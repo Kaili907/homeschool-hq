@@ -94,6 +94,11 @@ export interface StudyAdultPrivatePort {
 }
 
 export interface StudyEventLedgerPort {
+  read(
+    scope: StudyScope,
+    eventRef: string,
+    operation?: StudyOperationContext,
+  ): Promise<StudySafeEvent | null>
   append(
     scope: StudyScope,
     event: StudySafeEvent,

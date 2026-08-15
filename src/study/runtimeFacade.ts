@@ -301,6 +301,7 @@ export class AcceptedRc1HostRuntime {
     const visibleText = result.directive === 'continue'
       ? 'Your Tutor Core check was accepted. Continue to the next planned step.'
       : 'Your Tutor Core check was accepted. Let’s try this step with a different example.'
+    const previous = await ports.persistence.loadSession(input.scope)
     await ports.persistence.saveSession({
       scope: input.scope,
       lessonRef: input.entry.lessonRef,
@@ -308,6 +309,9 @@ export class AcceptedRc1HostRuntime {
       status: 'active',
       updatedAt: input.occurredAt,
       lastAcceptedEventRef: result.eventId,
+      lastProgressionDecisionRef: previous?.segmentRef === input.segmentRef
+        ? previous.lastProgressionDecisionRef
+        : null,
       rawAnswerIncluded: false,
       transcriptIncluded: false,
     })

@@ -116,7 +116,11 @@ describe('production client bundle provider and preview boundary', () => {
     }
     visit(entry)
 
-    const moduleIds = [...closure].flatMap((chunk) => Object.keys(chunk.modules)).join('\n')
+    const workspacePrefix = `${process.cwd()}/`
+    const moduleIds = [...closure]
+      .flatMap((chunk) => Object.keys(chunk.modules))
+      .map((moduleId) => moduleId.replace(workspacePrefix, ''))
+      .join('\n')
     const closureText = [...closure].map((chunk) => chunk.code).join('\n')
     expect(moduleIds).not.toMatch(/localDevelopmentPorts|syntheticStudyFixtures|\/testing\/|fakeIndexedDb|node_modules\/fake-indexeddb/i)
     expect(moduleIds).not.toMatch(/source\.node|generate\.node|node-runtime|supabase.*study|study.*supabase/i)

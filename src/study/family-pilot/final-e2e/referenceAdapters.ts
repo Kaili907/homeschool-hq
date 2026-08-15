@@ -408,6 +408,7 @@ class ReferenceFinalFamilyPilotRuntime implements FinalFamilyPilotRuntime {
       status,
       updatedAt: this.#at(),
       lastAcceptedEventRef: null,
+      lastProgressionDecisionRef: null,
       rawAnswerIncluded: false,
       transcriptIncluded: false,
     }

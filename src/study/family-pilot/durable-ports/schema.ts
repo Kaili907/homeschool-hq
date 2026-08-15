@@ -257,7 +257,11 @@ function parseSession(value: unknown, scope: StudyLearnerScope): StudySessionSna
   const statuses = ['ready', 'active', 'paused', 'completed', 'stopped']
   if (!statuses.includes(value.status as string)) return null
   if (!(value.lastAcceptedEventRef === null || isRef(value.lastAcceptedEventRef))) return null
-  return value as unknown as StudySessionSnapshot
+  if (!(value.lastProgressionDecisionRef === undefined || value.lastProgressionDecisionRef === null || isRef(value.lastProgressionDecisionRef))) return null
+  return {
+    ...(value as unknown as StudySessionSnapshot),
+    lastProgressionDecisionRef: value.lastProgressionDecisionRef ?? null,
+  }
 }
 
 function parseCheckpoint(value: unknown, scope: StudyLearnerScope): StudyCheckpoint | null {

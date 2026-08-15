@@ -7,6 +7,7 @@ import {
   type StudyLifecycleToken,
 } from '../../lifecycle'
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../ports'
+import { decideStudyProgression } from '../../progressionAuthority'
 import { assertAcceptedStudyRuntime } from '../../runtimeCompatibility'
 import type {
   AcceptedRc1HostRuntime,
@@ -141,6 +142,7 @@ const REJECTION_MESSAGES: Readonly<Record<FamilyPilotRejection, string>> = {
   'no-active-segment': 'This Study assignment has no remaining step.',
   'response-draft-not-opaque': 'A checkpoint may reference a draft, never its text.',
   'session-stopped': 'This Study session is paused. Please go get an adult.',
+  'study-progression-held': 'Study kept this step active. Follow the Tutor guidance before continuing.',
   quarantined: 'That Study step could not be accepted. Nothing was recorded.',
   'lifecycle-cancelled': 'This Study session was closed. Open Study again to continue.',
   'study-unavailable': 'Study could not complete that step safely. Nothing was recorded.',
@@ -258,6 +260,7 @@ export class FamilyPilotStudyRuntime {
         status: entry.state === 'paused' ? 'paused' : 'active',
         updatedAt: at,
         lastAcceptedEventRef: persisted?.lastAcceptedEventRef ?? null,
+        lastProgressionDecisionRef: persisted?.lastProgressionDecisionRef ?? null,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
       }))
@@ -378,8 +381,35 @@ export class FamilyPilotStudyRuntime {
           studentMessage: result.studentMessage,
         }
       }
+      const decision = decideStudyProgression({
+        entry,
+        segmentRef,
+        tutorAdvisory: result,
+        bindingIsCurrent: token.isCurrent(),
+        safetyStopped: this.#stopped(input.session),
+      })
+      const decisionRef = `study-progression:${input.session.sessionRef}:${segmentRef}:${decision.reasonCode}`
+      const decisionResult = await runCurrentStudyWork(token, () => ports.eventLedger.append(scope, {
+        eventRef: decisionRef,
+        occurredAt: at,
+        type: 'study-progression-decision',
+        payload: { decision: decision.decision, basis: decision.reasonCode, segmentRef },
+      }))
+      if (decisionResult === 'idempotency-collision') throw new Error('Study progression decision collision.')
+      await runCurrentStudyWork(token, () => ports.persistence.saveSession({
+        scope,
+        lessonRef: entry.lessonRef,
+        segmentRef,
+        status: 'active',
+        updatedAt: at,
+        lastAcceptedEventRef: result.eventRef,
+        lastProgressionDecisionRef: decisionRef,
+        rawAnswerIncluded: false,
+        transcriptIncluded: false,
+      }))
       // The accepted turn already wrote the minimized session row, including
-      // the accepted event reference that later proves the completion.
+      // the accepted event reference. Study separately records its advisory
+      // decision here, including an explicit HOLD for reteach.
       return {
         status: 'accepted',
         snapshot: await this.#project(token, input.session, entry),
@@ -417,6 +447,7 @@ export class FamilyPilotStudyRuntime {
         status: 'paused',
         updatedAt: at,
         lastAcceptedEventRef: persisted?.lastAcceptedEventRef ?? null,
+        lastProgressionDecisionRef: persisted?.lastProgressionDecisionRef ?? null,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
       }))
@@ -444,6 +475,7 @@ export class FamilyPilotStudyRuntime {
         status: 'active',
         updatedAt: at,
         lastAcceptedEventRef: persisted?.lastAcceptedEventRef ?? null,
+        lastProgressionDecisionRef: persisted?.lastProgressionDecisionRef ?? null,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
       }))
@@ -477,22 +509,38 @@ export class FamilyPilotStudyRuntime {
       const learnerScope: StudyLearnerScope = { householdRef: session.householdRef, learnerRef: session.learnerRef }
       const scope: StudyScope = { ...learnerScope, sessionRef: session.sessionRef }
       const at = this.#at()
+      const persisted = await runCurrentStudyWork(token, () => ports.persistence.loadSession(scope))
+      if (persisted?.segmentRef === segmentRef && persisted.lastProgressionDecisionRef) {
+        const decisionEvent = await runCurrentStudyWork(token, () =>
+          ports.eventLedger.read(scope, persisted.lastProgressionDecisionRef!))
+        if (
+          decisionEvent?.type !== 'study-progression-decision' ||
+          decisionEvent.payload.segmentRef !== segmentRef
+        ) throw new Error('Study progression authority evidence is invalid.')
+        if (decisionEvent.payload.decision === 'HOLD') return reject('study-progression-held')
+        if (decisionEvent.payload.decision !== 'ADVANCE') {
+          throw new Error('Study progression authority evidence is invalid.')
+        }
+      }
       const next = await runCurrentStudyWork(token, () => ports.calendar.completeCurrentSegment(
         learnerScope,
         session.blockRef,
         segmentRef,
         at,
       ))
-      const persisted = await runCurrentStudyWork(token, () => ports.persistence.loadSession(scope))
-      // The block reaching 'completed' does not itself complete the session:
-      // completeAssignment writes that, and only against an accepted receipt.
+      const nextSegmentRef = this.#currentSegment(next) ?? segmentRef
+      // This explicit Study-owned segment action is not driven by a Tutor
+      // recommendation. Final durable completion remains separately gated.
       await runCurrentStudyWork(token, () => ports.persistence.saveSession({
         scope,
         lessonRef: next.lessonRef,
-        segmentRef: this.#currentSegment(next) ?? segmentRef,
+        segmentRef: nextSegmentRef,
         status: 'active',
         updatedAt: at,
         lastAcceptedEventRef: persisted?.lastAcceptedEventRef ?? null,
+        lastProgressionDecisionRef: nextSegmentRef === segmentRef
+          ? persisted?.lastProgressionDecisionRef ?? null
+          : null,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
       }))
@@ -512,20 +560,47 @@ export class FamilyPilotStudyRuntime {
         sessionRef: session.sessionRef,
       }
       const at = this.#at()
-      await runCurrentStudyWork(token, () => ports.eventLedger.append(scope, {
+      const persisted = await runCurrentStudyWork(token, () => ports.persistence.loadSession(scope))
+      const segmentRef = entry.segments[entry.segments.length - 1]?.segmentRef ?? entry.lessonRef
+      let decisionRef = persisted?.lastProgressionDecisionRef ?? null
+      if (entry.masteryAuthority !== 'completion-only') {
+        if (!persisted?.lastAcceptedEventRef) throw new Error('Accepted Tutor evidence is unavailable.')
+        const tutorEvent = await runCurrentStudyWork(token, () =>
+          ports.eventLedger.read(scope, persisted.lastAcceptedEventRef!))
+        if (tutorEvent?.type !== 'tutor-directive') throw new Error('Accepted Tutor evidence is invalid.')
+        if (!decisionRef) throw new Error('Study progression authority evidence is unavailable.')
+        const decisionEvent = await runCurrentStudyWork(token, () => ports.eventLedger.read(scope, decisionRef!))
+        if (
+          decisionEvent?.type !== 'study-progression-decision' ||
+          decisionEvent.payload.decision !== 'ADVANCE' ||
+          decisionEvent.payload.basis !== 'accepted-tutor-continue' ||
+          decisionEvent.payload.segmentRef !== segmentRef
+        ) throw new Error('Study progression authority evidence is invalid.')
+      } else {
+        decisionRef = `study-progression:${session.sessionRef}:${segmentRef}`
+        const decisionResult = await runCurrentStudyWork(token, () => ports.eventLedger.append(scope, {
+          eventRef: decisionRef!,
+          occurredAt: at,
+          type: 'study-progression-decision',
+          payload: { decision: 'ADVANCE', basis: 'completion-only', segmentRef },
+        }))
+        if (decisionResult === 'idempotency-collision') throw new Error('Study progression decision collision.')
+      }
+      const completionResult = await runCurrentStudyWork(token, () => ports.eventLedger.append(scope, {
         eventRef: `completion:${session.sessionRef}:${entry.lessonRef}`,
         occurredAt: at,
         type: 'session-completed',
         payload: { blockRef: entry.blockRef, lessonRef: entry.lessonRef },
       }))
-      const persisted = await runCurrentStudyWork(token, () => ports.persistence.loadSession(scope))
+      if (completionResult === 'idempotency-collision') throw new Error('Study completion evidence collision.')
       await runCurrentStudyWork(token, () => ports.persistence.saveSession({
         scope,
         lessonRef: entry.lessonRef,
-        segmentRef: entry.segments[entry.segments.length - 1]?.segmentRef ?? entry.lessonRef,
+        segmentRef,
         status: 'completed',
         updatedAt: at,
         lastAcceptedEventRef: persisted?.lastAcceptedEventRef ?? null,
+        lastProgressionDecisionRef: decisionRef,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
       }))

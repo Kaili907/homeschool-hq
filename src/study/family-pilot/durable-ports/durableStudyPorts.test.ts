@@ -141,6 +141,7 @@ function session(overrides: Partial<StudySessionSnapshot> = {}): StudySessionSna
     status: 'active',
     updatedAt: SYNTHETIC_NOW.toISOString(),
     lastAcceptedEventRef: null,
+    lastProgressionDecisionRef: null,
     rawAnswerIncluded: false,
     transcriptIncluded: false,
     ...overrides,
@@ -261,7 +262,7 @@ describe('Family Pilot durable Study ports — persistence', () => {
       .rejects.toThrow(/canonical calendar work is incomplete/)
   })
 
-  it('refuses a completion with no accepted Tutor event when Tutor Core owns mastery', async () => {
+  it('refuses a completion with no Study progression decision when Tutor Core owns mastery', async () => {
     const box = device()
     const created = await box.ports.calendar.create(SCOPE, draft())
     await box.ports.calendar.start(SCOPE, created.blockRef, at(0))
@@ -271,7 +272,7 @@ describe('Family Pilot durable Study ports — persistence', () => {
       )
     }
     await expect(box.ports.persistence.saveSession(session({ status: 'completed' })))
-      .rejects.toThrow(/accepted Tutor event is required/)
+      .rejects.toThrow(/Study progression authority evidence is required/)
 
     // A completion-only plan needs no Tutor receipt, exactly as accepted.
     const completionOnly = plan({ lessonRef: 'pilot:parent-activity:walk', masteryAuthority: 'completion-only' })
@@ -282,8 +283,27 @@ describe('Family Pilot durable Study ports — persistence', () => {
         SCOPE, activity.blockRef, segment.segmentRef, at(11_000 + 1_000 * index),
       )
     }
+    const completedSegmentRef = activity.segments.at(-1)!.segmentRef
+    const decisionRef = `study-progression:${SESSION.sessionRef}:${completedSegmentRef}`
+    await box.ports.eventLedger.append(SESSION, {
+      eventRef: decisionRef,
+      occurredAt: at(13_000),
+      type: 'study-progression-decision',
+      payload: { decision: 'ADVANCE', basis: 'completion-only', segmentRef: completedSegmentRef },
+    })
+    await box.ports.eventLedger.append(SESSION, {
+      eventRef: `completion:${SESSION.sessionRef}:${completionOnly.lessonRef}`,
+      occurredAt: at(14_000),
+      type: 'session-completed',
+      payload: { blockRef: activity.blockRef, lessonRef: completionOnly.lessonRef },
+    })
     await expect(box.ports.persistence.saveSession(
-      session({ status: 'completed', lessonRef: 'pilot:parent-activity:walk' }),
+      session({
+        status: 'completed',
+        lessonRef: 'pilot:parent-activity:walk',
+        segmentRef: completedSegmentRef,
+        lastProgressionDecisionRef: decisionRef,
+      }),
     )).resolves.toBeUndefined()
   })
 })

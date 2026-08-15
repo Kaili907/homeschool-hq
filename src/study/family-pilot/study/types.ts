@@ -37,6 +37,7 @@ export type FamilyPilotRejection =
   | 'no-active-segment'
   | 'response-draft-not-opaque'
   | 'session-stopped'
+  | 'study-progression-held'
   | 'quarantined'
   | 'lifecycle-cancelled'
   | 'study-unavailable'

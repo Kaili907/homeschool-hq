@@ -34,6 +34,7 @@ export const OPAQUE_REF = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,191}$/
 export const EVENT_ALLOWED_KEYS: Readonly<Record<StudySafeEvent['type'], readonly string[]>> = Object.freeze({
   'session-launched': ['lessonRef', 'segmentRef'],
   'tutor-directive': ['bridgeEventVersion', 'eventLedgerIdempotencyKey'],
+  'study-progression-decision': ['decision', 'basis', 'segmentRef'],
   'checkpoint-saved': ['checkpointRef', 'revision'],
   'session-completed': ['blockRef', 'lessonRef'],
   'safety-stop': ['reasonCode', 'deliveryStatus'],

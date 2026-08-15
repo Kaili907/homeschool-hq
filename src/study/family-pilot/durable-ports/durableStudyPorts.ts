@@ -225,6 +225,9 @@ function semanticEventIdentity(event: StudySafeEvent): string {
   if (event.type === 'tutor-directive') {
     return `${event.type}|${String(event.payload.eventLedgerIdempotencyKey)}`
   }
+  if (event.type === 'study-progression-decision') {
+    return `${event.type}|${String(event.payload.segmentRef)}|${String(event.payload.basis)}`
+  }
   return `${event.type}|${event.eventRef}`
 }
 
@@ -377,15 +380,39 @@ export class FamilyPilotDurableStudyServices {
       // the canonical calendar work is complete, and — unless the work is
       // completion-only — once a Tutor event has actually been accepted.
       const completed = loaded.document.calendar.find(
-        (record) => record.block.state === 'completed' && record.plan.lessonRef === snapshot.lessonRef,
+        (record) => record.block.state === 'completed' && record.plan.lessonRef === snapshot.lessonRef &&
+          record.block.segments.some((segment) => segment.segmentId === snapshot.segmentRef && !!segment.completedAt),
       )
       if (!completed) throw new Error('Forged completion rejected: canonical calendar work is incomplete.')
+      const decisionRecord = snapshot.lastProgressionDecisionRef
+        ? loaded.document.events.find((record) =>
+            record.sessionRef === snapshot.scope.sessionRef &&
+            record.eventRef === snapshot.lastProgressionDecisionRef)
+        : null
+      const expectedBasis = completed.plan.masteryAuthority === 'completion-only'
+        ? 'completion-only'
+        : 'accepted-tutor-continue'
+      if (
+        decisionRecord?.event.type !== 'study-progression-decision' ||
+        decisionRecord.event.payload.decision !== 'ADVANCE' ||
+        decisionRecord.event.payload.basis !== expectedBasis ||
+        decisionRecord.event.payload.segmentRef !== snapshot.segmentRef
+      ) throw new Error('Forged completion rejected: Study progression authority evidence is required.')
       if (
         completed.plan.masteryAuthority !== 'completion-only' &&
         (!snapshot.lastAcceptedEventRef ||
           !loaded.document.events.some((record) =>
-            record.sessionRef === snapshot.scope.sessionRef && record.eventRef === snapshot.lastAcceptedEventRef))
+            record.sessionRef === snapshot.scope.sessionRef &&
+            record.eventRef === snapshot.lastAcceptedEventRef &&
+            record.event.type === 'tutor-directive'))
       ) throw new Error('Forged completion rejected: an accepted Tutor event is required.')
+      if (!loaded.document.events.some((record) =>
+        record.sessionRef === snapshot.scope.sessionRef &&
+        record.event.type === 'session-completed' &&
+        record.event.payload.blockRef === completed.block.internalBlockId &&
+        record.event.payload.lessonRef === snapshot.lessonRef)) {
+        throw new Error('Forged completion rejected: session completion evidence is required.')
+      }
     }
     const sessions = loaded.document.sessions.filter((held) => held.scope.sessionRef !== snapshot.scope.sessionRef)
     this.#commit(snapshot.scope, loaded, { sessions: [...sessions, clone(snapshot)] })
@@ -777,6 +804,15 @@ export class FamilyPilotDurableStudyServices {
     return 'appended'
   }
 
+  async readEvent(scope: StudyScope, eventRef: string): Promise<StudySafeEvent | null> {
+    this.#sessionScope(scope)
+    const { document } = this.#load(scope)
+    const record = document.events.find(
+      (candidate) => candidate.sessionRef === scope.sessionRef && candidate.eventRef === eventRef,
+    )
+    return record ? clone(record.event) : null
+  }
+
   // -------------------------------------------------------------------- outbox
 
   async propose(scope: StudyLearnerScope, proposal: StudyOutboxProposal): Promise<'proposed-not-delivered'> {
@@ -841,6 +877,7 @@ export function createFamilyPilotDurableStudyPorts(
       commit: (scope, authorization, note) => services.commit(scope, authorization, note),
     },
     eventLedger: {
+      read: (scope, eventRef) => services.readEvent(scope, eventRef),
       append: (scope, event) => services.append(scope, event),
     },
     outbox: {

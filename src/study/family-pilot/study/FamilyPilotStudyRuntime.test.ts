@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
+import { AdaptiveTutorEngine, type TutorResponse } from '../../../../adaptive-tutor/core/index.ts'
 import { syntheticGrade5StudyContext } from '../../demonstrations'
 import type { HostLessonDescriptor } from '../../curriculumAdapter'
 import { StudyLifecycleBoundary } from '../../lifecycle'
@@ -171,6 +172,33 @@ describe('Family Pilot Study runtime', () => {
       status: 'rejected',
       reason: 'assignment-not-active',
     })
+  })
+
+  it('holds an accepted Tutor reteach advisory on the current segment', async () => {
+    const original = AdaptiveTutorEngine.prototype.submit
+    const submit = vi.spyOn(AdaptiveTutorEngine.prototype, 'submit').mockImplementation(function (
+      this: AdaptiveTutorEngine,
+      input: Parameters<AdaptiveTutorEngine['submit']>[0],
+    ): TutorResponse {
+      return { ...original.call(this, input), phase: 'reteach' }
+    })
+    try {
+      const device = pilotDevice()
+      const context = studentContext('one')
+      const { runtime, session } = await startMath(device, context, 'reteach-hold')
+      const action = await runtime.submitStudyAction({ context, session, transientLearnerText: 'incorrect' })
+      expect(action).toMatchObject({ status: 'accepted', directive: 'reteach' })
+      expect(await runtime.completeSegment({ context, session })).toMatchObject({
+        status: 'rejected',
+        reason: 'study-progression-held',
+      })
+      expect(await runtime.snapshot({ context, session })).toMatchObject({
+        status: 'ok',
+        snapshot: { assignmentState: 'active', completedSegmentRefs: [] },
+      })
+    } finally {
+      submit.mockRestore()
+    }
   })
 
   it('completes the whole assignment only against accepted Tutor receipts', async () => {

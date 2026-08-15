@@ -184,6 +184,7 @@ export interface StudySessionSnapshot {
   readonly status: 'ready' | 'active' | 'paused' | 'completed' | 'stopped'
   readonly updatedAt: string
   readonly lastAcceptedEventRef: string | null
+  readonly lastProgressionDecisionRef: string | null
   readonly rawAnswerIncluded: false
   readonly transcriptIncluded: false
 }
@@ -194,6 +195,7 @@ export interface StudySafeEvent {
   readonly type:
     | 'session-launched'
     | 'tutor-directive'
+    | 'study-progression-decision'
     | 'checkpoint-saved'
     | 'session-completed'
     | 'safety-stop'

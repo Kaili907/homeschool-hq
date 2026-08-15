@@ -103,6 +103,12 @@ describe('Family Pilot IndexedDB Study ports — migrating off localStorage', ()
     const device = pilotDevice({ legacyStorage: legacy.storage, clock: legacy.laterClock() })
     const { runtime } = await device.reload(context)
     for (let step = 0; step < 4; step += 1) {
+      const action = await runtime.submitStudyAction({
+        context,
+        session: storedHandle(session),
+        transientLearnerText: 'ready',
+      })
+      if (action.status !== 'accepted') throw new Error(`unexpected Study action: ${action.status}`)
       const advanced = await runtime.completeSegment({ context, session: storedHandle(session) })
       if (advanced.status !== 'ok') throw new Error(advanced.reason)
     }
