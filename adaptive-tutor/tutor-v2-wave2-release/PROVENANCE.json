@@ -1,6 +1,6 @@
 {
   "acceptedWave1BaselineSha": "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
-  "branch": "mac/tutor-v2-w2-convergence-r1",
+  "branch": "mac/tutor-v2-w2-reconvergence-r2",
   "cherryPickOrder": [
     "W2_01_ADMISSION",
     "W2_02_CONCEPT_GRAPH",
@@ -9,8 +9,13 @@
     "W2_05_INTERVENTION",
     "W2_06_MASTERY_EVIDENCE",
     "W2_07_PARENT_WHY",
-    "W2_08_REPAIR_RETEACH"
+    "W2_08_REPAIR_RETEACH",
+    "W2_B1_GLOBAL_AUTHORITY_FALLBACK",
+    "W2_B2_HISTORY_SCOPE",
+    "W2_B3_MASTERY_ASSISTANCE"
   ],
+  "failedR1CandidateSha": "8d618502a16a3d4d169143b539286a3b6fb5b925",
+  "finalW2_10R2Required": true,
   "lanes": {
     "W2_01_ADMISSION": {
       "branch": "origin/mac/tutor-v2-w2-admission-r1",
@@ -61,16 +66,52 @@
       "stablePatchId": "7ce3fdf3b5fd93d6d2e062667b0fc8b65914bcc1"
     }
   },
-  "provenanceVersion": 1,
-  "session": "STUDY-TUTOR-V2-W2-09 — Adaptive Intelligence Convergence",
-  "startingSha": "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
+  "provenanceVersion": 2,
+  "r2Candidate": {
+    "exactShaRecordedAfterCommitInSessionReturn": true,
+    "selfReferencedInsideChecksummedArtifacts": false,
+    "status": "generated-for-independent-w2-10r2-rereview"
+  },
+  "repairs": {
+    "W2_B1_GLOBAL_AUTHORITY_FALLBACK": {
+      "branch": "origin/mac/tutor-v2-w2-authority-fallback-repair-r1",
+      "cherryPickedCommit": "461f8298bafcd95b226f8abd76e184e2f58c5ad4",
+      "sourceCommit": "5ed021ed5cf239bf9b4d90b6baefed960565459a",
+      "stablePatchId": "ee25597f03be72840f8417e1efdd506e85c0f79c"
+    },
+    "W2_B2_HISTORY_SCOPE": {
+      "branch": "origin/mac/tutor-v2-w2-history-scope-repair-r1",
+      "cherryPickedCommit": "ee572e7f4d655e101671ce36253c2121e04d7ff8",
+      "sourceCommit": "28849cc7eeef76e9e6eeeb199375523e25317b0b",
+      "stablePatchId": "2caee0379c0a6bc7e5012557fc94a5c073e77f03"
+    },
+    "W2_B3_MASTERY_ASSISTANCE": {
+      "branch": "origin/mac/tutor-v2-w2-mastery-assistance-repair-r1",
+      "cherryPickedCommit": "07587f463565e0a0ddce46499ba010249e0319f3",
+      "sourceCommit": "76839746eebc60a1adf8e24a6daa68661a9adfa9",
+      "stablePatchId": "8b2142f6b809abb7d7462bfb3a918a89bebca462"
+    }
+  },
+  "session": "STUDY-TUTOR-V2-W2-09R2 — Wave 2 Blocker Repair Reconvergence",
+  "startingSha": "8d618502a16a3d4d169143b539286a3b6fb5b925",
   "verification": {
     "allRemoteTipsExact": true,
     "baseIsDirectParentForEveryLane": true,
     "convergenceOwnershipPassed": true,
-    "laneTreesUnmodifiedByConvergence": true,
     "mergeCommitsInLaneRanges": 0,
-    "stablePatchIdsExact": true
+    "repairDirectParentsAreFailedR1Candidate": true,
+    "repairRemoteTipsExact": true,
+    "repairStablePatchIdsExact": true,
+    "stablePatchIdsExact": true,
+    "unrepairedLaneTreesExactAndRepairSupersessionsVerified": true
   },
-  "w1_10R5AcceptanceClassification": "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS"
+  "w1_10R5AcceptanceClassification": "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS",
+  "w2_10R1BlockingFindings": [
+    "Study safety hold did not stop every adaptive subsystem.",
+    "Study allowedActions was bypassed by hint, prerequisite repair, and reteach.",
+    "Current hint assistance was not bound to the mastery evidence opportunity.",
+    "Invalid input controlled supposedly reviewed fallback references.",
+    "Hint and intervention history lacked child/session provenance."
+  ],
+  "w2_10R1Classification": "WAVE2_HOLD_BLOCKING_FINDINGS"
 }

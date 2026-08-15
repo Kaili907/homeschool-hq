@@ -39,6 +39,7 @@ export const Wave2StudyAuthoritySchema = Type.Object(
     officialWorkingLevelRef: OpaqueReferenceSchema,
     instructionalContextRef: OpaqueReferenceSchema,
     currentConceptRef: OpaqueReferenceSchema,
+    currentOpportunityRef: OpaqueReferenceSchema,
     assessmentPhase: AssessmentPhaseSchema,
     studyHintCeiling: HintLevelSchema,
     safetyStatus: Type.Union([

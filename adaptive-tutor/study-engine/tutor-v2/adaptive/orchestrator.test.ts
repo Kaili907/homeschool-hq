@@ -113,6 +113,13 @@ function authorize(
 ): void {
   input.studyAuthority.allowedActions = [...allowedActions];
   input.intervention.allowedActions = [...allowedActions];
+  if (!allowedActions.includes("hint")) {
+    input.masteryEvidence.currentOpportunityAssistanceLevel = "independent";
+    const current = input.masteryEvidence.evidence.find(
+      ({ opportunityRef }) => opportunityRef === input.studyAuthority.currentOpportunityRef,
+    );
+    if (current) current.assistanceLevel = "independent";
+  }
 }
 
 async function composeWithCounters(

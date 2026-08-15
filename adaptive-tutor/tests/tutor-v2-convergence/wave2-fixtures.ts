@@ -24,6 +24,8 @@ export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
   const gradeRef = "grade:study-authorized-a";
   const curriculumRef = "curriculum:study-authorized-a";
   const invocationBindingRef = "invocation:wave2-convergence-a";
+  const sessionRef = "session:wave2-a";
+  const currentOpportunityRef = "opportunity:wave2-current";
   const allowedActions = [
     "explain", "hint", "ask-check", "show-example", "reteach",
     "check-prerequisite", "suggest-break", "escalate", "return-to-lesson",
@@ -58,7 +60,7 @@ export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
       invocationBindingRef,
       householdScopeRef: "household-scope:wave2-a",
       learnerScopeRef,
-      sessionRef: "session:wave2-a",
+      sessionRef,
       interactionRef: "interaction:wave2-a",
       subjectRef,
       gradeRef,
@@ -66,6 +68,7 @@ export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
       officialWorkingLevelRef: "working-level:official-study-a",
       instructionalContextRef,
       currentConceptRef,
+      currentOpportunityRef,
       assessmentPhase: "instruction-or-practice",
       studyHintCeiling: "concept-cue",
       safetyStatus: "academic-flow-admitted",
@@ -149,7 +152,10 @@ export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
     },
     hintSelection: {
       requestKind: "bounded-hint-selection",
+      learnerScopeRef,
+      sessionRef,
       contextRef: instructionalContextRef,
+      currentOpportunityRef,
       assessmentPhase: "instruction-or-practice",
       studyHintCeiling: "concept-cue",
       previousAssistanceLevel: "independent",
@@ -191,6 +197,10 @@ export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
     },
     intervention: {
       inputKind: "study-intervention-evidence",
+      learnerScopeRef,
+      sessionRef,
+      instructionalContextRef,
+      currentOpportunityRef,
       interactionRef: "interaction:wave2-a",
       attemptCount: 2,
       assistanceHistory: [],
@@ -222,6 +232,10 @@ export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
       envelope: "study-issued-mastery-evidence",
       learnerScopeRef,
       conceptRef: currentConceptRef,
+      currentSessionRef: sessionRef,
+      currentInstructionalContextRef: instructionalContextRef,
+      currentOpportunityRef,
+      currentOpportunityAssistanceLevel: "light-hint",
       evaluatedAt: "2026-08-14T20:00:00.000Z",
       evidence: [
         {
@@ -229,8 +243,11 @@ export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
           issuer: "study",
           learnerScopeRef,
           conceptRef: currentConceptRef,
+          sessionRef,
+          instructionalContextRef,
+          opportunityRef: currentOpportunityRef,
           outcome: "demonstrated",
-          assistanceLevel: "independent",
+          assistanceLevel: "light-hint",
           recency: "current",
           spacing: "same-session",
           observedAt: "2026-08-14T18:00:00.000Z",
@@ -240,6 +257,9 @@ export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
           issuer: "study",
           learnerScopeRef,
           conceptRef: currentConceptRef,
+          sessionRef: "session:wave2-prior",
+          instructionalContextRef,
+          opportunityRef: "opportunity:wave2-prior-independent",
           outcome: "demonstrated",
           assistanceLevel: "independent",
           recency: "current",

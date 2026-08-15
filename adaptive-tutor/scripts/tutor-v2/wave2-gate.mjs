@@ -11,7 +11,8 @@ const repositoryRoot = resolve(tutorRoot, "..");
 const require = createRequire(resolve(tutorRoot, "package.json"));
 const tsc = resolve(dirname(require.resolve("typescript/package.json")), "bin", "tsc");
 const BASE = "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95";
-const CONVERGENCE_START = "aeff3bde7be983276c9006576d388eabbe81ba97";
+const R1_CANDIDATE = "8d618502a16a3d4d169143b539286a3b6fb5b925";
+const R2_CONVERGENCE_START = "07587f463565e0a0ddce46499ba010249e0319f3";
 
 const lanes = [
   {
@@ -40,6 +41,7 @@ const lanes = [
     branch: "mac/tutor-v2-w2-hint-ladder-r1",
     tip: "eb941ff897181f761f83b3604dc4006d5e5118d4",
     patchId: "7ac35fbee5cb7965f75dba780f3e450d11355091",
+    supersededByRepair: true,
     paths: ["adaptive-tutor/core/v2/hints", "docs/study-tutor-v2/wave2/lanes/w2-04-hint-ladder"],
   },
   {
@@ -47,6 +49,7 @@ const lanes = [
     branch: "mac/tutor-v2-w2-intervention-r1",
     tip: "94c0d816e6e312af9f61d465a9692ef37919a65b",
     patchId: "0f4f407fe5dbf52ef577c19e9617d7ed342097d8",
+    supersededByRepair: true,
     paths: ["adaptive-tutor/core/v2/interventions", "docs/study-tutor-v2/wave2/lanes/w2-05-intervention"],
   },
   {
@@ -54,6 +57,7 @@ const lanes = [
     branch: "mac/tutor-v2-w2-mastery-evidence-r1",
     tip: "241cfc7d3b6c673139728302b00bd580cba1e919",
     patchId: "7fcc26bee9e30240410e6b124534f9fa259cf9c9",
+    supersededByRepair: true,
     paths: ["adaptive-tutor/core/v2/mastery", "docs/study-tutor-v2/wave2/lanes/w2-06-mastery-evidence"],
   },
   {
@@ -72,6 +76,43 @@ const lanes = [
       "adaptive-tutor/study-engine/tutor-v2/prerequisite-repair",
       "adaptive-tutor/study-engine/tutor-v2/reteach",
       "docs/study-tutor-v2/wave2/lanes/w2-08-repair-reteach",
+    ],
+  },
+];
+
+const repairs = [
+  {
+    id: "W2_B1",
+    branch: "mac/tutor-v2-w2-authority-fallback-repair-r1",
+    tip: "5ed021ed5cf239bf9b4d90b6baefed960565459a",
+    cherryPick: "461f8298bafcd95b226f8abd76e184e2f58c5ad4",
+    patchId: "ee25597f03be72840f8417e1efdd506e85c0f79c",
+    roots: [
+      "adaptive-tutor/study-engine/tutor-v2/adaptive/",
+      "docs/study-tutor-v2/wave2/repairs/w2-b1-authority-fallback/",
+    ],
+  },
+  {
+    id: "W2_B2",
+    branch: "mac/tutor-v2-w2-history-scope-repair-r1",
+    tip: "28849cc7eeef76e9e6eeeb199375523e25317b0b",
+    cherryPick: "ee572e7f4d655e101671ce36253c2121e04d7ff8",
+    patchId: "2caee0379c0a6bc7e5012557fc94a5c073e77f03",
+    roots: [
+      "adaptive-tutor/core/v2/hints/",
+      "adaptive-tutor/core/v2/interventions/",
+      "docs/study-tutor-v2/wave2/repairs/w2-b2-history-scope/",
+    ],
+  },
+  {
+    id: "W2_B3",
+    branch: "mac/tutor-v2-w2-mastery-assistance-repair-r1",
+    tip: "76839746eebc60a1adf8e24a6daa68661a9adfa9",
+    cherryPick: "07587f463565e0a0ddce46499ba010249e0319f3",
+    patchId: "8b2142f6b809abb7d7462bfb3a918a89bebca462",
+    roots: [
+      "adaptive-tutor/core/v2/mastery/",
+      "docs/study-tutor-v2/wave2/repairs/w2-b3-mastery-assistance/",
     ],
   },
 ];
@@ -108,6 +149,16 @@ function tapCounts(output) {
   return { tests: count("tests"), pass: count("pass"), fail: count("fail"), skipped: count("skipped") };
 }
 
+function canonicalize(value) {
+  if (Array.isArray(value)) return value.map(canonicalize);
+  if (value === null || typeof value !== "object") return value;
+  return Object.fromEntries(
+    Object.entries(value)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([key, child]) => [key, canonicalize(child)]),
+  );
+}
+
 function requireTap(name, files, expected, options = {}) {
   const result = execute(process.execPath, ["--test", ...files], options);
   const counts = tapCounts(`${result.stdout}${result.stderr}`);
@@ -132,13 +183,45 @@ for (const lane of lanes) {
   const merges = git(["rev-list", "--min-parents=2", `${BASE}..${remote}`]).stdout.trim();
   const shown = git(["show", "--pretty=format:", lane.tip]).stdout;
   const patch = execute("git", ["patch-id", "--stable"], { cwd: repositoryRoot, input: shown }).stdout.trim().split(/\s+/)[0];
-  const treeExact = lane.paths.every((path) => git(["diff", "--quiet", lane.tip, "HEAD", "--", path]).status === 0);
+  const treeExact = lane.supersededByRepair === true ||
+    lane.paths.every((path) => git(["diff", "--quiet", lane.tip, "HEAD", "--", path]).status === 0);
   const valid = tip === lane.tip && parent === BASE && merges === "" && patch === lane.patchId && treeExact;
   record(
     `${lane.id.toLowerCase()}-provenance`,
     valid ? "PASS" : "FAIL",
-    valid ? `${lane.tip}; patch ${lane.patchId}; direct baseline parent; lane tree exact` : `tip=${tip}; parent=${parent}; merges=${merges || "none"}; patch=${patch}; treeExact=${String(treeExact)}`,
+    valid ? `${lane.tip}; patch ${lane.patchId}; direct baseline parent; ${lane.supersededByRepair === true ? "verified repair supersession" : "lane tree exact"}` : `tip=${tip}; parent=${parent}; merges=${merges || "none"}; patch=${patch}; treeExact=${String(treeExact)}`,
     `git provenance checks ${remote}`,
+  );
+}
+
+for (const repair of repairs) {
+  const remote = `origin/${repair.branch}`;
+  const tip = git(["rev-parse", remote]).stdout.trim();
+  const parent = git(["rev-parse", `${remote}^`]).stdout.trim();
+  const sourcePatch = execute("git", ["patch-id", "--stable"], {
+    cwd: repositoryRoot,
+    input: git(["show", "--pretty=format:", repair.tip]).stdout,
+  }).stdout.trim().split(/\s+/)[0];
+  const pickedPatch = execute("git", ["patch-id", "--stable"], {
+    cwd: repositoryRoot,
+    input: git(["show", "--pretty=format:", repair.cherryPick]).stdout,
+  }).stdout.trim().split(/\s+/)[0];
+  const changedPaths = git(["diff-tree", "--no-commit-id", "--name-only", "-r", repair.tip])
+    .stdout.split("\n").filter(Boolean);
+  const ownershipExact = changedPaths.every((path) =>
+    repair.roots.some((root) => path.startsWith(root))
+  );
+  const imported = git(["merge-base", "--is-ancestor", repair.cherryPick, "HEAD"]).status === 0;
+  const valid = tip === repair.tip && parent === R1_CANDIDATE &&
+    sourcePatch === repair.patchId && pickedPatch === repair.patchId &&
+    ownershipExact && imported;
+  record(
+    `${repair.id.toLowerCase()}-repair-provenance`,
+    valid ? "PASS" : "FAIL",
+    valid
+      ? `${repair.tip} -> ${repair.cherryPick}; patch ${repair.patchId}; direct R1 parent; ownership exact`
+      : `tip=${tip}; parent=${parent}; sourcePatch=${sourcePatch}; pickedPatch=${pickedPatch}; ownership=${String(ownershipExact)}; imported=${String(imported)}`,
+    `git repair provenance checks ${remote}`,
   );
 }
 
@@ -165,15 +248,59 @@ const laneCounts = requireTap("wave2-lane-regression", [
   `${dist}/core/v2/hints/hint-ladder.test.js`,
   `${dist}/core/v2/interventions/intervention-ladder.test.js`,
   `${dist}/core/v2/mastery/mastery-evidence.test.js`,
+  `${dist}/study-engine/tutor-v2/adaptive/orchestrator.test.js`,
   `${dist}/study-engine/tutor-v2/parent-explanations/parent-explanation.test.js`,
   `${dist}/study-engine/tutor-v2/prerequisite-repair/prerequisite-repair.test.js`,
   `${dist}/study-engine/tutor-v2/reteach/reteach.test.js`,
-], { tests: 164, pass: 164 });
+], { tests: 192, pass: 192 });
 
 const compositionCounts = requireTap("wave2-composition-regression", [
   `${dist}/tests/tutor-v2-convergence/wave2-composition.test.js`,
   `${dist}/tests/tutor-v2-convergence/wave2-schema-parity.test.js`,
 ], { tests: 17, pass: 17 });
+
+const blockerGateChecks = [
+  {
+    family: "GLOBAL_ADAPTIVE_SAFETY_AUTHORITY",
+    check: "global-adaptive-safety-authority-hard-gate",
+    file: `${dist}/tests/tutor-v2-convergence/global-adaptive-safety-authority.test.js`,
+    tests: 1,
+  },
+  {
+    family: "GLOBAL_ADAPTIVE_ALLOWED_ACTIONS",
+    check: "global-adaptive-allowed-actions-hard-gate",
+    file: `${dist}/tests/tutor-v2-convergence/global-adaptive-allowed-actions.test.js`,
+    tests: 1,
+  },
+  {
+    family: "TRUSTED_INVALID_REQUEST_FALLBACK",
+    check: "trusted-invalid-request-fallback-hard-gate",
+    file: `${dist}/tests/tutor-v2-convergence/trusted-invalid-request-fallback.test.js`,
+    tests: 1,
+  },
+  {
+    family: "ADAPTIVE_HISTORY_SCOPE_PROVENANCE",
+    check: "adaptive-history-scope-provenance-hard-gate",
+    file: `${dist}/tests/tutor-v2-convergence/adaptive-history-scope-provenance.test.js`,
+    tests: 2,
+  },
+  {
+    family: "ASSISTANCE_MASTERY_OPPORTUNITY_BINDING",
+    check: "assistance-mastery-opportunity-binding-hard-gate",
+    file: `${dist}/tests/tutor-v2-convergence/assistance-mastery-opportunity-binding.test.js`,
+    tests: 5,
+  },
+];
+const blockerCounts = blockerGateChecks.map(({ check, file, tests }) =>
+  requireTap(check, [file], { tests, pass: tests })
+);
+requireSuccess(
+  "wave2-r2-mutation-proof",
+  process.execPath,
+  ["scripts/tutor-v2/wave2-mutation-proof.mjs"],
+  "5/5 historical blocker mutations killed in disposable compiled copies",
+  { cwd: tutorRoot },
+);
 
 requireSuccess("study-bridge-typecheck", process.execPath, [tsc, "-p", "study-engine/tests/tutor-v2-bridge/tsconfig.json"], "Study Core Bridge compiled", { cwd: tutorRoot });
 const bridgeCounts = requireTap("study-bridge-regression", [
@@ -202,6 +329,18 @@ if (coreCounts.tests !== 21 || coreCounts.pass !== 21 || coreCounts.fail !== 0) 
 } else record("tutor-core-counts", "PASS", "21/21", "npm test");
 requireSuccess("tutor-core-build", "npm", ["run", "build"], "Tutor Core build", { cwd: tutorRoot });
 requireSuccess("tutor-core-smoke", "npm", ["run", "smoke"], "Tutor Core smoke", { cwd: tutorRoot });
+record(
+  "dependency-advisories",
+  "INHERITED_FINDING",
+  "3 existing high advisories: @playwright/test, nanoid, playwright; Study runtime manifests unchanged",
+  "Wave 1 accepted npm audit evidence; manifests unchanged",
+);
+record(
+  "candidate-sha-artifact-idempotency",
+  "INHERITED_FINDING",
+  "exact final SHA is returned after commit and is not self-referenced inside checksummed artifacts",
+  "deterministic non-self-referential release generation",
+);
 let validationRoot;
 try {
   validationRoot = await mkdtemp(join(tmpdir(), "tutor-v2-wave2-validation-"));
@@ -210,7 +349,7 @@ try {
     recursive: true,
     filter: (source) => !["node_modules", "dist", ".test-dist", ".dist"].includes(basename(source)),
   });
-  await symlink(resolve(repositoryRoot, "node_modules"), join(validationTutor, "node_modules"));
+  await symlink(resolve(tutorRoot, "node_modules"), join(validationTutor, "node_modules"));
   const validation = execute("npm", ["run", "validate"], { cwd: validationTutor });
   const validationOutput = `${validation.stdout}${validation.stderr}`;
   if (validation.status === 0) record("broad-validator", "PASS", "all checks passed", "npm run validate (isolated copy)");
@@ -230,7 +369,7 @@ try {
   const frozenTutor = join(sourceRoot, "tutor-core", "manuel-academy-adaptive-tutor-core-v0.2", "adaptive-tutor");
   await mkdir(dirname(frozenTutor), { recursive: true });
   await cp(resolve(tutorRoot, "study-engine/integration-labs/student-runtime/vendor/adaptive-tutor-core"), frozenTutor, { recursive: true });
-  await symlink(resolve(repositoryRoot, "node_modules"), join(frozenTutor, "node_modules"));
+  await symlink(resolve(tutorRoot, "node_modules"), join(frozenTutor, "node_modules"));
   requireSuccess("frozen-tutor-core-build", "npm", ["run", "build"], "reconstructed frozen Tutor Core build", { cwd: frozenTutor });
   await unlink(join(frozenTutor, "node_modules"));
   const studyContracts = join(sourceRoot, "study-contracts", "adaptive-tutor", "study-engine");
@@ -266,11 +405,11 @@ const allowed = (path) =>
   path.startsWith("docs/study-tutor-v2/wave2/");
 const statusPaths = git(["status", "--porcelain=v1", "--untracked-files=all"]).stdout
   .split("\n").filter(Boolean).map((line) => line.slice(3));
-const authoredPaths = git(["diff", "--name-only", CONVERGENCE_START, "HEAD"]).stdout
+const authoredPaths = git(["diff", "--name-only", R2_CONVERGENCE_START, "HEAD"]).stdout
   .split("\n").filter(Boolean);
 const allAuthored = [...new Set([...authoredPaths, ...statusPaths])];
 const violations = allAuthored.filter((path) => !allowed(path));
-record("convergence-ownership", violations.length === 0 ? "PASS" : "FAIL", violations.length === 0 ? `${allAuthored.length} convergence-authored paths within ownership` : violations.join(", "), `git diff --name-only ${CONVERGENCE_START} HEAD plus status`);
+record("convergence-ownership", violations.length === 0 ? "PASS" : "FAIL", violations.length === 0 ? `${allAuthored.length} R2 convergence-authored paths within ownership` : violations.join(", "), `git diff --name-only ${R2_CONVERGENCE_START} HEAD plus status`);
 const diffCheck = git(["diff", "--check"]);
 record("git-diff-check", diffCheck.status === 0 ? "PASS" : "FAIL", diffCheck.status === 0 ? "no whitespace errors" : diffCheck.stdout.trim(), "git diff --check");
 
@@ -281,24 +420,47 @@ const wave2GateNames = [
   "REPLAY_GATE", "STATIC_FALLBACK_GATE",
 ];
 const wave2CompositionPassed = checks.find(({ name }) => name === "wave2-composition-regression")?.status === "PASS";
-const hardGateFamilies = wave2GateNames.map((name) => ({
+const priorWave2HardGateFamilies = wave2GateNames.map((name) => ({
   name,
   enforcement: "HARD_NON_COMPENSABLE",
   status: wave2CompositionPassed ? "PASS" : "FAIL",
   permanentTest: "tests/tutor-v2-convergence/wave2-composition.test.ts",
 }));
+const blockerHardGateFamilies = blockerGateChecks.map(({ family, check, file }) => ({
+  name: family,
+  enforcement: "HARD_NON_COMPENSABLE",
+  status: checks.find(({ name }) => name === check)?.status === "PASS" ? "PASS" : "FAIL",
+  permanentTest: file.replace(`${dist}/`, ""),
+}));
+const wave1Passed = checks.find(({ name }) => name === "wave1-hard-gate-regression")?.status === "PASS";
+const wave1HardGateFamilies = [
+  "PROVIDER_AUTHORITY_BOUNDARY",
+  "STRUCTURAL_ACTIVE_ASSESSMENT_ANTI_ANSWER",
+  "REVIEWED_CONTENT_PRIVACY_PROVENANCE",
+  "APPROVAL_DECISION_STRUCTURAL_VALIDATION",
+].map((name) => ({
+  name,
+  enforcement: "HARD_NON_COMPENSABLE",
+  status: wave1Passed ? "PASS" : "FAIL",
+  permanentTest: "tests/tutor-v2-convergence/",
+}));
+const hardGateFamilies = [
+  ...priorWave2HardGateFamilies,
+  ...blockerHardGateFamilies,
+  ...wave1HardGateFamilies,
+];
 if (hardGateFamilies.some(({ status }) => status !== "PASS")) hardFailure = true;
 
 const inherited = checks.some(({ status }) => status === "INHERITED_FINDING" || status === "NOT_AVAILABLE");
 const finalClassification = hardFailure
   ? "WAVE2_HOLD"
   : inherited
-    ? "WAVE2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
-    : "WAVE2_CANDIDATE_READY_FOR_FINAL_REREVIEW";
+    ? "WAVE2_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
+    : "WAVE2_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW";
 const result = {
-  resultVersion: 1,
+  resultVersion: 2,
   product: "Manuel Academy Study Tutor V2",
-  wave: "Wave 2 Adaptive Intelligence Candidate",
+  wave: "Wave 2 R2 Adaptive Intelligence Candidate",
   wave1AcceptedBaselineSha: BASE,
   wave1AcceptanceClassification: "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS",
   wave2Complete: false,
@@ -312,6 +474,8 @@ const result = {
     wave2LanePassed: laneCounts.pass,
     wave2CompositionTests: compositionCounts.tests,
     wave2CompositionPassed: compositionCounts.pass,
+    wave2BlockerHardGateTests: blockerCounts.reduce((sum, counts) => sum + counts.tests, 0),
+    wave2BlockerHardGatePassed: blockerCounts.reduce((sum, counts) => sum + counts.pass, 0),
     foundationHarnessTests: evalTestCounts.tests,
     foundationHarnessPassed: evalTestCounts.pass,
     tutorCoreTests: coreCounts.tests,
@@ -320,6 +484,10 @@ const result = {
   checks,
 };
 await mkdir(resolve(tutorRoot, "tutor-v2-wave2-release"), { recursive: true });
-await writeFile(resolve(tutorRoot, "tutor-v2-wave2-release/WAVE2-GATE-RESULT.json"), `${JSON.stringify(result, null, 2)}\n`, "utf8");
+await writeFile(
+  resolve(tutorRoot, "tutor-v2-wave2-release/WAVE2-GATE-RESULT.json"),
+  `${JSON.stringify(canonicalize(result), null, 2)}\n`,
+  "utf8",
+);
 process.stdout.write(`${finalClassification}\n`);
 if (hardFailure) process.exitCode = 1;

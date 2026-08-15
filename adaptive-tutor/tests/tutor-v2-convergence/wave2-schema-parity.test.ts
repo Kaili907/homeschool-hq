@@ -21,6 +21,25 @@ test("Wave 2 serialized request has runtime/generated schema parity", () => {
   const schema = generated("wave2-adaptive-composition-request.schema.json");
   assert.equal(validateExact(Wave2AdaptiveCompositionRequestSchema, request).status, "accepted");
   assert.equal(Value.Check(schema, request), true);
+  assert.equal(schema.additionalProperties, false);
+  const serializedSchema = JSON.stringify(schema);
+  for (const required of [
+    "currentOpportunityRef",
+    "currentOpportunityAssistanceLevel",
+    "currentSessionRef",
+    "currentInstructionalContextRef",
+    "learnerScopeRef",
+    "sessionRef",
+    "instructionalContextRef",
+  ]) assert.equal(serializedSchema.includes(required), true, required);
+  for (const forbidden of [
+    "rawLearnerTranscript",
+    "rawLearnerProse",
+    "answerAuthority",
+    "officialMastery",
+    "nominalGradeMutation",
+    "workingLevelMutationRequest",
+  ]) assert.equal(serializedSchema.includes(forbidden), false, forbidden);
 
   const contaminated = { ...request, rawLearnerTranscript: "private" };
   assert.equal(validateExact(Wave2AdaptiveCompositionRequestSchema, contaminated).status, "rejected");

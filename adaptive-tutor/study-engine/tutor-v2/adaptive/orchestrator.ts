@@ -12,7 +12,12 @@ import {
 import { selectBoundedHint } from "../../../core/v2/hints/index.js";
 import { recommendNextIntervention } from "../../../core/v2/interventions/index.js";
 import { evaluateMasteryEvidence } from "../../../core/v2/mastery/index.js";
-import { validateExact } from "../../../core/v2/contracts/index.js";
+import {
+  validateExact,
+  type AssistanceLevel,
+  type HintLevel,
+  type TutorActionKind,
+} from "../../../core/v2/contracts/index.js";
 import {
   explainTutorRecommendationForParentHub,
   type ParentExplanationReasonCode,
@@ -257,26 +262,50 @@ function compositionBindingsAreValid(request: Wave2AdaptiveCompositionRequest): 
   ) return false;
 
   if (
+    request.hintSelection.learnerScopeRef !== authority.learnerScopeRef ||
+    request.hintSelection.sessionRef !== authority.sessionRef ||
     request.hintSelection.contextRef !== authority.instructionalContextRef ||
+    request.hintSelection.currentOpportunityRef !== authority.currentOpportunityRef ||
     request.hintSelection.assessmentPhase !== authority.assessmentPhase ||
     request.hintSelection.studyHintCeiling !== authority.studyHintCeiling ||
-    request.hintSelection.misconceptionSignalCode !== null
+    request.hintSelection.misconceptionSignalCode !== null ||
+    request.hintSelection.interventionHistory.some((entry) =>
+      entry.learnerScopeRef !== authority.learnerScopeRef ||
+      entry.sessionRef !== authority.sessionRef ||
+      entry.contextRef !== authority.instructionalContextRef
+    )
   ) return false;
 
   if (
+    request.intervention.learnerScopeRef !== authority.learnerScopeRef ||
+    request.intervention.sessionRef !== authority.sessionRef ||
+    request.intervention.instructionalContextRef !== authority.instructionalContextRef ||
+    request.intervention.currentOpportunityRef !== authority.currentOpportunityRef ||
     request.intervention.interactionRef !== authority.interactionRef ||
     request.intervention.assessmentPhase !== authority.assessmentPhase ||
     !sameStringArray(request.intervention.allowedActions, authority.allowedActions) ||
     request.intervention.misconceptionSignal.status !== "none" ||
-    request.intervention.prerequisiteSignal.status !== "none"
+    request.intervention.prerequisiteSignal.status !== "none" ||
+    request.intervention.assistanceHistory.some((entry) =>
+      entry.learnerScopeRef !== authority.learnerScopeRef ||
+      entry.sessionRef !== authority.sessionRef ||
+      entry.instructionalContextRef !== authority.instructionalContextRef
+    )
   ) return false;
 
   if (
     request.masteryEvidence.learnerScopeRef !== authority.learnerScopeRef ||
     request.masteryEvidence.conceptRef !== authority.currentConceptRef ||
+    request.masteryEvidence.currentSessionRef !== authority.sessionRef ||
+    request.masteryEvidence.currentInstructionalContextRef !== authority.instructionalContextRef ||
+    request.masteryEvidence.currentOpportunityRef !== authority.currentOpportunityRef ||
     request.masteryEvidence.evidence.some((item) =>
       item.learnerScopeRef !== authority.learnerScopeRef ||
-      item.conceptRef !== authority.currentConceptRef
+      item.conceptRef !== authority.currentConceptRef ||
+      (item.opportunityRef === authority.currentOpportunityRef && (
+        item.sessionRef !== authority.sessionRef ||
+        item.instructionalContextRef !== authority.instructionalContextRef
+      ))
     )
   ) return false;
 
@@ -295,6 +324,57 @@ function compositionBindingsAreValid(request: Wave2AdaptiveCompositionRequest): 
     parent.recommendationEventRef !== authority.eventRef
   )) return false;
   return true;
+}
+
+const ASSISTANCE_ORDER: readonly AssistanceLevel[] = [
+  "independent",
+  "light-hint",
+  "guided",
+  "reteach-required",
+];
+
+function mostAssisted(
+  left: AssistanceLevel,
+  right: AssistanceLevel,
+): AssistanceLevel {
+  return ASSISTANCE_ORDER.indexOf(left) >= ASSISTANCE_ORDER.indexOf(right)
+    ? left
+    : right;
+}
+
+function hintAssistance(level: HintLevel): AssistanceLevel {
+  if (level === "none") return "independent";
+  if (level === "nudge" || level === "concept-cue") return "light-hint";
+  return "guided";
+}
+
+function interventionAssistance(action: TutorActionKind): AssistanceLevel {
+  if (action === "reteach") return "reteach-required";
+  if (action === "check-prerequisite" || action === "show-example") return "guided";
+  if (action === "hint" || action === "explain") return "light-hint";
+  return "independent";
+}
+
+function effectiveCurrentOpportunityAssistance(
+  request: Wave2AdaptiveCompositionRequest,
+  currentHintLevel: HintLevel,
+): AssistanceLevel {
+  const opportunityRef = request.studyAuthority.currentOpportunityRef;
+  let effective = mostAssisted(
+    request.hintSelection.previousAssistanceLevel,
+    hintAssistance(currentHintLevel),
+  );
+  for (const entry of request.hintSelection.interventionHistory) {
+    if (entry.opportunityRef === opportunityRef) {
+      effective = mostAssisted(effective, entry.assistanceLevel);
+    }
+  }
+  for (const entry of request.intervention.assistanceHistory) {
+    if (entry.opportunityRef === opportunityRef) {
+      effective = mostAssisted(effective, interventionAssistance(entry.actionKind));
+    }
+  }
+  return effective;
 }
 
 function admissionsFor(
@@ -583,7 +663,26 @@ export async function composeWave2AdaptiveIntelligence(
     safetyRestriction: { status: "none", restrictionRef: null },
   });
 
-  const mastery = subsystems.evaluateMastery(request.masteryEvidence);
+  const effectiveAssistance = effectiveCurrentOpportunityAssistance(
+    request,
+    hintProjection.hintLevel,
+  );
+  if (
+    request.masteryEvidence.currentOpportunityAssistanceLevel !== effectiveAssistance
+  ) {
+    return fallback(
+      request,
+      "current-opportunity-assistance-binding-rejected",
+      "mastery-evidence",
+    );
+  }
+  const mastery = subsystems.evaluateMastery({
+    ...request.masteryEvidence,
+    currentSessionRef: request.studyAuthority.sessionRef,
+    currentInstructionalContextRef: request.studyAuthority.instructionalContextRef,
+    currentOpportunityRef: request.studyAuthority.currentOpportunityRef,
+    currentOpportunityAssistanceLevel: effectiveAssistance,
+  });
   const binding: ProposalScopeBinding = {
     householdScopeRef: request.studyAuthority.householdScopeRef,
     learnerScopeRef: request.studyAuthority.learnerScopeRef,

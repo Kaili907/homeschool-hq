@@ -7,7 +7,7 @@
   "schemas": [
     {
       "file": "wave2-adaptive-composition-request.schema.json",
-      "sha256": "4c73f1963e77a1f8683769faf560d8149896c69f91eef932782092f3029dd17d",
+      "sha256": "dd01c7763815124a0c23761b7d9c08fda5f8dced52ad825474ff2624e52fe7fb",
       "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2AdaptiveCompositionRequestSchema"
     },
     {
@@ -16,5 +16,5 @@
       "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2StudyDecisionPacketSchema"
     }
   ],
-  "wave": "Wave 2 Adaptive Intelligence Candidate"
+  "wave": "Wave 2 R2 Adaptive Intelligence Candidate"
 }

@@ -6,15 +6,27 @@
     "tutorCoreTests": 21,
     "wave1HardGatePassed": 462,
     "wave1HardGateTests": 462,
+    "wave2BlockerHardGatePassed": 10,
+    "wave2BlockerHardGateTests": 10,
     "wave2CompositionPassed": 17,
     "wave2CompositionTests": 17,
-    "wave2LanePassed": 164,
-    "wave2LaneTests": 164
+    "wave2LanePassed": 192,
+    "wave2LaneTests": 192
   },
-  "finalClassification": "WAVE2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
-  "hardGateFamiliesPassed": 12,
-  "hardGateFamilyCount": 12,
+  "finalClassification": "WAVE2_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "hardGateFamiliesPassed": 21,
+  "hardGateFamilyCount": 21,
   "inheritedFindings": [
+    {
+      "detail": "3 existing high advisories: @playwright/test, nanoid, playwright; Study runtime manifests unchanged",
+      "name": "dependency-advisories",
+      "status": "INHERITED_FINDING"
+    },
+    {
+      "detail": "exact final SHA is returned after commit and is not self-referenced inside checksummed artifacts",
+      "name": "candidate-sha-artifact-idempotency",
+      "status": "INHERITED_FINDING"
+    },
     {
       "detail": "18/19; accepted obsolete platform-boundary validator finding",
       "name": "broad-validator",

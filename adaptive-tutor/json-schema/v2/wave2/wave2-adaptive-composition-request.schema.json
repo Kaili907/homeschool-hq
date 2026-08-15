@@ -402,6 +402,12 @@
           "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
           "type": "string"
         },
+        "currentOpportunityRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
         "interventionHistory": {
           "items": {
             "$id": "TutorV2HintInterventionHistoryEntry",
@@ -479,15 +485,43 @@
                 "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
                 "type": "string"
               },
+              "learnerScopeRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "opportunityRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
               "ordinal": {
                 "maximum": 10000,
                 "minimum": 0,
                 "type": "integer"
+              },
+              "sessionRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "sourceInteractionRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
               }
             },
             "required": [
+              "learnerScopeRef",
+              "sessionRef",
               "interventionRef",
               "contextRef",
+              "sourceInteractionRef",
+              "opportunityRef",
               "ordinal",
               "interventionKind",
               "hintLevel",
@@ -497,6 +531,12 @@
           },
           "maxItems": 24,
           "type": "array"
+        },
+        "learnerScopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
         },
         "learnerStageProfile": {
           "$id": "TutorV2LearnerStageHintProfile",
@@ -685,6 +725,12 @@
           ],
           "type": "object"
         },
+        "sessionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
         "studyHintCeiling": {
           "anyOf": [
             {
@@ -708,7 +754,10 @@
       },
       "required": [
         "requestKind",
+        "learnerScopeRef",
+        "sessionRef",
         "contextRef",
+        "currentOpportunityRef",
         "assessmentPhase",
         "studyHintCeiling",
         "previousAssistanceLevel",
@@ -834,6 +883,24 @@
                   }
                 ]
               },
+              "instructionalContextRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "learnerScopeRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "opportunityRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
               "outcome": {
                 "anyOf": [
                   {
@@ -849,9 +916,26 @@
                     "type": "string"
                   }
                 ]
+              },
+              "sessionRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "sourceInteractionRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
               }
             },
             "required": [
+              "learnerScopeRef",
+              "sessionRef",
+              "instructionalContextRef",
+              "sourceInteractionRef",
+              "opportunityRef",
               "actionKind",
               "outcome"
             ],
@@ -865,6 +949,12 @@
           "minimum": 0,
           "type": "integer"
         },
+        "currentOpportunityRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
         "elapsedInstructionalEffortMinutes": {
           "maximum": 240,
           "minimum": 0,
@@ -872,6 +962,12 @@
         },
         "inputKind": {
           "const": "study-intervention-evidence",
+          "type": "string"
+        },
+        "instructionalContextRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
           "type": "string"
         },
         "interactionRef": {
@@ -884,6 +980,12 @@
           "maximum": 12,
           "minimum": 0,
           "type": "integer"
+        },
+        "learnerScopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
         },
         "learnerStageProfile": {
           "$id": "TutorV2LearnerStageInterventionProfile",
@@ -1147,10 +1249,20 @@
               "type": "object"
             }
           ]
+        },
+        "sessionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
         }
       },
       "required": [
         "inputKind",
+        "learnerScopeRef",
+        "sessionRef",
+        "instructionalContextRef",
+        "currentOpportunityRef",
         "interactionRef",
         "attemptCount",
         "assistanceHistory",
@@ -1171,6 +1283,44 @@
       "additionalProperties": false,
       "properties": {
         "conceptRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "currentInstructionalContextRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "currentOpportunityAssistanceLevel": {
+          "anyOf": [
+            {
+              "const": "independent",
+              "type": "string"
+            },
+            {
+              "const": "light-hint",
+              "type": "string"
+            },
+            {
+              "const": "guided",
+              "type": "string"
+            },
+            {
+              "const": "reteach-required",
+              "type": "string"
+            }
+          ]
+        },
+        "currentOpportunityRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "currentSessionRef": {
           "maxLength": 160,
           "minLength": 3,
           "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
@@ -1221,6 +1371,12 @@
                 "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
                 "type": "string"
               },
+              "instructionalContextRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
               "issuer": {
                 "const": "study",
                 "type": "string"
@@ -1233,6 +1389,12 @@
               },
               "observedAt": {
                 "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+                "type": "string"
+              },
+              "opportunityRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
                 "type": "string"
               },
               "outcome": {
@@ -1263,6 +1425,12 @@
                   }
                 ]
               },
+              "sessionRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
               "spacing": {
                 "anyOf": [
                   {
@@ -1281,6 +1449,9 @@
               "issuer",
               "learnerScopeRef",
               "conceptRef",
+              "sessionRef",
+              "instructionalContextRef",
+              "opportunityRef",
               "outcome",
               "assistanceLevel",
               "recency",
@@ -1303,6 +1474,10 @@
         "envelope",
         "learnerScopeRef",
         "conceptRef",
+        "currentSessionRef",
+        "currentInstructionalContextRef",
+        "currentOpportunityRef",
+        "currentOpportunityAssistanceLevel",
         "evaluatedAt",
         "evidence"
       ],
@@ -1977,6 +2152,12 @@
           "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
           "type": "string"
         },
+        "currentOpportunityRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
         "curriculumBindingRef": {
           "maxLength": 160,
           "minLength": 3,
@@ -2090,6 +2271,7 @@
         "officialWorkingLevelRef",
         "instructionalContextRef",
         "currentConceptRef",
+        "currentOpportunityRef",
         "assessmentPhase",
         "studyHintCeiling",
         "safetyStatus",

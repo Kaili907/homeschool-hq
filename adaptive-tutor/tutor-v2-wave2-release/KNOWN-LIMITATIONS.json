@@ -25,6 +25,14 @@
     {
       "code": "SESSION6_ARCHIVES_NOT_MOUNTED",
       "detail": "Four external Session 6 archives were not mounted; the reconstructed frozen source built and 35 executable Study Core Bridge tests passed, while one archive checksum test skipped."
+    },
+    {
+      "code": "INHERITED_DEPENDENCY_ADVISORIES",
+      "detail": "Three existing high advisories affect @playwright/test, playwright, and nanoid in unchanged Study runtime manifests."
+    },
+    {
+      "code": "NON_SELF_REFERENTIAL_CANDIDATE_SHA",
+      "detail": "As in Wave 1, the exact final candidate SHA is recorded after commit in the session return rather than self-referenced inside checksummed generated artifacts, preserving deterministic regeneration."
     }
   ],
   "limitationsVersion": 1

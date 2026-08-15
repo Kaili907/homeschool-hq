@@ -30,7 +30,7 @@ test("Wave 2 composition runs all admitted lanes and returns control to Study", 
   assert.equal(result.misconception.status, "possible-misconception");
   assert.equal(result.hint.status, "recommended");
   assert.equal(result.intervention.actionKind, "check-prerequisite");
-  assert.equal(result.mastery.recommendation, "supported-evidence");
+  assert.equal(result.mastery.recommendation, "emerging-evidence");
   assert.equal(result.repair.status, "proposed");
   assert.equal(result.reteach.status, "proposed");
   assert.notEqual(result.parentExplanation, null);
@@ -92,6 +92,12 @@ test("ACTIVE_ASSESSMENT_GATE structurally withholds hints, repair, and reteach",
   input.studyAuthority.assessmentPhase = "active-graded-or-mastery-check";
   input.hintSelection.assessmentPhase = "active-graded-or-mastery-check";
   input.intervention.assessmentPhase = "active-graded-or-mastery-check";
+  input.masteryEvidence.currentOpportunityAssistanceLevel = "independent";
+  const current = input.masteryEvidence.evidence.find(
+    ({ opportunityRef }) => opportunityRef === input.studyAuthority.currentOpportunityRef,
+  );
+  assert.ok(current);
+  current.assistanceLevel = "independent";
   const result = requirePending(await compose(input));
   assert.equal(result.hint.status, "no-hint");
   assert.equal(result.hint.hintLevel, "none");

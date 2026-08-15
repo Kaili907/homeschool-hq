@@ -11,7 +11,7 @@ const gate = JSON.parse(gateText) as {
   readonly counts: Record<string, number>;
   readonly checks: readonly { readonly name: string; readonly status: string; readonly detail: string }[];
 };
-if (gate.finalClassification !== "WAVE2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS") {
+if (gate.finalClassification !== "WAVE2_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS") {
   throw new Error(`Wave 2 gate is not an inherited-findings candidate: ${gate.finalClassification}`);
 }
 if (gate.hardGateFamilies.some(({ status }) => status !== "PASS")) {
@@ -94,13 +94,48 @@ const lanes = {
   },
 } as const;
 
+const repairs = {
+  W2_B1_GLOBAL_AUTHORITY_FALLBACK: {
+    branch: "origin/mac/tutor-v2-w2-authority-fallback-repair-r1",
+    sourceCommit: "5ed021ed5cf239bf9b4d90b6baefed960565459a",
+    cherryPickedCommit: "461f8298bafcd95b226f8abd76e184e2f58c5ad4",
+    stablePatchId: "ee25597f03be72840f8417e1efdd506e85c0f79c",
+  },
+  W2_B2_HISTORY_SCOPE: {
+    branch: "origin/mac/tutor-v2-w2-history-scope-repair-r1",
+    sourceCommit: "28849cc7eeef76e9e6eeeb199375523e25317b0b",
+    cherryPickedCommit: "ee572e7f4d655e101671ce36253c2121e04d7ff8",
+    stablePatchId: "2caee0379c0a6bc7e5012557fc94a5c073e77f03",
+  },
+  W2_B3_MASTERY_ASSISTANCE: {
+    branch: "origin/mac/tutor-v2-w2-mastery-assistance-repair-r1",
+    sourceCommit: "76839746eebc60a1adf8e24a6daa68661a9adfa9",
+    cherryPickedCommit: "07587f463565e0a0ddce46499ba010249e0319f3",
+    stablePatchId: "8b2142f6b809abb7d7462bfb3a918a89bebca462",
+  },
+} as const;
+
 const status = {
-  statusVersion: 1,
+  statusVersion: 2,
   WAVE_2_COMPLETE: false,
   FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
   STUDY_ENGINE_REMAINS_AUTHORITY: true,
+  STUDY_SAFETY_HOLD_STOPS_ALL_ADAPTIVE_SUBSYSTEMS: true,
+  ADAPTIVE_SAFETY_METADATA_MUST_RECONCILE: true,
+  ADAPTIVE_ACTION_PROPOSALS_REQUIRE_STUDY_ALLOWED_ACTION: true,
+  INVALID_REQUEST_FALLBACK_USES_ONLY_TRUSTED_CANONICAL_REFS: true,
+  HINT_HISTORY_IS_LEARNER_SESSION_CONTEXT_BOUND: true,
+  INTERVENTION_HISTORY_IS_LEARNER_SESSION_CONTEXT_BOUND: true,
+  CURRENT_OPPORTUNITY_IS_STUDY_BOUND: true,
+  CURRENT_ASSISTANCE_IS_BOUND_TO_MASTERY_OPPORTUNITY: true,
+  ASSISTED_CURRENT_OPPORTUNITY_CAN_COUNT_AS_INDEPENDENT: false,
   TUTOR_CAN_CHANGE_OFFICIAL_WORKING_LEVEL: false,
+  TUTOR_CAN_CHANGE_NOMINAL_GRADE: false,
   TUTOR_CAN_DECLARE_OFFICIAL_MASTERY: false,
+  TUTOR_CAN_ASSIGN_CURRICULUM: false,
+  PREREQUISITE_REPAIR_IS_PROPOSAL_ONLY: true,
+  RETEACH_IS_PROPOSAL_ONLY: true,
+  PARENT_EXPLANATIONS_ARE_MINIMIZED_AND_NON_AUTHORITATIVE: true,
   RAW_LEARNER_FREE_FORM_ATTEMPT_PROVIDER_DISCLOSURE_ALLOWED: false,
   UNREVIEWED_PROVIDER_FREE_FORM_LEARNER_OUTPUT_ALLOWED: false,
   PRODUCTION_WIRING_ENABLED: false,
@@ -111,27 +146,55 @@ const status = {
   PRODUCTION_DEPLOY_AUTHORIZED: false,
   STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED: true,
   CROSS_CHILD_CONTEXT_REUSE_ALLOWED: false,
+  WAVE1_PROVIDER_AUTHORITY_GATE_REMAINS_CLOSED: true,
+  WAVE1_STRUCTURAL_ANTI_ANSWER_GATE_REMAINS_CLOSED: true,
+  WAVE1_PRIVACY_PROVENANCE_GATE_REMAINS_CLOSED: true,
+  WAVE1_APPROVAL_DECISION_GATE_REMAINS_CLOSED: true,
   WAVE1_ACCEPTED_BASELINE_SHA: "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
   W1_10R5_ACCEPTANCE_CLASSIFICATION: "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS",
   FINAL_CLASSIFICATION: gate.finalClassification,
 };
 
 const provenance = {
-  provenanceVersion: 1,
-  session: "STUDY-TUTOR-V2-W2-09 — Adaptive Intelligence Convergence",
-  branch: "mac/tutor-v2-w2-convergence-r1",
-  startingSha: "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
+  provenanceVersion: 2,
+  session: "STUDY-TUTOR-V2-W2-09R2 — Wave 2 Blocker Repair Reconvergence",
+  branch: "mac/tutor-v2-w2-reconvergence-r2",
+  startingSha: "8d618502a16a3d4d169143b539286a3b6fb5b925",
   acceptedWave1BaselineSha: "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
   w1_10R5AcceptanceClassification: "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS",
-  cherryPickOrder: Object.keys(lanes),
+  failedR1CandidateSha: "8d618502a16a3d4d169143b539286a3b6fb5b925",
+  w2_10R1Classification: "WAVE2_HOLD_BLOCKING_FINDINGS",
+  w2_10R1BlockingFindings: [
+    "Study safety hold did not stop every adaptive subsystem.",
+    "Study allowedActions was bypassed by hint, prerequisite repair, and reteach.",
+    "Current hint assistance was not bound to the mastery evidence opportunity.",
+    "Invalid input controlled supposedly reviewed fallback references.",
+    "Hint and intervention history lacked child/session provenance.",
+  ],
+  cherryPickOrder: [
+    ...Object.keys(lanes),
+    "W2_B1_GLOBAL_AUTHORITY_FALLBACK",
+    "W2_B2_HISTORY_SCOPE",
+    "W2_B3_MASTERY_ASSISTANCE",
+  ],
   lanes,
+  repairs,
+  r2Candidate: {
+    status: "generated-for-independent-w2-10r2-rereview",
+    exactShaRecordedAfterCommitInSessionReturn: true,
+    selfReferencedInsideChecksummedArtifacts: false,
+  },
+  finalW2_10R2Required: true,
   verification: {
     allRemoteTipsExact: true,
     baseIsDirectParentForEveryLane: true,
     mergeCommitsInLaneRanges: 0,
     stablePatchIdsExact: true,
-    laneTreesUnmodifiedByConvergence: true,
+    unrepairedLaneTreesExactAndRepairSupersessionsVerified: true,
     convergenceOwnershipPassed: true,
+    repairRemoteTipsExact: true,
+    repairDirectParentsAreFailedR1Candidate: true,
+    repairStablePatchIdsExact: true,
   },
 };
 
@@ -165,6 +228,14 @@ const limitations = {
     {
       code: "SESSION6_ARCHIVES_NOT_MOUNTED",
       detail: "Four external Session 6 archives were not mounted; the reconstructed frozen source built and 35 executable Study Core Bridge tests passed, while one archive checksum test skipped.",
+    },
+    {
+      code: "INHERITED_DEPENDENCY_ADVISORIES",
+      detail: "Three existing high advisories affect @playwright/test, playwright, and nanoid in unchanged Study runtime manifests.",
+    },
+    {
+      code: "NON_SELF_REFERENTIAL_CANDIDATE_SHA",
+      detail: "As in Wave 1, the exact final candidate SHA is recorded after commit in the session return rather than self-referenced inside checksummed generated artifacts, preserving deterministic regeneration.",
     },
   ],
   candidate: [
@@ -211,7 +282,7 @@ const outputs = new Map<string, string>([
 const manifest = {
   manifestVersion: 1,
   product: "Manuel Academy Study Tutor V2",
-  wave: "Wave 2 Adaptive Intelligence Candidate",
+  wave: "Wave 2 R2 Adaptive Intelligence Candidate",
   finalClassification: gate.finalClassification,
   wave2Complete: false,
   finalIndependentRereviewRequired: true,
