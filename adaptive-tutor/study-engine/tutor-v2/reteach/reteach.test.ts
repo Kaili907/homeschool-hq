@@ -119,21 +119,60 @@ test("reteach steps are hard-capped at four", async () => {
   assert.equal(result.reasonCode, "RETEACH_STEP_CAP_REACHED");
 });
 
-test("repeated reteach loop is capped with a reviewed static proposal", async () => {
+test("repeated reteach loop cap is terminal at, above, and across replay", async () => {
   let recommendationCalls = 0;
+  let reviewCalls = 0;
   const ports = dependencies();
   ports.hintInterventions.recommend = () => {
     recommendationCalls += 1;
     throw new Error("must not be called");
   };
-  const result = await proposeReteachPlan(
-    { ...structuredClone(request), priorReteachLoops: 2 },
+  ports.reviewedContent.lookup = () => {
+    reviewCalls += 1;
+    throw new Error("must not be called");
+  };
+  const cappedRequest = { ...structuredClone(request), priorReteachLoops: 2 };
+  const result = await proposeReteachPlan(cappedRequest, ports);
+  assert.equal(result.status, "withheld");
+  assert.equal(result.reasonCode, "REPEATED_RETEACH_LOOP_CAP_REACHED");
+  assert.equal(result.source, "none");
+  assert.equal(recommendationCalls, 0);
+  assert.equal(reviewCalls, 0);
+  assert.deepEqual(result.steps, []);
+  assert.deepEqual(result.reviewedContentRefs, []);
+  assert.equal(result.studyDecisionRequired, true);
+  assert.equal(result.authorityEffects.masteryWrite, "none");
+  assert.equal(result.authorityEffects.workingLevelMutation, "none");
+  assert.deepEqual([...new Set(Object.values(result.authorityEffects))], ["none"]);
+  assert.equal("escalation" in result, false);
+
+  const above = await proposeReteachPlan(
+    { ...structuredClone(request), priorReteachLoops: 3 },
     ports,
   );
-  assert.equal(result.reasonCode, "REPEATED_RETEACH_LOOP_CAP_REACHED");
-  assert.equal(result.source, "reviewed-static-fallback");
+  assert.equal(above.status, "withheld");
+  assert.equal(above.reasonCode, "REPEATED_RETEACH_LOOP_CAP_REACHED");
+  assert.equal(above.source, "none");
+  assert.deepEqual(above.steps, []);
+  assert.deepEqual(above.reviewedContentRefs, []);
+
+  const below = await proposeReteachPlan(
+    { ...structuredClone(request), priorReteachLoops: 1 },
+    dependencies(),
+  );
+  assert.equal(below.status, "proposed");
+  assert.equal(below.reasonCode, "RETEACH_RECOMMENDED");
+  assert.equal(below.source, "adaptive");
+  assert.equal(below.steps.length, 2);
+  assert.equal(below.priorReteachLoops, 1);
+
+  const replay = await proposeReteachPlan(cappedRequest, ports);
+  assert.deepEqual(replay, result);
+  assert.equal(replay.status, "withheld");
+  assert.deepEqual(replay.steps, []);
+  assert.deepEqual(replay.reviewedContentRefs, []);
   assert.equal(recommendationCalls, 0);
-  assert.equal(result.steps.length, 1);
+  assert.equal(reviewCalls, 0);
 });
 
 test("active assessment holds reteach and cannot be bypassed", async () => {
@@ -144,7 +183,11 @@ test("active assessment holds reteach and cannot be bypassed", async () => {
     return {};
   };
   const result = await proposeReteachPlan(
-    { ...structuredClone(request), assessmentPhase: "active-graded-or-mastery-check" },
+    {
+      ...structuredClone(request),
+      assessmentPhase: "active-graded-or-mastery-check",
+      priorReteachLoops: 2,
+    },
     ports,
   );
   assert.equal(result.status, "withheld");
@@ -159,6 +202,7 @@ test("safety hold returns no reteach steps", async () => {
     {
       ...structuredClone(request),
       safety: { safetyHold: true, mayContinueAcademicFlow: false },
+      priorReteachLoops: 2,
     },
     dependencies(),
   );
@@ -203,12 +247,16 @@ test("unreviewed reteach content is rejected in favor of static reviewed content
   assert.deepEqual(result.reviewedContentRefs, ["content:reviewed-static-fractions"]);
 });
 
-test("reteach dependency failure returns safe static recommendation", async () => {
+test("reteach dependency outage below the loop cap returns safe static recommendation", async () => {
   const ports = dependencies();
   ports.hintInterventions.recommend = () => {
     throw new Error("recommendation unavailable");
   };
-  const result = await proposeReteachPlan(request, ports);
+  const result = await proposeReteachPlan(
+    { ...structuredClone(request), priorReteachLoops: 1 },
+    ports,
+  );
+  assert.equal(result.status, "proposed");
   assert.equal(result.reasonCode, "ADAPTIVE_DEPENDENCY_UNAVAILABLE");
   assert.equal(result.source, "reviewed-static-fallback");
   assert.deepEqual(result.reviewedContentRefs, ["content:reviewed-static-fractions"]);
