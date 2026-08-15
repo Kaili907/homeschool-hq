@@ -9,7 +9,8 @@
     "fictionalSimulationOnly": true,
     "noRealFinancialData": true,
     "noPersonalizedFinancialAdvice": true,
-    "adultOnlyScoring": true
+    "adultOnlyScoring": true,
+    "directorSampleOverlays": 1
   },
   "deterministicBuild": {
     "command": "node --experimental-strip-types --import ./curriculum-production/final/financial-literacy/tooling/register.mjs curriculum-production/final/financial-literacy/tooling/reconcile.mjs",
@@ -49,16 +50,19 @@
     },
     "fixedAuthorityLessons": 468,
     "rubricAuthorityLessons": 504,
-    "fixedContractItems": 2967,
-    "openContractItems": 666
+    "fixedContractItems": 2979,
+    "openContractItems": 668
   },
   "oracle": {
     "status": "PASS",
-    "sourceIndependentlyRecomputedOrComparisonDerivedFixedItems": 2881,
+    "sourceIndependentlyRecomputedOrComparisonDerivedFixedItems": 2893,
     "sourceAssertedFactChoicesWithPerItemAuthority": 85,
     "reconciliationIndependentSupplements": 1,
     "disagreements": 0,
-    "sourceEvidencePreserved": true
+    "sourceEvidencePreserved": false,
+    "sourceAuthorityPreservedLessons": 503,
+    "directorSampleIndependentAuthorityLessons": 1,
+    "allFinalFixedAuthorityVerified": true
   },
   "grade10JoinProof": {
     "sourceAuthorityCommit": "481296a9e794770348881b43bd0d1fa4f794db29",
@@ -4891,25 +4895,26 @@
       "unit": 4,
       "dayInUnit": 3,
       "responseScoringMode": "MIXED",
-      "fixedItems": 5,
-      "openItems": 1,
+      "fixedItems": 17,
+      "openItems": 3,
       "fixedAuthority": true,
       "rubricAuthority": true,
-      "acceptableAnswerCriteria": 1,
+      "acceptableAnswerCriteria": 3,
       "packagePath": "packages/grade-08/swk-fl-g8-u04-l03.package.json",
-      "packageSha256": "98f8d0bbcbcea45543fe270fa2c4345b1111f863557c221c9a9229fd133945fe",
+      "packageSha256": "5f9e95fde97059cc81c4eb64040a56d0bdb76294ef0560c5052ef26aef48e279",
       "scoringPath": "scoring/grade-08/swk-fl-g8-u04-l03.scoring.json",
-      "scoringSha256": "977376175faefea30f817843a1651d8e050486f2c578c4c5464d8158553a5103",
+      "scoringSha256": "a77fbaa65d944674152ee3fe05fcc2aa0595c4dda8d2ecf98138e2d3af0b4bc6",
       "inputLane": "mac/finlit-production-g38-r3",
       "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
       "sourceLessonAuthority": {
         "sourceCorpusVersion": "1.0.0",
-        "sourceRef": "worktree",
-        "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+        "sourceRef": "mac/finlit-director-sample-r1",
+        "sourcePath": "curriculum-production/final/financial-literacy/samples/grade-08/swk-fl-g8-u04-l03.sample.package.json",
         "sourceLessonId": "ma-g8-financial-literacy-u04-l03",
         "authoredBy": "manual",
         "answerDerivedFromSourceGuidance": false
-      }
+      },
+      "sampleRevision": "FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1"
     },
     {
       "packageId": "swk-fl-g8-u04-l04",
