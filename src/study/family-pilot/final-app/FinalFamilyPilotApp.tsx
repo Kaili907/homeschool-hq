@@ -56,7 +56,16 @@ import { toStudentDashboardPresentation } from './dashboardPresentation'
 import { FinalFamilyAutoPlannerHost } from './autoPlannerHost'
 import { applyAutoPlannerPresentation } from './autoPlannerPresentation'
 import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
-import { ParentSyncStatusR1 } from '../../hosted-sync/v2/familyPilot/status'
+import {
+  isParentDeviceSyncSetupSimulation,
+  ParentDeviceSyncSetup,
+  type ParentDeviceSyncSetupRuntime,
+} from '../../hosted-sync/v2/familyPilot/deviceSetup'
+import {
+  ParentSyncStatusR1,
+  currentParentSyncStatusR1,
+  type ParentSyncStatusR1 as ParentSyncStatus,
+} from '../../hosted-sync/v2/familyPilot/status'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -72,13 +81,17 @@ const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
 })
 
 type Mode = 'parent' | 'student'
-type ParentView = 'school-plan' | 'assign' | 'reports' | 'preferences' | 'backup'
+type ParentView = 'school-plan' | 'assign' | 'reports' | 'preferences' | 'backup' | 'devices'
 
 function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : 'That action could not be completed.'
 }
 
-export function FinalFamilyPilotApp({ onExit }: { readonly onExit: () => void }) {
+export function FinalFamilyPilotApp({ onExit, deviceSyncSetup }: {
+  readonly onExit: () => void
+  /** Local/test/staging injection only. Production composition omits this seam. */
+  readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
+}) {
   const [catalog, setCatalog] = useState<Awaited<ReturnType<typeof loadFinalFamilyPilotCatalog>> | null>(null)
   const [catalogError, setCatalogError] = useState<string | null>(null)
   const [revision, setRevision] = useState(0)
@@ -107,7 +120,7 @@ export function FinalFamilyPilotApp({ onExit }: { readonly onExit: () => void })
     return <FinalShell onExit={onExit}><p className="rounded-xl border border-red-300 bg-red-50 p-6 font-semibold" role="alert">{catalogError ?? 'The final curriculum could not be loaded.'}</p></FinalShell>
   }
 
-  return <MountedFinalFamilyPilot controller={controller} onExit={onExit} refresh={refresh} revision={revision} />
+  return <MountedFinalFamilyPilot controller={controller} onExit={onExit} refresh={refresh} revision={revision} deviceSyncSetup={deviceSyncSetup} />
 }
 
 function FinalShell({ onExit, children }: { readonly onExit: () => void; readonly children: React.ReactNode }) {
@@ -137,12 +150,14 @@ function MountedFinalFamilyPilot({
   onExit,
   refresh,
   revision,
+  deviceSyncSetup,
 }: {
   readonly controller: FinalFamilyPilotController
   readonly onExit: () => void
   readonly refresh: () => void
   /** Forces a projection refresh without remounting an open Study session. */
   readonly revision: number
+  readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
 }) {
   const [mode, setMode] = useState<Mode>('student')
   const [parentAuthorized, setParentAuthorized] = useState(false)
@@ -281,6 +296,7 @@ function MountedFinalFamilyPilot({
           refresh={refresh}
           restoreInput={restoreInput}
           onRestore={doRestore}
+          deviceSyncSetup={deviceSyncSetup}
         />
       )}
     </FinalShell>
@@ -492,7 +508,7 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   )
 }
 
-function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore }: {
+function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, deviceSyncSetup }: {
   readonly controller: FinalFamilyPilotController
   readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly view: ParentView
@@ -501,10 +517,21 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
   readonly refresh: () => void
   readonly restoreInput: React.RefObject<HTMLInputElement | null>
   readonly onRestore: (file: File | undefined) => Promise<void>
+  readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
 }) {
   const students = controller.appSnapshot.state.setup.students
   const [selectedRef, setSelectedRef] = useState(students[0]?.studentRef ?? '')
+  const deviceSyncAvailable = isParentDeviceSyncSetupSimulation(deviceSyncSetup)
+  const [syncStatus, setSyncStatus] = useState<ParentSyncStatus>(
+    deviceSyncAvailable ? 'SYNC_READY' : currentParentSyncStatusR1(),
+  )
+  useEffect(() => {
+    setSyncStatus(deviceSyncAvailable ? 'SYNC_READY' : currentParentSyncStatusR1())
+  }, [deviceSyncAvailable])
   const selected = students.find((item) => item.studentRef === selectedRef) ?? students[0]
+  const navigation: readonly ParentView[] = deviceSyncAvailable
+    ? ['school-plan', 'assign', 'reports', 'preferences', 'backup', 'devices']
+    : ['school-plan', 'assign', 'reports', 'preferences', 'backup']
   return (
     <main className="mx-auto max-w-6xl px-4 py-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -513,16 +540,18 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
           <h2 className="text-2xl font-extrabold">Household learning</h2>
         </div>
         <div className="flex items-center gap-3">
-          <ParentSyncStatusR1 />
+          <ParentSyncStatusR1 status={syncStatus} />
           <select aria-label="Parent student" className="rounded-lg border px-3 py-2 font-bold" value={selected?.studentRef ?? ''} onChange={(event) => setSelectedRef(event.target.value)}>
             {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
           </select>
         </div>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
-        {(['school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
+        {navigation.map((item) => <button key={item} type="button" className={`min-h-11 rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item === 'devices' ? 'Device sync' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
       </nav>
-      {!selected ? <p className="mt-6">No configured students.</p> : view === 'school-plan' ? (
+      {view === 'devices' && deviceSyncAvailable ? (
+        <ParentDeviceSyncSetup runtime={deviceSyncSetup} onStatusChange={setSyncStatus} />
+      ) : !selected ? <p className="mt-6">No configured students.</p> : view === 'school-plan' ? (
         <FamilySchoolPlanPanel controller={controller} host={autoPlannerHost} student={selected} />
       ) : view === 'assign' ? (
         <ParentAssignments controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
@@ -530,7 +559,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
         <ParentReports controller={controller} student={selected} refresh={refresh} />
       ) : view === 'preferences' ? (
         <PreferencesSurface controller={controller} student={selected} refresh={refresh} onClose={() => setView('assign')} />
-      ) : (
+      ) : view === 'backup' ? (
         <section className="mt-6 rounded-2xl border bg-white p-5">
           <h3 className="text-xl font-extrabold">Backup and recovery</h3>
           <p className="mt-2 text-slate-600">Exports minimized roster, assignment progress, exact segment references, source metadata, attestations, preferences, and safety state. It never includes learner answers or Tutor conversations.</p>
@@ -542,7 +571,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
           </div>
           <input ref={restoreInput} className="hidden" type="file" accept="application/json" onChange={(event) => void onRestore(event.target.files?.[0])} />
         </section>
-      )}
+      ) : null}
     </main>
   )
 }
