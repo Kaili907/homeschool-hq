@@ -15,43 +15,127 @@
   "scoring_stance": "SUMMATIVE",
   "rubric": [
     {
-      "dimension": "accuracy or fidelity",
-      "exceeds": "Every step, value, or rendered choice is accurate and faithful to the stated criteria, with no notable errors.",
-      "meets": "The work is accurate and faithful to the stated criteria, with at most one minor self-correctable error.",
-      "developing": "The work is mostly accurate but has one or more errors that change the result or the intended effect.",
-      "beginning": "Multiple accuracy or fidelity errors prevent the work from meeting the stated criteria."
+      "dimension": "algorithm construction and behavior",
+      "exceeds": "Both learner-authored algorithms satisfy all public and restricted checks, preserve inputs, terminate, and include a well-justified additional boundary or deliberate-break test.",
+      "meets": "Both algorithms satisfy all required public checks, preserve inputs, terminate, and implement the stated behavior without a result-changing error.",
+      "developing": "The main approach is plausible, but one algorithm has a result-changing boundary, ordering, distinct-position, or return defect.",
+      "beginning": "One or both algorithms are missing, copied, non-terminating, or do not implement the supplied specification."
     },
     {
-      "dimension": "evidence and reasoning",
-      "exceeds": "Every claim or choice is backed by specific evidence or clearly explained reasoning a reader can follow unaided.",
-      "meets": "Most claims or choices are backed by evidence or reasoning, with only small gaps.",
-      "developing": "Some claims are supported but several are asserted without support.",
-      "beginning": "Claims are asserted with little or no supporting evidence or reasoning."
+      "dimension": "invariant and correctness reasoning",
+      "exceeds": "Both arguments precisely establish initialization, maintenance, and termination and connect the invariant to the returned result for all permitted inputs.",
+      "meets": "Each algorithm has a relevant state invariant with a credible explanation of why it begins true, remains true, and supports the final result.",
+      "developing": "An invariant is present but restates the final goal, omits a proof phase, or is not connected to the return value.",
+      "beginning": "Correctness is asserted only from examples, or no invariant/state argument is supplied."
     },
     {
-      "dimension": "independence",
-      "exceeds": "The work was completed unaided and the explanation shows the reasoning is genuinely the student's own, transferring to an unseen case.",
-      "meets": "The work was completed without scaffold or prompts in view.",
-      "developing": "The work required prompting or reference beyond what the task allowed.",
-      "beginning": "The work could not proceed without step-by-step direction."
+      "dimension": "debugging reasoning",
+      "exceeds": "The defect log distinguishes symptom, falsifiable hypothesis, first divergent evidence, predicted change effect, controlled test, interpretation, and iteration with unusually clear causal reasoning.",
+      "meets": "All six required debugging moves are recorded in order, the hypothesis precedes the change, and the conclusion is supported by a complete rerun.",
+      "developing": "The repair may work, but one or more reasoning moves are missing, merged, after-the-fact, or unsupported by a trace/state observation.",
+      "beginning": "A change is supplied without a defensible diagnosis, or the response reproduces an exposed/copyable repair instead of independent reasoning."
     },
     {
       "dimension": "testing and verification",
-      "exceeds": "Test cases include normal, boundary, and deliberate-break inputs, each with expected against actual recorded and every failure resolved and re-run.",
-      "meets": "The required cases were run with expected against actual recorded, and failures were addressed.",
-      "developing": "Some checking occurred but cases are too few, results are unrecorded, or a known failure was left unresolved.",
-      "beginning": "The work was submitted without evidence it was checked against any case."
+      "exceeds": "Expected values precede execution for every normal, boundary, and learner-designed break case; actuals are recorded, failures are interpreted, and all relevant cases are rerun after revision.",
+      "meets": "Expected and actual results are recorded for every required case, including boundaries, and the complete set is rerun after the debugging change.",
+      "developing": "Some meaningful tests were used, but expected/actual timing is unclear, a boundary is missing, or only the originally failing case was rerun.",
+      "beginning": "The work has no inspectable test/trace evidence or declares success while a known required case still fails."
+    },
+    {
+      "dimension": "efficiency and trade-off reasoning",
+      "exceeds": "Time and extra-space claims are correct for both implementations, justified from operation growth, and compared with a viable alternative under an explicit constraint.",
+      "meets": "The learner correctly distinguishes worst-case time and extra space, identifies the repeated operation, and states one concrete alternative trade-off.",
+      "developing": "Complexity labels are partly correct but ceremonial, unsupported by operation growth, or do not distinguish time from storage.",
+      "beginning": "Efficiency is absent, materially incorrect, or reduced to an unsupported claim that one algorithm is simply better."
+    },
+    {
+      "dimension": "independence and authorship",
+      "exceeds": "The record is independently authored, internally consistent across code, traces, and explanations, and transfers the reasoning to a learner-designed case.",
+      "meets": "The protected work is the learner's own and was completed without an exact repair, completed target trace, or answer-bearing scaffold in view.",
+      "developing": "The record depends on support above the declared ceiling or contains reasoning the learner cannot connect to the submitted code and traces.",
+      "beginning": "A scored implementation, repair, trace, or explanation was produced by another person/tool or copied from protected authority."
     }
   ],
-  "scoring_judgment_guidance": "Score this session with the rubric below, not against a fixed answer key — a design, code, or debugging task legitimately has more than one valid solution. Score only what a mastery demonstration on algorithms, efficiency, and correctness can show: this is evidence of record, so it must be independent work checked against the stated criteria. Record the level reached on each dimension with one specific reason drawn from the actual submission. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoring_judgment_guidance": "Score only the durable independent creation and mastery-debug records; the readiness check, worked containsZero example, and guided countEven response are instruction and formative evidence, not summative points. Review code/pseudocode together with traces and explanations. Multiple valid implementations are acceptable when they satisfy the specification and checks. Do not award correctness merely for matching the reference text, and do not penalize a different valid algorithm. Record one evidence-specific reason for every rubric level. Do not infer effort, motivation, diagnosis, or character from an error.",
   "lesson_success_criteria": [
-    "The learner completes the central task on algorithms, efficiency, and correctness.",
-    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
-    "The learner checks or revises the work and can name a next step."
+    "The learner states an invariant that is true before the loop, remains true after each iteration, and supports the returned result.",
+    "The learner creates a fresh algorithm that meets normal and boundary tests and explains its O(n) time and O(1) extra-space costs.",
+    "The learner repairs a separate fresh defect without a target solution in view and records every move in the debugging cycle.",
+    "The learner verifies expected against actual results for all public cases and justifies one approach against a named alternative."
   ],
-  "formative_check": "Identify the item you are least confident about and say what would resolve it.",
-  "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
-  "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, commit or test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
+  "formative_check": "Before opening protected work, ask the learner to distinguish a state invariant from a final goal and to identify the observe/hypothesize/inspect order. This check is no-penalty and is not counted as mastery evidence.",
+  "answer_or_scoring_guidance": "Accept JavaScript, another approved text language, block code, or precise line-by-line pseudocode when it preserves loop semantics and the learner supplies the required trace. Accept alternate correct algorithms. Keep the exact reference implementations, decisive repairs, accepted target traces, and restricted tests out of every learner surface before the complete evidence record is durably saved. The Director preview intentionally injects no assessor and reports responses only as pending trusted review.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER",
+    "review_timing": "TRUSTED_ADULT_REVIEW_AFTER_ALL_REQUIRED_PARTS_ARE_DURABLY_SAVED",
+    "independent_creation": {
+      "task_ref": "ma-g10-technology-u02-l05#independent-first-drop",
+      "reference_implementation": "function firstDrop(values) {\n  for (let i = 1; i < values.length; i += 1) {\n    if (values[i] < values[i - 1]) return i;\n  }\n  return -1;\n}",
+      "accepted_invariant": "At the start of iteration i, no adjacent drop occurs at any index from 1 through i - 1. If the current pair drops, i is therefore the smallest valid index; if the loop terminates, no adjacent drop exists and -1 is correct.",
+      "complexity": "Worst-case O(n) time and O(1) extra space.",
+      "restricted_checks": [
+        {
+          "input": "[5, 4]",
+          "expected": "1"
+        },
+        {
+          "input": "[1, 3, 5, 5, 4]",
+          "expected": "4"
+        },
+        {
+          "input": "[-3, -2, -1]",
+          "expected": "-1"
+        }
+      ]
+    },
+    "mastery_debug": {
+      "task_ref": "ma-g10-technology-u02-l05#mastery-has-duplicate",
+      "root_cause": "The inner loop begins with right equal to left, so the first comparison always compares an element with itself and returns true for every nonempty input.",
+      "minimal_reference_repair": "Change the inner-loop initialization from `let right = left` to `let right = left + 1`.",
+      "reference_implementation": "function hasDuplicate(values) {\n  for (let left = 0; left < values.length; left += 1) {\n    for (let right = left + 1; right < values.length; right += 1) {\n      if (values[left] === values[right]) return true;\n    }\n  }\n  return false;\n}",
+      "accepted_invariant": "At the start of each outer iteration left, every permitted pair with a smaller first index has been checked and found unequal. During the inner loop, all pairs for this left with second index less than right have been checked and found unequal. A true return therefore identifies equal values at distinct positions; normal termination means every permitted pair is unequal.",
+      "complexity": "Worst-case O(n²) time and O(1) extra space. A Set-based implementation is also acceptable with expected O(n) time and O(n) extra space if the learner justifies the memory trade-off.",
+      "restricted_checks": [
+        {
+          "input": "[]",
+          "expected": "false"
+        },
+        {
+          "input": "['x', 'x']",
+          "expected": "true"
+        },
+        {
+          "input": "['a', 'b', 'c', 'b']",
+          "expected": "true"
+        }
+      ]
+    },
+    "fresh_remediation_check": {
+      "task_ref": "ma-g10-technology-u02-l05#fresh-shared-initial",
+      "root_cause": "The loop checks the Set but never records a newly observed initial, so later repetitions cannot be recognized.",
+      "minimal_reference_repair": "After the duplicate check and before the next iteration, add `seen.add(initial)`.",
+      "reference_implementation": "function sharesInitial(words) {\n  const seen = new Set();\n  for (const word of words) {\n    const initial = word[0];\n    if (seen.has(initial)) return true;\n    seen.add(initial);\n  }\n  return false;\n}",
+      "accepted_invariant": "Before each iteration, seen contains exactly the initials of all words already examined, and none of those examined words share an initial unless the function has already returned true.",
+      "complexity": "Expected O(n) time and O(n) extra space under ordinary Set operation assumptions.",
+      "restricted_checks": [
+        {
+          "input": "[]",
+          "expected": "false"
+        },
+        {
+          "input": "['Moon', 'map']",
+          "expected": "false"
+        },
+        {
+          "input": "['cedar', 'cypress']",
+          "expected": "true"
+        }
+      ]
+    }
+  },
+  "mastery_rule": "Mark this lesson secure only when both protected parts independently meet algorithm behavior, invariant/correctness, testing, and efficiency criteria and the mastery-debug log meets the debugging cycle. Do not infer mastery from the worked or guided fixtures. If remediation is used, keep the original solution protected and require the fresh sharesInitial check to meet the same debugging/correctness bar before reconsidering mastery. Use another retrieval or transfer occasion when feasible; this single lesson remains one evidence source, not permanent mastery authority.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g10-technology-u02-assessment",
     "total_points": 38,
@@ -67,26 +151,25 @@
       "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
       "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
     },
-    "note": "This lesson is one session inside the unit; the unit assessment record above is the summative instrument, and this lesson rubric scores only this session's evidence."
+    "note": "This lesson rubric scores this session's evidence only. The separate unit assessment remains the unit-level summative instrument."
   },
-  "remediation_plan": "Reteaching for algorithms, efficiency, and correctness follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for algorithms, efficiency, and correctness, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to algorithms, efficiency, and correctness works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of algorithms, efficiency, and correctness, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking algorithms, efficiency, and correctness mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
-  "extension_plan": "Apply algorithms, efficiency, and correctness under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on algorithms, efficiency, and correctness rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
-  "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "remediation_plan": "Select remediation from observable evidence. If the invariant restates the final goal, use the completed card-pair coverage map to teach partial-state coverage, contrast final and maintainable claims, then assign the fresh sharesInitial check. If code was edited before a hypothesis/evidence trace, use the six-box evidence ladder on the thermostat analogue, then assign the same fresh check. Neither route exposes the hasDuplicate repair. Correct but low-confidence work receives specific evidence-based confirmation and a varied example, not automatic reteaching. Do not mark mastery until the fresh independent record is reviewed.",
+  "extension_plan": "Offer optional depth only after required evidence: compare the accepted pairwise algorithm with a learner-built Set-based alternative using operation counts for increasing n, then write a decision record about worst-case time, expected time assumptions, extra memory, clarity, and input constraints. Extension is never required for mastery or assigned as a penalty.",
+  "accommodation_note": "Access supports may change format, pacing, copying load, setting, or response mode. They must preserve algorithm construction, state tracing, correctness reasoning, debugging evidence, and efficiency analysis and must not disclose a protected implementation or decisive repair.",
   "accessibility_options": [
-    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
-    "Chunk directions into one action at a time and show a worked example or model.",
-    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
-    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
-    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
-    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
-    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
-    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+    "Provide readable text plus optional read-aloud support; no voice feature is required.",
+    "Keep teaching, worked example, guided work, and independent work as distinct resumable stages with one primary action at a time.",
+    "Offer extended time, hidden timer, movement breaks, reduced copying, and a low-distraction setting without reducing the algorithmic target.",
+    "Use high contrast, visible keyboard focus, semantic headings, labelled inputs, and text-only code/trace representations.",
+    "Accept typed code, handwritten code, or precise line-by-line pseudocode plus a complete trace when no runtime is available.",
+    "Provide adjustable font/contrast and a keyboard-only workflow; never require dragging, audio, camera, microphone, or a third-party account."
   ],
   "task_accessibility_provisions": [
-    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
-    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+    "The preview presents one stage at a time with semantic headings, keyboard-reachable controls, persistent local response storage, and no timer.",
+    "The paper route preserves algorithm construction, program-state tracing, correctness, debugging, and efficiency, so it earns identical credit.",
+    "Breaks, extended time, reduced copying, and a low-distraction setting are available without changing the protected solution or scoring bar."
   ],
-  "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.",
+  "parent_or_guardian_visibility": "Share the lesson target, whether each required record was saved, the rubric levels with evidence-specific reasons, and the next instructional step. Do not expose raw private reflections or publish learner code. The parent/guardian or designated school adult should help the learner stop and switch to the offline route if a tool requests sign-in, upload, or real data.",
   "source_integrity": {
     "requires_review": false,
     "status": "NOT_APPLICABLE"
@@ -94,7 +177,7 @@
   "safety_and_privacy": {
     "requires_review": true,
     "status": "VERIFIED",
-    "note": "No real credential, live external system, production account, or real personal data is used anywhere in this session; all values are fictional or sandboxed and no live system may be probed or accessed."
+    "note": "Every code/data fixture is fictional and local. No real credential, personal data, private message, precise location, account, upload, network request, or live external system is required or permitted."
   },
   "standards": [
     "Michigan Computer Science: Algorithms and Programming"

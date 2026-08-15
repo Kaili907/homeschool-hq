@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
+import { isTechnologyDirectorPreviewPath } from './study/family-pilot/technology-director-preview/route'
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
 
@@ -13,6 +14,12 @@ const FinalFamilyPilotApp = lazy(() =>
   })),
 )
 
+const TechnologyDirectorPreview = import.meta.env.DEV
+  ? lazy(() => import('./study/family-pilot/technology-director-preview/TechnologyDirectorPreview').then((module) => ({
+      default: module.TechnologyDirectorPreview,
+    })))
+  : null
+
 function familyPilotSelectedAtBoot(): boolean {
   return isFamilyPilotEnabledFromHost() && isFamilyPilotPath(window.location.pathname)
 }
@@ -20,6 +27,14 @@ function familyPilotSelectedAtBoot(): boolean {
 export default function App() {
   const [familyPilotSelected, setFamilyPilotSelected] = useState(familyPilotSelectedAtBoot)
   const [returnToLegacyHome, setReturnToLegacyHome] = useState(false)
+
+  if (TechnologyDirectorPreview && isTechnologyDirectorPreviewPath(window.location.pathname)) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the Technology Director preview.</main>}>
+        <TechnologyDirectorPreview />
+      </Suspense>
+    )
+  }
 
   if (familyPilotSelected) {
     return (
