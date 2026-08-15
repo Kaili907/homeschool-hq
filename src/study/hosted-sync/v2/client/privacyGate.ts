@@ -44,7 +44,8 @@ const ALLOWED_KEYS = new Set<string>([
   'trustedReceipt','schoolPlan','materializations','nonSchoolDates','addedSchoolDates','schoolYearStart','schoolYearEnd',
   'schoolWeekdays','subjects','configuredAt','order','paused','courseRef','lessonsPerDay','startLocalTime',
   'materializationRef','localDate','workingGrade','unitRef',
-  'totalSegments','lastSegmentRef','activeSeconds','progress','pause',
+  'totalSegments','lastSegmentRef','activeSeconds','activeSecondsByDate','date','progress','pause',
+  'instructionalSession','activeSince','inactiveAt','endedAt',
   // Exact legacy R2 RPC import/write vocabulary. These fields remain only so
   // the lossless authority checkpoint can travel through the already-installed
   // four-RPC surface; the canonical checkpoint parser still supplies the
