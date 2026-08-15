@@ -6,6 +6,7 @@ import {
 } from '../../../curriculum/final-runtime'
 import { ACADEMY_SUBJECTS, type AcademySubject, type Grade } from '../../../types'
 import type { FamilyPilotAssignmentRecordV1 } from '../core'
+import { deriveCanonicalCourseCompletion } from '../course-completion'
 import type { FinalFamilyPilotAssessmentAssignment } from '../final-app'
 import type { ScheduleItemV1 } from '../schedule'
 import {
@@ -336,6 +337,9 @@ function buildCourses(
 ): readonly FamilyPilotDashboardCourseModel[] {
   const learner = input.setup.students.find((student) => student.studentRef === studentRef)
   if (!learner) return Object.freeze([])
+  const pendingGuardianAssignmentRefs = new Set(input.attestations
+    .filter((attestation) => attestation.studentRef === studentRef && attestation.status === 'PENDING_GUARDIAN_ATTESTATION')
+    .map((attestation) => attestation.assignmentRef))
   return Object.freeze(learner.enabledSubjects.map((subject) => {
     const workingGrade = learner.workingGradeBySubject[subject] ?? learner.nominalGrade
     const course = courseForSubject(input, subject, workingGrade)
@@ -349,6 +353,15 @@ function buildCourses(
     const completedLessons = lessonAssignments.filter((item) => item.state === 'completed').length
     const courseAssessments = assessments.filter((item) =>
       item.subject === subject && (!course || item.courseRef === course.courseRef))
+    const completion = deriveCanonicalCourseCompletion({
+      catalog: input.catalog.runtime,
+      studentRef,
+      subject,
+      workingGrade,
+      assignments,
+      assessments,
+      pendingGuardianAssignmentRefs,
+    })
     const current = lessonAssignments.find((item) => item.state === 'active')
       ?? lessonAssignments.find((item) => item.state === 'paused')
       ?? lessonAssignments.find((item) => item.state === 'planned')
@@ -363,9 +376,15 @@ function buildCourses(
       title: course?.title ?? `${ACADEMY_SUBJECT_LABELS[subject] ?? subject} · Grade ${workingGrade}`,
       assignedLessons: lessonAssignments.length,
       completedLessons,
-      completionPercent: lessonAssignments.length > 0
-        ? Math.round(completedLessons / lessonAssignments.length * 100)
+      totalLessons: completion.requiredLessonCount,
+      requiredAssessments: completion.requiredAssessmentCount,
+      completionPercent: completion.requiredLessonCount + completion.requiredAssessmentCount > 0
+        ? Math.round((completion.completedLessonCount + completion.certifiedAssessmentCount) /
+          (completion.requiredLessonCount + completion.requiredAssessmentCount) * 100)
         : null,
+      completionStatus: completion.status,
+      completionDate: completion.completedAt,
+      nextCourseOptions: completion.nextCourseOptions,
       currentUnit: unit ? Object.freeze({
         unitRef: unit.unitRef,
         unitNumber: unit.unitNumber,

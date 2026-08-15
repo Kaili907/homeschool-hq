@@ -6,6 +6,7 @@ import {
 } from '../../../curriculum/final-app-data'
 import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade } from '../../../types'
 import { FamilyPilotStudentLogin } from '../auth'
+import { deriveCanonicalCourseCompletion, ParentCourseCompletionReport } from '../course-completion'
 import { exportFinalFamilyPilotBackup, downloadFinalFamilyPilotBackup, restoreFinalFamilyPilotBackup } from './backup'
 import {
   buildFamilyPilotStudentDashboardModel,
@@ -759,6 +760,17 @@ function ParentReports({ controller, student, refresh }: {
   }
   const report = buildStudentWeeklyReport(snapshot, { startDate: '2000-01-01', endDate: '2100-12-31' })
   const assessmentAssignments = controller.assessmentAssignments(student.studentRef)
+  const pendingGuardianAssignmentRefs = new Set(controller.pendingAttestations(student.studentRef)
+    .map((attestation) => attestation.assignmentRef))
+  const courseCompletion = student.enabledSubjects.map((subject) => deriveCanonicalCourseCompletion({
+    catalog: controller.catalog.runtime,
+    studentRef: student.studentRef,
+    subject,
+    workingGrade: student.workingGradeBySubject[subject] ?? student.nominalGrade,
+    assignments: coreStudent.assignments,
+    assessments: assessmentAssignments,
+    pendingGuardianAssignmentRefs,
+  }))
   const subjectRows = Object.entries(coreStudent.assignments
     .filter((item) => item.state !== 'abandoned')
     .reduce<Record<string, FamilyPilotAssignmentRecordV1[]>>((groups, item) => {
@@ -768,6 +780,7 @@ function ParentReports({ controller, student, refresh }: {
   return (
     <div className="mt-6 space-y-5">
       <FamilyPilotProgressReport report={report} />
+      <ParentCourseCompletionReport courses={courseCompletion} />
       <section className="rounded-2xl border bg-white p-5">
         <h3 className="text-xl font-extrabold">Subject and grade progress</h3>
         <ul className="mt-3 space-y-2">{subjectRows.map(([subject, assignments]) => <li key={subject} className="rounded-lg bg-slate-100 p-3 font-semibold">{SUBJECT_LABEL[subject as AcademySubject] ?? subject} · Working Grade {student.workingGradeBySubject[subject as AcademySubject] ?? student.nominalGrade} · {assignments?.filter((item) => item.state === 'completed').length ?? 0}/{assignments?.length ?? 0} completed</li>)}</ul>

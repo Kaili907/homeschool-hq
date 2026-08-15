@@ -37,6 +37,7 @@ function failurePlan(
     generatedAt: instant.toISOString(),
     items: Object.freeze([]),
     blockers: Object.freeze([blocker]),
+    completedCourses: Object.freeze([]),
     manualOverrideActive: false,
     offlineMaterializedWorkAvailable: false,
   })

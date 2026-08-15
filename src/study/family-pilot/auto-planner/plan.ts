@@ -6,6 +6,7 @@ import {
   type FamilyAutoPlannerAssignmentFact,
   type FamilyAutoPlannerBlocker,
   type FamilyAutoPlannerComputation,
+  type FamilyAutoPlannerCourseCompletion,
   type FamilyAutoPlannerCourseBundle,
   type FamilyAutoPlannerDocumentV1,
   type FamilyAutoPlannerHoldFact,
@@ -126,6 +127,7 @@ function basePlan(input: ComputeFamilyAutoPlannerInput, localDate: string, timeZ
     generatedAt: input.instant.toISOString(),
     items: Object.freeze([]),
     blockers: Object.freeze([]),
+    completedCourses: Object.freeze([]),
     manualOverrideActive: false,
     offlineMaterializedWorkAvailable: false,
   })
@@ -139,6 +141,7 @@ function finish(
   blockers: readonly FamilyAutoPlannerBlocker[],
   manualOverrideActive: boolean,
   offlineMaterializedWorkAvailable: boolean,
+  completedCourses: readonly FamilyAutoPlannerCourseCompletion[] = base.completedCourses,
 ): FamilyAutoPlannerTodayPlan {
   return Object.freeze({
     ...base,
@@ -146,8 +149,41 @@ function finish(
     reason,
     items: Object.freeze([...items]),
     blockers: Object.freeze([...blockers]),
+    completedCourses: Object.freeze([...completedCourses]),
     manualOverrideActive,
     offlineMaterializedWorkAvailable,
+  })
+}
+
+function authoritativeCourseCompletion(
+  bundle: FamilyAutoPlannerCourseBundle,
+  learnerRef: string,
+  assignments: readonly FamilyAutoPlannerAssignmentFact[],
+  assessments: readonly FamilyAutoPlannerAssessmentFact[],
+): FamilyAutoPlannerCourseCompletion | null {
+  const lessonRefs = [...new Set(bundle.lessons.map((lesson) => lesson.lessonRef))]
+  if (lessonRefs.length === 0) return null
+  const assessmentRefs = [...new Set(bundle.units.flatMap((unit) => unit.assessmentRef ? [unit.assessmentRef] : []))]
+  const lessonFacts = lessonRefs.map((lessonRef) => assignments.filter((entry) =>
+    entry.learnerRef === learnerRef && entry.lessonRef === lessonRef && entry.state === 'completed'))
+  const assessmentFacts = assessmentRefs.map((assessmentRef) => assessments.filter((entry) =>
+    entry.learnerRef === learnerRef && entry.courseRef === bundle.course.courseRef &&
+    entry.assessmentRef === assessmentRef && entry.status === 'CERTIFIED'))
+  if (lessonFacts.some((facts) => facts.length === 0) || assessmentFacts.some((facts) => facts.length === 0)) return null
+
+  const firstDates = [...lessonFacts, ...assessmentFacts].map((facts) => facts
+    .map((fact) => fact.completedAt)
+    .filter((completedAt): completedAt is string => completedAt !== null && Number.isFinite(Date.parse(completedAt)))
+    .sort()[0] ?? null)
+  const completedAt = firstDates.every((date): date is string => date !== null)
+    ? [...firstDates].sort().at(-1) ?? null
+    : null
+  return Object.freeze({
+    courseRef: bundle.course.courseRef,
+    title: bundle.course.title,
+    subject: bundle.course.subject,
+    workingGrade: String(bundle.course.grade) as AcademyGrade,
+    completedAt,
   })
 }
 
@@ -231,6 +267,7 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
   const items: FamilyAutoPlannerTodayItem[] = []
   const blockers: FamilyAutoPlannerBlocker[] = []
   const intents: FamilyAutoPlannerMaterializationIntent[] = []
+  const completedCourses: FamilyAutoPlannerCourseCompletion[] = []
   const subjectsWithOpenWork = new Set<AcademySubject>()
   let manualOverrideActive = false
 
@@ -339,7 +376,7 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
       const fact = assignmentByRef.get(entry.assignmentRef)
       return fact?.state === 'completed' && localDateOf(fact.completedAt, configured.householdTimeZone) === localDate
     }).length
-    if (manualCompletedToday + autoCompletedToday >= subjectPlan.lessonsPerDay) continue
+    const dailyCapReached = manualCompletedToday + autoCompletedToday >= subjectPlan.lessonsPerDay
 
     // A failed prior materialization must never be replaced by a second one.
     const dangling = input.document.materializations.find((entry) =>
@@ -352,6 +389,7 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
     }
 
     if (!input.catalog) {
+      if (dailyCapReached) continue
       blockers.push(blocker('CATALOG_UNAVAILABLE', subject, 'New catalog work cannot be selected offline. Already materialized work remains available.'))
       continue
     }
@@ -361,6 +399,12 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
       continue
     }
     const { course, units } = selected.bundle
+    const courseCompletion = authoritativeCourseCompletion(selected.bundle, learner.learnerRef, input.assignments, input.assessments)
+    if (courseCompletion) {
+      completedCourses.push(courseCompletion)
+      continue
+    }
+    if (dailyCapReached) continue
     const lessons = [...selected.bundle.lessons].sort((a, b) => a.courseDay - b.courseDay || a.lessonRef.localeCompare(b.lessonRef))
     let selectedIntent: FamilyAutoPlannerMaterializationIntent | null = null
     let subjectWaiting = false
@@ -456,13 +500,17 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
         ? blockers.every((entry) => entry.reason === 'WORKING_GRADE_UNSUPPORTED' || entry.reason === 'COURSE_ASSIGNMENT_AMBIGUOUS' || entry.reason === 'COURSE_ASSIGNMENT_UNAVAILABLE')
           ? 'NEEDS_PLAN_SETUP'
           : 'BLOCKED'
-        : 'COMPLETE_FOR_TODAY'
-  const reason: FamilyAutoPlannerReason = status === 'READY' || status === 'COMPLETE_FOR_TODAY'
-    ? 'NONE'
+        : completedCourses.length > 0
+          ? 'COURSE_COMPLETE'
+          : 'COMPLETE_FOR_TODAY'
+  const reason: FamilyAutoPlannerReason = status === 'COURSE_COMPLETE'
+    ? 'COURSE_COMPLETE'
+    : status === 'READY' || status === 'COMPLETE_FOR_TODAY'
+      ? 'NONE'
     : blockers[0]?.reason ?? 'NONE'
   const offlineAvailable = input.catalog === null && items.some((item) => item.origin === 'AUTO')
   return {
-    plan: finish(datedBase, status, reason, items, blockers, manualOverrideActive, offlineAvailable),
+    plan: finish(datedBase, status, reason, items, blockers, manualOverrideActive, offlineAvailable, completedCourses),
     intents: Object.freeze(intents),
   }
 }

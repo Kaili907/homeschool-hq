@@ -9,6 +9,7 @@ export type FamilyAutoPlannerStatus =
   | 'READY'
   | 'NO_SCHOOL_TODAY'
   | 'COMPLETE_FOR_TODAY'
+  | 'COURSE_COMPLETE'
   | 'NEEDS_PLAN_SETUP'
   | 'BLOCKED'
   | 'WAITING_FOR_ASSESSMENT'
@@ -181,6 +182,15 @@ export interface FamilyAutoPlannerBlocker {
   readonly detail: string
 }
 
+export interface FamilyAutoPlannerCourseCompletion {
+  readonly courseRef: string
+  readonly title: string
+  readonly subject: AcademySubject
+  readonly workingGrade: AcademyGrade
+  /** Null when a required completion fact did not carry an authoritative timestamp. */
+  readonly completedAt: string | null
+}
+
 export type FamilyAutoPlannerItemKind = 'LESSON' | 'ASSESSMENT'
 export type FamilyAutoPlannerItemOrigin = 'AUTO' | 'MANUAL_OVERRIDE'
 export type FamilyAutoPlannerItemState =
@@ -221,6 +231,7 @@ export interface FamilyAutoPlannerTodayPlan {
   readonly generatedAt: string
   readonly items: readonly FamilyAutoPlannerTodayItem[]
   readonly blockers: readonly FamilyAutoPlannerBlocker[]
+  readonly completedCourses: readonly FamilyAutoPlannerCourseCompletion[]
   readonly manualOverrideActive: boolean
   readonly offlineMaterializedWorkAvailable: boolean
 }
