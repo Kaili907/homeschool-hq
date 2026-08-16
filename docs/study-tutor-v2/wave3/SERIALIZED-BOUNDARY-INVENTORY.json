@@ -1,20 +1,22 @@
 {
-  "inventoryVersion": 1,
-  "serializedSchemaCount": 8,
+  "inventoryVersion": 2,
+  "serializedSchemaCount": 10,
   "internalPortSchemaCount": 0,
   "contracts": [
-    { "name": "StudyCommercialTutorInvocation", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
-    { "name": "BoundedCommercialProviderRequest", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
-    { "name": "BoundedCommercialProviderResponse", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
-    { "name": "StudyCommercialTutorAdvisory", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
-    { "name": "StudyCommercialEffectReceipt", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
-    { "name": "CommercialOperationTelemetryEvent", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
-    { "name": "ParentReport", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
-    { "name": "InstructionalMemoryDelta", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
+    { "name": "StudyCommercialTutorInvocation", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Serialized invocation envelope crossing from the Study runtime into the commercial tutor operation boundary." },
+    { "name": "BoundedCommercialProviderRequest", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Serialized minimized request sent across the commercial provider boundary." },
+    { "name": "BoundedCommercialProviderResponse", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Serialized bounded response received from the commercial provider boundary before validation." },
+    { "name": "StudyCommercialTutorAdvisory", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Serialized non-authoritative advisory returned to the Study runtime." },
+    { "name": "StudyCommercialEffectReceipt", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Durable receipt used to reconcile acceptance of a Study-owned effect." },
+    { "name": "CommercialOperationTelemetryEvent", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Serialized minimized telemetry emitted for commercial operation observability." },
+    { "name": "ParentReport", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Serialized authorized report delivered across the parent-reporting boundary." },
+    { "name": "InstructionalMemoryDelta", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Recoverable serialized delta used to reconcile bounded instructional memory effects." },
+    { "name": "DurableMultimodalEvidence", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Durable minimized evidence persisted after multimodal projection; raw media, transcripts, biometric identity, and diagnostic inference are excluded." },
+    { "name": "MinimizedAcceptedStudyEffectEvent", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true, "reason": "Durable minimized acceptance event replayed for effect and instructional-memory reconciliation without raw provider, tutor, or learner data." },
     { "name": "PresentationIntent", "classification": "TRUSTED_INTERNAL_CONTRACT", "schemaGenerated": false, "reason": "Serialized only as a closed nested member of StudyCommercialTutorAdvisory." },
-    { "name": "CommercialProviderTransport", "classification": "EPHEMERAL_TRANSIENT", "schemaGenerated": false },
-    { "name": "RawAudioImageInput", "classification": "EPHEMERAL_TRANSIENT", "schemaGenerated": false },
-    { "name": "ProductionProviderAdapter", "classification": "FUTURE_PRODUCTION_BOUNDARY", "schemaGenerated": false },
-    { "name": "ProductionCurriculumRegistryAdapter", "classification": "FUTURE_PRODUCTION_BOUNDARY", "schemaGenerated": false }
+    { "name": "CommercialProviderTransport", "classification": "EPHEMERAL_TRANSIENT", "schemaGenerated": false, "reason": "Transport input exists only for the live request attempt and is not a durable artifact." },
+    { "name": "RawAudioImageInput", "classification": "EPHEMERAL_TRANSIENT", "schemaGenerated": false, "reason": "Raw media is an in-memory transient capability and is prohibited from durable evidence." },
+    { "name": "ProductionProviderAdapter", "classification": "FUTURE_PRODUCTION_BOUNDARY", "schemaGenerated": false, "reason": "The current adapter is a port/future integration seam rather than a shipped serialized boundary." },
+    { "name": "ProductionCurriculumRegistryAdapter", "classification": "FUTURE_PRODUCTION_BOUNDARY", "schemaGenerated": false, "reason": "The current adapter is a port/future integration seam rather than a shipped serialized boundary." }
   ]
 }
