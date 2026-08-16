@@ -1,0 +1,73 @@
+{
+  "contracts": [
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "StudyCommercialTutorInvocation",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "BoundedCommercialProviderRequest",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "BoundedCommercialProviderResponse",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "StudyCommercialTutorAdvisory",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "StudyCommercialEffectReceipt",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "CommercialOperationTelemetryEvent",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "ParentReport",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "InstructionalMemoryDelta",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "TRUSTED_INTERNAL_CONTRACT",
+      "name": "PresentationIntent",
+      "reason": "Serialized only as a closed nested member of StudyCommercialTutorAdvisory.",
+      "schemaGenerated": false
+    },
+    {
+      "classification": "EPHEMERAL_TRANSIENT",
+      "name": "CommercialProviderTransport",
+      "schemaGenerated": false
+    },
+    {
+      "classification": "EPHEMERAL_TRANSIENT",
+      "name": "RawAudioImageInput",
+      "schemaGenerated": false
+    },
+    {
+      "classification": "FUTURE_PRODUCTION_BOUNDARY",
+      "name": "ProductionProviderAdapter",
+      "schemaGenerated": false
+    },
+    {
+      "classification": "FUTURE_PRODUCTION_BOUNDARY",
+      "name": "ProductionCurriculumRegistryAdapter",
+      "schemaGenerated": false
+    }
+  ],
+  "internalPortSchemaCount": 0,
+  "inventoryVersion": 1,
+  "serializedSchemaCount": 8
+}

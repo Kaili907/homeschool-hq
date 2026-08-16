@@ -5,11 +5,17 @@ import {
   PROVIDER_AVAILABILITY_STATE_VERSION,
   PROVIDER_CAPABILITY_PROFILE_VERSION,
   ROUTING_REQUEST_VERSION,
+  createEligibleRouteCatalog,
   routeProviderModel,
   type ModelCapabilityProfile,
   type ProviderCapabilityProfile,
   type RoutingRequest,
 } from "../routing/provider-routing/index.js";
+import {
+  createTrustedProviderProfileRegistry,
+  type ProviderEligibilityRequirements,
+  type TrustedProviderProfile,
+} from "../provider-policy/index.js";
 import {
   validateProviderModelOutput,
   type InstructionalDisplayMode,
@@ -260,7 +266,6 @@ function provider(): ProviderCapabilityProfile {
     providerRef: "provider-profile:text-only",
     providerClass: "ZERO_RETENTION",
     lifecycle: "ACTIVE",
-    providerPolicyEligibilityRefs: ["provider-policy:minor"],
     modelRefs: ["model-profile:text-only"],
     minimumTimeoutMs: 100,
     maximumTimeoutMs: 2_000,
@@ -271,6 +276,10 @@ function textOnlyModel(): ModelCapabilityProfile {
   return {
     profileVersion: MODEL_CAPABILITY_PROFILE_VERSION,
     modelRef: "model-profile:text-only",
+    modelRevisionRef: "model-revision:text-only-r1",
+    configurationDigest: `sha256:${"b".repeat(64)}`,
+    capabilityProfileRevisionRef: "capability-profile:text-only-r1",
+    capabilityProfileDigest: `sha256:${"c".repeat(64)}`,
     modelClass: "BALANCED_TEXT",
     providerRef: "provider-profile:text-only",
     routeRef: "route-profile:text-only",
@@ -302,6 +311,9 @@ test("routing receives only the derived requirement and fails when modality is a
   const request: RoutingRequest = {
     requestVersion: ROUTING_REQUEST_VERSION,
     requestRef: "routing-request:presentation-one",
+    routePlanRef: "route-plan:presentation-one",
+    logicalOperationRef: "logical-operation:presentation-one",
+    physicalAttemptRefs: ["physical-attempt:presentation-one"],
     actionFamily: "HINT",
     subjectCapability: "SPATIAL_VISUAL_INTERPRETATION",
     learnerStage: "MIDDLE_GRADES",
@@ -316,9 +328,9 @@ test("routing receives only the derived requirement and fails when modality is a
       availabilityRef: "availability:presentation-one",
       providerRef: "provider-profile:text-only",
       modelRef: "model-profile:text-only",
+      modelRevisionRef: "model-revision:text-only-r1",
       state: "AVAILABLE",
     }],
-    providerPolicyEligibilityRef: "provider-policy:minor",
     studyPermissionBoundary: {
       permissionRef: "study-permission:presentation-one",
       authorizedActionFamily: "HINT",
@@ -330,7 +342,36 @@ test("routing receives only the derived requirement and fails when modality is a
     },
     staticFallbackPolicyRef: "fallback-policy:presentation-one",
   };
-  const decision = routeProviderModel(request, [provider()], [textOnlyModel()]);
+  const policyProfile: TrustedProviderProfile = {
+    providerRef: "provider-profile:text-only",
+    trainingUse: "prohibited",
+    retention: { class: "none", maximumDurationHours: 0 },
+    minorDataEligibility: "supported",
+    dataResidency: { approvedRegions: ["us-east"] },
+    dataDeletionCapability: "supported",
+    multimodalEligibility: "approved",
+    contractPolicyRevision: "provider-policy-revision:presentation-r1",
+    policyEvidenceRef: "provider-policy-evidence:presentation-r1",
+    policyEvidenceValidUntil: "2027-01-01T00:00:00.000Z",
+    status: "active",
+  };
+  const requirements: ProviderEligibilityRequirements = {
+    providerRef: policyProfile.providerRef,
+    allowedRetentionClasses: ["none"],
+    maximumRetentionHours: 0,
+    requiredRegion: "us-east",
+    modality: "multimodal",
+    requiredContractPolicyRevision: "provider-policy-revision:presentation-r1",
+    evaluatedAt: "2026-08-15T16:00:00.000Z",
+  };
+  const catalog = createEligibleRouteCatalog({
+    providerProfiles: [provider()],
+    modelProfiles: [textOnlyModel()],
+    providerPolicyRegistry: createTrustedProviderProfileRegistry([policyProfile]),
+    providerPolicyRequirements: [requirements],
+  });
+  assert.ok(catalog);
+  const decision = routeProviderModel(request, catalog);
   assert.equal(decision.status, "NO_ELIGIBLE_PROVIDER_ROUTE");
   assert.equal(decision.reasonCodes.includes("MULTIMODAL_MISMATCH"), true);
 });

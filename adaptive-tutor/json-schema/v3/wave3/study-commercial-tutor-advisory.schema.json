@@ -1,0 +1,400 @@
+{
+  "$id": "StudyCommercialTutorAdvisory",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "advisoryKind": {
+      "const": "study-commercial-tutor-advisory",
+      "type": "string"
+    },
+    "assistanceEvidenceRef": {
+      "anyOf": [
+        {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "contractVersion": {
+      "const": "study-tutor-v3.commercial-advisory.v1",
+      "type": "string"
+    },
+    "curriculumAuthority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "groundingDecision": {
+      "anyOf": [
+        {
+          "const": "sufficient",
+          "type": "string"
+        },
+        {
+          "const": "insufficient",
+          "type": "string"
+        },
+        {
+          "const": "not-executed",
+          "type": "string"
+        }
+      ]
+    },
+    "householdScopeRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "interactionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "invocationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "learnerScopeRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "logicalOperationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "nominalGradeAuthority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "officialMasteryAuthority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "officialWorkingLevelAuthority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "opportunityRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "presentationIntent": {
+      "anyOf": [
+        {
+          "$id": "TutorV3PresentationIntent",
+          "additionalProperties": false,
+          "properties": {
+            "accessibilityCaptionRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "contractVersion": {
+              "const": "study-tutor-v2.presentation-intent.v1",
+              "type": "string"
+            },
+            "fallbackPresentation": {
+              "$id": "TutorV3FallbackPresentationIntent",
+              "additionalProperties": false,
+              "properties": {
+                "presentationRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "requestedDeliveryChannels": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "const": "text",
+                        "type": "string"
+                      },
+                      {
+                        "const": "visual",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "maxItems": 2,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "presentationRef",
+                "requestedDeliveryChannels"
+              ],
+              "type": "object"
+            },
+            "intentKind": {
+              "const": "reference-only-presentation-intent",
+              "type": "string"
+            },
+            "requestedDeliveryChannels": {
+              "items": {
+                "anyOf": [
+                  {
+                    "const": "text",
+                    "type": "string"
+                  },
+                  {
+                    "const": "visual",
+                    "type": "string"
+                  },
+                  {
+                    "const": "speech-after-acceptance",
+                    "type": "string"
+                  }
+                ]
+              },
+              "maxItems": 3,
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "reviewedTextRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "reviewedVisual": {
+              "$id": "TutorV3ReviewedVisualIntent",
+              "additionalProperties": false,
+              "properties": {
+                "contentDigest": {
+                  "pattern": "^sha256:[a-f0-9]{64}$",
+                  "type": "string"
+                },
+                "contentRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "kind": {
+                  "anyOf": [
+                    {
+                      "const": "image",
+                      "type": "string"
+                    },
+                    {
+                      "const": "diagram",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "provenanceRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "contentRef",
+                "contentDigest",
+                "provenanceRef"
+              ],
+              "type": "object"
+            },
+            "structuredCheckRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "contractVersion",
+            "intentKind",
+            "requestedDeliveryChannels"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "proposedTutorAction": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "const": "explain",
+              "type": "string"
+            },
+            {
+              "const": "hint",
+              "type": "string"
+            },
+            {
+              "const": "ask-check",
+              "type": "string"
+            },
+            {
+              "const": "show-example",
+              "type": "string"
+            },
+            {
+              "const": "reteach",
+              "type": "string"
+            },
+            {
+              "const": "check-prerequisite",
+              "type": "string"
+            },
+            {
+              "const": "suggest-break",
+              "type": "string"
+            },
+            {
+              "const": "escalate",
+              "type": "string"
+            },
+            {
+              "const": "return-to-lesson",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reasonCodes": {
+      "items": {
+        "anyOf": [
+          {
+            "const": "COMMERCIAL_PROPOSAL_READY",
+            "type": "string"
+          },
+          {
+            "const": "PROVIDER_REFUSED",
+            "type": "string"
+          },
+          {
+            "const": "CURRICULUM_ADMISSION_FAILED",
+            "type": "string"
+          },
+          {
+            "const": "LEARNER_STAGE_POLICY_FAILED",
+            "type": "string"
+          },
+          {
+            "const": "NO_ELIGIBLE_PROVIDER_ROUTE",
+            "type": "string"
+          },
+          {
+            "const": "BUDGET_OR_DEADLINE_EXHAUSTED",
+            "type": "string"
+          },
+          {
+            "const": "PROVIDER_TRANSPORT_FAILED",
+            "type": "string"
+          },
+          {
+            "const": "UNTRUSTED_MODEL_OUTPUT_REJECTED",
+            "type": "string"
+          },
+          {
+            "const": "INSUFFICIENT_GROUNDED_CONTEXT",
+            "type": "string"
+          },
+          {
+            "const": "PRESENTATION_INTENT_REJECTED",
+            "type": "string"
+          }
+        ]
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "reviewedContentRefs": {
+      "items": {
+        "maxLength": 160,
+        "minLength": 3,
+        "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+        "type": "string"
+      },
+      "maxItems": 12,
+      "type": "array"
+    },
+    "segmentCompletionAuthority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "sessionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "status": {
+      "anyOf": [
+        {
+          "const": "proposed",
+          "type": "string"
+        },
+        {
+          "const": "refused",
+          "type": "string"
+        },
+        {
+          "const": "static-fallback-required",
+          "type": "string"
+        }
+      ]
+    },
+    "studyDecisionRequired": {
+      "const": true,
+      "type": "boolean"
+    },
+    "studyMutationAllowed": {
+      "const": false,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "advisoryKind",
+    "status",
+    "proposedTutorAction",
+    "reasonCodes",
+    "reviewedContentRefs",
+    "groundingDecision",
+    "assistanceEvidenceRef",
+    "presentationIntent",
+    "studyDecisionRequired",
+    "studyMutationAllowed",
+    "officialMasteryAuthority",
+    "officialWorkingLevelAuthority",
+    "nominalGradeAuthority",
+    "curriculumAuthority",
+    "segmentCompletionAuthority"
+  ],
+  "title": "Study Commercial Tutor Advisory",
+  "type": "object"
+}

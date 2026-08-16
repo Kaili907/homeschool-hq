@@ -1,0 +1,119 @@
+{
+  "aggregateStatus": "PASS",
+  "evidence": {
+    "APPROVED_LEARNER_STAGE_CATALOG": true,
+    "CLOSED_PRESENTATION_INTENT": true,
+    "COMMERCIAL_PROVIDER_REQUEST_MINIMIZATION": true,
+    "COMPOSED_EVALUATION_EXECUTION": true,
+    "CROSS_CHILD_COMMERCIAL_ISOLATION": true,
+    "CURRICULUM_TUTOR_ADMISSION": true,
+    "END_TO_END_DEADLINE_BOUNDED_FAILOVER": true,
+    "GROUNDED_CONTEXT_OR_REFUSAL": true,
+    "IMMUTABLE_PROVIDER_MODEL_ROUTE_IDENTITY": true,
+    "INTEGER_MICROS_ATTEMPT_BUDGET": true,
+    "NO_VENDOR_PRODUCTION_IMPORT": true,
+    "ONE_STUDY_ENGINE_AUTHORITY": true,
+    "PARENT_REPORT_GUARDIAN_AUTHORIZATION": true,
+    "PROVIDER_POLICY_BEFORE_ROUTING": true,
+    "RECOVERABLE_EFFECT_MEMORY_REPLAY": true,
+    "TELEMETRY_OPERATION_ATTEMPT_LINEAGE": true,
+    "TRANSIENT_MULTIMODAL_MINIMIZATION": true,
+    "UNTRUSTED_MODEL_OUTPUT_BOUNDARY": true
+  },
+  "hardGateFamilies": [
+    {
+      "name": "COMMERCIAL_PROVIDER_REQUEST_MINIMIZATION",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "PROVIDER_POLICY_BEFORE_ROUTING",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "IMMUTABLE_PROVIDER_MODEL_ROUTE_IDENTITY",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "INTEGER_MICROS_ATTEMPT_BUDGET",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "END_TO_END_DEADLINE_BOUNDED_FAILOVER",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "UNTRUSTED_MODEL_OUTPUT_BOUNDARY",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "GROUNDED_CONTEXT_OR_REFUSAL",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "CURRICULUM_TUTOR_ADMISSION",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "APPROVED_LEARNER_STAGE_CATALOG",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "RECOVERABLE_EFFECT_MEMORY_REPLAY",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "TRANSIENT_MULTIMODAL_MINIMIZATION",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "PARENT_REPORT_GUARDIAN_AUTHORIZATION",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "TELEMETRY_OPERATION_ATTEMPT_LINEAGE",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "CLOSED_PRESENTATION_INTENT",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "COMPOSED_EVALUATION_EXECUTION",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "CROSS_CHILD_COMMERCIAL_ISOLATION",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "ONE_STUDY_ENGINE_AUTHORITY",
+      "nonCompensable": true,
+      "status": "PASS"
+    },
+    {
+      "name": "NO_VENDOR_PRODUCTION_IMPORT",
+      "nonCompensable": true,
+      "status": "PASS"
+    }
+  ],
+  "hardGateFamiliesPassed": 18,
+  "hardGateFamilyCount": 18,
+  "nonCompensable": true,
+  "resultVersion": 1
+}

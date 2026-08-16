@@ -1,0 +1,141 @@
+{
+  "acceptedWave2Sha": "e8d852c3fa374abb8f5cb93b7ecbddc1786671b2",
+  "branch": "mac/tutor-v2-w3-convergence-r1",
+  "convergenceAdaptations": [
+    "R7 presentation test fixture was updated after import to the accepted R2 provider-policy catalog and immutable route identity APIs; production R2 and R7 meanings are both preserved."
+  ],
+  "duplicateImportPrevention": "PASS_ORIGINAL_LANES_ONCE_REPAIR_FINAL_COMMITS_ONLY",
+  "externalStudyProgressionAuthorityRepair": {
+    "branch": "mac/study-runtime-tutor-authority-port-r2",
+    "containedInTutorCandidate": false,
+    "learnerReleaseBaseline": "7baf8dfbc27168708ed4cf504285a1838d7345f6",
+    "repairSha": "527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4",
+    "ruling": "SEPARATE_VERIFIED_STUDY_AUTHORITY_ARTIFACT_NOT_MERGED"
+  },
+  "finalCandidate": {
+    "exactShaRecordedAfterCommitInSessionReturn": true,
+    "selfReferencedInsideChecksummedArtifacts": false
+  },
+  "importOrder": [
+    "W3_01",
+    "W3_02",
+    "W3_03",
+    "W3_04",
+    "W3_05",
+    "W3_06",
+    "W3_07",
+    "W3_08",
+    "W3_09",
+    "W3_10",
+    "W3_11",
+    "W3_12",
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5",
+    "R6",
+    "R7"
+  ],
+  "imports": {
+    "R1": {
+      "resultingSha": "98d071cbe82041b12471c43067d789fd259f04ff",
+      "sourceSha": "87fd6dc45db50b1a8ac4bd6cf5b39c066f25a588",
+      "stablePatchId": "9d9fabcbcdc2e18ac1db17b9d72f5fdfa84f4dd7"
+    },
+    "R2": {
+      "resultingSha": "48a128f51c559ab6f7547bf3f9056713ae269850",
+      "sourceSha": "f73d0dd0f8fd769be9941e7ab97127951b31c33f",
+      "stablePatchId": "b0341aaa9354b54ca82e74a0813b2f3cfa031cc4"
+    },
+    "R3": {
+      "resultingSha": "f65a8fb04e2b6a16f1b4835f4f291c2251b3bbe7",
+      "sourceSha": "21a655f8d4c43bc17b93be84755177f8e6c6c3dc",
+      "stablePatchId": "f4c698631e46d97635a0368aee0cd2db808f4ffa"
+    },
+    "R4": {
+      "resultingSha": "abb48c69d1f70cf13834faa65595ad8e674d294c",
+      "sourceSha": "b67871cea514288b3c2a18ab13b0756f55867cdc",
+      "stablePatchId": "9ef9745470adfb4755551a251bd5e5b02491856c"
+    },
+    "R5": {
+      "resultingSha": "6793246cb5413cbcca1f13a263fb4f3c738e3f81",
+      "sourceSha": "7b7e3fa1eda061250728aab3c78f7c5bff0b19cb",
+      "stablePatchId": "2c3de65ec4e768b2feebb8336b041fa1f6901c38"
+    },
+    "R6": {
+      "resultingSha": "8d6cd5f7fa4d434c014a6044f4bf6b79a6595871",
+      "sourceSha": "19385d5321ce62609d9b709c1bdce569f16b6eff",
+      "stablePatchId": "78fa1075619f9befcc2b073132be009dec780bfd"
+    },
+    "R7": {
+      "resultingSha": "c7592ff56dab4bc585c229f679e159f5d19862d9",
+      "sourceSha": "8b07eb5f61a7c744a8073534e8e5e2873c457743",
+      "stablePatchId": "1535db49e78b2d818e51b6fba491d832bba31065"
+    },
+    "W3_01": {
+      "resultingSha": "40ad0a90dc3899c0a2215189c3ac8946b69f0f9b",
+      "sourceSha": "96aa35bc110439f7b2d48712d209e7c75671880d",
+      "stablePatchId": "d5f0219ffb0dac36a5f9b52e1010e53038d54e4f"
+    },
+    "W3_02": {
+      "resultingSha": "2238ffc8147004af9009192d84e98cae0fef3fe2",
+      "sourceSha": "f71cc584e4a52b4bea079e8fc91a7d05059addc4",
+      "stablePatchId": "8a25e52b60e116fa99591c210127e4ef6b06adc7"
+    },
+    "W3_03": {
+      "resultingSha": "7431f151dd769c871ddabb755be00036d57d7799",
+      "sourceSha": "7e7d2a7c833e9cfb9b779f4deda9173dce79f314",
+      "stablePatchId": "47428eb11265f55f9ec8609590dc6bcf2c242bcd"
+    },
+    "W3_04": {
+      "resultingSha": "c9bf72d2afc1dbbfb1896dc9391bc8b893df76cb",
+      "sourceSha": "8d9fd119d2ca1930e7b41fc68318577ce8079a28",
+      "stablePatchId": "ee46e4d1fb083d1baff02352c2e3a75d3939e16d"
+    },
+    "W3_05": {
+      "resultingSha": "14ba94801ed0dbaf9763b323d15b357423b543f1",
+      "sourceSha": "71752a25748429d1e54b58b136e1d6bfda9c82d5",
+      "stablePatchId": "48af45e68d88ede11656b8a54f33281c17264a81"
+    },
+    "W3_06": {
+      "resultingSha": "f40658534165e38b9dc6df0c491a5db973618fd5",
+      "sourceSha": "a9f15ac3019fb235bc34f49c841eb408ef9f1d23",
+      "stablePatchId": "6aee53674e4442eb7aa285b846ad7ea52a2f1c37"
+    },
+    "W3_07": {
+      "resultingSha": "33065d188aee32b17225292d4a8d73c6ba810716",
+      "sourceSha": "1dfc1d4f17d81d3950f46b3c9c7a939fcfc0c4f0",
+      "stablePatchId": "1258ba6560e98968b5455a3d86aec95f9506c9e4"
+    },
+    "W3_08": {
+      "resultingSha": "4d4076f15df72d3888d10726638da40bf7f479e4",
+      "sourceSha": "6dd0cc6027d74ad57f8f4b8f0aa39f89ddd3b4bd",
+      "stablePatchId": "cddd52eda04a5a2c9de15315d5d49b4649a84c13"
+    },
+    "W3_09": {
+      "resultingSha": "f606c266fd28daf4a1657cd8e19311c54af12c66",
+      "sourceSha": "76c81e6a51cbdf19a4e9ca4b25e506c2305e2bc1",
+      "stablePatchId": "5324c6d2d60321666f7617eebfb2c40bf59e9105"
+    },
+    "W3_10": {
+      "resultingSha": "0bc23921b0cdd8f9a9103049bc77ac36ffe43e40",
+      "sourceSha": "0692bd3a98bcd904ba3872a5580aced4e96e4691",
+      "stablePatchId": "3459f12055db9ef13470d1a1b2156091123f6f7c"
+    },
+    "W3_11": {
+      "resultingSha": "794f4fa3162615a9f469b724c43afc6d37eb018c",
+      "sourceSha": "81506a3032cbbd0c6f1a65d7cb8105a4693ab050",
+      "stablePatchId": "9f7714dcd56fe7bf6fa18b12a9863f7482354be9"
+    },
+    "W3_12": {
+      "resultingSha": "70ea1d5a01e5035d0bb6065c930274d066733b72",
+      "sourceSha": "8c6c093632ff48551267dfa1b2846472f29335bf",
+      "stablePatchId": "a3b140021b7f119e94438d96b7450646cc4ede06"
+    }
+  },
+  "provenanceVersion": 1,
+  "semanticCherryPickAdaptations": [],
+  "session": "STUDY-TUTOR-V2-W3-13 Full Wave 3 Commercial Foundation Semantic Convergence",
+  "wave2Classification": "WAVE2_ACCEPTED_FOR_WAVE3"
+}

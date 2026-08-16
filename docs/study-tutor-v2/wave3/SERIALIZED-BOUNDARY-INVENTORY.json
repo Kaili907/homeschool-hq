@@ -1,0 +1,20 @@
+{
+  "inventoryVersion": 1,
+  "serializedSchemaCount": 8,
+  "internalPortSchemaCount": 0,
+  "contracts": [
+    { "name": "StudyCommercialTutorInvocation", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
+    { "name": "BoundedCommercialProviderRequest", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
+    { "name": "BoundedCommercialProviderResponse", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
+    { "name": "StudyCommercialTutorAdvisory", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
+    { "name": "StudyCommercialEffectReceipt", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
+    { "name": "CommercialOperationTelemetryEvent", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
+    { "name": "ParentReport", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
+    { "name": "InstructionalMemoryDelta", "classification": "SERIALIZED_BOUNDARY", "schemaGenerated": true },
+    { "name": "PresentationIntent", "classification": "TRUSTED_INTERNAL_CONTRACT", "schemaGenerated": false, "reason": "Serialized only as a closed nested member of StudyCommercialTutorAdvisory." },
+    { "name": "CommercialProviderTransport", "classification": "EPHEMERAL_TRANSIENT", "schemaGenerated": false },
+    { "name": "RawAudioImageInput", "classification": "EPHEMERAL_TRANSIENT", "schemaGenerated": false },
+    { "name": "ProductionProviderAdapter", "classification": "FUTURE_PRODUCTION_BOUNDARY", "schemaGenerated": false },
+    { "name": "ProductionCurriculumRegistryAdapter", "classification": "FUTURE_PRODUCTION_BOUNDARY", "schemaGenerated": false }
+  ]
+}

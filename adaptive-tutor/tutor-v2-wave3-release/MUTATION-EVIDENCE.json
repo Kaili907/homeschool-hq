@@ -1,0 +1,173 @@
+{
+  "aggregateStatus": "PASS",
+  "disposableCopiesOnly": true,
+  "expected": "18/18 killed",
+  "killed": 18,
+  "mutationCount": 18,
+  "mutationEvidenceVersion": 1,
+  "results": [
+    {
+      "actualFailedGates": [
+        "COMMERCIAL_PROVIDER_REQUEST_MINIMIZATION"
+      ],
+      "description": "raw learnerResponse allowed in commercial provider request",
+      "expectedFailedGate": "COMMERCIAL_PROVIDER_REQUEST_MINIMIZATION",
+      "mutation": "COMMERCIAL_PROVIDER_REQUEST_MINIMIZATION",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "PROVIDER_POLICY_BEFORE_ROUTING"
+      ],
+      "description": "provider-policy evaluation skipped",
+      "expectedFailedGate": "PROVIDER_POLICY_BEFORE_ROUTING",
+      "mutation": "PROVIDER_POLICY_BEFORE_ROUTING",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "IMMUTABLE_PROVIDER_MODEL_ROUTE_IDENTITY"
+      ],
+      "description": "model revision/configuration digest removed from route plan",
+      "expectedFailedGate": "IMMUTABLE_PROVIDER_MODEL_ROUTE_IDENTITY",
+      "mutation": "IMMUTABLE_PROVIDER_MODEL_ROUTE_IDENTITY",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "INTEGER_MICROS_ATTEMPT_BUDGET"
+      ],
+      "description": "money narrowed to JavaScript number or unreserved failover allowed",
+      "expectedFailedGate": "INTEGER_MICROS_ATTEMPT_BUDGET",
+      "mutation": "INTEGER_MICROS_ATTEMPT_BUDGET",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "END_TO_END_DEADLINE_BOUNDED_FAILOVER"
+      ],
+      "description": "deadline or retry budget bypassed",
+      "expectedFailedGate": "END_TO_END_DEADLINE_BOUNDED_FAILOVER",
+      "mutation": "END_TO_END_DEADLINE_BOUNDED_FAILOVER",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "UNTRUSTED_MODEL_OUTPUT_BOUNDARY"
+      ],
+      "description": "authority field accepted from model output",
+      "expectedFailedGate": "UNTRUSTED_MODEL_OUTPUT_BOUNDARY",
+      "mutation": "UNTRUSTED_MODEL_OUTPUT_BOUNDARY",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "GROUNDED_CONTEXT_OR_REFUSAL"
+      ],
+      "description": "unsupported grounding claim accepted",
+      "expectedFailedGate": "GROUNDED_CONTEXT_OR_REFUSAL",
+      "mutation": "GROUNDED_CONTEXT_OR_REFUSAL",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "CURRICULUM_TUTOR_ADMISSION"
+      ],
+      "description": "unknown curriculum or lesson admitted",
+      "expectedFailedGate": "CURRICULUM_TUTOR_ADMISSION",
+      "mutation": "CURRICULUM_TUTOR_ADMISSION",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "APPROVED_LEARNER_STAGE_CATALOG"
+      ],
+      "description": "unknown or unapproved learner stage accepted",
+      "expectedFailedGate": "APPROVED_LEARNER_STAGE_CATALOG",
+      "mutation": "APPROVED_LEARNER_STAGE_CATALOG",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "RECOVERABLE_EFFECT_MEMORY_REPLAY"
+      ],
+      "description": "accepted effect plus memory failure duplicates or becomes unrecoverable",
+      "expectedFailedGate": "RECOVERABLE_EFFECT_MEMORY_REPLAY",
+      "mutation": "RECOVERABLE_EFFECT_MEMORY_REPLAY",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "TRANSIENT_MULTIMODAL_MINIMIZATION"
+      ],
+      "description": "raw transcript, audio, or image becomes durable",
+      "expectedFailedGate": "TRANSIENT_MULTIMODAL_MINIMIZATION",
+      "mutation": "TRANSIENT_MULTIMODAL_MINIMIZATION",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "PARENT_REPORT_GUARDIAN_AUTHORIZATION"
+      ],
+      "description": "missing or foreign guardian authorization accepted",
+      "expectedFailedGate": "PARENT_REPORT_GUARDIAN_AUTHORIZATION",
+      "mutation": "PARENT_REPORT_GUARDIAN_AUTHORIZATION",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "TELEMETRY_OPERATION_ATTEMPT_LINEAGE"
+      ],
+      "description": "telemetry loses logical-operation or physical-attempt lineage",
+      "expectedFailedGate": "TELEMETRY_OPERATION_ATTEMPT_LINEAGE",
+      "mutation": "TELEMETRY_OPERATION_ATTEMPT_LINEAGE",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "CLOSED_PRESENTATION_INTENT"
+      ],
+      "description": "lossy or unknown presentation mode accepted",
+      "expectedFailedGate": "CLOSED_PRESENTATION_INTENT",
+      "mutation": "CLOSED_PRESENTATION_INTENT",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "COMPOSED_EVALUATION_EXECUTION"
+      ],
+      "description": "evaluation hard gates default to pass",
+      "expectedFailedGate": "COMPOSED_EVALUATION_EXECUTION",
+      "mutation": "COMPOSED_EVALUATION_EXECUTION",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "CROSS_CHILD_COMMERCIAL_ISOLATION"
+      ],
+      "description": "cross-child commercial scope reused",
+      "expectedFailedGate": "CROSS_CHILD_COMMERCIAL_ISOLATION",
+      "mutation": "CROSS_CHILD_COMMERCIAL_ISOLATION",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "ONE_STUDY_ENGINE_AUTHORITY"
+      ],
+      "description": "Tutor official mastery or working-level authority introduced",
+      "expectedFailedGate": "ONE_STUDY_ENGINE_AUTHORITY",
+      "mutation": "ONE_STUDY_ENGINE_AUTHORITY",
+      "status": "KILLED"
+    },
+    {
+      "actualFailedGates": [
+        "NO_VENDOR_PRODUCTION_IMPORT"
+      ],
+      "description": "vendor or production import introduced into Wave 3 foundation",
+      "expectedFailedGate": "NO_VENDOR_PRODUCTION_IMPORT",
+      "mutation": "NO_VENDOR_PRODUCTION_IMPORT",
+      "status": "KILLED"
+    }
+  ],
+  "survived": 0
+}

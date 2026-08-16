@@ -1,0 +1,369 @@
+{
+  "$id": "TutorCommercialTelemetryEventV3",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actionFamily": {
+      "anyOf": [
+        {
+          "const": "explanation",
+          "type": "string"
+        },
+        {
+          "const": "hint",
+          "type": "string"
+        },
+        {
+          "const": "knowledge-check",
+          "type": "string"
+        },
+        {
+          "const": "example",
+          "type": "string"
+        },
+        {
+          "const": "reteach",
+          "type": "string"
+        },
+        {
+          "const": "prerequisite",
+          "type": "string"
+        },
+        {
+          "const": "break",
+          "type": "string"
+        },
+        {
+          "const": "escalation",
+          "type": "string"
+        },
+        {
+          "const": "lesson-return",
+          "type": "string"
+        },
+        {
+          "const": "other",
+          "type": "string"
+        },
+        {
+          "const": "none",
+          "type": "string"
+        }
+      ]
+    },
+    "attemptIndex": {
+      "anyOf": [
+        {
+          "const": 0,
+          "type": "number"
+        },
+        {
+          "const": 1,
+          "type": "number"
+        }
+      ]
+    },
+    "authorityScope": {
+      "const": "commercial-operations-only",
+      "type": "string"
+    },
+    "cacheClass": {
+      "anyOf": [
+        {
+          "const": "hit",
+          "type": "string"
+        },
+        {
+          "const": "miss",
+          "type": "string"
+        },
+        {
+          "const": "bypass",
+          "type": "string"
+        },
+        {
+          "const": "not-applicable",
+          "type": "string"
+        },
+        {
+          "const": "unknown",
+          "type": "string"
+        }
+      ]
+    },
+    "capabilityProfileDigest": {
+      "maxLength": 71,
+      "minLength": 71,
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "capabilityProfileRevisionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "configurationDigest": {
+      "maxLength": 71,
+      "minLength": 71,
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "contractVersion": {
+      "const": "3.1.0",
+      "type": "string"
+    },
+    "costMicros": {
+      "maxLength": 19,
+      "minLength": 1,
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "type": "string"
+    },
+    "eventKind": {
+      "const": "tutor-commercial-operation",
+      "type": "string"
+    },
+    "eventRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "fallbackClass": {
+      "anyOf": [
+        {
+          "const": "none",
+          "type": "string"
+        },
+        {
+          "const": "reviewed-static",
+          "type": "string"
+        },
+        {
+          "const": "alternate-provider",
+          "type": "string"
+        },
+        {
+          "const": "reduced-capability",
+          "type": "string"
+        },
+        {
+          "const": "blocked",
+          "type": "string"
+        },
+        {
+          "const": "unknown",
+          "type": "string"
+        }
+      ]
+    },
+    "inputTokenCount": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "instructionalUseAllowed": {
+      "const": false,
+      "type": "boolean"
+    },
+    "latencyMs": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "logicalOperationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "modelRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "modelRevisionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "outcome": {
+      "anyOf": [
+        {
+          "const": "success",
+          "type": "string"
+        },
+        {
+          "const": "failure",
+          "type": "string"
+        }
+      ]
+    },
+    "outputTokenCount": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "physicalAttemptRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "providerPolicyEvidenceRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "providerPolicyRevisionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "providerRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "reasonCode": {
+      "anyOf": [
+        {
+          "const": "COMPLETED",
+          "type": "string"
+        },
+        {
+          "const": "PROVIDER_UNAVAILABLE",
+          "type": "string"
+        },
+        {
+          "const": "PROVIDER_TIMEOUT",
+          "type": "string"
+        },
+        {
+          "const": "MALFORMED_RESPONSE",
+          "type": "string"
+        },
+        {
+          "const": "POLICY_REJECTION",
+          "type": "string"
+        },
+        {
+          "const": "SAFETY_STOP",
+          "type": "string"
+        },
+        {
+          "const": "BUDGET_EXCEEDED",
+          "type": "string"
+        },
+        {
+          "const": "CANCELLED",
+          "type": "string"
+        },
+        {
+          "const": "INTERNAL_ERROR",
+          "type": "string"
+        },
+        {
+          "const": "UNKNOWN_FAILURE",
+          "type": "string"
+        }
+      ]
+    },
+    "reservationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "role": {
+      "anyOf": [
+        {
+          "const": "primary",
+          "type": "string"
+        },
+        {
+          "const": "failover",
+          "type": "string"
+        }
+      ]
+    },
+    "routeClass": {
+      "anyOf": [
+        {
+          "const": "local",
+          "type": "string"
+        },
+        {
+          "const": "hosted-standard",
+          "type": "string"
+        },
+        {
+          "const": "hosted-premium",
+          "type": "string"
+        },
+        {
+          "const": "fallback",
+          "type": "string"
+        },
+        {
+          "const": "unknown",
+          "type": "string"
+        }
+      ]
+    },
+    "routeRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "studyAuthority": {
+      "const": false,
+      "type": "boolean"
+    },
+    "studyMutationAllowed": {
+      "const": false,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "eventKind",
+    "eventRef",
+    "logicalOperationRef",
+    "physicalAttemptRef",
+    "reservationRef",
+    "routeRef",
+    "providerRef",
+    "modelRef",
+    "modelRevisionRef",
+    "configurationDigest",
+    "capabilityProfileRevisionRef",
+    "capabilityProfileDigest",
+    "providerPolicyRevisionRef",
+    "providerPolicyEvidenceRef",
+    "attemptIndex",
+    "role",
+    "actionFamily",
+    "routeClass",
+    "inputTokenCount",
+    "outputTokenCount",
+    "latencyMs",
+    "costMicros",
+    "cacheClass",
+    "fallbackClass",
+    "outcome",
+    "reasonCode",
+    "authorityScope",
+    "instructionalUseAllowed",
+    "studyAuthority",
+    "studyMutationAllowed"
+  ],
+  "title": "Commercial Operation Telemetry Event",
+  "type": "object"
+}

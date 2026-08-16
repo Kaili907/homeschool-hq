@@ -1,0 +1,49 @@
+{
+  "generatedSchemaCount": 8,
+  "internalPortSchemasGenerated": 0,
+  "product": "Manuel Academy Study Tutor V2",
+  "schemaInventoryVersion": 1,
+  "schemas": [
+    {
+      "file": "study-commercial-tutor-invocation.schema.json",
+      "sha256": "c9a89d50f03835391eea1f7f3ff20de1789ccb939ca0c986b7127ae90211dea7",
+      "source": "core/v3/contracts/commercial.ts#StudyCommercialTutorInvocationSchema"
+    },
+    {
+      "file": "bounded-commercial-provider-request.schema.json",
+      "sha256": "923640b41ebfdb30e424ca4adfef842abb2bd356a4f0f485dbc2444a53f276c4",
+      "source": "core/v3/provider-request/contracts.ts#BoundedCommercialProviderRequestSchema"
+    },
+    {
+      "file": "bounded-commercial-provider-response.schema.json",
+      "sha256": "51496e2ea3bbcbded6035a812a47602c605d9fd957f566312b91a8510488feb5",
+      "source": "core/v3/contracts/commercial.ts#BoundedCommercialProviderResponseSchema"
+    },
+    {
+      "file": "study-commercial-tutor-advisory.schema.json",
+      "sha256": "8a139e3ed45afa33a54ff76a3093b323dfbcecca0006c1efd87dd4f5d921fcc6",
+      "source": "core/v3/contracts/commercial.ts#StudyCommercialTutorAdvisorySchema"
+    },
+    {
+      "file": "study-commercial-effect-receipt.schema.json",
+      "sha256": "fbf7f4f0f3b7c28a9ddeaeeaf3815889e7e8b3903b3f60a1b2c00c507118822f",
+      "source": "core/v3/contracts/commercial.ts#StudyCommercialEffectReceiptSchema"
+    },
+    {
+      "file": "commercial-operation-telemetry-event.schema.json",
+      "sha256": "acab1e88351f0971237dc6200cdf14acb76340e4faaf1dcca99c08d4dad4747c",
+      "source": "core/v3/telemetry/contracts.ts#TutorCommercialTelemetryEventSchema"
+    },
+    {
+      "file": "parent-report.schema.json",
+      "sha256": "681cde743b7776aca616de1f1126bdc3b3d32cbe1d26be39721b1e0a7dce165e",
+      "source": "study-engine/tutor-v2/parent-reporting/parent-report.ts#ParentReportSchema"
+    },
+    {
+      "file": "instructional-memory-delta.schema.json",
+      "sha256": "0566aff806bdd2d8963c853460b9176e986fa8c712ebdb5faf413c99a4868955",
+      "source": "core/v3/memory/instructional-memory-delta.ts#InstructionalMemoryDeltaSchema"
+    }
+  ],
+  "wave": "Wave 3 Commercial Foundation Convergence"
+}
