@@ -1,0 +1,221 @@
+{
+  "$schema": "../science-director-sample.schema.json",
+  "schemaVersion": "1.0",
+  "sampleRevision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "grade": 9,
+  "courseId": "ma-hs9-biology",
+  "lessonRef": "ma-hs9-biology-u09-l02",
+  "title": "Concept model A: the four factors driving natural selection",
+  "subject": "science",
+  "format": "structured",
+  "standards": ["HS-LS4-1", "HS-LS4-2", "HS-LS4-3", "HS-LS4-4", "HS-LS4-5", "HS-LS4-6", "HS-LS2-7", "HS-ETS1-1", "HS-ETS1-2", "HS-ETS1-3"],
+  "phenomenonOrContext": "A bacterial population contains heritable variation before antibiotic exposure; resistant descendants become more common after repeated exposure.",
+  "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
+  "lessonGoal": "Use population evidence to explain natural selection without implying that individual organisms evolve because they need to.",
+  "successCriteria": [
+    "I identify heritable variation that exists before selection.",
+    "I connect limited survival and differential reproduction to a change across generations.",
+    "I describe a population-frequency change rather than a purposeful change in an individual.",
+    "I use claim, evidence, reasoning, and a limitation."
+  ],
+  "vocabulary": [
+    { "term": "heritable variation", "definition": "differences that can be passed genetically from parents to offspring" },
+    { "term": "selection pressure", "definition": "an environmental condition that changes relative survival or reproduction" },
+    { "term": "trait frequency", "definition": "the proportion of a population with a particular trait" },
+    { "term": "differential reproduction", "definition": "some individuals leave more surviving offspring than others" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "g9-selection:notice-data",
+      "sectionKind": "data-table",
+      "title": "NOTICE — A simplified bacterial population model",
+      "body": "The model begins with susceptible and resistant bacteria. Resistance is heritable. Each numbered generation is sampled after antibiotic exposure and reproduction of survivors.",
+      "data": {
+        "tableLabel": "Modeled trait frequency across generations",
+        "columns": ["Generation", "Susceptible phenotype (%)", "Resistant phenotype (%)"],
+        "rows": ["0 | 92 | 8", "1 | 70 | 30", "2 | 42 | 58", "3 | 19 | 81"],
+        "provenance": "Manuel Academy simplified instructional model. Percentages are constructed model outputs, not clinical or experimental results.",
+        "limitations": "The model omits mutation rate, horizontal gene transfer, dosage, spatial structure, and fitness costs outside antibiotic exposure."
+      }
+    },
+    {
+      "sectionRef": "g9-selection:notice-response",
+      "sectionKind": "guided-practice",
+      "title": "NOTICE — Locate the variation in time",
+      "items": [
+        {
+          "itemRef": "g9-selection:notice-response:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which statement is supported by Generation 0?",
+          "choices": [
+            { "id": "g9-selection:notice-response:1:a", "label": "Resistance was present before the modeled antibiotic exposures." },
+            { "id": "g9-selection:notice-response:1:b", "label": "Every susceptible bacterium changed itself into a resistant bacterium." },
+            { "id": "g9-selection:notice-response:1:c", "label": "The population had no heritable variation before exposure." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g9-selection:feedback-notice",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Put cause before outcome",
+      "body": "Generation 0 already includes resistant phenotypes. The antibiotic changes which existing variants survive and reproduce more successfully in this model; it does not show susceptible individuals purposefully changing because they need resistance.",
+      "feedbackFor": "g9-selection:notice-response:1"
+    },
+    {
+      "sectionRef": "g9-selection:learn",
+      "sectionKind": "teaching",
+      "title": "LEARN — Four necessary conditions",
+      "body": "Natural selection requires more offspring than can all survive, heritable variation, competition or another selective condition, and differences in survival and reproduction linked to the heritable traits. Selection acts on phenotypes, but population change persists across generations only when relevant variation is heritable. The outcome is a change in trait frequency in a population, not evolution by need within one organism."
+    },
+    {
+      "sectionRef": "g9-selection:model-reference",
+      "sectionKind": "reference",
+      "title": "MODEL — Causal chain",
+      "reference": {
+        "modelLabel": "Natural-selection reasoning chain",
+        "sequence": [
+          "heritable variation already present",
+          "selection pressure creates unequal survival or reproduction",
+          "survivors contribute unequally to the next generation",
+          "heritable trait frequencies change across generations"
+        ],
+        "boundary": "The chain does not claim that exposure always produces resistance or that every resistance mechanism has no cost."
+      }
+    },
+    {
+      "sectionRef": "g9-selection:model",
+      "sectionKind": "worked-example",
+      "title": "MODEL — Build a claim-evidence-reasoning explanation",
+      "items": [
+        {
+          "itemRef": "g9-selection:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Model task: explain the modeled increase in resistance.",
+          "workedSolution": {
+            "steps": [
+              "Claim: repeated antibiotic exposure selected for resistant bacteria in the modeled environment.",
+              "Evidence: resistant phenotypes increased from 8% at Generation 0 to 81% at Generation 3.",
+              "Reasoning: resistance was heritable and already varied; resistant bacteria survived and reproduced at higher rates during exposure, so their descendants formed a larger share of later generations.",
+              "Reject the misconception that individual susceptible bacteria became resistant because they tried or needed to.",
+              "Limit: the simplified data do not identify the genetic mechanism or predict fitness without antibiotic exposure."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "g9-selection:your-turn",
+      "sectionKind": "guided-practice",
+      "title": "YOUR TURN — Diagnose a broken explanation",
+      "body": "A draft says: The antibiotic taught each bacterium to become resistant, so the bacteria evolved during their own lifetimes.",
+      "items": [
+        {
+          "itemRef": "g9-selection:your-turn:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Revise the draft using heritable variation, differential survival or reproduction, population, and generations."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g9-selection:feedback-turn",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Keep individuals and populations distinct",
+      "body": "A scientifically sound revision places variation before exposure, assigns unequal survival or reproduction to existing phenotypes, and locates evolutionary change in population trait frequencies across generations.",
+      "feedbackFor": "g9-selection:your-turn:1"
+    },
+    {
+      "sectionRef": "g9-selection:apply-data",
+      "sectionKind": "data-table",
+      "title": "APPLY — Seed size in a fictional bird population",
+      "body": "A drought leaves mostly hard, large seeds. Beak depth varies and is heritable in the fictional population. The table reports means from equal-size random samples before the drought and among offspring two generations later.",
+      "data": {
+        "tableLabel": "Fictional bird population summary",
+        "columns": ["Sample", "Mean beak depth (mm)", "Large-seed feeding success (%)"],
+        "rows": ["Before drought | 8.1 | 44", "Two generations later | 9.0 | 67"],
+        "provenance": "Manuel Academy fictional transfer dataset constructed for reasoning practice; not a report of a field study.",
+        "limitations": "Means hide individual variation; two time points do not rule out migration, drift, or measurement bias."
+      }
+    },
+    {
+      "sectionRef": "g9-selection:apply",
+      "sectionKind": "independent-practice",
+      "title": "APPLY — Defend a bounded claim",
+      "items": [
+        {
+          "itemRef": "g9-selection:apply:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Write a claim-evidence-reasoning explanation for the fictional bird data and identify one alternative explanation or needed evidence."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g9-selection:feedback-apply",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Match confidence to the design",
+      "body": "A strong explanation connects heritable beak variation and feeding success to differential reproduction, cites both measured changes, and avoids saying individual birds grew deeper beaks because of need. The two-time-point design supports a selection hypothesis but does not by itself eliminate migration, drift, or bias.",
+      "feedbackFor": "g9-selection:apply:1"
+    },
+    {
+      "sectionRef": "g9-selection:what-learned",
+      "sectionKind": "reflection",
+      "title": "WHAT YOU LEARNED",
+      "body": "Natural selection changes the frequency of heritable traits in populations across generations through unequal survival and reproduction."
+    },
+    {
+      "sectionRef": "g9-selection:evidence-used",
+      "sectionKind": "reflection",
+      "title": "EVIDENCE YOU USED",
+      "body": "You used generation frequencies, a causal model, a fictional transfer dataset, and stated limitations."
+    },
+    {
+      "sectionRef": "g9-selection:how-you-did",
+      "sectionKind": "reflection",
+      "title": "HOW YOU DID",
+      "body": "Your saved revisions and CER response provide evidence of population-level reasoning. They remain pending assessment; reading the causal chain is not mastery."
+    },
+    {
+      "sectionRef": "g9-selection:what-to-practice",
+      "sectionKind": "reflection",
+      "title": "WHAT TO PRACTICE",
+      "body": "Practice distinguishing evidence consistent with selection from evidence that rules out alternative mechanisms."
+    },
+    {
+      "sectionRef": "g9-selection:review",
+      "sectionKind": "mastery-check",
+      "title": "REVIEW THIS LESSON",
+      "items": [
+        {
+          "itemRef": "g9-selection:review:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Name all four necessary conditions for natural selection and explain why heritability is essential for change across generations."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g9-selection:course-progress",
+      "sectionKind": "reflection",
+      "title": "COURSE PROGRESS",
+      "body": "This isolated sample does not change your course record. In a released lesson, assessed independent evidence across occasions is required before mastery changes."
+    },
+    {
+      "sectionRef": "g9-selection:next-action",
+      "sectionKind": "reflection",
+      "title": "NEXT ACTION",
+      "body": "Save the review explanation. Then continue to the next assigned Natural Selection lesson or return to your course page."
+    }
+  ],
+  "lessonReview": {
+    "whatYouLearned": "present",
+    "evidenceYouUsed": "present",
+    "howYouDid": "present",
+    "whatToPractice": "present",
+    "reviewThisLesson": "present-with-response",
+    "courseProgress": "present",
+    "nextAction": "present"
+  }
+}

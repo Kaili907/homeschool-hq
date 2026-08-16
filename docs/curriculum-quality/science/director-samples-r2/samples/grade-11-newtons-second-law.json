@@ -1,0 +1,213 @@
+{
+  "$schema": "../science-director-sample.schema.json",
+  "schemaVersion": "1.0",
+  "sampleRevision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "grade": 11,
+  "courseId": "ma-hs11-physics",
+  "lessonRef": "ma-hs11-physics-u02-l03",
+  "title": "Guided practice A: Newton's second law as a mathematical relationship",
+  "subject": "science",
+  "format": "structured",
+  "standards": ["HS-PS2-1"],
+  "phenomenonOrContext": "An empty cart and a loaded cart experience the same net force but accelerate differently.",
+  "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
+  "lessonGoal": "Use force diagrams, units, and Fnet = ma to predict acceleration and evaluate model limits.",
+  "successCriteria": [
+    "I define the system and calculate vector net force.",
+    "I use kilograms, newtons, and meters per second squared consistently.",
+    "I connect the sign and direction of acceleration to net force, not velocity.",
+    "I state a limitation or assumption before generalizing from the model."
+  ],
+  "vocabulary": [
+    { "term": "inertial mass", "definition": "the property that determines how strongly an object resists acceleration for a given net force" },
+    { "term": "free-body diagram", "definition": "a representation of all external forces acting on one chosen system" },
+    { "term": "net force", "definition": "the vector sum of external forces acting on the system" },
+    { "term": "model assumption", "definition": "a stated simplification under which a model's prediction is expected to apply" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "g11-newton:notice-data",
+      "sectionKind": "data-table",
+      "title": "NOTICE — Same net force, changed load",
+      "body": "A low-friction cart is modeled as one system. Right is positive. Vertical forces balance, and the horizontal net force is held at +18 N.",
+      "data": {
+        "tableLabel": "Modeled cart response",
+        "columns": ["Total mass (kg)", "Horizontal net force (N)", "Acceleration (m/s²)"],
+        "rows": ["3.0 | +18 | +6.0", "6.0 | +18 | +3.0", "9.0 | +18 | +2.0"],
+        "provenance": "Manuel Academy instructional model computed from Fnet = ma. Values are model outputs, not measured trials.",
+        "assumptions": "Constant mass, inertial reference frame, force values represent the modeled interval, and cart treated as one object."
+      }
+    },
+    {
+      "sectionRef": "g11-newton:notice-response",
+      "sectionKind": "guided-practice",
+      "title": "NOTICE — Quantify the inverse pattern",
+      "items": [
+        {
+          "itemRef": "g11-newton:notice-response:1",
+          "itemKind": "numeric-entry",
+          "responseKind": "NUMERIC",
+          "prompt": "By what factor does acceleration change when mass increases from 3.0 kg to 9.0 kg at the same net force? Enter final acceleration divided by initial acceleration."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g11-newton:feedback-notice",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Report the comparison direction",
+      "body": "Use final acceleration divided by initial acceleration, as the prompt specifies. If you report 3 instead of one-third, you calculated the inverse comparison. The fixed-force data show acceleration varying inversely with mass.",
+      "feedbackFor": "g11-newton:notice-response:1"
+    },
+    {
+      "sectionRef": "g11-newton:learn",
+      "sectionKind": "teaching",
+      "title": "LEARN — The equation begins with a force model",
+      "body": "Newton's second law relates the vector sum of external forces to mass and acceleration: Fnet = ma. The net force, not one selected force, determines acceleration. Acceleration points with net force even when velocity points the other way. Units provide a check because one newton equals one kilogram-meter per second squared. The relationship is applied over an interval in an inertial frame and requires a defined system."
+    },
+    {
+      "sectionRef": "g11-newton:model-reference",
+      "sectionKind": "reference",
+      "title": "MODEL — Signed horizontal free-body description",
+      "reference": {
+        "system": "A 5.0 kg cart",
+        "positiveDirection": "right",
+        "forces": ["+32 N applied force", "-7 N rolling resistance"],
+        "verticalCheck": "Normal force and weight balance in the vertical direction.",
+        "netForce": "+25 N horizontal"
+      }
+    },
+    {
+      "sectionRef": "g11-newton:model",
+      "sectionKind": "worked-example",
+      "title": "MODEL — From diagram to prediction",
+      "items": [
+        {
+          "itemRef": "g11-newton:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Model task: calculate and interpret the cart's acceleration.",
+          "workedSolution": {
+            "steps": [
+              "Define the system as the 5.0 kg cart and right as positive.",
+              "Sum horizontal external forces: +32 N + (-7 N) = +25 N.",
+              "Solve a = Fnet / m = +25 N / 5.0 kg = +5.0 m/s².",
+              "Interpret the sign: acceleration is right. This does not by itself reveal whether the cart's current velocity is right or left.",
+              "Check units and assumptions: forces must describe the same interval, mass is constant, and the reference frame is inertial."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "g11-newton:your-turn",
+      "sectionKind": "guided-practice",
+      "title": "YOUR TURN — Opposing forces",
+      "body": "A 4.0 kg sled has a +30 N pull and -14 N kinetic friction along a horizontal surface. Vertical forces balance.",
+      "items": [
+        {
+          "itemRef": "g11-newton:your-turn:1",
+          "itemKind": "numeric-entry",
+          "responseKind": "NUMERIC",
+          "prompt": "What is the signed horizontal acceleration in m/s²?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "g11-newton:feedback-turn",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Preserve the sign through both steps",
+      "body": "Add the signed forces before dividing by mass. A result based on 30 N alone ignores friction. A negative sign would conflict with the stated positive net force unless the sign convention or force sum was changed.",
+      "feedbackFor": "g11-newton:your-turn:1"
+    },
+    {
+      "sectionRef": "g11-newton:apply-data",
+      "sectionKind": "data-table",
+      "title": "APPLY — Evaluate an experimental claim",
+      "body": "A student tests a cart with nominal mass 2.00 kg. Force is inferred from a sensor, while acceleration comes from a motion tracker.",
+      "data": {
+        "tableLabel": "Measured cart data",
+        "columns": ["Trial", "Measured net force (N)", "Measured acceleration (m/s²)"],
+        "rows": ["1 | 2.1 | 1.0", "2 | 4.0 | 2.1", "3 | 6.2 | 3.0", "4 | 8.1 | 4.2"],
+        "provenance": "Manuel Academy fictional measurement dataset constructed for experimental-design reasoning; not a report of a physical experiment.",
+        "instrumentNotes": "Force uncertainty ±0.2 N; acceleration uncertainty ±0.2 m/s²; cart mass uncertainty ±0.02 kg."
+      }
+    },
+    {
+      "sectionRef": "g11-newton:apply",
+      "sectionKind": "independent-practice",
+      "title": "APPLY — Claim, evidence, and limitation",
+      "items": [
+        {
+          "itemRef": "g11-newton:apply:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Evaluate the claim that acceleration is proportional to net force for this cart. Use at least two trials, compare with the model prediction, and identify one limitation."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g11-newton:feedback-apply",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Treat scatter as evidence, not failure",
+      "body": "For a 2.00 kg model, acceleration is expected near one-half of net force numerically in these SI units. The measurements are close but not exact, so a strong evaluation uses uncertainty and trend rather than demanding perfect equality. A conclusion beyond the tested force range would require additional evidence.",
+      "feedbackFor": "g11-newton:apply:1"
+    },
+    {
+      "sectionRef": "g11-newton:what-learned",
+      "sectionKind": "reflection",
+      "title": "WHAT YOU LEARNED",
+      "body": "Net force determines acceleration through Fnet = ma for a defined system under stated model conditions."
+    },
+    {
+      "sectionRef": "g11-newton:evidence-used",
+      "sectionKind": "reflection",
+      "title": "EVIDENCE YOU USED",
+      "body": "You used a free-body description, signed force sums, dimensional checks, modeled data, fictional measurements, and uncertainty."
+    },
+    {
+      "sectionRef": "g11-newton:how-you-did",
+      "sectionKind": "reflection",
+      "title": "HOW YOU DID",
+      "body": "Your saved quantitative and experimental-design responses provide disciplinary evidence. They remain pending assessment; viewing calculations is not mastery."
+    },
+    {
+      "sectionRef": "g11-newton:what-to-practice",
+      "sectionKind": "reflection",
+      "title": "WHAT TO PRACTICE",
+      "body": "Practice defining the system and sign convention before substituting numbers into the equation."
+    },
+    {
+      "sectionRef": "g11-newton:review",
+      "sectionKind": "mastery-check",
+      "title": "REVIEW THIS LESSON",
+      "items": [
+        {
+          "itemRef": "g11-newton:review:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "An object moves left while its net force points right. Explain the acceleration direction, what happens to the leftward velocity at first, and what information is still needed to predict later motion."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g11-newton:course-progress",
+      "sectionKind": "reflection",
+      "title": "COURSE PROGRESS",
+      "body": "This isolated sample does not change your course record. In a released lesson, assessed independent quantitative evidence is required before progress or mastery changes."
+    },
+    {
+      "sectionRef": "g11-newton:next-action",
+      "sectionKind": "reflection",
+      "title": "NEXT ACTION",
+      "body": "Save the review explanation. Then continue to the next assigned Newton's Second Law lesson or return to your course page."
+    }
+  ],
+  "lessonReview": {
+    "whatYouLearned": "present",
+    "evidenceYouUsed": "present",
+    "howYouDid": "present",
+    "whatToPractice": "present",
+    "reviewThisLesson": "present-with-response",
+    "courseProgress": "present",
+    "nextAction": "present"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "$schema": "../science-director-sample.schema.json",
+  "schemaVersion": "1.0",
+  "sampleRevision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "grade": 10,
+  "courseId": "ma-hs10-chemistry",
+  "lessonRef": "ma-hs10-chemistry-u05-l02",
+  "title": "Concept model A: balancing equations as bookkeeping",
+  "subject": "science",
+  "format": "structured",
+  "standards": ["HS-PS1-7"],
+  "phenomenonOrContext": "A particle model shows hydrogen and oxygen atoms rearranging into water while every atom remains in the system.",
+  "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
+  "lessonGoal": "Balance chemical equations by conserving atoms and charge while changing coefficients only.",
+  "successCriteria": [
+    "I count each element on both sides of an equation.",
+    "I use coefficients to scale complete formulas.",
+    "I never change a subscript to force a balance.",
+    "I verify the final equation with an atom-count table and simplest whole-number coefficients."
+  ],
+  "vocabulary": [
+    { "term": "coefficient", "definition": "a number placed before a chemical formula that multiplies the entire formula" },
+    { "term": "subscript", "definition": "a number inside a chemical formula that states the ratio of atoms in that substance" },
+    { "term": "conservation of atoms", "definition": "atoms are rearranged in a reaction but are not created or destroyed" },
+    { "term": "formula unit", "definition": "the complete chemical formula treated as one unit when a coefficient is applied" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "g10-balance:notice-model",
+      "sectionKind": "data-table",
+      "title": "NOTICE — Atom counts expose the mismatch",
+      "body": "Start with the unbalanced representation H₂ + O₂ -> H₂O. This is a symbolic particle-accounting task; no chemicals or reaction are used.",
+      "data": {
+        "tableLabel": "Atom count before balancing",
+        "columns": ["Element", "Reactant-side atoms", "Product-side atoms"],
+        "rows": ["H | 2 | 2", "O | 2 | 1"],
+        "readingNote": "The arrow means reacts to form. Subscripts belong to the substance formula."
+      }
+    },
+    {
+      "sectionRef": "g10-balance:notice-response",
+      "sectionKind": "guided-practice",
+      "title": "NOTICE — Identify the unbalanced element",
+      "items": [
+        {
+          "itemRef": "g10-balance:notice-response:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which element's atom count is not conserved in the displayed equation?",
+          "choices": [
+            { "id": "g10-balance:notice-response:1:a", "label": "Hydrogen only" },
+            { "id": "g10-balance:notice-response:1:b", "label": "Oxygen only" },
+            { "id": "g10-balance:notice-response:1:c", "label": "Both elements already balance" }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g10-balance:feedback-notice",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Count from formulas, not names",
+      "body": "Compare one element at a time. The two sides already contain the same hydrogen count, but the oxygen counts differ. This diagnosis identifies where balancing must begin without changing either formula.",
+      "feedbackFor": "g10-balance:notice-response:1"
+    },
+    {
+      "sectionRef": "g10-balance:learn",
+      "sectionKind": "teaching",
+      "title": "LEARN — Coefficients conserve identity",
+      "body": "A balanced equation has the same number of atoms of every element and the same total charge on both sides. A coefficient multiplies every atom in the formula that follows. Changing H₂O to H₂O₂ would change water into a different substance, so subscripts are never edited to balance an equation. Coefficients describe relative numbers of particles or moles and are reduced to the smallest whole-number ratio."
+    },
+    {
+      "sectionRef": "g10-balance:model",
+      "sectionKind": "worked-example",
+      "title": "MODEL — Balance water formation",
+      "items": [
+        {
+          "itemRef": "g10-balance:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Model task: balance H₂ + O₂ -> H₂O.",
+          "workedSolution": {
+            "steps": [
+              "Count atoms: reactants have H = 2 and O = 2; products have H = 2 and O = 1.",
+              "Place coefficient 2 before H₂O so products have H = 4 and O = 2.",
+              "Place coefficient 2 before H₂ so reactants have H = 4 and O = 2.",
+              "Verify: 2H₂ + O₂ -> 2H₂O gives H = 4 and O = 2 on each side.",
+              "Check that formulas stayed H₂, O₂, and H₂O and that coefficients 2:1:2 are the simplest whole-number ratio."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "g10-balance:your-turn-reference",
+      "sectionKind": "data-table",
+      "title": "YOUR TURN — Nitrogen and hydrogen form ammonia",
+      "body": "Balance N₂ + H₂ -> NH₃. Use coefficient 1 for N₂ as the starting condition.",
+      "data": {
+        "tableLabel": "Scratch atom-count table",
+        "columns": ["Element", "Reactant count", "Product count"],
+        "rows": ["N | count after coefficients | count after coefficients", "H | count after coefficients | count after coefficients"]
+      }
+    },
+    {
+      "sectionRef": "g10-balance:your-turn",
+      "sectionKind": "guided-practice",
+      "title": "YOUR TURN — Enter one coefficient",
+      "items": [
+        {
+          "itemRef": "g10-balance:your-turn:1",
+          "itemKind": "numeric-entry",
+          "responseKind": "NUMERIC",
+          "prompt": "After balancing with coefficient 1 for N₂, what coefficient belongs before H₂?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "g10-balance:feedback-turn",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Scale the whole formula",
+      "body": "First make the product nitrogen count match N₂ by scaling whole NH₃ formula units. Then count the resulting hydrogen atoms and choose the H₂ coefficient that supplies the same total. If you changed the 3 in NH₃, restore the formula before recounting.",
+      "feedbackFor": "g10-balance:your-turn:1"
+    },
+    {
+      "sectionRef": "g10-balance:apply",
+      "sectionKind": "independent-practice",
+      "title": "APPLY — A fresh equation",
+      "body": "Balance Fe + O₂ -> Fe₂O₃ using the smallest whole-number coefficients. This is a paper model only; do not attempt the reaction.",
+      "items": [
+        {
+          "itemRef": "g10-balance:apply:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Write the balanced equation, provide the final Fe and O counts on each side, and explain why changing a subscript would be scientifically invalid."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g10-balance:feedback-apply",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Verify three constraints",
+      "body": "Check element-by-element equality, unchanged formulas, and the simplest whole-number coefficient ratio. If atom totals match only after editing Fe₂O₃ or O₂, the equation no longer represents the named substances and must be revised with coefficients instead.",
+      "feedbackFor": "g10-balance:apply:1"
+    },
+    {
+      "sectionRef": "g10-balance:what-learned",
+      "sectionKind": "reflection",
+      "title": "WHAT YOU LEARNED",
+      "body": "Balancing is atom and charge bookkeeping. Coefficients change relative amounts; subscripts define substance identity."
+    },
+    {
+      "sectionRef": "g10-balance:evidence-used",
+      "sectionKind": "reflection",
+      "title": "EVIDENCE YOU USED",
+      "body": "You used symbolic particle models, atom-count tables, coefficient ratios, and conservation checks."
+    },
+    {
+      "sectionRef": "g10-balance:how-you-did",
+      "sectionKind": "reflection",
+      "title": "HOW YOU DID",
+      "body": "Your saved coefficient and independent equation show quantitative reasoning. They remain pending assessment; copying the worked equation is not mastery evidence."
+    },
+    {
+      "sectionRef": "g10-balance:what-to-practice",
+      "sectionKind": "reflection",
+      "title": "WHAT TO PRACTICE",
+      "body": "Practice recounting every element after each coefficient change instead of balancing by visual guess."
+    },
+    {
+      "sectionRef": "g10-balance:review",
+      "sectionKind": "mastery-check",
+      "title": "REVIEW THIS LESSON",
+      "items": [
+        {
+          "itemRef": "g10-balance:review:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Explain how coefficients conserve atoms while preserving chemical identity, using one formula from this lesson as evidence."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g10-balance:course-progress",
+      "sectionKind": "reflection",
+      "title": "COURSE PROGRESS",
+      "body": "This isolated sample does not change your course record. In a released lesson, assessed independent evidence is required before progress or mastery changes."
+    },
+    {
+      "sectionRef": "g10-balance:next-action",
+      "sectionKind": "reflection",
+      "title": "NEXT ACTION",
+      "body": "Save the review explanation. Then continue to the next assigned Quantitative Reactions lesson or return to your course page."
+    }
+  ],
+  "lessonReview": {
+    "whatYouLearned": "present",
+    "evidenceYouUsed": "present",
+    "howYouDid": "present",
+    "whatToPractice": "present",
+    "reviewThisLesson": "present-with-response",
+    "courseProgress": "present",
+    "nextAction": "present"
+  }
+}

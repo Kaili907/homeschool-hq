@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "1.0",
+  "revision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "status": "READY_FOR_DIRECTOR_REVIEW",
+  "sampleCount": 9,
+  "productionCurriculumChanged": false,
+  "legacyFallbackRequired": false,
+  "storageBoundary": "docs/curriculum-quality/science/director-samples-r2",
+  "approvedModelReference": {
+    "branch": "mac/approved-lesson-models-r1",
+    "freezeCommit": "b17cf9a2788b861d7ef64c0e43aa645a1632edc7",
+    "manifest": "docs/curriculum-quality/approved-production/DIRECTOR_APPROVED_LESSON_MODELS_R1.manifest.json"
+  },
+  "samples": [
+    {
+      "grade": 3,
+      "courseId": "ma-g3-science",
+      "course": "Grade 3 Science",
+      "lessonRef": "ma-g3-science-u02-l03",
+      "canonicalSource": { "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6", "lineage": "g34-committed", "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl", "recordId": "ma-g3-science-u02-l03" },
+      "topic": "Patterns in motion",
+      "standard": ["3-PS2-1", "3-PS2-2"],
+      "path": "samples/grade-03-patterns-in-motion.json",
+      "phenomenonOrContext": "A toy car travels nearly the same distance on three unchanged ramp trials, then the ramp height changes.",
+      "responseTypes": ["CHOICE", "TEXT"],
+      "readabilityNotes": "Short sentences, one observation set at a time, concrete toy-car context, and a compact labeled data table."
+    },
+    {
+      "grade": 4,
+      "courseId": "ma-g4-science",
+      "course": "Grade 4 Science",
+      "lessonRef": "ma-g4-science-u03-l06",
+      "canonicalSource": { "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6", "lineage": "g34-committed", "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/science/lessons.jsonl", "recordId": "ma-g4-science-u03-l06" },
+      "topic": "Tracing energy paths",
+      "standard": ["4-PS3-2"],
+      "path": "samples/grade-04-tracing-energy-paths.json",
+      "phenomenonOrContext": "A hand-crank flashlight lights a bulb and becomes slightly warm.",
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE"],
+      "readabilityNotes": "Concrete device, arrow sequence, brief vocabulary, and no unexplained energy jargon."
+    },
+    {
+      "grade": 5,
+      "courseId": "ma-g5-science",
+      "course": "Grade 5 Science",
+      "lessonRef": "ma-g5-science-u07-l03",
+      "canonicalSource": { "commit": "4056e31d8beb36622be5ac27ea7f20145266343b", "lineage": "canonical-1.0.0", "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/science/lessons.jsonl", "recordId": "ma-g5-science-u07-l03" },
+      "topic": "Daily shadow patterns",
+      "standard": ["5-ESS1-1", "5-ESS1-2"],
+      "path": "samples/grade-05-daily-shadow-patterns.json",
+      "phenomenonOrContext": "A fixed post casts long shadows in the morning and late afternoon but a short shadow near midday.",
+      "responseTypes": ["NUMERIC", "CHOICE", "CONSTRUCTED_RESPONSE"],
+      "readabilityNotes": "Observable shadow data, explicit units, a text model, and a clear distinction between appearance and cause."
+    },
+    {
+      "grade": 7,
+      "courseId": "ma-g7-science",
+      "course": "Grade 7 Science",
+      "lessonRef": "ma-g7-science-u03-l09",
+      "canonicalSource": { "commit": "4056e31d8beb36622be5ac27ea7f20145266343b", "lineage": "canonical-1.0.0", "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/science/lessons.jsonl", "recordId": "ma-g7-science-u03-l09" },
+      "topic": "Energy transfer",
+      "standard": ["MS-PS3-3", "MS-PS3-4", "MS-PS3-5"],
+      "path": "samples/grade-07-energy-transfer.json",
+      "phenomenonOrContext": "Warm water and cool water move toward a shared temperature when separated only by a conducting wall.",
+      "responseTypes": ["CHOICE", "NUMERIC", "CONSTRUCTED_RESPONSE"],
+      "readabilityNotes": "Two-column time-series data, explicit system boundary, and multi-step energy accounting without calculus."
+    },
+    {
+      "grade": 8,
+      "courseId": "ma-g8-science",
+      "course": "Grade 8 Science",
+      "lessonRef": "ma-g8-science-u01-l02",
+      "canonicalSource": { "commit": "4056e31d8beb36622be5ac27ea7f20145266343b", "lineage": "canonical-1.0.0", "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/science/lessons.jsonl", "recordId": "ma-g8-science-u01-l02" },
+      "topic": "Force and mass",
+      "standard": ["MS-PS2-1", "MS-PS2-2", "MS-PS2-4", "MS-PS2-5"],
+      "path": "samples/grade-08-force-and-mass.json",
+      "phenomenonOrContext": "The same fan pushes two carts of different mass; the lighter cart changes speed more each second.",
+      "responseTypes": ["CHOICE", "NUMERIC", "CONSTRUCTED_RESPONSE"],
+      "readabilityNotes": "Variable-control table, proportional reasoning, labeled force model, and a new-context transfer."
+    },
+    {
+      "grade": 9,
+      "courseId": "ma-hs9-biology",
+      "course": "High School Biology (Grade 9)",
+      "lessonRef": "ma-hs9-biology-u09-l02",
+      "canonicalSource": { "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52", "lineage": "hs912-science-h4", "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/lessons/ma-hs9-biology.lessons.jsonl", "recordId": "ma-hs9-biology-u09-l02" },
+      "topic": "The four factors driving natural selection",
+      "standard": ["HS-LS4-1", "HS-LS4-2", "HS-LS4-3", "HS-LS4-4", "HS-LS4-5", "HS-LS4-6", "HS-LS2-7", "HS-ETS1-1", "HS-ETS1-2", "HS-ETS1-3"],
+      "path": "samples/grade-09-natural-selection.json",
+      "phenomenonOrContext": "A bacterial population contains heritable variation before antibiotic exposure; resistant descendants become more common after repeated exposure.",
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE"],
+      "readabilityNotes": "Generation-based data, explicit population language, and claim-evidence-reasoning with common misconception checks."
+    },
+    {
+      "grade": 10,
+      "courseId": "ma-hs10-chemistry",
+      "course": "High School Chemistry (Grade 10)",
+      "lessonRef": "ma-hs10-chemistry-u05-l02",
+      "canonicalSource": { "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52", "lineage": "hs912-science-h4", "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/lessons/ma-hs10-chemistry.lessons.jsonl", "recordId": "ma-hs10-chemistry-u05-l02" },
+      "topic": "Balancing equations as bookkeeping",
+      "standard": ["HS-PS1-7"],
+      "path": "samples/grade-10-balancing-equations.json",
+      "phenomenonOrContext": "A particle model shows hydrogen and oxygen atoms rearranging into water while every atom remains in the system.",
+      "responseTypes": ["NUMERIC", "CHOICE", "CONSTRUCTED_RESPONSE"],
+      "readabilityNotes": "Atom-count tables, coefficient reasoning, a complete worked model, and an explicit no-subscript-change boundary."
+    },
+    {
+      "grade": 11,
+      "courseId": "ma-hs11-physics",
+      "course": "High School Physics (Grade 11)",
+      "lessonRef": "ma-hs11-physics-u02-l03",
+      "canonicalSource": { "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52", "lineage": "hs912-science-h4", "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/lessons/ma-hs11-physics.lessons.jsonl", "recordId": "ma-hs11-physics-u02-l03" },
+      "topic": "Newton's second law as a mathematical relationship",
+      "standard": ["HS-PS2-1"],
+      "path": "samples/grade-11-newtons-second-law.json",
+      "phenomenonOrContext": "An empty cart and a loaded cart experience the same net force but accelerate differently.",
+      "responseTypes": ["NUMERIC", "CHOICE", "CONSTRUCTED_RESPONSE"],
+      "readabilityNotes": "Free-body descriptions, units at every quantitative step, sign convention, and stated model limitations."
+    },
+    {
+      "grade": 12,
+      "courseId": "ma-hs12-earth-space-environmental",
+      "course": "High School Earth, Space, and Environmental Science (Grade 12)",
+      "lessonRef": "ma-hs12-earth-space-environmental-u07-l05",
+      "canonicalSource": { "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52", "lineage": "hs912-science-h4", "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/lessons/ma-hs12-earth-space-environmental.lessons.jsonl", "recordId": "ma-hs12-earth-space-environmental-u07-l05" },
+      "topic": "Climate models and their uncertainty",
+      "standard": ["HS-ESS2-4", "HS-ESS2-6", "HS-ESS3-5"],
+      "path": "samples/grade-12-climate-model-uncertainty.json",
+      "phenomenonOrContext": "A climate model reproduces an observed warming trend within a stated uncertainty range, then produces different future ranges under different emissions scenarios.",
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE"],
+      "readabilityNotes": "Observed-versus-modeled table, scenario ranges, validation limits, and evidence-weighted explanation without false certainty."
+    }
+  ]
+}
