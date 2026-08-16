@@ -613,6 +613,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "family_cloud_first_link_mapping_response:incomplete->complete-r1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260816120000",
+      "filename": "20260816120000_academy_flexible_schedule_work_ahead_r1.sql",
+      "sha256": "e4da5dcdbbafb756358ccd57a73b16396acc18230bfe7bfcddae7296b598070e",
+      "dependency": "20260816103000_academy_family_cloud_first_link_mapping_response_r1.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "family_plan_work_ahead_fields:absent->r1",
+      "supersessionStatus": "current"
     }
   ]
 }

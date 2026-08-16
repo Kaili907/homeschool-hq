@@ -50,9 +50,10 @@ import {
   type FinalAssessmentAttemptV1,
 } from './assessment'
 import { toStudentDashboardPresentation } from './dashboardPresentation'
-import { FinalFamilyAutoPlannerHost } from './autoPlannerHost'
+import { FinalFamilyAutoPlannerHost, type FinalLearnerCourseView } from './autoPlannerHost'
 import { applyAutoPlannerPresentation } from './autoPlannerPresentation'
 import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
+import { LearnerCourseView } from './LearnerCourseView'
 import { FamilyOnboarding } from './FamilyOnboarding'
 import { ParentReviewCenter } from './review-center'
 import { FamilyOverview } from './FamilyOverview'
@@ -666,6 +667,9 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   const [model, setModel] = useState<FamilyPilotStudentDashboardModel | null>(null)
   const [planning, setPlanning] = useState<Awaited<ReturnType<FinalFamilyAutoPlannerHost['dashboardFor']>>['plan'] | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [courseView, setCourseView] = useState<FinalLearnerCourseView | null>(null)
+  const [courseBusy, setCourseBusy] = useState(false)
+  const [courseError, setCourseError] = useState<string | null>(null)
 
   useEffect(() => {
     let live = true
@@ -709,9 +713,18 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
     if (command && (command.type === 'START' || command.type === 'CONTINUE')) onOpen(command.assignmentRef)
   }
   const openCourse = (courseRef: string) => {
-    const command = model.courses.find((course) => course.action?.type === 'OPEN_COURSE' && course.action.studentRef === activeStudentRef && course.action.courseRef === courseRef)?.action
-    if (!command) return
-    document.getElementById('family-dashboard-today-heading')?.scrollIntoView({ block: 'start' })
+    const course = model.courses.find((item) => (item.courseRef ?? `unavailable:${item.subject}`) === courseRef)
+    setCourseError(null)
+    if (!course?.courseRef) {
+      setCourseError('Curriculum is unavailable for this working grade. Grade 6 remains intentionally unsupported; ask a parent to review Preferences.')
+      setCourseView(null)
+      return
+    }
+    setCourseBusy(true)
+    void autoPlannerHost.courseViewFor(activeStudentRef, course.courseRef, planning)
+      .then((view) => { setCourseView(view); setCourseError(null) })
+      .catch((cause: unknown) => { setCourseView(null); setCourseError(messageOf(cause)) })
+      .finally(() => setCourseBusy(false))
   }
   const openSchedule = () => document.getElementById('family-dashboard-today-heading')?.scrollIntoView({ block: 'start' })
   const openTool = (toolRef: string) => {
@@ -731,6 +744,28 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
     catalog: controller.catalog.runtime,
     today: model.today.date,
   }) : null
+
+  if (courseBusy || courseView || courseError) {
+    return <LearnerCourseView
+      view={courseView}
+      busy={courseBusy}
+      error={courseError}
+      onBack={() => { setCourseView(null); setCourseError(null); setCourseBusy(false) }}
+      onAction={(view) => {
+        const action = view.action
+        if (!action) return
+        if (action.type === 'OPEN_ASSIGNMENT' && action.assignmentRef) {
+          onOpen(action.assignmentRef)
+          return
+        }
+        setCourseBusy(true)
+        setCourseError(null)
+        void autoPlannerHost.startWorkAhead(activeStudentRef, view.courseRef, action.lessonRef)
+          .then((assignmentRef) => onOpen(assignmentRef))
+          .catch((cause: unknown) => { setCourseError(messageOf(cause)); setCourseBusy(false) })
+      }}
+    />
+  }
 
   return (
     <>

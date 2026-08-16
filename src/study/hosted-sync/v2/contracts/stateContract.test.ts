@@ -307,15 +307,17 @@ function localFixture(): HostedSyncLocalBundleR2 {
       schoolWeekdays: Object.freeze([1, 2, 3, 4, 5] as const),
       nonSchoolDates: Object.freeze(['2026-11-26']),
       addedSchoolDates: Object.freeze([]),
+      allowWorkAhead: true,
       subjects: Object.freeze([Object.freeze({
         subject: 'mathematics' as const, order: 0, paused: false,
+        schoolWeekdays: Object.freeze([1, 3, 5] as const),
         courseRef: 'course:math-5', lessonsPerDay: 1, startLocalTime: '09:00',
       })]),
       configuredAt: '2026-08-01T12:00:00.000Z',
       updatedAt: NOW,
     }),
     materializations: Object.freeze([Object.freeze({
-      materializationRef: 'auto:2026-08-13:mathematics:math-progress',
+      materializationRef: 'work-ahead:mathematics:math-progress',
       kind: 'LESSON' as const,
       localDate: '2026-08-13',
       subject: 'mathematics' as const,
@@ -326,6 +328,7 @@ function localFixture(): HostedSyncLocalBundleR2 {
       assignmentRef: 'assignment:math-progress',
       title: 'Math progress',
       createdAt: '2026-08-13T12:00:00.000Z',
+      provenance: 'LEARNER_WORK_AHEAD' as const,
     })]),
   })
   const learnerResponses = Object.freeze([Object.freeze({

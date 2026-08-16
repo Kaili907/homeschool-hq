@@ -28,6 +28,7 @@ interface SchoolPlanDraft {
   readonly schoolWeekdays: readonly SchoolWeekday[]
   readonly nonSchoolDates: string
   readonly addedSchoolDates: string
+  readonly allowWorkAhead: boolean
   readonly subjects: readonly FamilyAutoPlannerSubjectPlanV1[]
   readonly configuredAt: string
 }
@@ -70,6 +71,7 @@ function draftFor(
       schoolWeekdays: Object.freeze([...stored.schoolWeekdays]),
       nonSchoolDates: stored.nonSchoolDates.join('\n'),
       addedSchoolDates: stored.addedSchoolDates.join('\n'),
+      allowWorkAhead: stored.allowWorkAhead !== false,
       subjects: Object.freeze(student.enabledSubjects.map((subject, index) => bySubject.get(subject) ?? Object.freeze({
         subject,
         order: index,
@@ -89,6 +91,7 @@ function draftFor(
     schoolWeekdays: Object.freeze([1, 2, 3, 4, 5] as SchoolWeekday[]),
     nonSchoolDates: '',
     addedSchoolDates: '',
+    allowWorkAhead: true,
     subjects: Object.freeze(student.enabledSubjects.map((subject, index) => Object.freeze({
       subject,
       order: index,
@@ -157,7 +160,10 @@ export function FamilySchoolPlanPanel({
       if (live) { setError('School Plan storage is unavailable on this device.'); setBusy(false) }
     })
     return () => { live = false }
-  }, [controller, host, student])
+  // Controller refreshes replace snapshot objects even when this learner did
+  // not change. Key the load to identity so a successful save can announce
+  // itself instead of immediately remounting the editor.
+  }, [controller, host, student.studentRef])
 
   const courseOptions = useMemo(() => new Map(student.enabledSubjects.map((subject) => [
     subject,
@@ -189,6 +195,7 @@ export function FamilySchoolPlanPanel({
       schoolWeekdays: Object.freeze([...draft.schoolWeekdays].sort()),
       nonSchoolDates: dates(draft.nonSchoolDates),
       addedSchoolDates: dates(draft.addedSchoolDates),
+      allowWorkAhead: draft.allowWorkAhead,
       subjects: ordered(draft.subjects).map((item) => Object.freeze({ ...item, courseRef: item.courseRef?.trim() || undefined })),
       configuredAt: draft.configuredAt,
       updatedAt: now,
@@ -240,8 +247,16 @@ export function FamilySchoolPlanPanel({
       </section>
 
       <section className="rounded-2xl border bg-white p-5">
+        <h4 className="text-lg font-extrabold">Learner flexibility</h4>
+        <label className="mt-3 flex min-h-11 items-start gap-3 rounded-xl border p-4 font-bold">
+          <input type="checkbox" className="mt-1" checked={draft.allowWorkAhead} onChange={(event) => patch({ allowWorkAhead: event.target.checked })} />
+          <span>Allow work ahead<span className="mt-1 block text-sm font-normal text-slate-600">When enabled, this learner can start the next eligible lesson even when it is not scheduled for today. Work completed early counts toward course progress and will not be assigned again later.</span></span>
+        </label>
+      </section>
+
+      <section className="rounded-2xl border bg-white p-5">
         <h4 className="text-lg font-extrabold">Subjects, order, cadence, and pauses</h4>
-        <p className="mt-1 text-sm text-slate-600">Every enabled subject is shown. Daily lesson cap is per subject because that is the accepted planner’s durable authority.</p>
+        <p className="mt-1 text-sm text-slate-600">Every enabled subject is shown. Choose which household school weekdays require each subject. Daily lesson cap applies only to required work; it never limits optional work ahead.</p>
         <ol className="mt-4 space-y-4">{ordered(draft.subjects).map((subject, index) => {
           const courses = courseOptions.get(subject.subject) ?? []
           const workingGrade = student.workingGradeBySubject[subject.subject] ?? student.nominalGrade
@@ -260,6 +275,13 @@ export function FamilySchoolPlanPanel({
               <label className="font-bold">Daily lesson cap<select aria-label={`${subject.subject} daily lesson cap`} className="mt-1 w-full rounded-lg border px-3 py-2" value={subject.lessonsPerDay} onChange={(event) => setDraft(replaceSubject(draft, subject.subject, { lessonsPerDay: Number(event.target.value) }))}>{[1, 2, 3, 4, 5].map((value) => <option key={value} value={value}>{value}</option>)}</select></label>
               <label className="font-bold">Local start time<input aria-label={`${subject.subject} local start time`} type="time" className="mt-1 w-full rounded-lg border px-3 py-2" value={subject.startLocalTime} onChange={(event) => setDraft(replaceSubject(draft, subject.subject, { startLocalTime: event.target.value }))} /></label>
             </div>
+            <fieldset className="mt-3">
+              <legend className="font-bold">Required weekdays</legend>
+              <div className="mt-2 flex flex-wrap gap-2">{WEEKDAYS.filter((day) => draft.schoolWeekdays.includes(day.value)).map((day) => {
+                const selected = subject.schoolWeekdays ?? draft.schoolWeekdays
+                return <label key={day.value} className="flex min-h-11 items-center gap-2 rounded-lg border px-3 py-2"><input type="checkbox" checked={selected.includes(day.value)} onChange={(event) => setDraft(replaceSubject(draft, subject.subject, { schoolWeekdays: event.target.checked ? Object.freeze([...selected, day.value].sort()) as readonly SchoolWeekday[] : Object.freeze(selected.filter((item) => item !== day.value)) }))} />{day.label}</label>
+              })}</div>
+            </fieldset>
             <label className="mt-3 flex items-center gap-2 font-bold"><input type="checkbox" checked={subject.paused} onChange={(event) => setDraft(replaceSubject(draft, subject.subject, { paused: event.target.checked }))} />Pause this subject (unfinished work is preserved; no new lesson is assigned)</label>
             {workingGrade === '6' || courses.length === 0 ? <p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-3 font-semibold">Grade 6 is intentionally unsupported. Set an explicit supported working grade in Preferences; no Grade 5 or Grade 7 course will be substituted.</p> : null}
           </li>

@@ -1,5 +1,6 @@
 import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject } from '../../../types'
-import { schoolDayReason, schoolLocalDate, isIsoDate, assertTimeZone } from './clock'
+import { schoolDayReason, schoolLocalDate, isIsoDate, assertTimeZone, weekdayOf } from './clock'
+import { resolveFamilyCourseNextEligible } from './nextEligible'
 import {
   FAMILY_AUTO_PLANNER_SCHEMA_VERSION,
   type FamilyAutoPlannerAssessmentFact,
@@ -63,18 +64,40 @@ export function validateFamilyAutoPlannerSchoolPlan(plan: FamilyAutoPlannerSchoo
       if (new Set(dates).size !== dates.length || dates.some((date) => !isIsoDate(date))) return false
     }
     if (plan.nonSchoolDates.some((date) => plan.addedSchoolDates.includes(date))) return false
+    if (plan.allowWorkAhead !== undefined && typeof plan.allowWorkAhead !== 'boolean') return false
     if (!plan.subjects.length || new Set(plan.subjects.map((entry) => entry.subject)).size !== plan.subjects.length) return false
     if (new Set(plan.subjects.map((entry) => entry.order)).size !== plan.subjects.length) return false
     return plan.subjects.every((entry) =>
       ACADEMY_SUBJECTS.includes(entry.subject) &&
       Number.isSafeInteger(entry.order) && entry.order >= 0 &&
       typeof entry.paused === 'boolean' &&
+      (entry.schoolWeekdays === undefined || (
+        entry.schoolWeekdays.length > 0 &&
+        new Set(entry.schoolWeekdays).size === entry.schoolWeekdays.length &&
+        entry.schoolWeekdays.every((day) => Number.isInteger(day) && day >= 1 && day <= 7)
+      )) &&
       Number.isSafeInteger(entry.lessonsPerDay) && entry.lessonsPerDay >= 1 && entry.lessonsPerDay <= 5 &&
       TIME.test(entry.startLocalTime) &&
       (entry.courseRef === undefined || entry.courseRef.length > 0))
   } catch {
     return false
   }
+}
+
+export function familyAutoPlannerAllowsWorkAhead(plan: FamilyAutoPlannerSchoolPlanV1): boolean {
+  return plan.allowWorkAhead !== false
+}
+
+export function familyAutoPlannerSubjectScheduled(
+  plan: FamilyAutoPlannerSchoolPlanV1,
+  subject: AcademySubject,
+  localDate: string,
+): boolean {
+  const subjectPlan = plan.subjects.find((entry) => entry.subject === subject)
+  if (!subjectPlan) return false
+  if (plan.addedSchoolDates.includes(localDate)) return true
+  const weekdays = subjectPlan.schoolWeekdays ?? plan.schoolWeekdays
+  return weekdays.includes(weekdayOf(localDate))
 }
 
 function localDateOf(instant: string | null, timeZone: string): string | null {
@@ -217,6 +240,15 @@ function materializationRef(intent: FamilyAutoPlannerMaterializationIntent): str
   return `auto:${intent.localDate}:${intent.subject}:${(hash >>> 0).toString(36)}`
 }
 
+export function learnerWorkAheadMaterializationRef(subject: AcademySubject, itemRef: string): string {
+  let hash = 0x811c9dc5
+  for (const character of itemRef) {
+    hash ^= character.charCodeAt(0)
+    hash = Math.imul(hash, 0x01000193)
+  }
+  return `work-ahead:${subject}:${(hash >>> 0).toString(36)}`
+}
+
 /** Exported for the coordinator and tests. It is stable and contains no random component. */
 export function autoPlannerMaterializationRef(intent: FamilyAutoPlannerMaterializationIntent): string {
   return materializationRef(intent)
@@ -276,6 +308,8 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
     const right = planBySubject.get(b)!
     return left.order - right.order || a.localeCompare(b)
   })
+  const scheduledSubjects = new Set(orderedSubjects.filter((subject) =>
+    familyAutoPlannerSubjectScheduled(configured, subject, localDate)))
 
   // Existing unfinished work is projected before any catalog read is needed.
   const openAssignments = input.assignments
@@ -284,6 +318,13 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
   for (const assignment of openAssignments) {
     const subjectPlan = planBySubject.get(assignment.subject)
     const materialized = materials.get(assignment.assignmentRef)
+    const isWorkAhead = materialized?.provenance === 'LEARNER_WORK_AHEAD'
+    // Learner-started work stays optional for the date on which it was chosen.
+    // A later scheduled day adopts the same assignment without replacing its
+    // identity or Study state.
+    if (isWorkAhead && (
+      !scheduledSubjects.has(assignment.subject) || materialized.localDate >= localDate
+    )) continue
     const isManual = !materialized
     manualOverrideActive ||= isManual
     subjectsWithOpenWork.add(assignment.subject)
@@ -296,7 +337,7 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
       : 'The parent paused this subject; unfinished work was preserved.'))
     items.push(Object.freeze({
       kind: 'LESSON',
-      origin: isManual ? 'MANUAL_OVERRIDE' : 'AUTO',
+      origin: isManual ? 'MANUAL_OVERRIDE' : isWorkAhead ? 'LEARNER_WORK_AHEAD' : 'AUTO',
       learnerRef: learner.learnerRef,
       assignmentRef: assignment.assignmentRef,
       itemRef: assignment.lessonRef,
@@ -362,6 +403,7 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
       continue
     }
     if (subjectsWithOpenWork.has(subject)) continue
+    if (!scheduledSubjects.has(subject)) continue
     if (subjectPlan.paused) {
       blockers.push(blocker('SUBJECT_PAUSED', subject, 'The parent paused this subject. No new work was assigned.'))
       continue
@@ -372,7 +414,7 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
       entry.learnerRef === learner.learnerRef && entry.subject === subject && entry.state === 'completed' && !entry.optional &&
       !materials.has(entry.assignmentRef) && localDateOf(entry.completedAt, configured.householdTimeZone) === localDate).length
     const autoCompletedToday = input.document.materializations.filter((entry) => {
-      if (entry.kind !== 'LESSON' || entry.subject !== subject) return false
+      if (entry.kind !== 'LESSON' || entry.subject !== subject || entry.provenance === 'LEARNER_WORK_AHEAD') return false
       const fact = assignmentByRef.get(entry.assignmentRef)
       return fact?.state === 'completed' && localDateOf(fact.completedAt, configured.householdTimeZone) === localDate
     }).length
@@ -408,70 +450,44 @@ export function computeFamilyAutoPlanner(input: ComputeFamilyAutoPlannerInput): 
     const lessons = [...selected.bundle.lessons].sort((a, b) => a.courseDay - b.courseDay || a.lessonRef.localeCompare(b.lessonRef))
     let selectedIntent: FamilyAutoPlannerMaterializationIntent | null = null
     let subjectWaiting = false
-
-    for (const unit of [...units].sort((a, b) => a.unitNumber - b.unitNumber || a.unitRef.localeCompare(b.unitRef))) {
-      const unitLessons = lessons.filter((lesson) => lesson.unitRef === unit.unitRef)
-      let unitComplete = true
-      for (const lesson of unitLessons) {
-        const facts = input.assignments.filter((entry) => entry.learnerRef === learner.learnerRef && entry.lessonRef === lesson.lessonRef)
-        const completed = facts.some((entry) => entry.state === 'completed')
-        const explicitManualSkip = facts.some((entry) => entry.state === 'abandoned' && !materials.has(entry.assignmentRef))
-        const abandonedAuto = facts.find((entry) => entry.state === 'abandoned' && materials.has(entry.assignmentRef))
-        if (abandonedAuto) {
-          blockers.push(blocker('AUTO_ASSIGNMENT_ABANDONED', subject, `Automatic assignment ${abandonedAuto.assignmentRef} was abandoned and requires parent resolution.`))
-          subjectWaiting = true
-          unitComplete = false
-          break
-        }
-        if (completed || explicitManualSkip) continue
-        unitComplete = false
+    const abandonedAuto = input.assignments.find((entry) =>
+      entry.learnerRef === learner.learnerRef && entry.subject === subject &&
+      entry.state === 'abandoned' && materials.has(entry.assignmentRef))
+    if (abandonedAuto) {
+      blockers.push(blocker('AUTO_ASSIGNMENT_ABANDONED', subject, `Automatic assignment ${abandonedAuto.assignmentRef} was abandoned and requires parent resolution.`))
+      subjectWaiting = true
+    } else {
+      const next = resolveFamilyCourseNextEligible({
+        learnerRef: learner.learnerRef,
+        bundle: selected.bundle,
+        assignments: input.assignments,
+        assessments: input.assessments,
+        holds: input.holds,
+      })
+      if (next.status === 'LESSON') {
         selectedIntent = Object.freeze({
           kind: 'LESSON', localDate, subject, workingGrade: grade,
-          courseRef: course.courseRef, unitRef: unit.unitRef, lesson,
+          courseRef: course.courseRef, unitRef: next.unitRef, lesson: next.lesson,
         })
-        break
-      }
-      if (selectedIntent || subjectWaiting) break
-      if (!unitComplete) break
-      if (unit.assessmentRef) {
-        const assessment = input.assessments.find((entry) =>
-          entry.learnerRef === learner.learnerRef && entry.assessmentRef === unit.assessmentRef)
-        if (!assessment) {
+      } else if (next.gate === 'ASSESSMENT_REQUIRED') {
+        const unit = units.find((item) => item.assessmentRef && `${item.title} assessment` === next.title)
+        if (unit?.assessmentRef) {
           selectedIntent = Object.freeze({
             kind: 'ASSESSMENT', localDate, subject, workingGrade: grade,
             courseRef: course.courseRef, unitRef: unit.unitRef,
-            assessmentRef: unit.assessmentRef,
-            title: `${unit.title} assessment`,
+            assessmentRef: unit.assessmentRef, title: next.title,
           })
-          break
         }
-        if (assessment.status === 'CERTIFIED') continue
-        const materialized = materials.get(assessment.assignmentRef)
-        const waiting = !['PLANNED', 'ACTIVE'].includes(assessment.status)
-        const reason = waiting ? assessmentReason(assessment.status) : null
-        if (reason) blockers.push(blocker(reason, subject, 'The next lesson waits for the existing assessment authority to finish.'))
-        if (!materialized) manualOverrideActive = true
-        items.push(Object.freeze({
-          kind: 'ASSESSMENT',
-          origin: materialized ? 'AUTO' : 'MANUAL_OVERRIDE',
-          learnerRef: learner.learnerRef,
-          assignmentRef: assessment.assignmentRef,
-          itemRef: assessment.assessmentRef,
-          lessonRef: null,
-          assessmentRef: assessment.assessmentRef,
-          courseRef: assessment.courseRef,
-          unitRef: unit.unitRef,
-          subject,
-          workingGrade: grade,
-          title: assessment.title,
-          state: waiting ? 'WAITING' : assessment.status === 'ACTIVE' ? 'IN_PROGRESS' : 'NOT_STARTED',
-          scheduledLocalTime: subjectPlan.startLocalTime,
-          materializedForDate: materialized?.localDate ?? null,
-          carriedForwardFromDate: materialized && materialized.localDate < localDate ? materialized.localDate : null,
-          blockedReason: reason,
-        }))
+      } else if (next.gate !== 'COURSE_COMPLETE') {
+        const reason: FamilyAutoPlannerReason = next.gate === 'SAFETY_HOLD'
+          ? 'SAFETY_HOLD'
+          : next.gate === 'PARENT_REVIEW'
+            ? 'ASSESSMENT_REVIEW_REQUIRED'
+            : next.gate === 'GUARDIAN_CERTIFICATION'
+              ? 'ASSESSMENT_GUARDIAN_REQUIRED'
+              : 'ASSESSMENT_PENDING'
+        blockers.push(blocker(reason, subject, 'The next lesson waits for the existing course authority to finish.'))
         subjectWaiting = true
-        break
       }
     }
     if (selectedIntent) {

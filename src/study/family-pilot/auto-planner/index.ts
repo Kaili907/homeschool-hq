@@ -28,6 +28,9 @@ export {
   autoPlannerMaterializationRef,
   computeFamilyAutoPlanner,
   emptyFamilyAutoPlannerDocument,
+  familyAutoPlannerAllowsWorkAhead,
+  familyAutoPlannerSubjectScheduled,
+  learnerWorkAheadMaterializationRef,
   validateFamilyAutoPlannerSchoolPlan,
   type ComputeFamilyAutoPlannerInput,
 } from './plan'
@@ -46,4 +49,10 @@ export {
   type FamilyAutoPlannerStudyPort,
   type FamilyAutoPlannerStudyTarget,
 } from './studyPort'
+export {
+  resolveFamilyCourseNextEligible,
+  type FamilyCourseGate,
+  type FamilyCourseNextEligible,
+  type ResolveFamilyCourseNextEligibleInput,
+} from './nextEligible'
 export * from './types'

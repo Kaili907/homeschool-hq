@@ -67,7 +67,8 @@ function parseMaterialization(value: unknown): FamilyAutoPlannerMaterializationV
     !ACADEMY_GRADES.includes(value.workingGrade as AcademyGrade) ||
     !isRef(value.courseRef) || !isRef(value.unitRef) || !isRef(value.itemRef) ||
     !isRef(value.assignmentRef) || typeof value.title !== 'string' || !value.title.trim() || value.title.length > 200 ||
-    !isInstant(value.createdAt)
+    !isInstant(value.createdAt) ||
+    !(value.provenance === undefined || ['AUTO_PLANNER', 'LEARNER_WORK_AHEAD'].includes(value.provenance as string))
   ) return null
   return Object.freeze(value as unknown as FamilyAutoPlannerMaterializationV1)
 }

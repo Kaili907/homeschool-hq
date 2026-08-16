@@ -96,11 +96,18 @@ async function seedFamily(studentRefs = ['student:a', 'student:b'], householdRef
         schoolWeekdays: Object.freeze([1, 2, 3, 4, 5] as const),
         nonSchoolDates: Object.freeze([]),
         addedSchoolDates: Object.freeze([]),
-        subjects: Object.freeze([{ subject: 'mathematics' as const, order: 0, paused: false, lessonsPerDay: 1, startLocalTime: '09:00' }]),
+        allowWorkAhead: true,
+        subjects: Object.freeze([{ subject: 'mathematics' as const, order: 0, paused: false, schoolWeekdays: [1, 3, 5] as const, lessonsPerDay: 1, startLocalTime: '09:00' }]),
         configuredAt: CREATED,
         updatedAt: LATER,
       }),
-      materializations: Object.freeze([]),
+      materializations: Object.freeze([{
+        materializationRef: 'work-ahead:mathematics:fixture', kind: 'LESSON' as const,
+        localDate: '2026-08-14', subject: 'mathematics' as const, workingGrade: '5' as const,
+        courseRef: 'ma-g5-mathematics', unitRef: 'ma-g5-mathematics-u01', itemRef: 'lesson:1',
+        assignmentRef: 'assignment:1', title: 'Lesson 1', createdAt: LATER,
+        provenance: 'LEARNER_WORK_AHEAD' as const,
+      }]),
     }),
   })
   const records = await openIndexedDbRecordStore({ factory: indexedDb.factory, storageManager: indexedDb.storageManager })
@@ -120,6 +127,10 @@ describe('final Family Pilot backup and recovery R1', () => {
       coreStore: { storage: source.storage }, appStore: { storage: source.storage }, indexedDb: dbOptions(source.indexedDb), now: () => LATER,
     })
     expect(backup.recordCounts).toMatchObject({ learners: 2, assignments: 2, schoolPlans: 1 })
+    expect(backup.plannerDocuments[0]?.record?.document).toMatchObject({
+      schoolPlan: { allowWorkAhead: true, subjects: [{ schoolWeekdays: [1, 3, 5] }] },
+      materializations: [{ provenance: 'LEARNER_WORK_AHEAD' }],
+    })
     expect((await validateFinalFamilyPilotBackup(backup)).status).toBe('valid')
 
     const storage = new MemoryStorage()

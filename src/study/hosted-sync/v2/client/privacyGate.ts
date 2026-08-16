@@ -44,8 +44,8 @@ const ALLOWED_KEYS = new Set<string>([
   'adultAnswerAuthorityIncluded','answerMaterialIncluded','pausedAt','resumedAt','pausedSeconds','resumeSegmentRef',
   'instructionalInputIncluded','input','choiceRef','text','attemptRef','sectionRef','itemRef','assessmentState','savedAt',
   'trustedReceipt','schoolPlan','materializations','nonSchoolDates','addedSchoolDates','schoolYearStart','schoolYearEnd',
-  'schoolWeekdays','subjects','configuredAt','order','paused','courseRef','lessonsPerDay','startLocalTime',
-  'materializationRef','localDate','workingGrade','unitRef',
+  'schoolWeekdays','subjects','configuredAt','allowWorkAhead','order','paused','courseRef','lessonsPerDay','startLocalTime',
+  'materializationRef','localDate','workingGrade','unitRef','provenance',
   'totalSegments','lastSegmentRef','activeSeconds','activeSecondsByDate','date','progress','pause',
   'instructionalSession','activeSince','inactiveAt','endedAt',
   // Exact legacy R2 RPC import/write vocabulary. These fields remain only so

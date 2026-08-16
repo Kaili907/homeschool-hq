@@ -49,6 +49,14 @@ describe('StudentDashboard presentation', () => {
     expect(markup).not.toMatch(/<div[^>]+onclick=/i)
   })
 
+  it('keeps an unavailable working-grade course card actionable instead of rendering dead UI', () => {
+    const fixture = studentDashboardFixture('no-work')
+    const model = { ...fixture, courses: fixture.courses.map((course) => ({ ...course, actionable: false })) }
+    const markup = renderToStaticMarkup(<StudentDashboard model={model} {...callbacks} />)
+    expect(markup).toContain('<button type="button" aria-label="Open')
+    expect(markup).not.toContain('family-dashboard__course-card--unavailable')
+  })
+
   it('does not synthesize empty-state explanations when none are provided', () => {
     const fixture = studentDashboardFixture('no-work')
     const model = { ...fixture, mission: { ...fixture.mission, description: undefined }, todayEmptyLabel: undefined }

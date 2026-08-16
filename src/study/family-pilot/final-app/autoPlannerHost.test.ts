@@ -93,7 +93,10 @@ function harness() {
     },
     appSnapshot: {
       status: 'ready', safetyRecovery: 'available', reasonCode: null,
-      state: { householdRef: 'household:test', setup: { students: learners, completedAt: FRIDAY.toISOString() }, safety: { schemaVersion: 1, holds: [] } },
+      state: {
+        householdRef: 'household:test', setup: { students: learners, completedAt: FRIDAY.toISOString() },
+        safety: { schemaVersion: 1, holds: [] }, attestations: [], assessmentAssignments: [],
+      },
     },
     get coreSnapshot() { return { status: 'ready', reasonCode: null, state: state() } },
     coursesFor: (learner: FamilySetupStudent, subject?: AcademySubject) => {
@@ -195,5 +198,84 @@ describe('FinalFamilyAutoPlannerHost convergence', () => {
     expect(left.schedule[0]?.assignmentRef).toBe(right.schedule[0]?.assignmentRef)
     expect(h.assignments.get('student:elementary')).toHaveLength(1)
     expect(h.store.documents.get(h.store.key(h.host.scope('student:elementary')))?.materializations).toHaveLength(1)
+  })
+
+  it('materializes optional work only on the learner action and adopts the same unfinished assignment later', async () => {
+    const h = harness()
+    const mondayOnly = plan(h.grade5.course.courseRef, {
+      allowWorkAhead: true,
+      subjects: [{
+        subject: 'mathematics', order: 0, paused: false,
+        schoolWeekdays: [1], courseRef: h.grade5.course.courseRef,
+        lessonsPerDay: 1, startLocalTime: '09:00',
+      }],
+    })
+    await h.host.configure(h.host.scope('student:elementary'), mondayOnly)
+    const friday = await h.host.dashboardFor('student:elementary', FRIDAY)
+    expect(friday).toMatchObject({ plan: { status: 'COMPLETE_FOR_TODAY' }, schedule: [] })
+    expect(h.creates()).toBe(0)
+
+    const course = await h.host.courseViewFor('student:elementary', h.grade5.course.courseRef, friday.plan)
+    expect(course).toMatchObject({
+      todayStatus: 'NOT_REQUIRED_TODAY', workAheadAllowed: true,
+      next: { lessonRef: h.grade5.lessons[0].lessonRef, assignmentRef: null },
+      action: { type: 'START_WORK_AHEAD' },
+    })
+    expect(h.creates()).toBe(0)
+
+    const assignmentRef = await h.host.startWorkAhead('student:elementary', h.grade5.course.courseRef, h.grade5.lessons[0].lessonRef)
+    expect(h.creates()).toBe(1)
+    expect(h.store.documents.get(h.store.key(h.host.scope('student:elementary')))?.materializations[0]).toMatchObject({
+      assignmentRef, provenance: 'LEARNER_WORK_AHEAD', localDate: '2026-08-14',
+    })
+    const stillOptional = await h.host.dashboardFor('student:elementary', FRIDAY)
+    expect(stillOptional).toMatchObject({ plan: { status: 'COMPLETE_FOR_TODAY' }, schedule: [] })
+
+    const monday = await h.host.dashboardFor('student:elementary', new Date('2026-08-17T13:00:00.000Z'))
+    expect(monday.plan.items).toHaveLength(1)
+    expect(monday.plan.items[0]).toMatchObject({
+      assignmentRef, origin: 'LEARNER_WORK_AHEAD', carriedForwardFromDate: '2026-08-14',
+    })
+    expect(monday.schedule[0]?.assignmentRef).toBe(assignmentRef)
+    expect(h.creates()).toBe(1)
+  })
+
+  it('skips early completion on the next planned day and honors the Parent disable policy', async () => {
+    const h = harness()
+    const mondayOnly = plan(h.grade5.course.courseRef, {
+      allowWorkAhead: true,
+      subjects: [{
+        subject: 'mathematics', order: 0, paused: false, schoolWeekdays: [1],
+        courseRef: h.grade5.course.courseRef, lessonsPerDay: 1, startLocalTime: '09:00',
+      }],
+    })
+    await h.host.configure(h.host.scope('student:elementary'), mondayOnly)
+    const friday = await h.host.dashboardFor('student:elementary', FRIDAY)
+    const firstRef = await h.host.startWorkAhead('student:elementary', h.grade5.course.courseRef, h.grade5.lessons[0].lessonRef)
+    const first = h.assignments.get('student:elementary')![0]!
+    h.assignments.set('student:elementary', [Object.freeze({
+      ...first, state: 'completed', completedAt: FRIDAY.toISOString(), updatedAt: FRIDAY.toISOString(),
+    })])
+    const optionalComplete = await h.host.dashboardFor('student:elementary', FRIDAY)
+    expect(optionalComplete.schedule).toEqual([])
+    const monday = await h.host.dashboardFor('student:elementary', new Date('2026-08-17T13:00:00.000Z'))
+    expect(monday.plan.items[0]).toMatchObject({ lessonRef: h.grade5.lessons[1].lessonRef })
+    expect(monday.plan.items[0]?.assignmentRef).not.toBe(firstRef)
+
+    const disabled = plan(h.grade5.course.courseRef, {
+      allowWorkAhead: false,
+      subjects: [{
+        subject: 'mathematics', order: 0, paused: false, schoolWeekdays: [1],
+        courseRef: h.grade5.course.courseRef, lessonsPerDay: 1, startLocalTime: '09:00',
+      }],
+    })
+    const other = h.host.scope('student:high')
+    await h.host.configure(other, disabled)
+    const highFriday = await h.host.dashboardFor('student:high', FRIDAY)
+    const course = await h.host.courseViewFor('student:high', h.grade5.course.courseRef, highFriday.plan)
+    expect(course).toMatchObject({ workAheadAllowed: false, action: null })
+    expect(course.gate?.message).toContain('according to your School Plan')
+    await expect(h.host.startWorkAhead('student:high', h.grade5.course.courseRef, h.grade5.lessons[0].lessonRef))
+      .rejects.toThrow('not enabled')
   })
 })

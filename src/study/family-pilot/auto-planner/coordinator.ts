@@ -74,6 +74,7 @@ function materialization(
     assignmentRef,
     title: intent.kind === 'LESSON' ? intent.lesson.title : intent.title,
     createdAt,
+    provenance: 'AUTO_PLANNER',
   })
 }
 

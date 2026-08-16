@@ -149,6 +149,7 @@
 .family-dashboard__course-card { display: flex; width: 100%; min-height: 166px; flex-direction: column; border: 1px solid var(--family-dashboard-border); border-radius: 15px; padding: 17px; color: var(--family-dashboard-text); background: linear-gradient(145deg, rgba(26, 39, 58, 0.85), rgba(15, 23, 35, 0.9)); text-align: left; }
 .family-dashboard__course-card--unavailable { opacity: 0.76; }
 .family-dashboard__course-grid button:hover { border-color: rgba(255, 185, 104, 0.42); transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18); }
+.family-dashboard__course-grid button:focus-visible { outline: 4px solid #67e8f9; outline-offset: 3px; }
 .family-dashboard__course-topline { display: flex; justify-content: space-between; gap: 8px; color: var(--family-dashboard-muted); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
 .family-dashboard__course-topline span:last-child { color: #efc58d; }
 .family-dashboard__course-grid strong { margin: 15px 0 2px; font-size: 1rem; line-height: 1.22; }

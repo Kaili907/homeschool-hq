@@ -46,6 +46,9 @@ export interface FamilyAutoPlannerSubjectPlanV1 {
   readonly subject: AcademySubject
   readonly order: number
   readonly paused: boolean
+  /** Optional subject cadence. Missing preserves the original behavior: the
+   * subject follows every household school weekday. */
+  readonly schoolWeekdays?: readonly SchoolWeekday[]
   /** Optional parent-selected course. When absent, an existing course assignment
    * is preferred; otherwise the catalog must have exactly one matching course. */
   readonly courseRef?: string
@@ -64,6 +67,8 @@ export interface FamilyAutoPlannerSchoolPlanV1 {
   readonly schoolWeekdays: readonly SchoolWeekday[]
   readonly nonSchoolDates: readonly string[]
   readonly addedSchoolDates: readonly string[]
+  /** Missing is intentionally ON for existing Family Pilot households. */
+  readonly allowWorkAhead?: boolean
   readonly subjects: readonly FamilyAutoPlannerSubjectPlanV1[]
   readonly configuredAt: string
   readonly updatedAt: string
@@ -139,6 +144,8 @@ export interface FamilyAutoPlannerMaterializationV1 {
   readonly assignmentRef: string
   readonly title: string
   readonly createdAt: string
+  /** Missing means the original AUTO_PLANNER provenance. */
+  readonly provenance?: 'AUTO_PLANNER' | 'LEARNER_WORK_AHEAD'
 }
 
 export interface FamilyAutoPlannerDocumentV1 {
@@ -192,7 +199,7 @@ export interface FamilyAutoPlannerCourseCompletion {
 }
 
 export type FamilyAutoPlannerItemKind = 'LESSON' | 'ASSESSMENT'
-export type FamilyAutoPlannerItemOrigin = 'AUTO' | 'MANUAL_OVERRIDE'
+export type FamilyAutoPlannerItemOrigin = 'AUTO' | 'MANUAL_OVERRIDE' | 'LEARNER_WORK_AHEAD'
 export type FamilyAutoPlannerItemState =
   | 'NOT_STARTED'
   | 'IN_PROGRESS'

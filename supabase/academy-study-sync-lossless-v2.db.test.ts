@@ -26,6 +26,11 @@ const files = [
   './migrations/20260814110000_academy_family_cross_device_data_r1.sql',
   './migrations/20260814120000_academy_family_response_checkpoint_r1.sql',
   './migrations/20260815120000_academy_family_plan_checkpoint_r1.sql',
+  './migrations/20260815180000_academy_family_session_safety_clear_shape_r1.sql',
+  './migrations/20260815190000_academy_family_cloud_household_bootstrap_r1.sql',
+  './migrations/20260816030000_academy_family_cloud_timezone_bootstrap_r1.sql',
+  './migrations/20260816103000_academy_family_cloud_first_link_mapping_response_r1.sql',
+  './migrations/20260816120000_academy_flexible_schedule_work_ahead_r1.sql',
 ] as const
 
 const sources = Promise.all(files.map((filename) =>
@@ -459,10 +464,12 @@ function familyPlanCheckpoint(
         schoolWeekdays: [1, 2, 3, 4, 5],
         nonSchoolDates: ['2026-09-07'],
         addedSchoolDates: ['2026-08-15'],
+        allowWorkAhead: true,
         subjects: [{
           subject: 'mathematics',
           order: 0,
           paused: false,
+          schoolWeekdays: [1, 3, 5],
           courseRef: 'ma-g5-mathematics',
           lessonsPerDay: 1,
           startLocalTime: '09:00',
@@ -471,7 +478,7 @@ function familyPlanCheckpoint(
         updatedAt: `2026-08-01T15:${String(revision).padStart(2, '0')}:00.000Z`,
       },
       materializations: [{
-        materializationRef: 'auto:2026-08-01:mathematics:1abc',
+        materializationRef: 'work-ahead:mathematics:1abc',
         kind: 'LESSON',
         localDate: '2026-08-01',
         subject: 'mathematics',
@@ -482,6 +489,7 @@ function familyPlanCheckpoint(
         assignmentRef: localScope.assignmentRef,
         title: 'Math lesson',
         createdAt: '2026-08-01T13:30:00.000Z',
+        provenance: 'LEARNER_WORK_AHEAD',
       }],
     },
   }

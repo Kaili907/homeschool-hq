@@ -73,11 +73,9 @@ function CourseCard({ course, onOpenCourse }: { readonly course: StudentDashboar
   )
   return (
     <li data-dashboard-course-ref={course.courseRef}>
-      {course.actionable === false ? <div className="family-dashboard__course-card family-dashboard__course-card--unavailable">{contents}</div> : (
-        <button type="button" onClick={() => onOpenCourse(course.courseRef)} aria-label={`Open ${course.title}, ${course.context}, ${percent === null ? progressLabel : `${percent}% complete`}`}>
-          {contents}
-        </button>
-      )}
+      <button type="button" onClick={() => onOpenCourse(course.courseRef)} aria-label={`Open ${course.title}, ${course.context}, ${percent === null ? progressLabel : `${percent}% complete`}`}>
+        {contents}
+      </button>
     </li>
   )
 }
