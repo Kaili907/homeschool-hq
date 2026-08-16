@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "manuel-academy.rich-study-lesson.v1",
+  "sampleStatus": "DIRECTOR_REVIEW_ONLY",
+  "grade": 12,
+  "courseRef": "ma-g12-social-studies",
+  "unitRef": "ma-g12-social-studies-u03",
+  "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-12/ma-g12-social-studies/ma-g12-social-studies-u03-l03.md",
+  "standards": ["P1", "P2", "Civics C6.4.3"],
+  "sourceIntegrity": {
+    "policy": "Both dossiers are openly labeled simulations. No simulated name, quotation, crowd count, or event is represented as historical fact; the exercise assesses corroboration method.",
+    "sources": ["Manuel Academy simulated archive dossier", "National Archives guidance on provenance and archival context"]
+  },
+  "lessonRef": "ma-g12-social-studies-u03-l03",
+  "title": "Guided practice A: corroboration and triangulation",
+  "subject": "social-studies",
+  "format": "structured",
+  "essentialQuestion": "How do you establish that a source is what it claims to be?",
+  "successCriteria": [
+    "I can test provenance before using content as evidence.",
+    "I can compare independent and dependent sources.",
+    "I can revise a claim when corroboration narrows certainty."
+  ],
+  "vocabulary": [
+    { "term": "provenance", "definition": "the documented origin and custody history of a source" },
+    { "term": "corroboration", "definition": "comparison with other evidence to test a claim" },
+    { "term": "source dependence", "definition": "a relationship in which one source repeats or relies on another rather than providing independent evidence" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "ma-g12-social-studies-u03-l03:question",
+      "sectionKind": "teaching",
+      "title": "Question and context",
+      "body": "Three sources that repeat the same statement are not necessarily three independent confirmations. They may share one origin, copy one another, or use different methods.\nTriangulation compares provenance, independence, method, agreement, contradiction, and silence before revising a claim."
+    },
+    {
+      "sectionRef": "ma-g12-social-studies-u03-l03:background",
+      "sectionKind": "reference",
+      "title": "Build background — the six-check protocol",
+      "reference": {
+        "one_identity": "Verify creator, date, format, and what the item claims to be.",
+        "two_provenance": "Trace custody, catalog history, transformations, and missing links.",
+        "three_independence": "Determine whether sources observed separately or copied a common account.",
+        "four_method": "Compare how each source produced its information.",
+        "five_convergence": "Record precise agreement, disagreement, and silence.",
+        "six_revision": "State the strongest claim the combined record warrants and preserve uncertainty."
+      }
+    },
+    {
+      "sectionRef": "ma-g12-social-studies-u03-l03:model-source",
+      "sectionKind": "source",
+      "title": "EXAMPLE dossier — North Pier strike simulation",
+      "body": "Every item in this dossier is fictional and created to teach method.",
+      "source": {
+        "item_np1": "A union meeting ledger dated May 4 lists 82 members voting to authorize a strike; the archive catalog records donation by the union in 1984.",
+        "item_np2": "A May 6 newspaper report says more than 70 workers left the pier; the reporter's notes do not survive.",
+        "item_np3": "A 2003 website states that exactly 82 workers struck and cites only the newspaper report.",
+        "claim_to_test": "Exactly 82 workers participated in the strike."
+      }
+    },
+    {
+      "sectionRef": "ma-g12-social-studies-u03-l03:model",
+      "sectionKind": "worked-example",
+      "title": "EXAMPLE — model triangulation audit",
+      "directions": "This worked example is complete and uses a different fictional event from your task.",
+      "items": [
+        {
+          "itemRef": "ma-g12-social-studies-u03-l03:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Does the dossier establish exactly 82 participants?",
+          "workedSolution": {
+            "steps": [
+              "Verify identity: NP1 is a vote ledger, not an attendance list for the later strike.",
+              "Test independence: NP3 depends on NP2, so it is not a third independent observation.",
+              "Compare methods: NP1 records authorization; NP2 reports observed participation with an imprecise threshold.",
+              "Revise the claim: the records support substantial participation and an authorization vote of 82, but not an exact participant count of 82.",
+              "Preserve the gap: seek payroll, police, port, union attendance, or additional contemporaneous records with known methods."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g12-social-studies-u03-l03:dossier",
+      "sectionKind": "data-table",
+      "title": "Look at evidence — River Square rally simulation",
+      "body": "River Square, its organizations, and all records below are fictional. The exercise is about source criticism, not the event.",
+      "data": {
+        "columns": ["ID", "Record and provenance", "Method or dependence"],
+        "rows": [
+          "RS-1 — Contact sheet labeled June 12, 1968; donated by photographer's estate in 1994; sequence has two missing frames — ground-level photographs of parts of the square",
+          "RS-2 — Newspaper issue dated June 13, 1968 reports police estimate of 3,000 — reporter attributes the figure but does not explain police method",
+          "RS-3 — Organizer memoir published in 1999 estimates 5,000 — retrospective participant account; no count worksheet cited",
+          "RS-4 — 2012 blog claims 5,000 and links only to RS-3 — dependent restatement, not independent corroboration",
+          "RS-5 — City transit summary shows an unusual ridership increase that day — aggregate count with no destination-level breakdown"
+        ],
+        "claim_to_test": "Exactly 5,000 people attended the River Square rally.",
+        "chain_gap": "The original police worksheet and a complete photographic overview are unavailable."
+      }
+    },
+    {
+      "sectionRef": "ma-g12-social-studies-u03-l03:guided",
+      "sectionKind": "guided-practice",
+      "title": "Your turn — test source independence",
+      "directions": "Treat a dependent restatement as a trail to its source, not a new vote for the claim.",
+      "items": [
+        {
+          "itemRef": "ma-g12-social-studies-u03-l03:guided:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which pair does not provide two independent attendance estimates?",
+          "choices": [
+            { "id": "g12-depend-a", "label": "RS-3 memoir and RS-4 blog" },
+            { "id": "g12-depend-b", "label": "RS-1 photographs and RS-2 attributed newspaper report" },
+            { "id": "g12-depend-c", "label": "RS-2 report and RS-5 transit summary" }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g12-social-studies-u03-l03:feedback",
+      "sectionKind": "remediation",
+      "title": "Feedback — trace the citation backward",
+      "body": "If two matching numbers seemed like two confirmations, inspect their citation paths. Collapse dependent restatements into one evidence chain. Then compare the surviving independent sources by method, coverage, temporal distance, and uncertainty."
+    },
+    {
+      "sectionRef": "ma-g12-social-studies-u03-l03:independent",
+      "sectionKind": "independent-practice",
+      "title": "Your turn — write the corroboration finding",
+      "directions": "Produce a short audit. Address provenance, independence, method, convergence, contradiction, and missing evidence. Do not force a precise count if the dossier cannot support one.",
+      "items": [
+        {
+          "itemRef": "ma-g12-social-studies-u03-l03:independent:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "What is the strongest attendance claim the River Square dossier warrants? Explain why the exact 5,000 claim is confirmed, weakened, or unresolved."
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g12-social-studies-u03-l03:review",
+      "sectionKind": "reflection",
+      "title": "Lesson review",
+      "reference": {
+        "what_you_learned": "Corroboration weighs provenance, independence, and method; matching claims alone do not establish reliability.",
+        "evidence_you_used": "A simulated contact sheet, attributed newspaper estimate, retrospective memoir, dependent blog, transit summary, and documented chain gaps.",
+        "how_you_did": "Trusted review will evaluate the source graph, method comparison, calibrated claim, and whether uncertainty was preserved.",
+        "what_to_review": "Check whether you double-counted a dependent source or converted a partial image or aggregate measure into an exact attendance count.",
+        "review_this_lesson": "Draw arrows from every derivative source to its origin, then rewrite the claim at the supported confidence level.",
+        "course_progress": "This is course day 27 of 108 in Grade 12 Advanced Social Studies Inquiry. The simulation remains outside production curriculum.",
+        "next_action": "Advance to bias, perspective, and reliability after your dossier audit distinguishes evidence chains from independent convergence."
+      },
+      "items": [
+        {
+          "itemRef": "ma-g12-social-studies-u03-l03:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Review this lesson: select the next audit action your response needs.",
+          "choices": [
+            { "id": "g12-review-ready", "label": "Continue; I mapped dependence and calibrated the claim." },
+            { "id": "g12-review-chain", "label": "Trace each repeated number to its earliest source." },
+            { "id": "g12-review-method", "label": "Compare how each independent source produced its estimate." }
+          ]
+        }
+      ]
+    }
+  ]
+}

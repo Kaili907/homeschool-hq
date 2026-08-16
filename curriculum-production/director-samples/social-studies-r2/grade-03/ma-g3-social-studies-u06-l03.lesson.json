@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "manuel-academy.rich-study-lesson.v1",
+  "sampleStatus": "DIRECTOR_REVIEW_ONLY",
+  "grade": 3,
+  "courseRef": "ma-g3-social-studies",
+  "unitRef": "ma-g3-social-studies-u06",
+  "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-3/ma-g3-social-studies/ma-g3-social-studies-u06-l03.md",
+  "standards": ["3 – H3.0.3", "3 – H3.0.9", "3 – H3.0.10"],
+  "sourceIntegrity": {
+    "policy": "Dates are short factual paraphrases from the named public government sources. No historical quotation appears in this lesson.",
+    "sources": [
+      "Library of Congress, Today in History: Michigan Enters the Union",
+      "United States Senate, Michigan Statehood"
+    ]
+  },
+  "lessonRef": "ma-g3-social-studies-u06-l03",
+  "title": "Guided practice A: major eras in early Michigan",
+  "subject": "social-studies",
+  "format": "structured",
+  "lessonGoal": "Use dates and events to explain the order of important steps toward Michigan statehood.",
+  "successCriteria": [
+    "I can put events in time order.",
+    "I can use two dates as evidence.",
+    "I can explain that a timeline shows sequence but does not prove every cause."
+  ],
+  "vocabulary": [
+    { "term": "timeline", "definition": "events placed in the order they happened" },
+    { "term": "statehood", "definition": "becoming a state in the United States" },
+    { "term": "evidence", "definition": "information that helps support an answer" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "ma-g3-social-studies-u06-l03:question",
+      "sectionKind": "teaching",
+      "title": "Question and context",
+      "body": "How do dates help us tell the story of Michigan becoming a state?\nA timeline is like a path of stepping-stones. Each date shows where one event belongs."
+    },
+    {
+      "sectionRef": "ma-g3-social-studies-u06-l03:background",
+      "sectionKind": "teaching",
+      "title": "Build background",
+      "body": "Michigan did not become a state in one day. First, it was organized as a U.S. territory. Later, people wrote a state constitution. Congress and the president completed the steps that admitted Michigan as a state."
+    },
+    {
+      "sectionRef": "ma-g3-social-studies-u06-l03:model-data",
+      "sectionKind": "data-table",
+      "title": "EXAMPLE evidence — a town library timeline",
+      "body": "This is an Academy-created practice example. It is not Michigan history.",
+      "data": {
+        "columns": ["Year", "Event"],
+        "rows": [
+          "2008 — Neighbors asked for a library.",
+          "2010 — Voters approved money for the building.",
+          "2012 — The library opened."
+        ],
+        "access_note": "Read from the earliest year to the latest year."
+      }
+    },
+    {
+      "sectionRef": "ma-g3-social-studies-u06-l03:model",
+      "sectionKind": "worked-example",
+      "title": "EXAMPLE — model timeline thinking",
+      "directions": "Watch how the example uses dates without claiming more than the timeline shows.",
+      "items": [
+        {
+          "itemRef": "ma-g3-social-studies-u06-l03:model:1",
+          "itemKind": "worked-example",
+          "prompt": "What can the library timeline support?",
+          "workedSolution": {
+            "steps": [
+              "Start with the question: What happened before the library opened?",
+              "Find the opening date: 2012.",
+              "Look earlier: the request came in 2008 and the money was approved in 2010.",
+              "Example claim: The vote happened after the request and before the opening.",
+              "Check the limit: the dates show order, but they do not tell every reason voters made their choice."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g3-social-studies-u06-l03:evidence",
+      "sectionKind": "source",
+      "title": "Look at evidence — Michigan timeline",
+      "body": "These are short factual paraphrases, not quotations.",
+      "source": {
+        "title": "Michigan statehood timeline",
+        "creator": "Manuel Academy synthesis",
+        "context": "Compiled from the Library of Congress and United States Senate statehood pages.",
+        "source_type": "Teacher-authored secondary timeline based on public government records",
+        "url": "https://www.loc.gov/item/today-in-history/january-26/",
+        "events": [
+          "1805 — The Michigan Territory was organized.",
+          "1835 — Michigan voters approved a state constitution.",
+          "1836 — Congress passed a law that set conditions for admission.",
+          "January 26, 1837 — Michigan entered the Union as the 26th state."
+        ],
+        "limit": "This short timeline does not explain every disagreement or every person's experience."
+      }
+    },
+    {
+      "sectionRef": "ma-g3-social-studies-u06-l03:guided",
+      "sectionKind": "guided-practice",
+      "title": "Your turn — find the middle step",
+      "directions": "Use the dates in the Michigan timeline. Choose the event that happened after the territory was organized and before Michigan entered the Union.",
+      "items": [
+        {
+          "itemRef": "ma-g3-social-studies-u06-l03:guided:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which event belongs between 1805 and January 26, 1837?",
+          "choices": [
+            { "id": "g3-event-a", "label": "Michigan voters approved a state constitution in 1835." },
+            { "id": "g3-event-b", "label": "The Michigan Territory was organized in 1805." },
+            { "id": "g3-event-c", "label": "Michigan entered the Union in 1837." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g3-social-studies-u06-l03:feedback",
+      "sectionKind": "remediation",
+      "title": "Feedback — check the dates, not just the event words",
+      "body": "If an event sounded important but did not fit between the two dates, return to the year beside it. The question asks about order. Point to 1805, then find a later date that is still earlier than 1837."
+    },
+    {
+      "sectionRef": "ma-g3-social-studies-u06-l03:independent",
+      "sectionKind": "independent-practice",
+      "title": "Your turn — explain the path to statehood",
+      "directions": "Write two or three sentences. Use at least two dated events from the Michigan timeline.",
+      "items": [
+        {
+          "itemRef": "ma-g3-social-studies-u06-l03:independent:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "How does the timeline show that statehood was a series of steps? Name one thing the timeline does not tell us."
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g3-social-studies-u06-l03:review",
+      "sectionKind": "reflection",
+      "title": "Lesson review",
+      "reference": {
+        "what_you_learned": "Dates place the steps toward Michigan statehood in order.",
+        "evidence_you_used": "The 1805 territory date, the 1835 constitution date, the 1836 congressional step, and the 1837 statehood date.",
+        "how_you_did": "Your responses are saved for trusted review. This page does not decide whether an answer is correct.",
+        "what_to_review": "Recheck whether every event you named fits the time order and whether your limit describes missing information.",
+        "review_this_lesson": "Say the sequence aloud or trace the dates with a finger, keyboard cursor, or pointer.",
+        "course_progress": "This is course day 63 of 108 in Grade 3 Social Studies. This Director sample does not change production progress.",
+        "next_action": "Continue to independent timeline sequencing when your explanation uses dates and names a limit."
+      },
+      "items": [
+        {
+          "itemRef": "ma-g3-social-studies-u06-l03:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Review this lesson: what should you do next?",
+          "choices": [
+            { "id": "g3-review-ready", "label": "I can explain the order with dates; continue." },
+            { "id": "g3-review-again", "label": "I need to reread the timeline once more." },
+            { "id": "g3-review-help", "label": "I want help finding which date comes next." }
+          ]
+        }
+      ]
+    }
+  ]
+}

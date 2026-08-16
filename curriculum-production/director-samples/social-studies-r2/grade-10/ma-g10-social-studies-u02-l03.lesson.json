@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "manuel-academy.rich-study-lesson.v1",
+  "sampleStatus": "DIRECTOR_REVIEW_ONLY",
+  "grade": 10,
+  "courseRef": "ma-g10-social-studies",
+  "unitRef": "ma-g10-social-studies-u02",
+  "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-10/ma-g10-social-studies/ma-g10-social-studies-u02-l03.md",
+  "standards": ["WHG 4.1.1", "WHG 4.1.2", "P2"],
+  "sourceIntegrity": {
+    "policy": "Network descriptions are attributed Academy syntheses of named museum and UNESCO educational sources. The traveler account is paraphrased and explicitly limited; no invented quotation appears.",
+    "sources": ["UNESCO Silk Roads Programme", "The Metropolitan Museum of Art Heilbrunn Timeline", "Ibn Battuta, Rihla, in public-domain translations"]
+  },
+  "lessonRef": "ma-g10-social-studies-u02-l03",
+  "title": "Guided practice A: cross-cultural contact and exchange",
+  "subject": "social-studies",
+  "format": "structured",
+  "essentialQuestion": "How did religions and trade networks connect distant regions before 1500?",
+  "successCriteria": [
+    "I can trace a connection through more than one network node.",
+    "I can combine map-pattern evidence with a contextualized account.",
+    "I can distinguish movement from proof of equal exchange or complete cultural change."
+  ],
+  "vocabulary": [
+    { "term": "network", "definition": "connected routes, places, and participants through which goods or ideas move" },
+    { "term": "node", "definition": "a place where routes or exchanges connect" },
+    { "term": "diffusion", "definition": "the spread of an idea, practice, technology, or product across places" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:question",
+      "sectionKind": "teaching",
+      "title": "Question and context",
+      "body": "Before 1500, no single road or sea lane connected the whole Eastern Hemisphere. Overlapping networks linked ports, caravan cities, courts, religious centers, and farming regions.\nA network claim needs a route, intermediaries, something that moved, and evidence of contact."
+    },
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:background",
+      "sectionKind": "teaching",
+      "title": "Build background",
+      "body": "Indian Ocean sailing depended partly on seasonal wind patterns. Merchants and sailors often moved goods through several ports rather than across an entire network themselves. Commercial exchange could also carry languages, religious practices, technologies, and artistic forms, but local communities adopted and reshaped them in different ways."
+    },
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:model-map",
+      "sectionKind": "map-reference",
+      "title": "EXAMPLE map — trans-Saharan relay",
+      "body": "The model uses a different network from the independent Indian Ocean task.",
+      "map": {
+        "title": "Academy text map: selected trans-Saharan connections, c. 1200–1400",
+        "legend": "↔ indicates a multi-directional route; nodes are selected examples, not the whole network",
+        "route": "Sijilmasa ↔ desert caravan stages ↔ Timbuktu ↔ Niger River communities",
+        "movement_examples": ["salt moving south through relays", "gold moving north through relays", "books and scholarly ideas circulating among urban centers"],
+        "limit": "The line simplifies many routes and does not imply that exchange was equal or peaceful."
+      }
+    },
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:model",
+      "sectionKind": "worked-example",
+      "title": "EXAMPLE — model network reasoning",
+      "directions": "Follow the evidence across nodes, then test the scale of the claim.",
+      "items": [
+        {
+          "itemRef": "ma-g10-social-studies-u02-l03:model:1",
+          "itemKind": "worked-example",
+          "prompt": "How does the text map support a network claim?",
+          "workedSolution": {
+            "steps": [
+              "Identify nodes: Sijilmasa, caravan stages, Timbuktu, and Niger River communities.",
+              "Identify movement: selected goods and books traveled through linked relays.",
+              "Explain mechanism: intermediaries connected routes even when one merchant did not travel end to end.",
+              "Example claim: overlapping caravan and river routes linked North and West African exchange centers.",
+              "Limit check: the simplified map cannot establish equal power, exact quantities, or every travel path."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:map",
+      "sectionKind": "map-reference",
+      "title": "Look at evidence — Indian Ocean network",
+      "map": {
+        "title": "Academy text map: selected Indian Ocean nodes, c. 1300–1500",
+        "legend": "↔ marks recurring maritime connection; examples indicate goods associated with regions, not exclusive origins",
+        "western_route": "Kilwa ↔ Aden ↔ Calicut",
+        "eastern_route": "Calicut ↔ Melaka ↔ Quanzhou",
+        "movement_examples": [
+          "East African gold and ivory entered wider exchange through coastal ports.",
+          "South Asian textiles and spices circulated through multiple markets.",
+          "Chinese ceramics reached ports around the Indian Ocean."
+        ],
+        "alt": "A text-only sequence of six selected ports connected by two-way arrows.",
+        "source_note": "Manuel Academy synthesis of UNESCO and museum educational maps; no scale or quantity is implied."
+      }
+    },
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:source",
+      "sectionKind": "primary-source",
+      "title": "Look at evidence — traveler perspective",
+      "source": {
+        "title": "Rihla travel account",
+        "creator": "Ibn Battuta's account, compiled by Ibn Juzayy",
+        "date": "Fourteenth century",
+        "source_type": "Primary travel narrative in later manuscripts and translations",
+        "paraphrase": "The account describes Kilwa as a coastal trading city and comments on its prosperity and connections. This is a paraphrase, not a quotation.",
+        "context": "Ibn Battuta was a learned North African Muslim traveler writing from his own social position and purposes.",
+        "limit": "A travel narrative offers situated observations; it does not represent every resident or measure the volume of trade."
+      }
+    },
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:guided",
+      "sectionKind": "guided-practice",
+      "title": "Your turn — trace a defensible connection",
+      "directions": "Use at least two nodes and one item that moved. Avoid claiming that a single source proves the whole network.",
+      "items": [
+        {
+          "itemRef": "ma-g10-social-studies-u02-l03:guided:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which statement best fits the map and traveler account together?",
+          "choices": [
+            { "id": "g10-network-a", "label": "Kilwa participated in overlapping maritime connections, and one travel account offers contextual evidence about the port while leaving trade volume uncertain." },
+            { "id": "g10-network-b", "label": "Every merchant traveled from Kilwa to Quanzhou without intermediaries." },
+            { "id": "g10-network-c", "label": "Contact made all port societies culturally identical."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:feedback",
+      "sectionKind": "remediation",
+      "title": "Feedback — add the missing network mechanism",
+      "body": "If your claim names only two distant endpoints, add the intermediate nodes or relays. If it turns contact into sameness, identify what actually moved and leave local adoption as a separate question. If it treats the traveler as a camera, add his position and the account's limit."
+    },
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:independent",
+      "sectionKind": "independent-practice",
+      "title": "Your turn — explain connection without overclaiming",
+      "directions": "Construct a claim-evidence-reasoning response using the text map and traveler card. Name one source limitation and one additional source you would seek.",
+      "items": [
+        {
+          "itemRef": "ma-g10-social-studies-u02-l03:independent:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "How did the network connect East Africa with distant regions before 1500, and what can this evidence not tell us about cultural effects?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g10-social-studies-u02-l03:review",
+      "sectionKind": "reflection",
+      "title": "Lesson review",
+      "reference": {
+        "what_you_learned": "Trade networks operated through linked nodes, seasonal movement, and intermediaries rather than one continuous journey.",
+        "evidence_you_used": "A text map of selected ports, goods associated with regional exchange, and a contextualized traveler account.",
+        "how_you_did": "Trusted review will examine route logic, source context, qualification, and whether the evidence supports the scale of your claim.",
+        "what_to_review": "Look for endpoint-only reasoning, a claim of cultural sameness, or an unqualified use of one traveler's perspective.",
+        "review_this_lesson": "Trace node, movement, intermediary, and limit in that order.",
+        "course_progress": "This is course day 15 of 108 in Grade 10 World History and Geography. Director review creates no production completion.",
+        "next_action": "Advance when your explanation shows how the network worked and what its evidence leaves unresolved."
+      },
+      "items": [
+        {
+          "itemRef": "ma-g10-social-studies-u02-l03:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Review this lesson: identify your next evidence move.",
+          "choices": [
+            { "id": "g10-review-ready", "label": "Continue; my route, source, and limit work together." },
+            { "id": "g10-review-node", "label": "Add an intermediate node or relay." },
+            { "id": "g10-review-source", "label": "Contextualize the traveler before using the account." }
+          ]
+        }
+      ]
+    }
+  ]
+}

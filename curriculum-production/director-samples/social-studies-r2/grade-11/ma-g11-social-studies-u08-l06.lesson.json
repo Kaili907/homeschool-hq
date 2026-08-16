@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "manuel-academy.rich-study-lesson.v1",
+  "sampleStatus": "DIRECTOR_REVIEW_ONLY",
+  "grade": 11,
+  "courseRef": "ma-g11-social-studies",
+  "unitRef": "ma-g11-social-studies-u08",
+  "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-11/ma-g11-social-studies/ma-g11-social-studies-u08-l06.md",
+  "standards": ["Economics E2.1.1", "Economics E2.1.2", "Economics E2.2.1", "Economics E2.2.2", "Economics E2.2.3", "Economics E2.2.4", "P2"],
+  "sourceIntegrity": {
+    "policy": "Indicator definitions are accurate Academy paraphrases of BEA and BLS documentation. Every numeric practice series is clearly fictional and cannot be mistaken for a current economic release.",
+    "sources": ["U.S. Bureau of Economic Analysis national accounts documentation", "U.S. Bureau of Labor Statistics unemployment and Consumer Price Index documentation"]
+  },
+  "lessonRef": "ma-g11-social-studies-u08-l06",
+  "title": "Guided practice B: evaluating national economic conditions",
+  "subject": "social-studies",
+  "format": "structured",
+  "essentialQuestion": "What do national economic indicators actually tell us, and what do they hide?",
+  "successCriteria": [
+    "I can interpret direction and magnitude across several indicators.",
+    "I can avoid treating one national average as everyone's experience.",
+    "I can defend a qualified economic claim and identify missing evidence."
+  ],
+  "vocabulary": [
+    { "term": "real GDP", "definition": "inflation-adjusted value of final goods and services produced" },
+    { "term": "unemployment rate", "definition": "share of the labor force without work who are available and actively seeking work" },
+    { "term": "distribution", "definition": "how an outcome is spread across people, places, or groups" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "ma-g11-social-studies-u08-l06:question",
+      "sectionKind": "teaching",
+      "title": "Question and context",
+      "body": "Economic indicators are measurements, not verdicts. Real GDP tracks production, unemployment tracks one labor-market condition, inflation tracks average price change, and earnings measures track income in defined ways.\nA sound conclusion uses multiple indicators and names what national aggregates omit."
+    },
+    {
+      "sectionRef": "ma-g11-social-studies-u08-l06:background",
+      "sectionKind": "reference",
+      "title": "Build background — indicator meanings",
+      "reference": {
+        "real_gdp": "BEA measure, adjusted for price change; rising real GDP does not show how gains are distributed.",
+        "unemployment_rate": "BLS measure based on the labor force; it excludes people not counted in the labor force and does not measure job quality.",
+        "consumer_price_inflation": "BLS measure of average consumer price change for a defined basket; household experiences vary.",
+        "real_median_earnings_index": "A practice index of the middle worker's inflation-adjusted earnings; it does not capture wealth or everyone outside the measured group.",
+        "source_note": "Definitions are paraphrases. The practice data below are fictional."
+      }
+    },
+    {
+      "sectionRef": "ma-g11-social-studies-u08-l06:model-data",
+      "sectionKind": "data-table",
+      "title": "EXAMPLE data — fictional Region Cedar",
+      "body": "These values were created for instruction and are not a real release.",
+      "data": {
+        "columns": ["Indicator", "Period 1", "Period 2"],
+        "rows": [
+          "Real output index — 100.0 — 103.0",
+          "Unemployment rate — 6.2% — 5.4%",
+          "Price inflation — 2.1% — 2.3%",
+          "Real median earnings index — 100.0 — 101.2"
+        ]
+      }
+    },
+    {
+      "sectionRef": "ma-g11-social-studies-u08-l06:model",
+      "sectionKind": "worked-example",
+      "title": "EXAMPLE — model multi-indicator reasoning",
+      "directions": "This example demonstrates the method on a different dataset.",
+      "items": [
+        {
+          "itemRef": "ma-g11-social-studies-u08-l06:model:1",
+          "itemKind": "worked-example",
+          "prompt": "What conclusion fits Region Cedar?",
+          "workedSolution": {
+            "steps": [
+              "Describe each direction: output and real median earnings rose; unemployment fell; inflation edged up.",
+              "Avoid a single-indicator label: several measures improved, but inflation also increased slightly.",
+              "Example claim: the four indicators suggest broadly improving conditions in Period 2.",
+              "Qualify distribution: averages do not show conditions for each industry, region, or household.",
+              "Request disaggregated employment, wage, poverty, and regional data before making a wider welfare claim."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g11-social-studies-u08-l06:data",
+      "sectionKind": "data-table",
+      "title": "Look at evidence — fictional Nation Harbor",
+      "body": "This is a fixed, Academy-created practice release. The dates and values are fictional so they do not imply current economic conditions.",
+      "data": {
+        "columns": ["Indicator", "Year A", "Year B", "Change"],
+        "rows": [
+          "Real GDP index — 100.0 — 102.4 — up 2.4%",
+          "Unemployment rate — 4.3% — 5.6% — up 1.3 percentage points",
+          "Consumer price inflation — 2.0% — 3.8% — up 1.8 percentage points",
+          "Real median earnings index — 100.0 — 98.5 — down 1.5%"
+        ],
+        "method_note": "Indices use Year A = 100. Percentage points and percent change are not interchangeable.",
+        "missing_data": "No industry, demographic, regional, wealth, poverty, labor-force participation, or confidence interval data are supplied."
+      }
+    },
+    {
+      "sectionRef": "ma-g11-social-studies-u08-l06:guided",
+      "sectionKind": "guided-practice",
+      "title": "Your turn — select a supported reading",
+      "directions": "Choose the claim that incorporates the mixed direction of the indicators and stays within the dataset.",
+      "items": [
+        {
+          "itemRef": "ma-g11-social-studies-u08-l06:guided:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which claim is supported by the Nation Harbor table?",
+          "choices": [
+            { "id": "g11-data-a", "label": "Production rose, while unemployment and inflation rose and real median earnings fell; the indicators therefore point in mixed directions." },
+            { "id": "g11-data-b", "label": "Because real GDP rose, every household became better off." },
+            { "id": "g11-data-c", "label": "The table proves which policy caused every change."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g11-social-studies-u08-l06:feedback",
+      "sectionKind": "remediation",
+      "title": "Feedback — diagnose the overclaim",
+      "body": "If one rising indicator controlled your whole conclusion, list the direction of all four measures first. If you claimed causation, identify the missing comparison or mechanism. If you generalized to everyone, name the disaggregated evidence the table lacks."
+    },
+    {
+      "sectionRef": "ma-g11-social-studies-u08-l06:independent",
+      "sectionKind": "independent-practice",
+      "title": "Your turn — defend a qualified conditions claim",
+      "directions": "Write a concise analyst's note using at least three indicators. Distinguish percentage changes from percentage-point changes and name two missing measures.",
+      "items": [
+        {
+          "itemRef": "ma-g11-social-studies-u08-l06:independent:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "What can you responsibly conclude about Nation Harbor from Year A to Year B, and what remains hidden?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g11-social-studies-u08-l06:review",
+      "sectionKind": "reflection",
+      "title": "Lesson review",
+      "reference": {
+        "what_you_learned": "National conditions claims should synthesize multiple measures, respect units, and separate measurement from causation.",
+        "evidence_you_used": "Fictional fixed values for real GDP, unemployment, inflation, and real median earnings, plus official indicator definitions.",
+        "how_you_did": "Trusted review will examine numerical accuracy, indicator meaning, qualification, and the relevance of your requested evidence.",
+        "what_to_review": "Check for a percent versus percentage-point error, a causal claim without design evidence, or an everyone statement based on an aggregate.",
+        "review_this_lesson": "Create a four-row direction table, then add one sentence for distribution and one for causation limits.",
+        "course_progress": "This is course day 90 of 108 in Grade 11 Civics and Economics. The fictional release cannot affect live course records.",
+        "next_action": "Continue to national-markets analysis when your claim is accurate, mixed where needed, and explicit about hidden distribution."
+      },
+      "items": [
+        {
+          "itemRef": "ma-g11-social-studies-u08-l06:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Review this lesson: choose the highest-value next check.",
+          "choices": [
+            { "id": "g11-review-ready", "label": "Continue; I used multiple indicators and named limitations." },
+            { "id": "g11-review-units", "label": "Recheck percent versus percentage-point language." },
+            { "id": "g11-review-distribution", "label": "Add evidence needed to study distribution."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

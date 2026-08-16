@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "manuel-academy.rich-study-lesson.v1",
+  "sampleStatus": "DIRECTOR_REVIEW_ONLY",
+  "grade": 8,
+  "courseRef": "ma-g8-social-studies",
+  "unitRef": "ma-g8-social-studies-u01",
+  "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-8/ma-g8-social-studies/ma-g8-social-studies-u01-l07.md",
+  "standards": ["Michigan Grade 8 U3.3", "H1", "C1"],
+  "sourceIntegrity": {
+    "policy": "The Articles of Confederation and United States Constitution are public-domain primary sources. Excerpts are short, attributed, and linked to National Archives transcripts.",
+    "sources": ["National Archives, Articles of Confederation transcript", "National Archives, Constitution transcript"]
+  },
+  "lessonRef": "ma-g8-social-studies-u01-l07",
+  "title": "Investigation or close reading: historical evidence and argument",
+  "subject": "social-studies",
+  "format": "structured",
+  "essentialQuestion": "How can a comparison of founding documents support a claim about changes in national power?",
+  "successCriteria": [
+    "I can identify the institution and power named in each excerpt.",
+    "I can compare documents before explaining change.",
+    "I can distinguish the text's words from my interpretation."
+  ],
+  "vocabulary": [
+    { "term": "authority", "definition": "lawful power to make or carry out decisions" },
+    { "term": "levy", "definition": "to impose or collect a tax by legal authority" },
+    { "term": "interpretation", "definition": "an explanation of what evidence means" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:question",
+      "sectionKind": "teaching",
+      "title": "Question and context",
+      "body": "The Articles of Confederation governed the United States before the Constitution. Comparing exact powers in the two documents can show institutional change.\nYour job is not to praise or condemn either document. Your job is to make a claim the text can support."
+    },
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:background",
+      "sectionKind": "teaching",
+      "title": "Build background",
+      "body": "Under the Articles, the states remained central to raising much of the national government's revenue. The Constitution created a different structure and named powers for Congress. Historical context can help explain why delegates proposed changes, but the first step here is a close comparison of the documents."
+    },
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:model-source",
+      "sectionKind": "source",
+      "title": "EXAMPLE evidence — voting rules",
+      "source": {
+        "source_a": "Articles of Confederation, Article V: each state had one vote in Congress.",
+        "source_b": "United States Constitution, Article I: the House is apportioned by population while each state has two senators.",
+        "note": "These are concise paraphrases for the model. The independent task uses different clauses about taxation.",
+        "context": "Public-domain founding documents, National Archives transcripts."
+      }
+    },
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:model",
+      "sectionKind": "worked-example",
+      "title": "EXAMPLE — model document comparison",
+      "directions": "The model uses voting structure, not the taxation evidence in your task.",
+      "items": [
+        {
+          "itemRef": "ma-g8-social-studies-u01-l07:model:1",
+          "itemKind": "worked-example",
+          "prompt": "What changed in representation?",
+          "workedSolution": {
+            "steps": [
+              "Identify the shared topic: how states and people are represented in the national legislature.",
+              "Record Source A: one vote per state under the Articles.",
+              "Record Source B: two different chambers use different representation rules under the Constitution.",
+              "Example claim: the Constitution replaced a single state-vote rule with a two-chamber arrangement balancing population and equal state representation.",
+              "Limit check: these clauses show formal structure, not whether representation worked equally in practice."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:source-a",
+      "sectionKind": "primary-source",
+      "title": "Look at evidence — Articles of Confederation",
+      "source": {
+        "title": "Articles of Confederation, Article VIII",
+        "creator": "Second Continental Congress; ratified by the states",
+        "date": "Adopted 1777; in force 1781",
+        "excerpt": "The taxes for paying that proportion shall be laid and levied by the authority and direction of the legislatures of the several states.",
+        "context": "The article describes how states supplied the common treasury.",
+        "source_type": "Primary legal document",
+        "url": "https://www.archives.gov/milestone-documents/articles-of-confederation",
+        "limit": "The clause states a legal arrangement; it does not by itself measure how much money was collected."
+      }
+    },
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:source-b",
+      "sectionKind": "primary-source",
+      "title": "Look at evidence — Constitution",
+      "source": {
+        "title": "United States Constitution, Article I, Section 8",
+        "creator": "Constitutional Convention; ratified by the states",
+        "date": "Signed 1787; government began under it in 1789",
+        "excerpt": "The Congress shall have Power To lay and collect Taxes, Duties, Imposts and Excises.",
+        "context": "The clause lists powers of Congress, subject to the rest of the Constitution.",
+        "source_type": "Primary legal document",
+        "url": "https://www.archives.gov/founding-docs/constitution-transcript",
+        "limit": "The clause names authority; it does not show every political debate or later court interpretation."
+      }
+    },
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:guided",
+      "sectionKind": "guided-practice",
+      "title": "Your turn — identify the direct change",
+      "directions": "Focus on who is named as having authority in each excerpt.",
+      "items": [
+        {
+          "itemRef": "ma-g8-social-studies-u01-l07:guided:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which comparison is directly supported by the two excerpts?",
+          "choices": [
+            { "id": "g8-tax-a", "label": "The Articles relied on state legislatures to levy the stated taxes, while the Constitution names a congressional power to lay and collect taxes." },
+            { "id": "g8-tax-b", "label": "Both excerpts say that Congress alone collected every tax under the Articles." },
+            { "id": "g8-tax-c", "label": "The excerpts prove that every later tax policy was popular." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:feedback",
+      "sectionKind": "remediation",
+      "title": "Feedback — compare institutions before effects",
+      "body": "If your response jumped to popularity or later outcomes, return to the nouns and verbs in each clause. Underline who acts and circle the power described. A document comparison can establish a formal change before you investigate its consequences."
+    },
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:independent",
+      "sectionKind": "independent-practice",
+      "title": "Your turn — construct a document-based claim",
+      "directions": "Write a short claim-evidence-reasoning paragraph. Cite both article locations and include one limitation.",
+      "items": [
+        {
+          "itemRef": "ma-g8-social-studies-u01-l07:independent:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "How did the formal national taxing authority change from the Articles to the Constitution? What additional evidence would you need to evaluate the change's effects?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g8-social-studies-u01-l07:review",
+      "sectionKind": "reflection",
+      "title": "Lesson review",
+      "reference": {
+        "what_you_learned": "A close comparison can support a precise claim about institutional change.",
+        "evidence_you_used": "Article VIII of the Articles of Confederation and Article I, Section 8 of the Constitution.",
+        "how_you_did": "Trusted assessment will check accuracy, citation, reasoning, and whether your limitation calls for relevant evidence.",
+        "what_to_review": "Separate what the clauses state from what you infer about later results.",
+        "review_this_lesson": "Mark institution, action, and limit in each source before rereading your claim.",
+        "course_progress": "This is course day 7 of 108 in Grade 8 U.S. History and Civics. The isolated sample awards no course credit.",
+        "next_action": "Proceed when both documents appear in your reasoning and your effects claim stays appropriately limited."
+      },
+      "items": [
+        {
+          "itemRef": "ma-g8-social-studies-u01-l07:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Review this lesson: select the best next step for your own response.",
+          "choices": [
+            { "id": "g8-review-ready", "label": "Continue; I cited both clauses and limited my effects claim." },
+            { "id": "g8-review-compare", "label": "Build a two-column comparison before revising." },
+            { "id": "g8-review-context", "label": "Add a source I would use to study consequences." }
+          ]
+        }
+      ]
+    }
+  ]
+}
