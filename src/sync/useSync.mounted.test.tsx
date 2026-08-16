@@ -1174,4 +1174,98 @@ describe('mounted useSync lifecycle and import safety', () => {
       'replacement-transition-operation',
     )
   })
+
+  it('repeated sign-out is idempotent and does not leave stale session state', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const signOutRemote = (
+      await import('./supabase')
+    ).signOutRemote as ReturnType<typeof vi.fn>
+    const priorRemoteCalls = signOutRemote.mock.calls.length
+
+    await act(async () => {
+      await latestApi!.signOut()
+      await latestApi!.signOut()
+      await latestApi!.signOut()
+    })
+    await settle()
+
+    expect(signOutRemote.mock.calls.length).toBe(priorRemoteCalls + 3)
+    expect(latestApi?.status.user).toBeNull()
+    expect(latestApi?.status.decision).toBeNull()
+    expect(latestApi?.status.error).toBeNull()
+    expect(transport.sessionUser).toBeNull()
+  })
+
+  it('sign-out completes even when the remote transport rejects', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const supabase = await import('./supabase')
+    const signOutRemote = supabase.signOutRemote as ReturnType<typeof vi.fn>
+    signOutRemote.mockImplementationOnce(async () => {
+      transport.sessionUser = null
+      for (const listener of transport.authListeners) {
+        listener('SIGNED_OUT', null)
+      }
+      throw new Error('remote sign-out is unreachable')
+    })
+
+    await act(async () => {
+      await expect(latestApi!.signOut()).resolves.toBeUndefined()
+    })
+
+    expect(latestApi?.status.user).toBeNull()
+    expect(latestApi?.status.decision).toBeNull()
+    expect(latestApi?.status.error).toBeNull()
+    expect(transport.sessionUser).toBeNull()
+  })
+
+  it('unmounts safely after sign-out and does not restore ended session state', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    await act(async () => latestApi!.signOut())
+    const remembered = latestApi!
+    await act(async () => root!.unmount())
+    root = null
+
+    // A late auth fanout after unmount must not restore a signed-in user.
+    await act(async () => {
+      emitAuth('SIGNED_IN', {
+        id: 'household-a',
+        email: 'household-a@example.com',
+      })
+    })
+    await settle()
+
+    expect(remembered.status.user).toBeNull()
+    expect(transport.authListeners.size).toBe(0)
+  })
+
+  it('cancels a pending debounced push before signing out', async () => {
+    const state = await prepareState('household-a')
+    transport.sessionUser = {
+      id: 'household-a',
+      email: 'household-a@example.com',
+    }
+    await mount(state)
+    await waitFor(
+      () => loadHouseholdMeta('household-a').ownsLocalData === true,
+    )
+    await act(async () => {
+      const mutated = structuredClone(renderedState!)
+      mutated.profiles.p1.name = 'Edited'
+      updateHostState!(mutated)
+    })
+    await settle()
+
+    const pushesBefore = transport.push.mock.calls.length
+    await act(async () => latestApi!.signOut())
+    await settle()
+    await new Promise<void>((resolve) => setTimeout(resolve, 2000))
+    await settle()
+
+    expect(transport.push.mock.calls.length).toBe(pushesBefore)
+    expect(latestApi?.status.user).toBeNull()
+    expect(transport.authListeners.size).toBe(1)
+  })
 })

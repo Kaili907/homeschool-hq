@@ -151,6 +151,19 @@ function profilesFromRows(rows: RemoteProfileRow[]): Record<string, Profile> {
   return profiles
 }
 
+function reportListenerSideEffectFailure(
+  context: string,
+  cause: unknown,
+): void {
+  try {
+    // Failures may be reported but cannot block terminal session cleanup.
+    // eslint-disable-next-line no-console
+    console.error('[sync/session-lifecycle]', context, cause)
+  } catch {
+    // ignored
+  }
+}
+
 export function useSync(
   state: AppState,
   setState: Dispatch<SetStateAction<AppState>>,
@@ -850,13 +863,29 @@ export function useSync(
       const previousUserId = userRef.current?.id ?? null
       const householdChanged =
         previousUserId !== (next?.id ?? null)
-      if (previousUserId && householdChanged) {
-        abortOperation()
-        void purgeVoiceCache()
-      }
-      if (householdChanged) setRecoveryReady(false)
+      // Identity update runs first so a throwing side effect below cannot
+      // leave stale user/recovery state after a terminal auth transition.
       userRef.current = next
       if (mountedRef.current) setUser(next)
+      if (householdChanged) setRecoveryReady(false)
+      if (previousUserId && householdChanged) {
+        try {
+          abortOperation()
+        } catch (cause) {
+          reportListenerSideEffectFailure('abort-operation', cause)
+        }
+        try {
+          const purge = purgeVoiceCache() as unknown
+          if (
+            purge &&
+            typeof (purge as PromiseLike<unknown>).then === 'function'
+          ) {
+            void (purge as Promise<unknown>).catch(() => undefined)
+          }
+        } catch (cause) {
+          reportListenerSideEffectFailure('voice-cache', cause)
+        }
+      }
     })
     return () => {
       live = false
@@ -1184,19 +1213,51 @@ export function useSync(
   )
 
   const signOut = useCallback(async () => {
-    if (pushTimer.current !== null) {
-      window.clearTimeout(pushTimer.current)
-      pushTimer.current = null
+    // Terminal teardown must run to completion even if a step throws or
+    // rejects, so a failing listener/timer/voice-cache cannot strand the
+    // remote sign-out or leave stale local session state. Repeated
+    // sign-out/unmount is safe because every step is guarded and idempotent.
+    try {
+      if (pushTimer.current !== null) {
+        window.clearTimeout(pushTimer.current)
+        pushTimer.current = null
+      }
+    } catch (cause) {
+      reportListenerSideEffectFailure('sign-out/clear-timer', cause)
     }
-    abortOperation()
+    try {
+      abortOperation()
+    } catch (cause) {
+      reportListenerSideEffectFailure('sign-out/abort-operation', cause)
+    }
     userRef.current = null
     if (mountedRef.current) {
-      setUser(null)
-      setDecision(null)
-      setError(null)
+      try {
+        setUser(null)
+      } catch (cause) {
+        reportListenerSideEffectFailure('sign-out/set-user', cause)
+      }
+      try {
+        setDecision(null)
+      } catch (cause) {
+        reportListenerSideEffectFailure('sign-out/set-decision', cause)
+      }
+      try {
+        setError(null)
+      } catch (cause) {
+        reportListenerSideEffectFailure('sign-out/set-error', cause)
+      }
     }
-    await purgeVoiceCache()
-    await signOutRemote()
+    try {
+      await purgeVoiceCache()
+    } catch (cause) {
+      reportListenerSideEffectFailure('sign-out/voice-cache', cause)
+    }
+    try {
+      await signOutRemote()
+    } catch (cause) {
+      reportListenerSideEffectFailure('sign-out/remote', cause)
+    }
   }, [abortOperation])
 
   const verifyDecisionCloud = useCallback(
