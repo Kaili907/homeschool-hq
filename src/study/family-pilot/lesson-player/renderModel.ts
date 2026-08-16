@@ -234,5 +234,9 @@ export function createRichLessonRenderModel(material: LearnerMaterialDto): RichL
     title: material.title,
     subject: richLessonSubjectAdapter(material.subject),
     pages: Object.freeze(pages),
+    review: material.lessonReview ? Object.freeze({
+      ...material.lessonReview,
+      whatYouLearned: Object.freeze([...material.lessonReview.whatYouLearned]),
+    }) : null,
   })
 }

@@ -548,4 +548,77 @@ describe('FamilyPilotLessonPlayer', () => {
       itemRef: null,
     })
   })
+
+  it('shows authored feedback only after a trusted assessment decision exists', async () => {
+    const handlers = noopHandlers()
+    const baseModel = createRichLessonRenderModel(RICH_MATH_LESSON_FIXTURE)
+    const guidedPage = baseModel.pages.find((page) => page.item?.itemRef.endsWith(':guided:1'))!
+    const independent = baseModel.pages.find((page) => page.item?.itemRef.endsWith(':independent:1'))!.item!
+    const model = {
+      ...baseModel,
+      pages: baseModel.pages.map((page) => page.pageRef === guidedPage.pageRef
+        ? { ...page, item: { ...page.item!, feedback: { correct: 'You used the neighboring digit correctly.', incorrect: 'Recheck the neighboring digit.' } } }
+        : page),
+    }
+    const snapshot = baseSnapshot({ segmentRef: 'segment-2', segmentOrdinal: 2, completedSegmentRefs: ['segment-1'], remainingSegmentRefs: ['segment-2', 'segment-3'] })
+    await render(<FamilyPilotLessonPlayer {...baseProps({
+      ...handlers, snapshot, renderModel: model,
+      segmentContent: {
+        itemRef: guidedPage.item!.itemRef,
+        responseKind: guidedPage.item!.responseType,
+        answeredItemRefs: [],
+        requiredItemRefs: [guidedPage.item!.itemRef, independent.itemRef],
+        canCompleteSegment: false,
+      },
+    })} />)
+    await rerender(<FamilyPilotLessonPlayer {...baseProps({
+      ...handlers, snapshot, renderModel: model,
+      segmentContent: {
+        itemRef: independent.itemRef,
+        responseKind: independent.responseType,
+        answeredItemRefs: [guidedPage.item!.itemRef],
+        requiredItemRefs: [guidedPage.item!.itemRef, independent.itemRef],
+        canCompleteSegment: false,
+        assessmentDecisions: { [guidedPage.item!.itemRef]: 'CORRECT' },
+      },
+    })} />)
+    expect(hasText(container, 'Why that works')).toBe(true)
+    expect(hasText(container, 'You used the neighboring digit correctly.')).toBe(true)
+    expect(hasText(container, 'Recheck the neighboring digit.')).toBe(false)
+  })
+
+  it('replaces the abrupt rich completion screen with an evidence-aware lesson review', async () => {
+    const handlers = noopHandlers()
+    const baseModel = createRichLessonRenderModel(RICH_MATH_LESSON_FIXTURE)
+    const assessed = baseModel.pages.find((page) => page.item?.responseType === 'NUMERIC')!.item!
+    const model = {
+      ...baseModel,
+      review: {
+        whatYouLearned: ['Name the target place.', 'Use the digit to its right as evidence.'],
+        courseProgress: 'Unit 1 sample only; production progress is unchanged.',
+        nextAction: 'Done for today' as const,
+        reviewActionLabel: 'Review this lesson',
+      },
+    }
+    await render(<FamilyPilotLessonPlayer {...baseProps({
+      ...handlers,
+      status: 'completed',
+      snapshot: baseSnapshot({ title: 'Rounding with place value', sessionStatus: 'completed' }),
+      renderModel: model,
+      segmentContent: {
+        responseKind: 'READ',
+        answeredItemRefs: [assessed.itemRef],
+        assessmentDecisions: { [assessed.itemRef]: 'CORRECT' },
+        pendingAssessmentCount: 0,
+      },
+      onReviewLesson: vi.fn(),
+    })} />)
+    for (const heading of ['What you learned', 'How you did', 'What you did well', 'Review / try again', 'Course progress', 'Next action']) {
+      expect(hasText(container, heading)).toBe(true)
+    }
+    expect(hasText(container, '1 learner response saved')).toBe(true)
+    expect(hasText(container, 'Done for today')).toBe(true)
+    expect(hasText(container, 'Great work — this lesson is finished.')).toBe(false)
+    expect(findButton('Review this lesson')).not.toBeNull()
+  })
 })

@@ -58,6 +58,10 @@ export class LearnerResponseRuntime {
       requiredItemRefs: Object.freeze(required.map((candidate) => candidate.itemRef)),
       canCompleteSegment: required.every((candidate) => answered.has(candidate.itemRef)),
       pendingAssessmentCount: records.filter((record) => record.status === 'PENDING_ASSESSMENT').length,
+      assessmentDecisions: Object.freeze(Object.fromEntries(records.flatMap((record) =>
+        record.status === 'ASSESSED' && record.assessment
+          ? [[record.itemRef, record.assessment.decision] as const]
+          : []))),
     })
   }
 

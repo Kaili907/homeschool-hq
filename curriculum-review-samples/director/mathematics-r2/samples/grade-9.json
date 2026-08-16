@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "namespace": "director-review:mathematics:r2",
+  "reviewMetadata": {
+    "grade": 9,
+    "courseRef": "ma-g9-mathematics",
+    "sourceLessonRef": "ma-g9-mathematics-u03-l03",
+    "sourceLessonFamily": "Reasoning with Linear Equations and Inequalities",
+    "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u03-l03.package.json",
+    "standards": ["A-REI.1", "A-REI.3", "A-REI.10", "A-REI.11", "MP.3"],
+    "normalInstructionalLesson": true
+  },
+  "learnerMaterial": {
+    "lessonRef": "director-math-r2-g9-inequality-reversal",
+    "title": "Why the Inequality Sign Reverses",
+    "subject": "mathematics",
+    "format": "structured",
+    "lessonGoal": "Explain and apply the sign-reversal rule when solving a linear inequality.",
+    "successCriteria": ["I preserve the solution set at each step.", "I reverse the inequality when multiplying or dividing by a negative number.", "I verify a solution with a test value or graph."],
+    "keyPoints": ["An inequality compares order, not just equality.", "Multiplying or dividing by a negative number reverses order.", "A boundary check and test point can verify the result."],
+    "vocabulary": [{"term": "solution set", "definition": "all values that make a statement true"}],
+    "sections": [
+      {
+        "sectionRef": "director-math-r2-g9-inequality-reversal:teach",
+        "sectionKind": "data-table",
+        "title": "Watch order reverse",
+        "body": "Start with 2 < 5. Multiply both sides by −1.",
+        "data": {"columns": ["Original order", "After multiplying by −1", "True comparison"], "rows": ["2 < 5 | −2 and −5 | −2 > −5"]}
+      },
+      {
+        "sectionRef": "director-math-r2-g9-inequality-reversal:example",
+        "sectionKind": "worked-example",
+        "title": "Worked example: solve and verify",
+        "directions": "The answer and verification are shown.",
+        "items": [{
+          "itemRef": "director-math-r2-g9-inequality-reversal:example:1",
+          "itemKind": "worked-example",
+          "prompt": "Solve −3x + 4 ≤ 19.",
+          "workedSolution": {"steps": ["Subtract 4: −3x ≤ 15.", "Divide by −3 and reverse the inequality: x ≥ −5.", "Boundary check: x = −5 makes both sides equal.", "Test x = 0: 4 ≤ 19 is true, and 0 is in x ≥ −5.", "Therefore the solution set is x ≥ −5."]}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g9-inequality-reversal:guided",
+        "sectionKind": "guided-practice",
+        "title": "Your turn: identify the critical move",
+        "items": [{
+          "itemRef": "director-math-r2-g9-inequality-reversal:guided:1",
+          "itemKind": "multiple-choice",
+          "prompt": "From −4x > 20, which statement follows?",
+          "responseKind": "CHOICE",
+          "choices": ["x > −5", "x < −5", "x < 5"],
+          "feedback": {"correct": "You divided by a negative number and reversed the order relation.", "incorrect": "The quotient is negative, and dividing by −4 reverses the inequality sign."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g9-inequality-reversal:practice",
+        "sectionKind": "independent-practice",
+        "title": "Practice: solve and check",
+        "items": [
+          {
+            "itemRef": "director-math-r2-g9-inequality-reversal:practice:1",
+            "itemKind": "short-answer",
+            "prompt": "Solve 7 − 2x ≥ 17. Enter the final inequality.",
+            "responseKind": "TEXT",
+            "feedback": {"correct": "Your algebra preserves the solution set, including the sign reversal on division.", "incorrect": "Subtract 7 first. When you divide the resulting inequality by −2, reverse the sign."}
+          },
+          {
+            "itemRef": "director-math-r2-g9-inequality-reversal:practice:2",
+            "itemKind": "constructed-response",
+            "prompt": "A student solves −6x < 24 and writes x < −4. Diagnose the error and give a test value that exposes it.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "You named the missing sign reversal and used substitution as evidence.", "incorrect": "Check what happens to order after division by −6. Then test a simple value such as 0 in the original statement."}
+          }
+        ]
+      },
+      {
+        "sectionRef": "director-math-r2-g9-inequality-reversal:reteach",
+        "sectionKind": "remediation",
+        "title": "Reteach: compare two number-line images",
+        "body": "Multiplication by −1 reflects every point across 0. A point farther right becomes farther left, so the order reverses.",
+        "items": [{
+          "itemRef": "director-math-r2-g9-inequality-reversal:reteach:1",
+          "itemKind": "multiple-choice",
+          "prompt": "If a < b, which comparison is always true?",
+          "responseKind": "CHOICE",
+          "choices": ["−a < −b", "−a > −b", "−a = −b"],
+          "feedback": {"correct": "You treated multiplication by −1 as a reflection that reverses order.", "incorrect": "Try a = 2 and b = 5, then compare −2 and −5 on a number line."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g9-inequality-reversal:check",
+        "sectionKind": "mastery-check",
+        "title": "Check: defend the solution set",
+        "items": [{
+          "itemRef": "director-math-r2-g9-inequality-reversal:check:1",
+          "itemKind": "constructed-response",
+          "prompt": "Solve 5 − 3(2x − 1) > 20. Justify the sign direction and verify with one value inside your solution set.",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "feedback": {"correct": "Your symbolic steps, sign justification, and test value agree.", "incorrect": "Simplify first, isolate the negative x-term, and record exactly where division by a negative reverses the relation."}
+        }]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": ["Negative scaling reverses order.", "The inequality sign changes only when multiplying or dividing by a negative number.", "A test value checks whether the stated solution region is plausible."],
+      "courseProgress": "This sample is based on Grade 9 Unit 3, lesson family 3. It does not change your production-course progress.",
+      "nextAction": "Done for today",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}

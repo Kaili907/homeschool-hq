@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "namespace": "director-review:mathematics:r2",
+  "reviewMetadata": {
+    "grade": 10,
+    "courseRef": "ma-g10-mathematics",
+    "sourceLessonRef": "ma-g10-mathematics-u02-l05",
+    "sourceLessonFamily": "Rigid Motions and Transformations",
+    "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-10/ma-g10-mathematics-u02-l05.package.json",
+    "standards": ["G-CO.2", "G-CO.3", "G-CO.4", "G-CO.5", "MP.5"],
+    "normalInstructionalLesson": true
+  },
+  "learnerMaterial": {
+    "lessonRef": "director-math-r2-g10-transformation-sequences",
+    "title": "Specify a Sequence of Rigid Transformations",
+    "subject": "mathematics",
+    "format": "structured",
+    "lessonGoal": "Describe a sequence of rigid transformations precisely enough that another person can reproduce and verify the image.",
+    "successCriteria": ["I name each transformation and its defining information.", "I apply transformations in the stated order.", "I verify preserved distance and angle measures."],
+    "keyPoints": ["A transformation sequence is composition: order matters.", "A translation needs a vector, a rotation needs a center and angle, and a reflection needs a line.", "Rigid motions preserve distances and angle measures."],
+    "vocabulary": [{"term": "composition", "definition": "applying transformations in sequence, using each image as the next input"}],
+    "sections": [
+      {
+        "sectionRef": "director-math-r2-g10-transformation-sequences:teach",
+        "sectionKind": "data-table",
+        "title": "Track every vertex",
+        "body": "Triangle A(1,1), B(3,1), C(1,2) is translated by ⟨2,−1⟩, then rotated 90° counterclockwise about the origin.",
+        "data": {"columns": ["Vertex", "Start", "After translation", "After rotation"], "rows": ["A | (1,1) | (3,0) | (0,3)", "B | (3,1) | (5,0) | (0,5)", "C | (1,2) | (3,1) | (−1,3)"]}
+      },
+      {
+        "sectionRef": "director-math-r2-g10-transformation-sequences:example",
+        "sectionKind": "worked-example",
+        "title": "Worked example: write a reproducible sequence",
+        "directions": "Study the completed sequence and its check.",
+        "items": [{
+          "itemRef": "director-math-r2-g10-transformation-sequences:example:1",
+          "itemKind": "worked-example",
+          "prompt": "Describe the transformation from the original triangle to the final image in the table.",
+          "workedSolution": {"steps": ["Translate every point 2 units right and 1 unit down: (x,y) → (x+2,y−1).", "Rotate the translated image 90° counterclockwise about (0,0): (x,y) → (−y,x).", "Keep the order: rotation first would produce different coordinates.", "Check AB: its length is 2 at the start and 2 in the final image, as required for rigid motions."]}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g10-transformation-sequences:guided",
+        "sectionKind": "guided-practice",
+        "title": "Your turn: apply the sequence",
+        "items": [{
+          "itemRef": "director-math-r2-g10-transformation-sequences:guided:1",
+          "itemKind": "short-answer",
+          "prompt": "Point P(2,−1) is translated by ⟨−3,4⟩, then reflected across the x-axis. Enter the final ordered pair.",
+          "responseKind": "TEXT",
+          "feedback": {"correct": "You used the translated point as the input to the reflection.", "incorrect": "Record the intermediate point first. Reflection across the x-axis keeps x and negates y."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g10-transformation-sequences:practice",
+        "sectionKind": "independent-practice",
+        "title": "Practice: specify and verify",
+        "items": [
+          {
+            "itemRef": "director-math-r2-g10-transformation-sequences:practice:1",
+            "itemKind": "constructed-response",
+            "prompt": "Describe a rotation that maps Q(4,1) to Q′(−1,4). Include the center, angle, and direction.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "Your description contains enough information to reproduce the rotation.", "incorrect": "Compare the coordinate rule with standard rotations about the origin, then name angle and direction explicitly."}
+          },
+          {
+            "itemRef": "director-math-r2-g10-transformation-sequences:practice:2",
+            "itemKind": "constructed-response",
+            "prompt": "Explain why translating by ⟨3,0⟩ and then reflecting across the y-axis is not generally the same as doing those steps in reverse.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "You treated order as part of the transformation and supported the claim with a coordinate or example.", "incorrect": "Apply both orders to one point such as (1,2). Compare the two final coordinates."}
+          }
+        ]
+      },
+      {
+        "sectionRef": "director-math-r2-g10-transformation-sequences:reteach",
+        "sectionKind": "remediation",
+        "title": "Reteach: use an input-output chain",
+        "body": "Write start → first image → final image. Never apply both rules to the original point.",
+        "items": [{
+          "itemRef": "director-math-r2-g10-transformation-sequences:reteach:1",
+          "itemKind": "short-answer",
+          "prompt": "Start at (−2,3). Reflect across the y-axis, then translate by ⟨1,−2⟩. Enter the final ordered pair.",
+          "responseKind": "TEXT",
+          "feedback": {"correct": "Your input-output chain preserves the specified order.", "incorrect": "First change only the x-coordinate for the reflection. Then add the translation vector to that image."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g10-transformation-sequences:check",
+        "sectionKind": "mastery-check",
+        "title": "Check: construct a full mapping",
+        "items": [{
+          "itemRef": "director-math-r2-g10-transformation-sequences:check:1",
+          "itemKind": "constructed-response",
+          "prompt": "Map A(0,1), B(2,1), C(0,4) by a 180° rotation about the origin followed by translation ⟨−1,3⟩. Give the final vertices and one distance check.",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "feedback": {"correct": "Your coordinates follow the ordered composition, and your invariant check supports the mapping.", "incorrect": "List the rotated vertices before translating. Then compare one side length before and after."}
+        }]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": ["A transformation sequence must include complete defining information.", "Composition order changes the result.", "Distance and angle invariants help verify rigid-motion work."],
+      "courseProgress": "This sample is based on Grade 10 Unit 2, lesson family 5. It does not change your production-course progress.",
+      "nextAction": "Done for today",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}

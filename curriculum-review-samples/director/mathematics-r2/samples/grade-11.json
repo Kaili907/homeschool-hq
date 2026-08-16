@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "namespace": "director-review:mathematics:r2",
+  "reviewMetadata": {
+    "grade": 11,
+    "courseRef": "ma-g11-mathematics",
+    "sourceLessonRef": "ma-g11-mathematics-u02-l06",
+    "sourceLessonFamily": "Rational and Radical Expressions and Equations",
+    "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u02-l06.package.json",
+    "standards": ["A-APR.6", "A-REI.2", "MP.6"],
+    "normalInstructionalLesson": true
+  },
+  "learnerMaterial": {
+    "lessonRef": "director-math-r2-g11-extraneous-solutions",
+    "title": "Detect Extraneous Solutions",
+    "subject": "mathematics",
+    "format": "structured",
+    "lessonGoal": "Explain why radical-equation procedures can create extraneous solutions and verify candidates in the original equation.",
+    "successCriteria": ["I state domain restrictions before solving.", "I distinguish implication from equivalence in a squared step.", "I test every candidate in the original equation."],
+    "keyPoints": ["Squaring both sides can enlarge the solution set.", "Algebraic candidates are not solutions until they satisfy the original equation.", "Domain restrictions can reject impossible candidates early."],
+    "vocabulary": [{"term": "extraneous solution", "definition": "a value produced by a solving process that does not satisfy the original equation"}],
+    "sections": [
+      {
+        "sectionRef": "director-math-r2-g11-extraneous-solutions:teach",
+        "sectionKind": "data-table",
+        "title": "Equivalence can be lost",
+        "data": {"columns": ["Statement", "Squaring gives", "Converse always true?"], "rows": ["a = b | a² = b² | no; a may equal −b"]}
+      },
+      {
+        "sectionRef": "director-math-r2-g11-extraneous-solutions:example",
+        "sectionKind": "worked-example",
+        "title": "Worked example: solve, then verify",
+        "directions": "The full solution includes the candidate check.",
+        "items": [{
+          "itemRef": "director-math-r2-g11-extraneous-solutions:example:1",
+          "itemKind": "worked-example",
+          "prompt": "Solve √(x + 6) = x.",
+          "workedSolution": {"steps": ["Domain: x must be at least 0 because the square root is nonnegative.", "Square: x + 6 = x², so x² − x − 6 = 0.", "Factor: (x − 3)(x + 2) = 0, giving candidates 3 and −2.", "The domain rejects −2. Check 3: √9 = 3.", "The only solution is x = 3."]}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g11-extraneous-solutions:guided",
+        "sectionKind": "guided-practice",
+        "title": "Your turn: apply the domain screen",
+        "items": [{
+          "itemRef": "director-math-r2-g11-extraneous-solutions:guided:1",
+          "itemKind": "multiple-choice",
+          "prompt": "For √(2x − 1) = x − 4, which restriction must hold before solving?",
+          "responseKind": "CHOICE",
+          "choices": ["x ≥ 1/2 only", "x ≥ 4", "x ≤ 4"],
+          "feedback": {"correct": "You accounted for both a defined radicand and a nonnegative right side.", "incorrect": "The square root is defined and nonnegative. Require the right side to be nonnegative too."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g11-extraneous-solutions:practice",
+        "sectionKind": "independent-practice",
+        "title": "Practice: audit candidate solutions",
+        "items": [
+          {
+            "itemRef": "director-math-r2-g11-extraneous-solutions:practice:1",
+            "itemKind": "constructed-response",
+            "prompt": "Solve √(x + 2) = x. Show the candidate equation and test every candidate in the original equation.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "You separated generated candidates from verified solutions.", "incorrect": "After solving the squared equation, substitute each candidate into the unsquared original equation."}
+          },
+          {
+            "itemRef": "director-math-r2-g11-extraneous-solutions:practice:2",
+            "itemKind": "constructed-response",
+            "prompt": "Explain precisely why the step a = b ⇒ a² = b² cannot always be reversed.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "You identified sign loss and distinguished implication from equivalence.", "incorrect": "Find two unequal numbers with equal squares. Use them to test the reverse statement."}
+          }
+        ]
+      },
+      {
+        "sectionRef": "director-math-r2-g11-extraneous-solutions:reteach",
+        "sectionKind": "remediation",
+        "title": "Reteach: mark the one-way step",
+        "body": "Use a one-way arrow when you square an equation. At the end, a substitution check decides which candidates return to the original equation.",
+        "items": [{
+          "itemRef": "director-math-r2-g11-extraneous-solutions:reteach:1",
+          "itemKind": "multiple-choice",
+          "prompt": "A candidate makes the left side 5 and the right side −5 in the original equation. What is its status?",
+          "responseKind": "CHOICE",
+          "choices": ["Verified solution", "Extraneous candidate", "Identity"],
+          "feedback": {"correct": "Equal squares did not make the original signed values equal.", "incorrect": "The original equation requires equal values, not merely equal squares."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g11-extraneous-solutions:check",
+        "sectionKind": "mastery-check",
+        "title": "Check: preserve the original authority",
+        "items": [{
+          "itemRef": "director-math-r2-g11-extraneous-solutions:check:1",
+          "itemKind": "constructed-response",
+          "prompt": "Solve √(3x + 4) = x + 2. State restrictions, generate candidates, and verify the final solution set in the original equation.",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "feedback": {"correct": "Your restrictions, algebra, and original-equation checks establish the final solution set.", "incorrect": "Separate the work into restriction, candidate generation, and original-equation verification."}
+        }]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": ["Squaring is not automatically an equivalent transformation.", "Domain restrictions screen candidates before or after algebra.", "The original equation—not the squared equation—decides the final solution set."],
+      "courseProgress": "This sample is based on Grade 11 Unit 2, lesson family 6. It does not change your production-course progress.",
+      "nextAction": "Done for today",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}

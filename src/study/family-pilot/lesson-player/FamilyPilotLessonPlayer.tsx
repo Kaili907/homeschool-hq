@@ -23,6 +23,7 @@ export function FamilyPilotLessonPlayer({
   onCompleteSegment,
   onOpenTutor,
   onExit,
+  onReviewLesson,
 }: FamilyPilotLessonPlayerProps) {
   const [responseText, setResponseText] = useState('')
   const [selectedChoice, setSelectedChoice] = useState('')
@@ -81,6 +82,30 @@ export function FamilyPilotLessonPlayer({
   }
 
   if (status === 'completed') {
+    if (renderModel?.mode === 'rich' && renderModel.review) {
+      const decisions = segmentContent?.assessmentDecisions ?? {}
+      const answered = new Set(segmentContent?.answeredItemRefs ?? [])
+      const assessedPages = renderModel.pages.filter((page) => page.item && answered.has(page.item.itemRef))
+      const correctPages = assessedPages.filter((page) => decisions[page.item!.itemRef] === 'CORRECT')
+      const retryPages = assessedPages.filter((page) => ['INCORRECT', 'PARTIAL'].includes(decisions[page.item!.itemRef] ?? ''))
+      const pendingCount = segmentContent?.pendingAssessmentCount ?? 0
+      return (
+        <main className="rich-lesson" data-subject={renderModel.subject.subject}>
+          <article id="rich-lesson-review" className="rich-lesson__card rich-lesson__card--reflection" aria-labelledby="rich-lesson-review-heading">
+            <p className="rich-lesson__eyebrow">Lesson review</p>
+            <h1 id="rich-lesson-review-heading" ref={headingRef} tabIndex={-1}>{title}</h1>
+            <section aria-labelledby="rich-review-learned"><h2 id="rich-review-learned">What you learned</h2><ul>{renderModel.review.whatYouLearned.map((point) => <li key={point}>{point}</li>)}</ul></section>
+            <section aria-labelledby="rich-review-how"><h2 id="rich-review-how">How you did</h2><p>{answered.size} learner response{answered.size === 1 ? '' : 's'} saved. {pendingCount ? `${pendingCount} still ${pendingCount === 1 ? 'needs' : 'need'} trusted assessment.` : 'All saved responses that could be assessed have a trusted result.'}</p></section>
+            <section aria-labelledby="rich-review-well"><h2 id="rich-review-well">What you did well</h2>{correctPages.length ? <ul>{correctPages.map((page) => <li key={page.pageRef}>{page.title}: your response demonstrated the target skill.</li>)}</ul> : <p>Specific skill evidence will appear here after trusted assessment. Finishing a page alone does not claim mastery.</p>}</section>
+            <section aria-labelledby="rich-review-retry"><h2 id="rich-review-retry">Review / try again</h2>{retryPages.length ? <ul>{retryPages.map((page) => <li key={page.pageRef}>{page.title}: use the reteach path, then try the fresh item.</li>)}</ul> : <p>{pendingCount ? 'Return after assessment to see any skill that needs another try.' : 'No assessed skill is currently marked for another try.'}</p>}</section>
+            <section aria-labelledby="rich-review-progress"><h2 id="rich-review-progress">Course progress</h2><p>{renderModel.review.courseProgress}</p></section>
+            <section aria-labelledby="rich-review-next"><h2 id="rich-review-next">Next action</h2><p>{renderModel.review.nextAction}</p></section>
+            {onReviewLesson ? <button type="button" className="rich-lesson__primary-button" onClick={onReviewLesson}>{renderModel.review.reviewActionLabel}</button> : null}
+            <button type="button" className="rich-lesson__quiet-button" onClick={() => onExit()}>Done</button>
+          </article>
+        </main>
+      )
+    }
     return (
       <main>
         <h1 ref={headingRef} tabIndex={-1}>{title}: lesson complete</h1>

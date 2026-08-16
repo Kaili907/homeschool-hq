@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "namespace": "director-review:mathematics:r2",
+  "reviewMetadata": {
+    "grade": 8,
+    "courseRef": "ma-g8-mathematics",
+    "sourceLessonRef": "ma-g8-mathematics-u01-l02",
+    "sourceLessonFamily": "Real Numbers and Irrational Numbers",
+    "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-08/ma-g8-mathematics-u01-l02.package.json",
+    "standards": ["8.NS.1", "8.NS.2", "MP.2", "MP.6"],
+    "normalInstructionalLesson": true
+  },
+  "learnerMaterial": {
+    "lessonRef": "director-math-r2-g8-decimal-expansions",
+    "title": "What a Decimal Expansion Reveals",
+    "subject": "mathematics",
+    "format": "structured",
+    "lessonGoal": "Today you will use decimal expansions to distinguish rational numbers from irrational numbers and justify an estimate.",
+    "successCriteria": ["I can identify terminating or repeating decimals as rational.", "I can explain why a nonterminating, nonrepeating decimal is irrational.", "I can bound an irrational number between decimals."],
+    "keyPoints": ["Every rational number has a decimal that terminates or repeats.", "An irrational decimal continues without a repeating block.", "Perfect-square bounds support square-root estimates."],
+    "vocabulary": [
+      {"term": "terminating decimal", "definition": "a decimal with finitely many nonzero digits"},
+      {"term": "repeating decimal", "definition": "a decimal whose digit block repeats forever"},
+      {"term": "irrational number", "definition": "a real number that cannot be written as a ratio of integers"}
+    ],
+    "sections": [
+      {
+        "sectionRef": "director-math-r2-g8-decimal-expansions:teach",
+        "sectionKind": "data-table",
+        "title": "Classify by the decimal pattern",
+        "data": {"columns": ["Number", "Decimal form", "Pattern", "Class"], "rows": ["3/8 | 0.375 | terminates | rational", "2/3 | 0.666… | repeats | rational", "√2 | 1.414213… | no repeating block | irrational"]}
+      },
+      {
+        "sectionRef": "director-math-r2-g8-decimal-expansions:example",
+        "sectionKind": "worked-example",
+        "title": "Worked example: bound √10",
+        "directions": "Read the completed reasoning. This is not a response page.",
+        "items": [{
+          "itemRef": "director-math-r2-g8-decimal-expansions:example:1",
+          "itemKind": "worked-example",
+          "prompt": "Place √10 between two consecutive tenths.",
+          "workedSolution": {"steps": ["3² = 9 and 4² = 16, so √10 is between 3 and 4.", "Test tenths near 3: 3.1² = 9.61 and 3.2² = 10.24.", "Because 9.61 < 10 < 10.24, 3.1 < √10 < 3.2.", "The bounds are justified by squaring positive endpoints."]}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g8-decimal-expansions:guided",
+        "sectionKind": "guided-practice",
+        "title": "Your turn: read the pattern",
+        "items": [{
+          "itemRef": "director-math-r2-g8-decimal-expansions:guided:1",
+          "itemKind": "multiple-choice",
+          "prompt": "Which decimal form proves that 7/12 is rational?",
+          "responseKind": "CHOICE",
+          "choices": ["0.58333… with 3 repeating", "0.583102… with no repeating block", "A decimal form cannot show this"],
+          "feedback": {"correct": "You recognized an eventually repeating block, which is a rational pattern.", "incorrect": "A rational decimal may terminate or begin with nonrepeating digits before a block repeats forever."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g8-decimal-expansions:practice",
+        "sectionKind": "independent-practice",
+        "title": "Practice: classify and estimate",
+        "items": [
+          {
+            "itemRef": "director-math-r2-g8-decimal-expansions:practice:1",
+            "itemKind": "constructed-response",
+            "prompt": "Classify 0.121212… as rational or irrational. Use the decimal pattern as evidence.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "You identified the repeating block and connected it to the rational-number rule.", "incorrect": "Mark a short block of digits and check whether that exact block repeats without end."}
+          },
+          {
+            "itemRef": "director-math-r2-g8-decimal-expansions:practice:2",
+            "itemKind": "numeric-entry",
+            "prompt": "Enter the whole number immediately below √27.",
+            "responseKind": "NUMERIC",
+            "feedback": {"correct": "You used neighboring perfect squares to locate √27.", "incorrect": "Find consecutive perfect squares with 27 between them. Use the smaller square's root."}
+          }
+        ]
+      },
+      {
+        "sectionRef": "director-math-r2-g8-decimal-expansions:reteach",
+        "sectionKind": "remediation",
+        "title": "Reteach: separate “goes on” from “does not repeat”",
+        "body": "A decimal going on forever is not enough to make it irrational. Repeating decimals also go on forever. Ask whether a fixed block repeats.",
+        "items": [{
+          "itemRef": "director-math-r2-g8-decimal-expansions:reteach:1",
+          "itemKind": "multiple-choice",
+          "prompt": "Which decimal description must be irrational?",
+          "responseKind": "CHOICE",
+          "choices": ["It terminates.", "A block repeats forever.", "It continues forever with no repeating block."],
+          "feedback": {"correct": "You used both conditions: nonterminating and nonrepeating.", "incorrect": "Eliminate patterns that rational numbers can have: terminating and repeating."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g8-decimal-expansions:check",
+        "sectionKind": "mastery-check",
+        "title": "Check: combine classification and bounds",
+        "items": [{
+          "itemRef": "director-math-r2-g8-decimal-expansions:check:1",
+          "itemKind": "constructed-response",
+          "prompt": "Explain why √15 is irrational, then place it between two consecutive tenths using squared endpoints.",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "feedback": {"correct": "You combined the non-perfect-square argument with verified decimal bounds.", "incorrect": "First compare 15 with nearby perfect squares. Then test tenths by squaring positive endpoints."}
+        }]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": ["Terminating and repeating decimals are rational.", "Nonterminating, nonrepeating decimals are irrational.", "Squared decimal endpoints can justify a square-root estimate."],
+      "courseProgress": "This sample is based on Grade 8 Unit 1, lesson family 2. It does not change your production-course progress.",
+      "nextAction": "Done for today",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}

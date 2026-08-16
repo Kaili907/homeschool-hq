@@ -43,6 +43,8 @@ export interface FamilyPilotLessonSegmentContent {
   readonly answeredItemRefs?: readonly string[]
   readonly requiredItemRefs?: readonly string[]
   readonly canCompleteSegment?: boolean
+  /** Trusted assessment decisions only; learner material never supplies correctness. */
+  readonly assessmentDecisions?: Readonly<Record<string, 'CORRECT' | 'INCORRECT' | 'PARTIAL' | 'REVIEW_REQUIRED'>>
 }
 
 export type RichLessonSectionKind =
@@ -101,6 +103,7 @@ export interface RichLessonRenderModel {
   readonly title: string
   readonly subject: RichLessonSubjectAdapter
   readonly pages: readonly RichLessonPage[]
+  readonly review?: import('../final-app/learner-response').LearnerLessonReview | null
 }
 
 export interface RichLessonTutorRequest {
@@ -130,4 +133,6 @@ export interface FamilyPilotLessonPlayerProps {
   /** A narrow future seam. The player imports no Tutor runtime or API. */
   readonly onOpenTutor: (request?: RichLessonTutorRequest) => void
   readonly onExit: (presentationProgressRef?: string) => void
+  /** Optional host-owned navigation for revisiting completed rich lesson content. */
+  readonly onReviewLesson?: () => void
 }

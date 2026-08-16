@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "namespace": "director-review:mathematics:r2",
+  "reviewMetadata": {
+    "grade": 5,
+    "courseRef": "ma-g5-mathematics",
+    "sourceLessonRef": "ma-g5-mathematics-u02-l02",
+    "sourceLessonFamily": "Place Value, Powers of Ten, and Decimals",
+    "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-05/ma-g5-mathematics-u02-l02.package.json",
+    "standards": ["5.NBT.1", "5.NBT.2", "5.NBT.3", "5.NBT.4"],
+    "normalInstructionalLesson": true
+  },
+  "learnerMaterial": {
+    "lessonRef": "director-math-r2-g5-decimal-place-value",
+    "title": "Read Decimals by Place Value",
+    "subject": "mathematics",
+    "format": "structured",
+    "lessonGoal": "Today you will read decimals through thousandths and connect each digit to its value. Decimal place value is useful when you measure and compare.",
+    "successCriteria": ["I can name tenths, hundredths, and thousandths.", "I can write a decimal in word form and expanded form."],
+    "keyPoints": ["The decimal point separates whole-number places from decimal places.", "Each place to the right is one tenth of the place to its left."],
+    "vocabulary": [
+      {"term": "hundredth", "definition": "one of 100 equal parts of a whole"},
+      {"term": "thousandth", "definition": "one of 1,000 equal parts of a whole"}
+    ],
+    "sections": [
+      {
+        "sectionRef": "director-math-r2-g5-decimal-place-value:teach",
+        "sectionKind": "data-table",
+        "title": "A decimal place-value chart",
+        "body": "Read 4.307 as four and three hundred seven thousandths.",
+        "data": {"columns": ["Ones", "Decimal point", "Tenths", "Hundredths", "Thousandths"], "rows": ["4 | . | 3 | 0 | 7"]}
+      },
+      {
+        "sectionRef": "director-math-r2-g5-decimal-place-value:example",
+        "sectionKind": "worked-example",
+        "title": "Worked example: unpack 2.645",
+        "directions": "The answer is shown because this is a worked example.",
+        "items": [{
+          "itemRef": "director-math-r2-g5-decimal-place-value:example:1",
+          "itemKind": "worked-example",
+          "prompt": "Write 2.645 in expanded form and word form.",
+          "workedSolution": {"steps": ["The 2 is in the ones place: 2.", "The 6 is in the tenths place: 0.6.", "The 4 is in the hundredths place: 0.04.", "The 5 is in the thousandths place: 0.005.", "Expanded form: 2 + 0.6 + 0.04 + 0.005.", "Word form: two and six hundred forty-five thousandths."]}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g5-decimal-place-value:guided",
+        "sectionKind": "guided-practice",
+        "title": "Your turn: name a digit's value",
+        "directions": "Choose one value.",
+        "items": [{
+          "itemRef": "director-math-r2-g5-decimal-place-value:guided:1",
+          "itemKind": "multiple-choice",
+          "prompt": "What is the value of the 8 in 6.082?",
+          "responseKind": "CHOICE",
+          "choices": ["eight tenths", "eight hundredths", "eight thousandths"],
+          "feedback": {"correct": "You counted two places to the right of the decimal point: hundredths.", "incorrect": "Start just right of the decimal point with tenths, then count one place at a time."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g5-decimal-place-value:practice",
+        "sectionKind": "independent-practice",
+        "title": "Practice: read and build decimals",
+        "items": [
+          {
+            "itemRef": "director-math-r2-g5-decimal-place-value:practice:1",
+            "itemKind": "short-answer",
+            "prompt": "Write 3.409 in word form.",
+            "responseKind": "TEXT",
+            "feedback": {"correct": "Your word form preserves the zero hundredths and names thousandths.", "incorrect": "Use “and” for the decimal point. Then read 409 and name the last place: thousandths."}
+          },
+          {
+            "itemRef": "director-math-r2-g5-decimal-place-value:practice:2",
+            "itemKind": "constructed-response",
+            "prompt": "Write 7.052 in expanded form. Explain what the zero tells you.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "You represented each nonzero digit and explained the empty tenths place.", "incorrect": "Place the digits in a chart first. The zero keeps the 5 in the hundredths place."}
+          }
+        ]
+      },
+      {
+        "sectionRef": "director-math-r2-g5-decimal-place-value:reteach",
+        "sectionKind": "remediation",
+        "title": "Reteach: count from the decimal point",
+        "body": "Touch the decimal point. Move right: tenths, hundredths, thousandths. A zero can hold a place even when its value is zero.",
+        "items": [{
+          "itemRef": "director-math-r2-g5-decimal-place-value:reteach:1",
+          "itemKind": "multiple-choice",
+          "prompt": "Which decimal means five and six thousandths?",
+          "responseKind": "CHOICE",
+          "choices": ["5.6", "5.06", "5.006"],
+          "feedback": {"correct": "You used zeros to hold the tenths and hundredths places.", "incorrect": "Six thousandths puts the 6 in the third place to the right of the decimal point."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g5-decimal-place-value:check",
+        "sectionKind": "mastery-check",
+        "title": "Check: connect three forms",
+        "items": [{
+          "itemRef": "director-math-r2-g5-decimal-place-value:check:1",
+          "itemKind": "constructed-response",
+          "prompt": "Write 9.174 in word form and expanded form. Then name the value of the 7.",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "feedback": {"correct": "All three representations agree, and the digit value matches its place.", "incorrect": "Check each position in a place-value chart, especially the hundredths place."}
+        }]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": ["Tenths, hundredths, and thousandths are places right of the decimal point.", "Zeros can hold places in a decimal.", "Standard, word, and expanded forms must show the same value."],
+      "courseProgress": "This sample is based on Grade 5 Unit 2, lesson family 2. It does not change your production-course progress.",
+      "nextAction": "Done for today",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}

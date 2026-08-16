@@ -143,6 +143,12 @@ export function RichLessonPresentation({
   const canContinue = !interactive || answered || responseType === 'RUBRIC_REVIEW_PENDING' || responseType === 'GUARDIAN_ATTESTATION'
   const hasNextPage = pageIndex < pages.length - 1
   const exampleSteps = item?.example?.split('\n').map((step) => step.trim()).filter(Boolean) ?? []
+  const assessmentDecision = item ? segmentContent?.assessmentDecisions?.[item.itemRef] : undefined
+  const assessmentFeedback = assessmentDecision === 'CORRECT'
+    ? item?.feedback?.correct
+    : assessmentDecision === 'INCORRECT' || assessmentDecision === 'PARTIAL'
+      ? item?.feedback?.incorrect
+      : undefined
 
   const continueLesson = () => {
     if (isBusy || !canContinue) return
@@ -185,7 +191,13 @@ export function RichLessonPresentation({
 
         {answered ? (
           <div className="rich-lesson__saved" role="status">
-            <p>Response saved. No browser correctness decision was made.</p>
+            {assessmentFeedback ? (
+              <><h2>{assessmentDecision === 'CORRECT' ? 'Why that works' : 'Use this feedback'}</h2><p>{assessmentFeedback}</p></>
+            ) : assessmentDecision === 'REVIEW_REQUIRED' ? (
+              <p>Your response is saved for trusted review. No browser correctness decision was made.</p>
+            ) : (
+              <p>Response saved. No browser correctness decision was made.</p>
+            )}
             <button type="button" className="rich-lesson__primary-button" disabled={isBusy} onClick={continueLesson}>{hasNextPage ? 'Continue' : 'Finish this part'}</button>
           </div>
         ) : responseType === 'RUBRIC_REVIEW_PENDING' ? (

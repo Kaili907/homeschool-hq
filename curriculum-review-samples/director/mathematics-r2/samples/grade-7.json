@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "namespace": "director-review:mathematics:r2",
+  "reviewMetadata": {
+    "grade": 7,
+    "courseRef": "ma-g7-mathematics",
+    "sourceLessonRef": "ma-g7-mathematics-u01-l04",
+    "sourceLessonFamily": "Mathematical Reasoning and Proportional Thinking",
+    "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-07/ma-g7-mathematics-u01-l04.package.json",
+    "standards": ["7.RP.1", "7.RP.2", "MP.1", "MP.3", "MP.6"],
+    "normalInstructionalLesson": true
+  },
+  "learnerMaterial": {
+    "lessonRef": "director-math-r2-g7-constant-of-proportionality",
+    "title": "Find the Constant of Proportionality",
+    "subject": "mathematics",
+    "format": "structured",
+    "lessonGoal": "Today you will find the constant of proportionality in tables and equations, then explain what it means in context.",
+    "successCriteria": ["I can test whether y/x stays constant.", "I can write y = kx.", "I can interpret k with units."],
+    "keyPoints": ["In a proportional relationship, y/x has one constant value k.", "The equation y = kx represents the relationship.", "The constant has meaning and units in a context."],
+    "vocabulary": [{"term": "constant of proportionality", "definition": "the fixed multiplier k in y = kx"}],
+    "sections": [
+      {
+        "sectionRef": "director-math-r2-g7-constant-of-proportionality:teach",
+        "sectionKind": "data-table",
+        "title": "Look for one multiplier",
+        "body": "A bike rental charges the same amount per hour. Divide cost by hours in each row.",
+        "data": {"columns": ["Hours x", "Cost y", "y ÷ x"], "rows": ["2 | $14 | $7 per hour", "3 | $21 | $7 per hour", "5 | $35 | $7 per hour"]}
+      },
+      {
+        "sectionRef": "director-math-r2-g7-constant-of-proportionality:example",
+        "sectionKind": "worked-example",
+        "title": "Worked example: connect table and equation",
+        "directions": "The solution is complete on this page. No response is expected.",
+        "items": [{
+          "itemRef": "director-math-r2-g7-constant-of-proportionality:example:1",
+          "itemKind": "worked-example",
+          "prompt": "What is the constant of proportionality for the bike rental, and what does it mean?",
+          "workedSolution": {"steps": ["Compute y/x for more than one row: 14/2 = 7 and 21/3 = 7.", "The ratios agree, so k = 7.", "The equation is y = 7x.", "In this situation, 7 means the rental costs $7 per hour."]}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g7-constant-of-proportionality:guided",
+        "sectionKind": "guided-practice",
+        "title": "Your turn: find k",
+        "directions": "Use one row, then check with another.",
+        "items": [{
+          "itemRef": "director-math-r2-g7-constant-of-proportionality:guided:1",
+          "itemKind": "numeric-entry",
+          "prompt": "A machine fills 18 bottles in 3 minutes and 30 bottles in 5 minutes. What is k in bottles per minute?",
+          "responseKind": "NUMERIC",
+          "feedback": {"correct": "Both rows give the same bottles-per-minute rate, so your k is supported by the table.", "incorrect": "Divide bottles by minutes for each row. A proportional table should give the same quotient twice."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g7-constant-of-proportionality:practice",
+        "sectionKind": "independent-practice",
+        "title": "Practice: represent and interpret",
+        "items": [
+          {
+            "itemRef": "director-math-r2-g7-constant-of-proportionality:practice:1",
+            "itemKind": "multiple-choice",
+            "prompt": "Which equation matches a proportional relationship with k = 2.5?",
+            "responseKind": "CHOICE",
+            "choices": ["y = x + 2.5", "y = 2.5x", "y = 2.5/x"],
+            "feedback": {"correct": "You placed k as the multiplier in y = kx.", "incorrect": "Use the proportional form y = kx. Decide where 2.5 belongs in that structure."}
+          },
+          {
+            "itemRef": "director-math-r2-g7-constant-of-proportionality:practice:2",
+            "itemKind": "constructed-response",
+            "prompt": "The equation d = 4.5t gives distance d in miles after t hours. Explain what 4.5 means and include units.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "You interpreted k as a unit rate instead of repeating the number without meaning.", "incorrect": "Read d/t: distance divided by time. State what amount of distance occurs for one hour."}
+          }
+        ]
+      },
+      {
+        "sectionRef": "director-math-r2-g7-constant-of-proportionality:reteach",
+        "sectionKind": "remediation",
+        "title": "Reteach: use the one-row test",
+        "body": "For a pair (x, y), ask: “What multiplies x to make y?” That multiplier is a candidate for k. Check it on a second pair.",
+        "items": [{
+          "itemRef": "director-math-r2-g7-constant-of-proportionality:reteach:1",
+          "itemKind": "numeric-entry",
+          "prompt": "For the pairs (4, 10) and (8, 20), what is k?",
+          "responseKind": "NUMERIC",
+          "feedback": {"correct": "Your multiplier works for both ordered pairs.", "incorrect": "Solve 4k = 10, then check whether the same k makes 8k = 20."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g7-constant-of-proportionality:check",
+        "sectionKind": "mastery-check",
+        "title": "Check: justify a proportional relationship",
+        "items": [{
+          "itemRef": "director-math-r2-g7-constant-of-proportionality:check:1",
+          "itemKind": "constructed-response",
+          "prompt": "A table contains (3, 12), (7, 28), and (10, 40). Decide whether it is proportional. Give k, an equation, and evidence from the table.",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "feedback": {"correct": "Your ratios, equation, and conclusion support one another.", "incorrect": "Compute y/x for all three pairs. If they agree, use that common value in y = kx."}
+        }]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": ["A proportional relationship has a constant ratio y/x.", "The equation y = kx names the constant as k.", "A useful interpretation of k includes units and context."],
+      "courseProgress": "This sample is based on Grade 7 Unit 1, lesson family 4. It does not change your production-course progress.",
+      "nextAction": "Done for today",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}
