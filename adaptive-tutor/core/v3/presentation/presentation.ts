@@ -1,4 +1,12 @@
 import { validateExact } from "../../v2/contracts/validation.js";
+import {
+  CommercialExecutionScopeSchema,
+  type CommercialExecutionScope,
+} from "../commercial-operation/contracts.js";
+import {
+  StudyCommercialTutorAdvisorySchema,
+  type StudyCommercialTutorAdvisory,
+} from "../contracts/commercial.js";
 import { validateExactSnapshot } from "../multimodal/runtime-snapshot.js";
 import {
   MultimodalAllowanceSchema,
@@ -474,7 +482,12 @@ export type W306PresentationMappingResult =
       readonly code:
         | "TRUSTED_ACCEPTANCE_REQUIRED"
         | "TRUSTED_PRESENTATION_BOUNDARY_REQUIRED"
+        | "TRUSTED_COMMERCIAL_EXECUTION_SCOPE_REQUIRED"
+        | "TRUSTED_STUDY_ADVISORY_REQUIRED"
         | "PRESENTATION_SCOPE_MISMATCH"
+        | "PRESENTATION_COMMERCIAL_SCOPE_MISMATCH"
+        | "STUDY_ADVISORY_SCOPE_MISMATCH"
+        | "STUDY_ADVISORY_PRESENTATION_MISMATCH"
         | "UNTRUSTED_PRESENTATION_REFERENCE"
         | "UNTRUSTED_REVIEWED_VISUAL"
         | "ACTIVE_ASSESSMENT_CAPTION_BLOCKED"
@@ -486,10 +499,88 @@ function samePresentationScope(
   right: PresentationScopeLineage,
 ): boolean {
   return left.householdScopeRef === right.householdScopeRef
+    && left.commercialExecutionScopeRef === right.commercialExecutionScopeRef
     && left.learnerScopeRef === right.learnerScopeRef
     && left.sessionRef === right.sessionRef
     && left.interactionRef === right.interactionRef
-    && left.opportunityRef === right.opportunityRef;
+    && left.logicalOperationRef === right.logicalOperationRef
+    && left.conceptRef === right.conceptRef
+    && left.opportunityRef === right.opportunityRef
+    && left.presentationRef === right.presentationRef;
+}
+
+function scopeMatchesCommercialExecution(
+  scope: PresentationScopeLineage,
+  commercialScope: CommercialExecutionScope,
+): boolean {
+  return scope.commercialExecutionScopeRef === commercialScope.scopeRef
+    && scope.householdScopeRef === commercialScope.householdScopeRef
+    && scope.learnerScopeRef === commercialScope.learnerScopeRef
+    && scope.sessionRef === commercialScope.sessionRef
+    && scope.interactionRef === commercialScope.interactionRef
+    && scope.logicalOperationRef === commercialScope.logicalOperationRef
+    && scope.conceptRef === commercialScope.conceptRef
+    && scope.opportunityRef === commercialScope.opportunityRef
+    && scope.presentationRef === commercialScope.presentationRef;
+}
+
+function sameReviewedVisual(
+  left: ReviewedVisualIntent | undefined,
+  right: ReviewedVisualIntent | undefined,
+): boolean {
+  if (left === undefined || right === undefined) return left === right;
+  return left.kind === right.kind
+    && left.contentRef === right.contentRef
+    && left.contentDigest === right.contentDigest
+    && left.provenanceRef === right.provenanceRef;
+}
+
+function samePresentationIntent(
+  left: PresentationIntent,
+  right: PresentationIntent,
+): boolean {
+  const leftFallback = left.fallbackPresentation;
+  const rightFallback = right.fallbackPresentation;
+  return left.contractVersion === right.contractVersion
+    && left.intentKind === right.intentKind
+    && left.reviewedTextRef === right.reviewedTextRef
+    && sameReviewedVisual(left.reviewedVisual, right.reviewedVisual)
+    && left.structuredCheckRef === right.structuredCheckRef
+    && left.accessibilityCaptionRef === right.accessibilityCaptionRef
+    && equalStringArrays(left.requestedDeliveryChannels, right.requestedDeliveryChannels)
+    && (
+      leftFallback === undefined || rightFallback === undefined
+        ? leftFallback === rightFallback
+        : leftFallback.presentationRef === rightFallback.presentationRef
+          && equalStringArrays(
+            leftFallback.requestedDeliveryChannels,
+            rightFallback.requestedDeliveryChannels,
+          )
+    );
+}
+
+function reviewedContentRefsFor(intent: PresentationIntent): string[] {
+  return [
+    ...(intent.reviewedTextRef === undefined ? [] : [intent.reviewedTextRef]),
+    ...(intent.reviewedVisual === undefined ? [] : [intent.reviewedVisual.contentRef]),
+    ...(intent.structuredCheckRef === undefined ? [] : [intent.structuredCheckRef]),
+  ];
+}
+
+function advisoryMatchesCommercialExecution(
+  advisory: StudyCommercialTutorAdvisory,
+  commercialScope: CommercialExecutionScope,
+): boolean {
+  return advisory.commercialScopeRef === commercialScope.scopeRef
+    && advisory.invocationRef === commercialScope.interactionRef
+    && advisory.householdScopeRef === commercialScope.householdScopeRef
+    && advisory.learnerScopeRef === commercialScope.learnerScopeRef
+    && advisory.sessionRef === commercialScope.sessionRef
+    && advisory.interactionRef === commercialScope.interactionRef
+    && advisory.logicalOperationRef === commercialScope.logicalOperationRef
+    && advisory.conceptRef === commercialScope.conceptRef
+    && advisory.opportunityRef === commercialScope.opportunityRef
+    && advisory.learnerStageRef === commercialScope.learnerStageRef;
 }
 
 function hasTrustedReference(
@@ -533,6 +624,8 @@ function hasTrustedVisual(
 export function mapTrustedAcceptedIntentToW306PresentationPieces(
   acceptanceCandidate: unknown,
   trustedBoundaryCandidate?: unknown,
+  trustedCommercialExecutionScopeCandidate?: unknown,
+  trustedStudyAdvisoryCandidate?: unknown,
 ): W306PresentationMappingResult {
   const acceptanceValidation = validateExactSnapshot(
     TrustedPresentationAcceptanceSchema,
@@ -550,17 +643,51 @@ export function mapTrustedAcceptedIntentToW306PresentationPieces(
     return { status: "rejected", code: "TRUSTED_PRESENTATION_BOUNDARY_REQUIRED" };
   }
   const boundary = boundaryValidation.value;
+  const commercialScopeValidation = validateExactSnapshot(
+    CommercialExecutionScopeSchema,
+    trustedCommercialExecutionScopeCandidate,
+  );
+  if (commercialScopeValidation.status === "rejected") {
+    return { status: "rejected", code: "TRUSTED_COMMERCIAL_EXECUTION_SCOPE_REQUIRED" };
+  }
+  const commercialScope = commercialScopeValidation.value;
+  const advisoryValidation = validateExactSnapshot(
+    StudyCommercialTutorAdvisorySchema,
+    trustedStudyAdvisoryCandidate,
+  );
+  if (advisoryValidation.status === "rejected") {
+    return { status: "rejected", code: "TRUSTED_STUDY_ADVISORY_REQUIRED" };
+  }
+  const advisory = advisoryValidation.value;
   if (
     acceptance.acceptanceRef !== boundary.acceptanceRef
     || !samePresentationScope(acceptance.scope, boundary.scope)
   ) {
     return { status: "rejected", code: "PRESENTATION_SCOPE_MISMATCH" };
   }
+  if (
+    !scopeMatchesCommercialExecution(acceptance.scope, commercialScope)
+    || !scopeMatchesCommercialExecution(boundary.scope, commercialScope)
+  ) {
+    return { status: "rejected", code: "PRESENTATION_COMMERCIAL_SCOPE_MISMATCH" };
+  }
+  if (!advisoryMatchesCommercialExecution(advisory, commercialScope)) {
+    return { status: "rejected", code: "STUDY_ADVISORY_SCOPE_MISMATCH" };
+  }
   const intentValidation = validatePresentationIntent(acceptance.presentationIntent);
   if (intentValidation.status === "rejected") {
     return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
   }
   const intent = intentValidation.intent;
+  if (
+    advisory.status !== "proposed"
+    || advisory.presentationIntent === null
+    || !samePresentationIntent(advisory.presentationIntent, intent)
+    || !equalStringArrays(advisory.reviewedContentRefs, reviewedContentRefsFor(intent))
+    || intent.fallbackPresentation?.presentationRef !== commercialScope.presentationRef
+  ) {
+    return { status: "rejected", code: "STUDY_ADVISORY_PRESENTATION_MISMATCH" };
+  }
   if (
     (intent.reviewedTextRef !== undefined
       && !hasTrustedReference(

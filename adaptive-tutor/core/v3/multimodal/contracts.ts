@@ -1,6 +1,8 @@
 import { Type, type Static } from "../../schema/typebox.js";
+import { StudyCommercialTutorAdvisorySchema } from "../contracts/commercial.js";
+import { CommercialExecutionScopeSchema } from "../commercial-operation/contracts.js";
 
-export const MULTIMODAL_CONTRACT_VERSION = "3.0.0-foundation.2" as const;
+export const MULTIMODAL_CONTRACT_VERSION = "3.0.0-foundation.3" as const;
 
 export const MultimodalReferenceSchema = Type.String({
   minLength: 3,
@@ -20,11 +22,15 @@ export const MultimodalISODateTimeSchema = Type.String({
 
 export const MultimodalScopeLineageSchema = Type.Object(
   {
+    commercialExecutionScopeRef: MultimodalReferenceSchema,
     householdScopeRef: MultimodalReferenceSchema,
     learnerScopeRef: MultimodalReferenceSchema,
     sessionRef: MultimodalReferenceSchema,
     interactionRef: MultimodalReferenceSchema,
+    logicalOperationRef: MultimodalReferenceSchema,
+    conceptRef: MultimodalReferenceSchema,
     opportunityRef: MultimodalReferenceSchema,
+    presentationRef: MultimodalReferenceSchema,
   },
   { additionalProperties: false, $id: "TutorV3MultimodalScopeLineage" },
 );
@@ -388,6 +394,8 @@ export const TrustedLearnerAudioInputCapabilitySchema = Type.Object(
 export const TrustedMultimodalPolicyContextSchema = Type.Object(
   {
     contextKind: Type.Literal("trusted-study-multimodal-policy-context"),
+    commercialExecutionScope: CommercialExecutionScopeSchema,
+    studyAdvisory: StudyCommercialTutorAdvisorySchema,
     scope: MultimodalScopeLineageSchema,
     captionBinding: TrustedMultimodalCaptionBindingSchema,
     reviewedVisualBindings: Type.Array(TrustedReviewedVisualBindingSchema, {
@@ -490,11 +498,15 @@ export const DurableMultimodalEvidenceSchema = Type.Object(
     contractVersion: Type.Literal(MULTIMODAL_CONTRACT_VERSION),
     envelope: Type.Literal("durable-multimodal-evidence"),
     evidenceRef: MultimodalReferenceSchema,
+    commercialExecutionScopeRef: MultimodalReferenceSchema,
     householdScopeRef: MultimodalReferenceSchema,
     learnerScopeRef: MultimodalReferenceSchema,
     sessionRef: MultimodalReferenceSchema,
     interactionRef: MultimodalReferenceSchema,
+    logicalOperationRef: MultimodalReferenceSchema,
+    conceptRef: MultimodalReferenceSchema,
     opportunityRef: MultimodalReferenceSchema,
+    presentationRef: MultimodalReferenceSchema,
     turnRef: MultimodalReferenceSchema,
     mode: MultimodalModeSchema,
     outcome: MultimodalObservationOutcomeSchema,

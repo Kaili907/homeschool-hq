@@ -2,6 +2,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { Value } from "../../../core/schema/value.js";
 import {
+  COMMERCIAL_EXECUTION_SCOPE_VERSION,
+  type CommercialExecutionScope,
+} from "../../../core/v3/commercial-operation/index.js";
+import {
+  STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION,
+  type StudyCommercialTutorAdvisory,
+} from "../../../core/v3/contracts/index.js";
+import {
   MULTIMODAL_CONTRACT_VERSION,
   MultimodalPresentationSchema,
   TransientMediaDescriptorSchema,
@@ -35,20 +43,56 @@ function seededOrder<T>(values: readonly T[]): T[] {
 }
 
 const scopeA = {
+  commercialExecutionScopeRef: "commercial-scope:child-a",
   householdScopeRef: "household:family-one",
   learnerScopeRef: "learner:child-a",
   sessionRef: "session:child-a",
   interactionRef: "interaction:child-a",
+  logicalOperationRef: "logical-operation:child-a",
+  conceptRef: "concept:child-a",
   opportunityRef: "opportunity:child-a",
+  presentationRef: "presentation-fallback:image-a",
 } as const satisfies PresentationScopeLineage;
 
 const scopeB = {
+  commercialExecutionScopeRef: "commercial-scope:child-b",
   householdScopeRef: "household:family-one",
   learnerScopeRef: "learner:child-b",
   sessionRef: "session:child-b",
   interactionRef: "interaction:child-b",
+  logicalOperationRef: "logical-operation:child-b",
+  conceptRef: "concept:child-b",
   opportunityRef: "opportunity:child-b",
+  presentationRef: "presentation-fallback:image-b",
 } as const satisfies PresentationScopeLineage;
+
+const commercialExecutionScope: CommercialExecutionScope = {
+  scopeVersion: COMMERCIAL_EXECUTION_SCOPE_VERSION,
+  scopeKind: "trusted-study-commercial-execution-scope",
+  issuedBy: "study-engine",
+  scopeRef: scopeA.commercialExecutionScopeRef,
+  householdScopeRef: scopeA.householdScopeRef,
+  learnerScopeRef: scopeA.learnerScopeRef,
+  sessionRef: scopeA.sessionRef,
+  interactionRef: scopeA.interactionRef,
+  logicalOperationRef: scopeA.logicalOperationRef,
+  curriculumReleaseRef: "release-child-a",
+  curriculumPackageRef: "package:child-a",
+  curriculumCourseRef: "course-child-a",
+  curriculumSubjectRef: "subject-child-a",
+  curriculumUnitRef: "unit-child-a",
+  curriculumLessonRef: "lesson-child-a",
+  conceptRef: scopeA.conceptRef,
+  opportunityRef: scopeA.opportunityRef,
+  learnerStageRef: "learner-stage:child-a",
+  presentationRef: scopeA.presentationRef,
+  routingRequestRef: "routing-request:child-a",
+  routePlanRef: "route-plan:child-a",
+  reservationRef: "reservation:child-a",
+  physicalAttemptRefs: ["physical-attempt:child-a"],
+  allowedRouteRefs: ["route:child-a"],
+  telemetryEventRefs: ["telemetry:child-a"],
+};
 
 const presentationIntent = {
   contractVersion: PRESENTATION_CONTRACT_VERSION,
@@ -77,6 +121,41 @@ function acceptance(
     scope,
     presentationIntent: intent,
   } as const;
+}
+
+function studyAdvisory(intent: PresentationIntent): StudyCommercialTutorAdvisory {
+  return {
+    contractVersion: STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION,
+    advisoryKind: "study-commercial-tutor-advisory",
+    invocationRef: commercialExecutionScope.interactionRef,
+    commercialScopeRef: commercialExecutionScope.scopeRef,
+    householdScopeRef: commercialExecutionScope.householdScopeRef,
+    learnerScopeRef: commercialExecutionScope.learnerScopeRef,
+    sessionRef: commercialExecutionScope.sessionRef,
+    interactionRef: commercialExecutionScope.interactionRef,
+    logicalOperationRef: commercialExecutionScope.logicalOperationRef,
+    opportunityRef: commercialExecutionScope.opportunityRef,
+    conceptRef: commercialExecutionScope.conceptRef,
+    learnerStageRef: commercialExecutionScope.learnerStageRef,
+    status: "proposed",
+    proposedTutorAction: "hint",
+    reasonCodes: ["COMMERCIAL_PROPOSAL_READY"],
+    reviewedContentRefs: [
+      ...(intent.reviewedTextRef === undefined ? [] : [intent.reviewedTextRef]),
+      ...(intent.reviewedVisual === undefined ? [] : [intent.reviewedVisual.contentRef]),
+      ...(intent.structuredCheckRef === undefined ? [] : [intent.structuredCheckRef]),
+    ],
+    groundingDecision: "sufficient",
+    assistanceEvidenceRef: commercialExecutionScope.opportunityRef,
+    presentationIntent: intent,
+    studyDecisionRequired: true,
+    studyMutationAllowed: false,
+    officialMasteryAuthority: false,
+    officialWorkingLevelAuthority: false,
+    nominalGradeAuthority: false,
+    curriculumAuthority: false,
+    segmentCompletionAuthority: false,
+  };
 }
 
 function presentationBoundary(
@@ -123,7 +202,7 @@ const restrictions = {
 } as const;
 
 const caption = {
-  captionRef: "caption:neutral-a",
+  captionRef: "caption-metadata:image-a",
   text: "A neutral accessibility description of the prompt is available.",
   locale: "en-US",
   availability: "available",
@@ -131,7 +210,7 @@ const caption = {
 } as const;
 
 const reviewedImage = {
-  visualRef: "visual:image-a",
+  visualRef: "reviewed-content:image-a",
   visualKind: "image",
   contentDigest: digestA,
   mimeType: "image/png",
@@ -171,6 +250,8 @@ function policyContext(
 ): TrustedMultimodalPolicyContext {
   return {
     contextKind: "trusted-study-multimodal-policy-context",
+    commercialExecutionScope,
+    studyAdvisory: studyAdvisory(presentationIntent),
     scope: scopeA,
     captionBinding: {
       scope: scopeA,
@@ -269,6 +350,8 @@ test(`W4-08 seed ${W4_SEED}: active-assessment answer canaries cannot enter capt
     mapTrustedAcceptedIntentToW306PresentationPieces(
       acceptance(answerCaptionIntent),
       presentationBoundary(),
+      commercialExecutionScope,
+      studyAdvisory(answerCaptionIntent),
     ),
     { status: "rejected", code: "ACTIVE_ASSESSMENT_CAPTION_BLOCKED" },
   );
@@ -279,6 +362,8 @@ test(`W4-03/W4-08 seed ${W4_SEED}: sibling scope cannot influence presentation a
   const scopeResult = mapTrustedAcceptedIntentToW306PresentationPieces(
     siblingAcceptance,
     presentationBoundary(scopeA),
+    commercialExecutionScope,
+    studyAdvisory(presentationIntent),
   );
   assert.deepEqual(scopeResult, {
     status: "rejected",
@@ -319,6 +404,8 @@ test(`W4-08 seed ${W4_SEED}: well-formed wrong digest and provenance are rejecte
     mapTrustedAcceptedIntentToW306PresentationPieces(
       acceptance(wrongDigest),
       presentationBoundary(),
+      commercialExecutionScope,
+      studyAdvisory(wrongDigest),
     ),
     { status: "rejected", code: "UNTRUSTED_REVIEWED_VISUAL" },
   );
@@ -334,6 +421,8 @@ test(`W4-08 seed ${W4_SEED}: well-formed wrong digest and provenance are rejecte
     mapTrustedAcceptedIntentToW306PresentationPieces(
       acceptance(wrongProvenance),
       presentationBoundary(),
+      commercialExecutionScope,
+      studyAdvisory(wrongProvenance),
     ),
     { status: "rejected", code: "UNTRUSTED_REVIEWED_VISUAL" },
   );
