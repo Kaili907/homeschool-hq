@@ -1,0 +1,14 @@
+{
+  "extends": "../../../scripts/tutor-v3/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "../../..",
+    "outDir": "./.dist"
+  },
+  "include": [
+    "../../../core/schema/**/*.ts",
+    "../../../core/v2/contracts/**/*.ts",
+    "../../../core/v3/**/*.ts",
+    "../../../tests/tutor-v3-convergence/fixtures.ts",
+    "./**/*.ts"
+  ]
+}
