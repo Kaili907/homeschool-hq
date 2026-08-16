@@ -19,3 +19,22 @@ or psychological judgments.
 Unknown, malformed, or mismatched stage bindings return the configured
 `study-reviewed-static-stage-fallback`. This result disables adaptive Tutor and
 provider invocation; it does not guess a nearby stage.
+
+## Commercial catalog
+
+`catalog.ts` commits the Study-approved commercial foundation catalog. It has
+one explicit profile for each broad stage supported by W3-01: early elementary,
+upper elementary, middle grades, and secondary. Each entry pins the catalog
+version, profile reference, policy revision, approval, and every W3-11 bound.
+
+`createCommercialLearnerStagePolicyCatalog()` accepts no profile or fallback
+inputs. It constructs W3-11 from the committed entries and reviewed static
+fallback only. Callers can inspect defensive copies but cannot install or
+replace a commercial profile. Bindings must carry the exact current catalog
+version, policy revision, and Study-supplied `learnerStageRef`.
+
+The reviewed routing mapping converts each canonical `learnerStageRef` to the
+matching W3-01 broad routing-stage literal. It is a routing input only. Nominal
+grade, official working level, curriculum grade, and learner stage remain four
+separate authorities, and no grade or working-level value is accepted by the
+catalog binding.
