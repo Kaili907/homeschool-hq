@@ -45,7 +45,7 @@ function context(expiresAt = '2026-08-14T18:00:00.000Z'): FamilyCloudIdentityCon
 }
 
 function identity(current: FamilyCloudIdentityContext | null = null): FamilyCloudIdentityPort & { signOut: ReturnType<typeof vi.fn> } {
-  const signOut = vi.fn(async () => undefined)
+  const signOut = vi.fn(async () => 'SIGNED_OUT' as const)
   return {
     current: vi.fn(async () => current),
     signIn: vi.fn(async () => ({ status: 'SIGNED_IN' as const, context: context() })),
@@ -213,6 +213,18 @@ describe('family household cloud auth', () => {
     expect(local.local.has(HOUSEHOLD_A)).toBe(true)
   })
 
+  it('does not report signed out when the provider logout fails', async () => {
+    const storage = new MemoryStorage()
+    const auth = identity()
+    auth.signOut.mockResolvedValueOnce('UNAVAILABLE')
+    const runtime = coordinator({ storage, identity: auth })
+    await runtime.signIn('parent@example.test', 'password')
+    await expect(runtime.signOut()).resolves.toMatchObject({
+      status: 'NEEDS_ATTENTION', reason: 'AUTH_UNAVAILABLE', cloudAuthority: 'NONE',
+    })
+    expect(storage.getItem(LINKED_FAMILY_DEVICE_KEY)).not.toBeNull()
+  })
+
   it('reconciles only through the established authenticated household context', async () => {
     const local = data()
     const runtime = coordinator({ data: local })
@@ -378,7 +390,6 @@ describe('provider-managed Family Cloud account creation', () => {
   })
 
   it('passes the exact staging Parent email to signInWithPassword and accepts its verified session', async () => {
-    vi.stubGlobal('window', { location: { origin: 'https://family-pilot-cloud-r1--manuel-academy.netlify.app' } })
     const session = {
       access_token: 'header.payload.signature', expires_at: Math.floor(Date.now() / 1_000) + 3_600,
       user: { id: USER_A, email: 'srkmanuel@gmail.com' },
@@ -392,6 +403,17 @@ describe('provider-managed Family Cloud account creation', () => {
     const adapter = createSupabaseFamilyCloudIdentity(client)
     await expect(adapter.signIn('srkmanuel@gmail.com', 'provider-owned-password')).resolves.toMatchObject({ status: 'SIGNED_IN' })
     expect(signInWithPassword).toHaveBeenCalledWith({ email: 'srkmanuel@gmail.com', password: 'provider-owned-password' })
+  })
+
+  it('requires canonical provider logout and verifies that the session is gone', async () => {
+    const signOut = vi.fn(async () => ({ error: null }))
+    const getSession = vi.fn(async () => ({ data: { session: null }, error: null }))
+    const getUser = vi.fn(async () => ({ data: { user: null }, error: new Error('Auth session missing') }))
+    const adapter = createSupabaseFamilyCloudIdentity({ auth: { signOut, getSession, getUser } } as unknown as SupabaseClient)
+    await expect(adapter.signOut()).resolves.toBe('SIGNED_OUT')
+    expect(signOut).toHaveBeenCalledWith({ scope: 'global' })
+    expect(getSession).toHaveBeenCalledOnce()
+    expect(getUser).toHaveBeenCalledOnce()
   })
 })
 

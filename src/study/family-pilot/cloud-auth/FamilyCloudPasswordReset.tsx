@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Session, SupabaseClient } from '@supabase/supabase-js'
-import { getSupabaseClient } from '../../../auth/supabaseSession'
+import { getSupabaseClient, supabaseSessionRecordIsPresent } from '../../../auth/supabaseSession'
 import { FAMILY_CLOUD_PATH } from './supabase'
 
 export type PasswordValidationResult = 'VALID' | 'TOO_SHORT' | 'MISMATCH'
@@ -50,8 +50,14 @@ export function observeFamilyCloudRecoverySession(
 }
 
 export async function updateFamilyCloudPassword(client: SupabaseClient, password: string): Promise<boolean> {
+  const before = await client.auth.getSession()
+  const expectedUserId = before.data.session?.user.id
+  if (before.error || !expectedUserId) return false
   const { error } = await client.auth.updateUser({ password })
-  return !error
+  if (error) return false
+  const after = await client.auth.getSession()
+  if (after.error || after.data.session?.user.id !== expectedUserId) return false
+  return supabaseSessionRecordIsPresent() && providerSessionIsValid(client, after.data.session)
 }
 
 export function FamilyCloudPasswordReset({ client = getSupabaseClient() }: { readonly client?: SupabaseClient | null }) {

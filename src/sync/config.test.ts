@@ -14,11 +14,13 @@ import {
 } from './config'
 import {
   createSupabaseBrowserClient,
+  getSupabaseClient,
   getVerifiedAuthContext,
   getVerifiedCurrentUser,
   onAuthSessionChange,
   profileRowsForMutation,
   pullProfiles,
+  resetSupabaseClientForTests,
   signOutRemote,
   userFromSession,
 } from './supabase'
@@ -179,11 +181,25 @@ describe('official Supabase auth and transport', () => {
     const auth = client.auth as unknown as {
       persistSession: boolean
       autoRefreshToken: boolean
+      detectSessionInUrl: boolean
+      flowType: string
       storageKey: string
     }
     expect(auth.persistSession).toBe(true)
     expect(auth.autoRefreshToken).toBe(true)
-    expect(auth.storageKey).toContain('auth-token')
+    expect(auth.detectSessionInUrl).toBe(true)
+    expect(auth.flowType).toBe('pkce')
+    expect(auth.storageKey).toBe('sb-example-auth-token')
+  })
+
+  it('reuses one canonical browser client and fails closed on configuration drift', () => {
+    resetSupabaseClientForTests()
+    const first = getSupabaseClient('https://example.supabase.co', 'anon-key')
+    const second = getSupabaseClient('https://example.supabase.co/', 'anon-key')
+    expect(first).not.toBeNull()
+    expect(second).toBe(first)
+    expect(getSupabaseClient('https://other.supabase.co', 'anon-key')).toBeNull()
+    resetSupabaseClientForTests()
   })
 
   it('keeps the verified household identity on TOKEN_REFRESHED', () => {

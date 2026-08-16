@@ -36,6 +36,7 @@ export type FamilyCloudIdentitySignUpResult =
   | Readonly<{ status: 'CONFIRM_EMAIL' | 'INVALID_CREDENTIALS' | 'UNAVAILABLE' }>
 
 export type FamilyCloudEmailRequestResult = 'SENT' | 'UNAVAILABLE'
+export type FamilyCloudIdentitySignOutResult = 'SIGNED_OUT' | 'UNAVAILABLE'
 
 export type FamilyCloudAccountCreationResult =
   | Readonly<{ status: 'CONFIRM_EMAIL' }>
@@ -48,7 +49,7 @@ export interface FamilyCloudIdentityPort {
   signUp(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudIdentitySignUpResult>
   requestPasswordRecovery(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult>
   requestMagicLink(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult>
-  signOut(): Promise<void>
+  signOut(): Promise<FamilyCloudIdentitySignOutResult>
 }
 
 /** Stores only a nonsecret device-to-household link. It must never receive a token or PIN. */

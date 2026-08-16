@@ -65,7 +65,7 @@ export function FamilyCloudAuthBoundary({ runtime, children }: {
       }
       return
     }
-    await runtime.signIn(email.trim(), heldPassword)
+    await runtime.signIn(email, heldPassword)
   }
 
   const sendRecovery = async () => {

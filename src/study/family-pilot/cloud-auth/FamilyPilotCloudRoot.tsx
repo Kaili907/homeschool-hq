@@ -10,12 +10,25 @@ export function FamilyPilotCloudRoot({ children }: {
   useEffect(() => {
     const client = getSupabaseClient(composition.configuration.url, composition.configuration.anonKey)
     if (!client) return
+    const timers = new Set<number>()
+    const bootstrapAfterProviderEvent = () => {
+      const timer = window.setTimeout(() => {
+        timers.delete(timer)
+        void composition.auth.bootstrap()
+      }, 0)
+      timers.add(timer)
+    }
     const { data } = client.auth.onAuthStateChange((event) => {
-      if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
-        queueMicrotask(() => { void composition.auth.bootstrap() })
-      }
+      // Password sign-in is established by the coordinator that initiated it.
+      // Starting a second bootstrap from SIGNED_IN races that same operation.
+      if (event === 'SIGNED_IN' && composition.auth.snapshot().status !== 'AUTHENTICATING') bootstrapAfterProviderEvent()
+      else if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') bootstrapAfterProviderEvent()
     })
-    return () => data.subscription.unsubscribe()
+    return () => {
+      data.subscription.unsubscribe()
+      for (const timer of timers) window.clearTimeout(timer)
+      timers.clear()
+    }
   }, [composition])
   return <>{children(composition.auth)}</>
 }

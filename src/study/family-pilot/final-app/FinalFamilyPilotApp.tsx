@@ -126,7 +126,10 @@ export function FinalFamilyPilotApp({ onExit, familyServicesPilot, deviceSyncSet
       deviceSyncSetup={deviceSyncSetup}
       cloudState={cloudState}
       onReconcile={familyCloudAuth ? (signal) => familyCloudAuth.reconcile(signal) : undefined}
-      onHouseholdSignOut={familyCloudAuth ? async () => { await familyCloudAuth.signOut(); onExit() } : undefined}
+      onHouseholdSignOut={familyCloudAuth ? async () => {
+        const state = await familyCloudAuth.signOut()
+        if (state.status === 'SIGNED_OUT') onExit()
+      } : undefined}
     />
   )
   return familyCloudAuth
@@ -208,8 +211,9 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
   const householdSignOut = useCallback(() => {
     reconcileController.current?.abort()
     reconcileController.current = null
+    controller.selectStudent(null)
     onHouseholdSignOut?.()
-  }, [onHouseholdSignOut])
+  }, [controller, onHouseholdSignOut])
   return <MountedFinalFamilyPilot
     controller={controller}
     onExit={onExit}
@@ -380,6 +384,11 @@ function MountedFinalFamilyPilot({
           <button type="button" className="mt-4 min-h-11 rounded-lg border border-cyan-700 bg-white px-4 py-2 font-bold text-cyan-900" onClick={() => restoreInput.current?.click()}>Restore a Family Pilot backup</button>
           <input ref={restoreInput} className="hidden" type="file" accept="application/json" onChange={(event) => void doRestore(event.target.files?.[0])} />
         </section>
+        {onHouseholdSignOut ? (
+          <div className="mx-auto mb-8 max-w-6xl">
+            <button type="button" className="min-h-11 rounded-lg border border-slate-400 bg-white px-4 py-2 font-bold" onClick={onHouseholdSignOut}>Sign out family</button>
+          </div>
+        ) : null}
       </FinalShell>
     )
   }

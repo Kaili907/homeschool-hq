@@ -50,9 +50,13 @@ describe('Family Cloud password recovery', () => {
 
   it('submits the new password only to authenticated updateUser', async () => {
     const updateUser = vi.fn(async () => ({ data: { user: SESSION.user }, error: null }))
-    const client = { auth: { updateUser } } as unknown as SupabaseClient
+    const getSession = vi.fn(async () => ({ data: { session: SESSION }, error: null }))
+    const getUser = vi.fn(async () => ({ data: { user: SESSION.user }, error: null }))
+    const client = { auth: { updateUser, getSession, getUser } } as unknown as SupabaseClient
     await expect(updateFamilyCloudPassword(client, 'provider-owned-password')).resolves.toBe(true)
     expect(updateUser).toHaveBeenCalledWith({ password: 'provider-owned-password' })
+    expect(getSession).toHaveBeenCalledTimes(2)
+    expect(getUser).toHaveBeenCalledOnce()
   })
 
   it('shows an expired/invalid message and a safe reset-request path without a session', () => {

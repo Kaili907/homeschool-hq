@@ -22,7 +22,7 @@ function session() {
   }
 }
 
-async function installAuthBackend(context: BrowserContext, requests: URL[]) {
+async function installAuthBackend(context: BrowserContext, requests: URL[], tokenBodies: unknown[] = []) {
   await context.route(`${SUPABASE_ORIGIN}/**`, async (route: Route) => {
     const url = new URL(route.request().url())
     requests.push(url)
@@ -31,8 +31,19 @@ async function installAuthBackend(context: BrowserContext, requests: URL[]) {
     })
     if (url.pathname === '/auth/v1/recover') return json({})
     if (url.pathname === '/auth/v1/otp') return json({})
-    if (url.pathname === '/auth/v1/token') return json(session())
+    if (url.pathname === '/auth/v1/token') {
+      tokenBodies.push(route.request().postDataJSON())
+      return json(session())
+    }
     if (url.pathname === '/auth/v1/user') return json(user)
+    if (url.pathname === '/auth/v1/logout') return route.fulfill({ status: 204, body: '' })
+    if (url.pathname === '/rest/v1/academy_household_memberships') return json([{
+      household_id: '10000000-0000-4000-8000-000000000001',
+      academy_households: { status: 'active' },
+    }])
+    if (url.pathname === '/rest/v1/rpc/academy_family_cloud_bootstrap_r1') return json({
+      schemaVersion: 1, status: 'ready', householdRef: '10000000-0000-4000-8000-000000000001', learners: [],
+    })
     return json({ message: `Unhandled auth test route: ${url.pathname}` }, 404)
   })
 }
@@ -84,6 +95,9 @@ test('valid session opens reset form, rejects mismatch, and updates without pass
     expect(requests.filter((url) => url.pathname === '/auth/v1/user')).not.toHaveLength(0)
     const storage = await page.evaluate(() => JSON.stringify(localStorage))
     expect(storage).not.toContain('browser-new-password')
+    await expect(page).toHaveURL(/\/family-pilot$/)
+    await expect(page.getByRole('heading', { name: 'Sign in to Manuel Academy' })).toHaveCount(0)
+    expect(await page.evaluate((key) => localStorage.getItem(key) !== null, STORAGE_KEY)).toBe(true)
   } finally { await context.close() }
 })
 
@@ -97,6 +111,88 @@ test('root recognizes a persisted magic-link session before showing login', asyn
     await page.goto('/#type=magiclink')
     await expect(page).toHaveURL(/\/family-pilot$/)
     await expect(page.getByRole('heading', { name: 'Sign in to Manuel Academy' })).toHaveCount(0)
+  } finally { await context.close() }
+})
+
+test('password session persists through rerender, navigation, reload, provider logout, and sign-in again', async ({ browser }) => {
+  const context = await browser.newContext()
+  const requests: URL[] = []
+  const tokenBodies: unknown[] = []
+  await installAuthBackend(context, requests, tokenBodies)
+  const page = await context.newPage()
+  try {
+    const typedEmail = ` ${EMAIL} `
+    await page.goto('/family-pilot')
+    const emailInput = page.getByLabel('Parent email')
+    await emailInput.fill(typedEmail)
+    const submittedEmail = await emailInput.inputValue()
+    await page.getByLabel('Family account password').fill('provider-owned-password')
+    await page.getByRole('button', { name: 'Sign in', exact: true }).click()
+    await expect(page.getByRole('heading', { name: 'Set up everyone who learns here' })).toBeVisible()
+    expect(tokenBodies[0]).toMatchObject({ email: submittedEmail })
+    await expect.poll(() => page.evaluate((key) => localStorage.getItem(key) !== null, STORAGE_KEY)).toBe(true)
+
+    await page.evaluate(() => window.dispatchEvent(new Event('online')))
+    await expect(page.getByRole('heading', { name: 'Set up everyone who learns here' })).toBeVisible()
+    expect(await page.evaluate((key) => localStorage.getItem(key) !== null, STORAGE_KEY)).toBe(true)
+    await page.goto('/family-pilot?navigation-proof=1')
+    await expect(page.getByRole('heading', { name: 'Set up everyone who learns here' })).toBeVisible()
+    await page.reload()
+    await expect(page.getByRole('heading', { name: 'Set up everyone who learns here' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Sign in to Manuel Academy' })).toHaveCount(0)
+
+    await page.evaluate(async () => {
+      await new Promise<void>((resolve, reject) => {
+        const open = indexedDB.open('family-cloud-auth-local-data-proof', 1)
+        open.onupgradeneeded = () => open.result.createObjectStore('academic').put({ progress: 1 }, 'learner')
+        open.onerror = () => reject(open.error)
+        open.onsuccess = () => { open.result.close(); resolve() }
+      })
+    })
+    await page.getByRole('button', { name: 'Sign out family' }).click()
+    await expect.poll(() => requests.filter((url) => url.pathname === '/auth/v1/logout').length).toBe(1)
+    await expect.poll(() => page.evaluate((key) => localStorage.getItem(key) === null, STORAGE_KEY)).toBe(true)
+    expect(await page.evaluate(async () => new Promise<number | null>((resolve, reject) => {
+      const open = indexedDB.open('family-cloud-auth-local-data-proof', 1)
+      open.onerror = () => reject(open.error)
+      open.onsuccess = () => {
+        const request = open.result.transaction('academic').objectStore('academic').get('learner')
+        request.onerror = () => reject(request.error)
+        request.onsuccess = () => { open.result.close(); resolve(request.result?.progress ?? null) }
+      }
+    }))).toBe(1)
+
+    await page.goto('/family-pilot')
+    await expect(page.getByRole('heading', { name: 'Sign in to Manuel Academy' })).toBeVisible()
+    await page.getByLabel('Parent email').fill(EMAIL)
+    await page.getByLabel('Family account password').fill('provider-owned-password')
+    await page.getByRole('button', { name: 'Sign in', exact: true }).click()
+    await expect(page.getByRole('heading', { name: 'Set up everyone who learns here' })).toBeVisible()
+    await page.reload()
+    await expect(page.getByRole('heading', { name: 'Sign in to Manuel Academy' })).toHaveCount(0)
+  } finally { await context.close() }
+})
+
+test('PKCE magic-link return is consumed once, persisted, cleaned, and never replayed', async ({ browser }) => {
+  const context = await browser.newContext()
+  const requests: URL[] = []
+  await installAuthBackend(context, requests)
+  const page = await context.newPage()
+  try {
+    await page.goto('/family-pilot')
+    await page.getByLabel('Parent email').fill(EMAIL)
+    await page.getByRole('button', { name: 'Email me a sign-in link' }).click()
+    await expect(page.getByText('Check your email for a secure sign-in link.')).toBeVisible()
+    await page.goto('/?code=one-time-magic-link-code')
+    await expect(page).toHaveURL(/\/family-pilot$/)
+    await expect(page.getByRole('heading', { name: 'Sign in to Manuel Academy' })).toHaveCount(0)
+    expect(requests.filter((url) => url.pathname === '/auth/v1/token')).toHaveLength(1)
+    expect(requests.filter((url) => url.pathname === '/auth/v1/verify')).toHaveLength(0)
+    expect(await page.evaluate((key) => localStorage.getItem(key) !== null, STORAGE_KEY)).toBe(true)
+    await page.reload()
+    await expect(page.getByRole('heading', { name: 'Sign in to Manuel Academy' })).toHaveCount(0)
+    expect(requests.filter((url) => url.pathname === '/auth/v1/token')).toHaveLength(1)
+    expect(requests.filter((url) => url.pathname === '/auth/v1/verify')).toHaveLength(0)
   } finally { await context.close() }
 })
 

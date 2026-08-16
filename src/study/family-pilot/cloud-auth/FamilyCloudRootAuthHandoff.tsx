@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import type { AuthChangeEvent, Session, SupabaseClient } from '@supabase/supabase-js'
-import { getSupabaseClient } from '../../../auth/supabaseSession'
+import { getSupabaseClient, getVerifiedAuthContext, supabaseSessionRecordIsPresent } from '../../../auth/supabaseSession'
 import { FAMILY_CLOUD_PASSWORD_RECOVERY_PATH, FAMILY_CLOUD_PATH } from './supabase'
 
 function returnParameters(): URLSearchParams {
@@ -44,24 +44,44 @@ export function FamilyCloudRootAuthHandoff({ client, children, onNavigate }: {
     let active = true
     let moved = false
     let recoveryEventSeen = false
+    let completionPending = false
     const move = (path: string) => {
       if (!active || moved) return
       moved = true
       window.history.replaceState(null, '', path)
       onNavigate(path)
     }
+    const complete = () => {
+      if (!active || moved || completionPending) return
+      completionPending = true
+      queueMicrotask(() => {
+        void getVerifiedAuthContext(authClient).then((context) => {
+          completionPending = false
+          if (!active || moved) return
+          if (!context || !supabaseSessionRecordIsPresent()) {
+            setChecking(false)
+            return
+          }
+          move(recoveryEventSeen || familyCloudAuthReturnIsRecovery()
+            ? FAMILY_CLOUD_PASSWORD_RECOVERY_PATH
+            : FAMILY_CLOUD_PATH)
+        }, () => {
+          completionPending = false
+          if (active && !moved) setChecking(false)
+        })
+      })
+    }
     const { data } = authClient.auth.onAuthStateChange((event, session) => {
       if (event === 'PASSWORD_RECOVERY') recoveryEventSeen = true
       const target = familyCloudAuthEventTarget(event, session)
       if (!target) return
-      queueMicrotask(() => move(recoveryEventSeen ? FAMILY_CLOUD_PASSWORD_RECOVERY_PATH : target))
+      complete()
     })
     void authClient.auth.getSession().then(({ data: sessionData, error }) => {
       if (!active || moved) return
       queueMicrotask(() => {
         if (!active || moved) return
-        if (recoveryEventSeen || familyCloudAuthReturnIsRecovery()) move(FAMILY_CLOUD_PASSWORD_RECOVERY_PATH)
-        else if (!error && sessionData.session) move(FAMILY_CLOUD_PATH)
+        if (!error && sessionData.session) complete()
         else setChecking(false)
       })
     }, () => { if (active) setChecking(false) })

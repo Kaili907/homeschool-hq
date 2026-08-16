@@ -3,6 +3,7 @@ import {
   getCurrentSession,
   getSupabaseClient,
   getVerifiedAuthContext,
+  supabaseSessionRecordIsPresent,
   supabaseAnonKey,
   supabaseUrl,
   type VerifiedAuthContext,
@@ -36,6 +37,7 @@ async function currentContext(
   if (!client || signal?.aborted) return null
   const session = await getCurrentSession(client)
   if (!session?.expires_at || session.expires_at * 1_000 <= Date.now()) return null
+  if (!supabaseSessionRecordIsPresent()) return null
   const authorization = await getVerifiedAuthContext(client, signal)
   if (!authorization || authorization.user.id !== session.user.id) return null
   return Object.freeze({
@@ -103,7 +105,13 @@ export function createSupabaseFamilyCloudIdentity(
       return error || signal?.aborted ? 'UNAVAILABLE' as const : 'SENT' as const
     },
     async signOut() {
-      if (client) await client.auth.signOut()
+      if (!client) return 'UNAVAILABLE' as const
+      const { error } = await client.auth.signOut({ scope: 'global' })
+      if (error) return 'UNAVAILABLE' as const
+      const { data, error: sessionError } = await client.auth.getSession()
+      if (sessionError || data.session) return 'UNAVAILABLE' as const
+      const { data: userData, error: userError } = await client.auth.getUser()
+      return userError || !userData.user ? 'SIGNED_OUT' as const : 'UNAVAILABLE' as const
     },
   })
 }

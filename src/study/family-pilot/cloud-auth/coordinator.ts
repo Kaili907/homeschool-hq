@@ -119,10 +119,16 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
   async signOut(): Promise<FamilyCloudSessionState> {
     ++this.#generation
     this.#dropCloudAuthority()
-    this.#device.clear()
-    this.#publish(SIGNED_OUT)
-    try { await this.#identity.signOut() } catch { /* local authority is already cleared */ }
-    return this.#state
+    let result
+    try { result = await this.#identity.signOut() } catch { result = 'UNAVAILABLE' as const }
+    if (result === 'SIGNED_OUT') {
+      this.#device.clear()
+      return this.#publish(SIGNED_OUT)
+    }
+    return this.#publish(Object.freeze({
+      status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'NONE',
+      localData: 'UNAVAILABLE', reason: 'AUTH_UNAVAILABLE',
+    }))
   }
 
   async reconcile(signal?: AbortSignal): Promise<FamilyCloudReconcileResult> {

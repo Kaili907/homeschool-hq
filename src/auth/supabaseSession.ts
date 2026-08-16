@@ -1,6 +1,7 @@
 import { createClient, type Session, type SupabaseClient } from '@supabase/supabase-js'
 
 export const AUTH_VERIFICATION_TIMEOUT_MS = 8_000
+export const SUPABASE_BROWSER_AUTH_FLOW = 'pkce' as const
 
 export interface VerifiedAuthContext {
   readonly user: { readonly id: string; readonly email: string }
@@ -22,6 +23,29 @@ export function supabaseConfigured(): boolean {
   return supabaseUrl() !== '' && supabaseAnonKey() !== ''
 }
 
+export function supabaseAuthStorageKey(url = supabaseUrl()): string | null {
+  try {
+    const hostname = new URL(url).hostname
+    const projectRef = hostname.endsWith('.supabase.co')
+      ? hostname.slice(0, -'.supabase.co'.length)
+      : ''
+    return projectRef ? `sb-${projectRef}-auth-token` : null
+  } catch { return null }
+}
+
+/** Presence-only persistence check; provider credential bytes are never read. */
+export function supabaseSessionRecordIsPresent(url = supabaseUrl()): boolean {
+  if (typeof window === 'undefined') return true
+  const key = supabaseAuthStorageKey(url)
+  if (!key) return false
+  try { return window.localStorage.getItem(key) !== null } catch { return false }
+}
+
+function browserAuthStorage(): Storage | undefined {
+  if (typeof window === 'undefined') return undefined
+  try { return window.localStorage } catch { return undefined }
+}
+
 /**
  * The supported auth client owns session persistence and refresh. It exposes no
  * profile read/write operation, so gateway authentication does not pull legacy
@@ -34,12 +58,16 @@ export function createSupabaseBrowserClient(
   url = supabaseUrl(),
   anonKey = supabaseAnonKey(),
 ): SupabaseClient {
+  const storage = browserAuthStorage()
+  const storageKey = supabaseAuthStorageKey(url)
   return createClient(url, anonKey, {
     auth: {
       persistSession: true,
       autoRefreshToken: true,
       detectSessionInUrl: true,
-      flowType: 'pkce',
+      flowType: SUPABASE_BROWSER_AUTH_FLOW,
+      ...(storage ? { storage } : {}),
+      ...(storageKey ? { storageKey } : {}),
     },
   })
 }
