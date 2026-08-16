@@ -252,7 +252,7 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
     try { return this.#options.repository.hasHousehold(householdRef) } catch { return false }
   }
 
-  async establish(input: Readonly<{ householdRef: string; authorization: VerifiedAuthContext; signal?: AbortSignal }>): Promise<'READY' | 'OFFLINE' | 'UNAVAILABLE'> {
+  async establish(input: Readonly<{ householdRef: string; authorization: VerifiedAuthContext; signal?: AbortSignal }>): Promise<'READY' | 'OFFLINE' | 'FIRST_LINK_FAILED' | 'UNAVAILABLE'> {
     const generation = ++this.#generation
     const resolved = await this.#options.directory.resolve(input).catch(() => ({ status: 'UNAVAILABLE' as const }))
     if (input.signal?.aborted || generation !== this.#generation) return 'UNAVAILABLE'
@@ -276,6 +276,7 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
     const hydrated: FamilyCloudLocalLearnerStateR1[] = []
     for (const entry of resolved.learners) {
       const current = localByLearner.get(entry.learnerRef)
+      const firstLink = Boolean(current && !current.linked)
       const next = current?.linked
         ? await this.#hydrate(entry, current, input.signal)
         : current
@@ -287,7 +288,7 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
           householdRef: input.householdRef, learnerRef: entry.learnerRef,
           domain: 'FIRST_LINK', local: current, remote: next.remote,
         }).catch(() => undefined)
-        return 'UNAVAILABLE'
+        return firstLink ? 'FIRST_LINK_FAILED' : 'UNAVAILABLE'
       }
       hydrated.push(next.state)
     }

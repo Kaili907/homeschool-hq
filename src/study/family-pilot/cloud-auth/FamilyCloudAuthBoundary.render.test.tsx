@@ -12,6 +12,7 @@ describe('Family Cloud account gateway', () => {
       createAccount: vi.fn(),
       requestPasswordRecovery: vi.fn(),
       requestMagicLink: vi.fn(),
+      retryCloudSetup: vi.fn(),
       signIn: vi.fn(),
       signOut: vi.fn(),
       reconcile: vi.fn(),
@@ -25,5 +26,31 @@ describe('Family Cloud account gateway', () => {
     expect(html).toContain('Forgot password?')
     expect(html).toContain('Email me a sign-in link')
     expect(html).not.toContain('learner controller mounted')
+  })
+
+  it('shows authenticated first-link recovery without returning to the login form', () => {
+    const runtime = {
+      snapshot: () => ({
+        status: 'NEEDS_ATTENTION' as const,
+        householdRef: '10000000-0000-4000-8000-000000000001',
+        cloudAuthority: 'AUTHENTICATED_PARENT_HOUSEHOLD' as const,
+        localData: 'AVAILABLE' as const,
+        expiresAt: '2026-08-16T18:00:00.000Z',
+        reason: 'CLOUD_FIRST_LINK_FAILED' as const,
+      }),
+      subscribe: () => () => undefined,
+      bootstrap: vi.fn(),
+      retryCloudSetup: vi.fn(),
+      signOut: vi.fn(),
+    } as unknown as FamilyCloudAuthRuntime
+    const html = renderToStaticMarkup(
+      <FamilyCloudAuthBoundary runtime={runtime}>{() => <p>learner controller mounted</p>}</FamilyCloudAuthBoundary>,
+    )
+    expect(html).toContain('Family Cloud: Needs attention')
+    expect(html).toContain('Your family account is signed in')
+    expect(html).toContain('Retry linking')
+    expect(html).toContain('learner controller mounted')
+    expect(html).not.toContain('Parent email')
+    expect(html).not.toContain('Family account password')
   })
 })

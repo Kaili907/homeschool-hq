@@ -66,7 +66,7 @@ import { resolveFamilyServicesR1, type FamilyServicesPilotConfigurationR1 } from
 import { ParentAssignmentLibrary } from './ParentAssignmentLibrary'
 import { createBrowserHouseholdScopedStorage } from '../cloud-auth/scopedStorage'
 import { FamilyCloudAuthBoundary } from '../cloud-auth/FamilyCloudAuthBoundary'
-import type { FamilyCloudAuthRuntime, FamilyCloudSessionState } from '../cloud-auth/types'
+import type { FamilyCloudAppState, FamilyCloudAuthRuntime } from '../cloud-auth/types'
 
 type Mode = 'parent' | 'student'
 type ParentView = 'overview' | 'school-plan' | 'assign' | 'review' | 'reports' | 'preferences' | 'backup' | 'devices'
@@ -117,7 +117,7 @@ export function FinalFamilyPilotApp({ onExit, familyServicesPilot, deviceSyncSet
     return <FinalShell onExit={onExit}><p className="rounded-xl border border-red-300 bg-red-50 p-6 font-semibold" role="alert">{catalogError ?? 'The final curriculum could not be loaded.'}</p></FinalShell>
   }
 
-  const app = (cloudState: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }> | null) => (
+  const app = (cloudState: FamilyCloudAppState | null) => (
     <ReadyFinalFamilyPilotApp
       catalog={catalog}
       onExit={onExit}
@@ -143,35 +143,40 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
   readonly trustedScorer?: LearnerResponseAssessor
   readonly parentSyncStatus: ParentSyncStatusValueR1
   readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
-  readonly cloudState: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }> | null
+  readonly cloudState: FamilyCloudAppState | null
   readonly onReconcile?: (signal?: AbortSignal) => ReturnType<FamilyCloudAuthRuntime['reconcile']>
   readonly onHouseholdSignOut?: () => void
 }) {
   const [revision, setRevision] = useState(0)
   const [cloudSyncStatus, setCloudSyncStatus] = useState<ParentSyncStatusValueR1>(() =>
-    cloudState?.status === 'READY' ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'OFFLINE_SAVED' : parentSyncStatus)
+    cloudState?.status === 'READY' ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'OFFLINE_SAVED'
+      : cloudState?.status === 'NEEDS_ATTENTION' ? 'NEEDS_ATTENTION' : parentSyncStatus)
   const reconcileController = useRef<AbortController | null>(null)
   const reconcilePending = useRef(false)
   const runReconcile = useRef<() => void>(() => undefined)
+  const useScopedCloudStorage = Boolean(cloudState && (
+    cloudState.status !== 'NEEDS_ATTENTION' || cloudState.localData === 'AVAILABLE'
+  ))
   const storage = useMemo(
-    () => cloudState ? createBrowserHouseholdScopedStorage(cloudState.householdRef) : undefined,
-    [cloudState?.householdRef],
+    () => useScopedCloudStorage && cloudState ? createBrowserHouseholdScopedStorage(cloudState.householdRef) : undefined,
+    [cloudState?.householdRef, useScopedCloudStorage],
   )
   const controller = useMemo(() => new FinalFamilyPilotController({
     catalog,
-    ...(cloudState ? {
+    ...(useScopedCloudStorage && cloudState ? {
       coreStore: { storage },
       appStore: { storage, householdRef: cloudState.householdRef },
     } : {}),
-  }), [catalog, cloudState?.householdRef, storage])
-  const backupOptions = useMemo<FinalFamilyPilotBackupOptions>(() => cloudState ? {
+  }), [catalog, cloudState?.householdRef, storage, useScopedCloudStorage])
+  const backupOptions = useMemo<FinalFamilyPilotBackupOptions>(() => useScopedCloudStorage && cloudState ? {
     coreStore: { storage },
     appStore: { storage, householdRef: cloudState.householdRef },
-  } : {}, [cloudState?.householdRef, storage])
+  } : {}, [cloudState?.householdRef, storage, useScopedCloudStorage])
   useEffect(() => () => controller.close(), [controller])
   useEffect(() => {
     setCloudSyncStatus(cloudState?.status === 'READY'
-      ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'OFFLINE_SAVED' : parentSyncStatus)
+      ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'OFFLINE_SAVED'
+        : cloudState?.status === 'NEEDS_ATTENTION' ? 'NEEDS_ATTENTION' : parentSyncStatus)
   }, [cloudState?.status, parentSyncStatus])
   useEffect(() => () => {
     reconcilePending.current = false
@@ -228,7 +233,7 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
   />
 }
 
-function FinalShell({ onExit, children, cloudState = null }: { readonly onExit: () => void; readonly children: React.ReactNode; readonly cloudState?: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }> | null }) {
+function FinalShell({ onExit, children, cloudState = null }: { readonly onExit: () => void; readonly children: React.ReactNode; readonly cloudState?: FamilyCloudAppState | null }) {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900" data-family-pilot-release="family-pilot-r1">
       <header className="border-b border-slate-200 bg-slate-950 text-white">
@@ -246,6 +251,8 @@ function FinalShell({ onExit, children, cloudState = null }: { readonly onExit: 
             ? 'Family account connected. Work is saved on this device and synchronized through the authenticated household.'
             : cloudState?.status === 'OFFLINE_LOCAL'
               ? 'Offline / saved on this device. Cloud changes will wait until the family account reconnects; you are not signed out.'
+              : cloudState?.status === 'NEEDS_ATTENTION'
+                ? 'Family Cloud needs attention. Work remains available on this device while secure linking is retried.'
               : 'This pilot currently saves progress in this browser on this device. Download backups regularly. Cross-device sync is coming next.'}
         </p>
       </aside>
@@ -274,7 +281,7 @@ function MountedFinalFamilyPilot({
   readonly trustedScorer?: LearnerResponseAssessor
   readonly parentSyncStatus: ParentSyncStatusValueR1
   readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
-  readonly cloudState: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }> | null
+  readonly cloudState: FamilyCloudAppState | null
   readonly onHouseholdSignOut?: () => void
   readonly backupOptions: FinalFamilyPilotBackupOptions
 }) {

@@ -261,6 +261,21 @@ export class BrowserFamilyCloudCheckpointRepositoryR1 implements FamilyCloudChec
     })))
   }
 
+  async readHouseholdTimeZone(householdRef: string): Promise<string> {
+    const { app } = sourceStorage(householdRef)
+    const sourceHouseholdRef = app.householdRef
+    const zones = new Set<string>()
+    for (const student of app.setup.students) {
+      const planner = await plannerDocument(sourceHouseholdRef, sourceHouseholdRef, student.studentRef, app.updatedAt)
+      if (planner.schoolPlan) zones.add(planner.schoolPlan.householdTimeZone)
+    }
+    if (zones.size > 1) throw new Error('Saved School Plans disagree about the household timezone.')
+    const canonical = [...zones][0]
+    if (canonical) return canonical
+    const detected = Intl.DateTimeFormat().resolvedOptions().timeZone
+    return detected || 'UTC'
+  }
+
   hasHousehold(householdRef: string): boolean {
     const scoped = createBrowserHouseholdScopedStorage(householdRef)
     return parseMetadata(scoped.getItem(META_KEY), householdRef)?.initialized === true

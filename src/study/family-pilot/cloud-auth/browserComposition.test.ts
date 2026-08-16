@@ -132,6 +132,7 @@ describe('real Family Pilot browser cloud composition', () => {
     const directory = createSupabaseFamilyCloudRemoteDirectory({
       client: supabase,
       localLearners: () => [{ learnerRef: 'student:ada', displayName: 'Ada', gradeLevel: '4' }],
+      householdTimeZone: () => 'America/Detroit',
     })
     await expect(directory.resolve({
       householdRef: '00000000-0000-4000-8000-000000000201',
@@ -142,6 +143,7 @@ describe('real Family Pilot browser cloud composition', () => {
     })).resolves.toMatchObject({ status: 'READY', learners: [{ learnerRef: 'student:ada' }] })
     expect(rpc).toHaveBeenCalledWith('academy_family_cloud_bootstrap_r1', {
       p_local_learners: [{ learnerRef: 'student:ada', displayName: 'Ada', gradeLevel: '4' }],
+      p_household_timezone: 'America/Detroit',
     })
     expect(JSON.stringify(rpc.mock.calls[0]?.[1])).not.toMatch(/token|password|userId|householdRef|role/i)
   })

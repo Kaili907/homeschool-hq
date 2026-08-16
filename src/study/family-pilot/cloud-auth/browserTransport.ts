@@ -17,6 +17,16 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-
 const DIGEST = /^[0-9a-f]{64}$/u
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,191}$/u
 
+function validTimeZone(value: string): boolean {
+  if (!value || value.length > 80) return false
+  try { new Intl.DateTimeFormat('en-US', { timeZone: value }).format(new Date(0)); return true } catch { return false }
+}
+
+function detectedTimeZone(): string {
+  const value = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+  return validTimeZone(value) ? value : 'UTC'
+}
+
 function sessionExpiry(session: Session): string | null {
   if (!session.expires_at) return null
   const expiresAt = new Date(session.expires_at * 1_000).toISOString()
@@ -124,7 +134,9 @@ export async function establishSupabaseFamilyHousehold(
   const verified = await getVerifiedAuthContext(client, signal)
   if (!verified || verified.user.id !== context.user.id || verified.accessToken !== context.accessToken) return null
   try {
-    const query = client.rpc('academy_family_cloud_bootstrap_r1', { p_local_learners: [] })
+    const query = client.rpc('academy_family_cloud_bootstrap_r1', {
+      p_local_learners: [], p_household_timezone: detectedTimeZone(),
+    })
     const { data, error } = await query.abortSignal(signal ?? new AbortController().signal)
     if (error || !data || typeof data !== 'object' || Array.isArray(data)) return null
     const householdRef = (data as { householdRef?: unknown }).householdRef
@@ -147,6 +159,7 @@ function parseBootstrap(value: unknown, householdRef: string): BootstrapResult |
 export function createSupabaseFamilyCloudRemoteDirectory(options: {
   readonly client: SupabaseClient
   readonly localLearners: (householdRef: string) => readonly FamilyCloudBootstrapLearnerR1[]
+  readonly householdTimeZone?: (householdRef: string) => string | Promise<string>
 }): FamilyCloudRemoteDirectoryPortR1 {
   return Object.freeze({
     async resolve(input: { householdRef: string; authorization: VerifiedAuthContext; signal?: AbortSignal }): Promise<FamilyCloudRemoteDirectoryResultR1> {
@@ -161,7 +174,12 @@ export function createSupabaseFamilyCloudRemoteDirectory(options: {
         gradeLevel: learner.gradeLevel,
       }))
       try {
-        const query = options.client.rpc('academy_family_cloud_bootstrap_r1', { p_local_learners: localLearners })
+        const householdTimeZone = options.householdTimeZone
+          ? await options.householdTimeZone(input.householdRef) : detectedTimeZone()
+        if (!validTimeZone(householdTimeZone)) return Object.freeze({ status: 'UNAVAILABLE' })
+        const query = options.client.rpc('academy_family_cloud_bootstrap_r1', {
+          p_local_learners: localLearners, p_household_timezone: householdTimeZone,
+        })
         const { data, error } = await query.abortSignal(input.signal ?? new AbortController().signal)
         if (error) return Object.freeze({ status: 'UNAVAILABLE' })
         const parsed = parseBootstrap(data, input.householdRef)

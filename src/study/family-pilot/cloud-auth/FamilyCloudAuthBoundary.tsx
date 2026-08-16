@@ -1,9 +1,9 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import type { FamilyCloudAuthRuntime, FamilyCloudSessionState } from './types'
+import type { FamilyCloudAppState, FamilyCloudAuthRuntime, FamilyCloudSessionState } from './types'
 
 export function FamilyCloudAuthBoundary({ runtime, children }: {
   readonly runtime: FamilyCloudAuthRuntime
-  readonly children: (state: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }>) => ReactNode
+  readonly children: (state: FamilyCloudAppState) => ReactNode
 }) {
   const [state, setState] = useState<FamilyCloudSessionState>(() => runtime.snapshot())
   const [email, setEmail] = useState('')
@@ -30,7 +30,7 @@ export function FamilyCloudAuthBoundary({ runtime, children }: {
   }, [runtime])
 
   useEffect(() => {
-    if (state.status !== 'READY') return
+    if (!('expiresAt' in state)) return
     const remaining = Date.parse(state.expiresAt) - Date.now()
     const timer = window.setTimeout(() => { void runtime.bootstrap() }, Math.max(0, remaining) + 50)
     return () => window.clearTimeout(timer)
@@ -41,15 +41,39 @@ export function FamilyCloudAuthBoundary({ runtime, children }: {
     return <main className="mx-auto max-w-md px-4 py-12"><p role="status" className="rounded-xl border bg-white p-5 font-semibold">Checking this computer’s family account…</p></main>
   }
 
+  if (state.status === 'NEEDS_ATTENTION' && state.cloudAuthority !== 'NONE') {
+    const firstLink = state.reason === 'CLOUD_FIRST_LINK_FAILED'
+    const recovery = (
+      <section className="mx-auto max-w-6xl px-4 py-6" aria-labelledby="family-cloud-attention-title">
+        <div className="rounded-xl border border-amber-300 bg-amber-50 p-5">
+          <p className="font-bold text-amber-700">Family Cloud: Needs attention</p>
+          <h2 id="family-cloud-attention-title" className="mt-1 text-2xl font-extrabold">Your family account is signed in</h2>
+          <p className="mt-3 font-semibold text-slate-600">
+            {firstLink
+              ? 'This computer could not finish its first secure link. Saved family data remains on this device.'
+              : 'Family Cloud setup could not finish. Saved family data remains on this device.'}
+          </p>
+          <button type="button" className="mt-5 min-h-11 rounded-lg bg-cyan-700 px-5 py-3 font-extrabold text-white" onClick={() => { void runtime.retryCloudSetup() }}>
+            Retry linking
+          </button>
+          <button type="button" className="ml-2 mt-5 min-h-11 rounded-lg border border-slate-400 px-4 py-3 font-bold text-slate-700" onClick={() => { void runtime.signOut() }}>
+            Sign out
+          </button>
+        </div>
+      </section>
+    )
+    return state.householdRef
+      ? <>{recovery}{children(state as FamilyCloudAppState)}</>
+      : <main>{recovery}</main>
+  }
+
   const expired = state.status === 'EXPIRED'
   const attention = state.status === 'NEEDS_ATTENTION'
   const message = expired
     ? 'Your secure family session has expired. Sign in again; saved work on this device was not removed.'
-    : attention && state.reason === 'NO_ACTIVE_HOUSEHOLD'
-      ? 'This account does not have an active Manuel Academy household.'
-      : attention && state.reason === 'AMBIGUOUS_HOUSEHOLD'
-        ? 'This account belongs to more than one active household. Family access must be resolved before continuing.'
-        : attention ? 'Family sign-in could not be completed. Check the account details and connection, then try again.'
+    : attention && state.reason === 'SIGN_IN_FAILED'
+      ? 'The email or password was not accepted. Check the account details, then try again.'
+      : attention ? 'Family sign-in is unavailable. Check the connection, then try again.'
           : 'A Parent signs in once to authorize this family computer. Learners then use their own profiles and PINs.'
 
   const submit = async () => {

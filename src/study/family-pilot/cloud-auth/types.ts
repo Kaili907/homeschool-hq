@@ -72,7 +72,7 @@ export interface FamilyCloudLocalDataPort {
     householdRef: string
     authorization: VerifiedAuthContext
     signal?: AbortSignal
-  }>): Promise<'READY' | 'OFFLINE' | 'UNAVAILABLE'>
+  }>): Promise<'READY' | 'OFFLINE' | 'FIRST_LINK_FAILED' | 'UNAVAILABLE'>
   /** Reconciles already-established local changes through explicit CAS domains. */
   reconcile(input: Readonly<{
     householdRef: string
@@ -117,11 +117,23 @@ export type FamilyCloudSessionState =
     }>
   | Readonly<{
       status: 'NEEDS_ATTENTION'
-      householdRef: string | null
+      householdRef: null
       cloudAuthority: 'NONE'
       localData: 'AVAILABLE' | 'UNAVAILABLE'
-      reason: 'NO_ACTIVE_HOUSEHOLD' | 'AMBIGUOUS_HOUSEHOLD' | 'AUTH_UNAVAILABLE' | 'DATA_UNAVAILABLE'
+      reason: 'SIGN_IN_FAILED' | 'AUTH_UNAVAILABLE'
     }>
+  | Readonly<{
+      status: 'NEEDS_ATTENTION'
+      householdRef: string | null
+      cloudAuthority: 'AUTHENTICATED_PARENT' | 'AUTHENTICATED_PARENT_HOUSEHOLD'
+      localData: 'AVAILABLE' | 'UNAVAILABLE'
+      expiresAt: string
+      reason: 'NO_ACTIVE_HOUSEHOLD' | 'AMBIGUOUS_HOUSEHOLD' | 'CLOUD_SETUP_FAILED' | 'CLOUD_FIRST_LINK_FAILED'
+    }>
+
+export type FamilyCloudAppState =
+  | Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }>
+  | (Extract<FamilyCloudSessionState, { status: 'NEEDS_ATTENTION'; cloudAuthority: 'AUTHENTICATED_PARENT' | 'AUTHENTICATED_PARENT_HOUSEHOLD' }> & Readonly<{ householdRef: string }>)
 
 export interface FamilyCloudAuthRuntime {
   snapshot(): FamilyCloudSessionState
@@ -130,6 +142,7 @@ export interface FamilyCloudAuthRuntime {
   createAccount(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudAccountCreationResult>
   requestPasswordRecovery(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult>
   requestMagicLink(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult>
+  retryCloudSetup(signal?: AbortSignal): Promise<FamilyCloudSessionState>
   signOut(): Promise<FamilyCloudSessionState>
   reconcile(signal?: AbortSignal): Promise<FamilyCloudReconcileResult>
   subscribe(listener: (state: FamilyCloudSessionState) => void): () => void

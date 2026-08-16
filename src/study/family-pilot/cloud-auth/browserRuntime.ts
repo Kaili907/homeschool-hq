@@ -41,6 +41,7 @@ export function createFamilyCloudBrowserRuntimeR1(
   const directory = createSupabaseFamilyCloudRemoteDirectory({
     client,
     localLearners: (householdRef) => repository.listBootstrapLearners(householdRef),
+    householdTimeZone: (householdRef) => repository.readHouseholdTimeZone(householdRef),
   })
   const rpc = createHostedSyncRpcAdapter({ authorization: createSupabaseHostedSyncAuthorization(client) })
   const localData = new HostedFamilyCloudLocalDataPortR1({ directory, repository, client: rpc, deviceRef })

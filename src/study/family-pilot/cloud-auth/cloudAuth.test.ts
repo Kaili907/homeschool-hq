@@ -126,6 +126,40 @@ describe('family household cloud auth', () => {
     })
   })
 
+  it('keeps the provider session and local household after first-link failure, then retries the same household', async () => {
+    const auth = identity()
+    const local = data([HOUSEHOLD_A])
+    local.establish.mockResolvedValueOnce('FIRST_LINK_FAILED').mockResolvedValueOnce('READY')
+    const householdAuthority = authority()
+    const runtime = coordinator({ identity: auth, authority: householdAuthority, data: local })
+
+    await expect(runtime.signIn('parent@example.test', 'password')).resolves.toEqual({
+      status: 'NEEDS_ATTENTION', householdRef: HOUSEHOLD_A,
+      cloudAuthority: 'AUTHENTICATED_PARENT_HOUSEHOLD', localData: 'AVAILABLE',
+      expiresAt: '2026-08-14T18:00:00.000Z', reason: 'CLOUD_FIRST_LINK_FAILED',
+    })
+    expect(local.local.has(HOUSEHOLD_A)).toBe(true)
+    expect(auth.signIn).toHaveBeenCalledOnce()
+
+    await expect(runtime.retryCloudSetup()).resolves.toMatchObject({
+      status: 'READY', householdRef: HOUSEHOLD_A,
+    })
+    expect(auth.signIn).toHaveBeenCalledOnce()
+    expect(householdAuthority.resolve).toHaveBeenCalledTimes(2)
+    expect(local.establish).toHaveBeenNthCalledWith(2, expect.objectContaining({ householdRef: HOUSEHOLD_A }))
+  })
+
+  it('classifies rejected credentials as sign-in failure before cloud setup begins', async () => {
+    const auth = identity()
+    auth.signIn = vi.fn(async () => ({ status: 'INVALID_CREDENTIALS' as const }))
+    const local = data()
+    const runtime = coordinator({ identity: auth, data: local })
+    await expect(runtime.signIn('parent@example.test', 'wrong')).resolves.toMatchObject({
+      status: 'NEEDS_ATTENTION', cloudAuthority: 'NONE', reason: 'SIGN_IN_FAILED',
+    })
+    expect(local.establish).not.toHaveBeenCalled()
+  })
+
   it('creates an account through the provider without persisting the password', async () => {
     const storage = new MemoryStorage()
     const auth = identity()
@@ -196,7 +230,8 @@ describe('family household cloud auth', () => {
       data: data([HOUSEHOLD_A]), online: false,
     })
     await expect(runtime.bootstrap()).resolves.toMatchObject({
-      status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'NONE', reason: 'AUTH_UNAVAILABLE',
+      status: 'NEEDS_ATTENTION', householdRef: null,
+      cloudAuthority: 'AUTHENTICATED_PARENT', reason: 'CLOUD_SETUP_FAILED',
     })
   })
 

@@ -79,7 +79,7 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
     if (result.status !== 'SIGNED_IN') {
       return this.#publish(Object.freeze({
         status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'NONE', localData: 'UNAVAILABLE',
-        reason: 'AUTH_UNAVAILABLE',
+        reason: result.status === 'INVALID_CREDENTIALS' ? 'SIGN_IN_FAILED' : 'AUTH_UNAVAILABLE',
       }))
     }
     return this.#establish(result.context, generation, signal)
@@ -101,7 +101,7 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
     if (result.status !== 'SIGNED_IN') {
       const state = this.#publish(Object.freeze({
         status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'NONE', localData: 'UNAVAILABLE',
-        reason: 'AUTH_UNAVAILABLE',
+        reason: result.status === 'INVALID_CREDENTIALS' ? 'SIGN_IN_FAILED' : 'AUTH_UNAVAILABLE',
       }))
       return Object.freeze({ status: 'SESSION', state })
     }
@@ -114,6 +114,14 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
 
   async requestMagicLink(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult> {
     try { return await this.#identity.requestMagicLink(email, signal) } catch { return 'UNAVAILABLE' }
+  }
+
+  async retryCloudSetup(signal?: AbortSignal): Promise<FamilyCloudSessionState> {
+    const context = this.#context
+    if (!context || signal?.aborted) return this.#state
+    const generation = ++this.#generation
+    this.#publish(AUTHENTICATING)
+    return this.#establish(context, generation, signal)
   }
 
   async signOut(): Promise<FamilyCloudSessionState> {
@@ -186,12 +194,16 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
       !Number.isFinite(expiry) || expiry <= this.#now().getTime() ||
       !REF.test(context.authorization.user.id)
     ) return this.#withoutCurrentSession()
+    // Provider authentication remains valid while household setup/linking is
+    // retried. Only an explicit sign-out or an invalid/expired provider session
+    // clears this context.
+    this.#context = context
     let resolved
     try { resolved = await this.#authority.resolve(context.authorization, signal) } catch { resolved = { status: 'UNAVAILABLE' as const } }
     if (generation !== this.#generation || signal?.aborted) return this.#state
     if (resolved.status !== 'RESOLVED') {
       const reason = resolved.status === 'NO_ACTIVE_HOUSEHOLD' ? 'NO_ACTIVE_HOUSEHOLD'
-        : resolved.status === 'AMBIGUOUS_HOUSEHOLD' ? 'AMBIGUOUS_HOUSEHOLD' : 'AUTH_UNAVAILABLE'
+        : resolved.status === 'AMBIGUOUS_HOUSEHOLD' ? 'AMBIGUOUS_HOUSEHOLD' : 'CLOUD_SETUP_FAILED'
       const link = this.#device.load()
       const localAvailable = Boolean(link && this.#hasLocalHousehold(link.householdRef))
       if (
@@ -204,14 +216,14 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
         }))
       }
       return this.#publish(Object.freeze({
-        status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'NONE',
-        localData: 'UNAVAILABLE', reason,
+        status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'AUTHENTICATED_PARENT',
+        localData: 'UNAVAILABLE', expiresAt: context.expiresAt, reason,
       }))
     }
     if (!REF.test(resolved.householdRef)) {
       return this.#publish(Object.freeze({
-        status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'NONE',
-        localData: 'UNAVAILABLE', reason: 'AUTH_UNAVAILABLE',
+        status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'AUTHENTICATED_PARENT',
+        localData: 'UNAVAILABLE', expiresAt: context.expiresAt, reason: 'CLOUD_SETUP_FAILED',
       }))
     }
     const data = await this.#localData.establish({
@@ -228,8 +240,9 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
       }
       return this.#publish(Object.freeze({
         status: 'NEEDS_ATTENTION', householdRef: resolved.householdRef,
-        cloudAuthority: 'NONE', localData: matchingLocal ? 'AVAILABLE' : 'UNAVAILABLE',
-        reason: 'DATA_UNAVAILABLE',
+        cloudAuthority: 'AUTHENTICATED_PARENT_HOUSEHOLD',
+        localData: matchingLocal ? 'AVAILABLE' : 'UNAVAILABLE', expiresAt: context.expiresAt,
+        reason: data === 'FIRST_LINK_FAILED' ? 'CLOUD_FIRST_LINK_FAILED' : 'CLOUD_SETUP_FAILED',
       }))
     }
     const linkedAt = this.#now().toISOString()
@@ -239,13 +252,12 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
       householdRef: resolved.householdRef,
       linkedAt,
     })) {
-      this.#dropCloudAuthority()
       return this.#publish(Object.freeze({
         status: 'NEEDS_ATTENTION', householdRef: resolved.householdRef,
-        cloudAuthority: 'NONE', localData: 'AVAILABLE', reason: 'DATA_UNAVAILABLE',
+        cloudAuthority: 'AUTHENTICATED_PARENT_HOUSEHOLD', localData: 'AVAILABLE',
+        expiresAt: context.expiresAt, reason: 'CLOUD_SETUP_FAILED',
       }))
     }
-    this.#context = context
     return this.#publish(Object.freeze({
       status: 'READY', householdRef: resolved.householdRef,
       cloudAuthority: 'AUTHENTICATED_PARENT_HOUSEHOLD', localData: 'AVAILABLE',

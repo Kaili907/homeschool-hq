@@ -50,11 +50,11 @@ async function asAuthenticated<T>(subject: string, studentPrincipal: boolean, op
   }
 }
 
-async function call(subject: string, learners: unknown) {
+async function call(subject: string, learners: unknown, householdTimeZone = 'UTC') {
   return asAuthenticated(subject, false, async () => {
     const result = await database.query<{ value: Record<string, unknown> }>(
-      'select public.academy_family_cloud_bootstrap_r1($1::jsonb) as value',
-      [JSON.stringify(learners)],
+      'select public.academy_family_cloud_bootstrap_r1($1::jsonb, $2::text) as value',
+      [JSON.stringify(learners), householdTimeZone],
     )
     return result.rows[0].value
   })
@@ -83,8 +83,8 @@ describe.sequential('Family Cloud authenticated household bootstrap R1', () => {
       { learnerRef: 'student:ada', displayName: 'Ada', gradeLevel: '5' },
       { learnerRef: 'student:bea', displayName: 'Bea', gradeLevel: '8' },
     ]
-    const first = await call(PARENT_A, learners)
-    const second = await call(PARENT_A, learners)
+    const first = await call(PARENT_A, learners, 'America/Detroit')
+    const second = await call(PARENT_A, learners, 'America/Detroit')
     expect(first).toMatchObject({ schemaVersion: 1, status: 'ready' })
     expect((first.learners as { learnerRef: string; hostedAssignmentRef: string }[])
       .map(({ learnerRef, hostedAssignmentRef }) => ({ learnerRef, hostedAssignmentRef }))
@@ -93,14 +93,16 @@ describe.sequential('Family Cloud authenticated household bootstrap R1', () => {
         { learnerRef: 'student:bea', hostedAssignmentRef: 'family-cloud:learner-authority' },
       ])
     expect(second.householdRef).toBe(first.householdRef)
-    const counts = await database.query<{ households: number; memberships: number; students: number; access_rows: number }>(`
+    const counts = await database.query<{ households: number; memberships: number; students: number; access_rows: number; settings_rows: number; timezone: string }>(`
       select
         (select count(*)::int from public.academy_households where created_by='${PARENT_A}') as households,
         (select count(*)::int from public.academy_household_memberships where user_id='${PARENT_A}' and status='active') as memberships,
         (select count(*)::int from public.academy_students where household_id='${first.householdRef}') as students,
-        (select count(*)::int from public.academy_guardian_student_access where household_id='${first.householdRef}' and status='active') as access_rows
+        (select count(*)::int from public.academy_guardian_student_access where household_id='${first.householdRef}' and status='active') as access_rows,
+        (select count(*)::int from public.academy_study_household_settings where household_id='${first.householdRef}') as settings_rows,
+        (select household_timezone from public.academy_study_household_settings where household_id='${first.householdRef}') as timezone
     `)
-    expect(counts.rows[0]).toEqual({ households: 1, memberships: 1, students: 2, access_rows: 2 })
+    expect(counts.rows[0]).toEqual({ households: 1, memberships: 1, students: 2, access_rows: 2, settings_rows: 1, timezone: 'America/Detroit' })
     expect(JSON.stringify(first)).not.toMatch(/pin|verifier|password|accessToken|refreshToken|service.?role|sessionReference/i)
     expect((first.learners as { tokenDigest: string }[]).every((item) => /^[0-9a-f]{64}$/.test(item.tokenDigest))).toBe(true)
   })
@@ -121,11 +123,11 @@ describe.sequential('Family Cloud authenticated household bootstrap R1', () => {
 
   it('denies anonymous and student-principal execution', async () => {
     const anon = await database.query<{ allowed: boolean }>(`
-      select has_function_privilege('anon','public.academy_family_cloud_bootstrap_r1(jsonb)','EXECUTE') as allowed
+      select has_function_privilege('anon','public.academy_family_cloud_bootstrap_r1(jsonb,text)','EXECUTE') as allowed
     `)
     expect(anon.rows[0].allowed).toBe(false)
     await expect(asAuthenticated(PARENT_A, true, () => database.query(
-      `select public.academy_family_cloud_bootstrap_r1('[]'::jsonb)`,
+      `select public.academy_family_cloud_bootstrap_r1('[]'::jsonb, 'UTC')`,
     ))).rejects.toThrow()
   })
 })

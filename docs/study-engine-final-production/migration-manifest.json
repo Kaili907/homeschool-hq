@@ -593,6 +593,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "family_cloud_household_bootstrap:absent->r1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260816030000",
+      "filename": "20260816030000_academy_family_cloud_timezone_bootstrap_r1.sql",
+      "sha256": "b80d00e24ed3cb4141b4149212a28bbec6613efab7a177c99c8d3eba2faccf70",
+      "dependency": "20260815190000_academy_family_cloud_household_bootstrap_r1.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "family_cloud_timezone_bootstrap:missing->canonical-r1",
+      "supersessionStatus": "current"
     }
   ]
 }
