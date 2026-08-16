@@ -281,13 +281,40 @@ export function downloadJson(filename: string, text: string): void {
 }
 
 /**
- * The exact JSON the standard export-all writes. MM privacy: no sanitizer is needed
- * here because reflection TEXT never lives in AppState — it is kept in journalStore's
- * own localStorage slot (see mindset/journalStore.ts). This serializes only AppState,
- * which carries mindset COMPLETION signals but never a girl's words.
+ * Portable-backup privacy boundary. Extends the mindset-journal structural
+ * guarantee (reflection text lives outside AppState and cannot cross this
+ * boundary) to the fields that ARE inside AppState but must not travel in a
+ * shareable JSON file:
+ *
+ *   • Raw PINs (parent + kid) — 4-digit local UX gates. On a fresh device or a
+ *     restored file, PINs are re-created via the existing PinCreate flow, so
+ *     omitting them is import-safe (validator accepts `""`).
+ *   • Tutor transcripts (`profile.tutorChats`) — full kid/tutor prose plus the
+ *     locked-in `problem` / `correctAnswer` / `herAnswer`. Auto-pruned locally
+ *     at 60 days; not restore-critical. `tutorCalls` (numeric timestamps only)
+ *     is retained so the parent daily-cap meter survives a round-trip.
+ *   • HS assistant session prose (`profile.assistant.sessions`) — same
+ *     rationale as tutor transcripts. Aggregate call log + config kept.
+ *
+ * `tutorChats` and `assistant` are `optional()` on the sync validator, and
+ * `parentPin` / `profile.pin` accept `""`, so a redacted export re-imports
+ * without validation failure.
  */
+export function sanitizeStateForPortableExport(state: AppState): AppState {
+  const profiles: Record<string, Profile> = {}
+  for (const [id, profile] of Object.entries(state.profiles)) {
+    const { tutorChats: _tutorChats, ...rest } = profile
+    const sanitized: Profile = { ...rest, pin: '' }
+    if (profile.assistant) {
+      sanitized.assistant = { ...profile.assistant, sessions: [] }
+    }
+    profiles[id] = sanitized
+  }
+  return { ...state, parentPin: '', profiles }
+}
+
 export function serializeAllBackup(state: AppState): string {
-  return JSON.stringify(state, null, 2)
+  return JSON.stringify(sanitizeStateForPortableExport(state), null, 2)
 }
 
 export function exportAllBackup(state: AppState): void {
