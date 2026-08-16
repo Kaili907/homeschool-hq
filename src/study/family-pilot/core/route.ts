@@ -1,7 +1,13 @@
 export const FAMILY_PILOT_PATH = '/family-pilot'
+export const FAMILY_PILOT_RESET_PASSWORD_PATH = `${FAMILY_PILOT_PATH}/reset-password`
 
 export function isFamilyPilotPath(pathname: string): boolean {
-  return pathname === FAMILY_PILOT_PATH || pathname === `${FAMILY_PILOT_PATH}/`
+  return pathname === FAMILY_PILOT_PATH || pathname === `${FAMILY_PILOT_PATH}/` ||
+    pathname === FAMILY_PILOT_RESET_PASSWORD_PATH || pathname === `${FAMILY_PILOT_RESET_PASSWORD_PATH}/`
+}
+
+export function isFamilyPilotResetPasswordPath(pathname: string): boolean {
+  return pathname === FAMILY_PILOT_RESET_PASSWORD_PATH || pathname === `${FAMILY_PILOT_RESET_PASSWORD_PATH}/`
 }
 
 export function enterFamilyPilotPath(): void {

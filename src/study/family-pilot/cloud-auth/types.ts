@@ -35,6 +35,8 @@ export type FamilyCloudIdentitySignUpResult =
   | Readonly<{ status: 'SIGNED_IN'; context: FamilyCloudIdentityContext }>
   | Readonly<{ status: 'CONFIRM_EMAIL' | 'INVALID_CREDENTIALS' | 'UNAVAILABLE' }>
 
+export type FamilyCloudEmailRequestResult = 'SENT' | 'UNAVAILABLE'
+
 export type FamilyCloudAccountCreationResult =
   | Readonly<{ status: 'CONFIRM_EMAIL' }>
   | Readonly<{ status: 'SESSION'; state: FamilyCloudSessionState }>
@@ -44,6 +46,8 @@ export interface FamilyCloudIdentityPort {
   current(signal?: AbortSignal): Promise<FamilyCloudIdentityContext | null>
   signIn(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudIdentitySignInResult>
   signUp(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudIdentitySignUpResult>
+  requestPasswordRecovery(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult>
+  requestMagicLink(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult>
   signOut(): Promise<void>
 }
 
@@ -123,6 +127,8 @@ export interface FamilyCloudAuthRuntime {
   bootstrap(signal?: AbortSignal): Promise<FamilyCloudSessionState>
   signIn(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudSessionState>
   createAccount(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudAccountCreationResult>
+  requestPasswordRecovery(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult>
+  requestMagicLink(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult>
   signOut(): Promise<FamilyCloudSessionState>
   reconcile(signal?: AbortSignal): Promise<FamilyCloudReconcileResult>
   subscribe(listener: (state: FamilyCloudSessionState) => void): () => void

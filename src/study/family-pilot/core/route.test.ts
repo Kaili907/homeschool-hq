@@ -1,8 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   FAMILY_PILOT_PATH,
+  FAMILY_PILOT_RESET_PASSWORD_PATH,
   enterFamilyPilotPath,
   isFamilyPilotPath,
+  isFamilyPilotResetPasswordPath,
   leaveFamilyPilotPath,
 } from './route'
 
@@ -24,6 +26,8 @@ describe('family pilot route', () => {
   it('matches the path with and without a trailing slash', () => {
     expect(isFamilyPilotPath(FAMILY_PILOT_PATH)).toBe(true)
     expect(isFamilyPilotPath(`${FAMILY_PILOT_PATH}/`)).toBe(true)
+    expect(isFamilyPilotPath(FAMILY_PILOT_RESET_PASSWORD_PATH)).toBe(true)
+    expect(isFamilyPilotResetPasswordPath(FAMILY_PILOT_RESET_PASSWORD_PATH)).toBe(true)
   })
 
   it.each(['/', '/study-engine', '/family-pilots', '/family-pilot/session', ''])(

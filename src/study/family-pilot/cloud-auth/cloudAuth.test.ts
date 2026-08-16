@@ -50,6 +50,8 @@ function identity(current: FamilyCloudIdentityContext | null = null): FamilyClou
     current: vi.fn(async () => current),
     signIn: vi.fn(async () => ({ status: 'SIGNED_IN' as const, context: context() })),
     signUp: vi.fn(async () => ({ status: 'SIGNED_IN' as const, context: context() })),
+    requestPasswordRecovery: vi.fn(async () => 'SENT' as const),
+    requestMagicLink: vi.fn(async () => 'SENT' as const),
     signOut,
   }
 }
@@ -93,6 +95,15 @@ function coordinator(options: {
 }
 
 describe('family household cloud auth', () => {
+  it('uses an already-authenticated provider session to skip sign-in and bootstrap the household', async () => {
+    const auth = identity(context())
+    const runtime = coordinator({ identity: auth })
+    await expect(runtime.bootstrap()).resolves.toMatchObject({
+      status: 'READY', householdRef: HOUSEHOLD_A, cloudAuthority: 'AUTHENTICATED_PARENT_HOUSEHOLD',
+    })
+    expect(auth.signIn).not.toHaveBeenCalled()
+  })
+
   it('establishes a new computer from Parent cloud login without application credential persistence', async () => {
     const storage = new MemoryStorage()
     const local = data()
@@ -343,6 +354,44 @@ describe('provider-managed Family Cloud account creation', () => {
       email: 'new-parent@example.test', password: 'provider-owned-password',
       options: { emailRedirectTo: 'https://family-pilot-cloud-r1--manuel-academy.netlify.app/family-pilot' },
     })
+  })
+
+  it('sends recovery and magic-link requests to explicit canonical application routes', async () => {
+    vi.stubGlobal('window', { location: { origin: 'https://family-pilot-cloud-r1--manuel-academy.netlify.app' } })
+    const resetPasswordForEmail = vi.fn(async () => ({ data: {}, error: null }))
+    const signInWithOtp = vi.fn(async () => ({ data: {}, error: null }))
+    const client = { auth: { resetPasswordForEmail, signInWithOtp } } as unknown as SupabaseClient
+    const adapter = createSupabaseFamilyCloudIdentity(client)
+
+    await expect(adapter.requestPasswordRecovery('srkmanuel@gmail.com')).resolves.toBe('SENT')
+    expect(resetPasswordForEmail).toHaveBeenCalledWith('srkmanuel@gmail.com', {
+      redirectTo: 'https://family-pilot-cloud-r1--manuel-academy.netlify.app/family-pilot/reset-password',
+    })
+    await expect(adapter.requestMagicLink('srkmanuel@gmail.com')).resolves.toBe('SENT')
+    expect(signInWithOtp).toHaveBeenCalledWith({
+      email: 'srkmanuel@gmail.com',
+      options: {
+        emailRedirectTo: 'https://family-pilot-cloud-r1--manuel-academy.netlify.app/family-pilot',
+        shouldCreateUser: false,
+      },
+    })
+  })
+
+  it('passes the exact staging Parent email to signInWithPassword and accepts its verified session', async () => {
+    vi.stubGlobal('window', { location: { origin: 'https://family-pilot-cloud-r1--manuel-academy.netlify.app' } })
+    const session = {
+      access_token: 'header.payload.signature', expires_at: Math.floor(Date.now() / 1_000) + 3_600,
+      user: { id: USER_A, email: 'srkmanuel@gmail.com' },
+    }
+    const signInWithPassword = vi.fn(async () => ({ data: { session }, error: null }))
+    const client = { auth: {
+      signInWithPassword,
+      getSession: vi.fn(async () => ({ data: { session }, error: null })),
+      getUser: vi.fn(async () => ({ data: { user: session.user }, error: null })),
+    } } as unknown as SupabaseClient
+    const adapter = createSupabaseFamilyCloudIdentity(client)
+    await expect(adapter.signIn('srkmanuel@gmail.com', 'provider-owned-password')).resolves.toMatchObject({ status: 'SIGNED_IN' })
+    expect(signInWithPassword).toHaveBeenCalledWith({ email: 'srkmanuel@gmail.com', password: 'provider-owned-password' })
   })
 })
 

@@ -7,6 +7,7 @@ import {
   supabaseUrl,
   type VerifiedAuthContext,
 } from '../../../auth/supabaseSession'
+import { FAMILY_PILOT_PATH, FAMILY_PILOT_RESET_PASSWORD_PATH } from '../core/route'
 import { FamilyCloudAuthCoordinator, type FamilyCloudAuthCoordinatorOptions } from './coordinator'
 import { createLinkedFamilyDeviceStore } from './deviceStore'
 import type {
@@ -19,6 +20,14 @@ import type {
 } from './types'
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+
+export const FAMILY_CLOUD_PATH = FAMILY_PILOT_PATH
+export const FAMILY_CLOUD_PASSWORD_RECOVERY_PATH = FAMILY_PILOT_RESET_PASSWORD_PATH
+
+export function familyCloudRedirectTo(path: typeof FAMILY_CLOUD_PATH | typeof FAMILY_CLOUD_PASSWORD_RECOVERY_PATH): string | undefined {
+  if (typeof window === 'undefined' || !window.location.origin) return undefined
+  return new URL(path, window.location.origin).toString()
+}
 
 async function currentContext(
   client: SupabaseClient | null,
@@ -57,9 +66,7 @@ export function createSupabaseFamilyCloudIdentity(
     },
     async signUp(email: string, password: string, signal?: AbortSignal) {
       if (!client || signal?.aborted) return Object.freeze({ status: 'UNAVAILABLE' as const })
-      const emailRedirectTo = typeof window === 'undefined'
-        ? undefined
-        : new URL('/family-pilot', window.location.origin).toString()
+      const emailRedirectTo = familyCloudRedirectTo(FAMILY_CLOUD_PATH)
       const { data, error } = await client.auth.signUp({
         email,
         password,
@@ -77,6 +84,23 @@ export function createSupabaseFamilyCloudIdentity(
       return context
         ? Object.freeze({ status: 'SIGNED_IN' as const, context })
         : Object.freeze({ status: 'UNAVAILABLE' as const })
+    },
+    async requestPasswordRecovery(email: string, signal?: AbortSignal) {
+      if (!client || signal?.aborted) return 'UNAVAILABLE' as const
+      const redirectTo = familyCloudRedirectTo(FAMILY_CLOUD_PASSWORD_RECOVERY_PATH)
+      if (!redirectTo) return 'UNAVAILABLE' as const
+      const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo })
+      return error || signal?.aborted ? 'UNAVAILABLE' as const : 'SENT' as const
+    },
+    async requestMagicLink(email: string, signal?: AbortSignal) {
+      if (!client || signal?.aborted) return 'UNAVAILABLE' as const
+      const emailRedirectTo = familyCloudRedirectTo(FAMILY_CLOUD_PATH)
+      if (!emailRedirectTo) return 'UNAVAILABLE' as const
+      const { error } = await client.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo, shouldCreateUser: false },
+      })
+      return error || signal?.aborted ? 'UNAVAILABLE' as const : 'SENT' as const
     },
     async signOut() {
       if (client) await client.auth.signOut()

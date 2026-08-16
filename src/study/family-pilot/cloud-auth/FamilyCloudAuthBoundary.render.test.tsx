@@ -10,6 +10,8 @@ describe('Family Cloud account gateway', () => {
       subscribe: () => () => undefined,
       bootstrap: vi.fn(),
       createAccount: vi.fn(),
+      requestPasswordRecovery: vi.fn(),
+      requestMagicLink: vi.fn(),
       signIn: vi.fn(),
       signOut: vi.fn(),
       reconcile: vi.fn(),
@@ -20,6 +22,8 @@ describe('Family Cloud account gateway', () => {
     expect(html).toContain('Sign in to Manuel Academy')
     expect(html).toContain('Set up Family Cloud')
     expect(html).toContain('Family account password')
+    expect(html).toContain('Forgot password?')
+    expect(html).toContain('Email me a sign-in link')
     expect(html).not.toContain('learner controller mounted')
   })
 })

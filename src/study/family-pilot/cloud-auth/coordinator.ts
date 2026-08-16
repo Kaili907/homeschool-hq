@@ -2,6 +2,7 @@ import {
   FAMILY_CLOUD_AUTH_SCHEMA_VERSION,
   type FamilyCloudAuthRuntime,
   type FamilyCloudAccountCreationResult,
+  type FamilyCloudEmailRequestResult,
   type FamilyCloudIdentityPort,
   type FamilyCloudLocalDataPort,
   type FamilyCloudIdentityContext,
@@ -105,6 +106,14 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
       return Object.freeze({ status: 'SESSION', state })
     }
     return Object.freeze({ status: 'SESSION', state: await this.#establish(result.context, generation, signal) })
+  }
+
+  async requestPasswordRecovery(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult> {
+    try { return await this.#identity.requestPasswordRecovery(email, signal) } catch { return 'UNAVAILABLE' }
+  }
+
+  async requestMagicLink(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult> {
+    try { return await this.#identity.requestMagicLink(email, signal) } catch { return 'UNAVAILABLE' }
   }
 
   async signOut(): Promise<FamilyCloudSessionState> {
