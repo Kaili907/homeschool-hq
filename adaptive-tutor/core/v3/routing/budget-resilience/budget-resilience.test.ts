@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { COMMERCIAL_ROUTE_ATTEMPT_PLAN_VERSION } from "../../commercial-operation/index.js";
 import {
   BUDGET_RESILIENCE_VERSION,
   MAX_INTEGER_MICROS,
   decideFallback,
   evaluateCircuitBreaker,
   reserveExecutionBudget,
+  reserveCommercialRouteAttemptPlan,
   settleBudgetReservation,
   type AttemptBudget,
   type BudgetReservation,
@@ -16,6 +18,9 @@ import {
   type ResilienceDecisionInput,
   type RetryPolicy,
 } from "./index.js";
+
+const CONFIG_DIGEST = `sha256:${"a".repeat(64)}`;
+const PROFILE_DIGEST = `sha256:${"b".repeat(64)}`;
 
 function executionBudget(
   maximumMicros = "300",
@@ -45,12 +50,26 @@ function attempt(
 ): AttemptBudget {
   return {
     contractVersion: BUDGET_RESILIENCE_VERSION,
+    logicalOperationRef: "operation:budget-resilience-001",
+    physicalAttemptRef: `physical-attempt:budget-resilience-00${attemptIndex + 1}`,
     attemptIndex,
-    routeRole: attemptIndex === 0 ? "primary" : "failover",
+    role: attemptIndex === 0 ? "primary" : "failover",
     routeRef:
       attemptIndex === 0
         ? "route:commercial-primary-v1"
         : "route:commercial-failover-v1",
+    providerRef: attemptIndex === 0 ? "provider:primary-v1" : "provider:failover-v1",
+    modelRef: attemptIndex === 0 ? "model:primary" : "model:failover",
+    modelRevisionRef:
+      attemptIndex === 0 ? "model-revision:primary-v1" : "model-revision:failover-v1",
+    configurationDigest: CONFIG_DIGEST,
+    capabilityProfileRevisionRef: "capability-profile:minor-heightened-v1",
+    capabilityProfileDigest: PROFILE_DIGEST,
+    providerPolicyRevisionRef: "provider-policy-revision:minor-v1",
+    providerPolicyEvidenceRef:
+      attemptIndex === 0
+        ? "provider-policy-evidence:primary-v1"
+        : "provider-policy-evidence:failover-v1",
     eligibilityClassRef: "eligibility:minor-heightened-us-reviewed-v1",
     hardConstraintsSatisfied: true,
     reservedCostMicros: "100",
@@ -191,6 +210,26 @@ test("uses exact integer cost ceilings and the smallest remaining cap", () => {
   assert.ok("decision" in over);
   assert.equal(over.decision, "reviewed-static-fallback");
   assert.equal(over.reason, "budget-exhausted");
+});
+
+test("reserves an immutable route attempt plan without a catalog re-read", () => {
+  const original = reserve();
+  const result = reserveCommercialRouteAttemptPlan({
+    executionBudget: executionBudget(),
+    reservationRef: "reservation:route-plan-snapshot",
+    routeAttemptPlan: {
+      contractVersion: COMMERCIAL_ROUTE_ATTEMPT_PLAN_VERSION,
+      routePlanRef: "route-plan:budget-resilience-001",
+      logicalOperationRef: original.logicalOperationRef,
+      attempts: original.attempts,
+      totalReservedCostMicros: original.totalReservedMicros,
+    },
+    eligibilityClassRef: "eligibility:minor-heightened-us-reviewed-v1",
+    failoverBackoffMs: 50,
+  });
+  assert.ok("status" in result);
+  assert.deepEqual(result.attempts, original.attempts);
+  assert.equal(result.totalReservedMicros, original.totalReservedMicros);
 });
 
 test("rejects negative and unsafe integer millisecond values", () => {
@@ -433,6 +472,18 @@ test("failover requires an immutable pre-reserved cost slot", () => {
   const fallback = decideFallback(input);
   assert.equal(fallback.decision, "reviewed-static-fallback");
   assert.equal(fallback.reason, "failover-not-pre-reserved");
+});
+
+test("reservation rejects duplicate physical attempt references", () => {
+  const primary = attempt(0);
+  const failover = attempt(1, { physicalAttemptRef: primary.physicalAttemptRef });
+  const result = reserveExecutionBudget({
+    executionBudget: executionBudget(),
+    reservationRef: "reservation:duplicate-physical-attempt",
+    attempts: [primary, failover],
+  });
+  assert.ok("decision" in result);
+  assert.equal(result.decision, "fixed-stop");
 });
 
 test("cost over reservation becomes an anomaly without fabricated release", () => {

@@ -1,9 +1,11 @@
-import { validateExact } from "../../../v2/contracts/validation.js";
 import {
-  MODEL_CAPABILITY_PROFILE_VERSION,
-  ModelCapabilityProfileSchema,
-  PROVIDER_CAPABILITY_PROFILE_VERSION,
-  ProviderCapabilityProfileSchema,
+  createCommercialRouteAttemptPlan,
+  parseCanonicalIntegerMicros,
+  type CommercialAttempt,
+} from "../../commercial-operation/index.js";
+import { validateExact } from "../../../v2/contracts/validation.js";
+import { readEligibleRouteCatalog, type EligibleRouteCatalogEntry } from "./catalog.js";
+import {
   ROUTING_DECISION_VERSION,
   RoutingRequestSchema,
   type ActionFamily,
@@ -43,33 +45,12 @@ const REASON_ORDER: readonly RoutingReasonCode[] = [
   "NO_ELIGIBLE_PROVIDER_ROUTE",
 ];
 
-interface Candidate {
-  readonly provider: ProviderCapabilityProfile;
-  readonly model: ModelCapabilityProfile;
+interface Candidate extends EligibleRouteCatalogEntry {
   readonly costMicros: bigint;
 }
 
 function unique(values: readonly string[]): boolean {
   return new Set(values).size === values.length;
-}
-
-function closedProfiles<T>(
-  values: unknown,
-  schema: typeof ProviderCapabilityProfileSchema | typeof ModelCapabilityProfileSchema,
-  expectedVersion:
-    | typeof PROVIDER_CAPABILITY_PROFILE_VERSION
-    | typeof MODEL_CAPABILITY_PROFILE_VERSION,
-): readonly T[] | null {
-  if (!Array.isArray(values) || values.length === 0 || values.length > 64) return null;
-  const profiles: T[] = [];
-  for (const value of values) {
-    const validation = validateExact(schema, value);
-    if (validation.status === "rejected") return null;
-    const profile = validation.value as Record<string, unknown>;
-    if (profile.profileVersion !== expectedVersion) return null;
-    profiles.push(validation.value as T);
-  }
-  return profiles;
 }
 
 function authorityBoundary(request: RoutingRequest | null): RoutingAuthorityBoundary {
@@ -125,9 +106,7 @@ function noRoute(
 }
 
 function hasDuplicates(profile: ProviderCapabilityProfile | ModelCapabilityProfile): boolean {
-  if ("modelRefs" in profile) {
-    return !unique(profile.modelRefs) || !unique(profile.providerPolicyEligibilityRefs);
-  }
+  if ("modelRefs" in profile) return !unique(profile.modelRefs);
   return !unique(profile.actionFamilies) ||
     !unique(profile.subjectCapabilities) ||
     !unique(profile.learnerStages) ||
@@ -139,26 +118,23 @@ function matchingAvailability(
   request: RoutingRequest,
   providerRef: string,
   modelRef: string,
+  modelRevisionRef: string,
 ): ProviderAvailabilityState | null {
   const matches = request.providerAvailability.filter(
-    (entry) => entry.providerRef === providerRef && entry.modelRef === modelRef,
+    (entry) =>
+      entry.providerRef === providerRef &&
+      entry.modelRef === modelRef &&
+      entry.modelRevisionRef === modelRevisionRef,
   );
   return matches.length === 1 ? matches[0] ?? null : null;
 }
 
-function isSafetyEligible(
-  model: ModelCapabilityProfile,
-  request: RoutingRequest,
-): boolean {
-  return model.safetyCapabilities.includes(request.safetyRequirement);
-}
-
 function evaluateCandidate(
-  provider: ProviderCapabilityProfile,
-  model: ModelCapabilityProfile,
+  entry: EligibleRouteCatalogEntry,
   request: RoutingRequest,
   reasons: Set<RoutingReasonCode>,
 ): Candidate | null {
+  const { provider, model } = entry;
   if (
     provider.lifecycle !== "ACTIVE" ||
     model.lifecycle !== "ACTIVE" ||
@@ -192,7 +168,7 @@ function evaluateCandidate(
     reasons.add("CONTEXT_SIZE_MISMATCH");
     return null;
   }
-  if (!isSafetyEligible(model, request)) {
+  if (!model.safetyCapabilities.includes(request.safetyRequirement)) {
     reasons.add("SAFETY_MISMATCH");
     return null;
   }
@@ -207,11 +183,12 @@ function evaluateCandidate(
     reasons.add("REVIEWED_CONTENT_MISMATCH");
     return null;
   }
-  if (!provider.providerPolicyEligibilityRefs.includes(request.providerPolicyEligibilityRef)) {
-    reasons.add("PROVIDER_POLICY_INELIGIBLE");
-    return null;
-  }
-  const availability = matchingAvailability(request, provider.providerRef, model.modelRef);
+  const availability = matchingAvailability(
+    request,
+    provider.providerRef,
+    model.modelRef,
+    model.modelRevisionRef,
+  );
   if (!availability || availability.state !== "AVAILABLE") {
     reasons.add("PROVIDER_UNAVAILABLE");
     return null;
@@ -225,18 +202,21 @@ function evaluateCandidate(
     reasons.add("LATENCY_CEILING_EXCEEDED");
     return null;
   }
-  const costMicros = BigInt(model.worstCaseCostMicros);
-  if (costMicros > BigInt(request.costCeilingMicros)) {
+  const costMicros = parseCanonicalIntegerMicros(model.worstCaseCostMicros);
+  const costCeilingMicros = parseCanonicalIntegerMicros(request.costCeilingMicros);
+  if (costMicros === null || costCeilingMicros === null) {
+    reasons.add("INVALID_ROUTING_CONTRACT");
+    return null;
+  }
+  if (costMicros > costCeilingMicros) {
     reasons.add("COST_CEILING_EXCEEDED");
     return null;
   }
-  return { provider, model, costMicros };
+  return { ...entry, costMicros };
 }
 
 function compareCandidate(left: Candidate, right: Candidate): number {
-  if (left.costMicros !== right.costMicros) {
-    return left.costMicros < right.costMicros ? -1 : 1;
-  }
+  if (left.costMicros !== right.costMicros) return left.costMicros < right.costMicros ? -1 : 1;
   if (left.model.estimatedLatencyMs !== right.model.estimatedLatencyMs) {
     return left.model.estimatedLatencyMs - right.model.estimatedLatencyMs;
   }
@@ -245,6 +225,7 @@ function compareCandidate(left: Candidate, right: Candidate): number {
     left.provider.providerRef.localeCompare(right.provider.providerRef),
     left.model.modelClass.localeCompare(right.model.modelClass),
     left.model.modelRef.localeCompare(right.model.modelRef),
+    left.model.modelRevisionRef.localeCompare(right.model.modelRevisionRef),
     left.model.routeRef.localeCompare(right.model.routeRef),
   ].find((comparison) => comparison !== 0) ?? 0;
 }
@@ -254,108 +235,117 @@ function chooseFallback(
   candidates: readonly Candidate[],
   request: RoutingRequest,
 ): Candidate | null {
-  const ceiling = BigInt(request.costCeilingMicros);
+  if (request.physicalAttemptRefs.length < 2) return null;
+  const ceiling = parseCanonicalIntegerMicros(request.costCeilingMicros);
+  if (ceiling === null) return null;
   return candidates.find((candidate) =>
     candidate !== primary &&
+    candidate.model.routeRef !== primary.model.routeRef &&
     primary.costMicros + candidate.costMicros <= ceiling &&
-    primary.model.attemptTimeoutMs + candidate.model.attemptTimeoutMs <=
-      request.latencyCeilingMs
+    primary.model.attemptTimeoutMs + candidate.model.attemptTimeoutMs <= request.latencyCeilingMs
   ) ?? null;
+}
+
+function commercialAttempt(
+  request: RoutingRequest,
+  candidate: Candidate,
+  attemptIndex: 0 | 1,
+): CommercialAttempt | null {
+  const physicalAttemptRef = request.physicalAttemptRefs[attemptIndex];
+  if (!physicalAttemptRef) return null;
+  return {
+    logicalOperationRef: request.logicalOperationRef,
+    physicalAttemptRef,
+    attemptIndex,
+    role: attemptIndex === 0 ? "primary" : "failover",
+    routeRef: candidate.model.routeRef,
+    providerRef: candidate.provider.providerRef,
+    modelRef: candidate.model.modelRef,
+    modelRevisionRef: candidate.model.modelRevisionRef,
+    configurationDigest: candidate.model.configurationDigest,
+    capabilityProfileRevisionRef: candidate.model.capabilityProfileRevisionRef,
+    capabilityProfileDigest: candidate.model.capabilityProfileDigest,
+    providerPolicyRevisionRef:
+      candidate.providerPolicyDecision.providerPolicyRevisionRef,
+    providerPolicyEvidenceRef:
+      candidate.providerPolicyDecision.providerPolicyEvidenceRef,
+    reservedCostMicros: candidate.model.worstCaseCostMicros,
+    timeoutMs: candidate.model.attemptTimeoutMs,
+  };
 }
 
 function selectedDecision(
   request: RoutingRequest,
   primary: Candidate,
   fallback: Candidate | null,
-): SelectedRoutingDecision {
+): RoutingDecision {
+  const primaryAttempt = commercialAttempt(request, primary, 0);
+  const fallbackAttempt = fallback === null ? null : commercialAttempt(request, fallback, 1);
+  if (primaryAttempt === null || (fallback !== null && fallbackAttempt === null)) {
+    return noRoute(request, new Set(["INVALID_ROUTING_CONTRACT"]));
+  }
+  const attempts = fallbackAttempt === null ? [primaryAttempt] : [primaryAttempt, fallbackAttempt];
+  const routeAttemptPlan = createCommercialRouteAttemptPlan({
+    routePlanRef: request.routePlanRef,
+    logicalOperationRef: request.logicalOperationRef,
+    attempts,
+  });
+  if (routeAttemptPlan === null) {
+    return noRoute(request, new Set(["INVALID_ROUTING_CONTRACT"]));
+  }
   const reasonCodes: RoutingReasonCode[] = ["PRIMARY_ROUTE_SELECTED"];
-  if (fallback) reasonCodes.push("FALLBACK_ROUTE_SELECTED");
-  return {
+  if (fallbackAttempt) reasonCodes.push("FALLBACK_ROUTE_SELECTED");
+  const decision: SelectedRoutingDecision = {
     decisionVersion: ROUTING_DECISION_VERSION,
     status: "ROUTE_SELECTED",
     requestRef: request.requestRef,
-    providerClass: primary.provider.providerClass,
-    providerRef: primary.provider.providerRef,
-    modelClass: primary.model.modelClass,
-    modelRef: primary.model.modelRef,
-    routeRef: primary.model.routeRef,
-    maxOutputTokens: request.contextSizeRequirement.requiredOutputTokens,
-    timeoutMs: primary.model.attemptTimeoutMs,
+    routeAttemptPlan,
     retryCount: 0,
-    fallbackProviderClass: fallback?.provider.providerClass ?? null,
-    fallbackProviderRef: fallback?.provider.providerRef ?? null,
-    fallbackModelClass: fallback?.model.modelClass ?? null,
-    fallbackModelRef: fallback?.model.modelRef ?? null,
-    fallbackRouteRef: fallback?.model.routeRef ?? null,
-    fallbackMaxOutputTokens:
-      fallback === null ? 0 : request.contextSizeRequirement.requiredOutputTokens,
-    fallbackTimeoutMs: fallback?.model.attemptTimeoutMs ?? 0,
-    reservedCostMicros: (primary.costMicros + (fallback?.costMicros ?? 0n)).toString(),
+    reservedCostMicros: routeAttemptPlan.totalReservedCostMicros,
     staticReviewedFallbackRequirement: "REQUIRED_ON_ROUTE_FAILURE",
     staticFallbackPolicyRef: request.staticFallbackPolicyRef,
     authorityBoundary: authorityBoundary(request),
     reasonCodes,
   };
+  return decision;
 }
 
-/**
- * Pure provider/model selection. It performs no I/O and treats profiles,
- * availability, and policy eligibility as closed reviewed inputs.
- */
+/** Pure selection from a catalog whose provider eligibility was evaluated by W3-08. */
 export function routeProviderModel(
   routingRequest: unknown,
-  providerProfilesInput: unknown,
-  modelProfilesInput: unknown,
+  eligibleRouteCatalog: unknown,
 ): RoutingDecision {
   try {
     const requestValidation = validateExact(RoutingRequestSchema, routingRequest);
     if (requestValidation.status === "rejected") {
       return noRoute(null, new Set(["INVALID_ROUTING_CONTRACT"]));
     }
-    const request = requestValidation.value as unknown as RoutingRequest;
-    const providers = closedProfiles<ProviderCapabilityProfile>(
-      providerProfilesInput,
-      ProviderCapabilityProfileSchema,
-      PROVIDER_CAPABILITY_PROFILE_VERSION,
-    );
-    const models = closedProfiles<ModelCapabilityProfile>(
-      modelProfilesInput,
-      ModelCapabilityProfileSchema,
-      MODEL_CAPABILITY_PROFILE_VERSION,
-    );
-    if (!providers || !models) {
+    const request = requestValidation.value as RoutingRequest;
+    if (!unique(request.physicalAttemptRefs)) {
       return noRoute(request, new Set(["INVALID_ROUTING_CONTRACT"]));
     }
-    if (
-      request.actionFamily !== request.studyPermissionBoundary.authorizedActionFamily
-    ) {
+    const catalogEntries = readEligibleRouteCatalog(eligibleRouteCatalog);
+    if (catalogEntries === null) {
+      return noRoute(request, new Set(["INVALID_ROUTING_CONTRACT"]));
+    }
+    if (request.actionFamily !== request.studyPermissionBoundary.authorizedActionFamily) {
       return noRoute(request, new Set(["STUDY_PERMISSION_MISMATCH"]));
     }
     if (request.reviewedContentRequirement === "STATIC_REVIEWED_ONLY") {
       return noRoute(request, new Set(["STATIC_REVIEWED_ONLY"]));
     }
-
-    const providerRefs = providers.map((profile) => profile.providerRef);
-    const modelRefs = models.map((profile) => profile.modelRef);
-    const routeRefs = models.map((profile) => profile.routeRef);
-    if (!unique(providerRefs) || !unique(modelRefs) || !unique(routeRefs)) {
-      return noRoute(request, new Set(["PROVIDER_MODEL_BINDING_MISMATCH"]));
+    if (catalogEntries.length === 0) {
+      return noRoute(request, new Set(["PROVIDER_POLICY_INELIGIBLE"]));
     }
 
     const reasons = new Set<RoutingReasonCode>();
-    const candidates: Candidate[] = [];
-    for (const provider of providers) {
-      for (const model of models) {
-        if (model.providerRef !== provider.providerRef) continue;
-        const candidate = evaluateCandidate(provider, model, request, reasons);
-        if (candidate) candidates.push(candidate);
-      }
-    }
-    candidates.sort(compareCandidate);
+    const candidates = catalogEntries
+      .map((entry) => evaluateCandidate(entry, request, reasons))
+      .filter((candidate): candidate is Candidate => candidate !== null)
+      .sort(compareCandidate);
     const primary = candidates[0];
     if (!primary) return noRoute(request, reasons);
-    const fallback = chooseFallback(primary, candidates, request);
-    return selectedDecision(request, primary, fallback);
+    return selectedDecision(request, primary, chooseFallback(primary, candidates, request));
   } catch {
     return noRoute(null, new Set(["INVALID_ROUTING_CONTRACT"]));
   }

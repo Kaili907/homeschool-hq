@@ -1,4 +1,12 @@
 import {
+  commercialAttemptsEqual,
+  isCanonicalCommercialAttempt,
+  parseCanonicalIntegerMicros,
+} from "../commercial-operation/index.js";
+import { validateExact } from "../../v2/contracts/validation.js";
+import { validateBudgetReservationSnapshot } from "../routing/budget-resilience/index.js";
+import {
+  CommercialTelemetryLineageSchema,
   TELEMETRY_ACTION_FAMILIES,
   TELEMETRY_CACHE_CLASSES,
   TELEMETRY_FAILURE_REASON_CODES,
@@ -9,6 +17,7 @@ import {
   type TelemetryCacheClass,
   type TelemetryFailureReasonCode,
   type TelemetryFallbackClass,
+  type TelemetryProjectionRejectionCode,
   type TelemetryProjectionResult,
   type TelemetryRouteClass,
   type TutorCommercialTelemetryEvent,
@@ -55,21 +64,38 @@ function normalizedCode<const T extends string>(
     : fallback;
 }
 
-function optionalReference(record: Record<string, unknown>, key: string): string | null {
-  const value = ownDataProperty(record, key);
-  return isOpaqueReference(value) ? value : null;
-}
-
-function rejected(reasonCode: "INVALID_EXECUTION_RESULT" | "INVALID_OPERATIONAL_REFERENCE" | "INVALID_NUMERIC_METRIC"): TelemetryProjectionResult {
+function rejected(reasonCode: TelemetryProjectionRejectionCode): TelemetryProjectionResult {
   return Object.freeze({ status: "rejected", reasonCode });
 }
 
 /**
- * Projects a provider execution result into a closed, prose-free commercial
- * operations event. Unknown properties are not enumerated and never cross the
- * telemetry boundary.
+ * Projects only allowlisted operational fields. All route, model, policy, and
+ * reservation identity is copied from the canonical reserved attempt rather
+ * than accepted from a provider execution result.
  */
-export function projectTutorCommercialTelemetry(executionResult: unknown): TelemetryProjectionResult {
+export function projectTutorCommercialTelemetry(
+  executionResult: unknown,
+  lineageInput: unknown,
+): TelemetryProjectionResult {
+  const lineageValidation = validateExact(CommercialTelemetryLineageSchema, lineageInput);
+  if (lineageValidation.status === "rejected") {
+    return rejected("INVALID_COMMERCIAL_LINEAGE");
+  }
+  const { attempt, reservation } = lineageValidation.value;
+  if (validateBudgetReservationSnapshot(reservation) === null) {
+    return rejected("INVALID_COMMERCIAL_LINEAGE");
+  }
+  const reservedAttempt = reservation.attempts.find(
+    (candidate) => candidate.physicalAttemptRef === attempt.physicalAttemptRef,
+  );
+  if (
+    !isCanonicalCommercialAttempt(attempt) ||
+    reservation.logicalOperationRef !== attempt.logicalOperationRef ||
+    !reservedAttempt ||
+    !commercialAttemptsEqual(reservedAttempt, attempt)
+  ) {
+    return rejected("INVALID_COMMERCIAL_LINEAGE");
+  }
   if (!isPlainRecord(executionResult)) return rejected("INVALID_EXECUTION_RESULT");
 
   const status = ownDataProperty(executionResult, "status");
@@ -77,23 +103,20 @@ export function projectTutorCommercialTelemetry(executionResult: unknown): Telem
   if ((status !== "success" && status !== "failure") || !isPlainRecord(metrics)) {
     return rejected("INVALID_EXECUTION_RESULT");
   }
-
   const eventRef = ownDataProperty(executionResult, "eventRef");
-  const providerRef = ownDataProperty(executionResult, "providerRef");
-  const modelRef = ownDataProperty(executionResult, "modelRef");
-  if (!isOpaqueReference(eventRef) || !isOpaqueReference(providerRef) || !isOpaqueReference(modelRef)) {
-    return rejected("INVALID_OPERATIONAL_REFERENCE");
-  }
+  if (!isOpaqueReference(eventRef)) return rejected("INVALID_OPERATIONAL_REFERENCE");
 
   const inputTokenCount = safeCounter(ownDataProperty(metrics, "inputTokenCount"));
   const outputTokenCount = safeCounter(ownDataProperty(metrics, "outputTokenCount"));
   const latencyMs = safeCounter(ownDataProperty(metrics, "latencyMs"));
-  const costMicros = safeCounter(ownDataProperty(metrics, "costMicros"));
+  const costMicrosInput = ownDataProperty(metrics, "costMicros");
+  const costMicros = parseCanonicalIntegerMicros(costMicrosInput);
   if (
     inputTokenCount === null ||
     outputTokenCount === null ||
     latencyMs === null ||
-    costMicros === null
+    costMicros === null ||
+    typeof costMicrosInput !== "string"
   ) {
     return rejected("INVALID_NUMERIC_METRIC");
   }
@@ -130,20 +153,30 @@ export function projectTutorCommercialTelemetry(executionResult: unknown): Telem
     contractVersion: TUTOR_COMMERCIAL_TELEMETRY_CONTRACT_VERSION,
     eventKind: "tutor-commercial-operation",
     eventRef,
-    providerRef,
-    modelRef,
+    logicalOperationRef: attempt.logicalOperationRef,
+    physicalAttemptRef: attempt.physicalAttemptRef,
+    reservationRef: reservation.reservationRef,
+    routeRef: attempt.routeRef,
+    providerRef: attempt.providerRef,
+    modelRef: attempt.modelRef,
+    modelRevisionRef: attempt.modelRevisionRef,
+    configurationDigest: attempt.configurationDigest,
+    capabilityProfileRevisionRef: attempt.capabilityProfileRevisionRef,
+    capabilityProfileDigest: attempt.capabilityProfileDigest,
+    providerPolicyRevisionRef: attempt.providerPolicyRevisionRef,
+    providerPolicyEvidenceRef: attempt.providerPolicyEvidenceRef,
+    attemptIndex: attempt.attemptIndex,
+    role: attempt.role,
     actionFamily,
     routeClass,
     inputTokenCount,
     outputTokenCount,
     latencyMs,
-    costMicros,
+    costMicros: costMicrosInput,
     cacheClass,
     fallbackClass,
     outcome: status,
     reasonCode,
-    policyRevisionRef: optionalReference(executionResult, "policyRevisionRef"),
-    configRevisionRef: optionalReference(executionResult, "configRevisionRef"),
     authorityScope: "commercial-operations-only",
     instructionalUseAllowed: false,
     studyAuthority: false,

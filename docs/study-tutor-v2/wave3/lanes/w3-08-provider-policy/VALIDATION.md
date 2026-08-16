@@ -1,5 +1,7 @@
 # W3-08 Validation
 
+R2 focused result: PASS — 13 tests, 0 failures.
+
 The focused deterministic suite covers:
 
 | Case | Expected decision |

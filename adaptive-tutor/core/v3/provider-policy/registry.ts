@@ -1,5 +1,7 @@
 import type { TrustedProviderProfile } from "./contracts.js";
 
+const TRUSTED_REGISTRIES = new WeakSet<TrustedProviderProfileRegistry>();
+
 function freezeProfile(profile: TrustedProviderProfile): TrustedProviderProfile {
   return Object.freeze({
     ...profile,
@@ -22,6 +24,7 @@ export class TrustedProviderProfileRegistry {
 
   private constructor(profiles: ReadonlyMap<string, TrustedProviderProfile>) {
     this.#profiles = profiles;
+    TRUSTED_REGISTRIES.add(this);
   }
 
   static fromTrustedProfiles(
@@ -43,6 +46,14 @@ export class TrustedProviderProfileRegistry {
   lookup(providerRef: string): TrustedProviderProfile | undefined {
     return this.#profiles.get(providerRef);
   }
+}
+
+export function isTrustedProviderProfileRegistry(
+  value: unknown,
+): value is TrustedProviderProfileRegistry {
+  return typeof value === "object" && value !== null && TRUSTED_REGISTRIES.has(
+    value as TrustedProviderProfileRegistry,
+  );
 }
 
 export function createTrustedProviderProfileRegistry(

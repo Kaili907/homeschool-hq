@@ -32,6 +32,8 @@ export interface TrustedProviderProfile {
   readonly multimodalEligibility: MultimodalEligibility;
   /** Jointly pins the reviewed provider contract and privacy-policy revision. */
   readonly contractPolicyRevision: string | null;
+  /** Host-owned evidence record supporting the reviewed policy revision. */
+  readonly policyEvidenceRef: string | null;
   /** Exclusive validity boundary, expressed as a canonical ISO-8601 instant. */
   readonly policyEvidenceValidUntil: string | null;
   readonly status: ProviderStatus;
@@ -60,6 +62,7 @@ export type ProviderEligibilityReason =
   | "data-deletion-capability-unknown"
   | "multimodal-eligibility-unknown"
   | "contract-policy-revision-unknown"
+  | "policy-evidence-ref-unknown"
   | "policy-evidence-expiration-unknown"
   | "policy-evidence-expiration-invalid"
   | "policy-evidence-expired"
@@ -76,5 +79,8 @@ export type ProviderEligibilityReason =
 export interface ProviderEligibilityDecision {
   readonly decision: ProviderEligibilityDecisionKind;
   readonly providerRef: string;
+  readonly providerPolicyRevisionRef: string | null;
+  readonly providerPolicyEvidenceRef: string | null;
+  readonly evaluatedAt: string | null;
   readonly reasons: readonly ProviderEligibilityReason[];
 }

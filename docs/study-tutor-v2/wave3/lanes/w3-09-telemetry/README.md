@@ -1,59 +1,29 @@
-# W3-09 — Minimized Tutor usage and cost telemetry
+# W3-09 minimized commercial telemetry
 
-## Scope
+`projectTutorCommercialTelemetry` emits a closed commercial-operations event
+from an execution measurement plus a canonical reserved-attempt lineage. The
+execution result cannot declare provider, model, route, policy, or reservation
+identity; those fields are copied from the W3-01/W3-02 snapshot.
 
-This lane defines provider-independent commercial operations evidence. It has
-no database integration, sink, retention mechanism, Admin UI, or provider SDK
-dependency. `projectTutorCommercialTelemetry` accepts an unknown execution
-result and emits only the closed `TutorCommercialTelemetryEvent` allowlist.
+Each event correlates:
 
-## Units and overflow
+- `eventRef`, `logicalOperationRef`, `physicalAttemptRef`, `reservationRef`, and
+  `routeRef`;
+- provider/model alias, immutable model revision, and configuration digest;
+- capability-profile revision/digest and provider-policy revision/evidence;
+- attempt index/role, latency, exact cost, fallback class, and outcome.
 
-Token counts, latency, and cost are non-negative JavaScript safe integers.
-Latency uses integer milliseconds (`latencyMs`) and cost uses integer micros
-(`costMicros`). The projector does not round, clamp, or silently replace an
-invalid measurement. A negative, fractional, non-finite, non-number, or unsafe
-integer measurement rejects the projection with `INVALID_NUMERIC_METRIC`.
+Cost is the same bounded canonical decimal-string micros representation used by
+W3-02. Values beyond `Number.MAX_SAFE_INTEGER` remain exact; JS-number money,
+negative/decimal/non-canonical strings, and signed-64-bit overflow are rejected.
+Token counters and latency remain safe non-negative integer numbers.
 
-## Data minimization
+The projector verifies that the canonical attempt exactly matches a physical
+attempt in the supplied reservation and that the logical-operation references
+agree. It reads only own allowlisted execution properties and never invokes
+accessors. Prompts, responses, learner prose, transcripts, identity, diagnoses,
+credentials, and arbitrary provider failure prose cannot cross the boundary.
 
-The event contains only:
-
-- opaque event, provider, model, policy revision, and config revision refs;
-- bounded action, route, cache, and fallback classes;
-- input/output token counts, latency milliseconds, and cost micros;
-- bounded success/failure reason codes; and
-- literal operational-only authority markers.
-
-The projector does not enumerate the input. It reads only own data properties
-on the allowlist and does not invoke accessors. Unknown class values receive a
-bounded generic classification. Unknown failure strings become
-`UNKNOWN_FAILURE`; they are never copied.
-
-The contract has no field for learner answers, Tutor transcripts, prompts,
-provider response prose, learner names, diagnoses, emotions, personality data,
-or credentials. Its schema rejects additional fields.
-
-## Authority boundary
-
-This event is billing, reliability, routing, and capacity evidence only. It is
-not instructional evidence and cannot select an action, alter a prompt, infer a
-learner state, score work, establish mastery, change progress, or authorize a
-Study mutation. Every emitted event fixes:
-
-```text
-authorityScope = commercial-operations-only
-instructionalUseAllowed = false
-studyAuthority = false
-studyMutationAllowed = false
-```
-
-Consumers must not join this telemetry back into Tutor instruction or Study
-decision paths. Study remains the sole authority for official state.
-
-## Validation
-
-The co-located tests cover exact projection, forbidden-field redaction,
-accessor non-execution, bounded failure normalization, invalid operational
-references, schema closure, authority literals, numeric overflow, invalid
-numeric forms, and maximum-safe-integer preservation.
+Every event fixes `authorityScope = commercial-operations-only`,
+`instructionalUseAllowed = false`, `studyAuthority = false`, and
+`studyMutationAllowed = false`.

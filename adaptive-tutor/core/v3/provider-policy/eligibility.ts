@@ -8,6 +8,7 @@ import type {
 import type { TrustedProviderProfileRegistry } from "./registry.js";
 
 const CANONICAL_INSTANT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
+const OPAQUE_REFERENCE = /^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$/;
 
 function instantMilliseconds(value: string): number | null {
   if (!CANONICAL_INSTANT.test(value)) return null;
@@ -40,10 +41,15 @@ function decision(
   kind: ProviderEligibilityDecision["decision"],
   providerRef: string,
   reasons: readonly ProviderEligibilityReason[],
+  profile: TrustedProviderProfile | null,
+  evaluatedAt: string | null,
 ): ProviderEligibilityDecision {
   return Object.freeze({
     decision: kind,
     providerRef,
+    providerPolicyRevisionRef: profile?.contractPolicyRevision ?? null,
+    providerPolicyEvidenceRef: profile?.policyEvidenceRef ?? null,
+    evaluatedAt,
     reasons: Object.freeze([...reasons]),
   });
 }
@@ -98,6 +104,13 @@ function unknownOrUntrustedReasons(
   }
   if (profile.contractPolicyRevision === null || !nonEmpty(profile.contractPolicyRevision)) {
     reasons.push("contract-policy-revision-unknown");
+  }
+  if (
+    profile.policyEvidenceRef === null ||
+    profile.policyEvidenceRef.length > 160 ||
+    !OPAQUE_REFERENCE.test(profile.policyEvidenceRef)
+  ) {
+    reasons.push("policy-evidence-ref-unknown");
   }
   if (profile.policyEvidenceValidUntil === null) {
     reasons.push("policy-evidence-expiration-unknown");
@@ -172,6 +185,8 @@ export function evaluateProviderEligibility(
       "static-fallback-required",
       requirements.providerRef,
       ["invalid-eligibility-requirements"],
+      null,
+      null,
     );
   }
 
@@ -181,18 +196,32 @@ export function evaluateProviderEligibility(
       "static-fallback-required",
       requirements.providerRef,
       ["trusted-profile-not-found"],
+      null,
+      requirements.evaluatedAt,
     );
   }
 
   const fallbackReasons = unknownOrUntrustedReasons(profile, requirements);
   if (fallbackReasons.length > 0) {
-    return decision("static-fallback-required", requirements.providerRef, fallbackReasons);
+    return decision(
+      "static-fallback-required",
+      requirements.providerRef,
+      fallbackReasons,
+      profile,
+      requirements.evaluatedAt,
+    );
   }
 
   const ineligibilityReasons = explicitIneligibilityReasons(profile, requirements);
   if (ineligibilityReasons.length > 0) {
-    return decision("ineligible", requirements.providerRef, ineligibilityReasons);
+    return decision(
+      "ineligible",
+      requirements.providerRef,
+      ineligibilityReasons,
+      profile,
+      requirements.evaluatedAt,
+    );
   }
 
-  return decision("eligible", requirements.providerRef, []);
+  return decision("eligible", requirements.providerRef, [], profile, requirements.evaluatedAt);
 }
