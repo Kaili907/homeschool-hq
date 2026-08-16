@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u05-l14",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u05-l14",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Division with Remainders",
+    "dayInUnit": 14,
+    "courseDay": 86,
+    "phase": "Performance task: build",
+    "focus": "the plan with a written remainder justification",
+    "title": "Performance task: build: the plan with a written remainder justification"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.6"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 310 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "77 r2",
+            "78 r2",
+            "76 r2",
+            "77 r3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "68 students are going on a field trip. Each van holds 6 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "12",
+            "13",
+            "11",
+            "10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 323 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "80 r3",
+            "79 r3",
+            "80 r1",
+            "81 r3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "89 students are going on a field trip. Each van holds 6 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "15",
+            "13",
+            "14",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 147 ÷ 5. Write the answer as a quotient and remainder.",
+          "choices": [
+            "29 r2",
+            "29 r3",
+            "30 r2",
+            "28 r2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 83 eggs and needs 5 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "17",
+            "15",
+            "16",
+            "19"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 268 ÷ 3. Write the answer as a quotient and remainder.",
+          "choices": [
+            "90 r1",
+            "89 r2",
+            "88 r1",
+            "89 r1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 132 eggs and needs 8 eggs for each cake. How many whole cakes can be made?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 723 ÷ 7. Write the answer as a quotient and remainder.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u05-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u05-l14"
+  }
+}

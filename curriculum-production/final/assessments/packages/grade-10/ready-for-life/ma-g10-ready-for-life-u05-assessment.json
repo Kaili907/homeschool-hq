@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-ready-for-life-u05-assessment",
+  "courseRef": "ma-g10-ready-for-life",
+  "grade": 10,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g10-ready-for-life-u05",
+    "unitNumber": 5,
+    "unitTitle": "Civic Participation and Public Systems",
+    "courseTitle": "Ready for Life 10: Career Exploration and Workplace Communication",
+    "assessmentLessonRef": "ma-g10-ready-for-life-u05-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u05-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Choose three public systems from this unit to include in your guide.",
+      "prompt": "Name the three systems you're including and why each is genuinely useful to you."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "For each of the three systems, write a guide entry stating what it is, how to access it, and the source that verified it.",
+      "prompt": "Write the guide entry for system one: what it is, how to access it, and your verifying source."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "extended-response",
+      "directions": "For each of the three systems, write a guide entry stating what it is, how to access it, and the source that verified it.",
+      "prompt": "Write the guide entry for system two."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "extended-response",
+      "directions": "For each of the three systems, write a guide entry stating what it is, how to access it, and the source that verified it.",
+      "prompt": "Write the guide entry for system three."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "checklist-item",
+      "directions": "For each of the three systems, write a guide entry stating what it is, how to access it, and the source that verified it.",
+      "prompt": "Every entry names a specific, current source, not an assumption."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "Re-verify one entry against a second source to confirm it wasn't outdated when first found.",
+      "prompt": "State which entry you re-verified, the second source, and whether it confirmed or changed your original finding."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Reflect on the unit as a whole.",
+      "prompt": "Looking at your finished guide, what is the single biggest difference between what you assumed about public systems before this unit and what you actually found?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/ready-for-life/ma-g10-ready-for-life-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Guide completeness and sourcing criterion.",
+    "Provide evidence that meets the stated Re-verification discipline criterion.",
+    "Provide evidence that meets the stated Depth of unit-level reflection criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-ready-for-life-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u05-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Civic Participation and Public Systems?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u01-l15",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u01-l15",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Polynomial Arithmetic, Identities, and Zeros",
+    "dayInUnit": 15,
+    "courseDay": 15,
+    "phase": "Assessment preparation",
+    "focus": "identifying zeros from a factored polynomial",
+    "title": "Assessment preparation: identifying zeros from a factored polynomial"
+  },
+  "standards": [
+    "A-APR.1",
+    "A-APR.2",
+    "A-APR.3",
+    "A-APR.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 1,
+          "prompt": "Expand and simplify: (4x + 5)(4x − 4).",
+          "choices": [
+            "16x^2 - 20x",
+            "16x^2 + 4x - 20",
+            "16x^2 - 36x - 20",
+            "8x^2 + 4x + 1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 2,
+          "prompt": "Find the remainder when -x^2 - 4x + 1 is divided by (x + 2).",
+          "choices": [
+            "-4",
+            "-11",
+            "3",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 2,
+          "prompt": "A cubic polynomial factors as (x + 4)(x + 3)(x − 2). List its zeros in increasing order.",
+          "choices": [
+            "-3, -2, 3",
+            "-4, -3, 2",
+            "-2, 3, 4",
+            "-4, 2, -3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 2,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 3 and y = 5 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "-16, 16, 30",
+            "16, 30, 34",
+            "3, 5, 8",
+            "-16, 15, 34"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 3,
+          "prompt": "Expand and simplify: (-8x + 4)(-7x + 4).",
+          "choices": [
+            "56x^2 - 4x + 16",
+            "56x^2 - 60x + 16",
+            "-15x^2 - 60x + 8",
+            "56x^2 + 16x"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 3,
+          "prompt": "Find the remainder when -4x^2 + 4x - 5 is divided by (x + 4).",
+          "choices": [
+            "-5",
+            "-75",
+            "-53",
+            "-85"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 3,
+          "prompt": "A cubic polynomial factors as (x + 4)(x + 6)(x − 5). List its zeros in increasing order.",
+          "choices": [
+            "-4, -6, 5",
+            "-5, 4, 6",
+            "-6, -4, 5",
+            "-5, -3, 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 3,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 8 and y = 7 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "7, 8, 15",
+            "15, 15, 112",
+            "15, 56, 113",
+            "15, 112, 113"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 2,
+          "prompt": "Expand and simplify: (-2x − 3)(3x + 4).",
+          "choices": [
+            "x^2 - 17x + 1",
+            "-6x^2 - 17x - 12",
+            "-6x^2 - 12x",
+            "-6x^2 + x - 12"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 2,
+          "prompt": "Find the remainder when 4x^2 + 5x - 3 is divided by (x + 1).",
+          "choices": [
+            "6",
+            "2",
+            "-5",
+            "-4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 3,
+          "prompt": "A cubic polynomial factors as (x + 2)(x + 5)(x + 1). List its zeros in increasing order.",
+          "choices": [
+            "-4, -1, 0",
+            "-2, -5, -1",
+            "-5, -2, -1",
+            "1, 2, 5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 3,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 4 and y = 3 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "3, 4, 7",
+            "7, 24, 25",
+            "7, 12, 25",
+            "7, 7, 24"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u01-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u01-l15"
+  }
+}

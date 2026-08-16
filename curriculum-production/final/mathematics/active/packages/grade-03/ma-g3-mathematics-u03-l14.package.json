@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l14",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l14",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 14,
+    "courseDay": 50,
+    "phase": "Performance task: build",
+    "focus": "strategy cards with models and checks",
+    "title": "Performance task: build: strategy cards with models and checks"
+  },
+  "standards": [
+    "3.OA.5",
+    "3.OA.7"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression is equal to 6 × 6 by the commutative property?",
+          "choices": [
+            "6 × 6",
+            "7 × 6",
+            "6 × 7",
+            "6 + 6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 2 × 7.",
+          "choices": [
+            "16",
+            "14",
+            "12",
+            "9"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 20 ÷ 4.",
+          "choices": [
+            "4",
+            "6",
+            "16",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 4 × (9 × 2) rewritten using the associative property?",
+          "choices": [
+            "(4 × 9) × 2",
+            "(4 + 9) × 2",
+            "4 × 9 + 2",
+            "4 × 2 × 9 × 9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 7 × 3.",
+          "choices": [
+            "14",
+            "28",
+            "21",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 72 ÷ 9.",
+          "choices": [
+            "8",
+            "63",
+            "7",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 3,
+          "prompt": "Which expression shows 9 × (4 + 8) rewritten using the distributive property?",
+          "choices": [
+            "9 + 4 + 8",
+            "(9 × 4) + (9 × 8)",
+            "(9 + 4) × (9 + 8)",
+            "9 × 4 × 8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 2 × 8.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 25 ÷ 5.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l14"
+  }
+}

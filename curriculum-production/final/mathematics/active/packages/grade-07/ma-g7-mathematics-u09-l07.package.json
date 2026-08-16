@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u09-l07",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u09-l07",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability and Simulation",
+    "dayInUnit": 7,
+    "courseDay": 151,
+    "phase": "Investigation or close reading",
+    "focus": "probability scale",
+    "title": "Investigation or close reading: probability scale"
+  },
+  "standards": [
+    "7.SP.5",
+    "7.SP.6",
+    "7.SP.7",
+    "7.SP.8"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "probability-scale",
+          "standard": "7.SP.5",
+          "difficulty": 1,
+          "prompt": "A probability of 1 means an event is...",
+          "workedSolution": {
+            "steps": [
+              "Identify the favorable outcomes and the total possible outcomes.",
+              "Write the probability as a reduced fraction, or use it to predict or evaluate a count."
+            ],
+            "answer": "certain"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "experimental-probability",
+          "standard": "7.SP.6",
+          "difficulty": 2,
+          "prompt": "A spinner was spun 50 times and landed on blue 8 times. Based on this experiment, what is the experimental probability of landing on blue?",
+          "choices": [
+            "3/25",
+            "7/50",
+            "4/25",
+            "9/50"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "theoretical-probability",
+          "standard": "7.SP.7",
+          "difficulty": 3,
+          "prompt": "A bag has 7 red, 8 blue, and 11 green marbles. If one marble is drawn at random, what is the theoretical probability of drawing red, P(red)?",
+          "choices": [
+            "11/26",
+            "7/26",
+            "19/26",
+            "25/26"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compound-events",
+          "standard": "7.SP.8",
+          "difficulty": 2,
+          "prompt": "A fair coin is flipped and a spinner with 6 equal sections numbered 1 to 6 is spun. What is the probability of getting tails on the coin and landing on 2 on the spinner?",
+          "choices": [
+            "1/12",
+            "1/2",
+            "1/3",
+            "1/6"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "sample-spaces",
+          "standard": "7.SP.8",
+          "difficulty": 3,
+          "prompt": "A meal is made by choosing one main dish from 6 options and one side dish from 5 options. How many different meals are possible?",
+          "choices": [
+            "30",
+            "32",
+            "33",
+            "31"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "simulation-and-model-limitations",
+          "standard": "7.SP.7",
+          "difficulty": 3,
+          "prompt": "A probability model predicts a fair 5-section spinner lands on a chosen section about 20 times in 100 spins. A simulation of 100 spins landed on that section 16 times. How does the simulated count compare to the model's prediction?",
+          "choices": [
+            "3 fewer than predicted",
+            "exactly as predicted",
+            "4 fewer than predicted",
+            "4 more than predicted"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "probability-scale",
+          "standard": "7.SP.5",
+          "difficulty": 3,
+          "prompt": "An event has a probability of 1/10. How would you describe how likely the event is to happen?",
+          "choices": [
+            "certain",
+            "impossible",
+            "equally likely to happen or not happen",
+            "unlikely"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "experimental-probability",
+          "standard": "7.SP.6",
+          "difficulty": 3,
+          "prompt": "A spinner was spun 20 times and landed on blue 4 times. Based on this experiment, what is the experimental probability of landing on blue?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "theoretical-probability",
+          "standard": "7.SP.7",
+          "difficulty": 3,
+          "prompt": "A bag has 6 red, 9 blue, and 13 green marbles. If one marble is drawn at random, what is the theoretical probability of drawing red, P(red)?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u09-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u09-l07"
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u09-l18",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u09-l18",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Linear, Quadratic, and Exponential Models",
+    "dayInUnit": 18,
+    "courseDay": 162,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "interpreting model parameters in context",
+    "title": "Publication, presentation, or reflection: interpreting model parameters in context"
+  },
+  "standards": [
+    "F-LE.1",
+    "F-LE.2",
+    "F-LE.3",
+    "F-LE.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 1,
+          "prompt": "Line through (1, 5) and (3, 11).",
+          "workedSolution": {
+            "steps": [
+              "Slope (11−5)/(3−1) = 3.",
+              "5 = 3(1) + b so b = 2."
+            ],
+            "answer": "f(x) = 3x + 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 2,
+          "prompt": "A table of successive outputs reads 5, 10, 20, 40. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Quadratic; the second differences are constant.",
+            "Linear; successive outputs differ by a constant 2.",
+            "Neither; the pattern does not repeat.",
+            "Exponential; successive outputs have a constant ratio of 2."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A population of 400 grows by 10% per year. Write the model P(t) and find the population after 6 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 400(1.1)^t; P(6) ≈ 779",
+            "P(t) = 400(0.1)^t; P(6) ≈ 0",
+            "P(t) = 400 + 10t; P(6) ≈ 460",
+            "P(t) = 400(1.1)^t; P(6) ≈ 709"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 3,
+          "prompt": "Quantity A grows by 61 units each year. Quantity B doubles or triples each year, with ratio 3, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "A stays ahead permanently because 61 is larger than 3.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+            "The two grow at the same eventual rate.",
+            "B exceeds A only if B starts larger than A."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 3,
+          "prompt": "An asset's value is modelled by V(t) = 2000(0.86)^t, with t in years. What does 2000 represent?",
+          "choices": [
+            "the total value lost over the asset's life",
+            "the number of years until the asset is worthless",
+            "the value of the asset when it was new, $2000",
+            "the fraction of value retained each year, 0.86, meaning a 14% annual loss"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A linear model passes through (1, -7) and (6, -52). Write it in the form f(x) = mx + b.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 3,
+          "prompt": "A table of successive outputs reads 20, 100, 500, 2500. Is the relationship linear or exponential, and why?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u09-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u09-l18"
+  }
+}

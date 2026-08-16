@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u06-l03",
+  "lessonId": "ma-g3-financial-literacy-u06-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much does Nico keep from one flower after paying for its supplies?",
+        "answer": "$1.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.50 - 1.50) = 1.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 250
+            },
+            "less": {
+              "op": "money",
+              "cents": 150
+            }
+          },
+          "trace": "(2.50 - 1.50) = 1.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much money comes in from selling 4 flowers?",
+        "answer": "$10.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.50 x 4) = 10.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 250
+            },
+            "times": 4
+          },
+          "trace": "(2.50 x 4) = 10.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What did supplies for those 4 flowers cost?",
+        "answer": "$6.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1.50 x 4) = 6.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 150
+            },
+            "times": 4
+          },
+          "trace": "(1.50 x 4) = 6.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What does Nico keep from all 4 flowers at the $2.50 price?",
+        "answer": "$4.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2.50 x 4) - (1.50 x 4)) = 4.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 250
+              },
+              "times": 4
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 150
+              },
+              "times": 4
+            }
+          },
+          "trace": "((2.50 x 4) - (1.50 x 4)) = 4.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What would he keep from all 4 flowers at the $2.00 price?",
+        "answer": "$2.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2.00 x 4) - (1.50 x 4)) = 2.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 200
+              },
+              "times": 4
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 150
+              },
+              "times": 4
+            }
+          },
+          "trace": "((2.00 x 4) - (1.50 x 4)) = 2.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning about price and profit",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response says the lower price is simply wrong for Nico, with no reason."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A reason is offered for Nico but it does not involve customers or the number sold."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that a lower price might let Nico sell to more classmates, and that more sales could make up for keeping less on each flower."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does Nico keep from one flower after paying for its supplies?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much money comes in from selling 4 flowers?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What did supplies for those 4 flowers cost?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does Nico keep from all 4 flowers at the $2.50 price?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would he keep from all 4 flowers at the $2.00 price?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Dropping the price by $0.50 cut Nico's keep-money in half. Why might he still consider it?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much does Nico keep from one flower after paying for its supplies? Answer: $1.00. Verification: (2.50 - 1.50) = 1.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How much money comes in from selling 4 flowers? Answer: $10.00. Verification: (2.50 x 4) = 10.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What did supplies for those 4 flowers cost? Answer: $6.00. Verification: (1.50 x 4) = 6.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What does Nico keep from all 4 flowers at the $2.50 price? Answer: $4.00. Verification: ((2.50 x 4) - (1.50 x 4)) = 4.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What would he keep from all 4 flowers at the $2.00 price? Answer: $2.00. Verification: ((2.00 x 4) - (1.50 x 4)) = 2.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Reasoning about price and profit — Not yet: The response says the lower price is simply wrong for Nico, with no reason. Approaching: A reason is offered for Nico but it does not involve customers or the number sold. Meets: The response explains that a lower price might let Nico sell to more classmates, and that more sales could make up for keeping less on each flower. The response explains that a lower price might let Nico sell to more classmates, and that more sales could make up for keeping less on each flower."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that a lower price might let Nico sell to more classmates, and that more sales could make up for keeping less on each flower."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u06-l03.scoring.json",
+    "sourceScoringSha256": "acee778c9a3453f2cf77d4c43beae41bfc05407ba7d16354b7496c2b5eb5cea2",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

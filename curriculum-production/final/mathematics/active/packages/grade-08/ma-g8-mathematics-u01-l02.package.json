@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l02",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 2,
+    "courseDay": 2,
+    "phase": "Concept model A",
+    "focus": "decimal expansions",
+    "title": "Concept model A: decimal expansions"
+  },
+  "standards": [
+    "8.NS.1",
+    "8.NS.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "repeating-decimal-to-fraction",
+          "standard": "8.NS.1",
+          "difficulty": 1,
+          "prompt": "Write 0.454545... as a fraction in lowest terms.",
+          "workedSolution": {
+            "steps": [
+              "The repeating block is \"45\", which has length 2.",
+              "Write the fraction as 45/99.",
+              "Reduce by the greatest common factor, 9, to get 5/11."
+            ],
+            "answer": "5/11"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "repeating-decimal-error-analysis",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "A student writes 0.6666... = 6/10. Which statement best analyzes the claim?",
+          "workedSolution": {
+            "steps": [
+              "The repeating block \"6\" has length 1, so the denominator should be 10¹ - 1 = 9.",
+              "6/9 reduces to 2/3."
+            ],
+            "answer": "The correct fraction is 2/3; the denominator should be 9 (one 9 for each repeating digit), not 10."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "consecutive-integers-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "Between which two consecutive whole numbers does √35 lie?",
+          "choices": [
+            "5 and 7",
+            "6 and 7",
+            "5 and 6",
+            "3 and 4"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "nearest-tenth-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "Estimate √23 to the nearest tenth.",
+          "choices": [
+            "4.7",
+            "4",
+            "4.9",
+            "4.8"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "locate-root-on-number-line",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "On the number line, points A, B, C, and D are located at 10, 11, 12, 13. Which point is closest to √135?",
+          "choices": [
+            "B",
+            "C",
+            "A",
+            "D"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "Compare √31 and 3/4.",
+          "choices": [
+            "√31 < 3/4",
+            "√31 > 3/4",
+            "cannot be compared without a calculator",
+            "√31 = 3/4"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "order-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Order √112, 11/13, 8 from least to greatest.",
+          "choices": [
+            "8 < 11/13 < √112",
+            "√112 < 8 < 11/13",
+            "11/13 < 8 < √112",
+            "11/13 < √112 < 8"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "estimate-root-expression",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Which whole number is closest to √62 - 2?",
+          "choices": [
+            "6",
+            "5",
+            "8",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "real-number-word-problem",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "A square garden has an area of 342 square feet. Between which two consecutive whole numbers of feet is the side length?",
+          "choices": [
+            "16 and 17",
+            "19 and 20",
+            "17 and 18",
+            "18 and 19"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "root-comparison-error-analysis",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "A student claims √119 > 15 because 119 > 15. Which statement correctly analyzes the claim?",
+          "choices": [
+            "The claim is correct; 119 > 15, so √119 > 15.",
+            "The claim cannot be evaluated without a calculator.",
+            "The claim is incorrect; since 119 < 15² = 225, √119 < 15.",
+            "The claim is incorrect; √119 = 15 exactly."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-rational-or-irrational",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "Classify 31 as rational or irrational.",
+          "choices": [
+            "rational",
+            "irrational"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u01-l02"
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l04",
+  "lessonId": "ma-g12-financial-literacy-u04-l04",
+  "integratedDomains": [
+    "debt",
+    "postsecondary-financing",
+    "income",
+    "budgeting"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$345.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "32 thousands borrowed at $10.79 a month each. The factor already accounts for the 5.4% rate and the 120-payment term, so no separate interest step is needed here."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$41,433.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$345.28 in each of 120 months. This is the figure a borrower rarely sees, because the paperwork leads with the monthly payment."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$9,433.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$41,433.60 repaid against $32,000 borrowed. Interest is what repayment costs above the sum advanced."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,666.67",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$44,000 across 12 months, before any tax or deduction."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "9.42%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$345.28 measured against $3,666.67 of gross pay."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Yes — but with little room to spare",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "9.42% against a 10% guideline. It passes, and a starting salary about $2,600 lower would not, so the margin is narrow."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(balance / 1000 * factor, 2)",
+        "substituted": "round(32000 / 1000 * 10.79, 2)",
+        "result": "$345.28",
+        "why": "32 thousands borrowed at $10.79 a month each. The factor already accounts for the 5.4% rate and the 120-payment term, so no separate interest step is needed here."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 * payments",
+        "substituted": "#t1-p1 * 120",
+        "result": "$41,433.60",
+        "why": "$345.28 in each of 120 months. This is the figure a borrower rarely sees, because the paperwork leads with the monthly payment."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - balance2",
+        "substituted": "#t1-p2 - 32000",
+        "result": "$9,433.60",
+        "why": "$41,433.60 repaid against $32,000 borrowed. Interest is what repayment costs above the sum advanced."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(salary / 12, 2)",
+        "substituted": "round(44000 / 12, 2)",
+        "result": "$3,666.67",
+        "why": "$44,000 across 12 months, before any tax or deduction."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p1 / #t2-p1 * 100, 2)",
+        "substituted": "round(#t1-p1 / #t2-p1 * 100, 2)",
+        "result": "9.42%",
+        "why": "$345.28 measured against $3,666.67 of gross pay."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 < 10",
+        "substituted": "#t2-p2 < 10",
+        "result": "Yes — but with little room to spare",
+        "why": "9.42% against a 10% guideline. It passes, and a starting salary about $2,600 lower would not, so the margin is narrow."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This projection passes the guideline at 9.42%. Explain what the guideline is measuring and what it is not, and say why testing the payment against gross rather than take-home pay makes the result look better than the graduate’s month will feel.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States what the guideline measures: the size of the payment relative to income, as a rough check that one obligation does not dominate a budget.",
+          "States what it does not measure: it says nothing about rent, other obligations, the $9,433.60 of interest, or whether the remaining 90.58% of gross is enough to live on in the place the job is.",
+          "Explains the gross-versus-net point: tax and payroll deductions come out before the payment does, so $345.28 is a larger share of the money actually reaching the account than 9.42% suggests."
+        ],
+        "evidenceRequirements": [
+          "Uses the 9.42% share and the $345.28 payment, and refers to the $9,433.60 of interest or the $41,433.60 total repaid."
+        ],
+        "lookFors": [
+          "The response treats the guideline as a screen rather than as a verdict on affordability.",
+          "The response notes that passing at 9.42% leaves very little margin against a lower starting salary."
+        ],
+        "commonMisconception": "Reading a payment that satisfies a percentage-of-income guideline as evidence that the borrowing is comfortably affordable.",
+        "dimensions": [
+          "criteria-application",
+          "communication-of-uncertainty",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly payment?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is repaid in total across the 120 payments?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much of that is interest?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is expected monthly gross pay?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What share of monthly gross does the payment take, to two decimal places?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Does the projected payment satisfy the graduate’s 10% guideline?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "This projection passes the guideline at 9.42%. Explain what the guideline is measuring and what it is not, and say why testing the payment against gross rather than take-home pay makes the result look better than the graduate’s month will feel."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the monthly payment? Answer: $345.28. Verification: 32 thousands borrowed at $10.79 a month each. The factor already accounts for the 5.4% rate and the 120-payment term, so no separate interest step is needed here. t1-p2: What is repaid in total across the 120 payments? Answer: $41,433.60. Verification: $345.28 in each of 120 months. This is the figure a borrower rarely sees, because the paperwork leads with the monthly payment. t1-p3: How much of that is interest? Answer: $9,433.60. Verification: $41,433.60 repaid against $32,000 borrowed. Interest is what repayment costs above the sum advanced. t2-p1: What is expected monthly gross pay? Answer: $3,666.67. Verification: $44,000 across 12 months, before any tax or deduction. t2-p2: What share of monthly gross does the payment take, to two decimal places? Answer: 9.42%. Verification: $345.28 measured against $3,666.67 of gross pay. t2-p3: Does the projected payment satisfy the graduate’s 10% guideline? Answer: Yes — but with little room to spare. Verification: 9.42% against a 10% guideline. It passes, and a starting salary about $2,600 lower would not, so the margin is narrow."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: This projection passes the guideline at 9.42%. Explain what the guideline is measuring and what it is not, and say why testing the payment against gross rather than take-home pay makes the result look better than the graduate’s month will feel. States what the guideline measures: the size of the payment relative to income, as a rough check that one obligation does not dominate a budget. States what it does not measure: it says nothing about rent, other obligations, the $9,433.60 of interest, or whether the remaining 90.58% of gross is enough to live on in the place the job is. Explains the gross-versus-net point: tax and payroll deductions come out before the payment does, so $345.28 is a larger share of the money actually reaching the account than 9.42% suggests. Uses the 9.42% share and the $345.28 payment, and refers to the $9,433.60 of interest or the $41,433.60 total repaid. The response treats the guideline as a screen rather than as a verdict on affordability. The response notes that passing at 9.42% leaves very little margin against a lower starting salary."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States what the guideline measures: the size of the payment relative to income, as a rough check that one obligation does not dominate a budget. States what it does not measure: it says nothing about rent, other obligations, the $9,433.60 of interest, or whether the remaining 90.58% of gross is enough to live on in the place the job is. Explains the gross-versus-net point: tax and payroll deductions come out before the payment does, so $345.28 is a larger share of the money actually reaching the account than 9.42% suggests."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u04-l04.scoring.json",
+    "sourceScoringSha256": "3321dc63a9ada55de47bef47c2ea43fce3fe5d718bdd6cea7c80b3008d19195c",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

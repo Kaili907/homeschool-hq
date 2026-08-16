@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l01",
+  "lessonId": "ma-g11-ready-for-life-u02-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Tracker completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more options is missing a deadline or lists documents only as a single vague item like 'paperwork.'" },
+          { "label": "Proficient", "descriptor": "Every option has a deadline and its documents broken out individually." },
+          { "label": "Advanced", "descriptor": "Every option also has a per-document status marker, making the tracker genuinely usable going forward, not just a one-time list." }
+        ]
+      },
+      {
+        "dimension": "Structural usability",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The tracker is an unstructured list with no consistent fields, making it hard to compare options at a glance." },
+          { "label": "Proficient", "descriptor": "The tracker uses a consistent table or field structure across all options." },
+          { "label": "Advanced", "descriptor": "The structure would clearly scale to more options or documents being added later without needing to be rebuilt." }
+        ]
+      },
+      {
+        "dimension": "Risk identification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names a deadline or document as risky without saying why." },
+          { "label": "Proficient", "descriptor": "Reflection names a specific risk and gives a concrete reason tied to the tracker's own contents." },
+          { "label": "Advanced", "descriptor": "Reflection's stated risk is genuinely the most urgent one visible in the learner's own tracker data, showing real analysis rather than a guess." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Deadlines are specific dates or clearly labeled estimates, not vague terms like 'soon' or 'later this year.'",
+      "Documents are broken into individually trackable items rather than bundled together.",
+      "The warm-up story and the final risk reflection are both specific, not generic statements."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

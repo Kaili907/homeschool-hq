@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l05",
+  "lessonId": "ma-g11-financial-literacy-u01-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$42,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three years of $14,200, all of it borrowed, which is owed whether or not the qualification arrives."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$50,880.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "68% of $58,400 plus 32% of $34,900. The expectation is well below the graduate salary because nearly a third of the cohort does not reach it."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$11,080.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The expected salary of $50,880.00 against the $39,800 alternative. This is the advantage the borrowing has to be repaid out of."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "3.8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$42,600.00 of borrowing against an $11,080.00 expected annual advantage. Interest is excluded here so the effect of the completion risk alone is visible."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "-$4,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The non-completing outcome pays $34,900 against the $39,800 alternative, so the advantage is negative — and the $42,600.00 of debt is still owed."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$18,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$58,400 against $39,800. The two outcomes are $23,500 apart in annual terms, which is the size of what the 68% is deciding."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$117,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The two outcomes differ by $23,500 a year — $18,600.00 against -$4,900.00 — and that gap is carried for each of the 5 years."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "It is still owed in full, with no qualification to show for it",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The scenario states the full $42,600 is borrowed across the three years and says nothing about cancellation or proportional reduction; the debt is a separate obligation from the qualification, which is precisely why the non-completing outcome is worse than simply not enrolling."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "annual * 3",
+        "substituted": "14200 * 3",
+        "result": "$42,600.00",
+        "why": "Three years of $14,200, all of it borrowed, which is owed whether or not the qualification arrives."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "pDone * gradPay + pLeft * leftPay",
+        "substituted": "0.68 * 58400 + 0.32 * 34900",
+        "result": "$50,880.00",
+        "why": "68% of $58,400 plus 32% of $34,900. The expectation is well below the graduate salary because nearly a third of the cohort does not reach it."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - without",
+        "substituted": "#t1-p2 - 39800",
+        "result": "$11,080.00",
+        "why": "The expected salary of $50,880.00 against the $39,800 alternative. This is the advantage the borrowing has to be repaid out of."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p1 / #t1-p3, 1)",
+        "substituted": "round(#t1-p1 / #t1-p3, 1)",
+        "result": "3.8",
+        "why": "$42,600.00 of borrowing against an $11,080.00 expected annual advantage. Interest is excluded here so the effect of the completion risk alone is visible."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "leftPay2 - without2",
+        "substituted": "34900 - 39800",
+        "result": "-$4,900.00",
+        "why": "The non-completing outcome pays $34,900 against the $39,800 alternative, so the advantage is negative — and the $42,600.00 of debt is still owed."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "gradPay2 - without3",
+        "substituted": "58400 - 39800",
+        "result": "$18,600.00",
+        "why": "$58,400 against $39,800. The two outcomes are $23,500 apart in annual terms, which is the size of what the 68% is deciding."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "(#t2-p3 - #t2-p2) * horizon",
+        "substituted": "(#t2-p3 - #t2-p2) * 5",
+        "result": "$117,500.00",
+        "why": "The two outcomes differ by $23,500 a year — $18,600.00 against -$4,900.00 — and that gap is carried for each of the 5 years."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The expected annual advantage is positive at $11,080.00, but one of the two outcomes leaves Simone worse off than not enrolling. Explain how both of those can be true, and say what the expected figure is and is not useful for.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the expectation is a weighted blend of $18,600.00 and -$4,900.00, so a positive average is compatible with a genuinely bad outcome occurring 32% of the time.",
+          "States that the expectation is useful for comparing options across many repetitions but not for describing what happens to one person once.",
+          "Notes that the downside outcome carries the full $42,600.00 of debt alongside the lower salary."
+        ],
+        "evidenceRequirements": [
+          "Cites both branch figures — the $18,600.00 advantage and the -$4,900.00 shortfall — and the weights that combine them."
+        ],
+        "lookFors": [
+          "The response distinguishes an average outcome from an achievable outcome.",
+          "The response mentions that the debt survives the bad branch, not only that the salary is lower.",
+          "A response arguing the programme is still worth it is acceptable if it acknowledges the size and probability of the downside."
+        ],
+        "commonMisconception": "Treating an expected value as the outcome an individual should plan to receive.",
+        "dimensions": [
+          "communication-of-uncertainty",
+          "reasoning-from-figures",
+          "tradeoff-defense"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Name one thing Simone could find out before enrolling that would change the 68% figure for her specifically, and say how a higher or lower figure would move the expected advantage.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names something concrete and knowable in advance, such as the completion rate for part-time students, or for students entering with her preparation, or the programme’s support for people who fall behind.",
+          "States the direction correctly: a higher completion figure raises the expected advantage above $11,080.00 by shifting weight from the -$4,900.00 branch to the $18,600.00 one."
+        ],
+        "evidenceRequirements": [
+          "Refers to the 68% and 32% weights and to at least one of the two branch outcomes when describing the effect."
+        ],
+        "lookFors": [
+          "The suggestion is something a prospective student could actually ask for, not a general wish for more information.",
+          "The response reasons about weight moving between branches rather than about the salaries changing."
+        ],
+        "commonMisconception": "Assuming a published cohort completion rate applies unchanged to every individual in it.",
+        "dimensions": [
+          "evidence-use",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total borrowed across the 3 years of the programme?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the probability-weighted expected annual salary after the programme, using the 68% and 32% figures?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the expected annual advantage over the $39,800 Simone would earn without the programme?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "At the expected annual advantage, how many years of work does it take to repay the amount borrowed? Give one decimal place. Ignore interest for this step."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "In the outcome where Simone does not finish, what is her annual position relative to the $39,800 she would have earned without the programme?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "In the completing outcome, what is the annual advantage over the same alternative?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Across the first 5 years after the programme, how much larger is the completing outcome than the non-completing one?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "In the outcome where the programme is not finished, what has happened to the $42,600 borrowed?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The expected annual advantage is positive at $11,080.00, but one of the two outcomes leaves Simone worse off than not enrolling. Explain how both of those can be true, and say what the expected figure is and is not useful for."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Name one thing Simone could find out before enrolling that would change the 68% figure for her specifically, and say how a higher or lower figure would move the expected advantage."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the total borrowed across the 3 years of the programme? Answer: $42,600.00. Verification: Three years of $14,200, all of it borrowed, which is owed whether or not the qualification arrives. t1-p2: What is the probability-weighted expected annual salary after the programme, using the 68% and 32% figures? Answer: $50,880.00. Verification: 68% of $58,400 plus 32% of $34,900. The expectation is well below the graduate salary because nearly a third of the cohort does not reach it. t1-p3: What is the expected annual advantage over the $39,800 Simone would earn without the programme? Answer: $11,080.00. Verification: The expected salary of $50,880.00 against the $39,800 alternative. This is the advantage the borrowing has to be repaid out of. t2-p1: At the expected annual advantage, how many years of work does it take to repay the amount borrowed? Give one decimal place. Ignore interest for this step. Answer: 3.8. Verification: $42,600.00 of borrowing against an $11,080.00 expected annual advantage. Interest is excluded here so the effect of the completion risk alone is visible. t2-p2: In the outcome where Simone does not finish, what is her annual position relative to the $39,800 she would have earned without the programme? Answer: -$4,900.00. Verification: The non-completing outcome pays $34,900 against the $39,800 alternative, so the advantage is negative — and the $42,600.00 of debt is still owed. t2-p3: In the completing outcome, what is the annual advantage over the same alternative? Answer: $18,600.00. Verification: $58,400 against $39,800. The two outcomes are $23,500 apart in annual terms, which is the size of what the 68% is deciding. t2-p4: Across the first 5 years after the programme, how much larger is the completing outcome than the non-completing one? Answer: $117,500.00. Verification: The two outcomes differ by $23,500 a year — $18,600.00 against -$4,900.00 — and that gap is carried for each of the 5 years. t2-p5: In the outcome where the programme is not finished, what has happened to the $42,600 borrowed? Answer: It is still owed in full, with no qualification to show for it. Verification: The scenario states the full $42,600 is borrowed across the three years and says nothing about cancellation or proportional reduction; the debt is a separate obligation from the qualification, which is precisely why the non-completing outcome is worse than simply not enrolling."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The expected annual advantage is positive at $11,080.00, but one of the two outcomes leaves Simone worse off than not enrolling. Explain how both of those can be true, and say what the expected figure is and is not useful for. Explains that the expectation is a weighted blend of $18,600.00 and -$4,900.00, so a positive average is compatible with a genuinely bad outcome occurring 32% of the time. States that the expectation is useful for comparing options across many repetitions but not for describing what happens to one person once. Notes that the downside outcome carries the full $42,600.00 of debt alongside the lower salary. Cites both branch figures — the $18,600.00 advantage and the -$4,900.00 shortfall — and the weights that combine them. The response distinguishes an average outcome from an achievable outcome. The response mentions that the debt survives the bad branch, not only that the salary is lower. A response arguing the programme is still worth it is acceptable if it acknowledges the size and probability of the downside. t3-p2: Name one thing Simone could find out before enrolling that would change the 68% figure for her specifically, and say how a higher or lower figure would move the expected advantage. Names something concrete and knowable in advance, such as the completion rate for part-time students, or for students entering with her preparation, or the programme’s support for people who fall behind. States the direction correctly: a higher completion figure raises the expected advantage above $11,080.00 by shifting weight from the -$4,900.00 branch to the $18,600.00 one. Refers to the 68% and 32% weights and to at least one of the two branch outcomes when describing the effect. The suggestion is something a prospective student could actually ask for, not a general wish for more information. The response reasons about weight moving between branches rather than about the salaries changing."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the expectation is a weighted blend of $18,600.00 and -$4,900.00, so a positive average is compatible with a genuinely bad outcome occurring 32% of the time. States that the expectation is useful for comparing options across many repetitions but not for describing what happens to one person once. Notes that the downside outcome carries the full $42,600.00 of debt alongside the lower salary. Names something concrete and knowable in advance, such as the completion rate for part-time students, or for students entering with her preparation, or the programme’s support for people who fall behind. States the direction correctly: a higher completion figure raises the expected advantage above $11,080.00 by shifting weight from the -$4,900.00 branch to the $18,600.00 one."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u01-l05.scoring.json",
+    "sourceScoringSha256": "fe05605f120eaf349dbac8af417af426f19ff85dbfbd7cd8010de8fd098aaa59",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

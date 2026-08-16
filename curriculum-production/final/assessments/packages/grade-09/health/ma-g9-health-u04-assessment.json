@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-health-u04-assessment",
+  "courseRef": "ma-g9-health",
+  "grade": 9,
+  "subject": "health",
+  "location": {
+    "unitRef": "ma-g9-health-u04",
+    "unitNumber": 4,
+    "unitTitle": "Substance Use Prevention: Alcohol, Nicotine, Cannabis, and Medication Safety",
+    "courseTitle": "Health and Wellness I",
+    "assessmentLessonRef": "ma-g9-health-u04-l05"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-09/unit-assessments/ma-g9-health-u04-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the private-safe task without disclosing medical history, diagnosis, body measurements, or sexual history.",
+    "Use a fictional scenario when offered and identify a trusted adult or qualified professional where appropriate."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain physiology of alcohol, nicotine and vaping products, and cannabis on the adolescent body and brain in your own words and give a valid example."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of dependence, tolerance, and why adolescent timing matters."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply marketing, social media, and normalization pressure in a new fictional situation. Show the decision process or cite the evidence used."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving prescription and over-the-counter medication safety and storage; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect refusal and exit strategies that survive real social pressure with overdose and poisoning response, and where families get help. Explain how the two support, constrain, or build on one another."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Write and rehearse three refusal and exit scripts for three different fictional pressure situations, then analyze one substance marketing artifact for the influence technique it uses."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question."
+    }
+  ],
+  "responseMode": "private-safe-task-and-reflection",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/health/ma-g9-health-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy of health information criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated skill application criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-health-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-09/unit-assessments/ma-g9-health-u04-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Substance Use Prevention: Alcohol, Nicotine, Cannabis, and Medication Safety?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

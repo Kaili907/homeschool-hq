@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l04",
+  "lessonId": "ma-g8-ready-for-life-u05-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Application completeness and privacy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The application is missing one of the three requested fields, or includes information beyond name, interests, and availability."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The application includes only first name, genuine interests, and realistic availability, with nothing else added."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the listed interests are specific enough to connect clearly to the fictional role."
+          }
+        ]
+      },
+      {
+        "dimension": "Interview delivery",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Answers are one word or stray off topic, or the learner does not ask a question back."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three questions receive a spoken answer with at least one concrete detail, and the learner asks one relevant question back."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the deadline-question answer names a specific real example with a clear outcome."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real address, phone number, or ID number appears anywhere on the application.",
+      "The reflection names one specific answer to improve, not a general 'I did fine' or 'it was hard.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

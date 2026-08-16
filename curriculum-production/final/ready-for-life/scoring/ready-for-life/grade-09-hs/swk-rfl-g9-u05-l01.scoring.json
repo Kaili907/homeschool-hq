@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l01",
+  "lessonId": "ma-g9-ready-for-life-u05-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Register identification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Labels fewer than two of the three messages' audiences correctly, or does not identify which message is mismatched." },
+          { "label": "Proficient", "descriptor": "Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one." },
+          { "label": "Advanced", "descriptor": "Correctly labels all three audiences, identifies the mismatch, and names the specific wording (slang, abbreviations, missing greeting) that causes it." }
+        ]
+      },
+      {
+        "dimension": "Revision quality and justification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Rewrites Message C but keeps casual wording (slang, abbreviations) or does not name any specific changes made." },
+          { "label": "Proficient", "descriptor": "Rewrites Message C into an appropriately formal register and names at least two specific wording changes." },
+          { "label": "Advanced", "descriptor": "Rewrites Message C into an appropriately formal register, names at least three specific wording changes, and explains what register signal each change removes or adds." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A rewritten Message C that removes every slang term ('lol', 'my bad') and adds a named greeting and closing.",
+      "A specific, word-level comparison between the casual and formal versions rather than a general statement like 'I made it more polite.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

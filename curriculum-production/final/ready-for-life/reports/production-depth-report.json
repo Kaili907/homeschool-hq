@@ -1,0 +1,448 @@
+{
+  "schemaVersion": "1.0",
+  "version": "ready-for-life-production-depth-r1",
+  "status": "PASS",
+  "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+  "lessonsBefore": 324,
+  "lessonsAfter": 324,
+  "lessonsRebuilt": 324,
+  "lessonFamilies": [
+    "capstone-integration",
+    "career-work",
+    "civic-public-systems",
+    "clothing-laundry",
+    "communication-relationships",
+    "digital-consumer",
+    "food-kitchen",
+    "health-self-management",
+    "home-care",
+    "housing-independent-living",
+    "planning-organization",
+    "transportation-community"
+  ],
+  "coverage": {
+    "materialCompleteness": 324,
+    "models": 324,
+    "guided": 324,
+    "independent": 324,
+    "retry": 324,
+    "safety": 324,
+    "privacy": 324,
+    "guardianBoundary": 324
+  },
+  "approvedAnchor": {
+    "lessonId": "ma-g3-ready-for-life-u01-l04",
+    "status": "PRESERVED"
+  },
+  "representativeCoverage": {
+    "strategy": "Day 4 application lesson from every grade and unit; fallback to first unit lesson.",
+    "lessonCount": 54,
+    "grades": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "families": [
+      "capstone-integration",
+      "career-work",
+      "civic-public-systems",
+      "clothing-laundry",
+      "communication-relationships",
+      "digital-consumer",
+      "food-kitchen",
+      "health-self-management",
+      "home-care",
+      "housing-independent-living",
+      "planning-organization",
+      "transportation-community"
+    ],
+    "lessons": [
+      {
+        "lessonId": "ma-g3-ready-for-life-u01-l04",
+        "grade": 3,
+        "unit": 1,
+        "family": "home-care",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g3-ready-for-life-u02-l04",
+        "grade": 3,
+        "unit": 2,
+        "family": "clothing-laundry",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g3-ready-for-life-u03-l04",
+        "grade": 3,
+        "unit": 3,
+        "family": "food-kitchen",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g3-ready-for-life-u04-l04",
+        "grade": 3,
+        "unit": 4,
+        "family": "food-kitchen",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g3-ready-for-life-u05-l04",
+        "grade": 3,
+        "unit": 5,
+        "family": "planning-organization",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g3-ready-for-life-u06-l04",
+        "grade": 3,
+        "unit": 6,
+        "family": "capstone-integration",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g4-ready-for-life-u01-l04",
+        "grade": 4,
+        "unit": 1,
+        "family": "planning-organization",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g4-ready-for-life-u02-l04",
+        "grade": 4,
+        "unit": 2,
+        "family": "clothing-laundry",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g4-ready-for-life-u03-l04",
+        "grade": 4,
+        "unit": 3,
+        "family": "food-kitchen",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g4-ready-for-life-u04-l04",
+        "grade": 4,
+        "unit": 4,
+        "family": "food-kitchen",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g4-ready-for-life-u05-l04",
+        "grade": 4,
+        "unit": 5,
+        "family": "communication-relationships",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g4-ready-for-life-u06-l04",
+        "grade": 4,
+        "unit": 6,
+        "family": "capstone-integration",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g5-ready-for-life-u01-l04",
+        "grade": 5,
+        "unit": 1,
+        "family": "home-care",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g5-ready-for-life-u02-l04",
+        "grade": 5,
+        "unit": 2,
+        "family": "clothing-laundry",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g5-ready-for-life-u03-l04",
+        "grade": 5,
+        "unit": 3,
+        "family": "food-kitchen",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g5-ready-for-life-u04-l04",
+        "grade": 5,
+        "unit": 4,
+        "family": "food-kitchen",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g5-ready-for-life-u05-l04",
+        "grade": 5,
+        "unit": 5,
+        "family": "communication-relationships",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g5-ready-for-life-u06-l04",
+        "grade": 5,
+        "unit": 6,
+        "family": "capstone-integration",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g7-ready-for-life-u01-l04",
+        "grade": 7,
+        "unit": 1,
+        "family": "planning-organization",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g7-ready-for-life-u02-l04",
+        "grade": 7,
+        "unit": 2,
+        "family": "clothing-laundry",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g7-ready-for-life-u03-l04",
+        "grade": 7,
+        "unit": 3,
+        "family": "food-kitchen",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g7-ready-for-life-u04-l04",
+        "grade": 7,
+        "unit": 4,
+        "family": "communication-relationships",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g7-ready-for-life-u05-l04",
+        "grade": 7,
+        "unit": 5,
+        "family": "digital-consumer",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g7-ready-for-life-u06-l04",
+        "grade": 7,
+        "unit": 6,
+        "family": "capstone-integration",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g8-ready-for-life-u01-l04",
+        "grade": 8,
+        "unit": 1,
+        "family": "digital-consumer",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g8-ready-for-life-u02-l04",
+        "grade": 8,
+        "unit": 2,
+        "family": "housing-independent-living",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g8-ready-for-life-u03-l04",
+        "grade": 8,
+        "unit": 3,
+        "family": "food-kitchen",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g8-ready-for-life-u04-l04",
+        "grade": 8,
+        "unit": 4,
+        "family": "health-self-management",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g8-ready-for-life-u05-l04",
+        "grade": 8,
+        "unit": 5,
+        "family": "career-work",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g8-ready-for-life-u06-l04",
+        "grade": 8,
+        "unit": 6,
+        "family": "capstone-integration",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g9-ready-for-life-u01-l04",
+        "grade": 9,
+        "unit": 1,
+        "family": "planning-organization",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g9-ready-for-life-u02-l04",
+        "grade": 9,
+        "unit": 2,
+        "family": "housing-independent-living",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g9-ready-for-life-u03-l04",
+        "grade": 9,
+        "unit": 3,
+        "family": "food-kitchen",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g9-ready-for-life-u04-l04",
+        "grade": 9,
+        "unit": 4,
+        "family": "health-self-management",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g9-ready-for-life-u05-l04",
+        "grade": 9,
+        "unit": 5,
+        "family": "career-work",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g9-ready-for-life-u06-l04",
+        "grade": 9,
+        "unit": 6,
+        "family": "capstone-integration",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g10-ready-for-life-u01-l04",
+        "grade": 10,
+        "unit": 1,
+        "family": "career-work",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g10-ready-for-life-u02-l04",
+        "grade": 10,
+        "unit": 2,
+        "family": "career-work",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g10-ready-for-life-u03-l04",
+        "grade": 10,
+        "unit": 3,
+        "family": "career-work",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g10-ready-for-life-u04-l04",
+        "grade": 10,
+        "unit": 4,
+        "family": "civic-public-systems",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g10-ready-for-life-u05-l04",
+        "grade": 10,
+        "unit": 5,
+        "family": "civic-public-systems",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g10-ready-for-life-u06-l04",
+        "grade": 10,
+        "unit": 6,
+        "family": "capstone-integration",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g11-ready-for-life-u01-l04",
+        "grade": 11,
+        "unit": 1,
+        "family": "career-work",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g11-ready-for-life-u02-l04",
+        "grade": 11,
+        "unit": 2,
+        "family": "home-care",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g11-ready-for-life-u03-l04",
+        "grade": 11,
+        "unit": 3,
+        "family": "health-self-management",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g11-ready-for-life-u04-l04",
+        "grade": 11,
+        "unit": 4,
+        "family": "housing-independent-living",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g11-ready-for-life-u05-l04",
+        "grade": 11,
+        "unit": 5,
+        "family": "communication-relationships",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g11-ready-for-life-u06-l04",
+        "grade": 11,
+        "unit": 6,
+        "family": "capstone-integration",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g12-ready-for-life-u01-l04",
+        "grade": 12,
+        "unit": 1,
+        "family": "capstone-integration",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g12-ready-for-life-u02-l04",
+        "grade": 12,
+        "unit": 2,
+        "family": "transportation-community",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g12-ready-for-life-u03-l04",
+        "grade": 12,
+        "unit": 3,
+        "family": "career-work",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g12-ready-for-life-u04-l04",
+        "grade": 12,
+        "unit": 4,
+        "family": "civic-public-systems",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g12-ready-for-life-u05-l04",
+        "grade": 12,
+        "unit": 5,
+        "family": "communication-relationships",
+        "status": "PASS"
+      },
+      {
+        "lessonId": "ma-g12-ready-for-life-u06-l04",
+        "grade": 12,
+        "unit": 6,
+        "family": "capstone-integration",
+        "status": "PASS"
+      }
+    ]
+  },
+  "issueCount": 0,
+  "issues": []
+}

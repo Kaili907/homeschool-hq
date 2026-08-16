@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l01",
+  "lessonId": "ma-g3-ready-for-life-u05-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Current-block identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Marks the wrong block, or a block from the wrong part of the day, at one or more of the three checks."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly marks the block matching the actual moment at all three checks."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Correctly marks the block at all three checks and explains, in specific terms, how the activity happening matched the block's label."
+          }
+        ]
+      },
+      {
+        "dimension": "Next-block prediction",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Names the block that already happened, or a block out of order, instead of the block coming next."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly names the block that comes immediately after the current one at all three checks."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Correctly names the next block every time and, unprompted, estimates roughly how soon it will start."
+          }
+        ]
+      },
+      {
+        "dimension": "Recall of block order",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Recalls two or fewer of the five block labels in the correct order from memory."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Recalls at least four of the five block labels in the correct order from memory."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner uses the schedule card's printed order, not a guess about clock time, to answer now-and-next questions.",
+      "The reflection response names a specific moment and a specific fact learned from the schedule, not a vague 'it helped.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

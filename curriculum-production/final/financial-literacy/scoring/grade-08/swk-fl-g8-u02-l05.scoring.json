@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u02-l05",
+  "lessonId": "ma-g8-financial-literacy-u02-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Building an evidence-led case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response relies on frustration rather than on evidence in Ondine's case."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Evidence is mentioned for Ondine but not tied to what it proves."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response links each piece of Ondine's evidence to what it establishes, such as the receipt proving purchase and the dated video proving early failure."
+          }
+        ]
+      },
+      {
+        "dimension": "Escalating in a defensible order",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response escalates immediately or gives up on Ondine's case."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Steps are listed for Ondine but without content or ordering rationale."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response orders Ondine's steps from a written request to the seller through to an external body, and states what each communication should contain and request."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Ties the receipt and the dated video to specific claims.",
+      "Puts a written, dated request to the seller first.",
+      "Records the referrals between the parties as evidence.",
+      "Names a concrete external escalation route."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What evidence does the buyer in Ondine's case hold, and what does each piece establish?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What steps should the buyer take, in what order, and what should each one contain and ask for?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why is being passed between seller and manufacturer itself a fact worth recording?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Building an evidence-led case — Not yet: The response relies on frustration rather than on evidence in Ondine's case. Approaching: Evidence is mentioned for Ondine but not tied to what it proves. Meets: The response links each piece of Ondine's evidence to what it establishes, such as the receipt proving purchase and the dated video proving early failure. Escalating in a defensible order — Not yet: The response escalates immediately or gives up on Ondine's case. Approaching: Steps are listed for Ondine but without content or ordering rationale. Meets: The response orders Ondine's steps from a written request to the seller through to an external body, and states what each communication should contain and request. Ties the receipt and the dated video to specific claims. Puts a written, dated request to the seller first. Records the referrals between the parties as evidence. Names a concrete external escalation route."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Ties the receipt and the dated video to specific claims. Puts a written, dated request to the seller first. Records the referrals between the parties as evidence. Names a concrete external escalation route."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u02-l05.scoring.json",
+    "sourceScoringSha256": "643932495e30a612fcb9b21dcdd602cef288596f4f9751e209c2b15358bb58f0",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

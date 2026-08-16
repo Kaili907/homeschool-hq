@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u09-l07",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u09-l07",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Coordinate Geometry",
+    "dayInUnit": 7,
+    "courseDay": 151,
+    "phase": "Investigation or close reading",
+    "focus": "deriving the circle equation from the Pythagorean theorem",
+    "title": "Investigation or close reading: deriving the circle equation from the Pythagorean theorem"
+  },
+  "standards": [
+    "G-GPE.1",
+    "G-GPE.2",
+    "G-GPE.4",
+    "G-GPE.5",
+    "G-GPE.6",
+    "G-GPE.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "partition-segment-in-ratio",
+          "standard": "G-GPE.6",
+          "difficulty": 1,
+          "prompt": "Partition A(0,0) to B(6,9) in ratio 2:1 from A.",
+          "workedSolution": {
+            "steps": [
+              "Three parts; move two of them.",
+              "(0 + 4, 0 + 6) = (4, 6)."
+            ],
+            "answer": "(4, 6)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-distance-and-perimeter",
+          "standard": "G-GPE.7",
+          "difficulty": 2,
+          "prompt": "A right triangle has vertices at (0, 0), (3, 0), and (3, 4). Find its perimeter and area.",
+          "choices": [
+            "perimeter 12; area 12",
+            "perimeter 12; area 3.5",
+            "perimeter 12; area 6",
+            "perimeter 7; area 6"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 3,
+          "prompt": "A parabola has focus (-5, 5) and directrix y = -1. Write its equation in vertex form.",
+          "choices": [
+            "y = 1/12(x − 5)² + 2",
+            "y = 1/6(x + 5)² + 2",
+            "y = 12(x + 5)² + 2",
+            "y = 1/12(x + 5)² + 2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 2,
+          "prompt": "Write the equation of the circle with centre (4, -3) and radius 7.",
+          "choices": [
+            "(x − 4)² + (y + 3)² = 7",
+            "(x − 4)² + (y + 3)² = 49",
+            "(x + 4)² + (y − 3)² = 49",
+            "(x − 4)² − (y + 3)² = 49"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "parallel-perpendicular-slope",
+          "standard": "G-GPE.5",
+          "difficulty": 3,
+          "prompt": "A line has slope -1. What is the slope of a line perpendicular to it?",
+          "choices": [
+            "-4/5",
+            "-3/5",
+            "1",
+            "-1"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "partition-segment-in-ratio",
+          "standard": "G-GPE.6",
+          "difficulty": 3,
+          "prompt": "Find the point that partitions the segment from A(4, 4) to B(13, 10) in the ratio 2:1 from A.",
+          "choices": [
+            "(11, 8)",
+            "(7, 6)",
+            "(8.5, 7)",
+            "(10, 8)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-distance-and-perimeter",
+          "standard": "G-GPE.7",
+          "difficulty": 3,
+          "prompt": "A right triangle has vertices at (0, 0), (5, 0), and (5, 12). Find its perimeter and area.",
+          "choices": [
+            "perimeter 30; area 30",
+            "perimeter 30; area 8.5",
+            "perimeter 17; area 30",
+            "perimeter 30; area 60"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 3,
+          "prompt": "A parabola has focus (-6, 4) and directrix y = -2. Write its equation in vertex form.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 3,
+          "prompt": "Write the equation of the circle with centre (-8, -7) and radius 8.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u09-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u09-l07"
+  }
+}

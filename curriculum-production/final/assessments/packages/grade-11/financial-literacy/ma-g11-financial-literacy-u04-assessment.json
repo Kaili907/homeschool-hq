@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-financial-literacy-u04-assessment",
+  "courseRef": "ma-g11-financial-literacy",
+  "grade": 11,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g11-financial-literacy-u04",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "courseTitle": "Investing, Insurance, and Risk Management",
+    "assessmentLessonRef": "ma-g11-financial-literacy-u04-l11"
+  },
+  "standards": [
+    "PF4",
+    "PF4.1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u04-l11.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Anselm’s gross income is $6,240 a month and his existing debt payments total $1,142 a month. The fictional lender caps all debt payments at 36% of gross income. The housing payment he is proposing is $1,380 a month.",
+      "prompt": "What is Anselm’s current debt-to-income ratio? Give one decimal place.",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "Anselm’s gross income is $6,240 a month and his existing debt payments total $1,142 a month. The fictional lender caps all debt payments at 36% of gross income. The housing payment he is proposing is $1,380 a month.",
+      "prompt": "What is the 36% ceiling on total debt payments?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "Anselm’s gross income is $6,240 a month and his existing debt payments total $1,142 a month. The fictional lender caps all debt payments at 36% of gross income. The housing payment he is proposing is $1,380 a month.",
+      "prompt": "How much room does that leave for the new housing payment?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p4",
+      "kind": "fixed-numeric",
+      "directions": "Anselm’s gross income is $6,240 a month and his existing debt payments total $1,142 a month. The fictional lender caps all debt payments at 36% of gross income. The housing payment he is proposing is $1,380 a month.",
+      "prompt": "What would the ratio become if the proposed $1,380 payment were added? Give one decimal place.",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now work out exactly what would have to change for the proposal to fit.",
+      "prompt": "By how much does the proposed payment exceed what the rule allows?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now work out exactly what would have to change for the proposal to fit.",
+      "prompt": "How much of his existing $1,142 of payments would Anselm have to clear for the $1,380 payment to fit?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now work out exactly what would have to change for the proposal to fit.",
+      "prompt": "Alternatively, what gross income would make the $1,380 payment fit under the 36% rule?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Now work out exactly what would have to change for the proposal to fit.",
+      "prompt": "How much more gross income a month is that than Anselm has now?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p5",
+      "kind": "fixed-numeric",
+      "directions": "Now work out exactly what would have to change for the proposal to fit.",
+      "prompt": "How much larger is the monthly income increase the rule would need than the monthly debt reduction it would need?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p6",
+      "kind": "fixed-choice",
+      "directions": "Now work out exactly what would have to change for the proposal to fit.",
+      "prompt": "Which route to fitting the rule is more within Anselm’s control?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Answer each in a few sentences.",
+      "prompt": "Anselm wants to argue that the rule is wrong in his case. Construct the strongest version of that argument using figures from this lesson, then give the strongest response a lender could make to it."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Answer each in a few sentences.",
+      "prompt": "Suppose Anselm clears the $275.60 of payments by taking a longer term on the same debt rather than by repaying it. Say whether that satisfies the rule, and whether it improves his position."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/financial-literacy/ma-g11-financial-literacy-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Diagnosing the error criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-financial-literacy-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u04-l11.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF4 — Using Credit: Debt Strategy and Repayment Analysis?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u02-l09",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u02-l09",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rigid Motions and Transformations",
+    "dayInUnit": 9,
+    "courseDay": 27,
+    "phase": "Concept model C",
+    "focus": "rotations and reflections that carry a polygon onto itself",
+    "title": "Concept model C: rotations and reflections that carry a polygon onto itself"
+  },
+  "standards": [
+    "G-CO.2",
+    "G-CO.3",
+    "G-CO.4",
+    "G-CO.5",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 1,
+          "prompt": "Reflect (3, 5) across the y-axis.",
+          "workedSolution": {
+            "steps": [
+              "Negate x, keep y.",
+              "(−3, 5)."
+            ],
+            "answer": "(−3, 5)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Rotate the point (1, -1) counterclockwise about the origin by 270°. Give the image.",
+          "choices": [
+            "(0, -1)",
+            "(1, 1)",
+            "(-1, 1)",
+            "(-1, -1)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 3,
+          "prompt": "A regular polygon has 9 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "8 rotations; smallest angle 140°",
+            "9 rotations; smallest angle 40°",
+            "8 rotations; smallest angle 20°",
+            "8 rotations; smallest angle 40°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has vertices A(8, -9) and B(-9, -8). After a transformation the images are A′(-8, 9) and B′(9, 8), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "choices": [
+            "a reflection across the x-axis",
+            "a reflection across the y-axis",
+            "a 180° rotation about the origin",
+            "a translation by ⟨-16, 18⟩"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 2,
+          "prompt": "Point P(-1, 6) is translated by the rule (x, y) → (x − 3, y − 1). Give the image P′.",
+          "choices": [
+            "(-4, 5)",
+            "(5, -4)",
+            "(2, 7)",
+            "(-2, 3)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Reflect the point (-5, -7) across the x-axis. Give the image.",
+          "choices": [
+            "(5, 7)",
+            "(-5, 7)",
+            "(5, -7)",
+            "(-7, -5)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Rotate the point (1, 7) counterclockwise about the origin by 180°. Give the image.",
+          "choices": [
+            "(7, 1)",
+            "(7, -1)",
+            "(-7, 1)",
+            "(-1, -7)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 3,
+          "prompt": "A regular polygon has 12 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "11 rotations; smallest angle 30°",
+            "11 rotations; smallest angle 150°",
+            "11 rotations; smallest angle 15°",
+            "12 rotations; smallest angle 30°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has vertices A(-10, 5) and B(5, 10). After a transformation the images are A′(10, -5) and B′(-5, -10), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "choices": [
+            "a 180° rotation about the origin",
+            "a reflection across the x-axis",
+            "a translation by ⟨20, -10⟩",
+            "a reflection across the y-axis"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 3,
+          "prompt": "Point P(7, 10) is translated by the rule (x, y) → (x − 3, y − 1). Give the image P′.",
+          "choices": [
+            "(4, 9)",
+            "(10, 11)",
+            "(6, 7)",
+            "(9, 4)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Reflect the point (-4, -12) across the line y = x. Give the image.",
+          "choices": [
+            "(4, -12)",
+            "(-12, -4)",
+            "(4, 12)",
+            "(-4, 12)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u02-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u02-l09"
+  }
+}

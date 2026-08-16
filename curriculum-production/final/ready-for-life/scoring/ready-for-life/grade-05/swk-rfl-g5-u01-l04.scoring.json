@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l04",
+  "lessonId": "ma-g5-ready-for-life-u01-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Hazard identification accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Adult confirms fewer than three of the learner's flagged items as real hazards."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Adult confirms at least four real hazards across two categories."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Adult confirms at least four hazards across three or more categories, and the learner self-corrects a false flag."
+          }
+        ]
+      },
+      {
+        "dimension": "Category naming and proposed fixes",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cannot name the hazard category or propose a workable fix."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names the correct category and proposes a workable fix for each confirmed hazard."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proposed fixes address the root cause, not just the immediate symptom (for example securing a shelf instead of just moving items off it)."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Adult was present for the full walk-through, not just a summary afterward.",
+      "Learner did not attempt any hazard fix without adult review first.",
+      "Findings distinguish clutter from genuine hazard."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u02-l14",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u02-l14",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rational and Radical Expressions and Equations",
+    "dayInUnit": 14,
+    "courseDay": 32,
+    "phase": "Transfer challenge",
+    "focus": "inspection, long division, and computer algebra systems",
+    "title": "Transfer challenge: inspection, long division, and computer algebra systems"
+  },
+  "standards": [
+    "A-APR.6",
+    "A-REI.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 1,
+          "prompt": "Write 2/(x − 1) + 3/(x − 4) as one fraction.",
+          "workedSolution": {
+            "steps": [
+              "Common denominator (x − 1)(x − 4).",
+              "2(x − 4) + 3(x − 1) = 5x − 11."
+            ],
+            "answer": "(5x − 11)/((x − 1)(x − 4))"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-extraneous-solution",
+          "standard": "A-REI.2",
+          "difficulty": 3,
+          "prompt": "Solving a rational equation with denominator (x − 8) yields the candidate solutions x = 8 and x = 5. Which are genuine solutions?",
+          "choices": [
+            "Neither is a solution, because the equation has a restricted domain.",
+            "Only x = 8; x = 5 must be rejected.",
+            "Only x = 5; x = 8 makes the original denominator zero, so it is extraneous.",
+            "Both x = 8 and x = 5 are solutions."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "simplify-rational-expression",
+          "standard": "A-APR.6",
+          "difficulty": 3,
+          "prompt": "Simplify (x^2 + 3x - 40) / (x + 8), and state the restriction on x.",
+          "choices": [
+            "x − 5, x ≠ 5",
+            "x + 5, x ≠ -8",
+            "x + 8, x ≠ -8",
+            "x − 5, x ≠ -8"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-radical-equation-with-check",
+          "standard": "A-REI.2",
+          "difficulty": 3,
+          "prompt": "Solve √(2x + 25) = 7, then verify the solution.",
+          "choices": [
+            "x = 12",
+            "x = 19",
+            "x = 49",
+            "x = 11"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 3,
+          "prompt": "Write as a single fraction: 2/(x + 4) + 1/(x − 1).",
+          "choices": [
+            "(3x + 2) / ((x + 4)(x − 1))",
+            "(3) / ((x + 4)(x − 1))",
+            "(3x − 2) / ((x + 4)(x − 1))",
+            "(2x + 2) / ((x + 4)(x − 1))"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-extraneous-solution",
+          "standard": "A-REI.2",
+          "difficulty": 3,
+          "prompt": "Solving a rational equation with denominator (x − 3) yields the candidate solutions x = 3 and x = 9. Which are genuine solutions?",
+          "choices": [
+            "Both x = 3 and x = 9 are solutions.",
+            "Only x = 9; x = 3 makes the original denominator zero, so it is extraneous.",
+            "Neither is a solution, because the equation has a restricted domain.",
+            "Only x = 3; x = 9 must be rejected."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "simplify-rational-expression",
+          "standard": "A-APR.6",
+          "difficulty": 3,
+          "prompt": "Simplify (x^2 + 5x + 6) / (x + 2), and state the restriction on x.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-radical-equation-with-check",
+          "standard": "A-REI.2",
+          "difficulty": 3,
+          "prompt": "Solve √(4x + 61) = 9, then verify the solution.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 3,
+          "prompt": "Write as a single fraction: -4/(x − 4) + 1/(x + 5).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u02-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u02-l14"
+  }
+}

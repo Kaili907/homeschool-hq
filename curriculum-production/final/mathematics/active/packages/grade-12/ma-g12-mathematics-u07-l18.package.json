@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u07-l18",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u07-l18",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Matrices, Transformations, and Systems",
+    "dayInUnit": 18,
+    "courseDay": 126,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "solving systems with an inverse matrix and technology",
+    "title": "Publication, presentation, or reflection: solving systems with an inverse matrix and technology"
+  },
+  "standards": [
+    "N-VM.6",
+    "N-VM.7",
+    "N-VM.8",
+    "N-VM.9",
+    "N-VM.10",
+    "N-VM.11",
+    "N-VM.12",
+    "A-REI.8",
+    "A-REI.9",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "determinant-and-invertibility",
+          "standard": "N-VM.10",
+          "difficulty": 1,
+          "prompt": "Find det([[3, 1], [2, 4]]) and say whether it is invertible.",
+          "workedSolution": {
+            "steps": [
+              "3(4) − 1(2) = 10.",
+              "Non-zero, so invertible."
+            ],
+            "answer": "det = 10; invertible"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "determinant-as-area-scale-factor",
+          "standard": "N-VM.11",
+          "difficulty": 2,
+          "prompt": "The matrix [[-4, 1], [-2, 3]] is applied to a region of area 8. Find the area of the image.",
+          "choices": [
+            "-80",
+            "80",
+            "8",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 2,
+          "prompt": "Compute -3·[[-5, 5], [-1, 2]].",
+          "choices": [
+            "[[15, -15], [-1, 2]]",
+            "[[-8, 2], [-4, -1]]",
+            "[[15, -15], [3, -6]]",
+            "[[15, 5], [-1, 2]]"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "matrix-vector-product",
+          "standard": "N-VM.11",
+          "difficulty": 3,
+          "prompt": "Compute [[2, 7], [-1, 1]]·⟨4, 5⟩.",
+          "choices": [
+            "⟨1, 43⟩",
+            "⟨3, 33⟩",
+            "⟨8, 5⟩",
+            "⟨43, 1⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "determinant-and-invertibility",
+          "standard": "N-VM.10",
+          "difficulty": 3,
+          "prompt": "For M = [[-7, 1], [-6, 6]], find det(M) and state whether M is invertible.",
+          "choices": [
+            "det(M) = -36; M is invertible",
+            "det(M) = 36; M is invertible",
+            "det(M) = -48; M is invertible",
+            "det(M) = -35; M is invertible"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "determinant-as-area-scale-factor",
+          "standard": "N-VM.11",
+          "difficulty": 3,
+          "prompt": "The matrix [[5, 5], [3, 1]] is applied to a region of area 13. Find the area of the image.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 3,
+          "prompt": "Compute -2·[[-8, -1], [-9, -9]].",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u07-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u07-l18"
+  }
+}

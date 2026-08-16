@@ -1,0 +1,998 @@
+{
+  "course_id": "ma-g3-science",
+  "source_commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+  "authored_against": "Grade 3 science, elementary band. Keys state established science at this grade band; they are not extracted from the source, which states only a focus and generic objectives.",
+  "topics": [
+    {
+      "unit": 1,
+      "focus": "careful observations",
+      "fixed_facts": [],
+      "relationships": [
+        "An observation is information taken in directly, through the senses or through a tool such as a hand lens, ruler, or thermometer.",
+        "An inference is an explanation of what an observation might mean; the same observation can support more than one inference.",
+        "An observation recorded at the time it is made is more reliable than one recalled later, because memory changes."
+      ],
+      "accepted_alternative_framings": [
+        "Describing observations as qualitative or quantitative is correct and so is describing them as words or numbers; neither wording is required."
+      ],
+      "disqualifying_errors": [
+        "Recording an inference as an observation, such as writing 'the plant is thirsty' instead of 'the leaves are drooping'.",
+        "Claiming that an opinion about what happened counts as data.",
+        "Claiming an observation only counts if a tool was used; unaided senses give observations too."
+      ],
+      "out_of_scope": "Measurement uncertainty, instrument calibration, and statistical treatment of repeated observations belong to later grades and must not be required here."
+    },
+    {
+      "unit": 1,
+      "focus": "testable questions",
+      "fixed_facts": [],
+      "relationships": [
+        "A testable question is one that could be answered by observing something or by doing something and seeing what happens.",
+        "A testable question names something to change or look at and something to notice or measure.",
+        "Questions about what is best, prettiest, or fairest are not settled by a test on their own, because no observation decides them."
+      ],
+      "accepted_alternative_framings": [
+        "A question phrased as 'what happens if', 'how does X affect Y', or 'which of these' can all be testable; no single sentence frame is required."
+      ],
+      "disqualifying_errors": [
+        "Calling a question testable when no possible observation could answer it.",
+        "Claiming a question must begin with 'why' to be scientific.",
+        "Treating 'what does the book say' as a testable question about the natural world."
+      ],
+      "out_of_scope": "Naming independent and dependent variables, and formal hypothesis statements, are introduced later."
+    },
+    {
+      "unit": 1,
+      "focus": "models and drawings",
+      "fixed_facts": [],
+      "relationships": [
+        "A model is a representation used to show or explain how something works: a drawing, diagram, physical build, or acted-out sequence.",
+        "Every model leaves something out. What it leaves out is a limitation of the model, not a mistake by the learner.",
+        "A model is judged by what it explains and predicts about the thing it stands for, not by how attractive it looks."
+      ],
+      "accepted_alternative_framings": [
+        "A labelled drawing, a physical build, and a sequence of pictures are all models; the form the learner chooses is not a correctness question."
+      ],
+      "disqualifying_errors": [
+        "Claiming a model must look exactly like the real thing to be a good model.",
+        "Claiming a good model has no limitations.",
+        "Scoring a model on artistic quality rather than on what it explains."
+      ],
+      "out_of_scope": "Mathematical and computational models are later work."
+    },
+    {
+      "unit": 1,
+      "focus": "fair tests",
+      "fixed_facts": [
+        "In a fair test only one thing is changed on purpose."
+      ],
+      "relationships": [
+        "In a fair test one thing is changed on purpose and everything else that could affect the result is kept the same.",
+        "If more than one thing changes at once, you cannot tell which change caused the result.",
+        "Repeating a test gives more confidence in the result than a single try does."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Calling a test fair when two or more conditions were changed at the same time.",
+        "Claiming a single trial proves a result.",
+        "Treating a result that disagrees with the prediction as a failed test; a fair test that disagrees with the prediction is still a good test."
+      ],
+      "out_of_scope": "Control groups by name, randomisation, and sample-size reasoning are later work."
+    },
+    {
+      "unit": 1,
+      "focus": "measuring and recording data",
+      "fixed_facts": [
+        "A measurement is incomplete without its unit."
+      ],
+      "relationships": [
+        "A measurement has both a number and a unit; the number alone does not say how much.",
+        "The same quantity measured with the same tool by different people should agree closely, and a large disagreement is a signal to check the method.",
+        "Data recorded in a table with labelled columns can be compared; loose notes usually cannot."
+      ],
+      "accepted_alternative_framings": [
+        "Metric and customary units are both acceptable, provided one system is used consistently within a comparison."
+      ],
+      "disqualifying_errors": [
+        "Recording a bare number with no unit and treating it as a complete measurement.",
+        "Changing a recorded measurement afterwards so it matches a prediction.",
+        "Claiming a longer number is automatically a more accurate measurement."
+      ],
+      "out_of_scope": "Significant figures, uncertainty ranges, and error propagation are later work."
+    },
+    {
+      "unit": 1,
+      "focus": "criteria and constraints",
+      "fixed_facts": [],
+      "relationships": [
+        "Criteria are what a successful solution must do; constraints are the limits it must work within, such as materials, cost, time, or safety.",
+        "The problem is defined before solutions are compared, so that every solution is judged against the same criteria.",
+        "A solution can meet every criterion and still be rejected because it breaks a constraint."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating criteria and constraints as the same thing.",
+        "Judging a design best without stating what it was judged against.",
+        "Adding a new criterion after testing so that a preferred design wins."
+      ],
+      "out_of_scope": "Weighted trade-off matrices and formal optimisation are later work."
+    },
+
+    {
+      "unit": 2,
+      "focus": "pushes and pulls",
+      "fixed_facts": [
+        "A force is a push or a pull."
+      ],
+      "relationships": [
+        "A force is a push or a pull on an object, and it comes from an interaction between two objects.",
+        "A force has both a strength and a direction.",
+        "A force can start motion, stop motion, change speed, or change direction."
+      ],
+      "accepted_alternative_framings": [
+        "Describing a force by an arrow, by words, or by a demonstration are all correct representations at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming an object exerts a force on itself, or that a moving object carries a stored force inside it.",
+        "Claiming an object stopped because the force ran out, rather than because another force such as friction acted on it.",
+        "Describing a force by strength only, with no direction."
+      ],
+      "out_of_scope": "Newton's laws by name, the newton as a unit, and net-force arithmetic belong to later grades."
+    },
+    {
+      "unit": 2,
+      "focus": "balanced and unbalanced forces",
+      "fixed_facts": [
+        "Balanced forces do not change an object's motion; unbalanced forces do."
+      ],
+      "relationships": [
+        "When the forces on an object are balanced, its motion does not change: at rest it stays at rest, and moving it keeps the same speed and direction.",
+        "When the forces on an object are unbalanced, its motion changes.",
+        "Balanced does not mean no forces are acting; it means the forces cancel each other."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming an object sitting still has no forces acting on it.",
+        "Claiming balanced forces bring a moving object to a stop.",
+        "Claiming the larger or heavier object always wins in a push."
+      ],
+      "out_of_scope": "Vector addition, free-body diagrams, and quantitative net force are later work."
+    },
+    {
+      "unit": 2,
+      "focus": "patterns in motion",
+      "fixed_facts": [],
+      "relationships": [
+        "Motion that repeats regularly, such as a swing, a spinning wheel, or a ball rolling down the same ramp, can be observed, described, and used to predict what happens next.",
+        "A pattern is established by repeated observation; something seen once is not yet a pattern.",
+        "A pattern supports a prediction only while the conditions that produced it stay the same."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Calling a single observation a pattern and predicting from it.",
+        "Predicting from a pattern after the conditions have been changed, without saying so.",
+        "Claiming a pattern explains why the motion happens; a pattern describes, it does not by itself explain."
+      ],
+      "out_of_scope": "Position-time graphs and the mathematics of periodic motion are later work."
+    },
+    {
+      "unit": 2,
+      "focus": "predicting motion",
+      "fixed_facts": [],
+      "relationships": [
+        "If the pattern of an object's past motion is known and the conditions stay the same, its future motion can be predicted.",
+        "A prediction is stated before the observation; a statement made afterwards is an explanation, not a prediction.",
+        "A prediction that turns out wrong is evidence, and it is recorded as it was made."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Rewriting a prediction after seeing the result.",
+        "Claiming a prediction is guaranteed rather than expected.",
+        "Predicting motion for conditions the observed pattern never covered."
+      ],
+      "out_of_scope": "Calculating a future position from speed and time is later work."
+    },
+    {
+      "unit": 2,
+      "focus": "measuring distance and time",
+      "fixed_facts": [],
+      "relationships": [
+        "Distance and time are measured with tools and reported with units; two values can only be compared when they use the same unit.",
+        "Starting and stopping a timer by hand adds error to every trial, which is why several trials are taken.",
+        "A fair comparison of two motions uses the same starting point, the same finish point, and the same measuring method."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Comparing distances recorded in different units without converting them.",
+        "Treating a single hand-timed trial as exact.",
+        "Changing the start or finish point between trials and comparing the results anyway."
+      ],
+      "out_of_scope": "Speed as distance divided by time is Grade 4 work and is not required here."
+    },
+    {
+      "unit": 2,
+      "focus": "friction and surfaces",
+      "fixed_facts": [
+        "Friction acts only between surfaces that are touching."
+      ],
+      "relationships": [
+        "Friction is a force between surfaces that are touching, and it opposes sliding.",
+        "Under otherwise identical conditions, a rougher pair of surfaces produces more friction than a smoother pair.",
+        "Friction turns some of the energy of motion into thermal energy, which is why rubbed surfaces warm up."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming friction acts on an object when nothing is touching it.",
+        "Claiming friction is always a problem; friction is what makes walking, gripping, and braking possible.",
+        "Claiming a smoother surface always gives faster motion regardless of the other forces acting."
+      ],
+      "out_of_scope": "Coefficients of friction, and the static-versus-kinetic distinction by name, are later work."
+    },
+
+    {
+      "unit": 3,
+      "focus": "magnetic attraction and repulsion",
+      "fixed_facts": [
+        "Magnets do not attract every metal. Aluminium and copper are metals and are not attracted."
+      ],
+      "relationships": [
+        "A magnet exerts a force on some materials without touching them.",
+        "Magnets attract objects containing iron, nickel, or cobalt; they do not attract copper, aluminium, glass, plastic, or wood.",
+        "The magnetic force between a magnet and an object weakens as the distance between them increases."
+      ],
+      "accepted_alternative_framings": [
+        "A learner who says 'magnetic materials' rather than naming iron, nickel, and cobalt is correct, provided the examples they give are right."
+      ],
+      "disqualifying_errors": [
+        "Claiming magnets attract all metals.",
+        "Claiming a magnet has to touch an object to affect it.",
+        "Claiming the force is the same at every distance."
+      ],
+      "out_of_scope": "Magnetic domains, field-strength units, and electromagnets are later work."
+    },
+    {
+      "unit": 3,
+      "focus": "magnet poles",
+      "fixed_facts": [
+        "Like poles repel; unlike poles attract.",
+        "Every magnet has both a north and a south pole."
+      ],
+      "relationships": [
+        "Every magnet has two poles, called north and south.",
+        "Like poles repel each other and unlike poles attract each other.",
+        "Cutting a magnet in half gives two magnets, each with two poles; a piece with only one pole is never produced."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming like poles attract.",
+        "Claiming a magnet can be cut to give a north-only piece.",
+        "Claiming the north pole of a magnet is stronger than its south pole."
+      ],
+      "out_of_scope": "Earth's magnetic field, polarity conventions, and magnetic declination are later work."
+    },
+    {
+      "unit": 3,
+      "focus": "forces without contact",
+      "fixed_facts": [],
+      "relationships": [
+        "Magnetic and electric forces act between objects that are not touching.",
+        "Gravity also acts without contact.",
+        "The strength of a non-contact force depends on the distance between the objects and on properties of the objects themselves."
+      ],
+      "accepted_alternative_framings": [
+        "Calling these 'forces at a distance' or 'non-contact forces' are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming every force needs contact.",
+        "Claiming a non-contact force is equally strong at any distance.",
+        "Claiming magnetism and static electricity are the same force."
+      ],
+      "out_of_scope": "Fields as a formal representation, and inverse-square relationships, are later work."
+    },
+    {
+      "unit": 3,
+      "focus": "static electric interactions",
+      "fixed_facts": [
+        "Opposite charges attract; like charges repel."
+      ],
+      "relationships": [
+        "Rubbing certain materials together transfers electric charge from one to the other, leaving each object charged.",
+        "Objects with opposite charges attract each other; objects with the same charge repel each other.",
+        "A charged object can attract an uncharged object such as paper, hair, or a thin stream of water."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming rubbing creates charge out of nothing, rather than moving it from one object to the other.",
+        "Claiming static electricity and magnetism are the same thing.",
+        "Claiming an uncharged object cannot be attracted to a charged one."
+      ],
+      "out_of_scope": "Electrons by name, the conductor-insulator distinction, and current electricity are later work; a learner who uses them correctly is not wrong."
+    },
+    {
+      "unit": 3,
+      "focus": "cause and effect",
+      "fixed_facts": [],
+      "relationships": [
+        "A cause-and-effect claim names what was changed and what changed as a result.",
+        "Two things happening at the same time does not on its own show that one caused the other.",
+        "Evidence for a cause comes from changing one thing and observing what follows."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming one event caused another only because they happened together.",
+        "Stating an effect with no named cause and calling it an explanation.",
+        "Reversing cause and effect without evidence about which came first."
+      ],
+      "out_of_scope": "Correlation coefficients, confounding by name, and controlled-variable vocabulary are later work."
+    },
+    {
+      "unit": 3,
+      "focus": "solving a problem with magnets",
+      "fixed_facts": [],
+      "relationships": [
+        "A magnetic solution only works on materials the magnet actually attracts, so the material is part of defining the problem.",
+        "A design is tested against its stated criteria and constraints, not against how clever it seems.",
+        "A stronger magnet, or a smaller gap, gives the design a larger force to work with."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Proposing a magnetic solution for a material magnets do not attract.",
+        "Declaring a design successful without testing it against the stated criteria.",
+        "Claiming a magnet works through any material without checking."
+      ],
+      "out_of_scope": "Electromagnet design and quantitative force calculations are later work."
+    },
+
+    {
+      "unit": 4,
+      "focus": "birth, growth, reproduction, and death",
+      "fixed_facts": [
+        "All organisms have life cycles that include being born or germinating, growing, reproducing, and dying."
+      ],
+      "relationships": [
+        "All organisms have life cycles that include being born or germinating, growing, reproducing, and dying.",
+        "The particular stages differ between kinds of organism, but the overall birth-growth-reproduction-death pattern is shared.",
+        "Different kinds of organism take characteristically different lengths of time to complete a life cycle."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming some organisms never die.",
+        "Claiming every organism passes through the same stages, such as a larval stage.",
+        "Claiming an organism grows up into a different kind of organism."
+      ],
+      "out_of_scope": "Cell division, the genetics of reproduction, and alternation of generations are later work."
+    },
+    {
+      "unit": 4,
+      "focus": "plant life cycles",
+      "fixed_facts": [
+        "In a flowering plant, pollination and fertilisation must occur before seeds form."
+      ],
+      "relationships": [
+        "A flowering plant's cycle runs seed, germination, seedling, mature plant with flowers, pollination, then fruit and seed.",
+        "Seeds form after pollination and fertilisation; a flower that is never pollinated does not produce seed.",
+        "A seed contains a young plant and a store of food that supports early growth before the seedling has leaves of its own."
+      ],
+      "accepted_alternative_framings": [
+        "Pollination by wind, water, insects, or other animals are all correct; the agent is not fixed."
+      ],
+      "disqualifying_errors": [
+        "Claiming a flowering plant produces seeds without pollination.",
+        "Claiming a germinating seed grows because the soil feeds it; early growth runs on the seed's own stored food.",
+        "Claiming plants take their food ready-made from the soil rather than making it themselves."
+      ],
+      "out_of_scope": "Photosynthesis chemistry, double fertilisation, and the cycles of non-flowering plants are later work."
+    },
+    {
+      "unit": 4,
+      "focus": "insect life cycles",
+      "fixed_facts": [
+        "Complete metamorphosis is egg, larva, pupa, adult.",
+        "Incomplete metamorphosis is egg, nymph, adult, with no pupal stage."
+      ],
+      "relationships": [
+        "Many insects undergo complete metamorphosis: egg, larva, pupa, adult.",
+        "Other insects undergo incomplete metamorphosis: egg, nymph, adult, with no pupal stage.",
+        "The larva and the adult of one insect can look completely different and eat different food, and are still the same individual organism."
+      ],
+      "accepted_alternative_framings": [
+        "Caterpillar for larva and chrysalis or cocoon for the pupal stage are acceptable everyday names."
+      ],
+      "disqualifying_errors": [
+        "Claiming every insect passes through a pupal stage.",
+        "Claiming a caterpillar and the butterfly it becomes are two different organisms.",
+        "Placing the pupa before the larva in the sequence."
+      ],
+      "out_of_scope": "Hormonal control of moulting, and counting instars, are later work."
+    },
+    {
+      "unit": 4,
+      "focus": "comparing life cycles",
+      "fixed_facts": [],
+      "relationships": [
+        "Comparing life cycles means matching stages that play the same role, not stages that share a name.",
+        "Organisms that look very different can share the same overall cycle pattern.",
+        "A difference between two life cycles is evidence about the organisms, not a fault in either of them."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming an organism with a shorter life cycle is less developed or less successful.",
+        "Matching a plant's seed to an animal's adult stage as if they played the same role.",
+        "Claiming two organisms with different stage names cannot be compared."
+      ],
+      "out_of_scope": "Interpreting life-cycle similarity as evidence of relatedness is later work."
+    },
+    {
+      "unit": 4,
+      "focus": "modeling a life cycle",
+      "fixed_facts": [],
+      "relationships": [
+        "A life-cycle model shows the stages in order and shows that the cycle repeats.",
+        "A representation that ends at the adult stage shows a sequence, not a cycle.",
+        "The arrows in the model carry meaning: they show the direction of change over time."
+      ],
+      "accepted_alternative_framings": [
+        "A circular diagram, a labelled set of pictures in order, or a built model are all acceptable forms."
+      ],
+      "disqualifying_errors": [
+        "Drawing a life cycle as a straight line with no return to the first stage.",
+        "Leaving out a stage the organism actually passes through and calling the model complete.",
+        "Drawing arrows that run backwards through the cycle without saying why."
+      ],
+      "out_of_scope": "Quantitative stage durations and survivorship curves are later work."
+    },
+    {
+      "unit": 4,
+      "focus": "diverse but shared patterns",
+      "fixed_facts": [],
+      "relationships": [
+        "Organisms are enormously varied, and yet all of them share the broad life-cycle pattern of birth, growth, reproduction, and death.",
+        "A pattern shared across many kinds of organism is something to be explained, not a coincidence.",
+        "A single organism's cycle is an example of the pattern, not the pattern itself."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming that because organisms look different they share nothing.",
+        "Treating one organism's particular stages as the pattern that all organisms must follow.",
+        "Claiming that a shared pattern means the organisms are the same kind."
+      ],
+      "out_of_scope": "Common ancestry as the explanation for shared patterns is Grade 8 and High School work."
+    },
+
+    {
+      "unit": 5,
+      "focus": "inherited traits",
+      "fixed_facts": [],
+      "relationships": [
+        "Organisms inherit many of their traits from their parents.",
+        "Offspring resemble their parents but are not identical to them.",
+        "Inheritance passes information from parent to offspring; it does not pass on what happened to the parent during its life."
+      ],
+      "accepted_alternative_framings": [
+        "Saying traits are 'passed down' or 'inherited' are both correct at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming offspring of two parents are identical copies of one parent.",
+        "Claiming a trait a parent acquired during life, such as a scar or a learned skill, is inherited.",
+        "Claiming every trait an organism has was inherited."
+      ],
+      "out_of_scope": "Genes, chromosomes, dominance, and Punnett squares are Grade 8 and High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "variation within a group",
+      "fixed_facts": [],
+      "relationships": [
+        "Individuals of the same kind of organism differ from one another, and that difference is called variation.",
+        "Variation exists even among siblings that share the same two parents.",
+        "Variation is described by comparing many individuals, not by looking at one."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming all members of one kind of organism are the same.",
+        "Treating a single individual as representing its whole group.",
+        "Claiming variation means the organisms are different kinds."
+      ],
+      "out_of_scope": "Mutation and recombination as the sources of variation are later work."
+    },
+    {
+      "unit": 5,
+      "focus": "comparing parents and offspring",
+      "fixed_facts": [],
+      "relationships": [
+        "Offspring traits can be compared with parent traits to see which are similar and which differ.",
+        "A trait can appear in an offspring that neither parent shows.",
+        "Resemblance to a parent is evidence of inheritance; it does not establish which parent a particular trait came from."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a trait must have come from whichever parent the offspring most resembles overall.",
+        "Claiming a trait absent in both parents cannot have been inherited.",
+        "Claiming offspring must show the average of their two parents."
+      ],
+      "out_of_scope": "Recessive inheritance, carriers, and Punnett squares are Grade 8 and High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "traits influenced by environment",
+      "fixed_facts": [],
+      "relationships": [
+        "Some traits are affected by the environment: food, water, light, temperature, exercise, and injury.",
+        "Two organisms with the same inheritance can end up different if they grow in different environments.",
+        "An environmental effect on one organism is not passed to its offspring by inheritance."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming every difference between two organisms is inherited.",
+        "Claiming a trait changed by the environment during an organism's life will be inherited by its offspring.",
+        "Claiming the environment has no effect on any trait."
+      ],
+      "out_of_scope": "Gene-environment interaction and epigenetics are later work."
+    },
+    {
+      "unit": 5,
+      "focus": "reading trait data",
+      "fixed_facts": [],
+      "relationships": [
+        "Trait data from many individuals can be put in a table or graph to show how common each form of the trait is.",
+        "The shape of the data, where most individuals fall and how spread out they are, is the evidence; no single individual is.",
+        "A graph of trait data shows what was recorded and nothing more."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Drawing a conclusion about the group from one individual's measurement.",
+        "Reading the tallest bar as 'all' rather than 'most'.",
+        "Claiming a trait is absent from a group because it did not appear in a small sample."
+      ],
+      "out_of_scope": "Mean, median, spread, and the names of distributions are later work."
+    },
+    {
+      "unit": 5,
+      "focus": "evidence from observation",
+      "fixed_facts": [],
+      "relationships": [
+        "A claim about traits is supported by recorded observations of real organisms, or by published records of them.",
+        "Evidence has to bear on the claim being made; observations of a different trait do not support it.",
+        "The source of an observation is named so that a reader can check it."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Supporting a trait claim with an opinion or a story rather than a recorded observation.",
+        "Offering evidence that does not bear on the claim.",
+        "Presenting an invented observation as a real one."
+      ],
+      "out_of_scope": "Sampling design and statistical significance are later work."
+    },
+
+    {
+      "unit": 6,
+      "focus": "animal groups",
+      "fixed_facts": [],
+      "relationships": [
+        "Some animals live in groups that vary in size and organisation; others live alone for most of their lives.",
+        "Living in a group is a behaviour, and like other traits it varies between kinds of animal.",
+        "A group of animals is many organisms together, not one large organism."
+      ],
+      "accepted_alternative_framings": [
+        "Herd, flock, school, colony, and pack are all correct names for particular kinds of group."
+      ],
+      "disqualifying_errors": [
+        "Claiming all animals of a kind live in groups.",
+        "Claiming group living is always the better strategy.",
+        "Treating a group of animals as a single organism."
+      ],
+      "out_of_scope": "Kin selection and social-insect caste systems are later work."
+    },
+    {
+      "unit": 6,
+      "focus": "benefits of living in groups",
+      "fixed_facts": [],
+      "relationships": [
+        "Groups can help members find food, defend against predators, care for young, and cope with harsh conditions.",
+        "Group living also has costs, such as competition for food inside the group and faster spread of disease.",
+        "Whether group living helps depends on the environment; it is not an advantage everywhere."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming group living has benefits and no costs.",
+        "Claiming animals live in groups because they have worked out that it is beneficial.",
+        "Claiming a benefit without connecting it to a need the animals actually have."
+      ],
+      "out_of_scope": "Quantitative fitness models and cost-benefit calculations are later work."
+    },
+    {
+      "unit": 6,
+      "focus": "habitat needs",
+      "fixed_facts": [],
+      "relationships": [
+        "Every organism needs particular resources and conditions: food or nutrients, water, air or dissolved gases, shelter, and space.",
+        "A habitat is a place that supplies those needs; an organism cannot survive where its needs are not met.",
+        "Different organisms need different things from the same place."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming any organism could live anywhere if it tried hard enough.",
+        "Claiming every organism in one habitat needs the same resources.",
+        "Listing only food as a habitat need."
+      ],
+      "out_of_scope": "Niche theory and tolerance curves are later work."
+    },
+    {
+      "unit": 6,
+      "focus": "surviving well or less well",
+      "fixed_facts": [],
+      "relationships": [
+        "In a particular habitat, some variations of a trait help an individual survive and reproduce better than other variations do.",
+        "The same trait can be an advantage in one habitat and a disadvantage in another.",
+        "Surviving well means surviving and reproducing, not being the largest or the strongest."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Calling a trait better without naming the habitat it is better in.",
+        "Claiming an organism develops a trait because it needs it.",
+        "Claiming the strongest individual always survives."
+      ],
+      "out_of_scope": "Natural selection as a mechanism acting over generations is Grade 8 and High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "constructing an argument",
+      "fixed_facts": [],
+      "relationships": [
+        "A scientific argument states a claim, gives evidence, and explains how the evidence supports the claim.",
+        "The reasoning step is what connects evidence to claim; without it the argument is a claim with data sitting beside it.",
+        "An argument is judged on the fit between claim, evidence, and reasoning, not on how strongly it is stated."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a claim and data with no reasoning linking them.",
+        "Giving reasoning that does not use the evidence presented.",
+        "Treating confident wording as a substitute for evidence."
+      ],
+      "out_of_scope": "Counter-argument and rebuttal structure are later work."
+    },
+    {
+      "unit": 6,
+      "focus": "evidence for a survival claim",
+      "fixed_facts": [],
+      "relationships": [
+        "Evidence for a survival claim names the habitat, names the trait, and connects the trait to a need in that habitat.",
+        "Evidence can come from the learner's own observation or from a named published source.",
+        "A survival claim covers the habitat the evidence came from, not every habitat."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Supporting a survival claim with a trait that has no stated connection to a need in that habitat.",
+        "Using an invented example as evidence.",
+        "Extending a survival claim to habitats the evidence never covered."
+      ],
+      "out_of_scope": "Field-study design and population data analysis are later work."
+    },
+
+    {
+      "unit": 7,
+      "focus": "what fossils are",
+      "fixed_facts": [
+        "A fossil is preserved evidence of an organism that lived in the past."
+      ],
+      "relationships": [
+        "A fossil is preserved evidence of an organism that lived in the past: a body part, an impression, or a trace such as a footprint or burrow.",
+        "Most fossils form in sedimentary rock, when remains are buried by sediment before they decay away.",
+        "Only a very small fraction of organisms ever become fossils, so the fossil record is incomplete."
+      ],
+      "accepted_alternative_framings": [
+        "Body fossils and trace fossils are both fossils; a learner who names only one kind is not wrong unless they deny the other."
+      ],
+      "disqualifying_errors": [
+        "Claiming a fossil is the organism's actual unchanged body.",
+        "Claiming the fossil record contains every organism that ever lived.",
+        "Claiming a rock that merely looks like an organism is a fossil."
+      ],
+      "out_of_scope": "Mineral replacement chemistry, taphonomy, and index fossils are later work."
+    },
+    {
+      "unit": 7,
+      "focus": "reading rock layers",
+      "fixed_facts": [
+        "In undisturbed sedimentary layers, a lower layer is older than a layer above it."
+      ],
+      "relationships": [
+        "Sedimentary rock forms in layers, with newer layers deposited on top of older ones.",
+        "In undisturbed layers, a lower layer is older than the layer above it.",
+        "Layers can be tilted, folded, or broken after they form, so whether a sequence is undisturbed has to be checked rather than assumed."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the top layer is the oldest.",
+        "Claiming the order of layers gives an age in years.",
+        "Applying the deeper-is-older rule to layers that have visibly been tilted or overturned without saying so."
+      ],
+      "out_of_scope": "Radiometric dating and the stratigraphic principles by their formal names are Grade 8 and High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "fossil evidence",
+      "fixed_facts": [],
+      "relationships": [
+        "Fossils are evidence about which organisms lived in a place and about the conditions there.",
+        "A fossil in a rock layer shows the organism lived when that layer was forming, not when the fossil was found.",
+        "Similar fossils in layers of the same age in different places link those places in time."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a body fossil shows what the organism did; only trace fossils record behaviour.",
+        "Claiming that finding no fossils of an organism proves it never lived there.",
+        "Dating a fossil by when it was collected rather than by the layer it came from."
+      ],
+      "out_of_scope": "Biostratigraphic correlation and continental drift are later work."
+    },
+    {
+      "unit": 7,
+      "focus": "environments long ago",
+      "fixed_facts": [
+        "Fossils of sea organisms in rock far from any sea are evidence that the area was once under water."
+      ],
+      "relationships": [
+        "Fossils of organisms that live in particular conditions today are evidence that similar conditions existed where those fossils formed.",
+        "Marine fossils found far inland are evidence that the area was once covered by water.",
+        "Environments change over long spans of time."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the environment where a fossil is found today must always have been the same.",
+        "Concluding what a whole region was like from one fossil.",
+        "Claiming an environment cannot change."
+      ],
+      "out_of_scope": "Palaeoclimate proxies and isotope evidence are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "comparing past and present",
+      "fixed_facts": [
+        "Extinct means no members of that kind of organism are alive anywhere.",
+        "People did not live alongside the large non-bird dinosaurs."
+      ],
+      "relationships": [
+        "Some fossil organisms resemble organisms alive today; others resemble nothing now living.",
+        "Organisms known only as fossils are extinct: none are alive anywhere.",
+        "A resemblance between a fossil and a living organism is evidence of similarity, not proof that one descended from the other."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating 'it might still be alive somewhere' as a scientific conclusion about an extinct organism.",
+        "Claiming a fossil organism turned into a living organism during its own lifetime.",
+        "Claiming people lived alongside the large non-bird dinosaurs."
+      ],
+      "out_of_scope": "Evolutionary relationship and common ancestry are Grade 8 and High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "variation and advantage",
+      "fixed_facts": [],
+      "relationships": [
+        "Individuals in a past population varied, just as individuals do today.",
+        "A variation that helped individuals survive and reproduce in their environment could become more common in later generations.",
+        "Which variation counts as an advantage is set by the environment, not by the organism."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming an individual organism changes its own traits to suit its environment.",
+        "Claiming a trait appeared because the organism needed it.",
+        "Claiming an advantage in one environment is an advantage everywhere."
+      ],
+      "out_of_scope": "The mechanism of natural selection and the genetics behind it are Grade 8 and High School work."
+    },
+
+    {
+      "unit": 8,
+      "focus": "daily weather data",
+      "fixed_facts": [],
+      "relationships": [
+        "Weather is the state of the atmosphere at a place at a particular time: temperature, precipitation, wind, and cloud.",
+        "Weather is recorded with instruments, in units, at a stated time and place.",
+        "A single day's weather does not describe what a place's weather is usually like."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Recording a weather observation with no date, time, or place.",
+        "Concluding what a place's weather is usually like from one day's record.",
+        "Recording a temperature with no unit."
+      ],
+      "out_of_scope": "Instrument calibration and station-siting standards are later work."
+    },
+    {
+      "unit": 8,
+      "focus": "tables and graphs",
+      "fixed_facts": [],
+      "relationships": [
+        "A table organises weather data so values can be compared; a graph shows the pattern in those values.",
+        "A graph needs labelled axes with units, or a reader cannot tell what is shown.",
+        "A graph shows what was recorded; it does not add information that was never measured."
+      ],
+      "accepted_alternative_framings": [
+        "Bar graphs and line graphs are both correct choices here, provided the graph type suits the data."
+      ],
+      "disqualifying_errors": [
+        "Reading a trend off a graph with unlabelled axes.",
+        "Extending a graph beyond the data and treating the extension as a measurement.",
+        "Changing a plotted value so the graph looks smoother."
+      ],
+      "out_of_scope": "Line of best fit, interpolation, and correlation are later work."
+    },
+    {
+      "unit": 8,
+      "focus": "seasonal patterns",
+      "fixed_facts": [
+        "When it is summer in the Northern Hemisphere it is winter in the Southern Hemisphere."
+      ],
+      "relationships": [
+        "At most places, weather varies in a repeating yearly pattern of seasons.",
+        "A seasonal pattern is found by comparing records across several years, not one year.",
+        "The seasons in the Northern and Southern Hemispheres are opposite to each other at the same time of year."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming seasons happen because Earth is closer to the Sun in summer.",
+        "Claiming every year's weather matches the seasonal average exactly.",
+        "Claiming the whole world has summer at the same time."
+      ],
+      "out_of_scope": "The tilt of Earth's axis as the mechanism is Grade 5 and Grade 8 work and is not required here; a learner who states it correctly is right."
+    },
+    {
+      "unit": 8,
+      "focus": "weather compared with climate",
+      "fixed_facts": [
+        "Climate is the long-term pattern of weather at a place, described over many years."
+      ],
+      "relationships": [
+        "Weather is short-term and local; climate is the pattern of weather at a place over many years.",
+        "One cold day does not contradict a warm climate, and one hot week is not a change in climate.",
+        "Climate is described with long-term averages and ranges, not single readings."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Using a single day's weather as evidence about climate.",
+        "Treating weather and climate as the same thing.",
+        "Claiming climate never changes."
+      ],
+      "out_of_scope": "Climate classification systems and attribution of climate change are later work."
+    },
+    {
+      "unit": 8,
+      "focus": "climates in different regions",
+      "fixed_facts": [],
+      "relationships": [
+        "Different regions of the world have different climates.",
+        "Climate varies with distance from the equator, height above sea level, and nearness to large bodies of water.",
+        "Two places at the same distance from the equator can have different climates because of those other factors."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming distance from the equator alone determines climate.",
+        "Claiming every place near the equator is a rainforest.",
+        "Claiming a mountain top and the valley below it must share a climate because they are close together."
+      ],
+      "out_of_scope": "Ocean currents and prevailing winds as mechanisms, and formal climate classes, are later work."
+    },
+    {
+      "unit": 8,
+      "focus": "combining information sources",
+      "fixed_facts": [],
+      "relationships": [
+        "A conclusion about weather or climate is stronger when it draws on more than one record or source.",
+        "Each source is named so a reader can check it.",
+        "Sources that disagree are information in themselves; the disagreement is reported, not hidden."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a combined conclusion with no sources named.",
+        "Dropping a source because it disagrees with the others.",
+        "Treating two copies of the same source as two independent sources."
+      ],
+      "out_of_scope": "Weighting and formal reconciliation of conflicting datasets are later work."
+    },
+
+    {
+      "unit": 9,
+      "focus": "weather-related hazards",
+      "fixed_facts": [],
+      "relationships": [
+        "Weather-related hazards include floods, severe thunderstorms, tornadoes, blizzards, drought, and extreme heat and cold.",
+        "A hazard is a natural event; it becomes a disaster when it affects people or the things they depend on.",
+        "Hazards cannot be stopped from happening, but their impacts can be reduced."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a weather hazard can be prevented from occurring.",
+        "Claiming hazards are entirely unpredictable; many have known seasons, regions, and warning signs.",
+        "Claiming a hazard is a disaster regardless of whether anyone is affected."
+      ],
+      "out_of_scope": "Probabilistic risk assessment and return periods are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "habitat change",
+      "fixed_facts": [],
+      "relationships": [
+        "When a habitat changes, some organisms survive there, some move away, and some die.",
+        "Changes can be sudden, such as a flood or fire, or gradual, such as a long drought.",
+        "A change that harms one kind of organism can help another."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming every habitat change harms every organism in it.",
+        "Claiming individual organisms adapt themselves to fit a changed habitat.",
+        "Claiming a habitat that has changed can never support life again."
+      ],
+      "out_of_scope": "Population-level change across generations is Grade 8 and High School work."
+    },
+    {
+      "unit": 9,
+      "focus": "design criteria and constraints",
+      "fixed_facts": [],
+      "relationships": [
+        "A hazard-reduction design states what it must achieve, which are its criteria, and the limits it must respect, which are its constraints, including safety and cost.",
+        "The problem is defined before solutions are generated.",
+        "A design that breaks a stated constraint has not solved the problem, however well it meets the criteria."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Proposing a solution before stating what it has to achieve.",
+        "Ignoring a stated constraint and still calling the design successful.",
+        "Treating safety as an optional constraint."
+      ],
+      "out_of_scope": "Formal engineering standards and building codes are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "comparing solutions",
+      "fixed_facts": [],
+      "relationships": [
+        "Solutions are compared against the same criteria and the same constraints.",
+        "A solution can be better on one criterion and worse on another, and the comparison says so.",
+        "The comparison reports what was tested, not what was hoped for."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Declaring a solution best without stating the criteria used.",
+        "Comparing two solutions against different criteria.",
+        "Ignoring a criterion on which the preferred solution does badly."
+      ],
+      "out_of_scope": "Weighted decision matrices and formal trade studies are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "fair-testing a design",
+      "fixed_facts": [],
+      "relationships": [
+        "A design test changes one thing at a time and holds the rest the same, exactly as any fair test does.",
+        "A test that shows a design failing is useful evidence and points to the revision.",
+        "The test has to measure what the criterion states, not whatever is easiest to measure."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Changing the design and the test conditions at the same time and crediting the difference to the design.",
+        "Treating a failed test as a reason to stop rather than as evidence for revision.",
+        "Measuring something other than what the criterion states and reporting it as the criterion."
+      ],
+      "out_of_scope": "Statistical comparison of design variants is later work."
+    },
+    {
+      "unit": 9,
+      "focus": "evidence-based claims",
+      "fixed_facts": [],
+      "relationships": [
+        "A claim about a hazard or a design is supported by recorded data or by a named source.",
+        "The reasoning states how the evidence supports the claim.",
+        "A claim broader than the evidence covers is overstated and should be narrowed to what was actually shown."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Making a claim broader than the evidence collected supports.",
+        "Presenting an untested design as proven.",
+        "Citing no source and no data for a factual claim."
+      ],
+      "out_of_scope": "Quantified uncertainty and confidence statements are later work."
+    }
+  ]
+}

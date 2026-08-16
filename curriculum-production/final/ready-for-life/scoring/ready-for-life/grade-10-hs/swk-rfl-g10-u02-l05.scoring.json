@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l05",
+  "lessonId": "ma-g10-ready-for-life-u02-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Logistics checklist completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The checklist is missing basic items such as confirming time and place." },
+          { "label": "Proficient", "descriptor": "The checklist covers the essentials: confirming time and place, and what to bring." },
+          { "label": "Advanced", "descriptor": "The checklist is thorough and includes a genuine contingency (such as what to do if running late)." }
+        ]
+      },
+      {
+        "dimension": "Quality of interviewer questions",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Questions are generic filler with no explained purpose." },
+          { "label": "Proficient", "descriptor": "Both questions have an explained, genuine purpose for the learner." },
+          { "label": "Advanced", "descriptor": "Both questions are specific to the role or organization type discussed and clearly not copyable to any interview." }
+        ]
+      },
+      {
+        "dimension": "Follow-up message specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The follow-up message is a generic 'thank you for your time' with no reference to the actual interview." },
+          { "label": "Proficient", "descriptor": "The message references one specific thing from the practice interview." },
+          { "label": "Advanced", "descriptor": "The message references a specific detail and connects it to genuine continued interest, not just politeness." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The checklist and questions are traceable to the actual practice interview from the previous lesson, not invented fresh.",
+      "The follow-up message names a specific topic, person's comment, or moment from the practice interview.",
+      "The reflection explains the 'why' of specificity, not just restating that specific is better."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

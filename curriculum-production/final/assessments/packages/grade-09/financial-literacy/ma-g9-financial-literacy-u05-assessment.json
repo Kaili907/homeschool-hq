@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-financial-literacy-u05-assessment",
+  "courseRef": "ma-g9-financial-literacy",
+  "grade": 9,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g9-financial-literacy-u05",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "courseTitle": "Personal Finance",
+    "assessmentLessonRef": "ma-g9-financial-literacy-u05-l10"
+  },
+  "standards": [
+    "PF5"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u05-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The three fictional goals. Goal A: $1,600 for a certification course, needed in 10 months. Goal B: $9,000 toward a vehicle, needed in 60 months. Goal C: a 25-year goal, funded by placing $5,000 now at an assumed 6% a year and adding nothing.",
+      "prompt": "How much a month does Goal A require, assuming no growth?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The three fictional goals. Goal A: $1,600 for a certification course, needed in 10 months. Goal B: $9,000 toward a vehicle, needed in 60 months. Goal C: a 25-year goal, funded by placing $5,000 now at an assumed 6% a year and adding nothing.",
+      "prompt": "How much a month does Goal B require, assuming no growth?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The three fictional goals. Goal A: $1,600 for a certification course, needed in 10 months. Goal B: $9,000 toward a vehicle, needed in 60 months. Goal C: a 25-year goal, funded by placing $5,000 now at an assumed 6% a year and adding nothing.",
+      "prompt": "What does Goal C’s $5,000 placement reach in 25 years at 6% a year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Check the plan against the money actually available.",
+      "prompt": "What do Goals A and B together require each month?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Check the plan against the money actually available.",
+      "prompt": "How much of the $340 a month is left over?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Check the plan against the money actually available.",
+      "prompt": "Once Goal A is funded after 10 months, how much a month becomes free?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write the plan up.",
+      "prompt": "Present the allocation: which holding category each goal belongs in, what each requires, and what happens to the freed $160 after month 10. Then answer this objection: \"Goal A is only 10 months away — put it in the stock-type holding and it will get there faster.\""
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Write the plan up.",
+      "prompt": "The Goal C projection assumes 6% a year for 25 years. Say what happens to that projection if the actual average is 4%, and how you would present the figure to avoid overstating certainty."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/financial-literacy/ma-g9-financial-literacy-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Identifying the assumption criterion.",
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-financial-literacy-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u05-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF5 — Financial Investing: Risk, Return, and Why Diversification Matters?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

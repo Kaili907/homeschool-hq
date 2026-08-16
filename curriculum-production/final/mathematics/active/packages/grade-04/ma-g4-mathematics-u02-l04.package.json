@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u02-l04",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Multi-Digit Addition and Subtraction",
+    "dayInUnit": 4,
+    "courseDay": 22,
+    "phase": "Guided practice A",
+    "focus": "fluent multi-digit addition",
+    "title": "Guided practice A: fluent multi-digit addition"
+  },
+  "standards": [
+    "4.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "A theater sold 24,861 tickets in week one and 18,957 in week two. How many total?",
+          "workedSolution": {
+            "steps": [
+              "24,861 + 18,957.",
+              "Add each place, regrouping as needed.",
+              "Total: 43,818."
+            ],
+            "answer": "43818"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l04#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a concert had 3887 visitors expected, but only 3734 attended. How many fewer people attended than expected?",
+          "choices": [
+            "-847",
+            "7621",
+            "1153",
+            "153"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l04#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a food drive raised 5399 dollars on Saturday and 1761 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "7160",
+            "6160",
+            "3638",
+            "8160"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l04#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a warehouse had 2721 visitors expected, but only 1191 attended. How many fewer people attended than expected?",
+          "choices": [
+            "1530",
+            "3912",
+            "2530",
+            "530"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l04#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a concert raised 81391 dollars on Saturday and 67465 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "148856",
+            "147856",
+            "149856",
+            "13926"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l04#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a stadium had 97078 visitors expected, but only 82770 attended. How many fewer people attended than expected?",
+          "choices": [
+            "179848",
+            "13308",
+            "14308",
+            "15308"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a food drive raised 70779 dollars on Saturday and 63122 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "7657",
+            "133901",
+            "132901",
+            "134901"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a stadium had 92697 visitors expected, but only 69035 attended. How many fewer people attended than expected?",
+          "choices": [
+            "22662",
+            "24662",
+            "23662",
+            "161732"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a stadium raised 6284 dollars on Saturday and 9041 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "16325",
+            "15325",
+            "2757",
+            "14325"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a concert had 16081 visitors expected, but only 15002 attended. How many fewer people attended than expected?",
+          "choices": [
+            "79",
+            "1079",
+            "31083",
+            "2079"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u02-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u02-l04"
+  }
+}

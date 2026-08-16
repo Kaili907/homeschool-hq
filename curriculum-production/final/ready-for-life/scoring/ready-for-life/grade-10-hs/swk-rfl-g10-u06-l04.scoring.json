@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l04",
+  "lessonId": "ma-g10-ready-for-life-u06-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Genuine re-verification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The re-check uses the same source as the original research, or no source is named." },
+          { "label": "Proficient", "descriptor": "Uses a genuinely different, current source." },
+          { "label": "Advanced", "descriptor": "Uses a genuinely different source and explicitly states whether the finding matched or differed from the original." }
+        ]
+      },
+      {
+        "dimension": "Additional rule research",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The additional rule is vague or not genuinely new information." },
+          { "label": "Proficient", "descriptor": "Records a real, specific additional rule with a source." },
+          { "label": "Advanced", "descriptor": "Records a specific additional rule, its practical meaning, and a source, and it's genuinely distinct from what was covered earlier this year." }
+        ]
+      },
+      {
+        "dimension": "Reasoning about reverification frequency",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection doesn't connect the re-check result to a reasoning about how often to reverify." },
+          { "label": "Proficient", "descriptor": "Draws a plausible general conclusion from the re-check result." },
+          { "label": "Advanced", "descriptor": "Draws a specific, well-reasoned conclusion tied to what was or wasn't found to have changed." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The two sources used across the original and re-check research are genuinely different in type or origin.",
+      "The additional rule is something a first-time worker would actually need to know, not a trivial detail.",
+      "The reflection response reasons from the actual re-check outcome rather than a generic statement about verification being good practice."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

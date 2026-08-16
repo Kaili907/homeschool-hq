@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l01",
+  "lessonId": "ma-g5-ready-for-life-u02-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Consistent sorting rule",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Rule changes partway through, or piles don't match the stated rule."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "One rule applied consistently across all items."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Rule applied consistently and the learner names a case where it would fail."
+          }
+        ]
+      },
+      {
+        "dimension": "Label comparison",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Does not check or compare the label."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Checks the label and accurately states whether it matches their rule."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Checks the label, states the match, and revises the rule to be more accurate."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "At least three distinct piles exist.",
+      "Stated rule is specific enough that another person could sort the same way.",
+      "No item is left unsorted."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

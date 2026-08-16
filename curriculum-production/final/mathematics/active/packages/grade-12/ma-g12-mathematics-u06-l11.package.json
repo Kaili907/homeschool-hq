@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u06-l11",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u06-l11",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Vectors",
+    "dayInUnit": 11,
+    "courseDay": 101,
+    "phase": "Performance task planning",
+    "focus": "magnitude and direction of a resultant",
+    "title": "Performance task planning: magnitude and direction of a resultant"
+  },
+  "standards": [
+    "N-VM.1",
+    "N-VM.2",
+    "N-VM.3",
+    "N-VM.4",
+    "N-VM.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 1,
+          "prompt": "Find the magnitude of ⟨3, 4⟩.",
+          "workedSolution": {
+            "steps": [
+              "√(9 + 16) = √25.",
+              "= 5."
+            ],
+            "answer": "5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 2,
+          "prompt": "Given u = ⟨2, -3⟩ and v = ⟨-3, -5⟩, find u − v.",
+          "choices": [
+            "⟨5, 2⟩",
+            "⟨5, -8⟩",
+            "⟨-5, -2⟩",
+            "⟨-1, -8⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 2,
+          "prompt": "Let v = ⟨6, 8⟩, which has magnitude 10. Find 2v and its magnitude, and say how the direction changes.",
+          "choices": [
+            "⟨12, 16⟩, magnitude 20, direction unchanged",
+            "⟨12, 16⟩, magnitude 10, direction unchanged",
+            "⟨12, 16⟩, magnitude 20, direction reversed",
+            "⟨8, 10⟩, magnitude 20, direction unchanged"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 3,
+          "prompt": "Find the unit vector in the direction of ⟨-6, -8⟩.",
+          "choices": [
+            "⟨-6/10, -8/10⟩",
+            "⟨10/-6, 10/-8⟩",
+            "⟨-6/100, -8/100⟩",
+            "⟨-6, -8⟩"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 3,
+          "prompt": "A vector has components ⟨3, -4⟩. Find its magnitude.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 3,
+          "prompt": "Given u = ⟨3, 10⟩ and v = ⟨-2, 1⟩, find u − v.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 3,
+          "prompt": "Let v = ⟨6, 8⟩, which has magnitude 10. Find 5v and its magnitude, and say how the direction changes.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u06-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u06-l11"
+  }
+}

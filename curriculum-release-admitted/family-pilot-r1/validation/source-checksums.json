@@ -1,0 +1,74 @@
+{
+  "overall": "PASS",
+  "sources": [
+    {
+      "source": "mathematics",
+      "checked": 3389,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "science",
+      "checked": 1981,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "social-studies",
+      "checked": 14,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "health",
+      "checked": 2883,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "physical-education",
+      "checked": 2884,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "ready-for-life",
+      "checked": 648,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "financial-literacy",
+      "checked": 1008,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "english-language-arts",
+      "checked": 1,
+      "failures": [],
+      "status": "PASS",
+      "method": "immutable corpus tree plus 1,620/1,620 Gate H3 rerun"
+    },
+    {
+      "source": "technology",
+      "checked": 690,
+      "failures": [],
+      "status": "PASS",
+      "method": "immutable repaired Technology tree plus 336/336 actionability audit"
+    },
+    {
+      "source": "arts-and-music",
+      "checked": 1296,
+      "failures": [],
+      "status": "PASS",
+      "method": "immutable repaired Arts/Music tree plus 648/648 executability audit"
+    },
+    {
+      "source": "assessments",
+      "checked": 1398,
+      "failures": [],
+      "status": "PASS"
+    }
+  ]
+}

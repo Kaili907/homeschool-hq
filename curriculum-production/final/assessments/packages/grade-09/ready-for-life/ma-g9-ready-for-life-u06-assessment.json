@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-ready-for-life-u06-assessment",
+  "courseRef": "ma-g9-ready-for-life",
+  "grade": 9,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g9-ready-for-life-u06",
+    "unitNumber": 6,
+    "unitTitle": "Grade 9 Independence Capstone",
+    "courseTitle": "Ready for Life 9: Personal Management and Learning Systems",
+    "assessmentLessonRef": "ma-g9-ready-for-life-u06-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-09-hs/swk-rfl-g9-u06-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Review your artifacts from earlier in the capstone week and outline what worked and what didn't across the systems you used.",
+      "prompt": "List at least two things that worked well and at least two things that didn't go as planned during the capstone week, across any of your systems."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Write the full content of your presentation: one thing that worked, one thing that didn't, and one specific backup plan for a risk that could recur.",
+      "prompt": "My presentation names one specific thing that worked during the capstone week and why it worked."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Write the full content of your presentation: one thing that worked, one thing that didn't, and one specific backup plan for a risk that could recur.",
+      "prompt": "My presentation names one specific thing that did not go as planned during the capstone week."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Write the full content of your presentation: one thing that worked, one thing that didn't, and one specific backup plan for a risk that could recur.",
+      "prompt": "My presentation includes one specific backup plan for a risk that could recur, naming the exact trigger and the exact different action I would take."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "checklist-item",
+      "directions": "Present your capstone week outcomes out loud to your trusted adult (or, if using the alternative, have them read and initial your script), and have them ask you at least one follow-up question.",
+      "prompt": "My trusted adult confirms I presented my capstone week outcomes out loud, or, if using the script alternative, read and initialed my script."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "checklist-item",
+      "directions": "Present your capstone week outcomes out loud to your trusted adult (or, if using the alternative, have them read and initial your script), and have them ask you at least one follow-up question.",
+      "prompt": "My trusted adult confirms they asked at least one follow-up question during or after the presentation."
+    },
+    {
+      "taskRef": "t3-p3",
+      "kind": "short-response",
+      "directions": "Present your capstone week outcomes out loud to your trusted adult (or, if using the alternative, have them read and initial your script), and have them ask you at least one follow-up question.",
+      "prompt": "What was the follow-up question your adult asked, and how did you answer it?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Look back on the whole capstone week.",
+      "prompt": "Of the five systems (planning, household, food, transportation, communication), which one do you most want to strengthen going forward, and what is your first specific step?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/ready-for-life/ma-g9-ready-for-life-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Presentation content and specificity criterion.",
+    "Provide evidence that meets the stated Guardian-confirmed presentation and engagement criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-ready-for-life-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-09-hs/swk-rfl-g9-u06-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Grade 9 Independence Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l03",
+  "lessonId": "ma-g5-ready-for-life-u05-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Checklist packing accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Misses checklist items or packs unnecessary extras without reason."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Packs against the checklist accurately with reasons for any exclusions."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Packs accurately and independently double-checks the list before finishing."
+          }
+        ]
+      },
+      {
+        "dimension": "Full unpacking follow-through",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Bag left partially unpacked."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Bag fully unpacked with items returned to their homes."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Bag fully unpacked and the learner catches an easy-to-forget item on their own."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Checklist is actually consulted during packing, not just afterward.",
+      "Unpacking happens within a reasonable time of the bag's purpose ending.",
+      "Reflection names one specific reason a habit is harder, not just \"I forget.\""
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

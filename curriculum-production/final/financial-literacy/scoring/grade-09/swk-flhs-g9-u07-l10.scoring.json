@@ -1,0 +1,337 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l10",
+  "lessonId": "ma-g9-financial-literacy-u07-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$360.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Removing $3,000 from taxable income at a 12% marginal rate saves 12% of $3,000."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$105.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The savings account pays 3.5% on the $3,000 held, giving $105.00 of interest before tax."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$92.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$105.00 of interest less 12% tax on it."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$267.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$360.00 of tax saved against $92.40 of after-tax interest."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$3,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Option 2 keeps the whole amount accessible, which is the thing Option 1 gives up."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "contribution * marginalRate",
+        "substituted": "3000 * 0.12",
+        "result": "$360.00",
+        "why": "Removing $3,000 from taxable income at a 12% marginal rate saves 12% of $3,000."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "savings * savingsRate",
+        "substituted": "3000 * 0.035",
+        "result": "$105.00",
+        "why": "The savings account pays 3.5% on the $3,000 held, giving $105.00 of interest before tax."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 * (1 - interestTaxRate)",
+        "substituted": "#t1-p2 * (1 - 0.12)",
+        "result": "$92.40",
+        "why": "$105.00 of interest less 12% tax on it."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 - #t1-p3",
+        "substituted": "#t1-p1 - #t1-p3",
+        "result": "$267.60",
+        "why": "$360.00 of tax saved against $92.40 of after-tax interest."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "savings2",
+        "substituted": "3000",
+        "result": "$3,000.00",
+        "why": "Option 2 keeps the whole amount accessible, which is the thing Option 1 gives up."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Outline the tax benefit and the drawback of each option, then recommend one for a worker with no emergency reserve at all — and defend that recommendation against the $267.60 first-year advantage the other option shows.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States Option 1’s benefit as $360.00 of tax saved now and its drawback as the money being inaccessible until retirement.",
+          "States Option 2’s benefit as full access to $3,000 and its drawback as a smaller after-tax gain of $92.40.",
+          "Recommends for a worker with no reserve, and defends it against the $267.60 advantage by pricing what an inaccessible reserve would cost in a real emergency — borrowing at credit-card rates, or an early-withdrawal penalty."
+        ],
+        "evidenceRequirements": [
+          "Uses the $360.00, $92.40, and $267.60 figures in the outline."
+        ],
+        "lookFors": [
+          "The response faces the $267.60 rather than ignoring it.",
+          "The response recognises the recommendation would likely flip once a reserve exists."
+        ],
+        "commonMisconception": "Choosing the option with the larger tax benefit without asking what the money is needed for.",
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Option 1’s $360 saving assumes a 12% marginal rate. Say what happens to that figure if the worker’s marginal rate is 22% instead, and whether that changes the recommendation for a worker with no reserve.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that the saving rises to $660 at a 22% rate, making Option 1’s advantage larger.",
+          "Says whether the recommendation changes and why — a larger tax advantage does not create an accessible reserve."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $360.00 saving and the 12% rate it assumes."
+        ],
+        "lookFors": [
+          "The response treats the marginal rate as an input rather than a fixed feature of the option."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much tax does Option 1 save this year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What interest does Option 2 earn in a year, before tax?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does Option 2 leave after tax on the interest?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much better off is Option 1 in the first year, counting only the tax saved against the after-tax interest?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of the $3,000 does Option 2 leave available to spend if an emergency arises?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Outline the tax benefit and the drawback of each option, then recommend one for a worker with no emergency reserve at all — and defend that recommendation against the $267.60 first-year advantage the other option shows."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Option 1’s $360 saving assumes a 12% marginal rate. Say what happens to that figure if the worker’s marginal rate is 22% instead, and whether that changes the recommendation for a worker with no reserve."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much tax does Option 1 save this year? Answer: $360.00. Verification: Removing $3,000 from taxable income at a 12% marginal rate saves 12% of $3,000. t1-p2: What interest does Option 2 earn in a year, before tax? Answer: $105.00. Verification: The savings account pays 3.5% on the $3,000 held, giving $105.00 of interest before tax. t1-p3: What does Option 2 leave after tax on the interest? Answer: $92.40. Verification: $105.00 of interest less 12% tax on it. t2-p1: How much better off is Option 1 in the first year, counting only the tax saved against the after-tax interest? Answer: $267.60. Verification: $360.00 of tax saved against $92.40 of after-tax interest. t2-p2: How much of the $3,000 does Option 2 leave available to spend if an emergency arises? Answer: $3,000.00. Verification: Option 2 keeps the whole amount accessible, which is the thing Option 1 gives up."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Outline the tax benefit and the drawback of each option, then recommend one for a worker with no emergency reserve at all — and defend that recommendation against the $267.60 first-year advantage the other option shows. States Option 1’s benefit as $360.00 of tax saved now and its drawback as the money being inaccessible until retirement. States Option 2’s benefit as full access to $3,000 and its drawback as a smaller after-tax gain of $92.40. Recommends for a worker with no reserve, and defends it against the $267.60 advantage by pricing what an inaccessible reserve would cost in a real emergency — borrowing at credit-card rates, or an early-withdrawal penalty. Uses the $360.00, $92.40, and $267.60 figures in the outline. The response faces the $267.60 rather than ignoring it. The response recognises the recommendation would likely flip once a reserve exists. t3-p2: Option 1’s $360 saving assumes a 12% marginal rate. Say what happens to that figure if the worker’s marginal rate is 22% instead, and whether that changes the recommendation for a worker with no reserve. States that the saving rises to $660 at a 22% rate, making Option 1’s advantage larger. Says whether the recommendation changes and why — a larger tax advantage does not create an accessible reserve. Refers to the $360.00 saving and the 12% rate it assumes. The response treats the marginal rate as an input rather than a fixed feature of the option."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States Option 1’s benefit as $360.00 of tax saved now and its drawback as the money being inaccessible until retirement. States Option 2’s benefit as full access to $3,000 and its drawback as a smaller after-tax gain of $92.40. Recommends for a worker with no reserve, and defends it against the $267.60 advantage by pricing what an inaccessible reserve would cost in a real emergency — borrowing at credit-card rates, or an early-withdrawal penalty. States that the saving rises to $660 at a 22% rate, making Option 1’s advantage larger. Says whether the recommendation changes and why — a larger tax advantage does not create an accessible reserve."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u07-l10.scoring.json",
+    "sourceScoringSha256": "3381b2822d3751e872175210234d19bd6ada075ff3fd45ee861181cfde5dadeb",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

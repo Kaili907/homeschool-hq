@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u02-l14",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u02-l14",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rigid Motions and Transformations",
+    "dayInUnit": 14,
+    "courseDay": 32,
+    "phase": "Transfer challenge",
+    "focus": "distance-preserving versus non-distance-preserving transformations",
+    "title": "Transfer challenge: distance-preserving versus non-distance-preserving transformations"
+  },
+  "standards": [
+    "G-CO.2",
+    "G-CO.3",
+    "G-CO.4",
+    "G-CO.5",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 1,
+          "prompt": "Reflect (3, 5) across the y-axis.",
+          "workedSolution": {
+            "steps": [
+              "Negate x, keep y.",
+              "(−3, 5)."
+            ],
+            "answer": "(−3, 5)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Rotate the point (-7, 11) counterclockwise about the origin by 90°. Give the image.",
+          "choices": [
+            "(7, -11)",
+            "(-11, -7)",
+            "(11, -7)",
+            "(11, 7)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 3,
+          "prompt": "A regular polygon has 9 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "8 rotations; smallest angle 140°",
+            "8 rotations; smallest angle 40°",
+            "8 rotations; smallest angle 20°",
+            "9 rotations; smallest angle 40°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has vertices A(-2, 4) and B(4, 2). After a transformation the images are A′(2, -4) and B′(-4, -2), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "choices": [
+            "a reflection across the x-axis",
+            "a 180° rotation about the origin",
+            "a reflection across the y-axis",
+            "a translation by ⟨4, -8⟩"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 3,
+          "prompt": "Point P(5, -2) is translated by the rule (x, y) → (x − 9, y + 1). Give the image P′.",
+          "choices": [
+            "(-1, -4)",
+            "(14, -3)",
+            "(-4, -1)",
+            "(6, -11)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Reflect the point (11, 2) across the y-axis. Give the image.",
+          "choices": [
+            "(2, 11)",
+            "(11, -2)",
+            "(-11, -2)",
+            "(-11, 2)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Rotate the point (2, 11) counterclockwise about the origin by 270°. Give the image.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 3,
+          "prompt": "A regular polygon has 8 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has vertices A(-8, -9) and B(-9, 8). After a transformation the images are A′(8, 9) and B′(9, -8), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u02-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u02-l14"
+  }
+}

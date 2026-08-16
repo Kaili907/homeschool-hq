@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l08",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l08",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 8,
+    "courseDay": 134,
+    "phase": "Error analysis and repair",
+    "focus": "digit-count decimal comparison errors",
+    "title": "Error analysis and repair: digit-count decimal comparison errors"
+  },
+  "standards": [
+    "4.NF.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 1,
+          "prompt": "Compare using <, >, or =: 0.30 ___ 0.3",
+          "workedSolution": {
+            "steps": [
+              "0.30 and 0.3 represent the same amount.",
+              "0.30 = 0.3."
+            ],
+            "answer": "="
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 1,
+          "prompt": "Compare using <, >, or =: 0.6 ___ 0.5",
+          "choices": [
+            "<",
+            "Cannot be compared without more information",
+            "=",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 1,
+          "prompt": "Compare using <, >, or =: 0.6 ___ 0.9",
+          "choices": [
+            "Cannot be compared without more information",
+            "<",
+            ">",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.64 ___ 0.83",
+          "choices": [
+            "Cannot be compared without more information",
+            "<",
+            ">",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.57 ___ 0.98",
+          "choices": [
+            "<",
+            "=",
+            ">",
+            "Cannot be compared without more information"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.38 ___ 0.30",
+          "choices": [
+            "=",
+            "<",
+            "Cannot be compared without more information",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.40 ___ 0.22",
+          "choices": [
+            ">",
+            "=",
+            "Cannot be compared without more information",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 0.20 ___ 0.79",
+          "choices": [
+            "=",
+            "Cannot be compared without more information",
+            "<",
+            ">"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l08"
+  }
+}

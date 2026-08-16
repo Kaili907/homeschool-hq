@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l04",
+  "lessonId": "ma-g3-ready-for-life-u02-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Fold and hang technique",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Items are folded or hung without following the taught sequence, resulting in loose, uneven folds or hangers facing mixed directions."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Fold-type items follow the sleeves-in, half, half-again sequence, and hung items are closed and face the same direction, with adult confirmation."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner corrects their own technique mid-task after noticing an uneven fold or crooked hanger without being told."
+          }
+        ]
+      },
+      {
+        "dimension": "Correct storage placement",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Folded or hung items are left out or placed in the wrong drawer or closet section."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All folded and hung items are placed in their correct drawer or closet spot, confirmed by the adult."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All items are placed correctly, and the learner explains the specific reason a particular item belongs in its spot."
+          }
+        ]
+      },
+      {
+        "dimension": "Safety boundary respected",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner climbs on furniture or forces a stuck drawer instead of asking the trusted adult for help."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner stays off furniture for high reaches and asks the trusted adult for help when needed."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names the reach or drawer issue out loud before it becomes a problem."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The adult confirmation specifically checks both the fold-type items and the hung items, not just one group.",
+      "The reflection response names one specific tricky item and the specific fix, not a general 'it went fine' statement."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l14",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l14",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 14,
+    "courseDay": 140,
+    "phase": "Performance task: build",
+    "focus": "the board with fractions, decimals, models, and comparisons",
+    "title": "Performance task: build: the board with fractions, decimals, models, and comparisons"
+  },
+  "standards": [
+    "4.NF.5",
+    "4.NF.6",
+    "4.NF.7"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.44 ___ 0.22",
+          "choices": [
+            ">",
+            "Cannot be compared without more information",
+            "=",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 2,
+          "prompt": "Find 1/10 + 3/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "4/100",
+            "13/100",
+            "13/10",
+            "10/100"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 79/100 using decimal notation.",
+          "choices": [
+            "0.80",
+            "0.78",
+            "0.82",
+            "0.79"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.15 ___ 0.83",
+          "choices": [
+            "Cannot be compared without more information",
+            "<",
+            "=",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 3,
+          "prompt": "Find 3/10 + 4/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "34/10",
+            "7/100",
+            "30/100",
+            "34/100"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 10/100 using decimal notation.",
+          "choices": [
+            "0.10",
+            "0.09",
+            "0.13",
+            "0.11"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 0.46 ___ 0.35",
+          "choices": [
+            "=",
+            ">",
+            "Cannot be compared without more information",
+            "<"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 3,
+          "prompt": "Find 4/10 + 43/100. Give the answer as a fraction over 100.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 24/100 using decimal notation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l14"
+  }
+}

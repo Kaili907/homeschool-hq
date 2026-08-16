@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u02-l05",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: folding and hanging"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 04–06",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can practice folding and hanging. I will do one step at a time and check one result.",
+  "scenario": "Without step-by-step guidance, the learner is given a pile of at least six clean items — a mix that should include at least one shirt, one pair of pants, something meant for hanging (like a jacket), and something meant for folding (like a t-shirt or towel) — and sorts, then finishes, each item using either the folding technique or the hanging technique that fits it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Use respectful, non-shaming language if an item is folded or hung imperfectly on the first attempt."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If six real clean items aren't available, the learner instead sorts six items shown in a printed or hand-drawn set into fold-or-hang, and describes in writing the specific technique they would use for each rather than physically folding it."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g5-u02-l05-model-card",
+    "Embedded resource: swk-rfl-g5-u02-l05-step-card",
+    "Embedded resource: swk-rfl-g5-u02-l05-guided-card",
+    "Embedded resource: swk-rfl-g5-u02-l05-independent-card",
+    "Embedded resource: swk-rfl-g5-u02-l05-evidence-record",
+    "Embedded resource: swk-rfl-g5-u02-l05-retry-pair",
+    "learner-local: at least six clean clothing items",
+    "learner-local: hangers"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Open swk-rfl-g5-u02-l05-model-card. Watch one complete example.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g5-u02-l05-guided-card. Do the coached move.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u02-l05-independent-card. Choose one complete route. Follow its steps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g5-u02-l05-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Rate your confidence in your own fold-or-hang judgment (very / somewhat / not yet), name the one item you were least sure about, and choose: ready to try a bigger pile on your own, ready to review this again, or need a different explanation."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u02-l05-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u02-l05-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u02-l05-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Fold-or-hang sorting accuracy: Sorts at least five of six items correctly. | Technique quality: Folded items are neat and hung items fit their hangers. Resume at the next unfinished step on swk-rfl-g5-u02-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Add two unusual items to the pile (like a swimsuit or a fitted sheet) that don't fit the obvious fold-or-hang categories and have the learner reason through what to do with each.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u02-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u02-l05",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "clothing-laundry",
+    "practicalGoal": "I can practice folding and hanging. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u02-l05-model-card",
+        "swk-rfl-g5-u02-l05-step-card",
+        "swk-rfl-g5-u02-l05-guided-card",
+        "swk-rfl-g5-u02-l05-independent-card",
+        "swk-rfl-g5-u02-l05-evidence-record",
+        "swk-rfl-g5-u02-l05-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g5-u02-l05-local-1",
+          "label": "at least six clean clothing items",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g5-u02-l05-local-2",
+          "label": "hangers",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u02-l05-model-card",
+        "kind": "model",
+        "title": "folding and hanging worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Without step-by-step guidance, the learner is given a pile of at least six clean items — a mix that should include at least one shirt, one pair of pants, something meant for hanging (like a jacket), and something meant for folding (like a t-shirt or towel) — and sorts, then finishes, each item using either the folding technique or the hanging technique that fits it.",
+          "Model move 1: Read the condition and name the exact folding and hanging decision or action.",
+          "Model move 2: Quickly recall: name one clothing item that always gets hung and one that always gets folded, and say why.",
+          "Model move 3: Sort your pile into 'fold' and 'hang,' then fold or hang each item using a technique that keeps its shape.",
+          "Model check: Fold-or-hang sorting accuracy: Sorts at least five of six items correctly. | Technique quality: Folded items are neat and hung items fit their hangers."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l05-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "folding and hanging action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for folding and hanging.",
+          "2. Watch the worked move on swk-rfl-g5-u02-l05-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u02-l05-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u02-l05-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u02-l05-evidence-record; use swk-rfl-g5-u02-l05-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l05-guided-card",
+        "kind": "guided-practice",
+        "title": "folding and hanging coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Without step-by-step guidance, the learner is given a pile of at least six clean items — a mix that should include at least one shirt, one pair of pants, something meant for hanging (like a jacket), and something meant for folding (like a t-shirt or towel) — and sorts, then finishes, each item using either the folding technique or the hanging technique that fits it.",
+          "Coach direction: Quickly recall: name one clothing item that always gets hung and one that always gets folded, and say why.",
+          "Learner prompt: Name the two items and your reasoning.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l05-independent-card",
+        "kind": "independent-task",
+        "title": "folding and hanging complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Sort your pile into 'fold' and 'hang,' then fold or hang each item using a technique that keeps its shape.",
+          "Response 1 (t2-p1): Every item is sorted into fold or hang, none left undecided.",
+          "Response 2 (t2-p2): Folded items have straight edges and consistent size, not just crumpled into a pile.",
+          "Response 3 (t2-p3): Hung items are on a hanger that fits, not stretched at the shoulders or slipping off.",
+          "Equal-access rule: If six real clean items aren't available, the learner instead sorts six items shown in a printed or hand-drawn set into fold-or-hang, and describes in writing the specific technique they would use for each rather than physically folding it."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l05-evidence-record",
+        "kind": "evidence-record",
+        "title": "folding and hanging minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Rate your confidence in your own fold-or-hang judgment (very / somewhat / not yet), name the one item you were least sure about, and choose: ready to try a bigger pile on your own, ready to review this again, or need a different explanation.",
+          "Success checks: Fold-or-hang sorting accuracy: Sorts at least five of six items correctly. | Technique quality: Folded items are neat and hung items fit their hangers.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l05-retry-pair",
+        "kind": "retry",
+        "title": "folding and hanging supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u02-l05-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u02-l05-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional folding and hanging condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Fold-or-hang sorting accuracy: Sorts at least five of six items correctly. | Technique quality: Folded items are neat and hung items fit their hangers..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u02-l05-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "folding and hanging worked model",
+      "startingCondition": "Without step-by-step guidance, the learner is given a pile of at least six clean items — a mix that should include at least one shirt, one pair of pants, something meant for hanging (like a jacket), and something meant for folding (like a t-shirt or towel) — and sorts, then finishes, each item using either the folding technique or the hanging technique that fits it.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact folding and hanging decision or action.",
+        "Model move 2: Quickly recall: name one clothing item that always gets hung and one that always gets folded, and say why.",
+        "Model move 3: Sort your pile into 'fold' and 'hang,' then fold or hang each item using a technique that keeps its shape."
+      ],
+      "reasoning": "The model names the condition, follows the ordered folding and hanging process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Fold-or-hang sorting accuracy: Sorts at least five of six items correctly.",
+        "Technique quality: Folded items are neat and hung items fit their hangers."
+      ],
+      "resourceRef": "swk-rfl-g5-u02-l05-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for folding and hanging.",
+        "2. Watch the worked move on swk-rfl-g5-u02-l05-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u02-l05-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u02-l05-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u02-l05-evidence-record; use swk-rfl-g5-u02-l05-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u02-l05-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Without step-by-step guidance, the learner is given a pile of at least six clean items — a mix that should include at least one shirt, one pair of pants, something meant for hanging (like a jacket), and something meant for folding (like a t-shirt or towel) — and sorts, then finishes, each item using either the folding technique or the hanging technique that fits it.",
+      "prompt": "Name the two items and your reasoning.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Fold-or-hang sorting accuracy: Sorts at least five of six items correctly.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u02-l05-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u02-l05-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "folding and hanging — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g5-u02-l05-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Sort your pile into 'fold' and 'hang,' then fold or hang each item using a technique that keeps its shape.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "folding and hanging — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u02-l05-independent-card",
+        "directions": "If six real clean items aren't available, the learner instead sorts six items shown in a printed or hand-drawn set into fold-or-hang, and describes in writing the specific technique they would use for each rather than physically folding it.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u02-l05-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Rate your confidence in your own fold-or-hang judgment (very / somewhat / not yet), name the one item you were least sure about, and choose: ready to try a bigger pile on your own, ready to review this again, or need a different explanation.",
+      "observableCriteria": [
+        "Fold-or-hang sorting accuracy: Sorts at least five of six items correctly.",
+        "Technique quality: Folded items are neat and hung items fit their hangers."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u02-l05-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u02-l05-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u02-l05-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u02-l05-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Fold-or-hang sorting accuracy: Sorts at least five of six items correctly. | Technique quality: Folded items are neat and hung items fit their hangers.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u02-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u02-l05-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

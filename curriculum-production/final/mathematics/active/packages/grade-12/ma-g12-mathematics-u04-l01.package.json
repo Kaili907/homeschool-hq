@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u04-l01",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "The Complex Plane",
+    "dayInUnit": 1,
+    "courseDay": 55,
+    "phase": "Launch and diagnostic",
+    "focus": "conjugates, moduli, and quotients",
+    "title": "Launch and diagnostic: conjugates, moduli, and quotients"
+  },
+  "standards": [
+    "N-CN.3",
+    "N-CN.4",
+    "N-CN.5",
+    "N-CN.6",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 1,
+          "prompt": "For z = 3 + 4i, give z̄ and |z|.",
+          "workedSolution": {
+            "steps": [
+              "Negate the imaginary part: 3 − 4i.",
+              "|z| = √(9 + 16) = 5."
+            ],
+            "answer": "z̄ = 3 − 4i, |z| = 5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 1,
+          "prompt": "Write 2i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "choices": [
+            "modulus 2, argument 90°",
+            "modulus √2, argument 45°",
+            "modulus √2, argument 225°",
+            "modulus √2, argument 135°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 1,
+          "prompt": "Complex numbers z and w have modulus 4 and 4 and arguments 45° and 60°. Give the modulus and argument of zw.",
+          "choices": [
+            "modulus 16, argument 2700°",
+            "modulus 16, argument 15°",
+            "modulus 8, argument 105°",
+            "modulus 16, argument 105°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 2,
+          "prompt": "Let z = 1 − 4i and w = 9 + 11i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "choices": [
+            "distance 17, midpoint 8 + 15i",
+            "distance 23, midpoint 5 + 3.5i",
+            "distance 17, midpoint 5 + 3.5i",
+            "distance 289, midpoint 5 + 3.5i"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 2,
+          "prompt": "For z = 7 + 24i, give the conjugate z̄ and the modulus |z|.",
+          "choices": [
+            "z̄ = 7 − 24i, |z| = 25",
+            "z̄ = -7 + 24i, |z| = 25",
+            "z̄ = 7 − 24i, |z| = 31",
+            "z̄ = -7 − 24i, |z| = 25"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 3,
+          "prompt": "Write −1 − i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "choices": [
+            "modulus √2, argument 45°",
+            "modulus √2, argument 315°",
+            "modulus √2, argument 135°",
+            "modulus √2, argument 225°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 1,
+          "prompt": "Complex numbers z and w have modulus 3 and 4 and arguments 60° and 45°. Give the modulus and argument of zw.",
+          "choices": [
+            "modulus 12, argument 105°",
+            "modulus 12, argument 2700°",
+            "modulus 7, argument 105°",
+            "modulus 12, argument 15°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 2,
+          "prompt": "Let z = 5 + 5i and w = 10 + 17i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "choices": [
+            "distance 169, midpoint 7.5 + 11i",
+            "distance 13, midpoint 5 + 12i",
+            "distance 13, midpoint 7.5 + 11i",
+            "distance 17, midpoint 7.5 + 11i"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u04-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u04-l01"
+  }
+}

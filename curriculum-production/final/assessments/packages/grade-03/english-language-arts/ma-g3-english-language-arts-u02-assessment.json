@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-english-language-arts-u02-assessment",
+  "courseRef": "ma-g3-english-language-arts",
+  "grade": 3,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g3-english-language-arts-u02",
+    "unitNumber": 2,
+    "unitTitle": "Word Builders: Syllables, Prefixes, Suffixes, and Roots",
+    "courseTitle": "Grade 3 English Language Arts",
+    "assessmentLessonRef": "ma-g3-english-language-arts-u02-l17"
+  },
+  "standards": [
+    "3.RF.3",
+    "3.L.4",
+    "3.L.2"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-03/ma-g3-english-language-arts-u02-l17.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: unit evidence: decoding, word-part reasoning, and correct use. Essential question: How do the parts inside a word help me read it and figure out what it means? By the end of this lesson you should be able to: Show independent evidence of this unit's targets. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for Word Builders: Syllables, Prefixes, Suffixes, and Roots. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain this idea in your own words and give one valid example: syllable patterns in multisyllabic words.\\n- (6 pts, text evidence) Answer a question about common prefixes using an unfamiliar passage, and quote or precisely paraphrase the words that support your answer.\\n- (6 pts, application) Apply this to new material: roots and word families. Show the process or cite the evidence.\\n- (6 pts, error or claim analysis) A plausible but flawed response about irregular high-frequency words is provided. Identify the error, correct it, and explain why the correction is better.\\n- (9 pts, constructed writing) Write an independent response connected to using word parts to predict meaning and to the unit performance task: Build a Word-Parts toolkit that decodes and explains ten longer words taken from this year's reading, with a sentence showing each word used correctly.\\n- (4 pts, reflection and transfer) Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.\\n\\nThis assessment also includes 1 fixed-answer/selected-response item(s) delivered separately by your facilitator.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/english-language-arts/ma-g3-english-language-arts-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-english-language-arts-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-03/ma-g3-english-language-arts-u02-l17.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Word Builders: Syllables, Prefixes, Suffixes, and Roots?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

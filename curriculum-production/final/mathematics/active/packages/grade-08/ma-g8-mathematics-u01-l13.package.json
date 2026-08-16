@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l13",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l13",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 13,
+    "courseDay": 13,
+    "phase": "Skill consolidation",
+    "focus": "rational and irrational numbers",
+    "title": "Skill consolidation: rational and irrational numbers"
+  },
+  "standards": [
+    "8.NS.1",
+    "8.NS.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-rational-or-irrational",
+          "standard": "8.NS.1",
+          "difficulty": 1,
+          "prompt": "Classify √26 as rational or irrational.",
+          "choices": [
+            "rational",
+            "irrational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "closure-classification",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "A rational number (4/3) is added to an irrational number (√77). Is the result rational or irrational?",
+          "choices": [
+            "sometimes rational and sometimes irrational",
+            "rational",
+            "cannot be determined without computing",
+            "irrational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-to-fraction",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "Write 0.808080... as a fraction in lowest terms.",
+          "choices": [
+            "80/999",
+            "81/99",
+            "80/198",
+            "80/99"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-error-analysis",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "A student writes 0.929292... = 92/100. Which statement best analyzes the claim?",
+          "choices": [
+            "The claim is correct; 92/100 equals 0.929292....",
+            "The claim is close; only the sign needs to be corrected.",
+            "The correct fraction is 92/99; the denominator should be 99 (nine repeated once per repeating digit), not 100.",
+            "The correct fraction is 92/99; the numerator should have one extra digit."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "consecutive-integers-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Between which two consecutive whole numbers does √517 lie?",
+          "choices": [
+            "20 and 21",
+            "22 and 24",
+            "22 and 23",
+            "21 and 22"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "nearest-tenth-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Estimate √583 to the nearest tenth.",
+          "choices": [
+            "24.2",
+            "24.1",
+            "24",
+            "24.0"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "locate-root-on-number-line",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "On the number line, points A, B, C, and D are located at 20, 21, 22, 23. Which point is closest to √445?",
+          "choices": [
+            "B",
+            "C",
+            "A",
+            "D"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "compare-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Compare 13/12 and 10.",
+          "choices": [
+            "13/12 > 10",
+            "13/12 < 10",
+            "cannot be compared without a calculator",
+            "13/12 = 10"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "order-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Order √379, 2/3, 12 from least to greatest.",
+          "choices": [
+            "12 < 2/3 < √379",
+            "√379 < 12 < 2/3",
+            "2/3 < √379 < 12",
+            "2/3 < 12 < √379"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "estimate-root-expression",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Which whole number is closest to √174 + 6?",
+          "choices": [
+            "20",
+            "18",
+            "21",
+            "19"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "real-number-word-problem",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "A square garden has an area of 428 square feet. Between which two consecutive whole numbers of feet is the side length?",
+          "choices": [
+            "19 and 20",
+            "21 and 22",
+            "20 and 21",
+            "18 and 19"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "root-comparison-error-analysis",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "A student claims √164 > 15 because 164 > 15. Which statement correctly analyzes the claim?",
+          "choices": [
+            "The claim is incorrect; since 164 < 15² = 225, √164 < 15.",
+            "The claim is correct; 164 > 15, so √164 > 15.",
+            "The claim cannot be evaluated without a calculator.",
+            "The claim is incorrect; √164 = 15 exactly."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u01-l13"
+  }
+}

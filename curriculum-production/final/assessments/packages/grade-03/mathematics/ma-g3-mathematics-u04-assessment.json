@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-mathematics-u04-assessment",
+  "courseRef": "ma-g3-mathematics",
+  "grade": 3,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g3-mathematics-u04",
+    "unitNumber": 4,
+    "unitTitle": "Properties, Patterns, and Two-Step Problems",
+    "courseTitle": "Grade 3 Mathematics",
+    "assessmentLessonRef": "ma-g3-mathematics-u04-l16"
+  },
+  "standards": [
+    "3.OA.5",
+    "3.OA.8",
+    "3.OA.9",
+    "3.NBT.3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u04-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "The pattern 10, 16, 22, 28, ... continues by the same rule. What is the 7th term?",
+      "choices": [
+        "47",
+        "40",
+        "46",
+        "52"
+      ],
+      "standardRef": "3.OA.9"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Which expression is equal to 3 × 4 by the commutative property?",
+      "choices": [
+        "4 × 3",
+        "4 × 4",
+        "3 + 4",
+        "3 × 5"
+      ],
+      "standardRef": "3.OA.5"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Find 9 × 30.",
+      "choices": [
+        "260",
+        "280",
+        "27",
+        "270"
+      ],
+      "standardRef": "3.NBT.3"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "A store arranges 5 shelves with 5 boxes on each shelf, then adds 3 more boxes to the display. How many boxes are on display now?",
+      "choices": [
+        "13",
+        "22",
+        "28",
+        "25"
+      ],
+      "standardRef": "3.OA.8"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "The pattern 2, 4, 6, 8, ... continues by the same rule. What is the 5th term?",
+      "choices": [
+        "12",
+        "11",
+        "10",
+        "8"
+      ],
+      "standardRef": "3.OA.9"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Which expression is equal to 2 × 8 by the commutative property?",
+      "choices": [
+        "3 × 8",
+        "2 × 9",
+        "8 × 2",
+        "2 + 8"
+      ],
+      "standardRef": "3.OA.5"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Find 5 × 60.",
+      "choices": [
+        "300",
+        "30",
+        "290",
+        "310"
+      ],
+      "standardRef": "3.NBT.3"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "A store arranges 3 shelves with 9 boxes on each shelf, then adds 6 more boxes to the display. How many boxes are on display now?",
+      "choices": [
+        "21",
+        "33",
+        "27",
+        "18"
+      ],
+      "standardRef": "3.OA.8"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "The pattern 4, 12, 20, 28, ... continues by the same rule. What is the 6th term?",
+      "choices": [
+        "52",
+        "36",
+        "45",
+        "44"
+      ],
+      "standardRef": "3.OA.9"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u04-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Which expression is equal to 8 × 2 by the commutative property?",
+      "choices": [
+        "2 × 8",
+        "9 × 2",
+        "8 + 2",
+        "8 × 3"
+      ],
+      "standardRef": "3.OA.5"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/mathematics/ma-g3-mathematics-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-mathematics-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u04-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Properties, Patterns, and Two-Step Problems?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

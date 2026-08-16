@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u03-l02",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multi-Digit Multiplication",
+    "dayInUnit": 2,
+    "courseDay": 38,
+    "phase": "Concept model A",
+    "focus": "area models",
+    "title": "Concept model A: area models"
+  },
+  "standards": [
+    "5.NBT.5",
+    "5.OA.1",
+    "5.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "partial-products",
+          "standard": "5.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use partial products to calculate 326 × 24.",
+          "workedSolution": {
+            "steps": [
+              "Decompose 326 as 300 + 20 + 6 and 24 as 20 + 4.",
+              "The partial products are 6000, 1200, 400, 80, 120, and 24.",
+              "Add all partial products to get 7824."
+            ],
+            "answer": "7824"
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "standard-algorithm",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use the standard algorithm to calculate 247 × 36.",
+          "workedSolution": {
+            "steps": [
+              "Multiply 247 by 6 to get 1482.",
+              "Multiply 247 by 30 to get 7410; the tens-place zero keeps the place value.",
+              "Add 1482 + 7410 to get 8892."
+            ],
+            "answer": "8892"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 1,
+          "prompt": "Estimate 46 × 13 by rounding 46 to the nearest ten and 13 to the nearest ten.",
+          "choices": [
+            "650",
+            "460",
+            "500",
+            "600"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "write-grouped-expression",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "Add 27 and 4. Then multiply the sum by 3. Which numerical expression represents the calculation?",
+          "choices": [
+            "(27 × 4) + 3",
+            "27 × (4 + 3)",
+            "27 + (4 × 3)",
+            "(27 + 4) × 3"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-grouped-expression",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "Evaluate: [9 + (2 × 3)] × 7",
+          "choices": [
+            "95",
+            "115",
+            "105",
+            "106"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "Without evaluating it, which statement describes 10 × (27 + 16)?",
+          "choices": [
+            "Multiply the sum of 10 and 27 by 16.",
+            "Add 27 and the product of 10 and 16.",
+            "Multiply 10 by the sum of 27 and 16.",
+            "Add 10 and the product of 27 and 16."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-multiplication",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "For 2 event days, a booth sells 64 tickets each day at $7 per ticket. What projected revenue will the booth earn?",
+          "choices": [
+            "$896",
+            "$142",
+            "$448",
+            "$903"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Maya has 9 times as many cards as Leo. Leo has 47 cards. How many cards does Maya have?",
+          "choices": [
+            "423",
+            "56",
+            "414",
+            "47"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "area-model-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "An area model for 2563 × 30 splits 2563 into 2000 + 500 + 60 + 3 and 30 into 30. What total product does the model represent?",
+          "choices": [
+            "76890",
+            "0",
+            "74327",
+            "7689"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "partial-products",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use partial products to calculate 944 × 22. Decompose both factors by place value, multiply each pair of parts, and add the partial products. What is the product?",
+          "choices": [
+            "20768",
+            "21712",
+            "1888",
+            "20746"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "standard-algorithm",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use the standard multiplication algorithm to calculate 173 × 25.",
+          "choices": [
+            "4300",
+            "4325",
+            "4152",
+            "4498"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u03-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u03-l02"
+  }
+}

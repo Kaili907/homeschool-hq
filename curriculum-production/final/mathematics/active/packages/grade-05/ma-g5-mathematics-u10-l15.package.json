@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u10-l15",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u10-l15",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 15,
+    "courseDay": 177,
+    "phase": "Assessment preparation",
+    "focus": "constraints and assumptions",
+    "title": "Assessment preparation: constraints and assumptions"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.NBT.5",
+    "5.NBT.6",
+    "5.NBT.7",
+    "5.NF.1",
+    "5.NF.4",
+    "5.MD.5",
+    "5.G.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "whole-number-model",
+          "standard": "5.NBT.5",
+          "difficulty": 1,
+          "prompt": "Find 16 × 15.",
+          "choices": [
+            "224",
+            "256",
+            "240",
+            "241"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-model",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "217 supplies are shared equally among 7 teams. How many supplies does each team receive?",
+          "choices": [
+            "31",
+            "33",
+            "34",
+            "35"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-budget",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "3 tickets cost $4.07 each and there is a $0.91 fee. What is the total cost?",
+          "choices": [
+            "$17.19",
+            "$14.12",
+            "$12.21",
+            "$13.12"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "fraction-project",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "A project uses 9/12 meter of blue ribbon and 1/12 meter of gold ribbon. How much ribbon is used?",
+          "choices": [
+            "1/16",
+            "5/6",
+            "10/13",
+            "11/12"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "scale-project",
+          "standard": "5.NF.4",
+          "difficulty": 3,
+          "prompt": "A 1/2-meter path is scaled by 2. What is the new length in meters?",
+          "choices": [
+            "1",
+            "1/4",
+            "1/2",
+            "1 1/2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "volume-plan",
+          "standard": "5.MD.5",
+          "difficulty": 3,
+          "prompt": "A storage box is 5 units long, 8 units wide, and 2 units high. What is its volume in cubic units?",
+          "choices": [
+            "82",
+            "80",
+            "78",
+            "40"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-data",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "A data point is at (8, 1). Move right 1 and up 2. What is the new point?",
+          "choices": [
+            "(3, 9)",
+            "(9, 3)",
+            "(10, 3)",
+            "(9, 4)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "model-argument",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A student says a 6 by 2 by 4 box has volume 12. Is the claim correct?",
+          "choices": [
+            "Yes; the volume is 12 cubic units.",
+            "No; the volume is 48 cubic units.",
+            "No; the volume is 51 cubic units.",
+            "No; the volume is 50 cubic units."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "choose-operation",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "4 packs hold 7 markers each, and 12 markers are loose. How many markers are there?",
+          "choices": [
+            "42",
+            "40",
+            "44",
+            "43"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "whole-number-model",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 81 × 42.",
+          "choices": [
+            "3402",
+            "3403",
+            "3321",
+            "123"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "division-model",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "450 supplies are shared equally among 18 teams. How many supplies does each team receive?",
+          "choices": [
+            "28",
+            "25",
+            "26",
+            "29"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-budget",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "5 tickets cost $3.65 each and there is a $0.32 fee. What is the total cost?",
+          "choices": [
+            "$22.22",
+            "$18.57",
+            "$19.57",
+            "$18.25"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u10-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u10-l15"
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-mathematics-u09-assessment",
+  "courseRef": "ma-g9-mathematics",
+  "grade": 9,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g9-mathematics-u09",
+    "unitNumber": 9,
+    "unitTitle": "Linear, Quadratic, and Exponential Models",
+    "courseTitle": "Algebra I",
+    "assessmentLessonRef": "ma-g9-mathematics-u09-l16"
+  },
+  "standards": [
+    "F-LE.1",
+    "F-LE.2",
+    "F-LE.3",
+    "F-LE.5",
+    "MP.4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u09-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "A table of successive outputs reads 2, 6, 10, 14. Is the relationship linear or exponential, and why?",
+      "choices": [
+        "Quadratic; the second differences are constant.",
+        "Exponential; successive outputs have a constant ratio of 4.",
+        "Neither; the pattern does not repeat.",
+        "Linear; successive outputs differ by a constant 4."
+      ],
+      "standardRef": "F-LE.1"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A population of 900 grows by 6% per year. Write the model P(t) and find the population after 2 years, to the nearest whole number.",
+      "choices": [
+        "P(t) = 900(0.06)^t; P(2) ≈ 3",
+        "P(t) = 900 + 6t; P(2) ≈ 912",
+        "P(t) = 900(1.06)^t; P(2) ≈ 1072",
+        "P(t) = 900(1.06)^t; P(2) ≈ 1011"
+      ],
+      "standardRef": "F-LE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Quantity A grows by 57 units each year. Quantity B doubles or triples each year, with ratio 3, starting from a much smaller value. Which statement is true in the long run?",
+      "choices": [
+        "B exceeds A only if B starts larger than A.",
+        "The two grow at the same eventual rate.",
+        "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+        "A stays ahead permanently because 57 is larger than 3."
+      ],
+      "standardRef": "F-LE.3"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "An asset's value is modelled by V(t) = 1300(0.85)^t, with t in years. What does 0.85 represent?",
+      "choices": [
+        "the number of years until the asset is worthless",
+        "the value of the asset when it was new, $1300",
+        "the total value lost over the asset's life",
+        "the fraction of value retained each year, 0.85, meaning a 15% annual loss"
+      ],
+      "standardRef": "F-LE.5"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "A linear model passes through (5, -8) and (7, -10). Write it in the form f(x) = mx + b.",
+      "choices": [
+        "f(x) = -1x − 3",
+        "f(x) = 1x − 3",
+        "f(x) = -3x − 1",
+        "f(x) = -1x + 3"
+      ],
+      "standardRef": "F-LE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A table of successive outputs reads 2, 8, 32, 128. Is the relationship linear or exponential, and why?",
+      "choices": [
+        "Linear; successive outputs differ by a constant 4.",
+        "Neither; the pattern does not repeat.",
+        "Exponential; successive outputs have a constant ratio of 4.",
+        "Quadratic; the second differences are constant."
+      ],
+      "standardRef": "F-LE.1"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "A population of 800 grows by 5% per year. Write the model P(t) and find the population after 8 years, to the nearest whole number.",
+      "choices": [
+        "P(t) = 800(1.05)^t; P(8) ≈ 1182",
+        "P(t) = 800 + 5t; P(8) ≈ 840",
+        "P(t) = 800(0.05)^t; P(8) ≈ 0",
+        "P(t) = 800(1.05)^t; P(8) ≈ 1241"
+      ],
+      "standardRef": "F-LE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Quantity A grows by 87 units each year. Quantity B doubles or triples each year, with ratio 2, starting from a much smaller value. Which statement is true in the long run?",
+      "choices": [
+        "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+        "B exceeds A only if B starts larger than A.",
+        "A stays ahead permanently because 87 is larger than 2.",
+        "The two grow at the same eventual rate."
+      ],
+      "standardRef": "F-LE.3"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "An asset's value is modelled by V(t) = 1200(0.87)^t, with t in years. What does 0.87 represent?",
+      "choices": [
+        "the fraction of value retained each year, 0.87, meaning a 13% annual loss",
+        "the number of years until the asset is worthless",
+        "the value of the asset when it was new, $1200",
+        "the total value lost over the asset's life"
+      ],
+      "standardRef": "F-LE.5"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "A linear model passes through (2, -12) and (5, -27). Write it in the form f(x) = mx + b.",
+      "choices": [
+        "f(x) = -5x − 2",
+        "f(x) = 5x − 2",
+        "f(x) = -5x + 2",
+        "f(x) = -2x − 5"
+      ],
+      "standardRef": "F-LE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "A table of successive outputs reads 9, 11, 13, 15. Is the relationship linear or exponential, and why?",
+      "choices": [
+        "Quadratic; the second differences are constant.",
+        "Exponential; successive outputs have a constant ratio of 2.",
+        "Neither; the pattern does not repeat.",
+        "Linear; successive outputs differ by a constant 2."
+      ],
+      "standardRef": "F-LE.1"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u09-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "A population of 300 grows by 2% per year. Write the model P(t) and find the population after 3 years, to the nearest whole number.",
+      "choices": [
+        "P(t) = 300(1.02)^t; P(3) ≈ 318",
+        "P(t) = 300(0.02)^t; P(3) ≈ 0",
+        "P(t) = 300(1.02)^t; P(3) ≈ 325",
+        "P(t) = 300 + 2t; P(3) ≈ 306"
+      ],
+      "standardRef": "F-LE.2"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/mathematics/ma-g9-mathematics-u09-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-mathematics-u09-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u09-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Linear, Quadratic, and Exponential Models?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u04-l09",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u04-l09",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Equations and Inequalities",
+    "dayInUnit": 9,
+    "courseDay": 63,
+    "phase": "Concept model C",
+    "focus": "two-step inequalities",
+    "title": "Concept model C: two-step inequalities"
+  },
+  "standards": [
+    "7.EE.3",
+    "7.EE.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "graph-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 1,
+          "prompt": "Graph x ≥ 3.",
+          "workedSolution": {
+            "steps": [
+              "Undo operations in reverse order, keeping both sides equivalent.",
+              "Substitute or test a boundary value to check the result."
+            ],
+            "answer": "closed circle at 3, shaded right"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "check-and-interpret-solution",
+          "standard": "7.EE.3",
+          "difficulty": 2,
+          "prompt": "A club charges $13 plus $2 per session for a total of $17. How many sessions were purchased?",
+          "choices": [
+            "2",
+            "3",
+            "4",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-numerical-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A group buys 3 passes at $19 each and pays a $8 service fee. What is the total cost?",
+          "choices": [
+            "$64",
+            "$66",
+            "$65",
+            "$68"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "two-step-equation",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve -4x + 9 = 19. Write the answer in simplest form.",
+          "choices": [
+            "-5/3",
+            "-5/2",
+            "10",
+            "-7/2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "Solve 2x + 2 ≥ 6.",
+          "choices": [
+            "x ≤ 2",
+            "x ≥ 1",
+            "x ≥ 2",
+            "x ≥ 3"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solution-set",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "Which integer satisfies 3x + 4 ≥ 37 and x < 12?",
+          "choices": [
+            "10",
+            "11",
+            "13",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "graph-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Which graph describes x ≥ 9?",
+          "choices": [
+            "closed circle at 10, shaded right",
+            "open circle at 9, shaded right",
+            "closed circle at 9, shaded right",
+            "closed circle at 9, shaded left"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "check-and-interpret-solution",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A club charges $10 plus $5 per session for a total of $90. How many sessions were purchased?",
+          "choices": [
+            "18",
+            "16",
+            "17",
+            "80"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-numerical-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A group buys 7 passes at $5 each and pays a $4 service fee. What is the total cost?",
+          "choices": [
+            "$38",
+            "$42",
+            "$39",
+            "$41"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-equation",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve 6x + 3 = -5. Write the answer in simplest form.",
+          "choices": [
+            "-8",
+            "-4/3",
+            "-6/3",
+            "-4/2"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve -4x + 19 ≥ -37.",
+          "choices": [
+            "x ≥ 15",
+            "x ≥ 14",
+            "x ≤ 15",
+            "x ≤ 14"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u04-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u04-l09"
+  }
+}

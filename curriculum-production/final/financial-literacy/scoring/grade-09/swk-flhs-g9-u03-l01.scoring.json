@@ -1,0 +1,335 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l01",
+  "lessonId": "ma-g9-financial-literacy-u03-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$25 a month for 12 months is $300 of the saver’s own money."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The match is 50% of everything deposited, and the deposits total $300 over the year."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$300 deposited plus $150 matched."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$15.30",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3.4% of $450 is exactly $15.30. This is interest on a full year at the closing balance; because the deposits arrive across the year, the first year’s actual credit would be roughly half of it."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$0.23",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.05% of $450 is $0.225, which rounds to $0.23."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "The deposit match",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The match is worth $150 against $15.30 of interest, so it is nearly ten times the size in the first year."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "monthly * months",
+        "substituted": "25 * 12",
+        "result": "$300.00",
+        "why": "$25 a month for 12 months is $300 of the saver’s own money."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 * matchRate",
+        "substituted": "#t1-p1 * 0.5",
+        "result": "$150.00",
+        "why": "The match is 50% of everything deposited, and the deposits total $300 over the year."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$450.00",
+        "why": "$300 deposited plus $150 matched."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 * savingsRate, 2)",
+        "substituted": "round(#t1-p3 * 0.034, 2)",
+        "result": "$15.30",
+        "why": "3.4% of $450 is exactly $15.30. This is interest on a full year at the closing balance; because the deposits arrive across the year, the first year’s actual credit would be roughly half of it."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p3 * checkingRate, 2)",
+        "substituted": "round(#t1-p3 * 0.0005, 2)",
+        "result": "$0.23",
+        "why": "0.05% of $450 is $0.225, which rounds to $0.23."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p2 > #t2-p1",
+        "substituted": "#t1-p2 > #t2-p1",
+        "result": "The deposit match",
+        "why": "The match is worth $150 against $15.30 of interest, so it is nearly ten times the size in the first year."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Ranks the match first at $150, the savings interest second at $15.30, and the checking rate last at $0.23.",
+          "Explains that the match is a return of 50% on money deposited in the first year, which no ordinary interest rate approaches.",
+          "Notes that the interest gap between the two accounts, about $15 on a full year at the closing balance and less than that in year one, is real but small next to the match."
+        ],
+        "evidenceRequirements": [
+          "Uses all three computed figures — $150.00, $15.30, and $0.23 — in the ranking."
+        ],
+        "lookFors": [
+          "The response compares the incentives against the $300 actually deposited rather than treating them as free-standing amounts.",
+          "The response does not dismiss the interest as worthless; it is small here, not zero."
+        ],
+        "commonMisconception": "Choosing a savings account by its interest rate when a match or other one-off incentive dwarfs the rate difference.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Name one condition in the fictional programme that would have to be checked before treating the $150 match as certain.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names a specific, checkable condition — a minimum term, a cap on the match, a withdrawal restriction, an eligibility rule, or what happens if a month is missed.",
+          "States why that condition matters to the $150 figure specifically."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $150 match figure and to the 12-month deposit schedule the match is calculated on."
+        ],
+        "lookFors": [
+          "The condition named is one a saver could actually verify by reading the terms."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does the saver deposit over the 12 months?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much is the match worth?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance after deposits and match, before any interest?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "If the $450 balance sat in the account for a full year, how much would interest at 3.4% add?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much would the same balance earn in a year at the checking rate of 0.05%?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Which incentive is larger for this saver in the first year?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Name one condition in the fictional programme that would have to be checked before treating the $150 match as certain."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much does the saver deposit over the 12 months? Answer: $300.00. Verification: $25 a month for 12 months is $300 of the saver’s own money. t1-p2: How much is the match worth? Answer: $150.00. Verification: The match is 50% of everything deposited, and the deposits total $300 over the year. t1-p3: What is the balance after deposits and match, before any interest? Answer: $450.00. Verification: $300 deposited plus $150 matched. t2-p1: If the $450 balance sat in the account for a full year, how much would interest at 3.4% add? Answer: $15.30. Verification: 3.4% of $450 is exactly $15.30. This is interest on a full year at the closing balance; because the deposits arrive across the year, the first year’s actual credit would be roughly half of it. t2-p2: How much would the same balance earn in a year at the checking rate of 0.05%? Answer: $0.23. Verification: 0.05% of $450 is $0.225, which rounds to $0.23. t2-p3: Which incentive is larger for this saver in the first year? Answer: The deposit match. Verification: The match is worth $150 against $15.30 of interest, so it is nearly ten times the size in the first year."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking. Ranks the match first at $150, the savings interest second at $15.30, and the checking rate last at $0.23. Explains that the match is a return of 50% on money deposited in the first year, which no ordinary interest rate approaches. Notes that the interest gap between the two accounts, about $15 on a full year at the closing balance and less than that in year one, is real but small next to the match. Uses all three computed figures — $150.00, $15.30, and $0.23 — in the ranking. The response compares the incentives against the $300 actually deposited rather than treating them as free-standing amounts. The response does not dismiss the interest as worthless; it is small here, not zero. t3-p2: Name one condition in the fictional programme that would have to be checked before treating the $150 match as certain. Names a specific, checkable condition — a minimum term, a cap on the match, a withdrawal restriction, an eligibility rule, or what happens if a month is missed. States why that condition matters to the $150 figure specifically. Refers to the $150 match figure and to the 12-month deposit schedule the match is calculated on. The condition named is one a saver could actually verify by reading the terms."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Ranks the match first at $150, the savings interest second at $15.30, and the checking rate last at $0.23. Explains that the match is a return of 50% on money deposited in the first year, which no ordinary interest rate approaches. Notes that the interest gap between the two accounts, about $15 on a full year at the closing balance and less than that in year one, is real but small next to the match. Names a specific, checkable condition — a minimum term, a cap on the match, a withdrawal restriction, an eligibility rule, or what happens if a month is missed. States why that condition matters to the $150 figure specifically."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u03-l01.scoring.json",
+    "sourceScoringSha256": "b2e770446578db93698764dd816dc67671b31d1e1f90b85b741205bce0c61000",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

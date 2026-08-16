@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g9-technology-u02-l03",
+  "unit_id": "ma-g9-technology-u02",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 9,
+  "grade_dir": "grade-09",
+  "unit_title": "Programming Foundations: Data, Control, and Functions",
+  "lesson_title": "Guided practice: selection and compound boolean logic and iteration nested loops and loop conditions",
+  "phase": "Guided practice",
+  "work_mode": "GUIDED",
+  "focus": "selection and compound boolean logic and iteration nested loops and loop conditions",
+  "scoring_authority_kind": "RUBRIC",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "rubric": [
+    {
+      "dimension": "accuracy or fidelity",
+      "exceeds": "Every step, value, or rendered choice is accurate and faithful to the stated criteria, with no notable errors.",
+      "meets": "The work is accurate and faithful to the stated criteria, with at most one minor self-correctable error.",
+      "developing": "The work is mostly accurate but has one or more errors that change the result or the intended effect.",
+      "beginning": "Multiple accuracy or fidelity errors prevent the work from meeting the stated criteria."
+    },
+    {
+      "dimension": "evidence and reasoning",
+      "exceeds": "Every claim or choice is backed by specific evidence or clearly explained reasoning a reader can follow unaided.",
+      "meets": "Most claims or choices are backed by evidence or reasoning, with only small gaps.",
+      "developing": "Some claims are supported but several are asserted without support.",
+      "beginning": "Claims are asserted with little or no supporting evidence or reasoning."
+    },
+    {
+      "dimension": "process documentation",
+      "exceeds": "The record shows the actual working order, including abandoned attempts and dead ends, in enough detail to reconstruct the session.",
+      "meets": "The required log, trace, or notes are present and record what was done and why.",
+      "developing": "Documentation exists but is thin, out of order, or written after the fact from memory.",
+      "beginning": "Little or no record of the process was kept."
+    }
+  ],
+  "scoring_judgment_guidance": "Score this session with the rubric below, not against a fixed answer key — a design, code, or debugging task legitimately has more than one valid solution. Score only what a guided practice on selection and compound boolean logic and iteration nested loops and loop conditions can show: this is one increment of progress, so score the increment and its documentation rather than the unfinished whole. Record the level reached on each dimension with one specific reason drawn from the actual submission. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "lesson_success_criteria": [
+    "The learner completes the central task on selection and compound boolean logic and iteration nested loops and loop conditions.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "formative_check": "Show your reasoning on the faded example of selection and compound boolean logic and iteration nested loops and loop conditions and identify the check that confirms it.",
+  "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER",
+    "review_timing": "TRUSTED_ADULT_REVIEW_AFTER_REQUIRED_INDEPENDENT_EVIDENCE_IS_SAVED",
+    "lesson_type": "algorithms",
+    "protected_task": {
+      "task_ref": "ma-g9-technology-u02-l03#protected-independent",
+      "authority": "ADULT_TRUSTED_AUTHORITY",
+      "learner_visibility": "NEVER",
+      "task_kind": "CODE_OR_DEBUG",
+      "root_cause": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "decisive_resolution": "Iteration begins at index 0; all three tests retain every step in order.",
+      "reference_implementation": "function runSteps(steps) {\n  const completed = [];\n  for (let index = 0; index < steps.length; index += 1) completed.push(steps[index]);\n  return completed.join(\" > \");\n}",
+      "expected_results": [
+        {
+          "input": "[\"open\", \"check\", \"save\"]",
+          "expected": "open > check > save"
+        },
+        {
+          "input": "[]",
+          "expected": "empty string"
+        },
+        {
+          "input": "[\"start\"]",
+          "expected": "start"
+        }
+      ],
+      "acceptance_note": "Accept any implementation or precise pseudocode that satisfies the specification and all checks for selection and compound boolean logic and iteration nested loops and loop conditions; do not require textual agreement with this reference."
+    },
+    "fresh_mastery_check": {
+      "task_ref": "ma-g9-technology-u02-l03#fresh-total-label-lengths",
+      "root_cause": "The loop replaces total with the current label length instead of accumulating the current length with prior lengths.",
+      "decisive_resolution": "Update total with total + label.length on each iteration.",
+      "reference_implementation": "function totalLabelLengths(labels) {\n  let total = 0;\n  for (const label of labels) total = total + label.length;\n  return total;\n}",
+      "accepted_invariant": "After each iteration, total equals the sum of the lengths of exactly the prefix already examined.",
+      "expected_results": [
+        "[\"oak\", \"map\"] → 6",
+        "[] → 0",
+        "[\"cedar\"] → 5"
+      ]
+    },
+    "remediation_authority": {
+      "selection_rule": "Choose the smallest alternate route from observable evidence; do not repeat the original task or expose its protected resolution.",
+      "mastery_reconsideration": "Reconsider mastery only from the fresh independent record under the same criteria. A worked or guided response is instruction, not mastery evidence."
+    }
+  },
+  "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, commit or test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
+  "unit_assessment_reference": {
+    "assessment_id": "ma-g9-technology-u02-assessment",
+    "total_points": 38,
+    "unit_rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "note": "This lesson is one session inside the unit; the unit assessment record above is the summative instrument, and this lesson rubric scores only this session's evidence."
+  },
+  "remediation_plan": "Reteaching for selection and compound boolean logic and iteration nested loops and loop conditions follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for selection and compound boolean logic and iteration nested loops and loop conditions, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to selection and compound boolean logic and iteration nested loops and loop conditions works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of selection and compound boolean logic and iteration nested loops and loop conditions, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking selection and compound boolean logic and iteration nested loops and loop conditions mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension_plan": "Apply selection and compound boolean logic and iteration nested loops and loop conditions under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on selection and compound boolean logic and iteration nested loops and loop conditions rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.",
+  "source_integrity": {
+    "requires_review": false,
+    "status": "NOT_APPLICABLE"
+  },
+  "safety_and_privacy": {
+    "requires_review": true,
+    "status": "VERIFIED",
+    "note": "No real credential, live external system, production account, or real personal data is used anywhere in this session; all values are fictional or sandboxed and no live system may be probed or accessed."
+  },
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming"
+  ]
+}

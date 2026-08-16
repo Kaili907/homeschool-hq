@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u01-l05",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Polynomial Arithmetic, Identities, and Zeros",
+    "dayInUnit": 5,
+    "courseDay": 5,
+    "phase": "Concept model B",
+    "focus": "proving polynomial identities",
+    "title": "Concept model B: proving polynomial identities"
+  },
+  "standards": [
+    "A-APR.1",
+    "A-APR.2",
+    "A-APR.3",
+    "A-APR.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 1,
+          "prompt": "Expand (2x + 3)(x − 5).",
+          "workedSolution": {
+            "steps": [
+              "2x² − 10x + 3x − 15.",
+              "Collect: 2x² − 7x − 15."
+            ],
+            "answer": "2x² − 7x − 15"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 2,
+          "prompt": "Remainder when x² + 2x − 3 is divided by (x − 2)?",
+          "workedSolution": {
+            "steps": [
+              "Evaluate at x = 2.",
+              "4 + 4 − 3 = 5."
+            ],
+            "answer": "5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 2,
+          "prompt": "A cubic polynomial factors as (x + 4)(x + 1)(x + 2). List its zeros in increasing order.",
+          "choices": [
+            "-4, -1, -2",
+            "1, 2, 4",
+            "-4, -2, -1",
+            "-3, -1, 0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 2,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 2 and y = 5 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "20, 21, 29",
+            "-21, 10, 29",
+            "-21, 20, 21",
+            "2, 5, 7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 2,
+          "prompt": "Expand and simplify: (3x − 2)(-1x − 2).",
+          "choices": [
+            "2x^2 - 4x - 4",
+            "-3x^2 - 4x + 4",
+            "-3x^2 + 4x",
+            "-3x^2 - 8x + 4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 2,
+          "prompt": "Find the remainder when x^2 - 3x + 3 is divided by (x + 2).",
+          "choices": [
+            "13",
+            "7",
+            "11",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 2,
+          "prompt": "A cubic polynomial factors as (x − 2)(x − 3)(x + 1). List its zeros in increasing order.",
+          "choices": [
+            "-3, -2, 1",
+            "0, 3, 4",
+            "2, 3, -1",
+            "-1, 2, 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 3,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 4 and y = 5 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "9, 40, 41",
+            "-9, 9, 40",
+            "-9, 20, 41",
+            "4, 5, 9"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 3,
+          "prompt": "Expand and simplify: (-1x − 5)(5x − 2).",
+          "choices": [
+            "4x^2 - 23x - 7",
+            "-5x^2 + 27x + 10",
+            "-5x^2 - 23x + 10",
+            "-5x^2 + 10x"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 2,
+          "prompt": "Find the remainder when -2x^2 - 5x + 1 is divided by (x + 1).",
+          "choices": [
+            "3",
+            "4",
+            "-6",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 3,
+          "prompt": "A cubic polynomial factors as (x + 4)(x − 3)(x − 4). List its zeros in increasing order.",
+          "choices": [
+            "-4, -3, 4",
+            "-3, 4, 5",
+            "-4, 4, 3",
+            "-4, 3, 4"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u01-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u01-l05"
+  }
+}

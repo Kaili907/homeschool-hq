@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u02-l05",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rigid Motions and Transformations",
+    "dayInUnit": 5,
+    "courseDay": 23,
+    "phase": "Concept model B",
+    "focus": "specifying a sequence of transformations",
+    "title": "Concept model B: specifying a sequence of transformations"
+  },
+  "standards": [
+    "G-CO.2",
+    "G-CO.3",
+    "G-CO.4",
+    "G-CO.5",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 1,
+          "prompt": "How many rotations under 360° carry a square onto itself?",
+          "workedSolution": {
+            "steps": [
+              "Vertices are 90° apart.",
+              "90°, 180°, 270° work — three rotations."
+            ],
+            "answer": "3 rotations; smallest angle 90°"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 2,
+          "prompt": "(3, 4) maps to (−3, −4) preserving orientation. Which motion?",
+          "workedSolution": {
+            "steps": [
+              "Both signs flip.",
+              "Orientation is preserved, so it is a rotation."
+            ],
+            "answer": "a 180° rotation about the origin"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 2,
+          "prompt": "Point P(-3, 2) is translated by the rule (x, y) → (x + 2, y − 2). Give the image P′.",
+          "choices": [
+            "(-1, 0)",
+            "(-5, 4)",
+            "(0, -1)",
+            "(-1, 4)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Reflect the point (-1, -2) across the line y = x. Give the image.",
+          "choices": [
+            "(-1, 2)",
+            "(1, -2)",
+            "(-2, -1)",
+            "(1, 2)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Rotate the point (2, -6) counterclockwise about the origin by 270°. Give the image.",
+          "choices": [
+            "(6, 2)",
+            "(-6, 2)",
+            "(-6, -2)",
+            "(-2, 6)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 2,
+          "prompt": "A regular polygon has 7 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "6 rotations; smallest angle 51.42857142857143°",
+            "7 rotations; smallest angle 51.42857142857143°",
+            "6 rotations; smallest angle 25.714285714285715°",
+            "6 rotations; smallest angle 129°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 2,
+          "prompt": "Triangle ABC has vertices A(-6, -3) and B(-3, 6). After a transformation the images are A′(6, 3) and B′(3, -6), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "choices": [
+            "a reflection across the x-axis",
+            "a translation by ⟨12, 6⟩",
+            "a reflection across the y-axis",
+            "a 180° rotation about the origin"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 3,
+          "prompt": "Point P(-1, 12) is translated by the rule (x, y) → (x − 5, y + 6). Give the image P′.",
+          "choices": [
+            "(4, 6)",
+            "(-6, 18)",
+            "(5, 7)",
+            "(18, -6)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Reflect the point (-11, -6) across the y-axis. Give the image.",
+          "choices": [
+            "(11, 6)",
+            "(-6, -11)",
+            "(11, -6)",
+            "(-11, 6)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Rotate the point (-5, 5) counterclockwise about the origin by 180°. Give the image.",
+          "choices": [
+            "(5, 5)",
+            "(5, -5)",
+            "(-5, -5)",
+            "(6, -5)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 3,
+          "prompt": "A regular polygon has 9 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "9 rotations; smallest angle 40°",
+            "8 rotations; smallest angle 40°",
+            "8 rotations; smallest angle 140°",
+            "8 rotations; smallest angle 20°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u02-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u02-l05"
+  }
+}

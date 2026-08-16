@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l08",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l08",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 8,
+    "courseDay": 152,
+    "phase": "Error analysis and repair",
+    "focus": "wrong-direction conversion errors",
+    "title": "Error analysis and repair: wrong-direction conversion errors"
+  },
+  "standards": [
+    "4.MD.1",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 3 meters to centimeters.",
+          "workedSolution": {
+            "steps": [
+              "1 meter = 100 centimeters.",
+              "3 × 100 = 300.",
+              "3 meters = 300 centimeters."
+            ],
+            "answer": "300 centimeters"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 2 feet to inches.",
+          "choices": [
+            "2.4 inches",
+            "24 inches",
+            "2 inches",
+            "14 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 1 kilogram to grams.",
+          "choices": [
+            "1000 grams",
+            "1001 grams",
+            "100 grams",
+            "1 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 2 kilograms to grams.",
+          "choices": [
+            "2000 grams",
+            "2 grams",
+            "1002 grams",
+            "200 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 10 meters to centimeters.",
+          "choices": [
+            "10 centimeters",
+            "1000 centimeters",
+            "100 centimeters",
+            "110 centimeters"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 10 kilograms to grams.",
+          "choices": [
+            "10000 grams",
+            "1010 grams",
+            "10 grams",
+            "1000 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 12 feet to inches.",
+          "choices": [
+            "14.4 inches",
+            "12 inches",
+            "144 inches",
+            "24 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 12 liters to milliliters.",
+          "choices": [
+            "1012 milliliters",
+            "12 milliliters",
+            "12000 milliliters",
+            "1200 milliliters"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l08"
+  }
+}

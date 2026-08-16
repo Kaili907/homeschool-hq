@@ -1,0 +1,414 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u04-l03",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Travel, and Community Logistics",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: identification and travel documents"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic identification and travel documents task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task is research and personal inventory only; the learner is never required to possess, produce, or apply for a driver's license or any specific regulated document to complete the lesson.",
+    "If the learner cannot check whether they actually have a listed item, they may mark it 'not sure, need to check with a trusted adult' instead."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "Embedded resource: swk-rfl-g9-u04-l03-model-card",
+    "Embedded resource: swk-rfl-g9-u04-l03-step-card",
+    "Embedded resource: swk-rfl-g9-u04-l03-guided-card",
+    "Embedded resource: swk-rfl-g9-u04-l03-independent-card",
+    "Embedded resource: swk-rfl-g9-u04-l03-evidence-record",
+    "Embedded resource: swk-rfl-g9-u04-l03-retry-pair",
+    "Embedded resource: swk-rfl-g9-u04-l03-delivered-card",
+    "Embedded resource: swk-rfl-g9-u04-l03-delivered-checklist",
+    "Embedded resource: swk-rfl-g9-u04-l03-delivered-example",
+    "Embedded resource: swk-rfl-g9-u04-l03-delivered-reference"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Analyze the complete worked example on swk-rfl-g9-u04-l03-model-card before beginning.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g9-u04-l03-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g9-u04-l03-independent-card; follow every step and retain only the named minimal evidence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Complete the minimal evidence record on swk-rfl-g9-u04-l03-evidence-record; omit or fictionalize private details.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Of the documents on your checklist that you don't currently have, which one do you think you'll need soonest, and why?"
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g9-u04-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g9-u04-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g9-u04-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts. | Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap. Resume at the next unfinished step on swk-rfl-g9-u04-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner research one additional context not covered in this lesson, such as what a healthcare appointment or a volunteer role typically asks for, and add it to their checklist.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "transportation-community",
+    "practicalGoal": "I can complete a realistic identification and travel documents task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g9-u04-l03-model-card",
+        "swk-rfl-g9-u04-l03-step-card",
+        "swk-rfl-g9-u04-l03-guided-card",
+        "swk-rfl-g9-u04-l03-independent-card",
+        "swk-rfl-g9-u04-l03-evidence-record",
+        "swk-rfl-g9-u04-l03-retry-pair",
+        "swk-rfl-g9-u04-l03-delivered-card",
+        "swk-rfl-g9-u04-l03-delivered-checklist",
+        "swk-rfl-g9-u04-l03-delivered-example",
+        "swk-rfl-g9-u04-l03-delivered-reference"
+      ],
+      "referencedArtifactWords": [
+        "card",
+        "checklist",
+        "example",
+        "reference"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g9-u04-l03-delivered-card",
+        "swk-rfl-g9-u04-l03-delivered-checklist",
+        "swk-rfl-g9-u04-l03-delivered-example",
+        "swk-rfl-g9-u04-l03-delivered-reference"
+      ],
+      "localMaterials": [],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-model-card",
+        "kind": "model",
+        "title": "identification and travel documents worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+          "Model move 1: Read the condition and name the exact identification and travel documents decision or action.",
+          "Model move 2: Think about times you've needed to prove who you are or provide information to someone outside your household.",
+          "Model move 3: Research what is typically required in three different contexts: a school field trip, applying for or using a library card, and traveling by air.",
+          "Model check: Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts. | Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "identification and travel documents action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for identification and travel documents.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "identification and travel documents coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+          "Coach direction: Think about times you've needed to prove who you are or provide information to someone outside your household.",
+          "Learner prompt: Describe one time you or someone you know needed to show identification or a specific document, and what that document was.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-independent-card",
+        "kind": "independent-task",
+        "title": "identification and travel documents complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Research what is typically required in three different contexts: a school field trip, applying for or using a library card, and traveling by air.",
+          "Response 1 (t2-p1): I found out what a school typically requires for a field trip (such as a signed permission form).",
+          "Response 2 (t2-p2): I found out what is typically needed to get or use a library card.",
+          "Response 3 (t2-p3): I found out what kind of identification is typically required for domestic air travel and what is typically required for international air travel (such as a passport).",
+          "Response 4 (t2-p4): For each of the three contexts, write one sentence summarizing what is typically required.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "identification and travel documents minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Of the documents on your checklist that you don't currently have, which one do you think you'll need soonest, and why?",
+          "Success checks: Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts. | Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-retry-pair",
+        "kind": "retry",
+        "title": "identification and travel documents supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g9-u04-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g9-u04-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional identification and travel documents condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts. | Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap..",
+          "Return: resume at the next unfinished step on swk-rfl-g9-u04-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-delivered-card",
+        "kind": "guided-practice",
+        "title": "identification and travel documents delivered card",
+        "purpose": "Resolves the lesson's named card so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+          "Use steps: Research what is typically required in three different contexts: a school field trip, applying for or using a library card, and traveling by air.",
+          "Field 1 (t2-p1): I found out what a school typically requires for a field trip (such as a signed permission form).",
+          "Field 2 (t2-p2): I found out what is typically needed to get or use a library card.",
+          "Field 3 (t2-p3): I found out what kind of identification is typically required for domestic air travel and what is typically required for international air travel (such as a passport).",
+          "Field 4 (t2-p4): For each of the three contexts, write one sentence summarizing what is typically required.",
+          "Check against: Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts. | Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-delivered-checklist",
+        "kind": "reference",
+        "title": "identification and travel documents delivered checklist",
+        "purpose": "Resolves the lesson's named checklist so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+          "Use steps: Research what is typically required in three different contexts: a school field trip, applying for or using a library card, and traveling by air.",
+          "Field 1 (t2-p1): I found out what a school typically requires for a field trip (such as a signed permission form).",
+          "Field 2 (t2-p2): I found out what is typically needed to get or use a library card.",
+          "Field 3 (t2-p3): I found out what kind of identification is typically required for domestic air travel and what is typically required for international air travel (such as a passport).",
+          "Field 4 (t2-p4): For each of the three contexts, write one sentence summarizing what is typically required.",
+          "Check against: Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts. | Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-delivered-example",
+        "kind": "model",
+        "title": "identification and travel documents delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+          "Use steps: Research what is typically required in three different contexts: a school field trip, applying for or using a library card, and traveling by air.",
+          "Field 1 (t2-p1): I found out what a school typically requires for a field trip (such as a signed permission form).",
+          "Field 2 (t2-p2): I found out what is typically needed to get or use a library card.",
+          "Field 3 (t2-p3): I found out what kind of identification is typically required for domestic air travel and what is typically required for international air travel (such as a passport).",
+          "Field 4 (t2-p4): For each of the three contexts, write one sentence summarizing what is typically required.",
+          "Check against: Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts. | Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l03-delivered-reference",
+        "kind": "reference",
+        "title": "identification and travel documents delivered reference",
+        "purpose": "Resolves the lesson's named reference so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+          "Use steps: Research what is typically required in three different contexts: a school field trip, applying for or using a library card, and traveling by air.",
+          "Field 1 (t2-p1): I found out what a school typically requires for a field trip (such as a signed permission form).",
+          "Field 2 (t2-p2): I found out what is typically needed to get or use a library card.",
+          "Field 3 (t2-p3): I found out what kind of identification is typically required for domestic air travel and what is typically required for international air travel (such as a passport).",
+          "Field 4 (t2-p4): For each of the three contexts, write one sentence summarizing what is typically required.",
+          "Check against: Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts. | Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap."
+        ]
+      }
+    ],
+    "model": {
+      "title": "identification and travel documents worked model",
+      "startingCondition": "The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact identification and travel documents decision or action.",
+        "Model move 2: Think about times you've needed to prove who you are or provide information to someone outside your household.",
+        "Model move 3: Research what is typically required in three different contexts: a school field trip, applying for or using a library card, and traveling by air."
+      ],
+      "reasoning": "The model names the condition, follows the ordered identification and travel documents process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts.",
+        "Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap."
+      ],
+      "resourceRef": "swk-rfl-g9-u04-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for identification and travel documents.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g9-u04-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+      "prompt": "Describe one time you or someone you know needed to show identification or a specific document, and what that document was.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g9-u04-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g9-u04-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "identification and travel documents — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g9-u04-l03-independent-card",
+        "directions": "Complete the identification and travel documents task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g9-u04-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Of the documents on your checklist that you don't currently have, which one do you think you'll need soonest, and why?",
+      "observableCriteria": [
+        "Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts.",
+        "Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g9-u04-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g9-u04-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g9-u04-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g9-u04-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Research accuracy across contexts: Summary sentences correctly and specifically describe what is typically required for each of the three contexts. | Checklist completeness and personal accuracy: Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g9-u04-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g9-u04-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

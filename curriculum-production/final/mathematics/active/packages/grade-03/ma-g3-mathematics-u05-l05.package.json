@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u05-l05",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Understanding Fractions as Numbers",
+    "dayInUnit": 5,
+    "courseDay": 77,
+    "phase": "Independent evidence A",
+    "focus": "naming fractions from area models",
+    "title": "Independent evidence A: naming fractions from area models"
+  },
+  "standards": [
+    "3.NF.1",
+    "3.G.2"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence A",
+    "profile": "independent-evidence",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "partition-shape-equal-areas",
+          "standard": "3.G.2",
+          "difficulty": 1,
+          "prompt": "A rectangle is partitioned into 4 parts of equal area. What fraction does one part represent?",
+          "workedSolution": {
+            "steps": [
+              "4 equal parts make up the whole.",
+              "One part is 1/4."
+            ],
+            "answer": "1/4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 2,
+          "prompt": "A shape is divided into 4 equal parts. 2 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "2/3",
+            "1/4",
+            "4/2",
+            "2/4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "partition-shape-equal-areas",
+          "standard": "3.G.2",
+          "difficulty": 2,
+          "prompt": "A rectangle is partitioned into 8 parts of equal area. What fraction of the rectangle does one part represent?",
+          "choices": [
+            "8/1",
+            "1/7",
+            "1/9",
+            "1/8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 2,
+          "prompt": "A shape is divided into 4 equal parts. 1 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "1/4",
+            "1/3",
+            "2/4",
+            "4/1"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "partition-shape-equal-areas",
+          "standard": "3.G.2",
+          "difficulty": 3,
+          "prompt": "A rectangle is partitioned into 6 parts of equal area. What fraction of the rectangle does one part represent?",
+          "choices": [
+            "6/1",
+            "1/7",
+            "1/5",
+            "1/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l05#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A shape is divided into 8 equal parts. 6 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "6/8",
+            "5/8",
+            "6/7",
+            "8/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l05#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "partition-shape-equal-areas",
+          "standard": "3.G.2",
+          "difficulty": 3,
+          "prompt": "A circle is partitioned into 6 parts of equal area. What fraction of the circle does one part represent?",
+          "choices": [
+            "1/7",
+            "1/6",
+            "1/5",
+            "6/1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 2,
+          "prompt": "A shape is divided into 4 equal parts. 3 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "3/3",
+            "3/4",
+            "4/3",
+            "2/4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "partition-shape-equal-areas",
+          "standard": "3.G.2",
+          "difficulty": 3,
+          "prompt": "A circle is partitioned into 8 parts of equal area. What fraction of the circle does one part represent?",
+          "choices": [
+            "1/9",
+            "8/1",
+            "1/7",
+            "1/8"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u05-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u05-l05"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u07-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u07-l03",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Measurement: Time, Liquid Volume, and Mass",
+    "dayInUnit": 3,
+    "courseDay": 111,
+    "phase": "Concept build B",
+    "focus": "elapsed time on a number line",
+    "title": "Concept build B: elapsed time on a number line"
+  },
+  "standards": [
+    "3.MD.1"
+  ],
+  "blueprint": {
+    "phase": "Concept build B",
+    "profile": "concept-build-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 1,
+          "prompt": "A movie starts at 2:15 p.m. and lasts 40 minutes. What time does it end?",
+          "workedSolution": {
+            "steps": [
+              "Start at 2:15 p.m. and count forward 40 minutes.",
+              "2:15 + 40 minutes = 2:55 p.m."
+            ],
+            "answer": "2:55 p.m."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 1,
+          "prompt": "Practice starts at 12:15 p.m. and lasts 7 minutes. What time does practice end?",
+          "choices": [
+            "12:22 p.m.",
+            "12:08 p.m.",
+            "12:52 p.m.",
+            "11:52 a.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 1:05 p.m. and lasts 87 minutes. What time does practice end?",
+          "choices": [
+            "3:02 p.m.",
+            "2:02 p.m.",
+            "2:32 p.m.",
+            "11:38 a.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 11:45 a.m. and lasts 24 minutes. What time does practice end?",
+          "choices": [
+            "11:21 a.m.",
+            "12:09 p.m.",
+            "11:39 a.m.",
+            "12:39 p.m."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 1:45 p.m. and lasts 84 minutes. What time does practice end?",
+          "choices": [
+            "2:39 p.m.",
+            "3:39 p.m.",
+            "12:21 p.m.",
+            "3:09 p.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 12:45 p.m. and lasts 50 minutes. What time does practice end?",
+          "choices": [
+            "11:55 a.m.",
+            "1:05 p.m.",
+            "2:05 p.m.",
+            "1:35 p.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 3,
+          "prompt": "Practice starts at 12:05 p.m. and lasts 136 minutes. What time does practice end?",
+          "choices": [
+            "2:21 p.m.",
+            "1:51 p.m.",
+            "2:51 p.m.",
+            "9:49 a.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l03#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 3,
+          "prompt": "Practice starts at 8:45 a.m. and lasts 78 minutes. What time does practice end?",
+          "choices": [
+            "10:03 a.m.",
+            "9:33 a.m.",
+            "10:33 a.m.",
+            "7:27 a.m."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 9:45 a.m. and lasts 72 minutes. What time does practice end?",
+          "choices": [
+            "10:57 a.m.",
+            "11:27 a.m.",
+            "8:33 a.m.",
+            "10:27 a.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 8:30 a.m. and lasts 67 minutes. What time does practice end?",
+          "choices": [
+            "10:07 a.m.",
+            "9:37 a.m.",
+            "7:23 a.m.",
+            "9:07 a.m."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u07-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u07-l03"
+  }
+}

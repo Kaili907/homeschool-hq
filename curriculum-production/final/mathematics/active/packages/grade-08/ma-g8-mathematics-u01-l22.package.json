@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l22",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l22",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 22,
+    "courseDay": 22,
+    "phase": "Correction assessment",
+    "focus": "independent mastery evidence for 8.EE.2",
+    "title": "Correction assessment: exact roots, evaluation, and irrationality"
+  },
+  "standards": [
+    "8.EE.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Correction assessment",
+    "profile": "correction-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "a",
+      "kind": "mastery-check",
+      "title": "ma-g8-mathematics-c01-assessment — 30 points, 6 prompts",
+      "directions": "Work every prompt independently. No instructional support is given during this assessment. A squaring and cubing reference table is permitted.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l22#a-01",
+          "kind": "constructed-response",
+          "itemType": "assessment-exact-solutions",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Write the exact solution or solutions of each equation using root notation: x² = 49, x² = 11, x³ = 27, x³ = 5. For each, state how many real solutions the equation has and why. (6 points)",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l22#a-02",
+          "kind": "constructed-response",
+          "itemType": "assessment-evaluate-roots",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Evaluate exactly, without a calculator: √121, √(16/49), ∛64, ∛(1/27). Verify two of your four answers using the inverse operation and show that verification. (6 points)",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l22#a-03",
+          "kind": "constructed-response",
+          "itemType": "assessment-bounding",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "For √45 and ∛50, state the two consecutive whole numbers each value lies between and explain how you know without a calculator. Then explain why neither can be written as an exact whole number. (5 points)",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l22#a-04",
+          "kind": "constructed-response",
+          "itemType": "assessment-irrationality",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "Explain why √2 is irrational but √49 is rational. Give a reason rather than an assertion; reference the decimal expansion, the ratio-of-integers definition, or the informal contradiction argument. (5 points)",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l22#a-05",
+          "kind": "constructed-response",
+          "itemType": "assessment-error-analysis",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "A learner writes: “x² = 25, so x = 5,” and “∛(−27) has no real solution because you cannot take a root of a negative.” Identify what is wrong with each statement, correct it, and explain why the error is tempting. (4 points)",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l22#a-06",
+          "kind": "constructed-response",
+          "itemType": "assessment-transfer-area",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "A square garden bed must enclose 20 square feet. Give the exact side length in root notation, classify it as rational or irrational with a reason, give an approximation appropriate for buying lumber, and explain why the exact and rounded forms are each correct for their own purpose. (4 points)",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l22.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.1-correction",
+    "itemSource": "integration-correction-generator@curriculum-release-corrections/grade8-mathematics-integration/build_student_work.py",
+    "seed": "1.0.1-correction|ma-g8-mathematics-u01-l22"
+  }
+}

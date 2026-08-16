@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l05",
+  "lessonId": "ma-g10-ready-for-life-u06-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Schedule realism",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Working hours overlap with school or another fixed commitment." },
+          { "label": "Proficient", "descriptor": "Working hours fit into genuinely open time, with at most a minor overlap." },
+          { "label": "Advanced", "descriptor": "Working hours fit cleanly into open time, and rest is genuinely preserved, not just squeezed out." }
+        ]
+      },
+      {
+        "dimension": "Conflict-point identification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No specific conflict point is named, or the named point isn't a real risk in the schedule shown." },
+          { "label": "Proficient", "descriptor": "Names a real, specific conflict point from the actual schedule." },
+          { "label": "Advanced", "descriptor": "Names a real conflict point and a genuinely workable way to handle it." }
+        ]
+      },
+      {
+        "dimension": "Honest reassessment of the original estimate",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Claims the original estimate was fine with no evidence from the actual schedule." },
+          { "label": "Proficient", "descriptor": "Honestly states whether the estimate held up, with a reason." },
+          { "label": "Advanced", "descriptor": "Honestly reassesses the estimate with specific reference to what the full-week schedule actually showed." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The weekly schedule accounts for schoolwork time and rest, not only school hours themselves.",
+      "The identified conflict point is traceable to a specific place in the schedule, not a generic worry.",
+      "The reassessment of the original hours estimate is genuinely honest, including if it means admitting the original number was too high."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

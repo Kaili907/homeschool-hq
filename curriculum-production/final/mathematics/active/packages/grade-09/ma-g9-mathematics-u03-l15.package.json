@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u03-l15",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u03-l15",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "dayInUnit": 15,
+    "courseDay": 51,
+    "phase": "Assessment preparation",
+    "focus": "solving linear inequalities and the sign-reversal rule",
+    "title": "Assessment preparation: solving linear inequalities and the sign-reversal rule"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 1,
+          "prompt": "The graphs of f(x) = -5x + 2 and g(x) = -1x − 14 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = 8/3",
+            "x = -4",
+            "x = 3",
+            "x = 4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve 4x − 4y = 4 for y.",
+          "choices": [
+            "y = (4 − 4x)/-4",
+            "y = (4x − 4)/-4",
+            "y = 4 − 4x",
+            "y = (4 + 4x)/-4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x: 7x + 7 = 4x + 28.",
+          "choices": [
+            "x = 35/3",
+            "x = 7",
+            "x = -7",
+            "x = 21/11"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x and state the solution set: -6x + 3 < 10.",
+          "choices": [
+            "x < -7/6",
+            "x > -13/6",
+            "x > -7/6",
+            "x > 7/6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 3,
+          "prompt": "In a solution, one line reads: From 3(x + 4) = 21 to 3x + 12 = 21. Which property justifies that step?",
+          "choices": [
+            "the distributive property",
+            "the multiplicative inverse",
+            "the addition property of equality",
+            "combining like terms"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 3,
+          "prompt": "Does the point (4, 47) lie on the graph of y = 9x + 10?",
+          "choices": [
+            "Yes; the coordinates satisfy the equation.",
+            "It cannot be determined without graphing the line.",
+            "No; substituting x = 4 gives y = 46, not 47.",
+            "Only if the graph is extended beyond the plotted window."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 3,
+          "prompt": "The graphs of f(x) = 1x − 10 and g(x) = 2x − 18 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = -8/3",
+            "x = -8",
+            "x = 28",
+            "x = 8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve -9x − 5y = -4 for y.",
+          "choices": [
+            "y = (-4 − -9x)/-5",
+            "y = (-4 + -9x)/-5",
+            "y = (-9x − -4)/-5",
+            "y = -4 − -9x"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x: -3x − 6 = -2x + 2.",
+          "choices": [
+            "x = -8/5",
+            "x = -8",
+            "x = 4",
+            "x = 8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x and state the solution set: 6x + 1 < -7.",
+          "choices": [
+            "x < 4/3",
+            "x < -4/3",
+            "x > -4/3",
+            "x < -1"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 3,
+          "prompt": "In a solution, one line reads: From 3x = 9 to x = 3. Which property justifies that step?",
+          "choices": [
+            "dividing both sides by 3 (division property of equality)",
+            "the associative property",
+            "the distributive property",
+            "subtracting 3 from both sides"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 3,
+          "prompt": "Does the point (-1, 0) lie on the graph of y = -3x − 2?",
+          "choices": [
+            "Only if the graph is extended beyond the plotted window.",
+            "Yes; the coordinates satisfy the equation.",
+            "No; substituting x = -1 gives y = 1, not 0.",
+            "It cannot be determined without graphing the line."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u03-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u03-l15"
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u07-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u07-l06",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Circles, Angles, Area, and Surface Area",
+    "dayInUnit": 6,
+    "courseDay": 114,
+    "phase": "Guided practice B",
+    "focus": "surface area and volume",
+    "title": "Guided practice B: surface area and volume"
+  },
+  "standards": [
+    "7.G.4",
+    "7.G.5",
+    "7.G.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "surface-area-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 1,
+          "prompt": "A rectangular prism has length 5, width 4, and height 3 (all in units). What is its exact surface area?",
+          "workedSolution": {
+            "steps": [
+              "Surface area is twice the sum of the three face areas: SA = 2(lw + lh + wh).",
+              "Find each face area: lw = 20, lh = 15, wh = 12.",
+              "Add and double: 2(20 + 15 + 12) = 2(47) = 94 square units."
+            ],
+            "answer": "94"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "What is the exact volume of a rectangular prism with length 10, width 10, and height 6 (units)? Give your answer in cubic units.",
+          "choices": [
+            "602 cubic units",
+            "600 cubic units",
+            "100 cubic units",
+            "603 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "circumference-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a radius of 11 in. What is its exact circumference? Express your answer as a multiple of π.",
+          "choices": [
+            "21π in",
+            "22π in",
+            "24π in",
+            "25π in"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "find-radius-or-diameter-from-circumference",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a circumference of 14π ft. What is its exact diameter?",
+          "choices": [
+            "14 ft",
+            "13 ft",
+            "16 ft",
+            "28 ft"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "area-of-circle-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a diameter of 7 in. What is its exact area? Express your answer as a multiple of π (use a fraction for the coefficient if it is not a whole number).",
+          "choices": [
+            "45/4π in²",
+            "49/4π in²",
+            "49π in²",
+            "57/4π in²"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "circumference-area-relationship",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle's radius equals its circumference divided by 2π. A circle has a circumference of 30π m. Use this relationship to find the circle's exact area, as a multiple of π.",
+          "choices": [
+            "227π m²",
+            "225π m²",
+            "224π m²",
+            "900π m²"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "complementary-supplementary-angle",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two angles are complementary. One angle measures 79°. What is the measure of the other angle?",
+          "choices": [
+            "12°",
+            "11°",
+            "13°",
+            "1°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "vertical-angles-with-expressions",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two lines intersect, forming vertical angles that measure (3x + 5)° and (2x + 9)°. Vertical angles are congruent. Find the value of x and the measure of the angles.",
+          "choices": [
+            "x = 3, each angle measures 14°",
+            "x = 4, each angle measures 17°",
+            "x = 4, each angle measures 7°",
+            "x = 4, each angle measures 27°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "angle-equation-multistep",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two angles are supplementary. Their measures are (3x + 4)° and (3x + 56)°. Find the value of x and the measure of each angle.",
+          "choices": [
+            "x = 22, angles measure 70° and 110°",
+            "x = 20, angles measure 64° and 116°",
+            "x = 21, angles measure 67° and 113°",
+            "x = 20, angles measure 64° and 64°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "angles-on-a-line-or-around-a-point",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "The angles around a point measure 6°, 113°, 19°, 169°, and x°. What is the value of x?",
+          "choices": [
+            "53°",
+            "63°",
+            "52°",
+            "54°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "area-of-composite-figure",
+          "standard": "7.G.6",
+          "difficulty": 3,
+          "prompt": "A figure is a 15-by-14 rectangle topped by a triangle. The triangle's base equals the rectangle's width, 15 units, and its height is 6 units. What is the total area of the figure, in square units?",
+          "choices": [
+            "216",
+            "255",
+            "256",
+            "300"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u07-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u07-l06"
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u09-l15",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u09-l15",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Area and the Distributive Property",
+    "dayInUnit": 15,
+    "courseDay": 159,
+    "phase": "Synthesis and review",
+    "focus": "area concepts, tiling, and formulas",
+    "title": "Synthesis and review: area concepts, tiling, and formulas"
+  },
+  "standards": [
+    "3.MD.5",
+    "3.MD.6",
+    "3.MD.7"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 1,
+          "prompt": "Which statement correctly describes the area of a shape?",
+          "choices": [
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area is always the same number as the perimeter for any rectangle.",
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is the amount of flat space a shape covers, measured in square units."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 2 rows of 4 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "8",
+            "6",
+            "9",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangular rug is 5 m long and 5 m wide. What is its area?",
+          "choices": [
+            "20 sq m",
+            "26 sq m",
+            "25 sq m",
+            "10 sq m"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangle 5 units long is split into two parts: one 3 units wide and one 4 units wide. Use 5 × (3 + 4) to find the total area.",
+          "choices": [
+            "15",
+            "35",
+            "12",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular rug is 11 cm long and 5 cm wide. What is its area?",
+          "choices": [
+            "32 sq cm",
+            "56 sq cm",
+            "55 sq cm",
+            "16 sq cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 3,
+          "prompt": "A rectangle is covered by unit squares in 2 rows of 2 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "2",
+            "5",
+            "4",
+            "8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangular rug is 11 ft long and 8 ft wide. What is its area?",
+          "choices": [
+            "19 sq ft",
+            "88 sq ft",
+            "89 sq ft",
+            "38 sq ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangle 9 units long is split into two parts: one 5 units wide and one 5 units wide. Use 9 × (5 + 5) to find the total area.",
+          "choices": [
+            "19",
+            "90",
+            "45",
+            "91"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular rug is 9 m long and 3 m wide. What is its area?",
+          "choices": [
+            "12 sq m",
+            "27 sq m",
+            "28 sq m",
+            "24 sq m"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u09-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u09-l15"
+  }
+}

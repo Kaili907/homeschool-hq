@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-technology-u06-assessment",
+  "courseRef": "ma-g10-technology",
+  "grade": 10,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g10-technology-u06",
+    "unitNumber": 6,
+    "unitTitle": "Secure Data Project and Threat-Model Review",
+    "courseTitle": "Programming I",
+    "assessmentLessonRef": "ma-g10-technology-u06-l05"
+  },
+  "standards": [
+    "Michigan Computer Science: Data and Analysis",
+    "Networks and the Internet — Cybersecurity"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u06-l05.task-package.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Demonstrate recognising and defending against secure data project and threat-model review independently, with no scaffold, prompts, or worked example in view. Produce a complete correct solution to a new problem, then prove it works: state the expected result first, run or hand-trace at least two cases including one boundary case, and show actual against expected. Then explain the reasoning in your own words well enough that a reader who has not seen recognising and defending against secure data project and threat-model review could follow why each decision was made. Both the working result and the explanation are required — either one alone is incomplete. Anchor today's work inside its unit: this session's evidence is about recognising and defending against secure data project and threat-model review, and it belongs to \"Secure Data Project and Threat-Model Review\", which also covers separate topics such as requirements and data inventory. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 10 the bar is independent work that justifies its approach against a named alternative you considered and rejected, with the trade-off stated concretely."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Independent complete solution, a two-case verification with expected against actual, and a self-contained written explanation."
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/technology/ma-g10-technology-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task on secure data project and threat-model review.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-technology-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u06-l05.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Secure Data Project and Threat-Model Review?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l13",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l13",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 13,
+    "courseDay": 103,
+    "phase": "Skill consolidation",
+    "focus": "creating linear, quadratic, rational, and exponential equations in one variable",
+    "title": "Skill consolidation: creating linear, quadratic, rational, and exponential equations in one variable"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 1,
+          "prompt": "A model gives a required side length of −6 metres. How should this solution be interpreted?",
+          "choices": [
+            "Add 6 to every measurement to correct the model.",
+            "Reject the solution; a length cannot be negative, so it lies outside the model’s domain.",
+            "Report −6 metres, because the algebra is correct.",
+            "Use 6 metres, taking the absolute value."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A repair service charges a $125 call-out fee plus $9 per hour. A job cost $170 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "9 + 125h = 170",
+            "125h + 9 = 170",
+            "125 + 9h = 170",
+            "125 + 9 + h = 170"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 2,
+          "prompt": "The formula A = -4bh − 4 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = (A + 4) / (-4b)",
+            "h = -4b(A + 4)",
+            "h = (A − 4) / (-4b)",
+            "h = A / (-4b) + 4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "Item A costs $5 each and item B costs $15 each. You may spend at most $250 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "5a + 15b = 250",
+            "5a + 15b ≤ 250",
+            "5a + 15b ≥ 250",
+            "a + b ≤ 250"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 110 litres and is filling at 6 litres per minute. After how many minutes does it hold 200 litres?",
+          "choices": [
+            "52 minutes",
+            "15 minutes",
+            "33 minutes",
+            "90 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives the number of buses needed as 4.3. How should this solution be interpreted?",
+          "choices": [
+            "Round down to 4, because 4.3 is closer to 4.",
+            "The model must be wrong, because the answer is not a whole number.",
+            "Round up to 5; a fractional bus is not viable and rounding down leaves people behind.",
+            "Report 4.3, because the model is exact."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $300 call-out fee plus $3 per hour. A job cost $309 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "300h + 3 = 309",
+            "300 + 3 + h = 309",
+            "3 + 300h = 309",
+            "300 + 3h = 309"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = 2bh + 2 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = 2b(A − 2)",
+            "h = (A − 2) / (2b)",
+            "h = (A + 2) / (2b)",
+            "h = A / (2b) − 2"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "Item A costs $8 each and item B costs $9 each. You may spend at most $140 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "8a + 9b ≤ 140",
+            "a + b ≤ 140",
+            "8a + 9b ≥ 140",
+            "8a + 9b = 140"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A tank holds 45 litres and is filling at 6 litres per minute. After how many minutes does it hold 129 litres?",
+          "choices": [
+            "84 minutes",
+            "29 minutes",
+            "22 minutes",
+            "14 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A budget model allows 12.7 units of a product sold individually. How should this solution be interpreted?",
+          "choices": [
+            "Split the order so the fractional unit is shared.",
+            "Round down to 12; buying a partial unit is not possible and 13 would exceed the budget.",
+            "Report 12.7, because the constraint is satisfied.",
+            "Round up to 13, because 12.7 is closer to 13."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $145 call-out fee plus $19 per hour. A job cost $430 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "19 + 145h = 430",
+            "145h + 19 = 430",
+            "145 + 19h = 430",
+            "145 + 19 + h = 430"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l13"
+  }
+}

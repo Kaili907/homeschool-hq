@@ -1,0 +1,432 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l02",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: payroll taxes and employer withholding"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "payroll taxes and employer withholding",
+  "objective": "Compute payroll tax for two fictional wage levels under a schedule with a wage cap on one levy and none on the other, and show that the combined rate falls as wages rise past the cap.",
+  "scenario": "The simulated payroll levies below are invented for this exercise. In this fictional system the social insurance levy is 6% of wages up to a cap of $158,000, and the health levy is 1.5% of all wages with no cap. These are separate from the income tax and are withheld from every paycheck.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional payroll schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Worker A earns wages of $58,000 in the simulated year, which is below the $158,000 social insurance cap. Compute each levy separately. Note that no deduction applies to payroll tax in this system: the levies are charged on wages from the first dollar.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker A’s social insurance levy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker A’s health levy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker A’s total payroll tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Worker B earns wages of $210,000 in the same year, which is above the cap. Apply the cap to the social insurance levy only.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker B’s social insurance levy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker B’s health levy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker B’s total payroll tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What share of Worker B’s wages is that?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What share of Worker A’s wages was their payroll tax?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The income tax in the previous lesson took a larger share as income rose; this payroll tax takes a smaller one. Explain what feature of each schedule produces that difference, and say why a person comparing two jobs should look at both taxes rather than the income tax alone."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Worker B’s social insurance levy comes out as $12,600, the 6% is being charged on the whole $210,000. The cap stops that levy at $158,000 of wages, so the charge is 6% of $158,000. The health levy is the one with no cap, and it does apply to all $210,000.",
+  "extension": "Find the wage level at which the combined payroll rate first falls below 7%, and say what happens to that rate as wages continue to rise.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Worker A’s social insurance levy?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is Worker A’s health levy?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Worker A’s total payroll tax?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Worker B’s social insurance levy?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is Worker B’s health levy?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Worker B’s total payroll tax?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What share of Worker B’s wages is that?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "What share of Worker A’s wages was their payroll tax?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The income tax in the previous lesson took a larger share as income rose; this payroll tax takes a smaller one. Explain what feature of each schedule produces that difference, and say why a person comparing two jobs should look at both taxes rather than the income tax alone."
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "TAX",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "CONCEPT_INSTRUCTION",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.tax.1",
+      "meaning": "Withholding is money prepaid toward an estimated tax during the year; it is not automatically the final tax."
+    },
+    {
+      "conceptId": "finlit.tax.2",
+      "meaning": "Reconciliation compares final tax under the stated fictional rules with total withholding."
+    },
+    {
+      "conceptId": "finlit.tax.3",
+      "meaning": "Too little withholding can leave an amount due, while too much can produce a refund; neither changes the final tax itself."
+    }
+  ],
+  "evidencePurpose": "Develop and apply tax withholding, final tax, and reconciliation through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "title": "Understand tax withholding, final tax, and reconciliation",
+    "paragraphs": [
+      "Withholding is money prepaid toward an estimated tax during the year; it is not automatically the final tax.",
+      "Reconciliation compares final tax under the stated fictional rules with total withholding. In this lesson, the learner uses the provided fictional facts about payroll taxes and employer withholding; no real household information belongs in the work.",
+      "Too little withholding can leave an amount due, while too much can produce a refund; neither changes the final tax itself. The usable process is: Compute total fictional withholding in cents. Use the stated final-tax rule or given final tax. Subtract smaller from larger and label refund or amount due. Check timing, assumptions, and whether an adjustment affects cash flow."
+    ],
+    "relationship": [
+      "Compute total fictional withholding in cents.",
+      "Use the stated final-tax rule or given final tax.",
+      "Subtract smaller from larger and label refund or amount due.",
+      "Check timing, assumptions, and whether an adjustment affects cash flow."
+    ],
+    "commonConfusion": "A refund is not extra earnings, and an amount due is not an added tax rate; both are differences between prepayment and final tax.",
+    "conditionsAndLimits": "Use only the stated fictional facts, time period, rate meaning, fees, taxes, timing, rounding, goals, and constraints. The result is education for this scenario, not individualized advice."
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "TAX",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "Use only the fictional jurisdiction, year, base, rates or brackets, deductions, credits, withholding, caps, and order stated in the learner scenario.",
+    "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "separationRule": "The model uses different fictional people, amounts, wording, and decision conditions from protected independent and mastery work."
+  },
+  "workedExamples": [
+    {
+      "exampleRef": "pd-r1-tax-g10",
+      "title": "Worked example — tax withholding, final tax, and reconciliation",
+      "fictionCue": "Every person, amount, product, institution, and rule in this example is invented for instruction.",
+      "facts": [
+        "A simplified fictional final tax is $480.00.",
+        "Withholding was $45.00 per month for ten months.",
+        "No credits, penalties, or other payments apply."
+      ],
+      "goal": "Reconcile total withholding with final tax.",
+      "relevantInformation": "Use only the listed fictional facts and conditions; do not substitute real household information.",
+      "method": "Compute total fictional withholding in cents. Use the stated final-tax rule or given final tax. Subtract smaller from larger and label refund or amount due. Check timing, assumptions, and whether an adjustment affects cash flow.",
+      "steps": [
+        "Convert $45.00 to 4,500 cents and multiply: 10 × 4,500 = 45,000 cents withheld.",
+        "Final tax is 48,000 cents.",
+        "Amount due: 48,000 − 45,000 = 3,000 cents, or $30.00.",
+        "Check: $450.00 withholding + $30.00 due = $480.00 final tax."
+      ],
+      "interpretation": "The fictional filer owes $30.00 because prepayments were $30.00 below final tax.",
+      "reasonablenessCheck": "Check: $450.00 withholding + $30.00 due = $480.00 final tax.",
+      "tradeoff": "Increasing future withholding may reduce current take-home pay while lowering the chance of an amount due under unchanged assumptions.",
+      "limits": "The conclusion applies only to the stated fictional facts. A changed rate, fee, time, rule, goal, constraint, or risk can change it.",
+      "calculationAuthority": "All USD calculations shown here are written as integer cents. Percent rates, when used, are integer basis points divided by 10,000; stated rounding is half up at the declared line only."
+    }
+  ],
+  "guidedPracticeContract": {
+    "applicability": "REQUIRED",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g10-financial-literacy-u07-l02",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: A refund is not extra earnings, and an amount due is not an added tax rate; both are differences between prepayment and final tax.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t3-p1"
+    ],
+    "gradeBandDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.tax.1",
+      "finlit.tax.2",
+      "finlit.tax.3"
+    ],
+    "evidenceLessonId": "ma-g10-financial-literacy-u07-l09",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.tax.core-confusion",
+      "observableSignal": "A refund is not extra earnings, and an amount due is not an added tax rate; both are differences between prepayment and final tax.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-tax-g10",
+        "title": "Alternate model — tax withholding, final tax, and reconciliation",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "Fictional final tax is 36,000 cents and twelve monthly withholdings are 3,200 cents each."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Total withholding: 12 × 3,200 = 38,400 cents.",
+          "Difference: 38,400 − 36,000 = 2,400 cents.",
+          "Label the $24.00 difference as a refund under the stated model.",
+          "Check: final tax + refund = total withholding."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g10-financial-literacy-u07-l07",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g10-financial-literacy-u07-l09",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.tax.1",
+      "finlit.tax.2",
+      "finlit.tax.3"
+    ],
+    "prerequisiteConceptIds": [],
+    "misconceptionIds": [
+      "finlit.tax.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "TAX",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "Use only the fictional jurisdiction, year, base, rates or brackets, deductions, credits, withholding, caps, and order stated in the learner scenario.",
+      "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g10-financial-literacy-u07-l02:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "HIGH_SCHOOL_9_12",
+      "scaffolding": "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+      "reasoningDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u07-l02.package.json",
+    "sourcePackageSha256": "5eff7cf91116f9d10f22d2882169db876891150a1143e12056271cfca5796195",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u07-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

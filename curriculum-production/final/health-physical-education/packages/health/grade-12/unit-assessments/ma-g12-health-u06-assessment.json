@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g12-health-u06-assessment",
+  "courseId": "ma-g12-health",
+  "grade": 12,
+  "subject": "health",
+  "unitNumber": 6,
+  "unitTitle": "Capstone: Personal Health Plan and Community Advocacy",
+  "essentialQuestion": "What plan would still be running a year from now, and what would I want changed for other people?",
+  "prompts": [
+    {
+      "type": "concept and vocabulary",
+      "prompt": "Explain integrating four years of health learning into one working plan in your own words and give a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of stating evidence for each element of the plan.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply building in review points and revision triggers in a new fictional situation. Show the decision process or cite the evidence used.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving choosing one advocacy commitment that is realistic; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect presenting a plan to a guardian without disclosing private detail with defending choices under questioning and revising after critique. Explain how the two support, constrain, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Present the complete personal health plan and advocacy commitment for review, defend each element with evidence and reasoning, then revise it based on the critique received.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "The defense may be spoken, written, presented as annotated slides, or delivered in a one-to-one conversation with an adult. No public presentation, recording, or audience is required.",
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "trustedAdultNote": "Direct any urgent safety, health, or mental-health concern to a trusted adult or qualified professional; this course is not diagnosis, therapy, or treatment.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceAssessmentId": "ma-g12-health-u06-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

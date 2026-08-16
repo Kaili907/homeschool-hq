@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l05",
+  "lessonId": "ma-g5-ready-for-life-u03-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Ingredient use and logic",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than three ingredients used, or the order doesn't make sense."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least three ingredients, assembled in a logical order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "At least three ingredients, logical order, and the learner explains why that order was chosen."
+          }
+        ]
+      },
+      {
+        "dimension": "Finished-and-ready quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Item is not actually ready to eat, for example it still needs assembly."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Item is fully assembled and ready to eat."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Item is fully assembled, ready to eat, and neatly presented."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Confidence rating ties to a specific real step from the task.",
+      "Assembly order matches what was actually planned in the warm-up or independent notes.",
+      "No adult step-by-step direction was needed during assembly."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

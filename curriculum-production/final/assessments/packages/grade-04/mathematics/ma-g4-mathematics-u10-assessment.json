@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-mathematics-u10-assessment",
+  "courseRef": "ma-g4-mathematics",
+  "grade": 4,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g4-mathematics-u10",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "courseTitle": "Grade 4 Mathematics",
+    "assessmentLessonRef": "ma-g4-mathematics-u10-l16"
+  },
+  "standards": [
+    "4.MD.5",
+    "4.MD.6",
+    "4.MD.7",
+    "4.G.1",
+    "4.G.2",
+    "4.G.3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u10-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Which term describes two lines that cross to form a right angle?",
+      "choices": [
+        "parallel lines",
+        "a ray",
+        "perpendicular lines",
+        "a line segment"
+      ],
+      "standardRef": "4.G.1"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A triangle where all three sides are the same length is called what kind of triangle?",
+      "choices": [
+        "right triangle",
+        "equilateral triangle",
+        "obtuse triangle",
+        "acute triangle"
+      ],
+      "standardRef": "4.G.2"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "How many lines of symmetry does a regular pentagon have?",
+      "choices": [
+        "4",
+        "6",
+        "5",
+        "10"
+      ],
+      "standardRef": "4.G.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "An angle turns through 120° of a full circle. What fraction of a full turn (360°) is this, in lowest terms?",
+      "choices": [
+        "13/36",
+        "2/3",
+        "11/36",
+        "1/3"
+      ],
+      "standardRef": "4.MD.5"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "A protractor reads 75° for an angle. Classify the angle.",
+      "choices": [
+        "right",
+        "acute",
+        "straight",
+        "obtuse"
+      ],
+      "standardRef": "4.MD.6"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Two adjacent angles share a ray and together measure 169°. One of the angles measures 14°. What does the other angle measure?",
+      "choices": [
+        "169°",
+        "14°",
+        "155°",
+        "183°"
+      ],
+      "standardRef": "4.MD.7"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Which term describes a part of a line that has one endpoint and extends forever in one direction?",
+      "choices": [
+        "perpendicular lines",
+        "parallel lines",
+        "a line segment",
+        "a ray"
+      ],
+      "standardRef": "4.G.1"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "A triangle where one angle measures exactly 90° is called what kind of triangle?",
+      "choices": [
+        "right triangle",
+        "obtuse triangle",
+        "equilateral triangle",
+        "acute triangle"
+      ],
+      "standardRef": "4.G.2"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "How many lines of symmetry does a rectangle (non-square) have?",
+      "choices": [
+        "1",
+        "4",
+        "3",
+        "2"
+      ],
+      "standardRef": "4.G.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u10-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "An angle turns through 200° of a full circle. What fraction of a full turn (360°) is this, in lowest terms?",
+      "choices": [
+        "10/9",
+        "7/12",
+        "19/36",
+        "5/9"
+      ],
+      "standardRef": "4.MD.5"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/mathematics/ma-g4-mathematics-u10-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-mathematics-u10-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u10-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Angles, Geometry, and Integrated Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l02",
+  "lessonId": "ma-g9-financial-literacy-u04-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$6,555.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "36 monthly payments of $182.10, the figure a disclosure calls the total of payments."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$555.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,555.60 repaid against $6,000 borrowed."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$6,936.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60 monthly payments of $115.61 on the same $6,000 of principal."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$936.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,936.60 repaid against the same $6,000 borrowed."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$66.49",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$182.10 against $115.61 each month."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$381.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$936.60 of interest on Loan B against $555.60 on Loan A, at the same rate."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "A longer term, so the balance is owed for more months",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Both loans state 5.9% APR on $6,000 and no fees are disclosed; the only difference in the two disclosures is 36 months against 60."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "paymentA * monthsA",
+        "substituted": "182.1 * 36",
+        "result": "$6,555.60",
+        "why": "36 monthly payments of $182.10, the figure a disclosure calls the total of payments."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - principal",
+        "substituted": "#t1-p1 - 6000",
+        "result": "$555.60",
+        "why": "$6,555.60 repaid against $6,000 borrowed."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "paymentB * monthsB",
+        "substituted": "115.61 * 60",
+        "result": "$6,936.60",
+        "why": "60 monthly payments of $115.61 on the same $6,000 of principal."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "#t1-p3 - principal2",
+        "substituted": "#t1-p3 - 6000",
+        "result": "$936.60",
+        "why": "$6,936.60 repaid against the same $6,000 borrowed."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "paymentA2 - paymentB2",
+        "substituted": "182.1 - 115.61",
+        "result": "$66.49",
+        "why": "$182.10 against $115.61 each month."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p4 - #t1-p2",
+        "substituted": "#t1-p4 - #t1-p2",
+        "result": "$381.00",
+        "why": "$936.60 of interest on Loan B against $555.60 on Loan A, at the same rate."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A borrower says Loan B is better because it is \"the same rate for less money each month\". Explain precisely what is true and what is false in that sentence, and name the borrower for whom Loan B really is the better choice.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Confirms that the rate really is the same and the monthly payment really is $66.49 lower, so both factual claims hold.",
+          "Identifies the false implication: less money each month is not less money, since Loan B costs $381.00 more in total.",
+          "Names a borrower for whom Loan B is right — one who cannot fit $182.10 into a monthly budget and would otherwise default or go without — and says what that costs them."
+        ],
+        "evidenceRequirements": [
+          "Uses the $66.49 payment difference and the $381.00 total interest difference together."
+        ],
+        "lookFors": [
+          "The response separates affordability per month from total cost rather than collapsing them.",
+          "The response does not claim the longer loan is simply a trap."
+        ],
+        "commonMisconception": "Reading an unchanged interest rate as meaning the loan costs the same.",
+        "dimensions": [
+          "tradeoff-defense",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Loan A’s total of payments?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much interest does Loan A cost in total?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Loan B’s total of payments?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much interest does Loan B cost in total?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much lower is Loan B’s monthly payment?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does that lower payment cost in total interest?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "The rate is identical on both loans. What makes Loan B cost more?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "A borrower says Loan B is better because it is \"the same rate for less money each month\". Explain precisely what is true and what is false in that sentence, and name the borrower for whom Loan B really is the better choice."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is Loan A’s total of payments? Answer: $6,555.60. Verification: 36 monthly payments of $182.10, the figure a disclosure calls the total of payments. t1-p2: How much interest does Loan A cost in total? Answer: $555.60. Verification: $6,555.60 repaid against $6,000 borrowed. t1-p3: What is Loan B’s total of payments? Answer: $6,936.60. Verification: 60 monthly payments of $115.61 on the same $6,000 of principal. t1-p4: How much interest does Loan B cost in total? Answer: $936.60. Verification: $6,936.60 repaid against the same $6,000 borrowed. t2-p1: How much lower is Loan B’s monthly payment? Answer: $66.49. Verification: $182.10 against $115.61 each month. t2-p2: What does that lower payment cost in total interest? Answer: $381.00. Verification: $936.60 of interest on Loan B against $555.60 on Loan A, at the same rate. t2-p3: The rate is identical on both loans. What makes Loan B cost more? Answer: A longer term, so the balance is owed for more months. Verification: Both loans state 5.9% APR on $6,000 and no fees are disclosed; the only difference in the two disclosures is 36 months against 60."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: A borrower says Loan B is better because it is \"the same rate for less money each month\". Explain precisely what is true and what is false in that sentence, and name the borrower for whom Loan B really is the better choice. Confirms that the rate really is the same and the monthly payment really is $66.49 lower, so both factual claims hold. Identifies the false implication: less money each month is not less money, since Loan B costs $381.00 more in total. Names a borrower for whom Loan B is right — one who cannot fit $182.10 into a monthly budget and would otherwise default or go without — and says what that costs them. Uses the $66.49 payment difference and the $381.00 total interest difference together. The response separates affordability per month from total cost rather than collapsing them. The response does not claim the longer loan is simply a trap."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Confirms that the rate really is the same and the monthly payment really is $66.49 lower, so both factual claims hold. Identifies the false implication: less money each month is not less money, since Loan B costs $381.00 more in total. Names a borrower for whom Loan B is right — one who cannot fit $182.10 into a monthly budget and would otherwise default or go without — and says what that costs them."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u04-l02.scoring.json",
+    "sourceScoringSha256": "c58c9cfb3cc79089a72010b9da16749e3bde3f6669d02065805d87991a44c48c",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

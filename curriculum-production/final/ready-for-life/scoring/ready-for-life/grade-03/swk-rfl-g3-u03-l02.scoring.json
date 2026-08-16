@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l02",
+  "lessonId": "ma-g3-ready-for-life-u03-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Reset sequence",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Skips one or more of the four reset steps (clear, wipe, gather, safety scan)."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Completes all four reset steps in order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Completes all four steps in order and explains why clearing the surface has to happen before wiping it."
+          }
+        ]
+      },
+      {
+        "dimension": "Safety scan accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cannot name a specific item looked at during the safety scan, such as a stove knob or appliance switch."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names at least one specific stove knob or appliance looked at, without touching it, during the safety scan."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names more than one specific item looked at and explains the specific hazard each one presents."
+          }
+        ]
+      },
+      {
+        "dimension": "List discipline",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Sets out items not on the list, or misses items that were on the list."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Sets out exactly the items on the list, nothing more or less."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Sets out exactly the list items and notices out loud when something is missing before starting."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Clutter is returned to a specific spot, not pushed into a single pile.",
+      "The safety scan happens as a distinct last step before the learner calls the reset finished.",
+      "The learner describes the safety scan as look-only and never reports touching a stove knob or appliance switch."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

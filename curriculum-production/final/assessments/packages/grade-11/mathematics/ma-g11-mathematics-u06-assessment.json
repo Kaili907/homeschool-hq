@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-mathematics-u06-assessment",
+  "courseRef": "ma-g11-mathematics",
+  "grade": 11,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g11-mathematics-u06",
+    "unitNumber": 6,
+    "unitTitle": "Advanced Function Analysis and Graphing",
+    "courseTitle": "Algebra II",
+    "assessmentLessonRef": "ma-g11-mathematics-u06-l16"
+  },
+  "standards": [
+    "F-IF.7",
+    "F-IF.8",
+    "F-IF.9",
+    "MP.5"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u06-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "The function f(x) = (x − 4)² − 3 opens upward. State its minimum value and where it occurs.",
+      "choices": [
+        "minimum 4 at x = -3",
+        "minimum 3 at x = 4",
+        "minimum -3 at x = 4",
+        "minimum -3 at x = -4"
+      ],
+      "standardRef": "F-IF.8"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A polynomial has degree 3 and leading coefficient 3. Describe its end behaviour.",
+      "choices": [
+        "the left end falls and the right end rises",
+        "the left end rises and the right end falls",
+        "both ends rise",
+        "both ends fall"
+      ],
+      "standardRef": "F-IF.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "For f(x) = (x + 5) / (x − 3), state the vertical asymptote and the horizontal asymptote.",
+      "choices": [
+        "vertical x = 3; horizontal y = 1",
+        "vertical x = -5; horizontal y = 1",
+        "vertical x = 3; horizontal y = -5/3",
+        "vertical x = 3; horizontal y = 0"
+      ],
+      "standardRef": "F-IF.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Function f is given in vertex form as f(x) = −3(x − 3)² − 6, so it opens downward. Function g is given by a table whose greatest output is -3. Which function has the greater maximum, and by how much?",
+      "choices": [
+        "g, by 3",
+        "g, by -3",
+        "g, by -6",
+        "g, by -9"
+      ],
+      "standardRef": "F-IF.9"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "The function f(x) = (x − 1)² + 5 opens upward. State its minimum value and where it occurs.",
+      "choices": [
+        "minimum -5 at x = 1",
+        "minimum 5 at x = -1",
+        "minimum 5 at x = 1",
+        "minimum 1 at x = 5"
+      ],
+      "standardRef": "F-IF.8"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A polynomial has degree 2 and leading coefficient -5. Describe its end behaviour.",
+      "choices": [
+        "the left end rises and the right end falls",
+        "both ends fall",
+        "both ends rise",
+        "the left end falls and the right end rises"
+      ],
+      "standardRef": "F-IF.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "For f(x) = (x − 6) / (x + 5), state the vertical asymptote and the horizontal asymptote.",
+      "choices": [
+        "vertical x = -5; horizontal y = -6/5",
+        "vertical x = -5; horizontal y = 1",
+        "vertical x = -5; horizontal y = 0",
+        "vertical x = 6; horizontal y = 1"
+      ],
+      "standardRef": "F-IF.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Function f is given in vertex form as f(x) = −2(x + 6)² + 8, so it opens downward. Function g is given by a table whose greatest output is 10. Which function has the greater maximum, and by how much?",
+      "choices": [
+        "g, by 18",
+        "g, by 2",
+        "g, by 8",
+        "g, by 10"
+      ],
+      "standardRef": "F-IF.9"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "The function f(x) = (x − 5)² + 3 opens upward. State its minimum value and where it occurs.",
+      "choices": [
+        "minimum 5 at x = 3",
+        "minimum 3 at x = -5",
+        "minimum 3 at x = 5",
+        "minimum -3 at x = 5"
+      ],
+      "standardRef": "F-IF.8"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "A polynomial has degree 3 and leading coefficient -1. Describe its end behaviour.",
+      "choices": [
+        "both ends fall",
+        "the left end rises and the right end falls",
+        "the left end falls and the right end rises",
+        "both ends rise"
+      ],
+      "standardRef": "F-IF.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "For f(x) = (x + 5) / (x + 1), state the vertical asymptote and the horizontal asymptote.",
+      "choices": [
+        "vertical x = -1; horizontal y = 1",
+        "vertical x = -1; horizontal y = 5",
+        "vertical x = -5; horizontal y = 1",
+        "vertical x = -1; horizontal y = 0"
+      ],
+      "standardRef": "F-IF.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u06-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Function f is given in vertex form as f(x) = −2(x + 5)² − 6, so it opens downward. Function g is given by a table whose greatest output is -5. Which function has the greater maximum, and by how much?",
+      "choices": [
+        "g, by -11",
+        "g, by 1",
+        "g, by -5",
+        "g, by -6"
+      ],
+      "standardRef": "F-IF.9"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/mathematics/ma-g11-mathematics-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-mathematics-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u06-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Advanced Function Analysis and Graphing?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

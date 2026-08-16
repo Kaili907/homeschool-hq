@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l11",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l11",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 11,
+    "courseDay": 29,
+    "phase": "Concept extension",
+    "focus": "unknown-factor problems and fact families",
+    "title": "Concept extension: unknown-factor problems and fact families"
+  },
+  "standards": [
+    "3.OA.4",
+    "3.OA.6"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "unknown-number-in-equation",
+          "standard": "3.OA.4",
+          "difficulty": 1,
+          "prompt": "Find the missing number: 7 × ? = 42",
+          "workedSolution": {
+            "steps": [
+              "42 ÷ 7 = 6.",
+              "Check: 7 × 6 = 42."
+            ],
+            "answer": "6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "Find 18 ÷ 6 by thinking: 6 × ? = 18.",
+          "choices": [
+            "18",
+            "12",
+            "6",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "unknown-number-in-equation",
+          "standard": "3.OA.4",
+          "difficulty": 3,
+          "prompt": "Find the missing number: ? × 8 = 64",
+          "choices": [
+            "9",
+            "56",
+            "8",
+            "64"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "Find 27 ÷ 9 by thinking: 9 × ? = 27.",
+          "choices": [
+            "3",
+            "18",
+            "27",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "unknown-number-in-equation",
+          "standard": "3.OA.4",
+          "difficulty": 2,
+          "prompt": "Find the missing number: 2 × ? = 10",
+          "choices": [
+            "2",
+            "10",
+            "8",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "Find 14 ÷ 7 by thinking: 7 × ? = 14.",
+          "choices": [
+            "3",
+            "14",
+            "2",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "unknown-number-in-equation",
+          "standard": "3.OA.4",
+          "difficulty": 3,
+          "prompt": "Find the missing number: ? × 6 = 18",
+          "choices": [
+            "18",
+            "12",
+            "6",
+            "3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "Find 25 ÷ 5 by thinking: 5 × ? = 25.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "unknown-number-in-equation",
+          "standard": "3.OA.4",
+          "difficulty": 3,
+          "prompt": "Find the missing number: 7 × ? = 49",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l11"
+  }
+}

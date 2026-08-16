@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u02-l04",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rigid Motions and Transformations",
+    "dayInUnit": 4,
+    "courseDay": 22,
+    "phase": "Independent application A",
+    "focus": "definitions of rotation, reflection, and translation",
+    "title": "Independent application A: definitions of rotation, reflection, and translation"
+  },
+  "standards": [
+    "G-CO.2",
+    "G-CO.3",
+    "G-CO.4",
+    "G-CO.5",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 1,
+          "prompt": "Reflect (3, 5) across the y-axis.",
+          "workedSolution": {
+            "steps": [
+              "Negate x, keep y.",
+              "(−3, 5)."
+            ],
+            "answer": "(−3, 5)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Rotate the point (-1, 5) counterclockwise about the origin by 270°. Give the image.",
+          "choices": [
+            "(1, -5)",
+            "(5, 1)",
+            "(-5, -1)",
+            "(5, -1)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 2,
+          "prompt": "A regular polygon has 5 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "4 rotations; smallest angle 108°",
+            "5 rotations; smallest angle 72°",
+            "4 rotations; smallest angle 36°",
+            "4 rotations; smallest angle 72°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 2,
+          "prompt": "Triangle ABC has vertices A(4, -5) and B(-5, -4). After a transformation the images are A′(-4, 5) and B′(5, 4), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "choices": [
+            "a 180° rotation about the origin",
+            "a reflection across the y-axis",
+            "a reflection across the x-axis",
+            "a translation by ⟨-8, 10⟩"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 3,
+          "prompt": "Point P(-1, -8) is translated by the rule (x, y) → (x + 8, y + 12). Give the image P′.",
+          "choices": [
+            "(7, 4)",
+            "(11, 0)",
+            "(-9, -20)",
+            "(4, 7)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Reflect the point (-2, 3) across the x-axis. Give the image.",
+          "choices": [
+            "(2, -3)",
+            "(3, -2)",
+            "(-2, -3)",
+            "(2, 3)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Rotate the point (10, 12) counterclockwise about the origin by 90°. Give the image.",
+          "choices": [
+            "(-10, -12)",
+            "(12, -10)",
+            "(-12, 10)",
+            "(12, 10)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 3,
+          "prompt": "A regular polygon has 10 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "9 rotations; smallest angle 144°",
+            "9 rotations; smallest angle 36°",
+            "10 rotations; smallest angle 36°",
+            "9 rotations; smallest angle 18°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has vertices A(-10, -5) and B(-5, 10). After a transformation the images are A′(10, 5) and B′(5, -10), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "choices": [
+            "a translation by ⟨20, 10⟩",
+            "a 180° rotation about the origin",
+            "a reflection across the x-axis",
+            "a reflection across the y-axis"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 2,
+          "prompt": "Point P(3, 3) is translated by the rule (x, y) → (x − 2, y − 1). Give the image P′.",
+          "choices": [
+            "(1, 4)",
+            "(5, 4)",
+            "(1, 2)",
+            "(2, 1)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Reflect the point (-3, -6) across the line y = x. Give the image.",
+          "choices": [
+            "(3, -6)",
+            "(-3, 6)",
+            "(-6, -3)",
+            "(3, 6)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Rotate the point (-3, 7) counterclockwise about the origin by 270°. Give the image.",
+          "choices": [
+            "(3, -7)",
+            "(-7, -3)",
+            "(7, 3)",
+            "(7, -3)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u02-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u02-l04"
+  }
+}

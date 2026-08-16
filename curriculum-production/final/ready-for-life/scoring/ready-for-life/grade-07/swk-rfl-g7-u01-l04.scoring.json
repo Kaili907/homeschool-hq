@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l04",
+  "lessonId": "ma-g7-ready-for-life-u01-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Starting technique selection",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The technique chosen is not named, or the first action written is vague, such as 'start working,' rather than a specific physical step."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific technique is chosen and justified for the task, and the first action is written as a concrete, physical, sub-minute step."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains specifically why the other technique would have fit this particular task less well."
+          }
+        ]
+      },
+      {
+        "dimension": "Real task initiation and follow-through",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The task is not actually started, or what happened after the timer or first step is not reported."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The task is actually started today using the chosen technique, and the learner reports specifically what happened once the timer or first step ended."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names a specific factor, not a vague feeling, that helped or blocked continuing past the first step."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The task named is a real, currently stalled task, not an invented example.",
+      "The report of what happened after starting is specific to this attempt, not a general statement about motivation.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

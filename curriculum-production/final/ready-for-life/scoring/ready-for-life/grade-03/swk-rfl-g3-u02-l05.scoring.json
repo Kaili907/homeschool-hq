@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l05",
+  "lessonId": "ma-g3-ready-for-life-u02-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Independence (unprompted start)",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner needs a reminder or direct prompt from an adult before starting any part of the routine."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner starts and completes the whole routine on their own, without a reminder, confirmed by the adult the next morning."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner starts the routine earlier in the evening than the minimum needed, leaving spare time."
+          }
+        ]
+      },
+      {
+        "dimension": "Weather-matched completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The outfit set out is missing a piece the weather requires, such as a needed jacket, or includes an item that is not actually clean."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The full outfit, shoes, and one bag item are set out, matching the weather, and every piece is confirmed clean."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names the specific weather detail (temperature or precipitation) that drove a layering choice."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The adult confirmation happens the next morning, not the night the routine was set up.",
+      "The reflection response names a specific rushed or unrushed detail from a real morning, not a general feeling statement."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

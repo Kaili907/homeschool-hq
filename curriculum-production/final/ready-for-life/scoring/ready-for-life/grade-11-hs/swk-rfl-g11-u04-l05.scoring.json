@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l05",
+  "lessonId": "ma-g11-ready-for-life-u04-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Checklist specificity and completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Items are vague or general ('check if clean') and/or fewer than four areas are covered." },
+          { "label": "Proficient", "descriptor": "All four areas are covered with at least two specific, verifiable items each." },
+          { "label": "Advanced", "descriptor": "Items are specific enough that two different people checking the same item would reach the same conclusion." }
+        ]
+      },
+      {
+        "dimension": "Deposit-protection reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Explanation doesn't connect documentation to deposit outcomes, or restates the deposit's dollar amount without reasoning." },
+          { "label": "Proficient", "descriptor": "Explanation clearly connects move-out documentation to protecting the deposit, using Jordan's situation." },
+          { "label": "Advanced", "descriptor": "Explanation also names what could go wrong without documentation, such as a dispute with no written record to point to." }
+        ]
+      },
+      {
+        "dimension": "Practical follow-through",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names an item without a workable plan to remember it." },
+          { "label": "Proficient", "descriptor": "Reflection names a specific item and a specific, workable plan to avoid skipping it." },
+          { "label": "Advanced", "descriptor": "The plan is concrete enough to actually execute, tied to a specific moment in the packing process, not just a general intention." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All four areas (kitchen, bathroom, bedroom, main living space) have specific items, not restated generic language.",
+      "The deposit-protection explanation references Jordan's specific lease terms.",
+      "Jordan's scenario is treated as fictional throughout; no real move is referenced."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

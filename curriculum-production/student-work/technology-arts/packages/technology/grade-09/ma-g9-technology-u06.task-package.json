@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "unit_id": "ma-g9-technology-u06",
+  "source_course_id": "ma-g9-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 9,
+  "grade_dir": "grade-09",
+  "unit_number": 6,
+  "unit_title": "Foundations Project and Impact Review",
+  "task_type": "debugging_and_testing",
+  "task_label": "Debugging and testing task",
+  "essential_question": "What evidence should accompany software before anyone else relies on it?",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Impacts of Computing"
+  ],
+  "estimated_days": 6,
+  "project_brief": "Deliver a foundations software project with version history, test evidence, an accessibility audit, and a privacy and security review. This is the grade 9 culminating project for \"Foundations Project and Impact Review\" (ma-g9-technology-u06, unit 6), built around project scoping and success criteria, version control and iterative build history, test evidence and defect closure, accessibility verification, and privacy security and data minimization review. Work from a supplied, intentionally broken example related to project scoping and success criteria, version control and iterative build history, test evidence and defect closure, and accessibility verification. Reproduce the failure, isolate the smallest case that triggers it, fix the underlying cause (not just the symptom), and keep a short defect log documenting what was wrong and how you know it is fixed now.",
+  "requirements": [
+    "Address every topic listed for this unit: project scoping and success criteria, version control and iterative build history, test evidence and defect closure, accessibility verification, privacy security and data minimization review, and documentation and handoff.",
+    "Meet the performance task as written: Deliver a foundations software project with version history, test evidence, an accessibility audit, and a privacy and security review.",
+    "Show your work or process, not just a final result — a process note, sketch log, commit history, or draft trail.",
+    "Complete the checklist in this package before submitting."
+  ],
+  "primary_task": "Work from a supplied, intentionally broken example related to project scoping and success criteria, version control and iterative build history, test evidence and defect closure, and accessibility verification. Reproduce the failure, isolate the smallest case that triggers it, fix the underlying cause (not just the symptom), and keep a short defect log documenting what was wrong and how you know it is fixed now.",
+  "test_or_check_criteria": [
+    "Every claim or design choice in the submission can be traced to project scoping and success criteria or another named topic from this unit — nothing is left unexplained.",
+    "The submission runs, displays, or demonstrates correctly on at least two different sample inputs or scenarios the student chooses.",
+    "No real password, API key, account credential, precise location, or other real personal/system data appears anywhere in the submission — fictional or sandbox examples only.",
+    "The student can explain, in their own words, why each step or decision was made, not just that it works.",
+    "A defect log lists each bug found, its symptom, its root cause, and the specific change that fixed it.",
+    "At least one test existed (or was written) that failed before the fix and passes after it, proving the fix actually worked."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "This project never touches a real account, a real password or API key, a live production system, or another person's real data. Use fictional names, sandbox environments, local files, or already-approved sample data throughout. Submit code, screenshots of your own sandbox, diagrams, or a written walkthrough — a live public deployment is never required."
+  },
+  "copyright_and_authorship": "The final submitted work must remain your own authorship. A parent, tutor, or AI assistant may help you plan, explain a concept, demonstrate a technique, or give feedback on a draft, but may not produce the graded work itself. Never request, store, or submit a real password, API key, access token, or other real credential; use only fictional accounts and sandboxed or offline systems.",
+  "remediation": "If the project stalls, step back to the smallest version of the task: rebuild just the part covering project scoping and success criteria in isolation, using a worked example from this unit as a model, then re-attach it to the full project once that smaller piece works and you can explain why.",
+  "extension": "Once the core project is working, extend it to handle a new constraint or edge case related to version control and iterative build history, or compare two different approaches to the same problem and explain the real tradeoff between them in your own words."
+}

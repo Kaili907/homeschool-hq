@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l02",
+  "lessonId": "ma-g8-ready-for-life-u06-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Budget-to-calendar linkage",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Categories are matched to calendar blocks arbitrarily or left unmatched, with no stated reasoning."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each budget category is matched to a specific calendar block with a stated reason."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and at least one match reflects a specific, non-obvious connection (for example, tying savings to a specific recurring day) rather than the most obvious pairing."
+          }
+        ]
+      },
+      {
+        "dimension": "Income and hours plausibility check",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No math is shown connecting work-block hours to the $1,800 fictional income, or the math contains an unexplained error."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Math shown correctly connects a chosen hourly wage and the persona's work-block hours to a plausible monthly total near $1,800."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and when the numbers do not line up, the learner proposes one specific, workable change to either the calendar or the budget template."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All dollar figures used are the provided fictional round numbers or the learner's own invented hourly wage - no real family income or account figures appear anywhere.",
+      "The expense total-vs-income comparison in task 1 is arithmetically correct."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

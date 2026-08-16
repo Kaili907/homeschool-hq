@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u07-l14",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u07-l14",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Functions: Concept, Notation, and Interpretation",
+    "dayInUnit": 14,
+    "courseDay": 122,
+    "phase": "Transfer challenge",
+    "focus": "domain, range, and function notation",
+    "title": "Transfer challenge: domain, range, and function notation"
+  },
+  "standards": [
+    "F-IF.1",
+    "F-IF.2",
+    "F-IF.3",
+    "F-IF.4",
+    "F-IF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 1,
+          "prompt": "Is {(1,2),(1,3)} a function?",
+          "workedSolution": {
+            "steps": [
+              "Input 1 appears twice with different outputs.",
+              "That violates the definition."
+            ],
+            "answer": "No"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 3,
+          "prompt": "A machine starts with 95 components and consumes 2 per hour. It can run for at most 28 hours. What is the domain of C(h) = 95 − 2h in this context?",
+          "choices": [
+            "0 ≤ h ≤ 95",
+            "0 ≤ h ≤ 28",
+            "h ≥ 0",
+            "all real numbers"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = 8 and a(n) = a(n − 1) + 4 for n > 1. Find a(23).",
+          "choices": [
+            "100",
+            "-80",
+            "736",
+            "96"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a cooling object’s temperature flattens out towards a horizontal line. Which feature is this, and what does it mean?",
+          "choices": [
+            "a maximum, giving the hottest temperature",
+            "a zero, giving the time the object freezes",
+            "an end behaviour approaching the surrounding temperature",
+            "an interval of increase"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = -1x² + 5x + 3, find f(6).",
+          "choices": [
+            "27",
+            "69",
+            "-3",
+            "-6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 3,
+          "prompt": "Does the set {(1, 3), (2, 5), (3, 7), (4, 9)} define y as a function of x? Justify the decision.",
+          "choices": [
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "No; the input 1 is paired with both 3 and 8.",
+            "Yes; each input appears once, so each has exactly one output.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 3,
+          "prompt": "A machine starts with 100 components and consumes 2 per hour. It can run for at most 21 hours. What is the domain of C(h) = 100 − 2h in this context?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = -7 and a(n) = a(n − 1) − 3 for n > 1. Find a(19).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time reaches its highest point. Which feature is this, and what does it mean?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u07-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u07-l14"
+  }
+}

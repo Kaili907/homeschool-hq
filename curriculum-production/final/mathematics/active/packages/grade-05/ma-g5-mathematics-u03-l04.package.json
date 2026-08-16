@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u03-l04",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multi-Digit Multiplication",
+    "dayInUnit": 4,
+    "courseDay": 40,
+    "phase": "Independent application A",
+    "focus": "standard multiplication algorithm",
+    "title": "Independent application A: standard multiplication algorithm"
+  },
+  "standards": [
+    "5.NBT.5",
+    "5.OA.1",
+    "5.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-grouped-expression",
+          "standard": "5.OA.1",
+          "difficulty": 1,
+          "prompt": "Evaluate [8 + (3 × 4)] × 2.",
+          "workedSolution": {
+            "steps": [
+              "Evaluate the parentheses first: 3 × 4 = 12.",
+              "Evaluate the brackets: 8 + 12 = 20.",
+              "Multiply 20 × 2 to get 40."
+            ],
+            "answer": "40"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Without evaluating it, which statement describes (41 × 4) + 7?",
+          "choices": [
+            "Add 7 to the product of 41 and 4.",
+            "Add 41 and the product of 4 and 7.",
+            "Multiply the sum of 41 and 4 by 7.",
+            "Multiply 41 by the sum of 4 and 7."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-multiplication",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "For 6 event days, a booth sells 36 tickets each day at $6 per ticket. What projected revenue will the booth earn?",
+          "choices": [
+            "$1296",
+            "$1302",
+            "$252",
+            "$216"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Maya has 255 cards, which is 5 times as many as Leo. How many cards does Leo have?",
+          "choices": [
+            "250",
+            "56",
+            "260",
+            "51"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "area-model-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "An area model for 4642 × 81 splits 4642 into 4000 + 600 + 40 + 2 and 81 into 80 + 1. What total product does the model represent?",
+          "choices": [
+            "37136",
+            "371360",
+            "376083",
+            "376002"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "partial-products",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use partial products to calculate 8266 × 61. Decompose both factors by place value, multiply each pair of parts, and add the partial products. What is the product?",
+          "choices": [
+            "8266",
+            "504165",
+            "504226",
+            "495960"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "standard-algorithm",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use the standard multiplication algorithm to calculate 3343 × 14.",
+          "choices": [
+            "13372",
+            "46788",
+            "3343",
+            "46802"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Estimate 2556 × 664 by rounding 2556 to the nearest thousand and 664 to the nearest hundred.",
+          "choices": [
+            "1992000",
+            "1789200",
+            "2100000",
+            "2200000"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "write-grouped-expression",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Add 89 and 23. Add 9 and 5. Then multiply the two sums. Which numerical expression represents the calculation?",
+          "choices": [
+            "(89 × 23) + (9 × 5)",
+            "(89 + 23) × (9 + 5)",
+            "89 + (23 × 9) + 5",
+            "(89 + 23 + 9) × 5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-grouped-expression",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "Evaluate: [7 + (12 × 2)] × 3",
+          "choices": [
+            "83",
+            "94",
+            "92",
+            "93"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Without evaluating it, which statement describes (54 - 9) × 5?",
+          "choices": [
+            "Subtract 9 from the product of 54 and 5.",
+            "Multiply the difference between 9 and 54 by 5.",
+            "Subtract the product of 9 and 5 from 54.",
+            "Multiply the difference between 54 and 9 by 5."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-multiplication",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "For 7 event days, a booth sells 179 tickets each day at $23 per ticket. What projected revenue will the booth earn?",
+          "choices": [
+            "$1414",
+            "$4117",
+            "$1253",
+            "$28819"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u03-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u03-l04"
+  }
+}

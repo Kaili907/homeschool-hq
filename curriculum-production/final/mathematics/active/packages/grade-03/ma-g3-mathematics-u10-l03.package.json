@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l03",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 3,
+    "courseDay": 165,
+    "phase": "Concept build B",
+    "focus": "finding an unknown side length from a known perimeter",
+    "title": "Concept build B: finding an unknown side length from a known perimeter"
+  },
+  "standards": [
+    "3.MD.8"
+  ],
+  "blueprint": {
+    "phase": "Concept build B",
+    "profile": "concept-build-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 1,
+          "prompt": "A rectangular field is 9 ft long and 5 ft wide. What is its perimeter?",
+          "workedSolution": {
+            "steps": [
+              "2 × (9 + 5) = 2 × 14 = 28."
+            ],
+            "answer": "28 ft"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 1,
+          "prompt": "A rectangular field is 5 m long and 5 m wide. What is its perimeter?",
+          "choices": [
+            "20 m",
+            "10 m",
+            "21 m",
+            "25 m"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 5 in long and 4 in wide. What is its perimeter?",
+          "choices": [
+            "9 in",
+            "19 in",
+            "18 in",
+            "20 in"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 7 cm long and 8 cm wide. What is its perimeter?",
+          "choices": [
+            "15 cm",
+            "31 cm",
+            "56 cm",
+            "30 cm"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 8 m long and 5 m wide. What is its perimeter?",
+          "choices": [
+            "40 m",
+            "13 m",
+            "27 m",
+            "26 m"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 7 m long and 7 m wide. What is its perimeter?",
+          "choices": [
+            "28 m",
+            "49 m",
+            "29 m",
+            "14 m"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 8 cm long and 12 cm wide. What is its perimeter?",
+          "choices": [
+            "41 cm",
+            "96 cm",
+            "40 cm",
+            "20 cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l03#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 11 ft long and 11 ft wide. What is its perimeter?",
+          "choices": [
+            "45 ft",
+            "22 ft",
+            "121 ft",
+            "44 ft"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 8 in long and 5 in wide. What is its perimeter?",
+          "choices": [
+            "40 in",
+            "26 in",
+            "27 in",
+            "13 in"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 13 m long and 3 m wide. What is its perimeter?",
+          "choices": [
+            "32 m",
+            "16 m",
+            "33 m",
+            "39 m"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l03"
+  }
+}

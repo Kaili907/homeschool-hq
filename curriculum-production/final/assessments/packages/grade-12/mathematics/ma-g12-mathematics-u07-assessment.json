@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-mathematics-u07-assessment",
+  "courseRef": "ma-g12-mathematics",
+  "grade": 12,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g12-mathematics-u07",
+    "unitNumber": 7,
+    "unitTitle": "Matrices, Transformations, and Systems",
+    "courseTitle": "Precalculus with Statistics",
+    "assessmentLessonRef": "ma-g12-mathematics-u07-l16"
+  },
+  "standards": [
+    "N-VM.6",
+    "N-VM.7",
+    "N-VM.8",
+    "N-VM.9",
+    "N-VM.10",
+    "N-VM.11",
+    "N-VM.12",
+    "A-REI.8",
+    "A-REI.9",
+    "MP.5"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u07-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "For M = [[5, 5], [-4, -4]], find det(M) and state whether M is invertible.",
+      "choices": [
+        "det(M) = 0; M is not invertible",
+        "det(M) = -40; M is invertible",
+        "det(M) = 4; M is invertible",
+        "det(M) = 2; M is invertible"
+      ],
+      "standardRef": "N-VM.10"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "The matrix [[1, -2], [3, -3]] is applied to a region of area 2. Find the area of the image.",
+      "choices": [
+        "6",
+        "7",
+        "2",
+        "3"
+      ],
+      "standardRef": "N-VM.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Compute 2·[[5, 4], [-5, 4]].",
+      "choices": [
+        "[[10, 4], [-5, 4]]",
+        "[[10, 8], [-5, 4]]",
+        "[[7, 6], [-3, 6]]",
+        "[[10, 8], [-10, 8]]"
+      ],
+      "standardRef": "N-VM.7"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Compute [[-3, -4], [3, -4]]·⟨1, -1⟩.",
+      "choices": [
+        "⟨1, 7⟩",
+        "⟨7, 1⟩",
+        "⟨-3, 4⟩",
+        "⟨-6, 0⟩"
+      ],
+      "standardRef": "N-VM.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "For M = [[-4, -3], [-4, -1]], find det(M) and state whether M is invertible.",
+      "choices": [
+        "det(M) = -8; M is invertible",
+        "det(M) = 16; M is invertible",
+        "det(M) = 13; M is invertible",
+        "det(M) = -7; M is invertible"
+      ],
+      "standardRef": "N-VM.10"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "The matrix [[-1, -3], [-4, -3]] is applied to a region of area 5. Find the area of the image.",
+      "choices": [
+        "45",
+        "5",
+        "-45",
+        "9"
+      ],
+      "standardRef": "N-VM.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Compute -2·[[7, -9], [-7, 6]].",
+      "choices": [
+        "[[-14, 18], [-7, 6]]",
+        "[[-14, -9], [-7, 6]]",
+        "[[5, -11], [-9, 4]]",
+        "[[-14, 18], [14, -12]]"
+      ],
+      "standardRef": "N-VM.7"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Compute [[-2, 6], [-3, -7]]·⟨5, -7⟩.",
+      "choices": [
+        "⟨11, 79⟩",
+        "⟨34, -52⟩",
+        "⟨-52, 34⟩",
+        "⟨-10, 49⟩"
+      ],
+      "standardRef": "N-VM.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "For M = [[-7, 2], [7, -2]], find det(M) and state whether M is invertible.",
+      "choices": [
+        "det(M) = -45; M is invertible",
+        "det(M) = 2; M is invertible",
+        "det(M) = 0; M is not invertible",
+        "det(M) = 28; M is invertible"
+      ],
+      "standardRef": "N-VM.10"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "The matrix [[2, -1], [-5, 3]] is applied to a region of area 18. Find the area of the image.",
+      "choices": [
+        "1",
+        "19",
+        "18",
+        "17"
+      ],
+      "standardRef": "N-VM.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "Compute 2·[[-1, -1], [-9, 4]].",
+      "choices": [
+        "[[-2, -1], [-9, 4]]",
+        "[[-2, -2], [-9, 4]]",
+        "[[1, 1], [-7, 6]]",
+        "[[-2, -2], [-18, 8]]"
+      ],
+      "standardRef": "N-VM.7"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u07-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Compute [[6, 5], [-3, 3]]·⟨7, -5⟩.",
+      "choices": [
+        "⟨17, -36⟩",
+        "⟨42, -15⟩",
+        "⟨-36, 17⟩",
+        "⟨57, 20⟩"
+      ],
+      "standardRef": "N-VM.11"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/mathematics/ma-g12-mathematics-u07-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-mathematics-u07-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u07-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Matrices, Transformations, and Systems?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u01-l06",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits, Place Value, and Rounding",
+    "dayInUnit": 6,
+    "courseDay": 6,
+    "phase": "Concept build C",
+    "focus": "addition within 1,000 by decomposing place values",
+    "title": "Concept build C: addition within 1,000 by decomposing place values"
+  },
+  "standards": [
+    "3.NBT.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Concept build C",
+    "profile": "concept-build-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 1,
+          "prompt": "A bakery made 248 rolls, then made 175 more. How many rolls in all?",
+          "workedSolution": {
+            "steps": [
+              "248 + 175.",
+              "Add ones: 8 + 5 = 13, regroup 1 ten.",
+              "Add tens: 4 + 7 + 1 = 12, regroup 1 hundred.",
+              "Add hundreds: 2 + 1 + 1 = 4.",
+              "Total: 423."
+            ],
+            "answer": "423"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A farm had 632 apples. 268 apples were given away. How many apples are left?",
+          "choices": [
+            "374",
+            "364",
+            "464",
+            "900"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A school had 181 pencils. They received 283 more pencils. How many pencils are there now?",
+          "choices": [
+            "474",
+            "454",
+            "-102",
+            "464"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A toy store had 620 stickers. 128 stickers were given away. How many stickers are left?",
+          "choices": [
+            "492",
+            "748",
+            "502",
+            "592"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A library had 306 books. They received 162 more books. How many books are there now?",
+          "choices": [
+            "458",
+            "478",
+            "468",
+            "144"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A toy store had 662 stickers. 83 stickers were given away. How many stickers are left?",
+          "choices": [
+            "589",
+            "679",
+            "579",
+            "745"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A school had 431 pencils. They received 158 more pencils. How many pencils are there now?",
+          "choices": [
+            "579",
+            "599",
+            "273",
+            "589"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A toy store had 406 stickers. 37 stickers were given away. How many stickers are left?",
+          "choices": [
+            "443",
+            "379",
+            "469",
+            "369"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A school had 574 pencils. They received 323 more pencils. How many pencils are there now?",
+          "choices": [
+            "897",
+            "251",
+            "907",
+            "887"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A farm had 708 apples. 570 apples were given away. How many apples are left?",
+          "choices": [
+            "238",
+            "148",
+            "1278",
+            "138"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u01-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u01-l06"
+  }
+}

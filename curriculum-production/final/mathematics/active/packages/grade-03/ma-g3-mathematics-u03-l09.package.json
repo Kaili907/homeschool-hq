@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l09",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l09",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 9,
+    "courseDay": 45,
+    "phase": "Retrieval and fluency",
+    "focus": "mixed products within 100",
+    "title": "Retrieval and fluency: mixed products within 100"
+  },
+  "standards": [
+    "3.OA.7"
+  ],
+  "blueprint": {
+    "phase": "Retrieval and fluency",
+    "profile": "retrieval-and-fluency",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 4 × 4.",
+          "choices": [
+            "12",
+            "8",
+            "20",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 25 ÷ 5.",
+          "choices": [
+            "6",
+            "4",
+            "5",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 3 × 7.",
+          "choices": [
+            "21",
+            "24",
+            "10",
+            "18"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 8 ÷ 2.",
+          "choices": [
+            "2",
+            "4",
+            "6",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 3 × 2.",
+          "choices": [
+            "6",
+            "9",
+            "5",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l09#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 15 ÷ 3.",
+          "choices": [
+            "3",
+            "12",
+            "6",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l09#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 8 × 6.",
+          "choices": [
+            "40",
+            "48",
+            "56",
+            "14"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 30 ÷ 6.",
+          "choices": [
+            "24",
+            "5",
+            "6",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 2 × 4.",
+          "choices": [
+            "9",
+            "6",
+            "10",
+            "8"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l09"
+  }
+}

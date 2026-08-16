@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l01",
+  "lessonId": "ma-g4-ready-for-life-u02-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Sorting accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Items are sorted by only one rule (color or fabric), or several items are placed in a group that does not match their actual color or fabric type."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The full pile is correctly sorted by both color and fabric type in two separate, complete passes."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner accurately tracks which items shifted between different-seeming groups across the two sorts."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about the tricky item",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The chosen item and rule are named, but the explanation of risk (damage or discoloration) is vague or missing."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The explanation names a specific risk, such as dye transfer or shrinking, tied to the item and the rule that matters most for it."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner connects the reasoning back to why a fabric-type sort catches something a color-only sort would miss."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The trickiest item named in the warm-up matches the item discussed in the independent task.",
+      "The reflection response uses a specific reason, not a general statement like 'fabric matters too.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

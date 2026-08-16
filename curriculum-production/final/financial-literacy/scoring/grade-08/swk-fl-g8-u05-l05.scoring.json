@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u05-l05",
+  "lessonId": "ma-g8-financial-literacy-u05-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What does the higher fee cost in one year?",
+        "answer": "$600.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1.2% of 50,000.00) = 600.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 5000000
+            },
+            "bps": 120,
+            "round": "exact"
+          },
+          "trace": "(1.2% of 50,000.00) = 600.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What does the 0.1% fee cost in one year?",
+        "answer": "$50.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(0.1% of 50,000.00) = 50.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 5000000
+            },
+            "bps": 10,
+            "round": "exact"
+          },
+          "trace": "(0.1% of 50,000.00) = 50.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is the annual difference between the two fees?",
+        "answer": "$550.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((1.2% of 50,000.00) - (0.1% of 50,000.00)) = 550.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 5000000
+              },
+              "bps": 120,
+              "round": "exact"
+            },
+            "less": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 5000000
+              },
+              "bps": 10,
+              "round": "exact"
+            }
+          },
+          "trace": "((1.2% of 50,000.00) - (0.1% of 50,000.00)) = 550.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What does the higher fee cost over ten years?",
+        "answer": "$6,000.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((1.2% of 50,000.00) x 10) = 6,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 5000000
+              },
+              "bps": 120,
+              "round": "exact"
+            },
+            "times": 10
+          },
+          "trace": "((1.2% of 50,000.00) x 10) = 6,000.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much more is that than ten years of the lower fee?",
+        "answer": "$5,500.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(((1.2% of 50,000.00) x 10) - ((0.1% of 50,000.00) x 10)) = 5,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 5000000
+                },
+                "bps": 120,
+                "round": "exact"
+              },
+              "times": 10
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 5000000
+                },
+                "bps": 10,
+                "round": "exact"
+              },
+              "times": 10
+            }
+          },
+          "trace": "(((1.2% of 50,000.00) x 10) - ((0.1% of 50,000.00) x 10)) = 5,500.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Weighing fees and conflicts of interest",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Tavish's fees as too small to matter."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The fee gap is computed for Tavish but the conflict question is not addressed."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response uses Tavish's ten-year gap to show fees are certain while performance is not, and explains that commission-based advice creates an incentive that may not align with the client."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the higher fee cost in one year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the 0.1% fee cost in one year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the annual difference between the two fees?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the higher fee cost over ten years?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much more is that than ten years of the lower fee?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain how Tavish should weigh a fee difference against a promise of better performance, and what conflict arises when an adviser is paid more for recommending certain products."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the higher fee cost in one year? Answer: $600.00. Verification: (1.2% of 50,000.00) = 600.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What does the 0.1% fee cost in one year? Answer: $50.00. Verification: (0.1% of 50,000.00) = 50.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What is the annual difference between the two fees? Answer: $550.00. Verification: ((1.2% of 50,000.00) - (0.1% of 50,000.00)) = 550.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What does the higher fee cost over ten years? Answer: $6,000.00. Verification: ((1.2% of 50,000.00) x 10) = 6,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How much more is that than ten years of the lower fee? Answer: $5,500.00. Verification: (((1.2% of 50,000.00) x 10) - ((0.1% of 50,000.00) x 10)) = 5,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Weighing fees and conflicts of interest — Not yet: The response treats Tavish's fees as too small to matter. Approaching: The fee gap is computed for Tavish but the conflict question is not addressed. Meets: The response uses Tavish's ten-year gap to show fees are certain while performance is not, and explains that commission-based advice creates an incentive that may not align with the client. The response uses Tavish's ten-year gap to show fees are certain while performance is not, and explains that commission-based advice creates an incentive that may not align with the client."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response uses Tavish's ten-year gap to show fees are certain while performance is not, and explains that commission-based advice creates an incentive that may not align with the client."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u05-l05.scoring.json",
+    "sourceScoringSha256": "472e9c8085b2e5175294dc0059cf40aaee8a55c6b389ebb1fd90a28d509044b6",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

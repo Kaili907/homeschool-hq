@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l05",
+  "lessonId": "ma-g5-ready-for-life-u04-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Storage decision accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Storage method is wrong for the food type, for example leaving a perishable item uncovered at room temperature."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Storage method is correct for the food type."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Storage method is correct and the learner explains the specific reason tied to that food."
+          }
+        ]
+      },
+      {
+        "dimension": "Serving portion reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Portion decision has no stated reasoning."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Portion decision has a plausible stated reason."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Portion decision reasoning references a real body signal or planning factor from earlier in the unit."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Stored food is covered or sealed, not left open.",
+      "Confidence rating ties to the specific decision made today.",
+      "No weight or calorie language appears in the reasoning."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

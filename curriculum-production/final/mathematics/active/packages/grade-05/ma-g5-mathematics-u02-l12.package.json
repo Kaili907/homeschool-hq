@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u02-l12",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u02-l12",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Place Value, Powers of Ten, and Decimals",
+    "dayInUnit": 12,
+    "courseDay": 30,
+    "phase": "Performance task build",
+    "focus": "number lines and place-value charts",
+    "title": "Performance task build: number lines and place-value charts"
+  },
+  "standards": [
+    "5.NBT.1",
+    "5.NBT.2",
+    "5.NBT.3",
+    "5.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-number-line",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "A number line from 8.90 to 9.00 has 10 equal intervals. Point P is 7 intervals after 8.90. What number is P?",
+          "choices": [
+            "8.98",
+            "89.7",
+            "8.93",
+            "8.97"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "place-value-chart",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "Place-value chart:\nthousands | hundreds | tens | ones | tenths | hundredths | thousandths\n1 | 8 | 6 | 3 | 7 | 4 | 9\nWhich place contains the digit 3?",
+          "choices": [
+            "hundredths",
+            "tenths",
+            "ones",
+            "tens"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "In 997, how does the value of the 9 in the tens place compare with the value of the 9 in the hundreds place?",
+          "choices": [
+            "10 times",
+            "1/10 as much",
+            "100 times",
+            "the same value"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "power-of-ten-notation",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "10^4 = ?",
+          "choices": [
+            "100000",
+            "100",
+            "10000",
+            "1000"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "7.265 × 10^3 = ?",
+          "choices": [
+            "7265",
+            "7.265",
+            "72650",
+            "0.007265"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "divide-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "0.80 ÷ 10^2 = ?",
+          "choices": [
+            "0.0008",
+            "0.008",
+            "80",
+            "0.08"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-number-name",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "How is 653.190 written in words?",
+          "choices": [
+            "six hundred fifty-three and one hundred eighty-nine thousandths",
+            "six hundred fifty-three and one hundred ninety thousandths",
+            "six hundred fifty-four and one hundred ninety thousandths",
+            "six hundred fifty-three and one hundred ninety hundredths"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "number-name-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write “forty and three thousandths” as a decimal.",
+          "choices": [
+            "40.03",
+            "40.3",
+            "41.003",
+            "40.003"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "decimal-to-expanded-form",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write 467.957 in expanded form.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "expanded-form-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write 20 + 6 + 0.5 + 0.07 + 0.006 in standard form.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u02-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u02-l12"
+  }
+}

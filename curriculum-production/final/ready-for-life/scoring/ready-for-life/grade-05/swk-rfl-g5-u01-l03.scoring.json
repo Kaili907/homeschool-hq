@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l03",
+  "lessonId": "ma-g5-ready-for-life-u01-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Reasoning for chosen homes",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Spot is chosen with no stated reason."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "States a plausible reason tied to how or where the item is used."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Reasoning compares at least two possible spots and explains why one wins."
+          }
+        ]
+      },
+      {
+        "dimension": "Independent maintenance",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than three of five items are returned to their home the next day."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least four of five items are returned correctly."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All five are returned, and the learner diagnoses the cause when one drifts."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Homes are specific locations, not general rooms.",
+      "Learner, not the adult, makes the final placement decision on day two.",
+      "Reflection names one concrete reason, not just 'I forgot.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l05",
+  "lessonId": "ma-g4-ready-for-life-u02-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Fold, hang, and match technique",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Method is inconsistent within an item type, or one or more pairs (like socks) are left unmatched without a stated reason."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each item type uses one consistent fold or hang method, and all pairs are correctly matched."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and every item is placed in its correct real storage spot, confirmed by the adult's spot-check."
+          }
+        ]
+      },
+      {
+        "dimension": "Fold-versus-hang reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The two compared items are named, but the explanation for their different treatment is missing or does not reference fabric, shape, or garment type."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The explanation correctly ties the fold-or-hang decision to a specific property, such as fabric weight, shape retention, or garment type, of each item."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner connects this decision-making to how the grade-3 five-minute tidy routine did not require this level of specific decision."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The adult's spot-check of finished items matches what the learner reported doing.",
+      "The two compared items in the independent task are genuinely similar in size or weight, not an easy contrast like a towel versus a sock."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u07-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u07-l01",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Circles, Angles, Area, and Surface Area",
+    "dayInUnit": 1,
+    "courseDay": 109,
+    "phase": "Launch and diagnostic",
+    "focus": "pi and circumference",
+    "title": "Launch and diagnostic: pi and circumference"
+  },
+  "standards": [
+    "7.G.4",
+    "7.G.5",
+    "7.G.6"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "circumference-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 1,
+          "prompt": "A circle has a radius of 5 cm. What is its exact circumference?",
+          "workedSolution": {
+            "steps": [
+              "The diameter is twice the radius: 2 × 5 = 10 cm.",
+              "Circumference is π times the diameter: C = πd = 10π cm."
+            ],
+            "answer": "10π cm"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "find-radius-or-diameter-from-circumference",
+          "standard": "7.G.4",
+          "difficulty": 1,
+          "prompt": "A circle has a circumference of 11π ft. What is its exact radius?",
+          "choices": [
+            "5 1/2 ft",
+            "8 1/2 ft",
+            "6 1/2 ft",
+            "11 ft"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "area-of-circle-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 1,
+          "prompt": "A circle has a diameter of 11 m. What is its exact area? Express your answer as a multiple of π (use a fraction for the coefficient if it is not a whole number).",
+          "choices": [
+            "121π m²",
+            "121/4π m²",
+            "117/4π m²",
+            "11π m²"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "circumference-area-relationship",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle's radius equals its circumference divided by 2π. A circle has a circumference of 31π ft. Use this relationship to find the circle's exact area, as a multiple of π.",
+          "choices": [
+            "957/4π ft²",
+            "969/4π ft²",
+            "961/4π ft²",
+            "31π ft²"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "complementary-supplementary-angle",
+          "standard": "7.G.5",
+          "difficulty": 2,
+          "prompt": "Two angles are supplementary. One angle measures 60°. What is the measure of the other angle?",
+          "choices": [
+            "120°",
+            "130°",
+            "122°",
+            "121°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "vertical-angles-with-expressions",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two lines intersect, forming vertical angles that measure (5x + 6)° and (2x + 45)°. Vertical angles are congruent. Find the value of x and the measure of the angles.",
+          "choices": [
+            "x = 13, each angle measures 61°",
+            "x = 13, each angle measures 81°",
+            "x = 13, each angle measures 71°",
+            "x = 12, each angle measures 66°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "angle-equation-multistep",
+          "standard": "7.G.5",
+          "difficulty": 1,
+          "prompt": "Two angles are supplementary. Their measures are (2x + 2)° and (3x + 133)°. Find the value of x and the measure of each angle.",
+          "choices": [
+            "x = 9, angles measure 160° and 20°",
+            "x = 8, angles measure 18° and 162°",
+            "x = 9, angles measure 20° and 160°",
+            "x = 11, angles measure 24° and 156°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "angles-on-a-line-or-around-a-point",
+          "standard": "7.G.5",
+          "difficulty": 2,
+          "prompt": "Three angles lie along a straight line and measure 6°, 15°, 87°, and x°. What is the value of x?",
+          "choices": [
+            "74°",
+            "108°",
+            "82°",
+            "72°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u07-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u07-l01"
+  }
+}

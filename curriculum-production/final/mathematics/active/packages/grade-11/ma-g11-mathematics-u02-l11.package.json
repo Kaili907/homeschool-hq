@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u02-l11",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u02-l11",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rational and Radical Expressions and Equations",
+    "dayInUnit": 11,
+    "courseDay": 29,
+    "phase": "Performance task planning",
+    "focus": "solving radical equations",
+    "title": "Performance task planning: solving radical equations"
+  },
+  "standards": [
+    "A-APR.6",
+    "A-REI.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "simplify-rational-expression",
+          "standard": "A-APR.6",
+          "difficulty": 1,
+          "prompt": "Simplify (x² − 5x + 6)/(x − 2).",
+          "workedSolution": {
+            "steps": [
+              "Numerator factors as (x − 2)(x − 3).",
+              "Cancel (x − 2): x − 3, x ≠ 2."
+            ],
+            "answer": "x − 3, x ≠ 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-radical-equation-with-check",
+          "standard": "A-REI.2",
+          "difficulty": 2,
+          "prompt": "Solve √(1x + 9) = 4, then verify the solution.",
+          "choices": [
+            "x = 16",
+            "x = 11",
+            "x = 7",
+            "x = 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 2,
+          "prompt": "Write as a single fraction: -1/(x − 1) + 1/(x + 1).",
+          "choices": [
+            "(0) / ((x − 1)(x + 1))",
+            "(-1x − 2) / ((x − 1)(x + 1))",
+            "(0x + 2) / ((x − 1)(x + 1))",
+            "(0x − 2) / ((x − 1)(x + 1))"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-extraneous-solution",
+          "standard": "A-REI.2",
+          "difficulty": 3,
+          "prompt": "Solving a rational equation with denominator (x − 8) yields the candidate solutions x = 8 and x = 8. Which are genuine solutions?",
+          "choices": [
+            "Only x = 8; x = 8 must be rejected.",
+            "Neither is a solution, because the equation has a restricted domain.",
+            "Both x = 8 and x = 8 are solutions.",
+            "Only x = 8; x = 8 makes the original denominator zero, so it is extraneous."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "simplify-rational-expression",
+          "standard": "A-APR.6",
+          "difficulty": 3,
+          "prompt": "Simplify (x^2 - 15x + 56) / (x − 7), and state the restriction on x.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-radical-equation-with-check",
+          "standard": "A-REI.2",
+          "difficulty": 3,
+          "prompt": "Solve √(4x − 20) = 4, then verify the solution.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 3,
+          "prompt": "Write as a single fraction: 2/(x + 3) + -1/(x + 7).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u02-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u02-l11"
+  }
+}

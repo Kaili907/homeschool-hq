@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u04-l11",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u04-l11",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Equations and Inequalities",
+    "dayInUnit": 11,
+    "courseDay": 65,
+    "phase": "Performance task planning",
+    "focus": "graphing inequalities",
+    "title": "Performance task planning: graphing inequalities"
+  },
+  "standards": [
+    "7.EE.3",
+    "7.EE.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 1,
+          "prompt": "Solve 2x - 3 ≥ 11.",
+          "workedSolution": {
+            "steps": [
+              "Undo operations in reverse order, keeping both sides equivalent.",
+              "Substitute or test a boundary value to check the result."
+            ],
+            "answer": "x ≥ 7"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solution-set",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "Which integer satisfies 5x + 13 ≥ 28 and x < 4?",
+          "choices": [
+            "4",
+            "6",
+            "3",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "graph-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "Which graph describes x ≤ 11?",
+          "choices": [
+            "open circle at 11, shaded right",
+            "open circle at 11, shaded left",
+            "closed circle at 11, shaded right",
+            "closed circle at 11, shaded left"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "check-and-interpret-solution",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A club charges $21 plus $4 per session for a total of $57. How many sessions were purchased?",
+          "choices": [
+            "36",
+            "8",
+            "9",
+            "10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multi-step-numerical-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A group buys 5 passes at $14 each and pays a $4 service fee. What is the total cost?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "two-step-equation",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve 6x - 12 = -27. Write the answer in simplest form.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve -2x + 12 ≤ 8.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u04-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u04-l11"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u10-l18",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u10-l18",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "dayInUnit": 18,
+    "courseDay": 180,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "symmetry and rule-based patterns in the completed design",
+    "title": "Transfer, reflection, and publication: symmetry and rule-based patterns in the completed design"
+  },
+  "standards": [
+    "4.OA.5",
+    "4.G.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 1,
+          "prompt": "How many lines of symmetry does a square have?",
+          "workedSolution": {
+            "steps": [
+              "A square matches itself when folded along 2 diagonals and 2 midlines.",
+              "That is 4 lines of symmetry."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern-capstone",
+          "standard": "4.OA.5",
+          "difficulty": 2,
+          "prompt": "The pattern 2, 4, 8, 16, ... follows the rule \"multiply by 2 each time.\" What is the 6th term?",
+          "choices": [
+            "64",
+            "128",
+            "32",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a regular pentagon have?",
+          "choices": [
+            "5",
+            "6",
+            "4",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern-capstone",
+          "standard": "4.OA.5",
+          "difficulty": 3,
+          "prompt": "The pattern 1, 2, 4, 8, ... follows the rule \"multiply by 2 each time.\" What is the 5th term?",
+          "choices": [
+            "5",
+            "32",
+            "16",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a equilateral triangle have?",
+          "choices": [
+            "2",
+            "6",
+            "4",
+            "3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "number-or-shape-pattern-capstone",
+          "standard": "4.OA.5",
+          "difficulty": 3,
+          "prompt": "The pattern 6, 18, 54, 162, ... follows the rule \"multiply by 3 each time.\" What is the 6th term?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a circle have?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u10-l18"
+  }
+}

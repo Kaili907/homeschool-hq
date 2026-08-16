@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u07-l08",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u07-l08",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Right Triangle Trigonometry",
+    "dayInUnit": 8,
+    "courseDay": 116,
+    "phase": "Reteach and varied practice",
+    "focus": "defining sine, cosine, and tangent",
+    "title": "Reteach and varied practice: defining sine, cosine, and tangent"
+  },
+  "standards": [
+    "G-SRT.6",
+    "G-SRT.7",
+    "G-SRT.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 1,
+          "prompt": "Write sin 35° as a cosine.",
+          "workedSolution": {
+            "steps": [
+              "sin θ = cos(90 − θ).",
+              "sin 35° = cos 55°."
+            ],
+            "answer": "cos 55°"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 2,
+          "prompt": "Tower 30 m tall, observer 40 m away. Equation for θ?",
+          "workedSolution": {
+            "steps": [
+              "Opposite 30, adjacent 40.",
+              "tan θ = 30/40."
+            ],
+            "answer": "tan θ = 30/40"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 1,
+          "prompt": "A right triangle has legs 5 and 12 and hypotenuse 13. Angle θ is opposite the leg of length 5. Find tan θ as an exact fraction in lowest terms.",
+          "choices": [
+            "5/12",
+            "5/13",
+            "12/5",
+            "12/13"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 1,
+          "prompt": "A right triangle has legs 9 and 12. Find the hypotenuse.",
+          "choices": [
+            "15",
+            "21",
+            "18",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 2,
+          "prompt": "Express sin 26° as a cosine of another angle, and explain why the two are equal.",
+          "choices": [
+            "cos 26°, because sine and cosine are always equal",
+            "cos 154°, because the angles are supplementary",
+            "cos 64°, because the two angles are complementary and swap the roles of opposite and adjacent",
+            "cos 116°, because the angles differ by a right angle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 2,
+          "prompt": "From a point 8 m from the base of a tower, the angle of elevation to the top is θ, and the tower is 6 m tall. Which equation correctly determines θ?",
+          "choices": [
+            "sin θ = 6/8",
+            "tan θ = 6/8",
+            "tan θ = 8/6",
+            "cos θ = 6/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 1,
+          "prompt": "A right triangle has legs 3 and 4 and hypotenuse 5. Angle θ is opposite the leg of length 3. Find cos θ as an exact fraction in lowest terms.",
+          "choices": [
+            "3/4",
+            "5/4",
+            "4/5",
+            "3/5"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 2,
+          "prompt": "A right triangle has legs 15 and 36. Find the hypotenuse.",
+          "choices": [
+            "51",
+            "15",
+            "42",
+            "39"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 2,
+          "prompt": "Express sin 42° as a cosine of another angle, and explain why the two are equal.",
+          "choices": [
+            "cos 138°, because the angles are supplementary",
+            "cos 132°, because the angles differ by a right angle",
+            "cos 42°, because sine and cosine are always equal",
+            "cos 48°, because the two angles are complementary and swap the roles of opposite and adjacent"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "From a point 48 m from the base of a tower, the angle of elevation to the top is θ, and the tower is 20 m tall. Which equation correctly determines θ?",
+          "choices": [
+            "cos θ = 20/48",
+            "tan θ = 20/48",
+            "sin θ = 20/48",
+            "tan θ = 48/20"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 3,
+          "prompt": "A right triangle has legs 14 and 48 and hypotenuse 50. Angle θ is opposite the leg of length 14. Find tan θ as an exact fraction in lowest terms.",
+          "choices": [
+            "24/25",
+            "7/25",
+            "24/7",
+            "7/24"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u07-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u07-l08"
+  }
+}

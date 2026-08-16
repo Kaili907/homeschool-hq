@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l01",
+  "lessonId": "ma-g12-ready-for-life-u04-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Category matching",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more situations has no plausible record category matched to it."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every situation has at least one plausible category matched."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The two trickiest-situation explanations show genuine reasoning about ambiguity, not just a guess."
+          }
+        ]
+      },
+      {
+        "dimension": "Verification framing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more matches are stated as certain fact rather than something to verify."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every match is explicitly framed as needing verification against a current local/official source."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection response shows genuine understanding of why rules vary by place and time, not just repeating the instruction."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Every situation has at least one matched category with an explicit verify-locally note attached.",
+      "No specific real institution's actual requirement is asserted as fact anywhere.",
+      "The reflection response explains the reasoning, not just restates the rule."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

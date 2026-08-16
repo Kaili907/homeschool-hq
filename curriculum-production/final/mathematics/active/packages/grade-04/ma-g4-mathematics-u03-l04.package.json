@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l04",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 4,
+    "courseDay": 40,
+    "phase": "Guided practice A",
+    "focus": "comparison word problems solved with models",
+    "title": "Guided practice A: comparison word problems solved with models"
+  },
+  "standards": [
+    "4.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 1,
+          "prompt": "Ella has 5 stickers. Zoe has 3 times as many as Ella. How many stickers does Zoe have?",
+          "workedSolution": {
+            "steps": [
+              "3 × 5 = 15."
+            ],
+            "answer": "15"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l04#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 1,
+          "prompt": "Liam has 8 trading cards. Sofia has 2 times as many cards as Liam. How many cards does Sofia have?",
+          "choices": [
+            "16",
+            "10",
+            "8",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l04#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 1,
+          "prompt": "Ava has 7 trading cards. Noah has 6 times as many cards as Ava. How many cards does Noah have?",
+          "choices": [
+            "42",
+            "35",
+            "49",
+            "13"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l04#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 1,
+          "prompt": "Liam has 6 trading cards. Sofia has 5 times as many cards as Liam. How many cards does Sofia have?",
+          "choices": [
+            "11",
+            "36",
+            "30",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l04#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Ava has 2 trading cards. Noah has 5 times as many cards as Ava. How many cards does Noah have?",
+          "choices": [
+            "8",
+            "7",
+            "12",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l04#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Ava has 6 trading cards. Noah has 6 times as many cards as Ava. How many cards does Noah have?",
+          "choices": [
+            "30",
+            "36",
+            "42",
+            "12"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Mia has 7 trading cards. Jacob has 5 times as many cards as Mia. How many cards does Jacob have?",
+          "choices": [
+            "28",
+            "12",
+            "42",
+            "35"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Liam has 8 trading cards. Sofia has 3 times as many cards as Liam. How many cards does Sofia have?",
+          "choices": [
+            "24",
+            "32",
+            "16",
+            "11"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 1,
+          "prompt": "Mia has 2 trading cards. Jacob has 2 times as many cards as Mia. How many cards does Jacob have?",
+          "choices": [
+            "5",
+            "4",
+            "6",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Liam has 3 trading cards. Sofia has 5 times as many cards as Liam. How many cards does Sofia have?",
+          "choices": [
+            "15",
+            "8",
+            "18",
+            "12"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l04"
+  }
+}

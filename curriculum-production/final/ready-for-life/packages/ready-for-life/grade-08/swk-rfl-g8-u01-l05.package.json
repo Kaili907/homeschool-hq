@@ -1,0 +1,383 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u01-l05",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Independent Planning and Executive Routines",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: interruptions and recovery"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic interruptions and recovery task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "Plans rarely survive a normal day untouched, a sudden chore, an unexpected call, a schedule change.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Describe the interruption in terms of your own tasks and time only; don't record private details about another person's schedule or plans.",
+    "If the interruption involves a shared household device or account, check with a trusted adult before changing any settings to work around it."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real interruption occurs by the end of the day, design one plausible interruption specific to your own system and schedule, for example an unplanned task showing up right before your busiest block, then write the specific recovery step you would take exactly as if it had actually happened."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g8-u01-l05-model-card",
+    "Embedded resource: swk-rfl-g8-u01-l05-step-card",
+    "Embedded resource: swk-rfl-g8-u01-l05-guided-card",
+    "Embedded resource: swk-rfl-g8-u01-l05-independent-card",
+    "Embedded resource: swk-rfl-g8-u01-l05-evidence-record",
+    "Embedded resource: swk-rfl-g8-u01-l05-retry-pair",
+    "Embedded resource: swk-rfl-g8-u01-l05-delivered-plan",
+    "learner-local: the planning system built in the previous lesson, paper pages or a digital app",
+    "learner-local: a pen or pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Analyze the complete worked example on swk-rfl-g8-u01-l05-model-card before beginning.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g8-u01-l05-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g8-u01-l05-independent-card; follow every step and retain only the named minimal evidence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Complete the minimal evidence record on swk-rfl-g8-u01-l05-evidence-record; omit or fictionalize private details.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one specific change you could make to your system so it would absorb a similar interruption more easily next time."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g8-u01-l05-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g8-u01-l05-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g8-u01-l05-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Interruption identification: A specific interruption is named with a rough time, whether real or a realistically designed one. | Recovery action specificity: The recovery step names a specific, concrete action, such as what was moved, dropped, or reset. Resume at the next unfinished step on swk-rfl-g8-u01-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner identify a second, different kind of interruption that could plausibly hit their system, and write a recovery step for it in advance, before it actually happens.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "planning-organization",
+    "practicalGoal": "I can complete a realistic interruptions and recovery task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "Three consecutive days; active work is divided across short daily check-ins",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g8-u01-l05-model-card",
+        "swk-rfl-g8-u01-l05-step-card",
+        "swk-rfl-g8-u01-l05-guided-card",
+        "swk-rfl-g8-u01-l05-independent-card",
+        "swk-rfl-g8-u01-l05-evidence-record",
+        "swk-rfl-g8-u01-l05-retry-pair",
+        "swk-rfl-g8-u01-l05-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g8-u01-l05-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g8-u01-l05-local-1",
+          "label": "the planning system built in the previous lesson, paper pages or a digital app",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u01-l05-local-2",
+          "label": "a pen or pencil",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g8-u01-l05-model-card",
+        "kind": "model",
+        "title": "interruptions and recovery worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Plans rarely survive a normal day untouched, a sudden chore, an unexpected call, a schedule change.",
+          "Model move 1: Read the condition and name the exact interruptions and recovery decision or action.",
+          "Model move 2: Think back to your three-day trial before today.",
+          "Model move 3: Over the course of today, watch for one real interruption to your system, an unplanned task, an interruption to your usual time block, or a forgotten commitment that surfaces suddenly.",
+          "Model check: Interruption identification: A specific interruption is named with a rough time, whether real or a realistically designed one. | Recovery action specificity: The recovery step names a specific, concrete action, such as what was moved, dropped, or reset."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l05-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "interruptions and recovery action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for interruptions and recovery.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l05-guided-card",
+        "kind": "guided-practice",
+        "title": "interruptions and recovery coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Plans rarely survive a normal day untouched, a sudden chore, an unexpected call, a schedule change.",
+          "Coach direction: Think back to your three-day trial before today.",
+          "Learner prompt: Was there already a moment in your trial where something unexpected knocked your plan off track? Describe it in one or two sentences, or note that everything went smoothly so far.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l05-independent-card",
+        "kind": "independent-task",
+        "title": "interruptions and recovery complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Over the course of today, watch for one real interruption to your system, an unplanned task, an interruption to your usual time block, or a forgotten commitment that surfaces suddenly. When it happens, pause and note it immediately: what happened, and about what time.",
+          "Response 1 (t2-p1): I noted the interruption within the same day it happened, including roughly what time it occurred.",
+          "Response 2 (t2-p2): I described specifically what the interruption was, not just that 'something came up.'",
+          "Equal-access rule: If no real interruption occurs by the end of the day, design one plausible interruption specific to your own system and schedule, for example an unplanned task showing up right before your busiest block, then write the specific recovery step you would take exactly as if it had actually happened."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l05-evidence-record",
+        "kind": "evidence-record",
+        "title": "interruptions and recovery minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Name one specific change you could make to your system so it would absorb a similar interruption more easily next time.",
+          "Success checks: Interruption identification: A specific interruption is named with a rough time, whether real or a realistically designed one. | Recovery action specificity: The recovery step names a specific, concrete action, such as what was moved, dropped, or reset.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l05-retry-pair",
+        "kind": "retry",
+        "title": "interruptions and recovery supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g8-u01-l05-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g8-u01-l05-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional interruptions and recovery condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Interruption identification: A specific interruption is named with a rough time, whether real or a realistically designed one. | Recovery action specificity: The recovery step names a specific, concrete action, such as what was moved, dropped, or reset..",
+          "Return: resume at the next unfinished step on swk-rfl-g8-u01-l05-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l05-delivered-plan",
+        "kind": "independent-task",
+        "title": "interruptions and recovery delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Plans rarely survive a normal day untouched, a sudden chore, an unexpected call, a schedule change.",
+          "Use steps: Over the course of today, watch for one real interruption to your system, an unplanned task, an interruption to your usual time block, or a forgotten commitment that surfaces suddenly.",
+          "Field 1 (t2-p1): I noted the interruption within the same day it happened, including roughly what time it occurred.",
+          "Field 2 (t2-p2): I described specifically what the interruption was, not just that 'something came up.'",
+          "Check against: Interruption identification: A specific interruption is named with a rough time, whether real or a realistically designed one. | Recovery action specificity: The recovery step names a specific, concrete action, such as what was moved, dropped, or reset."
+        ]
+      }
+    ],
+    "model": {
+      "title": "interruptions and recovery worked model",
+      "startingCondition": "Plans rarely survive a normal day untouched, a sudden chore, an unexpected call, a schedule change.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact interruptions and recovery decision or action.",
+        "Model move 2: Think back to your three-day trial before today.",
+        "Model move 3: Over the course of today, watch for one real interruption to your system, an unplanned task, an interruption to your usual time block, or a forgotten commitment that surfaces suddenly."
+      ],
+      "reasoning": "The model names the condition, follows the ordered interruptions and recovery process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Interruption identification: A specific interruption is named with a rough time, whether real or a realistically designed one.",
+        "Recovery action specificity: The recovery step names a specific, concrete action, such as what was moved, dropped, or reset."
+      ],
+      "resourceRef": "swk-rfl-g8-u01-l05-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for interruptions and recovery.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g8-u01-l05-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Plans rarely survive a normal day untouched, a sudden chore, an unexpected call, a schedule change.",
+      "prompt": "Was there already a moment in your trial where something unexpected knocked your plan off track? Describe it in one or two sentences, or note that everything went smoothly so far.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Interruption identification: A specific interruption is named with a rough time, whether real or a realistically designed one.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g8-u01-l05-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g8-u01-l05-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "interruptions and recovery — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g8-u01-l05-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Over the course of today, watch for one real interruption to your system, an unplanned task, an interruption to your usual time block, or a forgotten commitment that surfaces suddenly. When it happens, pause and note it immediately: what happened, and about what time.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "interruptions and recovery — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g8-u01-l05-independent-card",
+        "directions": "If no real interruption occurs by the end of the day, design one plausible interruption specific to your own system and schedule, for example an unplanned task showing up right before your busiest block, then write the specific recovery step you would take exactly as if it had actually happened.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g8-u01-l05-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Name one specific change you could make to your system so it would absorb a similar interruption more easily next time.",
+      "observableCriteria": [
+        "Interruption identification: A specific interruption is named with a rough time, whether real or a realistically designed one.",
+        "Recovery action specificity: The recovery step names a specific, concrete action, such as what was moved, dropped, or reset."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g8-u01-l05-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g8-u01-l05-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g8-u01-l05-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g8-u01-l05-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Interruption identification: A specific interruption is named with a rough time, whether real or a realistically designed one. | Recovery action specificity: The recovery step names a specific, concrete action, such as what was moved, dropped, or reset.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g8-u01-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g8-u01-l05-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

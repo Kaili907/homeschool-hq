@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l03",
+  "lessonId": "ma-g8-ready-for-life-u02-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Tool identification accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Correctly names three or fewer of the six tools in round two (independent recall)."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly names four or five of the six tools in round two."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Correctly names all six tools in round two, in the new order, without relying on the round-one word bank."
+          }
+        ]
+      },
+      {
+        "dimension": "Use and safety explanation",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Use or safety notes are missing, or safety notes are generic ('be careful') rather than tool-specific."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Provides an accurate, tool-specific use and a plausible, tool-specific safety consideration for at least five of the six tools."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Provides accurate, specific use and safety reasoning for all six tools, including for any tool the learner named as unfamiliar in the warm-up."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No tool was picked up, held, or operated at any point during the lesson.",
+      "Round-two answers are in a genuinely different order than round one, confirming independent recall rather than copying."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

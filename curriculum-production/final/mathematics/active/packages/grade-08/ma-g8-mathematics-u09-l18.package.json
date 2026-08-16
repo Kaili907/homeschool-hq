@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u09-l18",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u09-l18",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Volume and Bivariate Data",
+    "dayInUnit": 18,
+    "courseDay": 166,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "correlation versus causation",
+    "title": "Publication, presentation, or reflection: correlation versus causation"
+  },
+  "standards": [
+    "8.G.9",
+    "8.SP.1",
+    "8.SP.2",
+    "8.SP.3",
+    "8.SP.4"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-scatter-association",
+          "standard": "8.SP.1",
+          "difficulty": 1,
+          "prompt": "As x increases, y generally increases. Identify the association.",
+          "workedSolution": {
+            "steps": [
+              "Identify the quantities and the applicable model.",
+              "Compute using the stated relationship.",
+              "Check that the result answers the question."
+            ],
+            "answer": "positive"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-outlier",
+          "standard": "8.SP.1",
+          "difficulty": 2,
+          "prompt": "Most plotted points follow y = 2x + 1. Of these points, (7, 15), (8, 17), (6, 13), (7, 30), which point is an outlier?",
+          "choices": [
+            "(6, 13)",
+            "(7, 15)",
+            "(7, 30)",
+            "(8, 17)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "line-of-fit-prediction",
+          "standard": "8.SP.2",
+          "difficulty": 2,
+          "prompt": "A line of fit is y = 9x - 2. Predict y when x = 4.",
+          "choices": [
+            "34",
+            "24",
+            "44",
+            "53"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpolation-or-extrapolation",
+          "standard": "8.SP.2",
+          "difficulty": 3,
+          "prompt": "A data set has x-values from 2 through 9. A prediction is made at x = 5. Is this interpolation or extrapolation?",
+          "choices": [
+            "a census",
+            "extrapolation",
+            "causation",
+            "interpolation"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpolation-or-extrapolation",
+          "standard": "8.SP.2",
+          "difficulty": 3,
+          "prompt": "A data set has x-values from 4 through 11. A prediction is made at x = 14. Is this interpolation or extrapolation?",
+          "choices": [
+            "causation",
+            "a census",
+            "extrapolation",
+            "interpolation"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "correlation-versus-causation",
+          "standard": "8.SP.3",
+          "difficulty": 3,
+          "prompt": "Umbrella sales and rainy-day traffic delays are correlated. Which conclusion is justified?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "cylinder-volume",
+          "standard": "8.G.9",
+          "difficulty": 3,
+          "prompt": "Find the exact volume of a cylinder with radius 4 units and height 6 units. Express your answer as a rational multiple of π.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u09-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u09-l18"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-ready-for-life-u05-assessment",
+  "courseRef": "ma-g11-ready-for-life",
+  "grade": 11,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g11-ready-for-life-u05",
+    "unitNumber": 5,
+    "unitTitle": "Problem Solving Under Constraint",
+    "courseTitle": "Ready for Life 11: Postsecondary Planning and Portfolio",
+    "assessmentLessonRef": "ma-g11-ready-for-life-u05-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u05-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before proposing any option, separate the stated problem from the underlying real problem, and name the three separate constraints (time, money, information) at play in the scenario.",
+      "prompt": "What is the real underlying decision the character has to make, separate from how the scenario first states it?"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "checklist-item",
+      "directions": "Before proposing any option, separate the stated problem from the underlying real problem, and name the three separate constraints (time, money, information) at play in the scenario.",
+      "prompt": "I named the specific time constraint, money constraint, and information gap at play in the scenario."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Generate at least three genuinely distinct options (not variations of the same two choices), build a tradeoff table comparing them on the same criteria, and make and defend a decision using specific rows from your table.",
+      "prompt": "I generated at least three genuinely distinct options, not variations of the original two choices."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Generate at least three genuinely distinct options (not variations of the same two choices), build a tradeoff table comparing them on the same criteria, and make and defend a decision using specific rows from your table.",
+      "prompt": "I built a tradeoff table comparing all options on the same criteria."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "extended-response",
+      "directions": "Generate at least three genuinely distinct options (not variations of the same two choices), build a tradeoff table comparing them on the same criteria, and make and defend a decision using specific rows from your table.",
+      "prompt": "State your defended decision and justify it using at least two specific rows from your tradeoff table."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Build a concrete fallback with a specific trigger condition, then present your full decision, tradeoffs, and fallback to a guardian.",
+      "prompt": "Describe your fallback plan and the exact trigger condition that would cause the character to switch to it."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "checklist-item",
+      "directions": "Build a concrete fallback with a specific trigger condition, then present your full decision, tradeoffs, and fallback to a guardian.",
+      "prompt": "I presented my decision, tradeoffs, and fallback out loud to a guardian."
+    },
+    {
+      "taskRef": "t3-p3",
+      "kind": "checklist-item",
+      "directions": "Build a concrete fallback with a specific trigger condition, then present your full decision, tradeoffs, and fallback to a guardian.",
+      "prompt": "The guardian asked at least one question about my reasoning."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Read the provided outcome account and review it with your guardian.",
+      "prompt": "Did the outcome match what you expected when you made the decision? What specifically was different, if anything?"
+    },
+    {
+      "taskRef": "t4-p2",
+      "kind": "short-response",
+      "directions": "Read the provided outcome account and review it with your guardian.",
+      "prompt": "After discussing the outcome with your guardian, what is one thing you would do differently in your decision process, not just a different final answer?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/ready-for-life/ma-g11-ready-for-life-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Option generation and tradeoff analysis criterion.",
+    "Provide evidence that meets the stated Fallback and guardian presentation criterion.",
+    "Provide evidence that meets the stated Outcome review quality criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-ready-for-life-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u05-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Problem Solving Under Constraint?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

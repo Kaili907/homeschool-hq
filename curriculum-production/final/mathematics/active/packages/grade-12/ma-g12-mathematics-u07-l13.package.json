@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u07-l13",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u07-l13",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Matrices, Transformations, and Systems",
+    "dayInUnit": 13,
+    "courseDay": 121,
+    "phase": "Skill consolidation",
+    "focus": "matrices as organized data and scalar multiplication",
+    "title": "Skill consolidation: matrices as organized data and scalar multiplication"
+  },
+  "standards": [
+    "N-VM.6",
+    "N-VM.7",
+    "N-VM.8",
+    "N-VM.9",
+    "N-VM.10",
+    "N-VM.11",
+    "N-VM.12",
+    "A-REI.8",
+    "A-REI.9",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 1,
+          "prompt": "Compute -2·[[1, -4], [1, -5]].",
+          "choices": [
+            "[[-2, 8], [1, -5]]",
+            "[[-2, -4], [1, -5]]",
+            "[[-1, -6], [-1, -7]]",
+            "[[-2, 8], [-2, 10]]"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "matrix-vector-product",
+          "standard": "N-VM.11",
+          "difficulty": 2,
+          "prompt": "Compute [[-1, -2], [2, -3]]·⟨-4, 3⟩.",
+          "choices": [
+            "⟨10, -1⟩",
+            "⟨4, -9⟩",
+            "⟨-2, -17⟩",
+            "⟨-17, -2⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "determinant-and-invertibility",
+          "standard": "N-VM.10",
+          "difficulty": 2,
+          "prompt": "For M = [[3, -4], [-5, 6.666666666666667]], find det(M) and state whether M is invertible.",
+          "choices": [
+            "det(M) = 11.666666666666668; M is invertible",
+            "det(M) = 2; M is invertible",
+            "det(M) = 40; M is invertible",
+            "det(M) = 0; M is not invertible"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "determinant-as-area-scale-factor",
+          "standard": "N-VM.11",
+          "difficulty": 2,
+          "prompt": "The matrix [[-3, -3], [-2, 2]] is applied to a region of area 5. Find the area of the image.",
+          "choices": [
+            "60",
+            "-60",
+            "5",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 3,
+          "prompt": "Compute -3·[[4, -5], [4, -7]].",
+          "choices": [
+            "[[-12, 15], [4, -7]]",
+            "[[-12, -5], [4, -7]]",
+            "[[1, -8], [1, -10]]",
+            "[[-12, 15], [-12, 21]]"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "matrix-vector-product",
+          "standard": "N-VM.11",
+          "difficulty": 3,
+          "prompt": "Compute [[-2, 3], [-6, -4]]·⟨-7, 4⟩.",
+          "choices": [
+            "⟨26, 26⟩",
+            "⟨14, -16⟩",
+            "⟨-10, -37⟩",
+            "⟨27, 26⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "determinant-and-invertibility",
+          "standard": "N-VM.10",
+          "difficulty": 3,
+          "prompt": "For M = [[-1, -4], [-7, -3]], find det(M) and state whether M is invertible.",
+          "choices": [
+            "det(M) = -24; M is invertible",
+            "det(M) = -25; M is invertible",
+            "det(M) = 31; M is invertible",
+            "det(M) = -5; M is invertible"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "determinant-as-area-scale-factor",
+          "standard": "N-VM.11",
+          "difficulty": 3,
+          "prompt": "The matrix [[-3, -6], [-6, -5]] is applied to a region of area 2. Find the area of the image.",
+          "choices": [
+            "-42",
+            "21",
+            "42",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 3,
+          "prompt": "Compute -2·[[-6, 2], [1, -1]].",
+          "choices": [
+            "[[-8, 0], [-1, -3]]",
+            "[[12, -4], [1, -1]]",
+            "[[12, -4], [-2, 2]]",
+            "[[12, 2], [1, -1]]"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "matrix-vector-product",
+          "standard": "N-VM.11",
+          "difficulty": 2,
+          "prompt": "Compute [[4, 1], [2, -1]]·⟨-2, 3⟩.",
+          "choices": [
+            "⟨-2, -5⟩",
+            "⟨-7, -5⟩",
+            "⟨-5, -7⟩",
+            "⟨-8, -3⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "determinant-and-invertibility",
+          "standard": "N-VM.10",
+          "difficulty": 3,
+          "prompt": "For M = [[7, -2], [-8, 2.2857142857142856]], find det(M) and state whether M is invertible.",
+          "choices": [
+            "det(M) = 0; M is not invertible",
+            "det(M) = -51.42857142857143; M is invertible",
+            "det(M) = 32; M is invertible",
+            "det(M) = 2; M is invertible"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "determinant-as-area-scale-factor",
+          "standard": "N-VM.11",
+          "difficulty": 3,
+          "prompt": "The matrix [[-3, 2], [6, -3]] is applied to a region of area 15. Find the area of the image.",
+          "choices": [
+            "15",
+            "3",
+            "-45",
+            "45"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u07-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u07-l13"
+  }
+}

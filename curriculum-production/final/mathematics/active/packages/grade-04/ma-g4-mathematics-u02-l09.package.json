@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u02-l09",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u02-l09",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Multi-Digit Addition and Subtraction",
+    "dayInUnit": 9,
+    "courseDay": 27,
+    "phase": "Retrieval and fluency",
+    "focus": "mixed addition and subtraction",
+    "title": "Retrieval and fluency: mixed addition and subtraction"
+  },
+  "standards": [
+    "4.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Retrieval and fluency",
+    "profile": "retrieval-and-fluency",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a food drive raised 1684 dollars on Saturday and 8749 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "7065",
+            "11433",
+            "10433",
+            "9433"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a school had 1252 visitors expected, but only 1216 attended. How many fewer people attended than expected?",
+          "choices": [
+            "-964",
+            "1036",
+            "2468",
+            "36"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a food drive raised 84271 dollars on Saturday and 31581 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "52690",
+            "115852",
+            "116852",
+            "114852"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a stadium had 50245 visitors expected, but only 24727 attended. How many fewer people attended than expected?",
+          "choices": [
+            "24518",
+            "25518",
+            "26518",
+            "74972"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a food drive raised 53990 dollars on Saturday and 89660 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "35670",
+            "143650",
+            "144650",
+            "142650"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l09#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a concert had 687329 visitors expected, but only 587690 attended. How many fewer people attended than expected?",
+          "choices": [
+            "100639",
+            "98639",
+            "1275019",
+            "99639"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l09#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a stadium raised 127190 dollars on Saturday and 285008 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "413198",
+            "157818",
+            "411198",
+            "412198"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a warehouse had 69358 visitors expected, but only 62058 attended. How many fewer people attended than expected?",
+          "choices": [
+            "8300",
+            "6300",
+            "7300",
+            "131416"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a concert raised 491752 dollars on Saturday and 362061 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "129691",
+            "854813",
+            "852813",
+            "853813"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u02-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u02-l09"
+  }
+}

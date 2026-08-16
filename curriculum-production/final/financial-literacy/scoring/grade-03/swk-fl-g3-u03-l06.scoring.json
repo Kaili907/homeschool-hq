@@ -1,0 +1,274 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u03-l06",
+  "lessonId": "ma-g3-financial-literacy-u03-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What does Kwame's first plan cost in total?",
+        "answer": "$12.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6.00 + 2.25 + 4.50) = 12.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 600
+              },
+              {
+                "op": "money",
+                "cents": 225
+              },
+              {
+                "op": "money",
+                "cents": 450
+              }
+            ]
+          },
+          "trace": "(6.00 + 2.25 + 4.50) = 12.75"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How does Kwame's first plan compare with his $11.00?",
+        "answer": "It runs short",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare (6.00 + 2.25 + 4.50) with 11.00 = It runs short. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 600
+                },
+                {
+                  "op": "money",
+                  "cents": 225
+                },
+                {
+                  "op": "money",
+                  "cents": 450
+                }
+              ]
+            },
+            "right": {
+              "op": "money",
+              "cents": 1100
+            },
+            "whenLess": "It fits",
+            "whenEqual": "It comes out exactly even",
+            "whenGreater": "It runs short"
+          },
+          "trace": "compare (6.00 + 2.25 + 4.50) with 11.00 = It runs short"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "By how much does the first plan run short?",
+        "answer": "$1.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((6.00 + 2.25 + 4.50) - 11.00) = 1.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 600
+                },
+                {
+                  "op": "money",
+                  "cents": 225
+                },
+                {
+                  "op": "money",
+                  "cents": 450
+                }
+              ]
+            },
+            "less": {
+              "op": "money",
+              "cents": 1100
+            }
+          },
+          "trace": "((6.00 + 2.25 + 4.50) - 11.00) = 1.75"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What does Kwame's changed plan cost?",
+        "answer": "$10.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6.00 + 4.50) = 10.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 600
+              },
+              {
+                "op": "money",
+                "cents": 450
+              }
+            ]
+          },
+          "trace": "(6.00 + 4.50) = 10.50"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much of his $11.00 is left after the changed plan?",
+        "answer": "$0.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(11.00 - (6.00 + 4.50)) = 0.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 1100
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 600
+                },
+                {
+                  "op": "money",
+                  "cents": 450
+                }
+              ]
+            }
+          },
+          "trace": "(11.00 - (6.00 + 4.50)) = 0.50"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reading a choice under a limit",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response restates what Kwame dropped without saying anything about what it shows."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Kwame's priority is named but not tied to the fact that his money forced a cut."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Kwame's money ran out first, and that keeping his sister's gift while cutting his own snack shows what he treated as most important."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does Kwame's first plan cost in total?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How does Kwame's first plan compare with his $11.00?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "By how much does the first plan run short?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does Kwame's changed plan cost?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of his $11.00 is left after the changed plan?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Kwame had to drop something. What does his choice show about what mattered most to him that day?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does Kwame's first plan cost in total? Answer: $12.75. Verification: (6.00 + 2.25 + 4.50) = 12.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How does Kwame's first plan compare with his $11.00? Answer: It runs short. Verification: compare (6.00 + 2.25 + 4.50) with 11.00 = It runs short. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: By how much does the first plan run short? Answer: $1.75. Verification: ((6.00 + 2.25 + 4.50) - 11.00) = 1.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What does Kwame's changed plan cost? Answer: $10.50. Verification: (6.00 + 4.50) = 10.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How much of his $11.00 is left after the changed plan? Answer: $0.50. Verification: (11.00 - (6.00 + 4.50)) = 0.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Reading a choice under a limit — Not yet: The response restates what Kwame dropped without saying anything about what it shows. Approaching: Kwame's priority is named but not tied to the fact that his money forced a cut. Meets: The response explains that Kwame's money ran out first, and that keeping his sister's gift while cutting his own snack shows what he treated as most important. The response explains that Kwame's money ran out first, and that keeping his sister's gift while cutting his own snack shows what he treated as most important."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Kwame's money ran out first, and that keeping his sister's gift while cutting his own snack shows what he treated as most important."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u03-l06.scoring.json",
+    "sourceScoringSha256": "c50a82ae0677cafd13db57fb8990019ba1cbae5264ec40b5d1a57bda29293dee",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

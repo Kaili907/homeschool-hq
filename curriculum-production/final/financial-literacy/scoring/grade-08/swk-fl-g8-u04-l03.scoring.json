@@ -1,0 +1,700 @@
+{
+  "schemaVersion": "2.0",
+  "sampleRevision": "FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1",
+  "packageId": "swk-fl-g8-u04-l03",
+  "lessonId": "ma-g8-financial-literacy-u04-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "DIRECTOR_SAMPLE_R1",
+    "authorityClass": "FIXED_ANSWER_KEY_WITH_RUBRIC",
+    "answerTextPresent": true,
+    "fixedItemCount": 17,
+    "rubricCriterionCount": 3,
+    "answerDerivation": "independent-integer-cent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-director-sample-r1-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, responsibility, wealth, family behavior, or character from an error.",
+  "decisionNeutrality": "Score the use of stated fictional facts, constraints, calculations, tradeoffs, and conditional reasoning. Do not require the adult scorer's preferred payment choice.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "Which statement correctly explains what happens when the fictional payment is applied after interest posts?",
+        "answer": "Interest is rounded to cents first; the payment covers that interest before the rest reduces the balance.",
+        "verification": {
+          "method": "independent-concept-rule-check",
+          "reasoning": "The shared statement rule posts and rounds interest before allocating the payment. The remaining payment, not the whole payment, reduces principal.",
+          "computation": {
+            "rule": "rounded interest + principal reduction = payment",
+            "timing": "interest posts before payment allocation"
+          },
+          "trace": "interest first; payment = interest share + principal-reduction share"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is Mika's one-period interest charge?",
+        "answer": "$15.00",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $1,250.00 × 1.20% = $15.00; round half up once to $15.00; principal reduction: $50.00 − $15.00 = $35.00; ending balance: $1,250.00 − $35.00 = $1,215.00; payment check: $15.00 + $35.00 = $50.00. The requested interest result is $15.00.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 125000,
+            "monthlyRateBps": 120,
+            "interestNumerator": 15000000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1500,
+            "paymentCents": 5000,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 3500,
+            "endingBalanceCents": 121500,
+            "requestedResult": "interest",
+            "requestedResultCents": 1500
+          },
+          "trace": "interest: $1,250.00 × 1.20% = $15.00; round half up once to $15.00; principal reduction: $50.00 − $15.00 = $35.00; ending balance: $1,250.00 − $35.00 = $1,215.00; payment check: $15.00 + $35.00 = $50.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much of Mika's payment reduces principal?",
+        "answer": "$35.00",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $1,250.00 × 1.20% = $15.00; round half up once to $15.00; principal reduction: $50.00 − $15.00 = $35.00; ending balance: $1,250.00 − $35.00 = $1,215.00; payment check: $15.00 + $35.00 = $50.00. The requested principal result is $35.00.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 125000,
+            "monthlyRateBps": 120,
+            "interestNumerator": 15000000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1500,
+            "paymentCents": 5000,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 3500,
+            "endingBalanceCents": 121500,
+            "requestedResult": "principal",
+            "requestedResultCents": 3500
+          },
+          "trace": "interest: $1,250.00 × 1.20% = $15.00; round half up once to $15.00; principal reduction: $50.00 − $15.00 = $35.00; ending balance: $1,250.00 − $35.00 = $1,215.00; payment check: $15.00 + $35.00 = $50.00"
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "promptText": "What is Mika's ending balance?",
+        "answer": "$1,215.00",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $1,250.00 × 1.20% = $15.00; round half up once to $15.00; principal reduction: $50.00 − $15.00 = $35.00; ending balance: $1,250.00 − $35.00 = $1,215.00; payment check: $15.00 + $35.00 = $50.00. The requested ending result is $1,215.00.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 125000,
+            "monthlyRateBps": 120,
+            "interestNumerator": 15000000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1500,
+            "paymentCents": 5000,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 3500,
+            "endingBalanceCents": 121500,
+            "requestedResult": "ending",
+            "requestedResultCents": 121500
+          },
+          "trace": "interest: $1,250.00 × 1.20% = $15.00; round half up once to $15.00; principal reduction: $50.00 − $15.00 = $35.00; ending balance: $1,250.00 − $35.00 = $1,215.00; payment check: $15.00 + $35.00 = $50.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is Ari's one-period interest charge?",
+        "answer": "$15.61",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $45.00 − $15.61 = $29.39; ending balance: $975.50 − $29.39 = $946.11; payment check: $15.61 + $29.39 = $45.00. The requested interest result is $15.61.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 97550,
+            "monthlyRateBps": 160,
+            "interestNumerator": 15608000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1561,
+            "paymentCents": 4500,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 2939,
+            "endingBalanceCents": 94611,
+            "requestedResult": "interest",
+            "requestedResultCents": 1561
+          },
+          "trace": "interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $45.00 − $15.61 = $29.39; ending balance: $975.50 − $29.39 = $946.11; payment check: $15.61 + $29.39 = $45.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much of Ari's $45.00 payment reduces principal?",
+        "answer": "$29.39",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $45.00 − $15.61 = $29.39; ending balance: $975.50 − $29.39 = $946.11; payment check: $15.61 + $29.39 = $45.00. The requested principal result is $29.39.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 97550,
+            "monthlyRateBps": 160,
+            "interestNumerator": 15608000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1561,
+            "paymentCents": 4500,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 2939,
+            "endingBalanceCents": 94611,
+            "requestedResult": "principal",
+            "requestedResultCents": 2939
+          },
+          "trace": "interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $45.00 − $15.61 = $29.39; ending balance: $975.50 − $29.39 = $946.11; payment check: $15.61 + $29.39 = $45.00"
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "promptText": "What is Ari's ending balance after the $45.00 payment?",
+        "answer": "$946.11",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $45.00 − $15.61 = $29.39; ending balance: $975.50 − $29.39 = $946.11; payment check: $15.61 + $29.39 = $45.00. The requested ending result is $946.11.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 97550,
+            "monthlyRateBps": 160,
+            "interestNumerator": 15608000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1561,
+            "paymentCents": 4500,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 2939,
+            "endingBalanceCents": 94611,
+            "requestedResult": "ending",
+            "requestedResultCents": 94611
+          },
+          "trace": "interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $45.00 − $15.61 = $29.39; ending balance: $975.50 − $29.39 = $946.11; payment check: $15.61 + $29.39 = $45.00"
+        }
+      },
+      {
+        "ref": "t4-p1",
+        "promptText": "What ending balance results if Ari pays $70.00 under the same statement conditions?",
+        "answer": "$921.11",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $70.00 − $15.61 = $54.39; ending balance: $975.50 − $54.39 = $921.11; payment check: $15.61 + $54.39 = $70.00. The requested ending result is $921.11.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 97550,
+            "monthlyRateBps": 160,
+            "interestNumerator": 15608000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1561,
+            "paymentCents": 7000,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 5439,
+            "endingBalanceCents": 92111,
+            "requestedResult": "ending",
+            "requestedResultCents": 92111
+          },
+          "trace": "interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $70.00 − $15.61 = $54.39; ending balance: $975.50 − $54.39 = $921.11; payment check: $15.61 + $54.39 = $70.00"
+        }
+      },
+      {
+        "ref": "t5-p1",
+        "promptText": "What is Taylor's one-period interest charge?",
+        "answer": "$15.96",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $1,140.25 × 1.40% = $15.9635; round half up once to $15.96; principal reduction: $50.00 − $15.96 = $34.04; ending balance: $1,140.25 − $34.04 = $1,106.21; payment check: $15.96 + $34.04 = $50.00. The requested interest result is $15.96.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 114025,
+            "monthlyRateBps": 140,
+            "interestNumerator": 15963500,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1596,
+            "paymentCents": 5000,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 3404,
+            "endingBalanceCents": 110621,
+            "requestedResult": "interest",
+            "requestedResultCents": 1596
+          },
+          "trace": "interest: $1,140.25 × 1.40% = $15.9635; round half up once to $15.96; principal reduction: $50.00 − $15.96 = $34.04; ending balance: $1,140.25 − $34.04 = $1,106.21; payment check: $15.96 + $34.04 = $50.00"
+        }
+      },
+      {
+        "ref": "t5-p2",
+        "promptText": "How much of Taylor's payment reduces principal?",
+        "answer": "$34.04",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $1,140.25 × 1.40% = $15.9635; round half up once to $15.96; principal reduction: $50.00 − $15.96 = $34.04; ending balance: $1,140.25 − $34.04 = $1,106.21; payment check: $15.96 + $34.04 = $50.00. The requested principal result is $34.04.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 114025,
+            "monthlyRateBps": 140,
+            "interestNumerator": 15963500,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1596,
+            "paymentCents": 5000,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 3404,
+            "endingBalanceCents": 110621,
+            "requestedResult": "principal",
+            "requestedResultCents": 3404
+          },
+          "trace": "interest: $1,140.25 × 1.40% = $15.9635; round half up once to $15.96; principal reduction: $50.00 − $15.96 = $34.04; ending balance: $1,140.25 − $34.04 = $1,106.21; payment check: $15.96 + $34.04 = $50.00"
+        }
+      },
+      {
+        "ref": "t5-p3",
+        "promptText": "What is Taylor's ending balance?",
+        "answer": "$1,106.21",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $1,140.25 × 1.40% = $15.9635; round half up once to $15.96; principal reduction: $50.00 − $15.96 = $34.04; ending balance: $1,140.25 − $34.04 = $1,106.21; payment check: $15.96 + $34.04 = $50.00. The requested ending result is $1,106.21.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 114025,
+            "monthlyRateBps": 140,
+            "interestNumerator": 15963500,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1596,
+            "paymentCents": 5000,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 3404,
+            "endingBalanceCents": 110621,
+            "requestedResult": "ending",
+            "requestedResultCents": 110621
+          },
+          "trace": "interest: $1,140.25 × 1.40% = $15.9635; round half up once to $15.96; principal reduction: $50.00 − $15.96 = $34.04; ending balance: $1,140.25 − $34.04 = $1,106.21; payment check: $15.96 + $34.04 = $50.00"
+        }
+      },
+      {
+        "ref": "t6-p1",
+        "promptText": "What amount belongs in Nia's interest box?",
+        "answer": "$10.00",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $500.00 × 2.00% = $10.00; round half up once to $10.00; principal reduction: $25.00 − $10.00 = $15.00; ending balance: $500.00 − $15.00 = $485.00; payment check: $10.00 + $15.00 = $25.00. The requested interest result is $10.00.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 50000,
+            "monthlyRateBps": 200,
+            "interestNumerator": 10000000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1000,
+            "paymentCents": 2500,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 1500,
+            "endingBalanceCents": 48500,
+            "requestedResult": "interest",
+            "requestedResultCents": 1000
+          },
+          "trace": "interest: $500.00 × 2.00% = $10.00; round half up once to $10.00; principal reduction: $25.00 − $10.00 = $15.00; ending balance: $500.00 − $15.00 = $485.00; payment check: $10.00 + $15.00 = $25.00"
+        }
+      },
+      {
+        "ref": "t6-p2",
+        "promptText": "What amount belongs in Nia's principal-reduction box?",
+        "answer": "$15.00",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $500.00 × 2.00% = $10.00; round half up once to $10.00; principal reduction: $25.00 − $10.00 = $15.00; ending balance: $500.00 − $15.00 = $485.00; payment check: $10.00 + $15.00 = $25.00. The requested principal result is $15.00.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 50000,
+            "monthlyRateBps": 200,
+            "interestNumerator": 10000000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1000,
+            "paymentCents": 2500,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 1500,
+            "endingBalanceCents": 48500,
+            "requestedResult": "principal",
+            "requestedResultCents": 1500
+          },
+          "trace": "interest: $500.00 × 2.00% = $10.00; round half up once to $10.00; principal reduction: $25.00 − $10.00 = $15.00; ending balance: $500.00 − $15.00 = $485.00; payment check: $10.00 + $15.00 = $25.00"
+        }
+      },
+      {
+        "ref": "t6-p3",
+        "promptText": "What is Nia's ending balance?",
+        "answer": "$485.00",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $500.00 × 2.00% = $10.00; round half up once to $10.00; principal reduction: $25.00 − $10.00 = $15.00; ending balance: $500.00 − $15.00 = $485.00; payment check: $10.00 + $15.00 = $25.00. The requested ending result is $485.00.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 50000,
+            "monthlyRateBps": 200,
+            "interestNumerator": 10000000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 1000,
+            "paymentCents": 2500,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 1500,
+            "endingBalanceCents": 48500,
+            "requestedResult": "ending",
+            "requestedResultCents": 48500
+          },
+          "trace": "interest: $500.00 × 2.00% = $10.00; round half up once to $10.00; principal reduction: $25.00 − $10.00 = $15.00; ending balance: $500.00 − $15.00 = $485.00; payment check: $10.00 + $15.00 = $25.00"
+        }
+      },
+      {
+        "ref": "t7-p1",
+        "promptText": "What is Omar's one-period interest charge?",
+        "answer": "$9.00",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $720.00 × 1.25% = $9.00; round half up once to $9.00; principal reduction: $35.00 − $9.00 = $26.00; ending balance: $720.00 − $26.00 = $694.00; payment check: $9.00 + $26.00 = $35.00. The requested interest result is $9.00.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 72000,
+            "monthlyRateBps": 125,
+            "interestNumerator": 9000000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 900,
+            "paymentCents": 3500,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 2600,
+            "endingBalanceCents": 69400,
+            "requestedResult": "interest",
+            "requestedResultCents": 900
+          },
+          "trace": "interest: $720.00 × 1.25% = $9.00; round half up once to $9.00; principal reduction: $35.00 − $9.00 = $26.00; ending balance: $720.00 − $26.00 = $694.00; payment check: $9.00 + $26.00 = $35.00"
+        }
+      },
+      {
+        "ref": "t7-p2",
+        "promptText": "How much of Omar's payment reduces principal?",
+        "answer": "$26.00",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $720.00 × 1.25% = $9.00; round half up once to $9.00; principal reduction: $35.00 − $9.00 = $26.00; ending balance: $720.00 − $26.00 = $694.00; payment check: $9.00 + $26.00 = $35.00. The requested principal result is $26.00.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 72000,
+            "monthlyRateBps": 125,
+            "interestNumerator": 9000000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 900,
+            "paymentCents": 3500,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 2600,
+            "endingBalanceCents": 69400,
+            "requestedResult": "principal",
+            "requestedResultCents": 2600
+          },
+          "trace": "interest: $720.00 × 1.25% = $9.00; round half up once to $9.00; principal reduction: $35.00 − $9.00 = $26.00; ending balance: $720.00 − $26.00 = $694.00; payment check: $9.00 + $26.00 = $35.00"
+        }
+      },
+      {
+        "ref": "t7-p3",
+        "promptText": "What is Omar's ending balance?",
+        "answer": "$694.00",
+        "verification": {
+          "method": "independent-integer-cent-recompute",
+          "reasoning": "interest: $720.00 × 1.25% = $9.00; round half up once to $9.00; principal reduction: $35.00 − $9.00 = $26.00; ending balance: $720.00 − $26.00 = $694.00; payment check: $9.00 + $26.00 = $35.00. The requested ending result is $694.00.",
+          "computation": {
+            "op": "fictional-credit-statement-period",
+            "startingBalanceCents": 72000,
+            "monthlyRateBps": 125,
+            "interestNumerator": 9000000,
+            "interestDenominator": 10000,
+            "interestRounding": "nearest-cent-half-up-once",
+            "roundedInterestCents": 900,
+            "paymentCents": 3500,
+            "paymentAllocation": "rounded-interest-then-principal",
+            "principalReductionCents": 2600,
+            "endingBalanceCents": 69400,
+            "requestedResult": "ending",
+            "requestedResultCents": 69400
+          },
+          "trace": "interest: $720.00 × 1.25% = $9.00; round half up once to $9.00; principal reduction: $35.00 − $9.00 = $26.00; ending balance: $720.00 − $26.00 = $694.00; payment check: $9.00 + $26.00 = $35.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Explaining the payment split",
+        "itemRefs": [
+          "t2-p4"
+        ],
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats the whole payment as principal reduction or does not distinguish interest from principal."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response names interest and principal but does not use the payment-split check accurately."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that rounded interest is covered before the remainder reduces principal and uses interest plus principal reduction equals payment as a valid check."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about Ari's payment tradeoff",
+        "itemRefs": [
+          "t4-p2"
+        ],
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The recommendation is unsupported, contradicts the fictional facts, or makes a personal judgment about Ari."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response cites either debt reduction or cash available now but does not connect both to Ari's stated constraints."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response recommends either payment consistently, cites the computed balance effect, explains the cash-available tradeoff against the $35.00 fee, and names a plausible changed fact that could change the recommendation."
+          }
+        ]
+      },
+      {
+        "dimension": "Fresh mastery interpretation",
+        "itemRefs": [
+          "t5-p4"
+        ],
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response reports an amount without explaining the interest-principal relationship or the payment tradeoff."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response explains the payment split or the larger-payment effect, but not both."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response accurately interprets Taylor's interest and principal split and explains that, under unchanged statement conditions, an added payment amount increases principal reduction by that amount while reducing cash available now by the same amount."
+          }
+        ]
+      }
+    ]
+  },
+  "calculationAuthority": {
+    "representation": "integer-cents-and-basis-points",
+    "interestRounding": "nearest-cent-half-up-once-before-payment-allocation",
+    "floatingPointAsFinalAuthority": false,
+    "statementFacts": {
+      "mika": {
+        "startingBalanceCents": 125000,
+        "monthlyRateBps": 120,
+        "paymentCents": 5000
+      },
+      "ariMinimum": {
+        "startingBalanceCents": 97550,
+        "monthlyRateBps": 160,
+        "paymentCents": 4500
+      },
+      "ariLarger": {
+        "startingBalanceCents": 97550,
+        "monthlyRateBps": 160,
+        "paymentCents": 7000
+      },
+      "taylor": {
+        "startingBalanceCents": 114025,
+        "monthlyRateBps": 140,
+        "paymentCents": 5000
+      },
+      "nia": {
+        "startingBalanceCents": 50000,
+        "monthlyRateBps": 200,
+        "paymentCents": 2500
+      },
+      "omar": {
+        "startingBalanceCents": 72000,
+        "monthlyRateBps": 125,
+        "paymentCents": 3500
+      }
+    }
+  },
+  "integrity": {
+    "sourceRef": "mac/finlit-director-sample-r1",
+    "sourcePath": "curriculum-production/final/financial-literacy/samples/grade-08/financial-literacy-director-sample-r1-authority.mjs",
+    "verificationMethod": "independent-integer-cent-recompute"
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "Which statement correctly explains what happens when the fictional payment is applied after interest posts?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Mika's one-period interest charge?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of Mika's payment reduces principal?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Mika's ending balance?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "OPEN",
+          "promptText": "Explain why subtracting the whole payment from the starting balance would misstate Mika's ending balance. Use the payment-split check in your reasoning."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Ari's one-period interest charge?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of Ari's $45.00 payment reduces principal?"
+        },
+        {
+          "ref": "t3-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Ari's ending balance after the $45.00 payment?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "FIXED",
+          "promptText": "What ending balance results if Ari pays $70.00 under the same statement conditions?"
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "Recommend either the $45.00 or $70.00 payment for Ari's stated goal. Cite the balance effect, explain the cash-available tradeoff, and name one changed fact that could change the recommendation."
+        },
+        {
+          "ref": "t5-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Taylor's one-period interest charge?"
+        },
+        {
+          "ref": "t5-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of Taylor's payment reduces principal?"
+        },
+        {
+          "ref": "t5-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Taylor's ending balance?"
+        },
+        {
+          "ref": "t5-p4",
+          "responseMode": "OPEN",
+          "promptText": "Explain what Taylor's payment split shows about minimum payments. Then explain how a larger payment under the same statement conditions would change principal reduction and the cash available now."
+        },
+        {
+          "ref": "t6-p1",
+          "responseMode": "FIXED",
+          "promptText": "What amount belongs in Nia's interest box?"
+        },
+        {
+          "ref": "t6-p2",
+          "responseMode": "FIXED",
+          "promptText": "What amount belongs in Nia's principal-reduction box?"
+        },
+        {
+          "ref": "t6-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Nia's ending balance?"
+        },
+        {
+          "ref": "t7-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Omar's one-period interest charge?"
+        },
+        {
+          "ref": "t7-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of Omar's payment reduces principal?"
+        },
+        {
+          "ref": "t7-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Omar's ending balance?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: Which statement correctly explains what happens when the fictional payment is applied after interest posts? Answer: Interest is rounded to cents first; the payment covers that interest before the rest reduces the balance.. Verification: The shared statement rule posts and rounds interest before allocating the payment. The remaining payment, not the whole payment, reduces principal. t2-p1: What is Mika's one-period interest charge? Answer: $15.00. Verification: interest: $1,250.00 × 1.20% = $15.00; round half up once to $15.00; principal reduction: $50.00 − $15.00 = $35.00; ending balance: $1,250.00 − $35.00 = $1,215.00; payment check: $15.00 + $35.00 = $50.00. The requested interest result is $15.00. t2-p2: How much of Mika's payment reduces principal? Answer: $35.00. Verification: interest: $1,250.00 × 1.20% = $15.00; round half up once to $15.00; principal reduction: $50.00 − $15.00 = $35.00; ending balance: $1,250.00 − $35.00 = $1,215.00; payment check: $15.00 + $35.00 = $50.00. The requested principal result is $35.00. t2-p3: What is Mika's ending balance? Answer: $1,215.00. Verification: interest: $1,250.00 × 1.20% = $15.00; round half up once to $15.00; principal reduction: $50.00 − $15.00 = $35.00; ending balance: $1,250.00 − $35.00 = $1,215.00; payment check: $15.00 + $35.00 = $50.00. The requested ending result is $1,215.00. t3-p1: What is Ari's one-period interest charge? Answer: $15.61. Verification: interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $45.00 − $15.61 = $29.39; ending balance: $975.50 − $29.39 = $946.11; payment check: $15.61 + $29.39 = $45.00. The requested interest result is $15.61. t3-p2: How much of Ari's $45.00 payment reduces principal? Answer: $29.39. Verification: interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $45.00 − $15.61 = $29.39; ending balance: $975.50 − $29.39 = $946.11; payment check: $15.61 + $29.39 = $45.00. The requested principal result is $29.39. t3-p3: What is Ari's ending balance after the $45.00 payment? Answer: $946.11. Verification: interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $45.00 − $15.61 = $29.39; ending balance: $975.50 − $29.39 = $946.11; payment check: $15.61 + $29.39 = $45.00. The requested ending result is $946.11. t4-p1: What ending balance results if Ari pays $70.00 under the same statement conditions? Answer: $921.11. Verification: interest: $975.50 × 1.60% = $15.608; round half up once to $15.61; principal reduction: $70.00 − $15.61 = $54.39; ending balance: $975.50 − $54.39 = $921.11; payment check: $15.61 + $54.39 = $70.00. The requested ending result is $921.11. t5-p1: What is Taylor's one-period interest charge? Answer: $15.96. Verification: interest: $1,140.25 × 1.40% = $15.9635; round half up once to $15.96; principal reduction: $50.00 − $15.96 = $34.04; ending balance: $1,140.25 − $34.04 = $1,106.21; payment check: $15.96 + $34.04 = $50.00. The requested interest result is $15.96. t5-p2: How much of Taylor's payment reduces principal? Answer: $34.04. Verification: interest: $1,140.25 × 1.40% = $15.9635; round half up once to $15.96; principal reduction: $50.00 − $15.96 = $34.04; ending balance: $1,140.25 − $34.04 = $1,106.21; payment check: $15.96 + $34.04 = $50.00. The requested principal result is $34.04. t5-p3: What is Taylor's ending balance? Answer: $1,106.21. Verification: interest: $1,140.25 × 1.40% = $15.9635; round half up once to $15.96; principal reduction: $50.00 − $15.96 = $34.04; ending balance: $1,140.25 − $34.04 = $1,106.21; payment check: $15.96 + $34.04 = $50.00. The requested ending result is $1,106.21. t6-p1: What amount belongs in Nia's interest box? Answer: $10.00. Verification: interest: $500.00 × 2.00% = $10.00; round half up once to $10.00; principal reduction: $25.00 − $10.00 = $15.00; ending balance: $500.00 − $15.00 = $485.00; payment check: $10.00 + $15.00 = $25.00. The requested interest result is $10.00. t6-p2: What amount belongs in Nia's principal-reduction box? Answer: $15.00. Verification: interest: $500.00 × 2.00% = $10.00; round half up once to $10.00; principal reduction: $25.00 − $10.00 = $15.00; ending balance: $500.00 − $15.00 = $485.00; payment check: $10.00 + $15.00 = $25.00. The requested principal result is $15.00. t6-p3: What is Nia's ending balance? Answer: $485.00. Verification: interest: $500.00 × 2.00% = $10.00; round half up once to $10.00; principal reduction: $25.00 − $10.00 = $15.00; ending balance: $500.00 − $15.00 = $485.00; payment check: $10.00 + $15.00 = $25.00. The requested ending result is $485.00. t7-p1: What is Omar's one-period interest charge? Answer: $9.00. Verification: interest: $720.00 × 1.25% = $9.00; round half up once to $9.00; principal reduction: $35.00 − $9.00 = $26.00; ending balance: $720.00 − $26.00 = $694.00; payment check: $9.00 + $26.00 = $35.00. The requested interest result is $9.00. t7-p2: How much of Omar's payment reduces principal? Answer: $26.00. Verification: interest: $720.00 × 1.25% = $9.00; round half up once to $9.00; principal reduction: $35.00 − $9.00 = $26.00; ending balance: $720.00 − $26.00 = $694.00; payment check: $9.00 + $26.00 = $35.00. The requested principal result is $26.00. t7-p3: What is Omar's ending balance? Answer: $694.00. Verification: interest: $720.00 × 1.25% = $9.00; round half up once to $9.00; principal reduction: $35.00 − $9.00 = $26.00; ending balance: $720.00 − $26.00 = $694.00; payment check: $9.00 + $26.00 = $35.00. The requested ending result is $694.00."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Explaining the payment split — Not yet: The response treats the whole payment as principal reduction or does not distinguish interest from principal. Approaching: The response names interest and principal but does not use the payment-split check accurately. Meets: The response explains that rounded interest is covered before the remainder reduces principal and uses interest plus principal reduction equals payment as a valid check. Reasoning about Ari's payment tradeoff — Not yet: The recommendation is unsupported, contradicts the fictional facts, or makes a personal judgment about Ari. Approaching: The response cites either debt reduction or cash available now but does not connect both to Ari's stated constraints. Meets: The response recommends either payment consistently, cites the computed balance effect, explains the cash-available tradeoff against the $35.00 fee, and names a plausible changed fact that could change the recommendation. Fresh mastery interpretation — Not yet: The response reports an amount without explaining the interest-principal relationship or the payment tradeoff. Approaching: The response explains the payment split or the larger-payment effect, but not both. Meets: The response accurately interprets Taylor's interest and principal split and explains that, under unchanged statement conditions, an added payment amount increases principal reduction by that amount while reducing cash available now by the same amount. The response explains that rounded interest is covered before the remainder reduces principal and uses interest plus principal reduction equals payment as a valid check. The response recommends either payment consistently, cites the computed balance effect, explains the cash-available tradeoff against the $35.00 fee, and names a plausible changed fact that could change the recommendation. The response accurately interprets Taylor's interest and principal split and explains that, under unchanged statement conditions, an added payment amount increases principal reduction by that amount while reducing cash available now by the same amount."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that rounded interest is covered before the remainder reduces principal and uses interest plus principal reduction equals payment as a valid check. The response recommends either payment consistently, cites the computed balance effect, explains the cash-available tradeoff against the $35.00 fee, and names a plausible changed fact that could change the recommendation. The response accurately interprets Taylor's interest and principal split and explains that, under unchanged statement conditions, an added payment amount increases principal reduction by that amount while reducing cash available now by the same amount."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 17 fixed answers are independently recomputed from integer cents and basis points by finlit-director-sample-r1-oracle@1. Interest is rounded once to cents, half up, before payment allocation; binary floating-point output is not final authority."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 17,
+      "contractFixedItemCount": 17,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": false,
+      "directorSampleOracleVerified": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 3,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u04-l03.scoring.json",
+    "sourceScoringSha256": "bace4569d3da3eca0cf716a7367c74ab1804868369a77d4733a7544da4ffefbe",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": false,
+    "directorSampleAuthority": {
+      "revision": "FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1",
+      "authorityPath": "curriculum-production/final/financial-literacy/samples/grade-08/financial-literacy-director-sample-r1-authority.mjs",
+      "oracleId": "finlit-director-sample-r1-oracle@1"
+    }
+  }
+}

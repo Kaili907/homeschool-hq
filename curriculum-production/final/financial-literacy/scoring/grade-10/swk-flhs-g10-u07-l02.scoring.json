@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l02",
+  "lessonId": "ma-g10-financial-literacy-u07-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,480.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6% of $58,000. The wages are below the cap, so the whole amount is subject to the levy."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$870.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1.5% of $58,000, with no cap to consider."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,350.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,480.00 plus $870.00. Note this is charged on top of any income tax, and unlike income tax it receives no standard deduction."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$9,480.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6% is charged on the first $158,000 only. The $52,000 of wages above the cap carries no social insurance levy at all."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$3,150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1.5% of the whole $210,000, because this levy has no cap."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$12,630.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,480.00 of social insurance plus $3,150.00 of health levy, charged on the same wages with no deduction."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "6.01%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$12,630.00 against $210,000 of wages."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "7.50%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,350.00 against $58,000 — a higher share than the worker earning nearly four times as much, because the cap removed the social insurance levy from Worker B’s top $52,000."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "wagesA * socRate",
+        "substituted": "58000 * 0.06",
+        "result": "$3,480.00",
+        "why": "6% of $58,000. The wages are below the cap, so the whole amount is subject to the levy."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "wagesA2 * healthRate",
+        "substituted": "58000 * 0.015",
+        "result": "$870.00",
+        "why": "1.5% of $58,000, with no cap to consider."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$4,350.00",
+        "why": "$3,480.00 plus $870.00. Note this is charged on top of any income tax, and unlike income tax it receives no standard deduction."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "min(wagesB, cap) * socRate2",
+        "substituted": "min(210000, 158000) * 0.06",
+        "result": "$9,480.00",
+        "why": "6% is charged on the first $158,000 only. The $52,000 of wages above the cap carries no social insurance levy at all."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "wagesB2 * healthRate2",
+        "substituted": "210000 * 0.015",
+        "result": "$3,150.00",
+        "why": "1.5% of the whole $210,000, because this levy has no cap."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 + #t2-p2",
+        "substituted": "#t2-p1 + #t2-p2",
+        "result": "$12,630.00",
+        "why": "$9,480.00 of social insurance plus $3,150.00 of health levy, charged on the same wages with no deduction."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 / wagesB3 * 100",
+        "substituted": "#t2-p3 / 210000 * 100",
+        "result": "6.01%",
+        "why": "$12,630.00 against $210,000 of wages."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t1-p3 / wagesA3 * 100",
+        "substituted": "#t1-p3 / 58000 * 100",
+        "result": "7.50%",
+        "why": "$4,350.00 against $58,000 — a higher share than the worker earning nearly four times as much, because the cap removed the social insurance levy from Worker B’s top $52,000."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The income tax in the previous lesson took a larger share as income rose; this payroll tax takes a smaller one. Explain what feature of each schedule produces that difference, and say why a person comparing two jobs should look at both taxes rather than the income tax alone.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the two features: rising bracket rates make the income tax take a larger share as income rises, while the $158,000 cap on the social insurance levy makes the payroll tax take a smaller share above that point.",
+          "Uses the 7.50% and 6.01% figures to show the direction, and notes that the health levy alone would have kept the rate flat.",
+          "Concludes that comparing jobs on income tax alone understates the total, because payroll tax is charged from the first dollar with no deduction."
+        ],
+        "evidenceRequirements": [
+          "Uses both workers’ total payroll tax figures and both of the share percentages."
+        ],
+        "lookFors": [
+          "The response points at the cap specifically as the mechanism.",
+          "The response notes that payroll tax has no deduction, which is why it starts biting at incomes where income tax is still zero."
+        ],
+        "commonMisconception": "Assuming every tax takes a larger share of a larger income.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "transfer",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Worker A’s social insurance levy?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is Worker A’s health levy?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Worker A’s total payroll tax?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Worker B’s social insurance levy?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is Worker B’s health levy?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Worker B’s total payroll tax?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What share of Worker B’s wages is that?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What share of Worker A’s wages was their payroll tax?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The income tax in the previous lesson took a larger share as income rose; this payroll tax takes a smaller one. Explain what feature of each schedule produces that difference, and say why a person comparing two jobs should look at both taxes rather than the income tax alone."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is Worker A’s social insurance levy? Answer: $3,480.00. Verification: 6% of $58,000. The wages are below the cap, so the whole amount is subject to the levy. t1-p2: What is Worker A’s health levy? Answer: $870.00. Verification: 1.5% of $58,000, with no cap to consider. t1-p3: What is Worker A’s total payroll tax? Answer: $4,350.00. Verification: $3,480.00 plus $870.00. Note this is charged on top of any income tax, and unlike income tax it receives no standard deduction. t2-p1: What is Worker B’s social insurance levy? Answer: $9,480.00. Verification: 6% is charged on the first $158,000 only. The $52,000 of wages above the cap carries no social insurance levy at all. t2-p2: What is Worker B’s health levy? Answer: $3,150.00. Verification: 1.5% of the whole $210,000, because this levy has no cap. t2-p3: What is Worker B’s total payroll tax? Answer: $12,630.00. Verification: $9,480.00 of social insurance plus $3,150.00 of health levy, charged on the same wages with no deduction. t2-p4: What share of Worker B’s wages is that? Answer: 6.01%. Verification: $12,630.00 against $210,000 of wages. t2-p5: What share of Worker A’s wages was their payroll tax? Answer: 7.50%. Verification: $4,350.00 against $58,000 — a higher share than the worker earning nearly four times as much, because the cap removed the social insurance levy from Worker B’s top $52,000."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The income tax in the previous lesson took a larger share as income rose; this payroll tax takes a smaller one. Explain what feature of each schedule produces that difference, and say why a person comparing two jobs should look at both taxes rather than the income tax alone. Identifies the two features: rising bracket rates make the income tax take a larger share as income rises, while the $158,000 cap on the social insurance levy makes the payroll tax take a smaller share above that point. Uses the 7.50% and 6.01% figures to show the direction, and notes that the health levy alone would have kept the rate flat. Concludes that comparing jobs on income tax alone understates the total, because payroll tax is charged from the first dollar with no deduction. Uses both workers’ total payroll tax figures and both of the share percentages. The response points at the cap specifically as the mechanism. The response notes that payroll tax has no deduction, which is why it starts biting at incomes where income tax is still zero."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the two features: rising bracket rates make the income tax take a larger share as income rises, while the $158,000 cap on the social insurance levy makes the payroll tax take a smaller share above that point. Uses the 7.50% and 6.01% figures to show the direction, and notes that the health levy alone would have kept the rate flat. Concludes that comparing jobs on income tax alone understates the total, because payroll tax is charged from the first dollar with no deduction."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u07-l02.scoring.json",
+    "sourceScoringSha256": "83d6a514dbd6629b6090f7f1c7c9ed21fb7ef44451c54f3fceaf774a0f6791a6",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

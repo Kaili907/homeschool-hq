@@ -1,0 +1,83 @@
+{
+  "rawCounts": {
+    "READY": 499,
+    "NEEDS_HUMAN_REVIEW": 5
+  },
+  "effectiveCounts": {
+    "READY": 504
+  },
+  "blockingLessons": [],
+  "unresolvedHumanReview": [],
+  "scoringCorrections": [
+    {
+      "packageId": "swk-flhs-g11-u04-l07",
+      "sourcePromptRef": "t3-p2",
+      "correction": "The combined source prompt is represented as one FIXED computation sub-item and one OPEN judgment sub-item in the H3 contract. A substantive independently recomputed fixed-answer supplement was added; source prompt text and source scoring evidence remain preserved.",
+      "fixedAnswer": "Approximately 11.1 months",
+      "verification": "$2,219.04 / $199.73 = 11.110499... months, which is approximately 11.1 months to the precision stated by the source acceptable-answer criteria."
+    }
+  ],
+  "manuallyResolvedPromptAmbiguities": [
+    {
+      "packageId": "swk-fl-g3-u02-l05",
+      "lessonId": "ma-g3-financial-literacy-u02-l05",
+      "reviews": [
+        {
+          "itemRef": "t4-p1",
+          "promptText": "What is the difference between the $5.00 Ben was given and the $6.00 he earned?",
+          "resolution": "CONFIRMED_OPEN_JUDGMENT",
+          "rationale": "The prompt contrasts how a gift and earnings arrive, not their $1 numerical difference. The source rubric requires origin, repeatability, and agency; the fixed comparison was already answered in t2 and t3."
+        }
+      ]
+    },
+    {
+      "packageId": "swk-fl-g3-u04-l01",
+      "lessonId": "ma-g3-financial-literacy-u04-l01",
+      "reviews": [
+        {
+          "itemRef": "t4-p1",
+          "promptText": "Fatima saved for five weeks in the second story but still had not reached the kite. What did the $2.00 snack cost her besides $2.00?",
+          "resolution": "CONFIRMED_OPEN_JUDGMENT",
+          "rationale": "“Besides $2.00” expressly asks for the non-numeric time/opportunity cost. The source rubric accepts an explanation that the withdrawal delayed the goal; the dollar arithmetic is fixed and keyed earlier."
+        }
+      ]
+    },
+    {
+      "packageId": "swk-fl-g4-u04-l04",
+      "lessonId": "ma-g4-financial-literacy-u04-l04",
+      "reviews": [
+        {
+          "itemRef": "t4-p1",
+          "promptText": "What is Kofi actually being paid for when a simulated account adds interest to his savings?",
+          "resolution": "CONFIRMED_OPEN_JUDGMENT",
+          "rationale": "The prompt asks what interest compensates a saver for—the institution’s use of money—not the amount of interest. The amount was separately computed in fixed items and the reflection remains rubric-scored."
+        }
+      ]
+    },
+    {
+      "packageId": "swk-fl-g5-u06-l04",
+      "lessonId": "ma-g5-financial-literacy-u06-l04",
+      "reviews": [
+        {
+          "itemRef": "independent-work",
+          "scope": "INDEPENDENT_WORK_TEXT",
+          "promptText": "Write what Petra should tell buyers and how she should tell them, given the stall closes tomorrow and she has already been paid.",
+          "resolution": "CONFIRMED_OPEN_JUDGMENT",
+          "rationale": "“Already been paid” is scenario context, not a request to calculate pay. The learner must decide what to disclose, whom to contact, and what remedy to offer; the substantive source rubric supplies acceptable judgment criteria."
+        }
+      ]
+    },
+    {
+      "packageId": "swk-flhs-g11-u01-l02",
+      "lessonId": "ma-g11-financial-literacy-u01-l02",
+      "reviews": [
+        {
+          "itemRef": "t3-p2",
+          "promptText": "The model gives Marcus a raise of 2.5% in each year he is not studying. Say what would happen to the true cost if that raise pattern were smaller, and name one thing about his job that would make the 2.5% assumption unsafe.",
+          "resolution": "CONFIRMED_OPEN_JUDGMENT",
+          "rationale": "The response must explain the direction of a changed raise assumption and identify why that assumption may fail. No single numeric raise path is requested; source criteria require causal and uncertainty reasoning."
+        }
+      ]
+    }
+  ]
+}

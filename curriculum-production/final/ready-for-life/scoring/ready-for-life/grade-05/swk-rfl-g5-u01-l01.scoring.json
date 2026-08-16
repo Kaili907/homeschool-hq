@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l01",
+  "lessonId": "ma-g5-ready-for-life-u01-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Shared-space identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Lists personal-only spaces or gives vague answers that do not name a second user."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Lists three genuinely multi-person spaces with at least one other user named for each."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Lists three shared spaces and explains a distinct reason each one is shared."
+          }
+        ]
+      },
+      {
+        "dimension": "Evidence-based reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Reflection restates the question without citing the day's observation."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Reflection cites the specific noticing from today as evidence."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Reflection connects the day's observation to a general principle about shared-space care in the learner's own words."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Named spaces are actually used by more than one person, not just the learner's own room.",
+      "Reflection references a concrete event from the noticing day, not a generic statement.",
+      "Language avoids blaming any specific family member for a messy space."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l07",
+  "lessonId": "ma-g9-financial-literacy-u05-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "12.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "40 minus 30 plus 26 is 36, divided by 3 years, so the investor’s 12% average is correctly computed."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$14,049.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "This reproduces the investor’s own method: $10,000 x 1.12 to the third power."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$14,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The first year’s +40% applied to the original $10,000 stake."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$9,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The 30% fall applies to the $14,000 the good year produced, taking the balance below the original stake."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$12,348.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The third year’s +26% applied to the $9,800 the second year left."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$1,701.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$14,049.28 projected against $12,348.00 actually reached."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "An average of annual percentages does not compound to the same result as the actual sequence",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The 12% average is arithmetically correct, but a 30% loss removes more value than a 30% gain adds, so averaging the rates and compounding the average overstates what a volatile sequence delivers."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round((r1 + r2 + r3) / 3, 1)",
+        "substituted": "round((40 + -30 + 26) / 3, 1)",
+        "result": "12.0%",
+        "why": "40 minus 30 plus 26 is 36, divided by 3 years, so the investor’s 12% average is correctly computed."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(stake * pow(1 + #t1-p1 / 100, years), 2)",
+        "substituted": "round(10000 * pow(1 + #t1-p1 / 100, 3), 2)",
+        "result": "$14,049.28",
+        "why": "This reproduces the investor’s own method: $10,000 x 1.12 to the third power."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "stake2 * (1 + y1)",
+        "substituted": "10000 * (1 + 0.4)",
+        "result": "$14,000.00",
+        "why": "The first year’s +40% applied to the original $10,000 stake."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 * (1 - y2)",
+        "substituted": "#t2-p1 * (1 - 0.3)",
+        "result": "$9,800.00",
+        "why": "The 30% fall applies to the $14,000 the good year produced, taking the balance below the original stake."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 * (1 + y3)",
+        "substituted": "#t2-p2 * (1 + 0.26)",
+        "result": "$12,348.00",
+        "why": "The third year’s +26% applied to the $9,800 the second year left."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t1-p2 - #t2-p3",
+        "substituted": "#t1-p2 - #t2-p3",
+        "result": "$1,701.28",
+        "why": "$14,049.28 projected against $12,348.00 actually reached."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Explain why the year-2 loss cost more than the year-1 gain earned, using the balances, and state what an advertisement quoting an \"average annual return\" is and is not telling you.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the 30% loss was taken on $14,000 while the 40% gain was earned on $10,000, so the same-looking percentages moved very different amounts of money.",
+          "States that an average annual return describes the rates, not the outcome, and that the wider the swings the further the two diverge.",
+          "Notes what the investor should ask for instead: the actual ending value, or the growth rate that would have produced it."
+        ],
+        "evidenceRequirements": [
+          "Uses the year-1 and year-2 balances, $14,000.00 and $9,800.00, and the final $12,348.00."
+        ],
+        "lookFors": [
+          "The response notices the balance fell below the original $10,000 after two years despite a positive average.",
+          "The response does not accuse anyone of misreporting; the figures are all correct."
+        ],
+        "commonMisconception": "Treating the average of a series of annual returns as the rate the money actually grew at.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the arithmetic average of the three annual returns? Round to one decimal place."
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the investor’s projection give — $10,000 growing 12% a year for 3 years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance after year 1?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance after year 2?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance after year 3?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "By how much did the investor’s projection overstate the actual result?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What went wrong in the investor’s reasoning?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain why the year-2 loss cost more than the year-1 gain earned, using the balances, and state what an advertisement quoting an \"average annual return\" is and is not telling you."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the arithmetic average of the three annual returns? Round to one decimal place. Answer: 12.0%. Verification: 40 minus 30 plus 26 is 36, divided by 3 years, so the investor’s 12% average is correctly computed. t1-p2: What does the investor’s projection give — $10,000 growing 12% a year for 3 years? Answer: $14,049.28. Verification: This reproduces the investor’s own method: $10,000 x 1.12 to the third power. t2-p1: What is the balance after year 1? Answer: $14,000.00. Verification: The first year’s +40% applied to the original $10,000 stake. t2-p2: What is the balance after year 2? Answer: $9,800.00. Verification: The 30% fall applies to the $14,000 the good year produced, taking the balance below the original stake. t2-p3: What is the balance after year 3? Answer: $12,348.00. Verification: The third year’s +26% applied to the $9,800 the second year left. t3-p1: By how much did the investor’s projection overstate the actual result? Answer: $1,701.28. Verification: $14,049.28 projected against $12,348.00 actually reached. t3-p2: What went wrong in the investor’s reasoning? Answer: An average of annual percentages does not compound to the same result as the actual sequence. Verification: The 12% average is arithmetically correct, but a 30% loss removes more value than a 30% gain adds, so averaging the rates and compounding the average overstates what a volatile sequence delivers."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t4-p1: Explain why the year-2 loss cost more than the year-1 gain earned, using the balances, and state what an advertisement quoting an \"average annual return\" is and is not telling you. Explains that the 30% loss was taken on $14,000 while the 40% gain was earned on $10,000, so the same-looking percentages moved very different amounts of money. States that an average annual return describes the rates, not the outcome, and that the wider the swings the further the two diverge. Notes what the investor should ask for instead: the actual ending value, or the growth rate that would have produced it. Uses the year-1 and year-2 balances, $14,000.00 and $9,800.00, and the final $12,348.00. The response notices the balance fell below the original $10,000 after two years despite a positive average. The response does not accuse anyone of misreporting; the figures are all correct."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the 30% loss was taken on $14,000 while the 40% gain was earned on $10,000, so the same-looking percentages moved very different amounts of money. States that an average annual return describes the rates, not the outcome, and that the wider the swings the further the two diverge. Notes what the investor should ask for instead: the actual ending value, or the growth rate that would have produced it."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u05-l07.scoring.json",
+    "sourceScoringSha256": "b74fbb358df9064a247d4a9cb1cbb7ce9de1cee17d45060f641da30f2099617d",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

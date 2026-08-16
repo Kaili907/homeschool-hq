@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-health-u05-assessment",
+  "courseRef": "ma-g9-health",
+  "grade": 9,
+  "subject": "health",
+  "location": {
+    "unitRef": "ma-g9-health-u05",
+    "unitNumber": 5,
+    "unitTitle": "Fueling, Movement, Sleep, and Recovery Without Diet Culture",
+    "courseTitle": "Health and Wellness I",
+    "assessmentLessonRef": "ma-g9-health-u05-l05"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-09/unit-assessments/ma-g9-health-u05-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the private-safe task without disclosing medical history, diagnosis, body measurements, or sexual history.",
+    "Use a fictional scenario when offered and identify a trusted adult or qualified professional where appropriate."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain adequate fueling for growth, school load, and activity in your own words and give a valid example."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of hydration across a day."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply sleep need, sleep debt, and circadian timing in high school in a new fictional situation. Show the decision process or cite the evidence used."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving recovery after effort, illness, or a heavy week; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect evaluating supplement, energy-product, and fitness-industry claims with body respect and resisting appearance-based health messaging. Explain how the two support, constrain, or build on one another."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Evaluate three fictional wellness plans for adequacy, safety, evidence, flexibility, and cost, then revise the weakest one. No calorie counts, weights, body-size targets, diet rules, or good/bad food labels are used or produced."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question."
+    }
+  ],
+  "responseMode": "private-safe-task-and-reflection",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/health/ma-g9-health-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy of health information criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated skill application criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-health-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-09/unit-assessments/ma-g9-health-u05-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Fueling, Movement, Sleep, and Recovery Without Diet Culture?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

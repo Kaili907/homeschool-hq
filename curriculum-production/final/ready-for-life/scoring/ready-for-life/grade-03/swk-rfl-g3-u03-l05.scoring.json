@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l05",
+  "lessonId": "ma-g3-ready-for-life-u03-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Tool boundary respected",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Learner reaches for or uses a sharp knife, the stove, the oven, or an appliance during assembly."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Learner uses only the butter knife or spoon and cold or room-temperature ingredients throughout."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner independently redirects themselves away from an off-limits tool before the adult has to intervene."
+          }
+        ]
+      },
+      {
+        "dimension": "Hygiene and separation",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Learner skips handwashing or lets an unwashed ingredient touch a ready-to-eat ingredient."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Learner washes hands before starting and keeps unwashed ingredients away from ready-to-eat ones."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains out loud why a specific ingredient needed washing or separating."
+          }
+        ]
+      },
+      {
+        "dimension": "Process completion",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Snack is left partly assembled, or the counter is left unwiped."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Snack is fully assembled in a clear order and the counter is wiped afterward."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names the specific step where they had to be most careful, with a concrete safety reason."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The adult remains present in the kitchen for the entire assembly, not just the start.",
+      "The learner's step-order description matches what the adult actually observed.",
+      "The reflection response names one specific careful step, not a general 'I was careful the whole time.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

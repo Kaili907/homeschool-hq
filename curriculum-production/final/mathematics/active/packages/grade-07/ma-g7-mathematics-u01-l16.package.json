@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u01-l16",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u01-l16",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Reasoning and Proportional Thinking",
+    "dayInUnit": 16,
+    "courseDay": 16,
+    "phase": "Unit assessment",
+    "focus": "constant of proportionality",
+    "title": "Unit assessment: constant of proportionality"
+  },
+  "standards": [
+    "7.RP.1",
+    "7.RP.2",
+    "MP.1",
+    "MP.3",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-fraction",
+          "standard": "7.RP.1",
+          "difficulty": 1,
+          "prompt": "3 units for 7 items. What is the unit rate?",
+          "choices": [
+            "10/7 units per item",
+            "4/7 units per item",
+            "3/8 units per item",
+            "3/7 units per item"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "proportional-table",
+          "standard": "7.RP.2",
+          "difficulty": 1,
+          "prompt": "A proportional table has 4 per item. What is the output for 7 items?",
+          "choices": [
+            "30",
+            "11",
+            "28",
+            "29"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "constant-of-proportionality",
+          "standard": "7.RP.2",
+          "difficulty": 2,
+          "prompt": "For y = kx, y = 3 when x = 2. What is k?",
+          "choices": [
+            "3/2",
+            "1",
+            "2",
+            "5/2"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "equation-from-rate",
+          "standard": "7.RP.2",
+          "difficulty": 2,
+          "prompt": "A relationship has 2 output units for each input unit. Write its equation.",
+          "choices": [
+            "y = 5x",
+            "y = x + 2",
+            "y = 3x",
+            "y = 2x"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "proportional-or-not",
+          "standard": "7.RP.2",
+          "difficulty": 2,
+          "prompt": "Are (1, 5), (2, 10), and (3, 15) proportional?",
+          "choices": [
+            "proportional",
+            "both",
+            "not proportional",
+            "neither"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "reasonableness",
+          "standard": "7.RP.1",
+          "difficulty": 2,
+          "prompt": "A price is 6 dollars per item. Is 48 dollars the exact total for 8 items?",
+          "choices": [
+            "cannot tell",
+            "only if discounted",
+            "no",
+            "yes"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-fraction",
+          "standard": "7.RP.1",
+          "difficulty": 3,
+          "prompt": "6 units for 2 items. What is the unit rate?",
+          "choices": [
+            "3 units per item",
+            "7/2 units per item",
+            "4 units per item",
+            "2 units per item"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "proportional-table",
+          "standard": "7.RP.2",
+          "difficulty": 3,
+          "prompt": "A proportional table has 5 per item. What is the output for 6 items?",
+          "choices": [
+            "29",
+            "32",
+            "11",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "constant-of-proportionality",
+          "standard": "7.RP.2",
+          "difficulty": 3,
+          "prompt": "For y = kx, y = 3 when x = 5. What is k?",
+          "choices": [
+            "1",
+            "4/5",
+            "3/5",
+            "8/5"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "equation-from-rate",
+          "standard": "7.RP.2",
+          "difficulty": 3,
+          "prompt": "A relationship has 6 output units for each input unit. Write its equation.",
+          "choices": [
+            "y = 7x",
+            "y = 8x",
+            "y = 6x",
+            "y = 9x"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "proportional-or-not",
+          "standard": "7.RP.2",
+          "difficulty": 3,
+          "prompt": "Are (1, 6), (2, 12), and (3, 18) proportional?",
+          "choices": [
+            "neither",
+            "not proportional",
+            "cannot tell",
+            "proportional"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "reasonableness",
+          "standard": "7.RP.1",
+          "difficulty": 3,
+          "prompt": "A price is 4 dollars per item. Is 36 dollars the exact total for 9 items?",
+          "choices": [
+            "only if discounted",
+            "yes",
+            "no",
+            "approximately"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u01-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u01-l16"
+  }
+}

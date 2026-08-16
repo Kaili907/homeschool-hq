@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u06-l14",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u06-l14",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Vectors",
+    "dayInUnit": 14,
+    "courseDay": 104,
+    "phase": "Transfer challenge",
+    "focus": "component form from initial and terminal points",
+    "title": "Transfer challenge: component form from initial and terminal points"
+  },
+  "standards": [
+    "N-VM.1",
+    "N-VM.2",
+    "N-VM.3",
+    "N-VM.4",
+    "N-VM.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 1,
+          "prompt": "v = ⟨3, 4⟩, find −2v.",
+          "workedSolution": {
+            "steps": [
+              "⟨−6, −8⟩.",
+              "Magnitude 2 × 5 = 10, direction reversed."
+            ],
+            "answer": "⟨−6, −8⟩, magnitude 10, reversed"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 3,
+          "prompt": "Find the unit vector in the direction of ⟨-8, 15⟩.",
+          "choices": [
+            "⟨-8/289, 15/289⟩",
+            "⟨-8/17, 15/17⟩",
+            "⟨17/-8, 17/15⟩",
+            "⟨-8, 15⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 3,
+          "prompt": "A vector has components ⟨-8, 15⟩. Find its magnitude.",
+          "choices": [
+            "17",
+            "23",
+            "7",
+            "289"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 3,
+          "prompt": "Given u = ⟨1, -7⟩ and v = ⟨12, 4⟩, find u − v.",
+          "choices": [
+            "⟨-11, -3⟩",
+            "⟨11, 11⟩",
+            "⟨13, -3⟩",
+            "⟨-11, -11⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 3,
+          "prompt": "Let v = ⟨6, 8⟩, which has magnitude 10. Find 2v and its magnitude, and say how the direction changes.",
+          "choices": [
+            "⟨12, 16⟩, magnitude 20, direction unchanged",
+            "⟨12, 16⟩, magnitude 10, direction unchanged",
+            "⟨12, 16⟩, magnitude 20, direction reversed",
+            "⟨8, 10⟩, magnitude 20, direction unchanged"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 3,
+          "prompt": "Find the unit vector in the direction of ⟨-3, -4⟩.",
+          "choices": [
+            "⟨-3/5, -4/5⟩",
+            "⟨-3, -4⟩",
+            "⟨-3/25, -4/25⟩",
+            "⟨5/-3, 5/-4⟩"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 3,
+          "prompt": "A vector has components ⟨8, -15⟩. Find its magnitude.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 3,
+          "prompt": "Given u = ⟨-11, -2⟩ and v = ⟨4, -2⟩, find u − v.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 3,
+          "prompt": "Let v = ⟨6, 8⟩, which has magnitude 10. Find 3v and its magnitude, and say how the direction changes.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u06-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u06-l14"
+  }
+}

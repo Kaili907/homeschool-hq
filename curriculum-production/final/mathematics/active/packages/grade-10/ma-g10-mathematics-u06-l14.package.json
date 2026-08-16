@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u06-l14",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u06-l14",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Similarity Proofs and Applications",
+    "dayInUnit": 14,
+    "courseDay": 104,
+    "phase": "Transfer challenge",
+    "focus": "proving the Pythagorean theorem using similarity",
+    "title": "Transfer challenge: proving the Pythagorean theorem using similarity"
+  },
+  "standards": [
+    "G-SRT.4",
+    "G-SRT.5",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u06-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "indirect-measurement-by-similarity",
+          "standard": "G-SRT.5",
+          "difficulty": 1,
+          "prompt": "A 2 m pole casts a 3 m shadow; a tree casts a 12 m shadow. Tree height?",
+          "workedSolution": {
+            "steps": [
+              "2/3 = h/12.",
+              "h = 8 m."
+            ],
+            "answer": "8 m"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u06-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "similarity-proof-justification",
+          "standard": "G-SRT.4",
+          "difficulty": 3,
+          "prompt": "A line parallel to one side of a triangle divides the other two sides proportionally. Which statement correctly justifies it?",
+          "choices": [
+            "The parallel line creates corresponding angles, giving a smaller triangle similar to the original by AA, so the sides are in proportion.",
+            "The parallel line bisects both sides by definition.",
+            "The two parts of each side are congruent because the line is parallel.",
+            "The result follows from the Pythagorean theorem applied twice."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "proportional-side-in-similar-triangles",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is similar to triangle DEF. Side AB = 3 corresponds to DE = 6. If BC = 9, find EF.",
+          "choices": [
+            "18",
+            "9",
+            "12",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "geometric-mean-altitude",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "In a right triangle, the altitude to the hypotenuse divides it into segments of length 8 and 128. Find the altitude.",
+          "choices": [
+            "136",
+            "68",
+            "120",
+            "32"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "indirect-measurement-by-similarity",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "A 7 m pole casts a 2 m shadow. At the same moment a building casts a 18 m shadow. How tall is the building?",
+          "choices": [
+            "23 m",
+            "63 m",
+            "5 m",
+            "18 m"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "similarity-proof-justification",
+          "standard": "G-SRT.4",
+          "difficulty": 3,
+          "prompt": "Two triangles with all three pairs of sides in the same ratio are similar. Which statement correctly justifies it?",
+          "choices": [
+            "This is the SSS congruence criterion applied directly.",
+            "The criterion holds only when the ratio is a whole number.",
+            "Equal ratios of sides guarantee congruence, not similarity.",
+            "This is the SSS similarity criterion: a dilation matches one triangle’s sides to the other’s, and the resulting figures are congruent."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u06-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "proportional-side-in-similar-triangles",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is similar to triangle DEF. Side AB = 4 corresponds to DE = 20. If BC = 7, find EF.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "geometric-mean-altitude",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "In a right triangle, the altitude to the hypotenuse divides it into segments of length 11 and 99. Find the altitude.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "indirect-measurement-by-similarity",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "A 7 m pole casts a 7 m shadow. At the same moment a building casts a 35 m shadow. How tall is the building?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u06-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u06-l14"
+  }
+}

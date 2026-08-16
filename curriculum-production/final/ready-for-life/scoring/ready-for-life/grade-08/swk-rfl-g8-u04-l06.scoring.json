@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l06",
+  "lessonId": "ma-g8-ready-for-life-u04-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Contingency identification and backup plan accuracy",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "Revised plan still relies on the closed Route 4, or the Route 4A timing, walk, and ride details are calculated incorrectly."
+          },
+          {
+            "label": "Developing",
+            "descriptor": "Revised plan correctly switches to Route 4A but the leave-home time or arrival buffer contains an arithmetic error."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Revised plan correctly uses Route 4A with an accurate leave-home time, walk and ride duration, arrival time, and closing-time buffer."
+          }
+        ]
+      },
+      {
+        "dimension": "Justification and reasoning for the revised plan",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "States the revised plan without explaining why it still works given the different stop and later departure."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Explains clearly why the revised plan still meets the booth's closing time, directly referencing the changed stop, departure, or travel time."
+          }
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

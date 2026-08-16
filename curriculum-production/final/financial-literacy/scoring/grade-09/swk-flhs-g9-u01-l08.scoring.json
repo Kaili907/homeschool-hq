@@ -1,0 +1,329 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l08",
+  "lessonId": "ma-g9-financial-literacy-u01-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$20,700.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$17.25 x 24 hours x 50 weeks, which is 1,200 hours of work in the year."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,020.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$85 a month for twelve months."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$100 a month for twelve months, as the offer states it."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$22,920.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20,700 wages + $1,020 transit + $1,200 gym, counting both benefits in full."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$21,720.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A benefit she would not use returns nothing to her, so only wages and the transit pass count."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The whole gap is the unused gym stipend."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$22,680.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The second bakery pays $18.90 x 24 hours x 50 weeks, the same 1,200 hours as the first offer."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "The second bakery, at $18.90 an hour",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The first is worth $21,720 in realised value against the second’s $22,680 — though at face value the first appears to win at $22,920."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "rate * hoursPerWeek * weeks",
+        "substituted": "17.25 * 24 * 50",
+        "result": "$20,700.00",
+        "why": "$17.25 x 24 hours x 50 weeks, which is 1,200 hours of work in the year."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "transitMonthly * 12",
+        "substituted": "85 * 12",
+        "result": "$1,020.00",
+        "why": "$85 a month for twelve months."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "gymMonthly * 12",
+        "substituted": "100 * 12",
+        "result": "$1,200.00",
+        "why": "$100 a month for twelve months, as the offer states it."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 + #t1-p2 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p2 + #t1-p3",
+        "result": "$22,920.00",
+        "why": "$20,700 wages + $1,020 transit + $1,200 gym, counting both benefits in full."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$21,720.00",
+        "why": "A benefit she would not use returns nothing to her, so only wages and the transit pass count."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t2-p2",
+        "substituted": "#t2-p1 - #t2-p2",
+        "result": "$1,200.00",
+        "why": "The whole gap is the unused gym stipend."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "rate2 * hours2 * weeks2",
+        "substituted": "18.9 * 24 * 50",
+        "result": "$22,680.00",
+        "why": "The second bakery pays $18.90 x 24 hours x 50 weeks, the same 1,200 hours as the first offer."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t1-p1 + #t1-p2 > #t3-p1",
+        "substituted": "#t1-p1 + #t1-p2 > #t3-p1",
+        "result": "The second bakery, at $18.90 an hour",
+        "why": "The first is worth $21,720 in realised value against the second’s $22,680 — though at face value the first appears to win at $22,920."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Comparing these two offers at face value and at realised value gives opposite answers. Explain why, and say which comparison Simone should act on.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the $1,200 gym stipend counts in the face-value total but returns nothing to someone who would not use it, and that this $1,200 is larger than the $960 by which the offers otherwise differ.",
+          "Concludes that realised value is the comparison to act on, because it measures what she actually receives."
+        ],
+        "evidenceRequirements": [
+          "Uses both totals for the first offer, $22,920 face and $21,720 realised, against the second offer’s $22,680."
+        ],
+        "lookFors": [
+          "The response identifies that the conclusion depends on Simone’s stated intention not to use a gym, which is an assumption that could change.",
+          "The response applies the total-compensation method from the earlier offer comparison rather than starting over from hourly rates."
+        ],
+        "commonMisconception": "Counting every listed benefit at face value regardless of whether the worker would use it.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What are Simone’s wages for the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the transit pass worth over a year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the gym stipend worth over a year at its stated face value?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the offer’s total compensation at face value?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the offer worth to Simone in realised value, given that she would not use the gym?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the gap between the offer’s face value and its realised value?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What would the second bakery pay in wages for the year?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "Judged on realised value, which offer is worth more to Simone?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Comparing these two offers at face value and at realised value gives opposite answers. Explain why, and say which comparison Simone should act on."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What are Simone’s wages for the year? Answer: $20,700.00. Verification: $17.25 x 24 hours x 50 weeks, which is 1,200 hours of work in the year. t1-p2: What is the transit pass worth over a year? Answer: $1,020.00. Verification: $85 a month for twelve months. t1-p3: What is the gym stipend worth over a year at its stated face value? Answer: $1,200.00. Verification: $100 a month for twelve months, as the offer states it. t2-p1: What is the offer’s total compensation at face value? Answer: $22,920.00. Verification: $20,700 wages + $1,020 transit + $1,200 gym, counting both benefits in full. t2-p2: What is the offer worth to Simone in realised value, given that she would not use the gym? Answer: $21,720.00. Verification: A benefit she would not use returns nothing to her, so only wages and the transit pass count. t2-p3: What is the gap between the offer’s face value and its realised value? Answer: $1,200.00. Verification: The whole gap is the unused gym stipend. t3-p1: What would the second bakery pay in wages for the year? Answer: $22,680.00. Verification: The second bakery pays $18.90 x 24 hours x 50 weeks, the same 1,200 hours as the first offer. t3-p2: Judged on realised value, which offer is worth more to Simone? Answer: The second bakery, at $18.90 an hour. Verification: The first is worth $21,720 in realised value against the second’s $22,680 — though at face value the first appears to win at $22,920."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t4-p1: Comparing these two offers at face value and at realised value gives opposite answers. Explain why, and say which comparison Simone should act on. Explains that the $1,200 gym stipend counts in the face-value total but returns nothing to someone who would not use it, and that this $1,200 is larger than the $960 by which the offers otherwise differ. Concludes that realised value is the comparison to act on, because it measures what she actually receives. Uses both totals for the first offer, $22,920 face and $21,720 realised, against the second offer’s $22,680. The response identifies that the conclusion depends on Simone’s stated intention not to use a gym, which is an assumption that could change. The response applies the total-compensation method from the earlier offer comparison rather than starting over from hourly rates."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the $1,200 gym stipend counts in the face-value total but returns nothing to someone who would not use it, and that this $1,200 is larger than the $960 by which the offers otherwise differ. Concludes that realised value is the comparison to act on, because it measures what she actually receives."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 2
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u01-l08.scoring.json",
+    "sourceScoringSha256": "286c4b3964ee1220af16e6508c0326e5a146f02516710582e919a9b0ae6fc87d",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "technology-arts/task-package.schema.json",
+  "title": "Student-facing task package",
+  "description": "One unit's project/task materials as given to the student. Never contains answer keys or scoring judgment.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "unit_id",
+    "source_course_id",
+    "subject",
+    "band",
+    "grade",
+    "grade_dir",
+    "unit_number",
+    "unit_title",
+    "task_type",
+    "task_label",
+    "essential_question",
+    "standards",
+    "estimated_days",
+    "project_brief",
+    "requirements",
+    "primary_task",
+    "presentation_and_privacy",
+    "copyright_and_authorship",
+    "remediation",
+    "extension"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "unit_id": { "type": "string", "pattern": "^ma-g\\d{1,2}-.+-u\\d{2}$" },
+    "source_course_id": { "type": "string" },
+    "subject": { "enum": ["technology", "arts-music"] },
+    "band": { "enum": ["g3-4", "canonical-5-7-8", "hs-9-12"] },
+    "grade": { "type": "integer", "minimum": 3, "maximum": 12 },
+    "grade_dir": { "type": "string", "pattern": "^grade-\\d{2}$" },
+    "unit_number": { "type": "integer", "minimum": 1 },
+    "unit_title": { "type": "string", "minLength": 1 },
+    "task_type": { "type": "string", "minLength": 1 },
+    "task_label": { "type": "string", "minLength": 1 },
+    "essential_question": { "type": "string", "minLength": 1 },
+    "standards": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "estimated_days": { "type": "integer", "minimum": 1 },
+    "project_brief": { "type": "string", "minLength": 1 },
+    "requirements": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "primary_task": { "type": "string", "minLength": 1 },
+    "test_or_check_criteria": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "critique_criteria": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "presentation_and_privacy": {
+      "type": "object",
+      "oneOf": [
+        {
+          "required": ["sandbox_and_credentials_note"],
+          "properties": { "sandbox_and_credentials_note": { "type": "string", "minLength": 1 } }
+        },
+        {
+          "required": ["presentation_options", "text_or_no_audio_alternative"],
+          "properties": {
+            "presentation_options": { "type": "string", "minLength": 1 },
+            "text_or_no_audio_alternative": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "copyright_and_authorship": { "type": "string", "minLength": 1 },
+    "remediation": { "type": "string", "minLength": 1 },
+    "extension": { "type": "string", "minLength": 1 }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "subject": { "const": "technology" } } },
+      "then": { "required": ["test_or_check_criteria"] }
+    },
+    {
+      "if": { "properties": { "subject": { "const": "arts-music" } } },
+      "then": { "required": ["critique_criteria"] }
+    }
+  ]
+}

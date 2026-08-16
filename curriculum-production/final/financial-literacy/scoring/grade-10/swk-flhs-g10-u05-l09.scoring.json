@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l09",
+  "lessonId": "ma-g10-financial-literacy-u05-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "6.00%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "20% less 10% plus 8%, divided by 3. The two portfolios have exactly the same average annual return."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$11,664.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Each year’s return applied in turn to whatever the previous year left. The order does not matter, but the multiplication does."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$11,910.16",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,000 compounded at a steady 6% for 3 years — the same average return, delivered without the swing."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$246.16",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,910.16 against $11,664.00, from identical starting amounts and identical average annual returns."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,664.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,664.00 against the $10,000 started with."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,910.16",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,910.16 against the same $10,000. The gain is nearly 15% larger from the same average return."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "Because the -10% year removed money that the later gain had to rebuild before it could add anything",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The average is correct at 6.00%, and the period is the same for both. The loss year shrank the base that every later return applies to, and recovering a percentage loss takes a larger percentage gain, as the previous lesson established."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "(y1 + y2 + y3) / 3 * 100",
+        "substituted": "(0.2 + -0.1 + 0.08) / 3 * 100",
+        "result": "6.00%",
+        "why": "20% less 10% plus 8%, divided by 3. The two portfolios have exactly the same average annual return."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(start * (1 + a) * (1 + b) * (1 + c), 2)",
+        "substituted": "round(10000 * (1 + 0.2) * (1 + -0.1) * (1 + 0.08), 2)",
+        "result": "$11,664.00",
+        "why": "Each year’s return applied in turn to whatever the previous year left. The order does not matter, but the multiplication does."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(start2 * pow(1 + steady, 3), 2)",
+        "substituted": "round(10000 * pow(1 + 0.06, 3), 2)",
+        "result": "$11,910.16",
+        "why": "$10,000 compounded at a steady 6% for 3 years — the same average return, delivered without the swing."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$246.16",
+        "why": "$11,910.16 against $11,664.00, from identical starting amounts and identical average annual returns."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 - start3",
+        "substituted": "#t1-p2 - 10000",
+        "result": "$1,664.00",
+        "why": "$11,664.00 against the $10,000 started with."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 - start4",
+        "substituted": "#t1-p3 - 10000",
+        "result": "$1,910.16",
+        "why": "$11,910.16 against the same $10,000. The gain is nearly 15% larger from the same average return."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Both portfolios averaged 6.00% a year and ended $246.16 apart. Explain what this shows about reading an advertised average return, and connect it to why an investor might accept a lower expected return in exchange for a steadier one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that an arithmetic average of annual returns does not determine the ending value, because returns multiply rather than add, so a swing costs money even when the average is unchanged.",
+          "Connects this to the choice between portfolios: a steadier path can end higher than a more volatile one with the same average, which is a reason to value steadiness rather than merely a preference for comfort.",
+          "Notes that this comparison is a stated outcome of one simulated three-year period, so it demonstrates the mechanism rather than predicting which real portfolio would win."
+        ],
+        "evidenceRequirements": [
+          "Uses the 6.00% average shared by both, the $11,664.00 and $11,910.16 ending values, and the $246.16 gap."
+        ],
+        "lookFors": [
+          "The response identifies multiplication of returns as the mechanism rather than describing losses as psychologically worse.",
+          "The response does not conclude that steadier is always better; it concludes that the average alone does not settle it."
+        ],
+        "commonMisconception": "Treating an average annual return as sufficient to determine what an investment ends up worth.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "communication-of-uncertainty",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the average of Portfolio P’s three annual returns?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is Portfolio P worth after the three years? Round to the nearest cent."
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Portfolio Q worth after the three years? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much more does the steadier portfolio end with?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much did Portfolio P actually gain over the three years?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much did Portfolio Q gain?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Why does Portfolio P end lower despite having the same average annual return?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Both portfolios averaged 6.00% a year and ended $246.16 apart. Explain what this shows about reading an advertised average return, and connect it to why an investor might accept a lower expected return in exchange for a steadier one."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the average of Portfolio P’s three annual returns? Answer: 6.00%. Verification: 20% less 10% plus 8%, divided by 3. The two portfolios have exactly the same average annual return. t1-p2: What is Portfolio P worth after the three years? Round to the nearest cent. Answer: $11,664.00. Verification: Each year’s return applied in turn to whatever the previous year left. The order does not matter, but the multiplication does. t1-p3: What is Portfolio Q worth after the three years? Round to the nearest cent. Answer: $11,910.16. Verification: $10,000 compounded at a steady 6% for 3 years — the same average return, delivered without the swing. t2-p1: How much more does the steadier portfolio end with? Answer: $246.16. Verification: $11,910.16 against $11,664.00, from identical starting amounts and identical average annual returns. t2-p2: How much did Portfolio P actually gain over the three years? Answer: $1,664.00. Verification: $11,664.00 against the $10,000 started with. t2-p3: How much did Portfolio Q gain? Answer: $1,910.16. Verification: $11,910.16 against the same $10,000. The gain is nearly 15% larger from the same average return. t2-p4: Why does Portfolio P end lower despite having the same average annual return? Answer: Because the -10% year removed money that the later gain had to rebuild before it could add anything. Verification: The average is correct at 6.00%, and the period is the same for both. The loss year shrank the base that every later return applies to, and recovering a percentage loss takes a larger percentage gain, as the previous lesson established."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Both portfolios averaged 6.00% a year and ended $246.16 apart. Explain what this shows about reading an advertised average return, and connect it to why an investor might accept a lower expected return in exchange for a steadier one. Explains that an arithmetic average of annual returns does not determine the ending value, because returns multiply rather than add, so a swing costs money even when the average is unchanged. Connects this to the choice between portfolios: a steadier path can end higher than a more volatile one with the same average, which is a reason to value steadiness rather than merely a preference for comfort. Notes that this comparison is a stated outcome of one simulated three-year period, so it demonstrates the mechanism rather than predicting which real portfolio would win. Uses the 6.00% average shared by both, the $11,664.00 and $11,910.16 ending values, and the $246.16 gap. The response identifies multiplication of returns as the mechanism rather than describing losses as psychologically worse. The response does not conclude that steadier is always better; it concludes that the average alone does not settle it."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that an arithmetic average of annual returns does not determine the ending value, because returns multiply rather than add, so a swing costs money even when the average is unchanged. Connects this to the choice between portfolios: a steadier path can end higher than a more volatile one with the same average, which is a reason to value steadiness rather than merely a preference for comfort. Notes that this comparison is a stated outcome of one simulated three-year period, so it demonstrates the mechanism rather than predicting which real portfolio would win."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u05-l09.scoring.json",
+    "sourceScoringSha256": "e085f549c78dbab16c14d90cfbf0f7f5244d0cedf120fbc4a5ca1d07cef257f4",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u07-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u07-l06",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Functions: Concept, Notation, and Interpretation",
+    "dayInUnit": 6,
+    "courseDay": 114,
+    "phase": "Guided practice B",
+    "focus": "relating domain to a quantitative context",
+    "title": "Guided practice B: relating domain to a quantitative context"
+  },
+  "standards": [
+    "F-IF.1",
+    "F-IF.2",
+    "F-IF.3",
+    "F-IF.4",
+    "F-IF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 1,
+          "prompt": "If f(x) = 2x² − 3x + 1, find f(4).",
+          "workedSolution": {
+            "steps": [
+              "2(16) − 3(4) + 1.",
+              "32 − 12 + 1 = 21."
+            ],
+            "answer": "21"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 2,
+          "prompt": "Does the set {(1, 4), (2, 4), (3, 4), (5, 4)} define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "Yes; each input appears once, so each has exactly one output.",
+            "No; the input 1 is paired with both 3 and 8."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 2,
+          "prompt": "A machine starts with 115 components and consumes 5 per hour. It can run for at most 11 hours. What is the domain of C(h) = 115 − 5h in this context?",
+          "choices": [
+            "all real numbers",
+            "h ≥ 0",
+            "0 ≤ h ≤ 115",
+            "0 ≤ h ≤ 11"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = 9 and a(n) = a(n − 1) − 7 for n > 1. Find a(12).",
+          "choices": [
+            "-756",
+            "-75",
+            "86",
+            "-68"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a cooling object’s temperature flattens out towards a horizontal line. Which feature is this, and what does it mean?",
+          "choices": [
+            "an end behaviour approaching the surrounding temperature",
+            "an interval of increase",
+            "a zero, giving the time the object freezes",
+            "a maximum, giving the hottest temperature"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 2,
+          "prompt": "Given f(x) = -1x² − 5x + 2, find f(-3).",
+          "choices": [
+            "8",
+            "20",
+            "6",
+            "26"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 3,
+          "prompt": "Does the set {(1, 3), (2, 5), (3, 7), (4, 9)} define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 1 is paired with both 3 and 8.",
+            "Yes; each input appears once, so each has exactly one output.",
+            "No; the input 4 gives both y = 2 and y = −2."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 3,
+          "prompt": "A machine starts with 35 components and consumes 4 per hour. It can run for at most 21 hours. What is the domain of C(h) = 35 − 4h in this context?",
+          "choices": [
+            "0 ≤ h ≤ 21",
+            "0 ≤ h ≤ 35",
+            "all real numbers",
+            "0 ≤ h ≤ 8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = -5 and a(n) = a(n − 1) + 4 for n > 1. Find a(15).",
+          "choices": [
+            "55",
+            "-61",
+            "-300",
+            "51"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time crosses the horizontal axis. Which feature is this, and what does it mean?",
+          "choices": [
+            "the y-intercept, giving the launch height",
+            "the average rate of change over the flight",
+            "a zero, giving the time the projectile returns to ground level",
+            "the maximum, giving the greatest height"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = -3x² − 7x − 6, find f(2).",
+          "choices": [
+            "-32",
+            "16",
+            "-4",
+            "-26"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u07-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u07-l06"
+  }
+}

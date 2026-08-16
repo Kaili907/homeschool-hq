@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-ready-for-life-u01-assessment",
+  "courseRef": "ma-g11-ready-for-life",
+  "grade": 11,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g11-ready-for-life-u01",
+    "unitNumber": 1,
+    "unitTitle": "Postsecondary Pathways",
+    "courseTitle": "Ready for Life 11: Postsecondary Planning and Portfolio",
+    "assessmentLessonRef": "ma-g11-ready-for-life-u01-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u01-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before assembling the shortlist, choose the two pathways you will compare and state why they are the right two to put side by side.",
+      "prompt": "Which two pathways will you compare on your shortlist, and why are these two the most useful comparison right now, rather than any other pair?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Build the side-by-side shortlist, pulling in requirements, timelines, cost and funding categories, and fit notes from earlier in the unit.",
+      "prompt": "My shortlist includes, for both pathways, the actual entry requirements and a realistic timeline from day 2."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Build the side-by-side shortlist, pulling in requirements, timelines, cost and funding categories, and fit notes from earlier in the unit.",
+      "prompt": "My shortlist includes, for both pathways, the general cost and funding categories from day 3."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Build the side-by-side shortlist, pulling in requirements, timelines, cost and funding categories, and fit notes from earlier in the unit.",
+      "prompt": "My shortlist includes, for both pathways, the setting and support fit notes from day 4."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "extended-response",
+      "directions": "Build the side-by-side shortlist, pulling in requirements, timelines, cost and funding categories, and fit notes from earlier in the unit.",
+      "prompt": "State the single closest deadline across both pathways, and what needs to happen before that deadline."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Walk your guardian through the finished shortlist and record what they questioned or flagged.",
+      "prompt": "Summarize at least one specific question or concern your guardian raised while reviewing the shortlist, and how you responded or what you changed as a result."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "checklist-item",
+      "directions": "Walk your guardian through the finished shortlist and record what they questioned or flagged.",
+      "prompt": "My guardian reviewed the finished shortlist and confirmed it is complete and realistic."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect on what this unit changed about how you think about your options.",
+      "prompt": "What is the single most useful thing you learned across this unit that changed how you're thinking about your postsecondary options, and why did it matter?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/ready-for-life/ma-g11-ready-for-life-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Shortlist completeness criterion.",
+    "Provide evidence that meets the stated Genuine comparison, not parallel lists criterion.",
+    "Provide evidence that meets the stated Guardian scrutiny incorporated criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-ready-for-life-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u01-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Postsecondary Pathways?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

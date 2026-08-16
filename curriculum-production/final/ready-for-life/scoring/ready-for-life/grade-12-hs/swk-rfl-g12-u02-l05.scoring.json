@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l05",
+  "lessonId": "ma-g12-ready-for-life-u02-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Arithmetic accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The before-and-after numbers do not actually reconcile with the stated cuts or substitutions."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The before-and-after numbers correctly reconcile with what was cut, delayed, or substituted."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The running arithmetic is shown step by step, making the tradeoff easy to verify."
+          }
+        ]
+      },
+      {
+        "dimension": "Tradeoff reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No reason is given for why this particular tradeoff was chosen over another."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific reason is given for the chosen tradeoff."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection identifies which part of the original plan turned out to be genuinely flexible versus fixed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The revised total is arithmetically consistent with the stated cuts or substitutions.",
+      "A specific tradeoff is named, not a vague 'I cut back on stuff.'",
+      "No real financial hardship or real account information is disclosed."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

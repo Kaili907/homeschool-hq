@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u04-l16",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u04-l16",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Equations and Inequalities",
+    "dayInUnit": 16,
+    "courseDay": 70,
+    "phase": "Unit assessment",
+    "focus": "solution sets",
+    "title": "Unit assessment: solution sets"
+  },
+  "standards": [
+    "7.EE.3",
+    "7.EE.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-numerical-problem",
+          "standard": "7.EE.3",
+          "difficulty": 1,
+          "prompt": "A group buys 4 passes at $4 each and pays a $3 service fee. What is the total cost?",
+          "choices": [
+            "$20",
+            "$22",
+            "$19",
+            "$18"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "two-step-equation",
+          "standard": "7.EE.4",
+          "difficulty": 1,
+          "prompt": "Solve 5x + 5 = 40.",
+          "choices": [
+            "6",
+            "35",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "Solve 5x + 15 ≤ 60.",
+          "choices": [
+            "x ≤ 10",
+            "x ≤ 9",
+            "x ≥ 9",
+            "x ≥ 10"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "solution-set",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "Which integer satisfies 6x + 11 ≥ 47 and x < 7?",
+          "choices": [
+            "5",
+            "6",
+            "9",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "graph-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "Which graph describes x ≥ 10?",
+          "choices": [
+            "open circle at 10, shaded right",
+            "closed circle at 10, shaded right",
+            "open circle at 10, shaded left",
+            "closed circle at 10, shaded left"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "check-and-interpret-solution",
+          "standard": "7.EE.3",
+          "difficulty": 2,
+          "prompt": "A club charges $6 plus $4 per session for a total of $42. How many sessions were purchased?",
+          "choices": [
+            "8",
+            "10.5",
+            "36",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-numerical-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A group buys 2 passes at $23 each and pays a $1 service fee. What is the total cost?",
+          "choices": [
+            "$47",
+            "$50",
+            "$49",
+            "$46"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "two-step-equation",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve 6x - 6 = 9. Write the answer in simplest form.",
+          "choices": [
+            "7/2",
+            "5/2",
+            "15",
+            "3/2"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve 3x + 19 ≤ 67.",
+          "choices": [
+            "x ≤ 15",
+            "x ≤ 16",
+            "x ≥ 17",
+            "x ≤ 17"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "solution-set",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Which integer satisfies 4x + 12 ≥ 48 and x < 10?",
+          "choices": [
+            "12",
+            "9",
+            "8",
+            "11"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "graph-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Which graph describes x ≥ 9?",
+          "choices": [
+            "closed circle at 9, shaded right",
+            "open circle at 9, shaded left",
+            "closed circle at 9, shaded left",
+            "closed circle at 10, shaded right"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "check-and-interpret-solution",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A club charges $15 plus $5 per session for a total of $85. How many sessions were purchased?",
+          "choices": [
+            "17",
+            "14",
+            "70",
+            "15"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u04-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u04-l16"
+  }
+}

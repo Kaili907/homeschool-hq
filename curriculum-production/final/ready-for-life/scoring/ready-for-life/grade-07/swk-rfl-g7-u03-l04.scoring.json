@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l04",
+  "lessonId": "ma-g7-ready-for-life-u03-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Measurement accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Ingredients are estimated by eye rather than measured with the correct tool."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Ingredients are measured with the correct tool and leveled correctly for most steps."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All ingredients are measured precisely, and the learner catches and corrects their own measurement error during cooking."
+          }
+        ]
+      },
+      {
+        "dimension": "Timing discipline",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Timed stages are guessed rather than tracked with a timer."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A timer is used for each timed stage."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "A timer is used and doneness is also checked against a specific sign described in the recipe, not the timer alone."
+          }
+        ]
+      },
+      {
+        "dimension": "Result analysis",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No specific cause is identified for any mismatch between result and recipe description."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific measurement or timing step is correctly identified as the likely cause of any mismatch."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains the mechanism (why that amount or time specifically caused that result)."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner did not operate the stove, oven, or a knife without the adult present.",
+      "The precision-example reflection names a specific ingredient or stage, not a generic 'cooking takes practice.'",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

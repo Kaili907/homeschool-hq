@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u09-l14",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u09-l14",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability Rules and Interpretation",
+    "dayInUnit": 14,
+    "courseDay": 158,
+    "phase": "Transfer challenge",
+    "focus": "the conditional probability formula as a fraction of outcomes",
+    "title": "Transfer challenge: the conditional probability formula as a fraction of outcomes"
+  },
+  "standards": [
+    "S-CP.5",
+    "S-CP.6",
+    "S-CP.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 1,
+          "prompt": "P(delay | rain) = P(delay). What does that mean?",
+          "workedSolution": {
+            "steps": [
+              "Conditioning changes nothing.",
+              "The events are independent."
+            ],
+            "answer": "They are independent"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 20 items, of which 7 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "21/190",
+            "7/20",
+            "49/400",
+            "21/200"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 16/100 and P(B) = 84/100, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "84/625",
+            "4/21",
+            "4/25",
+            "21/4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 12/100, P(B) = 10/100, and P(A and B) = 4/100, find P(A or B) in lowest terms.",
+          "choices": [
+            "9/50",
+            "3/50",
+            "13/50",
+            "11/50"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, P(passes | attended the workshop) is higher than P(passes) overall. What is the correct interpretation?",
+          "choices": [
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The relationship proves that one event causes the other.",
+            "The two events are mutually exclusive.",
+            "Attendance and passing are associated, though this alone does not show that the workshop caused the improvement."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 7 items, of which 3 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "6/49",
+            "3/7",
+            "1/7",
+            "9/49"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 60/100 and P(B) = 82/100, find P(A | B) as a fraction in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 30/100, P(B) = 38/100, and P(A and B) = 18/100, find P(A or B) in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, P(has the condition | tested positive) is much smaller than P(tested positive | has the condition). What is the correct interpretation?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u09-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u09-l14"
+  }
+}

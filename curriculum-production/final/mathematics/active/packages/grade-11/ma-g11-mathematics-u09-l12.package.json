@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u09-l12",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u09-l12",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability Rules and Interpretation",
+    "dayInUnit": 12,
+    "courseDay": 156,
+    "phase": "Performance task build",
+    "focus": "common probabilistic reasoning errors",
+    "title": "Performance task build: common probabilistic reasoning errors"
+  },
+  "standards": [
+    "S-CP.5",
+    "S-CP.6",
+    "S-CP.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 2,
+          "prompt": "In a study, P(has the condition | tested positive) is much smaller than P(tested positive | has the condition). What is the correct interpretation?",
+          "choices": [
+            "The relationship proves that one event causes the other.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The two events are mutually exclusive.",
+            "The two conditional probabilities condition on different events, so they need not be close; a rare condition makes the first much smaller."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 16 items, of which 3 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "3/16",
+            "1/40",
+            "3/128",
+            "9/256"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 2,
+          "prompt": "Given P(A and B) = 1/20 and P(B) = 6/20, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "6",
+            "3/200",
+            "1/6",
+            "1/20"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 31/100, P(B) = 35/100, and P(A and B) = 11/100, find P(A or B) in lowest terms.",
+          "choices": [
+            "7/100",
+            "11/20",
+            "77/100",
+            "33/50"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, P(passes | attended the workshop) is higher than P(passes) overall. What is the correct interpretation?",
+          "choices": [
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The relationship proves that one event causes the other.",
+            "Attendance and passing are associated, though this alone does not show that the workshop caused the improvement.",
+            "The two events are mutually exclusive."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 6 items, of which 2 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "1/15",
+            "1/18",
+            "1/9",
+            "1/3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 25/100 and P(B) = 29/100, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "29/400",
+            "29/25",
+            "25/29",
+            "1/4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 22/100, P(B) = 15/100, and P(A and B) = 12/100, find P(A or B) in lowest terms.",
+          "choices": [
+            "1/4",
+            "49/100",
+            "19/100",
+            "37/100"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, the probability of a delay is the same whether or not it is raining. What is the correct interpretation?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 19 items, of which 7 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u09-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u09-l12"
+  }
+}

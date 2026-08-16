@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l06",
+  "lessonId": "ma-g12-ready-for-life-u04-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Checklist coverage",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the four categories (identification, records, registration, responsibilities) is missing from the checklist."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All four categories are represented on the checklist."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The checklist is organized clearly enough to actually be reused later, not just a list of notes."
+          }
+        ]
+      },
+      {
+        "dimension": "Verification honesty",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "An item is marked 'verified' without the learner being able to name the actual real source checked."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every 'verified' item names the real source that was actually checked, and unverified items are honestly marked as such."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection shows genuine understanding of why an honestly incomplete checklist is more trustworthy than a falsely complete one."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Every 'verified' item names an actual real source, not a guess dressed up as a fact.",
+      "At least one item is honestly marked 'not yet verified' if a real check genuinely wasn't possible \u2014 this is expected, not penalized.",
+      "No specific real legal fact is asserted anywhere as universally true."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

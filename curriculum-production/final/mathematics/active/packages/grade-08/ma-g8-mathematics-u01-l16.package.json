@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l16",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l16",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 16,
+    "courseDay": 16,
+    "phase": "Unit assessment",
+    "focus": "locating irrational numbers on number lines",
+    "title": "Unit assessment: locating irrational numbers on number lines"
+  },
+  "standards": [
+    "8.NS.1",
+    "8.NS.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "locate-root-on-number-line",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "On the number line, points A, B, C, and D are located at 4, 5, 6, 7. Which point is closest to √32?",
+          "choices": [
+            "D",
+            "B",
+            "C",
+            "A"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "Compare √26 and 7.",
+          "choices": [
+            "√26 < 7",
+            "cannot be compared without a calculator",
+            "√26 = 7",
+            "√26 > 7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "order-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Order √109, 20/19, 20 from least to greatest.",
+          "choices": [
+            "20 < √109 < 20/19",
+            "√109 < 20/19 < 20",
+            "20/19 < 20 < √109",
+            "20/19 < √109 < 20"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "estimate-root-expression",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Which whole number is closest to √61 - 12?",
+          "choices": [
+            "-3",
+            "-5",
+            "-4",
+            "-2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "real-number-word-problem",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "A square garden has an area of 171 square inches. Between which two consecutive whole numbers of inches is the side length?",
+          "choices": [
+            "13 and 15",
+            "12 and 13",
+            "13 and 14",
+            "11 and 12"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "root-comparison-error-analysis",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "A student claims √85 > 10 because 85 > 10. Which statement correctly analyzes the claim?",
+          "choices": [
+            "The claim is incorrect; since 85 < 10² = 100, √85 < 10.",
+            "The claim is incorrect; √85 = 10 exactly.",
+            "The claim cannot be evaluated without a calculator.",
+            "The claim is correct; 85 > 10, so √85 > 10."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "classify-rational-or-irrational",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "Classify π as rational or irrational.",
+          "choices": [
+            "rational",
+            "irrational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "closure-classification",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "A rational number (2/1) is added to an irrational number (√113). Is the result rational or irrational?",
+          "choices": [
+            "irrational",
+            "sometimes rational and sometimes irrational",
+            "cannot be determined without computing",
+            "rational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-to-fraction",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "Write 0.998998... as a fraction in lowest terms.",
+          "choices": [
+            "998/999",
+            "998/9999",
+            "998/1000",
+            "999/999"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-error-analysis",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "A student writes 0.525252... = 52/100. Which statement best analyzes the claim?",
+          "choices": [
+            "The correct fraction is 52/99; the denominator should be 99 (nine repeated once per repeating digit), not 100.",
+            "The claim is correct; 52/100 equals 0.525252....",
+            "The claim is close; only the sign needs to be corrected.",
+            "The correct fraction is 52/99; the numerator should have one extra digit."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "consecutive-integers-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Between which two consecutive whole numbers does √668 lie?",
+          "choices": [
+            "25 and 26",
+            "26 and 27",
+            "23 and 24",
+            "25 and 27"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "nearest-tenth-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Estimate √846 to the nearest tenth.",
+          "choices": [
+            "29.0",
+            "29",
+            "29.1",
+            "29.2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u01-l16"
+  }
+}

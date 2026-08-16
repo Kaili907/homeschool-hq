@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l04",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 4,
+    "courseDay": 94,
+    "phase": "Independent application A",
+    "focus": "representing constraints by equations, inequalities, and systems",
+    "title": "Independent application A: representing constraints by equations, inequalities, and systems"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 1,
+          "prompt": "Solve A = 2bh + 5 for h.",
+          "workedSolution": {
+            "steps": [
+              "2bh = A − 5.",
+              "Divide by the whole coefficient 2b.",
+              "h = (A − 5)/(2b)."
+            ],
+            "answer": "h = (A − 5)/(2b)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "Item A costs $3 each and item B costs $13 each. You may spend at most $90 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "3a + 13b ≤ 90",
+            "a + b ≤ 90",
+            "3a + 13b ≥ 90",
+            "3a + 13b = 90"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A tank holds 280 litres and is filling at 3 litres per minute. After how many minutes does it hold 334 litres?",
+          "choices": [
+            "54 minutes",
+            "111 minutes",
+            "18 minutes",
+            "205 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "A budget model allows 12.7 units of a product sold individually. How should this solution be interpreted?",
+          "choices": [
+            "Round down to 12; buying a partial unit is not possible and 13 would exceed the budget.",
+            "Split the order so the fractional unit is shared.",
+            "Round up to 13, because 12.7 is closer to 13.",
+            "Report 12.7, because the constraint is satisfied."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $30 call-out fee plus $16 per hour. A job cost $94 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "30h + 16 = 94",
+            "30 + 16h = 94",
+            "16 + 30h = 94",
+            "30 + 16 + h = 94"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = 8bh − 5 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = (A − 5) / (8b)",
+            "h = (A + 5) / (8b)",
+            "h = 8b(A + 5)",
+            "h = A / (8b) + 5"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "Item A costs $6 each and item B costs $3 each. You may spend at most $90 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "6a + 3b ≥ 90",
+            "a + b ≤ 90",
+            "6a + 3b ≤ 90",
+            "6a + 3b = 90"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 60 litres and is filling at 7 litres per minute. After how many minutes does it hold 88 litres?",
+          "choices": [
+            "21 minutes",
+            "28 minutes",
+            "4 minutes",
+            "13 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives a required side length of −6 metres. How should this solution be interpreted?",
+          "choices": [
+            "Add 6 to every measurement to correct the model.",
+            "Report −6 metres, because the algebra is correct.",
+            "Reject the solution; a length cannot be negative, so it lies outside the model’s domain.",
+            "Use 6 metres, taking the absolute value."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A repair service charges a $110 call-out fee plus $3 per hour. A job cost $152 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "3 + 110h = 152",
+            "110 + 3 + h = 152",
+            "110 + 3h = 152",
+            "110h + 3 = 152"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = 4bh + 2 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = 4b(A − 2)",
+            "h = (A + 2) / (4b)",
+            "h = A / (4b) − 2",
+            "h = (A − 2) / (4b)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "Item A costs $8 each and item B costs $8 each. You may spend at most $180 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "8a + 8b ≥ 180",
+            "a + b ≤ 180",
+            "8a + 8b = 180",
+            "8a + 8b ≤ 180"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l04"
+  }
+}

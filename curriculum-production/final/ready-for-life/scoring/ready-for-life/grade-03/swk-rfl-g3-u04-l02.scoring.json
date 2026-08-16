@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l02",
+  "lessonId": "ma-g3-ready-for-life-u04-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Sorting accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than half of the four example sentences are sorted into the correct group."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All four example sentences are sorted correctly into neutral naming or self-critical."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All four sentences are sorted correctly, and the learner names the specific word or phrase that made a sentence self-critical."
+          }
+        ]
+      },
+      {
+        "dimension": "Rewriting quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "A rewrite removes the signal entirely, such as changing a sentence to 'I'm fine,' instead of naming it kindly."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each rewrite keeps the same signal and uses the 'My body is telling me' starter."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Each rewrite keeps the signal, uses the starter, and adds a calm next step without judgment language."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying to a new signal",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner cannot produce a new neutral naming sentence without the example set in front of them."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner writes one neutral naming sentence about a signal felt that day, using the starter."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner writes a neutral naming sentence and explains why the neutral wording is kinder than a self-critical version."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The four neutral rewrites all use the same starter phrase consistently.",
+      "The learner's example for the transfer prompt names a genuine signal rather than repeating one of the four given sentences."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

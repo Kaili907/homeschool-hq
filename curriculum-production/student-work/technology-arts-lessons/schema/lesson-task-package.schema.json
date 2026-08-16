@@ -1,0 +1,549 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "manuel-academy/technology-arts-lessons/lesson-task-package",
+  "title": "Lesson task package",
+  "description": "One student-ready task for ONE authored lesson. The work shape comes from the lesson's phase; the content comes from its focus, objectives, and success criteria.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "lesson_id",
+    "unit_id",
+    "source_course_id",
+    "subject",
+    "band",
+    "grade",
+    "grade_dir",
+    "unit_number",
+    "unit_title",
+    "day_in_unit",
+    "lesson_title",
+    "phase",
+    "work_mode",
+    "focus",
+    "task_type",
+    "task_label",
+    "scoring_stance",
+    "estimated_minutes",
+    "standards",
+    "learning_objectives",
+    "lesson_success_criteria",
+    "task_brief",
+    "primary_task",
+    "requirements",
+    "deliverable",
+    "presentation_and_privacy",
+    "copyright_and_authorship",
+    "accessibility_options",
+    "remediation",
+    "extension",
+    "unit_context",
+    "task_accessibility_provisions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "lesson_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unit_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_course_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "enum": [
+        "technology",
+        "arts-music"
+      ]
+    },
+    "band": {
+      "enum": [
+        "g3-4",
+        "canonical-5-7-8",
+        "hs-9-12"
+      ]
+    },
+    "grade": {
+      "enum": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "grade_dir": {
+      "type": "string",
+      "pattern": "^grade-\\d{2}$"
+    },
+    "unit_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "unit_title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "day_in_unit": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "course_day": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "lesson_title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "type": "string",
+      "minLength": 1
+    },
+    "work_mode": {
+      "description": "Archetype selected by the lesson phase \u2014 the reason this task is not the unit task repeated.",
+      "enum": [
+        "PROBE",
+        "MODEL",
+        "MODEL_A",
+        "MODEL_B",
+        "GUIDED",
+        "GUIDED_A",
+        "GUIDED_B",
+        "APPLY",
+        "BUILD",
+        "INVESTIGATE",
+        "RETEACH",
+        "INCREMENT",
+        "DEMONSTRATE",
+        "SYNTHESIZE",
+        "ASSESS",
+        "CORRECT"
+      ]
+    },
+    "focus": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The authored lesson focus, verbatim."
+    },
+    "task_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lesson_type": {
+      "description": "Technology production-depth lesson family after combining content type with the lesson's work mode.",
+      "type": "string",
+      "minLength": 3
+    },
+    "task_label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scoring_stance": {
+      "enum": [
+        "FORMATIVE_NO_PENALTY",
+        "PROGRESS_EVIDENCE",
+        "SUMMATIVE"
+      ]
+    },
+    "estimated_minutes": {
+      "type": "string"
+    },
+    "standards": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "essential_question": {
+      "type": "string"
+    },
+    "learning_objectives": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "lesson_success_criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "task_brief": {
+      "type": "string",
+      "minLength": 120
+    },
+    "primary_task": {
+      "type": "string",
+      "minLength": 200
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "string"
+      }
+    },
+    "deliverable": {
+      "type": "string",
+      "minLength": 40
+    },
+    "guided_scaffold_note": {
+      "type": "string"
+    },
+    "sourceReference": {
+      "description": "A complete learner-visible model, scaffold, or reference work attached to this package.",
+      "type": "string",
+      "minLength": 300
+    },
+    "learner_resource": {
+      "description": "Rights, availability, and access metadata for an attached Arts/Music learner resource.",
+      "type": "object",
+      "required": [
+        "resource_id",
+        "kind",
+        "profile",
+        "availability",
+        "academy_original",
+        "license",
+        "third_party_content",
+        "external_dependencies",
+        "required_paid_tools",
+        "required_specialized_materials",
+        "household_accessible",
+        "silent_text_route_equal_credit"
+      ],
+      "properties": {
+        "resource_id": { "type": "string", "minLength": 20 },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "ACADEMY_ORIGINAL_MODEL",
+            "ACADEMY_CREATED_SCAFFOLD",
+            "ACADEMY_ORIGINAL_REFERENCE_WORK"
+          ]
+        },
+        "profile": { "type": "string" },
+        "availability": { "type": "string", "enum": ["ATTACHED_IN_PACKAGE"] },
+        "academy_original": { "type": "boolean" },
+        "license": { "type": "string", "enum": ["CC-BY-4.0"] },
+        "third_party_content": { "type": "boolean" },
+        "external_dependencies": { "type": "array", "maxItems": 0 },
+        "required_paid_tools": { "type": "array", "maxItems": 0 },
+        "required_specialized_materials": { "type": "array", "maxItems": 0 },
+        "household_accessible": { "type": "boolean" },
+        "silent_text_route_equal_credit": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "test_or_check_criteria": {
+      "description": "Technology only: the explicit pass/fail checks the work is verified against.",
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "string"
+      }
+    },
+    "critique_criteria": {
+      "description": "Arts/music only: the criteria the created or analysed work is critiqued against.",
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "string"
+      }
+    },
+    "presentation_and_privacy": {
+      "type": "object",
+      "oneOf": [
+        {
+          "required": [
+            "sandbox_and_credentials_note"
+          ],
+          "properties": {
+            "sandbox_and_credentials_note": {
+              "type": "string",
+              "minLength": 100
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": [
+            "presentation_options",
+            "text_or_no_audio_alternative"
+          ],
+          "properties": {
+            "presentation_options": {
+              "type": "string",
+              "minLength": 100
+            },
+            "text_or_no_audio_alternative": {
+              "type": "string",
+              "minLength": 100
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "copyright_and_authorship": {
+      "type": "string",
+      "minLength": 100
+    },
+    "accessibility_options": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "safety_and_privacy_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "media": {
+      "type": "object"
+    },
+    "remediation": {
+      "type": "string",
+      "minLength": 100
+    },
+    "extension": {
+      "type": "string",
+      "minLength": 60
+    },
+    "unit_context": {
+      "type": "object",
+      "required": [
+        "performance_task",
+        "topics"
+      ],
+      "properties": {
+        "performance_task": {
+          "type": "string"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "essential_question": {
+          "type": "string"
+        },
+        "assessment_id": {
+          "type": "string"
+        }
+      }
+    },
+    "arts_music_r1": {
+      "description": "Arts/Music only: production teaching, learner-work, remediation, reference, and Tutor-readiness supply authored against the R1 lesson standard.",
+      "type": "object",
+      "required": [
+        "contract_version",
+        "lesson_type",
+        "phase",
+        "learning_goal",
+        "concept_instruction",
+        "technique_sequence",
+        "work_blocks",
+        "remediation_paths",
+        "rubric_ref",
+        "tutor_readiness_manifest"
+      ],
+      "properties": {
+        "contract_version": { "enum": ["manuel-academy.arts-music-lesson-r1.production-1", "manuel-academy.arts-music-lesson-r1.sample-1"] },
+        "lesson_type": {
+          "enum": ["VISUAL_ART_CONCEPT", "TECHNIQUE", "ART_ANALYSIS", "ART_HISTORY_CONTEXT", "DESIGN", "CREATION_STUDIO", "MUSIC_CONCEPT", "RHYTHM", "MELODY", "LISTENING", "PERFORMANCE", "COMPOSITION", "CRITIQUE_REFLECTION", "REVIEW", "REMEDIATION", "MASTERY", "PROJECT"]
+        },
+        "phase": { "type": "string" },
+        "learning_goal": { "type": "string", "minLength": 40 },
+        "concept_instruction": { "type": "array" },
+        "technique_sequence": { "type": "array" },
+        "work_blocks": { "type": "array", "minItems": 2 },
+        "remediation_paths": { "type": "array", "minItems": 2 },
+        "rubric_ref": { "type": "string", "minLength": 10 },
+        "tutor_readiness_manifest": { "type": "object" }
+      }
+    },
+    "r1_sample": {
+      "description": "Director-approved anchor contract retained only on the approved anchor lesson.",
+      "type": "object"
+    },
+    "task_steps": {
+      "description": "Elementary grades only: the task body chunked into one action per step.",
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 8
+      }
+    },
+    "task_accessibility_provisions": {
+      "description": "Access provisions derived from what THIS task concretely demands, added alongside the authored accessibility_options.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 40
+      }
+    },
+    "activity_setup": {
+      "description": "Technology only: all central inputs, specification, execution routes, tests, debugging target, and equal-credit manual alternative needed to perform the task without another handout or service.",
+      "type": "object",
+      "required": [
+        "activity_kind",
+        "central_input",
+        "expected_behavior_and_specification",
+        "execution_method",
+        "test_cases",
+        "debugging_target",
+        "equal_credit_alternative"
+      ],
+      "properties": {
+        "activity_kind": {
+          "enum": [
+            "CODE_OR_DEBUG",
+            "ANALYSIS_OR_DESIGN"
+          ]
+        },
+        "central_input": {
+          "type": "object"
+        },
+        "expected_behavior_and_specification": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "string",
+            "minLength": 20
+          }
+        },
+        "execution_method": {
+          "type": "object"
+        },
+        "test_cases": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object"
+          }
+        },
+        "debugging_target": {
+          "type": "object"
+        },
+        "equal_credit_alternative": {
+          "type": "object"
+        }
+      }
+    },
+    "learner_experience": {
+      "description": "Static Technology teaching sequence with analogous instruction and protected independent evidence.",
+      "type": "object",
+      "required": [
+        "experience_version",
+        "static_complete",
+        "tutor_required",
+        "sequence_policy",
+        "learning_targets",
+        "concept_teaching",
+        "worked_example",
+        "guided_task",
+        "remediation_routes",
+        "fresh_mastery_check"
+      ],
+      "properties": {
+        "experience_version": { "type": "string", "minLength": 10 },
+        "static_complete": { "const": true },
+        "tutor_required": { "const": false },
+        "sequence_policy": { "type": "string", "minLength": 80 },
+        "learning_targets": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+        "concept_teaching": { "type": "object" },
+        "worked_example": {
+          "type": "object",
+          "required": ["relationship_to_protected_tasks", "evidence_eligible"],
+          "properties": {
+            "relationship_to_protected_tasks": { "const": "ANALOGOUS_NON_TARGET" },
+            "evidence_eligible": { "const": false }
+          }
+        },
+        "guided_task": { "type": "object" },
+        "remediation_routes": { "type": "array", "minItems": 2 },
+        "fresh_mastery_check": { "type": "object" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "subject": {
+            "const": "technology"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "test_or_check_criteria",
+          "activity_setup",
+          "learner_experience"
+        ],
+        "not": {
+          "required": [
+            "critique_criteria"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "subject": {
+            "const": "arts-music"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "critique_criteria",
+          "arts_music_r1"
+        ],
+        "allOf": [
+          {
+            "not": {
+              "required": [
+                "test_or_check_criteria"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "activity_setup"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

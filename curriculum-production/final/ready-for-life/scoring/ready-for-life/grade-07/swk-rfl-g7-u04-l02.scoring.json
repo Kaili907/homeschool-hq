@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l02",
+  "lessonId": "ma-g7-ready-for-life-u04-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Assertive statement structure",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The statement blames, apologizes excessively, or omits a specific request."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The statement names the specific situation, how it affects the learner, and a specific, doable request."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the statement stays calm and firm rather than softening the request into a vague hope."
+          }
+        ]
+      },
+      {
+        "dimension": "Real delivery and reporting",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The statement is drafted but not actually delivered, or the exchange with the household member is not reported."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The statement is delivered to the household member, and what was said and how they responded are both reported."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner identifies one specific word or phrase they would change next time based on how it landed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The situation is a real, recurring one for the learner, not an invented example.",
+      "The reflection ties its answer to the actual delivered conversation, not general feelings about setting boundaries.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

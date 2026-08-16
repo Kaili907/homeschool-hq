@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l06",
+  "lessonId": "ma-g11-ready-for-life-u06-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Integration across the year's work",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Presentation and write-up cover the plan's sections without connecting them to specific earlier unit work." },
+          { "label": "Proficient", "descriptor": "Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making)." },
+          { "label": "Advanced", "descriptor": "Presentation draws connections across multiple units, showing the plan as a genuine synthesis rather than six separate sections." }
+        ]
+      },
+      {
+        "dimension": "Completeness of the plan presented",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more of the six required sections (pathway, requirements, timeline, funding outline, support needs, contingencies) is missing or too vague to present." },
+          { "label": "Proficient", "descriptor": "All six required sections are present and specific enough to explain to another person." },
+          { "label": "Advanced", "descriptor": "All six sections are present, specific, and consistent with each other (for example, the timeline and requirements sections agree, and the funding outline matches the pathway chosen)." }
+        ]
+      },
+      {
+        "dimension": "Genuine use of guardian feedback",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Feedback is recorded as generic or absent ('no changes needed') with no real revision made." },
+          { "label": "Proficient", "descriptor": "At least one specific, real revision was made to the plan based on actual guardian feedback." },
+          { "label": "Advanced", "descriptor": "The revision meaningfully improves the plan's realism or clarity, and the learner can explain specifically why the guardian's point was worth acting on." }
+        ]
+      },
+      {
+        "dimension": "Reflection on the year",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Closing reflection is generic and doesn't identify anything specific learned across the year." },
+          { "label": "Proficient", "descriptor": "Closing reflection names one specific, real thing learned that shaped the final plan." },
+          { "label": "Advanced", "descriptor": "Reflection connects that specific learning to a concrete part of the plan, showing cause and effect rather than a vague summary." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The funding outline stays at the level of general categories and approach, with no real dollar figures tied to household finances.",
+      "The presentation and write-up show a guardian genuinely participated, not a plan completed alone and reported after the fact.",
+      "The plan reflects real, if still general or undecided, thinking about the learner's own postsecondary path — it is fine for specifics to remain open where the learner prefers."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

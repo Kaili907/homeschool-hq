@@ -1,0 +1,320 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u04-l05",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Saving for a Goal",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: waiting is hard and normal",
+    "focus": "waiting is hard and normal"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 4 — saving and goals"
+  ],
+  "objective": "Learners describe what waiting for a savings goal actually feels like and choose a strategy for staying with a goal, without treating the difficulty as a personal failing.",
+  "scenario": "Sofia is a made-up third grader four weeks into saving for an invented $9.00 board game. Her pretend jar is over halfway full, a friend just bought the same game, and she is tired of waiting. Everything here is invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Talk through Sofia's week four. The jar is more than half full, the goal has not moved, and the waiting feels harder now than it did in week one. Describe the feeling before deciding anything about it.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Why does waiting feel harder for Sofia in week four than it did in week one?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Sofia wants to keep going but needs something concrete to help. Write one strategy she could actually use this week, and say what makes it likely to work for her rather than just sounding good.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What is one thing Sofia could do this week to make waiting easier, and why would it help?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Sofia's friend already has the game.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What would you say to Sofia about her friend already having the game?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner offers only \"be patient\", ask what would let Sofia see progress between now and the goal, and take one concrete idea before any advice is written down.",
+  "extension": "Ask the learner to design a checkpoint reward for Sofia that does not spend any of the jar, and explain why it does not slow the goal.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u04-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "Why does waiting feel harder for Sofia in week four than it did in week one?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "What is one thing Sofia could do this week to make waiting easier, and why would it help?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "What would you say to Sofia about her friend already having the game?"
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "SAVING",
+    "secondary": [
+      "DECISION_QUALITY",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "MASTERY",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.saving.1",
+      "meaning": "Saving means setting aside some pretend money now for a later goal or unexpected need."
+    },
+    {
+      "conceptId": "finlit.saving.2",
+      "meaning": "A saving plan names the goal, amount already saved, amount added each time, and how long the plan takes."
+    },
+    {
+      "conceptId": "finlit.saving.3",
+      "meaning": "Saving more quickly can reach a goal sooner but leaves less pretend money for choices today."
+    }
+  ],
+  "evidencePurpose": "Collect protected evidence about waiting is hard and normal without answer-bearing teaching during the attempt.",
+  "conceptExplanation": {
+    "applicability": "PROFILE_BOUNDARY",
+    "title": "mastery boundary",
+    "paragraphs": [],
+    "protectedBoundary": "Do not reveal, model, or hint the protected solution during this mastery or assessment attempt.",
+    "conceptLessonId": "ma-g3-financial-literacy-u04-l02"
+  },
+  "calculationPolicy": {
+    "applicable": false,
+    "reason": "The protected response contract is decision and judgment work; calculation is not manufactured merely to add arithmetic.",
+    "moneyRepresentationIfIntroduced": "integer-cents",
+    "rateRepresentationIfIntroduced": "integer-basis-points-or-exact-rational"
+  },
+  "workedExamplePolicy": {
+    "applicability": "DEFERRED_OR_PREREQUISITE_ONLY",
+    "reason": "A like-kind model during protected mastery or assessment would expose the measured method.",
+    "modelLessonId": "ma-g3-financial-literacy-u04-l02"
+  },
+  "workedExamples": [],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g3-financial-literacy-u04-l05",
+    "learnerAction": "Identify the goal and constraints, compare alternatives, and support a provisional decision.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: Naming a goal is not yet a plan; the gap, contribution, and time must work together.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "written comparison or decision reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t1-p1",
+      "t2-p1",
+      "t3-p1"
+    ],
+    "gradeBandDemand": "Name the goal, compare concrete costs or benefits, and explain one opportunity cost.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.saving.1",
+      "finlit.saving.2",
+      "finlit.saving.3"
+    ],
+    "evidenceLessonId": "ma-g3-financial-literacy-u04-l05",
+    "localTaskRefs": [
+      "t1",
+      "t2",
+      "t3"
+    ],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "A claim supported by relevant fictional evidence, tradeoff or risk reasoning, and acceptable variation under the adult-only rubric.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.saving.core-confusion",
+      "observableSignal": "Naming a goal is not yet a plan; the gap, contribution, and time must work together.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-saving-g3",
+        "title": "Alternate model — saving goals, time, and reserves",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "A fictional goal is 3,000 cents, with 900 cents saved and 350 cents added weekly."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Gap: 3,000 − 900 = 2,100 cents.",
+          "Six weeks adds 6 × 350 = 2,100 cents.",
+          "Total: 900 + 2,100 = 3,000 cents.",
+          "State which current use gives up the 350 cents each week."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g3-financial-literacy-u04-l06",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g3-financial-literacy-u04-l05",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.saving.1",
+      "finlit.saving.2",
+      "finlit.saving.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g3-financial-literacy-u04-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.saving.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": false,
+      "reason": "The protected response contract is decision and judgment work; calculation is not manufactured merely to add arithmetic.",
+      "moneyRepresentationIfIntroduced": "integer-cents",
+      "rateRepresentationIfIntroduced": "integer-basis-points-or-exact-rational"
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g3-financial-literacy-u04-l05:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "ELEMENTARY_3_5",
+      "scaffolding": "Use concrete choices, at most two interacting constraints at a time, short labelled cent calculations, and one evidence-based reason.",
+      "reasoningDemand": "Name the goal, compare concrete costs or benefits, and explain one opportunity cost.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "JUDGMENT_APPLICATION",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Use concrete choices, at most two interacting constraints at a time, short labelled cent calculations, and one evidence-based reason.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-03/swk-fl-g3-u04-l05.package.json",
+    "sourcePackageSha256": "8f963a4ccd51e8aca27833709ba250b138493481a6a3acc7cfe825f6e96675f7",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g3-financial-literacy-u04-l05",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

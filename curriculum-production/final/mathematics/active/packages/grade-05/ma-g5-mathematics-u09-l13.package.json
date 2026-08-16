@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u09-l13",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u09-l13",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Geometry and the Coordinate Plane",
+    "dayInUnit": 13,
+    "courseDay": 157,
+    "phase": "Skill consolidation",
+    "focus": "coordinate-plane axes and ordered pairs",
+    "title": "Skill consolidation: coordinate-plane axes and ordered pairs"
+  },
+  "standards": [
+    "5.G.1",
+    "5.G.2",
+    "5.G.3",
+    "5.G.4"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 1,
+          "prompt": "A shape has 4 sides, 0 right angles, and 2 pairs of parallel sides. Its opposite sides are equal in length, and its adjacent sides are unequal in length. What is the most specific name?",
+          "choices": [
+            "rhombus",
+            "triangle",
+            "rectangle",
+            "parallelogram"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 2,
+          "prompt": "In the hierarchy rectangle → parallelogram → quadrilateral, what category comes immediately after rectangle?",
+          "choices": [
+            "trapezoid",
+            "parallelogram",
+            "circle",
+            "pentagon"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "geometric-vocabulary",
+          "standard": "5.G.3",
+          "difficulty": 2,
+          "prompt": "Lines that meet to form a right angle are called what?",
+          "choices": [
+            "vertex",
+            "perpendicular",
+            "edge",
+            "parallel"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-route",
+          "standard": "5.G.2",
+          "difficulty": 2,
+          "prompt": "Start at (4, 0). Move right 3 and up 3. What is the endpoint?",
+          "choices": [
+            "(8, 4)",
+            "(7, 3)",
+            "(8, 3)",
+            "(3, 7)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-coordinate-axes",
+          "standard": "5.G.1",
+          "difficulty": 3,
+          "prompt": "Which coordinate-plane axis is vertical?",
+          "choices": [
+            "y-axis",
+            "origin",
+            "ordered pair",
+            "x-axis"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "read-ordered-pair",
+          "standard": "5.G.1",
+          "difficulty": 3,
+          "prompt": "What ordered pair has x-coordinate 15 and y-coordinate 13?",
+          "choices": [
+            "(15, 12)",
+            "(15, 13)",
+            "(13, 15)",
+            "(15, 14)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "On a map, the library is at x = 0 and y = 15. Which point names its location?",
+          "choices": [
+            "(0, 16)",
+            "(0, 15)",
+            "(0, 14)",
+            "(1, 15)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 3,
+          "prompt": "A shape has 3 sides, 0 right angles, and 0 pairs of parallel sides. What is the most specific name?",
+          "choices": [
+            "rectangle",
+            "pentagon",
+            "triangle",
+            "parallelogram"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 3,
+          "prompt": "In the hierarchy rhombus → parallelogram → quadrilateral, what category comes immediately after rhombus?",
+          "choices": [
+            "trapezoid",
+            "parallelogram",
+            "circle",
+            "pentagon"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "geometric-vocabulary",
+          "standard": "5.G.3",
+          "difficulty": 2,
+          "prompt": "Lines in a plane that never meet are called what?",
+          "choices": [
+            "perpendicular",
+            "edge",
+            "vertex",
+            "parallel"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-route",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "Start at (4, 11). Move right 3 and up 3. What is the endpoint?",
+          "choices": [
+            "(14, 7)",
+            "(7, 14)",
+            "(8, 14)",
+            "(7, 15)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-coordinate-axes",
+          "standard": "5.G.1",
+          "difficulty": 3,
+          "prompt": "Which coordinate-plane axis is horizontal?",
+          "choices": [
+            "origin",
+            "ordered pair",
+            "x-axis",
+            "y-axis"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u09-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u09-l13"
+  }
+}

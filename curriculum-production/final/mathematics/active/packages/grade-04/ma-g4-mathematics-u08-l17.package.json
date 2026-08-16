@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l17",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l17",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 17,
+    "courseDay": 143,
+    "phase": "Targeted correction and reassessment",
+    "focus": "decimal comparison",
+    "title": "Targeted correction and reassessment: decimal comparison"
+  },
+  "standards": [
+    "4.NF.6",
+    "4.NF.7"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 7/100 using decimal notation.",
+          "workedSolution": {
+            "steps": [
+              "A denominator of 100 means two decimal places.",
+              "7/100 = 0.07."
+            ],
+            "answer": "0.07"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.30 ___ 0.3",
+          "workedSolution": {
+            "steps": [
+              "0.30 and 0.3 represent the same amount.",
+              "0.30 = 0.3."
+            ],
+            "answer": "="
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 8/10 using decimal notation.",
+          "choices": [
+            "0.9",
+            "0.7",
+            "0.11",
+            "0.8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.75 ___ 0.15",
+          "choices": [
+            ">",
+            "Cannot be compared without more information",
+            "<",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 68/100 using decimal notation.",
+          "choices": [
+            "0.69",
+            "0.67",
+            "0.68",
+            "0.71"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.40 ___ 0.24",
+          "choices": [
+            "=",
+            "Cannot be compared without more information",
+            ">",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 67/100 using decimal notation.",
+          "choices": [
+            "0.70",
+            "0.68",
+            "0.67",
+            "0.66"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 0.15 ___ 0.37",
+          "choices": [
+            ">",
+            "<",
+            "=",
+            "Cannot be compared without more information"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l17"
+  }
+}

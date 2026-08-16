@@ -1,0 +1,411 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g10-technology-u02-l05",
+  "unit_id": "ma-g10-technology-u02",
+  "source_course_id": "ma-g10-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 10,
+  "grade_dir": "grade-10",
+  "unit_number": 2,
+  "unit_title": "Algorithms, Efficiency, and Correctness",
+  "day_in_unit": 5,
+  "course_day": 11,
+  "lesson_title": "Mastery check: algorithms, efficiency, and correctness",
+  "phase": "Mastery check",
+  "work_mode": "DEMONSTRATE",
+  "focus": "algorithms, efficiency, and correctness",
+  "task_type": "programming_and_logic",
+  "task_label": "Programming and logic — Mastery demonstration",
+  "scoring_stance": "SUMMATIVE",
+  "estimated_minutes": "60–75",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming"
+  ],
+  "essential_question": "When two algorithms both work, what makes one of them better?",
+  "learning_objectives": [
+    "Demonstrate current mastery across algorithms, efficiency, and correctness, showing process or evidence for each response.",
+    "Communicate understanding of algorithms, efficiency, and correctness using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on algorithms, efficiency, and correctness against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on algorithms, efficiency, and correctness.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "the complete static code and trace fixtures included in this package",
+    "an approved local JavaScript console/editor or the equal-credit paper trace route"
+  ],
+  "task_brief": "This mastery lesson begins with a short readiness sequence: explicit teaching, one fully worked non-target debugging example, and guided practice. Those teaching fixtures are then closed. You independently create one algorithm and debug a separate fresh algorithm while the exact solutions remain withheld. Submit code or precise pseudocode, a compact defect log, expected-versus-actual test evidence, an invariant-based correctness argument, and an efficiency comparison. Every input is fictional and local; no account, network service, or tutor is needed.",
+  "primary_task": "Demonstrate algorithms, efficiency, and correctness after completing the visible teaching and guided stages, then close them and work independently. Part A: implement firstDrop(values), which returns the smallest index whose value is lower than the value immediately before it, or -1 when no such index exists. Part B: diagnose and repair the supplied hasDuplicate(values) program from its specification and public failures without receiving the accepted change. For each part, state expected results before running or tracing, record actual results, explain why the algorithm is correct using an invariant, and analyze worst-case time and extra space. For Part B, record symptom → hypothesis → inspection evidence → predicted change effect → test result → interpretation → verification. Finish by naming a plausible alternative and the concrete runtime, memory, or clarity trade-off that made you accept or reject it.",
+  "requirements": [
+    "Complete the explicit concept check, the analogous worked example review, and the guided debugging response before the independent boundary begins.",
+    "Submit a learner-authored implementation or precise line-by-line pseudocode for firstDrop(values), not a description of what code might do.",
+    "Submit a repaired hasDuplicate(values) implementation or precise pseudocode plus a complete six-move defect log; the exact repair is not present in learner material.",
+    "State expected results before execution and record expected versus actual for every required normal and boundary case.",
+    "Use an invariant to justify correctness and give worst-case time and extra-space costs for both independent algorithms.",
+    "Name one alternative approach and justify the choice with a concrete efficiency, memory, or clarity trade-off.",
+    "Use only the fictional local inputs in this package; do not enter personal data, credentials, private messages, or data from a live system."
+  ],
+  "deliverable": "One independent mastery record containing the firstDrop implementation, the repaired hasDuplicate implementation, two test tables, two correctness explanations, one debugging log, and one approach trade-off.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Two-part independent algorithm and debugging case",
+      "purpose": "Create one algorithm from a specification, then debug a structurally different supplied algorithm. All fixtures are fictional and embedded here.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "function hasDuplicate(values) {\n  for (let left = 0; left < values.length; left += 1) {\n    for (let right = left; right < values.length; right += 1) {\n      if (values[left] === values[right]) return true;\n    }\n  }\n  return false;\n}",
+      "independent_creation_starter": "function firstDrop(values) {\n  // Return the smallest index i where values[i] < values[i - 1].\n  // Return -1 when no such index exists.\n}",
+      "protected_debugging_starter": "function hasDuplicate(values) {\n  for (let left = 0; left < values.length; left += 1) {\n    for (let right = left; right < values.length; right += 1) {\n      if (values[left] === values[right]) return true;\n    }\n  }\n  return false;\n}",
+      "input_data": [
+        "firstDrop: [2, 4, 3, 8]",
+        "firstDrop: [1, 1, 2, 5]",
+        "firstDrop: [9]",
+        "hasDuplicate: ['oak', 'pine', 'cedar']",
+        "hasDuplicate: ['red', 'blue', 'red']",
+        "hasDuplicate: ['solo']"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "firstDrop(values) receives a nonempty number list and returns the smallest index i at least 1 for which values[i] is lower than values[i - 1]; it returns -1 when the list never drops.",
+      "hasDuplicate(values) returns true only when the same value occurs at two different positions; it returns false for an empty list, a single-item list, or a list whose values are all distinct.",
+      "Each implementation must terminate, preserve its input list, and be justified with an invariant tied to the returned result rather than only a test claim.",
+      "The debugging record must state a falsifiable hypothesis before the learner's proposed change and must rerun every public test after that change.",
+      "The efficiency explanation must count how the important comparisons grow with input length and distinguish time from extra storage."
+    ],
+    "execution_method": {
+      "primary": "Use the browser's local developer console or an approved local JavaScript editor. Paste only the supplied fictional code and data; no web request or account is needed.",
+      "local_optional": "If Node.js is already installed, save the code as activity.js and run `node activity.js`; installing software is not required.",
+      "no_computer_required": "Use the complete paper trace route below. Precise pseudocode plus state tables earns identical credit because the target is algorithm semantics, correctness, testing, and debugging reasoning rather than typing in a particular editor."
+    },
+    "test_cases": [
+      {
+        "task": "firstDrop",
+        "input": "[2, 4, 3, 8]",
+        "expected": "2",
+        "case_role": "normal case with a later drop"
+      },
+      {
+        "task": "firstDrop",
+        "input": "[1, 1, 2, 5]",
+        "expected": "-1",
+        "case_role": "equal adjacent values are not a drop"
+      },
+      {
+        "task": "firstDrop",
+        "input": "[9]",
+        "expected": "-1",
+        "case_role": "single-item boundary"
+      },
+      {
+        "task": "hasDuplicate",
+        "input": "['oak', 'pine', 'cedar']",
+        "expected": "false",
+        "case_role": "all distinct"
+      },
+      {
+        "task": "hasDuplicate",
+        "input": "['red', 'blue', 'red']",
+        "expected": "true",
+        "case_role": "duplicate at separated positions"
+      },
+      {
+        "task": "hasDuplicate",
+        "input": "['solo']",
+        "expected": "false",
+        "case_role": "single-item boundary"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "The unchanged hasDuplicate program returns true for ['oak', 'pine', 'cedar'] and for ['solo'], although both expected results are false.",
+      "target": "Use a trace to identify the first comparison that cannot justify a true result under the two-different-positions specification. Form and test a hypothesis without receiving the accepted code change.",
+      "pre_attempt_support": "Term clarification and a location/evidence cue are available: inspect the identities of both positions at the first comparison and ask whether that comparison is permitted by the specification.",
+      "passing_change": "The exact passing change is intentionally withheld from learner material and resolves only through restricted trusted-adult authority after the complete evidence boundary.",
+      "hint_ceiling": "LOCATION_OR_EVIDENCE_CUE",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES",
+      "scope_note": "A corrected implementation, a six-move defect log, all public test results, and an invariant/efficiency explanation are required."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app trace and pseudocode; this earns exactly the same score.",
+      "steps": [
+        "For firstDrop, write one row per adjacent comparison with i, the two values, whether a drop has appeared, and the current return decision.",
+        "For hasDuplicate, write one row per executed comparison with left, right, both values, and the returned state.",
+        "Circle the first row where actual behavior cannot be justified by the specification and write a hypothesis before editing pseudocode.",
+        "Change one justified part, predict which rows should differ, and trace every public case again.",
+        "Add the invariant and time/space explanation beside each final trace."
+      ],
+      "evidence_to_submit": "The two completed pseudocode algorithms, both trace/test tables, the six-move defect log, the invariant arguments, and the efficiency comparison."
+    }
+  },
+  "learner_experience": {
+    "experience_version": "technology-director-sample-r1",
+    "static_complete": true,
+    "tutor_required": false,
+    "sequence_policy": "Teaching and guided fixtures are visible first. Once independent work starts, the preview unmounts those fixtures and does not offer backward navigation. No exact protected repair is present in this package.",
+    "learning_targets": [
+      "Explain how a loop invariant connects an algorithm's intermediate state to its final correctness.",
+      "Create and verify a linear algorithm from an input/output specification.",
+      "Debug a fresh algorithm by recording the symptom, hypothesis, inspection evidence, tested change, interpretation, and verification.",
+      "Compare time and space trade-offs using concrete operation growth, including O(n) and O(n²)."
+    ],
+    "concept_teaching": {
+      "ref": "ma-g10-technology-u02-l05#concept-invariants-correctness-efficiency",
+      "title": "From loop state to a correctness claim",
+      "entry_check": "Before reading, predict: if a loop has passed three items without returning, what must already be true about those three items? This is no-penalty readiness evidence.",
+      "explanation": [
+        "An algorithm is a finite, ordered process for turning permitted inputs into specified outputs. Correctness means more than passing a few tests: for every input allowed by the precondition, the process terminates and returns a result that satisfies the specification.",
+        "A loop invariant is a statement about program state that stays true at a chosen point in every iteration. Use three questions: Initialization — why is it true before the first iteration? Maintenance — if it is true now, why does one more iteration keep it true? Termination — when the loop stops, how does the invariant support the returned result?",
+        "Tests and invariants do different jobs. Tests can expose a counterexample; they cannot by themselves cover every possible input. An invariant explains why all permitted executions have the needed relationship between inspected state and the final result.",
+        "Efficiency describes resource growth as input size n increases. One pass usually performs work proportional to n, written O(n). Comparing many pairs can grow like n², written O(n²). A Set-based approach may reduce expected time while using O(n) extra storage. 'Better' depends on the named constraint, not on one complexity label alone.",
+        "Debugging is an evidence cycle: observe the mismatch, form a falsifiable hypothesis, inspect a relevant trace/state, predict what one change should affect, test it, interpret the result, and iterate or verify. Editing first and explaining later is guessing, not a debugging argument."
+      ],
+      "key_terms": [
+        {
+          "term": "precondition",
+          "definition": "What must be true about an input before the algorithm is required to work."
+        },
+        {
+          "term": "loop invariant",
+          "definition": "A precise claim about state that is true at the selected point before and after every iteration."
+        },
+        {
+          "term": "boundary case",
+          "definition": "A smallest, largest, empty, single-item, tied, or otherwise edge-shaped permitted input that stresses the specification."
+        },
+        {
+          "term": "time complexity",
+          "definition": "How the number of important operations grows as input size grows."
+        },
+        {
+          "term": "extra-space complexity",
+          "definition": "How much additional storage the algorithm needs beyond its input."
+        }
+      ],
+      "application_check": [
+        "Can you state what is true after the loop has examined a prefix of the input?",
+        "Can you connect that statement to the exact return value when the loop stops?",
+        "Did you test a normal case and a boundary case with expected written before actual?",
+        "Did you count the operation that repeats as n grows and name any added storage?"
+      ]
+    },
+    "worked_example": {
+      "ref": "ma-g10-technology-u02-l05#worked-contains-zero-early-return",
+      "kind": "WORKED_EXAMPLE_CODE",
+      "relationship_to_protected_tasks": "ANALOGOUS_NON_TARGET",
+      "evidence_eligible": false,
+      "title": "Worked debugging example: a loop that stops before its evidence is complete",
+      "goal": "Make containsZero(values) return true exactly when at least one list member is 0.",
+      "starter_code": "function containsZero(values) {\n  let found = false;\n  for (const value of values) {\n    if (value === 0) found = true;\n    return found;\n  }\n}",
+      "public_observation": "For [5, 0, 8], expected is true but actual is false. For [0, 4], both are true. One passing case does not erase the failure.",
+      "annotations": [
+        {
+          "move": "Observe",
+          "reasoning": "The failure occurs only when 0 appears after the first position, so input order is relevant evidence."
+        },
+        {
+          "move": "Hypothesize",
+          "reasoning": "The function may stop before the loop has inspected the later positions. This predicts a trace with only one completed iteration."
+        },
+        {
+          "move": "Inspect",
+          "reasoning": "With [5, 0, 8], the first iteration sets value = 5 and found = false, then return ends the entire function. The values 0 and 8 are never inspected."
+        },
+        {
+          "move": "Test one change",
+          "reasoning": "Move the final return after the loop. Prediction: every value will be considered, while found still records whether 0 has appeared in the examined prefix."
+        },
+        {
+          "move": "Interpret",
+          "reasoning": "The formerly failing case now returns true, supporting the early-termination hypothesis. We still need distinct boundary and non-match tests."
+        },
+        {
+          "move": "Verify",
+          "reasoning": "[5, 0, 8] → true, [0, 4] → true, [2, 3] → false, and [] → false. All expected and actual results match."
+        }
+      ],
+      "completed_code": "function containsZero(values) {\n  let found = false;\n  for (const value of values) {\n    if (value === 0) found = true;\n  }\n  return found;\n}",
+      "correctness_and_efficiency": "Invariant: after each iteration, found is true exactly when 0 occurs in the prefix examined so far. It is true before the loop for the empty prefix, one iteration maintains it, and at termination the prefix is the whole list. The algorithm is O(n) time and O(1) extra space.",
+      "transfer_prompt": "On a different loop, what trace evidence would distinguish 'the state updates incorrectly' from 'the loop stops before enough state is inspected'?"
+    },
+    "guided_task": {
+      "ref": "ma-g10-technology-u02-l05#guided-count-even-update",
+      "title": "Guided debug: locate the first state divergence",
+      "goal": "Repair countEven(values) so it returns the number of even members.",
+      "starter_code": "function countEven(values) {\n  let count = 0;\n  for (const value of values) {\n    if (value % 2 === 0) count += 2;\n  }\n  return count;\n}",
+      "public_tests": [
+        {
+          "input": "[2, 5, 8]",
+          "expected": "2",
+          "observed": "4"
+        },
+        {
+          "input": "[]",
+          "expected": "0",
+          "observed": "0"
+        },
+        {
+          "input": "[7]",
+          "expected": "0",
+          "observed": "0"
+        }
+      ],
+      "prompts": [
+        "Before editing, predict count after the first iteration for [2, 5, 8].",
+        "Trace value and count after every iteration. Circle the first row that violates: count equals the number of even values examined so far.",
+        "Write a hypothesis that predicts which rows would change if it were correct.",
+        "Make one change, then rerun all three tests and interpret whether the hypothesis was supported."
+      ],
+      "immediate_check": "Inspect the first even value. Immediately after that iteration, the invariant requires count to equal the number of even values seen so far. If those quantities differ, keep your hypothesis focused on the state update rather than the loop boundary or return.",
+      "support_fade": "The guided cue names the state and invariant. The next creation task provides only a specification and tests; the mastery debug provides only a symptom plus a location/evidence hint ceiling."
+    },
+    "independent_creation": {
+      "ref": "ma-g10-technology-u02-l05#independent-first-drop",
+      "role": "MASTERY_EVIDENCE",
+      "freshness": "FRESH_TRANSFER",
+      "title": "Independent build: find the first drop",
+      "starter_code": "function firstDrop(values) {\n  // Write your algorithm.\n}",
+      "specification": [
+        "Input is a nonempty list of numbers.",
+        "Return the smallest index i at least 1 where values[i] < values[i - 1].",
+        "Return -1 when no adjacent pair drops; equal neighbors do not count as a drop.",
+        "Do not mutate values."
+      ],
+      "public_tests": [
+        "[2, 4, 3, 8] → 2",
+        "[1, 1, 2, 5] → -1",
+        "[9] → -1"
+      ],
+      "evidence_requirements": [
+        "Your complete code or precise line-by-line pseudocode.",
+        "Expected-before-actual results for all three public tests plus one deliberate-break test you design.",
+        "An initialization–maintenance–termination invariant argument.",
+        "Worst-case time and extra space with the repeated operation identified.",
+        "One alternative you considered and the concrete reason you rejected it."
+      ],
+      "support": "TERM_OR_INSTRUCTION_CLARIFICATION_ONLY",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    },
+    "mastery_debug": {
+      "ref": "ma-g10-technology-u02-l05#mastery-has-duplicate",
+      "role": "MASTERY_EVIDENCE",
+      "freshness": "FRESH_TRANSFER",
+      "title": "Mastery debug: distinct positions",
+      "starter_code": "function hasDuplicate(values) {\n  for (let left = 0; left < values.length; left += 1) {\n    for (let right = left; right < values.length; right += 1) {\n      if (values[left] === values[right]) return true;\n    }\n  }\n  return false;\n}",
+      "specification": [
+        "Return true only when equal values occur at two different positions.",
+        "Return false for [], ['solo'], and any list whose values are all distinct.",
+        "Preserve the input and terminate for every finite list."
+      ],
+      "observed_symptom": "['oak', 'pine', 'cedar'] should be false but is true; ['solo'] should be false but is true.",
+      "public_tests": [
+        "['oak', 'pine', 'cedar'] → false",
+        "['red', 'blue', 'red'] → true",
+        "['solo'] → false"
+      ],
+      "debug_log_template": [
+        "Symptom — expected versus actual:",
+        "Hypothesis — a falsifiable cause stated before editing:",
+        "Inspection — the first trace row or state that bears on the hypothesis:",
+        "Change test — one justified change and its predicted effect:",
+        "Interpretation — supported, rejected, or not fully tested, with evidence:",
+        "Verification/iteration — all rerun results and any next hypothesis:"
+      ],
+      "hint_ceiling": "LOCATION_OR_EVIDENCE_CUE",
+      "available_hint": "At the first executed comparison, record both position identities as well as their values. Ask whether that comparison is allowed to establish a duplicate under the specification.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES",
+      "post_evidence_review": "ANALOGOUS_REVIEW_ONLY"
+    },
+    "remediation_routes": [
+      {
+        "trigger_id": "invariant-not-connected-to-state",
+        "learner_signal": "My invariant repeats the goal but does not describe the state after a partial loop.",
+        "title": "Different lens: a coverage map",
+        "alternate_teaching": "Put three cards A, B, and C on a table. A distinct pair uses two different cards, and pair order does not create a new pair. The coverage map contains A–B, A–C, and B–C. It excludes A–A, B–B, C–C and avoids reversed repeats. After finishing row A, an invariant can say: every permitted pair whose first card is A has been checked. This describes partial progress, not merely the final goal.",
+        "analogue_task": "For cards W, X, Y, Z, list each permitted unordered pair once. After the row beginning with X is complete, state exactly which pairs are guaranteed checked and which remain.",
+        "contrast_check": "'No duplicates exist' is a final claim and may be false before coverage is complete. 'Every permitted pair in the completed rows has unequal values' is a state claim that can be maintained.",
+        "original_protected_solution_exposed": false
+      },
+      {
+        "trigger_id": "edit-before-evidence",
+        "learner_signal": "I changed code before I could name the first mismatch or a testable hypothesis.",
+        "title": "Different lens: an evidence ladder",
+        "alternate_teaching": "Use six boxes in order: expected/actual, first divergent row, hypothesis, predicted effect, one change, rerun interpretation. A change is not justified until the first three boxes constrain what it is meant to test. If the rerun changes an unrelated case or leaves the first divergence intact, revise the hypothesis rather than stacking another edit.",
+        "analogue_task": "A fictional thermostat display should show the first reading below 10, but it reports 'none' for [12, 8, 7]. Build the six-box evidence ladder from this symptom before proposing any pseudocode change.",
+        "contrast_check": "'Try changing the loop' is not falsifiable. 'The trace never records readings after index 0, so the loop may terminate after its first iteration' predicts a specific trace pattern.",
+        "original_protected_solution_exposed": false
+      }
+    ],
+    "fresh_mastery_check": {
+      "ref": "ma-g10-technology-u02-l05#fresh-shared-initial",
+      "role": "REMEDIATION_CHECK",
+      "freshness": "FRESH_TRANSFER",
+      "title": "Fresh check after remediation: shared initials",
+      "starter_code": "function sharesInitial(words) {\n  const seen = new Set();\n  for (const word of words) {\n    const initial = word[0];\n    if (seen.has(initial)) return true;\n  }\n  return false;\n}",
+      "specification": "Return true when two different nonempty words begin with the same case-sensitive character; otherwise return false.",
+      "observed_symptom": "['maple', 'oak', 'mint'] should return true but returns false.",
+      "public_tests": [
+        "['maple', 'oak', 'mint'] → true",
+        "['ash', 'birch', 'cedar'] → false",
+        "['elm'] → false"
+      ],
+      "evidence_requirements": "Independently submit a new six-move defect log, corrected code or precise pseudocode, all public reruns, an invariant, and expected O(n) time/O(n) extra-space reasoning. The decisive change is not present in learner material.",
+      "hint_ceiling": "TERM_OR_INSTRUCTION_CLARIFICATION",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    }
+  },
+  "test_or_check_criteria": [
+    "Both independent implementations satisfy every public normal and boundary test with expected written before actual.",
+    "The protected debugging response records all six evidence-cycle moves and does not rely on an exposed target repair.",
+    "Each correctness argument states an invariant and explains initialization, maintenance, and termination.",
+    "Each efficiency claim identifies the repeated operation and distinguishes worst-case time from extra storage.",
+    "The approach comparison names a plausible alternative and a concrete runtime, memory, or clarity trade-off.",
+    "No real credential, personal data, private message, precise location, or live external system appears anywhere."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this lesson uses fictional lists in a local browser console, approved local editor, or on paper. Never use a real password, passphrase, API key, access token, account credential, private message, precise home location, or identifiable personal data in code or evidence. Do not sign into, probe, scan, stress, or attempt access to any live school, family, production, or third-party system, and do not send a network request. If a tool asks for an account or upload, stop and use the paper route or contact a parent/guardian or designated school adult."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship: the implementations, traces, explanations, and debugging logs must be the learner's own work. A parent, tutor, or AI tool may clarify terms or demonstrate a different non-target technique, but must not write, repair, or complete either protected task. Any code beyond the Academy-supplied fixtures must be learner-authored or cited with its source and the learner's changes.",
+  "accessibility_options": [
+    "Provide readable text plus optional read-aloud support; no voice feature is required.",
+    "Keep teaching, worked example, guided work, and independent work as distinct resumable stages with one primary action at a time.",
+    "Offer extended time, hidden timer, movement breaks, reduced copying, and a low-distraction setting without reducing the algorithmic target.",
+    "Use high contrast, visible keyboard focus, semantic headings, labelled inputs, and text-only code/trace representations.",
+    "Accept typed code, handwritten code, or precise line-by-line pseudocode plus a complete trace when no runtime is available.",
+    "Provide adjustable font/contrast and a keyboard-only workflow; never require dragging, audio, camera, microphone, or a third-party account."
+  ],
+  "task_accessibility_provisions": [
+    "The preview presents one stage at a time with semantic headings, keyboard-reachable controls, persistent local response storage, and no timer.",
+    "The paper route preserves algorithm construction, program-state tracing, correctness, debugging, and efficiency, so it earns identical credit.",
+    "Breaks, extended time, reduced copying, and a low-distraction setting are available without changing the protected solution or scoring bar."
+  ],
+  "safety_and_privacy_rules": [
+    "Use only the fictional arrays and words supplied in this package or other clearly invented values.",
+    "Never enter a real password, credential, token, private message, precise location, identifiable image, or personal dataset.",
+    "Keep all execution local or on paper; do not send network requests or interact with live systems, accounts, services, or people.",
+    "Do not bypass filters, access controls, licensing, or terms of service.",
+    "If any tool asks for a sign-in, upload, or real data, stop and use the offline route or ask a parent/guardian or designated school adult.",
+    "AI or tutor output may clarify concepts but may not produce any scored implementation, repair, trace, or explanation."
+  ],
+  "media": {
+    "suggestion": "No media is needed; the complete code, state traces, pair coverage map, and evidence ladder are represented as accessible text.",
+    "required": false,
+    "fallback": "Use the printed code blocks and draw the state tables or pair map on paper."
+  },
+  "remediation": "After the protected mastery response is saved, select the observed signal rather than repeating the original task. If the invariant does not describe partial state, use the card-pair coverage map, contrast a final claim with a maintainable state claim, and complete the fresh Set-based debugging check. If editing began before evidence, use the six-box evidence ladder on a thermostat analogue, then complete the same fresh Set-based check independently. Neither route exposes the original repair. Correct but low-confidence work receives a specific confirmation and one varied explanation, not unnecessary reteaching. Mastery is reconsidered only from the fresh independent record and trusted adult review.",
+  "extension": "Optional depth: implement a second valid approach to one independent task, measure or count its operations for increasing n, and write a short decision record comparing worst-case time, extra memory, clarity, and input constraints. The extension is not required for mastery and uses only fictional local inputs.",
+  "unit_context": {
+    "performance_task": "Compare searching and sorting approaches using complexity reasoning together with measured runtime evidence.",
+    "topics": [
+      "searching algorithms",
+      "sorting algorithms",
+      "recursion and base cases",
+      "complexity and growth rates",
+      "correctness arguments and invariants",
+      "empirical timing and measurement"
+    ],
+    "essential_question": "When two algorithms both work, what makes one of them better?",
+    "assessment_id": "ma-g10-technology-u02-assessment"
+  }
+}

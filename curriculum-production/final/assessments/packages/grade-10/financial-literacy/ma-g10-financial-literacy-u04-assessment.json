@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-financial-literacy-u04-assessment",
+  "courseRef": "ma-g10-financial-literacy",
+  "grade": 10,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g10-financial-literacy-u04",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "courseTitle": "Consumer Economics and Credit",
+    "assessmentLessonRef": "ma-g10-financial-literacy-u04-l11"
+  },
+  "standards": [
+    "PF4",
+    "PF4.1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u04-l11.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "A fictional student needs $6,000 for one year and can take it two ways. Order A takes the federal money first: a $3,500 subsidised loan on which no interest accrues in school, plus a $2,500 unsubsidised loan at 5.5%. Order B takes a single $6,000 private loan at 10.9%. Both are held for 4.5 years of school and grace before repayment begins.",
+      "prompt": "Under Order A, how much interest accrues on the unsubsidised portion?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "A fictional student needs $6,000 for one year and can take it two ways. Order A takes the federal money first: a $3,500 subsidised loan on which no interest accrues in school, plus a $2,500 unsubsidised loan at 5.5%. Order B takes a single $6,000 private loan at 10.9%. Both are held for 4.5 years of school and grace before repayment begins.",
+      "prompt": "What does Order A owe when repayment begins?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "A fictional student needs $6,000 for one year and can take it two ways. Order A takes the federal money first: a $3,500 subsidised loan on which no interest accrues in school, plus a $2,500 unsubsidised loan at 5.5%. Order B takes a single $6,000 private loan at 10.9%. Both are held for 4.5 years of school and grace before repayment begins.",
+      "prompt": "Under Order B, how much interest accrues on the private loan?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now compare the two orders at the moment repayment begins.",
+      "prompt": "What does Order B owe when repayment begins?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now compare the two orders at the moment repayment begins.",
+      "prompt": "How much more does Order B owe than Order A?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now compare the two orders at the moment repayment begins.",
+      "prompt": "Order B’s balance is what percentage of Order A’s?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-choice",
+      "directions": "Now compare the two orders at the moment repayment begins.",
+      "prompt": "Which feature of Order A accounts for the larger share of the $2,324.25 difference?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Answer in a few sentences.",
+      "prompt": "Defend the rule \"take federal aid before private borrowing\" using these figures, then name one circumstance in which a fictional student might still need private borrowing, and say what they should compare before accepting it."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/financial-literacy/ma-g10-financial-literacy-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion.",
+    "Provide evidence that meets the stated Transfer to the new case criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-financial-literacy-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u04-l11.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF4 — Using Credit: Credit Systems, Scores, and Financing Aid?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

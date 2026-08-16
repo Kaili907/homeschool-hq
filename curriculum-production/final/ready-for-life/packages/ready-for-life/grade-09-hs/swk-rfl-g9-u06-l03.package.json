@@ -1,0 +1,408 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u06-l03",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 9 Independence Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: household and food contribution"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic household and food contribution task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "During the capstone week, the learner chooses one household task and one food task that connect directly to skills they already practiced earlier in the year, writes a short step-by-step plan for each before starting, carries out both tasks for real, and has a trusted adult confirm afterward that both happened.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "written plan",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner does not use a stove, oven, or knife for the food task unless that is already a tool they safely use under their household's normal rules; if it is, the household's usual rules for adult presence still apply.",
+    "Completing this task sheet never certifies the tasks by itself; a guardian confirmation is required before the task counts as complete."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If performing the real household and food tasks during this specific week is not possible, the learner instead writes out, in full step order, exactly how each task would be carried out for a realistic sample week: the specific household task chosen and every step in the order it would be done, and the specific food task chosen and every step in the order it would be done, including what would be checked, gathered, or prepared beforehand, so the written plan carries the same level of specific, real detail as actually doing the tasks."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g9-u06-l03-model-card",
+    "Embedded resource: swk-rfl-g9-u06-l03-step-card",
+    "Embedded resource: swk-rfl-g9-u06-l03-guided-card",
+    "Embedded resource: swk-rfl-g9-u06-l03-independent-card",
+    "Embedded resource: swk-rfl-g9-u06-l03-evidence-record",
+    "Embedded resource: swk-rfl-g9-u06-l03-retry-pair",
+    "Embedded resource: swk-rfl-g9-u06-l03-delivered-plan",
+    "Embedded resource: swk-rfl-g9-u06-l03-delivered-reference",
+    "adult-or-local: access to the real household and its usual food supplies"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Analyze the complete worked example on swk-rfl-g9-u06-l03-model-card before beginning.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g9-u06-l03-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g9-u06-l03-independent-card; follow every step and retain only the named minimal evidence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Complete the minimal evidence record on swk-rfl-g9-u06-l03-evidence-record; omit or fictionalize private details.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Now that you've done both tasks for real, what specifically would you change about how you plan this kind of task next time?"
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g9-u06-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g9-u06-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g9-u06-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand. | Guardian-confirmed follow-through: The guardian confirms both the household task and the food task were completed as planned. Resume at the next unfinished step on swk-rfl-g9-u06-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner teach the step-by-step plan for one task, in writing, to a sibling or peer, explaining each step clearly enough for that person to follow it.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can complete a realistic household and food contribution task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "Up to seven days; use only the check-ins explicitly named in the task",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g9-u06-l03-model-card",
+        "swk-rfl-g9-u06-l03-step-card",
+        "swk-rfl-g9-u06-l03-guided-card",
+        "swk-rfl-g9-u06-l03-independent-card",
+        "swk-rfl-g9-u06-l03-evidence-record",
+        "swk-rfl-g9-u06-l03-retry-pair",
+        "swk-rfl-g9-u06-l03-delivered-plan",
+        "swk-rfl-g9-u06-l03-delivered-reference"
+      ],
+      "referencedArtifactWords": [
+        "plan",
+        "reference"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g9-u06-l03-delivered-plan",
+        "swk-rfl-g9-u06-l03-delivered-reference"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g9-u06-l03-local-1",
+          "label": "access to the real household and its usual food supplies",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g9-u06-l03-model-card",
+        "kind": "model",
+        "title": "household and food contribution worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: During the capstone week, the learner chooses one household task and one food task that connect directly to skills they already practiced earlier in the year, writes a short step-by-step plan for each before starting, carries out both tasks for real, and has a trusted adult confirm afterward that both happened.",
+          "Model move 1: Read the condition and name the exact household and food contribution decision or action.",
+          "Model move 2: Choose one household task and one food task for this week, each connected to a specific skill you already practiced earlier this year.",
+          "Model move 3: Before doing either task for real, write a short step-by-step plan for each, in order, and decide when during the week you'll do them.",
+          "Model check: Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand. | Guardian-confirmed follow-through: The guardian confirms both the household task and the food task were completed as planned."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u06-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "household and food contribution action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for household and food contribution.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u06-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "household and food contribution coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: During the capstone week, the learner chooses one household task and one food task that connect directly to skills they already practiced earlier in the year, writes a short step-by-step plan for each before starting, carries out both tasks for real, and has a trusted adult confirm afterward that both happened.",
+          "Coach direction: Choose one household task and one food task for this week, each connected to a specific skill you already practiced earlier this year.",
+          "Learner prompt: Name the household task you will perform this week and the specific Unit 2 skill it connects to.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u06-l03-independent-card",
+        "kind": "independent-task",
+        "title": "household and food contribution complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Before doing either task for real, write a short step-by-step plan for each, in order, and decide when during the week you'll do them.",
+          "Response 1 (t2-p1): My household task plan lists the specific steps in order.",
+          "Response 2 (t2-p2): My food task plan lists the specific steps in order, including anything I need to check or gather beforehand.",
+          "Response 3 (t2-p3): I identified the specific day this week I will do each task.",
+          "Equal-access rule: If performing the real household and food tasks during this specific week is not possible, the learner instead writes out, in full step order, exactly how each task would be carried out for a realistic sample week: the specific household task chosen and every step in the order it would be done, and the specific food task chosen and every step in the order it would be done, including what would be checked, gathered, or prepared beforehand, so the written plan carries the same level of specific, real detail as actually doing the tasks."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u06-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "household and food contribution minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Now that you've done both tasks for real, what specifically would you change about how you plan this kind of task next time?",
+          "Success checks: Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand. | Guardian-confirmed follow-through: The guardian confirms both the household task and the food task were completed as planned.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u06-l03-retry-pair",
+        "kind": "retry",
+        "title": "household and food contribution supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g9-u06-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g9-u06-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional household and food contribution condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand. | Guardian-confirmed follow-through: The guardian confirms both the household task and the food task were completed as planned..",
+          "Return: resume at the next unfinished step on swk-rfl-g9-u06-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u06-l03-delivered-plan",
+        "kind": "independent-task",
+        "title": "household and food contribution delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: During the capstone week, the learner chooses one household task and one food task that connect directly to skills they already practiced earlier in the year, writes a short step-by-step plan for each before starting, carries out both tasks for real, and has a trusted adult confirm afterward that both happened.",
+          "Use steps: Before doing either task for real, write a short step-by-step plan for each, in order, and decide when during the week you'll do them.",
+          "Field 1 (t2-p1): My household task plan lists the specific steps in order.",
+          "Field 2 (t2-p2): My food task plan lists the specific steps in order, including anything I need to check or gather beforehand.",
+          "Field 3 (t2-p3): I identified the specific day this week I will do each task.",
+          "Check against: Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand. | Guardian-confirmed follow-through: The guardian confirms both the household task and the food task were completed as planned."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u06-l03-delivered-reference",
+        "kind": "reference",
+        "title": "household and food contribution delivered reference",
+        "purpose": "Resolves the lesson's named reference so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: During the capstone week, the learner chooses one household task and one food task that connect directly to skills they already practiced earlier in the year, writes a short step-by-step plan for each before starting, carries out both tasks for real, and has a trusted adult confirm afterward that both happened.",
+          "Use steps: Before doing either task for real, write a short step-by-step plan for each, in order, and decide when during the week you'll do them.",
+          "Field 1 (t2-p1): My household task plan lists the specific steps in order.",
+          "Field 2 (t2-p2): My food task plan lists the specific steps in order, including anything I need to check or gather beforehand.",
+          "Field 3 (t2-p3): I identified the specific day this week I will do each task.",
+          "Check against: Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand. | Guardian-confirmed follow-through: The guardian confirms both the household task and the food task were completed as planned."
+        ]
+      }
+    ],
+    "model": {
+      "title": "household and food contribution worked model",
+      "startingCondition": "During the capstone week, the learner chooses one household task and one food task that connect directly to skills they already practiced earlier in the year, writes a short step-by-step plan for each before starting, carries out both tasks for real, and has a trusted adult confirm afterward that both happened.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact household and food contribution decision or action.",
+        "Model move 2: Choose one household task and one food task for this week, each connected to a specific skill you already practiced earlier this year.",
+        "Model move 3: Before doing either task for real, write a short step-by-step plan for each, in order, and decide when during the week you'll do them."
+      ],
+      "reasoning": "The model names the condition, follows the ordered household and food contribution process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand.",
+        "Guardian-confirmed follow-through: The guardian confirms both the household task and the food task were completed as planned."
+      ],
+      "resourceRef": "swk-rfl-g9-u06-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for household and food contribution.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g9-u06-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "During the capstone week, the learner chooses one household task and one food task that connect directly to skills they already practiced earlier in the year, writes a short step-by-step plan for each before starting, carries out both tasks for real, and has a trusted adult confirm afterward that both happened.",
+      "prompt": "Name the household task you will perform this week and the specific Unit 2 skill it connects to.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g9-u06-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g9-u06-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "household and food contribution — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g9-u06-l03-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Before doing either task for real, write a short step-by-step plan for each, in order, and decide when during the week you'll do them.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "household and food contribution — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g9-u06-l03-independent-card",
+        "directions": "If performing the real household and food tasks during this specific week is not possible, the learner instead writes out, in full step order, exactly how each task would be carried out for a realistic sample week: the specific household task chosen and every step in the order it would be done, and the specific food task chosen and every step in the order it would be done, including what would be checked, gathered, or prepared beforehand, so the written plan carries the same level of specific, real detail as actually doing the tasks.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g9-u06-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Now that you've done both tasks for real, what specifically would you change about how you plan this kind of task next time?",
+      "observableCriteria": [
+        "Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand.",
+        "Guardian-confirmed follow-through: The guardian confirms both the household task and the food task were completed as planned."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g9-u06-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g9-u06-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g9-u06-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g9-u06-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Task plan quality: The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand. | Guardian-confirmed follow-through: The guardian confirms both the household task and the food task were completed as planned.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g9-u06-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g9-u06-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

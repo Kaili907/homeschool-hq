@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u01-l18",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u01-l18",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Place Value to One Million",
+    "dayInUnit": 18,
+    "courseDay": 18,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "reading large numbers encountered in the world",
+    "title": "Transfer, reflection, and publication: reading large numbers encountered in the world"
+  },
+  "standards": [
+    "4.NBT.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 1,
+          "prompt": "Round 583,204 to the nearest 10,000.",
+          "workedSolution": {
+            "steps": [
+              "The nearest multiples of 10,000 are 580,000 and 590,000.",
+              "583,204 is closer to 580,000."
+            ],
+            "answer": "580000"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 34007 to the nearest 1,000.",
+          "choices": [
+            "34007",
+            "34001",
+            "34000",
+            "35000"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 980006 to the nearest 10,000.",
+          "choices": [
+            "980001",
+            "980006",
+            "980000",
+            "990000"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 250900 to the nearest 10,000.",
+          "choices": [
+            "250000",
+            "260000",
+            "250900",
+            "250001"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 134093 to the nearest 10,000.",
+          "choices": [
+            "134093",
+            "140000",
+            "130001",
+            "130000"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 963678 to the nearest 10,000.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 347232 to the nearest 10,000.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u01-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u01-l18"
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u09-l15",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u09-l15",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Linear, Quadratic, and Exponential Models",
+    "dayInUnit": 15,
+    "courseDay": 159,
+    "phase": "Assessment preparation",
+    "focus": "constructing linear and exponential functions from data",
+    "title": "Assessment preparation: constructing linear and exponential functions from data"
+  },
+  "standards": [
+    "F-LE.1",
+    "F-LE.2",
+    "F-LE.3",
+    "F-LE.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 1,
+          "prompt": "An asset's value is modelled by V(t) = 2700(0.97)^t, with t in years. What does 0.97 represent?",
+          "choices": [
+            "the fraction of value retained each year, 0.97, meaning a 3% annual loss",
+            "the total value lost over the asset's life",
+            "the number of years until the asset is worthless",
+            "the value of the asset when it was new, $2700"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A linear model passes through (1, 7) and (3, 15). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = -4x + 3",
+            "f(x) = 4x + 3",
+            "f(x) = 4x − 3",
+            "f(x) = 3x + 4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 2,
+          "prompt": "A table of successive outputs reads 8, 16, 32, 64. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Exponential; successive outputs have a constant ratio of 2.",
+            "Quadratic; the second differences are constant.",
+            "Neither; the pattern does not repeat.",
+            "Linear; successive outputs differ by a constant 2."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A population of 1600 grows by 2% per year. Write the model P(t) and find the population after 7 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 1600 + 2t; P(7) ≈ 1614",
+            "P(t) = 1600(1.02)^t; P(7) ≈ 1875",
+            "P(t) = 1600(0.02)^t; P(7) ≈ 0",
+            "P(t) = 1600(1.02)^t; P(7) ≈ 1838"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 3,
+          "prompt": "Quantity A grows by 29 units each year. Quantity B doubles or triples each year, with ratio 3, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "B exceeds A only if B starts larger than A.",
+            "A stays ahead permanently because 29 is larger than 3.",
+            "The two grow at the same eventual rate.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 3,
+          "prompt": "An asset's value is modelled by V(t) = 1400(0.9)^t, with t in years. What does 1400 represent?",
+          "choices": [
+            "the value of the asset when it was new, $1400",
+            "the total value lost over the asset's life",
+            "the fraction of value retained each year, 0.9, meaning a 10% annual loss",
+            "the number of years until the asset is worthless"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A linear model passes through (1, 13) and (4, 25). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = 9x + 4",
+            "f(x) = -4x + 9",
+            "f(x) = 4x + 9",
+            "f(x) = 4x − 9"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 3,
+          "prompt": "A table of successive outputs reads 6, 12, 24, 48. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Quadratic; the second differences are constant.",
+            "Neither; the pattern does not repeat.",
+            "Linear; successive outputs differ by a constant 2.",
+            "Exponential; successive outputs have a constant ratio of 2."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A population of 900 grows by 3% per year. Write the model P(t) and find the population after 2 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 900(0.03)^t; P(2) ≈ 1",
+            "P(t) = 900(1.03)^t; P(2) ≈ 955",
+            "P(t) = 900(1.03)^t; P(2) ≈ 983",
+            "P(t) = 900 + 3t; P(2) ≈ 906"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 2,
+          "prompt": "Quantity A grows by 83 units each year. Quantity B doubles or triples each year, with ratio 2, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "B exceeds A only if B starts larger than A.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+            "The two grow at the same eventual rate.",
+            "A stays ahead permanently because 83 is larger than 2."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 3,
+          "prompt": "An asset's value is modelled by V(t) = 3200(0.96)^t, with t in years. What does 3200 represent?",
+          "choices": [
+            "the total value lost over the asset's life",
+            "the value of the asset when it was new, $3200",
+            "the fraction of value retained each year, 0.96, meaning a 4% annual loss",
+            "the number of years until the asset is worthless"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A linear model passes through (5, 18) and (9, 34). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = 4x + 2",
+            "f(x) = -2x + 4",
+            "f(x) = 4x − 2",
+            "f(x) = -4x − 2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u09-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u09-l15"
+  }
+}

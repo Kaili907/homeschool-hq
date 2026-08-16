@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l05",
+  "lessonId": "ma-g5-ready-for-life-u01-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Sorting accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Sorts tasks by how much the learner wants to do them rather than genuine scope."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly separates true one-sitting tasks from multi-step ones."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Sorting includes a stated reason tied to time or number of parts."
+          }
+        ]
+      },
+      {
+        "dimension": "First-step sizing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "First step is still too broad to finish quickly."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "First step is specific and completable in under ten minutes."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "First step is specific, quick, and clearly sets up the next step in the sequence."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Confidence rating is tied to a specific task, not a vague feeling.",
+      "First steps use action verbs and a concrete stopping point.",
+      "No task is left unsorted."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

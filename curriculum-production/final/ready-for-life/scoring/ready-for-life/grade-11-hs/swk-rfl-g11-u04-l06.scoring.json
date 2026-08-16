@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l06",
+  "lessonId": "ma-g11-ready-for-life-u04-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Analysis completeness and accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more of the four analysis components (comparison, lease obligations, checklist, budget) is missing or contains a clear factual error against the provided data." },
+          { "label": "Proficient", "descriptor": "All four components are present and accurately reflect the provided options and lease." },
+          { "label": "Advanced", "descriptor": "All four components are accurate and the budget total is broken down line by line rather than given as a single lump figure." }
+        ]
+      },
+      {
+        "dimension": "Research quality on tenancy-rule variation",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Answer names a way rules can vary but doesn't explain it, or the verification method is vague ('look it up')." },
+          { "label": "Proficient", "descriptor": "Answer clearly explains two specific ways rules can vary and names one specific, workable verification method." },
+          { "label": "Advanced", "descriptor": "The verification method named is one a person could actually use for a specific location, not just a general category of source." }
+        ]
+      },
+      {
+        "dimension": "Guardian-reviewed self-assessment",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection is generic ('I feel ready') without naming any specific part." },
+          { "label": "Proficient", "descriptor": "Reflection names one specific part felt ready for and one specific part still needing help." },
+          { "label": "Advanced", "descriptor": "Reflection explains specifically why the still-needing-help part is hard, connecting it to something concrete from the analysis." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The comparison, lease summary, checklist, and budget all correctly use the specific figures provided in the scenario.",
+      "The tenancy-rule-variation research stays general and doesn't require or reference one specific real address.",
+      "The reflection is specific and guardian-reviewed rather than a blanket statement."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

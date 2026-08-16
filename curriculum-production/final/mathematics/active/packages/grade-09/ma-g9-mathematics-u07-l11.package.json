@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u07-l11",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Functions: Concept, Notation, and Interpretation",
+    "dayInUnit": 11,
+    "courseDay": 119,
+    "phase": "Performance task planning",
+    "focus": "key features of graphs and tables",
+    "title": "Performance task planning: key features of graphs and tables"
+  },
+  "standards": [
+    "F-IF.1",
+    "F-IF.2",
+    "F-IF.3",
+    "F-IF.4",
+    "F-IF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 1,
+          "prompt": "If f(x) = 2x² − 3x + 1, find f(4).",
+          "workedSolution": {
+            "steps": [
+              "2(16) − 3(4) + 1.",
+              "32 − 12 + 1 = 21."
+            ],
+            "answer": "21"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 2,
+          "prompt": "Does the relation x = y², for real y define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 1 is paired with both 3 and 8.",
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "Yes; each input appears once, so each has exactly one output."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 2,
+          "prompt": "A machine starts with 120 components and consumes 4 per hour. It can run for at most 15 hours. What is the domain of C(h) = 120 − 4h in this context?",
+          "choices": [
+            "all real numbers",
+            "0 ≤ h ≤ 120",
+            "h ≥ 0",
+            "0 ≤ h ≤ 15"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = 4 and a(n) = a(n − 1) + 6 for n > 1. Find a(5).",
+          "choices": [
+            "28",
+            "-20",
+            "120",
+            "34"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a cooling object’s temperature flattens out towards a horizontal line. Which feature is this, and what does it mean?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = -5x² + 3x + 9, find f(3).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 3,
+          "prompt": "Does the set {(1, 3), (2, 5), (1, 8), (4, 9)} define y as a function of x? Justify the decision.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u07-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u07-l11"
+  }
+}

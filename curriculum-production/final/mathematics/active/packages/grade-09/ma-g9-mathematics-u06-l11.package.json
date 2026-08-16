@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l11",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l11",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 11,
+    "courseDay": 101,
+    "phase": "Performance task planning",
+    "focus": "judging viable and non-viable options in a modeling context",
+    "title": "Performance task planning: judging viable and non-viable options in a modeling context"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 1,
+          "prompt": "A $40 fee plus $15 per hour totals $115. Write the equation.",
+          "workedSolution": {
+            "steps": [
+              "Fee is constant; hourly rate multiplies h.",
+              "40 + 15h = 115."
+            ],
+            "answer": "40 + 15h = 115"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 2,
+          "prompt": "The formula A = -3bh + 5 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = (A − 5) / (-3b)",
+            "h = -3b(A − 5)",
+            "h = (A + 5) / (-3b)",
+            "h = A / (-3b) − 5"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "Item A costs $15 each and item B costs $12 each. You may spend at most $330 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "15a + 12b = 330",
+            "a + b ≤ 330",
+            "15a + 12b ≤ 330",
+            "15a + 12b ≥ 330"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 290 litres and is filling at 18 litres per minute. After how many minutes does it hold 434 litres?",
+          "choices": [
+            "24 minutes",
+            "144 minutes",
+            "40 minutes",
+            "8 minutes"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives the number of buses needed as 4.3. How should this solution be interpreted?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $110 call-out fee plus $15 per hour. A job cost $245 in total. Which equation determines the number of hours h?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = 6bh + 6 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l11"
+  }
+}

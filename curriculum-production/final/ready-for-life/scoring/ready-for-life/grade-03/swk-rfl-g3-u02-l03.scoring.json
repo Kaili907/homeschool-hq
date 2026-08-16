@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l03",
+  "lessonId": "ma-g3-ready-for-life-u02-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Tag location and symbol identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Reads the size tag or brand tag instead of the care tag, or misses the wash or drying symbol on more than one garment."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly locates the care tag and identifies the wash-temperature and drying symbols on all three garments."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Correctly identifies wash, drying, and any special warning symbol on all three garments without help from the reference card by the last one."
+          }
+        ]
+      },
+      {
+        "dimension": "Matching symbols to meaning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Names a symbol but cannot match it to its meaning on the reference card without significant help."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly matches most identified symbols to their written meaning using the reference card."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Correctly matches every identified symbol to its meaning and predicts a fourth garment's symbols before checking the card."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner distinguishes the care tag from the size or brand tag by name, not just by pointing.",
+      "The reflection response names a specific garment and a specific instruction, not a general 'tags were confusing' statement."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

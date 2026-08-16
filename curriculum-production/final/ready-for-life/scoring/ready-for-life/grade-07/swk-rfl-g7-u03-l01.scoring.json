@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l01",
+  "lessonId": "ma-g7-ready-for-life-u03-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Real-check thoroughness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The refrigerator temperature check, the date check on real items, or the raw-versus-ready-to-eat observation is missing or clearly not based on an actual look."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three real checks (temperature awareness, at least five real dated items, and raw-versus-ready-to-eat placement) are completed and specific findings are reported."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner checks a second real storage location or item type beyond the minimum required."
+          }
+        ]
+      },
+      {
+        "dimension": "Risk identification and reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Named risks or changes are generic (for example, 'be more careful') rather than tied to what was actually found."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least two specific, real changes are named that are clearly tied to the learner's own findings."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains the specific mechanism by which the current arrangement could cause cross-contamination."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The findings describe the learner's own real household storage, not a hypothetical or invented kitchen.",
+      "The reflection connects a real finding to a real proposed change rather than restating general food-safety advice.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

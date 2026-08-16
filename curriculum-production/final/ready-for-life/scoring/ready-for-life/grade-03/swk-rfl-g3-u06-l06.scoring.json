@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l06",
+  "lessonId": "ma-g3-ready-for-life-u06-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Reflection specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Answers to the three prompts are vague, such as 'it was good' or 'I don't know.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each of the three prompts is answered with a specific, concrete detail from the actual job."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the 'do differently' answer is rewritten as a specific, actionable plan for next time."
+          }
+        ]
+      },
+      {
+        "dimension": "Non-shaming language",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The reflection uses self-judgment words, such as lazy, bad, or careless, about the learner rather than describing what happened."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The reflection describes specific steps or moments without using self-judgment words."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the learner independently rewrites an early self-judgment phrase into a concrete action, showing the shift on their own."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "An imperfect job result never lowers either score; only the honesty and specificity of the reflection are scored.",
+      "Guardian confirmation covers that the reflection happened and which prompt stood out, not the private content itself."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

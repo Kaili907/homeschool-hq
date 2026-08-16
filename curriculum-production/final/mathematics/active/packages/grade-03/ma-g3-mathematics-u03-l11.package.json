@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l11",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l11",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 11,
+    "courseDay": 47,
+    "phase": "Concept extension",
+    "focus": "multiplying one-digit numbers by multiples of ten",
+    "title": "Concept extension: multiplying one-digit numbers by multiples of ten"
+  },
+  "standards": [
+    "3.OA.5",
+    "3.NBT.3"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-by-multiples-of-ten",
+          "standard": "3.NBT.3",
+          "difficulty": 1,
+          "prompt": "Find 6 × 40.",
+          "workedSolution": {
+            "steps": [
+              "40 is 4 tens, so 6 × 40 = 6 × 4 × 10.",
+              "6 × 4 = 24.",
+              "24 × 10 = 240."
+            ],
+            "answer": "240"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 4 × (5 × 6) rewritten using the associative property?",
+          "choices": [
+            "(4 × 5) × 6",
+            "4 × 6 × 5 × 5",
+            "(4 + 5) × 6",
+            "4 × 5 + 6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-multiples-of-ten",
+          "standard": "3.NBT.3",
+          "difficulty": 3,
+          "prompt": "Find 8 × 80.",
+          "choices": [
+            "630",
+            "640",
+            "650",
+            "64"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression is equal to 9 × 5 by the commutative property?",
+          "choices": [
+            "10 × 5",
+            "9 × 6",
+            "5 × 9",
+            "9 + 5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-multiples-of-ten",
+          "standard": "3.NBT.3",
+          "difficulty": 2,
+          "prompt": "Find 3 × 20.",
+          "choices": [
+            "60",
+            "6",
+            "50",
+            "70"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 3,
+          "prompt": "Which expression shows 5 × (3 + 2) rewritten using the distributive property?",
+          "choices": [
+            "5 × 3 × 2",
+            "(5 × 3) + (5 × 2)",
+            "(5 + 3) × (5 + 2)",
+            "5 + 3 + 2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-multiples-of-ten",
+          "standard": "3.NBT.3",
+          "difficulty": 3,
+          "prompt": "Find 8 × 70.",
+          "choices": [
+            "56",
+            "550",
+            "570",
+            "560"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 3,
+          "prompt": "Which expression shows 5 × (5 + 6) rewritten using the distributive property?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiply-by-multiples-of-ten",
+          "standard": "3.NBT.3",
+          "difficulty": 3,
+          "prompt": "Find 7 × 30.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l11"
+  }
+}

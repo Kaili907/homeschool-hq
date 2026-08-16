@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l03",
+  "lessonId": "ma-g12-ready-for-life-u06-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Neutral framing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The revised example or the learner's own statement still carries shame-flavored or self-critical language."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both the revised example and the learner's own statement use neutral, non-shaming language."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner's own statement is specific enough to be useful for planning, not just vaguely neutral."
+          }
+        ]
+      },
+      {
+        "dimension": "Privacy-safe honesty",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner's own statement either avoids naming any real need at all, or discloses private specifics of why it's needed."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names an honest, real type of support need without disclosing private specifics."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection shows genuine engagement with how the neutral framing changed the learner's own relationship to naming the need."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No support-need category is treated as more shameful than another anywhere in the response.",
+      "The learner's own statement names a real type of need without private specifics of why.",
+      "The revised example statement is meaningfully different in tone from the original shame-flavored version."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g12-arts-and-music-u01-assessment",
+  "courseRef": "ma-g12-arts-and-music",
+  "grade": 12,
+  "subject": "arts-and-music",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "independence",
+    "craft and intent"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/student-work/technology-arts-lessons/scoring-guides/arts-music/grade-12/ma-g12-arts-and-music-u01-l11.scoring-guide.json",
+  "scoringSourceAuthority": {
+    "input": "hs912_normalization",
+    "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-candidates/hs912-r1/arts-and-music/grade-12/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l05",
+  "lessonId": "ma-g3-ready-for-life-u05-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Clarity of the ask",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "States only a general complaint or question, missing the specific problem, what was tried, or what help is needed."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "States all three parts (specific problem, what was already tried, and the kind of help needed) clearly enough for the adult to act without follow-up questions."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "States all three parts clearly, and the adult confirms no clarifying questions were needed at all."
+          }
+        ]
+      },
+      {
+        "dimension": "Directness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Waits to be noticed or hints at the problem rather than directly approaching a trusted adult."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Directly approaches a trusted adult and states the request out loud without prompting."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to a second instance",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The second ask drops one or more parts of the structure that were present the first time."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The second ask, with a different question, includes all three parts with less reliance on a written reminder."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The adult's confirmation is based on witnessing or being party to the actual ask, not the learner's account of it after the fact.",
+      "The learner's stated problem is specific and current, not a general or made-up example."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

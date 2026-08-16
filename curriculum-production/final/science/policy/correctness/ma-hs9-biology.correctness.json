@@ -1,0 +1,1066 @@
+{
+  "course_id": "ma-hs9-biology",
+  "source_commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+  "repinned_from": "e7551b959112fcd9e6868d614799028cf22acf5d",
+  "repin_basis": "Repinned from H3 to H4 without re-authoring only after an independent comparison proved that every field these keys are keyed on and authored against - unit_ref, focus, phase, title, essential_question, learning_objectives, success_criteria - is byte-identical across all 108 lessons of this course between e7551b9 and a86780a. Across all four High School courses H4 changed only materials, lesson_flow, safety_privacy, and extensions. The check 'correctness-keys-repinned-on-identical-topic-basis' re-derives the comparison from both pinned commits and fails if it ever stops holding.",
+  "authored_against": "High School Biology, Grade 9. Keys state established science at this course level; they are not extracted from the source, which states a focus and generic objectives.",
+  "topics": [
+    {
+      "unit": 1,
+      "focus": "biological scale and measurement",
+      "fixed_facts": [
+        "Typical bacterial cells are on the order of micrometres; typical eukaryotic cells are tens of micrometres; molecules such as proteins are on the order of nanometres."
+      ],
+      "relationships": [
+        "Biological structures span many orders of magnitude, and the appropriate unit and instrument change with the scale being studied.",
+        "The scale of a structure constrains what can be observed about it: light microscopy resolves cells and large organelles, not individual proteins.",
+        "A measurement is meaningful only with its unit and the method that produced it."
+      ],
+      "accepted_alternative_framings": [
+        "Scientific notation, SI prefixes, and explicit unit conversions are all acceptable ways to express biological scale."
+      ],
+      "disqualifying_errors": [
+        "Claiming individual protein molecules can be resolved with a light microscope.",
+        "Reporting a biological measurement with no unit, or with a unit off by orders of magnitude for the structure named.",
+        "Claiming a cell and an organelle are of comparable size."
+      ],
+      "out_of_scope": "Electron microscopy theory, super-resolution methods, and instrument physics are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "uncertainty and repeated trials",
+      "fixed_facts": [],
+      "relationships": [
+        "Repeated trials estimate how much a measurement varies, which is what makes a difference between conditions interpretable.",
+        "Biological variation between individuals is real variation, not measurement error, and the two are reported separately.",
+        "A difference smaller than the spread within a condition is not evidence of an effect."
+      ],
+      "accepted_alternative_framings": [
+        "Reporting a range, a mean with a spread, or individual trial values are all acceptable at this level."
+      ],
+      "disqualifying_errors": [
+        "Claiming an effect from a difference smaller than the variation between replicates.",
+        "Treating biological variation between individuals as experimental error to be eliminated.",
+        "Reporting a mean with no indication of the spread or the number of trials."
+      ],
+      "out_of_scope": "Formal statistical tests, confidence intervals, and power analysis are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "carbon and macromolecule structure",
+      "fixed_facts": [
+        "Carbon forms four covalent bonds, which is why it builds the large, varied molecules life depends on.",
+        "The four major classes of biological macromolecule are carbohydrates, lipids, proteins, and nucleic acids."
+      ],
+      "relationships": [
+        "Carbon's capacity to form four stable covalent bonds, including with other carbon atoms, allows chains, branches, and rings, and therefore enormous molecular variety.",
+        "Carbohydrates, proteins, and nucleic acids are polymers built from repeating monomers; lipids are not polymers in the same sense.",
+        "Monomers are joined by removing water and separated by adding it."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the joining and splitting reactions dehydration synthesis and hydrolysis, or describing them as removing and adding water, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming carbon forms a number of covalent bonds other than four in these molecules.",
+        "Claiming lipids are polymers of a repeating monomer in the way proteins and nucleic acids are.",
+        "Claiming monomers are joined by adding water and separated by removing it."
+      ],
+      "out_of_scope": "Detailed organic reaction mechanisms and stereochemistry are Chemistry course work."
+    },
+    {
+      "unit": 1,
+      "focus": "structure-function relationships",
+      "fixed_facts": [],
+      "relationships": [
+        "The three-dimensional shape and chemical properties of a biological molecule determine what it can interact with and therefore what it does.",
+        "Changing the structure changes the function, which is why a small change in shape can abolish activity entirely.",
+        "The relationship runs from structure to function; a molecule does not acquire a structure because a function is needed."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a molecule changes its structure in order to perform a function it is required to perform.",
+        "Claiming function can be predicted from composition without regard to structure.",
+        "Claiming structure and function are independent."
+      ],
+      "out_of_scope": "Structural biology methods and molecular dynamics are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "enzymes and reaction conditions",
+      "fixed_facts": [
+        "An enzyme lowers the activation energy of a reaction and is not consumed by it.",
+        "Enzymes do not change whether a reaction is energetically favourable; they change how fast it proceeds."
+      ],
+      "relationships": [
+        "An enzyme is a biological catalyst: it lowers activation energy, speeds the reaction, and emerges unchanged.",
+        "Enzyme activity depends on temperature and pH, rising to an optimum and falling away as the enzyme's shape is disrupted.",
+        "Specificity comes from the shape and chemistry of the active site, which is why an enzyme acts on particular substrates."
+      ],
+      "accepted_alternative_framings": [
+        "Lock-and-key and induced-fit descriptions are both acceptable; induced fit is the more accurate model."
+      ],
+      "disqualifying_errors": [
+        "Claiming an enzyme is used up in the reaction it catalyses.",
+        "Claiming an enzyme makes an energetically unfavourable reaction favourable.",
+        "Claiming high temperature always increases enzyme activity, ignoring denaturation."
+      ],
+      "out_of_scope": "Enzyme kinetics, Michaelis-Menten parameters, and inhibition types are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "argument from evidence in biology",
+      "fixed_facts": [],
+      "relationships": [
+        "A biological argument links a claim to evidence through explicit reasoning about mechanism or pattern.",
+        "Biological systems are variable, so an argument states how much of the observed pattern the evidence actually establishes.",
+        "The strongest alternative explanation is stated and addressed rather than omitted."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Inferring a causal mechanism from a correlation with no further evidence.",
+        "Generalising from a single organism or a single trial to a population.",
+        "Omitting evidence or an alternative explanation that weakens the claim."
+      ],
+      "out_of_scope": "Formal experimental design theory and meta-analysis are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "DNA structure and base pairing",
+      "fixed_facts": [
+        "In DNA, adenine pairs with thymine and guanine pairs with cytosine.",
+        "DNA is a double helix of two antiparallel strands with a sugar-phosphate backbone on the outside and paired bases on the inside."
+      ],
+      "relationships": [
+        "DNA is composed of nucleotides, each a deoxyribose sugar, a phosphate group, and one of four nitrogenous bases.",
+        "The two strands are held together by hydrogen bonds between complementary bases: adenine with thymine, guanine with cytosine.",
+        "Because the pairing is complementary, each strand specifies the sequence of the other, which is what makes accurate copying possible."
+      ],
+      "accepted_alternative_framings": [
+        "Writing the pairing as A-T and G-C, or spelling out the base names, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Pairing adenine with guanine, or cytosine with thymine.",
+        "Claiming the bases form the backbone and the sugars and phosphates lie in the interior.",
+        "Claiming the two strands run in the same direction."
+      ],
+      "out_of_scope": "Base-stacking energetics, DNA topology, and chromatin structure in detail are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "replication as information copying",
+      "fixed_facts": [
+        "DNA replication is semiconservative: each new double helix contains one original strand and one newly made strand."
+      ],
+      "relationships": [
+        "The double helix separates and each original strand acts as a template for a new complementary strand.",
+        "Because replication is semiconservative, every daughter molecule retains one parental strand.",
+        "Copying is highly accurate but not perfect, and uncorrected errors become mutations."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the template as the parental strand, or as the original strand, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming replication is conservative, with the original helix intact and a wholly new one produced.",
+        "Claiming the new strand has the same sequence as its template rather than the complementary sequence.",
+        "Claiming replication is error-free."
+      ],
+      "out_of_scope": "Replication fork enzymology, leading and lagging strand detail, and telomere biology are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "transcription",
+      "fixed_facts": [
+        "Transcription copies a DNA sequence into RNA; RNA contains uracil in place of thymine and ribose in place of deoxyribose.",
+        "In eukaryotes transcription occurs in the nucleus and translation occurs at ribosomes in the cytoplasm."
+      ],
+      "relationships": [
+        "Transcription produces a single-stranded RNA copy complementary to one DNA strand.",
+        "Only part of the genome is transcribed in any given cell at any given time, which is why cells with identical DNA differ.",
+        "The messenger RNA carries the sequence information out of the nucleus to the ribosome."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the copied strand as the template or non-coding strand is correct; naming the other strand the coding or sense strand is also correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming RNA contains thymine.",
+        "Claiming transcription produces protein.",
+        "Claiming every gene is transcribed in every cell at all times."
+      ],
+      "out_of_scope": "Promoter structure, splicing detail, and transcription factor biochemistry are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "translation and the genetic code",
+      "fixed_facts": [
+        "The genetic code is read in three-nucleotide codons, and it is redundant: most amino acids are specified by more than one codon.",
+        "Proteins are built from twenty standard amino acids."
+      ],
+      "relationships": [
+        "Ribosomes read messenger RNA in codons of three nucleotides and assemble the corresponding amino acids into a chain.",
+        "Transfer RNA molecules match codons to amino acids, which is how the nucleotide sequence is converted into an amino acid sequence.",
+        "The code is redundant but not ambiguous: one codon specifies one amino acid, while one amino acid may have several codons."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the code as degenerate or as redundant are the same claim."
+      ],
+      "disqualifying_errors": [
+        "Claiming one nucleotide, or two, specifies one amino acid.",
+        "Claiming each amino acid has exactly one codon.",
+        "Claiming translation occurs in the nucleus in eukaryotic cells."
+      ],
+      "out_of_scope": "Ribosome structure, elongation factor biochemistry, and codon usage bias are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "protein folding and function",
+      "fixed_facts": [
+        "A protein's amino acid sequence, together with its cellular environment, determines the three-dimensional structure it folds into, and that structure determines its function."
+      ],
+      "relationships": [
+        "The order of amino acids determines how the chain folds, because the side chains interact with each other and with water.",
+        "A protein that loses its folded shape loses its function, which is what denaturation by heat or extreme pH does.",
+        "Because structure follows from sequence, a change in the sequence can change or abolish the function."
+      ],
+      "accepted_alternative_framings": [
+        "Referring to primary, secondary, tertiary, and quaternary structure is correct but not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming a protein's function is determined by its amino acid composition regardless of order.",
+        "Claiming a denatured protein retains its function because its sequence is unchanged.",
+        "Claiming proteins fold into shapes that are chosen to suit the function required."
+      ],
+      "out_of_scope": "Chaperone biology, folding thermodynamics, and structure prediction are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "mutation and its consequences",
+      "fixed_facts": [
+        "A mutation is a change in DNA sequence; its effect may be harmful, beneficial, or neutral, and depends on where it occurs and what it changes."
+      ],
+      "relationships": [
+        "Mutations arise from replication errors and from chemical and radiation damage, and most are repaired.",
+        "A substitution may change no amino acid, change one, or introduce a stop; an insertion or deletion that is not a multiple of three shifts the reading frame and usually has a larger effect.",
+        "Only mutations in the germ line are inherited; somatic mutations affect the individual alone."
+      ],
+      "accepted_alternative_framings": [
+        "Silent, missense, nonsense, and frameshift are correct names; describing the effect without the labels is equally acceptable."
+      ],
+      "disqualifying_errors": [
+        "Claiming all mutations are harmful.",
+        "Claiming mutations occur because the organism or population needs a particular change.",
+        "Claiming a somatic mutation is passed to offspring."
+      ],
+      "out_of_scope": "Repair pathway biochemistry and mutational signature analysis are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "cell theory and cell types",
+      "fixed_facts": [
+        "All living organisms are made of cells, the cell is the basic unit of life, and all cells come from pre-existing cells.",
+        "Prokaryotic cells have no nucleus or membrane-bound organelles; eukaryotic cells have both."
+      ],
+      "relationships": [
+        "Cell theory holds that organisms are composed of cells, that the cell is the basic unit of structure and function, and that cells arise only from existing cells.",
+        "Prokaryotic cells lack a nucleus and membrane-bound organelles; eukaryotic cells have a nucleus and a range of organelles.",
+        "Both cell types have a plasma membrane, cytoplasm, ribosomes, and DNA."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming prokaryotic cells have no DNA or no ribosomes.",
+        "Claiming viruses are cells or are alive by the criteria of cell theory.",
+        "Claiming cells can arise spontaneously from non-living material under present conditions."
+      ],
+      "out_of_scope": "Endosymbiotic theory in detail and archaeal biology are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "organelles as interacting subsystems",
+      "fixed_facts": [
+        "The nucleus holds the genetic material, ribosomes assemble proteins, mitochondria carry out most ATP production, and chloroplasts carry out photosynthesis in plant cells."
+      ],
+      "relationships": [
+        "Organelles are specialised compartments whose functions depend on one another, so the cell operates as an integrated system.",
+        "Membranes create separate chemical environments, which is what allows incompatible processes to run in the same cell at once.",
+        "A product of one organelle is frequently the input of another, so disrupting one disrupts others."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming plant cells have chloroplasts instead of mitochondria; plant cells have both.",
+        "Claiming mitochondria produce energy rather than converting it into a usable chemical form.",
+        "Claiming organelles function independently of one another."
+      ],
+      "out_of_scope": "Vesicular trafficking detail and organelle proteomics are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "tissues, organs, and organ systems",
+      "fixed_facts": [
+        "The hierarchy runs cells, tissues, organs, organ systems, organism."
+      ],
+      "relationships": [
+        "Specialised cells of similar type form tissues; tissues combine into organs; organs work together as organ systems.",
+        "Each level shows capabilities the level below does not have on its own, which is what makes the hierarchy meaningful.",
+        "Organ systems are interdependent, so a failure in one propagates to others."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Placing the levels of organisation out of order.",
+        "Claiming an organ consists of a single tissue type.",
+        "Claiming organ systems operate independently."
+      ],
+      "out_of_scope": "Histology and comparative anatomy are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "the cell cycle and mitosis",
+      "fixed_facts": [
+        "Mitosis produces two daughter cells genetically identical to the parent cell and to each other.",
+        "DNA is replicated during interphase, before mitosis begins."
+      ],
+      "relationships": [
+        "The cell cycle consists of interphase, during which the cell grows and replicates its DNA, followed by division.",
+        "Mitosis distributes one complete copy of the replicated chromosomes to each daughter cell, so chromosome number is maintained.",
+        "Checkpoints regulate progression, and loss of that regulation underlies uncontrolled division."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the mitotic stages is correct but not required; describing the outcome accurately is what matters here."
+      ],
+      "disqualifying_errors": [
+        "Claiming mitosis halves the chromosome number.",
+        "Claiming DNA is replicated during mitosis itself rather than during interphase.",
+        "Claiming mitosis produces genetically varied daughter cells."
+      ],
+      "out_of_scope": "Cyclin and checkpoint kinase biochemistry, and cancer genetics, are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "differentiation and stem cells",
+      "fixed_facts": [
+        "Differentiated cells in one organism generally contain the same genome; they differ in which genes are expressed."
+      ],
+      "relationships": [
+        "Differentiation is the process by which cells become specialised, and it results from differences in gene expression rather than differences in the genes present.",
+        "Stem cells retain the capacity to divide and to give rise to specialised cell types.",
+        "Because the genome is retained, differentiation is about regulation, not about loss of genetic information."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming differentiated cells have lost the genes they do not use.",
+        "Claiming every cell in the body expresses the same genes.",
+        "Claiming differentiation is driven by the cell choosing what the organism needs."
+      ],
+      "out_of_scope": "Reprogramming methods, epigenetic mechanisms in detail, and stem-cell therapeutics are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "scale and surface-area-to-volume",
+      "fixed_facts": [
+        "As an object grows with its shape unchanged, its volume increases faster than its surface area, so the surface-area-to-volume ratio falls."
+      ],
+      "relationships": [
+        "Exchange with the environment happens across the surface, while demand scales with volume, so cells are limited in the size they can reach.",
+        "Multicellular organisms overcome the limit with many small cells and with structures such as folds, villi, and branching that increase surface area.",
+        "The ratio explains why cells divide rather than simply growing larger."
+      ],
+      "accepted_alternative_framings": [
+        "Explaining the constraint through diffusion distance, or through the ratio of surface to volume, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming surface area and volume increase in the same proportion as an object grows.",
+        "Claiming a larger cell exchanges materials more efficiently than a smaller one.",
+        "Claiming the ratio increases as a cell grows."
+      ],
+      "out_of_scope": "Quantitative diffusion modelling and allometric scaling laws are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "setpoints and tolerance ranges",
+      "fixed_facts": [
+        "Homeostasis maintains internal conditions within a tolerance range, not at a single unchanging value."
+      ],
+      "relationships": [
+        "A regulated variable has a setpoint and a range within which the organism functions.",
+        "Values fluctuate within the range continuously; regulation acts when a departure is detected, so variation is expected.",
+        "Different variables have different ranges, and exceeding a range has consequences specific to that variable."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a homeostatically regulated variable is held perfectly constant.",
+        "Treating any fluctuation within the tolerance range as a regulatory failure.",
+        "Claiming all regulated variables share one tolerance range."
+      ],
+      "out_of_scope": "Control theory and quantitative physiological modelling are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "negative feedback loops",
+      "fixed_facts": [
+        "Negative feedback opposes the change that triggered it and returns the variable toward its setpoint."
+      ],
+      "relationships": [
+        "A negative feedback loop requires a sensor that detects the change, a control centre that compares it with the setpoint, and an effector that acts to reverse it.",
+        "Because the response opposes the deviation, the system is stabilised around the setpoint.",
+        "Most physiological regulation, including of body temperature, blood glucose, and water balance, is negative feedback."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the three components sensor, control centre, and effector, or receptor, integrator, and effector, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Describing a loop as negative feedback when the response amplifies the original change.",
+        "Omitting the detection step and claiming the effector acts on its own.",
+        "Claiming negative feedback means the outcome is harmful."
+      ],
+      "out_of_scope": "Gain, time constants, and formal control-system analysis are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "positive feedback loops",
+      "fixed_facts": [
+        "Positive feedback amplifies the change that triggered it and drives the system away from the starting condition."
+      ],
+      "relationships": [
+        "In positive feedback the response reinforces the original change rather than opposing it.",
+        "Positive feedback drives processes to completion, such as childbirth, blood clotting, and the rising phase of a nerve impulse.",
+        "Positive feedback requires an external stopping condition, because the loop itself does not stabilise."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming positive feedback means a beneficial outcome and negative feedback a harmful one.",
+        "Describing a stabilising loop as positive feedback.",
+        "Claiming positive feedback maintains a setpoint."
+      ],
+      "out_of_scope": "Bistability and formal dynamical systems analysis are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "feedback failure and disease",
+      "fixed_facts": [],
+      "relationships": [
+        "Disease can result when a sensor, a control centre, an effector, or the signal between them fails.",
+        "The same symptom can arise from failures at different points in the loop, so the symptom alone does not identify the cause.",
+        "Treatment that replaces an effector's output does not restore regulation unless the loop can still detect and respond."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Inferring the point of failure from the symptom alone with no further evidence.",
+        "Claiming a failure at any point in the loop produces the same physiological effect.",
+        "Claiming replacing a hormone restores feedback regulation as well as the hormone level."
+      ],
+      "out_of_scope": "Clinical diagnosis, pharmacology, and specific disease mechanisms in depth are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "regulation across organ systems",
+      "fixed_facts": [],
+      "relationships": [
+        "Regulating one variable usually involves several organ systems acting together, coordinated by nervous and endocrine signals.",
+        "Nervous signalling is fast and short-lived; endocrine signalling is slower and more sustained, and the two are used for different regulatory jobs.",
+        "Because systems are coupled, correcting one variable can disturb another."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a single organ regulates a variable without involving others.",
+        "Claiming nervous and endocrine signalling operate on the same timescale.",
+        "Claiming correcting one regulated variable never affects any other."
+      ],
+      "out_of_scope": "Specific hormone axes in detail and integrative physiology modelling are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "modelling feedback quantitatively",
+      "fixed_facts": [],
+      "relationships": [
+        "A quantitative feedback model represents the variable over time, the setpoint, and the size and delay of the response.",
+        "Delay in the response produces oscillation around the setpoint rather than a smooth return.",
+        "A model is evaluated against measured time-course data, not against how reasonable it looks."
+      ],
+      "accepted_alternative_framings": [
+        "Graphical, tabular, and equation-based representations are all acceptable model forms here."
+      ],
+      "disqualifying_errors": [
+        "Modelling a regulated variable as returning instantly to setpoint with no delay or overshoot.",
+        "Presenting a model output as though it were measured data.",
+        "Claiming a model is validated without comparison to data."
+      ],
+      "out_of_scope": "Differential equation modelling and parameter estimation are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "light energy capture",
+      "fixed_facts": [
+        "Chlorophyll absorbs light most strongly in the blue and red regions and reflects green, which is why plants appear green."
+      ],
+      "relationships": [
+        "Pigments absorb particular wavelengths of light and transfer that energy into the photosynthetic process.",
+        "Light absorbed is used; light reflected or transmitted is not, which is why leaf colour indicates which wavelengths are least used.",
+        "The light-dependent reactions occur in the thylakoid membranes of the chloroplast."
+      ],
+      "accepted_alternative_framings": [
+        "Naming accessory pigments such as carotenoids alongside chlorophyll is correct and not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming chlorophyll absorbs green light most strongly.",
+        "Claiming plants take in light and store it as light energy.",
+        "Claiming photosynthesis occurs in the mitochondria."
+      ],
+      "out_of_scope": "Photosystem biochemistry, electron transport detail, and absorption spectra analysis are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "photosynthesis as matter and energy transformation",
+      "fixed_facts": [
+        "Photosynthesis uses carbon dioxide and water, with light energy, to produce glucose and oxygen.",
+        "The oxygen released by photosynthesis comes from water, not from carbon dioxide."
+      ],
+      "relationships": [
+        "Photosynthesis converts light energy into chemical energy stored in the bonds of sugar.",
+        "The carbon in the sugar comes from atmospheric carbon dioxide, which is the origin of most of a plant's mass.",
+        "Photosynthesis is both an energy transformation and a matter transformation, and a complete account addresses both."
+      ],
+      "accepted_alternative_framings": [
+        "Writing the overall equation in words or in symbols, and naming the light-dependent reactions and the Calvin cycle, are all acceptable."
+      ],
+      "disqualifying_errors": [
+        "Claiming the oxygen released comes from carbon dioxide.",
+        "Claiming a plant's mass comes principally from the soil.",
+        "Claiming photosynthesis creates energy rather than converting it."
+      ],
+      "out_of_scope": "Calvin cycle intermediates, RuBisCO kinetics, and photorespiration are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "cellular respiration",
+      "fixed_facts": [
+        "Aerobic cellular respiration uses glucose and oxygen and produces carbon dioxide, water, and ATP.",
+        "Cellular respiration occurs in all living cells, including plant cells."
+      ],
+      "relationships": [
+        "Cellular respiration releases energy stored in glucose and captures it in ATP, the cell's usable energy currency.",
+        "Glycolysis occurs in the cytoplasm; the remaining aerobic stages occur in the mitochondria.",
+        "Respiration is not the reverse of photosynthesis in mechanism, although the overall inputs and outputs are complementary."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the stages glycolysis, the Krebs or citric acid cycle, and the electron transport chain is correct but not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming plants carry out photosynthesis instead of respiration.",
+        "Claiming respiration produces energy rather than transferring stored chemical energy into ATP.",
+        "Claiming cellular respiration and breathing are the same process."
+      ],
+      "out_of_scope": "ATP yield accounting in detail, chemiosmosis, and proton gradient biophysics are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "aerobic and anaerobic pathways",
+      "fixed_facts": [
+        "Anaerobic pathways yield far less ATP per glucose molecule than aerobic respiration."
+      ],
+      "relationships": [
+        "When oxygen is unavailable, cells use anaerobic pathways such as lactic acid fermentation or alcoholic fermentation.",
+        "Fermentation regenerates the molecules glycolysis needs to continue, which is why it allows ATP production to keep going.",
+        "The far lower ATP yield is why anaerobic activity cannot be sustained for long at high demand."
+      ],
+      "accepted_alternative_framings": [
+        "Describing fermentation's role as regenerating NAD+, or as allowing glycolysis to continue, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming fermentation produces more ATP than aerobic respiration.",
+        "Claiming fermentation produces no ATP at all.",
+        "Claiming lactic acid accumulation is what causes delayed-onset muscle soreness."
+      ],
+      "out_of_scope": "Detailed fermentation biochemistry and exercise physiology are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "conservation of matter in metabolism",
+      "fixed_facts": [
+        "Atoms are conserved through every metabolic process; they are rearranged, never created or destroyed."
+      ],
+      "relationships": [
+        "The atoms in an organism's body came from the food, water, and gases it took in.",
+        "Tracing an element through metabolism means following where its atoms go, and every atom is accounted for.",
+        "Mass lost by an organism leaves as matter, principally as exhaled carbon dioxide and as water, not as energy."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming atoms are consumed or destroyed during metabolism.",
+        "Claiming body mass lost is converted into energy and thereby ceases to be matter.",
+        "Claiming an organism builds tissue from matter that did not enter it."
+      ],
+      "out_of_scope": "Isotope tracer methodology and metabolic flux analysis are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "energy accounting in organisms",
+      "fixed_facts": [],
+      "relationships": [
+        "Energy taken in is used for maintenance, growth, movement, and reproduction, with a substantial fraction released to the surroundings as thermal energy.",
+        "Energy is conserved: an account balances intake against use, storage, and loss.",
+        "Because energy is degraded to thermal energy at every transfer, organisms need a continuous supply."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting an energy account in which energy is created or destroyed.",
+        "Claiming all energy taken in is available for growth.",
+        "Claiming energy, like matter, is recycled within the organism."
+      ],
+      "out_of_scope": "Calorimetry, metabolic rate measurement, and quantitative energy budgets are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "trophic levels and energy transfer",
+      "fixed_facts": [
+        "Only a small fraction of the energy at one trophic level, on the order of ten per cent, is incorporated into the next."
+      ],
+      "relationships": [
+        "Energy enters most ecosystems through producers and passes upward through consumers, with most released as thermal energy at each transfer.",
+        "Because so little energy passes upward, food chains have few levels and higher levels support far less biomass.",
+        "Energy flows through an ecosystem in one direction and is not recycled."
+      ],
+      "accepted_alternative_framings": [
+        "Approximate statements such as 'about ten per cent' or 'roughly a tenth' are correct; an exact figure is not."
+      ],
+      "disqualifying_errors": [
+        "Claiming energy cycles through an ecosystem the way matter does.",
+        "Claiming most of the energy at one trophic level passes to the next.",
+        "Claiming a long food chain supports as much biomass at the top as at the bottom."
+      ],
+      "out_of_scope": "Quantitative production ecology and ecological efficiency measurement are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "food webs and matter flow",
+      "fixed_facts": [],
+      "relationships": [
+        "Food web arrows point from the organism consumed to the consumer, showing the direction matter and energy move.",
+        "Matter cycles within the ecosystem; the atoms in a consumer were previously in its food and will later be elsewhere.",
+        "Because organisms occupy multiple positions in a web, effects of a change propagate beyond the direct link."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Drawing food-web arrows from consumer to consumed.",
+        "Claiming matter is used up and lost from the ecosystem.",
+        "Claiming removing a species affects only the species directly linked to it."
+      ],
+      "out_of_scope": "Network analysis metrics and quantitative food-web modelling are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "the carbon cycle in ecosystems",
+      "fixed_facts": [
+        "Photosynthesis moves carbon from the atmosphere into organisms; respiration, decomposition, and combustion return it."
+      ],
+      "relationships": [
+        "Carbon moves between the atmosphere, organisms, soil, water, and rock, and the timescales of those movements differ by orders of magnitude.",
+        "Fossil fuel combustion transfers carbon from a long-term geological reservoir into the atmosphere far faster than natural processes return it.",
+        "A carbon cycle account balances the flows in and out of each reservoir."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming carbon is created or destroyed as it moves through the cycle.",
+        "Claiming only plants and animals participate in the carbon cycle.",
+        "Claiming the fast biological cycle and the slow geological cycle operate at comparable rates."
+      ],
+      "out_of_scope": "Quantitative reservoir sizes, flux measurements, and ocean carbonate chemistry are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "nitrogen and nutrient cycling",
+      "fixed_facts": [
+        "Atmospheric nitrogen gas cannot be used directly by plants or animals; it must first be fixed into usable compounds."
+      ],
+      "relationships": [
+        "Nitrogen-fixing bacteria, and industrial processes, convert atmospheric nitrogen into forms plants can take up.",
+        "Nitrogen moves from soil to plants to consumers and back through excretion and decomposition.",
+        "Adding excess nutrients to water bodies stimulates growth that, on decomposing, depletes dissolved oxygen."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the steps fixation, nitrification, assimilation, ammonification, and denitrification is correct but not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming plants take nitrogen directly from the air.",
+        "Claiming animals obtain nitrogen from the atmosphere.",
+        "Claiming adding more nutrients to an ecosystem always improves it."
+      ],
+      "out_of_scope": "Detailed microbial biochemistry and nutrient-loading models are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "decomposition",
+      "fixed_facts": [],
+      "relationships": [
+        "Decomposers break down dead organisms and waste, returning elements to soil, water, and air in forms producers can use.",
+        "Decomposition rate depends on temperature, moisture, oxygen availability, and the material itself.",
+        "Without decomposition, matter would remain locked in dead material and nutrient cycling would halt."
+      ],
+      "accepted_alternative_framings": [
+        "Naming bacteria, fungi, and detritivores as the agents are all correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming dead material disappears without any organism acting on it.",
+        "Claiming decomposers are outside the ecosystem's energy and matter flows.",
+        "Claiming decomposition proceeds at the same rate in all conditions."
+      ],
+      "out_of_scope": "Soil biogeochemistry and litter decomposition modelling are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "quantitative ecosystem models",
+      "fixed_facts": [],
+      "relationships": [
+        "A quantitative ecosystem model represents stocks and flows of matter or energy and must balance.",
+        "Model outputs are conditional on the assumptions and parameter values used, and those are stated.",
+        "A model is evaluated against measured data, and disagreement is information about the assumptions."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting model output as though it were measured data.",
+        "Reporting a model result without stating its assumptions.",
+        "Building a matter or energy model whose inputs and outputs do not balance."
+      ],
+      "out_of_scope": "Sensitivity analysis and formal model validation methods are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "exponential and logistic growth",
+      "fixed_facts": [
+        "Exponential growth has no limiting factor and cannot be sustained; logistic growth slows as the population approaches carrying capacity."
+      ],
+      "relationships": [
+        "A population grows exponentially when resources are effectively unlimited, with growth rate proportional to population size.",
+        "As resources become limiting, per-individual growth rate declines and the curve levels off near the carrying capacity.",
+        "No real population grows exponentially indefinitely, because no environment supplies unlimited resources."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the curves as J-shaped and S-shaped is correct and equivalent."
+      ],
+      "disqualifying_errors": [
+        "Claiming a population can sustain exponential growth indefinitely.",
+        "Claiming logistic growth means the population stops changing once it reaches carrying capacity.",
+        "Confusing the growth rate with the population size."
+      ],
+      "out_of_scope": "Differential equation forms, intrinsic rate of increase, and age-structured models are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "carrying capacity and limiting factors",
+      "fixed_facts": [
+        "Carrying capacity is the population size an environment can sustain given its limiting resources, and it changes when those resources change."
+      ],
+      "relationships": [
+        "The limiting factor is the resource in shortest supply relative to demand; increasing any other resource does not raise the population.",
+        "Density-dependent factors such as competition, disease, and predation intensify as population rises; density-independent factors such as weather do not.",
+        "Carrying capacity is a property of the environment and the population together, and it is not fixed."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating carrying capacity as a permanent fixed number for a place.",
+        "Claiming increasing a non-limiting resource raises the sustainable population.",
+        "Classifying weather events as density-dependent factors."
+      ],
+      "out_of_scope": "Quantitative estimation of carrying capacity and metapopulation theory are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "interspecific interactions",
+      "fixed_facts": [
+        "In mutualism both species benefit; in commensalism one benefits and the other is essentially unaffected; in parasitism and predation one benefits at the other's expense; in competition both are harmed."
+      ],
+      "relationships": [
+        "Interactions are classified by the effect on each participant, not by intent or by how the relationship appears.",
+        "Interspecific competition occurs where species use the same limiting resource, and it can shift the resources each species uses.",
+        "Predator and prey populations influence one another, typically with a delay between the change in one and the response of the other."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Classifying a relationship as mutualism when only one participant benefits.",
+        "Claiming predators normally drive their prey to extinction.",
+        "Claiming competition occurs only between members of different species."
+      ],
+      "out_of_scope": "Competitive exclusion modelling and niche partitioning theory in depth are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "biodiversity measurement",
+      "fixed_facts": [],
+      "relationships": [
+        "Biodiversity measures include the number of species present and how evenly individuals are distributed among them.",
+        "A measurement depends on the area sampled, the effort spent, and the method used, so figures are comparable only when those match.",
+        "Genetic diversity within species and diversity of ecosystems are also components of biodiversity."
+      ],
+      "accepted_alternative_framings": [
+        "Species richness and species evenness are distinct measures, and either or both may be reported."
+      ],
+      "disqualifying_errors": [
+        "Comparing biodiversity figures from different sampling areas or methods as though they were equivalent.",
+        "Treating species richness as the whole of biodiversity.",
+        "Claiming an unsampled species is absent."
+      ],
+      "out_of_scope": "Diversity indices, rarefaction curves, and estimator statistics are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "ecosystem resilience and disturbance",
+      "fixed_facts": [],
+      "relationships": [
+        "Disturbance is a normal component of ecosystem dynamics, and many communities depend on it.",
+        "Resilience is the capacity to recover ecosystem function after disturbance, and it generally rises with biodiversity.",
+        "Severe or repeated disturbance can shift an ecosystem into a different state that does not return on its own."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming all disturbance damages ecosystems.",
+        "Claiming an ecosystem always returns to its prior state after disturbance.",
+        "Claiming resilience means the ecosystem is unchanged by disturbance."
+      ],
+      "out_of_scope": "Alternative stable state theory and quantitative resilience metrics are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "group behaviour and survival",
+      "fixed_facts": [],
+      "relationships": [
+        "Group behaviours such as flocking, herding, cooperative hunting, and colonial nesting can increase individual survival and reproductive success.",
+        "Group living also imposes costs, including competition within the group and faster transmission of disease and parasites.",
+        "Whether group behaviour is favoured depends on the balance of those costs and benefits in the specific environment."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming group behaviour evolves for the good of the species irrespective of effects on individuals.",
+        "Claiming group living carries benefits with no costs.",
+        "Claiming animals adopt group behaviour because they understand its advantages."
+      ],
+      "out_of_scope": "Kin selection, inclusive fitness calculations, and game-theoretic models are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "chromosomes and gene loci",
+      "fixed_facts": [
+        "A gene occupies a specific locus on a specific chromosome, and different versions of a gene at that locus are alleles."
+      ],
+      "relationships": [
+        "Genes occupy fixed positions on chromosomes, and homologous chromosomes carry the same genes at the same loci.",
+        "Diploid organisms carry two copies of each locus, one from each parent, and those copies may be the same allele or different alleles.",
+        "Genes close together on the same chromosome tend to be inherited together."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Using gene and allele as interchangeable terms.",
+        "Claiming homologous chromosomes carry identical DNA sequences.",
+        "Claiming every gene is on a different chromosome from every other."
+      ],
+      "out_of_scope": "Linkage mapping, recombination frequencies, and chromosome banding are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "meiosis and recombination",
+      "fixed_facts": [
+        "Meiosis halves the chromosome number and produces four genetically distinct haploid cells from one diploid cell."
+      ],
+      "relationships": [
+        "Meiosis involves two divisions after a single round of DNA replication, which is why the chromosome number is halved.",
+        "Crossing over between homologous chromosomes, and the independent assortment of homologous pairs, produce genetically distinct gametes.",
+        "Fertilisation restores the diploid number and adds a further source of combination."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming meiosis produces two genetically identical daughter cells.",
+        "Claiming meiosis maintains the chromosome number rather than halving it.",
+        "Claiming DNA is replicated between the first and second meiotic divisions."
+      ],
+      "out_of_scope": "Synaptonemal complex biology and nondisjunction mechanisms in detail are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "sources of genetic variation",
+      "fixed_facts": [
+        "The sources of heritable variation are mutation, recombination during meiosis, independent assortment, and the random combination of gametes at fertilisation."
+      ],
+      "relationships": [
+        "Mutation is the ultimate source of new alleles; the other mechanisms rearrange existing alleles into new combinations.",
+        "Sexual reproduction generates far more genetic variety among offspring than asexual reproduction does.",
+        "Variation is present in a population before selection acts on it."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming recombination creates new alleles.",
+        "Claiming variation arises in response to environmental need.",
+        "Claiming asexual reproduction produces the same level of genetic variety as sexual reproduction."
+      ],
+      "out_of_scope": "Population genetics and allele frequency mathematics are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "probability and Punnett models",
+      "fixed_facts": [
+        "A Punnett square gives expected proportions across many offspring, not an outcome for any individual offspring."
+      ],
+      "relationships": [
+        "A Punnett square enumerates the possible gamete combinations and their expected frequencies.",
+        "Each fertilisation is an independent event, so previous offspring do not change the probabilities for the next.",
+        "Observed proportions in small samples deviate from expectation by chance, and that deviation is not evidence against the model."
+      ],
+      "accepted_alternative_framings": [
+        "Punnett squares, probability rules, and branch diagrams give the same predictions and are all acceptable."
+      ],
+      "disqualifying_errors": [
+        "Reading a three-to-one expected ratio as a guarantee about four offspring.",
+        "Claiming previous offspring change the probability for a subsequent one.",
+        "Rejecting a genetic model because a small family departed from the expected ratio."
+      ],
+      "out_of_scope": "Chi-squared goodness-of-fit testing is beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "polygenic and environmental effects",
+      "fixed_facts": [
+        "Many traits are influenced by multiple genes and by the environment, and these show continuous rather than discrete variation."
+      ],
+      "relationships": [
+        "A polygenic trait is influenced by several genes, each contributing part of the effect, which produces a continuous range of phenotypes.",
+        "The environment modifies the expression of many traits, so genotype does not determine phenotype on its own.",
+        "Simple dominant-recessive models apply to a minority of traits and mislead when applied to polygenic ones."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Modelling a continuously varying trait such as height as a single gene with two alleles and presenting the result as established.",
+        "Claiming genotype fully determines phenotype regardless of environment.",
+        "Claiming an environmentally induced change in an individual is inherited through the genome."
+      ],
+      "out_of_scope": "Heritability estimation, quantitative trait loci, and genome-wide association methods are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "distribution of expressed traits",
+      "fixed_facts": [],
+      "relationships": [
+        "Traits influenced by many genes and by the environment are distributed continuously in a population, often clustering around a central value.",
+        "The distribution is a property of the population, and no individual measurement characterises it.",
+        "Comparing distributions requires comparable measurement methods and sample sizes."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the shape as a normal or bell-shaped distribution is correct; describing it in plain terms is equally acceptable."
+      ],
+      "disqualifying_errors": [
+        "Drawing a conclusion about a population's trait distribution from one individual.",
+        "Claiming a continuous trait falls into discrete categories because the data was binned that way.",
+        "Comparing trait distributions measured by different methods as though they were equivalent."
+      ],
+      "out_of_scope": "Descriptive and inferential statistics beyond reading a distribution are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "multiple lines of evidence for common ancestry",
+      "fixed_facts": [
+        "Evidence for common ancestry comes from the fossil record, comparative anatomy, embryology, biogeography, and molecular sequence comparison."
+      ],
+      "relationships": [
+        "Independent lines of evidence converging on the same pattern of relationship is what makes common ancestry a robust conclusion.",
+        "Shared DNA and protein sequences among species match the pattern inferred from anatomy and fossils.",
+        "Shared underlying structure used for different functions indicates common ancestry; similar function achieved by different structures does not."
+      ],
+      "accepted_alternative_framings": [
+        "Naming homologous and analogous structures is correct but not required, provided the distinction is used correctly."
+      ],
+      "disqualifying_errors": [
+        "Treating similarity of function as evidence of close relationship.",
+        "Claiming a single line of evidence establishes the relationships on its own.",
+        "Claiming one living species is the ancestor of another living species."
+      ],
+      "out_of_scope": "Phylogenetic tree-building algorithms and molecular clock calibration are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "the four factors driving natural selection",
+      "fixed_facts": [
+        "Natural selection requires: more offspring produced than can survive; heritable variation among individuals; competition for limited resources; and differential survival and reproduction of individuals with particular heritable traits."
+      ],
+      "relationships": [
+        "All four conditions are necessary; if any is absent, natural selection does not operate.",
+        "Selection acts on phenotypes, and the effect is heritable only to the extent that the variation is genetic.",
+        "The outcome is a change in the frequency of heritable traits in the population across generations."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the fourth factor as differential reproductive success, or as differences in survival and reproduction, are equivalent."
+      ],
+      "disqualifying_errors": [
+        "Claiming individual organisms evolve or adapt themselves during their lifetimes.",
+        "Claiming variation arises because the population needs it.",
+        "Claiming natural selection has a goal, a direction toward complexity, or an endpoint."
+      ],
+      "out_of_scope": "Hardy-Weinberg equilibrium, genetic drift quantification, and speciation modelling are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "statistics of advantageous traits",
+      "fixed_facts": [],
+      "relationships": [
+        "Selection is detected as a change in the distribution of a trait in a population over generations.",
+        "A shift in a distribution is evidence about the population, not about any individual within it.",
+        "The strength of the evidence depends on sample size, on measurement method, and on the number of generations observed."
+      ],
+      "accepted_alternative_framings": [
+        "Directional, stabilising, and disruptive selection are correct names for the distributional patterns; describing the shift without the labels is equally acceptable."
+      ],
+      "disqualifying_errors": [
+        "Inferring selection from a change in one individual.",
+        "Claiming a shift in a trait distribution is necessarily due to selection, without considering other causes.",
+        "Reporting a distributional change with no reference to sample size or generations."
+      ],
+      "out_of_scope": "Selection coefficients and formal statistical inference are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "adaptation of populations",
+      "fixed_facts": [
+        "Adaptation is a population-level outcome across generations, not a change an individual makes during its life."
+      ],
+      "relationships": [
+        "An adaptation is a heritable trait that has become common in a population because it improved survival and reproduction in that environment.",
+        "A trait that is adaptive in one environment can be neutral or harmful in another, so adaptation is always relative to conditions.",
+        "Not every trait is an adaptation; some persist through chance, through linkage to other traits, or as by-products."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Describing an individual organism as adapting to its environment during its lifetime as an evolutionary process.",
+        "Claiming every trait an organism has is an adaptation.",
+        "Claiming an adaptation is a trait the organism developed because it was needed."
+      ],
+      "out_of_scope": "Adaptationist critique, exaptation theory, and comparative methods are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "environmental change and extinction",
+      "fixed_facts": [],
+      "relationships": [
+        "When the environment changes, populations may shift in trait frequency, migrate, or become extinct, and which occurs depends on existing variation and the rate of change.",
+        "Rapid change is more likely to cause extinction than gradual change, because there is less opportunity for trait frequencies to shift.",
+        "Extinction is the normal fate of most species over geological time, and the fossil record documents this."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a population will always evolve in time to survive an environmental change.",
+        "Claiming extinction indicates a defect in the organisms rather than a mismatch with changed conditions.",
+        "Claiming populations can evolve traits for which no variation exists."
+      ],
+      "out_of_scope": "Extinction rate estimation and mass extinction mechanisms in detail are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "engineering solutions for biodiversity",
+      "fixed_facts": [],
+      "relationships": [
+        "Interventions to protect biodiversity are evaluated against stated criteria and against evidence of effect, not against intent.",
+        "Because ecosystems are connected, an intervention has effects beyond its target, sometimes delayed or distant.",
+        "Monitoring after the intervention is what converts an expected effect into an observed one."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming an intervention affects only its intended target.",
+        "Declaring an intervention successful without post-intervention monitoring.",
+        "Presenting a conservation option as having benefits with no costs or trade-offs."
+      ],
+      "out_of_scope": "Conservation policy, environmental impact assessment procedure, and economic valuation are beyond this course."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l03",
+  "lessonId": "ma-g7-ready-for-life-u05-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Price data and per-unit calculation",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Prices are recorded without size or quantity, or no per-unit price is calculated."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Price, size or quantity, and extra costs are recorded for both sources, and a correct per-unit price is calculated for each."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner catches a hidden cost, such as shipping or tax, that changes which option is actually cheaper."
+          }
+        ]
+      },
+      {
+        "dimension": "Value reasoning beyond price",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The decision is based on price alone with no other factor considered."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific non-price factor is named and connected to the decision."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner describes a specific scenario where that non-price factor would outweigh the price difference."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The per-unit price calculation is shown, not just the sticker prices.",
+      "No purchases were completed in order to finish this task.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

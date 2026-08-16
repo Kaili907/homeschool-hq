@@ -1,0 +1,405 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u06-l04",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Community Contribution Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: communication"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic communication task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "With the project planned and its materials checked, the learner writes exactly what needs to be communicated to the person or group involved (what is planned, when, and what to expect) and, together with a trusted adult, delivers or shares that communication.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Any communication with someone outside your household happens through or alongside a trusted adult — you do not contact or respond to anyone outside your household alone.",
+    "Do not share personal information such as your full name, address, school, schedule, or other household details with anyone outside your household as part of this communication."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If this project needs no communication with anyone outside the household (for example, the entire plan involves only people who already live there), or if the person or group who would receive it genuinely cannot be reached this week for a reason outside the learner's control, the learner instead writes the message or spoken script they would use, and reads it aloud to a trusted adult for feedback, without sending or delivering it."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g7-u06-l04-model-card",
+    "Embedded resource: swk-rfl-g7-u06-l04-step-card",
+    "Embedded resource: swk-rfl-g7-u06-l04-guided-card",
+    "Embedded resource: swk-rfl-g7-u06-l04-independent-card",
+    "Embedded resource: swk-rfl-g7-u06-l04-evidence-record",
+    "Embedded resource: swk-rfl-g7-u06-l04-retry-pair",
+    "Embedded resource: swk-rfl-g7-u06-l04-delivered-example",
+    "Embedded resource: swk-rfl-g7-u06-l04-delivered-plan",
+    "learner-local: paper or a notes app for drafting the message"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Analyze the complete worked example on swk-rfl-g7-u06-l04-model-card before beginning.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g7-u06-l04-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g7-u06-l04-independent-card; follow every step and retain only the named minimal evidence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Complete the minimal evidence record on swk-rfl-g7-u06-l04-evidence-record; omit or fictionalize private details.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one thing you would say differently next time you need to communicate a plan to someone outside your household, based on how this attempt actually went."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g7-u06-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g7-u06-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g7-u06-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm. | Adult-involved delivery: The delivery is documented as happening through or alongside a trusted adult, with a clear account of what changed after their feedback. Resume at the next unfinished step on swk-rfl-g7-u06-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner draft a second, shorter version of the same message meant for a quick check-in after the project is finished, and compare what details it needs versus the first message.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can complete a realistic communication task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g7-u06-l04-model-card",
+        "swk-rfl-g7-u06-l04-step-card",
+        "swk-rfl-g7-u06-l04-guided-card",
+        "swk-rfl-g7-u06-l04-independent-card",
+        "swk-rfl-g7-u06-l04-evidence-record",
+        "swk-rfl-g7-u06-l04-retry-pair",
+        "swk-rfl-g7-u06-l04-delivered-example",
+        "swk-rfl-g7-u06-l04-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "example",
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g7-u06-l04-delivered-example",
+        "swk-rfl-g7-u06-l04-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g7-u06-l04-local-1",
+          "label": "paper or a notes app for drafting the message",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g7-u06-l04-model-card",
+        "kind": "model",
+        "title": "communication worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: With the project planned and its materials checked, the learner writes exactly what needs to be communicated to the person or group involved (what is planned, when, and what to expect) and, together with a trusted adult, delivers or shares that communication.",
+          "Model move 1: Read the condition and name the exact communication decision or action.",
+          "Model move 2: Before drafting anything, think about what the person or group receiving help would most want to know in advance.",
+          "Model move 3: Draft the specific message or spoken script you would use to communicate your plan, including what you intend to do, when, and any question you need answered before proceeding.",
+          "Model check: Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm. | Adult-involved delivery: The delivery is documented as happening through or alongside a trusted adult, with a clear account of what changed after their feedback."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "communication action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for communication.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "communication coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: With the project planned and its materials checked, the learner writes exactly what needs to be communicated to the person or group involved (what is planned, when, and what to expect) and, together with a trusted adult, delivers or shares that communication.",
+          "Coach direction: Before drafting anything, think about what the person or group receiving help would most want to know in advance.",
+          "Learner prompt: List two specific things the person or group involved in your project would need to know before you help — for example, timing or exactly what you plan to do.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l04-independent-card",
+        "kind": "independent-task",
+        "title": "communication complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Draft the specific message or spoken script you would use to communicate your plan, including what you intend to do, when, and any question you need answered before proceeding.",
+          "Response 1 (t2-p1): My draft states the specific plan clearly, not a vague offer to help.",
+          "Response 2 (t2-p2): My draft includes at least one specific question or detail I still need to confirm with the other person or group.",
+          "Equal-access rule: If this project needs no communication with anyone outside the household (for example, the entire plan involves only people who already live there), or if the person or group who would receive it genuinely cannot be reached this week for a reason outside the learner's control, the learner instead writes the message or spoken script they would use, and reads it aloud to a trusted adult for feedback, without sending or delivering it."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "communication minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain one thing you would say differently next time you need to communicate a plan to someone outside your household, based on how this attempt actually went.",
+          "Success checks: Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm. | Adult-involved delivery: The delivery is documented as happening through or alongside a trusted adult, with a clear account of what changed after their feedback.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l04-retry-pair",
+        "kind": "retry",
+        "title": "communication supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g7-u06-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g7-u06-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional communication condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm. | Adult-involved delivery: The delivery is documented as happening through or alongside a trusted adult, with a clear account of what changed after their feedback..",
+          "Return: resume at the next unfinished step on swk-rfl-g7-u06-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l04-delivered-example",
+        "kind": "model",
+        "title": "communication delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: With the project planned and its materials checked, the learner writes exactly what needs to be communicated to the person or group involved (what is planned, when, and what to expect) and, together with a trusted adult, delivers or shares that communication.",
+          "Use steps: Draft the specific message or spoken script you would use to communicate your plan, including what you intend to do, when, and any question you need answered before proceeding.",
+          "Field 1 (t2-p1): My draft states the specific plan clearly, not a vague offer to help.",
+          "Field 2 (t2-p2): My draft includes at least one specific question or detail I still need to confirm with the other person or group.",
+          "Check against: Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm. | Adult-involved delivery: The delivery is documented as happening through or alongside a trusted adult, with a clear account of what changed after their feedback."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l04-delivered-plan",
+        "kind": "independent-task",
+        "title": "communication delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: With the project planned and its materials checked, the learner writes exactly what needs to be communicated to the person or group involved (what is planned, when, and what to expect) and, together with a trusted adult, delivers or shares that communication.",
+          "Use steps: Draft the specific message or spoken script you would use to communicate your plan, including what you intend to do, when, and any question you need answered before proceeding.",
+          "Field 1 (t2-p1): My draft states the specific plan clearly, not a vague offer to help.",
+          "Field 2 (t2-p2): My draft includes at least one specific question or detail I still need to confirm with the other person or group.",
+          "Check against: Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm. | Adult-involved delivery: The delivery is documented as happening through or alongside a trusted adult, with a clear account of what changed after their feedback."
+        ]
+      }
+    ],
+    "model": {
+      "title": "communication worked model",
+      "startingCondition": "With the project planned and its materials checked, the learner writes exactly what needs to be communicated to the person or group involved (what is planned, when, and what to expect) and, together with a trusted adult, delivers or shares that communication.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact communication decision or action.",
+        "Model move 2: Before drafting anything, think about what the person or group receiving help would most want to know in advance.",
+        "Model move 3: Draft the specific message or spoken script you would use to communicate your plan, including what you intend to do, when, and any question you need answered before proceeding."
+      ],
+      "reasoning": "The model names the condition, follows the ordered communication process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm.",
+        "Adult-involved delivery: The delivery is documented as happening through or alongside a trusted adult, with a clear account of what changed after their feedback."
+      ],
+      "resourceRef": "swk-rfl-g7-u06-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for communication.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g7-u06-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "With the project planned and its materials checked, the learner writes exactly what needs to be communicated to the person or group involved (what is planned, when, and what to expect) and, together with a trusted adult, delivers or shares that communication.",
+      "prompt": "List two specific things the person or group involved in your project would need to know before you help — for example, timing or exactly what you plan to do.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g7-u06-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g7-u06-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "communication — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g7-u06-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Draft the specific message or spoken script you would use to communicate your plan, including what you intend to do, when, and any question you need answered before proceeding.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "communication — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g7-u06-l04-independent-card",
+        "directions": "If this project needs no communication with anyone outside the household (for example, the entire plan involves only people who already live there), or if the person or group who would receive it genuinely cannot be reached this week for a reason outside the learner's control, the learner instead writes the message or spoken script they would use, and reads it aloud to a trusted adult for feedback, without sending or delivering it.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g7-u06-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain one thing you would say differently next time you need to communicate a plan to someone outside your household, based on how this attempt actually went.",
+      "observableCriteria": [
+        "Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm.",
+        "Adult-involved delivery: The delivery is documented as happening through or alongside a trusted adult, with a clear account of what changed after their feedback."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g7-u06-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g7-u06-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g7-u06-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g7-u06-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Message clarity and completeness: The draft clearly states the specific plan, timing, and at least one open question or detail to confirm. | Adult-involved delivery: The delivery is documented as happening through or alongside a trusted adult, with a clear account of what changed after their feedback.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g7-u06-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g7-u06-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

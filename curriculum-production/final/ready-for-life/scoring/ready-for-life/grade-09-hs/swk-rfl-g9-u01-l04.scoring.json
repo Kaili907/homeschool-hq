@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l04",
+  "lessonId": "ma-g9-ready-for-life-u01-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Completeness of the entered system",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The system is missing one or more categories of real commitments (assignments, chores, or activities) for the next two weeks, or has no reminder or review habit set." },
+          { "label": "Proficient", "descriptor": "The system includes assignments, chores, and activities for the next two weeks with correct dates, and at least one reminder or review habit is set." },
+          { "label": "Advanced", "descriptor": "The system includes all commitment categories with correct dates, a working reminder or review habit, and the learner can explain a specific reason for how they organized or labeled entries." }
+        ]
+      },
+      {
+        "dimension": "Confirmed real use versus simulation",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No adult confirmation of active use is present, and no simulation alternative was completed to the same level of detail as real use would have required." },
+          { "label": "Proficient", "descriptor": "Either a guardian confirms active use with one specific real instance described, or the simulation alternative is completed with a full, specific fictional week matching the real task's level of detail." },
+          { "label": "Advanced", "descriptor": "A guardian confirms active use with a specific, credible instance of real checking or updating during the period, and the learner's reflection identifies a genuine remaining weakness in their own use of the system." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A guardian confirmation statement (not just the learner's own claim) that the system is currently being consulted and updated, or an equally detailed simulation alternative if real confirmation was not possible.",
+      "At least one specific, concrete instance described (a real date, task, or moment) of the system actually being checked or updated, not a general claim like 'I've been using it.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

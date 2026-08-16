@@ -1,0 +1,329 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g12-technology-u05-l03",
+  "unit_id": "ma-g12-technology-u05",
+  "source_course_id": "ma-g12-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 12,
+  "grade_dir": "grade-12",
+  "unit_number": 5,
+  "unit_title": "Capstone Design, Build, and Test",
+  "day_in_unit": 3,
+  "course_day": 27,
+  "lesson_title": "Guided practice A: architecture and build increments",
+  "phase": "Guided practice A",
+  "work_mode": "GUIDED_A",
+  "focus": "architecture and build increments",
+  "task_type": "design_and_prototyping",
+  "lesson_type": "creation_project",
+  "task_label": "Design and prototyping — Guided practice (first pass)",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "60–90",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Impacts of Computing"
+  ],
+  "essential_question": "How do we build something substantial and prove, at each step, that it works?",
+  "learning_objectives": [
+    "Practise architecture and build increments with prompts, feedback, and gradually reduced support.",
+    "Communicate understanding of architecture and build increments using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on architecture and build increments against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on architecture and build increments.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "approved editor, runtime, and version-control tool",
+    "project milestone plan, test log, and accessibility checklist"
+  ],
+  "task_brief": "Day 3 of \"Capstone Design, Build, and Test\" (unit 5, grade 12) is a guided practice (first pass) on architecture and build increments. It is one step inside the unit — not the whole unit project — and takes about 60–90 minutes. The unit is working toward: Build the capstone system to a testable milestone with verified requirements, automated tests, and accessibility evidence. Today's work contributes to that by handling architecture and build increments at the guided practice a stage, against the unit's wider topics of problem validation and stakeholders, requirements and success metrics, architecture and build increments, and verification and test evidence. This session produces reviewable evidence toward the unit performance task.",
+  "primary_task": "Work the first supported pass on architecture and build increments. Take the first two complete test cases printed in activity_setup and solve each with the method visible, writing after every step the reason that step is legal and what would have gone wrong without it. Record intermediate values or states for both cases. Then mark, on your own work, the single step you would most likely get wrong if the method were removed — that mark is what the second pass will test. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about architecture and build increments, and it belongs to \"Capstone Design, Build, and Test\", which also covers separate topics such as problem validation and stakeholders. Close out with this check before you stop: Show your reasoning on the faded example of architecture and build increments and identify the check that confirms it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on architecture and build increments., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Practise architecture and build increments with prompts, feedback, and gradually reduced support.",
+    "Produce the deliverable for a guided practice (first pass): Two scaffolded solutions with per-step reasons, intermediate states, and one flagged fragile step.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Two scaffolded solutions with per-step reasons, intermediate states, and one flagged fragile step.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline design brief for architecture and build increments",
+      "purpose": "Design only for the fictional learner described here; no interview, public post, account, camera, or outside tester is needed.",
+      "fictional_user": "Kai uses a keyboard, sometimes enlarges text to 200%, and wants a three-step way to track completed reading sessions without entering a name or location.",
+      "required_features": [
+        "Add one reading session in at most three actions.",
+        "Show completion using both a word and a visual mark, not color alone.",
+        "Remain understandable at 200% text size.",
+        "Store only a fictional book label and a completed/not-completed value."
+      ],
+      "fixed_constraint": "The prototype is a labelled paper sketch or local file; it is never published and collects no real personal data."
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply architecture and build increments to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one limitation or trade-off and explain why the available evidence does not settle it."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "The exact accepted evidence map is intentionally withheld from learner material and is available only in the restricted trusted-adult scoring authority after the learner submits complete evidence.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES",
+      "hint_ceiling": "CRITERION_OR_EVIDENCE_LOCATION_CUE"
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to architecture and build increments.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
+  "learner_experience": {
+    "experience_version": "technology-production-depth-r1",
+    "static_complete": true,
+    "tutor_required": false,
+    "lesson_type": "creation_project",
+    "sequence_policy": "Concept teaching, the analogous model, and guided practice precede protected independent evidence. Protected and fresh resolutions are absent from learner material and remain adult-only.",
+    "learning_targets": [
+      "Practise architecture and build increments with prompts, feedback, and gradually reduced support.",
+      "Communicate understanding of architecture and build increments using subject-appropriate evidence or representation.",
+      "Check, revise, or improve the work on architecture and build increments against the stated success criteria.",
+      "Explain the evidence chain used to make or evaluate a result about architecture and build increments.",
+      "Transfer the reasoning to a fresh case without a completed target response in view."
+    ],
+    "concept_teaching": {
+      "ref": "ma-g12-technology-u05-l03#concept-design-and-prototyping",
+      "title": "Requirements become testable design decisions: architecture and build increments",
+      "entry_check": "Before reading, write one prediction about architecture and build increments and one observation that could show the prediction is wrong. This readiness record is no-penalty evidence.",
+      "explanation": [
+        "architecture and build increments is treated here as a relationship among a specification, inspectable evidence, and a justified decision. A result is not secure merely because it looks plausible: the learner must state what should be true, identify evidence that bears on it, and explain why the evidence supports the claim.",
+        "Translate each supplied need into a requirement, make the smallest prototype that can test it, and preserve before/after evidence for one revision. This keeps observation separate from interpretation and prevents a preferred answer from being rewritten as evidence after the fact.",
+        "Verification begins before execution or review. Record an expected result or pass condition, include a normal and boundary or stress case, compare actual with expected, and interpret every mismatch. After revision, rerun the complete relevant set so a local fix does not hide a regression elsewhere.",
+        "Correctness and quality require a limitation statement. Name what the supplied case, trace, dataset, or prototype cannot establish, then describe the additional evidence that would settle that point. For creation work, also name a viable alternative and the concrete clarity, access, time, storage, privacy, or reliability trade-off."
+      ],
+      "key_terms": [
+        {
+          "term": "requirement",
+          "definition": "A capability or condition the finished artifact must satisfy."
+        },
+        {
+          "term": "prototype",
+          "definition": "A limited representation built to answer a design question."
+        },
+        {
+          "term": "success criterion",
+          "definition": "An observable condition written before building."
+        },
+        {
+          "term": "iteration",
+          "definition": "A documented change made because a check produced evidence."
+        }
+      ],
+      "application_check": [
+        "Can you explain requirements become testable design decisions in your own words using a new fictional example?",
+        "Did you write expected behavior or a pass condition before running, tracing, or judging the result?",
+        "Can another reader trace each conclusion to a state row, printed fact, requirement, or observation?",
+        "Did you name a boundary, stress case, missing fact, or limitation instead of assuming it away?"
+      ]
+    },
+    "worked_example": {
+      "ref": "ma-g12-technology-u05-l03#worked-analogue-design-and-prototyping",
+      "kind": "WORKED_EXAMPLE_ANNOTATED_CASE",
+      "relationship_to_protected_tasks": "ANALOGOUS_NON_TARGET",
+      "evidence_eligible": false,
+      "title": "Worked analogue: turn a need into a testable locker label",
+      "complete_analogue_case": "A fictional shared supply locker needs labels readable from two steps away, usable without color, and replaceable without remaking the whole sign.",
+      "annotations": [
+        {
+          "step": 1,
+          "reasoning": "Translate the needs into three requirements before sketching."
+        },
+        {
+          "step": 2,
+          "reasoning": "Prototype large text plus a distinct shape and a replaceable paper slot."
+        },
+        {
+          "step": 3,
+          "reasoning": "Check distance, no-color identification, and label replacement separately."
+        },
+        {
+          "step": 4,
+          "reasoning": "Revise the smallest failing feature and preserve both sketches."
+        },
+        {
+          "step": 5,
+          "reasoning": "A paper prototype cannot establish long-term durability; name that limitation."
+        }
+      ],
+      "completed_model": "Translate the needs into three requirements before sketching. Prototype large text plus a distinct shape and a replaceable paper slot. Check distance, no-color identification, and label replacement separately. Revise the smallest failing feature and preserve both sketches. A paper prototype cannot establish long-term durability; name that limitation.",
+      "transfer_prompt": "Use the same evidence discipline on the protected task, but make a new decision from its different printed labels. Do not copy this model as the protected response.",
+      "difference_from_protected_task": "The worked model uses a different fictional setting, facts, labels, decision, and check. None of its completed claims answers the protected central input."
+    },
+    "guided_task": {
+      "ref": "ma-g12-technology-u05-l03#guided-evidence-bridge",
+      "title": "Guided practice: claim → printed evidence → check",
+      "alternate_case": "A separate fictional practice card about architecture and build increments contains labels P1, P2, and P3. P1 states the intended purpose, P2 states a constraint, and P3 records an observed mismatch. It is not the protected case titled \"Inline design brief for architecture and build increments.\"",
+      "prompts": [
+        "Restate P1 as a criterion without adding facts.",
+        "Use P2 to reject one tempting but invalid response.",
+        "Use P3 to propose a revision and write an observable pass condition.",
+        "Name one conclusion the three labels cannot support."
+      ],
+      "immediate_check": "A complete guided response has one claim about architecture and build increments, the exact supporting label, one check, and one limitation.",
+      "support_fade": "The guided card names the purpose/constraint/mismatch roles. In protected work, the learner must locate those roles independently in the supplied central input; the fresh check offers only term or instruction clarification.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    },
+    "independent_task": {
+      "ref": "ma-g12-technology-u05-l03#protected-independent",
+      "role": "INDEPENDENT_LESSON_EVIDENCE",
+      "freshness": "FRESH_FROM_WORKED_AND_GUIDED_FIXTURES",
+      "title": "Independent analysis/design: architecture and build increments",
+      "central_input_ref": "activity_setup.central_input",
+      "specification": [
+        "The response must apply architecture and build increments to at least three labelled details from the supplied central input.",
+        "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+        "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+        "The response must name one limitation or trade-off and explain why the available evidence does not settle it."
+      ],
+      "public_checks": [
+        "the complete supplied central input → three or more evidence-linked observations",
+        "the proposed revision or decision → one stated check with an observable pass condition",
+        "the strongest competing interpretation → one limitation, unknown, or trade-off stated without inventing facts"
+      ],
+      "evidence_requirements": [
+        "At least three claims, each linked to an exact printed row, card, requirement, or scenario detail.",
+        "One feasible learner-authored revision, design, or decision made only from the supplied fictional case.",
+        "An observable pass condition written before judging the revision or decision.",
+        "One limitation, missing fact, or trade-off stated without inventing evidence.",
+        "A before/after or claim/check record showing how evidence changed the work."
+      ],
+      "support": "TERM_OR_INSTRUCTION_CLARIFICATION; one location/evidence cue may identify where to inspect but may not select the decision or give the resolution.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    },
+    "debugging_reasoning": {
+      "title": "Use the six-move evidence cycle",
+      "required_moves": [
+        "Symptom: record expected versus actual without explaining it away.",
+        "Hypothesis: state one falsifiable cause about the claim or design state before revising.",
+        "Inspection: identify the first trace row or printed detail that bears on the hypothesis.",
+        "Predicted effect: state what one controlled change should alter and what it should leave unchanged.",
+        "Test and interpretation: compare actual with the prediction and mark the hypothesis supported, rejected, or not fully tested.",
+        "Verification: rerun all relevant checks and record any new limitation or next hypothesis."
+      ],
+      "anti_guessing_rule": "A working final artifact without a pre-change hypothesis and inspectable evidence is incomplete debugging/revision evidence."
+    },
+    "remediation_routes": [
+      {
+        "trigger_id": "claim-not-connected-to-partial-state",
+        "learner_signal": "My conclusion names the topic but does not connect to exact printed evidence.",
+        "title": "Different representation: evidence cards and arrows",
+        "alternate_teaching": "Copy each printed fact onto a separate card. Draw an arrow from a fact to a claim only when the fact would make that claim more or less credible. Unconnected claims must be revised or removed.",
+        "analogue_task": "Use four new cards about a fictional library sign to build a fact → claim → check map for architecture and build increments; do not use the protected case.",
+        "return_check": "Complete the fresh mastery check with teaching materials closed. The original protected solution remains withheld.",
+        "original_protected_solution_exposed": false
+      },
+      {
+        "trigger_id": "revision-before-evidence",
+        "learner_signal": "I changed or chose something before recording the mismatch and a testable reason.",
+        "title": "Different routine: the six-box evidence ladder",
+        "alternate_teaching": "Use six boxes in order: expected/actual, first divergence or decisive detail, hypothesis, predicted effect, one revision, rerun interpretation. Do not enter the revision box until the first four constrain what the change is meant to test.",
+        "analogue_task": "Apply the six boxes to a separate fictional clock-card mismatch related to architecture and build increments. Stop after the prediction, explain what result would reject the hypothesis, then finish the check.",
+        "return_check": "Complete the fresh mastery check independently. A correct but low-confidence response receives confirmation tied to evidence, not automatic reteaching.",
+        "original_protected_solution_exposed": false
+      }
+    ],
+    "fresh_mastery_check": {
+      "ref": "ma-g12-technology-u05-l03#fresh-northstar-case",
+      "role": "FRESH_MASTERY_OR_REMEDIATION_CHECK",
+      "freshness": "DIFFERENT_FIXTURE_FROM_WORKED_GUIDED_AND_PROTECTED_TASKS",
+      "title": "Fresh transfer: Northstar card for architecture and build increments",
+      "complete_case": "A new fictional Northstar card supplies purpose N1, constraint N2, two observations N3–N4, and an unsuccessful first revision N5. No outside facts are needed or permitted.",
+      "task": "Use translate each supplied need into a requirement, make the smallest prototype that can test it, and preserve before/after evidence for one revision. Produce two evidence-linked claims, one revised decision or design, an observable pass condition, and one limitation.",
+      "evidence_requirements": "Submit the label-to-claim map, the revised artifact or decision, expected-versus-observed check evidence, and the limitation. Do not reuse the worked model wording.",
+      "hint_ceiling": "TERM_OR_INSTRUCTION_CLARIFICATION",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    }
+  },
+  "guided_scaffold_note": "Scaffolding for architecture and build increments fades within the session: the first case may be worked with the reference, model, or prompts in view, and the second must be attempted before checking anything. The supporting adult may ask \"what supports that move?\" after a step but should not supply the step. Where the unscaffolded attempt diverges from the scaffolded one, the divergence itself is the thing to examine, not something to erase.",
+  "test_or_check_criteria": [
+    "Two prepared cases are solved with per-step reasons recorded while the scaffold was visible.",
+    "Intermediate values or states are shown for both cases.",
+    "Exactly one step is flagged as the one most likely to fail without the scaffold.",
+    "No real personal data, credential, or production system is referenced in either case."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting architecture and build increments.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for architecture and build increments follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for architecture and build increments, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to architecture and build increments works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of architecture and build increments, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking architecture and build increments mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply architecture and build increments under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on architecture and build increments rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Build the capstone system to a testable milestone with verified requirements, automated tests, and accessibility evidence.",
+    "topics": [
+      "problem validation and stakeholders",
+      "requirements and success metrics",
+      "architecture and build increments",
+      "verification and test evidence",
+      "accessibility and privacy verification",
+      "iteration from feedback"
+    ],
+    "essential_question": "How do we build something substantial and prove, at each step, that it works?",
+    "assessment_id": "ma-g12-technology-u05-assessment"
+  }
+}

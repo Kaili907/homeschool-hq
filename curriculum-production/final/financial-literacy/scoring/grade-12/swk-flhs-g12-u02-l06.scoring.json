@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l06",
+  "lessonId": "ma-g12-financial-literacy-u02-l06",
+  "integratedDomains": [
+    "budgeting",
+    "saving-investing",
+    "insurance-risk",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$36,468.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The six planned figures added, with savings treated as an allocation like any other rather than as what is left over."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$36,468.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The six actual figures added. The totals match exactly, which is why a review that stops at the total finds nothing wrong."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$915.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,915 against $3,000 planned — the largest single overspend in the year."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,086.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,114 saved against $4,200 planned. Nothing decided this figure directly; it is what remained after the other five categories took what they took."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,770.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$684.00 on food, $171.00 on insurance, and $915.00 on discretionary."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,086.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,770.00 of overspend less $684.00 of underspend on transport. It equals the savings shortfall exactly, which is the arithmetic proof that savings was the residual."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "housing + food + transport + insurance + discretionary + savings",
+        "substituted": "15420 + 6600 + 4800 + 2448 + 3000 + 4200",
+        "result": "$36,468.00",
+        "why": "The six planned figures added, with savings treated as an allocation like any other rather than as what is left over."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "housing2 + foodA + transportA + insuranceA + discretionaryA + savingsA",
+        "substituted": "15420 + 7284 + 4116 + 2619 + 3915 + 3114",
+        "result": "$36,468.00",
+        "why": "The six actual figures added. The totals match exactly, which is why a review that stops at the total finds nothing wrong."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "discretionaryA2 - discretionary2",
+        "substituted": "3915 - 3000",
+        "result": "$915.00",
+        "why": "$3,915 against $3,000 planned — the largest single overspend in the year."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "savings2 - savingsA2",
+        "substituted": "4200 - 3114",
+        "result": "$1,086.00",
+        "why": "$3,114 saved against $4,200 planned. Nothing decided this figure directly; it is what remained after the other five categories took what they took."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "(foodA2 - food2) + (insuranceA2 - insurance2) + #t2-p1",
+        "substituted": "(7284 - 6600) + (2619 - 2448) + #t2-p1",
+        "result": "$1,770.00",
+        "why": "$684.00 on food, $171.00 on insurance, and $915.00 on discretionary."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 - (transport2 - transportA2)",
+        "substituted": "#t2-p3 - (4800 - 4116)",
+        "result": "$1,086.00",
+        "why": "$1,770.00 of overspend less $684.00 of underspend on transport. It equals the savings shortfall exactly, which is the arithmetic proof that savings was the residual."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The year came in exactly on total and $1,086.00 short on savings. Explain what that equality shows about how this plan actually worked, and propose one change to the plan for next year, saying what it would cost the household.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the structure: savings was funded by whatever remained, so every dollar of net overspend elsewhere came out of it automatically and without a decision being made.",
+          "Uses the equality as evidence: the $1,086.00 net overspend and the $1,086.00 savings shortfall are the same money, which is what shows savings absorbed the variance rather than merely happening to be low.",
+          "Proposes a concrete change with its cost — for example moving the $4,200 of savings to the front so it is transferred before spending, which would have forced $1,086.00 of cuts across food, insurance, and discretionary instead."
+        ],
+        "evidenceRequirements": [
+          "Uses the matching $1,086.00 figures and at least one category variance, such as the $915.00 on discretionary or the $684.00 on food."
+        ],
+        "lookFors": [
+          "The response recognises that a plan meeting its total can still fail completely.",
+          "The proposed change names what would have to give, rather than only what should be protected."
+        ],
+        "commonMisconception": "Reading a matching annual total as evidence that a plan worked, when the total can only match if the residual category has absorbed everything.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What did the household plan to allocate across all six categories?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What did the household actually allocate across the same six categories?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "By how much did discretionary spending exceed its plan?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "By how much did savings fall short of its plan?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What do the three categories that exceeded plan — food, insurance, and discretionary — come to in total overspend?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Netting off the one category that came in under plan, what is the net overspend outside savings?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The year came in exactly on total and $1,086.00 short on savings. Explain what that equality shows about how this plan actually worked, and propose one change to the plan for next year, saying what it would cost the household."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What did the household plan to allocate across all six categories? Answer: $36,468.00. Verification: The six planned figures added, with savings treated as an allocation like any other rather than as what is left over. t1-p2: What did the household actually allocate across the same six categories? Answer: $36,468.00. Verification: The six actual figures added. The totals match exactly, which is why a review that stops at the total finds nothing wrong. t2-p1: By how much did discretionary spending exceed its plan? Answer: $915.00. Verification: $3,915 against $3,000 planned — the largest single overspend in the year. t2-p2: By how much did savings fall short of its plan? Answer: $1,086.00. Verification: $3,114 saved against $4,200 planned. Nothing decided this figure directly; it is what remained after the other five categories took what they took. t2-p3: What do the three categories that exceeded plan — food, insurance, and discretionary — come to in total overspend? Answer: $1,770.00. Verification: $684.00 on food, $171.00 on insurance, and $915.00 on discretionary. t2-p4: Netting off the one category that came in under plan, what is the net overspend outside savings? Answer: $1,086.00. Verification: $1,770.00 of overspend less $684.00 of underspend on transport. It equals the savings shortfall exactly, which is the arithmetic proof that savings was the residual."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The year came in exactly on total and $1,086.00 short on savings. Explain what that equality shows about how this plan actually worked, and propose one change to the plan for next year, saying what it would cost the household. Explains the structure: savings was funded by whatever remained, so every dollar of net overspend elsewhere came out of it automatically and without a decision being made. Uses the equality as evidence: the $1,086.00 net overspend and the $1,086.00 savings shortfall are the same money, which is what shows savings absorbed the variance rather than merely happening to be low. Proposes a concrete change with its cost — for example moving the $4,200 of savings to the front so it is transferred before spending, which would have forced $1,086.00 of cuts across food, insurance, and discretionary instead. Uses the matching $1,086.00 figures and at least one category variance, such as the $915.00 on discretionary or the $684.00 on food. The response recognises that a plan meeting its total can still fail completely. The proposed change names what would have to give, rather than only what should be protected."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the structure: savings was funded by whatever remained, so every dollar of net overspend elsewhere came out of it automatically and without a decision being made. Uses the equality as evidence: the $1,086.00 net overspend and the $1,086.00 savings shortfall are the same money, which is what shows savings absorbed the variance rather than merely happening to be low. Proposes a concrete change with its cost — for example moving the $4,200 of savings to the front so it is transferred before spending, which would have forced $1,086.00 of cuts across food, insurance, and discretionary instead."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u02-l06.scoring.json",
+    "sourceScoringSha256": "a0cf4c99cde5802642f4db70ba63be577691f8a34270e8d0a4f4ba48b3c225a6",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

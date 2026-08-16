@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u03-l12",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u03-l12",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multi-Digit Multiplication",
+    "dayInUnit": 12,
+    "courseDay": 48,
+    "phase": "Performance task build",
+    "focus": "multi-step multiplication problems",
+    "title": "Performance task build: multi-step multiplication problems"
+  },
+  "standards": [
+    "5.NBT.5",
+    "5.OA.1",
+    "5.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "A student says 472 × 62 = 292640. Round 472 to the nearest hundred and 62 to the nearest ten. Is the claim reasonable?",
+          "choices": [
+            "Yes; the rounded estimate is 30000.",
+            "No; the rounded estimate is 25000.",
+            "Yes; the rounded estimate is 25000.",
+            "No; the rounded estimate is 30000."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "write-grouped-expression",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Add 33 and 26. Then multiply the sum by 7. Which numerical expression represents the calculation?",
+          "choices": [
+            "33 + (26 × 7)",
+            "(33 × 26) + 7",
+            "(33 + 26) × 7",
+            "33 × (26 + 7)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-grouped-expression",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "Evaluate: [28 + (9 × 7)] × 3",
+          "choices": [
+            "274",
+            "272",
+            "273",
+            "283"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Without evaluating it, which statement describes (17 × 3) + 3?",
+          "choices": [
+            "Add 17 and the product of 3 and 3.",
+            "Add 3 to the product of 17 and 3.",
+            "Multiply the sum of 17 and 3 by 3.",
+            "Multiply 17 by the sum of 3 and 3."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-multiplication",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "An event has 14 display tables. Each table holds 11 boxes with 21 items in each box. There are also 33 loose items. How many items are in inventory altogether?",
+          "choices": [
+            "3267 items",
+            "208 items",
+            "3234 items",
+            "481 items"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Maya has 560 cards and Leo has 56 cards. How many times as many cards does Maya have as Leo?",
+          "choices": [
+            "504 times",
+            "10 times",
+            "9 times",
+            "11 times"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "area-model-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "An area model for 1398 × 94 splits 1398 into 1000 + 300 + 90 + 8 and 94 into 90 + 4. What total product does the model represent?",
+          "choices": [
+            "132810",
+            "130014",
+            "12582",
+            "131412"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "partial-products",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use partial products to calculate 5306 × 44. Decompose both factors by place value, multiply each pair of parts, and add the partial products. What is the product?",
+          "choices": [
+            "233420",
+            "233508",
+            "228158",
+            "233464"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "standard-algorithm",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use the standard multiplication algorithm to calculate 6471 × 88.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Estimate 2277 × 360 by rounding 2277 to the nearest thousand and 360 to the nearest hundred.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u03-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u03-l12"
+  }
+}

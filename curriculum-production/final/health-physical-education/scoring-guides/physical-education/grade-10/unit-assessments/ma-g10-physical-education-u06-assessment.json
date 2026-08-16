@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g10-physical-education-u06-assessment",
+  "courseId": "ma-g10-physical-education",
+  "grade": 10,
+  "subject": "physical-education",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "safe participation and self-management",
+    "skill cues or movement quality",
+    "tactical or training reasoning",
+    "self-assessment and revision"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with safe, independent application and adequate explanation of cues, tactics, or training reasoning.",
+    "developing": "70–84% or inconsistent explanation; assign varied practice and a fresh transfer check on a later occasion.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the simplest version and reassess with new evidence.",
+    "rule": "A unit score is one evidence source on one occasion, not the sole basis for long-term mastery. Never adjust a score for body size, weight, or appearance."
+  },
+  "accommodationNote": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "guardianSafetyReview": {
+    "equipment": "Varies; free options always available. Aquatics only where the family already has safe, supervised access.",
+    "environment": "Guardian approves every location, and approves aquatic activity separately if it is chosen.",
+    "movement_hazards": "Water risk if aquatics is elected; otherwise varies by chosen activity. Aquatic activity requires guardian-arranged supervision by a competent adult.",
+    "supervision_note": "Guardian explicitly approves or declines the aquatic option; declining it does not reduce the unit.",
+    "guardian_confirmation_required": true
+  },
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceAssessmentId": "ma-g10-physical-education-u06-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

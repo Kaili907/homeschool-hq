@@ -1,0 +1,269 @@
+{
+  "gate": "science student-work safety gate",
+  "totalLessons": 972,
+  "checks": 37,
+  "passed": 37,
+  "failed": 0,
+  "status": "PASS",
+  "results": [
+    {
+      "id": "no-prefilled-observations",
+      "description": "No recording cell, provenance cell, or write-here box in any student sheet arrives with content in it.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "no-supplied-dataset-embedded",
+      "description": "The supplied-data path names where to retrieve published data and never embeds a dataset of its own.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "student-visible-safety-parity",
+      "description": "Every hazard, mitigation, stop condition, and safety clause in the pinned source lesson also appears in the rendered student sheet.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "hs-safety-from-h4-only",
+      "description": "Every High School package is built at the required H4 SHA and carries its safety-review text verbatim; H3, H2, and the failed base candidate are rejected.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "hs-base-candidate-defects-absent",
+      "description": "None of the defects removed before H4 — flame demonstration, water on a fire, uncapped hot water, sealing a reacting mixture — reappears in any student sheet.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "fire-response-never-water",
+      "description": "The fire stop condition never instructs anyone to use water, in either the adult or the grades 3-5 wording.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "no-unsafe-home-experimentation",
+      "description": "Nothing a learner is asked to gather, do, or extend requires an open flame, mains electricity, a concentrated reagent, a fume hood, a laser, a radioactive source, or dissection.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "equal-credit-alternative-is-safe",
+      "description": "Every lesson has a non-empty equal-credit alternative, and no alternative itself requires a hazardous step.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "hands-on-lessons-carry-a-real-alternative",
+      "description": "Any lesson that has the learner handle materials offers an actual alternative activity, not a note that this lesson needs no equipment.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "alternative-promise-matches-package",
+      "description": "An alternative that promises supplied or provided material is fulfilled by the package-alone executable route.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "package-alone-learner-content-is-executable",
+      "description": "Every lesson prints a science brief, bound evidence, exact steps, complete materials, and an executable equal-credit route.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "prohibitions-on-every-sheet",
+      "description": "Every non-disableable prohibition the pinned H4 policy set declares appears on every student sheet, in the wording for that grade band.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "brief-states-supervision-ppe-disposal",
+      "description": "Every student sheet states who must be present, what protective equipment is needed, and how to clear up.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "chemical-hazard-needs-direct-adult",
+      "description": "Any lesson declaring a chemical hazard declares direct-adult supervision, as the H4 framework requires.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "no-camera-or-body-data-required",
+      "description": "No sheet requires a photograph, video, voice recording, or any body or health measurement as evidence.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "safety-floor-traceable-to-source",
+      "description": "Every clause in the safety floor appears verbatim in the committed source it is attributed to.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "canonical-grades-carry-imported-floor",
+      "description": "Grades 5, 7, and 8 — whose canonical source carries no investigation alternative or guardian acknowledgement — render the imported Grade 3/4 clauses.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "scoring-authority-forbids-unearned-numbers",
+      "description": "Every scoring sheet forbids awarding credit for a value the learner did not measure, calculate, or cite, and supplies no model answer.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "elementary-safety-is-banded-and-stricter",
+      "description": "Grades 3-5 read a restatement of every prohibition and stop condition, never the adult wording, never a conditional fire-fighting instruction — and the adult wording still reaches the guardian.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "unspecified-procedure-needs-direct-supervision",
+      "description": "A hands-on lesson whose procedure and hazards are family-chosen rather than prescribed requires an adult present and watching, not merely within earshot.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "tree-matches-checksums",
+      "description": "Every file recorded in SHA256SUMS.txt is present and unchanged, so the gate can never report PASS over a half-written tree.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "every-lesson-covered",
+      "description": "Every lesson in every pinned source course has exactly one package, one student sheet, and one scoring sheet.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "objective-questions-distinct-and-mapped",
+      "description": "Every stated objective is matched to a question type by exact template, and no lesson asks the same question twice.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "analysis-questions-cover-every-objective",
+      "description": "Every stated learning objective is served by at least one analysis question, and every question maps to a stated objective.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "correctness-authority-on-every-lesson",
+      "description": "Every lesson carries a scientific correctness authority whose content matches the hand-authored key for its topic, verbatim, and every authored key is used by a lesson.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "correctness-key-states-no-observation",
+      "description": "No authored correctness key, and nothing rendered from one, states a measurement a learner is expected to obtain or a result attributed to a learner.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "correctness-authority-is-adult-facing",
+      "description": "Every authored relationship and disqualifying error is printed on the adult scoring sheet, and no disqualifying error reaches the learner sheet.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "investigation-days-bound-conclusions-not-observations",
+      "description": "Every investigation day states that the content key bounds the conclusion and that a recorded observation is never scored against it; no desk day claims to be one.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "supplied-data-authority-pins-provenance",
+      "description": "Every lesson whose source names published data carries a supplied-data answer authority that pins the named resource and the source provenance verbatim, and no other lesson claims one.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "rubric-correctness-criterion-bound-to-key",
+      "description": "The Scientific correctness rubric row is judged against the topic content key, and no sheet still tells a reader that the package ships no key.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "correctness-keys-repinned-on-identical-topic-basis",
+      "description": "A correctness key repinned onto a newer source commit rather than re-authored is only accepted where every field the key is keyed on and authored against is byte-identical across the two commits.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "hazard-phenomenon-never-reaches-a-learner-unbriefed",
+      "description": "Every unit phenomenon that reaches a learner surface — the printed sheet or the instruction the app renders — and names a hazard-bearing material carries the H4 student-visible SAFETY rule with it.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "non-food-grade-route-never-shares-food-equipment",
+      "description": "Any lesson whose pinned source declares a non-food-grade material carries the H4 never-return-to-food-use rule to the learner in its hazard, its safe order, and its disposal.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "ppe-named-in-a-mitigation-is-on-the-materials-list",
+      "description": "Protective equipment a mitigation tells the learner to wear — eye protection, gloves, a waterproof dressing, apron, or dust mask — is resolved onto that lesson’s materials list.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "guardian-record-names-safe-order-ppe-and-disposal",
+      "description": "On every hazard-bearing lesson the adult record states the safe order, protective equipment, and disposal, resolved exactly as the learner reads them.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "no-path-states-what-will-be-observed",
+      "description": "No alternative path, extension, or instruction tells the learner what they will observe. Naming the quantity to measure is fine; naming the outcome is a supplied result, which every sheet’s footer denies this package prints.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "h4-b1-b2-b3-closed-on-rendered-sheets",
+      "description": "The exact prior B1/B2/B3 findings are closed in H4-derived package data and in both rendered learner and adult sheets.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    }
+  ]
+}

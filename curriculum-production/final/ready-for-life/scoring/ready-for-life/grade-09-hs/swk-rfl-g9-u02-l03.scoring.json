@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l03",
+  "lessonId": "ma-g9-ready-for-life-u02-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Scenario sorting accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Sorts three or fewer of the six scenarios correctly, or marks the gas-smell or electrical scenario as safe for a learner to attempt." },
+          { "label": "Proficient", "descriptor": "Sorts at least five of the six scenarios correctly, and never marks the gas-smell scenario as safe for a learner to attempt." },
+          { "label": "Advanced", "descriptor": "Sorts all six scenarios correctly and explains the borderline case (the cracked outlet cover plate) with specific reasoning about why it still needs an adult despite the outlet working normally." }
+        ]
+      },
+      {
+        "dimension": "Quality of risk-factor reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reasoning for 'needs a qualified adult' scenarios names a vague concern ('it's dangerous') without naming a specific risk factor." },
+          { "label": "Proficient", "descriptor": "Reasoning names the specific risk factor (gas, electricity, height, structural damage, moving mechanical parts) for each scenario marked 'needs a qualified adult.'" },
+          { "label": "Advanced", "descriptor": "Same as proficient, and the reflection correctly identifies gas as the risk factor that overrides case-by-case judgment because of its immediate danger regardless of scale." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The gas-smell scenario is always marked 'needs a qualified adult' with no exceptions or hedging.",
+      "Reasoning names a specific risk factor (gas, electricity, height) rather than a generic word like 'dangerous' or 'risky.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

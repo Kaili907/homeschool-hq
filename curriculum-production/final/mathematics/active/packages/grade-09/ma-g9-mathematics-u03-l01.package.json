@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u03-l01",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "dayInUnit": 1,
+    "courseDay": 37,
+    "phase": "Launch and diagnostic",
+    "focus": "justifying each solution step as an equation-preserving move",
+    "title": "Launch and diagnostic: justifying each solution step as an equation-preserving move"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 1,
+          "prompt": "Solve 5x + 3 = 2x − 9.",
+          "workedSolution": {
+            "steps": [
+              "5x − 2x = −9 − 3, so 3x = −12.",
+              "Divide by 3: x = −4."
+            ],
+            "answer": "x = −4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 1,
+          "prompt": "Solve for x and state the solution set: -3x + 4 < -13.",
+          "choices": [
+            "x > 3",
+            "x < 17/3",
+            "x > 17/3",
+            "x > -17/3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 1,
+          "prompt": "In a solution, one line reads: From 3x = 9 to x = 3. Which property justifies that step?",
+          "choices": [
+            "the distributive property",
+            "the associative property",
+            "dividing both sides by 3 (division property of equality)",
+            "subtracting 3 from both sides"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 2,
+          "prompt": "Does the point (4, 17) lie on the graph of y = 2x + 9?",
+          "choices": [
+            "It cannot be determined without graphing the line.",
+            "Yes; the coordinates satisfy the equation.",
+            "Only if the graph is extended beyond the plotted window.",
+            "No; substituting x = 4 gives y = 18, not 17."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 2,
+          "prompt": "The graphs of f(x) = -2x − 10 and g(x) = -1x − 12 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = 22",
+            "x = -2",
+            "x = 2",
+            "x = 2/3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve -5x − 1y = -1 for y.",
+          "choices": [
+            "y = -1 − -5x",
+            "y = (-1 + -5x)/-1",
+            "y = (-5x − -1)/-1",
+            "y = (-1 − -5x)/-1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 1,
+          "prompt": "Solve for x: 1x − 4 = -3x + 0.",
+          "choices": [
+            "x = 5/4",
+            "x = -2",
+            "x = -1",
+            "x = 1"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x and state the solution set: -4x + 2 < 5.",
+          "choices": [
+            "x > -7/4",
+            "x < -3/4",
+            "x > 3/4",
+            "x > -3/4"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u03-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u03-l01"
+  }
+}

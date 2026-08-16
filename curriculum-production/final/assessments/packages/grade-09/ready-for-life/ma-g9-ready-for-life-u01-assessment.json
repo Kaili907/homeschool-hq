@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-ready-for-life-u01-assessment",
+  "courseRef": "ma-g9-ready-for-life",
+  "grade": 9,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g9-ready-for-life-u01",
+    "unitNumber": 1,
+    "unitTitle": "Planning Systems and Time Management",
+    "courseTitle": "Ready for Life 9: Personal Management and Learning Systems",
+    "assessmentLessonRef": "ma-g9-ready-for-life-u01-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-09-hs/swk-rfl-g9-u01-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Think of a real or plausible situation where a plan started slipping before the deadline arrived.",
+      "prompt": "Describe the situation: what was the task, and what was the earliest specific sign that it was starting to fall behind schedule (not the moment it became a full crisis)?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "short-response",
+      "directions": "Compare asking for help early to asking after the deadline has already failed.",
+      "prompt": "Explain one specific thing a trusted adult or teacher could actually do to help if asked at the early warning sign, that they could no longer do once the deadline has already passed."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Compare asking for help early to asking after the deadline has already failed.",
+      "prompt": "I identified a specific person (a role, such as 'my history teacher' or 'a trusted adult in my household,' not a name) I would ask for help in this situation."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Draft the exact help-request statement you would use, naming the specific problem and the specific help you need.",
+      "prompt": "Write the exact one-to-three sentence statement you would say or write, naming the specific task, the specific point you're stuck at or behind on, and the specific help you're asking for (more time, an example, clarification, or something else specific)."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-choice",
+      "directions": "Draft the exact help-request statement you would use, naming the specific problem and the specific help you need.",
+      "prompt": "Does your statement name a specific, concrete request rather than a general statement like 'I need help'?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Reflect on what makes it hard to ask early, and how you'd overcome that.",
+      "prompt": "Name one specific reason it's hard to ask for help at the early warning sign rather than waiting, and describe one concrete thing you could do to push yourself to ask at that earlier point next time."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/ready-for-life/ma-g9-ready-for-life-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Timing and identification of the early warning sign criterion.",
+    "Provide evidence that meets the stated Specificity of the help-request statement criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-ready-for-life-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-09-hs/swk-rfl-g9-u01-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Planning Systems and Time Management?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

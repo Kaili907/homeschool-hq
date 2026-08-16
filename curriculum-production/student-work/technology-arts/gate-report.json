@@ -1,0 +1,1579 @@
+{
+  "generatedFor": "curriculum-production/student-work/technology-arts",
+  "gateSource": "src/curriculum/production-quality (this branch, evaluateCourseProductionReadiness)",
+  "totals": {
+    "courses": 18,
+    "lessons": 108,
+    "ready": 108,
+    "needsHumanReview": 0,
+    "notReady": 0
+  },
+  "courses": [
+    {
+      "courseId": "ma-g3-tech-cs",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g3-tech-cs-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-tech-cs-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-tech-cs-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-tech-cs-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-tech-cs-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-tech-cs-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g3-tech-cs-u01",
+            "ma-g3-tech-cs-u02",
+            "ma-g3-tech-cs-u03",
+            "ma-g3-tech-cs-u04",
+            "ma-g3-tech-cs-u05",
+            "ma-g3-tech-cs-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g4-tech-cs",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g4-tech-cs-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-tech-cs-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-tech-cs-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-tech-cs-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-tech-cs-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-tech-cs-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g4-tech-cs-u01",
+            "ma-g4-tech-cs-u02",
+            "ma-g4-tech-cs-u03",
+            "ma-g4-tech-cs-u04",
+            "ma-g4-tech-cs-u05",
+            "ma-g4-tech-cs-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g5-technology",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g5-technology-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-technology-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-technology-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-technology-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-technology-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-technology-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g5-technology-u01",
+            "ma-g5-technology-u02",
+            "ma-g5-technology-u03",
+            "ma-g5-technology-u04",
+            "ma-g5-technology-u05",
+            "ma-g5-technology-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g7-technology",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g7-technology-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-technology-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-technology-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-technology-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-technology-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-technology-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g7-technology-u01",
+            "ma-g7-technology-u02",
+            "ma-g7-technology-u03",
+            "ma-g7-technology-u04",
+            "ma-g7-technology-u05",
+            "ma-g7-technology-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g8-technology",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g8-technology-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-technology-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-technology-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-technology-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-technology-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-technology-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g8-technology-u01",
+            "ma-g8-technology-u02",
+            "ma-g8-technology-u03",
+            "ma-g8-technology-u04",
+            "ma-g8-technology-u05",
+            "ma-g8-technology-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g9-technology",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g9-technology-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-technology-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-technology-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-technology-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-technology-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-technology-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g9-technology-u01",
+            "ma-g9-technology-u02",
+            "ma-g9-technology-u03",
+            "ma-g9-technology-u04",
+            "ma-g9-technology-u05",
+            "ma-g9-technology-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g10-technology",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g10-technology-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-technology-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-technology-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-technology-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-technology-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-technology-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g10-technology-u01",
+            "ma-g10-technology-u02",
+            "ma-g10-technology-u03",
+            "ma-g10-technology-u04",
+            "ma-g10-technology-u05",
+            "ma-g10-technology-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g11-technology",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g11-technology-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-technology-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-technology-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-technology-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-technology-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-technology-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g11-technology-u01",
+            "ma-g11-technology-u02",
+            "ma-g11-technology-u03",
+            "ma-g11-technology-u04",
+            "ma-g11-technology-u05",
+            "ma-g11-technology-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g12-technology",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g12-technology-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-technology-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-technology-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-technology-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-technology-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-technology-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g12-technology-u01",
+            "ma-g12-technology-u02",
+            "ma-g12-technology-u03",
+            "ma-g12-technology-u04",
+            "ma-g12-technology-u05",
+            "ma-g12-technology-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g3-arts-music",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g3-arts-music-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-arts-music-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-arts-music-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-arts-music-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-arts-music-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g3-arts-music-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g3-arts-music-u01",
+            "ma-g3-arts-music-u02",
+            "ma-g3-arts-music-u03",
+            "ma-g3-arts-music-u04",
+            "ma-g3-arts-music-u05",
+            "ma-g3-arts-music-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g4-arts-music",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g4-arts-music-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-arts-music-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-arts-music-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-arts-music-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-arts-music-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g4-arts-music-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g4-arts-music-u01",
+            "ma-g4-arts-music-u02",
+            "ma-g4-arts-music-u03",
+            "ma-g4-arts-music-u04",
+            "ma-g4-arts-music-u05",
+            "ma-g4-arts-music-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g5-arts-and-music",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g5-arts-and-music-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-arts-and-music-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-arts-and-music-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-arts-and-music-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-arts-and-music-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g5-arts-and-music-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g5-arts-and-music-u01",
+            "ma-g5-arts-and-music-u02",
+            "ma-g5-arts-and-music-u03",
+            "ma-g5-arts-and-music-u04",
+            "ma-g5-arts-and-music-u05",
+            "ma-g5-arts-and-music-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g7-arts-and-music",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g7-arts-and-music-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-arts-and-music-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-arts-and-music-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-arts-and-music-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-arts-and-music-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g7-arts-and-music-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g7-arts-and-music-u01",
+            "ma-g7-arts-and-music-u02",
+            "ma-g7-arts-and-music-u03",
+            "ma-g7-arts-and-music-u04",
+            "ma-g7-arts-and-music-u05",
+            "ma-g7-arts-and-music-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g8-arts-and-music",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g8-arts-and-music-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-arts-and-music-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-arts-and-music-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-arts-and-music-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-arts-and-music-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g8-arts-and-music-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g8-arts-and-music-u01",
+            "ma-g8-arts-and-music-u02",
+            "ma-g8-arts-and-music-u03",
+            "ma-g8-arts-and-music-u04",
+            "ma-g8-arts-and-music-u05",
+            "ma-g8-arts-and-music-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g9-arts-and-music",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g9-arts-and-music-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-arts-and-music-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-arts-and-music-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-arts-and-music-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-arts-and-music-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g9-arts-and-music-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g9-arts-and-music-u01",
+            "ma-g9-arts-and-music-u02",
+            "ma-g9-arts-and-music-u03",
+            "ma-g9-arts-and-music-u04",
+            "ma-g9-arts-and-music-u05",
+            "ma-g9-arts-and-music-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g10-arts-and-music",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g10-arts-and-music-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-arts-and-music-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-arts-and-music-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-arts-and-music-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-arts-and-music-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g10-arts-and-music-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g10-arts-and-music-u01",
+            "ma-g10-arts-and-music-u02",
+            "ma-g10-arts-and-music-u03",
+            "ma-g10-arts-and-music-u04",
+            "ma-g10-arts-and-music-u05",
+            "ma-g10-arts-and-music-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g11-arts-and-music",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g11-arts-and-music-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-arts-and-music-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-arts-and-music-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-arts-and-music-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-arts-and-music-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g11-arts-and-music-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g11-arts-and-music-u01",
+            "ma-g11-arts-and-music-u02",
+            "ma-g11-arts-and-music-u03",
+            "ma-g11-arts-and-music-u04",
+            "ma-g11-arts-and-music-u05",
+            "ma-g11-arts-and-music-u06"
+          ]
+        }
+      },
+      "notes": []
+    },
+    {
+      "courseId": "ma-g12-arts-and-music",
+      "status": "READY",
+      "lessonResults": [
+        {
+          "lessonId": "ma-g12-arts-and-music-u01",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-arts-and-music-u02",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-arts-and-music-u03",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-arts-and-music-u04",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-arts-and-music-u05",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        },
+        {
+          "lessonId": "ma-g12-arts-and-music-u06",
+          "status": "READY",
+          "codes": [
+            "READY"
+          ],
+          "notes": []
+        }
+      ],
+      "gapSummary": {
+        "totalLessons": 6,
+        "readyCount": 6,
+        "needsHumanReviewCount": 0,
+        "notReadyCount": 0,
+        "codeCounts": {
+          "READY": 6,
+          "MISSING_INSTRUCTION": 0,
+          "MISSING_STUDENT_WORK": 0,
+          "MISSING_GUIDED_PRACTICE": 0,
+          "MISSING_INDEPENDENT_WORK": 0,
+          "MISSING_SCORING_AUTHORITY": 0,
+          "MISSING_ANSWER_KEY": 0,
+          "MISSING_RUBRIC": 0,
+          "MISSING_REMEDIATION": 0,
+          "MISSING_EXTENSION": 0,
+          "ASSESSMENT_NOT_ALIGNED": 0,
+          "SOURCE_INTEGRITY_GAP": 0,
+          "SAFETY_OR_PRIVACY_GAP": 0,
+          "NEEDS_HUMAN_REVIEW": 0
+        },
+        "lessonsByCode": {
+          "READY": [
+            "ma-g12-arts-and-music-u01",
+            "ma-g12-arts-and-music-u02",
+            "ma-g12-arts-and-music-u03",
+            "ma-g12-arts-and-music-u04",
+            "ma-g12-arts-and-music-u05",
+            "ma-g12-arts-and-music-u06"
+          ]
+        }
+      },
+      "notes": []
+    }
+  ]
+}

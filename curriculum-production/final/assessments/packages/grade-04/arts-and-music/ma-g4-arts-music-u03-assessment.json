@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-arts-music-u03-assessment",
+  "courseRef": "ma-g4-arts-music",
+  "grade": 4,
+  "subject": "arts-and-music",
+  "location": {
+    "unitRef": "ma-g4-arts-music-u03",
+    "unitNumber": 3,
+    "unitTitle": "Music Foundations and Listening",
+    "courseTitle": "Grade 4 Arts And Music",
+    "assessmentLessonRef": "ma-g4-arts-music-u03-l11"
+  },
+  "standards": [
+    "Michigan Arts: Music – Performing",
+    "Michigan Arts: Music – Responding"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/arts-music/grade-04/ma-g4-arts-music-u03-l11.task-package.json",
+  "instructions": [
+    "Create, perform privately, analyze, or critique as directed. A written, no-audio alternative receives equal credit.",
+    "Submit original work plus process evidence and a specific revision or critique."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Do the unit task for instrument families and voices on your own. Make what the task asks for. Show your process, not just the finished piece. Check it against the criteria before you hand it in. Then judge it yourself. What did you want? What did it really do? Where is the gap? Everything must be your own work. You never have to perform in public, use a camera, record your voice, or take a photo to pass. Keep today's work tied to your unit. Today is about instrument families and voices. It is part of \"Music Foundations and Listening\". Later days in this unit cover other things, like steady beat and rhythm. Before you stop, do this check: Rate confidence in instrument families and voices, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation. In grade 4, try the steps yourself before you ask for help. Give a reason in your own words for at least one choice. A labelled drawing or a spoken answer counts fully."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Your finished task, your process shown, and your own judgement of what you wanted, what happened, and the gap."
+    }
+  ],
+  "responseMode": "project-performance-analysis-or-critique",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/arts-and-music/ma-g4-arts-music-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task about instrument families and voices.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-arts-music-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/arts-music/grade-04/ma-g4-arts-music-u03-l11.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Music Foundations and Listening?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

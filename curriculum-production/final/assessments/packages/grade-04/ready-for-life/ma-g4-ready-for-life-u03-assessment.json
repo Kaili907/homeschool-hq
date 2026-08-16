@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-ready-for-life-u03-assessment",
+  "courseRef": "ma-g4-ready-for-life",
+  "grade": 4,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g4-ready-for-life-u03",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Food Safety",
+    "courseTitle": "Grade 4 Ready For Life",
+    "assessmentLessonRef": "ma-g4-ready-for-life-u03-l05"
+  },
+  "standards": [
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u03-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "checklist-item",
+      "directions": "Before touching any ingredient, wash your hands and clean your workspace.",
+      "prompt": "I washed my hands with soap for a full 20 seconds before touching any ingredient."
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "checklist-item",
+      "directions": "Before touching any ingredient, wash your hands and clean your workspace.",
+      "prompt": "I wiped down the plate, bowl, or counter space I will use before starting."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "With your adult supervising, gather your ready-to-eat ingredients, check each one for freshness with your adult, and lay them out in the order you will use them.",
+      "prompt": "I checked with my adult that every ingredient was already washed, cooked, or pre-sliced and safe to use."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "With your adult supervising, gather your ready-to-eat ingredients, check each one for freshness with your adult, and lay them out in the order you will use them.",
+      "prompt": "I laid out my ingredients in the order I planned to use them before starting to assemble."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Assemble your food item yourself, step by step, keeping ready-to-eat ingredients away from any surface or utensil that touched raw or unwashed food earlier in the day, then show your adult the finished result.",
+      "prompt": "Describe the order you assembled your item in, and name one moment where you made sure a surface or utensil was clean before it touched your ready-to-eat ingredients."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-choice",
+      "directions": "Assemble your food item yourself, step by step, keeping ready-to-eat ingredients away from any surface or utensil that touched raw or unwashed food earlier in the day, then show your adult the finished result.",
+      "prompt": "Looking back at your assembly, did you keep every ready-to-eat ingredient away from anything that had touched raw or unwashed food?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Compare making this item carefully to how food might get made without thinking about safety.",
+      "prompt": "Explain one specific food-safety step you did during this preparation that someone rushing without thinking might skip, and what could go wrong if they skipped it."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/ready-for-life/ma-g4-ready-for-life-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Food-safety practice during assembly criterion.",
+    "Provide evidence that meets the stated Explanation of safety reasoning criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-ready-for-life-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u03-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Kitchen Care and Food Safety?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

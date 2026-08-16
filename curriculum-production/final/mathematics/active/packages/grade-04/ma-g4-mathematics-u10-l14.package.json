@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u10-l14",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u10-l14",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "dayInUnit": 14,
+    "courseDay": 176,
+    "phase": "Performance task: build",
+    "focus": "the capstone design",
+    "title": "Performance task: build: the capstone design"
+  },
+  "standards": [
+    "4.MD.6",
+    "4.MD.7",
+    "4.G.1",
+    "4.G.2"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 2,
+          "prompt": "A protractor reads 75° for an angle. Classify the angle.",
+          "choices": [
+            "acute",
+            "right",
+            "straight",
+            "obtuse"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 2,
+          "prompt": "Two adjacent angles share a ray and together measure 97°. One of the angles measures 85°. What does the other angle measure?",
+          "choices": [
+            "97°",
+            "85°",
+            "12°",
+            "182°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-lines-and-angles",
+          "standard": "4.G.1",
+          "difficulty": 2,
+          "prompt": "Which term describes two lines in the same plane that never meet and stay the same distance apart?",
+          "choices": [
+            "a ray",
+            "parallel lines",
+            "a line segment",
+            "perpendicular lines"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 2,
+          "prompt": "A triangle where all three sides are the same length is called what kind of triangle?",
+          "choices": [
+            "right triangle",
+            "acute triangle",
+            "equilateral triangle",
+            "obtuse triangle"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 3,
+          "prompt": "A protractor reads 89° for an angle. Classify the angle.",
+          "choices": [
+            "straight",
+            "right",
+            "obtuse",
+            "acute"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 3,
+          "prompt": "Two adjacent angles share a ray and together measure 167°. One of the angles measures 150°. What does the other angle measure?",
+          "choices": [
+            "317°",
+            "150°",
+            "17°",
+            "167°"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "classify-lines-and-angles",
+          "standard": "4.G.1",
+          "difficulty": 3,
+          "prompt": "Which term describes a part of a line with two endpoints?",
+          "choices": [
+            "parallel lines",
+            "perpendicular lines",
+            "a line segment",
+            "a ray"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 3,
+          "prompt": "A triangle where one angle measures exactly 90° is called what kind of triangle?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 3,
+          "prompt": "A protractor reads 10° for an angle. Classify the angle.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u10-l14"
+  }
+}

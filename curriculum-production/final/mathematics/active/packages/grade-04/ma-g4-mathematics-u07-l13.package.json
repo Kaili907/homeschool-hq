@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u07-l13",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u07-l13",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Adding, Subtracting, and Multiplying Fractions",
+    "dayInUnit": 13,
+    "courseDay": 121,
+    "phase": "Performance task: plan",
+    "focus": "the recipe or measurement plan",
+    "title": "Performance task: plan: the recipe or measurement plan"
+  },
+  "standards": [
+    "4.NF.3",
+    "4.NF.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 1,
+          "prompt": "Find 5/8 − 2/8.",
+          "workedSolution": {
+            "steps": [
+              "Denominators match, subtract numerators: 5 − 2 = 3.",
+              "3/8 is already in lowest terms."
+            ],
+            "answer": "3/8"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "decompose-fraction-as-sum",
+          "standard": "4.NF.3",
+          "difficulty": 2,
+          "prompt": "Write 8/5 as a whole number plus a fraction less than 1.",
+          "choices": [
+            "1 3/5",
+            "1 4/5",
+            "0 3/5",
+            "2 3/5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 2 × 1/5.",
+          "choices": [
+            "2/5",
+            "2/10",
+            "1/10",
+            "3/5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 3,
+          "prompt": "Find 6/8 + 1/8. Give the answer in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "decompose-fraction-as-sum",
+          "standard": "4.NF.3",
+          "difficulty": 3,
+          "prompt": "Write 12/6 as a whole number plus a fraction less than 1.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u07-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u07-l13"
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u01-l10",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u01-l10",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits, Place Value, and Rounding",
+    "dayInUnit": 10,
+    "courseDay": 10,
+    "phase": "Independent evidence B",
+    "focus": "subtraction within 1,000 by decomposing place values",
+    "title": "Independent evidence B: subtraction within 1,000 by decomposing place values"
+  },
+  "standards": [
+    "3.NBT.2"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence B",
+    "profile": "independent-evidence-varied",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 1,
+          "prompt": "A bakery made 248 rolls, then made 175 more. How many rolls in all?",
+          "workedSolution": {
+            "steps": [
+              "248 + 175.",
+              "Add ones: 8 + 5 = 13, regroup 1 ten.",
+              "Add tens: 4 + 7 + 1 = 12, regroup 1 hundred.",
+              "Add hundreds: 2 + 1 + 1 = 4.",
+              "Total: 423."
+            ],
+            "answer": "423"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A library had 527 books. 295 books were given away. How many books are left?",
+          "choices": [
+            "332",
+            "232",
+            "242",
+            "822"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A toy store had 193 stickers. They received 245 more stickers. How many stickers are there now?",
+          "choices": [
+            "428",
+            "448",
+            "-52",
+            "438"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A school had 564 pencils. 217 pencils were given away. How many pencils are left?",
+          "choices": [
+            "781",
+            "447",
+            "357",
+            "347"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l10#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A farm had 155 apples. They received 226 more apples. How many apples are there now?",
+          "choices": [
+            "381",
+            "-71",
+            "391",
+            "371"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l10#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A toy store had 649 stickers. 186 stickers were given away. How many stickers are left?",
+          "choices": [
+            "473",
+            "563",
+            "463",
+            "835"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l10#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A farm had 356 apples. They received 180 more apples. How many apples are there now?",
+          "choices": [
+            "176",
+            "526",
+            "546",
+            "536"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l10#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A farm had 472 apples. 370 apples were given away. How many apples are left?",
+          "choices": [
+            "112",
+            "102",
+            "842",
+            "202"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l10#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A farm had 319 apples. They received 242 more apples. How many apples are there now?",
+          "choices": [
+            "561",
+            "551",
+            "77",
+            "571"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l10#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A toy store had 519 stickers. 203 stickers were given away. How many stickers are left?",
+          "choices": [
+            "326",
+            "416",
+            "722",
+            "316"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u01-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u01-l10"
+  }
+}

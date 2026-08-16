@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-ready-for-life-u05-assessment",
+  "courseRef": "ma-g4-ready-for-life",
+  "grade": 4,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g4-ready-for-life-u05",
+    "unitNumber": 5,
+    "unitTitle": "Planning, Belongings, and Communication",
+    "courseTitle": "Grade 4 Ready For Life",
+    "assessmentLessonRef": "ma-g4-ready-for-life-u05-l05"
+  },
+  "standards": [
+    "Ready for Life v1, Grade 4 Unit 5: Planning, Belongings, and Communication"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u05-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before talking to an adult, think honestly about what is currently not going well.",
+      "prompt": "Describe the real problem or stuck point you are facing right now, and how long you have already been dealing with it on your own."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Go to a trusted adult and tell them about the problem in your own words, while it is still small enough to fix easily.",
+      "prompt": "I brought up the problem myself, before the adult asked or noticed on their own."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Go to a trusted adult and tell them about the problem in your own words, while it is still small enough to fix easily.",
+      "prompt": "I described the specific problem clearly, not just that something was 'wrong.'"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Go to a trusted adult and tell them about the problem in your own words, while it is still small enough to fix easily.",
+      "prompt": "I asked for or accepted the adult's suggestion instead of only reporting the problem and walking away."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "After talking with the adult, compare how much effort it would take to fix the problem now, right after asking early, against how much effort it likely would have taken if you had waited until it got worse.",
+      "prompt": "What did the adult suggest, and how much effort or time will it take to fix the problem now?"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "After talking with the adult, compare how much effort it would take to fix the problem now, right after asking early, against how much effort it likely would have taken if you had waited until it got worse.",
+      "prompt": "If you had waited another day or two before saying anything, how much bigger or harder to fix do you think the problem would have gotten? Be specific."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Think about what made it hard or easy to bring the problem up.",
+      "prompt": "Explain what almost stopped you from asking for help, and what you will tell yourself next time a problem starts to feel too small or too embarrassing to mention."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/ready-for-life/ma-g4-ready-for-life-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Proactive and specific disclosure criterion.",
+    "Provide evidence that meets the stated Early-versus-late reasoning criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-ready-for-life-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u05-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Planning, Belongings, and Communication?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

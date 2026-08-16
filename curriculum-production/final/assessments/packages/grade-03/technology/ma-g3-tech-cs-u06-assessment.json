@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-tech-cs-u06-assessment",
+  "courseRef": "ma-g3-tech-cs",
+  "grade": 3,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g3-tech-cs-u06",
+    "unitNumber": 6,
+    "unitTitle": "Designing for Someone Else",
+    "courseTitle": "Grade 3 Technology",
+    "assessmentLessonRef": "ma-g3-tech-cs-u06-l05"
+  },
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Michigan Computer Science: Impacts of Computing"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-03/ma-g3-tech-cs-u06-l05.task-package.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Show that you can do this on your own: asking for feedback. Put away the help sheet and the examples. Solve a new problem all the way. First write what answer you expect. Then test it two ways. Include one tricky case. Show what you expected and what you got. Then explain your thinking. Write it so someone new to asking for feedback could follow it. Keep today's work tied to your unit. Today is about asking for feedback. It is part of \"Designing for Someone Else\". Later days in this unit cover other things, like who will use this. Before you stop, do this check: Rate confidence in asking for feedback, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Your solution done alone, a two-way check with expected and actual, and an explanation someone new could follow."
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/technology/ma-g3-tech-cs-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task about asking for feedback.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-tech-cs-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-03/ma-g3-tech-cs-u06-l05.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Designing for Someone Else?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

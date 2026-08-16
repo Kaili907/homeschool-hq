@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l04",
+  "lessonId": "ma-g8-financial-literacy-u07-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Analysing who pays and who benefits",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response evaluates Malachy's options without identifying who bears each cost."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "One option is analysed for Malachy but the others are not."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies payers, beneficiaries, and potentially excluded groups for each of Malachy's three options."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending a policy choice",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is made for Malachy with no engagement with objections."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An objection is acknowledged for Malachy but not answered."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response recommends an option for Malachy and answers the strongest objection, addressing the interests of those who bear the cost."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies who pays under each invented option.",
+      "Names a group that could be excluded by a user fee.",
+      "Takes a position rather than listing options neutrally.",
+      "Engages with the losing side's interests."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "For each of Malachy's three options, who pays and who could end up excluded from the clinic?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "Which option should Malachy's community choose, and how does your answer address those who bear the cost?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why can a user fee for a clinic produce an outcome the community did not intend?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Analysing who pays and who benefits — Not yet: The response evaluates Malachy's options without identifying who bears each cost. Approaching: One option is analysed for Malachy but the others are not. Meets: The response identifies payers, beneficiaries, and potentially excluded groups for each of Malachy's three options. Defending a policy choice — Not yet: A choice is made for Malachy with no engagement with objections. Approaching: An objection is acknowledged for Malachy but not answered. Meets: The response recommends an option for Malachy and answers the strongest objection, addressing the interests of those who bear the cost. Identifies who pays under each invented option. Names a group that could be excluded by a user fee. Takes a position rather than listing options neutrally. Engages with the losing side's interests."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies who pays under each invented option. Names a group that could be excluded by a user fee. Takes a position rather than listing options neutrally. Engages with the losing side's interests."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u07-l04.scoring.json",
+    "sourceScoringSha256": "130db4d876f08e7aafa605677a5970fc035d79b1da23fb7f52b118aedbac88ba",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

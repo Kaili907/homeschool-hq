@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u10-l11",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u10-l11",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 11,
+    "courseDay": 173,
+    "phase": "Performance task planning",
+    "focus": "budgeting and measurement",
+    "title": "Performance task planning: budgeting and measurement"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.NBT.5",
+    "5.NBT.6",
+    "5.NBT.7",
+    "5.NF.1",
+    "5.NF.4",
+    "5.MD.5",
+    "5.G.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "division-model",
+          "standard": "5.NBT.6",
+          "difficulty": 1,
+          "prompt": "156 chairs are shared equally among 12 tables. How many per table?",
+          "workedSolution": {
+            "steps": [
+              "12 × 13 = 156.",
+              "So each table has 13 chairs."
+            ],
+            "answer": "13"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-budget",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "4 tickets cost $9.01 each and there is a $0.88 fee. What is the total cost?",
+          "choices": [
+            "$45.93",
+            "$36.04",
+            "$37.92",
+            "$36.92"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "fraction-project",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "A project uses 1/12 meter of blue ribbon and 7/12 meter of gold ribbon. How much ribbon is used?",
+          "choices": [
+            "8/13",
+            "3/4",
+            "7/144",
+            "2/3"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "scale-project",
+          "standard": "5.NF.4",
+          "difficulty": 3,
+          "prompt": "A 1/4-meter path is scaled by 3. What is the new length in meters?",
+          "choices": [
+            "1/12",
+            "3/4",
+            "1",
+            "1/4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "volume-plan",
+          "standard": "5.MD.5",
+          "difficulty": 3,
+          "prompt": "A storage box is 3 units long, 2 units wide, and 6 units high. What is its volume in cubic units?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "coordinate-data",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "A data point is at (4, 5). Move right 2 and up 2. What is the new point?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "model-argument",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A student says a 5 by 5 by 3 box has volume 13. Is the claim correct?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u10-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u10-l11"
+  }
+}

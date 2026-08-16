@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-financial-literacy-u06-assessment",
+  "courseRef": "ma-g10-financial-literacy",
+  "grade": 10,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g10-financial-literacy-u06",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "courseTitle": "Consumer Economics and Credit",
+    "assessmentLessonRef": "ma-g10-financial-literacy-u06-l10"
+  },
+  "standards": [
+    "PF6"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u06-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "A fictional auto policy carries three coverages. Collision has a $14,000 limit and a $1,000 deductible. Medical payments has a $5,000 limit and no deductible. Property damage liability has a $25,000 limit and no deductible. In a simulated accident the policyholder’s own car sustains $9,800 of damage, the policyholder’s own medical bills come to $6,200, and the policyholder is responsible for $31,400 of damage to another party’s property. Apply each coverage separately, subtracting its deductible from its part of the loss and capping the result at its limit.",
+      "prompt": "What does collision pay for the policyholder’s car?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "A fictional auto policy carries three coverages. Collision has a $14,000 limit and a $1,000 deductible. Medical payments has a $5,000 limit and no deductible. Property damage liability has a $25,000 limit and no deductible. In a simulated accident the policyholder’s own car sustains $9,800 of damage, the policyholder’s own medical bills come to $6,200, and the policyholder is responsible for $31,400 of damage to another party’s property. Apply each coverage separately, subtracting its deductible from its part of the loss and capping the result at its limit.",
+      "prompt": "What does medical payments coverage pay?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "A fictional auto policy carries three coverages. Collision has a $14,000 limit and a $1,000 deductible. Medical payments has a $5,000 limit and no deductible. Property damage liability has a $25,000 limit and no deductible. In a simulated accident the policyholder’s own car sustains $9,800 of damage, the policyholder’s own medical bills come to $6,200, and the policyholder is responsible for $31,400 of damage to another party’s property. Apply each coverage separately, subtracting its deductible from its part of the loss and capping the result at its limit.",
+      "prompt": "What does property damage liability pay for the other party’s property?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now total both sides of the claim and check that they reconcile.",
+      "prompt": "What does the insurer pay in total across the three coverages?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now total both sides of the claim and check that they reconcile.",
+      "prompt": "What does the policyholder bear on their own car?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now total both sides of the claim and check that they reconcile.",
+      "prompt": "What does the policyholder bear on their own medical bills?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Now total both sides of the claim and check that they reconcile.",
+      "prompt": "What is the policyholder responsible for on the other party’s property?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p5",
+      "kind": "fixed-numeric",
+      "directions": "Now total both sides of the claim and check that they reconcile.",
+      "prompt": "What does the policyholder bear in total?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p6",
+      "kind": "fixed-numeric",
+      "directions": "Now total both sides of the claim and check that they reconcile.",
+      "prompt": "Check the work: what do the insurer’s payments and the policyholder’s costs come to together?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Answer in a few sentences, using the figures you computed.",
+      "prompt": "Report this claim to the fictional policyholder: what the policy paid, what they owe, and which single coverage limit was most costly to have set where it was. Then say which limit you would raise first and what raising it would not fix."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/financial-literacy/ma-g10-financial-literacy-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Reasoning from the figures criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-financial-literacy-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u06-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF6 — Protecting and Insuring: Insurance Structures and Identity Protection?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

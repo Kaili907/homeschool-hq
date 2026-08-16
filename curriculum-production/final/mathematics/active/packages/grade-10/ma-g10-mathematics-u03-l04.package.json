@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u03-l04",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Congruence and Triangle Criteria",
+    "dayInUnit": 4,
+    "courseDay": 40,
+    "phase": "Independent application A",
+    "focus": "deriving ASA, SAS, and SSS from rigid motion",
+    "title": "Independent application A: deriving ASA, SAS, and SSS from rigid motion"
+  },
+  "standards": [
+    "G-CO.6",
+    "G-CO.7",
+    "G-CO.8",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "corresponding-parts-value",
+          "standard": "G-CO.7",
+          "difficulty": 1,
+          "prompt": "△ABC ≅ △DEF, ∠A = 50°, ∠B = 60°. Find ∠F.",
+          "workedSolution": {
+            "steps": [
+              "∠F corresponds to ∠C.",
+              "∠C = 180 − 50 − 60 = 70°."
+            ],
+            "answer": "70°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rigid-motion-defines-congruence",
+          "standard": "G-CO.6",
+          "difficulty": 2,
+          "prompt": "Two figures are congruent if and only if …",
+          "choices": [
+            "they have the same area",
+            "they can be scaled to match",
+            "they have the same perimeter",
+            "there is a sequence of rigid motions taking one exactly onto the other"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 2,
+          "prompt": "In two triangles, the hypotenuses and one pair of legs of two right triangles are congruent. Which congruence criterion applies?",
+          "choices": [
+            "HL",
+            "SAS",
+            "ASA",
+            "SSS"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "why-ssa-is-not-a-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 2,
+          "prompt": "Two triangles share two pairs of congruent sides and a pair of congruent angles that are not between those sides. Why does this fail to prove congruence?",
+          "choices": [
+            "The angle must be a right angle for any criterion to apply.",
+            "Two sides are never enough information under any circumstances.",
+            "The triangles are congruent, but the criterion is simply named differently.",
+            "The unknown side can close the triangle in two different ways, producing one acute and one obtuse triangle from the same measurements."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "corresponding-parts-value",
+          "standard": "G-CO.7",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is congruent to triangle DEF. In triangle ABC, ∠A = 51° and ∠B = 75°. Find ∠F.",
+          "choices": [
+            "126°",
+            "54°",
+            "75°",
+            "51°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "rigid-motion-defines-congruence",
+          "standard": "G-CO.6",
+          "difficulty": 3,
+          "prompt": "A rigid motion is a transformation that …",
+          "choices": [
+            "maps every figure to a similar figure",
+            "preserves area but may change side lengths",
+            "preserves distance and angle measure",
+            "preserves shape but may change size"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 3,
+          "prompt": "In two triangles, two pairs of corresponding angles and a pair of non-included sides are congruent. Which congruence criterion applies?",
+          "choices": [
+            "AAS",
+            "SAS",
+            "ASA",
+            "SSS"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "rigid-motion-defines-congruence",
+          "standard": "G-CO.6",
+          "difficulty": 3,
+          "prompt": "If a sequence of rigid motions maps △ABC onto △DEF, then …",
+          "choices": [
+            "every pair of corresponding sides and angles is congruent",
+            "the triangles have equal area but need not be congruent",
+            "only the corresponding angles are congruent",
+            "only the corresponding sides are congruent"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "corresponding-parts-value",
+          "standard": "G-CO.7",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is congruent to triangle DEF. In triangle ABC, ∠A = 70° and ∠B = 34°. Find ∠F.",
+          "choices": [
+            "104°",
+            "76°",
+            "34°",
+            "70°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 2,
+          "prompt": "In two triangles, all three pairs of corresponding sides are congruent. Which congruence criterion applies?",
+          "choices": [
+            "ASA",
+            "SAS",
+            "AAS",
+            "SSS"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 3,
+          "prompt": "In two triangles, two pairs of corresponding sides and the pair of included angles are congruent. Which congruence criterion applies?",
+          "choices": [
+            "SSS",
+            "ASA",
+            "AAS",
+            "SAS"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 3,
+          "prompt": "In two triangles, two pairs of corresponding angles and the pair of included sides are congruent. Which congruence criterion applies?",
+          "choices": [
+            "ASA",
+            "SSS",
+            "AAS",
+            "SAS"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u03-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u03-l04"
+  }
+}

@@ -1,0 +1,343 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l01",
+  "lessonId": "ma-g10-financial-literacy-u05-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,140.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "40 shares at $28.50 each. This is the base every return figure below is measured against."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,270.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same 40 shares at the $31.75 price. Nothing has been sold, so this is a value on paper."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$130.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,270.00 against $1,140.00. This part of the return exists only while the price holds and reverses if it falls."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$16.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "40 shares at $0.42 each. Unlike the price move, this is cash the investor actually received."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$146.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$130.00 of price change plus $16.80 of dividends. Reporting only the price change would understate the year."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "12.88%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$146.80 against the $1,140.00 invested."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$45.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4.5% of the $1,000 face value. The coupon is set against face value, not against what the investor paid."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "4.69%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$45.00 against the $960 paid. Buying below face value raises the yield above the stated coupon rate, which is why the two figures differ."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "The bond",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "A bond is a loan with a contractual coupon and a repayment date, so the amounts are stated in advance. A dividend on a share is declared at the company’s discretion and can be reduced or stopped, which is why the $16.80 was not promised."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "shares * buy",
+        "substituted": "40 * 28.5",
+        "result": "$1,140.00",
+        "why": "40 shares at $28.50 each. This is the base every return figure below is measured against."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "shares2 * sell",
+        "substituted": "40 * 31.75",
+        "result": "$1,270.00",
+        "why": "The same 40 shares at the $31.75 price. Nothing has been sold, so this is a value on paper."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - #t1-p1",
+        "substituted": "#t1-p2 - #t1-p1",
+        "result": "$130.00",
+        "why": "$1,270.00 against $1,140.00. This part of the return exists only while the price holds and reverses if it falls."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "shares3 * dividend",
+        "substituted": "40 * 0.42",
+        "result": "$16.80",
+        "why": "40 shares at $0.42 each. Unlike the price move, this is cash the investor actually received."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 + #t2-p1",
+        "substituted": "#t1-p3 + #t2-p1",
+        "result": "$146.80",
+        "why": "$130.00 of price change plus $16.80 of dividends. Reporting only the price change would understate the year."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 / #t1-p1 * 100",
+        "substituted": "#t2-p2 / #t1-p1 * 100",
+        "result": "12.88%",
+        "why": "$146.80 against the $1,140.00 invested."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "face * coupon",
+        "substituted": "1000 * 0.045",
+        "result": "$45.00",
+        "why": "4.5% of the $1,000 face value. The coupon is set against face value, not against what the investor paid."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p4 / pricePaid * 100",
+        "substituted": "#t2-p4 / 960 * 100",
+        "result": "4.69%",
+        "why": "$45.00 against the $960 paid. Buying below face value raises the yield above the stated coupon rate, which is why the two figures differ."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A fictional index fund holds small pieces of hundreds of companies at once, while the share position above is one company. Explain what the fund changes about the risk the investor is exposed to, and name one risk it does not remove.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that spreading across many companies removes the exposure to any single company failing, so one company’s collapse cannot take the whole position with it.",
+          "Names a risk the fund does not remove — a decline across the whole market, or the fund’s own expense ratio — and says why holding more companies does not address it.",
+          "Distinguishes the two sources of the share return, the $130.00 price move and the $16.80 of dividends, and notes that a fund return is built the same way from its holdings."
+        ],
+        "evidenceRequirements": [
+          "Uses the $146.80 total return and the 12.88% figure, and refers to the bond’s stated coupon."
+        ],
+        "lookFors": [
+          "The response separates company-specific risk from market-wide risk.",
+          "The response does not present the 12.88% as a rate anyone can expect; it is one simulated year’s outcome."
+        ],
+        "commonMisconception": "Treating diversification as protection against loss in general rather than against the failure of any one holding.",
+        "dimensions": [
+          "transfer",
+          "communication-of-uncertainty",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What did the share position cost to buy?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the position worth at the end of the simulated year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much did the position gain from the price move alone?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much did the shares pay in dividends over the year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total return on the share position in dollars?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is that total return as a percentage of what the position cost?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What does the fictional bond pay in coupon each year?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What is the bond’s current yield — the coupon measured against the $960 actually paid?"
+        },
+        {
+          "ref": "t2-p6",
+          "responseMode": "FIXED",
+          "promptText": "Which of these instruments carries a stated promise to pay a fixed amount on a schedule?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "A fictional index fund holds small pieces of hundreds of companies at once, while the share position above is one company. Explain what the fund changes about the risk the investor is exposed to, and name one risk it does not remove."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What did the share position cost to buy? Answer: $1,140.00. Verification: 40 shares at $28.50 each. This is the base every return figure below is measured against. t1-p2: What is the position worth at the end of the simulated year? Answer: $1,270.00. Verification: The same 40 shares at the $31.75 price. Nothing has been sold, so this is a value on paper. t1-p3: How much did the position gain from the price move alone? Answer: $130.00. Verification: $1,270.00 against $1,140.00. This part of the return exists only while the price holds and reverses if it falls. t2-p1: How much did the shares pay in dividends over the year? Answer: $16.80. Verification: 40 shares at $0.42 each. Unlike the price move, this is cash the investor actually received. t2-p2: What is the total return on the share position in dollars? Answer: $146.80. Verification: $130.00 of price change plus $16.80 of dividends. Reporting only the price change would understate the year. t2-p3: What is that total return as a percentage of what the position cost? Answer: 12.88%. Verification: $146.80 against the $1,140.00 invested. t2-p4: What does the fictional bond pay in coupon each year? Answer: $45.00. Verification: 4.5% of the $1,000 face value. The coupon is set against face value, not against what the investor paid. t2-p5: What is the bond’s current yield — the coupon measured against the $960 actually paid? Answer: 4.69%. Verification: $45.00 against the $960 paid. Buying below face value raises the yield above the stated coupon rate, which is why the two figures differ. t2-p6: Which of these instruments carries a stated promise to pay a fixed amount on a schedule? Answer: The bond. Verification: A bond is a loan with a contractual coupon and a repayment date, so the amounts are stated in advance. A dividend on a share is declared at the company’s discretion and can be reduced or stopped, which is why the $16.80 was not promised."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: A fictional index fund holds small pieces of hundreds of companies at once, while the share position above is one company. Explain what the fund changes about the risk the investor is exposed to, and name one risk it does not remove. Explains that spreading across many companies removes the exposure to any single company failing, so one company’s collapse cannot take the whole position with it. Names a risk the fund does not remove — a decline across the whole market, or the fund’s own expense ratio — and says why holding more companies does not address it. Distinguishes the two sources of the share return, the $130.00 price move and the $16.80 of dividends, and notes that a fund return is built the same way from its holdings. Uses the $146.80 total return and the 12.88% figure, and refers to the bond’s stated coupon. The response separates company-specific risk from market-wide risk. The response does not present the 12.88% as a rate anyone can expect; it is one simulated year’s outcome."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that spreading across many companies removes the exposure to any single company failing, so one company’s collapse cannot take the whole position with it. Names a risk the fund does not remove — a decline across the whole market, or the fund’s own expense ratio — and says why holding more companies does not address it. Distinguishes the two sources of the share return, the $130.00 price move and the $16.80 of dividends, and notes that a fund return is built the same way from its holdings."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u05-l01.scoring.json",
+    "sourceScoringSha256": "1806e5399c3819158c2d61aaa9145f4c3b0f3bc61602f511ea46a9ecfe3399db",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

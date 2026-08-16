@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l08",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l08",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 8,
+    "courseDay": 8,
+    "phase": "Reteach and varied practice",
+    "focus": "point, line, distance, and arc as undefined starting terms",
+    "title": "Reteach and varied practice: point, line, distance, and arc as undefined starting terms"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 1,
+          "prompt": "A regular hexagon is inscribed in a circle. Central angle per side?",
+          "workedSolution": {
+            "steps": [
+              "Six equal arcs make 360°.",
+              "360 ÷ 6 = 60°."
+            ],
+            "answer": "60°"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Why does the equilateral triangle construction work?",
+          "workedSolution": {
+            "steps": [
+              "Both circles have radius AB.",
+              "So AC = BC = AB."
+            ],
+            "answer": "All three sides equal the radius"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 1,
+          "prompt": "Which statement is a precise definition of a perpendicular lines?",
+          "choices": [
+            "two lines that intersect to form right angles",
+            "two lines with opposite slopes",
+            "two lines that form an isosceles triangle",
+            "two lines that never meet"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 1,
+          "prompt": "A construction proceeds as follows. Through point P not on line ℓ, copy the angle that a transversal makes with ℓ, placing the copy at P on the same transversal. What has been constructed?",
+          "choices": [
+            "a line through P perpendicular to ℓ",
+            "the reflection of ℓ across P",
+            "a line through P parallel to ℓ",
+            "the perpendicular bisector of the transversal"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 2,
+          "prompt": "A regular quadrilateral is inscribed in a circle of radius 12. What central angle does each side subtend?",
+          "choices": [
+            "180°",
+            "90°",
+            "45°",
+            "91°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the angle bisector construction?",
+          "choices": [
+            "The ray drawn appears to split the angle evenly.",
+            "The construction relies on the angle being acute.",
+            "The construction builds two congruent triangles by SSS, so the angles at the vertex are congruent.",
+            "Equal arcs always produce equal angles regardless of the triangle."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 1,
+          "prompt": "Which statement is a precise definition of a angle?",
+          "choices": [
+            "a corner of a polygon",
+            "the space between two intersecting lines",
+            "the figure formed by two rays sharing a common endpoint",
+            "the amount of turn measured in degrees"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "A construction proceeds as follows. With the compass set to the radius, mark successive arcs around the circle from a starting point, then join consecutive marks. What has been constructed?",
+          "choices": [
+            "a square inscribed in the circle",
+            "an equilateral triangle inscribed in the circle",
+            "a regular hexagon inscribed in the circle",
+            "a regular pentagon inscribed in the circle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 2,
+          "prompt": "A regular quadrilateral is inscribed in a circle of radius 3. What central angle does each side subtend?",
+          "choices": [
+            "180°",
+            "45°",
+            "90°",
+            "91°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "Which statement correctly justifies the equilateral triangle construction on a given segment?",
+          "choices": [
+            "Both circles have radius equal to the segment, so all three sides are that same length.",
+            "The circles intersect, which guarantees 60° angles by definition.",
+            "The intersection point is the midpoint of the segment.",
+            "The construction works only when the segment is horizontal."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a circle?",
+          "choices": [
+            "the set of all points in a plane at a fixed distance from a given centre point",
+            "a polygon with infinitely many sides",
+            "a closed curve with no corners",
+            "a shape whose area is πr²"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l08"
+  }
+}

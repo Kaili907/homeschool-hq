@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-health-u06-assessment",
+  "courseRef": "ma-g10-health",
+  "grade": 10,
+  "subject": "health",
+  "location": {
+    "unitRef": "ma-g10-health-u06",
+    "unitNumber": 6,
+    "unitTitle": "Mental Health Support Systems and Crisis Response",
+    "courseTitle": "Health II: Mental Health and Community Wellness",
+    "assessmentLessonRef": "ma-g10-health-u06-l05"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-10/unit-assessments/ma-g10-health-u06-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the private-safe task without disclosing medical history, diagnosis, body measurements, or sexual history.",
+    "Use a fictional scenario when offered and identify a trusted adult or qualified professional where appropriate."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain the difference between ordinary distress and a situation needing professional support in your own words and give a valid example."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of what school counselors, clinicians, and crisis lines actually do."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply confidentiality, its limits, and mandatory reporting in plain language in a new fictional situation. Show the decision process or cite the evidence used."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving responding when a peer discloses distress; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect reducing stigma through accurate language with advocating for accessible mental-health support in a community. Explain how the two support, constrain, or build on one another."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Write a peer-support response protocol: what to say, what not to promise, who to bring in, and how to hand off — then draft one short advocacy message for better support access."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question."
+    }
+  ],
+  "responseMode": "private-safe-task-and-reflection",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/health/ma-g10-health-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy of health information criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated skill application criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-health-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-10/unit-assessments/ma-g10-health-u06-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Mental Health Support Systems and Crisis Response?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

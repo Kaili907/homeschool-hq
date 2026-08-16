@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-ready-for-life-u01-assessment",
+  "courseRef": "ma-g10-ready-for-life",
+  "grade": 10,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g10-ready-for-life-u01",
+    "unitNumber": 1,
+    "unitTitle": "Career Exploration and Pathway Mapping",
+    "courseTitle": "Ready for Life 10: Career Exploration and Workplace Communication",
+    "assessmentLessonRef": "ma-g10-ready-for-life-u01-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u01-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before compiling, list the three careers you researched this unit in the order of your current interest.",
+      "prompt": "List the three careers in order of your current interest, and note if that order changed since day one."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "For each of the three careers, record its pathway, day-to-day reality, and entry requirements in a consistent format.",
+      "prompt": "For career one, write its pathway (numbered steps), day-to-day reality (specific tasks), and entry requirements, pulling from your earlier research."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "extended-response",
+      "directions": "For each of the three careers, record its pathway, day-to-day reality, and entry requirements in a consistent format.",
+      "prompt": "For career two, write the same three fields."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "extended-response",
+      "directions": "For each of the three careers, record its pathway, day-to-day reality, and entry requirements in a consistent format.",
+      "prompt": "For career three, write the same three fields."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "checklist-item",
+      "directions": "For each of the three careers, record its pathway, day-to-day reality, and entry requirements in a consistent format.",
+      "prompt": "All three careers are recorded in the same consistent format, so they can be compared at a glance."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "Set a concrete plan for revisiting this record.",
+      "prompt": "Name a specific future point (a date, grade milestone, or event) when you will revisit this record, and one specific thing that would make you update it before then."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Reflect on the unit as a whole.",
+      "prompt": "Looking at all three careers side by side, what is the single most useful thing you learned this unit that you did not know before day one?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/ready-for-life/ma-g10-ready-for-life-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Completeness and consistency of the findings record criterion.",
+    "Provide evidence that meets the stated Grounding in prior research criterion.",
+    "Provide evidence that meets the stated Concreteness of the revisit plan criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-ready-for-life-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u01-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Career Exploration and Pathway Mapping?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

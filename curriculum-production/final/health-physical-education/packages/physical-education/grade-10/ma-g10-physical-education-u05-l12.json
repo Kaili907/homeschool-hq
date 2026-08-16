@@ -1,0 +1,295 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-task-card",
+  "lessonId": "ma-g10-physical-education-u05-l12",
+  "courseId": "ma-g10-physical-education",
+  "grade": 10,
+  "subject": "physical-education",
+  "unitNumber": 5,
+  "unitTitle": "Recovery, Sleep, Hydration, and Injury Prevention",
+  "title": "Correction and reflection: returning after illness or injury on a graded plan under transfer",
+  "focus": "returning after illness or injury on a graded plan",
+  "essentialQuestion": "Why does what I do between sessions decide what happens in them?",
+  "estimatedMinutes": "35–60",
+  "standards": [
+    "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+    "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+  ],
+  "primaryLessonType": "REMEDIATION_RETRY",
+  "secondaryLessonTypes": [
+    "SAFETY_STOP_DECISION",
+    "SKILL_DEVELOPMENT"
+  ],
+  "lessonFamilyPlan": {
+    "instructionalPurpose": "repair one observable cue or decision with a different model",
+    "guidedEmphasis": "Name the exact gap, simplify the setup, and contrast the original pattern with a different cue or representation.",
+    "independentEvidence": "Use one bounded practice change and then a fresh retry rather than repeating the same attempt.",
+    "evidencePurpose": "correction, cue use, fresh retry, and exit readiness"
+  },
+  "goal": "I can repair one observable cue or decision with a different model for returning after illness or injury on a graded plan, using a safe standard or equal-credit adapted route, and explain the cue or decision that shows success.",
+  "successOverview": "Success is safe setup, use of the taught Warning sign or unsafe event? Stop first; tell next. cue or decision, a fresh bounded application, and a short explanation. Credit never depends on body position, speed, athletic talent, comparison, or use of the standard route.",
+  "readinessCheck": [
+    "Sort one comfortable-break example and one warning-sign example into different lanes.",
+    "Choose movement, seated, supported, mobility-aid, low-space, no-equipment, or described evidence without explaining why.",
+    "Use the complete described route if guardian permission, safe space, equipment, movement, a partner, or a real setting is unavailable."
+  ],
+  "materials": [
+    "No specialized equipment is required.",
+    "Optional: three scrap-paper labels for REST / ADJUST, STOP AND TELL, and DO NOT RESUME.",
+    "Point, sign, speak, draw, or use three familiar objects as decision-lane markers."
+  ],
+  "movementCues": [
+    "NOTICE the supplied condition without diagnosing it.",
+    "PAUSE before choosing whether activity may continue.",
+    "ACT by resting or adjusting when safe, or by stopping and telling when a warning sign or unsafe event appears.",
+    "HOLD after an impact, injury concern, or persistent or worsening symptom until authorized clearance."
+  ],
+  "ageAppropriateTechnique": "Self-manage setup, demand, and feedback while keeping intensity and range learner-selected and the evidence tied to the taught cue or decision.",
+  "movementModel": {
+    "title": "Model for returning after illness or injury on a graded plan",
+    "startingPosition": "Begin with a supplied fictional situation and the three visible lanes REST / ADJUST, STOP AND TELL, and DO NOT RESUME.",
+    "action": "Name the observable condition, choose the safer lane, state the next action, and identify who controls return.",
+    "keyCue": "Warning sign or unsafe event? Stop first; tell next.",
+    "commonError": "Continuing for one more attempt to see whether a warning sign settles.",
+    "correction": "Do not test a concern by continuing. Stop and hand the decision to the authorized adult.",
+    "notice": "Notice the condition and authority boundary, not a diagnosis or a performance score.",
+    "adaptedModel": "Use the seated, supported, mobility-aid, reduced-range, object-modeled, or described route and preserve this evidence: Notice the condition and authority boundary, not a diagnosis or a performance score.",
+    "safetyBoundary": "Use only supplied fictional conditions. Do not diagnose, prescribe, recreate a hazard, or use activity as a symptom test. Never induce a symptom, impact, injury, collision, equipment failure, or real stop event."
+  },
+  "guidedPractice": [
+    {
+      "id": "guided-1",
+      "prompt": "Name the exact gap, simplify the setup, and contrast the original pattern with a different cue or representation. Sort one comfortable-break example and one warning-sign example into different lanes. Apply it to returning after illness or injury on a graded plan.",
+      "support": "Use the model cue: Warning sign or unsafe event? Stop first; tell next.",
+      "feedback": "If the target is unclear, return to the starting position and use this correction: Do not test a concern by continuing. Stop and hand the decision to the authorized adult."
+    },
+    {
+      "id": "guided-2",
+      "prompt": "Classify a supplied safe-environment comfort break and name the allowed adjustment.",
+      "support": "Watch for this contrast: Continuing for one more attempt to see whether a warning sign settles.",
+      "feedback": "Keep the safe version when the learner can show or explain notice the condition and authority boundary, not a diagnosis or a performance score."
+    }
+  ],
+  "practiceProgression": [
+    {
+      "round": 1,
+      "name": "Entry version",
+      "task": "Name the exact gap, simplify the setup, and contrast the original pattern with a different cue or representation. Classify a supplied safe-environment comfort break and name the allowed adjustment.",
+      "targetCue": "Warning sign or unsafe event? Stop first; tell next.",
+      "successCheck": "Show or explain the target for returning after illness or injury on a graded plan once with the safe boundary intact.",
+      "changedVariable": "None; begin with the simplest safe version.",
+      "learnerChoice": "Remain here, reduce range or pace, add support, rest, or switch to the described route.",
+      "maximumBoundary": "Never induce a symptom, impact, injury, collision, equipment failure, or real stop event."
+    },
+    {
+      "round": 2,
+      "name": "One change",
+      "task": "Classify a supplied safe-environment comfort break and name the allowed adjustment. Then add one named warning sign or environmental change. Keep the correction, cue use, fresh retry, and exit readiness purpose visible.",
+      "targetCue": "Warning sign or unsafe event? Stop first; tell next.",
+      "successCheck": "Name what changed and keep the same cue, control, decision, and safety boundary.",
+      "changedVariable": "Add one named warning sign or environmental change.",
+      "learnerChoice": "Progress only by choice; repeat or regress whenever the cue or control is not clear.",
+      "maximumBoundary": "Never induce a symptom, impact, injury, collision, equipment failure, or real stop event."
+    },
+    {
+      "round": 3,
+      "name": "Fresh application",
+      "task": "Use one bounded practice change and then a fresh retry rather than repeating the same attempt. Classify a fresh fictional condition, cite the fact that controls the choice, state the next safe action, and name who controls return.",
+      "targetCue": "Warning sign or unsafe event? Stop first; tell next.",
+      "successCheck": "Complete the fresh bounded application and identify the cue or decision that controlled it.",
+      "changedVariable": "The learner selects a new safe example, arrangement, or condition.",
+      "learnerChoice": "Use any standard or equal-credit route, take breaks, or finish through description without penalty.",
+      "maximumBoundary": "Never induce a symptom, impact, injury, collision, equipment failure, or real stop event."
+    }
+  ],
+  "independentActivity": {
+    "title": "Fresh application: returning after illness or injury on a graded plan",
+    "directions": [
+      "Choose one approved route.",
+      "Classify a fresh fictional condition, cite the fact that controls the choice, state the next safe action, and name who controls return.",
+      "Use this cue or decision: Warning sign or unsafe event? Stop first; tell next.",
+      "Stop at the maximum boundary.",
+      "Provide the selected evidence without a recording or body metric."
+    ],
+    "freshTask": "Use one bounded practice change and then a fresh retry rather than repeating the same attempt. Classify a fresh fictional condition, cite the fact that controls the choice, state the next safe action, and name who controls return.",
+    "independenceBoundary": "A trusted human or future Tutor may read directions, define a cue, and offer an approved route. They may not perform the decision for the learner, claim unapproved observation, certify physical completion, or provide medical or return clearance."
+  },
+  "warmUpAndFinishPolicy": {
+    "applicability": "REQUIRED_FOR_MOVEMENT",
+    "warmUp": null,
+    "coolDown": [
+      "Return to the easiest comfortable version or rest.",
+      "Restore optional equipment and space safely.",
+      "Name one cue, safety choice, or next adjustment without reporting body data."
+    ],
+    "rationale": null
+  },
+  "spaceSetup": "Use one safe, comfortable seat, desk, or communication station. This non-movement route needs no activity area; if the immediate space is unsafe, stop setup and tell a trusted adult. Low-space access remains available before and during the lesson. Cleanup: return optional items only after movement has stopped and the path is clear.",
+  "equipmentRequirements": {
+    "required": [
+      "No specialized equipment is required."
+    ],
+    "optional": [
+      "Optional: three scrap-paper labels for REST / ADJUST, STOP AND TELL, and DO NOT RESUME."
+    ],
+    "householdSubstitutes": [
+      "Point, sign, speak, draw, or use three familiar objects as decision-lane markers."
+    ],
+    "prohibited": [
+      "Never induce a symptom, impact, injury, collision, equipment failure, or real stop event."
+    ],
+    "equalCreditNoEquipment": "Equal-credit no-equipment route: hear or read the fictional situation, state the lane and next safe action, and identify the adult or professional boundary. No movement or real stop event is required."
+  },
+  "safetyRules": [
+    "Check the surface, ceiling, boundary, people, pets, cords, breakables, footwear or mobility supports, and any optional item before movement.",
+    "Use only supplied fictional conditions. Do not diagnose, prescribe, recreate a hazard, or use activity as a symptom test.",
+    "Use learner-selected range, pace, and demand. Control, decisions, and understanding matter more than force, distance, duration, or repetitions.",
+    "If the environment cannot be made safe, do not perform movement; use the equal-credit described route or stop and tell a trusted adult."
+  ],
+  "stoppingRules": [
+    "REST / ADJUST: You may pause, rest, reduce pace or range, use support, switch to an approved route, or finish for the day at any time. You may resume only when comfortable and the environment is safe. Rest and adaptation never reduce credit.",
+    "STOP AND TELL: Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, an injury concern, damaged equipment, or an unsafe environment. Tell a trusted adult and do not continue to test the concern.",
+    "DO NOT RESUME: After a head impact, an injury concern, or a symptom that persists or worsens, remain out until the authorized guardian or qualified professional says it is safe. A learner, browser, or Tutor cannot provide clearance."
+  ],
+  "adaptationRoutes": {
+    "seated": "Use a stable seated position and preserve the Warning sign or unsafe event? Stop first; tell next. evidence through upper-body movement, pointing, gesture, object modeling, or description.",
+    "supported": "Place an approved stable support before beginning and use it through the whole attempt; score the cue or decision for returning after illness or injury on a graded plan, not unsupported balance.",
+    "reducedRange": "Use the smallest comfortable movement, eye-gaze choice, point, or gesture that still shows the target cue or decision for returning after illness or injury on a graded plan.",
+    "reducedPaceOrDemand": "Complete one stage at a time with learner-chosen breaks, remain at the entry version, or split the lesson across short sittings.",
+    "mobilityAidCompatible": "Keep the mobility aid positioned and used as approved; adapt the path around the aid and score the same Warning sign or unsafe event? Stop first; tell next. evidence.",
+    "solo": "Use the supplied solo, shadow, diagram, imagined-role, or fictional-situation route; no partner, opponent, group, or audience is required.",
+    "lowSpace": "Use the one-arm-span or one-seat setup: Equal-credit no-equipment route: hear or read the fictional situation, state the lane and next safe action, and identify the adult or professional boundary. No movement or real stop event is required.",
+    "noEquipment": "Equal-credit no-equipment route: hear or read the fictional situation, state the lane and next safe action, and identify the adult or professional boundary. No movement or real stop event is required.",
+    "describedOrDecisionRoute": "Describe, draw, gesture, point, sign, or model Classify a fresh fictional condition, cite the fact that controls the choice, state the next safe action, and name who controls return. This is a complete equal-credit route when movement is not appropriate."
+  },
+  "accessibleAdaptation": "Choose or change any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route without explaining why. Every route earns equal credit for the same notice the condition and authority boundary, not a diagnosis or a performance score. The standard route is never required and adaptation never lowers credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit no-equipment route: hear or read the fictional situation, state the lane and next safe action, and identify the adult or professional boundary. No movement or real stop event is required.",
+  "activitySteps": [
+    "Choose a standard or equal-credit response route.",
+    "Check the required permission.",
+    "Check the space.",
+    "Check any optional equipment.",
+    "Read the REST / ADJUST rule.",
+    "Read the STOP AND TELL rule.",
+    "Complete the warm-up when it applies.",
+    "Study the model.",
+    "Name the key cue.",
+    "Complete guided attempt 1.",
+    "Complete guided attempt 2.",
+    "Choose a progression round.",
+    "Complete the fresh application.",
+    "Use the safe finish when it applies.",
+    "Provide the selected evidence.",
+    "Answer the short reflection or leave it blank."
+  ],
+  "executionCategory": "safety-stop-decision",
+  "commonErrorToWatchFor": "Continuing for one more attempt to see whether a warning sign settles.",
+  "evidenceExpectations": {
+    "evidenceTypes": [
+      "DECISION_QUALITY",
+      "SAFETY_KNOWLEDGE",
+      "PLANNING",
+      "COMPLETION"
+    ],
+    "learnerEvidence": [
+      "One guided response using Warning sign or unsafe event? Stop first; tell next..",
+      "One fresh bounded application or complete described equivalent for returning after illness or injury on a graded plan.",
+      "One cue, decision, safety, or next-step explanation."
+    ],
+    "physicalCompletion": "NOT_TUTOR_CERTIFIABLE",
+    "observer": "A learner may self-check a cue and a trusted human may review the selected evidence. A Tutor, browser, camera, wearable, or self-report cannot certify physical completion, guardian permission, or safe return.",
+    "doNotCollect": [
+      "weight, appearance, body composition, calories, body shape, fitness norms, speed versus peers, or athletic talent",
+      "diagnosis, disability reason, symptom history, or private medical information",
+      "photo, video, audio, wearable data, location proof, or exercise log"
+    ]
+  },
+  "retryPlan": {
+    "trigger": "Retry when the evidence does not yet show the target cue or decision for returning after illness or injury on a graded plan; name the missing observable part without judging the learner.",
+    "simplerSetup": "Sort one comfortable-break example and one warning-sign example into different lanes.",
+    "differentCue": "Replace the full cue set with: “Warning sign or unsafe event? Stop first; tell next.”",
+    "alternateModel": "Contrast this common error — Continuing for one more attempt to see whether a warning sign settles. — with this correction — Do not test a concern by continuing. Stop and hand the decision to the authorized adult.",
+    "boundedPractice": "Classify a supplied safe-environment comfort break and name the allowed adjustment.",
+    "freshRetry": "Classify a fresh fictional condition, cite the fact that controls the choice, state the next safe action, and name who controls return. Use a new safe example rather than repeating the scored attempt.",
+    "exitCriterion": "Return to independent work when the fresh retry shows or explains notice the condition and authority boundary, not a diagnosis or a performance score. A safety stop, rest, or adaptation is never recorded as failure."
+  },
+  "guardianAuthority": {
+    "level": "GUARDIAN_PERMISSION",
+    "when": "Guardian permission is required before real movement, optional equipment, a real location, partner, outdoor route, or progression is used.",
+    "requiredAction": "The guardian confirms that the bounded space, optional equipment, and activity route are permitted before movement.",
+    "minimumRecord": "Record only permission status or that the equal-credit described route was used; collect no body, health, media, location, or performance data.",
+    "confirmationBoundary": "Guardian confirmation may establish permission or occurrence only. It does not certify academic mastery, physical quality, diagnosis, effort, body status, or safe return.",
+    "equalCreditAlternative": "When guardian review, real movement, equipment, space, partner, or location is unavailable, the supplied solo described/decision route is the complete equal-credit lesson.",
+    "tutorOrLearnerMaySubstitute": false
+  },
+  "tutorMetadata": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "may": [
+      "explain approved content and vocabulary",
+      "cue the approved model",
+      "offer an approved presentation or activity route",
+      "coach how the learner presents their own evidence",
+      "route to rest, stop, retry, or adult handoff"
+    ],
+    "mustNot": [
+      "cannot diagnose, prescribe, rehabilitate, or give medical clearance",
+      "cannot claim unapproved observation or certify physical completion",
+      "cannot override rest, stop, adaptation, guardian authority, professional authority, or safe return",
+      "cannot choose the answer or action for fresh independent evidence",
+      "cannot score body data, norms, appearance, talent, or peer comparison"
+    ]
+  },
+  "keyPoints": [
+    "Begin with a supplied fictional situation and the three visible lanes REST / ADJUST, STOP AND TELL, and DO NOT RESUME.",
+    "Name the observable condition, choose the safer lane, state the next action, and identify who controls return.",
+    "Warning sign or unsafe event? Stop first; tell next.",
+    "Do not test a concern by continuing. Stop and hand the decision to the authorized adult."
+  ],
+  "privacySafeScenario": "Use a supplied or invented non-personal example of returning after illness or injury on a graded plan; do not disclose private health information or recreate a hazard.",
+  "studentTask": "Use one bounded practice change and then a fresh retry rather than repeating the same attempt. Classify a fresh fictional condition, cite the fact that controls the choice, state the next safe action, and name who controls return. Use any approved standard or equal-credit route. Name the cue or decision that controlled the result; no body metric, comparison, recording, or physical-completion claim is required.",
+  "knowledgeCheck": "State the starting position, action, key cue, common error, and correction for returning after illness or injury on a graded plan. Then distinguish optional REST / ADJUST from STOP AND TELL and DO NOT RESUME.",
+  "completionCriteria": [
+    "The learner uses a safe setup or accurately describes it for returning after illness or injury on a graded plan.",
+    "The learner applies Warning sign or unsafe event? Stop first; tell next. in one guided attempt and one fresh application or complete described equivalent.",
+    "The learner distinguishes learner-controlled rest from STOP AND TELL and DO NOT RESUME conditions.",
+    "Any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route earns equal credit for the same cue or decision evidence."
+  ],
+  "adaptationChoices": "Choose or change any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route without explaining why. Every route earns equal credit for the same notice the condition and authority boundary, not a diagnosis or a performance score. The standard route is never required and adaptation never lowers credit.",
+  "extensionChallenge": "Design the next progression of returning after illness or injury on a graded plan yourself, or coach the transfer condition to someone else so that they succeed with it — without completing another learner's graded work.",
+  "accessibilitySupports": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Allow typed, handwritten, spoken, drawn, demonstrated, or described responses when the standard permits.",
+    "Offer reduced-copying, extended-time, hidden-timer, rest-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "Preserve the learning target while adjusting quantity, pacing, intensity, range, equipment, or response mode.",
+    "Every movement task has a seated, supported, reduced-range, reduced-pace, and solo version that reaches the same standard.",
+    "The protocol may be written, tabled, or described; a learner managing a condition builds the protocol with guardian input around the constraints they already have."
+  ],
+  "optionalReflection": {
+    "prompt": "Which cue, decision, safety check, or adaptation preserved the target for returning after illness or injury on a graded plan, and what would you keep or change in a next safe attempt?",
+    "private": true,
+    "graded": false,
+    "optional": true
+  },
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience.",
+    "This task never requires maximal effort, exercise as punishment, or movement through pain.",
+    "This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceLessonId": "ma-g10-physical-education-u05-l12",
+    "productionDepthRevision": "physical-education-production-depth-r1"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

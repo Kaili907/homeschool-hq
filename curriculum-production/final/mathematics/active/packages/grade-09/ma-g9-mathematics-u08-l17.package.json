@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u08-l17",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u08-l17",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Rate of Change and Building Functions",
+    "dayInUnit": 17,
+    "courseDay": 143,
+    "phase": "Targeted correction",
+    "focus": "composing functions",
+    "title": "Targeted correction: composing functions"
+  },
+  "standards": [
+    "F-IF.6",
+    "F-BF.1",
+    "F-BF.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 1,
+          "prompt": "$50 to open plus $8 per attendee. Write C(n) and find C(10).",
+          "workedSolution": {
+            "steps": [
+              "C(n) = 50 + 8n.",
+              "C(10) = 50 + 80 = 130."
+            ],
+            "answer": "C(n) = 50 + 8n; C(10) = 130"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 2,
+          "prompt": "R(x) = 9x + 4, C(x) = 5x. Find P(x).",
+          "workedSolution": {
+            "steps": [
+              "P = R − C = 9x + 4 − 5x.",
+              "P(x) = 4x + 4."
+            ],
+            "answer": "P(x) = 4x + 4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 1,
+          "prompt": "A table records output 43 at input 4 and output 35 at input 6. What is the average rate of change between these readings?",
+          "choices": [
+            "4 output units per input unit",
+            "-4 output units per input unit",
+            "-4/5 output units per input unit",
+            "-8 output units per input unit"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "For f(x) = -1x² + 1x − 8, find the average rate of change from x = -3 to x = 4.",
+          "choices": [
+            "1/7",
+            "-1/7",
+            "0",
+            "-40/7"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 2,
+          "prompt": "A sequence has g(1) = 2 and g(n) = 2·g(n − 1). Write the explicit form and find g(3).",
+          "choices": [
+            "g(n) = 2·2^(n−1); g(3) = 8",
+            "g(n) = 2 + 2(n − 1); g(3) = 6",
+            "g(n) = 2·2^n; g(3) = 16",
+            "g(n) = 2·2^(n−1); g(3) = 16"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "A venue charges $150 to open plus $8 per attendee. Write C(n) for the total cost of n attendees, then find C(5).",
+          "choices": [
+            "C(n) = 150n + 8; C(5) = 758",
+            "C(n) = 150 + 8n; C(5) = 190",
+            "C(n) = 158n; C(5) = 790",
+            "C(n) = 8 + 150n; C(5) = 758"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 2,
+          "prompt": "Revenue is R(x) = 4x + 5 and cost is C(x) = -4x. Write the profit function P(x) = R(x) − C(x) in simplest form.",
+          "choices": [
+            "P(x) = 8x − 5",
+            "P(x) = 0x + 5",
+            "P(x) = -8x + 5",
+            "P(x) = 8x + 5"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "A table records output 19 at input 4 and output 21 at input 6. What is the average rate of change between these readings?",
+          "choices": [
+            "1/5 output units per input unit",
+            "2 output units per input unit",
+            "-1 output units per input unit",
+            "1 output units per input unit"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "For f(x) = -1x² − 6x + 7, find the average rate of change from x = 5 to x = -4.",
+          "choices": [
+            "11/3",
+            "63",
+            "-7",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 3,
+          "prompt": "A sequence has g(1) = 12 and g(n) = 3·g(n − 1). Write the explicit form and find g(5).",
+          "choices": [
+            "g(n) = 3·12^(n−1); g(5) = 62208",
+            "g(n) = 12·3^n; g(5) = 2916",
+            "g(n) = 12 + 3(n − 1); g(5) = 24",
+            "g(n) = 12·3^(n−1); g(5) = 972"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u08-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u08-l17"
+  }
+}

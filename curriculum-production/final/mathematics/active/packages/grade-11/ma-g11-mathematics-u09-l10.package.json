@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u09-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u09-l10",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability Rules and Interpretation",
+    "dayInUnit": 10,
+    "courseDay": 154,
+    "phase": "Discussion or problem seminar",
+    "focus": "applying the rules to real risk and screening questions",
+    "title": "Discussion or problem seminar: applying the rules to real risk and screening questions"
+  },
+  "standards": [
+    "S-CP.5",
+    "S-CP.6",
+    "S-CP.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 1,
+          "prompt": "P(delay | rain) = P(delay). What does that mean?",
+          "workedSolution": {
+            "steps": [
+              "Conditioning changes nothing.",
+              "The events are independent."
+            ],
+            "answer": "They are independent"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "A box holds 11 items, of which 8 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "56/121",
+            "64/121",
+            "8/11",
+            "28/55"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 14/100 and P(B) = 37/100, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "37/14",
+            "7/50",
+            "259/5000",
+            "14/37"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 27/100, P(B) = 16/100, and P(A and B) = 11/100, find P(A or B) in lowest terms.",
+          "choices": [
+            "11/50",
+            "43/100",
+            "27/50",
+            "8/25"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, P(has the condition | tested positive) is much smaller than P(tested positive | has the condition). What is the correct interpretation?",
+          "choices": [
+            "The two conditional probabilities condition on different events, so they need not be close; a rare condition makes the first much smaller.",
+            "The relationship proves that one event causes the other.",
+            "The two events are mutually exclusive.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 17 items, of which 4 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "3/68",
+            "12/289",
+            "16/289",
+            "4/17"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 29/100 and P(B) = 53/100, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "29/53",
+            "1537/10000",
+            "29/100",
+            "53/29"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 16/100, P(B) = 16/100, and P(A and B) = 13/100, find P(A or B) in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, the probability of a delay is the same whether or not it is raining. What is the correct interpretation?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u09-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u09-l10"
+  }
+}

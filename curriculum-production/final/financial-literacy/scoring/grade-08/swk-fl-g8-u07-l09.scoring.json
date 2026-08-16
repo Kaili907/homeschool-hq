@@ -1,0 +1,245 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l09",
+  "lessonId": "ma-g8-financial-literacy-u07-l09",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much is withheld each month?",
+        "answer": "$532.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(14% of 3,800.00) = 532.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 380000
+            },
+            "bps": 1400,
+            "round": "exact"
+          },
+          "trace": "(14% of 3,800.00) = 532.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is withheld across the year?",
+        "answer": "$6,384.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((14% of 3,800.00) x 12) = 6,384.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 380000
+              },
+              "bps": 1400,
+              "round": "exact"
+            },
+            "times": 12
+          },
+          "trace": "((14% of 3,800.00) x 12) = 6,384.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What refund results?",
+        "answer": "$484.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(((14% of 3,800.00) x 12) - 5,900.00) = 484.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 380000
+                },
+                "bps": 1400,
+                "round": "exact"
+              },
+              "times": 12
+            },
+            "less": {
+              "op": "money",
+              "cents": 590000
+            }
+          },
+          "trace": "(((14% of 3,800.00) x 12) - 5,900.00) = 484.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What monthly withholding would have matched the liability?",
+        "answer": "$491.67",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5,900.00 / 12) = 491.67. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. The exact share is $491.666..., rounded to the cent.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "money",
+              "cents": 590000
+            },
+            "by": 12,
+            "round": "half-up"
+          },
+          "trace": "(5,900.00 / 12) = 491.67"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much extra was withheld each month?",
+        "answer": "$40.33",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((14% of 3,800.00) - (5,900.00 / 12)) = 40.33. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 380000
+              },
+              "bps": 1400,
+              "round": "exact"
+            },
+            "less": {
+              "op": "divide",
+              "of": {
+                "op": "money",
+                "cents": 590000
+              },
+              "by": 12,
+              "round": "half-up"
+            }
+          },
+          "trace": "((14% of 3,800.00) - (5,900.00 / 12)) = 40.33"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Evaluating a withholding level",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Rhiannon's refund as free money or as automatically bad."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A position is taken for Rhiannon but the monthly figure is not used."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response weighs Rhiannon's $40.33 monthly amount against the behavioural value of a lump refund and reaches a defended position."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld each month?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is withheld across the year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What refund results?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What monthly withholding would have matched the liability?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much extra was withheld each month?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Argue whether Rhiannon should adjust her withholding, weighing the value of $40.33 a month against the discipline of a lump-sum refund."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much is withheld each month? Answer: $532.00. Verification: (14% of 3,800.00) = 532.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What is withheld across the year? Answer: $6,384.00. Verification: ((14% of 3,800.00) x 12) = 6,384.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What refund results? Answer: $484.00. Verification: (((14% of 3,800.00) x 12) - 5,900.00) = 484.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What monthly withholding would have matched the liability? Answer: $491.67. Verification: (5,900.00 / 12) = 491.67. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. The exact share is $491.666..., rounded to the cent. t3-p2: How much extra was withheld each month? Answer: $40.33. Verification: ((14% of 3,800.00) - (5,900.00 / 12)) = 40.33. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Evaluating a withholding level — Not yet: The response treats Rhiannon's refund as free money or as automatically bad. Approaching: A position is taken for Rhiannon but the monthly figure is not used. Meets: The response weighs Rhiannon's $40.33 monthly amount against the behavioural value of a lump refund and reaches a defended position. The response weighs Rhiannon's $40.33 monthly amount against the behavioural value of a lump refund and reaches a defended position."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response weighs Rhiannon's $40.33 monthly amount against the behavioural value of a lump refund and reaches a defended position."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u07-l09.scoring.json",
+    "sourceScoringSha256": "905defcafb7231c6b6357d390c40cbc0dadd55a921aa45af26ee080a03993639",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

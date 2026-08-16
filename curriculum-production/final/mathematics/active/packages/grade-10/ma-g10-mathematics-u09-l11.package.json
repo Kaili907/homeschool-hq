@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u09-l11",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u09-l11",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Coordinate Geometry",
+    "dayInUnit": 11,
+    "courseDay": 155,
+    "phase": "Performance task planning",
+    "focus": "slope criteria for parallel and perpendicular lines",
+    "title": "Performance task planning: slope criteria for parallel and perpendicular lines"
+  },
+  "standards": [
+    "G-GPE.1",
+    "G-GPE.2",
+    "G-GPE.4",
+    "G-GPE.5",
+    "G-GPE.6",
+    "G-GPE.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 1,
+          "prompt": "Circle with centre (2, −3), radius 5.",
+          "workedSolution": {
+            "steps": [
+              "(x − h)² + (y − k)² = r².",
+              "(x − 2)² + (y + 3)² = 25."
+            ],
+            "answer": "(x − 2)² + (y + 3)² = 25"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "parallel-perpendicular-slope",
+          "standard": "G-GPE.5",
+          "difficulty": 2,
+          "prompt": "A line has slope -5/2. What is the slope of a line perpendicular to it?",
+          "choices": [
+            "-5/2",
+            "5/2",
+            "2/5",
+            "-2/5"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "partition-segment-in-ratio",
+          "standard": "G-GPE.6",
+          "difficulty": 2,
+          "prompt": "Find the point that partitions the segment from A(3, 4) to B(1, 0) in the ratio 1:1 from A.",
+          "choices": [
+            "(2, 3)",
+            "(2, 2)",
+            "(1, 2)",
+            "(3, 2)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-distance-and-perimeter",
+          "standard": "G-GPE.7",
+          "difficulty": 3,
+          "prompt": "A right triangle has vertices at (0, 0), (6, 0), and (6, 8). Find its perimeter and area.",
+          "choices": [
+            "perimeter 24; area 7",
+            "perimeter 14; area 24",
+            "perimeter 24; area 24",
+            "perimeter 24; area 48"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 3,
+          "prompt": "A parabola has focus (2, 0) and directrix y = -2. Write its equation in vertex form.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 3,
+          "prompt": "Write the equation of the circle with centre (-9, -7) and radius 4.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "parallel-perpendicular-slope",
+          "standard": "G-GPE.5",
+          "difficulty": 3,
+          "prompt": "A line has slope -3. What is the slope of a line parallel to it?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u09-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u09-l11"
+  }
+}

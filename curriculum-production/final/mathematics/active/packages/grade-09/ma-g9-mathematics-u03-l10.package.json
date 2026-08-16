@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u03-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u03-l10",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "dayInUnit": 10,
+    "courseDay": 46,
+    "phase": "Discussion or problem seminar",
+    "focus": "graphs as the complete set of solutions",
+    "title": "Discussion or problem seminar: graphs as the complete set of solutions"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 1,
+          "prompt": "Solve 5x + 3 = 2x − 9.",
+          "workedSolution": {
+            "steps": [
+              "5x − 2x = −9 − 3, so 3x = −12.",
+              "Divide by 3: x = −4."
+            ],
+            "answer": "x = −4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x and state the solution set: -3x + 4 < 2.",
+          "choices": [
+            "x > -2/3",
+            "x > -2",
+            "x > 2/3",
+            "x < 2/3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 3,
+          "prompt": "In a solution, one line reads: From 3x = 9 to x = 3. Which property justifies that step?",
+          "choices": [
+            "the associative property",
+            "the distributive property",
+            "dividing both sides by 3 (division property of equality)",
+            "subtracting 3 from both sides"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 3,
+          "prompt": "Does the point (-9, -24) lie on the graph of y = 4x + 10?",
+          "choices": [
+            "It cannot be determined without graphing the line.",
+            "Yes; the coordinates satisfy the equation.",
+            "Only if the graph is extended beyond the plotted window.",
+            "No; substituting x = -9 gives y = -26, not -24."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 3,
+          "prompt": "The graphs of f(x) = -8x − 6 and g(x) = 6x − 48 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = 27/7",
+            "x = -3",
+            "x = 21",
+            "x = 3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve 4x + 6y = 8 for y.",
+          "choices": [
+            "y = (8 − 4x)/6",
+            "y = (4x − 8)/6",
+            "y = 8 − 4x",
+            "y = (8 + 4x)/6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x: -11x + 8 = -13x + 32.",
+          "choices": [
+            "x = -12",
+            "x = 12",
+            "x = 20",
+            "x = -1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x and state the solution set: 9x − 3 < 9.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 3,
+          "prompt": "In a solution, one line reads: From 3(x + 4) = 21 to 3x + 12 = 21. Which property justifies that step?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u03-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u03-l10"
+  }
+}

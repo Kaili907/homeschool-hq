@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u08-l10",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u08-l10",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "dayInUnit": 10,
+    "courseDay": 136,
+    "phase": "Independent evidence B",
+    "focus": "interpreting a line plot",
+    "title": "Independent evidence B: interpreting a line plot"
+  },
+  "standards": [
+    "3.MD.4"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence B",
+    "profile": "independent-evidence-varied",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 1,
+          "prompt": "A line plot shows 5 pencil lengths to the nearest 1/2 inch: 1/2, 1/2, 1, 1, 3/2. How many pencils measured exactly 1/2 inch?",
+          "workedSolution": {
+            "steps": [
+              "Two of the recorded lengths are 1/2 inch."
+            ],
+            "answer": "2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 3/4, 4/4, 3/4, 4/4, 4/4, 1/4, 4/4, 4/4. How many leaves measured exactly 4/4 inch?",
+          "choices": [
+            "5",
+            "8",
+            "6",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 1/4, 1/4, 3/4, 3/4, 4/4, 1/4, 1/4, 1/4. How many leaves measured exactly 1/4 inch?",
+          "choices": [
+            "6",
+            "8",
+            "4",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 5/8, 6/8, 3/8, 7/8, 5/8, 8/8, 2/8, 4/8. How many leaves measured exactly 7/8 inch?",
+          "choices": [
+            "1",
+            "2",
+            "8",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l10#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 8/8, 8/8, 2/8, 2/8, 2/8, 7/8, 7/8, 2/8. How many leaves measured exactly 8/8 inch?",
+          "choices": [
+            "3",
+            "2",
+            "8",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l10#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 8/8, 1/8, 3/8, 8/8, 5/8, 1/8, 3/8, 3/8. How many leaves measured exactly 8/8 inch?",
+          "choices": [
+            "8",
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l10#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 7/8, 7/8, 2/8, 6/8, 4/8, 2/8, 5/8, 3/8. How many leaves measured exactly 7/8 inch?",
+          "choices": [
+            "3",
+            "2",
+            "8",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l10#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 6/8, 5/8, 1/8, 4/8, 7/8, 2/8, 2/8, 6/8. How many leaves measured exactly 1/8 inch?",
+          "choices": [
+            "2",
+            "1",
+            "8",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l10#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 1/8, 4/8, 1/8, 8/8, 3/8, 1/8, 8/8, 2/8. How many leaves measured exactly 2/8 inch?",
+          "choices": [
+            "1",
+            "2",
+            "0",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l10#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 8/8, 3/8, 8/8, 5/8, 4/8, 7/8, 8/8, 1/8. How many leaves measured exactly 5/8 inch?",
+          "choices": [
+            "8",
+            "0",
+            "2",
+            "1"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u08-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u08-l10"
+  }
+}

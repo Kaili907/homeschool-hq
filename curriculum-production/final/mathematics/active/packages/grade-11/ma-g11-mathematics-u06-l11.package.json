@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u06-l11",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u06-l11",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Advanced Function Analysis and Graphing",
+    "dayInUnit": 11,
+    "courseDay": 101,
+    "phase": "Performance task planning",
+    "focus": "revealing zeros, extrema, and growth rate from algebraic form",
+    "title": "Performance task planning: revealing zeros, extrema, and growth rate from algebraic form"
+  },
+  "standards": [
+    "F-IF.7",
+    "F-IF.8",
+    "F-IF.9",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "rational-function-asymptotes",
+          "standard": "F-IF.7",
+          "difficulty": 1,
+          "prompt": "Asymptotes of (x + 1)/(x − 3)?",
+          "workedSolution": {
+            "steps": [
+              "Denominator zero at x = 3.",
+              "Equal degrees give y = 1."
+            ],
+            "answer": "vertical x = 3; horizontal y = 1"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-across-representations",
+          "standard": "F-IF.9",
+          "difficulty": 2,
+          "prompt": "Function f is given in vertex form as f(x) = −(x + 3)² − 5, so it opens downward. Function g is given by a table whose greatest output is -1. Which function has the greater maximum, and by how much?",
+          "choices": [
+            "g, by -5",
+            "g, by -1",
+            "g, by 4",
+            "g, by -6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 2,
+          "prompt": "The function f(x) = (x − 4)² + 4 opens upward. State its minimum value and where it occurs.",
+          "choices": [
+            "minimum 5 at x = 4",
+            "minimum -4 at x = 4",
+            "minimum 4 at x = -4",
+            "minimum 4 at x = 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-end-behaviour",
+          "standard": "F-IF.7",
+          "difficulty": 3,
+          "prompt": "A polynomial has degree 5 and leading coefficient -5. Describe its end behaviour.",
+          "choices": [
+            "both ends rise",
+            "the left end falls and the right end rises",
+            "both ends fall",
+            "the left end rises and the right end falls"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "rational-function-asymptotes",
+          "standard": "F-IF.7",
+          "difficulty": 3,
+          "prompt": "For f(x) = (x + 3) / (x + 5), state the vertical asymptote and the horizontal asymptote.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "compare-functions-across-representations",
+          "standard": "F-IF.9",
+          "difficulty": 3,
+          "prompt": "Function f is given in vertex form as f(x) = −(x − 2)² + 4, so it opens downward. Function g is given by a table whose greatest output is 8. Which function has the greater maximum, and by how much?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 3,
+          "prompt": "The function f(x) = 2(x + 3)² − 10 opens upward. State its minimum value and where it occurs.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u06-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u06-l11"
+  }
+}

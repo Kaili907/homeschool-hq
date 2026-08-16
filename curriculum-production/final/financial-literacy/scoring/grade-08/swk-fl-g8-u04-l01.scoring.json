@@ -1,0 +1,286 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u04-l01",
+  "lessonId": "ma-g8-financial-literacy-u04-l01",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much interest accrues in one year?",
+        "answer": "$600.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(7.5% of 8,000.00) = 600.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 800000
+            },
+            "bps": 750,
+            "round": "exact"
+          },
+          "trace": "(7.5% of 8,000.00) = 600.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the interest over three years?",
+        "answer": "$1,800.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((7.5% of 8,000.00) x 3) = 1,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 800000
+              },
+              "bps": 750,
+              "round": "exact"
+            },
+            "times": 3
+          },
+          "trace": "((7.5% of 8,000.00) x 3) = 1,800.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is repaid in total over three years?",
+        "answer": "$9,800.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(8,000.00 + ((7.5% of 8,000.00) x 3)) = 9,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 800000
+              },
+              {
+                "op": "scale",
+                "of": {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 800000
+                  },
+                  "bps": 750,
+                  "round": "exact"
+                },
+                "times": 3
+              }
+            ]
+          },
+          "trace": "(8,000.00 + ((7.5% of 8,000.00) x 3)) = 9,800.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is repaid in total over five years?",
+        "answer": "$11,000.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(8,000.00 + ((7.5% of 8,000.00) x 5)) = 11,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 800000
+              },
+              {
+                "op": "scale",
+                "of": {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 800000
+                  },
+                  "bps": 750,
+                  "round": "exact"
+                },
+                "times": 5
+              }
+            ]
+          },
+          "trace": "(8,000.00 + ((7.5% of 8,000.00) x 5)) = 11,000.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much more does the five-year term cost than the three-year term?",
+        "answer": "$1,200.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((8,000.00 + ((7.5% of 8,000.00) x 5)) - (8,000.00 + ((7.5% of 8,000.00) x 3))) = 1,200.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 800000
+                },
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "percent",
+                    "of": {
+                      "op": "money",
+                      "cents": 800000
+                    },
+                    "bps": 750,
+                    "round": "exact"
+                  },
+                  "times": 5
+                }
+              ]
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 800000
+                },
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "percent",
+                    "of": {
+                      "op": "money",
+                      "cents": 800000
+                    },
+                    "bps": 750,
+                    "round": "exact"
+                  },
+                  "times": 3
+                }
+              ]
+            }
+          },
+          "trace": "((8,000.00 + ((7.5% of 8,000.00) x 5)) - (8,000.00 + ((7.5% of 8,000.00) x 3))) = 1,200.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Weighing term against total cost",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats the shorter term as automatically correct for Emrys."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The payment-size tradeoff is mentioned for Emrys but not tied to affordability."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Emrys's longer term lowers each payment and raises the total, names when lower payments are necessary, and names when the extra cost is not justified."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much interest accrues in one year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the interest over three years?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is repaid in total over three years?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is repaid in total over five years?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much more does the five-year term cost than the three-year term?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain why a borrower might still choose Emrys's five-year term despite the extra $1,200.00, and what would make that choice unwise."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much interest accrues in one year? Answer: $600.00. Verification: (7.5% of 8,000.00) = 600.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What is the interest over three years? Answer: $1,800.00. Verification: ((7.5% of 8,000.00) x 3) = 1,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What is repaid in total over three years? Answer: $9,800.00. Verification: (8,000.00 + ((7.5% of 8,000.00) x 3)) = 9,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What is repaid in total over five years? Answer: $11,000.00. Verification: (8,000.00 + ((7.5% of 8,000.00) x 5)) = 11,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How much more does the five-year term cost than the three-year term? Answer: $1,200.00. Verification: ((8,000.00 + ((7.5% of 8,000.00) x 5)) - (8,000.00 + ((7.5% of 8,000.00) x 3))) = 1,200.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Weighing term against total cost — Not yet: The response treats the shorter term as automatically correct for Emrys. Approaching: The payment-size tradeoff is mentioned for Emrys but not tied to affordability. Meets: The response explains that Emrys's longer term lowers each payment and raises the total, names when lower payments are necessary, and names when the extra cost is not justified. The response explains that Emrys's longer term lowers each payment and raises the total, names when lower payments are necessary, and names when the extra cost is not justified."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Emrys's longer term lowers each payment and raises the total, names when lower payments are necessary, and names when the extra cost is not justified."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u04-l01.scoring.json",
+    "sourceScoringSha256": "a2136b431ffb73cdc14000e65da754db8ac2757cf63cccb48669cec5913c7635",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

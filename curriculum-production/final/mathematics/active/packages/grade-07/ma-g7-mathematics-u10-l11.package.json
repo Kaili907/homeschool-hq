@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u10-l11",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u10-l11",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 11,
+    "courseDay": 173,
+    "phase": "Performance task planning",
+    "focus": "data and uncertainty",
+    "title": "Performance task planning: data and uncertainty"
+  },
+  "standards": [
+    "7.RP.3",
+    "7.NS.3",
+    "7.EE.4",
+    "7.G.6",
+    "7.SP.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "proportional-and-algebraic-models",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "A model predicts a $80 rate will increase by 25%. What is the new rate?",
+          "workedSolution": {
+            "steps": [
+              "Identify what the problem is asking and which quantities, assumptions, or constraints matter.",
+              "Build and solve a model, then check the result against the context."
+            ],
+            "answer": "$100"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "geometry-and-measurement",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A storage container is designed as a rectangular prism 3 ft long, 9 ft wide, and 4 ft high. What is its volume in cubic feet?",
+          "choices": [
+            "108",
+            "111",
+            "27",
+            "150"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "data-and-uncertainty",
+          "standard": "7.SP.4",
+          "difficulty": 2,
+          "prompt": "A data set has the values 5, 20, 35, 50, 65. The mean is 35. What is the mean absolute deviation (MAD), a measure of the data's uncertainty or spread?",
+          "choices": [
+            "18",
+            "3",
+            "15",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "argument-and-presentation",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A student claims a box that is 4 by 5 by 6 units has a volume of 15 cubic units. Evaluate the claim.",
+          "choices": [
+            "Yes; the volume is 15 cubic units.",
+            "Cannot be determined from the given information.",
+            "No; the volume is 17 cubic units, not 15.",
+            "No; the volume is 120 cubic units, not 15."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "problem-formulation",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "A rental company charges a $8 base fee plus $5 per hour. A customer's total bill was $53. Which equation models this situation, and how many hours were rented?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "assumptions-and-constraints",
+          "standard": "7.NS.3",
+          "difficulty": 3,
+          "prompt": "A diver starts at the surface (0 m) and descends 7 m, then descends another 24 m, then ascends 12 m. The dive plan assumes a depth limit of 42 m below the surface. What is the diver's final position, as a signed number of meters?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "proportional-and-algebraic-models",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "A model predicts a $280 rate will decrease by 10%. What does the model predict as the new rate?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u10-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u10-l11"
+  }
+}

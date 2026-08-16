@@ -1,0 +1,251 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://manuel-academy/curriculum-production/final/health-physical-education/student-task-card.schema.json",
+  "title": "Health/PE student task card",
+  "description": "Student-facing lesson or unit-assessment task card. Never contains scoring guidance, mastery rules, or adaptive-tutor routing — those live only in the paired scoring-guides/ file.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "grade", "subject", "neverRequires", "sourceProvenance", "productionReadiness"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "kind": { "enum": ["lesson-task-card", "unit-assessment-task-card"] },
+    "lessonId": { "type": "string" },
+    "assessmentId": { "type": "string" },
+    "courseId": { "type": "string" },
+    "grade": { "type": "integer", "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12] },
+    "subject": { "enum": ["health", "physical-education"] },
+    "unitNumber": { "type": "integer" },
+    "unitTitle": { "type": "string" },
+    "title": { "type": "string" },
+    "focus": { "type": "string" },
+    "learningGoal": { "type": "string" },
+    "essentialQuestion": { "type": ["string", "null"] },
+    "estimatedMinutes": { "type": ["string", "null"] },
+    "standards": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "primaryLessonType": {
+      "enum": ["CONCEPT_VOCABULARY", "INFORMATION_EVALUATION", "DECISION_REASONING", "COMMUNICATION_HELP_SEEKING", "HEALTH_SKILL_PROCEDURE", "REVIEW_RETRIEVAL", "REMEDIATION_RETRY", "MASTERY_EVIDENCE", "PROJECT_CAPSTONE", "MOVEMENT_CONCEPT_CUES", "SKILL_DEVELOPMENT", "TACTICS_DECISION_MAKING", "FITNESS_SELF_MANAGEMENT", "SAFETY_STOP_DECISION", "COOPERATIVE_CREATIVE_ACTIVITY", "MASTERY_PERFORMANCE", "PROJECT_LIFETIME_ACTIVITY"]
+    },
+    "secondaryLessonTypes": { "type": "array", "maxItems": 2, "uniqueItems": true, "items": { "type": "string" } },
+    "lessonFamilyPlan": { "type": "object", "required": ["instructionalPurpose", "guidedEmphasis", "independentEvidence", "evidencePurpose"] },
+    "goal": { "type": "string", "minLength": 20 },
+    "successOverview": { "type": "string", "minLength": 20 },
+    "readinessCheck": { "type": "array", "minItems": 3, "items": { "type": "string" } },
+    "materials": { "type": "array", "items": { "type": "string" } },
+    "movementCues": { "type": ["array", "null"], "items": { "type": "string" } },
+    "movementModel": { "$ref": "#/definitions/movementModel" },
+    "decisionModel": { "$ref": "#/definitions/movementModel" },
+    "guidedPractice": {
+      "type": "array", "minItems": 2,
+      "items": { "type": "object", "required": ["prompt", "support", "feedback"], "properties": { "prompt": { "type": "string" }, "support": { "type": "string" }, "feedback": { "type": "string" } } }
+    },
+    "practiceProgression": {
+      "type": "array", "minItems": 3,
+      "items": { "type": "object", "required": ["task", "successCheck", "changedVariable", "learnerChoice"], "properties": { "task": { "type": "string" }, "successCheck": { "type": "string" }, "changedVariable": { "type": "string" }, "learnerChoice": { "type": "string" } } }
+    },
+    "independentActivity": { "type": "object" },
+    "warmUpAndFinishPolicy": { "type": "object", "required": ["applicability", "warmUp", "coolDown", "rationale"] },
+    "ageAppropriateTechnique": { "type": "string" },
+    "spaceSetup": { "type": "string" },
+    "equipmentRequirements": {
+      "type": "object",
+      "required": ["required", "optional", "householdSubstitutes", "equalCreditNoEquipment"],
+      "properties": {
+        "required": { "type": "array", "items": { "type": "string" } },
+        "optional": { "type": "array", "items": { "type": "string" } },
+        "householdSubstitutes": { "type": "array", "items": { "type": "string" } },
+        "equalCreditNoEquipment": { "type": "string" }
+      }
+    },
+    "safetyRules": { "type": "array", "items": { "type": "string" } },
+    "stoppingRules": { "type": "array", "items": { "type": "string" } },
+    "accessibleAdaptation": { "type": "string" },
+    "adaptationRoutes": {
+      "type": "object",
+      "required": ["seated", "supported", "reducedRange", "reducedPaceOrDemand", "mobilityAidCompatible", "solo", "lowSpace", "noEquipment", "describedOrDecisionRoute"]
+    },
+    "lowSpaceNoEquipmentAlternative": { "type": "string" },
+    "activitySteps": { "type": "array", "items": { "type": "string" } },
+    "executionCategory": { "type": "string" },
+    "commonErrorToWatchFor": { "type": ["string", "null"] },
+    "evidenceExpectations": { "type": "object", "required": ["learnerEvidence", "physicalCompletion", "observer", "doNotCollect"] },
+    "retryPlan": { "type": "object", "required": ["trigger", "simplerSetup", "differentCue", "alternateModel", "boundedPractice", "freshRetry", "exitCriterion"] },
+    "guardianAuthority": { "type": "object", "required": ["level", "requiredAction", "minimumRecord", "confirmationBoundary", "equalCreditAlternative", "tutorOrLearnerMaySubstitute"] },
+    "tutorMetadata": { "type": "object", "required": ["scope", "may", "mustNot"] },
+    "keyPoints": { "type": "array", "items": { "type": "string" } },
+    "privacySafeScenario": {
+      "type": ["string", "null"],
+      "description": "A fictional scenario the learner responds to. The learner may always answer about the fictional character instead of themselves."
+    },
+    "studentTask": { "type": ["string", "null"] },
+    "knowledgeCheck": { "type": ["string", "null"] },
+    "completionCriteria": { "type": "array", "items": { "type": "string" } },
+    "adaptationChoices": {
+      "type": ["string", "null"],
+      "description": "The adapted / equal-status alternative path for this task (Health: trusted-adult and private-response alternatives; PE: seated, supported, reduced-range, or solo alternatives)."
+    },
+    "extensionChallenge": { "type": ["string", "null"] },
+    "accessibilitySupports": { "type": "array", "items": { "type": "string" } },
+    "lessonExperience": {
+      "type": "object",
+      "required": ["experienceVersion", "privacyNotice", "entryCheck", "explanation", "vocabulary", "vocabularyCheck", "modelExample", "guidedReasoning", "independentEvidence", "remediation", "laterTransfer"],
+      "properties": {
+        "experienceVersion": { "type": "string" },
+        "privacyNotice": { "type": "string" },
+        "entryCheck": { "type": "object" },
+        "explanation": { "type": "object" },
+        "vocabulary": { "type": "object" },
+        "vocabularyCheck": { "type": "object" },
+        "modelExample": { "type": "object" },
+        "guidedReasoning": { "type": "object" },
+        "independentEvidence": { "type": "object" },
+        "freshMasteryCheck": { "type": "object" },
+        "freshConceptCheck": { "type": "object" },
+        "remediation": { "type": "object" },
+        "laterTransfer": { "type": "object" }
+      },
+      "anyOf": [
+        { "required": ["freshMasteryCheck"] },
+        { "required": ["freshConceptCheck"] }
+      ]
+    },
+    "trustedAdultNote": {
+      "type": "string",
+      "description": "Health only: directs urgent safety/health/mental-health concerns to a trusted adult or qualified professional."
+    },
+    "optionalReflection": {
+      "type": ["object", "null"],
+      "required": ["prompt", "private", "graded", "optional"],
+      "properties": {
+        "prompt": { "type": "string" },
+        "private": { "const": true },
+        "graded": { "const": false },
+        "optional": { "const": true }
+      }
+    },
+    "reflectionPolicy": {
+      "type": "object",
+      "required": ["mode", "visibleTo", "scored", "contributesToCompletion", "contributesToMastery"],
+      "properties": {
+        "mode": { "const": "PRIVATE_OPTIONAL" },
+        "visibleTo": { "type": "array", "items": { "type": "string" } },
+        "scored": { "const": false },
+        "contributesToCompletion": { "const": false },
+        "contributesToMastery": { "const": false }
+      }
+    },
+    "prompts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "prompt"],
+        "properties": {
+          "type": { "type": "string" },
+          "prompt": { "type": "string" },
+          "possiblePoints": { "type": ["number", "null"] }
+        }
+      }
+    },
+    "totalPossiblePoints": { "type": ["number", "null"] },
+    "accommodationNote": { "type": ["string", "null"] },
+    "neverRequires": {
+      "type": "array",
+      "minItems": 5,
+      "items": { "type": "string" },
+      "description": "Static, always-present list of what this task never requires: body weight/BMI/body-fat, calorie counting or diet goals, medical or sexual-history disclosure, photo/video/voice proof, public performance."
+    },
+    "sourceProvenance": {
+      "type": "object",
+      "required": ["sourceBranch"],
+      "properties": {
+        "sourceBranch": { "type": "string" },
+        "sourceLessonId": { "type": "string" },
+        "sourceAssessmentId": { "type": "string" }
+      }
+    },
+    "productionReadiness": {
+      "type": "object",
+      "required": ["status", "codes"],
+      "properties": {
+        "status": { "enum": ["READY", "NEEDS_HUMAN_REVIEW", "NOT_READY"] },
+        "codes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": { "const": "lesson-task-card" },
+          "subject": { "const": "health" }
+        },
+        "required": ["kind", "subject"]
+      },
+      "then": {
+        "required": ["standards", "primaryLessonType", "secondaryLessonTypes", "learningGoal", "lessonExperience", "reflectionPolicy", "trustedAdultNote"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": { "const": "lesson-task-card" },
+          "subject": { "const": "physical-education" }
+        },
+        "required": ["kind", "subject"]
+      },
+      "then": {
+        "required": [
+          "movementCues",
+          "primaryLessonType",
+          "goal",
+          "successOverview",
+          "readinessCheck",
+          "guidedPractice",
+          "practiceProgression",
+          "independentActivity",
+          "warmUpAndFinishPolicy",
+          "ageAppropriateTechnique",
+          "spaceSetup",
+          "equipmentRequirements",
+          "safetyRules",
+          "stoppingRules",
+          "accessibleAdaptation",
+          "adaptationRoutes",
+          "lowSpaceNoEquipmentAlternative",
+          "activitySteps",
+          "completionCriteria",
+          "evidenceExpectations",
+          "retryPlan",
+          "guardianAuthority",
+          "tutorMetadata"
+        ],
+        "anyOf": [
+          { "required": ["movementModel"] },
+          { "required": ["decisionModel"] }
+        ]
+      }
+    }
+  ],
+  "not": {
+    "anyOf": [
+      { "required": ["answer_or_scoring_guidance"] },
+      { "required": ["mastery_rule"] },
+      { "required": ["adaptive_tutor_routes"] },
+      { "required": ["masteryInterpretation"] },
+      { "required": ["rubricDimensions"] },
+      { "required": ["scoringGuidance"] }
+    ]
+  },
+  "definitions": {
+    "movementModel": {
+      "type": "object",
+      "required": ["startingPosition", "action", "keyCue", "commonError", "correction", "safetyBoundary"],
+      "properties": {
+        "startingPosition": { "type": "string", "minLength": 20 },
+        "action": { "type": "string", "minLength": 20 },
+        "keyCue": { "type": "string", "minLength": 5 },
+        "commonError": { "type": "string", "minLength": 15 },
+        "correction": { "type": "string", "minLength": 15 },
+        "safetyBoundary": { "type": "string", "minLength": 15 }
+      }
+    }
+  }
+}

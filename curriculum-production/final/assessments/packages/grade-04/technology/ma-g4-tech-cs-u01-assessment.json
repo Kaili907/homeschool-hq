@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-tech-cs-u01-assessment",
+  "courseRef": "ma-g4-tech-cs",
+  "grade": 4,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g4-tech-cs-u01",
+    "unitNumber": 1,
+    "unitTitle": "Digital Citizenship, Privacy, and Kindness Online",
+    "courseTitle": "Grade 4 Technology",
+    "assessmentLessonRef": "ma-g4-tech-cs-u01-l05"
+  },
+  "standards": [
+    "Michigan Computer Science: Impacts of Computing",
+    "Michigan Computer Science: Networks and the Internet"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-04/ma-g4-tech-cs-u01-l05.task-package.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Show that you can do this on your own: balancing screen time. Put away the help sheet and the examples. Solve a new problem all the way. First write what answer you expect. Then test it two ways. Include one tricky case. Show what you expected and what you got. Then explain your thinking. Write it so someone new to balancing screen time could follow it. Keep today's work tied to your unit. Today is about balancing screen time. It is part of \"Digital Citizenship, Privacy, and Kindness Online\". Later days in this unit cover other things, like digital footprints. Before you stop, do this check: Rate confidence in balancing screen time, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation. In grade 4, try the steps yourself before you ask for help. Give a reason in your own words for at least one choice. A labelled drawing or a spoken answer counts fully."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Your solution done alone, a two-way check with expected and actual, and an explanation someone new could follow."
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/technology/ma-g4-tech-cs-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task about balancing screen time.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-tech-cs-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-04/ma-g4-tech-cs-u01-l05.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Digital Citizenship, Privacy, and Kindness Online?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

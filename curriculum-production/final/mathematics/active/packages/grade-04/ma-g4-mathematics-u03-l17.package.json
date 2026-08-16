@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l17",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l17",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 17,
+    "courseDay": 53,
+    "phase": "Targeted correction and reassessment",
+    "focus": "comparison and factoring",
+    "title": "Targeted correction and reassessment: comparison and factoring"
+  },
+  "standards": [
+    "4.OA.2",
+    "4.OA.4"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 1,
+          "prompt": "What is the 4th multiple of 6?",
+          "workedSolution": {
+            "steps": [
+              "Multiples of 6: 6, 12, 18, 24.",
+              "The 4th multiple is 24."
+            ],
+            "answer": "24"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Ella has 5 stickers. Zoe has 3 times as many as Ella. How many stickers does Zoe have?",
+          "workedSolution": {
+            "steps": [
+              "3 × 5 = 15."
+            ],
+            "answer": "15"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 1,
+          "prompt": "How many whole-number factors does 12 have?",
+          "choices": [
+            "5",
+            "7",
+            "6",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 6th multiple of 6?",
+          "choices": [
+            "12",
+            "30",
+            "42",
+            "36"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Liam has 5 trading cards. Sofia has 3 times as many cards as Liam. How many cards does Sofia have?",
+          "choices": [
+            "10",
+            "20",
+            "15",
+            "8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 45 have?",
+          "choices": [
+            "3",
+            "6",
+            "7",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 5th multiple of 7?",
+          "choices": [
+            "28",
+            "12",
+            "42",
+            "35"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 3,
+          "prompt": "Mia has 9 trading cards. Jacob has 5 times as many cards as Mia. How many cards does Jacob have?",
+          "choices": [
+            "14",
+            "45",
+            "54",
+            "36"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l17"
+  }
+}

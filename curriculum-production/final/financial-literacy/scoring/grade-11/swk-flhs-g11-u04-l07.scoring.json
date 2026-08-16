@@ -1,0 +1,440 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l07",
+  "lessonId": "ma-g11-financial-literacy-u04-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$16,599.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "36 payments of $461.10 — the whole outlay under the shorter offer, before the borrowed amount is taken out of it."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$18,818.64",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "72 payments of $261.37 — the whole outlay under the longer offer, over twice as many months."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$2,099.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$16,599.60 repaid against $14,500 borrowed."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$4,318.64",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$18,818.64 repaid against the same $14,500."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "2.06",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,318.64 against $2,099.60. Doubling the term more than doubles the interest, so the claim understates the cost."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,219.04",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,318.64 against $2,099.60 — more than the entire interest bill of the shorter loan."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$4,199.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Exactly double the $2,099.60 — the figure the claim predicts."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$119.44",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,318.64 actual against the $4,199.20 the claim predicts."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$199.73",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$461.10 against $261.37 — the relief the extra $2,219.04 of interest buys."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(short * 36, 2)",
+        "substituted": "round(461.1 * 36, 2)",
+        "result": "$16,599.60",
+        "why": "36 payments of $461.10 — the whole outlay under the shorter offer, before the borrowed amount is taken out of it."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(long * 72, 2)",
+        "substituted": "round(261.37 * 72, 2)",
+        "result": "$18,818.64",
+        "why": "72 payments of $261.37 — the whole outlay under the longer offer, over twice as many months."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - principal",
+        "substituted": "#t1-p1 - 14500",
+        "result": "$2,099.60",
+        "why": "$16,599.60 repaid against $14,500 borrowed."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "#t1-p2 - principal2",
+        "substituted": "#t1-p2 - 14500",
+        "result": "$4,318.64",
+        "why": "$18,818.64 repaid against the same $14,500."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p4 / #t1-p3, 2)",
+        "substituted": "round(#t1-p4 / #t1-p3, 2)",
+        "result": "2.06",
+        "why": "$4,318.64 against $2,099.60. Doubling the term more than doubles the interest, so the claim understates the cost."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p4 - #t1-p3",
+        "substituted": "#t1-p4 - #t1-p3",
+        "result": "$2,219.04",
+        "why": "$4,318.64 against $2,099.60 — more than the entire interest bill of the shorter loan."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 * 2",
+        "substituted": "#t1-p3 * 2",
+        "result": "$4,199.20",
+        "why": "Exactly double the $2,099.60 — the figure the claim predicts."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p4 - #t2-p3",
+        "substituted": "#t1-p4 - #t2-p3",
+        "result": "$119.44",
+        "why": "$4,318.64 actual against the $4,199.20 the claim predicts."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(short2 - long2, 2)",
+        "substituted": "round(461.1 - 261.37, 2)",
+        "result": "$199.73",
+        "why": "$461.10 against $261.37 — the relief the extra $2,219.04 of interest buys."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The claim is close but wrong, and its direction of error matters. Explain why doubling the term more than doubles the interest, using the amortisation idea from earlier in the unit, and say who is harmed by an error in this direction.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that interest is charged on the outstanding balance, and a longer term means the balance falls more slowly, so more of the loan is outstanding for more of the time.",
+          "Points out that the error understates the cost by $119.44, so it makes the longer term look better than it is.",
+          "Identifies the borrower considering the longer term as the person harmed by an error that flatters it."
+        ],
+        "evidenceRequirements": [
+          "Cites the 2.06 ratio and the $119.44 by which the claim understates the interest."
+        ],
+        "lookFors": [
+          "The explanation rests on the balance falling more slowly, not on a general statement that longer loans cost more.",
+          "The response notices the direction of the error, not only its size.",
+          "A response observing that the claim is a useful rough check even though it is wrong is showing good judgement."
+        ],
+        "commonMisconception": "Assuming interest on an amortising loan is proportional to the term.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The extra interest is $2,219.04 and the monthly relief is $199.73. Work out how many months of relief the extra interest is worth, and say what that comparison does and does not settle.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Computes the comparison — about 11.1 months of $199.73 relief equals the $2,219.04 of extra interest — and reports it.",
+          "States what the comparison does not settle: whether the borrower can pay $461.10 at all, which is a question about capacity rather than about total cost."
+        ],
+        "evidenceRequirements": [
+          "Uses both the $2,219.04 extra interest and the $199.73 monthly relief in the comparison."
+        ],
+        "lookFors": [
+          "The comparison is computed rather than described.",
+          "The response identifies capacity as the question the arithmetic cannot answer."
+        ],
+        "dimensions": [
+          "transfer",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total of payments under the 36-month offer?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total of payments under the 72-month offer?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the interest on the 36-month offer?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the interest on the 72-month offer?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the ratio of the 72-month interest to the 36-month interest? Give two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much extra interest does the 72-month offer cost?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What would the 72-month interest have been if the claim were true?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "By how much does the claim understate the 72-month interest?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "How much lower is the monthly payment on the 72-month offer?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The claim is close but wrong, and its direction of error matters. Explain why doubling the term more than doubles the interest, using the amortisation idea from earlier in the unit, and say who is harmed by an error in this direction."
+        },
+        {
+          "ref": "t3-p2:fixed",
+          "sourcePromptRef": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "Work out how many months of $199.73 monthly relief equal $2,219.04 of extra interest."
+        },
+        {
+          "ref": "t3-p2:open",
+          "sourcePromptRef": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Say what that comparison does and does not settle."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the total of payments under the 36-month offer? Answer: $16,599.60. Verification: 36 payments of $461.10 — the whole outlay under the shorter offer, before the borrowed amount is taken out of it. t1-p2: What is the total of payments under the 72-month offer? Answer: $18,818.64. Verification: 72 payments of $261.37 — the whole outlay under the longer offer, over twice as many months. t1-p3: What is the interest on the 36-month offer? Answer: $2,099.60. Verification: $16,599.60 repaid against $14,500 borrowed. t1-p4: What is the interest on the 72-month offer? Answer: $4,318.64. Verification: $18,818.64 repaid against the same $14,500. t2-p1: What is the ratio of the 72-month interest to the 36-month interest? Give two decimal places. Answer: 2.06. Verification: $4,318.64 against $2,099.60. Doubling the term more than doubles the interest, so the claim understates the cost. t2-p2: How much extra interest does the 72-month offer cost? Answer: $2,219.04. Verification: $4,318.64 against $2,099.60 — more than the entire interest bill of the shorter loan. t2-p3: What would the 72-month interest have been if the claim were true? Answer: $4,199.20. Verification: Exactly double the $2,099.60 — the figure the claim predicts. t2-p4: By how much does the claim understate the 72-month interest? Answer: $119.44. Verification: $4,318.64 actual against the $4,199.20 the claim predicts. t2-p5: How much lower is the monthly payment on the 72-month offer? Answer: $199.73. Verification: $461.10 against $261.37 — the relief the extra $2,219.04 of interest buys. t3-p2:fixed: Work out how many months of $199.73 monthly relief equal $2,219.04 of extra interest. Answer: Approximately 11.1 months. Verification: $2,219.04 / $199.73 = 11.110499... months, which is approximately 11.1 months to the precision stated by the source acceptable-answer criteria."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The claim is close but wrong, and its direction of error matters. Explain why doubling the term more than doubles the interest, using the amortisation idea from earlier in the unit, and say who is harmed by an error in this direction. Explains that interest is charged on the outstanding balance, and a longer term means the balance falls more slowly, so more of the loan is outstanding for more of the time. Points out that the error understates the cost by $119.44, so it makes the longer term look better than it is. Identifies the borrower considering the longer term as the person harmed by an error that flatters it. Cites the 2.06 ratio and the $119.44 by which the claim understates the interest. The explanation rests on the balance falling more slowly, not on a general statement that longer loans cost more. The response notices the direction of the error, not only its size. A response observing that the claim is a useful rough check even though it is wrong is showing good judgement. t3-p2: The extra interest is $2,219.04 and the monthly relief is $199.73. Work out how many months of relief the extra interest is worth, and say what that comparison does and does not settle. Computes the comparison — about 11.1 months of $199.73 relief equals the $2,219.04 of extra interest — and reports it. States what the comparison does not settle: whether the borrower can pay $461.10 at all, which is a question about capacity rather than about total cost. Uses both the $2,219.04 extra interest and the $199.73 monthly relief in the comparison. The comparison is computed rather than described. The response identifies capacity as the question the arithmetic cannot answer."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that interest is charged on the outstanding balance, and a longer term means the balance falls more slowly, so more of the loan is outstanding for more of the time. Points out that the error understates the cost by $119.44, so it makes the longer term look better than it is. Identifies the borrower considering the longer term as the person harmed by an error that flatters it. Computes the comparison — about 11.1 months of $199.73 relief equals the $2,219.04 of extra interest — and reports it. States what the comparison does not settle: whether the borrower can pay $461.10 at all, which is a question about capacity rather than about total cost."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 1 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 10,
+      "supplements": [
+        {
+          "ref": "t3-p2:fixed",
+          "sourcePromptRef": "t3-p2",
+          "promptText": "Work out how many months of $199.73 monthly relief equal $2,219.04 of extra interest.",
+          "answer": "Approximately 11.1 months",
+          "verification": {
+            "method": "INDEPENDENT_ORACLE",
+            "oracleId": "finlit-final-reconciliation@1",
+            "computation": "221904 cents / 19973 cents; round half away from zero to one decimal place",
+            "evidence": "$2,219.04 / $199.73 = 11.110499... months, which is approximately 11.1 months to the precision stated by the source acceptable-answer criteria.",
+            "verdict": "AGREES_WITH_SOURCE_ACCEPTABLE_ANSWER_CRITERIA"
+          }
+        }
+      ],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u04-l07.scoring.json",
+    "sourceScoringSha256": "2d8a067f660c874d7f16a934d55b162814e64574c212048a0893ef7aeeb14892",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u06-l05",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring",
+    "dayInUnit": 5,
+    "phase": "Concept model B",
+    "title": "Concept model B: identity theft and cybersecurity",
+    "focus": "identity theft and cybersecurity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "objective": "Learners design a household response to an invented identity-theft incident, sequencing actions and identifying what evidence to preserve.",
+  "scenario": "Damaris is an invented eighth grader studying a pretend incident: a credit alert reports a new account nobody opened, a password reset email arrives for an unrelated service, and a text asks the household to confirm a code. All of it is invented for study.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Never share a verification code or password with an incoming contact; this incident is invented for study."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Sort the three invented signals in Damaris's case into evidence of compromise and attempts to exploit it. Explain how each one is classified.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which signals in Damaris's case are evidence of a problem, which is an attack, and how can they be told apart?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Set out the household's actions in order, saying what should be preserved as evidence and what should never be shared with an incoming contact.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should the household do, in what order, what should be preserved, and what must never be shared?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Two unrelated services were affected.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why does a problem appearing across unrelated services point to a different cause than a single compromised account?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner responds to the text, ask what an attacker gains from the code in Damaris's case, and rebuild the sequence from that.",
+  "extension": "Ask the learner to write the three preventive measures the household should adopt after Damaris's incident.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u06-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "Which signals in Damaris's case are evidence of a problem, which is an attack, and how can they be told apart?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "What should the household do, in what order, what should be preserved, and what must never be shared?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Why does a problem appearing across unrelated services point to a different cause than a single compromised account?"
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "INSURANCE_RISK",
+    "secondary": [
+      "DECISION_QUALITY",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "CONCEPT_INSTRUCTION",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.insurance_risk.1",
+      "meaning": "Insurance transfers some defined financial risk in exchange for a premium and stated conditions."
+    },
+    {
+      "conceptId": "finlit.insurance_risk.2",
+      "meaning": "A deductible is the amount the fictional insured pays before covered amounts are calculated under the simplified rule."
+    },
+    {
+      "conceptId": "finlit.insurance_risk.3",
+      "meaning": "Coverage, exclusions, limits, likelihood, severity, and retained risk all affect a decision."
+    }
+  ],
+  "evidencePurpose": "Develop and apply risk management and insurance tradeoffs through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "title": "Understand risk management and insurance tradeoffs",
+    "paragraphs": [
+      "Insurance transfers some defined financial risk in exchange for a premium and stated conditions.",
+      "A deductible is the amount the fictional insured pays before covered amounts are calculated under the simplified rule. In this lesson, the learner uses the provided fictional facts about identity theft and cybersecurity; no real household information belongs in the work.",
+      "Coverage, exclusions, limits, likelihood, severity, and retained risk all affect a decision. The usable process is: Identify the covered event and exclusions. Separate premium, deductible, limit, and retained loss. Compute only under the stated simplified rule. Compare protection with cost and remaining risk."
+    ],
+    "relationship": [
+      "Identify the covered event and exclusions.",
+      "Separate premium, deductible, limit, and retained loss.",
+      "Compute only under the stated simplified rule.",
+      "Compare protection with cost and remaining risk."
+    ],
+    "commonConfusion": "Having insurance does not mean every loss is covered or that the insured pays nothing.",
+    "conditionsAndLimits": "Use only the stated fictional facts, time period, rate meaning, fees, taxes, timing, rounding, goals, and constraints. The result is education for this scenario, not individualized advice."
+  },
+  "calculationPolicy": {
+    "applicable": false,
+    "reason": "The protected response contract is decision and judgment work; calculation is not manufactured merely to add arithmetic.",
+    "moneyRepresentationIfIntroduced": "integer-cents",
+    "rateRepresentationIfIntroduced": "integer-basis-points-or-exact-rational"
+  },
+  "workedExamplePolicy": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "separationRule": "The model uses different fictional people, amounts, wording, and decision conditions from protected independent and mastery work."
+  },
+  "workedExamples": [
+    {
+      "exampleRef": "pd-r1-insurance_risk-g8",
+      "title": "Worked example — risk management and insurance tradeoffs",
+      "fictionCue": "Every person, amount, product, institution, and rule in this example is invented for instruction.",
+      "facts": [
+        "A fictional covered loss is $4,000.00.",
+        "The simplified policy has a $750.00 deductible and a limit above the loss.",
+        "No coinsurance or exclusions apply in this invented model."
+      ],
+      "goal": "Find the amount remaining after the deductible under the stated rule.",
+      "relevantInformation": "Use only the listed fictional facts and conditions; do not substitute real household information.",
+      "method": "Identify the covered event and exclusions. Separate premium, deductible, limit, and retained loss. Compute only under the stated simplified rule. Compare protection with cost and remaining risk.",
+      "steps": [
+        "Convert to cents: loss 400,000; deductible 75,000.",
+        "Covered amount after deductible: 400,000 − 75,000 = 325,000 cents.",
+        "That is $3,250.00 under the simplified assumptions.",
+        "Check: $750.00 retained deductible + $3,250.00 covered amount = $4,000.00 loss."
+      ],
+      "interpretation": "The fictional insured still retains the deductible and any excluded or over-limit loss.",
+      "reasonablenessCheck": "Check: $750.00 retained deductible + $3,250.00 covered amount = $4,000.00 loss.",
+      "tradeoff": "A lower deductible can raise the premium; the better fit depends on the stated risk and cash constraint.",
+      "limits": "The conclusion applies only to the stated fictional facts. A changed rate, fee, time, rule, goal, constraint, or risk can change it.",
+      "calculationAuthority": "All USD calculations shown here are written as integer cents. Percent rates, when used, are integer basis points divided by 10,000; stated rounding is half up at the declared line only."
+    }
+  ],
+  "guidedPracticeContract": {
+    "applicability": "REQUIRED",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g8-financial-literacy-u06-l05",
+    "learnerAction": "Identify the goal and constraints, compare alternatives, and support a provisional decision.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: Having insurance does not mean every loss is covered or that the insured pays nothing.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "written comparison or decision reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t1-p1",
+      "t2-p1",
+      "t3-p1"
+    ],
+    "gradeBandDemand": "Connect a result to affordability, time, fees, risk, or alternatives and explain a tradeoff.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.insurance_risk.1",
+      "finlit.insurance_risk.2",
+      "finlit.insurance_risk.3"
+    ],
+    "evidenceLessonId": "ma-g8-financial-literacy-u06-l10",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "A claim supported by relevant fictional evidence, tradeoff or risk reasoning, and acceptable variation under the adult-only rubric.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.insurance_risk.core-confusion",
+      "observableSignal": "Having insurance does not mean every loss is covered or that the insured pays nothing.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-insurance_risk-g8",
+        "title": "Alternate model — risk management and insurance tradeoffs",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "A fictional covered loss is 180,000 cents with a 50,000-cent deductible and no other sharing."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Subtract the deductible: 180,000 − 50,000 = 130,000 cents.",
+          "Convert: $1,300.00 remains after the deductible.",
+          "Check: 50,000 + 130,000 = 180,000 cents.",
+          "Then inspect limits and exclusions before calling the whole amount covered."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g8-financial-literacy-u06-l08",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g8-financial-literacy-u06-l10",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.insurance_risk.1",
+      "finlit.insurance_risk.2",
+      "finlit.insurance_risk.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g8-financial-literacy-u06-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.insurance_risk.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": false,
+      "reason": "The protected response contract is decision and judgment work; calculation is not manufactured merely to add arithmetic.",
+      "moneyRepresentationIfIntroduced": "integer-cents",
+      "rateRepresentationIfIntroduced": "integer-basis-points-or-exact-rational"
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g8-financial-literacy-u06-l05:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "MIDDLE_7_8",
+      "scaffolding": "Use multiple stated constraints, explicit vocabulary support, calculators where declared, and a changed-fact test.",
+      "reasoningDemand": "Connect a result to affordability, time, fees, risk, or alternatives and explain a tradeoff.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "JUDGMENT_APPLICATION",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Use multiple stated constraints, explicit vocabulary support, calculators where declared, and a changed-fact test.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-08/swk-fl-g8-u06-l05.package.json",
+    "sourcePackageSha256": "c4f232fda5239d823699f25e1c8752ff809f782c2d1549d276366d86ba7ffc64",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g8-financial-literacy-u06-l05",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

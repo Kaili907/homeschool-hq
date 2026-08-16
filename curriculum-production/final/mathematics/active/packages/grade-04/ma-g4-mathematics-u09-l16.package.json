@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l16",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l16",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 16,
+    "courseDay": 160,
+    "phase": "Unit assessment",
+    "focus": "measurement, conversion, and data",
+    "title": "Unit assessment: measurement, conversion, and data"
+  },
+  "standards": [
+    "4.MD.1",
+    "4.MD.2",
+    "4.MD.3",
+    "4.MD.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 1,
+          "prompt": "A rectangle has area 21 square units and one side is 3 units. What is the length of the other side?",
+          "choices": [
+            "21",
+            "18",
+            "7",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 1,
+          "prompt": "A line plot shows 6 ribbon lengths to the nearest 1/2 yard: 2/2, 1/2, 2/2, 1/2, 1/2, 1/2. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 2/2 yard?",
+          "choices": [
+            "4/2",
+            "3/2",
+            "4/4",
+            "5/2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 12 feet to inches.",
+          "choices": [
+            "14.4 inches",
+            "24 inches",
+            "12 inches",
+            "144 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A tank has 442 liters of water. 5 containers of 80 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "42",
+            "442",
+            "400",
+            "842"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 2,
+          "prompt": "A rectangle has area 54 square units and one side is 6 units. What is the length of the other side?",
+          "choices": [
+            "9",
+            "48",
+            "6",
+            "54"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 1/4, 3/4, 2/4, 2/4, 2/4, 1/4, 1/4, 1/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 1/4 yard?",
+          "choices": [
+            "3/4",
+            "4/8",
+            "4/4",
+            "5/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 20 feet to inches.",
+          "choices": [
+            "20 inches",
+            "240 inches",
+            "32 inches",
+            "24 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 352 meters, then walks 3 more trips of 146 meters each. How many meters total?",
+          "choices": [
+            "438",
+            "791",
+            "790",
+            "352"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 3,
+          "prompt": "A rectangle has area 154 square units and one side is 11 units. What is the length of the other side?",
+          "choices": [
+            "154",
+            "14",
+            "143",
+            "11"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 7/8, 3/8, 2/8, 1/8, 5/8, 3/8, 4/8, 6/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 5/8 yard?",
+          "choices": [
+            "5/16",
+            "5/8",
+            "6/8",
+            "4/8"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l16"
+  }
+}

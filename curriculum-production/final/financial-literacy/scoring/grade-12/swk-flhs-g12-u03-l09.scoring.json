@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l09",
+  "lessonId": "ma-g12-financial-literacy-u03-l09",
+  "integratedDomains": [
+    "saving-investing",
+    "insurance-risk",
+    "budgeting",
+    "debt"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$260 in each of the 10 months without a withdrawal. The two interrupted months contributed nothing, which is realistic: the month an emergency lands is rarely a month with spare money in it."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,490.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The two withdrawals added. Both were met from the reserve rather than by borrowing, which is the outcome the reserve exists to produce."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$5,310.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $7,200 opening balance plus $2,600.00 contributed less $4,490.00 withdrawn."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "2.21",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,310.00 against $2,400 of essential monthly costs. The reserve started the year at exactly 3 months of cover."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,890.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,200 at the start against $5,310.00 at the end. The contributions replaced most but not all of what the two emergencies took."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "7.3",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,890.00 gap at the existing contribution rate. This assumes no further withdrawal during those months, which the year just completed suggests is optimistic."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "contribution * 10",
+        "substituted": "260 * 10",
+        "result": "$2,600.00",
+        "why": "$260 in each of the 10 months without a withdrawal. The two interrupted months contributed nothing, which is realistic: the month an emergency lands is rarely a month with spare money in it."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "event1 + event2",
+        "substituted": "1850 + 2640",
+        "result": "$4,490.00",
+        "why": "The two withdrawals added. Both were met from the reserve rather than by borrowing, which is the outcome the reserve exists to produce."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "opening + #t1-p1 - #t1-p2",
+        "substituted": "7200 + #t1-p1 - #t1-p2",
+        "result": "$5,310.00",
+        "why": "The $7,200 opening balance plus $2,600.00 contributed less $4,490.00 withdrawn."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 / essential, 2)",
+        "substituted": "round(#t1-p3 / 2400, 2)",
+        "result": "2.21",
+        "why": "$5,310.00 against $2,400 of essential monthly costs. The reserve started the year at exactly 3 months of cover."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "opening2 - #t1-p3",
+        "substituted": "7200 - #t1-p3",
+        "result": "$1,890.00",
+        "why": "$7,200 at the start against $5,310.00 at the end. The contributions replaced most but not all of what the two emergencies took."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / contribution2, 1)",
+        "substituted": "round(#t2-p2 / 260, 1)",
+        "result": "7.3",
+        "why": "The $1,890.00 gap at the existing contribution rate. This assumes no further withdrawal during those months, which the year just completed suggests is optimistic."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The reserve fell from 3 months of cover to 2.21 months across the year. Decide whether this reserve worked or failed, defend your answer with the figures, and say what the two withdrawals suggest about whether $260 a month is the right contribution.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Makes the case that it worked: $4,490.00 of unplanned costs were met without borrowing, which is precisely what the reserve is for, and a reserve that is never drawn down is not doing its job.",
+          "Makes the case that the position weakened: cover fell by 0.79 months, and restoring it would take 7.3 clear months during which another withdrawal is quite possible given that two occurred this year.",
+          "Draws a conclusion about the contribution rate from the evidence: $2,600.00 contributed against $4,490.00 withdrawn means the reserve loses ground in a year with two events, so $260 a month is adequate only in quieter years."
+        ],
+        "evidenceRequirements": [
+          "Uses the 2.21 months of closing cover, the $4,490.00 withdrawn, and the $2,600.00 contributed."
+        ],
+        "lookFors": [
+          "The response judges the reserve against its purpose rather than against whether the balance rose.",
+          "Either verdict is credited when it is argued from the contribution and withdrawal figures together."
+        ],
+        "commonMisconception": "Reading a fall in a reserve balance as a failure, when absorbing an unplanned cost without borrowing is exactly the outcome the reserve was built for.",
+        "dimensions": [
+          "criteria-application",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What was contributed to the reserve across the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What was withdrawn across the year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What did the reserve hold at the end of the year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many months of essential costs does the closing balance cover? Give two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How far below the original 3-month position does the year end?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "At $260 a month, how many months would it take to restore the reserve to $7,200? Give one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The reserve fell from 3 months of cover to 2.21 months across the year. Decide whether this reserve worked or failed, defend your answer with the figures, and say what the two withdrawals suggest about whether $260 a month is the right contribution."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What was contributed to the reserve across the year? Answer: $2,600.00. Verification: $260 in each of the 10 months without a withdrawal. The two interrupted months contributed nothing, which is realistic: the month an emergency lands is rarely a month with spare money in it. t1-p2: What was withdrawn across the year? Answer: $4,490.00. Verification: The two withdrawals added. Both were met from the reserve rather than by borrowing, which is the outcome the reserve exists to produce. t1-p3: What did the reserve hold at the end of the year? Answer: $5,310.00. Verification: The $7,200 opening balance plus $2,600.00 contributed less $4,490.00 withdrawn. t2-p1: How many months of essential costs does the closing balance cover? Give two decimal places. Answer: 2.21. Verification: $5,310.00 against $2,400 of essential monthly costs. The reserve started the year at exactly 3 months of cover. t2-p2: How far below the original 3-month position does the year end? Answer: $1,890.00. Verification: $7,200 at the start against $5,310.00 at the end. The contributions replaced most but not all of what the two emergencies took. t2-p3: At $260 a month, how many months would it take to restore the reserve to $7,200? Give one decimal place. Answer: 7.3. Verification: The $1,890.00 gap at the existing contribution rate. This assumes no further withdrawal during those months, which the year just completed suggests is optimistic."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: The reserve fell from 3 months of cover to 2.21 months across the year. Decide whether this reserve worked or failed, defend your answer with the figures, and say what the two withdrawals suggest about whether $260 a month is the right contribution. Makes the case that it worked: $4,490.00 of unplanned costs were met without borrowing, which is precisely what the reserve is for, and a reserve that is never drawn down is not doing its job. Makes the case that the position weakened: cover fell by 0.79 months, and restoring it would take 7.3 clear months during which another withdrawal is quite possible given that two occurred this year. Draws a conclusion about the contribution rate from the evidence: $2,600.00 contributed against $4,490.00 withdrawn means the reserve loses ground in a year with two events, so $260 a month is adequate only in quieter years. Uses the 2.21 months of closing cover, the $4,490.00 withdrawn, and the $2,600.00 contributed. The response judges the reserve against its purpose rather than against whether the balance rose. Either verdict is credited when it is argued from the contribution and withdrawal figures together."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Makes the case that it worked: $4,490.00 of unplanned costs were met without borrowing, which is precisely what the reserve is for, and a reserve that is never drawn down is not doing its job. Makes the case that the position weakened: cover fell by 0.79 months, and restoring it would take 7.3 clear months during which another withdrawal is quite possible given that two occurred this year. Draws a conclusion about the contribution rate from the evidence: $2,600.00 contributed against $4,490.00 withdrawn means the reserve loses ground in a year with two events, so $260 a month is adequate only in quieter years."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u03-l09.scoring.json",
+    "sourceScoringSha256": "15ac1c7b6fe47073085a17ca1539a22275909cacf87438d0540d1f299aa8de5d",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}
