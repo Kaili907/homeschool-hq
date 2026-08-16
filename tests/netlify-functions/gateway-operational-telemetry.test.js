@@ -115,7 +115,7 @@ function jarvisRequest() {
 function authThenAnthropic({ status = 200, body } = {}) {
   return vi.fn(async (url) => {
     if (url === 'https://academy.supabase.co/auth/v1/user') {
-      return new Response(JSON.stringify({ id: 'account-1' }), { status: 200 })
+      return new Response(JSON.stringify({ id: '00000000-0000-4000-8000-000000000701' }), { status: 200 })
     }
     if (url === 'https://api.anthropic.com/v1/messages') {
       if (body instanceof Error) throw body
@@ -143,7 +143,7 @@ function ttsEvent(text = 'Private speech text.') {
 function authThenTts() {
   return vi.fn(async (url) => {
     if (url === 'https://academy.supabase.co/auth/v1/user') {
-      return new Response(JSON.stringify({ id: 'account-1' }), { status: 200 })
+      return new Response(JSON.stringify({ id: '00000000-0000-4000-8000-000000000701' }), { status: 200 })
     }
     return new Response(new Uint8Array([1, 2, 3]), {
       status: 200,
