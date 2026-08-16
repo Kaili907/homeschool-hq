@@ -32,11 +32,15 @@ export type ReviewedVisualIntent = Static<typeof ReviewedVisualIntentSchema>;
 
 export const PresentationScopeLineageSchema = Type.Object(
   {
+    commercialExecutionScopeRef: OpaqueReferenceSchema,
     householdScopeRef: OpaqueReferenceSchema,
     learnerScopeRef: OpaqueReferenceSchema,
     sessionRef: OpaqueReferenceSchema,
     interactionRef: OpaqueReferenceSchema,
+    logicalOperationRef: OpaqueReferenceSchema,
+    conceptRef: OpaqueReferenceSchema,
     opportunityRef: OpaqueReferenceSchema,
+    presentationRef: OpaqueReferenceSchema,
   },
   { additionalProperties: false, $id: "TutorV3PresentationScopeLineage" },
 );

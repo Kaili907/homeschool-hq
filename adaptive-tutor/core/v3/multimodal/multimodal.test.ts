@@ -2,6 +2,15 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { Value } from "../../schema/value.js";
 import {
+  COMMERCIAL_EXECUTION_SCOPE_VERSION,
+  type CommercialExecutionScope,
+} from "../commercial-operation/index.js";
+import {
+  STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION,
+  type StudyCommercialTutorAdvisory,
+} from "../contracts/index.js";
+import { PRESENTATION_CONTRACT_VERSION, type PresentationIntent } from "../presentation/index.js";
+import {
   DurableMultimodalEvidenceSchema,
   LearnerImageReviewDecisionSchema,
   MULTIMODAL_CONTRACT_VERSION,
@@ -25,12 +34,44 @@ const digest = `sha256:${"a".repeat(64)}`;
 const restrictions = TRANSIENT_MEDIA_INFERENCE_RESTRICTIONS;
 
 const scope = {
+  commercialExecutionScopeRef: "commercial-scope:multimodal-001",
   householdScopeRef: "household:family-one",
   learnerScopeRef: "learner:learner-one",
   sessionRef: "session:study-001",
   interactionRef: "interaction:multimodal-001",
+  logicalOperationRef: "logical-operation:multimodal-001",
+  conceptRef: "concept:lesson-one",
   opportunityRef: "opportunity:lesson-one",
+  presentationRef: "presentation-fallback:lesson-one",
 } as const;
+
+const commercialExecutionScope: CommercialExecutionScope = {
+  scopeVersion: COMMERCIAL_EXECUTION_SCOPE_VERSION,
+  scopeKind: "trusted-study-commercial-execution-scope",
+  issuedBy: "study-engine",
+  scopeRef: scope.commercialExecutionScopeRef,
+  householdScopeRef: scope.householdScopeRef,
+  learnerScopeRef: scope.learnerScopeRef,
+  sessionRef: scope.sessionRef,
+  interactionRef: scope.interactionRef,
+  logicalOperationRef: scope.logicalOperationRef,
+  curriculumReleaseRef: "release-multimodal-001",
+  curriculumPackageRef: "package:multimodal-001",
+  curriculumCourseRef: "course-multimodal-001",
+  curriculumSubjectRef: "subject-multimodal-001",
+  curriculumUnitRef: "unit-multimodal-001",
+  curriculumLessonRef: "lesson-multimodal-001",
+  conceptRef: scope.conceptRef,
+  opportunityRef: scope.opportunityRef,
+  learnerStageRef: "learner-stage:multimodal-001",
+  presentationRef: scope.presentationRef,
+  routingRequestRef: "routing-request:multimodal-001",
+  routePlanRef: "route-plan:multimodal-001",
+  reservationRef: "reservation:multimodal-001",
+  physicalAttemptRefs: ["physical-attempt:multimodal-001"],
+  allowedRouteRefs: ["route:multimodal-001"],
+  telemetryEventRefs: ["telemetry:multimodal-001"],
+};
 
 const audio = {
   mediaRef: "media:audio-turn-001",
@@ -132,8 +173,70 @@ function presentationFor(mode: (typeof MULTIMODAL_MODES)[number]): MultimodalPre
 function trustedContextFor(
   presentation: MultimodalPresentation,
 ): TrustedMultimodalPolicyContext {
+  const content = presentation.content;
+  const presentationIntent: PresentationIntent =
+    content.mode === "reviewed-image" || content.mode === "reviewed-diagram"
+      ? {
+          contractVersion: PRESENTATION_CONTRACT_VERSION,
+          intentKind: "reference-only-presentation-intent",
+          reviewedVisual: {
+            kind: content.visual.visualKind,
+            contentRef: content.visual.visualRef,
+            contentDigest: content.visual.contentDigest,
+            provenanceRef: content.visual.provenanceRef,
+          },
+          accessibilityCaptionRef: presentation.caption.captionRef,
+          requestedDeliveryChannels: ["visual"],
+          fallbackPresentation: {
+            presentationRef: scope.presentationRef,
+            requestedDeliveryChannels: ["text"],
+          },
+        }
+      : {
+          contractVersion: PRESENTATION_CONTRACT_VERSION,
+          intentKind: "reference-only-presentation-intent",
+          reviewedTextRef: "reviewed-content:multimodal-text-001",
+          accessibilityCaptionRef: presentation.caption.captionRef,
+          requestedDeliveryChannels: ["text"],
+          fallbackPresentation: {
+            presentationRef: scope.presentationRef,
+            requestedDeliveryChannels: ["text"],
+          },
+        };
+  const studyAdvisory: StudyCommercialTutorAdvisory = {
+    contractVersion: STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION,
+    advisoryKind: "study-commercial-tutor-advisory",
+    invocationRef: commercialExecutionScope.interactionRef,
+    commercialScopeRef: commercialExecutionScope.scopeRef,
+    householdScopeRef: commercialExecutionScope.householdScopeRef,
+    learnerScopeRef: commercialExecutionScope.learnerScopeRef,
+    sessionRef: commercialExecutionScope.sessionRef,
+    interactionRef: commercialExecutionScope.interactionRef,
+    logicalOperationRef: commercialExecutionScope.logicalOperationRef,
+    opportunityRef: commercialExecutionScope.opportunityRef,
+    conceptRef: commercialExecutionScope.conceptRef,
+    learnerStageRef: commercialExecutionScope.learnerStageRef,
+    status: "proposed",
+    proposedTutorAction: "hint",
+    reasonCodes: ["COMMERCIAL_PROPOSAL_READY"],
+    reviewedContentRefs: content.mode === "reviewed-image" || content.mode === "reviewed-diagram"
+      ? [content.visual.visualRef]
+      : ["reviewed-content:multimodal-text-001"],
+    groundingDecision: "sufficient",
+    assistanceEvidenceRef: commercialExecutionScope.opportunityRef,
+    presentationIntent,
+    studyDecisionRequired: true,
+    studyMutationAllowed: false,
+    officialMasteryAuthority: false,
+    officialWorkingLevelAuthority: false,
+    nominalGradeAuthority: false,
+    curriculumAuthority: false,
+    segmentCompletionAuthority: false,
+  };
   return {
     contextKind: "trusted-study-multimodal-policy-context",
+    commercialExecutionScope,
+    studyAdvisory,
     scope,
     captionBinding: {
       scope,
@@ -319,16 +422,20 @@ test("minimization projection cannot carry raw media, transcript, caption, or co
     "assistanceLevel",
     "captionAvailability",
     "captionRef",
+    "commercialExecutionScopeRef",
+    "conceptRef",
     "contractVersion",
     "envelope",
     "evidenceRef",
     "householdScopeRef",
     "interactionRef",
     "learnerScopeRef",
+    "logicalOperationRef",
     "mode",
     "observedAt",
     "opportunityRef",
     "outcome",
+    "presentationRef",
     "rawMediaPersisted",
     "sessionRef",
     "transcriptPersisted",

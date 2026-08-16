@@ -11,7 +11,10 @@ import {
   GroundingRequirementsSchema,
 } from "../grounding/index.js";
 import { ProviderModelOutputEnvelopeSchema } from "../model-output/index.js";
-import { PresentationIntentSchema, PresentationMappingContextSchema } from "../presentation/index.js";
+import {
+  PresentationIntentSchema,
+  PresentationMappingContextSchema,
+} from "../presentation/contracts.js";
 import {
   CommercialReviewedContentEvidenceSchema,
 } from "../provider-request/index.js";
