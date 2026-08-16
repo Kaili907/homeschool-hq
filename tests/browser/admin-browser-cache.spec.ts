@@ -141,7 +141,9 @@ test('High School Program is mounted with real Grade 9-12 evidence', async ({ pa
   for (const grade of ['Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']) {
     await expect(page.getByText(grade, { exact: true }).first()).toBeVisible()
   }
-  await expect(page.getByText('Contract ↔ subject-branch reconciliation')).toBeVisible()
+  await expect(page.getByText('2.0.0 · ADMITTED', { exact: false }).first()).toBeVisible()
+  await expect(page.getByText('90 courses · 698 units · 8,292 lessons · 699 assessments', { exact: true }).first()).toBeVisible()
+  await expect(page.getByText('Contract ↔ admitted release reconciliation')).toBeVisible()
 })
 
 test('invalid Health subroutes reject instead of mounting System Health', async ({ page }) => {
@@ -182,6 +184,14 @@ test('Published Curriculum has one shell destination and one workflow destinatio
     .getByRole('link', { name: /^Published:/ })).toHaveCount(1)
   await expect(page.getByRole('navigation', { name: 'Curriculum browser views' })
     .getByRole('link')).toHaveCount(0)
+  await expect(page.getByRole('heading', { name: 'Curriculum Browser' })).toBeVisible()
+  await expect(page.getByText(/Published package family-pilot-r1 · version 2\.0\.0/)).toBeVisible()
+  const totals = page.locator('dl[aria-label="Loaded curriculum totals"]')
+  await expect(totals).toContainText(/Grades\s*9/)
+  await expect(totals).toContainText(/Courses\s*90/)
+  for (const grade of ['Grade 3', 'Grade 4', 'Grade 5', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']) {
+    await expect(page.getByRole('button', { name: new RegExp(`^${grade} `) })).toBeVisible()
+  }
 })
 
 test('an expired session fails closed within the authorization timeout', async ({ page }) => {

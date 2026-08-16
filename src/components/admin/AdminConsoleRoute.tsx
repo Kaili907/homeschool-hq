@@ -24,7 +24,7 @@ import { readAdminAuditPage, AdminAuditReadError } from '../../admin/auditHttpSo
 import type { AdminAuditFilters, AdminAuditReadState } from '../../admin/auditLogModel'
 import { AdminIncidentReadError, readAdminIncidentPage } from '../../admin/incidentExplorerHttpSource'
 import type { AdminIncidentFilters, AdminIncidentReadState } from '../../admin/incidentExplorerModel'
-import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
+import { createAdmittedReleaseCurriculumSource } from '../../admin/curriculum/admittedReleaseSource'
 import { createCurriculumDraftAuthoringHttpSource } from '../../admin/curriculum-authoring/httpSource'
 import { createCurriculumApprovalHttpSource } from '../../admin/curriculum-approval/httpSource'
 import { createCurriculumStagingHttpSource } from '../../admin/curriculum-staging/httpSource'
@@ -301,7 +301,7 @@ export function AdminConsoleRoute() {
   const [readinessRetry, setReadinessRetry] = useState(0)
   const [attentionState, setAttentionState] = useState<AdminAttentionReadState>({ status: 'loading' })
   const [attentionRetry, setAttentionRetry] = useState(0)
-  const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
+  const curriculumSource = useMemo(() => createAdmittedReleaseCurriculumSource(), [])
   const curriculumAuthoringSource = useMemo(() => createCurriculumDraftAuthoringHttpSource(), [])
   const curriculumApprovalSource = useMemo(() => createCurriculumApprovalHttpSource(), [])
   const curriculumStagingSource = useMemo(() => createCurriculumStagingHttpSource(), [])

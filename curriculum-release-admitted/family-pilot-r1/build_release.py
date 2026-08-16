@@ -835,6 +835,15 @@ def build_assessments(structural: list[dict]) -> list[dict]:
     return out
 
 
+def checksum_bytes(path: Path) -> bytes:
+    """Return platform-stable bytes for UTF-8 release text artifacts."""
+    data = path.read_bytes()
+    try:
+        return data.decode("utf-8").replace("\r\n", "\n").encode("utf-8")
+    except UnicodeDecodeError:
+        return data
+
+
 def write_checksums() -> None:
     target = ROOT / "SHA256SUMS.txt"
     files = sorted(
@@ -843,7 +852,7 @@ def write_checksums() -> None:
     )
     target.write_text(
         "".join(
-            f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.relative_to(ROOT).as_posix()}\n"
+            f"{hashlib.sha256(checksum_bytes(path)).hexdigest()}  {path.relative_to(ROOT).as_posix()}\n"
             for path in files
         ),
         encoding="utf-8",
@@ -857,7 +866,7 @@ def verify_checksums() -> list[str]:
         expected, relative = line.split("  ", 1)
         listed.add(relative)
         path = ROOT / relative
-        actual = hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else "MISSING"
+        actual = hashlib.sha256(checksum_bytes(path)).hexdigest() if path.exists() else "MISSING"
         if actual != expected:
             failures.append(relative)
     actual_files = {
@@ -904,6 +913,30 @@ def run_admission_adapter() -> None:
     finally:
         if extracted:
             shutil.rmtree(admission_root)
+
+
+def materialize_structural_source() -> bool:
+    """Temporarily extract the pinned structural input when a slice omits it."""
+    if STRUCTURAL_ROOT.exists():
+        return False
+    structural_path = STRUCTURAL_ROOT.relative_to(REPO).as_posix()
+    archive = run(
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        STRUCTURE_SHA,
+        "--",
+        structural_path,
+    )
+    subprocess.run(
+        ["tar", "-x", "-f", "-", "-C", str(REPO)],
+        input=archive,
+        check=True,
+    )
+    if not STRUCTURAL_ROOT.exists():
+        raise ValueError("pinned structural source extraction failed")
+    return True
 
 
 def build() -> None:
@@ -1035,8 +1068,13 @@ def main() -> None:
             raise SystemExit("stored validation is not PASS")
         print("PASS")
         return
-    build()
-    print("PASS")
+    extracted = materialize_structural_source()
+    try:
+        build()
+        print("PASS")
+    finally:
+        if extracted:
+            shutil.rmtree(STRUCTURAL_ROOT)
 
 
 if __name__ == "__main__":

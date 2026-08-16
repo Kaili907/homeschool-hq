@@ -9,7 +9,7 @@ export interface LearnerMaterialSection {
   readonly body?: string
   readonly directions?: string
   readonly items?: readonly unknown[]
-  readonly [key: string]: unknown
+  readonly answerKey?: unknown
 }
 
 /** Flexible learner-safe projection accepted from all ten production families. */
@@ -25,7 +25,6 @@ export interface FinalLearnerMaterial {
   readonly materials?: readonly string[]
   readonly safetyRules?: readonly string[]
   readonly sections?: readonly LearnerMaterialSection[]
-  readonly [key: string]: unknown
 }
 
 export interface RichLessonSubjectAdapter {
@@ -67,12 +66,59 @@ export interface RichLessonRenderModel {
   readonly pages: readonly RichLessonPage[]
 }
 
+export interface FamilyPilotLessonPlayerChoice {
+  readonly id: string
+  readonly label: string
+}
+
+export type FamilyPilotLessonResponseKind =
+  | 'CHOICE'
+  | 'TEXT'
+  | 'NUMERIC'
+  | 'CONSTRUCTED_RESPONSE'
+  | 'ACTIVITY_EVIDENCE'
+  | 'READ'
+  | 'NONE'
+  | 'RUBRIC_REVIEW_PENDING'
+  | 'GUARDIAN_ATTESTATION'
+  | 'text'
+  | 'choice'
+  | 'none'
+
+export interface FamilyPilotLessonSegmentContent {
+  readonly title?: string
+  readonly instruction?: string
+  readonly prompt?: string
+  readonly example?: string
+  readonly lessonRef?: string
+  readonly sectionRef?: string
+  readonly itemRef?: string
+  readonly responseKind?: FamilyPilotLessonResponseKind
+  readonly choices?: readonly FamilyPilotLessonPlayerChoice[]
+  readonly pendingAssessmentCount?: number
+  readonly answeredItemRefs?: readonly string[]
+  readonly requiredItemRefs?: readonly string[]
+  readonly canCompleteSegment?: boolean
+}
+
 export interface FamilyPilotLessonPlayerProps {
-  readonly status: 'loading' | 'ready' | 'paused' | 'completed' | 'blocked'
+  readonly status: 'loading' | 'ready' | 'active' | 'paused' | 'completed' | 'blocked' | 'error'
   readonly snapshot: FamilyPilotStudySnapshot | null
-  readonly renderModel: RichLessonRenderModel | null
+  readonly segmentContent?: FamilyPilotLessonSegmentContent
+  readonly renderModel?: RichLessonRenderModel | null
+  readonly tutorHelpAvailable?: boolean
+  readonly busy?: boolean
   readonly errorMessage?: string | null
   readonly onContinue?: () => void
-  readonly onPause?: () => void
-  readonly onExit?: () => void
+  readonly onSubmitAction?: (responseText: string) => void
+  readonly onPause?: (presentationProgressRef?: string) => void
+  readonly onResume?: () => void
+  readonly onNext?: () => void
+  readonly onCompleteSegment?: () => void
+  readonly onOpenTutor?: (request?: {
+    readonly lessonRef: string
+    readonly sectionRef: string | null
+    readonly itemRef: string | null
+  }) => void
+  readonly onExit?: (presentationProgressRef?: string) => void
 }

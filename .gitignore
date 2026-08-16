@@ -12,3 +12,6 @@ backups/
 
 # CURR-1: generated curriculum chunks (rebuilt from curriculum-content/ by scripts/build-curriculum.mjs)
 public/curriculum/
+
+# Generated Family Pilot release payload (rebuilt from admitted release data).
+public/family-pilot-final/
