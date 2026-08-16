@@ -1,0 +1,87 @@
+TAP version 13
+# Subtest: wrong guardian, household, learner, session, or period authorization fails closed
+not ok 1 - wrong guardian, household, learner, session, or period authorization fails closed
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  location: '/private$MUTANT_ROOT/adaptive-tutor/scripts/tutor-v3/.dist/study-engine/tutor-v2/parent-reporting/parent-report.test.js:254:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      {
+    +   status: 'accepted',
+    +   value: {
+    +     audience: 'parent-hub',
+    +     authority: 'explanatory-only',
+    +     disclaimer: 'This report explains Study-approved records. Tutor may propose a step, but only Study can approve or apply it. This report does not make or change a learning decision.',
+    +     provenance: {
+    +       authorizationRef: 'authorization:parent-report-a',
+    +       authorizationRevisionRef: 'authorization-revision:parent-report-a-r3',
+    +       consentRef: null,
+    +       generatedAt: '2026-08-15T15:00:00.000Z',
+    +       policyRef: 'policy:parent-reporting-v1',
+    +       producer: 'study-engine',
+    +       reportRef: 'report:report-a',
+    +       sourceEvidenceCount: 0
+    +     },
+    +     reportVersion: 'tutor-parent-report/v2',
+    +     scope: {
+    +       guardianRef: 'guardian:guardian-a',
+    +       householdScopeRef: 'household:family-a',
+    +       learnerScopeRef: 'learner:child-a',
+    +       scopeKind: 'session',
+    +       sessionRef: 'session:session-a'
+    +     },
+    +     summaries: []
+    +   }
+    -   code: 'PARENT_REPORT_AUTHORIZATION_REJECTED',
+    -   status: 'rejected'
+      }
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    status: 'rejected'
+    code: 'PARENT_REPORT_AUTHORIZATION_REJECTED'
+  actual:
+    status: 'accepted'
+    value:
+      reportVersion: 'tutor-parent-report/v2'
+      audience: 'parent-hub'
+      authority: 'explanatory-only'
+      scope:
+        scopeKind: 'session'
+        guardianRef: 'guardian:guardian-a'
+        householdScopeRef: 'household:family-a'
+        learnerScopeRef: 'learner:child-a'
+        sessionRef: 'session:session-a'
+      summaries:
+      disclaimer: 'This report explains Study-approved records. Tutor may propose a step, but only Study can approve or apply it. This report does not make or change a learning decision.'
+      provenance:
+        producer: 'study-engine'
+        reportRef: 'report:report-a'
+        policyRef: 'policy:parent-reporting-v1'
+        generatedAt: '2026-08-15T15:00:00.000Z'
+        authorizationRef: 'authorization:parent-report-a'
+        authorizationRevisionRef: 'authorization-revision:parent-report-a-r3'
+        consentRef: ~
+        sourceEvidenceCount: 0
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private$MUTANT_ROOT/adaptive-tutor/scripts/tutor-v3/.dist/study-engine/tutor-v2/parent-reporting/parent-report.test.js:273:16)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms <duration>
