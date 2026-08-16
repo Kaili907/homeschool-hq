@@ -13,6 +13,7 @@ import {
   saveAppState,
   type AppStatePersistenceFailure,
 } from './appState'
+import { createLocalPinVerifier, localPinMatches } from './localPin'
 import {
   PLACEMENT_TOTAL,
   PRACTICE_TOTAL,
@@ -510,7 +511,7 @@ function LegacyApp() {
               title={`Hi, ${profile.name}!`}
               subtitle="Enter your secret PIN"
               onComplete={(pin) => {
-                if (pin === profile.pin) {
+                if (localPinMatches(pin, profile.pin)) {
                   setState((s) => ({ ...s, activeProfileId: profile.id }))
                   setScreen({ kind: 'home' })
                   return null
@@ -531,7 +532,7 @@ function LegacyApp() {
                   return null
                 }
                 if (pin === screen.firstEntry) {
-                  patchById(profile.id, (prev) => ({ ...prev, pin }))
+                  patchById(profile.id, (prev) => ({ ...prev, pin: createLocalPinVerifier(pin) }))
                   setState((s) => ({ ...s, activeProfileId: profile.id }))
                   setScreen({ kind: 'home' })
                   return null
@@ -557,7 +558,7 @@ function LegacyApp() {
               title="Grown-Ups only"
               subtitle="Enter the parent PIN"
               onComplete={(pin) => {
-                if (pin === state.parentPin) {
+                if (localPinMatches(pin, state.parentPin)) {
                   establishParentStudyAuthorization()
                   setScreen({ kind: 'parentHub' })
                   return null
@@ -580,7 +581,7 @@ function LegacyApp() {
                   return null
                 }
                 if (pin === screen.firstEntry) {
-                  setState((s) => ({ ...s, parentPin: pin }))
+                  setState((s) => ({ ...s, parentPin: createLocalPinVerifier(pin) }))
                   establishParentStudyAuthorization()
                   setScreen({ kind: 'parentHub' })
                   return null

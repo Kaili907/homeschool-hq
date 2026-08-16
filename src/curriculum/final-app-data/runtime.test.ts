@@ -134,8 +134,6 @@ function releaseFixture(): {
       courseRef: firstCourse.courseRef,
       grade: firstCourse.grade,
       subject: firstCourse.subject,
-      productionPackageRef: `${lessonRef}-package`,
-      productionSourceCommit: 'source-commit',
       completionAuthority: 'LEARNER_AUTHORITY',
       sourceReadinessKind: 'STATIC_READY',
       sourceRuntimeState: 'READY',

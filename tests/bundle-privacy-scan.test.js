@@ -1,125 +1,51 @@
-import { readFile, readdir, stat } from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import os from 'node:os'
 import path from 'node:path'
-import { beforeAll, describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
+import { scanProductionBundle } from '../scripts/scan-production-bundle.mjs'
 
-/**
- * SEC-8 client-privacy + bundle-security regression scan. Reads the last
- * production build under dist/assets/ and asserts none of the emitted browser
- * assets contain the specific value shapes that a leak would take. Skips the
- * suite if no build is present so unrelated test runs are not blocked.
- *
- * Patterns focus on VALUE shapes (concrete secrets, tokens, absolute paths)
- * rather than field NAMES a legitimate schema might reference (the
- * AdminConsoleRoute bundle carries a privacy DENY-list of names, for example,
- * and that is intentional). Library-internal defaults like the supabase-js
- * `http://localhost:9999` GoTrue fallback are unreachable when
- * VITE_SUPABASE_URL is unset and are allow-listed explicitly.
- */
+const temporaryRoots = []
 
-const distAssets = fileURLToPath(new URL('../dist/assets', import.meta.url))
-
-async function bundleFiles() {
-  try {
-    const entries = await readdir(distAssets)
-    const files = []
-    for (const name of entries) {
-      if (!name.endsWith('.js')) continue
-      const full = path.join(distAssets, name)
-      const info = await stat(full)
-      if (info.isFile()) files.push({ name, full })
-    }
-    return files
-  } catch (cause) {
-    if (cause && cause.code === 'ENOENT') return null
-    throw cause
-  }
+async function fixture(source) {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'sec-8-bundle-'))
+  temporaryRoots.push(root)
+  await mkdir(path.join(root, 'nested'))
+  await writeFile(path.join(root, 'index.html'), '<script src="/nested/app.js"></script>')
+  await writeFile(path.join(root, 'nested', 'app.js'), source)
+  return root
 }
 
-let bundles = null
-
-beforeAll(async () => {
-  bundles = await bundleFiles()
+afterEach(async () => {
+  await Promise.all(temporaryRoots.splice(0).map((root) => rm(root, { recursive: true, force: true })))
 })
 
-describe('SEC-8 bundle privacy scan — emitted browser assets', () => {
-  it('at least one asset exists after a production build (dist/ present)', () => {
-    if (!bundles) {
-      // No build output on this checkout; nothing to scan but nothing to fail.
-      return
-    }
-    expect(bundles.length).toBeGreaterThan(0)
+describe('SEC-8 recursive production bundle privacy scanner', () => {
+  it('requires a production output tree', async () => {
+    await expect(scanProductionBundle(path.join(os.tmpdir(), 'sec-8-does-not-exist'))).rejects.toThrow('Production bundle is missing')
   })
 
-  it('no asset embeds a service-role or admin credential value', async () => {
-    if (!bundles) return
-    const patterns = [
-      /SUPABASE_SERVICE_ROLE_KEY\s*[:=]\s*['"][A-Za-z0-9_.-]{16,}/,
-      /service[_-]?role[_-]?key\s*[:=]\s*['"][A-Za-z0-9_.-]{16,}/i,
-      /sk_live_[A-Za-z0-9]{16,}/,
-      /sk_test_[A-Za-z0-9]{16,}/,
+  it('scans nested JSON and rejects source-authority material', async () => {
+    const root = await fixture('{"productionPackageRef":"git+823e3ea:curriculum-production/final/package.json"}')
+    await expect(scanProductionBundle(root)).rejects.toThrow(/repository package locator|server curriculum path|server binding locator field/)
+  })
+
+  it('rejects credential, token, raw PIN, answer, path, and dev endpoint values', async () => {
+    const samples = [
+      'SUPABASE_SERVICE_ROLE_KEY="abcdefghijklmnopqrstuvwxyz"',
+      'Bearer abcdefghijklmnopqrstuvwxyz1234',
+      '{"parentPin":"1234"}',
+      '{"correctAnswer":"choice-2"}',
+      'C:\\ma-sec\\s8\\server-only.json',
+      'http://localhost:5173/api',
     ]
-    for (const bundle of bundles) {
-      const source = await readFile(bundle.full, 'utf8')
-      for (const pattern of patterns) {
-        expect(pattern.test(source), `${bundle.name} contains ${pattern}`).toBe(
-          false,
-        )
-      }
+    for (const sample of samples) {
+      const root = await fixture(sample)
+      await expect(scanProductionBundle(root), sample).rejects.toThrow('SEC-8 production bundle privacy scan failed')
     }
   })
 
-  it('no asset embeds a fully-formed JWT bearer token', async () => {
-    if (!bundles) return
-    const jwt = /eyJ[A-Za-z0-9_-]{20,}\.eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}/
-    for (const bundle of bundles) {
-      const source = await readFile(bundle.full, 'utf8')
-      expect(jwt.test(source), `${bundle.name} contains a JWT`).toBe(false)
-    }
-  })
-
-  it('no asset embeds absolute developer file-system paths', async () => {
-    if (!bundles) return
-    const patterns = [
-      /[A-Z]:\\Users\\[^"\\]+/,
-      /[A-Z]:\\ma-sec\\/,
-      /\/Users\/[a-z0-9._-]+\//i,
-      /\/home\/[a-z0-9._-]+\//i,
-    ]
-    for (const bundle of bundles) {
-      const source = await readFile(bundle.full, 'utf8')
-      for (const pattern of patterns) {
-        expect(
-          pattern.test(source),
-          `${bundle.name} contains developer path ${pattern}`,
-        ).toBe(false)
-      }
-    }
-  })
-
-  it('no asset embeds an active dev endpoint outside supabase-js library defaults', async () => {
-    if (!bundles) return
-    // Only flag fully-formed URLs, not bare hostname string literals. supabase-js
-    // ships `http://localhost:9999` as its GoTrue default (unreachable when
-    // VITE_SUPABASE_URL is unset) and its browser-code hostname allowlist
-    // includes bare `"localhost"` and `"127.0.0.1"` string literals — those are
-    // library constants, not endpoint leaks.
-    const ALLOWED = new Set(['http://localhost:9999'])
-    const scan = /https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?(?:\/[A-Za-z0-9._/-]*)?/g
-    for (const bundle of bundles) {
-      const source = await readFile(bundle.full, 'utf8')
-      const hits = new Set()
-      let match
-      while ((match = scan.exec(source)) !== null) {
-        hits.add(match[0])
-      }
-      for (const hit of hits) {
-        if (ALLOWED.has(hit)) continue
-        expect(
-          false,
-          `${bundle.name} contains unexpected dev endpoint "${hit}"`,
-        ).toBe(true)
-      }
-    }
+  it('accepts learner-safe output and the audited supabase-js fallback literal', async () => {
+    const root = await fixture('const endpoint="http://localhost:9999"; const status="PENDING_SOURCE_ATTACHMENT"')
+    await expect(scanProductionBundle(root)).resolves.toMatchObject({ files: 2 })
   })
 })

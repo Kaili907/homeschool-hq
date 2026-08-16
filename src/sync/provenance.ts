@@ -6,7 +6,9 @@ import {
   type Profile,
 } from '../types'
 import { parseAcademyCourseId } from '../curriculum/grade-authority'
+import { normalizeAppStatePinVerifiers } from '../localPin'
 import type { HouseholdSyncMeta, RemoteProfileRow } from './types'
+import { sanitizeProfileForSync } from './privacy'
 
 export const APP_STATE_STORAGE_KEY = 'homeschool-hq:app:v2'
 export const DATASET_WRITE_LOCK_NAME = 'academy-sync-persisted-dataset'
@@ -1013,7 +1015,13 @@ export function validateRemoteProfileRows(value: unknown): RemoteRowsValidation 
       }
       ids.add(id)
     }
-    return { ok: true, rows: value as RemoteProfileRow[] }
+    return {
+      ok: true,
+      rows: (value as RemoteProfileRow[]).map((row) => ({
+        ...row,
+        data: sanitizeProfileForSync(row.data),
+      })),
+    }
   } catch {
     return {
       ok: false,
@@ -1195,10 +1203,11 @@ export async function persistDatasetVerified(
       wrote: false,
     }
   }
-  const validation = validateAppStateForSync(state)
+  const durableState = normalizeAppStatePinVerifiers(state)
+  const validation = validateAppStateForSync(durableState)
   if (!validation.ok) return { ...validation, wrote: false }
   try {
-    storage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(state))
+    storage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(durableState))
   } catch {
     return {
       ok: false,
@@ -1208,7 +1217,7 @@ export async function persistDatasetVerified(
   }
   const persisted = await readPersistedDataset(storage)
   if (!persisted.ok) return { ...persisted, wrote: true }
-  const expected = await datasetFingerprint(state)
+  const expected = await datasetFingerprint(durableState)
   return persisted.fingerprint === expected
     ? persisted
     : {

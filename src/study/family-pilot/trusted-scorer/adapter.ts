@@ -2,9 +2,9 @@ import {
   PRODUCTION_ITEM_ASSESSMENT_SCHEMA_VERSION,
   parseProductionItemResult,
   type ProductionItemAssessmentRequest,
-  type ProductionItemAssessmentTransport,
   type ProductionLearnerResponse,
-} from '../../production-assessment'
+} from '../../production-assessment/contracts'
+import type { ProductionItemAssessmentTransport } from '../../production-assessment/offline'
 import type {
   LearnerAssessmentReceipt,
   LearnerResponseAssessor,

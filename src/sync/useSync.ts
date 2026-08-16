@@ -85,6 +85,7 @@ import type {
   SignedInUser,
   SyncStatus,
 } from './types'
+import { mergeDevicePrivateProfile } from './privacy'
 import {
   executeAutomaticCycle,
   inspectUnboundHousehold,
@@ -145,9 +146,14 @@ function appStateWithProfiles(
   }
 }
 
-function profilesFromRows(rows: RemoteProfileRow[]): Record<string, Profile> {
+function profilesFromRows(
+  rows: RemoteProfileRow[],
+  local: Record<string, Profile>,
+): Record<string, Profile> {
   const profiles: Record<string, Profile> = Object.create(null)
-  for (const row of rows) profiles[row.profile_id] = row.data
+  for (const row of rows) {
+    profiles[row.profile_id] = mergeDevicePrivateProfile(row.data, local[row.profile_id])
+  }
   return profiles
 }
 
@@ -1395,7 +1401,7 @@ export function useSync(
           'A local safety backup could not be created; cloud data was not applied.',
         )
       }
-      const profiles = profilesFromRows(verifiedRows)
+      const profiles = profilesFromRows(verifiedRows, stateRef.current.profiles)
       const nextState = appStateWithProfiles(stateRef.current, profiles)
       const next = metaAfterSuccessfulSync(
         loadHouseholdMeta(verifiedUser.id, verifiedUser.email),

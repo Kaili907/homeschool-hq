@@ -10,6 +10,7 @@ import {
   validateProfileForSync,
   validateRemoteProfileRows,
 } from './provenance'
+import { mergeDevicePrivateProfile, sanitizeProfileForSync } from './privacy'
 
 const iso = (ms: number) => new Date(ms).toISOString()
 const msOf = (value: string) => Date.parse(value)
@@ -29,7 +30,7 @@ export function profileHash(profile: Profile): string {
         .map(([key, child]) => [key, canonicalize(child)]),
     )
   }
-  const text = JSON.stringify(canonicalize(profile))
+  const text = JSON.stringify(canonicalize(sanitizeProfileForSync(profile)))
   let hash = 2166136261
   for (let i = 0; i < text.length; i++) {
     hash ^= text.charCodeAt(i)
@@ -41,7 +42,7 @@ export function profileHash(profile: Profile): string {
 export function remoteRowsSignature(rows: RemoteProfileRow[]): string {
   const validation = validateRemoteProfileRows(rows)
   if (!validation.ok) throw new Error(validation.error)
-  return [...rows]
+  return [...validation.rows]
     .sort((a, b) =>
       a.profile_id < b.profile_id ? -1 : a.profile_id > b.profile_id ? 1 : 0,
     )
@@ -57,7 +58,9 @@ export function changedProfiles(
 ): string[] {
   const ids = new Set<string>([...Object.keys(prev), ...Object.keys(next)])
   return [...ids].filter(
-    (id) => JSON.stringify(prev[id]) !== JSON.stringify(next[id]),
+    (id) =>
+      JSON.stringify(prev[id] ? sanitizeProfileForSync(prev[id]) : undefined) !==
+      JSON.stringify(next[id] ? sanitizeProfileForSync(next[id]) : undefined),
   )
 }
 
@@ -86,7 +89,7 @@ export function pendingRows(
     .filter((id) => local[id])
     .map((id) => ({
       profile_id: id,
-      data: local[id],
+      data: sanitizeProfileForSync(local[id]),
       updated_at: iso(meta.profiles[id].updatedAt),
     }))
 }
@@ -226,14 +229,14 @@ export function applyReviewedSelection(
 
     if (choice === 'cloud') {
       if (!cloud) throw new Error(`Cloud copy for ${item.name} is unavailable.`)
-      profiles[item.id] = cloud.data
+      profiles[item.id] = mergeDevicePrivateProfile(cloud.data, loc)
     } else {
       if (!loc) throw new Error(`Device copy for ${item.name} is unavailable.`)
       profiles[item.id] = loc
       if (!cloud || profileHash(loc) !== profileHash(cloud.data)) {
         toPush.push({
           profile_id: item.id,
-          data: loc,
+          data: sanitizeProfileForSync(loc),
           // The local metadata timestamp is stable across a lost-response
           // retry, allowing the server mutation receipt to recognize the exact
           // logical payload instead of creating a second mutation identity.

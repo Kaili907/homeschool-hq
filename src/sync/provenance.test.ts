@@ -4,6 +4,7 @@ import {
   migrateV1ToV2,
 } from '../migration'
 import type { AppState } from '../types'
+import { localPinMatches } from '../localPin'
 import {
   APP_STATE_STORAGE_KEY,
   canonicalSerialize,
@@ -169,6 +170,20 @@ describe('persisted Academy dataset provenance', () => {
       fingerprint: await datasetFingerprint(state),
     })
     expect(await readPersistedDataset(storage)).toEqual(result)
+  })
+
+  it('migrates legacy raw PINs before the verified localStorage write', async () => {
+    const state = defaultAppState()
+    state.parentPin = '1357'
+    state.profiles.p1.pin = '8642'
+    const result = await persistDatasetVerified(state, storage)
+    expect(result.ok).toBe(true)
+    if (!result.ok) return
+    const raw = storage.getItem(APP_STATE_STORAGE_KEY) ?? ''
+    expect(raw).not.toContain('1357')
+    expect(raw).not.toContain('8642')
+    expect(localPinMatches('1357', result.state.parentPin)).toBe(true)
+    expect(localPinMatches('8642', result.state.profiles.p1.pin)).toBe(true)
   })
 
   it('rejects malformed JSON, unsupported versions, and malformed required records', async () => {

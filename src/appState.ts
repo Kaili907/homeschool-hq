@@ -1,5 +1,6 @@
 import type { AppState, Profile, SkillState, SkillStatus } from './types'
 import type { SkillId } from './skills'
+import { normalizeAppStatePinVerifiers } from './localPin'
 import { defaultAppState, migrateV1ToV2 } from './migration'
 import {
   APP_STATE_STORAGE_KEY,
@@ -53,7 +54,13 @@ export function loadAppState(): LoadResult {
     try {
       const parsed = JSON.parse(raw2) as unknown
       const validation = validateAppStateForSync(parsed)
-      if (validation.ok) return { state: validation.state, migrated: false }
+      if (validation.ok) {
+        const state = normalizeAppStatePinVerifiers(validation.state)
+        if (state !== validation.state) {
+          localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(state))
+        }
+        return { state, migrated: false }
+      }
     } catch {
       // The exact malformed JSON is quarantined below before a safe default is
       // published; it is never silently discarded.
@@ -81,9 +88,9 @@ export function loadAppState(): LoadResult {
         if (validation.ok) {
           localStorage.setItem(
             APP_STATE_STORAGE_KEY,
-            JSON.stringify(validation.state),
+            JSON.stringify(normalizeAppStatePinVerifiers(validation.state)),
           )
-          return { state: validation.state, migrated: true, backupKey }
+          return { state: normalizeAppStatePinVerifiers(validation.state), migrated: true, backupKey }
         }
       }
       const quarantineKey = quarantineRawState(raw1, 'v1')
@@ -334,7 +341,7 @@ function backupBeforeImport(current: AppState): boolean {
     const stamp = new Date().toISOString().replace(/[:.]/g, '-')
     localStorage.setItem(
       `${IMPORT_BACKUP_PREFIX}${stamp}`,
-      JSON.stringify(current),
+      JSON.stringify(normalizeAppStatePinVerifiers(current)),
     )
     return true
   } catch {
