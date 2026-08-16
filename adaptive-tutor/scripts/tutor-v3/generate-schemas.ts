@@ -9,7 +9,9 @@ import {
   StudyCommercialTutorInvocationSchema,
 } from "../../core/v3/contracts/index.js";
 import { InstructionalMemoryDeltaSchema } from "../../core/v3/memory/index.js";
+import { DurableMultimodalEvidenceSchema } from "../../core/v3/multimodal/index.js";
 import { BoundedCommercialProviderRequestSchema } from "../../core/v3/provider-request/index.js";
+import { MinimizedAcceptedStudyEffectEventSchema } from "../../core/v3/recovery/index.js";
 import { TutorCommercialTelemetryEventSchema } from "../../core/v3/telemetry/index.js";
 import { ParentReportSchema } from "../../study-engine/tutor-v2/parent-reporting/index.js";
 
@@ -68,6 +70,18 @@ export const WAVE3_SERIALIZED_SCHEMA_ARTIFACTS: readonly SchemaArtifact[] = [
     title: "Recoverable Instructional Memory Delta",
     source: "core/v3/memory/instructional-memory-delta.ts#InstructionalMemoryDeltaSchema",
     schema: InstructionalMemoryDeltaSchema,
+  },
+  {
+    file: "durable-multimodal-evidence.schema.json",
+    title: "Durable Multimodal Evidence",
+    source: "core/v3/multimodal/contracts.ts#DurableMultimodalEvidenceSchema",
+    schema: DurableMultimodalEvidenceSchema,
+  },
+  {
+    file: "minimized-accepted-study-effect-event.schema.json",
+    title: "Minimized Accepted Study Effect Event",
+    source: "core/v3/recovery/recoverable-memory-replay.ts#MinimizedAcceptedStudyEffectEventSchema",
+    schema: MinimizedAcceptedStudyEffectEventSchema,
   },
 ] as const;
 

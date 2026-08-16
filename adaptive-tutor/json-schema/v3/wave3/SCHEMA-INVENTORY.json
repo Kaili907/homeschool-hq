@@ -1,5 +1,5 @@
 {
-  "generatedSchemaCount": 8,
+  "generatedSchemaCount": 10,
   "internalPortSchemasGenerated": 0,
   "product": "Manuel Academy Study Tutor V2",
   "schemaInventoryVersion": 1,
@@ -43,6 +43,16 @@
       "file": "instructional-memory-delta.schema.json",
       "sha256": "0566aff806bdd2d8963c853460b9176e986fa8c712ebdb5faf413c99a4868955",
       "source": "core/v3/memory/instructional-memory-delta.ts#InstructionalMemoryDeltaSchema"
+    },
+    {
+      "file": "durable-multimodal-evidence.schema.json",
+      "sha256": "4bd5acb7ec9ffd805faf1f6ff6c90a97a4b3f1030efa660883173a0e8e96d832",
+      "source": "core/v3/multimodal/contracts.ts#DurableMultimodalEvidenceSchema"
+    },
+    {
+      "file": "minimized-accepted-study-effect-event.schema.json",
+      "sha256": "74f344b22386870de86100c759bbfb5db5da5a3634136626e83c4e5fbf7c7473",
+      "source": "core/v3/recovery/recoverable-memory-replay.ts#MinimizedAcceptedStudyEffectEventSchema"
     }
   ],
   "wave": "Wave 3 Commercial Foundation Convergence"
