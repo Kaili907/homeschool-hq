@@ -10,6 +10,7 @@ export type HostStudyLessonKind =
   | 'math'
   | 'reading'
   | 'writing'
+  | 'manuel-academy-activity'
   | 'quiz-practice'
   | 'quiz-assessment'
   | 'review'
@@ -39,6 +40,17 @@ interface MappingRow {
 }
 
 export const HOST_STUDY_MAPPING: Readonly<Record<HostStudyLessonKind, MappingRow>> = {
+  'manuel-academy-activity': {
+    subject: 'other',
+    blockKind: 'new_instruction',
+    source: 'manuel-academy',
+    masteryAuthority: 'completion-only',
+    segments: [
+      { suffix: 'learn', title: 'Learn from the lesson', taskType: 'direct-instruction', estimatedMinutes: 8 },
+      { suffix: 'practice', title: 'Complete the student work', taskType: 'independent-practice', estimatedMinutes: 12 },
+      { suffix: 'reflect', title: 'Review what you learned', taskType: 'reflection', estimatedMinutes: 5 },
+    ],
+  },
   math: {
     subject: 'math',
     blockKind: 'new_instruction',
