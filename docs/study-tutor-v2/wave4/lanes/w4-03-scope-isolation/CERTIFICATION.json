@@ -1,0 +1,47 @@
+{
+  "session": "STUDY-TUTOR-V2-W4-03",
+  "branch": "mac/tutor-v2-w4-scope-isolation-r1",
+  "startingSha": "a2fdf1858cd50c998f5da53970d36ee6c90ff31a",
+  "status": "W4_SCOPE_ISOLATION_BLOCKER_FOUND",
+  "sharedProductCodeChanged": false,
+  "campaign": {
+    "command": "npm --prefix adaptive-tutor/adversarial/v4/scope-isolation test",
+    "deterministic": true,
+    "liveProviderCalls": 0,
+    "tests": 58,
+    "passed": 36,
+    "failed": 22,
+    "distinctFailingLeafAssertions": 19
+  },
+  "baseline": {
+    "typecheck": "PASS",
+    "wave3Tests": {
+      "status": "PASS",
+      "tests": 33,
+      "passed": 33,
+      "failed": 0
+    },
+    "wave3HardGates": {
+      "status": "PASS",
+      "passed": 18,
+      "total": 18
+    }
+  },
+  "contained": [
+    "top-level household/learner/session/interaction combinations",
+    "same IDs under a foreign household at invocation ingress",
+    "stale grounding scope",
+    "receipt/advisory tuple mismatches",
+    "memory scope mismatch",
+    "guardian authorization and Parent report evidence mismatches"
+  ],
+  "blockers": [
+    "coherent sibling curriculum can execute under learner A trusted scope",
+    "sibling physical attempt, reservation, and route refs can receive calls/cost/telemetry",
+    "sibling concept, opportunity, stage, and presentation refs can influence A",
+    "accepted effect can add a sibling concept to A memory",
+    "household scope is absent from effect receipt, memory scope, and accepted effect",
+    "telemetry lacks household/learner/session/interaction lineage",
+    "presentation acceptance is not household/learner/session/interaction bound"
+  ]
+}
