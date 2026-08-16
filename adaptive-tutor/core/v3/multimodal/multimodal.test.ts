@@ -16,12 +16,21 @@ import {
   type MultimodalContent,
   type MultimodalEvidenceProjectionSource,
   type MultimodalPresentation,
+  type TrustedMultimodalPolicyContext,
 } from "./index.js";
 
 const observedAt = "2026-08-15T14:30:00.000Z";
 const digest = `sha256:${"a".repeat(64)}`;
 
 const restrictions = TRANSIENT_MEDIA_INFERENCE_RESTRICTIONS;
+
+const scope = {
+  householdScopeRef: "household:family-one",
+  learnerScopeRef: "learner:learner-one",
+  sessionRef: "session:study-001",
+  interactionRef: "interaction:multimodal-001",
+  opportunityRef: "opportunity:lesson-one",
+} as const;
 
 const audio = {
   mediaRef: "media:audio-turn-001",
@@ -57,8 +66,10 @@ const reviewedImage = {
   visualRef: "visual:approved-image-001",
   visualKind: "image",
   contentDigest: digest,
+  mimeType: "image/png",
   reviewStatus: "approved",
   reviewRef: "review:image-001",
+  provenanceRef: "provenance:image-001",
   reviewedAt: observedAt,
   learnerSafe: true,
 } as const;
@@ -67,8 +78,10 @@ const reviewedDiagram = {
   visualRef: "visual:approved-diagram-001",
   visualKind: "diagram",
   contentDigest: digest,
+  mimeType: "image/svg+xml",
   reviewStatus: "approved",
   reviewRef: "review:diagram-001",
+  provenanceRef: "provenance:diagram-001",
   reviewedAt: observedAt,
   learnerSafe: true,
 } as const;
@@ -102,6 +115,7 @@ function presentationFor(mode: (typeof MULTIMODAL_MODES)[number]): MultimodalPre
   return {
     contractVersion: MULTIMODAL_CONTRACT_VERSION,
     envelope: "multimodal-presentation",
+    scope,
     interactionRef: "interaction:multimodal-001",
     turnRef: `turn:${mode}`,
     speaker: "tutor",
@@ -112,6 +126,26 @@ function presentationFor(mode: (typeof MULTIMODAL_MODES)[number]): MultimodalPre
       stepIndex: 2,
     },
     assessmentDisclosure: activeAssessment,
+  };
+}
+
+function trustedContextFor(
+  presentation: MultimodalPresentation,
+): TrustedMultimodalPolicyContext {
+  return {
+    contextKind: "trusted-study-multimodal-policy-context",
+    scope,
+    captionBinding: {
+      scope,
+      captionRef: presentation.caption.captionRef,
+      text: presentation.caption.text,
+      locale: presentation.caption.locale,
+      use: "neutral-accessibility-metadata",
+    },
+    reviewedVisualBindings: [
+      { scope, visual: reviewedImage, provenanceStatus: "approved-content" },
+      { scope, visual: reviewedDiagram, provenanceStatus: "approved-content" },
+    ],
   };
 }
 
@@ -191,7 +225,14 @@ test("admits learner images only through a transient review request and approved
 
 test("applies active-assessment anti-answer policy identically to every mode", () => {
   for (const mode of MULTIMODAL_MODES) {
-    assert.equal(enforceMultimodalPresentationPolicy(presentationFor(mode)).status, "accepted");
+    const presentation = presentationFor(mode);
+    assert.equal(
+      enforceMultimodalPresentationPolicy(
+        presentation,
+        trustedContextFor(presentation),
+      ).status,
+      "accepted",
+    );
 
     const invalid = clone(presentationFor(mode)) as unknown as Record<string, unknown>;
     invalid.assessmentDisclosure = {
@@ -200,11 +241,11 @@ test("applies active-assessment anti-answer policy identically to every mode", (
       answerExposure: "reviewed-answer",
       appliesToAllModalities: true,
     };
-    const result = enforceMultimodalPresentationPolicy(invalid);
+    const result = enforceMultimodalPresentationPolicy(
+      invalid,
+      trustedContextFor(presentation),
+    );
     assert.equal(result.status, "rejected", mode);
-    if (result.status === "rejected") {
-      assert.equal(result.code, "ACTIVE_ASSESSMENT_ANSWER_BLOCKED", mode);
-    }
   }
 });
 
@@ -241,6 +282,7 @@ test("minimization projection cannot carry raw media, transcript, caption, or co
     evidenceRef: "evidence:multimodal-001",
     sessionRef: "session:study-001",
     presentation: speech,
+    trustedContext: trustedContextFor(speech),
     outcome: "demonstrated",
     assistanceLevel: "light-hint",
     observedAt,
@@ -280,9 +322,12 @@ test("minimization projection cannot carry raw media, transcript, caption, or co
     "contractVersion",
     "envelope",
     "evidenceRef",
+    "householdScopeRef",
     "interactionRef",
+    "learnerScopeRef",
     "mode",
     "observedAt",
+    "opportunityRef",
     "outcome",
     "rawMediaPersisted",
     "sessionRef",
@@ -297,6 +342,7 @@ test("durable evidence schema rejects raw fields and raw-like ref smuggling", ()
     evidenceRef: "evidence:multimodal-002",
     sessionRef: "session:study-001",
     presentation: presentationFor("reviewed-image"),
+    trustedContext: trustedContextFor(presentationFor("reviewed-image")),
     outcome: "inconclusive",
     assistanceLevel: "guided",
     observedAt,

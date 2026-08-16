@@ -30,6 +30,18 @@ export const ReviewedVisualIntentSchema = Type.Object(
 );
 export type ReviewedVisualIntent = Static<typeof ReviewedVisualIntentSchema>;
 
+export const PresentationScopeLineageSchema = Type.Object(
+  {
+    householdScopeRef: OpaqueReferenceSchema,
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    interactionRef: OpaqueReferenceSchema,
+    opportunityRef: OpaqueReferenceSchema,
+  },
+  { additionalProperties: false, $id: "TutorV3PresentationScopeLineage" },
+);
+export type PresentationScopeLineage = Static<typeof PresentationScopeLineageSchema>;
+
 export const FallbackPresentationIntentSchema = Type.Object(
   {
     presentationRef: OpaqueReferenceSchema,
@@ -138,12 +150,63 @@ export const TrustedPresentationAcceptanceSchema = Type.Object(
   {
     acceptanceKind: Type.Literal("trusted-study-provider-output-acceptance"),
     acceptanceRef: OpaqueReferenceSchema,
+    scope: PresentationScopeLineageSchema,
     presentationIntent: PresentationIntentSchema,
   },
   { additionalProperties: false, $id: "TutorV3TrustedPresentationAcceptance" },
 );
 export type TrustedPresentationAcceptance = Static<
   typeof TrustedPresentationAcceptanceSchema
+>;
+
+export const TrustedPresentationReferenceBindingSchema = Type.Object(
+  {
+    scope: PresentationScopeLineageSchema,
+    referenceKind: Type.Union([
+      Type.Literal("reviewed-text"),
+      Type.Literal("structured-check"),
+      Type.Literal("accessibility-caption"),
+      Type.Literal("fallback-presentation"),
+    ]),
+    referenceRef: OpaqueReferenceSchema,
+    referenceUse: Type.Union([
+      Type.Literal("approved-instructional-reference"),
+      Type.Literal("neutral-accessibility-metadata"),
+      Type.Literal("approved-fallback-reference"),
+    ]),
+  },
+  { additionalProperties: false, $id: "TutorV3TrustedPresentationReferenceBinding" },
+);
+
+export const TrustedPresentationVisualBindingSchema = Type.Object(
+  {
+    scope: PresentationScopeLineageSchema,
+    reviewedVisual: ReviewedVisualIntentSchema,
+    approvalStatus: Type.Literal("approved-content"),
+  },
+  { additionalProperties: false, $id: "TutorV3TrustedPresentationVisualBinding" },
+);
+
+export const TrustedPresentationBoundarySchema = Type.Object(
+  {
+    boundaryKind: Type.Literal("trusted-study-presentation-boundary"),
+    acceptanceRef: OpaqueReferenceSchema,
+    scope: PresentationScopeLineageSchema,
+    assessmentPhase: Type.Union([
+      Type.Literal("active-protected-assessment"),
+      Type.Literal("not-active-protected-assessment"),
+    ]),
+    referenceBindings: Type.Array(TrustedPresentationReferenceBindingSchema, {
+      maxItems: 12,
+    }),
+    reviewedVisualBindings: Type.Array(TrustedPresentationVisualBindingSchema, {
+      maxItems: 12,
+    }),
+  },
+  { additionalProperties: false, $id: "TutorV3TrustedPresentationBoundary" },
+);
+export type TrustedPresentationBoundary = Static<
+  typeof TrustedPresentationBoundarySchema
 >;
 
 const ReviewedTextPieceSchema = Type.Object(
@@ -221,6 +284,7 @@ export const W306PresentationPiecesSchema = Type.Object(
   {
     adapterKind: Type.Literal("w3-06-reference-presentation-pieces"),
     acceptanceRef: OpaqueReferenceSchema,
+    scope: PresentationScopeLineageSchema,
     pieces: Type.Array(W306PresentationPieceSchema, { minItems: 1, maxItems: 6 }),
     rawAudioAccepted: Type.Literal(false),
     rawImageBytesAccepted: Type.Literal(false),
