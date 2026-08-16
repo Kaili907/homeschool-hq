@@ -84,7 +84,7 @@
 }
 
 .rich-lesson__card h1:focus { outline: 3px solid #fbbf24; outline-offset: 4px; }
-.rich-lesson__body { font-size: 1.05rem; line-height: 1.7; }
+.rich-lesson__body { max-width: 72ch; font-size: 1.05rem; line-height: 1.7; }
 .rich-lesson__directions { color: var(--rich-muted); font-weight: 650; }
 .rich-lesson__prompt { margin-block: 1.25rem; font-size: clamp(1.15rem, 4vw, 1.45rem); font-weight: 800; }
 

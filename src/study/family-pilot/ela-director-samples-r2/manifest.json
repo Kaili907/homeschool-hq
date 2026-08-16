@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0",
+  "manifestId": "ELA_DIRECTOR_SAMPLES_R2",
+  "namespace": "src/study/family-pilot/ela-director-samples-r2",
+  "sampleCount": 9,
+  "grades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "contentModel": "LearnerMaterialDto structured fixture",
+  "richPlayerCompatible": true,
+  "legacyFallbackRequired": false,
+  "productionCurriculumChanged": false,
+  "samples": [
+    {
+      "grade": 3,
+      "courseId": "ma-g3-english-language-arts",
+      "courseTitle": "Grade 3 English Language Arts",
+      "canonicalLessonRef": "ma-g3-english-language-arts-u03-l04",
+      "topic": "Naming a character trait and proving it with one action from the text",
+      "standards": ["3.RL.3", "3.RL.1"],
+      "samplePath": "src/study/family-pilot/ela-director-samples-r2/grade3.ts",
+      "textType": "Realistic fiction",
+      "passageWordCount": 178,
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE", "RUBRIC_REVIEW_PENDING"],
+      "reviewPresent": true,
+      "readability": {
+        "instructionLength": "Two short teaching paragraphs; one action per screen",
+        "sentenceComplexity": "Mostly simple and compound sentences with concrete subjects",
+        "vocabularyLoad": "Two defined academic words used repeatedly in context",
+        "passageLength": "178 words in eight short paragraphs",
+        "expectedWrittenResponse": "3–4 complete sentences naming a trait, evidence, and connection",
+        "scaffolding": "Sentence frame, modeled reasoning, one fixed-choice check, three-part revision checklist"
+      }
+    },
+    {
+      "grade": 4,
+      "courseId": "ma-g4-english-language-arts",
+      "courseTitle": "Grade 4 English Language Arts",
+      "canonicalLessonRef": "ma-g4-english-language-arts-u04-l04",
+      "topic": "Stating a main idea and naming the key details that carry it",
+      "standards": ["4.RI.2", "4.RI.1"],
+      "samplePath": "src/study/family-pilot/ela-director-samples-r2/grade4.ts",
+      "textType": "Informational science article",
+      "passageWordCount": 241,
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE", "RUBRIC_REVIEW_PENDING"],
+      "reviewPresent": true,
+      "readability": {
+        "instructionLength": "Short explanatory screens followed by one clearly labeled task",
+        "sentenceComplexity": "Mostly compound sentences with a few explained cause-and-effect relationships",
+        "vocabularyLoad": "Three defined terms plus concrete science words supported by context",
+        "passageLength": "241 words in five focused paragraphs",
+        "expectedWrittenResponse": "4–5 sentence objective summary with three key details",
+        "scaffolding": "Umbrella metaphor, whole-text choice check, paragraph pauses, explicit summary checklist"
+      }
+    },
+    {
+      "grade": 5,
+      "courseId": "ma-g5-english-language-arts",
+      "courseTitle": "Grade 5 English Language Arts",
+      "canonicalLessonRef": "ma-g5-english-language-arts-u08-l06",
+      "topic": "Word relationships and nuance",
+      "standards": ["5.RF.3", "5.L.1", "5.L.2", "5.L.4", "5.L.5", "5.L.6"],
+      "samplePath": "src/study/family-pilot/ela-director-samples-r2/grade5.ts",
+      "textType": "Editorial case study",
+      "passageWordCount": 224,
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE", "RUBRIC_REVIEW_PENDING"],
+      "reviewPresent": true,
+      "readability": {
+        "instructionLength": "Brief concept explanation plus a four-step editorial task",
+        "sentenceComplexity": "Varied simple, compound, and introductory complex sentences",
+        "vocabularyLoad": "Three defined language terms applied repeatedly to familiar words",
+        "passageLength": "224 words in five connected paragraphs",
+        "expectedWrittenResponse": "One revised sentence plus a 3–5 sentence editor’s explanation",
+        "scaffolding": "Word continuum, evidence-matching choice, model think-aloud, explicit revision dimensions"
+      }
+    },
+    {
+      "grade": 7,
+      "courseId": "ma-g7-english-language-arts",
+      "courseTitle": "Grade 7 English Language Arts",
+      "canonicalLessonRef": "ma-g7-english-language-arts-u02-l07",
+      "topic": "Tracing how a theme develops through character interaction and choice",
+      "standards": ["7.RL.1", "7.RL.2", "7.RL.3", "7.W.3", "7.W.5"],
+      "samplePath": "src/study/family-pilot/ela-director-samples-r2/grade7.ts",
+      "textType": "Literary realistic fiction",
+      "passageWordCount": 310,
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE", "RUBRIC_REVIEW_PENDING"],
+      "reviewPresent": true,
+      "readability": {
+        "instructionLength": "One compact concept paragraph plus a multi-step close-reading direction",
+        "sentenceComplexity": "Mixed dialogue, compound-complex sentences, and implied relationships",
+        "vocabularyLoad": "Three defined analytical terms; meaning also supported by the narrative",
+        "passageLength": "310 words with dialogue and purposeful inference gaps",
+        "expectedWrittenResponse": "7–9 sentence literary-analysis paragraph using two moments",
+        "scaffolding": "Development path model, second-read markers, theme/topic check, reasoning-chain revision"
+      }
+    },
+    {
+      "grade": 8,
+      "courseId": "ma-g8-english-language-arts",
+      "courseTitle": "Grade 8 English Language Arts",
+      "canonicalLessonRef": "ma-g8-english-language-arts-u05-l04",
+      "topic": "Counterclaim and rebuttal in civic argument",
+      "standards": ["8.RI.8", "8.RI.9", "8.W.1", "8.SL.3", "8.SL.4"],
+      "samplePath": "src/study/family-pilot/ela-director-samples-r2/grade8.ts",
+      "textType": "Paired proposal, counterclaim, and response",
+      "passageWordCount": 275,
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE", "RUBRIC_REVIEW_PENDING"],
+      "reviewPresent": true,
+      "readability": {
+        "instructionLength": "Two mature but scannable paragraphs with labeled argument parts",
+        "sentenceComplexity": "Compound-complex reasoning, concessions, conditions, and cause-effect links",
+        "vocabularyLoad": "Three defined argument terms used in authentic civic context",
+        "passageLength": "275 words across three clearly labeled positions",
+        "expectedWrittenResponse": "8–10 sentence argument with counterclaim and rebuttal",
+        "scaffolding": "Argument-part labels, concession model, one rebuttal diagnostic, two-question revision test"
+      }
+    },
+    {
+      "grade": 9,
+      "courseId": "ma-g9-english-language-arts",
+      "courseTitle": "Grade 9 English Language Arts",
+      "canonicalLessonRef": "ma-g9-english-language-arts-u03-l07",
+      "topic": "Cumulative impact of specific word choices",
+      "standards": ["9-10.RL.4", "9-10.RI.4", "9-10.L.4", "9-10.L.5", "9-10.SL.6"],
+      "samplePath": "src/study/family-pilot/ela-director-samples-r2/grade9.ts",
+      "textType": "Literary vignette",
+      "passageWordCount": 343,
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE", "RUBRIC_REVIEW_PENDING"],
+      "reviewPresent": true,
+      "readability": {
+        "instructionLength": "Concise disciplinary explanation followed by a two-pass close-reading protocol",
+        "sentenceComplexity": "Controlled literary syntax, fragments for effect, figurative language, and implicit transitions",
+        "vocabularyLoad": "Three defined disciplinary terms plus context-dependent figurative diction",
+        "passageLength": "343 words with recurring images and structural contrast",
+        "expectedWrittenResponse": "1–2 analytical paragraphs using at least three exact word choices",
+        "scaffolding": "Escalation model, second-reading pattern options, progression check, synonym revision test"
+      }
+    },
+    {
+      "grade": 10,
+      "courseId": "ma-g10-english-language-arts",
+      "courseTitle": "Grade 10 English Language Arts",
+      "canonicalLessonRef": "ma-g10-english-language-arts-u08-l03",
+      "topic": "Semicolon and colon control in authentic revision",
+      "standards": ["9-10.L.1", "9-10.L.2", "9-10.L.3", "9-10.L.4", "9-10.W.5"],
+      "samplePath": "src/study/family-pilot/ela-director-samples-r2/grade10.ts",
+      "textType": "Public-information editorial draft",
+      "passageWordCount": 206,
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE", "RUBRIC_REVIEW_PENDING"],
+      "reviewPresent": true,
+      "readability": {
+        "instructionLength": "Compact rule set followed by an authentic multi-paragraph editing task",
+        "sentenceComplexity": "Independent and dependent clauses, transitions, appositives, and purposeful parallel lists",
+        "vocabularyLoad": "Three defined grammar/style terms used as analytical tools",
+        "passageLength": "206 words including the editorial brief",
+        "expectedWrittenResponse": "Three edited paragraphs plus a 4–6 sentence editor’s rationale",
+        "scaffolding": "Clause-boundary model, one deterministic check, semicolon/colon annotation audit, faded final edit"
+      }
+    },
+    {
+      "grade": 11,
+      "courseId": "ma-g11-english-language-arts",
+      "courseTitle": "Grade 11 English Language Arts",
+      "canonicalLessonRef": "ma-g11-english-language-arts-u07-l02",
+      "topic": "How style and content create rhetorical power and persuasiveness",
+      "standards": ["11-12.RI.6", "11-12.RI.5", "11-12.SL.3", "11-12.SL.4", "11-12.SL.5", "11-12.SL.6", "11-12.RL.7"],
+      "samplePath": "src/study/family-pilot/ela-director-samples-r2/grade11.ts",
+      "textType": "Original civic testimony",
+      "passageWordCount": 373,
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE", "RUBRIC_REVIEW_PENDING"],
+      "reviewPresent": true,
+      "readability": {
+        "instructionLength": "Brief disciplinary framing plus a commissioner-role close-reading protocol",
+        "sentenceComplexity": "Sustained parallelism, periodic syntax, concessions, qualifications, and structural callbacks",
+        "vocabularyLoad": "Three defined rhetorical concepts plus authentic planning language supported by context",
+        "passageLength": "373 words of formal civic testimony",
+        "expectedWrittenResponse": "2–3 analytical paragraphs with evaluation and a limitation",
+        "scaffolding": "Audience role, rhetorical landmarks, effect-purpose model, paragraph audit; no device checklist answer"
+      }
+    },
+    {
+      "grade": 12,
+      "courseId": "ma-g12-english-language-arts",
+      "courseTitle": "Grade 12 English Language Arts",
+      "canonicalLessonRef": "ma-g12-english-language-arts-u08-l07",
+      "topic": "Synthesis when authoritative sources disagree",
+      "standards": ["11-12.W.7", "11-12.RI.7", "11-12.RI.2", "11-12.SL.2", "11-12.SL.1", "11-12.W.8", "11-12.RI.3"],
+      "samplePath": "src/study/family-pilot/ela-director-samples-r2/grade12.ts",
+      "textType": "Three-source policy evidence set",
+      "passageWordCount": 493,
+      "responseTypes": ["CHOICE", "CONSTRUCTED_RESPONSE", "RUBRIC_REVIEW_PENDING"],
+      "reviewPresent": true,
+      "readability": {
+        "instructionLength": "Compressed scholarly framework with a multi-source analytical protocol",
+        "sentenceComplexity": "Dense disciplinary prose with qualification, methodological contrast, and conditional policy reasoning",
+        "vocabularyLoad": "Three defined concepts plus authentic technical and operational terms inferable from context",
+        "passageLength": "493 words across three sources with distinct institutional purposes",
+        "expectedWrittenResponse": "3–4 paragraph synthesis memo integrating all sources and limitations",
+        "scaffolding": "Claim-method-scope-purpose notes, warranted-conclusion check, source-interaction audit, no template that predetermines the recommendation"
+      }
+    }
+  ]
+}
