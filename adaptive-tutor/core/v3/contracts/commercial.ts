@@ -25,7 +25,7 @@ export const BOUNDED_COMMERCIAL_PROVIDER_RESPONSE_VERSION =
 export const STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION =
   "study-tutor-v3.commercial-advisory.v1" as const;
 export const STUDY_COMMERCIAL_EFFECT_RECEIPT_VERSION =
-  "study-tutor-v3.commercial-effect-receipt.v1" as const;
+  "study-tutor-v3.commercial-effect-receipt.v2" as const;
 
 const CurriculumIdentifierSchema = Type.String({
   minLength: 2,
@@ -251,11 +251,20 @@ export const StudyCommercialEffectReceiptSchema = Type.Object(
     issuedBy: Type.Literal("study-engine"),
     receiptRef: OpaqueReferenceSchema,
     invocationRef: OpaqueReferenceSchema,
+    commercialExecutionScopeRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     learnerScopeRef: OpaqueReferenceSchema,
     sessionRef: OpaqueReferenceSchema,
     interactionRef: OpaqueReferenceSchema,
+    conceptRef: OpaqueReferenceSchema,
     opportunityRef: OpaqueReferenceSchema,
+    curriculumReleaseRef: CurriculumIdentifierSchema,
+    curriculumPackageRef: OpaqueReferenceSchema,
+    curriculumCourseRef: CurriculumIdentifierSchema,
+    curriculumSubjectRef: CurriculumIdentifierSchema,
+    curriculumUnitRef: CurriculumIdentifierSchema,
+    curriculumLessonRef: CurriculumIdentifierSchema,
     decision: Type.Union([Type.Literal("accepted"), Type.Literal("rejected")]),
     effectRef: OpaqueReferenceSchema,
     effectDigest: ContentDigestSchema,

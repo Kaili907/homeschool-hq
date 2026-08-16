@@ -52,6 +52,8 @@ function forbiddenImportsAbsent(): boolean {
 }
 
 function recoveryProbe(): boolean {
+  const commercialScope = executionInput().trustedScope;
+  if (!("scopeRef" in commercialScope)) return false;
   const scope = {
     scopeKind: "trusted-study-instructional-memory-scope" as const,
     learnerScopeRef: "learner-scope:learner-a",
@@ -60,8 +62,17 @@ function recoveryProbe(): boolean {
     opportunityRef: "opportunity:fractions-one",
   };
   const memoryDelta = createInstructionalMemoryDelta({
+    commercialExecutionScopeRef: commercialScope.scopeRef,
+    householdScopeRef: commercialScope.householdScopeRef,
     logicalOperationRef: "logical-operation:commercial-one",
     sourceEventRef: "study-event:commercial-one-accepted",
+    conceptRef: commercialScope.conceptRef,
+    curriculumReleaseRef: commercialScope.curriculumReleaseRef,
+    curriculumPackageRef: commercialScope.curriculumPackageRef,
+    curriculumCourseRef: commercialScope.curriculumCourseRef,
+    curriculumSubjectRef: commercialScope.curriculumSubjectRef,
+    curriculumUnitRef: commercialScope.curriculumUnitRef,
+    curriculumLessonRef: commercialScope.curriculumLessonRef,
     memoryDeltaRef: "memory-delta:commercial-one",
     memoryRef: "memory:commercial-one",
     scope,
@@ -94,15 +105,24 @@ function recoveryProbe(): boolean {
   const coordinator = new RecoverableInstructionalOperationCoordinator(gateway, memory);
   const operation = {
     recoveryKind: "recoverable-instructional-operation" as const,
+    commercialExecutionScopeRef: commercialScope.scopeRef,
+    householdScopeRef: commercialScope.householdScopeRef,
     logicalOperationRef: "logical-operation:commercial-one",
     sourceEventRef: "study-event:commercial-one-accepted",
     effectRef: "study-effect:commercial-one",
     effectDigest: `sha256:${"e".repeat(64)}`,
+    conceptRef: commercialScope.conceptRef,
+    curriculumReleaseRef: commercialScope.curriculumReleaseRef,
+    curriculumPackageRef: commercialScope.curriculumPackageRef,
+    curriculumCourseRef: commercialScope.curriculumCourseRef,
+    curriculumSubjectRef: commercialScope.curriculumSubjectRef,
+    curriculumUnitRef: commercialScope.curriculumUnitRef,
+    curriculumLessonRef: commercialScope.curriculumLessonRef,
     scope,
     memoryDelta,
   };
-  const first = coordinator.replay(scope, operation);
-  const second = coordinator.replay(scope, operation);
+  const first = coordinator.replay(commercialScope, operation);
+  const second = coordinator.replay(commercialScope, operation);
   return first.status === "pending" && second.status === "complete" &&
     second.effectDisposition === "reused" && acceptCount === 1 && store.projectionCount === 1;
 }

@@ -78,12 +78,26 @@ export type InstructionalMemoryDeltaOperation = Static<
 
 const NullableOpaqueReferenceSchema = Type.Union([OpaqueReferenceSchema, Type.Null()]);
 const MemoryDigestSchema = Type.String({ pattern: "^memory-digest:[a-f0-9]{64}$" });
+const BoundedLineageIdentifierSchema = Type.String({
+  minLength: 1,
+  maxLength: 160,
+  pattern: "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+});
 
 export const InstructionalMemoryDeltaSchema = Type.Object(
   {
     deltaKind: Type.Literal("bounded-instructional-memory-delta"),
+    commercialExecutionScopeRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     sourceEventRef: OpaqueReferenceSchema,
+    conceptRef: OpaqueReferenceSchema,
+    curriculumReleaseRef: BoundedLineageIdentifierSchema,
+    curriculumPackageRef: OpaqueReferenceSchema,
+    curriculumCourseRef: BoundedLineageIdentifierSchema,
+    curriculumSubjectRef: BoundedLineageIdentifierSchema,
+    curriculumUnitRef: BoundedLineageIdentifierSchema,
+    curriculumLessonRef: BoundedLineageIdentifierSchema,
     memoryDeltaRef: OpaqueReferenceSchema,
     memoryRef: OpaqueReferenceSchema,
     scope: InstructionalMemoryScopeSchema,
@@ -130,6 +144,7 @@ export type InstructionalMemoryProjection = Static<typeof InstructionalMemoryPro
 
 export type InstructionalMemoryDeltaFailureCode =
   | "INVALID_MEMORY_DELTA"
+  | "MEMORY_LINEAGE_MISMATCH"
   | "MEMORY_SCOPE_MISMATCH"
   | "STALE_MEMORY_REVISION"
   | "CONFLICTING_LOGICAL_OPERATION"
@@ -148,8 +163,17 @@ export type ApplyInstructionalMemoryDeltaResult =
     };
 
 export interface CreateInstructionalMemoryDeltaInput {
+  readonly commercialExecutionScopeRef: string;
+  readonly householdScopeRef: string;
   readonly logicalOperationRef: string;
   readonly sourceEventRef: string;
+  readonly conceptRef: string;
+  readonly curriculumReleaseRef: string;
+  readonly curriculumPackageRef: string;
+  readonly curriculumCourseRef: string;
+  readonly curriculumSubjectRef: string;
+  readonly curriculumUnitRef: string;
+  readonly curriculumLessonRef: string;
   readonly memoryDeltaRef: string;
   readonly memoryRef: string;
   readonly scope: InstructionalMemoryScope;
@@ -302,6 +326,23 @@ function applyOperations(
   return validContent(state) ? state : null;
 }
 
+function operationsMatchConcept(
+  conceptRef: string,
+  operations: readonly InstructionalMemoryDeltaOperation[],
+): boolean {
+  return operations.every((operation) => {
+    if (operation.field !== "conceptRefs") return true;
+    if (operation.operationKind === "replace") {
+      return (
+        Array.isArray(operation.value) &&
+        operation.value.every((value) => value === conceptRef)
+      );
+    }
+    if (operation.operationKind === "remove") return true;
+    return operation.value === conceptRef;
+  });
+}
+
 function deriveResult(
   input: Omit<CreateInstructionalMemoryDeltaInput, "prior"> & {
     readonly priorRevisionRef: string | null;
@@ -315,6 +356,15 @@ function deriveResult(
   const revision = `memory-revision:${fingerprint({
     logicalOperationRef: input.logicalOperationRef,
     sourceEventRef: input.sourceEventRef,
+    commercialExecutionScopeRef: input.commercialExecutionScopeRef,
+    householdScopeRef: input.householdScopeRef,
+    conceptRef: input.conceptRef,
+    curriculumReleaseRef: input.curriculumReleaseRef,
+    curriculumPackageRef: input.curriculumPackageRef,
+    curriculumCourseRef: input.curriculumCourseRef,
+    curriculumSubjectRef: input.curriculumSubjectRef,
+    curriculumUnitRef: input.curriculumUnitRef,
+    curriculumLessonRef: input.curriculumLessonRef,
     memoryDeltaRef: input.memoryDeltaRef,
     memoryRef: input.memoryRef,
     scope: input.scope,
@@ -332,6 +382,9 @@ export function createInstructionalMemoryDelta(
   if (input.prior && !scopesMatch(input.prior.scope, input.scope)) {
     throw new RangeError("prior memory projection scope does not match delta scope");
   }
+  if (!operationsMatchConcept(input.conceptRef, input.operations)) {
+    throw new RangeError("memory delta concept operations do not match accepted concept");
+  }
   const result = deriveResult({
     ...input,
     priorRevisionRef: input.prior?.revisionRef ?? null,
@@ -342,8 +395,17 @@ export function createInstructionalMemoryDelta(
 
   return {
     deltaKind: "bounded-instructional-memory-delta",
+    commercialExecutionScopeRef: input.commercialExecutionScopeRef,
+    householdScopeRef: input.householdScopeRef,
     logicalOperationRef: input.logicalOperationRef,
     sourceEventRef: input.sourceEventRef,
+    conceptRef: input.conceptRef,
+    curriculumReleaseRef: input.curriculumReleaseRef,
+    curriculumPackageRef: input.curriculumPackageRef,
+    curriculumCourseRef: input.curriculumCourseRef,
+    curriculumSubjectRef: input.curriculumSubjectRef,
+    curriculumUnitRef: input.curriculumUnitRef,
+    curriculumLessonRef: input.curriculumLessonRef,
     memoryDeltaRef: input.memoryDeltaRef,
     memoryRef: input.memoryRef,
     scope: structuredClone(input.scope),
@@ -384,6 +446,9 @@ export class InstructionalMemoryProjectionStore {
     const validation = validateExact(InstructionalMemoryDeltaSchema, candidate);
     if (validation.status === "rejected") return rejected("INVALID_MEMORY_DELTA");
     const delta = validation.value;
+    if (!operationsMatchConcept(delta.conceptRef, delta.operations)) {
+      return rejected("MEMORY_LINEAGE_MISMATCH");
+    }
     const deltaFingerprint = canonicalize(delta);
 
     const logicalIdentity = this.#logicalOperations.get(delta.logicalOperationRef);
@@ -416,8 +481,17 @@ export class InstructionalMemoryProjectionStore {
     }
 
     const result = deriveResult({
+      commercialExecutionScopeRef: delta.commercialExecutionScopeRef,
+      householdScopeRef: delta.householdScopeRef,
       logicalOperationRef: delta.logicalOperationRef,
       sourceEventRef: delta.sourceEventRef,
+      conceptRef: delta.conceptRef,
+      curriculumReleaseRef: delta.curriculumReleaseRef,
+      curriculumPackageRef: delta.curriculumPackageRef,
+      curriculumCourseRef: delta.curriculumCourseRef,
+      curriculumSubjectRef: delta.curriculumSubjectRef,
+      curriculumUnitRef: delta.curriculumUnitRef,
+      curriculumLessonRef: delta.curriculumLessonRef,
       memoryDeltaRef: delta.memoryDeltaRef,
       memoryRef: delta.memoryRef,
       scope: delta.scope,
