@@ -2,6 +2,7 @@ import { validateExact } from "../../../v2/contracts/validation.js";
 import {
   evaluateProviderEligibility,
   isTrustedProviderProfileRegistry,
+  providerEligibilityRequirementsAreBounded,
   type ProviderEligibilityDecision,
   type ProviderEligibilityRequirements,
   type TrustedProviderProfileRegistry,
@@ -89,6 +90,7 @@ export function createEligibleRouteCatalog(
   input: EligibleRouteCatalogInput,
 ): EligibleRouteCatalog | null {
   if (!isTrustedProviderProfileRegistry(input.providerPolicyRegistry)) return null;
+  if (!providerEligibilityRequirementsAreBounded(input.providerPolicyRequirements)) return null;
   const providers = validatedProfiles<ProviderCapabilityProfile>(
     input.providerProfiles,
     ProviderCapabilityProfileSchema,

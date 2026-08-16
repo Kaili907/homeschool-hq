@@ -5,6 +5,10 @@ import type {
   ProviderEligibilityRequirements,
   TrustedProviderProfile,
 } from "./contracts.js";
+import {
+  MAXIMUM_ALLOWED_RETENTION_CLASSES,
+  MAXIMUM_PROVIDER_POLICY_REQUIREMENTS,
+} from "./contracts.js";
 import type { TrustedProviderProfileRegistry } from "./registry.js";
 
 const CANONICAL_INSTANT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
@@ -27,14 +31,43 @@ function validRetentionClass(value: string): value is KnownRetentionClass {
 
 function requirementsAreValid(requirements: ProviderEligibilityRequirements): boolean {
   return nonEmpty(requirements.providerRef)
+    && requirements.providerRef.length <= 160
     && nonEmpty(requirements.requiredRegion)
+    && requirements.requiredRegion.length <= 80
     && nonEmpty(requirements.requiredContractPolicyRevision)
+    && requirements.requiredContractPolicyRevision.length <= 160
     && (requirements.modality === "text" || requirements.modality === "multimodal")
     && instantMilliseconds(requirements.evaluatedAt) !== null
     && Number.isSafeInteger(requirements.maximumRetentionHours)
     && requirements.maximumRetentionHours >= 0
     && requirements.allowedRetentionClasses.length > 0
+    && requirements.allowedRetentionClasses.length <= MAXIMUM_ALLOWED_RETENTION_CLASSES
+    && new Set(requirements.allowedRetentionClasses).size ===
+      requirements.allowedRetentionClasses.length
     && requirements.allowedRetentionClasses.every(validRetentionClass);
+}
+
+/** Cheap cardinality gate that runs before any map/filter traversal. */
+export function providerEligibilityRequirementsAreBounded(
+  candidate: unknown,
+): candidate is readonly ProviderEligibilityRequirements[] {
+  if (
+    !Array.isArray(candidate) ||
+    candidate.length > MAXIMUM_PROVIDER_POLICY_REQUIREMENTS
+  ) {
+    return false;
+  }
+  const providerRefs = new Set<string>();
+  for (const value of candidate) {
+    if (typeof value !== "object" || value === null) return false;
+    const requirement = value as ProviderEligibilityRequirements;
+    if (!Array.isArray(requirement.allowedRetentionClasses)) return false;
+    if (!requirementsAreValid(requirement) || providerRefs.has(requirement.providerRef)) {
+      return false;
+    }
+    providerRefs.add(requirement.providerRef);
+  }
+  return true;
 }
 
 function decision(

@@ -46,9 +46,10 @@ import {
   projectTutorCommercialTelemetry,
   type TutorCommercialTelemetryEvent,
 } from "../telemetry/index.js";
-import type {
-  ProviderEligibilityRequirements,
-  TrustedProviderProfileRegistry,
+import {
+  providerEligibilityRequirementsAreBounded,
+  type ProviderEligibilityRequirements,
+  type TrustedProviderProfileRegistry,
 } from "../provider-policy/index.js";
 import {
   BoundedCommercialProviderResponseSchema,
@@ -58,10 +59,18 @@ import {
   type StudyCommercialTutorInvocation,
 } from "../contracts/index.js";
 import {
+  CommercialExecutionScopeSchema,
   CommercialAttemptUsageReceiptSchema,
   type CommercialAttempt,
   type CommercialAttemptUsageReceipt,
+  type CommercialExecutionScope,
 } from "./contracts.js";
+import {
+  PHYSICAL_ATTEMPT_DISPATCH_CLAIM_VERSION,
+  validateCurrentCommercialExecutionEligibility,
+  type CommercialExecutionEligibilityResolver,
+  type PhysicalAttemptDispatchClaimPort,
+} from "./execution-integrity.js";
 
 export type CommercialTransportFailureKind =
   | "provider-outage"
@@ -139,25 +148,31 @@ export interface CommercialTutorRoutingContext {
   readonly telemetryEventRefs: readonly string[];
 }
 
+interface LegacyCommercialScopeLineage {
+  readonly householdScopeRef: string;
+  readonly learnerScopeRef: string;
+  readonly sessionRef: string;
+  readonly interactionRef: string;
+}
+
 export interface CommercialTutorExecutionInput {
   readonly invocation: unknown;
-  readonly trustedScope: {
-    readonly householdScopeRef: string;
-    readonly learnerScopeRef: string;
-    readonly sessionRef: string;
-    readonly interactionRef: string;
-  };
+  readonly trustedScope: CommercialExecutionScope | LegacyCommercialScopeLineage;
   readonly curriculumMetadata: TrustedCurriculumMetadata | unknown;
   readonly capabilityDeclaration: TutorCapabilityDeclaration | null;
   readonly routing: CommercialTutorRoutingContext;
   readonly clock: CommercialOperationClock;
   readonly transport: CommercialProviderTransport;
+  readonly executionEligibilityResolver: CommercialExecutionEligibilityResolver;
+  readonly dispatchClaims: PhysicalAttemptDispatchClaimPort;
 }
 
 export type CommercialTutorExecutionResult =
   | {
       readonly status: "rejected";
-      readonly reasonCode: "INVALID_STUDY_COMMERCIAL_INVOCATION";
+      readonly reasonCode:
+        | "INVALID_STUDY_COMMERCIAL_INVOCATION"
+        | "INVALID_COMMERCIAL_EXECUTION_SCOPE";
       readonly providerCalls: 0;
       readonly telemetry: readonly [];
     }
@@ -180,20 +195,24 @@ export type CommercialTutorExecutionResult =
 
 type AdvisoryReasonCode = StudyCommercialTutorAdvisory["reasonCodes"][number];
 
-function staticAdvisory(
+function buildStaticAdvisory(
   invocation: StudyCommercialTutorInvocation,
+  commercialScope: CommercialExecutionScope,
   reasonCode: AdvisoryReasonCode,
 ): StudyCommercialTutorAdvisory {
   return Object.freeze({
     contractVersion: "study-tutor-v3.commercial-advisory.v1",
     advisoryKind: "study-commercial-tutor-advisory",
     invocationRef: invocation.interactionRef,
+    commercialScopeRef: commercialScope.scopeRef,
     householdScopeRef: invocation.householdScopeRef,
     learnerScopeRef: invocation.learnerScopeRef,
     sessionRef: invocation.sessionRef,
     interactionRef: invocation.interactionRef,
     logicalOperationRef: invocation.logicalOperationRef,
     opportunityRef: invocation.curriculum.opportunityRef,
+    conceptRef: invocation.curriculum.conceptRef,
+    learnerStageRef: invocation.learnerStageRef,
     status: "static-fallback-required",
     proposedTutorAction: null,
     reasonCodes: [reasonCode],
@@ -213,6 +232,7 @@ function staticAdvisory(
 
 function finalizedAdvisory(
   invocation: StudyCommercialTutorInvocation,
+  commercialScope: CommercialExecutionScope,
   response: CommercialModelResponse,
   grounding: GroundingDecision | null,
 ): StudyCommercialTutorAdvisory {
@@ -224,12 +244,15 @@ function finalizedAdvisory(
     contractVersion: "study-tutor-v3.commercial-advisory.v1",
     advisoryKind: "study-commercial-tutor-advisory",
     invocationRef: invocation.interactionRef,
+    commercialScopeRef: commercialScope.scopeRef,
     householdScopeRef: invocation.householdScopeRef,
     learnerScopeRef: invocation.learnerScopeRef,
     sessionRef: invocation.sessionRef,
     interactionRef: invocation.interactionRef,
     logicalOperationRef: invocation.logicalOperationRef,
     opportunityRef: invocation.curriculum.opportunityRef,
+    conceptRef: invocation.curriculum.conceptRef,
+    learnerStageRef: invocation.learnerStageRef,
     status: proposal ? "proposed" : "refused",
     proposedTutorAction: proposal ? response.validatedOutput.requestedTutorAction : null,
     reasonCodes: [reasonCode],
@@ -261,6 +284,7 @@ function toAttemptBudget(
 }
 
 function telemetryFor(
+  commercialScope: CommercialExecutionScope,
   attempt: CommercialAttempt,
   reservation: BudgetReservation,
   context: CommercialTutorRoutingContext,
@@ -283,7 +307,7 @@ function telemetryFor(
       reasonCode: result.reasonCode,
       metrics: result.metrics,
     },
-    { attempt, reservation },
+    { commercialScope, attempt, reservation },
   );
   return projected.status === "projected" ? projected.event : null;
 }
@@ -346,10 +370,19 @@ function validateUsageReceipt(
   if (validation.status === "rejected") return null;
   const receipt = validation.value;
   if (
+    receipt.commercialScopeRef !== attempt.commercialScopeRef ||
     receipt.logicalOperationRef !== attempt.logicalOperationRef ||
     receipt.physicalAttemptRef !== attempt.physicalAttemptRef ||
     receipt.reservationRef !== reservation.reservationRef ||
     receipt.routeRef !== attempt.routeRef ||
+    receipt.providerRef !== attempt.providerRef ||
+    receipt.modelRef !== attempt.modelRef ||
+    receipt.modelRevisionRef !== attempt.modelRevisionRef ||
+    receipt.configurationDigest !== attempt.configurationDigest ||
+    receipt.capabilityProfileRevisionRef !== attempt.capabilityProfileRevisionRef ||
+    receipt.capabilityProfileDigest !== attempt.capabilityProfileDigest ||
+    receipt.providerPolicyRevisionRef !== attempt.providerPolicyRevisionRef ||
+    receipt.providerPolicyEvidenceRef !== attempt.providerPolicyEvidenceRef ||
     receipt.attemptIndex !== attempt.attemptIndex ||
     receipt.role !== attempt.role ||
     receipt.reservedCostMicros !== attempt.reservedCostMicros ||
@@ -363,6 +396,40 @@ function validateUsageReceipt(
     return null;
   }
   return receipt;
+}
+
+function arraysEqual(left: readonly string[], right: readonly string[]): boolean {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function invocationMatchesCommercialScope(
+  invocation: StudyCommercialTutorInvocation,
+  scope: CommercialExecutionScope,
+  routing: CommercialTutorRoutingContext,
+): boolean {
+  const presentationRef =
+    invocation.requestedPresentation.mappingContext.fallbackPresentation?.presentationRef ?? null;
+  const modelRouteRefs = routing.modelProfiles.map((profile) => profile.routeRef);
+  return invocation.logicalOperationRef === scope.logicalOperationRef &&
+    invocation.curriculum.releaseRef === scope.curriculumReleaseRef &&
+    invocation.curriculum.packageRef === scope.curriculumPackageRef &&
+    invocation.curriculum.courseRef === scope.curriculumCourseRef &&
+    invocation.curriculum.subjectId === scope.curriculumSubjectRef &&
+    invocation.curriculum.unitRef === scope.curriculumUnitRef &&
+    invocation.curriculum.lessonRef === scope.curriculumLessonRef &&
+    invocation.curriculum.conceptRef === scope.conceptRef &&
+    invocation.curriculum.opportunityRef === scope.opportunityRef &&
+    invocation.learnerStageRef === scope.learnerStageRef &&
+    presentationRef === scope.presentationRef &&
+    routing.requestRef === scope.routingRequestRef &&
+    routing.routePlanRef === scope.routePlanRef &&
+    routing.reservationRef === scope.reservationRef &&
+    arraysEqual(routing.physicalAttemptRefs, scope.physicalAttemptRefs) &&
+    arraysEqual(routing.telemetryEventRefs, scope.telemetryEventRefs) &&
+    modelRouteRefs.length === scope.allowedRouteRefs.length &&
+    modelRouteRefs.every((routeRef) => scope.allowedRouteRefs.includes(routeRef)) &&
+    routing.executionBudget.commercialScopeRef === scope.scopeRef &&
+    routing.executionBudget.logicalOperationRef === scope.logicalOperationRef;
 }
 
 /**
@@ -386,6 +453,21 @@ export function executeCommercialTutorInvocation(
     };
   }
   const invocation = invocationValidation.value;
+  const scopeValidation = validateExact(CommercialExecutionScopeSchema, input.trustedScope);
+  if (scopeValidation.status === "rejected") {
+    return {
+      status: "rejected",
+      reasonCode: "INVALID_COMMERCIAL_EXECUTION_SCOPE",
+      providerCalls: 0,
+      telemetry: [],
+    };
+  }
+  const commercialScope = scopeValidation.value;
+  const staticAdvisory = (
+    currentInvocation: StudyCommercialTutorInvocation,
+    reasonCode: AdvisoryReasonCode,
+  ): StudyCommercialTutorAdvisory =>
+    buildStaticAdvisory(currentInvocation, commercialScope, reasonCode);
   const operationDeadlineAtMs = operationStartedAtMs === null
     ? null
     : checkedMillisecondsSum([operationStartedAtMs, input.routing.latencyCeilingMs]);
@@ -402,7 +484,8 @@ export function executeCommercialTutorInvocation(
     invocation.learnerScopeRef !== input.trustedScope.learnerScopeRef ||
     invocation.sessionRef !== input.trustedScope.sessionRef ||
     invocation.interactionRef !== input.trustedScope.interactionRef ||
-    invocation.groundedContext.scopeRef !== input.trustedScope.interactionRef
+    invocation.groundedContext.scopeRef !== input.trustedScope.interactionRef ||
+    !invocationMatchesCommercialScope(invocation, commercialScope, input.routing)
   ) {
     return {
       status: "static-fallback",
@@ -485,6 +568,9 @@ export function executeCommercialTutorInvocation(
   }
 
   if (
+    !providerEligibilityRequirementsAreBounded(
+      input.routing.providerPolicyRequirements,
+    ) ||
     input.routing.providerPolicyRequirements.some(
       (requirement) =>
         requirement.requiredContractPolicyRevision !==
@@ -518,6 +604,7 @@ export function executeCommercialTutorInvocation(
       requestVersion: ROUTING_REQUEST_VERSION,
       requestRef: input.routing.requestRef,
       routePlanRef: input.routing.routePlanRef,
+      commercialScopeRef: commercialScope.scopeRef,
       logicalOperationRef: invocation.logicalOperationRef,
       physicalAttemptRefs: input.routing.physicalAttemptRefs,
       actionFamily: invocation.requestedActionFamily,
@@ -546,7 +633,17 @@ export function executeCommercialTutorInvocation(
     },
     eligibleCatalog,
   );
-  if (routeDecision.status !== "ROUTE_SELECTED") {
+  if (
+    routeDecision.status !== "ROUTE_SELECTED" ||
+    routeDecision.routeAttemptPlan.commercialScopeRef !== commercialScope.scopeRef ||
+    routeDecision.routeAttemptPlan.routePlanRef !== commercialScope.routePlanRef ||
+    routeDecision.routeAttemptPlan.attempts.some(
+      (attempt, index) =>
+        attempt.commercialScopeRef !== commercialScope.scopeRef ||
+        attempt.physicalAttemptRef !== commercialScope.physicalAttemptRefs[index] ||
+        !commercialScope.allowedRouteRefs.includes(attempt.routeRef),
+    )
+  ) {
     return {
       status: "static-fallback",
       advisory: staticAdvisory(invocation, "NO_ELIGIBLE_PROVIDER_ROUTE"),
@@ -562,7 +659,12 @@ export function executeCommercialTutorInvocation(
     eligibilityClassRef: input.routing.eligibilityClassRef,
     failoverBackoffMs: input.routing.failoverBackoffMs,
   });
-  if (!("status" in reservation) || reservation.status !== "reserved") {
+  if (
+    !("status" in reservation) ||
+    reservation.status !== "reserved" ||
+    reservation.commercialScopeRef !== commercialScope.scopeRef ||
+    reservation.reservationRef !== commercialScope.reservationRef
+  ) {
     return {
       status: "static-fallback",
       advisory: staticAdvisory(invocation, "BUDGET_OR_DEADLINE_EXHAUSTED"),
@@ -617,6 +719,7 @@ export function executeCommercialTutorInvocation(
   for (let index = 0; index < reservation.attempts.length; index += 1) {
     const attempt = reservation.attempts[index];
     if (!attempt) break;
+    const plannedAttempt = Object.freeze(structuredClone(attempt));
     const attemptStartedAtMs = readMonotonicClock(input.clock, lastClockReadingMs);
     if (attemptStartedAtMs === null) {
       return {
@@ -645,10 +748,49 @@ export function executeCommercialTutorInvocation(
     ) {
       break;
     }
+    const dispatchEligibilityRequest = {
+      phase: "before-dispatch" as const,
+      commercialScopeRef: commercialScope.scopeRef,
+      reservationRef: reservation.reservationRef,
+      actionFamily: invocation.requestedActionFamily,
+      modalityRequirement: invocation.requestedPresentation.modalityRequirement,
+      attempt: plannedAttempt,
+    };
+    let dispatchEligibility: unknown;
+    try {
+      dispatchEligibility = input.executionEligibilityResolver.resolve(
+        dispatchEligibilityRequest,
+      );
+    } catch {
+      break;
+    }
+    if (
+      validateCurrentCommercialExecutionEligibility(
+        dispatchEligibility,
+        dispatchEligibilityRequest,
+      ) === null
+    ) {
+      break;
+    }
+    let dispatchClaim: ReturnType<
+      PhysicalAttemptDispatchClaimPort["claimPhysicalAttemptDispatch"]
+    >;
+    try {
+      dispatchClaim = input.dispatchClaims.claimPhysicalAttemptDispatch({
+        claimVersion: PHYSICAL_ATTEMPT_DISPATCH_CLAIM_VERSION,
+        commercialScopeRef: commercialScope.scopeRef,
+        reservationRef: reservation.reservationRef,
+        logicalOperationRef: plannedAttempt.logicalOperationRef,
+        physicalAttemptRef: plannedAttempt.physicalAttemptRef,
+      });
+    } catch {
+      break;
+    }
+    if (dispatchClaim !== "CLAIMED") break;
     providerCalls += 1;
     let transportResult: CommercialProviderTransportResult;
     try {
-      transportResult = input.transport.execute(providerRequest.request, attempt, {
+      transportResult = input.transport.execute(providerRequest.request, plannedAttempt, {
         reservationRef: reservation.reservationRef,
         operationStartedAtMs,
         operationDeadlineAtMs,
@@ -694,10 +836,35 @@ export function executeCommercialTutorInvocation(
         };
       }
       const response = responseValidation.value;
+      const responseEligibilityRequest = {
+        ...dispatchEligibilityRequest,
+        phase: "before-response-acceptance" as const,
+      };
+      let responseEligibility: unknown;
+      try {
+        responseEligibility = input.executionEligibilityResolver.resolve(
+          responseEligibilityRequest,
+        );
+      } catch {
+        responseEligibility = null;
+      }
+      if (
+        validateCurrentCommercialExecutionEligibility(
+          responseEligibility,
+          responseEligibilityRequest,
+        ) === null
+      ) {
+        return {
+          status: "static-fallback",
+          advisory: staticAdvisory(invocation, "NO_ELIGIBLE_PROVIDER_ROUTE"),
+          providerCalls,
+          telemetry,
+        };
+      }
       const receipt = validateUsageReceipt(
         transportResult.usageReceipt,
         reservation,
-        attempt,
+        plannedAttempt,
         response.metrics.costMicros,
       );
       if (receipt === null) {
@@ -725,7 +892,7 @@ export function executeCommercialTutorInvocation(
         operationElapsedMs > input.routing.latencyCeilingMs;
       if (!late) {
         acceptedResponse = response;
-        const event = telemetryFor(attempt, reservation, input.routing, {
+        const event = telemetryFor(commercialScope, plannedAttempt, reservation, input.routing, {
           status: "success",
           metrics: responseMetrics(response),
         });
@@ -750,7 +917,7 @@ export function executeCommercialTutorInvocation(
       }
       if (transportResult.usageReceipt === null) {
         if (transportResult.kind === "provider-timeout") {
-          indeterminateTimeoutAttemptRefs.push(attempt.physicalAttemptRef);
+          indeterminateTimeoutAttemptRefs.push(plannedAttempt.physicalAttemptRef);
         } else if (transportResult.kind !== "confirmed-not-dispatched-transport-failure") {
           return {
             status: "static-fallback",
@@ -763,7 +930,7 @@ export function executeCommercialTutorInvocation(
         const receipt = validateUsageReceipt(
           transportResult.usageReceipt,
           reservation,
-          attempt,
+          plannedAttempt,
           transportResult.metrics.costMicros,
         );
         if (receipt === null) {
@@ -785,7 +952,7 @@ export function executeCommercialTutorInvocation(
       failureMetrics = transportResult.metrics;
     }
 
-    const event = telemetryFor(attempt, reservation, input.routing, {
+    const event = telemetryFor(commercialScope, plannedAttempt, reservation, input.routing, {
       status: "failure",
       metrics: failureMetrics,
       reasonCode: executionFailureReason(failureKind),
@@ -932,7 +1099,7 @@ export function executeCommercialTutorInvocation(
 
   return {
     status: "advisory",
-    advisory: finalizedAdvisory(invocation, mapped.response, grounding),
+    advisory: finalizedAdvisory(invocation, commercialScope, mapped.response, grounding),
     commercialResponse: mapped.response,
     reservation,
     settlement: Object.freeze({ ...settlement }),

@@ -225,6 +225,7 @@ function isValidAttemptPlan(
     !primary ||
     primary.attemptIndex !== 0 ||
     primary.role !== "primary" ||
+    primary.commercialScopeRef !== budget.commercialScopeRef ||
     primary.logicalOperationRef !== budget.logicalOperationRef ||
     !isCanonicalCommercialAttempt(reservationAttempt(primary)) ||
     !primary.hardConstraintsSatisfied
@@ -236,6 +237,7 @@ function isValidAttemptPlan(
   return (
     failover.attemptIndex === 1 &&
     failover.role === "failover" &&
+    failover.commercialScopeRef === budget.commercialScopeRef &&
     failover.logicalOperationRef === budget.logicalOperationRef &&
     isCanonicalCommercialAttempt(reservationAttempt(failover)) &&
     failover.physicalAttemptRef !== primary.physicalAttemptRef &&
@@ -250,6 +252,7 @@ function reservationIsConsistent(
   reservation: BudgetReservation,
 ): boolean {
   if (
+    reservation.commercialScopeRef !== budget.commercialScopeRef ||
     reservation.logicalOperationRef !== budget.logicalOperationRef ||
     reservation.attempts.length > budget.maximumPhysicalAttempts
   ) {
@@ -286,6 +289,7 @@ function reservationIsConsistent(
 
 function reservationAttempt(attempt: AttemptBudget): CommercialAttempt {
   return {
+    commercialScopeRef: attempt.commercialScopeRef,
     logicalOperationRef: attempt.logicalOperationRef,
     physicalAttemptRef: attempt.physicalAttemptRef,
     attemptIndex: attempt.attemptIndex,
@@ -323,6 +327,7 @@ export function validateBudgetReservationSnapshot(input: unknown): BudgetReserva
       reservation.attempts[0]?.routeRef === reservation.attempts[1]?.routeRef) ||
     !reservation.attempts.every(
       (attempt, index) =>
+        attempt.commercialScopeRef === reservation.commercialScopeRef &&
         attempt.logicalOperationRef === reservation.logicalOperationRef &&
         attempt.attemptIndex === index &&
         attempt.role === (index === 0 ? "primary" : "failover") &&
@@ -365,6 +370,7 @@ export function reserveExecutionBudget(input: unknown):
   return {
     contractVersion: BUDGET_RESILIENCE_VERSION,
     reservationRef,
+    commercialScopeRef: budget.commercialScopeRef,
     logicalOperationRef: budget.logicalOperationRef,
     status: "reserved",
     totalReservedMicros: total.toString(),
@@ -387,6 +393,7 @@ export function reserveCommercialRouteAttemptPlan(input: unknown):
   } = validation.value;
   if (
     validateCommercialRouteAttemptPlan(routeAttemptPlan) === null ||
+    routeAttemptPlan.commercialScopeRef !== executionBudget.commercialScopeRef ||
     routeAttemptPlan.logicalOperationRef !== executionBudget.logicalOperationRef
   ) {
     return TRUSTED_INVALID_BUDGET_STOP;
@@ -407,10 +414,19 @@ function usageReceiptMatchesAttempt(
   attempt: CommercialAttempt,
 ): boolean {
   return (
+    receipt.commercialScopeRef === attempt.commercialScopeRef &&
     receipt.logicalOperationRef === attempt.logicalOperationRef &&
     receipt.physicalAttemptRef === attempt.physicalAttemptRef &&
     receipt.reservationRef === reservation.reservationRef &&
     receipt.routeRef === attempt.routeRef &&
+    receipt.providerRef === attempt.providerRef &&
+    receipt.modelRef === attempt.modelRef &&
+    receipt.modelRevisionRef === attempt.modelRevisionRef &&
+    receipt.configurationDigest === attempt.configurationDigest &&
+    receipt.capabilityProfileRevisionRef === attempt.capabilityProfileRevisionRef &&
+    receipt.capabilityProfileDigest === attempt.capabilityProfileDigest &&
+    receipt.providerPolicyRevisionRef === attempt.providerPolicyRevisionRef &&
+    receipt.providerPolicyEvidenceRef === attempt.providerPolicyEvidenceRef &&
     receipt.attemptIndex === attempt.attemptIndex &&
     receipt.role === attempt.role &&
     receipt.reservedCostMicros === attempt.reservedCostMicros
@@ -593,6 +609,7 @@ export function decideFallback(input: unknown): FallbackDecision {
       retryPolicy.retryableFailures.length ||
     primaryAttempt.attemptIndex !== 0 ||
     primaryAttempt.role !== "primary" ||
+    primaryAttempt.commercialScopeRef !== budget.commercialScopeRef ||
     primaryAttempt.logicalOperationRef !== budget.logicalOperationRef ||
     !isCanonicalCommercialAttempt(reservationAttempt(primaryAttempt)) ||
     !reservedPrimary ||
@@ -622,6 +639,7 @@ export function decideFallback(input: unknown): FallbackDecision {
   if (
     failoverAttempt.attemptIndex !== 1 ||
     failoverAttempt.role !== "failover" ||
+    failoverAttempt.commercialScopeRef !== budget.commercialScopeRef ||
     failoverAttempt.logicalOperationRef !== budget.logicalOperationRef ||
     failoverAttempt.physicalAttemptRef === primaryAttempt.physicalAttemptRef ||
     !isCanonicalCommercialAttempt(reservationAttempt(failoverAttempt))

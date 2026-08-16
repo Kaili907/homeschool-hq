@@ -19,6 +19,7 @@ export function parseCanonicalIntegerMicros(value: unknown): bigint | null {
 }
 
 const ATTEMPT_KEYS = [
+  "commercialScopeRef",
   "logicalOperationRef",
   "physicalAttemptRef",
   "attemptIndex",
@@ -64,6 +65,7 @@ function checkedAttemptCostTotal(attempts: readonly CommercialAttempt[]): bigint
 }
 
 function attemptSequenceIsValid(
+  commercialScopeRef: string,
   logicalOperationRef: string,
   attempts: readonly CommercialAttempt[],
 ): boolean {
@@ -72,6 +74,7 @@ function attemptSequenceIsValid(
   if (
     !attempts.every(
       (attempt, index) =>
+        attempt.commercialScopeRef === commercialScopeRef &&
         attempt.logicalOperationRef === logicalOperationRef &&
         attempt.attemptIndex === index &&
         attempt.role === (index === 0 ? "primary" : "failover"),
@@ -97,7 +100,7 @@ export function validateCommercialRouteAttemptPlan(
     total === null ||
     declaredTotal === null ||
     total !== declaredTotal ||
-    !attemptSequenceIsValid(plan.logicalOperationRef, plan.attempts)
+    !attemptSequenceIsValid(plan.commercialScopeRef, plan.logicalOperationRef, plan.attempts)
   ) {
     return null;
   }
@@ -106,6 +109,7 @@ export function validateCommercialRouteAttemptPlan(
 
 export function createCommercialRouteAttemptPlan(input: {
   readonly routePlanRef: string;
+  readonly commercialScopeRef: string;
   readonly logicalOperationRef: string;
   readonly attempts: readonly CommercialAttempt[];
 }): CommercialRouteAttemptPlan | null {
@@ -114,6 +118,7 @@ export function createCommercialRouteAttemptPlan(input: {
   const plan = {
     contractVersion: COMMERCIAL_ROUTE_ATTEMPT_PLAN_VERSION,
     routePlanRef: input.routePlanRef,
+    commercialScopeRef: input.commercialScopeRef,
     logicalOperationRef: input.logicalOperationRef,
     attempts: input.attempts.map((attempt) => ({ ...attempt })),
     totalReservedCostMicros: total.toString(),
