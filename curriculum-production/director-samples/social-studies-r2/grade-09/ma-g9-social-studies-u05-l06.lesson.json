@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "manuel-academy.rich-study-lesson.v1",
+  "sampleStatus": "DIRECTOR_REVIEW_ONLY",
+  "grade": 9,
+  "courseRef": "ma-g9-social-studies",
+  "unitRef": "ma-g9-social-studies-u05",
+  "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-9/ma-g9-social-studies/ma-g9-social-studies-u05-l06.md",
+  "standards": ["USHG 7.1.1", "USHG 7.1.2", "USHG 7.1.3", "P2"],
+  "sourceIntegrity": {
+    "policy": "All historical viewpoints are attributed paraphrases of public-domain government or party documents. No wording is presented as a quotation.",
+    "sources": ["Social Security Act of 1935", "Democratic Party Platform of 1936", "Republican Party Platform of 1936"]
+  },
+  "lessonRef": "ma-g9-social-studies-u05-l06",
+  "title": "Guided practice B: the changing role of the federal government",
+  "subject": "social-studies",
+  "format": "structured",
+  "essentialQuestion": "What caused the Great Depression, and how far did the New Deal change the role of government?",
+  "successCriteria": [
+    "I can distinguish a policy action from a political interpretation of it.",
+    "I can compare supporters' and critics' reasoning fairly.",
+    "I can make a qualified claim using institutional evidence."
+  ],
+  "vocabulary": [
+    { "term": "federal-state program", "definition": "a program in which national and state governments have different responsibilities" },
+    { "term": "administrative capacity", "definition": "an institution's ability to carry out a policy" },
+    { "term": "continuity", "definition": "something important that remains in place during change" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:question",
+      "sectionKind": "teaching",
+      "title": "Question and context",
+      "body": "The New Deal created programs, agencies, and federal-state arrangements during the Great Depression. People at the time disagreed about their effectiveness, constitutionality, cost, and effect on liberty.\nHistorical analysis should identify the institutional change and represent those disagreements accurately."
+    },
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:background",
+      "sectionKind": "teaching",
+      "title": "Build background",
+      "body": "From 1933 through the late 1930s, the Roosevelt administration and Congress responded to banking collapse, unemployment, farm distress, and weak demand through relief, recovery, and reform measures. Some measures expanded direct federal administration; others relied on state governments or regulated private institutions. Courts, Congress, states, businesses, workers, and voters shaped what endured."
+    },
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:model-data",
+      "sectionKind": "data-table",
+      "title": "EXAMPLE evidence — banking institutions",
+      "body": "This model uses a different New Deal policy area from the later social-insurance task.",
+      "data": {
+        "columns": ["Evidence", "Institutional feature"],
+        "rows": [
+          "Emergency Banking Act, 1933 — national rules and review shaped bank reopening",
+          "Federal Deposit Insurance Corporation — federal insurance protected eligible deposits at member banks",
+          "Private banks continued to hold deposits and make loans under regulation"
+        ],
+        "source_note": "Academy paraphrase of public statutes and FDIC historical summaries; not quotation."
+      }
+    },
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:model",
+      "sectionKind": "worked-example",
+      "title": "EXAMPLE — model institutional claim",
+      "directions": "The example distinguishes change from continuity and avoids declaring one ideology correct.",
+      "items": [
+        {
+          "itemRef": "ma-g9-social-studies-u05-l06:model:1",
+          "itemKind": "worked-example",
+          "prompt": "What changed in the banking example?",
+          "workedSolution": {
+            "steps": [
+              "Identify change: federal rules, review, and deposit insurance expanded national responsibility for banking stability.",
+              "Identify continuity: banks remained separate institutions that held deposits and made loans.",
+              "Example claim: New Deal banking measures expanded federal oversight and guarantees without replacing private banking.",
+              "Qualification: this evidence establishes institutional design, not the full economic effect or every person's view.",
+              "Next evidence: bank-failure data, court decisions, and testimony from depositors and bankers could test effects."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:policy",
+      "sectionKind": "source",
+      "title": "Look at evidence — Social Security Act",
+      "source": {
+        "title": "Social Security Act",
+        "creator": "United States Congress; signed by President Franklin D. Roosevelt",
+        "date": "1935",
+        "source_type": "Primary law",
+        "paraphrase": "The law established federal old-age benefits and federal-state arrangements for unemployment compensation and specified forms of public assistance.",
+        "url": "https://www.ssa.gov/history/35act.html",
+        "limit": "The act's original eligibility and coverage excluded many workers, and later amendments changed the system."
+      }
+    },
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:perspectives",
+      "sectionKind": "primary-source",
+      "title": "Look at evidence — two 1936 viewpoints",
+      "source": {
+        "viewpoint_a": "The 1936 Democratic platform presented unemployment as a national problem and economic security as a responsibility requiring durable public institutions.",
+        "viewpoint_a_context": "Paraphrase of the incumbent party's campaign platform; a persuasive document stating a governing program.",
+        "viewpoint_a_url": "https://www.presidency.ucsb.edu/documents/1936-democratic-party-platform",
+        "viewpoint_b": "The 1936 Republican platform criticized concentrated executive power and centralized administration while also proposing public action for unemployment and old-age security through different arrangements.",
+        "viewpoint_b_context": "Paraphrase of an opposition party platform; a campaign document designed to state alternatives.",
+        "viewpoint_b_url": "https://www.presidency.ucsb.edu/documents/republican-party-platform-1936",
+        "source_type": "Contrasting primary political viewpoints, paraphrased rather than quoted",
+        "limit": "Party documents state public positions. They do not show that every supporter agreed or predict every policy effect."
+      }
+    },
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:guided",
+      "sectionKind": "guided-practice",
+      "title": "Your turn — distinguish fact and viewpoint",
+      "directions": "Choose the statement that keeps the law's institutional facts separate from political interpretation.",
+      "items": [
+        {
+          "itemRef": "ma-g9-social-studies-u05-l06:guided:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which statement best separates evidence from interpretation?",
+          "choices": [
+            { "id": "g9-view-a", "label": "The 1935 law created named federal and federal-state programs; supporters and critics disagreed about what that expansion meant and how it should be administered." },
+            { "id": "g9-view-b", "label": "The law proves that everyone accepted one view of federal responsibility." },
+            { "id": "g9-view-c", "label": "Because campaign sources disagree, the law's provisions cannot be studied."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:feedback",
+      "sectionKind": "remediation",
+      "title": "Feedback — label the layer of evidence",
+      "body": "If your answer treated a campaign argument as a neutral fact, label each sentence: law, implementation evidence, or political viewpoint. If disagreement led you to reject all evidence, return to the statute for what changed and use the viewpoints to analyze contested meaning."
+    },
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:independent",
+      "sectionKind": "independent-practice",
+      "title": "Your turn — argue with change, continuity, and perspective",
+      "directions": "Write one qualified paragraph. Cite the act and accurately represent both 1936 party-platform viewpoints without adopting either as the course position.",
+      "items": [
+        {
+          "itemRef": "ma-g9-social-studies-u05-l06:independent:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "How far did the New Deal change the federal government's role in economic security? Use institutional evidence, one continuity, and one limitation."
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g9-social-studies-u05-l06:review",
+      "sectionKind": "reflection",
+      "title": "Lesson review",
+      "reference": {
+        "what_you_learned": "Institutional change, continuity, and political interpretation are related but not interchangeable.",
+        "evidence_you_used": "The 1935 Social Security Act and contrasting 1936 Democratic and Republican platform positions.",
+        "how_you_did": "Trusted review will check source attribution, fair perspective comparison, qualification, and evidence-to-claim reasoning.",
+        "what_to_review": "Check for absolute language such as everyone, completely, or proved when the evidence is narrower.",
+        "review_this_lesson": "Tag each sentence in your paragraph as fact, source viewpoint, inference, or limitation.",
+        "course_progress": "This is course day 54 of 108 in Grade 9 United States History and Geography. Sample work remains isolated.",
+        "next_action": "Continue when the paragraph explains a real change without erasing continuity or disagreement."
+      },
+      "items": [
+        {
+          "itemRef": "ma-g9-social-studies-u05-l06:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Review this lesson: choose the revision route your evidence needs.",
+          "choices": [
+            { "id": "g9-review-ready", "label": "Continue; my claim includes change, continuity, and limits." },
+            { "id": "g9-review-fact", "label": "Separate statutory facts from campaign viewpoints." },
+            { "id": "g9-review-fair", "label": "Revise my account of one viewpoint to make it accurate and fair." }
+          ]
+        }
+      ]
+    }
+  ]
+}

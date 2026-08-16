@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "manuel-academy.rich-study-lesson.v1",
+  "sampleStatus": "DIRECTOR_REVIEW_ONLY",
+  "grade": 4,
+  "courseRef": "ma-g4-social-studies",
+  "unitRef": "ma-g4-social-studies-u02",
+  "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-4/ma-g4-social-studies/ma-g4-social-studies-u02-l06.md",
+  "standards": ["4 – G1.0.4", "4 – G1.0.5", "4 – G2.0.1", "4 – G2.0.2"],
+  "sourceIntegrity": {
+    "policy": "All map cards are Manuel Academy explanatory text. They contain broad comparison features, not quotations or claims that every place in a region is alike.",
+    "sources": ["United States Geological Survey educational geography resources", "National Oceanic and Atmospheric Administration climate education resources"]
+  },
+  "lessonRef": "ma-g4-social-studies-u02-l06",
+  "title": "Guided practice B: comparing regions to the Great Lakes region",
+  "subject": "social-studies",
+  "format": "structured",
+  "essentialQuestion": "How can two maps help us compare the Great Lakes region with another U.S. region?",
+  "successCriteria": [
+    "I can read a map key before making a claim.",
+    "I can name one similarity and one difference.",
+    "I can avoid claiming that every place in a region is the same."
+  ],
+  "vocabulary": [
+    { "term": "region", "definition": "an area grouped by shared features" },
+    { "term": "physical feature", "definition": "a natural feature such as a lake, mountain, or desert" },
+    { "term": "pattern", "definition": "a feature or arrangement that repeats across places" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "ma-g4-social-studies-u02-l06:question",
+      "sectionKind": "teaching",
+      "title": "Question and context",
+      "body": "A region is useful because it helps us notice patterns. A region is not a rule about every place inside it.\nToday you will compare maps and make a careful geographic claim."
+    },
+    {
+      "sectionRef": "ma-g4-social-studies-u02-l06:background",
+      "sectionKind": "teaching",
+      "title": "Build background",
+      "body": "The Great Lakes region includes places near the five Great Lakes. The Southwest region includes places such as Arizona and New Mexico. Geographers can compare water, landforms, climate patterns, and where people live."
+    },
+    {
+      "sectionRef": "ma-g4-social-studies-u02-l06:model-map",
+      "sectionKind": "map-reference",
+      "title": "EXAMPLE map — two different practice regions",
+      "body": "This example uses the Pacific Northwest and Great Plains so the later task stays fresh.",
+      "map": {
+        "title": "Academy text map: Pacific Northwest and Great Plains",
+        "legend": "W = major water feature; M = mountain area; G = broad grassland area",
+        "locations": [
+          "Pacific Northwest card: Pacific Ocean (W), Cascade Range (M)",
+          "Great Plains card: long grassland belt (G), rivers crossing parts of the region (W)"
+        ],
+        "alt": "A text-only map key and two region cards; no color is needed to read the features."
+      }
+    },
+    {
+      "sectionRef": "ma-g4-social-studies-u02-l06:model",
+      "sectionKind": "worked-example",
+      "title": "EXAMPLE — model geographic thinking",
+      "directions": "Notice how the claim names map evidence and leaves room for variation.",
+      "items": [
+        {
+          "itemRef": "ma-g4-social-studies-u02-l06:model:1",
+          "itemKind": "worked-example",
+          "prompt": "How can the example regions be compared?",
+          "workedSolution": {
+            "steps": [
+              "Read the key: W marks water, M mountains, and G grassland.",
+              "Find a similarity: both cards include water features.",
+              "Find a difference: the Pacific Northwest card marks a mountain range; the Great Plains card emphasizes grassland.",
+              "Example claim: Both regions include water features, but the map emphasizes different landforms.",
+              "Limit check: the cards do not show every landform or every local climate."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g4-social-studies-u02-l06:map",
+      "sectionKind": "map-reference",
+      "title": "Look at evidence — Great Lakes and Southwest",
+      "map": {
+        "title": "Academy text map: two U.S. regions",
+        "legend": "L = large lake; R = major river; P = plateau or highland; D = desert area",
+        "great_lakes_region": [
+          "L appears beside Lakes Superior, Michigan, Huron, Erie, and Ontario.",
+          "R appears along rivers that connect or drain parts of the lake system.",
+          "Michigan is shown between and beside several Great Lakes."
+        ],
+        "southwest_region": [
+          "P appears across parts of the Colorado Plateau.",
+          "D appears across several dry-land areas.",
+          "R appears along the Colorado River and Rio Grande."
+        ],
+        "alt": "A keyboard-readable text map comparing water and landform symbols in two U.S. regions.",
+        "limit": "The card shows selected physical features. It does not show all places, peoples, or local differences."
+      }
+    },
+    {
+      "sectionRef": "ma-g4-social-studies-u02-l06:guided",
+      "sectionKind": "guided-practice",
+      "title": "Your turn — read the legend",
+      "directions": "Use the symbols and place names. Do not rely only on what you remember about the regions.",
+      "items": [
+        {
+          "itemRef": "ma-g4-social-studies-u02-l06:guided:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which statement uses evidence from both region cards?",
+          "choices": [
+            { "id": "g4-map-a", "label": "Both cards mark major rivers, while the Great Lakes card also emphasizes large lakes." },
+            { "id": "g4-map-b", "label": "Every place in both regions has the same landforms." },
+            { "id": "g4-map-c", "label": "The map proves which region is better for every person." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g4-social-studies-u02-l06:feedback",
+      "sectionKind": "remediation",
+      "title": "Feedback — match each word to a map mark",
+      "body": "A map-supported comparison should point to evidence on both cards. If your statement used words like every or better, check whether the map could really prove that. Replace a broad judgment with named symbols and places."
+    },
+    {
+      "sectionRef": "ma-g4-social-studies-u02-l06:independent",
+      "sectionKind": "independent-practice",
+      "title": "Your turn — make a careful comparison",
+      "directions": "Write three or four sentences. Include one similarity, one difference, and one limit of the text map.",
+      "items": [
+        {
+          "itemRef": "ma-g4-social-studies-u02-l06:independent:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Compare the physical geography of the Great Lakes and Southwest cards. Cite at least two symbols or named features."
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g4-social-studies-u02-l06:review",
+      "sectionKind": "reflection",
+      "title": "Lesson review",
+      "reference": {
+        "what_you_learned": "A map key turns symbols into evidence for a regional comparison.",
+        "evidence_you_used": "Large-lake, river, plateau, and desert-area marks from two text map cards.",
+        "how_you_did": "A trusted reviewer will check whether your claim matches both cards and avoids overgeneralizing.",
+        "what_to_review": "Look for a claim that says more than the selected map can show.",
+        "review_this_lesson": "Read the legend, point to evidence on each card, then say the comparison.",
+        "course_progress": "This is course day 18 of 108 in Grade 4 Social Studies. The review sample records no production completion.",
+        "next_action": "Move on when your comparison includes evidence from both maps and one honest limit."
+      },
+      "items": [
+        {
+          "itemRef": "ma-g4-social-studies-u02-l06:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Review this lesson: which next action fits your work?",
+          "choices": [
+            { "id": "g4-review-ready", "label": "Continue; I cited both map cards." },
+            { "id": "g4-review-map", "label": "Reread the map key and add a named feature." },
+            { "id": "g4-review-limit", "label": "Revise a statement that is too broad." }
+          ]
+        }
+      ]
+    }
+  ]
+}

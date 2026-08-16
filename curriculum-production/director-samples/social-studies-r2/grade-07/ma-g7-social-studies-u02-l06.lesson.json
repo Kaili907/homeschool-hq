@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "manuel-academy.rich-study-lesson.v1",
+  "sampleStatus": "DIRECTOR_REVIEW_ONLY",
+  "grade": 7,
+  "courseRef": "ma-g7-social-studies",
+  "unitRef": "ma-g7-social-studies-u02",
+  "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-7/ma-g7-social-studies/ma-g7-social-studies-u02-l06.md",
+  "standards": ["Michigan Grade 7 W1"],
+  "sourceIntegrity": {
+    "policy": "The archaeological cases are explicitly labeled Academy simulations. They model evidence limits without posing invented language or events as history.",
+    "sources": ["Smithsonian Human Origins educational archaeology resources", "Manuel Academy simulated excavation records"]
+  },
+  "lessonRef": "ma-g7-social-studies-u02-l06",
+  "title": "Guided practice B: limits of archaeological evidence",
+  "subject": "social-studies",
+  "format": "structured",
+  "essentialQuestion": "What can artifacts support us in saying about early human life, and what remains uncertain?",
+  "successCriteria": [
+    "I can separate an observation from an inference.",
+    "I can combine more than one artifact clue.",
+    "I can state a limitation without dismissing the evidence."
+  ],
+  "vocabulary": [
+    { "term": "artifact", "definition": "an object made or changed by people" },
+    { "term": "context", "definition": "where an object was found and what was found with it" },
+    { "term": "inference", "definition": "a reasoned idea based on evidence, not a direct observation" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "ma-g7-social-studies-u02-l06:question",
+      "sectionKind": "teaching",
+      "title": "Question and context",
+      "body": "Archaeologists rarely find a complete record. They study objects, locations, layers, animal or plant remains, and changes to the landscape.\nA strong interpretation says both what the evidence supports and where the evidence stops."
+    },
+    {
+      "sectionRef": "ma-g7-social-studies-u02-l06:background",
+      "sectionKind": "teaching",
+      "title": "Build background",
+      "body": "Observation: a stone point and flakes were found in the same dated layer.\nInference: people likely shaped stone tools at or near that place.\nUnsupported leap: one named person made the point for one known purpose. The artifacts do not identify that person or every use."
+    },
+    {
+      "sectionRef": "ma-g7-social-studies-u02-l06:model-source",
+      "sectionKind": "source",
+      "title": "EXAMPLE evidence — Seed Hollow simulation",
+      "body": "This is a transparent practice excavation created by Manuel Academy, not a real site report.",
+      "source": {
+        "record_a": "A cluster of charred seed fragments was recorded inside a hearth feature.",
+        "record_b": "A worn grinding stone was recorded one meter from the hearth in the same soil layer.",
+        "record_c": "No container survived in the excavated area.",
+        "date_note": "Laboratory dating places the hearth layer within a 200-year range.",
+        "limit": "Only part of the simulated site was excavated."
+      }
+    },
+    {
+      "sectionRef": "ma-g7-social-studies-u02-l06:model",
+      "sectionKind": "worked-example",
+      "title": "EXAMPLE — model observation and inference",
+      "directions": "The example shows a complete reasoning chain and labels uncertainty.",
+      "items": [
+        {
+          "itemRef": "ma-g7-social-studies-u02-l06:model:1",
+          "itemKind": "worked-example",
+          "prompt": "What can the Seed Hollow evidence support?",
+          "workedSolution": {
+            "steps": [
+              "Observe first: charred seeds, a hearth, and a worn grinding stone appear in the same layer.",
+              "Connect clues: heat, seeds, and grinding wear are consistent with plant processing near the hearth.",
+              "Example claim: the evidence supports an inference that people processed plant food in this area.",
+              "Do not overreach: the records do not identify who did each task or give an exact recipe.",
+              "Check the date range and partial excavation before making a broad claim."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g7-social-studies-u02-l06:evidence",
+      "sectionKind": "data-table",
+      "title": "Look at evidence — Ridge Camp simulation",
+      "body": "Treat each row as an observation record. The site and records are Academy-created for practice.",
+      "data": {
+        "columns": ["Record", "Observation", "Context"],
+        "rows": [
+          "RC-1 — Six sharp stone flakes — beside a larger stone core in Layer 4",
+          "RC-2 — One broken stone point — three meters east in the same layer",
+          "RC-3 — Animal bone fragments with cut marks — near a hearth in Layer 4",
+          "RC-4 — Pollen sample — suggests open grassland near the site"
+        ],
+        "dating": "Layer 4 is estimated to be 11,200 to 10,900 years old in the simulation.",
+        "missing_evidence": "No preserved clothing, spoken language, names, or complete dwelling was recovered."
+      }
+    },
+    {
+      "sectionRef": "ma-g7-social-studies-u02-l06:guided",
+      "sectionKind": "guided-practice",
+      "title": "Your turn — separate support from speculation",
+      "directions": "Choose the claim with a scale and certainty that match the records.",
+      "items": [
+        {
+          "itemRef": "ma-g7-social-studies-u02-l06:guided:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which claim is best supported by the Ridge Camp records?",
+          "choices": [
+            { "id": "g7-claim-a", "label": "People likely made or repaired stone tools and processed animals in the Layer 4 activity area." },
+            { "id": "g7-claim-b", "label": "One known leader assigned every person a permanent job." },
+            { "id": "g7-claim-c", "label": "The evidence proves the exact words people spoke at the camp." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g7-social-studies-u02-l06:feedback",
+      "sectionKind": "remediation",
+      "title": "Feedback — lower the certainty before dropping the claim",
+      "body": "If your claim names a person, belief, or social rule that no record shows, return to the observation column. Use words such as likely or supports the inference when the evidence is indirect. Then name what new evidence would test the inference."
+    },
+    {
+      "sectionRef": "ma-g7-social-studies-u02-l06:independent",
+      "sectionKind": "independent-practice",
+      "title": "Your turn — build and limit an interpretation",
+      "directions": "Write one evidence-based claim, cite at least two records by ID, and name one missing piece of evidence.",
+      "items": [
+        {
+          "itemRef": "ma-g7-social-studies-u02-l06:independent:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "What activity probably happened at Ridge Camp, and what can the evidence not establish? Explain how the context strengthens or weakens your claim."
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g7-social-studies-u02-l06:review",
+      "sectionKind": "reflection",
+      "title": "Lesson review",
+      "reference": {
+        "what_you_learned": "Archaeological reasoning moves from observations to cautious inferences.",
+        "evidence_you_used": "Stone flakes, a core, a broken point, marked bones, a hearth, pollen, layer context, and a date range.",
+        "how_you_did": "Trusted review will check whether your certainty matches the records and whether you cite more than one clue.",
+        "what_to_review": "Underline any detail in your claim that cannot be traced to an observation or a clearly labeled inference.",
+        "review_this_lesson": "Sort your sentences into observation, inference, and limitation.",
+        "course_progress": "This is course day 18 of 108 in Grade 7 World History and Geography. The sample is outside production progress.",
+        "next_action": "Continue to a fresh archaeological case after your claim includes context and uncertainty."
+      },
+      "items": [
+        {
+          "itemRef": "ma-g7-social-studies-u02-l06:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Review this lesson: what needs attention next?",
+          "choices": [
+            { "id": "g7-review-ready", "label": "My records, inference, and limit are connected; continue." },
+            { "id": "g7-review-records", "label": "Add two record IDs to my explanation." },
+            { "id": "g7-review-certainty", "label": "Reduce a claim that sounds more certain than the evidence." }
+          ]
+        }
+      ]
+    }
+  ]
+}

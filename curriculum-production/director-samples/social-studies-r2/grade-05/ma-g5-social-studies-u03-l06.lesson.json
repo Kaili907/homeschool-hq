@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "manuel-academy.rich-study-lesson.v1",
+  "sampleStatus": "DIRECTOR_REVIEW_ONLY",
+  "grade": 5,
+  "courseRef": "ma-g5-social-studies",
+  "unitRef": "ma-g5-social-studies-u03",
+  "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-5/ma-g5-social-studies/ma-g5-social-studies-u03-l06.md",
+  "standards": ["Michigan Grade 5 U1.2", "G4", "E1"],
+  "sourceIntegrity": {
+    "policy": "The named 1507 map is public domain. The lesson describes it without fabricating words from the map. Academy notes are labeled secondary explanatory text.",
+    "sources": ["Library of Congress, Universalis cosmographia, 1507"]
+  },
+  "lessonRef": "ma-g5-social-studies-u03-l06",
+  "title": "Guided practice B: source reliability",
+  "subject": "social-studies",
+  "format": "structured",
+  "essentialQuestion": "When is an old map useful evidence, and what can it not prove?",
+  "successCriteria": [
+    "I can name who made a source, when, and for what purpose.",
+    "I can match a source to the question it can answer.",
+    "I can state a useful limit instead of calling a source simply good or bad."
+  ],
+  "vocabulary": [
+    { "term": "reliable", "definition": "dependable for a particular question" },
+    { "term": "perspective", "definition": "the position and experience from which a source was created" },
+    { "term": "corroborate", "definition": "check a claim against other evidence" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:question",
+      "sectionKind": "teaching",
+      "title": "Question and context",
+      "body": "An old source is not automatically accurate about everything. It can still be strong evidence for some questions.\nThe key question is: reliable for what?"
+    },
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:background",
+      "sectionKind": "teaching",
+      "title": "Build background",
+      "body": "European mapmakers in the 1400s and 1500s combined travel reports, older geographic ideas, measurements, and guesses. Their maps can show what one mapmaker represented. Another source is needed before we claim the map shows what every traveler knew or what all places were really like."
+    },
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:model-source",
+      "sectionKind": "source",
+      "title": "EXAMPLE sources — a practice harbor",
+      "body": "Both cards are Academy-created examples, not historical quotations.",
+      "source": {
+        "source_a": "A ship clerk's same-day cargo list records 12 wool bundles unloaded at Harbor Pine.",
+        "source_b": "A town history written 80 years later says Harbor Pine was famous for fish exports.",
+        "practice_question": "How many wool bundles were recorded on that day?"
+      }
+    },
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:model",
+      "sectionKind": "worked-example",
+      "title": "EXAMPLE — model source analysis",
+      "directions": "This complete example answers a different question from the one you will answer.",
+      "items": [
+        {
+          "itemRef": "ma-g5-social-studies-u03-l06:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Which practice source fits the wool-bundle question?",
+          "workedSolution": {
+            "steps": [
+              "Name the question: the number of wool bundles recorded that day.",
+              "Source A is a same-day cargo record and directly lists the number.",
+              "Source B is later and focuses on a different export.",
+              "Example claim: Source A is more useful for this narrow count.",
+              "Limit check: the list does not prove every bundle arrived safely or that the clerk made no error."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:evidence-map",
+      "sectionKind": "map-reference",
+      "title": "Look at evidence — the 1507 world map",
+      "map": {
+        "title": "Universalis cosmographia secundum Ptholomaei traditionem et Americi Vespucii aliorumque lustrationes",
+        "creator": "Martin Waldseemüller and collaborators",
+        "date": "1507",
+        "repository": "Library of Congress",
+        "url": "https://www.loc.gov/resource/g3200.ct000725C/",
+        "source_type": "Primary visual source for what this mapmaking project represented in 1507",
+        "description": "The printed world map combines older geographic traditions with reports connected to Atlantic voyages and labels part of the Western Hemisphere with the name America.",
+        "limit": "It is one European mapmaking project. It does not represent every European view, Indigenous geographic knowledge, or a perfectly measured world."
+      }
+    },
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:evidence-note",
+      "sectionKind": "source",
+      "title": "Look at evidence — repository context",
+      "source": {
+        "title": "Library of Congress collection description",
+        "creator": "Library of Congress specialists",
+        "date": "Modern catalog record",
+        "source_type": "Secondary source",
+        "context": "The record identifies the map, its creators, date, physical form, and later history in the collection.",
+        "purpose": "Help researchers identify, locate, and place the map in context.",
+        "limit": "A catalog description summarizes expert research; it is not the 1507 map itself."
+      }
+    },
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:guided",
+      "sectionKind": "guided-practice",
+      "title": "Your turn — match source to question",
+      "directions": "Ask which source most directly answers the question. Then remember that the other source may be useful for a different purpose.",
+      "items": [
+        {
+          "itemRef": "ma-g5-social-studies-u03-l06:guided:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which source is most direct for studying what this mapmaking project represented in 1507?",
+          "choices": [
+            { "id": "g5-source-a", "label": "The 1507 map itself" },
+            { "id": "g5-source-b", "label": "Only a modern catalog summary" },
+            { "id": "g5-source-c", "label": "An unrelated modern road map" }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:feedback",
+      "sectionKind": "remediation",
+      "title": "Feedback — reliable for which question?",
+      "body": "If you chose a source because it sounded more modern or more official, pause. Restate the exact question. Then compare the question with each source's creator, date, purpose, and direct connection to the evidence."
+    },
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:independent",
+      "sectionKind": "independent-practice",
+      "title": "Your turn — make a supported source claim",
+      "directions": "Write four or five sentences. Use both source cards, and identify which words are your paraphrase.",
+      "items": [
+        {
+          "itemRef": "ma-g5-social-studies-u03-l06:independent:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Explain one question the 1507 map can help answer and one claim it cannot prove by itself. How could the catalog record help?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "ma-g5-social-studies-u03-l06:review",
+      "sectionKind": "reflection",
+      "title": "Lesson review",
+      "reference": {
+        "what_you_learned": "Reliability depends on the question, source context, and the claim being made.",
+        "evidence_you_used": "A public-domain 1507 map and a modern Library of Congress catalog record.",
+        "how_you_did": "A trusted reviewer will look for a matched question, relevant evidence, and an honest limit.",
+        "what_to_review": "Check whether you treated one mapmaker's representation as if it were every person's knowledge.",
+        "review_this_lesson": "Use the four checks: creator, date, purpose, and limit.",
+        "course_progress": "This is course day 30 of 108 in Grade 5 Social Studies. Director review does not update the live course.",
+        "next_action": "Continue when you can explain why a source can be useful and limited at the same time."
+      },
+      "items": [
+        {
+          "itemRef": "ma-g5-social-studies-u03-l06:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Review this lesson: choose your next move.",
+          "choices": [
+            { "id": "g5-review-ready", "label": "Continue; my claim names a use and a limit." },
+            { "id": "g5-review-context", "label": "Return to creator, date, and purpose." },
+            { "id": "g5-review-evidence", "label": "Add a specific detail from each source card." }
+          ]
+        }
+      ]
+    }
+  ]
+}
