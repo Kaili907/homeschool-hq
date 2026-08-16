@@ -43,6 +43,15 @@ function authorized(role = 'owner') {
   }
 }
 
+function assuredDependencies() {
+  return {
+    stepUpAssurance: {
+      consume: vi.fn(async ({ binding }) => ({ ok: true, binding })),
+    },
+    criticalActionAudit: { record: vi.fn(async () => {}) },
+  }
+}
+
 describe('Admin access endpoint', () => {
   it.each(['viewer', 'admin', 'owner'])('allows %s read through the canonical baseline capability', async (role) => {
     const require = vi.fn(async () => authorized(role))
@@ -75,7 +84,10 @@ describe('Admin access endpoint', () => {
       revision: '1',
       idempotencyResult: 'applied',
     })) }
-    const response = await createAdminAccessHandler({ authorization: { require }, source })(
+    const assurance = assuredDependencies()
+    const response = await createAdminAccessHandler({
+      authorization: { require }, source, ...assurance,
+    })(
       mutationEvent('/api/admin/v1/access/change-role', { newRole: 'admin' }),
     )
     expect(response.statusCode).toBe(200)
@@ -88,6 +100,14 @@ describe('Admin access endpoint', () => {
       requestId: REQUEST_ID,
     })
     expect(JSON.stringify(source.mutate.mock.calls[0][1])).not.toMatch(/capabilit|actor|token/i)
+    expect(assurance.stepUpAssurance.consume).toHaveBeenCalledWith({
+      event: expect.anything(),
+      binding: {
+        actorId: 'private-user',
+        action: 'admin.role.change',
+        resource: { type: 'admin-role-assignment', id: ASSIGNMENT_REF },
+      },
+    })
   })
 
   it('preserves authorization denial for admin/viewer mutation attempts', async () => {
@@ -101,6 +121,44 @@ describe('Admin access endpoint', () => {
     )
     expect(response.statusCode).toBe(403)
     expect(source.mutate).not.toHaveBeenCalled()
+  })
+
+  it('fails closed before role persistence when step-up is unavailable', async () => {
+    const source = { mutate: vi.fn() }
+    const response = await createAdminAccessHandler({
+      authorization: { require: vi.fn(async () => authorized()) },
+      source,
+      criticalActionAudit: { record: vi.fn(async () => {}) },
+    })(mutationEvent('/api/admin/v1/access/revoke'))
+    expect(response.statusCode).toBe(503)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: 'step_up_unavailable' } })
+    expect(source.mutate).not.toHaveBeenCalled()
+  })
+
+  it('binds revocation assurance to the exact actor and assignment', async () => {
+    const assurance = assuredDependencies()
+    const source = { mutate: vi.fn(async () => ({
+      schemaVersion: 2,
+      assignmentRef: ASSIGNMENT_REF,
+      role: 'viewer',
+      status: 'revoked',
+      revision: '2',
+      idempotencyResult: 'applied',
+    })) }
+    const response = await createAdminAccessHandler({
+      authorization: { require: vi.fn(async () => authorized()) },
+      source,
+      ...assurance,
+    })(mutationEvent('/api/admin/v1/access/revoke'))
+    expect(response.statusCode).toBe(200)
+    expect(assurance.stepUpAssurance.consume).toHaveBeenCalledWith({
+      event: expect.anything(),
+      binding: {
+        actorId: 'private-user',
+        action: 'admin.role.revoke',
+        resource: { type: 'admin-role-assignment', id: ASSIGNMENT_REF },
+      },
+    })
   })
 
   it('rejects forged roles, capabilities, unknown roles, queries, methods, and oversized revisions', async () => {
@@ -133,6 +191,7 @@ describe('Admin access endpoint', () => {
     const handler = createAdminAccessHandler({
       authorization: { require: vi.fn(async () => authorized()) },
       source: { mutate: vi.fn(async () => { throw new AdminAccessSourceError(sourceCode) }) },
+      ...assuredDependencies(),
     })
     const response = await handler(mutationEvent('/api/admin/v1/access/revoke'))
     expect(response.statusCode).toBe(status)

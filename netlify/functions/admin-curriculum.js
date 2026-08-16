@@ -1,5 +1,9 @@
 import { createHash } from 'node:crypto'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
+import {
+  ADMIN_CRITICAL_ACTIONS,
+  createAdminCriticalActionEnforcer,
+} from './_shared/admin-critical-actions.js'
 import { createAdminCurriculumAuthoringService } from './_shared/admin-curriculum-authoring.js'
 import { createAdminCurriculumStandardsReviewService } from './_shared/admin-curriculum-standards-review.js'
 import { createAdminCurriculumApprovalService } from './_shared/admin-curriculum-approval.js'
@@ -572,6 +576,11 @@ export function createAdminCurriculumHandler(overrides = {}) {
     evidence: integrityEvidence,
     registry,
   })
+  const criticalActions = overrides.criticalActions ?? createAdminCriticalActionEnforcer({
+    stepUpAssurance: overrides.stepUpAssurance,
+    audit: overrides.criticalActionAudit,
+    now: overrides.criticalActionNow,
+  })
 
   return async (event) => {
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
@@ -697,11 +706,32 @@ export function createAdminCurriculumHandler(overrides = {}) {
           value = await publishing.read(actor, route.draftId)
         } else if (route.kind === 'draft-publishing') {
           const input = parsePublishingRequest(event, route.draftId)
+          const assured = await criticalActions.enforce(event, {
+            actorId: actor,
+            action: ADMIN_CRITICAL_ACTIONS.PUBLISH_CURRICULUM,
+            resource: {
+              type: 'curriculum-publication',
+              id: `${input.draftId}:${input.stagingId}`,
+            },
+          })
+          if (!assured.ok) return assured.response
           value = await publishing.publish(actor, input.stagingId, input.idempotencyKey)
         } else if (route.kind === 'draft-entity') {
           value = await authoring.updateEntity(actor, parseUpdateEntity(event, route))
         } else {
-          value = await authoring.tombstoneEntity(actor, parseTombstone(event, route))
+          const input = parseTombstone(event, route)
+          const assured = await criticalActions.enforce(event, {
+            actorId: actor,
+            action: ADMIN_CRITICAL_ACTIONS.TOMBSTONE_CURRICULUM_ENTITY,
+            resource: {
+              type: 'curriculum-draft-entity',
+              id: [input.draftId, input.entityType, input.entityRef]
+                .map(encodeURIComponent)
+                .join('/'),
+            },
+          })
+          if (!assured.ok) return assured.response
+          value = await authoring.tombstoneEntity(actor, input)
         }
         return curriculumResponse(
           writing && value.replayed === false
@@ -737,12 +767,21 @@ export function createAdminCurriculumHandler(overrides = {}) {
       )
       if (!authorized.ok) return authorized.response
       try {
-        const value = writing
-          ? await activation.transition(
-            authorized.principal.userId,
-            parseActivationRequest(event),
-          )
-          : await activation.read(authorized.principal.userId)
+        let value
+        if (writing) {
+          const input = parseActivationRequest(event)
+          const assured = await criticalActions.enforce(event, {
+            actorId: authorized.principal.userId,
+            action: input.transitionKind === 'activation'
+              ? ADMIN_CRITICAL_ACTIONS.ACTIVATE_RELEASE
+              : ADMIN_CRITICAL_ACTIONS.ROLLBACK_RELEASE,
+            resource: { type: 'curriculum-release', id: input.targetReleaseVersion },
+          })
+          if (!assured.ok) return assured.response
+          value = await activation.transition(authorized.principal.userId, input)
+        } else {
+          value = await activation.read(authorized.principal.userId)
+        }
         return curriculumResponse(
           writing && value.transition.state === 'transitioned' && !value.replayed ? 201 : 200,
           value,

@@ -49,11 +49,16 @@ function setup(authorizationResult = {
       replayed: false,
     })),
   }
+  const stepUpAssurance = {
+    consume: vi.fn(async ({ binding }) => ({ ok: true, binding })),
+  }
   const handler = createAdminCurriculumHandler({
     authorization, activation,
+    stepUpAssurance,
+    criticalActionAudit: { record: vi.fn(async () => {}) },
     studio: {}, authoring: {}, approval: {}, staging: {}, registry: {}, source: {},
   })
-  return { activation, authorization, handler }
+  return { activation, authorization, stepUpAssurance, handler }
 }
 
 function activationBody(overrides = {}) {
@@ -69,7 +74,7 @@ function activationBody(overrides = {}) {
 
 describe('Admin curriculum activation HTTP boundary', () => {
   it('reads with curriculum:read and transitions with releases:manage', async () => {
-    const { activation, authorization, handler } = setup()
+    const { activation, authorization, stepUpAssurance, handler } = setup()
     const read = await handler(event('GET'))
     const write = await handler(event('POST', activationBody()))
     expect(read.statusCode).toBe(200)
@@ -79,6 +84,14 @@ describe('Admin curriculum activation HTTP boundary', () => {
     ])
     expect(activation.read).toHaveBeenCalledWith(ACTOR)
     expect(activation.transition).toHaveBeenCalledWith(ACTOR, activationBody())
+    expect(stepUpAssurance.consume).toHaveBeenCalledWith({
+      event: expect.anything(),
+      binding: {
+        actorId: ACTOR,
+        action: 'admin.release.activate',
+        resource: { type: 'curriculum-release', id: '2.0.0' },
+      },
+    })
     expect(JSON.parse(write.body).existingLearnersRepinned).toBe(false)
   })
 
@@ -91,6 +104,26 @@ describe('Admin curriculum activation HTTP boundary', () => {
     expect(forged.statusCode).toBe(400)
     expect(mismatched.statusCode).toBe(400)
     expect(activation.transition).not.toHaveBeenCalled()
+  })
+
+  it('binds rollback assurance to the rollback action and exact target release', async () => {
+    const { activation, stepUpAssurance, handler } = setup()
+    const body = activationBody({
+      targetReleaseVersion: '1.0.0',
+      transitionKind: 'rollback',
+      reasonCode: 'release.rolled_back',
+    })
+    const response = await handler(event('POST', body))
+    expect(response.statusCode).toBe(201)
+    expect(activation.transition).toHaveBeenCalledWith(ACTOR, body)
+    expect(stepUpAssurance.consume).toHaveBeenCalledWith({
+      event: expect.anything(),
+      binding: {
+        actorId: ACTOR,
+        action: 'admin.release.rollback',
+        resource: { type: 'curriculum-release', id: '1.0.0' },
+      },
+    })
   })
 
   it('fails before mutation when current server authorization denies', async () => {

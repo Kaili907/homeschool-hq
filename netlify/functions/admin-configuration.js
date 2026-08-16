@@ -5,6 +5,10 @@ import {
 } from '../../src/admin/configurationModel.ts'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import {
+  ADMIN_CRITICAL_ACTIONS,
+  createAdminCriticalActionEnforcer,
+} from './_shared/admin-critical-actions.js'
+import {
   AdminConfigurationSourceError,
   createAdminConfigurationSource,
 } from './_shared/admin-configuration-source.js'
@@ -123,6 +127,11 @@ export function createAdminConfigurationHandler(overrides = {}) {
   const effectiveResolver = overrides.effectiveResolver
     ?? ((projection) => resolveEffectiveRuntimeConfiguration(projection, { env, catalog }))
   const tokenFactory = overrides.tokenFactory ?? (() => randomBytes(32).toString('base64url'))
+  const criticalActions = overrides.criticalActions ?? createAdminCriticalActionEnforcer({
+    stepUpAssurance: overrides.stepUpAssurance,
+    audit: overrides.criticalActionAudit,
+    now: overrides.criticalActionNow,
+  })
 
   return async (event) => {
     const path = event?.path ?? ''
@@ -168,6 +177,12 @@ export function createAdminConfigurationHandler(overrides = {}) {
         return jsonResponse(200, { ...projection, confirmationToken })
       }
       const request = parseConfigurationCommitRequest(event)
+      const assured = await criticalActions.enforce(event, {
+        actorId: authorized.principal.userId,
+        action: ADMIN_CRITICAL_ACTIONS.COMMIT_CONFIGURATION,
+        resource: { type: 'admin-configuration', id: request.settingKey },
+      })
+      if (!assured.ok) return assured.response
       const { confirmationToken, ...immutableRequest } = request
       return jsonResponse(200, await source.commit(
         authorized.accessToken,
