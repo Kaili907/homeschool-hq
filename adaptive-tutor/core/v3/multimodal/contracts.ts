@@ -1,6 +1,6 @@
 import { Type, type Static } from "../../schema/typebox.js";
 
-export const MULTIMODAL_CONTRACT_VERSION = "3.0.0-foundation.1" as const;
+export const MULTIMODAL_CONTRACT_VERSION = "3.0.0-foundation.2" as const;
 
 export const MultimodalReferenceSchema = Type.String({
   minLength: 3,
@@ -17,6 +17,18 @@ export type MultimodalDigest = Static<typeof MultimodalDigestSchema>;
 export const MultimodalISODateTimeSchema = Type.String({
   pattern: "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
 });
+
+export const MultimodalScopeLineageSchema = Type.Object(
+  {
+    householdScopeRef: MultimodalReferenceSchema,
+    learnerScopeRef: MultimodalReferenceSchema,
+    sessionRef: MultimodalReferenceSchema,
+    interactionRef: MultimodalReferenceSchema,
+    opportunityRef: MultimodalReferenceSchema,
+  },
+  { additionalProperties: false, $id: "TutorV3MultimodalScopeLineage" },
+);
+export type MultimodalScopeLineage = Static<typeof MultimodalScopeLineageSchema>;
 
 export const MultimodalModeSchema = Type.Union([
   Type.Literal("text"),
@@ -55,22 +67,57 @@ export const TRANSIENT_MEDIA_INFERENCE_RESTRICTIONS = Object.freeze({
   diagnosticClassificationAllowed: false,
 } as const satisfies MediaInferenceRestrictions);
 
-export const TransientMediaDescriptorSchema = Type.Object(
+const TransientMediaDescriptorBaseSchema = Type.Object(
   {
     mediaRef: MultimodalReferenceSchema,
-    mediaKind: Type.Union([Type.Literal("raw-audio"), Type.Literal("raw-learner-image")]),
-    mimeType: Type.String({
-      minLength: 7,
-      maxLength: 96,
-      pattern: "^(?:audio|image)/[a-z0-9][a-z0-9.+-]*$",
-    }),
     byteLength: Type.Integer({ minimum: 1, maximum: 52_428_800 }),
     capturedAt: MultimodalISODateTimeSchema,
     disposition: Type.Literal("transient-memory-only"),
     persistenceAllowed: Type.Literal(false),
     inferenceRestrictions: MediaInferenceRestrictionsSchema,
   },
-  { additionalProperties: false, $id: "TutorV3TransientMediaDescriptor" },
+  { additionalProperties: false },
+);
+
+export const TransientAudioMediaDescriptorSchema = Type.Composite(
+  [
+    TransientMediaDescriptorBaseSchema,
+    Type.Object(
+      {
+        mediaKind: Type.Literal("raw-audio"),
+        mimeType: Type.String({
+          minLength: 7,
+          maxLength: 96,
+          pattern: "^audio/[a-z0-9][a-z0-9.+-]*$",
+        }),
+      },
+      { additionalProperties: false },
+    ),
+  ],
+  { additionalProperties: false, $id: "TutorV3TransientAudioMediaDescriptor" },
+);
+
+export const TransientLearnerImageMediaDescriptorSchema = Type.Composite(
+  [
+    TransientMediaDescriptorBaseSchema,
+    Type.Object(
+      {
+        mediaKind: Type.Literal("raw-learner-image"),
+        mimeType: Type.String({
+          minLength: 7,
+          maxLength: 96,
+          pattern: "^image/[a-z0-9][a-z0-9.+-]*$",
+        }),
+      },
+      { additionalProperties: false },
+    ),
+  ],
+  { additionalProperties: false, $id: "TutorV3TransientLearnerImageMediaDescriptor" },
+);
+
+export const TransientMediaDescriptorSchema = Type.Union(
+  [TransientAudioMediaDescriptorSchema, TransientLearnerImageMediaDescriptorSchema],
+  { $id: "TutorV3TransientMediaDescriptor" },
 );
 export type TransientMediaDescriptor = Static<typeof TransientMediaDescriptorSchema>;
 
@@ -122,8 +169,16 @@ export const ReviewedVisualReferenceSchema = Type.Object(
     visualRef: MultimodalReferenceSchema,
     visualKind: Type.Union([Type.Literal("image"), Type.Literal("diagram")]),
     contentDigest: MultimodalDigestSchema,
+    mimeType: Type.Union([
+      Type.Literal("image/png"),
+      Type.Literal("image/jpeg"),
+      Type.Literal("image/webp"),
+      Type.Literal("image/gif"),
+      Type.Literal("image/svg+xml"),
+    ]),
     reviewStatus: Type.Literal("approved"),
     reviewRef: MultimodalReferenceSchema,
+    provenanceRef: MultimodalReferenceSchema,
     reviewedAt: MultimodalISODateTimeSchema,
     learnerSafe: Type.Literal(true),
   },
@@ -134,13 +189,7 @@ export type ReviewedVisualReference = Static<typeof ReviewedVisualReferenceSchem
 export const TransientLearnerImageReviewRequestSchema = Type.Object(
   {
     requestRef: MultimodalReferenceSchema,
-    image: Type.Composite([
-      TransientMediaDescriptorSchema,
-      Type.Object(
-        { mediaKind: Type.Literal("raw-learner-image") },
-        { additionalProperties: false },
-      ),
-    ]),
+    image: TransientLearnerImageMediaDescriptorSchema,
     reviewPurpose: Type.Literal("learner-safe-curricular-content"),
     outputMayContainRawImage: Type.Literal(false),
   },
@@ -189,10 +238,7 @@ const TextContentSchema = Type.Object(
 const SpeechContentSchema = Type.Object(
   {
     mode: Type.Literal("speech"),
-    audio: Type.Composite([
-      TransientMediaDescriptorSchema,
-      Type.Object({ mediaKind: Type.Literal("raw-audio") }, { additionalProperties: false }),
-    ]),
+    audio: TransientAudioMediaDescriptorSchema,
     transcript: TransientTranscriptSchema,
   },
   { additionalProperties: false },
@@ -203,7 +249,18 @@ const ReviewedImageContentSchema = Type.Object(
     mode: Type.Literal("reviewed-image"),
     visual: Type.Composite([
       ReviewedVisualReferenceSchema,
-      Type.Object({ visualKind: Type.Literal("image") }, { additionalProperties: false }),
+      Type.Object(
+        {
+          visualKind: Type.Literal("image"),
+          mimeType: Type.Union([
+            Type.Literal("image/png"),
+            Type.Literal("image/jpeg"),
+            Type.Literal("image/webp"),
+            Type.Literal("image/gif"),
+          ]),
+        },
+        { additionalProperties: false },
+      ),
     ]),
   },
   { additionalProperties: false },
@@ -214,7 +271,13 @@ const ReviewedDiagramContentSchema = Type.Object(
     mode: Type.Literal("reviewed-diagram"),
     visual: Type.Composite([
       ReviewedVisualReferenceSchema,
-      Type.Object({ visualKind: Type.Literal("diagram") }, { additionalProperties: false }),
+      Type.Object(
+        {
+          visualKind: Type.Literal("diagram"),
+          mimeType: Type.Literal("image/svg+xml"),
+        },
+        { additionalProperties: false },
+      ),
     ]),
   },
   { additionalProperties: false },
@@ -277,6 +340,7 @@ export const MultimodalPresentationSchema = Type.Object(
   {
     contractVersion: Type.Literal(MULTIMODAL_CONTRACT_VERSION),
     envelope: Type.Literal("multimodal-presentation"),
+    scope: MultimodalScopeLineageSchema,
     interactionRef: MultimodalReferenceSchema,
     turnRef: MultimodalReferenceSchema,
     speaker: Type.Union([Type.Literal("learner"), Type.Literal("tutor")]),
@@ -288,6 +352,54 @@ export const MultimodalPresentationSchema = Type.Object(
   { additionalProperties: false, $id: "TutorV3MultimodalPresentation" },
 );
 export type MultimodalPresentation = Static<typeof MultimodalPresentationSchema>;
+
+export const TrustedMultimodalCaptionBindingSchema = Type.Object(
+  {
+    scope: MultimodalScopeLineageSchema,
+    captionRef: MultimodalReferenceSchema,
+    text: Type.String({ minLength: 1, maxLength: 8_000 }),
+    locale: Type.String({ minLength: 2, maxLength: 35, pattern: "^[A-Za-z0-9-]+$" }),
+    use: Type.Literal("neutral-accessibility-metadata"),
+  },
+  { additionalProperties: false, $id: "TutorV3TrustedMultimodalCaptionBinding" },
+);
+
+export const TrustedReviewedVisualBindingSchema = Type.Object(
+  {
+    scope: MultimodalScopeLineageSchema,
+    visual: ReviewedVisualReferenceSchema,
+    provenanceStatus: Type.Literal("approved-content"),
+  },
+  { additionalProperties: false, $id: "TutorV3TrustedReviewedVisualBinding" },
+);
+
+export const TrustedLearnerAudioInputCapabilitySchema = Type.Object(
+  {
+    capabilityKind: Type.Literal("trusted-learner-audio-input-capability"),
+    capabilityRef: MultimodalReferenceSchema,
+    scope: MultimodalScopeLineageSchema,
+    inputMode: Type.Literal("raw-audio"),
+    mediaRef: MultimodalReferenceSchema,
+    status: Type.Literal("permitted"),
+  },
+  { additionalProperties: false, $id: "TutorV3TrustedLearnerAudioInputCapability" },
+);
+
+export const TrustedMultimodalPolicyContextSchema = Type.Object(
+  {
+    contextKind: Type.Literal("trusted-study-multimodal-policy-context"),
+    scope: MultimodalScopeLineageSchema,
+    captionBinding: TrustedMultimodalCaptionBindingSchema,
+    reviewedVisualBindings: Type.Array(TrustedReviewedVisualBindingSchema, {
+      maxItems: 12,
+    }),
+    learnerAudioInputCapability: Type.Optional(TrustedLearnerAudioInputCapabilitySchema),
+  },
+  { additionalProperties: false, $id: "TutorV3TrustedMultimodalPolicyContext" },
+);
+export type TrustedMultimodalPolicyContext = Static<
+  typeof TrustedMultimodalPolicyContextSchema
+>;
 
 export const ContinuationFallbackSchema = Type.Object(
   {
@@ -359,8 +471,16 @@ const ReviewedVisualEvidenceMetadataSchema = Type.Object(
     visualRef: MultimodalReferenceSchema,
     reviewRef: MultimodalReferenceSchema,
     contentDigest: MultimodalDigestSchema,
+    mimeType: Type.Union([
+      Type.Literal("image/png"),
+      Type.Literal("image/jpeg"),
+      Type.Literal("image/webp"),
+      Type.Literal("image/gif"),
+      Type.Literal("image/svg+xml"),
+    ]),
     visualKind: Type.Union([Type.Literal("image"), Type.Literal("diagram")]),
     reviewStatus: Type.Literal("approved"),
+    provenanceRef: MultimodalReferenceSchema,
   },
   { additionalProperties: false },
 );
@@ -370,8 +490,11 @@ export const DurableMultimodalEvidenceSchema = Type.Object(
     contractVersion: Type.Literal(MULTIMODAL_CONTRACT_VERSION),
     envelope: Type.Literal("durable-multimodal-evidence"),
     evidenceRef: MultimodalReferenceSchema,
+    householdScopeRef: MultimodalReferenceSchema,
+    learnerScopeRef: MultimodalReferenceSchema,
     sessionRef: MultimodalReferenceSchema,
     interactionRef: MultimodalReferenceSchema,
+    opportunityRef: MultimodalReferenceSchema,
     turnRef: MultimodalReferenceSchema,
     mode: MultimodalModeSchema,
     outcome: MultimodalObservationOutcomeSchema,
@@ -392,6 +515,7 @@ export interface MultimodalEvidenceProjectionSource {
   readonly evidenceRef: MultimodalReference;
   readonly sessionRef: MultimodalReference;
   readonly presentation: MultimodalPresentation;
+  readonly trustedContext: TrustedMultimodalPolicyContext;
   readonly outcome: MultimodalObservationOutcome;
   readonly assistanceLevel: MultimodalAssistanceLevel;
   readonly observedAt: string;
