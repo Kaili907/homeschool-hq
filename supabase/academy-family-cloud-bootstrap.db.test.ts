@@ -107,6 +107,72 @@ describe.sequential('Family Cloud authenticated household bootstrap R1', () => {
     expect((first.learners as { tokenDigest: string }[]).every((item) => /^[0-9a-f]{64}$/.test(item.tokenDigest))).toBe(true)
   })
 
+  it('returns the complete local and hosted mapping required by the strict first-link client', async () => {
+    const bootstrapped = await call(PARENT_A, [
+      { learnerRef: 'student:ada', displayName: 'Ada', gradeLevel: '5' },
+    ], 'America/Detroit')
+    const learner = (bootstrapped.learners as {
+      learnerRef: string
+      hostedStudentId: string
+      tokenDigest: string
+      hostedAssignmentRef: string
+      hostedSessionRef: string
+    }[]).find((item) => item.learnerRef === 'student:ada')!
+    const localScope = {
+      householdRef: String(bootstrapped.householdRef),
+      studentRef: learner.learnerRef,
+      assignmentRef: 'local-assignment:ada',
+      sessionRef: 'local-session:ada',
+    }
+    const imported = await asAuthenticated(PARENT_A, false, async () => {
+      const result = await database.query<{ value: Record<string, any> }>(`
+        select public.academy_study_sync_first_link_v2(
+          $1::text, $2::uuid, $3::uuid, $4::jsonb
+        ) as value
+      `, [learner.tokenDigest, learner.hostedStudentId,
+        '93000000-0000-4000-8000-000000000003', JSON.stringify({
+          localScope,
+          hostedScope: {
+            assignmentRef: learner.hostedAssignmentRef,
+            sessionRef: learner.hostedSessionRef,
+          },
+          session: {
+            lessonRef: learner.hostedAssignmentRef,
+            subjectRef: 'family-cloud',
+            state: 'planned',
+            startedAt: null,
+            completedAt: null,
+            intendedLocalDate: '2026-08-16',
+          },
+          checkpoint: null,
+          socialSource: null,
+          guardianAttestation: null,
+          safetyState: { schemaVersion: 1, holds: [] },
+          assessment: null,
+        })])
+      return result.rows[0].value
+    })
+
+    expect(imported).toMatchObject({
+      schemaVersion: 2,
+      status: 'imported',
+      mapping: {
+        localHouseholdRef: localScope.householdRef,
+        localStudentRef: localScope.studentRef,
+        localAssignmentRef: localScope.assignmentRef,
+        localSessionRef: localScope.sessionRef,
+        hostedHouseholdId: bootstrapped.householdRef,
+        hostedStudentId: learner.hostedStudentId,
+        hostedAssignmentRef: learner.hostedAssignmentRef,
+        hostedSessionRef: learner.hostedSessionRef,
+      },
+    })
+    expect(Object.keys(imported.mapping).sort()).toEqual([
+      'hostedAssignmentRef', 'hostedHouseholdId', 'hostedSessionRef', 'hostedStudentId',
+      'localAssignmentRef', 'localHouseholdRef', 'localSessionRef', 'localStudentRef',
+    ])
+  })
+
   it('cannot join or write another household and cannot nominate a role or user', async () => {
     const other = await call(PARENT_B, [])
     const first = await call(PARENT_A, [{ learnerRef: 'student:new', displayName: 'New', gradeLevel: null }])

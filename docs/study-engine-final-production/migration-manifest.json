@@ -603,6 +603,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "family_cloud_timezone_bootstrap:missing->canonical-r1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260816103000",
+      "filename": "20260816103000_academy_family_cloud_first_link_mapping_response_r1.sql",
+      "sha256": "1d3d4c82b709cb4f3c5c1fa229756229cedc3e5c06d503ec5ebb8b32c52f0811",
+      "dependency": "20260816030000_academy_family_cloud_timezone_bootstrap_r1.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "family_cloud_first_link_mapping_response:incomplete->complete-r1",
+      "supersessionStatus": "current"
     }
   ]
 }

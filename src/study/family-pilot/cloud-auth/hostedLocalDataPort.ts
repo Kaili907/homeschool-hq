@@ -383,14 +383,21 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
       clientOperationId: operationId, import: importDocument,
     }, signal)
     if (outcome.code === 'OFFLINE') return { status: 'OFFLINE' as const }
-    if (outcome.code !== 'SUCCESS' || !['imported', 'linked-existing'].includes(outcome.value.status)) {
+    const recoveringExisting = outcome.code === 'SUCCESS' && outcome.value.status === 'mapping-conflict'
+    if (outcome.code !== 'SUCCESS' ||
+        (!recoveringExisting && !['imported', 'linked-existing'].includes(outcome.value.status))) {
       return { status: 'CONFLICT' as const, remote: null }
     }
     const hydrated = await this.#hydrate(entry, local, signal)
     if (hydrated.status !== 'READY') return hydrated
-    if (exact(hydrated.state.authorityCheckpoint) !== exact(authorityCheckpoint) ||
-        exact(hydrated.state.learnerResponseCheckpoint) !== exact(learnerResponseCheckpoint) ||
-        exact(hydrated.state.familyPlanCheckpoint) !== exact(familyPlanCheckpoint)) {
+    const exactImport = exact(hydrated.state.authorityCheckpoint) === exact(authorityCheckpoint) &&
+      exact(hydrated.state.learnerResponseCheckpoint) === exact(learnerResponseCheckpoint) &&
+      exact(hydrated.state.familyPlanCheckpoint) === exact(familyPlanCheckpoint)
+    const verifiedRetry = recoveringExisting &&
+      sameContent(hydrated.state.authorityCheckpoint, authorityCheckpoint) &&
+      sameContent(hydrated.state.learnerResponseCheckpoint, learnerResponseCheckpoint) &&
+      sameContent(hydrated.state.familyPlanCheckpoint, familyPlanCheckpoint)
+    if (!exactImport && !verifiedRetry) {
       return { status: 'CONFLICT' as const, remote: hydrated.state }
     }
     return hydrated
