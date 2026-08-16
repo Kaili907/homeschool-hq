@@ -1,4 +1,5 @@
 import { validateExact } from "../../v2/contracts/validation.js";
+import { validateExactSnapshot } from "../multimodal/runtime-snapshot.js";
 import {
   MultimodalAllowanceSchema,
   type TutorModality,
@@ -12,14 +13,17 @@ import {
   PresentationIntentSchema,
   PresentationMappingContextSchema,
   TrustedPresentationAcceptanceSchema,
+  TrustedPresentationBoundarySchema,
   W306PresentationPiecesSchema,
   type CommercialModelResponse,
   type CommercialProposalResponse,
   type PresentationDeliveryChannel,
   type PresentationIntent,
   type PresentationMappingContext,
+  type PresentationScopeLineage,
   type ReviewedVisualIntent,
   type TrustedPresentationAcceptance,
+  type TrustedPresentationBoundary,
   type W306PresentationPiece,
   type W306PresentationPieces,
 } from "./contracts.js";
@@ -86,7 +90,7 @@ function normalizedIntent(intent: PresentationIntent): PresentationIntent {
 }
 
 export function validatePresentationIntent(candidate: unknown): PresentationIntentValidation {
-  const validation = validateExact(PresentationIntentSchema, candidate);
+  const validation = validateExactSnapshot(PresentationIntentSchema, candidate);
   if (validation.status === "rejected") {
     return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
   }
@@ -100,6 +104,17 @@ export function validatePresentationIntent(candidate: unknown): PresentationInte
   }
 
   const channels = intent.requestedDeliveryChannels;
+  const fallbackChannels = intent.fallbackPresentation?.requestedDeliveryChannels;
+  if (
+    fallbackChannels !== undefined
+    && !(
+      equalStringArrays(fallbackChannels, ["text"])
+      || equalStringArrays(fallbackChannels, ["visual"])
+      || equalStringArrays(fallbackChannels, ["text", "visual"])
+    )
+  ) {
+    return { status: "rejected", code: "PRESENTATION_CHANNEL_MISMATCH" };
+  }
   const speechRequested = channels.includes("speech-after-acceptance");
   if (
     speechRequested
@@ -249,7 +264,10 @@ export function mapValidatedModelOutputToCommercialResponse(
     return { status: "rejected", code: "VALIDATED_OUTPUT_REQUIRED" };
   }
 
-  const contextValidation = validateExact(PresentationMappingContextSchema, contextCandidate);
+  const contextValidation = validateExactSnapshot(
+    PresentationMappingContextSchema,
+    contextCandidate,
+  );
   if (contextValidation.status === "rejected") {
     return { status: "rejected", code: "INVALID_PRESENTATION_MAPPING_CONTEXT" };
   }
@@ -349,7 +367,7 @@ function proposalMatchesIntent(response: CommercialProposalResponse): boolean {
 export function validateCommercialModelResponse(
   candidate: unknown,
 ): CommercialResponseValidation {
-  const validation = validateExact(CommercialModelResponseSchema, candidate);
+  const validation = validateExactSnapshot(CommercialModelResponseSchema, candidate);
   if (validation.status === "rejected") {
     return { status: "rejected", code: "INVALID_COMMERCIAL_MODEL_RESPONSE" };
   }
@@ -453,8 +471,60 @@ export type W306PresentationMappingResult =
   | { readonly status: "accepted"; readonly presentation: W306PresentationPieces }
   | {
       readonly status: "rejected";
-      readonly code: "TRUSTED_ACCEPTANCE_REQUIRED" | "INVALID_PRESENTATION_INTENT";
+      readonly code:
+        | "TRUSTED_ACCEPTANCE_REQUIRED"
+        | "TRUSTED_PRESENTATION_BOUNDARY_REQUIRED"
+        | "PRESENTATION_SCOPE_MISMATCH"
+        | "UNTRUSTED_PRESENTATION_REFERENCE"
+        | "UNTRUSTED_REVIEWED_VISUAL"
+        | "ACTIVE_ASSESSMENT_CAPTION_BLOCKED"
+        | "INVALID_PRESENTATION_INTENT";
     };
+
+function samePresentationScope(
+  left: PresentationScopeLineage,
+  right: PresentationScopeLineage,
+): boolean {
+  return left.householdScopeRef === right.householdScopeRef
+    && left.learnerScopeRef === right.learnerScopeRef
+    && left.sessionRef === right.sessionRef
+    && left.interactionRef === right.interactionRef
+    && left.opportunityRef === right.opportunityRef;
+}
+
+function hasTrustedReference(
+  boundary: TrustedPresentationBoundary,
+  scope: PresentationScopeLineage,
+  referenceKind: "reviewed-text" | "structured-check" | "accessibility-caption" | "fallback-presentation",
+  referenceRef: string,
+): boolean {
+  const expectedUse = referenceKind === "accessibility-caption"
+    ? "neutral-accessibility-metadata"
+    : referenceKind === "fallback-presentation"
+      ? "approved-fallback-reference"
+      : "approved-instructional-reference";
+  return boundary.referenceBindings.some(
+    (binding) => binding.referenceKind === referenceKind
+      && binding.referenceRef === referenceRef
+      && binding.referenceUse === expectedUse
+      && samePresentationScope(binding.scope, scope),
+  );
+}
+
+function hasTrustedVisual(
+  boundary: TrustedPresentationBoundary,
+  scope: PresentationScopeLineage,
+  visual: ReviewedVisualIntent,
+): boolean {
+  return boundary.reviewedVisualBindings.some((binding) =>
+    binding.approvalStatus === "approved-content"
+    && samePresentationScope(binding.scope, scope)
+    && binding.reviewedVisual.kind === visual.kind
+    && binding.reviewedVisual.contentRef === visual.contentRef
+    && binding.reviewedVisual.contentDigest === visual.contentDigest
+    && binding.reviewedVisual.provenanceRef === visual.provenanceRef
+  );
+}
 
 /**
  * Produces reference-only pieces for the W3-06 presentation layer. Resolution
@@ -462,8 +532,9 @@ export type W306PresentationMappingResult =
  */
 export function mapTrustedAcceptedIntentToW306PresentationPieces(
   acceptanceCandidate: unknown,
+  trustedBoundaryCandidate?: unknown,
 ): W306PresentationMappingResult {
-  const acceptanceValidation = validateExact(
+  const acceptanceValidation = validateExactSnapshot(
     TrustedPresentationAcceptanceSchema,
     acceptanceCandidate,
   );
@@ -471,11 +542,72 @@ export function mapTrustedAcceptedIntentToW306PresentationPieces(
     return { status: "rejected", code: "TRUSTED_ACCEPTANCE_REQUIRED" };
   }
   const acceptance: TrustedPresentationAcceptance = acceptanceValidation.value;
+  const boundaryValidation = validateExactSnapshot(
+    TrustedPresentationBoundarySchema,
+    trustedBoundaryCandidate,
+  );
+  if (boundaryValidation.status === "rejected") {
+    return { status: "rejected", code: "TRUSTED_PRESENTATION_BOUNDARY_REQUIRED" };
+  }
+  const boundary = boundaryValidation.value;
+  if (
+    acceptance.acceptanceRef !== boundary.acceptanceRef
+    || !samePresentationScope(acceptance.scope, boundary.scope)
+  ) {
+    return { status: "rejected", code: "PRESENTATION_SCOPE_MISMATCH" };
+  }
   const intentValidation = validatePresentationIntent(acceptance.presentationIntent);
   if (intentValidation.status === "rejected") {
     return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
   }
   const intent = intentValidation.intent;
+  if (
+    (intent.reviewedTextRef !== undefined
+      && !hasTrustedReference(
+        boundary,
+        acceptance.scope,
+        "reviewed-text",
+        intent.reviewedTextRef,
+      ))
+    || (intent.structuredCheckRef !== undefined
+      && !hasTrustedReference(
+        boundary,
+        acceptance.scope,
+        "structured-check",
+        intent.structuredCheckRef,
+      ))
+    || (intent.fallbackPresentation !== undefined
+      && !hasTrustedReference(
+        boundary,
+        acceptance.scope,
+        "fallback-presentation",
+        intent.fallbackPresentation.presentationRef,
+      ))
+  ) {
+    return { status: "rejected", code: "UNTRUSTED_PRESENTATION_REFERENCE" };
+  }
+  if (
+    intent.reviewedVisual !== undefined
+    && !hasTrustedVisual(boundary, acceptance.scope, intent.reviewedVisual)
+  ) {
+    return { status: "rejected", code: "UNTRUSTED_REVIEWED_VISUAL" };
+  }
+  if (
+    intent.accessibilityCaptionRef !== undefined
+    && !hasTrustedReference(
+      boundary,
+      acceptance.scope,
+      "accessibility-caption",
+      intent.accessibilityCaptionRef,
+    )
+  ) {
+    return {
+      status: "rejected",
+      code: boundary.assessmentPhase === "active-protected-assessment"
+        ? "ACTIVE_ASSESSMENT_CAPTION_BLOCKED"
+        : "UNTRUSTED_PRESENTATION_REFERENCE",
+    };
+  }
   const pieces: W306PresentationPiece[] = [];
 
   if (intent.reviewedTextRef !== undefined) {
@@ -528,6 +660,7 @@ export function mapTrustedAcceptedIntentToW306PresentationPieces(
   const presentation: W306PresentationPieces = {
     adapterKind: "w3-06-reference-presentation-pieces",
     acceptanceRef: acceptance.acceptanceRef,
+    scope: acceptance.scope,
     pieces,
     rawAudioAccepted: false,
     rawImageBytesAccepted: false,

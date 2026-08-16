@@ -33,6 +33,7 @@ import {
   type CommercialProposalResponse,
   type PresentationIntent,
   type PresentationMappingContext,
+  type TrustedPresentationBoundary,
 } from "./index.js";
 
 const textRef = "reviewed-content:text-one";
@@ -40,6 +41,13 @@ const visualRef = "reviewed-content:visual-one";
 const checkRef = "reviewed-content:check-one";
 const groundingRef = "grounding:lesson-one";
 const digest = `sha256:${"a".repeat(64)}`;
+const presentationScope = {
+  householdScopeRef: "household:family-one",
+  learnerScopeRef: "learner:learner-one",
+  sessionRef: "session:lesson-one",
+  interactionRef: "interaction:turn-one",
+  opportunityRef: "opportunity:lesson-one",
+} as const;
 
 const reviewedImage = {
   kind: "image",
@@ -106,8 +114,59 @@ function acceptance(intent: PresentationIntent) {
   return {
     acceptanceKind: "trusted-study-provider-output-acceptance",
     acceptanceRef: "presentation-acceptance:turn-one",
+    scope: presentationScope,
     presentationIntent: intent,
   } as const;
+}
+
+function boundaryFor(intent: PresentationIntent): TrustedPresentationBoundary {
+  const referenceBindings: TrustedPresentationBoundary["referenceBindings"] = [];
+  if (intent.reviewedTextRef !== undefined) {
+    referenceBindings.push({
+      scope: presentationScope,
+      referenceKind: "reviewed-text",
+      referenceRef: intent.reviewedTextRef,
+      referenceUse: "approved-instructional-reference",
+    });
+  }
+  if (intent.structuredCheckRef !== undefined) {
+    referenceBindings.push({
+      scope: presentationScope,
+      referenceKind: "structured-check",
+      referenceRef: intent.structuredCheckRef,
+      referenceUse: "approved-instructional-reference",
+    });
+  }
+  if (intent.accessibilityCaptionRef !== undefined) {
+    referenceBindings.push({
+      scope: presentationScope,
+      referenceKind: "accessibility-caption",
+      referenceRef: intent.accessibilityCaptionRef,
+      referenceUse: "neutral-accessibility-metadata",
+    });
+  }
+  if (intent.fallbackPresentation !== undefined) {
+    referenceBindings.push({
+      scope: presentationScope,
+      referenceKind: "fallback-presentation",
+      referenceRef: intent.fallbackPresentation.presentationRef,
+      referenceUse: "approved-fallback-reference",
+    });
+  }
+  return {
+    boundaryKind: "trusted-study-presentation-boundary",
+    acceptanceRef: "presentation-acceptance:turn-one",
+    scope: presentationScope,
+    assessmentPhase: "not-active-protected-assessment",
+    referenceBindings,
+    reviewedVisualBindings: intent.reviewedVisual === undefined
+      ? []
+      : [{
+          scope: presentationScope,
+          reviewedVisual: intent.reviewedVisual,
+          approvalStatus: "approved-content",
+        }],
+  };
 }
 
 test("maps reviewed-text to text-only presentation intent", () => {
@@ -132,6 +191,7 @@ test("preserves distinct text and visual pieces for reviewed-text-and-visual", (
   const response = mappedProposal("reviewed-text-and-visual", [textRef, visualRef]);
   const result = mapTrustedAcceptedIntentToW306PresentationPieces(
     acceptance(response.presentationIntent),
+    boundaryFor(response.presentationIntent),
   );
   assert.equal(result.status, "accepted");
   if (result.status !== "accepted") return;
@@ -168,6 +228,7 @@ test("keeps diagram kind through the W3-06 adapter", () => {
   const response = mappedProposal("reviewed-visual", [visualRef], diagramContext);
   const result = mapTrustedAcceptedIntentToW306PresentationPieces(
     acceptance(response.presentationIntent),
+    boundaryFor(response.presentationIntent),
   );
   assert.equal(result.status, "accepted");
   if (result.status !== "accepted") return;
@@ -180,6 +241,7 @@ test("maps structured-check to its own reference slot", () => {
   assert.equal(response.presentationIntent.reviewedTextRef, undefined);
   const result = mapTrustedAcceptedIntentToW306PresentationPieces(
     acceptance(response.presentationIntent),
+    boundaryFor(response.presentationIntent),
   );
   assert.equal(result.status, "accepted");
   if (result.status !== "accepted") return;
@@ -190,6 +252,7 @@ test("caption remains accessibility metadata and cannot become instructional tex
   const response = mappedProposal("reviewed-visual", [visualRef]);
   const result = mapTrustedAcceptedIntentToW306PresentationPieces(
     acceptance(response.presentationIntent),
+    boundaryFor(response.presentationIntent),
   );
   assert.equal(result.status, "accepted");
   if (result.status !== "accepted") return;
@@ -232,6 +295,7 @@ test("speech is emitted only as a post-acceptance delivery piece", () => {
   });
   const result = mapTrustedAcceptedIntentToW306PresentationPieces(
     acceptance(response.presentationIntent),
+    boundaryFor(response.presentationIntent),
   );
   assert.equal(result.status, "accepted");
   if (result.status !== "accepted") return;
