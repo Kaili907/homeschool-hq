@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l01",
+  "lessonId": "ma-g11-ready-for-life-u04-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Total-cost calculation accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Total for at least one option omits a listed recurring cost (for example, leaves out utilities or the shared-cost amount)." },
+          { "label": "Proficient", "descriptor": "All three totals correctly include every recurring cost listed for that option." },
+          { "label": "Advanced", "descriptor": "Totals are correct and the learner shows the specific addition for each one, not just a final number." }
+        ]
+      },
+      {
+        "dimension": "Fit reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Recommendation does not reference the priority named in the warm-up or any specific feature." },
+          { "label": "Proficient", "descriptor": "Recommendation references at least two specific numbers or features from the comparison." },
+          { "label": "Advanced", "descriptor": "Recommendation explicitly weighs a tradeoff (for example, lower cost against less privacy) rather than listing only the option's advantages." }
+        ]
+      },
+      {
+        "dimension": "Reflective consistency",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection does not address whether the recommendation matched the warm-up priority." },
+          { "label": "Proficient", "descriptor": "Reflection states clearly whether it matched and gives a reason." },
+          { "label": "Advanced", "descriptor": "Reflection names the specific number or feature that shifted the learner's thinking." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each of the three totals is arithmetically consistent with the costs listed for that option.",
+      "The recommendation cites specific figures rather than vague preference language.",
+      "No real personal housing situation is disclosed anywhere in the response."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

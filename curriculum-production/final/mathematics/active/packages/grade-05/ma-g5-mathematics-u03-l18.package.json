@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u03-l18",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u03-l18",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multi-Digit Multiplication",
+    "dayInUnit": 18,
+    "courseDay": 54,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "multi-step multiplication problems",
+    "title": "Publication, presentation, or reflection: multi-step multiplication problems"
+  },
+  "standards": [
+    "5.NBT.5",
+    "5.OA.1",
+    "5.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-expression",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "Without evaluating it, describe 6 × (18 + 7).",
+          "workedSolution": {
+            "steps": [
+              "The parentheses group 18 + 7 as one sum.",
+              "The multiplication sign places 6 groups of that sum.",
+              "Describe those operations without finding either the sum or the product."
+            ],
+            "answer": "Multiply 6 by the sum of 18 and 7."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-multiplication",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "For 2 event days, a booth sells 50 tickets each day at $3 per ticket. What projected revenue will the booth earn?",
+          "choices": [
+            "$300",
+            "$106",
+            "$100",
+            "$150"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Maya has 7 times as many cards as Leo. Leo has 26 cards. How many cards does Maya have?",
+          "choices": [
+            "33",
+            "182",
+            "26",
+            "175"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "area-model-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "An area model for 4205 × 98 splits 4205 into 4000 + 200 + 5 and 98 into 90 + 8. What total product does the model represent?",
+          "choices": [
+            "33640",
+            "37845",
+            "407885",
+            "412090"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "partial-products",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use partial products to calculate 4765 × 76. Decompose both factors by place value, multiply each pair of parts, and add the partial products. What is the product?",
+          "choices": [
+            "366905",
+            "362140",
+            "28590",
+            "362110"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "standard-algorithm",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use the standard multiplication algorithm to calculate 9702 × 65.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Estimate 6450 × 819 by rounding 6450 to the nearest thousand and 819 to the nearest hundred.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u03-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u03-l18"
+  }
+}

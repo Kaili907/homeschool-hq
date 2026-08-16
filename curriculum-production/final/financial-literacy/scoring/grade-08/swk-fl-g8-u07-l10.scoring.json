@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l10",
+  "lessonId": "ma-g8-financial-literacy-u07-l10",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Representing both sides fairly",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response caricatures one side of Sabelo's question."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Both sides are stated for Sabelo but one is noticeably weaker than it could be."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response gives the strongest available case on each side of Sabelo's question, in terms a holder of that view would accept."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending a position",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A position is asserted for Sabelo with no engagement with the objection."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The objection is acknowledged for Sabelo but not answered."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response defends a position and answers the objection from households paying without direct benefit, using the way the risk spreads as part of the reasoning."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "States both sides in their strongest form.",
+      "Takes a clear position rather than surveying.",
+      "Addresses households that pay without direct benefit.",
+      "Uses the spread of the risk in the reasoning."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What is the strongest argument for collective funding in Sabelo's case, and the strongest argument against?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should Sabelo's community do, and how does your position answer households that pay without direct benefit?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "How does the way a risk spreads affect whether it should be funded collectively?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Representing both sides fairly — Not yet: The response caricatures one side of Sabelo's question. Approaching: Both sides are stated for Sabelo but one is noticeably weaker than it could be. Meets: The response gives the strongest available case on each side of Sabelo's question, in terms a holder of that view would accept. Defending a position — Not yet: A position is asserted for Sabelo with no engagement with the objection. Approaching: The objection is acknowledged for Sabelo but not answered. Meets: The response defends a position and answers the objection from households paying without direct benefit, using the way the risk spreads as part of the reasoning. States both sides in their strongest form. Takes a clear position rather than surveying. Addresses households that pay without direct benefit. Uses the spread of the risk in the reasoning."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States both sides in their strongest form. Takes a clear position rather than surveying. Addresses households that pay without direct benefit. Uses the spread of the risk in the reasoning."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u07-l10.scoring.json",
+    "sourceScoringSha256": "848a2f4ff33e6672f2cd0f26dd4ebff983c440ed7b4fe7296ffcb9418fa43a3d",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

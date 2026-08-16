@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u08-l17",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u08-l17",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "dayInUnit": 17,
+    "courseDay": 143,
+    "phase": "Targeted correction and reassessment",
+    "focus": "scale and interpretation",
+    "title": "Targeted correction and reassessment: scale and interpretation"
+  },
+  "standards": [
+    "3.MD.3",
+    "3.MD.4"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 1,
+          "prompt": "A line plot shows 5 pencil lengths to the nearest 1/2 inch: 1/2, 1/2, 1, 1, 3/2. How many pencils measured exactly 1/2 inch?",
+          "workedSolution": {
+            "steps": [
+              "Two of the recorded lengths are 1/2 inch."
+            ],
+            "answer": "2"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph uses a scale of 5 per symbol. A bar shows 3 symbols. What does that bar represent?",
+          "workedSolution": {
+            "steps": [
+              "3 symbols × 5 per symbol = 15."
+            ],
+            "answer": "15"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "On a scaled bar graph with 1 per symbol, \"Dogs\" has 7 symbols and \"Cats\" has 4 symbols. How many more does \"Dogs\" have than \"Cats\"?",
+          "choices": [
+            "7",
+            "11",
+            "3",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 2/4, 1/4, 1/4, 4/4, 2/4, 4/4, 3/4, 4/4. How many leaves measured exactly 4/4 inch?",
+          "choices": [
+            "4",
+            "3",
+            "8",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 2 per symbol. The bar for \"Blue\" is worth 3 symbols. How many does \"Blue\" represent?",
+          "choices": [
+            "8",
+            "3",
+            "4",
+            "6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Dogs\" has 7 symbols and \"Cats\" has 3 symbols. How many more does \"Dogs\" have than \"Cats\"?",
+          "choices": [
+            "4",
+            "20",
+            "14",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 3/4, 1/4, 2/4, 4/4, 2/4, 4/4, 2/4, 2/4. How many leaves measured exactly 2/4 inch?",
+          "choices": [
+            "8",
+            "5",
+            "4",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 10 per symbol. The bar for \"Apples\" is worth 1 symbols. How many does \"Apples\" represent?",
+          "choices": [
+            "0",
+            "1",
+            "20",
+            "10"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u08-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u08-l17"
+  }
+}

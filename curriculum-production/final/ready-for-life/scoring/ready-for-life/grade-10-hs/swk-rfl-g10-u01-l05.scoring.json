@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l05",
+  "lessonId": "ma-g10-ready-for-life-u01-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Second career research quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The second career's day-to-day and pathway are vague or missing detail." },
+          { "label": "Proficient", "descriptor": "The second career's day-to-day and pathway are researched with specific detail comparable to the first." },
+          { "label": "Advanced", "descriptor": "The second career's research includes detail specific enough to support a genuine trade-off comparison." }
+        ]
+      },
+      {
+        "dimension": "Honesty of comparison",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One career is declared better across every dimension with no real trade-off named." },
+          { "label": "Proficient", "descriptor": "Names at least two specific, genuine trade-offs between the careers." },
+          { "label": "Advanced", "descriptor": "Names specific trade-offs and explicitly connects each to the learner's own constraints from day one." }
+        ]
+      },
+      {
+        "dimension": "Honest self-positioning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "States a lean with no acknowledged downside." },
+          { "label": "Proficient", "descriptor": "States a lean and names one real downside of that choice." },
+          { "label": "Advanced", "descriptor": "States a lean, names a real downside, and the downside is specific rather than generic ('it's harder')." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The comparison names at least one advantage for each career, not only the one the learner prefers.",
+      "Trade-offs cite specific facts gathered earlier in the unit rather than general impressions.",
+      "The final reflection names a genuine, specific downside rather than a token disclaimer."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

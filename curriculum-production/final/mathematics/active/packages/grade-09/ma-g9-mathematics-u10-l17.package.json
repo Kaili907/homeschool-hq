@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l17",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l17",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 17,
+    "courseDay": 179,
+    "phase": "Targeted correction",
+    "focus": "fitting a function to bivariate data and assessing fit with residual plots",
+    "title": "Targeted correction: fitting a function to bivariate data and assessing fit with residual plots"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 1,
+          "prompt": "Row 1 has 12 yes and 8 no. Fraction of row 1 saying yes?",
+          "workedSolution": {
+            "steps": [
+              "Row total 20.",
+              "12/20 = 3/5."
+            ],
+            "answer": "3/5"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 2,
+          "prompt": "For ŷ = 4x + 60, interpret the slope where x is hours studied.",
+          "workedSolution": {
+            "steps": [
+              "Slope is change in y per unit x.",
+              "One more hour is associated with about 4 more points."
+            ],
+            "answer": "about 4 more points per hour"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 1,
+          "prompt": "Towns with more fire engines report more fire damage. What conclusion is justified?",
+          "choices": [
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "A strong correlation always establishes causation when the sample is large.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 2,
+          "prompt": "A data set records 9, 16, 11, 5, 2. Give the mean and the median.",
+          "choices": [
+            "mean 9, median 9",
+            "mean 8.6, median 9",
+            "mean 9, median 8.6",
+            "mean 8.6, median 11"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 2,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 173 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "The median rises sharply while the mean changes little.",
+            "Both the mean and the median rise sharply."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 3,
+          "prompt": "A two-way table has row 1: 29 yes, 18 no; row 2: 34 yes, 27 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "29/108",
+            "18/47",
+            "29/47",
+            "29/63"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 2,
+          "prompt": "A least-squares line for a data set is ŷ = 7x + 45, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "Each additional hour studied is associated with an increase of about 7 test points.",
+            "The predicted value is 7 test points when x is 0.",
+            "Each additional hour studied causes an increase of exactly 7 test points.",
+            "Each additional test points is associated with 7 more hour studieds."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 2,
+          "prompt": "In a randomised trial, one group received a tutoring programme and scored higher on average than the control group. What conclusion is justified?",
+          "choices": [
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "A strong correlation always establishes causation when the sample is large.",
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 36, 2, 10, 23, 37, 28, 36. Give the mean and the median.",
+          "choices": [
+            "mean 24.57, median 28",
+            "mean 25, median 28",
+            "mean 28, median 24.57",
+            "mean 24.57, median 25"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 3,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 309 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Both the mean and the median rise sharply.",
+            "The median rises sharply while the mean changes little.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Neither statistic changes, because one value cannot affect a summary."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l17"
+  }
+}

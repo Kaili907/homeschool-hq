@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l03",
+  "lessonId": "ma-g12-ready-for-life-u05-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Immediate-danger sorting (non-negotiable)",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Any immediate-danger scenario is sorted outside 'get help now.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All immediate-danger scenarios are correctly sorted into 'get help now.'"
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner's explanation shows they recognize the immediate-danger pattern generally, not just for the listed examples."
+          }
+        ]
+      },
+      {
+        "dimension": "Escalation judgment",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The trickiest-scenario explanation restates the sorting decision without explaining the reasoning."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The explanation names a specific deciding factor for each trickiest scenario."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The 'when uncertain' default reflects a genuinely safety-first choice, with a clear reason."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Zero immediate-danger scenarios appear outside the 'get help now' tier.",
+      "The two trickiest-scenario explanations name a specific factor, not just 'it was hard to decide.'",
+      "The 'when uncertain' default is the more cautious tier, not the least effortful one."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

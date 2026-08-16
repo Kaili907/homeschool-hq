@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g5-ready-for-life-u02-assessment",
+  "courseRef": "ma-g5-ready-for-life",
+  "grade": 5,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g5-ready-for-life-u02",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry",
+    "courseTitle": "Grade 5 Ready for Life",
+    "assessmentLessonRef": "ma-g5-ready-for-life-u02-l05"
+  },
+  "standards": [
+    "Ready for Life v1 Lessons 04–06"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/ready-for-life/assessments.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain sorting clothing in your own words and give or identify a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "representation or source",
+      "prompt": "Use a diagram, model, quotation, data display, map, demonstration, or worked process to show understanding of labels and care symbols.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply washer and dryer safety in a new realistic situation. Show the process or cite evidence.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving handwashing a small item; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect sorting clothing with put-away systems. Explain how the ideas support, constrain, contrast with, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit project: Use the frozen laundry lessons with guardian visibility, then create a repeatable clothing-care checklist.",
+      "possiblePoints": 8
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-05/ready-for-life/ma-g5-ready-for-life-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g5-ready-for-life-u02-assessment",
+    "metadataRef": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/ready-for-life/assessments.json",
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-05/swk-rfl-g5-u02-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Clothing and Laundry?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

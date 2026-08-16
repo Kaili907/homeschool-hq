@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g5-health-u03-assessment",
+  "courseRef": "ma-g5-health",
+  "grade": 5,
+  "subject": "health",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/health-physical-education/scoring-guides/health/grade-05/unit-assessments/ma-g5-health-u03-assessment.json",
+  "scoringSourceAuthority": "repo:curriculum-production/final/health-physical-education/scoring-guides/health/grade-05/unit-assessments/ma-g5-health-u03-assessment.json",
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

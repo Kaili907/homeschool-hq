@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g4-health-u04-assessment",
+  "courseId": "ma-g4-health",
+  "grade": 4,
+  "subject": "health",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "accuracy",
+    "reasoning and evidence",
+    "application or performance",
+    "checking and revision"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with accurate independent application and adequate reasoning.",
+    "developing": "70-84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+    "rule": "A unit score is one evidence source, not the sole basis for long-term mastery. The transfer item asks about the skill; optional private reflection is separate and is never scored."
+  },
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. Choosing an adapted or opt-out path is never scored as a deficit.",
+  "guardianSafetyReview": {
+    "equipment": "None.",
+    "environment": "Indoor setting.",
+    "movement_hazards": "None expected.",
+    "food_or_allergy_note": "None. This unit covers personal-safety and consent rules; guardians may wish to preview it.",
+    "guardian_confirmation_required": true
+  },
+  "sourceProvenance": {
+    "sourceBranch": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",
+    "sourceAssessmentId": "ma-g4-health-u04-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u07-l07",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u07-l07",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations and Inverse Functions",
+    "dayInUnit": 7,
+    "courseDay": 115,
+    "phase": "Investigation or close reading",
+    "focus": "vertical and horizontal shifts",
+    "title": "Investigation or close reading: vertical and horizontal shifts"
+  },
+  "standards": [
+    "F-BF.3",
+    "F-BF.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 1,
+          "prompt": "Describe y = f(x − 3).",
+          "workedSolution": {
+            "steps": [
+              "The change is inside the function, so horizontal.",
+              "x − 3 shifts the graph right by 3."
+            ],
+            "answer": "a horizontal shift right by 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "Find the inverse of f(x) = -5x + 5.",
+          "choices": [
+            "f⁻¹(x) = (x − 5) / -5",
+            "f⁻¹(x) = (x + 5) / -5",
+            "f⁻¹(x) = 1 / (-5x + 5)",
+            "f⁻¹(x) = -5x − 5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = 5x + 7 and its inverse f⁻¹, evaluate f⁻¹(f(-7)).",
+          "choices": [
+            "-7",
+            "7",
+            "-28",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "Classify f(x) = x³ − 4x as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "odd; its graph is symmetric about the origin",
+            "even; its graph is symmetric about the y-axis",
+            "neither even nor odd",
+            "even; its graph is symmetric about the origin"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = f(4x). Describe the transformation.",
+          "choices": [
+            "a vertical stretch by a factor of 4",
+            "a horizontal shift right by 4",
+            "a horizontal compression by a factor of 4",
+            "a vertical shift up by 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = -4x + 7.",
+          "choices": [
+            "f⁻¹(x) = (x − 7) / -4",
+            "f⁻¹(x) = 1 / (-4x + 7)",
+            "f⁻¹(x) = (x + 7) / -4",
+            "f⁻¹(x) = -4x − 7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = -4x + 1 and its inverse f⁻¹, evaluate f⁻¹(f(2)).",
+          "choices": [
+            "-2",
+            "-7",
+            "2",
+            "3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x⁴ − 3x² + 1 as even, odd, or neither, and state the corresponding symmetry.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = f(x) + 4. Describe the transformation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u07-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u07-l07"
+  }
+}

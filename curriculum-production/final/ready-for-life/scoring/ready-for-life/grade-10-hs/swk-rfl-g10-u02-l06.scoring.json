@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l06",
+  "lessonId": "ma-g10-ready-for-life-u02-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Portfolio completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more of the three portfolio pieces is missing." },
+          { "label": "Proficient", "descriptor": "All three pieces are present and consistent with earlier lessons." },
+          { "label": "Advanced", "descriptor": "All three pieces are present, consistent, and read as a coherent single portfolio rather than three disconnected fragments." }
+        ]
+      },
+      {
+        "dimension": "Local rule research accuracy and sourcing",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No source is named, or a rule from an unrelated location is used without acknowledgment." },
+          { "label": "Proficient", "descriptor": "Records the minimum working age and names a current source." },
+          { "label": "Advanced", "descriptor": "Records working age, permit requirement, and hour limits, all with a named current source." }
+        ]
+      },
+      {
+        "dimension": "Reflection on the unit",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection is generic ('it was good practice') with no specific comparison or confidence statement." },
+          { "label": "Proficient", "descriptor": "Compares the warm-up guess to the research finding specifically." },
+          { "label": "Advanced", "descriptor": "Names a specific portfolio piece with a genuine reason for the confidence level stated." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The portfolio pieces are recognizably drawn from the learner's own earlier work this unit, not newly invented.",
+      "The named source for local rules is specific enough that someone else could check the same thing.",
+      "The reflection ties the guess-versus-finding comparison to a specific number or fact, not a vague impression."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

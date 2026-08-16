@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g3-science-u03-assessment",
+  "courseRef": "ma-g3-science",
+  "grade": 3,
+  "subject": "science",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/science/packages/ma-g3-science/scoring/ma-g3-science-u03-l11.md",
+  "scoringSourceAuthority": {
+    "input": "g34_normalization",
+    "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+    "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/science/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

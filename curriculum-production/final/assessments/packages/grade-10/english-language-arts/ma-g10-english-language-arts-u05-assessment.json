@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-english-language-arts-u05-assessment",
+  "courseRef": "ma-g10-english-language-arts",
+  "grade": 10,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g10-english-language-arts-u05",
+    "unitNumber": 5,
+    "unitTitle": "Sustained Argument and Audience Analysis",
+    "courseTitle": "English 10: World Literature and Rhetoric",
+    "assessmentLessonRef": "ma-g10-english-language-arts-u05-l16"
+  },
+  "standards": [
+    "9-10.W.1",
+    "9-10.RI.8",
+    "9-10.SL.4",
+    "9-10.W.5",
+    "9-10.L.1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-10/ma-g10-english-language-arts-u05-l16.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: concluding sections that follow from the argument. Essential question: How does close, evidence-governed attention to concluding sections that follow from the argument change what a reader or writer is entitled to claim? By the end of this lesson you should be able to: Explain what concluding sections that follow from the argument means and reconstruct, unprompted, the criteria a strong response must meet. You'll need: course notebook or digital equivalent; the unit's assigned texts, in an accessible reading representation; citation reference or style manual appropriate to the course.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for Sustained Argument and Audience Analysis. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain organization that clarifies claim and counterclaim relationships in your own words and identify a valid example in an assigned text.\\n- (5 pts, textual evidence) Cite the strongest available evidence for a claim about anticipating audience knowledge level and concerns, and state what the evidence does not establish.\\n- (6 pts, application) Apply strengths and limitations of both sides to a text you have not analyzed in this unit. Show the reasoning, not only the conclusion.\\n- (6 pts, error or claim analysis) Analyze a plausible misreading or unsupported claim involving concluding sections that follow from the argument; correct it and explain what made it wrong.\\n- (5 pts, connection) Connect revision focused on what is most significant with clause and phrase variety in formal writing. Explain how one constrains, supports, or complicates the other.\\n- (8 pts, performance evidence) Present the strongest evidence from the unit performance task: Write a sustained argument for a defined external audience and deliver it as a logically ordered formal presentation.\\n- (4 pts, reflection and transfer) Identify one skill you can now transfer, one check that improves the quality of your reading or writing, and one open question.\\n- (5 pts, sufficiency and counter-evidence) Show that your evidence for anticipating audience knowledge level and concerns is sufficient, not merely consistent with your claim. Identify the strongest piece of evidence that cuts against you.\\n- (5 pts, unaided transfer) Apply organization that clarifies claim and counterclaim relationships to a text supplied at assessment time, with no exemplar and no checklist. Explain the choice you made and why.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/english-language-arts/ma-g10-english-language-arts-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-english-language-arts-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-10/ma-g10-english-language-arts-u05-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Sustained Argument and Audience Analysis?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g9-financial-literacy-u05-assessment",
+  "courseRef": "ma-g9-financial-literacy",
+  "grade": 9,
+  "subject": "financial-literacy",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "Identifying the assumption",
+    "Communicating uncertainty",
+    "Applying the stated criteria",
+    "Coherence of the plan",
+    "Defending the tradeoff"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/financial-literacy/scoring/grade-09/swk-flhs-g9-u05-l10.scoring.json",
+  "scoringSourceAuthority": {
+    "input": "hs912_normalization",
+    "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-candidates/hs912-r1/financial-literacy/grade-9/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

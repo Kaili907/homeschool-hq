@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-mathematics-u01-assessment",
+  "courseRef": "ma-g12-mathematics",
+  "grade": 12,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g12-mathematics-u01",
+    "unitNumber": 1,
+    "unitTitle": "Advanced Trigonometry: Unit Circle and Identities",
+    "courseTitle": "Precalculus with Statistics",
+    "assessmentLessonRef": "ma-g12-mathematics-u01-l16"
+  },
+  "standards": [
+    "F-TF.3",
+    "F-TF.4",
+    "F-TF.9",
+    "MP.7"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u01-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Find the exact value of sin(15°) using sin(45° − 30°).",
+      "choices": [
+        "√6/4",
+        "(√6 − √2)/4",
+        "(√6 + √2)/4",
+        "(√2 − √6)/4"
+      ],
+      "standardRef": "F-TF.9"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate sin(855°) exactly, using the periodicity of sine.",
+      "choices": [
+        "−1/2",
+        "√2/2",
+        "−√2/2",
+        "1/2"
+      ],
+      "standardRef": "F-TF.4"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Give the exact value of sin(3π/4), which is 135°.",
+      "choices": [
+        "−1/2",
+        "−√2/2",
+        "√2/2",
+        "1/2"
+      ],
+      "standardRef": "F-TF.3"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Find the reference angle for 225°, and name the quadrant it lies in.",
+      "choices": [
+        "45°, quadrant 4",
+        "45°, quadrant 3",
+        "225°, quadrant 3",
+        "135°, quadrant 3"
+      ],
+      "standardRef": "F-TF.4"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Find the exact value of cos(75°) using cos(45° + 30°).",
+      "choices": [
+        "(√2 − √6)/4",
+        "(√6 − √2)/4",
+        "√6/4",
+        "(√6 + √2)/4"
+      ],
+      "standardRef": "F-TF.9"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate sin(480°) exactly, using the periodicity of sine.",
+      "choices": [
+        "−1/2",
+        "√3/2",
+        "√2/2",
+        "1/2"
+      ],
+      "standardRef": "F-TF.4"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Give the exact value of sin(5π/6), which is 150°.",
+      "choices": [
+        "1/2",
+        "√2/2",
+        "−√2/2",
+        "−1/2"
+      ],
+      "standardRef": "F-TF.3"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Find the reference angle for 210°, and name the quadrant it lies in.",
+      "choices": [
+        "30°, quadrant 4",
+        "210°, quadrant 3",
+        "150°, quadrant 3",
+        "30°, quadrant 3"
+      ],
+      "standardRef": "F-TF.4"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Find the exact value of sin(75°) using sin(45° + 30°).",
+      "choices": [
+        "√6/4",
+        "(√6 − √2)/4",
+        "(√6 + √2)/4",
+        "(√2 − √6)/4"
+      ],
+      "standardRef": "F-TF.9"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate sin(945°) exactly, using the periodicity of sine.",
+      "choices": [
+        "−1/2",
+        "√2/2",
+        "−√2/2",
+        "1/2"
+      ],
+      "standardRef": "F-TF.4"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "Give the exact value of cos(11π/6), which is 330°.",
+      "choices": [
+        "1/2",
+        "√3/2",
+        "√2/2",
+        "−1/2"
+      ],
+      "standardRef": "F-TF.3"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u01-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Find the reference angle for 240°, and name the quadrant it lies in.",
+      "choices": [
+        "120°, quadrant 3",
+        "60°, quadrant 3",
+        "240°, quadrant 3",
+        "60°, quadrant 4"
+      ],
+      "standardRef": "F-TF.4"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/mathematics/ma-g12-mathematics-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-mathematics-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u01-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Advanced Trigonometry: Unit Circle and Identities?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

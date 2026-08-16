@@ -1,0 +1,222 @@
+[
+  {
+    "sourceId": "structural",
+    "branch": "mac/final-curriculum-structure-r1",
+    "commitSha": "5a6c59024906275ba2cc36eec299e258535da154",
+    "path": "curriculum-release-candidates/family-pilot-final-r1",
+    "treeSha": "981a0a6e2e2d0720c4339f6aa62d4da2fc298c8e",
+    "role": "final structural curriculum candidate",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/final-curriculum-structure-r1",
+        "commitSha": "5a6c59024906275ba2cc36eec299e258535da154"
+      }
+    ]
+  },
+  {
+    "sourceId": "mathematics",
+    "branch": "mac/math-content-repair-r2",
+    "commitSha": "c8f5a6b6b9b18317f96b5e2f92d453bde0f0b2b9",
+    "path": "curriculum-production/final/mathematics",
+    "treeSha": "d4c04d4941bcdcb6dda18da5790b2dcd4e84e159",
+    "role": "repaired active mathematics production corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/math-content-repair-r2",
+        "commitSha": "c8f5a6b6b9b18317f96b5e2f92d453bde0f0b2b9"
+      }
+    ]
+  },
+  {
+    "sourceId": "science",
+    "branch": "mac/science-content-repair-r1",
+    "commitSha": "dc2cee7fa16ea059218862d0dc42a2bee504269d",
+    "path": "curriculum-production/final/science",
+    "treeSha": "bac5b85e5f6fe5186787aebc91e4d1045f1c24af",
+    "role": "repaired executable science production corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/science-content-repair-r1",
+        "commitSha": "dc2cee7fa16ea059218862d0dc42a2bee504269d"
+      }
+    ]
+  },
+  {
+    "sourceId": "social-studies",
+    "branch": "mac/social-content-source-repair-r1",
+    "commitSha": "9ab9860741566c2d02421fb36dc6c1eb0ddc9223",
+    "path": "curriculum-production/final/social-studies",
+    "treeSha": "2bd5b0f41f51b33dffa5d9697877b831c7339e8e",
+    "role": "repaired static and dynamic-source Social Studies corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/social-content-source-repair-r1",
+        "commitSha": "9ab9860741566c2d02421fb36dc6c1eb0ddc9223"
+      }
+    ]
+  },
+  {
+    "sourceId": "health",
+    "branch": "mac/health-production-depth-r1",
+    "commitSha": "2f8583bd2acc92ed6fe2ca133f27e75113deac54",
+    "path": "curriculum-production/final/health-physical-education",
+    "treeSha": "b1cdac76c7c11f20ad4cf1302eb1fbba40b4329e",
+    "role": "Director-approved production-depth Health lesson corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/health-production-depth-r1",
+        "commitSha": "2f8583bd2acc92ed6fe2ca133f27e75113deac54"
+      }
+    ]
+  },
+  {
+    "sourceId": "physical-education",
+    "branch": "mac/pe-production-depth-r1",
+    "commitSha": "69fc9e6902fd66f7b7f505cf7e98d650fb322fff",
+    "path": "curriculum-production/final/health-physical-education",
+    "treeSha": "627ab7722607449c679b2b5fd377dfa2e63967c2",
+    "role": "Director-approved production-depth Physical Education lesson corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/pe-production-depth-r1",
+        "commitSha": "69fc9e6902fd66f7b7f505cf7e98d650fb322fff"
+      }
+    ]
+  },
+  {
+    "sourceId": "ready-for-life",
+    "branch": "mac/rfl-production-depth-r1",
+    "commitSha": "d3b37a4e803a6fae47c567804341de8e46d26298",
+    "path": "curriculum-production/final/ready-for-life",
+    "treeSha": "9ab9a4198c7c3e1031956251318c277177ec5826",
+    "role": "Director-approved production-depth Ready for Life corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/rfl-production-depth-r1",
+        "commitSha": "d3b37a4e803a6fae47c567804341de8e46d26298"
+      }
+    ]
+  },
+  {
+    "sourceId": "financial-literacy",
+    "branch": "mac/finlit-production-depth-r1",
+    "commitSha": "fcc8f6dd4a234b19b366ba436cc6fb2c28182454",
+    "path": "curriculum-production/final/financial-literacy",
+    "treeSha": "5f9ef27ccbdea7bfd026f0c1cf6971e49bcbc74b",
+    "role": "Director-approved production-depth Financial Literacy corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/finlit-production-depth-r1",
+        "commitSha": "fcc8f6dd4a234b19b366ba436cc6fb2c28182454"
+      }
+    ]
+  },
+  {
+    "sourceId": "english-language-arts",
+    "branch": "mac/ela-content-source-repair-r1",
+    "commitSha": "d161efc876ad7563505897323f80fdb2cb11d5a4",
+    "path": "curriculum-production/student-work/english-language-arts",
+    "treeSha": "f6b3d30f6581e507ffff3ec4f4f6db06be017a83",
+    "role": "repaired actionable ELA lesson production corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/ela-content-source-repair-r1",
+        "commitSha": "d161efc876ad7563505897323f80fdb2cb11d5a4"
+      }
+    ]
+  },
+  {
+    "sourceId": "technology",
+    "branch": "mac/technology-production-depth-r1",
+    "commitSha": "42a04f5e4133799be35cd01b0fade59195c3447d",
+    "path": "curriculum-production/student-work/technology-arts-lessons",
+    "treeSha": "4dce338dae1080199b82190192fedf00cdf885f8",
+    "role": "Director-approved production-depth Technology/CS lesson corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/technology-production-depth-r1",
+        "commitSha": "42a04f5e4133799be35cd01b0fade59195c3447d"
+      }
+    ]
+  },
+  {
+    "sourceId": "arts-and-music",
+    "branch": "mac/arts-production-depth-r1",
+    "commitSha": "15ca63353e533db49374f5a2bc54e9b488750cca",
+    "path": "curriculum-production/student-work/technology-arts-lessons",
+    "treeSha": "b8fe88c1e8dbb1c2b6473ed317f25042a351d725",
+    "role": "Director-approved production-depth Arts/Music lesson corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/arts-production-depth-r1",
+        "commitSha": "15ca63353e533db49374f5a2bc54e9b488750cca"
+      }
+    ]
+  },
+  {
+    "sourceId": "assessments",
+    "branch": "mac/assessment-materialization-r1",
+    "commitSha": "520ce571e7a3e9dc8c60699cfae5f22ee10d56e2",
+    "path": "curriculum-production/final/assessments",
+    "treeSha": "fa9d2ae456cf71b0b216d4104832d2fc6c2dc7d0",
+    "role": "canonical materialized learner assessments and restricted adult authorities",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/assessment-materialization-r1",
+        "commitSha": "520ce571e7a3e9dc8c60699cfae5f22ee10d56e2"
+      }
+    ]
+  },
+  {
+    "sourceId": "production-gate-h3",
+    "branch": "mac/curriculum-production-gate-h3",
+    "commitSha": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "path": "src/curriculum/production-quality",
+    "treeSha": "6f87e247ea0a798b7ac01c8ec64a86ba17284547",
+    "role": "production readiness Gate H3 authority",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/curriculum-production-gate-h3",
+        "commitSha": "49b3c4b86cc7764627bd4cfbd752222849831abf"
+      }
+    ]
+  },
+  {
+    "sourceId": "release-admission",
+    "branch": "mac/release-admission-r1",
+    "commitSha": "5bd9e9c8981fe9171116f4aeb833a3e15da8b3e7",
+    "path": "src/curriculum/release-admission",
+    "treeSha": "8a782843a558c4221e583ff10a55dc9bfbefa6a9",
+    "role": "fail-closed release admission implementation",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": []
+  },
+  {
+    "sourceId": "final-runtime",
+    "branch": "mac/final-curriculum-runtime-r1",
+    "commitSha": "fe3d9f2fbf29714c49fe95fd9396bb95a614810a",
+    "path": "src/curriculum/final-runtime",
+    "treeSha": "493f383bf813f86ad31b19a924b902db158d1bfe",
+    "role": "final browser runtime compatibility contract",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "origin/mac/final-curriculum-runtime-r1",
+        "commitSha": "fe3d9f2fbf29714c49fe95fd9396bb95a614810a"
+      }
+    ]
+  }
+]

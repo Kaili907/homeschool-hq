@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u03-l02",
+  "lessonId": "ma-g5-financial-literacy-u03-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What does the order cost at the first supplier?",
+        "answer": "$74.20",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(24.75 + 18.40 + 31.05) = 74.20. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 2475
+              },
+              {
+                "op": "money",
+                "cents": 1840
+              },
+              {
+                "op": "money",
+                "cents": 3105
+              }
+            ]
+          },
+          "trace": "(24.75 + 18.40 + 31.05) = 74.20"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What does the order cost at the second supplier?",
+        "answer": "$73.25",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(26.10 + 16.95 + 30.20) = 73.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 2610
+              },
+              {
+                "op": "money",
+                "cents": 1695
+              },
+              {
+                "op": "money",
+                "cents": 3020
+              }
+            ]
+          },
+          "trace": "(26.10 + 16.95 + 30.20) = 73.25"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much cheaper is the better total?",
+        "answer": "$0.95",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((24.75 + 18.40 + 31.05) - (26.10 + 16.95 + 30.20)) = 0.95. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 2475
+                },
+                {
+                  "op": "money",
+                  "cents": 1840
+                },
+                {
+                  "op": "money",
+                  "cents": 3105
+                }
+              ]
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 2610
+                },
+                {
+                  "op": "money",
+                  "cents": 1695
+                },
+                {
+                  "op": "money",
+                  "cents": 3020
+                }
+              ]
+            }
+          },
+          "trace": "((24.75 + 18.40 + 31.05) - (26.10 + 16.95 + 30.20)) = 0.95"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "On the first item, how much more does the second supplier charge?",
+        "answer": "$1.35",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(26.10 - 24.75) = 1.35. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 2610
+            },
+            "less": {
+              "op": "money",
+              "cents": 2475
+            }
+          },
+          "trace": "(26.10 - 24.75) = 1.35"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "On the second and third items combined, how much less does the second supplier charge?",
+        "answer": "$2.30",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((18.40 + 31.05) - (16.95 + 30.20)) = 2.30. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 1840
+                },
+                {
+                  "op": "money",
+                  "cents": 3105
+                }
+              ]
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 1695
+                },
+                {
+                  "op": "money",
+                  "cents": 3020
+                }
+              ]
+            }
+          },
+          "trace": "((18.40 + 31.05) - (16.95 + 30.20)) = 2.30"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Comparing totals and considering hidden costs",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response compares Neel's single lines only, or ignores splitting entirely."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Splitting is considered for Neel but no additional cost is identified."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response reasons about Neel's split order using the line differences and names a cost the quotes omit, such as a second delivery or extra ordering time."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the order cost at the first supplier?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the order cost at the second supplier?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much cheaper is the better total?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "On the first item, how much more does the second supplier charge?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "On the second and third items combined, how much less does the second supplier charge?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Neel could split the order between suppliers. Work out whether that is worth doing and name a cost it would add that the quotes do not show."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the order cost at the first supplier? Answer: $74.20. Verification: (24.75 + 18.40 + 31.05) = 74.20. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What does the order cost at the second supplier? Answer: $73.25. Verification: (26.10 + 16.95 + 30.20) = 73.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How much cheaper is the better total? Answer: $0.95. Verification: ((24.75 + 18.40 + 31.05) - (26.10 + 16.95 + 30.20)) = 0.95. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: On the first item, how much more does the second supplier charge? Answer: $1.35. Verification: (26.10 - 24.75) = 1.35. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: On the second and third items combined, how much less does the second supplier charge? Answer: $2.30. Verification: ((18.40 + 31.05) - (16.95 + 30.20)) = 2.30. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Comparing totals and considering hidden costs — Not yet: The response compares Neel's single lines only, or ignores splitting entirely. Approaching: Splitting is considered for Neel but no additional cost is identified. Meets: The response reasons about Neel's split order using the line differences and names a cost the quotes omit, such as a second delivery or extra ordering time. The response reasons about Neel's split order using the line differences and names a cost the quotes omit, such as a second delivery or extra ordering time."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response reasons about Neel's split order using the line differences and names a cost the quotes omit, such as a second delivery or extra ordering time."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u03-l02.scoring.json",
+    "sourceScoringSha256": "0b165b0b1752b9071686c5ebd059aec56517a242ba978385fd7f64d571b68811",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

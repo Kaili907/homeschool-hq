@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u05-l16",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u05-l16",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Division with Remainders",
+    "dayInUnit": 16,
+    "courseDay": 88,
+    "phase": "Unit assessment",
+    "focus": "division and remainders",
+    "title": "Unit assessment: division and remainders"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.6"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 257 ÷ 3. Write the answer as a quotient and remainder.",
+          "choices": [
+            "84 r2",
+            "86 r2",
+            "85 r2",
+            "85 r1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 1,
+          "prompt": "A baker has 78 eggs and needs 4 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "22",
+            "18",
+            "20",
+            "19"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 169 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "42 r1",
+            "41 r1",
+            "43 r1",
+            "42 r2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A baker has 73 eggs and needs 6 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "15",
+            "11",
+            "12",
+            "13"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 172 ÷ 3. Write the answer as a quotient and remainder.",
+          "choices": [
+            "56 r1",
+            "57 r1",
+            "58 r1",
+            "57 r2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A baker has 45 eggs and needs 4 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "11",
+            "12",
+            "14",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 908 ÷ 7. Write the answer as a quotient and remainder.",
+          "choices": [
+            "129 r5",
+            "130 r5",
+            "129 r6",
+            "128 r5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "198 students are going on a field trip. Each van holds 7 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "28",
+            "29",
+            "30",
+            "27"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 423 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "105 r1",
+            "104 r3",
+            "106 r3",
+            "105 r3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 297 eggs and needs 8 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "37",
+            "36",
+            "38",
+            "40"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u05-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u05-l16"
+  }
+}

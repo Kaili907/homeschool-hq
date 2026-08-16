@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l05",
+  "lessonId": "ma-g8-ready-for-life-u06-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "System design (ongoing vs. single-event)",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The plan describes storage for a single event or document only, with no distinct ongoing categories or no assigned storage locations."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least four ongoing categories are named, each with a specific assigned storage location."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the categories and locations reflect a genuinely ongoing, whole-life system rather than a single project's paperwork."
+          }
+        ]
+      },
+      {
+        "dimension": "Recurring review habit",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No specific recurring day or checklist is given, or the review habit is described only in general terms ('check it sometimes')."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific recurring day and a clear checklist of review actions are given."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the checklist specifically addresses both outdated documents and newly arriving documents."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner's own explanation in task 1 clearly distinguishes an ongoing system from a single-event folder.",
+      "No real documents, account numbers, or identifying information belonging to the learner or their family appear anywhere."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

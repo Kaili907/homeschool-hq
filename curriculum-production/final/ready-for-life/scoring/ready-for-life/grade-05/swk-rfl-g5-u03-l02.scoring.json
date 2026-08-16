@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l02",
+  "lessonId": "ma-g5-ready-for-life-u03-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Five-step sequence accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Skips or reorders steps, for example soap before wetting."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Completes all five steps in the correct order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Completes all five steps correctly on both independent attempts without a reminder."
+          }
+        ]
+      },
+      {
+        "dimension": "Timing self-awareness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Scrub time is clearly under 20 seconds."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Scrub time is close to 20 seconds."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Scrub time meets 20 seconds and the learner names a specific personal strategy to hit it."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Both independent handwashing moments are tied to a real, named trigger.",
+      "Drying happens with a clean towel, not clothing.",
+      "Reflection names a concrete strategy, not just 'I'll try harder.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

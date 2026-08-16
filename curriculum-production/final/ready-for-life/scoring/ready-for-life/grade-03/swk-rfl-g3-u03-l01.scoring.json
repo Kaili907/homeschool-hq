@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l01",
+  "lessonId": "ma-g3-ready-for-life-u03-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Step sequence",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the five steps (wet, soap, scrub, rinse, dry) is missing or done out of order."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All five steps are present and completed in the modeled order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All five steps are present and in order, and the learner explains why the order matters, such as soap needing to go on before scrubbing lifts germs off skin."
+          }
+        ]
+      },
+      {
+        "dimension": "Scrub thoroughness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Scrubbing covers only palms, for noticeably less than twenty seconds."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Scrubbing covers the backs of hands, between fingers, and under nails for close to twenty seconds."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner independently times the twenty seconds without being reminded."
+          }
+        ]
+      },
+      {
+        "dimension": "Baseline comparison",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner cannot name any specific difference between their baseline wash and the full sequence."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names at least one specific step that was missing from their baseline wash."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner names the missing step and explains specifically why skipping it matters."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner sings or counts through a full twenty seconds rather than estimating.",
+      "The reflection response names a specific step, not a general 'I wash better now.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

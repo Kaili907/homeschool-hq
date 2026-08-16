@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l01",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 1,
+    "courseDay": 163,
+    "phase": "Launch and diagnostic",
+    "focus": "representing distributions with dot plots, histograms, and box plots",
+    "title": "Launch and diagnostic: representing distributions with dot plots, histograms, and box plots"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 1,
+          "prompt": "Find the mean and median of 4, 8, 6, 10, 2.",
+          "workedSolution": {
+            "steps": [
+              "Sum 30, count 5, mean 6.",
+              "Sorted: 2, 4, 6, 8, 10; median 6."
+            ],
+            "answer": "mean 6, median 6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 1,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 235 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Both the mean and the median rise sharply.",
+            "The median rises sharply while the mean changes little.",
+            "Neither statistic changes, because one value cannot affect a summary."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 1,
+          "prompt": "A two-way table has row 1: 13 yes, 19 no; row 2: 30 yes, 16 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "13/32",
+            "1/6",
+            "19/32",
+            "13/43"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 2,
+          "prompt": "A least-squares line for a data set is ŷ = 3x + 13, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "Each additional hour studied is associated with an increase of about 3 test points.",
+            "Each additional hour studied causes an increase of exactly 3 test points.",
+            "Each additional test points is associated with 3 more hour studieds.",
+            "The predicted value is 3 test points when x is 0."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 2,
+          "prompt": "In a randomised trial, one group received a tutoring programme and scored higher on average than the control group. What conclusion is justified?",
+          "choices": [
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+            "A strong correlation always establishes causation when the sample is large.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 12, 38, 22, 25, 24, 10, 18. Give the mean and the median.",
+          "choices": [
+            "mean 21.29, median 22",
+            "mean 22, median 21.29",
+            "mean 21.29, median 21",
+            "mean 21, median 22"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 1,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 163 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "Both the mean and the median rise sharply.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "The median rises sharply while the mean changes little."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 2,
+          "prompt": "A two-way table has row 1: 6 yes, 13 no; row 2: 10 yes, 25 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "6/19",
+            "13/19",
+            "3/8",
+            "1/9"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l01"
+  }
+}

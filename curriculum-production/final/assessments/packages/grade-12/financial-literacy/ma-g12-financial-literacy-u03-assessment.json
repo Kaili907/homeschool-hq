@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-financial-literacy-u03-assessment",
+  "courseRef": "ma-g12-financial-literacy",
+  "grade": 12,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g12-financial-literacy-u03",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "courseTitle": "Financial Transition to Adulthood",
+    "assessmentLessonRef": "ma-g12-financial-literacy-u03-l10"
+  },
+  "standards": [
+    "PF3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u03-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The fictional household has $640 a month of surplus. It carries a simulated card balance of $4,200 charged at 22.8% a year, applied as one twelfth of that rate each month. Its reserve holds $900 against essential costs of $2,850 a month. The employer adds 50% of whatever the worker contributes to retirement, up to the first 4% of a $54,000 salary.",
+      "prompt": "What interest does the card balance attract in one month?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The fictional household has $640 a month of surplus. It carries a simulated card balance of $4,200 charged at 22.8% a year, applied as one twelfth of that rate each month. Its reserve holds $900 against essential costs of $2,850 a month. The employer adds 50% of whatever the worker contributes to retirement, up to the first 4% of a $54,000 salary.",
+      "prompt": "What is the largest employer retirement contribution available in a year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The fictional household has $640 a month of surplus. It carries a simulated card balance of $4,200 charged at 22.8% a year, applied as one twelfth of that rate each month. Its reserve holds $900 against essential costs of $2,850 a month. The employer adds 50% of whatever the worker contributes to retirement, up to the first 4% of a $54,000 salary.",
+      "prompt": "What monthly contribution earns the full employer amount?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now size the other two claims and see what is left once the employer contribution is secured.",
+      "prompt": "What is a 3-month reserve target on essential costs?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now size the other two claims and see what is left once the employer contribution is secured.",
+      "prompt": "How far short of that target is the reserve?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now size the other two claims and see what is left once the employer contribution is secured.",
+      "prompt": "If the $180.00 retirement contribution is made first, what surplus remains?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Now size the other two claims and see what is left once the employer contribution is secured.",
+      "prompt": "If that whole $460.00 went to the card, what would the balance be after one month?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "Put the retirement contribution on a comparable footing before deciding anything.",
+      "prompt": "The employer adds $1,080.00 on a worker contribution of $2,160.00 a year. What is that as a percentage of what the worker puts in?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "Put the retirement contribution on a comparable footing before deciding anything.",
+      "prompt": "At $460.00 a month, how many months would clear the $4,200 balance if no further interest were charged? Give one decimal place."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Write the allocation. Every dollar of the $640 must be accounted for.",
+      "prompt": "Allocate the whole $640 a month across the three claims and defend it. State what your allocation gives up, and name the claim you would fund differently if the household told you its income was uncertain for the next year."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/financial-literacy/ma-g12-financial-literacy-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-financial-literacy-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u03-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF3 — Budgeting and Saving: Running the Adult Budget?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

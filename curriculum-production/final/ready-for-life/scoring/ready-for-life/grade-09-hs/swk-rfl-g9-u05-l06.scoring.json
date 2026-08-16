@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l06",
+  "lessonId": "ma-g9-ready-for-life-u05-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Judgment about what to share",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Sorts fewer than four of the five details correctly, or the drafted statement still includes a detail marked private." },
+          { "label": "Proficient", "descriptor": "Sorts all five details correctly and the drafted statement includes only the details marked necessary." },
+          { "label": "Advanced", "descriptor": "Sorts all five details correctly, the statement includes only necessary details, and the learner's reasoning names specifically why a detail changes (or doesn't change) whether the request would be granted." }
+        ]
+      },
+      {
+        "dimension": "Self-advocacy statement clarity and completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Statement omits a specific ask, or leaves the need vague (e.g., 'I'm struggling') instead of naming what's needed." },
+          { "label": "Proficient", "descriptor": "Statement gives brief context, names the specific need, and ends with one specific, answerable ask." },
+          { "label": "Advanced", "descriptor": "Statement meets the Proficient bar and orders the three parts so the ask is easy for the recipient to act on immediately, with no unrelated detail diluting it." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A final statement with zero details from the 'private or unnecessary' list identified in the warm-up.",
+      "An ask specific enough to answer with a yes/no or a number, not a vague request like 'please be understanding.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

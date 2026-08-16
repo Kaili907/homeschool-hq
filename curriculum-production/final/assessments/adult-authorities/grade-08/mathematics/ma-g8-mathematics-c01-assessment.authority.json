@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g8-mathematics-c01-assessment",
+  "courseRef": "ma-g8-mathematics",
+  "grade": 8,
+  "subject": "mathematics",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "Correct use of √ and ∛ notation to name exact solutions",
+    "Accuracy of evaluation for small perfect squares and perfect cubes",
+    "Discrimination between exact values and approximations, with justification",
+    "Quality of reasoning about rationality and irrationality",
+    "Verification and self-correction"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/mathematics/active/answer-keys/grade-08/ma-g8-mathematics-u01-l16.key.json",
+  "scoringSourceAuthority": {
+    "input": "g8_math_integration",
+    "commit": "6cde12f62d2ff432f45c5a6bb45f7d5a5f19b0de",
+    "path": "curriculum-release-corrections/grade8-mathematics/assessment.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

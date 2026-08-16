@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u09-l08",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u09-l08",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Area and the Distributive Property",
+    "dayInUnit": 8,
+    "courseDay": 152,
+    "phase": "Error analysis and repair",
+    "focus": "area-versus-perimeter confusion",
+    "title": "Error analysis and repair: area-versus-perimeter confusion"
+  },
+  "standards": [
+    "3.MD.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 1,
+          "prompt": "A rectangular garden bed is 6 ft long and 3 ft wide. What is its area?",
+          "workedSolution": {
+            "steps": [
+              "Area = length × width.",
+              "6 × 3 = 18.",
+              "The area is 18 square feet."
+            ],
+            "answer": "18 sq ft"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangle 5 units long is split into a 3-unit part and a 2-unit part. Find the total area.",
+          "workedSolution": {
+            "steps": [
+              "5 × 3 = 15.",
+              "5 × 2 = 10.",
+              "15 + 10 = 25."
+            ],
+            "answer": "25"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 1,
+          "prompt": "A rectangular rug is 3 ft long and 6 ft wide. What is its area?",
+          "choices": [
+            "18 sq ft",
+            "19 sq ft",
+            "9 sq ft",
+            "17 sq ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 1,
+          "prompt": "A rectangle 6 units long is split into two parts: one 2 units wide and one 4 units wide. Use 6 × (2 + 4) to find the total area.",
+          "choices": [
+            "12",
+            "36",
+            "37",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangular rug is 11 cm long and 5 cm wide. What is its area?",
+          "choices": [
+            "55 sq cm",
+            "56 sq cm",
+            "32 sq cm",
+            "16 sq cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangle 3 units long is split into two parts: one 2 units wide and one 4 units wide. Use 3 × (2 + 4) to find the total area.",
+          "choices": [
+            "18",
+            "12",
+            "6",
+            "9"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangular rug is 6 in long and 8 in wide. What is its area?",
+          "choices": [
+            "48 sq in",
+            "49 sq in",
+            "28 sq in",
+            "14 sq in"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangle 6 units long is split into two parts: one 2 units wide and one 2 units wide. Use 6 × (2 + 2) to find the total area.",
+          "choices": [
+            "12",
+            "10",
+            "25",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular rug is 8 ft long and 7 ft wide. What is its area?",
+          "choices": [
+            "30 sq ft",
+            "57 sq ft",
+            "56 sq ft",
+            "15 sq ft"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u09-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u09-l08"
+  }
+}

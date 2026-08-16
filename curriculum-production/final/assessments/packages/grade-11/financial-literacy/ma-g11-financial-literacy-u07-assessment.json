@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-financial-literacy-u07-assessment",
+  "courseRef": "ma-g11-financial-literacy",
+  "grade": 11,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g11-financial-literacy-u07",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "courseTitle": "Investing, Insurance, and Risk Management",
+    "assessmentLessonRef": "ma-g11-financial-literacy-u07-l11"
+  },
+  "standards": [
+    "PF7"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u07-l11.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Under the fictional rules, a gain on a holding sold within 18 months is taxed at the holder’s marginal rate of 22%, and a gain on a holding sold after 18 months or more is taxed at a flat 15%. A separate holding can be sold at a loss, and the loss reduces the taxable gain dollar for dollar. The gain is $12,600 and the available loss is $3,100.",
+      "prompt": "What is the tax on the gain if sold within 18 months, at 22%?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "Under the fictional rules, a gain on a holding sold within 18 months is taxed at the holder’s marginal rate of 22%, and a gain on a holding sold after 18 months or more is taxed at a flat 15%. A separate holding can be sold at a loss, and the loss reduces the taxable gain dollar for dollar. The gain is $12,600 and the available loss is $3,100.",
+      "prompt": "What is the tax if sold after 18 months, at 12%?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "Under the fictional rules, a gain on a holding sold within 18 months is taxed at the holder’s marginal rate of 22%, and a gain on a holding sold after 18 months or more is taxed at a flat 15%. A separate holding can be sold at a loss, and the loss reduces the taxable gain dollar for dollar. The gain is $12,600 and the available loss is $3,100.",
+      "prompt": "How much does waiting past the 18-month point save?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now bring in the $3,100 loss, which reduces the taxable gain.",
+      "prompt": "What is the taxable gain after the $3,100 loss is offset against it?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now bring in the $3,100 loss, which reduces the taxable gain.",
+      "prompt": "What is the tax on the reduced gain under the longer-holding rule?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now bring in the $3,100 loss, which reduces the taxable gain.",
+      "prompt": "How much does the loss offset save under the longer-holding rule?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Now bring in the $3,100 loss, which reduces the taxable gain.",
+      "prompt": "What would the same loss offset save under the within-18-months rule instead?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p5",
+      "kind": "fixed-numeric",
+      "directions": "Now bring in the $3,100 loss, which reduces the taxable gain.",
+      "prompt": "Combining both moves, how much lower is the tax than selling within 18 months with no offset?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p6",
+      "kind": "fixed-numeric",
+      "directions": "Now bring in the $3,100 loss, which reduces the taxable gain.",
+      "prompt": "The combined saving is what percentage of the original gain? Give one decimal place.",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write your defence. Answer both.",
+      "prompt": "Defend a recommendation about when to sell. State the tax saving you are relying on, the risk the recommendation carries, and the circumstance in which you would reverse it."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Write your defence. Answer both.",
+      "prompt": "The same $3,100 loss is worth $372.00 against a long-held gain and $682.00 against a short-held one. Explain what that implies about which gains a loss should be set against, and why the two tax rules pull in opposite directions here."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/financial-literacy/ma-g11-financial-literacy-u07-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion.",
+    "Provide evidence that meets the stated Transfer to the new case criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-financial-literacy-u07-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u07-l11.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

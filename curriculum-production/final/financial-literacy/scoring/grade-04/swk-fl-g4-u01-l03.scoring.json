@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u01-l03",
+  "lessonId": "ma-g4-financial-literacy-u01-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What does Plan B cost in total?",
+        "answer": "$28.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(19.50 + 9.00) = 28.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 1950
+              },
+              {
+                "op": "money",
+                "cents": 900
+              }
+            ]
+          },
+          "trace": "(19.50 + 9.00) = 28.50"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much more does Plan B cost than Plan A?",
+        "answer": "$0.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((19.50 + 9.00) - 28.00) = 0.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 1950
+                },
+                {
+                  "op": "money",
+                  "cents": 900
+                }
+              ]
+            },
+            "less": {
+              "op": "money",
+              "cents": 2800
+            }
+          },
+          "trace": "((19.50 + 9.00) - 28.00) = 0.50"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much of the $40.00 is left under Plan A?",
+        "answer": "$12.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(40.00 - 28.00) = 12.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 4000
+            },
+            "less": {
+              "op": "money",
+              "cents": 2800
+            }
+          },
+          "trace": "(40.00 - 28.00) = 12.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How much would have been left under Plan B?",
+        "answer": "$11.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(40.00 - (19.50 + 9.00)) = 11.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 4000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 1950
+                },
+                {
+                  "op": "money",
+                  "cents": 900
+                }
+              ]
+            }
+          },
+          "trace": "(40.00 - (19.50 + 9.00)) = 11.50"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What is the value of the art book Priyanka gave up by choosing Plan A?",
+        "answer": "$19.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "larger of (19.50, 9.00) = 19.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "max",
+            "of": [
+              {
+                "op": "money",
+                "cents": 1950
+              },
+              {
+                "op": "money",
+                "cents": 900
+              }
+            ]
+          },
+          "trace": "larger of (19.50, 9.00) = 19.50"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Naming opportunity cost",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response names only the ticket price as the cost of Priyanka's choice."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Plan B is mentioned as given up but its contents are not named specifically."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names the $19.50 art book and the lunch with a friend as what Priyanka gave up, and states that the give-up is part of what the choice cost her."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does Plan B cost in total?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much more does Plan B cost than Plan A?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of the $40.00 is left under Plan A?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much would have been left under Plan B?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the value of the art book Priyanka gave up by choosing Plan A?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Name what Priyanka gave up by choosing the show, and explain why the cost of a choice is more than the money she handed over."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does Plan B cost in total? Answer: $28.50. Verification: (19.50 + 9.00) = 28.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How much more does Plan B cost than Plan A? Answer: $0.50. Verification: ((19.50 + 9.00) - 28.00) = 0.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How much of the $40.00 is left under Plan A? Answer: $12.00. Verification: (40.00 - 28.00) = 12.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: How much would have been left under Plan B? Answer: $11.50. Verification: (40.00 - (19.50 + 9.00)) = 11.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What is the value of the art book Priyanka gave up by choosing Plan A? Answer: $19.50. Verification: larger of (19.50, 9.00) = 19.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Naming opportunity cost — Not yet: The response names only the ticket price as the cost of Priyanka's choice. Approaching: Plan B is mentioned as given up but its contents are not named specifically. Meets: The response names the $19.50 art book and the lunch with a friend as what Priyanka gave up, and states that the give-up is part of what the choice cost her. The response names the $19.50 art book and the lunch with a friend as what Priyanka gave up, and states that the give-up is part of what the choice cost her."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response names the $19.50 art book and the lunch with a friend as what Priyanka gave up, and states that the give-up is part of what the choice cost her."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-04/swk-fl-g4-u01-l03.scoring.json",
+    "sourceScoringSha256": "b29117407d9def8ba8139ed2022d3149efa35d6bcd3e62a5426a1bcf3490fb66",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

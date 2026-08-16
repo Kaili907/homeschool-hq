@@ -1,0 +1,412 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l04",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: subscription and service audits"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "subscription and service audits",
+  "objective": "Audit a fictional household’s recurring services against actual use, total what cancellation would recover, and express the recovery as a share of the whole outlay.",
+  "scenario": "The eight simulated services below, their prices, and the fictional household’s use of them are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional service list in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household pays for eight services. Seven are billed monthly: A at $15.99, B at $8.49, C at $22.00, D at $6.99, F at $11.99, G at $9.99, and H at $17.50. One, E, is billed once a year at $54.00. The household used A, C, E, and G in the last month. It has not used B, D, or F for most of the year. H duplicates what C already provides.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the seven monthly services cost in one month, together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do all eight services cost across a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now separate the services by whether they are used, and price what the audit could recover.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the three unused services — B, D, and F — cost across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the duplicate service H cost across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would cancelling all four recover in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total annual outlay does that recovery represent, to two decimal places?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Cancelling B, D, and F is straightforward. Cancelling H is a different kind of decision. Explain the difference, and say what the household should verify before cancelling H that it does not need to verify before cancelling the other three."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the annual total comes out as $1,115.40, the $54.00 annual service has been left out; if it comes out at $1,763.40, the $54.00 annual charge has been multiplied by 12 as well. Annualise each line on its own billing cycle: seven services at twelve charges each, and one service at a single charge.",
+  "extension": "Rank the eight services by annual cost rather than monthly price, and say which service the two orderings disagree about most.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the seven monthly services cost in one month, together?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do all eight services cost across a year?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the three unused services — B, D, and F — cost across a year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the duplicate service H cost across a year?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would cancelling all four recover in a year?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What share of the total annual outlay does that recovery represent, to two decimal places?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Cancelling B, D, and F is straightforward. Cancelling H is a different kind of decision. Explain the difference, and say what the household should verify before cancelling H that it does not need to verify before cancelling the other three."
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "CONSUMER_PROTECTION",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "GUIDED_APPLICATION",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.consumer_protection.1",
+      "meaning": "A safe consumer decision verifies the seller, total obligation, cancellation terms, privacy request, and remedy."
+    },
+    {
+      "conceptId": "finlit.consumer_protection.2",
+      "meaning": "Urgency, secrecy, guaranteed outcomes, and credential requests are warning signs rather than proof of value."
+    },
+    {
+      "conceptId": "finlit.consumer_protection.3",
+      "meaning": "A contract decision includes recurring costs and exit conditions, not only the first payment."
+    }
+  ],
+  "evidencePurpose": "Develop and apply consumer protection, contracts, privacy, and fraud through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "title": "Understand consumer protection, contracts, privacy, and fraud",
+    "paragraphs": [
+      "A safe consumer decision verifies the seller, total obligation, cancellation terms, privacy request, and remedy.",
+      "Urgency, secrecy, guaranteed outcomes, and credential requests are warning signs rather than proof of value. In this lesson, the learner uses the provided fictional facts about subscription and service audits; no real household information belongs in the work.",
+      "A contract decision includes recurring costs and exit conditions, not only the first payment. The usable process is: Pause and identify the claim. Verify through an independent trusted channel. Read total cost, renewal, cancellation, and data terms. Reject credential requests and document a safe next step."
+    ],
+    "relationship": [
+      "Pause and identify the claim.",
+      "Verify through an independent trusted channel.",
+      "Read total cost, renewal, cancellation, and data terms.",
+      "Reject credential requests and document a safe next step."
+    ],
+    "commonConfusion": "A professional-looking message or low introductory price does not verify identity, terms, or safety.",
+    "conditionsAndLimits": "Use only the stated fictional facts, time period, rate meaning, fees, taxes, timing, rounding, goals, and constraints. The result is education for this scenario, not individualized advice."
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "CONSUMER_PROTECTION",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "separationRule": "The model uses different fictional people, amounts, wording, and decision conditions from protected independent and mastery work."
+  },
+  "workedExamples": [
+    {
+      "exampleRef": "pd-r1-consumer_protection-g12",
+      "title": "Worked example — consumer protection, contracts, privacy, and fraud",
+      "fictionCue": "Every person, amount, product, institution, and rule in this example is invented for instruction.",
+      "facts": [
+        "A fictional message promises a guaranteed prize.",
+        "It demands a password within ten minutes.",
+        "The organization’s known website lists a different contact method."
+      ],
+      "goal": "Decide how the fictional recipient should respond.",
+      "relevantInformation": "Use only the listed fictional facts and conditions; do not substitute real household information.",
+      "method": "Pause and identify the claim. Verify through an independent trusted channel. Read total cost, renewal, cancellation, and data terms. Reject credential requests and document a safe next step.",
+      "steps": [
+        "Goal: protect information while verifying whether the claim is real.",
+        "Constraint: a password must never be shared; urgency is a warning sign.",
+        "Compare options: replying follows the unverified message, while using the known website creates an independent check.",
+        "Do not reply or click; preserve the message and verify through the known channel with a trusted adult."
+      ],
+      "interpretation": "The decision follows the verification and credential rules, not a guess about the sender’s appearance.",
+      "reasonablenessCheck": "Do not reply or click; preserve the message and verify through the known channel with a trusted adult.",
+      "tradeoff": "Pausing may delay a legitimate message, but it prevents an irreversible credential disclosure.",
+      "limits": "The conclusion applies only to the stated fictional facts. A changed rate, fee, time, rule, goal, constraint, or risk can change it.",
+      "calculationAuthority": "All USD calculations shown here are written as integer cents. Percent rates, when used, are integer basis points divided by 10,000; stated rounding is half up at the declared line only."
+    }
+  ],
+  "guidedPracticeContract": {
+    "applicability": "REQUIRED",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g12-financial-literacy-u02-l04",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: A professional-looking message or low introductory price does not verify identity, terms, or safety.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t3-p1"
+    ],
+    "gradeBandDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.consumer_protection.1",
+      "finlit.consumer_protection.2",
+      "finlit.consumer_protection.3"
+    ],
+    "evidenceLessonId": "ma-g12-financial-literacy-u02-l09",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.consumer_protection.core-confusion",
+      "observableSignal": "A professional-looking message or low introductory price does not verify identity, terms, or safety.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-consumer_protection-g12",
+        "title": "Alternate model — consumer protection, contracts, privacy, and fraud",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "A fictional subscription advertises $1.00 today, renews at $12.00 monthly, and requires cancellation three days before renewal."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Separate the introductory price from the recurring obligation.",
+          "Compute a three-month stated total: 100 + 1,200 + 1,200 = 2,500 cents.",
+          "Record the cancellation deadline before deciding.",
+          "Choose only if the total and exit terms fit the fictional goal."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g12-financial-literacy-u02-l07",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g12-financial-literacy-u02-l09",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.consumer_protection.1",
+      "finlit.consumer_protection.2",
+      "finlit.consumer_protection.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g12-financial-literacy-u02-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.consumer_protection.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "CONSUMER_PROTECTION",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g12-financial-literacy-u02-l04:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "HIGH_SCHOOL_9_12",
+      "scaffolding": "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+      "reasoningDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u02-l04.package.json",
+    "sourcePackageSha256": "b237486cd6a35274b6a902f6a6c0b694dcf092fdd7cebf69d800c378de4648b7",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u02-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

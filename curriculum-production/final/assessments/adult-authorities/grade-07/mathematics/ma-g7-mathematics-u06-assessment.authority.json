@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g7-mathematics-u06-assessment",
+  "courseRef": "ma-g7-mathematics",
+  "grade": 7,
+  "subject": "mathematics",
+  "authorityClass": "AUTO_SCOREABLE",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/mathematics/active/answer-keys/grade-07/ma-g7-mathematics-u06-l16.key.json",
+  "scoringSourceAuthority": {
+    "input": "sealed_1_0_0",
+    "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+    "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/mathematics/assessments.json"
+  },
+  "answerAuthorityRef": "repo:curriculum-production/final/mathematics/active/answer-keys/grade-07/ma-g7-mathematics-u06-l16.key.json",
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

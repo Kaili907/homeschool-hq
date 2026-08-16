@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l04",
+  "lessonId": "ma-g8-ready-for-life-u01-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "System construction",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The system has no real structure before day one, or day one's tasks are not real, current tasks."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A real structure is built before day one, populated with genuine current tasks."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The structure is built with a clear reason for the chosen format, matched to how the learner actually tends to work."
+          }
+        ]
+      },
+      {
+        "dimension": "Trial honesty and specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Daily log entries are generic ('it went fine,' 'it didn't work') across all three days."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each of the three days has a specific, concrete note on what worked and what broke down."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Entries are specific across all three days, and the reflection identifies a genuine, actionable change based on the pattern across days."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The three days described are consecutive and real, not compressed into a single sitting after the fact.",
+      "The 'what didn't work' notes name an actual mechanism (a missed step, a format mismatch) rather than restating that it was hard."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

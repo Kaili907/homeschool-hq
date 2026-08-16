@@ -1,0 +1,326 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l03",
+  "lessonId": "ma-g12-financial-literacy-u07-l03",
+  "integratedDomains": [
+    "income",
+    "taxes",
+    "saving-investing",
+    "insurance-risk",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": true,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,770.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,730 retirement election plus the $2,040 health premium. Both reduce taxable income; only the first remains the fictional adult’s own money."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$40,830.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$54,600 less the $4,770.00 of pre-tax elections and the $9,000 standard deduction. This figure sits below $44,000, so the 22% band is not reached this year."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,691.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,040.00 on the first $10,400 plus 12% of the remaining $30,430.00."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$7,043.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,176.90 of levy, $2,320.50 of state tax, and $546.00 of city tax, all charged on the full $54,600 because none of them takes the deduction or the pre-tax elections into account."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$11,735.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,691.60 of federal income tax plus $7,043.40 of the other three charges. The charges that get no deduction are larger together than the one that does."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$38,095.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$54,600 less $4,770.00 of pre-tax elections and $11,735.00 of tax. This is the figure every later capstone lesson builds on."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3,174.58",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$38,095.00 across 12 months. Against a headline salary of $4,550 a month, this is what the fictional adult can actually plan with."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "retire + healthPrem",
+        "substituted": "2730 + 2040",
+        "result": "$4,770.00",
+        "why": "The $2,730 retirement election plus the $2,040 health premium. Both reduce taxable income; only the first remains the fictional adult’s own money."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "gross - #t1-p1 - deduction",
+        "substituted": "54600 - #t1-p1 - 9000",
+        "result": "$40,830.00",
+        "why": "$54,600 less the $4,770.00 of pre-tax elections and the $9,000 standard deduction. This figure sits below $44,000, so the 22% band is not reached this year."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "band1 * lowRate + (#t1-p2 - band1) * midRate",
+        "substituted": "10400 * 0.1 + (#t1-p2 - 10400) * 0.12",
+        "result": "$4,691.60",
+        "why": "$1,040.00 on the first $10,400 plus 12% of the remaining $30,430.00."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "gross2 * levyRate + gross2 * stateRate + gross2 * cityRate",
+        "substituted": "54600 * 0.0765 + 54600 * 0.0425 + 54600 * 0.01",
+        "result": "$7,043.40",
+        "why": "$4,176.90 of levy, $2,320.50 of state tax, and $546.00 of city tax, all charged on the full $54,600 because none of them takes the deduction or the pre-tax elections into account."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 + #t2-p1",
+        "substituted": "#t1-p3 + #t2-p1",
+        "result": "$11,735.00",
+        "why": "$4,691.60 of federal income tax plus $7,043.40 of the other three charges. The charges that get no deduction are larger together than the one that does."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "gross3 - #t1-p1 - #t2-p2",
+        "substituted": "54600 - #t1-p1 - #t2-p2",
+        "result": "$38,095.00",
+        "why": "$54,600 less $4,770.00 of pre-tax elections and $11,735.00 of tax. This is the figure every later capstone lesson builds on."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p3 / 12, 2)",
+        "substituted": "round(#t2-p3 / 12, 2)",
+        "result": "$3,174.58",
+        "why": "$38,095.00 across 12 months. Against a headline salary of $4,550 a month, this is what the fictional adult can actually plan with."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Case R earns $54,600 and has $3,174.58 a month to work with. Write the opening entry of the capstone record: state what the year’s income actually makes available, name the largest single reduction and whether it is a cost or a transfer, and set out the one thing you would want to change about this starting position — with the reason it is worth changing and what changing it would cost.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States the position accurately: $54,600 of pay produces $38,095.00 of take-home, so roughly 30% of the headline figure never reaches the account, and $3,174.58 a month is the planning figure.",
+          "Identifies the largest reduction and classifies it correctly: tax at $11,735.00 is the largest and is a cost, while the $2,730 retirement election is a transfer the fictional adult still owns and the $2,040 health premium buys cover.",
+          "Names a change with a reason and a cost — for example raising the retirement election, which increases what is saved and reduces income tax but lowers monthly take-home, or reducing the health election, which raises take-home but changes cover.",
+          "Does not treat the whole $16,505.00 gap between pay and take-home as money lost."
+        ],
+        "evidenceRequirements": [
+          "Uses the $38,095.00 annual take-home and the $11,735.00 of total tax.",
+          "States what the proposed change would cost, in figures or in clearly named terms."
+        ],
+        "lookFors": [
+          "The response separates tax from elections rather than totalling everything between gross and take-home as deductions.",
+          "The proposed change is one the fictional adult could actually make, not a wish about the salary."
+        ],
+        "commonMisconception": "Reading everything between gross pay and take-home pay as tax, when in this case $4,770.00 of the gap is elections the fictional adult chose and largely still owns.",
+        "defensibleAlternatives": [
+          "Raise the retirement election, accepting lower monthly take-home in exchange for more saved and a smaller income tax bill.",
+          "Leave the elections as they are and treat the $3,174.58 as the figure to build the year around, on the grounds that the first year of independence needs cash flow more than it needs a higher contribution.",
+          "Reduce the health election if a lower-cost option genuinely covers the fictional adult’s needs, raising take-home while accepting a change in cover."
+        ],
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the two pre-tax amounts come to together?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is taxable income?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the federal income tax?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the payroll levy, state tax, and city tax come to together?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total tax for the year?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is take-home pay for the year, after both the pre-tax elections and all tax?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is monthly take-home pay?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Case R earns $54,600 and has $3,174.58 a month to work with. Write the opening entry of the capstone record: state what the year’s income actually makes available, name the largest single reduction and whether it is a cost or a transfer, and set out the one thing you would want to change about this starting position — with the reason it is worth changing and what changing it would cost."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the two pre-tax amounts come to together? Answer: $4,770.00. Verification: The $2,730 retirement election plus the $2,040 health premium. Both reduce taxable income; only the first remains the fictional adult’s own money. t1-p2: What is taxable income? Answer: $40,830.00. Verification: $54,600 less the $4,770.00 of pre-tax elections and the $9,000 standard deduction. This figure sits below $44,000, so the 22% band is not reached this year. t1-p3: What is the federal income tax? Answer: $4,691.60. Verification: $1,040.00 on the first $10,400 plus 12% of the remaining $30,430.00. t2-p1: What do the payroll levy, state tax, and city tax come to together? Answer: $7,043.40. Verification: $4,176.90 of levy, $2,320.50 of state tax, and $546.00 of city tax, all charged on the full $54,600 because none of them takes the deduction or the pre-tax elections into account. t2-p2: What is the total tax for the year? Answer: $11,735.00. Verification: $4,691.60 of federal income tax plus $7,043.40 of the other three charges. The charges that get no deduction are larger together than the one that does. t2-p3: What is take-home pay for the year, after both the pre-tax elections and all tax? Answer: $38,095.00. Verification: $54,600 less $4,770.00 of pre-tax elections and $11,735.00 of tax. This is the figure every later capstone lesson builds on. t2-p4: What is monthly take-home pay? Answer: $3,174.58. Verification: $38,095.00 across 12 months. Against a headline salary of $4,550 a month, this is what the fictional adult can actually plan with."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Case R earns $54,600 and has $3,174.58 a month to work with. Write the opening entry of the capstone record: state what the year’s income actually makes available, name the largest single reduction and whether it is a cost or a transfer, and set out the one thing you would want to change about this starting position — with the reason it is worth changing and what changing it would cost. States the position accurately: $54,600 of pay produces $38,095.00 of take-home, so roughly 30% of the headline figure never reaches the account, and $3,174.58 a month is the planning figure. Identifies the largest reduction and classifies it correctly: tax at $11,735.00 is the largest and is a cost, while the $2,730 retirement election is a transfer the fictional adult still owns and the $2,040 health premium buys cover. Names a change with a reason and a cost — for example raising the retirement election, which increases what is saved and reduces income tax but lowers monthly take-home, or reducing the health election, which raises take-home but changes cover. Does not treat the whole $16,505.00 gap between pay and take-home as money lost. Uses the $38,095.00 annual take-home and the $11,735.00 of total tax. States what the proposed change would cost, in figures or in clearly named terms. The response separates tax from elections rather than totalling everything between gross and take-home as deductions. The proposed change is one the fictional adult could actually make, not a wish about the salary."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States the position accurately: $54,600 of pay produces $38,095.00 of take-home, so roughly 30% of the headline figure never reaches the account, and $3,174.58 a month is the planning figure. Identifies the largest reduction and classifies it correctly: tax at $11,735.00 is the largest and is a cost, while the $2,730 retirement election is a transfer the fictional adult still owns and the $2,040 health premium buys cover. Names a change with a reason and a cost — for example raising the retirement election, which increases what is saved and reduces income tax but lowers monthly take-home, or reducing the health election, which raises take-home but changes cover. Does not treat the whole $16,505.00 gap between pay and take-home as money lost."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u07-l03.scoring.json",
+    "sourceScoringSha256": "9a522f8e668b1dc667017c308f332b13dc5624cb8775806ffd564eb605fda06b",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

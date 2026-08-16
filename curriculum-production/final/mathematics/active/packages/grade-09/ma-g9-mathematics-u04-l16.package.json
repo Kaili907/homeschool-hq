@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u04-l16",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u04-l16",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Systems of Linear Equations and Inequalities",
+    "dayInUnit": 16,
+    "courseDay": 70,
+    "phase": "Unit assessment",
+    "focus": "graphing half-planes as inequality solution sets",
+    "title": "Unit assessment: graphing half-planes as inequality solution sets"
+  },
+  "standards": [
+    "A-REI.5",
+    "A-REI.6",
+    "A-REI.12",
+    "MP.1"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 1,
+          "prompt": "Solve the system exactly:\n  1x − 3y = -4\n  1x + 4y = 10",
+          "choices": [
+            "(2, 3)",
+            "(3, 2)",
+            "(2, 2)",
+            "(-2, -2)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-system-solution-count",
+          "standard": "A-REI.6",
+          "difficulty": 1,
+          "prompt": "How many solutions does this system have?\n  -7x + 5y = 2\n  -6x + 5y = 5",
+          "choices": [
+            "exactly one solution",
+            "infinitely many solutions",
+            "no solution",
+            "exactly two solutions"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "half-plane-membership",
+          "standard": "A-REI.12",
+          "difficulty": 2,
+          "prompt": "Is the point (1, -3) in the solution region of -2x − 2y ≤ -2?",
+          "choices": [
+            "No; substituting gives 4, which is greater than -2.",
+            "Yes; substituting gives 4 ≤ -2.",
+            "The region cannot be tested without graphing it first.",
+            "Only points on the boundary line are in the solution region."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "linear-combination-equivalence",
+          "standard": "A-REI.5",
+          "difficulty": 2,
+          "prompt": "A student replaces the second equation of a system with (second equation) + 2 × (first equation). Which statement is correct?",
+          "choices": [
+            "The new system has exactly the same solution set, because the replacement step is reversible.",
+            "The new system may lose solutions that the original had.",
+            "The new system is equivalent only when 2 is 1.",
+            "The new system may gain solutions that the original did not have."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-substitution",
+          "standard": "A-REI.6",
+          "difficulty": 2,
+          "prompt": "Solve by substitution:\n  y = 1x − 9\n  -3x + 1y = -5",
+          "choices": [
+            "(-2, 7)",
+            "(-2, -11)",
+            "(-1, -11)",
+            "(-11, -2)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 2,
+          "prompt": "Solve the system exactly:\n  -1x − 6y = 10\n  2x − 5y = -3",
+          "choices": [
+            "(-3, -1)",
+            "(-4, -1)",
+            "(-1, -4)",
+            "(4, 1)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "classify-system-solution-count",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "How many solutions does this system have?\n  4x + 1y = -1\n  8x + 2y = 3",
+          "choices": [
+            "infinitely many solutions",
+            "no solution",
+            "exactly one solution",
+            "exactly two solutions"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "half-plane-membership",
+          "standard": "A-REI.12",
+          "difficulty": 3,
+          "prompt": "Is the point (8, -6) in the solution region of 2x − 4y ≤ 1?",
+          "choices": [
+            "Only points on the boundary line are in the solution region.",
+            "Yes; substituting gives 40 ≤ 1.",
+            "No; substituting gives 40, which is greater than 1.",
+            "The region cannot be tested without graphing it first."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "linear-combination-equivalence",
+          "standard": "A-REI.5",
+          "difficulty": 3,
+          "prompt": "A student replaces the second equation of a system with (second equation) + 4 × (first equation). Which statement is correct?",
+          "choices": [
+            "The new system is equivalent only when 4 is 1.",
+            "The new system may gain solutions that the original did not have.",
+            "The new system has exactly the same solution set, because the replacement step is reversible.",
+            "The new system may lose solutions that the original had."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-substitution",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "Solve by substitution:\n  y = -7x − 14\n  1x − 5y = 250",
+          "choices": [
+            "(5, -21)",
+            "(6, -49)",
+            "(5, -49)",
+            "(-49, 5)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "Solve the system exactly:\n  -4x + 6y = 10\n  -9x + 8y = -16",
+          "choices": [
+            "(9, 7)",
+            "(-8, -7)",
+            "(8, 7)",
+            "(7, 8)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "classify-system-solution-count",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "How many solutions does this system have?\n  -4x − 5y = -7\n  -3x − 5y = -4",
+          "choices": [
+            "exactly two solutions",
+            "no solution",
+            "infinitely many solutions",
+            "exactly one solution"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u04-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u04-l16"
+  }
+}

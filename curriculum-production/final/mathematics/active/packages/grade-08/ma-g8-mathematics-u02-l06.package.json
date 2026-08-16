@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u02-l06",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Integer Exponents and Scientific Notation",
+    "dayInUnit": 6,
+    "courseDay": 28,
+    "phase": "Guided practice B",
+    "focus": "measurement and technology applications",
+    "title": "Guided practice B: measurement and technology applications"
+  },
+  "standards": [
+    "8.EE.1",
+    "8.EE.3",
+    "8.EE.4"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u02-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "exponent-error-analysis",
+          "standard": "8.EE.1",
+          "difficulty": 1,
+          "prompt": "A student simplifies 2^3 × 2^4 as 2^12. Which statement best analyzes the error?",
+          "workedSolution": {
+            "steps": [
+              "Multiplying like bases adds the exponents, it does not multiply them.",
+              "3 + 4 = 7."
+            ],
+            "answer": "The exponents should be added, not multiplied: 3 + 4 = 7, so the product is 2^7."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u02-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "scientific-notation-error-analysis",
+          "standard": "8.EE.4",
+          "difficulty": 2,
+          "prompt": "A student multiplies (6 × 10^-2) × (7 × 10^-3) and writes 42 × 10^-5. Which statement best analyzes the claim?",
+          "choices": [
+            "The coefficients should have been added, not multiplied: 13 × 10^-5.",
+            "The claim is correct and already in scientific notation.",
+            "The exponents should have been multiplied: 42 × 10^6.",
+            "The value is correct but not in scientific notation; 42 × 10^-5 should be rewritten as 4.2 × 10^-4."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-integer-exponent",
+          "standard": "8.EE.1",
+          "difficulty": 2,
+          "prompt": "Evaluate 6^-2.",
+          "choices": [
+            "-36",
+            "36",
+            "1/12",
+            "1/36"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "combine-powers",
+          "standard": "8.EE.1",
+          "difficulty": 3,
+          "prompt": "Simplify 3^-3 × 3^7.",
+          "choices": [
+            "3^3",
+            "3^4",
+            "3^-21",
+            "3^-10"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "power-of-a-power",
+          "standard": "8.EE.1",
+          "difficulty": 3,
+          "prompt": "Simplify (4^5)^5.",
+          "choices": [
+            "4^25",
+            "4^5",
+            "4^27",
+            "4^26"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u02-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-power-of-ten",
+          "standard": "8.EE.1",
+          "difficulty": 2,
+          "prompt": "Evaluate 10^-3.",
+          "choices": [
+            "-30",
+            "1000",
+            "0.001",
+            "0.01"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-powers-of-ten",
+          "standard": "8.EE.1",
+          "difficulty": 3,
+          "prompt": "10^-1 is how many times as large as 10^-4?",
+          "choices": [
+            "100",
+            "1000",
+            "0.00001",
+            "0.001"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-scientific-notation",
+          "standard": "8.EE.3",
+          "difficulty": 3,
+          "prompt": "Write 2.6 × 10^-4 in standard form.",
+          "choices": [
+            "0.026",
+            "26000",
+            "0.00026",
+            "0.0026"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-scientific-notation",
+          "standard": "8.EE.3",
+          "difficulty": 3,
+          "prompt": "Compare 4.7 × 10^-7 and 4.4 × 10^-7.",
+          "choices": [
+            "4.7 × 10^-7 > 4.4 × 10^-7",
+            "4.7 × 10^-7 = 4.4 × 10^-7",
+            "cannot be compared without a calculator",
+            "4.7 × 10^-7 < 4.4 × 10^-7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u02-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "operate-scientific-notation",
+          "standard": "8.EE.4",
+          "difficulty": 3,
+          "prompt": "Multiply (9 × 10^6) × (1 × 10^-1) and write the result in scientific notation.",
+          "choices": [
+            "9 × 10^7",
+            "9 × 10^4",
+            "9 × 10^6",
+            "9 × 10^5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "scientific-notation-word-problem",
+          "standard": "8.EE.4",
+          "difficulty": 3,
+          "prompt": "A processor performs 9 × 10^8 operations per second. How many operations does it perform in 7 × 10^6 seconds? Write the answer in scientific notation.",
+          "choices": [
+            "6.3 × 10^2",
+            "6.3 × 10^16",
+            "6.3 × 10^14",
+            "6.3 × 10^15"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u02-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u02-l06"
+  }
+}

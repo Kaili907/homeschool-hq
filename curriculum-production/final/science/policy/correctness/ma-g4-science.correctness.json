@@ -1,0 +1,1021 @@
+{
+  "course_id": "ma-g4-science",
+  "source_commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+  "authored_against": "Grade 4 science, elementary band. Keys state established science at this grade band; they are not extracted from the source, which states only a focus and generic objectives.",
+  "topics": [
+    {
+      "unit": 1,
+      "focus": "careful observations",
+      "fixed_facts": [],
+      "relationships": [
+        "An observation is information taken in directly, through the senses or through an instrument.",
+        "An inference goes beyond the observation to say what it might mean, and the same observation can support more than one inference.",
+        "Observations recorded as they are made are more trustworthy than ones written up from memory afterwards."
+      ],
+      "accepted_alternative_framings": [
+        "Qualitative and quantitative, or words and numbers, are both correct ways to sort observations."
+      ],
+      "disqualifying_errors": [
+        "Recording an inference as an observation, such as 'the circuit is broken' instead of 'the bulb did not light'.",
+        "Treating an opinion about what happened as data.",
+        "Claiming an observation is only valid if an instrument was used."
+      ],
+      "out_of_scope": "Measurement uncertainty, calibration, and statistical treatment of repeats are later grades and must not be required here."
+    },
+    {
+      "unit": 1,
+      "focus": "testable questions",
+      "fixed_facts": [],
+      "relationships": [
+        "A testable question can be answered by making observations or by doing something and seeing what happens.",
+        "A testable question names what will be changed or examined and what will be observed or measured.",
+        "A question that no possible observation could settle is not testable, however interesting it is."
+      ],
+      "accepted_alternative_framings": [
+        "Comparison questions, cause questions, and 'what happens if' questions are all testable forms."
+      ],
+      "disqualifying_errors": [
+        "Calling a question testable when no observation could answer it.",
+        "Claiming a question has to start with 'why' to count as scientific.",
+        "Confusing a question that is looked up in a source with one the learner tested."
+      ],
+      "out_of_scope": "Naming independent and dependent variables formally, and writing hypotheses in if-then form, are later work."
+    },
+    {
+      "unit": 1,
+      "focus": "models and diagrams",
+      "fixed_facts": [],
+      "relationships": [
+        "A model or diagram represents something in order to explain or predict how it behaves.",
+        "Every model simplifies, and what it leaves out is a limitation to be stated rather than hidden.",
+        "A diagram's labels and arrows carry meaning; an unlabelled diagram does not communicate a model."
+      ],
+      "accepted_alternative_framings": [
+        "A labelled drawing, a flow diagram, a physical build, and an acted sequence are all legitimate models here."
+      ],
+      "disqualifying_errors": [
+        "Claiming a model has to look like the real thing to be good.",
+        "Claiming a good model has no limitations.",
+        "Judging a diagram on neatness rather than on what it explains."
+      ],
+      "out_of_scope": "Mathematical and computational modelling is later work."
+    },
+    {
+      "unit": 1,
+      "focus": "fair tests",
+      "fixed_facts": [
+        "In a fair test only one thing is changed on purpose; everything else that could affect the result is held the same."
+      ],
+      "relationships": [
+        "In a fair test one thing is changed on purpose and everything else that could affect the result is held the same.",
+        "If two things change at once, the result cannot be attributed to either one.",
+        "Repeating a test and getting a similar result gives more confidence than a single trial does."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Calling a test fair when more than one condition was changed.",
+        "Treating one trial as proof.",
+        "Treating a result that disagrees with the prediction as a failed test rather than as evidence."
+      ],
+      "out_of_scope": "Control groups by name, randomisation, and sample-size reasoning are later work."
+    },
+    {
+      "unit": 1,
+      "focus": "measuring and recording data",
+      "fixed_facts": [
+        "A measurement is incomplete without its unit."
+      ],
+      "relationships": [
+        "A measurement has a number and a unit, and both are needed for it to mean anything.",
+        "Repeated measurements of the same quantity usually differ a little; that spread is information about the method, not a mistake to hide.",
+        "A labelled table lets values be compared; scattered notes usually do not."
+      ],
+      "accepted_alternative_framings": [
+        "Metric or customary units are both acceptable if one system is used consistently within a comparison."
+      ],
+      "disqualifying_errors": [
+        "Recording a number with no unit and calling the measurement complete.",
+        "Altering a recorded value so it agrees with a prediction or with another trial.",
+        "Claiming more decimal places automatically means a better measurement."
+      ],
+      "out_of_scope": "Significant figures, uncertainty ranges, and error propagation are later work."
+    },
+    {
+      "unit": 1,
+      "focus": "criteria and constraints",
+      "fixed_facts": [],
+      "relationships": [
+        "Criteria are what a successful solution has to achieve; constraints are the limits it has to work within, including materials, cost, time, and safety.",
+        "Criteria and constraints are stated before solutions are generated, so every solution is judged the same way.",
+        "A solution that breaks a constraint has not solved the problem, however well it meets the criteria."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating criteria and constraints as the same thing.",
+        "Declaring a design best without stating what it was judged against.",
+        "Adding or dropping a criterion after testing so a preferred design wins."
+      ],
+      "out_of_scope": "Weighted trade-off matrices and formal optimisation are later work."
+    },
+
+    {
+      "unit": 2,
+      "focus": "energy of motion",
+      "fixed_facts": [
+        "A moving object has energy of motion; a faster-moving object of the same mass has more of it."
+      ],
+      "relationships": [
+        "Any moving object has energy because of its motion.",
+        "For objects of the same mass, the faster one has more energy of motion.",
+        "For objects moving at the same speed, the more massive one has more energy of motion."
+      ],
+      "accepted_alternative_framings": [
+        "'Energy of motion' and 'kinetic energy' are the same idea; either name is correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming a moving object has no energy until it hits something.",
+        "Claiming energy of motion depends on speed alone, with mass making no difference.",
+        "Claiming an object stores up force as it moves."
+      ],
+      "out_of_scope": "The relationship that energy of motion goes with the square of the speed, and any energy formula, are later work; a learner who states it correctly is not wrong."
+    },
+    {
+      "unit": 2,
+      "focus": "speed and energy",
+      "fixed_facts": [],
+      "relationships": [
+        "Speed describes how far an object travels in a given time.",
+        "Increasing an object's speed increases its energy of motion.",
+        "Energy has to be transferred to an object to speed it up, and away from it to slow it down."
+      ],
+      "accepted_alternative_framings": [
+        "Describing speed in words, as a distance per time, or by comparison between two objects are all acceptable at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming an object speeds up or slows down without any energy transfer.",
+        "Claiming that speed and energy are the same quantity.",
+        "Comparing speeds measured over different distances or times without saying so."
+      ],
+      "out_of_scope": "Calculating speed as distance divided by time is acceptable but not required; acceleration is later work."
+    },
+    {
+      "unit": 2,
+      "focus": "evidence and explanation",
+      "fixed_facts": [],
+      "relationships": [
+        "An explanation says how or why something happens; evidence is the recorded observation or measurement that supports it.",
+        "An explanation is only as strong as the evidence tied to it.",
+        "Evidence that does not bear on the claim does not support it, however carefully it was collected."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a claim with no evidence and calling it an explanation.",
+        "Offering evidence that does not bear on the claim being made.",
+        "Treating a confident statement as though it were evidence."
+      ],
+      "out_of_scope": "Formal claim-evidence-reasoning terminology and rebuttal structure are later work."
+    },
+    {
+      "unit": 2,
+      "focus": "collisions",
+      "fixed_facts": [
+        "In a collision, energy is transferred between the colliding objects and into sound, heat, and deformation."
+      ],
+      "relationships": [
+        "When objects collide, energy is transferred from one object to the other.",
+        "Some of the energy in a collision is transferred to sound, to warming, and to changing the shape of the objects.",
+        "A faster collision transfers more energy, which is why faster collisions do more damage."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming energy disappears in a collision.",
+        "Claiming a collision creates new energy.",
+        "Claiming the heavier object always transfers energy and never receives any."
+      ],
+      "out_of_scope": "Momentum, elastic versus inelastic collisions, and conservation calculations are Grade 8 and High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "predicting outcomes",
+      "fixed_facts": [],
+      "relationships": [
+        "A prediction about a collision or a motion is based on a pattern established by earlier observation.",
+        "A prediction is stated before the test; a statement made afterwards is an explanation.",
+        "A prediction that turns out wrong is useful evidence and is recorded exactly as it was made."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Changing a recorded prediction after seeing the result.",
+        "Predicting for conditions the observed pattern never covered.",
+        "Claiming a prediction is certain rather than expected."
+      ],
+      "out_of_scope": "Quantitative prediction from equations is later work."
+    },
+    {
+      "unit": 2,
+      "focus": "asking scientific questions",
+      "fixed_facts": [],
+      "relationships": [
+        "A scientific question about energy names what would be changed and what would be observed or measured.",
+        "Good questions often come from something that does not fit an existing explanation.",
+        "A question that cannot be answered by any observation is not a scientific question, whatever else it is."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Framing a preference or a value judgement as a scientific question.",
+        "Asking a question with no observable outcome and calling it testable.",
+        "Claiming a question is unscientific merely because it is simple."
+      ],
+      "out_of_scope": "Operational definitions and formal variable naming are later work."
+    },
+
+    {
+      "unit": 3,
+      "focus": "sound energy",
+      "fixed_facts": [
+        "Sound is produced by vibrating matter and needs matter to travel through."
+      ],
+      "relationships": [
+        "Sound is produced when matter vibrates, and the vibration passes through the material around it.",
+        "Sound travels through solids, liquids, and gases; it cannot travel through empty space.",
+        "A larger vibration carries more energy and is heard as a louder sound."
+      ],
+      "accepted_alternative_framings": [
+        "Describing sound as a vibration passing through matter, or as a wave in matter, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming sound travels through a vacuum.",
+        "Claiming sound is made without anything vibrating.",
+        "Claiming loudness comes from how fast the sound travels."
+      ],
+      "out_of_scope": "Frequency and pitch as a formal relationship, the speed of sound in named materials, and wave equations are later work."
+    },
+    {
+      "unit": 3,
+      "focus": "light energy",
+      "fixed_facts": [
+        "Light travels from a source, and it travels in straight lines until something changes its path."
+      ],
+      "relationships": [
+        "Light carries energy away from a source such as the Sun, a flame, or a lamp.",
+        "Light travels in straight lines until it is reflected, absorbed, or bent by a material.",
+        "Light that is absorbed by a material transfers energy to it, which is why dark surfaces in sunlight warm up."
+      ],
+      "accepted_alternative_framings": [
+        "Describing light as rays or as beams are both acceptable representations at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming light comes out of the eye to make objects visible.",
+        "Claiming light bends around ordinary opaque objects so you can see behind them.",
+        "Claiming a mirror creates light rather than reflecting it."
+      ],
+      "out_of_scope": "The wave and particle models of light, the speed of light, and the electromagnetic spectrum are later work."
+    },
+    {
+      "unit": 3,
+      "focus": "heat transfer",
+      "fixed_facts": [
+        "Energy moves from the warmer object to the cooler one, never the other way on its own."
+      ],
+      "relationships": [
+        "When two objects at different temperatures touch, energy moves from the warmer one to the cooler one.",
+        "Transfer continues until the two objects reach the same temperature.",
+        "Some materials transfer energy quickly and others slowly, which is what makes insulators useful."
+      ],
+      "accepted_alternative_framings": [
+        "Saying energy is transferred, or that heat flows, are both acceptable at this grade provided the direction is right."
+      ],
+      "disqualifying_errors": [
+        "Claiming cold moves into a warm object; only energy moves, and it moves from warmer to cooler.",
+        "Claiming an insulator produces warmth rather than slowing transfer.",
+        "Claiming a material feels colder because it is at a lower temperature than the air around it, when it is the rate of transfer that differs."
+      ],
+      "out_of_scope": "Conduction, convection, and radiation as named mechanisms, and specific heat capacity, are Grade 7 and later work."
+    },
+    {
+      "unit": 3,
+      "focus": "electric currents",
+      "fixed_facts": [
+        "An electric current needs a complete, unbroken loop from one terminal of the source back to the other."
+      ],
+      "relationships": [
+        "Energy can be transferred from place to place by electric currents.",
+        "A current flows only in a complete circuit; a break anywhere stops it everywhere in that loop.",
+        "A device in a circuit converts the energy delivered to it into another form, such as light, sound, motion, or warmth."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the circuit as a loop, a path, or a closed circuit are all correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming a bulb lights with a wire on only one terminal of the battery.",
+        "Claiming a battery stores current rather than storing energy.",
+        "Claiming current is used up as it goes round the circuit so less returns to the battery."
+      ],
+      "out_of_scope": "Voltage, resistance, series and parallel analysis, and Ohm's law are later work."
+    },
+    {
+      "unit": 3,
+      "focus": "observing transfer",
+      "fixed_facts": [],
+      "relationships": [
+        "Energy transfer is observed through its effects: something moves, warms, lights up, makes sound, or changes shape.",
+        "Observing an effect is evidence that energy was transferred, not a direct sight of the energy itself.",
+        "The same transfer can often be detected by more than one effect, and agreement between them strengthens the evidence."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming energy itself was seen or held.",
+        "Claiming no transfer happened because no effect was looked for.",
+        "Treating a single ambiguous effect as proof of a particular transfer path."
+      ],
+      "out_of_scope": "Quantifying energy transferred, and efficiency calculations, are later work."
+    },
+    {
+      "unit": 3,
+      "focus": "tracing energy paths",
+      "fixed_facts": [],
+      "relationships": [
+        "Energy can be traced from a source, through transfers, to where it ends up.",
+        "At every step some energy is transferred to the surroundings, usually as warming, and that step belongs in the trace.",
+        "A complete trace names the source, each transfer, and the final form."
+      ],
+      "accepted_alternative_framings": [
+        "An arrow diagram, a labelled sequence, or a written account are all valid ways to show the path."
+      ],
+      "disqualifying_errors": [
+        "Showing energy appearing partway along the path with no source.",
+        "Showing energy vanishing at the end of the path rather than being transferred to the surroundings.",
+        "Claiming a device creates the energy it delivers."
+      ],
+      "out_of_scope": "Quantitative energy accounting and named efficiency figures are later work."
+    },
+
+    {
+      "unit": 4,
+      "focus": "energy conversion",
+      "fixed_facts": [
+        "Energy is not created or destroyed by a device; it is converted from one form to another."
+      ],
+      "relationships": [
+        "A device converts energy from one form to another, such as electrical to light, or motion to sound.",
+        "No device converts all the energy it receives into the form that is wanted; some always ends up warming the surroundings.",
+        "The energy a device delivers comes from a source, never from the device itself."
+      ],
+      "accepted_alternative_framings": [
+        "Saying energy is converted, transformed, or changed in form are all correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming a device creates energy.",
+        "Claiming a device converts all of its input into the useful output.",
+        "Claiming energy is destroyed when a device stops working."
+      ],
+      "out_of_scope": "Numerical efficiency, the conservation law stated formally, and the second law are later work."
+    },
+    {
+      "unit": 4,
+      "focus": "design criteria",
+      "fixed_facts": [],
+      "relationships": [
+        "Design criteria state what the converter has to achieve, in terms that can actually be checked.",
+        "A criterion that cannot be tested cannot be used to judge the design.",
+        "Safety limits are constraints, and they are not traded away for better performance."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Writing a criterion so vague that no test could settle whether it was met.",
+        "Treating a safety limit as negotiable.",
+        "Judging the design against criteria written after the test."
+      ],
+      "out_of_scope": "Formal requirements specification and engineering standards are later work."
+    },
+    {
+      "unit": 4,
+      "focus": "generating solutions",
+      "fixed_facts": [],
+      "relationships": [
+        "More than one design can meet the same criteria, and generating several before choosing gives a better chance of a good one.",
+        "Comparing alternatives is only meaningful when they are judged against the same criteria.",
+        "An idea that fails a constraint is eliminated at this stage, not tested and then rejected."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Committing to the first idea and calling the comparison done.",
+        "Comparing two designs against different criteria.",
+        "Keeping a design that breaks a stated constraint because it performs well otherwise."
+      ],
+      "out_of_scope": "Structured ideation methods and decision matrices are later work."
+    },
+    {
+      "unit": 4,
+      "focus": "building a device",
+      "fixed_facts": [],
+      "relationships": [
+        "A build follows the design, and any departure from the design is recorded as it happens.",
+        "The device that is tested is the device that was built, not the one that was drawn.",
+        "A build that cannot be described well enough for someone else to repeat it cannot be evaluated properly."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Reporting the intended design rather than what was actually built.",
+        "Leaving out a change made during the build that affected the result.",
+        "Claiming a result for a device that was never completed."
+      ],
+      "out_of_scope": "Tolerances, materials specification, and formal build documentation are later work."
+    },
+    {
+      "unit": 4,
+      "focus": "testing and refining",
+      "fixed_facts": [],
+      "relationships": [
+        "A test changes one thing at a time so an improvement can be attributed to a particular change.",
+        "A failed test is evidence about the design and is the normal route to a better one.",
+        "Refinement is judged against the original criteria, not against how much effort the change took."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Changing several things between tests and crediting the improvement to one of them.",
+        "Discarding a test result because it was disappointing.",
+        "Declaring the design improved without retesting it against the criteria."
+      ],
+      "out_of_scope": "Statistical comparison of design variants is later work."
+    },
+    {
+      "unit": 4,
+      "focus": "comparing designs",
+      "fixed_facts": [],
+      "relationships": [
+        "Designs are compared against the same criteria and constraints, using the same test.",
+        "A design can win on one criterion and lose on another, and an honest comparison reports both.",
+        "The comparison reports what the tests showed, not what the designer hoped."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Naming a winner without saying what the criteria were.",
+        "Testing two designs under different conditions and comparing the results.",
+        "Omitting a criterion on which the preferred design performed badly."
+      ],
+      "out_of_scope": "Weighted scoring and formal trade studies are later work."
+    },
+
+    {
+      "unit": 5,
+      "focus": "wave patterns",
+      "fixed_facts": [
+        "A wave transfers energy from place to place without transporting the material it travels through."
+      ],
+      "relationships": [
+        "Waves are regular repeating patterns of motion that transfer energy from one place to another.",
+        "The material a wave travels through moves back and forth about its resting position; it is not carried along with the wave.",
+        "Waves can be described by their amplitude and their wavelength."
+      ],
+      "accepted_alternative_framings": [
+        "Describing a wave by a diagram, by a demonstration with a rope or spring, or in words are all acceptable."
+      ],
+      "disqualifying_errors": [
+        "Claiming a wave carries the water or the rope along with it.",
+        "Claiming a wave transfers matter rather than energy.",
+        "Claiming a single pulse with no repetition shows a wavelength."
+      ],
+      "out_of_scope": "The frequency-wavelength-speed relationship, and wave equations, are Grade 8 and High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "amplitude",
+      "fixed_facts": [
+        "Amplitude is the height of a wave from its resting position, and a larger amplitude carries more energy."
+      ],
+      "relationships": [
+        "Amplitude is measured from the resting position to the crest, not from trough to crest.",
+        "A wave with larger amplitude carries more energy than an otherwise identical wave with smaller amplitude.",
+        "In sound, larger amplitude is heard as louder; in water, larger amplitude is a taller wave."
+      ],
+      "accepted_alternative_framings": [
+        "Describing amplitude as wave height above rest, or as how far the material moves from rest, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Confusing amplitude with wavelength.",
+        "Claiming amplitude sets the pitch of a sound.",
+        "Measuring amplitude from trough to crest and reporting it as the amplitude."
+      ],
+      "out_of_scope": "The relationship between energy and the square of the amplitude is later work."
+    },
+    {
+      "unit": 5,
+      "focus": "wavelength",
+      "fixed_facts": [
+        "Wavelength is the distance from one point on a wave to the matching point on the next wave, such as crest to crest."
+      ],
+      "relationships": [
+        "Wavelength is the distance from a point on one wave to the matching point on the next.",
+        "Wavelength and amplitude are independent: changing one does not force the other to change.",
+        "Wavelength is a distance and is reported with a length unit."
+      ],
+      "accepted_alternative_framings": [
+        "Crest-to-crest and trough-to-trough both give the wavelength."
+      ],
+      "disqualifying_errors": [
+        "Confusing wavelength with amplitude.",
+        "Reporting a wavelength with no length unit.",
+        "Claiming a taller wave must have a longer wavelength."
+      ],
+      "out_of_scope": "Frequency, period, and the wave speed relationship are Grade 8 and High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "waves and motion",
+      "fixed_facts": [],
+      "relationships": [
+        "A wave can make an object in its path move, because it transfers energy to that object.",
+        "An object floating on water bobs up and down as waves pass; it is not carried along by them.",
+        "A wave with more energy makes a larger motion in the object it reaches."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a floating object is carried forward by each passing wave.",
+        "Claiming a wave moves an object without transferring energy to it.",
+        "Claiming the object's motion is unrelated to the wave's amplitude."
+      ],
+      "out_of_scope": "Wave-particle interaction models and orbital water motion are later work."
+    },
+    {
+      "unit": 5,
+      "focus": "patterns that carry information",
+      "fixed_facts": [],
+      "relationships": [
+        "Patterns can be used to send information: a code of light flashes, sounds, or marks stands for something the sender and receiver agree on.",
+        "Information is carried by the pattern, not by the material; the same message can be sent as light, sound, or writing.",
+        "A receiver can only recover the message if it knows the code the sender used."
+      ],
+      "accepted_alternative_framings": [
+        "Morse code, flag signals, drumbeats, and binary patterns are all correct examples."
+      ],
+      "disqualifying_errors": [
+        "Claiming information travels without any physical carrier.",
+        "Claiming a pattern carries meaning on its own, without an agreed code.",
+        "Claiming a message cannot be converted from one carrier to another."
+      ],
+      "out_of_scope": "Digital versus analog encoding, bandwidth, and error correction are Grade 8 and High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "comparing communication solutions",
+      "fixed_facts": [],
+      "relationships": [
+        "Communication solutions are compared on how reliably, how far, and how quickly they carry the message, and on what they cost or require.",
+        "A solution that works well in one setting can fail in another, so the setting is part of the comparison.",
+        "The comparison uses the same criteria for every option."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Declaring one method best without naming the criteria or the setting.",
+        "Ignoring a failure mode because it did not appear in the one test run.",
+        "Comparing options that were tested under different conditions."
+      ],
+      "out_of_scope": "Signal-to-noise reasoning and quantitative reliability are later work."
+    },
+
+    {
+      "unit": 6,
+      "focus": "light reflection",
+      "fixed_facts": [
+        "An object is seen when light reflected from it enters the eye."
+      ],
+      "relationships": [
+        "Light bounces off surfaces, and that bouncing is reflection.",
+        "A smooth surface reflects light in a regular way and gives an image; a rough surface scatters it in many directions and does not.",
+        "An object that gives out no light of its own is seen only because light from a source reflects off it."
+      ],
+      "accepted_alternative_framings": [
+        "Saying light bounces, reflects, or is scattered are all acceptable at this grade provided the direction of travel is right."
+      ],
+      "disqualifying_errors": [
+        "Claiming the eye sends out light to see objects.",
+        "Claiming a non-luminous object can be seen in complete darkness.",
+        "Claiming a mirror makes its own light."
+      ],
+      "out_of_scope": "The law of reflection stated with angles, refraction, and image formation are later work."
+    },
+    {
+      "unit": 6,
+      "focus": "how we see",
+      "fixed_facts": [
+        "Seeing requires light travelling from a source, reflecting off the object, and entering the eye."
+      ],
+      "relationships": [
+        "Light from a source reflects off an object, enters the eye, and is detected there.",
+        "The eye detects the light; the brain interprets the signal as an image.",
+        "Without light entering the eye, nothing is seen, however close or large the object is."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming vision works by the eye reaching out to the object.",
+        "Claiming an object is visible in a completely dark room once the eyes adjust.",
+        "Claiming the eye forms the perception without the brain."
+      ],
+      "out_of_scope": "Lens optics, the retina and its cell types, and colour vision mechanisms are later work."
+    },
+    {
+      "unit": 6,
+      "focus": "modeling light paths",
+      "fixed_facts": [],
+      "relationships": [
+        "Light paths are modelled with straight arrows that start at the source and point in the direction the light travels.",
+        "A complete model of seeing shows the path source, object, eye, in that order.",
+        "The arrows are a model of the path; they are not something visible in the room."
+      ],
+      "accepted_alternative_framings": [
+        "Ray diagrams drawn with lines or with arrows are both acceptable, provided direction is shown."
+      ],
+      "disqualifying_errors": [
+        "Drawing arrows from the eye to the object.",
+        "Drawing light travelling in curves around an obstacle.",
+        "Omitting the source from the path and starting at the object."
+      ],
+      "out_of_scope": "Scale ray diagrams, angles of incidence and reflection, and lens ray tracing are later work."
+    },
+    {
+      "unit": 6,
+      "focus": "senses and information",
+      "fixed_facts": [],
+      "relationships": [
+        "Animals take in information about their surroundings through sense receptors: eyes, ears, skin, nose, and tongue.",
+        "Each kind of receptor responds to a particular kind of input, such as light, sound, pressure, or chemicals.",
+        "The information is sent from the receptor to the brain as signals."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the sense organ or the kind of input it responds to are both acceptable ways to answer here."
+      ],
+      "disqualifying_errors": [
+        "Claiming one receptor responds equally to every kind of input.",
+        "Claiming the sense organ decides what to do without the brain.",
+        "Claiming an animal responds to information it has no receptor for."
+      ],
+      "out_of_scope": "Neurons, synapses, and signal transduction are Grade 7 and High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "the brain and response",
+      "fixed_facts": [],
+      "relationships": [
+        "Information from the senses is processed in the brain, which is what leads to a response.",
+        "A response can be immediate action, or storing the information as memory for later.",
+        "Different animals respond differently to the same information, because their bodies and behaviours differ."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the response happens in the sense organ with no processing.",
+        "Claiming memory is stored in the sense organ.",
+        "Claiming every animal must respond identically to the same input."
+      ],
+      "out_of_scope": "Named brain regions, reflex arcs, and neurotransmission are later work."
+    },
+    {
+      "unit": 6,
+      "focus": "modeling information processing",
+      "fixed_facts": [],
+      "relationships": [
+        "A model of information processing shows input, processing, and response as distinct stages.",
+        "The model shows the direction of flow, from receptor to brain to response.",
+        "A model that omits the processing stage cannot explain why responses differ between animals or situations."
+      ],
+      "accepted_alternative_framings": [
+        "Flow diagrams, labelled drawings, and written sequences are all acceptable model forms."
+      ],
+      "disqualifying_errors": [
+        "Drawing a model that runs from response back to input as the normal direction.",
+        "Leaving out the processing stage and calling the model complete.",
+        "Claiming the model shows what actually happens inside the brain in detail."
+      ],
+      "out_of_scope": "Neural circuitry and computational models of cognition are later work."
+    },
+
+    {
+      "unit": 7,
+      "focus": "external structures",
+      "fixed_facts": [],
+      "relationships": [
+        "Plants and animals have external structures, such as leaves, thorns, fur, claws, shells, and scales, that support survival, growth, behaviour, and reproduction.",
+        "A structure supports survival by doing something specific: protecting, capturing, moving, sensing, or attracting.",
+        "The same kind of structure can serve different functions in different organisms."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a structure exists because the organism wanted or needed it.",
+        "Naming a structure without saying what it does for the organism.",
+        "Claiming every external structure has exactly one function."
+      ],
+      "out_of_scope": "Evolutionary explanation of how structures arose is Grade 8 and High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "internal structures",
+      "fixed_facts": [],
+      "relationships": [
+        "Internal structures such as bones, hearts, lungs, stomachs, roots, and stems support survival, growth, behaviour, and reproduction.",
+        "Internal and external structures work together; neither functions alone.",
+        "An internal structure's function can be inferred from where it is and what it connects to, and then checked against evidence."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming internal structures matter only to animals and not to plants.",
+        "Claiming a structure has a function without any evidence for it.",
+        "Claiming internal structures work independently of the rest of the organism."
+      ],
+      "out_of_scope": "Cells, tissues, and organ systems as a hierarchy are Grade 7 and High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "structure and function",
+      "fixed_facts": [],
+      "relationships": [
+        "A structure's shape and material relate to what it does; this is the structure-function relationship.",
+        "Changing the structure changes what it can do.",
+        "Similar functions in different organisms are often carried out by structures that are built differently."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming structure and function are unrelated.",
+        "Claiming organisms with the same function must have the same structure.",
+        "Claiming a structure changes during an organism's life to fit a new function it needs."
+      ],
+      "out_of_scope": "Adaptation as an evolutionary process, and convergent evolution, are later work."
+    },
+    {
+      "unit": 7,
+      "focus": "plant structures",
+      "fixed_facts": [
+        "Roots take in water and dissolved minerals; leaves are where the plant makes its food."
+      ],
+      "relationships": [
+        "Roots anchor the plant and take in water and dissolved minerals from the soil.",
+        "Stems support the plant and carry water and food between roots and leaves.",
+        "Leaves are where the plant makes its own food, using light."
+      ],
+      "accepted_alternative_framings": [
+        "Saying leaves make food using light from the Sun, or that they carry out photosynthesis, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming plants take in ready-made food from the soil.",
+        "Claiming roots make the plant's food.",
+        "Claiming a plant does not need light if it has enough water and soil."
+      ],
+      "out_of_scope": "The chemistry of photosynthesis, xylem and phloem by name, and gas exchange detail are Grade 7 and High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "animal structures",
+      "fixed_facts": [],
+      "relationships": [
+        "Animal structures support taking in food and water, moving, sensing, protecting, and reproducing.",
+        "A structure that supports one function often constrains another, such as heavy armour limiting speed.",
+        "Structures that look alike can serve different functions in different animals, and structures that look different can serve the same one."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a structure is present for no function at all without evidence.",
+        "Claiming an animal grew a structure because it needed one.",
+        "Claiming structures never involve trade-offs."
+      ],
+      "out_of_scope": "Homology, analogy, and evolutionary relationship are Grade 8 and High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "evidence-based arguments",
+      "fixed_facts": [],
+      "relationships": [
+        "An argument about structure and function states a claim, cites observed evidence, and explains how the evidence supports the claim.",
+        "Evidence for a function comes from observing the structure being used, or from its position, shape, and connections.",
+        "An argument covers only what the evidence reaches, and says where it stops."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Asserting a function with no evidence and no reasoning.",
+        "Using evidence about one organism to make a claim about all organisms.",
+        "Treating a plausible story as evidence."
+      ],
+      "out_of_scope": "Counter-argument structure and formal rebuttal are later work."
+    },
+
+    {
+      "unit": 8,
+      "focus": "rock layers",
+      "fixed_facts": [
+        "In undisturbed sedimentary layers, a lower layer formed before the layer above it."
+      ],
+      "relationships": [
+        "Sedimentary rock forms as sediment settles in layers, with newer material on top.",
+        "In an undisturbed sequence, deeper means older.",
+        "Layers can be tilted, folded, faulted, or eroded after they form, so a sequence has to be checked for disturbance before the rule is applied."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the topmost layer is the oldest.",
+        "Reading an age in years straight off the layer order.",
+        "Applying the deeper-is-older rule to visibly overturned layers without saying so."
+      ],
+      "out_of_scope": "Radiometric dating, formal stratigraphic principles by name, and correlation between regions are Grade 8 and High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "fossils in rock layers",
+      "fixed_facts": [],
+      "relationships": [
+        "Fossils in rock layers are evidence of the organisms that lived when those layers were forming.",
+        "Different layers often contain different fossils, which is evidence that the living things in a place changed over time.",
+        "Fossils of organisms that lived in water, found in layers now far from water, are evidence that the environment there has changed."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Dating a fossil by when it was collected rather than by the layer it came from.",
+        "Claiming absence of a fossil proves the organism never lived there.",
+        "Claiming the environment at a place has always been what it is today."
+      ],
+      "out_of_scope": "Index fossils, biostratigraphy, and absolute dating are later work."
+    },
+    {
+      "unit": 8,
+      "focus": "weathering",
+      "fixed_facts": [
+        "Weathering breaks rock down in place; erosion moves the pieces away."
+      ],
+      "relationships": [
+        "Weathering breaks rock into smaller pieces where it sits, by water, ice, wind, temperature change, plants, and chemical action.",
+        "Water freezing in a crack expands and widens the crack, which is why freeze-thaw is a powerful weathering process in Michigan.",
+        "Weathering and erosion are different processes: weathering breaks material down, erosion carries it away."
+      ],
+      "accepted_alternative_framings": [
+        "Physical and chemical weathering, or mechanical and chemical weathering, are both correct namings."
+      ],
+      "disqualifying_errors": [
+        "Using weathering and erosion as though they meant the same thing.",
+        "Claiming water contracts when it freezes.",
+        "Claiming weathering only happens to rock that is exposed at the surface of a cliff."
+      ],
+      "out_of_scope": "Named chemical weathering reactions and mineral stability series are later work."
+    },
+    {
+      "unit": 8,
+      "focus": "rate of erosion",
+      "fixed_facts": [],
+      "relationships": [
+        "The rate of erosion depends on the slope, the amount and speed of moving water or wind, the material, and whether plants hold it in place.",
+        "Faster-moving water carries more material and larger pieces than slower-moving water.",
+        "Plant roots slow erosion by holding soil together, which is why removing vegetation increases it."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming erosion happens at the same rate everywhere regardless of slope or cover.",
+        "Claiming slow-moving water carries larger material than fast-moving water.",
+        "Claiming erosion only happens during storms."
+      ],
+      "out_of_scope": "Sediment transport equations and quantitative erosion rates are later work."
+    },
+    {
+      "unit": 8,
+      "focus": "maps of Earth's features",
+      "fixed_facts": [],
+      "relationships": [
+        "Maps show where Earth's features are, and patterns in those locations are evidence about the processes that made them.",
+        "A map needs a key and a scale, or its symbols and distances cannot be read.",
+        "Features such as mountains, volcanoes, and earthquakes are not spread evenly over Earth; they cluster in patterns."
+      ],
+      "accepted_alternative_framings": [
+        "Topographic maps, relief maps, and thematic maps are all legitimate map types here."
+      ],
+      "disqualifying_errors": [
+        "Reading distances off a map with no scale.",
+        "Claiming Earth's major features are spread evenly across the surface.",
+        "Treating a map symbol as the feature itself rather than as a representation of it."
+      ],
+      "out_of_scope": "Plate tectonics as the explanation for the patterns is Grade 8 and High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "Michigan's geological change",
+      "fixed_facts": [
+        "The Great Lakes basins were shaped by continental glaciers during the most recent ice age."
+      ],
+      "relationships": [
+        "Michigan's landscape was shaped by continental ice sheets that advanced and retreated repeatedly, carving basins and leaving behind sand, gravel, and boulders.",
+        "Much of Michigan's bedrock is sedimentary rock formed in ancient shallow seas, which is why marine fossils such as corals are found there.",
+        "Michigan's shorelines and dunes are still being changed today by waves, currents, wind, and ice."
+      ],
+      "accepted_alternative_framings": [
+        "Saying glaciers, ice sheets, or continental ice all correctly name the agent that shaped the Great Lakes basins."
+      ],
+      "disqualifying_errors": [
+        "Claiming the Great Lakes were formed by volcanic eruptions or by meteorite impact.",
+        "Claiming Michigan's landscape has not changed since the ice retreated.",
+        "Claiming fossil corals in Michigan rock mean corals live there in the lakes now."
+      ],
+      "out_of_scope": "Glacial stratigraphy, isostatic rebound, and the Michigan Basin's formation history are later work."
+    },
+
+    {
+      "unit": 9,
+      "focus": "energy from natural resources",
+      "fixed_facts": [
+        "Renewable resources are replenished on a human timescale; fossil fuels are not."
+      ],
+      "relationships": [
+        "The energy people use comes from natural resources: sunlight, wind, moving water, biomass, fossil fuels, and nuclear fuels.",
+        "Renewable resources are replaced on a human timescale; fossil fuels form over many millions of years and are not.",
+        "Every energy resource has to be found, extracted or captured, converted, and delivered, and each of those steps has costs and effects."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming any energy resource has no environmental effect at all.",
+        "Claiming fossil fuels are renewable because they are still forming.",
+        "Claiming energy is created at a power plant rather than converted there."
+      ],
+      "out_of_scope": "Quantitative energy budgets, capacity factors, and life-cycle analysis are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "fuels and the environment",
+      "fixed_facts": [
+        "Burning fossil fuels releases carbon dioxide into the atmosphere."
+      ],
+      "relationships": [
+        "Burning fossil fuels releases carbon dioxide and other substances into the air.",
+        "Extracting, transporting, and burning fuels affects land, water, and air, and those effects differ between fuels.",
+        "Reducing the amount of fuel used reduces the effects, which is why efficiency and conservation matter."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming burning fuel produces no waste products because the flame looks clean.",
+        "Claiming all fuels have identical environmental effects.",
+        "Claiming an effect can be removed entirely rather than reduced."
+      ],
+      "out_of_scope": "The greenhouse mechanism, combustion chemistry, and emissions figures are Grade 7 and later work."
+    },
+    {
+      "unit": 9,
+      "focus": "natural Earth processes",
+      "fixed_facts": [],
+      "relationships": [
+        "Natural Earth processes such as floods, storms, erosion, and, elsewhere, earthquakes and volcanic eruptions, happen whether or not people are present.",
+        "These processes become hazards when they affect people and what they depend on.",
+        "Where and when many of these processes occur follows patterns that can be studied and used for planning."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming natural Earth processes can be stopped from happening.",
+        "Claiming these processes occur completely at random with no patterns at all.",
+        "Claiming Michigan is at risk from active volcanoes."
+      ],
+      "out_of_scope": "Probabilistic hazard assessment and return periods are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "reducing hazard impacts",
+      "fixed_facts": [],
+      "relationships": [
+        "The impact of a natural hazard can be reduced by design, by warning systems, and by where and how people build.",
+        "Reducing impact is not the same as preventing the event; the event still happens.",
+        "Every mitigation has costs and limits, and a solution that works for one hazard may not work for another."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a design prevents the natural event itself.",
+        "Claiming a mitigation removes all risk.",
+        "Proposing a mitigation with no reference to the hazard it addresses."
+      ],
+      "out_of_scope": "Engineering codes, cost-benefit analysis, and risk quantification are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "comparing solutions",
+      "fixed_facts": [],
+      "relationships": [
+        "Solutions are compared against the same criteria and constraints, including cost, safety, and who is affected.",
+        "A solution can be better on one criterion and worse on another, and the comparison says so.",
+        "The comparison is based on tested evidence, not on preference."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Naming a best solution with no criteria stated.",
+        "Comparing solutions evaluated under different conditions.",
+        "Leaving out a criterion the preferred solution fails."
+      ],
+      "out_of_scope": "Weighted decision matrices and formal trade studies are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "Michigan's people and places",
+      "fixed_facts": [],
+      "relationships": [
+        "Where people in Michigan live and work is shaped by the Great Lakes, by farmland and forests, and by mineral and energy resources.",
+        "Michigan's main weather-related hazards include severe thunderstorms, tornadoes, winter and lake-effect snow storms, flooding, and shoreline erosion.",
+        "Decisions about resources and hazards affect different communities differently, so who is affected is part of the evidence."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming Michigan faces significant volcanic or major earthquake hazard.",
+        "Claiming a resource decision affects every community in the same way.",
+        "Claiming the Great Lakes have no effect on Michigan's weather."
+      ],
+      "out_of_scope": "Formal environmental justice frameworks and policy analysis are Grade 8 and later work."
+    }
+  ]
+}

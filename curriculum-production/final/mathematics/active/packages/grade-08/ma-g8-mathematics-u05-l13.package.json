@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u05-l13",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u05-l13",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Functions",
+    "dayInUnit": 13,
+    "courseDay": 89,
+    "phase": "Skill consolidation",
+    "focus": "function definition",
+    "title": "Skill consolidation: function definition"
+  },
+  "standards": [
+    "8.F.1",
+    "8.F.2",
+    "8.F.3",
+    "8.F.4",
+    "8.F.5"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "is-relation-a-function",
+          "standard": "8.F.1",
+          "difficulty": 1,
+          "prompt": "Consider the relation {(0, 5), (-4, 6), (4, -3)}. Is this relation a function?",
+          "choices": [
+            "Yes, this relation is a function.",
+            "It is a function only if every output is different.",
+            "No, this relation is not a function.",
+            "Cannot be determined from the given pairs."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "function-graph-as-pairs",
+          "standard": "8.F.1",
+          "difficulty": 2,
+          "prompt": "Which set of ordered pairs does NOT represent a function?",
+          "choices": [
+            "{(-9, -1), (-4, -3), (-10, 8), (5, -5)}",
+            "{(1, -1), (0, -10), (8, 9), (8, -6)}",
+            "{(-10, 2), (5, -1), (3, 1), (0, -9)}",
+            "{(-8, 7), (8, 3), (4, 1), (-10, 3)}"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "8.F.1",
+          "difficulty": 2,
+          "prompt": "Given f(x) = -2x + 6, find f(-7).",
+          "choices": [
+            "23",
+            "19",
+            "20",
+            "21"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "find-input-from-output",
+          "standard": "8.F.1",
+          "difficulty": 2,
+          "prompt": "Given f(x) = -9x - 14, find the value of x for which f(x) = 40.",
+          "choices": [
+            "-9",
+            "-6",
+            "-8",
+            "-4"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-rate-of-change",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function A is given by f(x) = -10x + 15. Function B is given by the table:\nx: 4, 5\ny: -46, -55\nWhich function has the greater rate of change?",
+          "choices": [
+            "They have the same rate of change.",
+            "Function A",
+            "Function B",
+            "Cannot be determined from the given information."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-value-at-x",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function A is given by f(x) = -8x - 8. Function B starts at 0 and increases by 11 each unit. Which function has the greater value when x = 7?",
+          "choices": [
+            "The two functions have equal values at that input.",
+            "Cannot be determined without a graph.",
+            "Function B",
+            "Function A"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-from-table",
+          "standard": "8.F.3",
+          "difficulty": 3,
+          "prompt": "A table shows:\nx: 4, 8, 12, 16\ny: -45, -141, -301, -525\nIs the relationship linear or nonlinear?",
+          "choices": [
+            "nonlinear",
+            "linear",
+            "cannot be determined from a table",
+            "constant"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-from-equation",
+          "standard": "8.F.3",
+          "difficulty": 3,
+          "prompt": "Classify the equation y = -10x - 24 as linear or nonlinear.",
+          "choices": [
+            "cannot be determined from an equation",
+            "constant",
+            "nonlinear",
+            "linear"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "construct-function-from-two-points",
+          "standard": "8.F.4",
+          "difficulty": 3,
+          "prompt": "A function contains the points (6, -46) and (-1, 24). Write the function rule f(x) = mx + b.",
+          "choices": [
+            "f(x) = -10x + 14",
+            "f(x) = -10x + 13",
+            "f(x) = 10x + 14",
+            "f(x) = -10x + 15"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "construct-function-from-context",
+          "standard": "8.F.4",
+          "difficulty": 2,
+          "prompt": "A gym charges a $88 sign-up fee plus $17 per month. Which function models the total cost f(x) after x months?",
+          "choices": [
+            "f(x) = 18x + 88",
+            "f(x) = 88x + 17",
+            "f(x) = 17x + 88",
+            "f(x) = 17x + 87"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "match-graph-description-to-scenario",
+          "standard": "8.F.5",
+          "difficulty": 3,
+          "prompt": "A hiker climbs a steady, unchanging slope for the whole hike. Which description best matches the shape of the graph over time?",
+          "choices": [
+            "constant, then increasing",
+            "increasing at a constant rate the whole time",
+            "decreasing at a constant rate the whole time",
+            "increasing, then constant, then decreasing"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-interval-behavior",
+          "standard": "8.F.5",
+          "difficulty": 3,
+          "prompt": "A graph shows height over time.\nFrom t = 0 to t = 5, height goes from 8 to 13.\nFrom t = 5 to t = 10, height goes from 13 to 9.\nFrom t = 10 to t = 11, height goes from 9 to 9.\nWhich interval shows the height decreasing?",
+          "choices": [
+            "t = 0 to t = 5",
+            "t = 5 to t = 10",
+            "No interval shows this behavior.",
+            "t = 10 to t = 11"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u05-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u05-l13"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l02",
+  "lessonId": "ma-g11-ready-for-life-u01-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Verified versus assumed requirements",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Requirements listed are vague or unsourced, indistinguishable from the warm-up guess." },
+          { "label": "Proficient", "descriptor": "Requirements are specific and a source is named for both pathways." },
+          { "label": "Advanced", "descriptor": "Requirements are specific, sourced, and the write-up explicitly flags where the source's information might change or need rechecking." }
+        ]
+      },
+      {
+        "dimension": "Timeline realism",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Timeline lists steps with no sense of order or roughly when each would happen." },
+          { "label": "Proficient", "descriptor": "Timeline orders the steps and attaches a rough timeframe to each, working backward from a deadline." },
+          { "label": "Advanced", "descriptor": "Timeline accounts for a dependency or constraint outside the learner's control (such as fixed test dates or a minimum age) and adjusts around it." }
+        ]
+      },
+      {
+        "dimension": "Updating assumptions with evidence",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection claims the warm-up guess was correct with no specific comparison made." },
+          { "label": "Proficient", "descriptor": "Reflection names a specific gap between the guess and the verified requirement." },
+          { "label": "Advanced", "descriptor": "Reflection explains why the gap likely existed (for example, an outdated assumption or a requirement that varies by program) rather than just naming it." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Both pathways researched trace back to the learner's own stated interests, not an arbitrary pick.",
+      "Sources named are specific enough that another person could find and check the same information.",
+      "The timeline is grounded in the learner's actual current grade and graduation timing, not a generic multi-year plan."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

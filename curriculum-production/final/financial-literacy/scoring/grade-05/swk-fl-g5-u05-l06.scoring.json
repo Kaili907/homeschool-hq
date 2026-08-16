@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u05-l06",
+  "lessonId": "ma-g5-financial-literacy-u05-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Analysing scam structure",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response judges only whether the delivery story sounds true."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "One element is identified for Bilal but the role of the small amount is missed."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Bilal's message pairs a plausible story with urgency and a deliberately small fee, because a small amount lowers resistance to entering card details."
+          }
+        ]
+      },
+      {
+        "dimension": "Verifying without engaging",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has Bilal use the link or reply to the message."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Bilal avoids the link but no independent way to check is offered."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has Bilal ignore the link entirely and verify through an independently found channel, with a trusted adult involved."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names urgency, plausibility, and the small amount as deliberate design.",
+      "Explains that card details, not the fee, are the actual target.",
+      "Verifies through a channel not supplied by the message.",
+      "Involves a trusted adult before any action."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What job does each part of the message do, and why is the small fee amount deliberately small?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should Bilal do step by step, and how can he check the story without using the link or number in the message?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why is the real risk much larger than the small fee the message asks for?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Analysing scam structure — Not yet: The response judges only whether the delivery story sounds true. Approaching: One element is identified for Bilal but the role of the small amount is missed. Meets: The response explains that Bilal's message pairs a plausible story with urgency and a deliberately small fee, because a small amount lowers resistance to entering card details. Verifying without engaging — Not yet: The response has Bilal use the link or reply to the message. Approaching: Bilal avoids the link but no independent way to check is offered. Meets: The response has Bilal ignore the link entirely and verify through an independently found channel, with a trusted adult involved. Names urgency, plausibility, and the small amount as deliberate design. Explains that card details, not the fee, are the actual target. Verifies through a channel not supplied by the message. Involves a trusted adult before any action."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names urgency, plausibility, and the small amount as deliberate design. Explains that card details, not the fee, are the actual target. Verifies through a channel not supplied by the message. Involves a trusted adult before any action."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u05-l06.scoring.json",
+    "sourceScoringSha256": "a2480b48b913d23339bffbf0b44e0fcdfb3943e8c7f4eae1e0425e3f1e452823",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

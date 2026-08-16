@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u02-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u02-l08",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Expression Structure and Equivalence",
+    "dayInUnit": 8,
+    "courseDay": 26,
+    "phase": "Reteach and varied practice",
+    "focus": "terms, factors, and coefficients",
+    "title": "Reteach and varied practice: terms, factors, and coefficients"
+  },
+  "standards": [
+    "A-SSE.1",
+    "A-SSE.2",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 1,
+          "prompt": "Factor x² − 7x + 12.",
+          "workedSolution": {
+            "steps": [
+              "Find two numbers with product 12 and sum −7: −3 and −4.",
+              "(x − 3)(x − 4)."
+            ],
+            "answer": "(x − 3)(x − 4)"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "factor-greatest-common-factor",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor 6x² + 9x.",
+          "workedSolution": {
+            "steps": [
+              "Common numeric factor 3, common variable factor x.",
+              "3x(2x + 3)."
+            ],
+            "answer": "3x(2x + 3)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-expression-check",
+          "standard": "A-SSE.1",
+          "difficulty": 1,
+          "prompt": "A student claims that 5(x² − 2x + 6) expands to 5x² − 10x + 30. Is the claim correct?",
+          "choices": [
+            "No; the x term should be -2x.",
+            "Yes, the expansion is correct.",
+            "No; the constant term should be 32.",
+            "No; the leading term should be x²."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "recognize-substitution-structure",
+          "standard": "A-SSE.2",
+          "difficulty": 1,
+          "prompt": "The expression (x + 2)^6 − 4 can be treated as a difference of squares. Which substitution makes that structure visible?",
+          "choices": [
+            "u = (x + 2)^3",
+            "u = x + 2",
+            "u = x^3",
+            "u = (x + 2)^6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 2,
+          "prompt": "An investment is modelled by 10000(1 + 0.06)^t. In this expression, what does t represent?",
+          "choices": [
+            "the growth factor applied once per year",
+            "the total interest earned over the whole period",
+            "the number of years the investment grows",
+            "the amount invested before any interest is added"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "factor-difference-of-squares",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor completely: 4x² − 25.",
+          "choices": [
+            "(2x − 5)(2x + 5)",
+            "(2x − 25)(2x + 1)",
+            "(2x − 5)²",
+            "(2x + 5)²"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 1,
+          "prompt": "Factor completely: x^2 + 9x + 20.",
+          "choices": [
+            "(x − 4)(x + 5)",
+            "(x − 4)(x − 5)",
+            "(x + 4)(x + 5)",
+            "(x − 20)(x − 9)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "factor-greatest-common-factor",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor out the greatest common factor: 10x^2 + 8x.",
+          "choices": [
+            "2x(5x + 4)",
+            "x(10x + 8)",
+            "2(5x² + 4x)",
+            "10x(x + 4)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-expression-check",
+          "standard": "A-SSE.1",
+          "difficulty": 2,
+          "prompt": "A student claims that 4(x² + 6x + 3) expands to 4x² + 24x + 11. Is the claim correct?",
+          "choices": [
+            "No; the x term should be 6x.",
+            "No; the constant term should be 12.",
+            "Yes, the expansion is correct.",
+            "No; the leading term should be x²."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "recognize-substitution-structure",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "The expression (x + 3)^4 − 9 can be treated as a difference of squares. Which substitution makes that structure visible?",
+          "choices": [
+            "u = (x + 3)^2",
+            "u = x + 3",
+            "u = (x + 3)^4",
+            "u = x^2"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "An investment is modelled by 1500(1 + 0.04)^t. In this expression, what does t represent?",
+          "choices": [
+            "the amount invested before any interest is added",
+            "the growth factor applied once per year",
+            "the total interest earned over the whole period",
+            "the number of years the investment grows"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u02-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u02-l08"
+  }
+}

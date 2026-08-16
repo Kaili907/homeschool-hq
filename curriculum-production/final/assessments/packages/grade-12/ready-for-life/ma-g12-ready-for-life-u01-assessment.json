@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-ready-for-life-u01-assessment",
+  "courseRef": "ma-g12-ready-for-life",
+  "grade": 12,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g12-ready-for-life-u01",
+    "unitNumber": 1,
+    "unitTitle": "The Adult-Life Operating System",
+    "courseTitle": "Ready for Life 12: Independent Adult Living Capstone",
+    "assessmentLessonRef": "ma-g12-ready-for-life-u01-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u01-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before responding, predict which of the three scenarios would be hardest to recover from.",
+      "prompt": "Of the three lapse scenarios (an unnoticed expiration, a missed deadline, a forgotten recurring obligation), which do you predict is hardest to recover from, and why?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Write a concrete recovery step for each of the three invented lapse scenarios.",
+      "prompt": "I wrote a recovery step for the unnoticed-expiration scenario."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Write a concrete recovery step for each of the three invented lapse scenarios.",
+      "prompt": "I wrote a recovery step for the missed-deadline scenario."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Write a concrete recovery step for each of the three invented lapse scenarios.",
+      "prompt": "I wrote a recovery step for the forgotten-recurring-obligation scenario."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Synthesize a general three-step protocol and assemble the unit's artifacts into one tracker.",
+      "prompt": "Write a general three-step 'when something lapses' protocol that could apply beyond just these three scenarios."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "extended-response",
+      "directions": "Synthesize a general three-step protocol and assemble the unit's artifacts into one tracker.",
+      "prompt": "Assemble your records map, reminder ladder, obligation calendar, and review routine from this unit into one described tracker, and explain in a few sentences how the pieces connect."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect on the assembled tracker.",
+      "prompt": "Which single piece of this tracker do you think will be the most useful to you going forward, and which do you think you're most likely to let slide?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/ready-for-life/ma-g12-ready-for-life-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Recovery specificity criterion.",
+    "Provide evidence that meets the stated Tracker integration criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-ready-for-life-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u01-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of The Adult-Life Operating System?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

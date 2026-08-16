@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l03",
+  "lessonId": "ma-g3-ready-for-life-u05-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Log completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more borrowed items found in the space are missing from the log entirely, or entries are missing one or more of the four columns."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every borrowed item found is logged, with all four columns filled in for each entry."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Every borrowed item is logged completely, and the learner can explain how they were sure they found every borrowed item in the space."
+          }
+        ]
+      },
+      {
+        "dimension": "Return-location specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Return locations are vague, such as 'give it back,' with no room, shelf, or person named."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every return location names a specific room, shelf, or person."
+          }
+        ]
+      },
+      {
+        "dimension": "Recall accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Recalls fewer than half of the logged items and owners from memory."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Recalls at least three-quarters of the logged items and owners from memory before checking the written log."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each logged item includes a specific owner, not a general 'someone else.'",
+      "The reflection names a specific reason a particular item was easy to forget, not a general statement about forgetfulness."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

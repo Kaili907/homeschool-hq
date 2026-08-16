@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l02",
+  "lessonId": "ma-g10-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Research completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Records the service's general purpose only, with no eligibility detail or access step." },
+          { "label": "Proficient", "descriptor": "Records what the service offers and a concrete first access step." },
+          { "label": "Advanced", "descriptor": "Records what the service offers, eligibility, the concrete first access step, and the source." }
+        ]
+      },
+      {
+        "dimension": "Concreteness of the access step",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The access step is vague ('just go there')." },
+          { "label": "Proficient", "descriptor": "The access step names a specific first action." },
+          { "label": "Advanced", "descriptor": "The access step is specific and matches what the actual source describes." }
+        ]
+      },
+      {
+        "dimension": "Non-judgmental reasoning about non-use",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The stated reason blames or judges people who don't use the service." },
+          { "label": "Proficient", "descriptor": "Names a realistic, non-judgmental reason." },
+          { "label": "Advanced", "descriptor": "Names a realistic reason and it's specific to a genuine barrier (such as not knowing the service exists) rather than a vague guess." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The service category chosen is genuinely relevant to the learner, not an arbitrary pick.",
+      "The recorded first access step could actually be followed by someone unfamiliar with the service.",
+      "The reflection response avoids shaming language about people who don't use available services."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

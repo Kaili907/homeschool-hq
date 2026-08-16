@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u05-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u05-l08",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Quadratic Expressions and Equations",
+    "dayInUnit": 8,
+    "courseDay": 80,
+    "phase": "Reteach and varied practice",
+    "focus": "completing the square to reveal maximum or minimum",
+    "title": "Reteach and varied practice: completing the square to reveal maximum or minimum"
+  },
+  "standards": [
+    "A-SSE.3",
+    "A-REI.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 1,
+          "prompt": "Which form shows the zeros of a quadratic immediately?",
+          "workedSolution": {
+            "steps": [
+              "A product is zero exactly when one factor is zero.",
+              "Factored form exposes that."
+            ],
+            "answer": "factored form"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 2,
+          "prompt": "Solve x² − 5x + 6 = 0.",
+          "workedSolution": {
+            "steps": [
+              "Factors: (x − 2)(x − 3) = 0.",
+              "Each factor zero gives x = 2 or x = 3."
+            ],
+            "answer": "x = 2 or x = 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 1,
+          "prompt": "Without solving, describe the roots of -x^2 + 3x - 7 = 0.",
+          "choices": [
+            "two distinct rational roots",
+            "exactly one real root (a repeated root)",
+            "two distinct irrational roots",
+            "no real roots (two complex conjugate roots)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 1,
+          "prompt": "Rewrite x^2 - 6x + 1 in vertex form and state the vertex.",
+          "choices": [
+            "(x − 3)² + 1; vertex (3, 1)",
+            "(x − 3)² + 8; vertex (3, 8)",
+            "(x + 3)² − 8; vertex (-3, -8)",
+            "(x − 3)² − 8; vertex (3, -8)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 2,
+          "prompt": "Use the quadratic formula to solve x^2 + 3x + 1 = 0. Give exact values.",
+          "choices": [
+            "x = (3 ± √5) / 2",
+            "x = (-3 ± √5) / 2",
+            "x = (-3 ± √5) / 1",
+            "x = (-3 ± √5) / 3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 2,
+          "prompt": "You need to read off the vertex of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "choices": [
+            "vertex form",
+            "recursive form",
+            "standard form",
+            "factored form"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 1,
+          "prompt": "Solve by factoring: x^2 - 3x - 4 = 0.",
+          "choices": [
+            "x = -1 or x = 4",
+            "x = 0 or x = 4",
+            "x = 1 or x = -4",
+            "x = -1 or x = -4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 2,
+          "prompt": "Without solving, describe the roots of 3x^2 + 3x + 6 = 0.",
+          "choices": [
+            "two distinct rational roots",
+            "exactly one real root (a repeated root)",
+            "no real roots (two complex conjugate roots)",
+            "two distinct irrational roots"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 2,
+          "prompt": "Rewrite x^2 - 8x + 24 in vertex form and state the vertex.",
+          "choices": [
+            "(x − 4)² + 24; vertex (4, 24)",
+            "(x + 4)² + 8; vertex (-4, 8)",
+            "(x − 4)² + 8; vertex (4, 8)",
+            "(x − 4)² − 8; vertex (4, -8)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Use the quadratic formula to solve 2x^2 - 3x - 1 = 0. Give exact values.",
+          "choices": [
+            "x = (3 ± √17) / 2",
+            "x = (3 ± √17) / 4",
+            "x = (3 ± √17) / 5",
+            "x = (-3 ± √17) / 4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "You need to read off the x-intercepts of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "choices": [
+            "factored form",
+            "vertex form",
+            "standard form",
+            "recursive form"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u05-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u05-l08"
+  }
+}

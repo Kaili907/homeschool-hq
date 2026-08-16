@@ -1,0 +1,360 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g3-tech-cs-u05-l06",
+  "unit_id": "ma-g3-tech-cs-u05",
+  "source_course_id": "ma-g3-tech-cs",
+  "subject": "technology",
+  "band": "g3-4",
+  "grade": 3,
+  "grade_dir": "grade-03",
+  "unit_number": 5,
+  "unit_title": "Pictures, Sounds, and Simple Data",
+  "day_in_unit": 6,
+  "course_day": 30,
+  "lesson_title": "Correction and reflection: checking if a fact seems true",
+  "phase": "Correction and reflection",
+  "work_mode": "CORRECT",
+  "focus": "checking if a fact seems true",
+  "task_type": "digital_citizenship_and_safety",
+  "lesson_type": "debugging_revision",
+  "task_label": "Digital citizenship and safety — Correction and reflection",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "40–60",
+  "standards": [
+    "Michigan Computer Science: Data and Analysis",
+    "Michigan Computer Science: Impacts of Computing"
+  ],
+  "essential_question": "How can understanding pictures, sounds, and simple data help us explain, decide, create, or solve something that matters?",
+  "learning_objectives": [
+    "Use error evidence to choose a different representation or strategy for checking if a fact seems true, then demonstrate corrected understanding.",
+    "Use subject-appropriate evidence or representation to communicate understanding of checking if a fact seems true.",
+    "Check, revise, or improve work about checking if a fact seems true using stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task about checking if a fact seems true.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "pencil or accessible response tool",
+    "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
+  ],
+  "task_brief": "This is day 6 of \"Pictures, Sounds, and Simple Data\". That is unit 5 in grade 3. Today is a correction and reflection about checking if a fact seems true. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Collect a small set of data and create a simple picture graph with a short conclusion. Today helps by working on checking if a fact seems true. Your unit also covers sorting and counting objects, simple picture graphs, choosing a picture that fits, and comparing two data sets. Today adds real evidence toward your unit project.",
+  "primary_task": "Look back at your earlier work on checking if a fact seems true and fix it. Make a fix-it list. For each mistake write four things: what went wrong, why it went wrong, what you changed, and how you know it works now. Include one thing that failed before and works now. Then look at all your mistakes together. What do they have in common? Name one habit that would catch it sooner. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about checking if a fact seems true. It is part of \"Pictures, Sounds, and Simple Data\". Later days in this unit cover other things, like sorting and counting objects. Before you stop, do this check: In one concise response, show or explain the most important idea about checking if a fact seems true; then identify one check that would catch an error or weak claim. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
+  "task_steps": [
+    "Look back at your earlier work on checking if a fact seems true and fix it.",
+    "Make a fix-it list.",
+    "For each mistake write four things: what went wrong, why it went wrong, what you changed, and how you know it works now.",
+    "Include one thing that failed before and works now.",
+    "Then look at all your mistakes together.",
+    "What do they have in common?",
+    "Name one habit that would catch it sooner."
+  ],
+  "requirements": [
+    "Do what this lesson asks: The learner completes the central task about checking if a fact seems true., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
+    "Meet today's goal: Use error evidence to choose a different representation or strategy for checking if a fact seems true, then demonstrate corrected understanding.",
+    "Hand in this: Your fix-it list with what went wrong, why, the change, and the check that passes, plus what your mistakes share.",
+    "Show your work, not just the answer — your steps, test notes, or drafts.",
+    "Go through the check list in this package before you hand it in."
+  ],
+  "deliverable": "Your fix-it list with what went wrong, why, the change, and the check that passes, plus what your mistakes share.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline fictional evidence table for checking if a fact seems true",
+      "purpose": "Use every row below; the table is the entire dataset for the task and contains no real person or location.",
+      "columns": [
+        "case",
+        "category",
+        "value",
+        "source_note"
+      ],
+      "rows": [
+        [
+          "Maple",
+          "A",
+          4,
+          "direct count recorded twice"
+        ],
+        [
+          "River",
+          "B",
+          7,
+          "estimate with a range of 6 to 8"
+        ],
+        [
+          "Cedar",
+          "A",
+          2,
+          "direct count recorded once"
+        ],
+        [
+          "Harbor",
+          "B",
+          7,
+          "copied claim with no supporting observation"
+        ]
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply checking if a fact seems true to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "The exact accepted evidence map is intentionally withheld from learner material and is available only in the restricted trusted-adult scoring authority after the learner submits complete evidence.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES",
+      "hint_ceiling": "CRITERION_OR_EVIDENCE_LOCATION_CUE"
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to checking if a fact seems true.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
+  "learner_experience": {
+    "experience_version": "technology-production-depth-r1",
+    "static_complete": true,
+    "tutor_required": false,
+    "lesson_type": "debugging_revision",
+    "sequence_policy": "Concept teaching, the analogous model, and guided practice precede protected independent evidence. Protected and fresh resolutions are absent from learner material and remain adult-only.",
+    "learning_targets": [
+      "Use error evidence to choose a different representation or strategy for checking if a fact seems true, then demonstrate corrected understanding.",
+      "Use subject-appropriate evidence or representation to communicate understanding of checking if a fact seems true.",
+      "Check, revise, or improve work about checking if a fact seems true using stated success criteria.",
+      "Explain the evidence chain used to make or evaluate a result about checking if a fact seems true.",
+      "Transfer the reasoning to a fresh case without a completed target response in view."
+    ],
+    "concept_teaching": {
+      "ref": "ma-g3-tech-cs-u05-l06#concept-digital-citizenship-and-safety",
+      "title": "Pause, minimize, verify, and document: checking if a fact seems true",
+      "entry_check": "Before reading, write one prediction about checking if a fact seems true and one observation that could show the prediction is wrong. This readiness record is no-penalty evidence.",
+      "explanation": [
+        "checking if a fact seems true is about making a clear choice and showing why it works. First name what the result should do. Then point to the step, label, or fact that supports your choice.",
+        "A check is different from a guess. Write what you expect before you try it. Compare what happened with what you expected. If they differ, circle the first place they stop matching.",
+        "A fix needs a reason. Change one thing that your evidence supports, try the same checks again, and keep the old and new work. That record shows your thinking even when the first try was wrong.",
+        "Separate the stated purpose from the information or action requested, choose the least-exposing safe response, and record which printed detail supports the decision. You may use paper, objects, labelled drawings, or precise steps when a computer is not the best tool."
+      ],
+      "key_terms": [
+        {
+          "term": "data minimization",
+          "definition": "Collecting or sharing only what a stated purpose actually needs."
+        },
+        {
+          "term": "permission",
+          "definition": "Clear authorization for a specific action and scope."
+        },
+        {
+          "term": "verification",
+          "definition": "Checking a claim through evidence independent of the claim itself."
+        },
+        {
+          "term": "escalation",
+          "definition": "Stopping and involving a trusted adult or responsible authority when risk exceeds the learner’s role."
+        }
+      ],
+      "application_check": [
+        "Can you explain pause, minimize, verify, and document in your own words using a new fictional example?",
+        "Did you write expected behavior or a pass condition before running, tracing, or judging the result?",
+        "Can another reader trace each conclusion to a state row, printed fact, requirement, or observation?",
+        "Did you name a boundary, stress case, missing fact, or limitation instead of assuming it away?"
+      ]
+    },
+    "worked_example": {
+      "ref": "ma-g3-tech-cs-u05-l06#worked-analogue-digital-citizenship-and-safety",
+      "kind": "WORKED_EXAMPLE_ANNOTATED_CASE",
+      "relationship_to_protected_tasks": "ANALOGOUS_NON_TARGET",
+      "evidence_eligible": false,
+      "title": "Worked analogue: minimize a fictional club timer",
+      "complete_analogue_case": "A paper-only club timer needs a made-up activity label and duration. Its draft form also asks for an exact birth date and contact list even though neither supports timing.",
+      "annotations": [
+        {
+          "step": 1,
+          "reasoning": "State the purpose first: label and time a fictional activity."
+        },
+        {
+          "step": 2,
+          "reasoning": "Match each requested field to that purpose; the date and contacts have no supplied justification."
+        },
+        {
+          "step": 3,
+          "reasoning": "Choose the least-exposing response: omit unrelated fields and keep the case offline."
+        },
+        {
+          "step": 4,
+          "reasoning": "Check by confirming every retained field has a stated function."
+        },
+        {
+          "step": 5,
+          "reasoning": "Escalate rather than supplying information if a real tool demands unrelated data or sign-in."
+        }
+      ],
+      "completed_model": "State the purpose first: label and time a fictional activity. Match each requested field to that purpose; the date and contacts have no supplied justification. Choose the least-exposing response: omit unrelated fields and keep the case offline. Check by confirming every retained field has a stated function. Escalate rather than supplying information if a real tool demands unrelated data or sign-in.",
+      "transfer_prompt": "Use the same evidence discipline on the protected task, but make a new decision from its different printed labels. Do not copy this model as the protected response.",
+      "difference_from_protected_task": "The worked model uses a different fictional setting, facts, labels, decision, and check. None of its completed claims answers the protected central input."
+    },
+    "guided_task": {
+      "ref": "ma-g3-tech-cs-u05-l06#guided-evidence-bridge",
+      "title": "Guided practice: claim → printed evidence → check",
+      "alternate_case": "A separate fictional practice card about checking if a fact seems true contains labels P1, P2, and P3. P1 states the intended purpose, P2 states a constraint, and P3 records an observed mismatch. It is not the protected case titled \"Inline fictional evidence table for checking if a fact seems true.\"",
+      "prompts": [
+        "Restate P1 as a criterion without adding facts.",
+        "Use P2 to reject one tempting but invalid response.",
+        "Use P3 to propose a revision and write an observable pass condition.",
+        "Name one conclusion the three labels cannot support."
+      ],
+      "immediate_check": "A complete guided response has one claim about checking if a fact seems true, the exact supporting label, one check, and one limitation.",
+      "support_fade": "The guided card names the purpose/constraint/mismatch roles. In protected work, the learner must locate those roles independently in the supplied central input; the fresh check offers only term or instruction clarification.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    },
+    "independent_task": {
+      "ref": "ma-g3-tech-cs-u05-l06#protected-independent",
+      "role": "INDEPENDENT_LESSON_EVIDENCE",
+      "freshness": "FRESH_FROM_WORKED_AND_GUIDED_FIXTURES",
+      "title": "Independent analysis/design: checking if a fact seems true",
+      "central_input_ref": "activity_setup.central_input",
+      "specification": [
+        "The response must apply checking if a fact seems true to at least three labelled details from the supplied central input.",
+        "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+        "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+        "The response must name one thing the supplied case does not tell you instead of guessing."
+      ],
+      "public_checks": [
+        "the complete supplied central input → three or more evidence-linked observations",
+        "the proposed revision or decision → one stated check with an observable pass condition",
+        "the strongest competing interpretation → one limitation, unknown, or trade-off stated without inventing facts"
+      ],
+      "evidence_requirements": [
+        "At least three claims, each linked to an exact printed row, card, requirement, or scenario detail.",
+        "One feasible learner-authored revision, design, or decision made only from the supplied fictional case.",
+        "An observable pass condition written before judging the revision or decision.",
+        "One limitation, missing fact, or trade-off stated without inventing evidence.",
+        "A before/after or claim/check record showing how evidence changed the work."
+      ],
+      "support": "TERM_OR_INSTRUCTION_CLARIFICATION; one location/evidence cue may identify where to inspect but may not select the decision or give the resolution.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    },
+    "debugging_reasoning": {
+      "title": "Use the six-move evidence cycle",
+      "required_moves": [
+        "Symptom: record expected versus actual without explaining it away.",
+        "Hypothesis: state one falsifiable cause about the claim or design state before revising.",
+        "Inspection: identify the first trace row or printed detail that bears on the hypothesis.",
+        "Predicted effect: state what one controlled change should alter and what it should leave unchanged.",
+        "Test and interpretation: compare actual with the prediction and mark the hypothesis supported, rejected, or not fully tested.",
+        "Verification: rerun all relevant checks and record any new limitation or next hypothesis."
+      ],
+      "anti_guessing_rule": "A working final artifact without a pre-change hypothesis and inspectable evidence is incomplete debugging/revision evidence."
+    },
+    "remediation_routes": [
+      {
+        "trigger_id": "claim-not-connected-to-partial-state",
+        "learner_signal": "My conclusion names the topic but does not connect to exact printed evidence.",
+        "title": "Different representation: evidence cards and arrows",
+        "alternate_teaching": "Copy each printed fact onto a separate card. Draw an arrow from a fact to a claim only when the fact would make that claim more or less credible. Unconnected claims must be revised or removed.",
+        "analogue_task": "Use four new cards about a fictional library sign to build a fact → claim → check map for checking if a fact seems true; do not use the protected case.",
+        "return_check": "Complete the fresh mastery check with teaching materials closed. The original protected solution remains withheld.",
+        "original_protected_solution_exposed": false
+      },
+      {
+        "trigger_id": "revision-before-evidence",
+        "learner_signal": "I changed or chose something before recording the mismatch and a testable reason.",
+        "title": "Different routine: the six-box evidence ladder",
+        "alternate_teaching": "Use six boxes in order: expected/actual, first divergence or decisive detail, hypothesis, predicted effect, one revision, rerun interpretation. Do not enter the revision box until the first four constrain what the change is meant to test.",
+        "analogue_task": "Apply the six boxes to a separate fictional clock-card mismatch related to checking if a fact seems true. Stop after the prediction, explain what result would reject the hypothesis, then finish the check.",
+        "return_check": "Complete the fresh mastery check independently. A correct but low-confidence response receives confirmation tied to evidence, not automatic reteaching.",
+        "original_protected_solution_exposed": false
+      }
+    ],
+    "fresh_mastery_check": {
+      "ref": "ma-g3-tech-cs-u05-l06#fresh-northstar-case",
+      "role": "FRESH_MASTERY_OR_REMEDIATION_CHECK",
+      "freshness": "DIFFERENT_FIXTURE_FROM_WORKED_GUIDED_AND_PROTECTED_TASKS",
+      "title": "Fresh transfer: Northstar card for checking if a fact seems true",
+      "complete_case": "A new fictional Northstar card supplies purpose N1, constraint N2, two observations N3–N4, and an unsuccessful first revision N5. No outside facts are needed or permitted.",
+      "task": "Use separate the stated purpose from the information or action requested, choose the least-exposing safe response, and record which printed detail supports the decision. Produce two evidence-linked claims, one revised decision or design, an observable pass condition, and one limitation.",
+      "evidence_requirements": "Submit the label-to-claim map, the revised artifact or decision, expected-versus-observed check evidence, and the limitation. Do not reuse the worked model wording.",
+      "hint_ceiling": "TERM_OR_INSTRUCTION_CLARIFICATION",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    }
+  },
+  "test_or_check_criteria": [
+    "Your fix-it list says what went wrong, why, what you changed, and how you know it works.",
+    "At least one thing failed before and works now.",
+    "You said what your mistakes have in common.",
+    "You named one habit that would catch it sooner."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+  ],
+  "task_accessibility_provisions": [
+    "You can do this with the keyboard only, no mouse needed. Text can be made bigger, and you may do it on paper instead of a screen.",
+    "You can take a break, stretch, or come back to this later. That does not lower your score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never require a real password, private message, precise location, account credential, API key, or identifiable image.",
+    "Use only fictional or sandboxed systems, accounts, and data; never probe, exploit, or attempt to access a real external system.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify, not as an authority or a substitute for learner work.",
+    "The tutor may explain, demonstrate, or debug alongside the learner, but must not silently complete a graded project or assessment for them."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, map, worked example, source image, demonstration, or short clip supporting checking if a fact seems true.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile/concrete model, or teacher demonstration."
+  },
+  "remediation": "Reteaching for checking if a fact seems true follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for checking if a fact seems true, model it with a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the process for checking if a fact seems true works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of checking if a fact seems true, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking checking if a fact seems true mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply checking if a fact seems true under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work. Treat this as optional depth on checking if a fact seems true rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Collect a small set of data and create a simple picture graph with a short conclusion.",
+    "topics": [
+      "sorting and counting objects",
+      "simple picture graphs",
+      "choosing a picture that fits",
+      "comparing two data sets",
+      "who made this: source basics",
+      "checking if a fact seems true"
+    ],
+    "essential_question": "How can understanding pictures, sounds, and simple data help us explain, decide, create, or solve something that matters?",
+    "assessment_id": "ma-g3-tech-cs-u05-assessment"
+  }
+}

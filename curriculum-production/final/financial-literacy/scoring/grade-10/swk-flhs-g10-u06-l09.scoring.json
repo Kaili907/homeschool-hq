@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l09",
+  "lessonId": "ma-g10-financial-literacy-u06-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$26,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Half of the $52,000 annual income. With no disability coverage in place, the household bears all of it."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$10,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $500 deductible off the $14,600 loss leaves $14,100, which exceeds the $10,000 limit, so the limit binds."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $14,600 loss less the $10,000.00 paid. The limit is below the exposure, so the household carries the shortfall as well as the deductible."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$11,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,000 deductible off the $12,300 loss leaves $11,300.00, which is below the $12,300 limit, so the limit does not bind."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Exactly the deductible, because the limit was set at the value of the car rather than below it."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$26,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $26,000.00 of lost income, against $4,600.00 on the belongings and $1,000.00 on the car. The largest exposure is the one with no coverage behind it at all."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$31,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,600.00 plus $1,000.00 plus $26,000.00 — more than half a year’s income, and over four fifths of it from the uncovered exposure."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "income / 12 * 6",
+        "substituted": "52000 / 12 * 6",
+        "result": "$26,000.00",
+        "why": "Half of the $52,000 annual income. With no disability coverage in place, the household bears all of it."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "min(belongings - rentDed, rentLimit)",
+        "substituted": "min(14600 - 500, 10000)",
+        "result": "$10,000.00",
+        "why": "The $500 deductible off the $14,600 loss leaves $14,100, which exceeds the $10,000 limit, so the limit binds."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "belongings2 - #t1-p2",
+        "substituted": "14600 - #t1-p2",
+        "result": "$4,600.00",
+        "why": "The $14,600 loss less the $10,000.00 paid. The limit is below the exposure, so the household carries the shortfall as well as the deductible."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "min(autoValue - autoDed, autoLimit)",
+        "substituted": "min(12300 - 1000, 12300)",
+        "result": "$11,300.00",
+        "why": "The $1,000 deductible off the $12,300 loss leaves $11,300.00, which is below the $12,300 limit, so the limit does not bind."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "autoValue2 - #t2-p1",
+        "substituted": "12300 - #t2-p1",
+        "result": "$1,000.00",
+        "why": "Exactly the deductible, because the limit was set at the value of the car rather than below it."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "max(#t1-p1, #t1-p3, #t2-p2)",
+        "substituted": "max(#t1-p1, #t1-p3, #t2-p2)",
+        "result": "$26,000.00",
+        "why": "The $26,000.00 of lost income, against $4,600.00 on the belongings and $1,000.00 on the car. The largest exposure is the one with no coverage behind it at all."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p3 + #t2-p2 + #t1-p1",
+        "substituted": "#t1-p3 + #t2-p2 + #t1-p1",
+        "result": "$31,600.00",
+        "why": "$4,600.00 plus $1,000.00 plus $26,000.00 — more than half a year’s income, and over four fifths of it from the uncovered exposure."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The household insures a $12,300 car down to a $1,000 exposure and leaves a $26,000.00 income exposure entirely uncovered. Explain why this pattern is common, and recommend the single change you would make first, defending it against the alternative of raising the renters limit.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the pattern: coverage tends to follow visible property and legal or lender requirements, while an income exposure has no object attached to it and is often not required by anyone.",
+          "Recommends adding disability coverage first and defends it with the $26,000.00 figure against the $4,600.00 that raising the renters limit would address.",
+          "Acknowledges what the recommendation costs — a further premium against a household already paying for renters and collision coverage — rather than treating more coverage as free."
+        ],
+        "evidenceRequirements": [
+          "Uses all three of the amounts borne, and the $31,600.00 combined figure."
+        ],
+        "lookFors": [
+          "The response ranks by the size of what the household would bear, not by the size of the asset.",
+          "A response that prioritises the renters limit is defensible only if it argues from likelihood rather than from magnitude, and says so."
+        ],
+        "commonMisconception": "Reviewing coverage by listing the policies held rather than by listing the exposures carried.",
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much income does the household lose if the earner cannot work for 6 months?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "In a total loss of the belongings, what does the renters policy pay?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the household bear in that event?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "In a total loss of the car, what does collision pay?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the household bear in that event?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Of the three events, what is the largest amount the household would have to bear?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "If all three events happened in the same year, what would the household bear in total?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The household insures a $12,300 car down to a $1,000 exposure and leaves a $26,000.00 income exposure entirely uncovered. Explain why this pattern is common, and recommend the single change you would make first, defending it against the alternative of raising the renters limit."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much income does the household lose if the earner cannot work for 6 months? Answer: $26,000.00. Verification: Half of the $52,000 annual income. With no disability coverage in place, the household bears all of it. t1-p2: In a total loss of the belongings, what does the renters policy pay? Answer: $10,000.00. Verification: The $500 deductible off the $14,600 loss leaves $14,100, which exceeds the $10,000 limit, so the limit binds. t1-p3: What does the household bear in that event? Answer: $4,600.00. Verification: The $14,600 loss less the $10,000.00 paid. The limit is below the exposure, so the household carries the shortfall as well as the deductible. t2-p1: In a total loss of the car, what does collision pay? Answer: $11,300.00. Verification: The $1,000 deductible off the $12,300 loss leaves $11,300.00, which is below the $12,300 limit, so the limit does not bind. t2-p2: What does the household bear in that event? Answer: $1,000.00. Verification: Exactly the deductible, because the limit was set at the value of the car rather than below it. t2-p3: Of the three events, what is the largest amount the household would have to bear? Answer: $26,000.00. Verification: The $26,000.00 of lost income, against $4,600.00 on the belongings and $1,000.00 on the car. The largest exposure is the one with no coverage behind it at all. t2-p4: If all three events happened in the same year, what would the household bear in total? Answer: $31,600.00. Verification: $4,600.00 plus $1,000.00 plus $26,000.00 — more than half a year’s income, and over four fifths of it from the uncovered exposure."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The household insures a $12,300 car down to a $1,000 exposure and leaves a $26,000.00 income exposure entirely uncovered. Explain why this pattern is common, and recommend the single change you would make first, defending it against the alternative of raising the renters limit. Explains the pattern: coverage tends to follow visible property and legal or lender requirements, while an income exposure has no object attached to it and is often not required by anyone. Recommends adding disability coverage first and defends it with the $26,000.00 figure against the $4,600.00 that raising the renters limit would address. Acknowledges what the recommendation costs — a further premium against a household already paying for renters and collision coverage — rather than treating more coverage as free. Uses all three of the amounts borne, and the $31,600.00 combined figure. The response ranks by the size of what the household would bear, not by the size of the asset. A response that prioritises the renters limit is defensible only if it argues from likelihood rather than from magnitude, and says so."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the pattern: coverage tends to follow visible property and legal or lender requirements, while an income exposure has no object attached to it and is often not required by anyone. Recommends adding disability coverage first and defends it with the $26,000.00 figure against the $4,600.00 that raising the renters limit would address. Acknowledges what the recommendation costs — a further premium against a household already paying for renters and collision coverage — rather than treating more coverage as free."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u06-l09.scoring.json",
+    "sourceScoringSha256": "18061dc99f69bb5874d00569f8b9be2ece1325aeb1e879fd29e0bcb304eb8cd4",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

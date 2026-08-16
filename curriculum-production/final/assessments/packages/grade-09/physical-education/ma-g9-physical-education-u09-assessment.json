@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-physical-education-u09-assessment",
+  "courseRef": "ma-g9-physical-education",
+  "grade": 9,
+  "subject": "physical-education",
+  "location": {
+    "unitRef": "ma-g9-physical-education-u09",
+    "unitNumber": 9,
+    "unitTitle": "Grade 9 Capstone: Personal Movement Portfolio",
+    "courseTitle": "Personal Fitness and Lifetime Activity",
+    "assessmentLessonRef": "ma-g9-physical-education-u09-l11"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-09/unit-assessments/ma-g9-physical-education-u09-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the safe activity or accessible equivalent and document the requested performance evidence.",
+    "Stop for pain, dizziness, breathing trouble, unsafe conditions, or missing adult supervision."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and cues",
+      "prompt": "Explain the critical features or key principle of assembling evidence across all activity categories in your own words."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "demonstration or description",
+      "prompt": "Demonstrate or fully describe self-assessment against stated criteria rather than against others using a version your body and setting allow. A described or adapted version earns full credit."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply explaining a tactical or training principle in the learner’s own words in a new situation and explain the decision or adjustment you made."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving documenting progress by capability, never by body; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect choosing Grade 10 activity directions and justifying the choice with reviewing the safety and stop-rule plan against a year of use and explain how one affects the other."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Assemble and present the portfolio to one trusted adult: category evidence, a training principle explained, the revised safety plan, and a justified plan for Grade 10."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself."
+    }
+  ],
+  "responseMode": "performance-log-or-accessible-equivalent",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/physical-education/ma-g9-physical-education-u09-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated safe participation and self-management criterion.",
+    "Provide evidence that meets the stated skill cues or movement quality criterion.",
+    "Provide evidence that meets the stated tactical or training reasoning criterion.",
+    "Provide evidence that meets the stated self-assessment and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-physical-education-u09-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-09/unit-assessments/ma-g9-physical-education-u09-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Grade 9 Capstone: Personal Movement Portfolio?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

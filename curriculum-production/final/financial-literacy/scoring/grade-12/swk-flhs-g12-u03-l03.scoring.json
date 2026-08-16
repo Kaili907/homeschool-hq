@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l03",
+  "lessonId": "ma-g12-financial-literacy-u03-l03",
+  "integratedDomains": [
+    "saving-investing",
+    "budgeting",
+    "insurance-risk",
+    "debt"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,700.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The six costs that continue whatever happens to income. The minimum debt payments belong here because missing them has consequences beyond the month, not because the debt could not eventually be renegotiated."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$8,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3 months of the $2,700.00 essential figure. This assumes a household under strain stops the spending it can stop."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$10,020.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3 months of the full $3,340.00 the household actually spends. This assumes life continues unchanged through the emergency."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,920.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,020.00 against $8,100.00 — three months of the $640 of discretionary spending. The choice of base, not the choice of months, produces this difference."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "1.8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,860 divided by the $2,700.00 essential monthly figure. Stating a reserve in months rather than dollars is what makes it comparable across households."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$180.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $3,240.00 still needed, spread across 18 months. Setting the period first and deriving the contribution is what turns a target into something a budget can act on."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "rent + utilities + food + insurance + transport + minDebt",
+        "substituted": "1285 + 180 + 520 + 165 + 240 + 310",
+        "result": "$2,700.00",
+        "why": "The six costs that continue whatever happens to income. The minimum debt payments belong here because missing them has consequences beyond the month, not because the debt could not eventually be renegotiated."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 * 3",
+        "substituted": "#t1-p1 * 3",
+        "result": "$8,100.00",
+        "why": "3 months of the $2,700.00 essential figure. This assumes a household under strain stops the spending it can stop."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "(#t1-p1 + nonEssential) * 3",
+        "substituted": "(#t1-p1 + 640) * 3",
+        "result": "$10,020.00",
+        "why": "3 months of the full $3,340.00 the household actually spends. This assumes life continues unchanged through the emergency."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$1,920.00",
+        "why": "$10,020.00 against $8,100.00 — three months of the $640 of discretionary spending. The choice of base, not the choice of months, produces this difference."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(reserve / #t1-p1, 1)",
+        "substituted": "round(4860 / #t1-p1, 1)",
+        "result": "1.8",
+        "why": "$4,860 divided by the $2,700.00 essential monthly figure. Stating a reserve in months rather than dollars is what makes it comparable across households."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round((#t1-p2 - reserve2) / horizon, 2)",
+        "substituted": "round((#t1-p2 - 4860) / 18, 2)",
+        "result": "$180.00",
+        "why": "The $3,240.00 still needed, spread across 18 months. Setting the period first and deriving the contribution is what turns a target into something a budget can act on."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Argue for sizing this household’s reserve on the $2,700.00 essential figure or on the $3,340.00 total figure. Use the figures, name what your choice assumes about how the household would behave during an emergency, and say which assumption is the weaker one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Argues one base on the figures — for example that the $8,100.00 target is reachable at $180.00 a month within the stated 18 months while the $10,020.00 target is not, or that the higher target is safer because a household in difficulty rarely cuts $640 of spending immediately.",
+          "Names the behavioural assumption behind the chosen base: the lower target assumes discretionary spending actually stops, and the higher target assumes it does not need to.",
+          "Identifies the weaker assumption and says why — most defensibly, that cutting $640 a month in the first month of a crisis is harder than a spreadsheet makes it look, so the essential-cost target has less margin than it appears."
+        ],
+        "evidenceRequirements": [
+          "Uses the $8,100.00 and $10,020.00 targets and the 1.8 months the current reserve covers."
+        ],
+        "lookFors": [
+          "The response treats the base as the real decision, rather than debating the number of months.",
+          "Either target is credited when the assumption behind it is named and examined."
+        ],
+        "commonMisconception": "Treating \"three months of expenses\" as a single well-defined figure, when the base it is three months of changes the target by $1,920.00 here.",
+        "dimensions": [
+          "assumption-identification",
+          "tradeoff-defense",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the essential monthly costs come to?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is a 3-month reserve sized on essential costs?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is a 3-month reserve sized on total spending instead?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much do the two targets differ by?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many months of essential costs does the current $4,860 reserve cover? Give one decimal place."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What monthly contribution reaches the essential-cost target within the 18 months?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Argue for sizing this household’s reserve on the $2,700.00 essential figure or on the $3,340.00 total figure. Use the figures, name what your choice assumes about how the household would behave during an emergency, and say which assumption is the weaker one."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the essential monthly costs come to? Answer: $2,700.00. Verification: The six costs that continue whatever happens to income. The minimum debt payments belong here because missing them has consequences beyond the month, not because the debt could not eventually be renegotiated. t1-p2: What is a 3-month reserve sized on essential costs? Answer: $8,100.00. Verification: 3 months of the $2,700.00 essential figure. This assumes a household under strain stops the spending it can stop. t1-p3: What is a 3-month reserve sized on total spending instead? Answer: $10,020.00. Verification: 3 months of the full $3,340.00 the household actually spends. This assumes life continues unchanged through the emergency. t2-p1: How much do the two targets differ by? Answer: $1,920.00. Verification: $10,020.00 against $8,100.00 — three months of the $640 of discretionary spending. The choice of base, not the choice of months, produces this difference. t2-p2: How many months of essential costs does the current $4,860 reserve cover? Give one decimal place. Answer: 1.8. Verification: $4,860 divided by the $2,700.00 essential monthly figure. Stating a reserve in months rather than dollars is what makes it comparable across households. t2-p3: What monthly contribution reaches the essential-cost target within the 18 months? Answer: $180.00. Verification: The $3,240.00 still needed, spread across 18 months. Setting the period first and deriving the contribution is what turns a target into something a budget can act on."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Argue for sizing this household’s reserve on the $2,700.00 essential figure or on the $3,340.00 total figure. Use the figures, name what your choice assumes about how the household would behave during an emergency, and say which assumption is the weaker one. Argues one base on the figures — for example that the $8,100.00 target is reachable at $180.00 a month within the stated 18 months while the $10,020.00 target is not, or that the higher target is safer because a household in difficulty rarely cuts $640 of spending immediately. Names the behavioural assumption behind the chosen base: the lower target assumes discretionary spending actually stops, and the higher target assumes it does not need to. Identifies the weaker assumption and says why — most defensibly, that cutting $640 a month in the first month of a crisis is harder than a spreadsheet makes it look, so the essential-cost target has less margin than it appears. Uses the $8,100.00 and $10,020.00 targets and the 1.8 months the current reserve covers. The response treats the base as the real decision, rather than debating the number of months. Either target is credited when the assumption behind it is named and examined."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Argues one base on the figures — for example that the $8,100.00 target is reachable at $180.00 a month within the stated 18 months while the $10,020.00 target is not, or that the higher target is safer because a household in difficulty rarely cuts $640 of spending immediately. Names the behavioural assumption behind the chosen base: the lower target assumes discretionary spending actually stops, and the higher target assumes it does not need to. Identifies the weaker assumption and says why — most defensibly, that cutting $640 a month in the first month of a crisis is harder than a spreadsheet makes it look, so the essential-cost target has less margin than it appears."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u03-l03.scoring.json",
+    "sourceScoringSha256": "61ff4be1cab87de5edfd6bb30d829e064cbd57538408e7dac0c85937688163bc",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

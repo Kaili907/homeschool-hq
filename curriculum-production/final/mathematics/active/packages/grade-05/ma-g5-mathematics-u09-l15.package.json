@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u09-l15",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u09-l15",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Geometry and the Coordinate Plane",
+    "dayInUnit": 15,
+    "courseDay": 159,
+    "phase": "Assessment preparation",
+    "focus": "classifying two-dimensional figures",
+    "title": "Assessment preparation: classifying two-dimensional figures"
+  },
+  "standards": [
+    "5.G.1",
+    "5.G.2",
+    "5.G.3",
+    "5.G.4"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-coordinate-axes",
+          "standard": "5.G.1",
+          "difficulty": 1,
+          "prompt": "Which coordinate-plane axis is vertical?",
+          "choices": [
+            "origin",
+            "ordered pair",
+            "y-axis",
+            "x-axis"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "read-ordered-pair",
+          "standard": "5.G.1",
+          "difficulty": 2,
+          "prompt": "What ordered pair has x-coordinate 4 and y-coordinate 9?",
+          "choices": [
+            "(9, 4)",
+            "(4, 9)",
+            "(5, 9)",
+            "(3, 9)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 2,
+          "prompt": "On a map, the garden is at x = 3 and y = 10. Which point names its location?",
+          "choices": [
+            "(4, 11)",
+            "(3, 10)",
+            "(4, 10)",
+            "(3, 11)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 2,
+          "prompt": "A shape has 3 sides, 0 right angles, and 0 pairs of parallel sides. What is the most specific name?",
+          "choices": [
+            "parallelogram",
+            "triangle",
+            "rectangle",
+            "rhombus"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 3,
+          "prompt": "In the hierarchy rhombus → parallelogram → quadrilateral, what category comes immediately after rhombus?",
+          "choices": [
+            "parallelogram",
+            "circle",
+            "pentagon",
+            "triangle"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "geometric-vocabulary",
+          "standard": "5.G.3",
+          "difficulty": 3,
+          "prompt": "Lines that meet to form a right angle are called what?",
+          "choices": [
+            "parallel",
+            "vertex",
+            "edge",
+            "perpendicular"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-route",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "Start at (3, 11). Move right 2 and up 2. What is the endpoint?",
+          "choices": [
+            "(5, 12)",
+            "(5, 14)",
+            "(4, 13)",
+            "(5, 13)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "identify-coordinate-axes",
+          "standard": "5.G.1",
+          "difficulty": 3,
+          "prompt": "Which coordinate-plane axis is horizontal?",
+          "choices": [
+            "y-axis",
+            "ordered pair",
+            "x-axis",
+            "origin"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "read-ordered-pair",
+          "standard": "5.G.1",
+          "difficulty": 2,
+          "prompt": "What ordered pair has x-coordinate 6 and y-coordinate 7?",
+          "choices": [
+            "(7, 6)",
+            "(7, 7)",
+            "(6, 7)",
+            "(7, 8)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 2,
+          "prompt": "On a map, the garden is at x = 7 and y = 2. Which point names its location?",
+          "choices": [
+            "(2, 7)",
+            "(7, 2)",
+            "(7, 1)",
+            "(8, 2)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 3,
+          "prompt": "A shape has 4 sides, 4 right angles, and 2 pairs of parallel sides. Its opposite sides are equal in length, and its adjacent sides are unequal in length. What is the most specific name?",
+          "choices": [
+            "rectangle",
+            "triangle",
+            "parallelogram",
+            "rhombus"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 3,
+          "prompt": "In the hierarchy rectangle → parallelogram → quadrilateral, what category comes immediately after rectangle?",
+          "choices": [
+            "pentagon",
+            "trapezoid",
+            "parallelogram",
+            "circle"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u09-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u09-l15"
+  }
+}

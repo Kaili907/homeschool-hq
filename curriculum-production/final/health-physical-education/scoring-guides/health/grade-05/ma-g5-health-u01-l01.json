@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g5-health-u01-l01",
+  "courseId": "ma-g5-health",
+  "grade": 5,
+  "subject": "health",
+  "standards": [
+    "Michigan Health: Core Concepts",
+    "Accessing Information"
+  ],
+  "primaryLessonType": "CONCEPT_VOCABULARY",
+  "secondaryLessonTypes": [
+    "DECISION_REASONING"
+  ],
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "Names at least two health dimensions that are supported by facts in the fresh case.",
+    "Uses at least two stated facts and keeps facts separate from assumptions or labels.",
+    "Chooses a safe, respectful action and explains how the facts support it.",
+    "Names an appropriate trusted adult or qualified professional when help is needed."
+  ],
+  "scoringGuidance": "Judge the learner's use of the five-dimension concept, facts, reasoning, and support route. Accept equivalent wording and alternate response modes. Do not score personal health, feelings, confidence, speed, handwriting, use of an adaptation, or similarity to the model. Do not infer a diagnosis, effort, motivation, character, family situation, or health status from the response.",
+  "protectedAuthority": {
+    "authorityVersion": "health-director-sample-r1",
+    "vocabularyCheck": [
+      {
+        "itemRef": "ma-g5-health-u01-l01#vocabulary-check-1",
+        "sufficientResponse": "Mental health is the closest match because the quiet room supports thinking and focus. Environmental health may be mentioned as a connection if the learner still identifies the quiet setting as the relevant fact."
+      },
+      {
+        "itemRef": "ma-g5-health-u01-l01#vocabulary-check-2",
+        "sufficientResponse": "Social health is the closest match because listening and helping someone reach support concern relationships, communication, and support."
+      },
+      {
+        "itemRef": "ma-g5-health-u01-l01#vocabulary-check-3",
+        "sufficientResponse": "Environmental health is the closest match because storm damage changed the safety of the surroundings."
+      }
+    ],
+    "independentEvidence": {
+      "caseRef": "ma-g5-health-u01-l01#independent-leah-center",
+      "requiredFacts": [
+        "A large event starts in the room.",
+        "The group cannot hear one another.",
+        "A center leader offers an open table in a quieter room."
+      ],
+      "dimensionConnections": [
+        "Environmental health: the room becomes loud and a quieter space is available.",
+        "Social health: the group needs to hear one another to communicate.",
+        "Mental health: a quieter place may support thinking and attention during the task."
+      ],
+      "acceptableActions": [
+        "Ask the center leader to use the quieter table.",
+        "Check with the center leader and group, then move to the offered quieter room.",
+        "Another action is acceptable only if it is safe, respectful, supported by the stated facts, and keeps the adult who controls the space involved."
+      ],
+      "adultSupport": "The center leader is the clearest support because that adult offered and manages the alternate space. A supervising parent, guardian, teacher, or club leader may also be acceptable if the learner explains that person's responsibility in the fictional situation."
+    },
+    "freshConceptCheck": {
+      "caseRef": "ma-g5-health-u01-l01#fresh-check-omar-park",
+      "requiredUnderstanding": [
+        "Storm damage and the closed path describe the surroundings, so they are environmental health facts.",
+        "The facts do not measure, label, or judge Omar's whole health.",
+        "A safe action is to follow the teacher to the open path and stay off the closed path.",
+        "The teacher has authority to guide the class; park staff may have authority over the closure."
+      ]
+    },
+    "acceptableVariation": [
+      "The learner may name more than two dimensions when every connection is tied to a stated fact.",
+      "Mental and emotional health may both appear when the learner accurately distinguishes thinking from feelings; the fictional cases do not require an emotional-health claim.",
+      "Equivalent words such as surroundings for environmental health or relationships and communication for social health are acceptable.",
+      "A typed, handwritten, signed, drawn-and-labeled, or spoken response earns equal credit when it supplies the same evidence."
+    ],
+    "misconceptionBoundaries": [
+      {
+        "id": "HLTH-G5-DIMENSIONS-SINGLE-FACT-WHOLE-PERSON",
+        "insufficientPattern": "Claims one fact proves a person's overall health or a medical or mental-health condition.",
+        "revisionNeeded": "State only what the fact shows and explain that the dimensions are thinking categories, not labels."
+      },
+      {
+        "id": "HLTH-G5-DIMENSIONS-ASSUMPTION-AS-FACT",
+        "insufficientPattern": "Adds a motive, feeling, character judgment, or private health claim that the case does not provide.",
+        "revisionNeeded": "Replace the assumption with a stated or observable fact from the case."
+      },
+      {
+        "id": "HLTH-G5-DIMENSIONS-NAME-WITHOUT-CONNECTION",
+        "insufficientPattern": "Lists dimensions without showing how a fact connects to a term's meaning.",
+        "revisionNeeded": "Add one fact-to-meaning connection for each required dimension."
+      },
+      {
+        "id": "HLTH-G5-DIMENSIONS-UNSUPPORTED-ACTION",
+        "insufficientPattern": "Names an action without a reason from the case or leaves out adult support where the adult controls safety or the setting.",
+        "revisionNeeded": "Use a stated fact as the reason and name the responsible adult or professional."
+      }
+    ],
+    "safetyCriticalErrors": [
+      "Directing a child to enter a closed or unsafe area.",
+      "Telling a child to manage a possible emergency alone.",
+      "Diagnosing or labeling the fictional person from one detail.",
+      "Seeking private health, body, treatment, medication, family, or feeling information as evidence.",
+      "Giving individualized medical, food, supplement, medication, treatment, or exercise advice."
+    ],
+    "scoringNotes": [
+      "A correct dimension name without a fact-to-meaning connection is partial evidence.",
+      "A safe action with incomplete reasoning is partial evidence and should receive the fact-link cue before a fresh retry.",
+      "A reasonable alternate action may be sufficient when it is safe, supported by case facts, respectful, and uses appropriate adult authority.",
+      "A pause, privacy choice, request for read-aloud, alternate response mode, or request for adult help is not evidence of failure."
+    ]
+  },
+  "masteryRule": "Do not mark mastery from the warm-up, vocabulary check, worked model, guided case, one response, confidence, or private reflection. Require accurate independent evidence on the Leah case and accurate retrieval or transfer with a meaningfully different fictional case on a later occasion. Both occasions must meet the lesson-specific criteria without answer-bearing help.",
+  "masteryPlan": {
+    "minimumEvidenceOccasions": 2,
+    "occasionOneRef": "ma-g5-health-u01-l01#independent-leah-center",
+    "laterRetrievalOrTransferRef": "ma-g5-health-u01-l01#later-transfer",
+    "independenceRule": "Definitions, read-aloud, directions, access tools, and response alternatives are permitted. A response is guided rather than independent if support supplies the dimensions, facts, action, decisive reason, or safety judgment.",
+    "privateReflectionContributes": false,
+    "decisionAuthority": "An authorized adult or separately approved scoring runtime applies this protected guide. A future Tutor may coach but may not make the mastery decision."
+  },
+  "remediation": "Name the smallest observable gap. Use the five-windows and camera-test explanation instead of repeating the original explanation. Complete the wet-floor guided correction. Then use the fresh water-fountain case without answer-bearing help. Exit remediation when the learner states one fact, connects the fact to a dimension, chooses a safe action, and names appropriate adult support without labeling a person.",
+  "adaptiveRoutes": [
+    {
+      "signal": "HLTH-G5-DIMENSIONS-SINGLE-FACT-WHOLE-PERSON",
+      "action": "Use the five-windows contrast: a window shows one part of a fictional situation but cannot score or label the whole person. Sort dimension statements from person labels, then retry the water-fountain case."
+    },
+    {
+      "signal": "HLTH-G5-DIMENSIONS-ASSUMPTION-AS-FACT",
+      "action": "Use the camera test: underline only words a camera or the written case could show. Change one guess into a stated fact, then retry the water-fountain case."
+    },
+    {
+      "signal": "HLTH-G5-DIMENSIONS-NAME-WITHOUT-CONNECTION",
+      "action": "Use the sentence frame 'This fact connects to ___ health because the term means ___.' Complete one guided connection, remove the frame, then retry the water-fountain case."
+    },
+    {
+      "signal": "HLTH-G5-DIMENSIONS-UNSUPPORTED-ACTION",
+      "action": "Ask: What changed? What safe choices are available? Which adult controls the setting? Model those questions on a separate broken-light case, then retry the water-fountain case."
+    },
+    {
+      "signal": "accurate independent evidence",
+      "action": "Record one evidence occasion. Schedule the later fictional transfer; do not mark mastery yet."
+    }
+  ],
+  "reflectionPolicy": {
+    "mode": "PRIVATE_OPTIONAL",
+    "visibleTo": [
+      "LEARNER"
+    ],
+    "scored": false,
+    "contributesToCompletion": false,
+    "contributesToMastery": false,
+    "subjectiveJudgmentPolicy": "SUBJECTIVE_REFLECTION_NOT_AUTOMATICALLY_RIGHT_OR_WRONG"
+  },
+  "guardianOrParentVisibility": "Share the learning goal, completion state, evidence type, and next instructional step. Do not expose the learner's private reflection or ask for proof that it occurred. Do not expose raw responses beyond the separately approved evidence-visibility policy. Never report diagnosis language or guesses about health, feelings, effort, motivation, or character.",
+  "guardianSafetyReview": {
+    "requiredForLessonCompletion": false,
+    "authority": "A parent, guardian, teacher, school staff member, or another trusted adult handles real safety concerns. A qualified health professional gives medical advice. Emergency services handle emergencies.",
+    "boundary": "The lesson, scorer, and future Tutor do not diagnose, prescribe, investigate private information, or override guardian or professional authority."
+  },
+  "safetyAndPrivacyNotes": [
+    "Use respectful, neutral, non-shaming language.",
+    "Required evidence uses fictional situations and never requires sensitive personal disclosure.",
+    "Do not infer health, feelings, diagnosis, motives, effort, character, or family circumstances from one fact or response.",
+    "Do not use dieting, calorie-target, weight-loss, body-value, appearance, or body-scoring language.",
+    "Do not provide individualized treatment, medication, food, supplement, or exercise advice.",
+    "Direct real health or safety concerns to a trusted adult or qualified professional; use emergency services for an emergency."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "shared base@656efba (canonical 5/7/8)",
+    "sourceLessonId": "ma-g5-health-u01-l01"
+  },
+  "contentProvenance": {
+    "repairLane": "mac/health-director-sample-r1",
+    "standardRef": "docs/curriculum-quality/health/HEALTH_LESSON_STANDARD_R1.md",
+    "sampleVersion": "health-director-sample-r1"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

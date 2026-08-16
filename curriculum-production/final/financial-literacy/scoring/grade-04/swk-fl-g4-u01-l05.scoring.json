@@ -1,0 +1,260 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u01-l05",
+  "lessonId": "ma-g4-financial-literacy-u01-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What does the plain helmet with a light cost together?",
+        "answer": "$30.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(26.50 + 4.00) = 30.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 2650
+              },
+              {
+                "op": "money",
+                "cents": 400
+              }
+            ]
+          },
+          "trace": "(26.50 + 4.00) = 30.50"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much cheaper is the second option?",
+        "answer": "$1.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(32.00 - (26.50 + 4.00)) = 1.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 3200
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 2650
+                },
+                {
+                  "op": "money",
+                  "cents": 400
+                }
+              ]
+            }
+          },
+          "trace": "(32.00 - (26.50 + 4.00)) = 1.50"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "Which option costs Omar less?",
+        "answer": "The plain helmet with a light",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare (26.50 + 4.00) with 32.00 = The plain helmet with a light. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 2650
+                },
+                {
+                  "op": "money",
+                  "cents": 400
+                }
+              ]
+            },
+            "right": {
+              "op": "money",
+              "cents": 3200
+            },
+            "whenLess": "The plain helmet with a light",
+            "whenEqual": "They cost the same",
+            "whenGreater": "The scooter helmet set"
+          },
+          "trace": "compare (26.50 + 4.00) with 32.00 = The plain helmet with a light"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is left after the scooter helmet set?",
+        "answer": "$13.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(45.00 - 32.00) = 13.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 4500
+            },
+            "less": {
+              "op": "money",
+              "cents": 3200
+            }
+          },
+          "trace": "(45.00 - 32.00) = 13.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What is left after the plain helmet with a light?",
+        "answer": "$14.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(45.00 - (26.50 + 4.00)) = 14.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 4500
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 2650
+                },
+                {
+                  "op": "money",
+                  "cents": 400
+                }
+              ]
+            }
+          },
+          "trace": "(45.00 - (26.50 + 4.00)) = 14.50"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying a decision routine",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response picks Omar's cheaper option with no other consideration named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A second consideration is raised for Omar but not connected to the purpose of a helmet."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names something beyond price that Omar should check, such as fit or safety certification, and treats the $1.50 difference as only one input to the decision."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the plain helmet with a light cost together?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much cheaper is the second option?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Which option costs Omar less?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is left after the scooter helmet set?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is left after the plain helmet with a light?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Omar's routine says to compare costs, not just find the smallest number. What else should he check before deciding between these two helmets?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the plain helmet with a light cost together? Answer: $30.50. Verification: (26.50 + 4.00) = 30.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How much cheaper is the second option? Answer: $1.50. Verification: (32.00 - (26.50 + 4.00)) = 1.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: Which option costs Omar less? Answer: The plain helmet with a light. Verification: compare (26.50 + 4.00) with 32.00 = The plain helmet with a light. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What is left after the scooter helmet set? Answer: $13.00. Verification: (45.00 - 32.00) = 13.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What is left after the plain helmet with a light? Answer: $14.50. Verification: (45.00 - (26.50 + 4.00)) = 14.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying a decision routine — Not yet: The response picks Omar's cheaper option with no other consideration named. Approaching: A second consideration is raised for Omar but not connected to the purpose of a helmet. Meets: The response names something beyond price that Omar should check, such as fit or safety certification, and treats the $1.50 difference as only one input to the decision. The response names something beyond price that Omar should check, such as fit or safety certification, and treats the $1.50 difference as only one input to the decision."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response names something beyond price that Omar should check, such as fit or safety certification, and treats the $1.50 difference as only one input to the decision."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-04/swk-fl-g4-u01-l05.scoring.json",
+    "sourceScoringSha256": "f02bf10d6a30c9b48338568fbe9bf6103e5aaba77e8fa7ac56d4b798af534a9a",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

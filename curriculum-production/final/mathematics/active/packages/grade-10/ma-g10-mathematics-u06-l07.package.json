@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u06-l07",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u06-l07",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Similarity Proofs and Applications",
+    "dayInUnit": 7,
+    "courseDay": 97,
+    "phase": "Investigation or close reading",
+    "focus": "the triangle proportionality theorem",
+    "title": "Investigation or close reading: the triangle proportionality theorem"
+  },
+  "standards": [
+    "G-SRT.4",
+    "G-SRT.5",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u06-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "proportional-side-in-similar-triangles",
+          "standard": "G-SRT.5",
+          "difficulty": 1,
+          "prompt": "AB = 4 maps to DE = 12, BC = 5. Find EF.",
+          "workedSolution": {
+            "steps": [
+              "Ratio 12 ÷ 4 = 3.",
+              "EF = 5 × 3 = 15."
+            ],
+            "answer": "15"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u06-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "geometric-mean-altitude",
+          "standard": "G-SRT.5",
+          "difficulty": 2,
+          "prompt": "In a right triangle, the altitude to the hypotenuse divides it into segments of length 2 and 32. Find the altitude.",
+          "choices": [
+            "8",
+            "30",
+            "34",
+            "17"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "indirect-measurement-by-similarity",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "A 4 m pole casts a 4 m shadow. At the same moment a building casts a 24 m shadow. How tall is the building?",
+          "choices": [
+            "23 m",
+            "25 m",
+            "6 m",
+            "24 m"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u06-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "similarity-proof-justification",
+          "standard": "G-SRT.4",
+          "difficulty": 2,
+          "prompt": "A line parallel to one side of a triangle divides the other two sides proportionally. Which statement correctly justifies it?",
+          "choices": [
+            "The parallel line creates corresponding angles, giving a smaller triangle similar to the original by AA, so the sides are in proportion.",
+            "The parallel line bisects both sides by definition.",
+            "The two parts of each side are congruent because the line is parallel.",
+            "The result follows from the Pythagorean theorem applied twice."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "proportional-side-in-similar-triangles",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is similar to triangle DEF. Side AB = 5 corresponds to DE = 15. If BC = 13, find EF.",
+          "choices": [
+            "4",
+            "39",
+            "13",
+            "23"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "geometric-mean-altitude",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "In a right triangle, the altitude to the hypotenuse divides it into segments of length 12 and 12. Find the altitude.",
+          "choices": [
+            "0",
+            "24",
+            "144",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "indirect-measurement-by-similarity",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "A 3 m pole casts a 8 m shadow. At the same moment a building casts a 48 m shadow. How tall is the building?",
+          "choices": [
+            "48 m",
+            "18 m",
+            "43 m",
+            "128 m"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u06-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "similarity-proof-justification",
+          "standard": "G-SRT.4",
+          "difficulty": 3,
+          "prompt": "The Pythagorean theorem can be proved using similarity. Which statement correctly justifies it?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "proportional-side-in-similar-triangles",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is similar to triangle DEF. Side AB = 9 corresponds to DE = 45. If BC = 6, find EF.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u06-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u06-l07"
+  }
+}

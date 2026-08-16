@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u06-l02",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Multiplying Fractions and Scaling",
+    "dayInUnit": 2,
+    "courseDay": 92,
+    "phase": "Concept model A",
+    "focus": "fraction by whole-number multiplication",
+    "title": "Concept model A: fraction by whole-number multiplication"
+  },
+  "standards": [
+    "5.NF.3",
+    "5.NF.4",
+    "5.NF.5",
+    "5.NF.6",
+    "5.NF.7"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u06-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-fractions",
+          "standard": "5.NF.4",
+          "difficulty": 1,
+          "prompt": "Find 2/3 × 3/4. Write the answer in simplest form.",
+          "workedSolution": {
+            "steps": [
+              "Multiply the numerators: 2 × 3 = 6. This counts the shaded parts of the area model.",
+              "Multiply the denominators: 3 × 4 = 12. This counts all the parts the model is cut into.",
+              "That gives 6/12; the greatest common factor of 6 and 12 is 6, and 6 ÷ 6 = 1 over 12 ÷ 6 = 2, so the answer is 1/2."
+            ],
+            "answer": "1/2"
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "scaling-magnitude",
+          "standard": "5.NF.5",
+          "difficulty": 2,
+          "prompt": "Compared with 12, 5/4 × 12 is __ 12.",
+          "workedSolution": {
+            "steps": [
+              "The factor 5/4 is larger than 1, because 5 fourths is one whole (4/4) plus an extra 1/4.",
+              "Compute to check: 5/4 × 12 = (5 × 12)/4 = 60/4 = 15.",
+              "Because 15 is above 12, the product is greater than 12. Multiplying by a factor over 1 always scales a number up."
+            ],
+            "answer": "greater than"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u06-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "fraction-word-problem",
+          "standard": "5.NF.6",
+          "difficulty": 1,
+          "prompt": "2 identical ribbon pieces are 2/3 meter each. What is their total length in meters?",
+          "choices": [
+            "1/3",
+            "4/3",
+            "2 2/3",
+            "1 1/3"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "divide-unit-fraction",
+          "standard": "5.NF.7",
+          "difficulty": 1,
+          "prompt": "Find 1/5 ÷ 5. Write the answer in simplest form.",
+          "choices": [
+            "1/10",
+            "1/25",
+            "1",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "fraction-as-division",
+          "standard": "5.NF.3",
+          "difficulty": 2,
+          "prompt": "Write 3 ÷ 5 as a fraction in simplest form.",
+          "choices": [
+            "3/5",
+            "2/5",
+            "1 2/3",
+            "3/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u06-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole",
+          "standard": "5.NF.4",
+          "difficulty": 1,
+          "prompt": "Find 3 × 2/4. Write the answer in simplest form.",
+          "choices": [
+            "6/4",
+            "3 1/2",
+            "1 1/2",
+            "1/6"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fractions",
+          "standard": "5.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 6/10 × 5/9. Write the answer in simplest form.",
+          "choices": [
+            "3",
+            "3 1/3",
+            "1 2/25",
+            "1/3"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scaling-magnitude",
+          "standard": "5.NF.5",
+          "difficulty": 2,
+          "prompt": "Compared with 5, 7/11 × 5 is __ 5.",
+          "choices": [
+            "greater than",
+            "less than",
+            "equal to"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "fraction-word-problem",
+          "standard": "5.NF.6",
+          "difficulty": 3,
+          "prompt": "5 identical ribbon pieces are 4/11 meter each. What is their total length in meters?",
+          "choices": [
+            "5 4/11",
+            "1 9/11",
+            "4/55",
+            "20/11"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u06-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "divide-unit-fraction",
+          "standard": "5.NF.7",
+          "difficulty": 2,
+          "prompt": "Find 1/3 ÷ 6. Write the answer in simplest form.",
+          "choices": [
+            "2",
+            "1/9",
+            "1/2",
+            "1/18"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "fraction-as-division",
+          "standard": "5.NF.3",
+          "difficulty": 2,
+          "prompt": "Write 9 ÷ 10 as a fraction in simplest form.",
+          "choices": [
+            "1/10",
+            "9/10",
+            "10/19",
+            "9/19"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u06-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u06-l02"
+  }
+}

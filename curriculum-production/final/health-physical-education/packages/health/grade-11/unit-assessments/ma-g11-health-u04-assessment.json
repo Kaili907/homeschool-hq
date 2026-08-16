@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g11-health-u04-assessment",
+  "courseId": "ma-g11-health",
+  "grade": 11,
+  "subject": "health",
+  "unitNumber": 4,
+  "unitTitle": "Navigating Health Systems, Coverage, and Confidentiality",
+  "essentialQuestion": "How does a person actually get care, and what does it cost them to try?",
+  "prompts": [
+    {
+      "type": "concept and vocabulary",
+      "prompt": "Explain levels of care: self-care, primary, urgent, emergency, and specialty in your own words and give a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of insurance vocabulary in plain language: premium, deductible, copay, network.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply what care costs without coverage, and where low-cost options exist in a new fictional situation. Show the decision process or cite the evidence used.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving preparing for an appointment and asking a clinician a real question; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect minor consent, confidentiality, and its limits in Michigan with medical records, portals, and who can see what. Explain how the two support, constrain, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Run three fictional cases through the system: choose the right level of care, estimate the cost path, prepare the questions, and identify the confidentiality rule that applies.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Walkthroughs may be written, charted, narrated, or completed on a supplied decision frame with vocabulary pre-defined.",
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "trustedAdultNote": "Direct any urgent safety, health, or mental-health concern to a trusted adult or qualified professional; this course is not diagnosis, therapy, or treatment.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceAssessmentId": "ma-g11-health-u04-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

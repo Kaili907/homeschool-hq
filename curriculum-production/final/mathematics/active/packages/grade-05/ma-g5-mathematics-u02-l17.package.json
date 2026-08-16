@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u02-l17",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u02-l17",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Place Value, Powers of Ten, and Decimals",
+    "dayInUnit": 17,
+    "courseDay": 35,
+    "phase": "Targeted correction",
+    "focus": "rounding decimals",
+    "title": "Targeted correction: rounding decimals"
+  },
+  "standards": [
+    "5.NBT.1",
+    "5.NBT.2",
+    "5.NBT.3",
+    "5.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "compare-decimals",
+          "standard": "5.NBT.3",
+          "difficulty": 1,
+          "prompt": "Compare 4.50 and 4.5 using <, >, or =.",
+          "workedSolution": {
+            "steps": [
+              "Line up the decimal points.",
+              "A zero added to the right of a decimal does not change its value.",
+              "Both numbers equal four and five tenths, so use =."
+            ],
+            "answer": "="
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "round-decimal",
+          "standard": "5.NBT.4",
+          "difficulty": 2,
+          "prompt": "Round 7.250 to the nearest tenth.",
+          "workedSolution": {
+            "steps": [
+              "The tenths digit is 2; inspect the hundredths digit.",
+              "The hundredths digit is 5, so the value is exactly halfway and rounds up.",
+              "Increase the tenths digit to 3: 7.3."
+            ],
+            "answer": "7.3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-number-line",
+          "standard": "5.NBT.3",
+          "difficulty": 1,
+          "prompt": "A number line from 3.0 to 4.0 has 10 equal intervals. Point P is 6 intervals after 3.0. What number is P?",
+          "choices": [
+            "3.5",
+            "3.4",
+            "3.6",
+            "36"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "place-value-chart",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "Place-value chart:\nhundreds | tens | ones | tenths | hundredths\n3 | 5 | 8 | 9 | 6\nWhat value does the 6 in the hundredths place represent?",
+          "choices": [
+            "60",
+            "0.06",
+            "0.6",
+            "600"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "In 889, how does the value of the 8 in the tens place compare with the value of the 8 in the hundreds place?",
+          "choices": [
+            "10 times",
+            "the same value",
+            "1/10 as much",
+            "100 times"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "power-of-ten-notation",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "10^? = 1000000",
+          "choices": [
+            "6",
+            "4",
+            "2",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 2,
+          "prompt": "2.9 × 10^2 = ?",
+          "choices": [
+            "2900",
+            "29",
+            "290",
+            "2.9"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "divide-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 2,
+          "prompt": "7.71 ÷ 10^1 = ?",
+          "choices": [
+            "77.1",
+            "0.771",
+            "0.0771",
+            "7.71"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-number-name",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "How is 231.277 written in words?",
+          "choices": [
+            "two hundred thirty-one and two hundred seventy-seven hundredths",
+            "two hundred thirty-one and two hundred seventy-eight thousandths",
+            "two hundred thirty-one and two hundred seventy-seven thousandths",
+            "two hundred thirty-two and two hundred seventy-seven thousandths"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "number-name-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write “five hundred sixty-nine and seven hundred ten thousandths” as a decimal.",
+          "choices": [
+            "570.710",
+            "576.10",
+            "569.710",
+            "569.711"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u02-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u02-l17"
+  }
+}

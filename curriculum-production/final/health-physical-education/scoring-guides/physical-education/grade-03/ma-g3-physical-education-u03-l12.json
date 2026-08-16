@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g3-physical-education-u03-l12",
+  "courseId": "ma-g3-physical-education",
+  "grade": 3,
+  "subject": "physical-education",
+  "standards": [
+    "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns",
+    "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+    "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others"
+  ],
+  "primaryLessonType": "REMEDIATION_RETRY",
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "The learner uses a safe setup or accurately describes it for linking balances into a sequence.",
+    "The learner applies Count, shape, change, finish. in one guided attempt and one fresh application or complete described equivalent.",
+    "The learner distinguishes learner-controlled rest from STOP AND TELL and DO NOT RESUME conditions.",
+    "Any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route earns equal credit for the same cue or decision evidence."
+  ],
+  "rubricDimensions": [
+    "Target evidence: applies Count, shape, change, finish..",
+    "Safety and self-management: uses setup, rest, stop, and maximum boundaries correctly.",
+    "Independent application: completes a fresh bounded attempt or equivalent described route.",
+    "Explanation and revision: identifies the cue or decision and a useful next adjustment.",
+    "Access parity: supplies the same target evidence through any approved route."
+  ],
+  "scoringGuidance": "Score safe participation when performed, decision quality, taught cue or skill evidence, planning, knowledge, reflection, revision, and completion as appropriate to the lesson type. Never score weight, appearance, body fat, calories, athletic talent, speed versus peers, body shape, fitness norms, standard-body performance, or willingness to avoid rest. Never reduce credit for adaptation, assistive technology, learner-controlled rest, a safety stop, guardian restriction, or a described route.",
+  "masteryRule": "Require accurate independent evidence of the taught cue, decision, sequence, tactic, or self-management on at least two occasions separated by time, setting, or meaningful variation when feasible. Physical occurrence, attendance, reflection alone, Tutor confidence, standard-route use, body data, speed, or self-report alone when adult confirmation is required cannot establish mastery.",
+  "remediation": "Name the observable gap for linking balances into a sequence. Use the simpler setup, replace the original wording with “Count, shape, change, finish.,” contrast the common error with the correction, practise one bounded change, then use the fresh retry. Offer rest or another route without penalty.",
+  "adaptiveRoutes": [
+    {
+      "signal": "starting position or setup is unclear",
+      "action": "Repeat one small movement on a steady four-count."
+    },
+    {
+      "signal": "target cue is missing",
+      "action": "Use the alternate cue “Count, shape, change, finish.,” then model the contrast once."
+    },
+    {
+      "signal": "common error appears",
+      "action": "Return to one small shape and one change, use a slower internal count, and mark the finish."
+    },
+    {
+      "signal": "standard route is unavailable or declined",
+      "action": "Equal-credit solo route: create, gesture, draw, or describe a four-count seated or standing sequence with a start, one change, and a stable finish."
+    },
+    {
+      "signal": "pain, dizziness, unusual breathing difficulty, head impact, injury concern, damaged equipment, or unsafe conditions occur",
+      "action": "Stop immediately and tell a trusted adult. Do not resume to finish evidence; use a described retry later only when appropriate."
+    },
+    {
+      "signal": "fresh retry is needed",
+      "action": "Create a fresh short sequence with a clear start, one chosen change, and stable finish; then name how the choice fits the focus. Use a new safe example rather than repeating the scored attempt."
+    }
+  ],
+  "protectedDecisionAuthority": [
+    "Target cue or decision: Count, shape, change, finish.",
+    "Acceptable evidence: Notice timing, clear change, and controlled transition rather than copying body shape.",
+    "Safety-critical boundary: No lift, inversion, forced contact, unfamiliar acrobatics, public performance, or movement beyond personal space.",
+    "Every approved adaptation is equivalent when it supplies the same target evidence.",
+    "A Tutor cannot claim observation, certify physical completion, replace guardian permission, diagnose, prescribe, or clear return."
+  ],
+  "sufficientEvidence": "One guided response, one fresh bounded application or described equivalent, and one cue/decision explanation for linking balances into a sequence. A safety stop is responsible evidence treatment, not failure.",
+  "guardianAuthority": {
+    "level": "GUARDIAN_PERMISSION",
+    "when": "Guardian permission is required before real movement, optional equipment, a real location, partner, outdoor route, or progression is used.",
+    "requiredAction": "The guardian confirms that the bounded space, optional equipment, and activity route are permitted before movement.",
+    "minimumRecord": "Record only permission status or that the equal-credit described route was used; collect no body, health, media, location, or performance data.",
+    "confirmationBoundary": "Guardian confirmation may establish permission or occurrence only. It does not certify academic mastery, physical quality, diagnosis, effort, body status, or safe return.",
+    "equalCreditAlternative": "When guardian review, real movement, equipment, space, partner, or location is unavailable, the supplied solo described/decision route is the complete equal-credit lesson.",
+    "tutorOrLearnerMaySubstitute": false
+  },
+  "evidenceTypes": [
+    "CREATIVE_SEQUENCE",
+    "SKILL_EVIDENCE",
+    "DECISION_QUALITY",
+    "REFLECTION"
+  ],
+  "tutorBoundary": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "may": [
+      "explain approved content and vocabulary",
+      "cue the approved model",
+      "offer an approved presentation or activity route",
+      "coach how the learner presents their own evidence",
+      "route to rest, stop, retry, or adult handoff"
+    ],
+    "mustNot": [
+      "cannot diagnose, prescribe, rehabilitate, or give medical clearance",
+      "cannot claim unapproved observation or certify physical completion",
+      "cannot override rest, stop, adaptation, guardian authority, professional authority, or safe return",
+      "cannot choose the answer or action for fresh independent evidence",
+      "cannot score body data, norms, appearance, talent, or peer comparison"
+    ]
+  },
+  "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, the guardian safety confirmation for equipment and environment, and the next instructional step. Do not expose recordings, images, body data, or health information. Study records completion and progress metadata only; it does not perform or persist physical measurement or fitness tracking.",
+  "guardianSafetyReview": {
+    "equipment": "A mat, carpet, folded blanket, or grass for any weight-bearing or rolling work. No hard or uneven surface.",
+    "environment": "Indoor open space with a padded surface, or a level grassy outdoor area.",
+    "movement_hazards": "Balance, rolling, and weight transfer carry a fall risk. An adult supervises directly, spots where needed, and no learner attempts an inversion or a skill they have not been taught.",
+    "food_or_allergy_note": null,
+    "guardian_confirmation_required": true
+  },
+  "safetyAndPrivacyNotes": [
+    "Use respectful, non-shaming language about bodies, ability, size, speed, and coordination.",
+    "Never require or record body weight, height, BMI, body-fat percentage, or any body measurement.",
+    "Never require a fitness test, a timed trial, a repetition count, a distance score, or any ranking of one learner against another.",
+    "Never require a photograph, video, or any recording of the learner as proof of participation or performance.",
+    "Never require a public performance, an audience, or a demonstration in front of peers; sharing is always the learner choice.",
+    "Progress is compared only against the learner own earlier work, and only when the learner chooses to track it.",
+    "Allow rest, a break, an adapted path, or an opt-out at any point without treating it as failure.",
+    "Stop activity and seek a trusted adult or qualified professional for pain, dizziness, breathing difficulty, or injury; this course is not medical advice."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",
+    "sourceLessonId": "ma-g3-physical-education-u03-l12",
+    "productionDepthRevision": "physical-education-production-depth-r1"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

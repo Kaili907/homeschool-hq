@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l01",
+  "lessonId": "ma-g9-ready-for-life-u02-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "System completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fewer than six tasks are listed, or one or more listed tasks has no person or method assigned in the final rotation system." },
+          { "label": "Proficient", "descriptor": "At least six specific tasks are listed with a frequency, and every task has a specific person or rotation method assigned." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and the system includes a specific rule for what happens when the assigned person is unavailable." }
+        ]
+      },
+      {
+        "dimension": "Realism and fairness of rotation method",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The rotation method is vague ('we'll figure it out') or clearly unfair to one household member without acknowledgment." },
+          { "label": "Proficient", "descriptor": "The rotation method is specific and named (alternating weekly, fixed assignment, drawing names) with a clear reason for the choice." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and the reflection names a specific, realistic failure mode and a specific rule that would prevent it." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Every task in the final table has a named person or a named rotation method, not a blank or 'TBD.'",
+      "The explanation of why the rotation method was chosen references something specific about the household, not a generic statement like 'it seemed fair.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

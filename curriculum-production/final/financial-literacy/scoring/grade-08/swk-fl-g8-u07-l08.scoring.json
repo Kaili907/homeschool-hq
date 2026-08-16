@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l08",
+  "lessonId": "ma-g8-financial-literacy-u07-l08",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much sales tax is charged?",
+        "answer": "$20.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6.25% of 320.00) = 20.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 32000
+            },
+            "bps": 625,
+            "round": "exact"
+          },
+          "trace": "(6.25% of 320.00) = 20.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What does the excise charge come to on 400 units?",
+        "answer": "$72.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(0.18 x 400) = 72.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 18
+            },
+            "times": 400
+          },
+          "trace": "(0.18 x 400) = 72.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What does the 1.2% property tax come to?",
+        "answer": "$1,800.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1.2% of 150,000.00) = 1,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 15000000
+            },
+            "bps": 120,
+            "round": "exact"
+          },
+          "trace": "(1.2% of 150,000.00) = 1,800.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What do all three taxes come to?",
+        "answer": "$1,892.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((6.25% of 320.00) + (0.18 x 400) + (1.2% of 150,000.00)) = 1,892.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 32000
+                },
+                "bps": 625,
+                "round": "exact"
+              },
+              {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 18
+                },
+                "times": 400
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 15000000
+                },
+                "bps": 120,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "((6.25% of 320.00) + (0.18 x 400) + (1.2% of 150,000.00)) = 1,892.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What is the monthly share of the property tax?",
+        "answer": "$150.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((1.2% of 150,000.00) / 12) = 150.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 15000000
+              },
+              "bps": 120,
+              "round": "exact"
+            },
+            "by": 12,
+            "round": "exact"
+          },
+          "trace": "((1.2% of 150,000.00) / 12) = 150.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Distinguishing per-unit from percentage taxes",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Quintus's excise charge as a percentage."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The difference is asserted for Quintus but the effect of rising prices is not addressed."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Quintus's excise is fixed per unit regardless of price, so its share of a purchase falls as prices rise unless the charge is changed."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much sales tax is charged?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the excise charge come to on 400 units?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the 1.2% property tax come to?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do all three taxes come to?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly share of the property tax?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain how Quintus's excise charge differs from a percentage tax, and what happens to its real burden when prices rise."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much sales tax is charged? Answer: $20.00. Verification: (6.25% of 320.00) = 20.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What does the excise charge come to on 400 units? Answer: $72.00. Verification: (0.18 x 400) = 72.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What does the 1.2% property tax come to? Answer: $1,800.00. Verification: (1.2% of 150,000.00) = 1,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What do all three taxes come to? Answer: $1,892.00. Verification: ((6.25% of 320.00) + (0.18 x 400) + (1.2% of 150,000.00)) = 1,892.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What is the monthly share of the property tax? Answer: $150.00. Verification: ((1.2% of 150,000.00) / 12) = 150.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Distinguishing per-unit from percentage taxes — Not yet: The response treats Quintus's excise charge as a percentage. Approaching: The difference is asserted for Quintus but the effect of rising prices is not addressed. Meets: The response explains that Quintus's excise is fixed per unit regardless of price, so its share of a purchase falls as prices rise unless the charge is changed. The response explains that Quintus's excise is fixed per unit regardless of price, so its share of a purchase falls as prices rise unless the charge is changed."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Quintus's excise is fixed per unit regardless of price, so its share of a purchase falls as prices rise unless the charge is changed."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u07-l08.scoring.json",
+    "sourceScoringSha256": "264e4e6a6d9495019e602cc83c4d1e93973bf21f6ab3722e4b7e484ed9f989a3",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

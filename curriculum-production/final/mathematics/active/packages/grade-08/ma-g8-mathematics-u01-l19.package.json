@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l19",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l19",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 19,
+    "courseDay": 19,
+    "phase": "Concept model — correction block",
+    "focus": "root symbols as exact solutions",
+    "title": "Square and cube roots as solutions to x² = p and x³ = p"
+  },
+  "standards": [
+    "8.EE.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Concept model — correction block",
+    "profile": "concept-model-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use these examples as the model for the work below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l19#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-x-squared-equals-p",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Solve x² = 36. Write the exact solution or solutions using root notation.",
+          "workedSolution": {
+            "steps": [
+              "x² = 36 asks which number multiplied by itself gives 36.",
+              "For a positive p, x² = p has two real solutions: x = √p and x = −√p.",
+              "√36 = 6 because 6² = 36, and (−6)² = 36 as well."
+            ],
+            "answer": "x = 6 or x = −6"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#ex-02",
+          "kind": "worked-example",
+          "itemType": "solve-x-cubed-equals-p",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Solve x³ = 8. Write the exact solution using root notation.",
+          "workedSolution": {
+            "steps": [
+              "x³ = 8 asks which number multiplied by itself three times gives 8.",
+              "Cubing keeps the sign of a number, so only one real number cubes to 8.",
+              "∛8 = 2 because 2³ = 8."
+            ],
+            "answer": "x = 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l19#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-x-squared-equals-p",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Write the complete exact solution of x² = 49.",
+          "choices": [
+            "x = 7",
+            "x = 7 or x = −7",
+            "x = −7",
+            "x = 49/2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-x-cubed-equals-p",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Write the complete exact solution of x³ = 125.",
+          "choices": [
+            "x = 5 or x = −5",
+            "x = ∛5",
+            "x = 5",
+            "x = 125/3"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "count-real-solutions",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "How many real solutions does x² = 11 have?",
+          "choices": [
+            "0",
+            "1",
+            "2",
+            "infinitely many"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "write-exact-solutions-nonperfect",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Write the exact solutions of x² = 11 using root notation.",
+          "choices": [
+            "x = √11 or x = −√11",
+            "x = √11",
+            "x = 11/2",
+            "x is about 3.32"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work these on your own. Report exact values wherever an exact value exists.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l19#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-x-squared-equals-p",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Write the complete exact solution of x² = 81.",
+          "choices": [
+            "x = 9 or x = −9",
+            "x = 9",
+            "x = −9",
+            "x = 40.5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-x-cubed-equals-p",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Write the complete exact solution of x³ = 27.",
+          "choices": [
+            "x = 3 or x = −3",
+            "x = 3",
+            "x = ∛3",
+            "x = 9"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "write-exact-solutions-nonperfect",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Write the exact solutions of x² = 23 using root notation.",
+          "choices": [
+            "x = 23/2",
+            "x = √23 or x = −√23",
+            "x is about 4.80",
+            "x = √23"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "write-exact-solution-cube-nonperfect",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Write the exact solution of x³ = 10 using root notation.",
+          "choices": [
+            "x = ∛10 or x = −∛10",
+            "x = 10/3",
+            "x = ∛10",
+            "x is about 2.15"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "count-real-solutions",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "How many real solutions does x³ = 5 have?",
+          "choices": [
+            "1",
+            "2",
+            "0",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "solve-x-squared-rational",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Write the complete exact solution of x² = 9/16.",
+          "choices": [
+            "x = 3/4",
+            "x = 3/4 or x = −3/4",
+            "x = 9/8",
+            "x = 81/256"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Work these with no support. Show enough that someone else could check each step.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l19#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "exact-versus-approximate",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "x² = 20. Which line gives the exact solutions rather than an approximation?",
+          "choices": [
+            "x = 4.47 or x = −4.47",
+            "x = 10 or x = −10",
+            "x = √20 or x = −√20",
+            "x = 400 or x = −400"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "count-real-solutions",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "How many real solutions does x² = 7 have?",
+          "choices": [
+            "2",
+            "1",
+            "0",
+            "infinitely many"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l19#mc-03",
+          "kind": "constructed-response",
+          "itemType": "sign-behaviour-invariant",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "For a positive rational p, x² = p has two real solutions but x³ = p has only one. Explain why, using what squaring and cubing do to the sign of a number.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l19.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.1-correction",
+    "itemSource": "integration-correction-generator@curriculum-release-corrections/grade8-mathematics-integration/build_student_work.py",
+    "seed": "1.0.1-correction|ma-g8-mathematics-u01-l19"
+  }
+}

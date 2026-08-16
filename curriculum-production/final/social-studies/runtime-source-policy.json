@@ -1,0 +1,723 @@
+{
+  "schemaVersion": 1,
+  "policyId": "FINAL_SOCIAL_STUDIES_SOURCE_READINESS",
+  "packageAdmission": {
+    "state": "ADMITTED",
+    "appliesToAll972Packages": true,
+    "dynamicLessonsGloballyProductionUnready": false
+  },
+  "lessonStates": {
+    "READY": {
+      "launch": "ENABLED",
+      "scoring": "ENABLED",
+      "meaning": "A pinned static source set has verified metadata/provenance."
+    },
+    "PENDING_SOURCE_ATTACHMENT": {
+      "launch": "DISABLED",
+      "scoring": "DISABLED",
+      "visibleAction": "Adult must attach qualifying sources",
+      "meaning": "The package is admitted, but this lesson cannot launch or be scored until an adult attachment satisfies the contract."
+    },
+    "ATTACHED_INCOMPLETE": {
+      "launch": "DISABLED",
+      "scoring": "DISABLED",
+      "visibleAction": "Adult must correct source metadata or sufficiency",
+      "meaning": "An attachment exists but fails one or more required metadata, authority, retrieval, safety, or sufficiency checks."
+    },
+    "ATTACHED_SATISFIED": {
+      "launch": "ENABLED",
+      "scoring": "ENABLED",
+      "meaning": "The adult-attested attachment passes every contract check and is current for the learner-selected issue."
+    }
+  },
+  "transitionRules": [
+    "PENDING_SOURCE_ATTACHMENT -> ATTACHED_INCOMPLETE when any attachment is recorded but the contract is not fully satisfied.",
+    "PENDING_SOURCE_ATTACHMENT or ATTACHED_INCOMPLETE -> ATTACHED_SATISFIED only after all required fields, qualification, authority, perspective, retrieval, privacy, and unit sufficiency rules pass.",
+    "ATTACHED_SATISFIED -> PENDING_SOURCE_ATTACHMENT when the issue changes or the attachment is withdrawn.",
+    "ATTACHED_SATISFIED -> ATTACHED_INCOMPLETE when the source is older than 180 days, stops resolving, or is amended and has not been revalidated."
+  ],
+  "dynamicContract": {
+    "contractId": "DYNAMIC_SOURCE_REQUIREMENT",
+    "contractVersion": 1,
+    "subject": "social-studies",
+    "purpose": "Some lessons turn on evidence that does not exist until the lesson is taught -- the learner picks the public issue, so the sources that bear on it are chosen at that moment. This contract states, in advance and in machine-checkable form, what a source attached at that moment must be. It makes the requirement checkable. It does not satisfy it: no lesson governed by this contract is READY until a satisfying attachment has actually been recorded.",
+    "whenThisApplies": "A unit whose evidence base is selected by the learner or tutor at teaching time, so that no source fixed in advance is evidence about the thing the learner is arguing. Naming a plausible historical source for such a unit would claim a source check that was never performed.",
+    "noInvention": {
+      "rule": "No title, date, creator, URL, or quotation is ever authored, guessed, or recalled from memory -- not by this lane, not by the tutor, not by the learner, not by any tool that fills in an attachment record.",
+      "consequence": "An attachment whose fields were filled in from memory rather than from the retrieved source is a failed attachment, and the lesson stays pending.",
+      "quotations": "No source text is stored in an attachment record. The learner transcribes any quotation directly from the source they retrieved, into their own work."
+    },
+    "acceptableSource": {
+      "mustAllHold": [
+        "It bears on the specific issue the learner has stated -- not on the general topic area.",
+        "It names a responsible party: a person, agency, organization, or outlet that can be held to it.",
+        "It carries a date: published, adopted, filed, recorded, last-updated, or (for learner-collected evidence) collected.",
+        "It has a retrieval location a second person could follow: a URL, a records request reference, a publication and page, or a described physical document.",
+        "The tutor opened it in full and read it before attaching it.",
+        "It was retrievable on the date recorded in the attachment."
+      ],
+      "qualifyingKinds": [
+        {
+          "kind": "OFFICIAL_RECORD",
+          "examples": "agenda, minutes, ordinance, resolution, budget line, permit, inspection report, or filing of a governing body (municipal, county, tribal, state, or federal)"
+        },
+        {
+          "kind": "AGENCY_DATA_OR_REPORT",
+          "examples": "data series, map, or report published by a government agency or a public university"
+        },
+        {
+          "kind": "PARTY_STATEMENT",
+          "examples": "a statement, plan, petition, or filing published by an organization that is itself a party to the issue -- primary evidence of that party's position, and interested"
+        },
+        {
+          "kind": "INDEPENDENT_REPORTING",
+          "examples": "reporting carrying a named outlet, a named reporter, and a date"
+        },
+        {
+          "kind": "LEARNER_COLLECTED",
+          "examples": "an interview, observation, count, or survey the learner conducts and records, with date, the participant's role, and recorded consent"
+        }
+      ],
+      "disqualifying": [
+        "No nameable responsible party, or no date.",
+        "Text produced or completed by a language model, or any source reconstructed from someone's memory of it.",
+        "A repost or aggregation whose original is not identified and retrievable.",
+        "A social post without an identifiable author and date.",
+        "Anything the tutor could not open at selection time -- including a search-result snippet, a paywalled item they did not read, or a dead link.",
+        "A source about the general topic that says nothing about the learner's stated issue."
+      ]
+    },
+    "sourceAuthority": {
+      "tiers": [
+        {
+          "tier": "TIER_1_OFFICIAL_RECORD",
+          "covers": [
+            "OFFICIAL_RECORD",
+            "AGENCY_DATA_OR_REPORT"
+          ],
+          "note": "The body's own record of what it did or measured."
+        },
+        {
+          "tier": "TIER_2_PARTY_STATEMENT",
+          "covers": [
+            "PARTY_STATEMENT"
+          ],
+          "note": "Primary and interested. Admissible as evidence of the party's position, not as a neutral account of the facts. The interest must be disclosed in the attachment."
+        },
+        {
+          "tier": "TIER_3_INDEPENDENT_REPORTING",
+          "covers": [
+            "INDEPENDENT_REPORTING"
+          ],
+          "note": "Named outlet, named reporter, date."
+        },
+        {
+          "tier": "TIER_4_LEARNER_COLLECTED",
+          "covers": [
+            "LEARNER_COLLECTED"
+          ],
+          "note": "Primary evidence the learner made. Strong for civic learning, narrow in reach; never the only source."
+        }
+      ],
+      "rules": [
+        "At least one attached source per unit must be TIER_1 or TIER_3.",
+        "A TIER_2 or TIER_4 source may never be the only source for a unit.",
+        "Where the issue is contested, at least two attached sources must have different responsible parties.",
+        "The tier and any interest are recorded on the attachment, not judged silently."
+      ]
+    },
+    "selection": {
+      "whoMayPropose": [
+        "learner",
+        "parent",
+        "tutor"
+      ],
+      "whoMustApprove": "parent or tutor",
+      "rules": [
+        "The approving adult opens and reads the source in full before attaching it. Attaching from a title, a snippet, or a search result is prohibited.",
+        "The approving adult previews the source for content safety and for reading level at the learner's grade, and records that they did.",
+        "The approving adult records who selected the source and on what date.",
+        "If the adult cannot confirm the responsible party, the date, or the retrieval location, the source is not attached and the lesson stays pending. Substituting a close-enough source is prohibited.",
+        "The tutor/scoring boundary in the shipped package still holds: the adult may help locate, read aloud, and make sense of a source, and may ask questions that test the learner's reasoning, but may not write, dictate, or correct the wording of the learner's graded claim, argument, or citation.",
+        "The learner writes the primary-vs-secondary label and its reason themselves; the adult does not supply it."
+      ],
+      "privacy": [
+        "No attached source may identify the learner or the learner's family.",
+        "An attachment record carries no personal data about the learner.",
+        "Learner-collected evidence records the participant's role and consent, not identifying details -- and never identifying details of another minor.",
+        "A public issue involving a named private individual is redirected to the institutional record of the issue."
+      ]
+    },
+    "evidenceMetadata": {
+      "note": "Fields an attachment record must carry. Every value is copied from the retrieved source or recorded by the adult who retrieved it. None is generated.",
+      "required": [
+        {
+          "field": "attachmentId",
+          "of": "the attachment record"
+        },
+        {
+          "field": "lessonRef",
+          "of": "the lesson the source is attached to"
+        },
+        {
+          "field": "unitRef",
+          "of": "the unit"
+        },
+        {
+          "field": "issueStatement",
+          "of": "the public issue the learner chose, in the learner's own words"
+        },
+        {
+          "field": "sourceTitle",
+          "of": "the source, as it appears on the source"
+        },
+        {
+          "field": "responsibleParty",
+          "of": "the creator, agency, organization, or outlet"
+        },
+        {
+          "field": "sourceDate",
+          "of": "published, adopted, filed, recorded, last-updated, or collected date, as the source gives it"
+        },
+        {
+          "field": "retrievalLocation",
+          "of": "URL, records reference, or described physical document"
+        },
+        {
+          "field": "retrievedOn",
+          "of": "the date it was retrieved"
+        },
+        {
+          "field": "retrievedBy",
+          "of": "who retrieved it"
+        },
+        {
+          "field": "sourceKind",
+          "of": "one of acceptableSource.qualifyingKinds"
+        },
+        {
+          "field": "authorityTier",
+          "of": "one of sourceAuthority.tiers"
+        },
+        {
+          "field": "primaryOrSecondary",
+          "of": "the learner's label"
+        },
+        {
+          "field": "primaryOrSecondaryReason",
+          "of": "the learner's one reason for the label"
+        },
+        {
+          "field": "interestDisclosure",
+          "of": "what stake, if any, the responsible party has in the issue"
+        },
+        {
+          "field": "relevanceToIssue",
+          "of": "why this is evidence about the learner's stated issue"
+        },
+        {
+          "field": "limitsNoted",
+          "of": "what this source does not show"
+        },
+        {
+          "field": "selectedBy",
+          "of": "the approving adult"
+        },
+        {
+          "field": "selectedOn",
+          "of": "the approval date"
+        },
+        {
+          "field": "readInFull",
+          "of": "boolean; the adult read the whole source before attaching"
+        },
+        {
+          "field": "previewedForSafetyAndLevel",
+          "of": "boolean; plus who previewed"
+        }
+      ],
+      "prohibitedInAttachment": [
+        "Quoted source text of any length beyond a citation-length title.",
+        "Any field filled in from memory rather than from the retrieved source.",
+        "Personal data about the learner."
+      ]
+    },
+    "sufficiency": {
+      "perLesson": "A lesson whose task requires a source needs at least one attachment satisfying every clause above.",
+      "perUnit": "The unit needs at least two attachments that satisfy sourceAuthority.rules, including the different-responsible-parties rule where the issue is contested.",
+      "admission": "A lesson is admissible only when its own requirement and the unit requirement are both satisfied."
+    },
+    "readinessStates": [
+      {
+        "state": "PENDING_SOURCE_ATTACHMENT",
+        "meaning": "No attachment recorded. This is the default and the state every governed lesson ships in.",
+        "lessonStatus": "NEEDS_HUMAN_REVIEW",
+        "sourceIntegrityStatus": "UNKNOWN",
+        "admissible": false
+      },
+      {
+        "state": "ATTACHED_INCOMPLETE",
+        "meaning": "An attachment exists but a required field is missing, a clause is unmet, or the authority rules are not satisfied.",
+        "lessonStatus": "NEEDS_HUMAN_REVIEW",
+        "sourceIntegrityStatus": "UNKNOWN",
+        "admissible": false
+      },
+      {
+        "state": "ATTACHED_SATISFIED",
+        "meaning": "Every required field is present, the source qualifies, the authority and perspective rules hold, and the retrieval was confirmed on the recorded date.",
+        "lessonStatus": "READY",
+        "sourceIntegrityStatus": "VERIFIED_AT_ATTACHMENT",
+        "admissible": true
+      }
+    ],
+    "readinessRule": "The existence of this contract never makes a lesson READY. A governed lesson is PENDING_SOURCE_ATTACHMENT until an attachment record satisfying every clause exists, and a pending lesson is reported as pending -- not as READY, and not as verified.",
+    "revalidation": {
+      "attachmentAgeDays": 180,
+      "rule": "An attachment older than 180 days is re-checked before it is scored again: current public issues move and links rot.",
+      "alsoRevalidateWhen": [
+        "the learner's issue statement changes",
+        "the retrieval location stops resolving",
+        "the responsible party withdraws or amends the source"
+      ]
+    }
+  },
+  "attachmentMetadataContract": {
+    "schemaPath": "curriculum-production/final/social-studies/dynamic-attachment-metadata.schema.json",
+    "schemaSha256": "b44c0c2242ce161341e57a1126caf64f852cb2ca5fe5a77ca1ebbe670ead3b13",
+    "schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://manuel.academy/schemas/social-studies/dynamic-source-attachment-v2.json",
+      "title": "Social Studies dynamic source attachment metadata",
+      "description": "Metadata-only record for a source retrieved for a learner-selected Grade 3 civic issue. Source bodies and quotations are deliberately excluded.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attachmentId",
+        "lessonRef",
+        "unitRef",
+        "issueStatement",
+        "sourceIdentifier",
+        "sourceTitle",
+        "responsibleParty",
+        "sourceDate",
+        "sourceVersionOrEdition",
+        "retrievalLocation",
+        "retrievedOn",
+        "retrievedByRole",
+        "retrievalStatus",
+        "mediaType",
+        "language",
+        "sourceKind",
+        "authorityTier",
+        "authorityVerified",
+        "primaryOrSecondary",
+        "primaryOrSecondaryReason",
+        "interestDisclosure",
+        "relevanceToIssue",
+        "limitsNoted",
+        "rightsCategory",
+        "rightsStatement",
+        "publicAccess",
+        "selectedByRole",
+        "selectedOn",
+        "readInFull",
+        "contentSafetyReviewedByRole",
+        "readingLevelReviewedByRole",
+        "previewedForSafetyAndLevel",
+        "containsLearnerPersonalData",
+        "containsOtherMinorPersonalData",
+        "quotedTextStored",
+        "contentDigestSha256"
+      ],
+      "properties": {
+        "attachmentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "lessonRef": {
+          "type": "string",
+          "pattern": "^ma-g3-social-studies-u09-l(?:0[1-9]|1[0-2])$"
+        },
+        "unitRef": {
+          "const": "ma-g3-social-studies-u09"
+        },
+        "issueStatement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Learner's own issue statement; not generated or rewritten by the tutor."
+        },
+        "sourceIdentifier": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300,
+          "description": "Record, docket, report, publication, dataset, or locally assigned learner-evidence identifier copied from the retrieved source context."
+        },
+        "sourceTitle": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "responsibleParty": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "sourceDate": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 80,
+          "description": "Published, adopted, filed, recorded, updated, or collected date as the source gives it."
+        },
+        "sourceVersionOrEdition": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "retrievalLocation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "description": "Retrieved URL, records reference, publication/page reference, or described physical document; never a search-result snippet."
+        },
+        "retrievedOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "retrievedByRole": {
+          "enum": [
+            "PARENT",
+            "TUTOR",
+            "TEACHER"
+          ]
+        },
+        "retrievalStatus": {
+          "const": "OPENED_AND_READABLE"
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "language": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "sourceKind": {
+          "enum": [
+            "OFFICIAL_RECORD",
+            "AGENCY_DATA_OR_REPORT",
+            "PARTY_STATEMENT",
+            "INDEPENDENT_REPORTING",
+            "LEARNER_COLLECTED"
+          ]
+        },
+        "authorityTier": {
+          "enum": [
+            "TIER_1_OFFICIAL_RECORD",
+            "TIER_2_PARTY_STATEMENT",
+            "TIER_3_INDEPENDENT_REPORTING",
+            "TIER_4_LEARNER_COLLECTED"
+          ]
+        },
+        "authorityVerified": {
+          "const": true
+        },
+        "primaryOrSecondary": {
+          "enum": [
+            "PRIMARY",
+            "SECONDARY"
+          ]
+        },
+        "primaryOrSecondaryReason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Learner-authored reason; an adult may verify presence but may not supply wording."
+        },
+        "interestDisclosure": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "relevanceToIssue": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 750
+        },
+        "limitsNoted": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 750
+        },
+        "rightsCategory": {
+          "enum": [
+            "PUBLIC_DOMAIN",
+            "GOVERNMENT_RECORD",
+            "CC0",
+            "CC_BY",
+            "CC_BY_SA",
+            "LICENSED_LINK_ONLY",
+            "FAIR_USE_MINIMAL_EXCERPT",
+            "LEARNER_COLLECTED_WITH_CONSENT"
+          ]
+        },
+        "rightsStatement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 750,
+          "description": "Copied or faithfully summarized from the retrieved source's rights/access notice; no license may be guessed."
+        },
+        "publicAccess": {
+          "type": "boolean"
+        },
+        "selectedByRole": {
+          "enum": [
+            "PARENT",
+            "TUTOR",
+            "TEACHER"
+          ]
+        },
+        "selectedOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "readInFull": {
+          "const": true
+        },
+        "contentSafetyReviewedByRole": {
+          "enum": [
+            "PARENT",
+            "TUTOR",
+            "TEACHER"
+          ]
+        },
+        "readingLevelReviewedByRole": {
+          "enum": [
+            "PARENT",
+            "TUTOR",
+            "TEACHER"
+          ]
+        },
+        "previewedForSafetyAndLevel": {
+          "const": true
+        },
+        "containsLearnerPersonalData": {
+          "const": false
+        },
+        "containsOtherMinorPersonalData": {
+          "const": false
+        },
+        "quotedTextStored": {
+          "const": false,
+          "description": "The attachment stores no source body and no quotation. Any quotation is transcribed by the learner directly into learner work."
+        },
+        "contentDigestSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Optional digest of retrieved bytes for change detection; never a substitute for retrieval and review."
+        },
+        "participantRole": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "consentRecorded": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "OFFICIAL_RECORD"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_1_OFFICIAL_RECORD"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "AGENCY_DATA_OR_REPORT"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_1_OFFICIAL_RECORD"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "PARTY_STATEMENT"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_2_PARTY_STATEMENT"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "INDEPENDENT_REPORTING"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_3_INDEPENDENT_REPORTING"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "LEARNER_COLLECTED"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "required": [
+              "participantRole",
+              "consentRecorded"
+            ],
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_4_LEARNER_COLLECTED"
+              },
+              "rightsCategory": {
+                "const": "LEARNER_COLLECTED_WITH_CONSENT"
+              },
+              "participantRole": {
+                "type": "string",
+                "minLength": 1
+              },
+              "consentRecorded": {
+                "const": true
+              }
+            }
+          }
+        }
+      ],
+      "x-unit-sufficiency": {
+        "minimumAttachments": 2,
+        "requiresAtLeastOneAuthorityTier": [
+          "TIER_1_OFFICIAL_RECORD",
+          "TIER_3_INDEPENDENT_REPORTING"
+        ],
+        "partyOrLearnerCollectedMayNotStandAlone": true,
+        "differentResponsiblePartiesWhenContested": true,
+        "sameIssueStatementRequiredAcrossUnit": true
+      },
+      "x-readiness": {
+        "defaultState": "PENDING_SOURCE_ATTACHMENT",
+        "validIntermediateState": "ATTACHED_INCOMPLETE",
+        "satisfiedState": "ATTACHED_SATISFIED",
+        "schemaValidationAloneDoesNotMakeReady": true,
+        "adultAttestationRequired": true,
+        "revalidateAfterDays": 180,
+        "revalidateOnIssueChange": true,
+        "revalidateOnRetrievalFailure": true,
+        "revalidateOnSourceAmendment": true
+      },
+      "x-authorship-boundary": {
+        "tutorMayLocateAndExplainSources": true,
+        "tutorMayAskGuidingQuestions": true,
+        "tutorMayWriteGradedArgument": false,
+        "tutorMayWriteLearnerCitation": false,
+        "tutorMaySupplyPrimarySecondaryReason": false
+      }
+    },
+    "sourceBodyStored": false,
+    "quotationsStored": false,
+    "validationRequiredBeforeSatisfiedTransition": true
+  },
+  "emptyAttachmentTemplate": {
+    "attachmentId": null,
+    "lessonRef": null,
+    "unitRef": null,
+    "issueStatement": null,
+    "sourceIdentifier": null,
+    "sourceTitle": null,
+    "responsibleParty": null,
+    "sourceDate": null,
+    "sourceVersionOrEdition": null,
+    "retrievalLocation": null,
+    "retrievedOn": null,
+    "retrievedByRole": null,
+    "retrievalStatus": null,
+    "mediaType": null,
+    "language": null,
+    "sourceKind": null,
+    "authorityTier": null,
+    "authorityVerified": null,
+    "primaryOrSecondary": null,
+    "primaryOrSecondaryReason": null,
+    "interestDisclosure": null,
+    "relevanceToIssue": null,
+    "limitsNoted": null,
+    "rightsCategory": null,
+    "rightsStatement": null,
+    "publicAccess": null,
+    "selectedByRole": null,
+    "selectedOn": null,
+    "readInFull": null,
+    "contentSafetyReviewedByRole": null,
+    "readingLevelReviewedByRole": null,
+    "previewedForSafetyAndLevel": null,
+    "containsLearnerPersonalData": null,
+    "containsOtherMinorPersonalData": null,
+    "quotedTextStored": null,
+    "contentDigestSha256": null
+  }
+}

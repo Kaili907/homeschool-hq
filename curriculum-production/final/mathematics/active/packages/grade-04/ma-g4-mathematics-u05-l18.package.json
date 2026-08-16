@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u05-l18",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u05-l18",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Division with Remainders",
+    "dayInUnit": 18,
+    "courseDay": 90,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "fair sharing decisions in real situations",
+    "title": "Transfer, reflection, and publication: fair sharing decisions in real situations"
+  },
+  "standards": [
+    "4.OA.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 1,
+          "prompt": "29 students need vans that hold 8 students each. How many vans are needed?",
+          "workedSolution": {
+            "steps": [
+              "29 ÷ 8 = 3 remainder 5.",
+              "The 5 leftover students still need a van.",
+              "4 vans are needed."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "33 students are going on a field trip. Each van holds 4 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "7",
+            "9",
+            "10",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 134 eggs and needs 7 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "18",
+            "22",
+            "20",
+            "19"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 137 eggs and needs 6 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "21",
+            "23",
+            "22",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 70 eggs and needs 3 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "24",
+            "26",
+            "22",
+            "23"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 58 eggs and needs 4 eggs for each cake. How many whole cakes can be made?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 252 eggs and needs 8 eggs for each cake. How many whole cakes can be made?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u05-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u05-l18"
+  }
+}

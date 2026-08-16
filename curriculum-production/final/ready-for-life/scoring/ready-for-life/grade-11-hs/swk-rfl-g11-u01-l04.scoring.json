@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l04",
+  "lessonId": "ma-g11-ready-for-life-u01-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Depth of the guardian conversation",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Summary of the guardian's input restates the learner's own warm-up guess with no new detail." },
+          { "label": "Proficient", "descriptor": "Summary includes one specific thing the guardian noticed that the learner had not already named." },
+          { "label": "Advanced", "descriptor": "Summary includes a concrete past example the guardian raised, and the learner explains how it changed or confirmed their self-assessment." }
+        ]
+      },
+      {
+        "dimension": "Fit analysis specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Match-versus-gap comparison is generic (for example, 'it seems fine') with no specific structure or support feature named." },
+          { "label": "Proficient", "descriptor": "At least one specific match and one specific gap are named between the pathway's typical setting and the learner's stated needs." },
+          { "label": "Advanced", "descriptor": "The gap identified is analyzed for how serious it is and whether it is something that could realistically be adapted around." }
+        ]
+      },
+      {
+        "dimension": "Shortlist reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection states a conclusion about the leading pathway with no reasoning tied to the fit conversation." },
+          { "label": "Proficient", "descriptor": "Reflection ties its conclusion directly to a specific point raised in the fit conversation." },
+          { "label": "Advanced", "descriptor": "Reflection weighs the leading pathway against a specific alternative from the day-1 list using the fit conversation as evidence." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The written record reflects an actual two-person conversation, not a solo write-up presented as a dialogue.",
+      "Examples used are real and specific, not generic personality statements like 'I'm a hard worker.'",
+      "The lesson does not require disclosing personal, medical, or family details unrelated to setting and support fit."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

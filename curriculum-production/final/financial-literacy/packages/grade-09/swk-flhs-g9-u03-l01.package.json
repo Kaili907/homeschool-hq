@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u03-l01",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Building a Budget That Survives a Surprise",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: incentives to set aside income for future consumption"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "incentives to set aside income for future consumption",
+  "objective": "Compare the size of two incentives to set money aside — a fictional deposit match and account interest — and say which one actually moves the decision.",
+  "scenario": "A fictional community credit union runs a simulated matched-savings programme. Every rate and amount below is invented for this exercise; no real account or programme is involved.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional programme terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional programme: a saver who deposits $25 a month for 12 months receives a match of 50% of everything deposited. The account also pays 3.4% a year on the balance. A plain checking account at the same fictional credit union pays 0.05% a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does the saver deposit over the 12 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much is the match worth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after deposits and match, before any interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare that with what interest adds. Apply each rate to the $450 balance for one year.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "If the $450 balance sat in the account for a full year, how much would interest at 3.4% add?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much would the same balance earn in a year at the checking rate of 0.05%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which incentive is larger for this saver in the first year?",
+          "choices": [
+            "The deposit match",
+            "The 3.4% interest",
+            "They are about the same"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one condition in the fictional programme that would have to be checked before treating the $150 match as certain."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the match is being computed as 50% of the final balance rather than of deposits, restate the rule in the programme’s own words: the match is on everything deposited, and the deposits total $300. Compute the deposits first and hold that figure before applying the match.",
+  "extension": "Work out what annual interest rate a plain savings account would need in order to add $150 to a $450 balance in one year, and say whether such a rate is plausible.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u03-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much does the saver deposit over the 12 months?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much is the match worth?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after deposits and match, before any interest?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "If the $450 balance sat in the account for a full year, how much would interest at 3.4% add?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much would the same balance earn in a year at the checking rate of 0.05%?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which incentive is larger for this saver in the first year?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Name one condition in the fictional programme that would have to be checked before treating the $150 match as certain."
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "SAVING",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "DIAGNOSTIC",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.saving.1",
+      "meaning": "A saving plan connects a target, current amount, regular contribution, and time."
+    },
+    {
+      "conceptId": "finlit.saving.2",
+      "meaning": "Liquidity and reliability matter when money must be available for a near-term goal or emergency."
+    },
+    {
+      "conceptId": "finlit.saving.3",
+      "meaning": "Changing the contribution or deadline changes the plan’s feasibility and opportunity cost."
+    }
+  ],
+  "evidencePurpose": "Collect protected evidence about incentives to set aside income for future consumption without answer-bearing teaching during the attempt.",
+  "conceptExplanation": {
+    "applicability": "PROFILE_BOUNDARY",
+    "title": "diagnostic boundary",
+    "paragraphs": [],
+    "protectedBoundary": "Do not preteach the measured target before the diagnostic response. Use the routed concept lesson after the attempt.",
+    "conceptLessonId": "ma-g9-financial-literacy-u03-l02"
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "SAVING",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "DEFERRED_OR_PREREQUISITE_ONLY",
+    "reason": "A like-kind model before the diagnostic would invalidate the evidence.",
+    "modelLessonId": "ma-g9-financial-literacy-u03-l02"
+  },
+  "workedExamples": [],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g9-financial-literacy-u03-l01",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: Naming a goal is not yet a plan; the gap, contribution, and time must work together.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t3-p1",
+      "t3-p2"
+    ],
+    "gradeBandDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.saving.1",
+      "finlit.saving.2",
+      "finlit.saving.3"
+    ],
+    "evidenceLessonId": "ma-g9-financial-literacy-u03-l09",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.saving.core-confusion",
+      "observableSignal": "Naming a goal is not yet a plan; the gap, contribution, and time must work together.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-saving-g9",
+        "title": "Alternate model — saving goals, time, and reserves",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "A fictional goal is 3,000 cents, with 900 cents saved and 350 cents added weekly."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Gap: 3,000 − 900 = 2,100 cents.",
+          "Six weeks adds 6 × 350 = 2,100 cents.",
+          "Total: 900 + 2,100 = 3,000 cents.",
+          "State which current use gives up the 350 cents each week."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g9-financial-literacy-u03-l07",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g9-financial-literacy-u03-l09",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.saving.1",
+      "finlit.saving.2",
+      "finlit.saving.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g9-financial-literacy-u03-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.saving.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "SAVING",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g9-financial-literacy-u03-l01:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "HIGH_SCHOOL_9_12",
+      "scaffolding": "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+      "reasoningDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u03-l01.package.json",
+    "sourcePackageSha256": "e8de91fdb7e73c632a1740be9d464e724694ee730ad4a17636c857829c76f1b0",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u03-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

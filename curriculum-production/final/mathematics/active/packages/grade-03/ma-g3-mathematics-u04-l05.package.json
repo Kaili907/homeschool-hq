@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u04-l05",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Properties, Patterns, and Two-Step Problems",
+    "dayInUnit": 5,
+    "courseDay": 59,
+    "phase": "Independent evidence A",
+    "focus": "two-step problems combining addition and multiplication",
+    "title": "Independent evidence A: two-step problems combining addition and multiplication"
+  },
+  "standards": [
+    "3.OA.8"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence A",
+    "profile": "independent-evidence",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 1,
+          "prompt": "A theater sets up 5 rows of 8 chairs, then adds 6 more chairs. How many chairs in all?",
+          "workedSolution": {
+            "steps": [
+              "5 × 8 = 40.",
+              "40 + 6 = 46."
+            ],
+            "answer": "46"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 5 shelves with 3 boxes on each shelf, then sells 10 boxes from the display. How many boxes are left?",
+          "choices": [
+            "18",
+            "5",
+            "15",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 7 shelves with 6 boxes on each shelf, then adds 6 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "48",
+            "42",
+            "36",
+            "19"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 4 shelves with 4 boxes on each shelf, then adds 12 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "16",
+            "28",
+            "4",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 3,
+          "prompt": "A store arranges 3 shelves with 4 boxes on each shelf, then adds 16 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "-4",
+            "23",
+            "28",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l05#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 3,
+          "prompt": "A store arranges 4 shelves with 8 boxes on each shelf, then adds 4 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "28",
+            "16",
+            "36",
+            "32"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l05#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 3,
+          "prompt": "A store arranges 6 shelves with 6 boxes on each shelf, then adds 14 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "26",
+            "36",
+            "22",
+            "50"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 4 shelves with 3 boxes on each shelf, then sells 11 boxes from the display. How many boxes are left?",
+          "choices": [
+            "12",
+            "1",
+            "23",
+            "18"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 3,
+          "prompt": "A store arranges 8 shelves with 7 boxes on each shelf, then adds 16 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "31",
+            "56",
+            "72",
+            "40"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u04-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u04-l05"
+  }
+}

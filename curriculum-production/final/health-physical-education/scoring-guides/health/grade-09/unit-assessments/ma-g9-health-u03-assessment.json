@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g9-health-u03-assessment",
+  "courseId": "ma-g9-health",
+  "grade": 9,
+  "subject": "health",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "accuracy of health information",
+    "evidence and reasoning",
+    "skill application",
+    "checking and revision"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+    "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check on a later occasion.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+    "rule": "A unit score is one evidence source on one occasion, not the sole basis for long-term mastery."
+  },
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "guardianSafetyReview": {
+    "equipment": "Optional training manikin or first-aid kit. No live practice on another person.",
+    "environment": "Indoor space with floor room if a manikin is used.",
+    "movement_hazards": "Kneeling and sustained arm effort if compressions are rehearsed on a manikin; the learner may stop at any point and may choose the non-physical roles instead.",
+    "sensitive_content_note": "Unit discusses injuries and medical emergencies in general, non-graphic terms.",
+    "guardian_confirmation_required": true
+  },
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceAssessmentId": "ma-g9-health-u03-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

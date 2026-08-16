@@ -1,0 +1,44 @@
+{
+  "sourceAuthorityCommit": "481296a9e794770348881b43bd0d1fa4f794db29",
+  "sourceAuthorityPath": "curriculum-authoring/full-family-highschool-9-12/subjects/financial-literacy/courses/financial-literacy-10/lessons.jsonl",
+  "baseLane": {
+    "count": 20,
+    "units": [
+      1,
+      2
+    ],
+    "lessonIdSetSha256": "8e2ac5d174aca7a2acd30f952a67ffefd27021760d69ff37ce25b60155fe8a3e"
+  },
+  "completionLane": {
+    "count": 52,
+    "units": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "lessonIdSetSha256": "8c3bd4a08c9ed695f62e973da1afb57124ebf8d7a1fde7216af054be19d11fdf"
+  },
+  "joined": {
+    "count": 72,
+    "lessonIdSetSha256": "475b4cea05679160b255edae67b29dcecbdaf20b01dfef1f5f805ab54cb2b840",
+    "unitCounts": {
+      "unit-01": 10,
+      "unit-02": 10,
+      "unit-03": 10,
+      "unit-04": 11,
+      "unit-05": 10,
+      "unit-06": 10,
+      "unit-07": 11
+    }
+  },
+  "source": {
+    "count": 72,
+    "lessonIdSetSha256": "475b4cea05679160b255edae67b29dcecbdaf20b01dfef1f5f805ab54cb2b840"
+  },
+  "overlap": [],
+  "missing": [],
+  "invented": [],
+  "exactSetEquality": true
+}

@@ -1,0 +1,365 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u04-l01",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals, Rest, and Fueling Meals",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: hunger, thirst, and stress signals"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 4: Body Signals, Rest, and Fueling Meals",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can practice hunger, thirst, and stress signals. I will do one step at a time and check one result.",
+  "scenario": "Some body signals can feel similar at first, like a tight stomach that could mean hunger or worry.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "Embedded resource: swk-rfl-g4-u04-l01-model-card",
+    "Embedded resource: swk-rfl-g4-u04-l01-step-card",
+    "Embedded resource: swk-rfl-g4-u04-l01-guided-card",
+    "Embedded resource: swk-rfl-g4-u04-l01-independent-card",
+    "Embedded resource: swk-rfl-g4-u04-l01-evidence-record",
+    "Embedded resource: swk-rfl-g4-u04-l01-retry-pair",
+    "Embedded resource: swk-rfl-g4-u04-l01-delivered-example",
+    "learner-local: paper or a notes app for a simple signal log",
+    "learner-local: a way to check the time three times during the day"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Open swk-rfl-g4-u04-l01-model-card. Watch one complete example.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g4-u04-l01-guided-card. Do the coached move.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Open swk-rfl-g4-u04-l01-independent-card. Choose one complete route. Follow its steps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g4-u04-l01-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why noticing a stress signal in your body might matter just as much as noticing hunger or thirst, using something from one of your three check-ins today as your example."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g4-u04-l01-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g4-u04-l01-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g4-u04-l01-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Signal-clue specificity: All three check-ins name a specific physical clue tied to the signal identified. | Comparison reasoning: The learner names which two signals were hardest to distinguish and identifies the clue that helped decide. Resume at the next unfinished step on swk-rfl-g4-u04-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner run a fourth check-in on a day when something stressful is actually happening (a test, a hard conversation, an activity change) and compare whether the stress signal was easier or harder to name accurately than during a calm day.",
+  "scoringRef": "scoring/swk-rfl-g4-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can practice hunger, thirst, and stress signals. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g4-u04-l01-model-card",
+        "swk-rfl-g4-u04-l01-step-card",
+        "swk-rfl-g4-u04-l01-guided-card",
+        "swk-rfl-g4-u04-l01-independent-card",
+        "swk-rfl-g4-u04-l01-evidence-record",
+        "swk-rfl-g4-u04-l01-retry-pair",
+        "swk-rfl-g4-u04-l01-delivered-example"
+      ],
+      "referencedArtifactWords": [
+        "example"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g4-u04-l01-delivered-example"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g4-u04-l01-local-1",
+          "label": "paper or a notes app for a simple signal log",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u04-l01-local-2",
+          "label": "a way to check the time three times during the day",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g4-u04-l01-model-card",
+        "kind": "model",
+        "title": "hunger, thirst, and stress signals worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Some body signals can feel similar at first, like a tight stomach that could mean hunger or worry.",
+          "Model move 1: Read the condition and name the exact hunger, thirst, and stress signals decision or action.",
+          "Model move 2: Before your first check-in, think about a time recently when you weren't sure if you were hungry, thirsty, or just stressed.",
+          "Model move 3: At three different points today, morning, midday, and afternoon or evening, pause for a moment and notice your body.",
+          "Model check: Signal-clue specificity: All three check-ins name a specific physical clue tied to the signal identified. | Comparison reasoning: The learner names which two signals were hardest to distinguish and identifies the clue that helped decide."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u04-l01-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "hunger, thirst, and stress signals action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for hunger, thirst, and stress signals.",
+          "2. Watch the worked move on swk-rfl-g4-u04-l01-model-card.",
+          "3. Do one coached move on swk-rfl-g4-u04-l01-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g4-u04-l01-independent-card.",
+          "5. Save the small record on swk-rfl-g4-u04-l01-evidence-record; use swk-rfl-g4-u04-l01-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u04-l01-guided-card",
+        "kind": "guided-practice",
+        "title": "hunger, thirst, and stress signals coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Some body signals can feel similar at first, like a tight stomach that could mean hunger or worry.",
+          "Coach direction: Before your first check-in, think about a time recently when you weren't sure if you were hungry, thirsty, or just stressed.",
+          "Learner prompt: Describe that mixed-up moment: what were you doing, and what made it hard to tell which signal it was?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u04-l01-independent-card",
+        "kind": "independent-task",
+        "title": "hunger, thirst, and stress signals complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: At three different points today, morning, midday, and afternoon or evening, pause for a moment and notice your body. For each check-in, name which signal is strongest (hunger, thirst, or stress) and write the one specific physical clue that told you, for example a dry mouth, a rumbling stomach, or tight shoulders.",
+          "Response 1 (t2-p1): I completed a check-in in the morning and named a specific physical clue.",
+          "Response 2 (t2-p2): I completed a check-in around midday and named a specific physical clue.",
+          "Response 3 (t2-p3): I completed a check-in in the afternoon or evening and named a specific physical clue.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u04-l01-evidence-record",
+        "kind": "evidence-record",
+        "title": "hunger, thirst, and stress signals minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain why noticing a stress signal in your body might matter just as much as noticing hunger or thirst, using something from one of your three check-ins today as your example.",
+          "Success checks: Signal-clue specificity: All three check-ins name a specific physical clue tied to the signal identified. | Comparison reasoning: The learner names which two signals were hardest to distinguish and identifies the clue that helped decide.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u04-l01-retry-pair",
+        "kind": "retry",
+        "title": "hunger, thirst, and stress signals supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g4-u04-l01-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g4-u04-l01-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional hunger, thirst, and stress signals condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Signal-clue specificity: All three check-ins name a specific physical clue tied to the signal identified. | Comparison reasoning: The learner names which two signals were hardest to distinguish and identifies the clue that helped decide..",
+          "Return: resume at the next unfinished step on swk-rfl-g4-u04-l01-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u04-l01-delivered-example",
+        "kind": "model",
+        "title": "hunger, thirst, and stress signals delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Some body signals can feel similar at first, like a tight stomach that could mean hunger or worry.",
+          "Use steps: At three different points today, morning, midday, and afternoon or evening, pause for a moment and notice your body.",
+          "Field 1 (t2-p1): I completed a check-in in the morning and named a specific physical clue.",
+          "Field 2 (t2-p2): I completed a check-in around midday and named a specific physical clue.",
+          "Field 3 (t2-p3): I completed a check-in in the afternoon or evening and named a specific physical clue.",
+          "Check against: Signal-clue specificity: All three check-ins name a specific physical clue tied to the signal identified. | Comparison reasoning: The learner names which two signals were hardest to distinguish and identifies the clue that helped decide."
+        ]
+      }
+    ],
+    "model": {
+      "title": "hunger, thirst, and stress signals worked model",
+      "startingCondition": "Some body signals can feel similar at first, like a tight stomach that could mean hunger or worry.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact hunger, thirst, and stress signals decision or action.",
+        "Model move 2: Before your first check-in, think about a time recently when you weren't sure if you were hungry, thirsty, or just stressed.",
+        "Model move 3: At three different points today, morning, midday, and afternoon or evening, pause for a moment and notice your body."
+      ],
+      "reasoning": "The model names the condition, follows the ordered hunger, thirst, and stress signals process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Signal-clue specificity: All three check-ins name a specific physical clue tied to the signal identified.",
+        "Comparison reasoning: The learner names which two signals were hardest to distinguish and identifies the clue that helped decide."
+      ],
+      "resourceRef": "swk-rfl-g4-u04-l01-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for hunger, thirst, and stress signals.",
+        "2. Watch the worked move on swk-rfl-g4-u04-l01-model-card.",
+        "3. Do one coached move on swk-rfl-g4-u04-l01-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g4-u04-l01-independent-card.",
+        "5. Save the small record on swk-rfl-g4-u04-l01-evidence-record; use swk-rfl-g4-u04-l01-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g4-u04-l01-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Some body signals can feel similar at first, like a tight stomach that could mean hunger or worry.",
+      "prompt": "Describe that mixed-up moment: what were you doing, and what made it hard to tell which signal it was?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Signal-clue specificity: All three check-ins name a specific physical clue tied to the signal identified.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g4-u04-l01-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g4-u04-l01-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "hunger, thirst, and stress signals — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g4-u04-l01-independent-card",
+        "directions": "Complete the hunger, thirst, and stress signals task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g4-u04-l01-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain why noticing a stress signal in your body might matter just as much as noticing hunger or thirst, using something from one of your three check-ins today as your example.",
+      "observableCriteria": [
+        "Signal-clue specificity: All three check-ins name a specific physical clue tied to the signal identified.",
+        "Comparison reasoning: The learner names which two signals were hardest to distinguish and identifies the clue that helped decide."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g4-u04-l01-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g4-u04-l01-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g4-u04-l01-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g4-u04-l01-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Signal-clue specificity: All three check-ins name a specific physical clue tied to the signal identified. | Comparison reasoning: The learner names which two signals were hardest to distinguish and identifies the clue that helped decide.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g4-u04-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g4-u04-l01-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

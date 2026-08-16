@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u06-l01",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Scale Drawings and Geometric Constructions",
+    "dayInUnit": 1,
+    "courseDay": 91,
+    "phase": "Launch and diagnostic",
+    "focus": "scale factors",
+    "title": "Launch and diagnostic: scale factors"
+  },
+  "standards": [
+    "7.G.1",
+    "7.G.2"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u06-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "scale-factor",
+          "standard": "7.G.1",
+          "difficulty": 1,
+          "prompt": "A 4 cm drawing represents 20 cm. What is the scale factor from drawing to actual?",
+          "workedSolution": {
+            "steps": [
+              "Write the scale as a ratio with matching units.",
+              "Multiply or divide consistently, then check whether the dimensions are possible."
+            ],
+            "answer": "5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u06-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "scale-drawing",
+          "standard": "7.G.1",
+          "difficulty": 1,
+          "prompt": "A map scale is 1 cm : 5 m. What actual distance does 6 cm represent?",
+          "choices": [
+            "30 m",
+            "31 m",
+            "32 m",
+            "34 m"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "actual-drawing-dimensions",
+          "standard": "7.G.1",
+          "difficulty": 1,
+          "prompt": "A 24 m path is drawn at 1 cm : 6 m. What is its drawing length?",
+          "choices": [
+            "5 cm",
+            "4 cm",
+            "6 cm",
+            "7 cm"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "reproduce-at-new-scale",
+          "standard": "7.G.1",
+          "difficulty": 2,
+          "prompt": "A 6 cm segment is reproduced using a scale factor of 3. What is its new length?",
+          "choices": [
+            "20 cm",
+            "22 cm",
+            "19 cm",
+            "18 cm"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "construct-triangle",
+          "standard": "7.G.2",
+          "difficulty": 2,
+          "prompt": "Can segments of lengths 5, 9, and 13 form a triangle?",
+          "choices": [
+            "not enough information",
+            "yes",
+            "only if all sides are equal",
+            "only if one angle is right"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "unique-triangle-conditions",
+          "standard": "7.G.2",
+          "difficulty": 3,
+          "prompt": "Which condition determines a unique triangle: ASA, AAA, SSA, or one side length?",
+          "choices": [
+            "ASA",
+            "AAA",
+            "one side length",
+            "SSA"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u06-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "scale-factor",
+          "standard": "7.G.1",
+          "difficulty": 1,
+          "prompt": "A 8 cm drawing represents 48 cm. What is the scale factor from drawing to actual?",
+          "choices": [
+            "9",
+            "6",
+            "8",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "scale-drawing",
+          "standard": "7.G.1",
+          "difficulty": 2,
+          "prompt": "A map scale is 2 cm : 7 m. What actual distance does 24 cm represent?",
+          "choices": [
+            "87 m",
+            "84 m",
+            "85 m",
+            "86 m"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u06-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u06-l01"
+  }
+}

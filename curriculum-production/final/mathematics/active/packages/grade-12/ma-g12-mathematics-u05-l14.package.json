@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u05-l14",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u05-l14",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Complex Solutions, Polynomials, and the Binomial Theorem",
+    "dayInUnit": 14,
+    "courseDay": 86,
+    "phase": "Transfer challenge",
+    "focus": "the fundamental theorem of algebra and counting roots",
+    "title": "Transfer challenge: the fundamental theorem of algebra and counting roots"
+  },
+  "standards": [
+    "N-CN.8",
+    "N-CN.9",
+    "A-APR.5",
+    "A-APR.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 1,
+          "prompt": "Coefficient of x²y³ in (x + y)⁵?",
+          "workedSolution": {
+            "steps": [
+              "C(5, 3) = 10."
+            ],
+            "answer": "10"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 3,
+          "prompt": "Complete the statement: the quotient of two rational expressions, where the divisor is not the zero expression …",
+          "choices": [
+            "is always a rational expression, because numerators and denominators multiply directly",
+            "need not be a rational expression, because the denominators may differ",
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because a common denominator can always be formed"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 3,
+          "prompt": "Factor x² + 64 completely over the complex numbers.",
+          "choices": [
+            "(x + 8i)(x + 8i)",
+            "(x + 8i)(x − 8i)",
+            "(x + 8)(x − 8)",
+            "(x + 8i)²"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 3,
+          "prompt": "A polynomial with real coefficients has degree 4. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 5, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 4, and any non-real roots occur in conjugate pairs",
+            "exactly 2, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 3,
+          "prompt": "In the expansion of (x + y)^5, find the coefficient of the term x^4·y^1.",
+          "choices": [
+            "10",
+            "5",
+            "1",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 3,
+          "prompt": "Complete the statement: the product of two rational expressions …",
+          "choices": [
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because a common denominator can always be formed",
+            "is always a rational expression, because numerators and denominators multiply directly",
+            "need not be a rational expression, because the denominators may differ"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 3,
+          "prompt": "Factor x² + 100 completely over the complex numbers.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 3,
+          "prompt": "A polynomial with real coefficients has degree 7. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 3,
+          "prompt": "In the expansion of (x + y)^4, find the coefficient of the term x^2·y^2.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u05-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u05-l14"
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u07-l07",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u07-l07",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Matrices, Transformations, and Systems",
+    "dayInUnit": 7,
+    "courseDay": 115,
+    "phase": "Investigation or close reading",
+    "focus": "matrices as organized data and scalar multiplication",
+    "title": "Investigation or close reading: matrices as organized data and scalar multiplication"
+  },
+  "standards": [
+    "N-VM.6",
+    "N-VM.7",
+    "N-VM.8",
+    "N-VM.9",
+    "N-VM.10",
+    "N-VM.11",
+    "N-VM.12",
+    "A-REI.8",
+    "A-REI.9",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 1,
+          "prompt": "Compute 3·[[1, 2], [3, 4]].",
+          "workedSolution": {
+            "steps": [
+              "Multiply every entry by 3.",
+              "[[3, 6], [9, 12]]."
+            ],
+            "answer": "[[3, 6], [9, 12]]"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "matrix-vector-product",
+          "standard": "N-VM.11",
+          "difficulty": 2,
+          "prompt": "Compute [[2, 1], [3, -1]]·⟨1, 4⟩.",
+          "choices": [
+            "⟨-1, 6⟩",
+            "⟨6, -1⟩",
+            "⟨2, -4⟩",
+            "⟨14, -3⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "determinant-and-invertibility",
+          "standard": "N-VM.10",
+          "difficulty": 3,
+          "prompt": "For M = [[-2, 3], [6, 4]], find det(M) and state whether M is invertible.",
+          "choices": [
+            "det(M) = 10; M is invertible",
+            "det(M) = -26; M is invertible",
+            "det(M) = -24; M is invertible",
+            "det(M) = -25; M is invertible"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "determinant-as-area-scale-factor",
+          "standard": "N-VM.11",
+          "difficulty": 2,
+          "prompt": "The matrix [[-3, 2], [-3, -1]] is applied to a region of area 5. Find the area of the image.",
+          "choices": [
+            "45",
+            "9",
+            "46",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 3,
+          "prompt": "Compute -3·[[2, -1], [5, -2]].",
+          "choices": [
+            "[[-1, -4], [2, -5]]",
+            "[[-6, 3], [5, -2]]",
+            "[[-6, -1], [5, -2]]",
+            "[[-6, 3], [-15, 6]]"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "matrix-vector-product",
+          "standard": "N-VM.11",
+          "difficulty": 3,
+          "prompt": "Compute [[-4, 2], [-7, 2]]·⟨4, 1⟩.",
+          "choices": [
+            "⟨-16, 2⟩",
+            "⟨-14, -26⟩",
+            "⟨-23, 10⟩",
+            "⟨-26, -14⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "determinant-and-invertibility",
+          "standard": "N-VM.10",
+          "difficulty": 3,
+          "prompt": "For M = [[-5, -7], [-5, 7]], find det(M) and state whether M is invertible.",
+          "choices": [
+            "det(M) = -69; M is invertible",
+            "det(M) = 1; M is invertible",
+            "det(M) = -70; M is invertible",
+            "det(M) = 74; M is invertible"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "determinant-as-area-scale-factor",
+          "standard": "N-VM.11",
+          "difficulty": 3,
+          "prompt": "The matrix [[5, 4], [-6, 1]] is applied to a region of area 16. Find the area of the image.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 3,
+          "prompt": "Compute 2·[[7, 6], [-2, 8]].",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u07-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u07-l07"
+  }
+}

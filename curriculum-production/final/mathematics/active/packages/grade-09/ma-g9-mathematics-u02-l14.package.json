@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u02-l14",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u02-l14",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Expression Structure and Equivalence",
+    "dayInUnit": 14,
+    "courseDay": 32,
+    "phase": "Transfer challenge",
+    "focus": "terms, factors, and coefficients",
+    "title": "Transfer challenge: terms, factors, and coefficients"
+  },
+  "standards": [
+    "A-SSE.1",
+    "A-SSE.2",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 1,
+          "prompt": "Factor x² − 7x + 12.",
+          "workedSolution": {
+            "steps": [
+              "Find two numbers with product 12 and sum −7: −3 and −4.",
+              "(x − 3)(x − 4)."
+            ],
+            "answer": "(x − 3)(x − 4)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "factor-greatest-common-factor",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor out the greatest common factor: 63x^2 + 18x.",
+          "choices": [
+            "9x(7x + 2)",
+            "9(7x² + 2x)",
+            "x(63x + 18)",
+            "63x(x + 2)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-expression-check",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "A student claims that 3(x² + 7x − 11) expands to 3x² + 21x − 33. Is the claim correct?",
+          "choices": [
+            "No; the leading term should be x².",
+            "No; the constant term should be -31.",
+            "Yes, the expansion is correct.",
+            "No; the x term should be 7x."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "recognize-substitution-structure",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "The expression (x + 2)^6 − 4 can be treated as a difference of squares. Which substitution makes that structure visible?",
+          "choices": [
+            "u = x + 2",
+            "u = (x + 2)^3",
+            "u = x^3",
+            "u = (x + 2)^6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "An investment is modelled by 1500(1 + 0.04)^t. In this expression, what does 1500 represent?",
+          "choices": [
+            "the number of years the investment grows",
+            "the growth factor applied once per year",
+            "the total interest earned over the whole period",
+            "the amount invested before any interest is added"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "factor-difference-of-squares",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor completely: 9x² − 36.",
+          "choices": [
+            "(3x − 6)(3x + 6)",
+            "(3x + 6)²",
+            "(3x − 6)²",
+            "(3x − 36)(3x + 1)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor completely: x^2 + 13x + 42.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "factor-greatest-common-factor",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor out the greatest common factor: 72x^2 + 48x.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "equivalent-expression-check",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "A student claims that 7(x² − 10x − 7) expands to 7x² − 70x − 49. Is the claim correct?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u02-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u02-l14"
+  }
+}

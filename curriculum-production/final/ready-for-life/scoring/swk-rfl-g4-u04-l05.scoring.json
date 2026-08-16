@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l05",
+  "lessonId": "ma-g4-ready-for-life-u04-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Routine design specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the three routine steps is missing or stays vague, such as writing 'clean up' with no rest signal named."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three steps are specific: a concrete space-clearing action, a named rest signal, and a set start time."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the named rest signal is personally specific rather than copied straight from an example list."
+          }
+        ]
+      },
+      {
+        "dimension": "Morning follow-through and reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The next-morning comparison is missing, or the 'most important step' answer isn't supported by a reason."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner accurately compares how rested they feel and names which step likely mattered most, with a reason."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reasoning correctly distinguishes the space-clearing step from the two new rest-awareness steps."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No response frames rest in terms of a required number of hours or compares the learner's rest to anyone else's.",
+      "The routine is treated as adjustable, not as a strict rule that must be followed perfectly."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

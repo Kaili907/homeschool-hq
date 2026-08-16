@@ -1,0 +1,344 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g3-tech-cs-u02-l02",
+  "unit_id": "ma-g3-tech-cs-u02",
+  "source_course_id": "ma-g3-tech-cs",
+  "subject": "technology",
+  "band": "g3-4",
+  "grade": 3,
+  "grade_dir": "grade-03",
+  "unit_number": 2,
+  "unit_title": "Computers Around Us",
+  "day_in_unit": 2,
+  "course_day": 8,
+  "lesson_title": "Explicit model: input and output devices",
+  "phase": "Explicit model",
+  "work_mode": "MODEL",
+  "focus": "input and output devices",
+  "task_type": "systems_and_hardware",
+  "lesson_type": "analysis",
+  "task_label": "Systems and troubleshooting — Worked-model trace",
+  "scoring_stance": "FORMATIVE_NO_PENALTY",
+  "estimated_minutes": "40–60",
+  "standards": [
+    "Michigan Computer Science: Computing Systems"
+  ],
+  "essential_question": "How can understanding computers around us help us explain, decide, create, or solve something that matters?",
+  "learning_objectives": [
+    "Build a clear mental model of input and output devices through an explicit worked example, demonstration, text, or phenomenon.",
+    "Use subject-appropriate evidence or representation to communicate understanding of input and output devices.",
+    "Check, revise, or improve work about input and output devices using stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task about input and output devices.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "pencil or accessible response tool",
+    "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
+  ],
+  "task_brief": "This is day 2 of \"Computers Around Us\". That is unit 2 in grade 3. Today is a worked-model trace about input and output devices. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Label a diagram of computer parts and demonstrate three careful-use habits. Today helps by working on input and output devices. Your unit also covers parts of a computer, input and output devices, caring for devices, and software versus hardware. Today is for practice. You are scored on finishing and being honest, not on getting it perfect.",
+  "primary_task": "Use the whole example printed in activity_setup about input and output devices. Follow it one step at a time. Do not skip ahead. After each step, write what changed. Make a small table. Show what things looked like before and after each step. Now change one thing in the example. Guess what will happen. Then check. Was your guess right? Last, say the rule for input and output devices in your own words. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about input and output devices. It is part of \"Computers Around Us\". Later days in this unit cover other things, like parts of a computer. Before you stop, do this check: In one concise response, show or explain the most important idea about input and output devices; then identify one check that would catch an error or weak claim. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
+  "task_steps": [
+    "Use the whole example printed in activity_setup about input and output devices.",
+    "Follow it one step at a time.",
+    "Do not skip ahead.",
+    "After each step, write what changed.",
+    "Make a small table.",
+    "Show what things looked like before and after each step.",
+    "Now change one thing in the example.",
+    "Guess what will happen.",
+    "Then check.",
+    "Was your guess right?",
+    "Last, say the rule for input and output devices in your own words."
+  ],
+  "requirements": [
+    "Do what this lesson asks: The learner completes the central task about input and output devices., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
+    "Meet today's goal: Build a clear mental model of input and output devices through an explicit worked example, demonstration, text, or phenomenon.",
+    "Hand in this: Your finished step table with reasons, plus the one change you made with your guess and what really happened.",
+    "Show your work, not just the answer — your steps, test notes, or drafts.",
+    "Go through the check list in this package before you hand it in."
+  ],
+  "deliverable": "Your finished step table with reasons, plus the one change you made with your guess and what really happened.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline paper system for input and output devices",
+      "purpose": "Use the labelled parts and event log below; no device, account, network, or special application is required.",
+      "labelled_parts": [
+        "Input card I1: the user selects Save",
+        "Process card P1: the application checks the file name",
+        "Storage card S1: Folder/Practice receives a copy named draft-02.txt",
+        "Output card O1: the screen reports Saved as draft-02.txt"
+      ],
+      "event_log": [
+        "09:00 — draft-01.txt exists in Folder/Practice",
+        "09:02 — user selects Save As and enters draft-02.txt",
+        "09:03 — storage card records draft-02.txt",
+        "09:04 — output card reports success"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply input and output devices to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "The exact accepted evidence map is intentionally withheld from learner material and is available only in the restricted trusted-adult scoring authority after the learner submits complete evidence.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES",
+      "hint_ceiling": "CRITERION_OR_EVIDENCE_LOCATION_CUE"
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to input and output devices.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
+  "learner_experience": {
+    "experience_version": "technology-production-depth-r1",
+    "static_complete": true,
+    "tutor_required": false,
+    "lesson_type": "analysis",
+    "sequence_policy": "Concept teaching, the analogous model, and guided practice precede protected independent evidence. Protected and fresh resolutions are absent from learner material and remain adult-only.",
+    "learning_targets": [
+      "Build a clear mental model of input and output devices through an explicit worked example, demonstration, text, or phenomenon.",
+      "Use subject-appropriate evidence or representation to communicate understanding of input and output devices.",
+      "Check, revise, or improve work about input and output devices using stated success criteria.",
+      "Explain the evidence chain used to make or evaluate a result about input and output devices.",
+      "Transfer the reasoning to a fresh case without a completed target response in view."
+    ],
+    "concept_teaching": {
+      "ref": "ma-g3-tech-cs-u02-l02#concept-systems-and-hardware",
+      "title": "Follow evidence across a system boundary: input and output devices",
+      "entry_check": "Before reading, write one prediction about input and output devices and one observation that could show the prediction is wrong. This readiness record is no-penalty evidence.",
+      "explanation": [
+        "input and output devices is about making a clear choice and showing why it works. First name what the result should do. Then point to the step, label, or fact that supports your choice.",
+        "A check is different from a guess. Write what you expect before you try it. Compare what happened with what you expected. If they differ, circle the first place they stop matching.",
+        "A fix needs a reason. Change one thing that your evidence supports, try the same checks again, and keep the old and new work. That record shows your thinking even when the first try was wrong.",
+        "Trace input, processing, storage, and output in order. Locate the first boundary whose observed state differs from its specified state before proposing a repair. You may use paper, objects, labelled drawings, or precise steps when a computer is not the best tool."
+      ],
+      "key_terms": [
+        {
+          "term": "component",
+          "definition": "A named part with a defined responsibility."
+        },
+        {
+          "term": "state",
+          "definition": "The information a component holds at a particular moment."
+        },
+        {
+          "term": "interface",
+          "definition": "The boundary where one component sends or receives information."
+        },
+        {
+          "term": "fault isolation",
+          "definition": "Using observations to narrow a failure to the smallest supported location."
+        }
+      ],
+      "application_check": [
+        "Can you explain follow evidence across a system boundary in your own words using a new fictional example?",
+        "Did you write expected behavior or a pass condition before running, tracing, or judging the result?",
+        "Can another reader trace each conclusion to a state row, printed fact, requirement, or observation?",
+        "Did you name a boundary, stress case, missing fact, or limitation instead of assuming it away?"
+      ]
+    },
+    "worked_example": {
+      "ref": "ma-g3-tech-cs-u02-l02#worked-analogue-systems-and-hardware",
+      "kind": "WORKED_EXAMPLE_ANNOTATED_CASE",
+      "relationship_to_protected_tasks": "ANALOGOUS_NON_TARGET",
+      "evidence_eligible": false,
+      "title": "Worked analogue: isolate a save-message mismatch",
+      "complete_analogue_case": "A fictional log shows input “Save copy,” processing validates the name, storage records draft-03.txt, but the output message still says draft-02.txt.",
+      "annotations": [
+        {
+          "step": 1,
+          "reasoning": "The input, processing, and storage observations match their specifications."
+        },
+        {
+          "step": 2,
+          "reasoning": "The first mismatch appears at the output boundary, so replacing storage is unsupported."
+        },
+        {
+          "step": 3,
+          "reasoning": "Revise the output state source so it reads the stored name."
+        },
+        {
+          "step": 4,
+          "reasoning": "Rerun normal save, renamed save, and empty-name rejection checks."
+        },
+        {
+          "step": 5,
+          "reasoning": "The log isolates a boundary but cannot prove the internal cause without an implementation trace."
+        }
+      ],
+      "completed_model": "The input, processing, and storage observations match their specifications. The first mismatch appears at the output boundary, so replacing storage is unsupported. Revise the output state source so it reads the stored name. Rerun normal save, renamed save, and empty-name rejection checks. The log isolates a boundary but cannot prove the internal cause without an implementation trace.",
+      "transfer_prompt": "Use the same evidence discipline on the protected task, but make a new decision from its different printed labels. Do not copy this model as the protected response.",
+      "difference_from_protected_task": "The worked model uses a different fictional setting, facts, labels, decision, and check. None of its completed claims answers the protected central input."
+    },
+    "guided_task": {
+      "ref": "ma-g3-tech-cs-u02-l02#guided-evidence-bridge",
+      "title": "Guided practice: claim → printed evidence → check",
+      "alternate_case": "A separate fictional practice card about input and output devices contains labels P1, P2, and P3. P1 states the intended purpose, P2 states a constraint, and P3 records an observed mismatch. It is not the protected case titled \"Inline paper system for input and output devices.\"",
+      "prompts": [
+        "Restate P1 as a criterion without adding facts.",
+        "Use P2 to reject one tempting but invalid response.",
+        "Use P3 to propose a revision and write an observable pass condition.",
+        "Name one conclusion the three labels cannot support."
+      ],
+      "immediate_check": "A complete guided response has one claim about input and output devices, the exact supporting label, one check, and one limitation.",
+      "support_fade": "The guided card names the purpose/constraint/mismatch roles. In protected work, the learner must locate those roles independently in the supplied central input; the fresh check offers only term or instruction clarification.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    },
+    "independent_task": {
+      "ref": "ma-g3-tech-cs-u02-l02#protected-independent",
+      "role": "INDEPENDENT_LESSON_EVIDENCE",
+      "freshness": "FRESH_FROM_WORKED_AND_GUIDED_FIXTURES",
+      "title": "Independent analysis/design: input and output devices",
+      "central_input_ref": "activity_setup.central_input",
+      "specification": [
+        "The response must apply input and output devices to at least three labelled details from the supplied central input.",
+        "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+        "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+        "The response must name one thing the supplied case does not tell you instead of guessing."
+      ],
+      "public_checks": [
+        "the complete supplied central input → three or more evidence-linked observations",
+        "the proposed revision or decision → one stated check with an observable pass condition",
+        "the strongest competing interpretation → one limitation, unknown, or trade-off stated without inventing facts"
+      ],
+      "evidence_requirements": [
+        "At least three claims, each linked to an exact printed row, card, requirement, or scenario detail.",
+        "One feasible learner-authored revision, design, or decision made only from the supplied fictional case.",
+        "An observable pass condition written before judging the revision or decision.",
+        "One limitation, missing fact, or trade-off stated without inventing evidence.",
+        "A before/after or claim/check record showing how evidence changed the work."
+      ],
+      "support": "TERM_OR_INSTRUCTION_CLARIFICATION; one location/evidence cue may identify where to inspect but may not select the decision or give the resolution.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    },
+    "debugging_reasoning": {
+      "title": "Use the six-move evidence cycle",
+      "required_moves": [
+        "Symptom: record expected versus actual without explaining it away.",
+        "Hypothesis: state one falsifiable cause about the claim or design state before revising.",
+        "Inspection: identify the first trace row or printed detail that bears on the hypothesis.",
+        "Predicted effect: state what one controlled change should alter and what it should leave unchanged.",
+        "Test and interpretation: compare actual with the prediction and mark the hypothesis supported, rejected, or not fully tested.",
+        "Verification: rerun all relevant checks and record any new limitation or next hypothesis."
+      ],
+      "anti_guessing_rule": "A working final artifact without a pre-change hypothesis and inspectable evidence is incomplete debugging/revision evidence."
+    },
+    "remediation_routes": [
+      {
+        "trigger_id": "claim-not-connected-to-partial-state",
+        "learner_signal": "My conclusion names the topic but does not connect to exact printed evidence.",
+        "title": "Different representation: evidence cards and arrows",
+        "alternate_teaching": "Copy each printed fact onto a separate card. Draw an arrow from a fact to a claim only when the fact would make that claim more or less credible. Unconnected claims must be revised or removed.",
+        "analogue_task": "Use four new cards about a fictional library sign to build a fact → claim → check map for input and output devices; do not use the protected case.",
+        "return_check": "Complete the fresh mastery check with teaching materials closed. The original protected solution remains withheld.",
+        "original_protected_solution_exposed": false
+      },
+      {
+        "trigger_id": "revision-before-evidence",
+        "learner_signal": "I changed or chose something before recording the mismatch and a testable reason.",
+        "title": "Different routine: the six-box evidence ladder",
+        "alternate_teaching": "Use six boxes in order: expected/actual, first divergence or decisive detail, hypothesis, predicted effect, one revision, rerun interpretation. Do not enter the revision box until the first four constrain what the change is meant to test.",
+        "analogue_task": "Apply the six boxes to a separate fictional clock-card mismatch related to input and output devices. Stop after the prediction, explain what result would reject the hypothesis, then finish the check.",
+        "return_check": "Complete the fresh mastery check independently. A correct but low-confidence response receives confirmation tied to evidence, not automatic reteaching.",
+        "original_protected_solution_exposed": false
+      }
+    ],
+    "fresh_mastery_check": {
+      "ref": "ma-g3-tech-cs-u02-l02#fresh-northstar-case",
+      "role": "FRESH_MASTERY_OR_REMEDIATION_CHECK",
+      "freshness": "DIFFERENT_FIXTURE_FROM_WORKED_GUIDED_AND_PROTECTED_TASKS",
+      "title": "Fresh transfer: Northstar card for input and output devices",
+      "complete_case": "A new fictional Northstar card supplies purpose N1, constraint N2, two observations N3–N4, and an unsuccessful first revision N5. No outside facts are needed or permitted.",
+      "task": "Use trace input, processing, storage, and output in order. locate the first boundary whose observed state differs from its specified state before proposing a repair. Produce two evidence-linked claims, one revised decision or design, an observable pass condition, and one limitation.",
+      "evidence_requirements": "Submit the label-to-claim map, the revised artifact or decision, expected-versus-observed check evidence, and the limitation. Do not reuse the worked model wording.",
+      "hint_ceiling": "TERM_OR_INSTRUCTION_CLARIFICATION",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    }
+  },
+  "test_or_check_criteria": [
+    "Your table has one row for each step and shows things before and after.",
+    "Each step has a short reason why it is right.",
+    "You changed one thing, guessed what would happen, and then checked.",
+    "You said the rule for input and output devices in your own words."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+  ],
+  "task_accessibility_provisions": [
+    "You can do this with the keyboard only, no mouse needed. Text can be made bigger, and you may do it on paper instead of a screen.",
+    "Anything you have to study will also come as plain text, a described version, or a version you can touch.",
+    "You can take a break, stretch, or come back to this later. That does not lower your score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never require a real password, private message, precise location, account credential, API key, or identifiable image.",
+    "Use only fictional or sandboxed systems, accounts, and data; never probe, exploit, or attempt to access a real external system.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify, not as an authority or a substitute for learner work.",
+    "The tutor may explain, demonstrate, or debug alongside the learner, but must not silently complete a graded project or assessment for them."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, map, worked example, source image, demonstration, or short clip supporting input and output devices.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile/concrete model, or teacher demonstration."
+  },
+  "remediation": "Reteaching for input and output devices follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for input and output devices, model it with a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the process for input and output devices works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of input and output devices, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking input and output devices mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply input and output devices under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work. Treat this as optional depth on input and output devices rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Label a diagram of computer parts and demonstrate three careful-use habits.",
+    "topics": [
+      "parts of a computer",
+      "input and output devices",
+      "caring for devices",
+      "software versus hardware",
+      "using a mouse and trackpad",
+      "following multi-step directions"
+    ],
+    "essential_question": "How can understanding computers around us help us explain, decide, create, or solve something that matters?",
+    "assessment_id": "ma-g3-tech-cs-u02-assessment"
+  }
+}

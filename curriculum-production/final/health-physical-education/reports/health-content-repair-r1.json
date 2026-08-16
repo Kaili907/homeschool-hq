@@ -1,0 +1,167 @@
+{
+  "audit": "HEALTH CONTENT REPAIR R1",
+  "classification": "HEALTH_CONTENT_READY_FOR_CONVERGENCE",
+  "base": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "scope": "Health lesson content only; projection, UI, scoring, and global admission are excluded.",
+  "totals": {
+    "lessons": 324,
+    "lessonsRepaired": 252,
+    "meaningfulInstruction": 324,
+    "actionableSafeTask": 324,
+    "completionCriteria": 324,
+    "safeAlternatives": 324,
+    "placeholdersAfter": 0
+  },
+  "privacyProof": {
+    "violations": 0,
+    "findings": []
+  },
+  "safetyProof": {
+    "violations": 0,
+    "findings": []
+  },
+  "grade3H2Proof": {
+    "provenance": "mac/g3-health-h2@50399a6fb6ae095907c0fde25db2a15ca85c6f1f",
+    "exactTeachingFactMatchesAgainstBase": 36,
+    "exactPackageAndGuideProvenanceMatchesAgainstBase": 36,
+    "correctedPhraseControls": 14,
+    "result": "PASS"
+  },
+  "activityProof": {
+    "actionableTasks": 324,
+    "completionCriteria": 324,
+    "safeAlternatives": 324,
+    "uniqueRepairedPrimaryTeachingPoints": 252,
+    "result": "PASS"
+  },
+  "authoritativeReferenceBasis": [
+    {
+      "scope": "health literacy",
+      "title": "CDC — What Is Health Literacy?",
+      "url": "https://www.cdc.gov/health-literacy/php/about/index.html"
+    },
+    {
+      "scope": "source and claim evaluation",
+      "title": "NIH — How to Evaluate Trustworthiness in Science",
+      "url": "https://www.nih.gov/about-nih/science-health-public-trust/tools/how-evaluate-trustworthiness-science"
+    },
+    {
+      "scope": "mental-health literacy and help-seeking",
+      "title": "CDC — Mental Health Education",
+      "url": "https://www.cdc.gov/healthy-youth/mental-health/mental-health-education.html"
+    },
+    {
+      "scope": "sleep and circadian concepts",
+      "title": "NICHD — Sleep",
+      "url": "https://www.nichd.nih.gov/health/topics/sleep"
+    },
+    {
+      "scope": "consent and coercion prevention",
+      "title": "HHS ACF — Let’s Talk Consent",
+      "url": "https://teenpregnancy.acf.hhs.gov/resources/lets-talk-consent"
+    },
+    {
+      "scope": "HIV transmission, testing, and treatment",
+      "title": "CDC — About HIV",
+      "url": "https://www.cdc.gov/hiv/about/index.html"
+    },
+    {
+      "scope": "medicine safety",
+      "title": "FDA — Buying & Using Medicine Safely",
+      "url": "https://www.fda.gov/drugs/information-consumers-and-patients-drugs/buying-using-medicine-safely"
+    },
+    {
+      "scope": "opioid overdose and naloxone awareness",
+      "title": "SAMHSA — Opioid Overdose Prevention and Reversal",
+      "url": "https://www.samhsa.gov/substance-use/treatment/overdose-prevention"
+    },
+    {
+      "scope": "food safety",
+      "title": "CDC — Preventing Food Poisoning",
+      "url": "https://www.cdc.gov/food-safety/prevention/index.html"
+    },
+    {
+      "scope": "concussion stop and return-to-activity rule",
+      "title": "CDC HEADS UP — Returning to Sports",
+      "url": "https://www.cdc.gov/heads-up/guidelines/returning-to-sports.html"
+    }
+  ],
+  "byGrade": {
+    "3": {
+      "lessons": 36,
+      "meaningfulInstruction": 36,
+      "actionableTask": 36,
+      "completionCriteria": 36,
+      "safeAlternative": 36,
+      "placeholders": 0
+    },
+    "4": {
+      "lessons": 36,
+      "meaningfulInstruction": 36,
+      "actionableTask": 36,
+      "completionCriteria": 36,
+      "safeAlternative": 36,
+      "placeholders": 0
+    },
+    "5": {
+      "lessons": 36,
+      "meaningfulInstruction": 36,
+      "actionableTask": 36,
+      "completionCriteria": 36,
+      "safeAlternative": 36,
+      "placeholders": 0
+    },
+    "7": {
+      "lessons": 36,
+      "meaningfulInstruction": 36,
+      "actionableTask": 36,
+      "completionCriteria": 36,
+      "safeAlternative": 36,
+      "placeholders": 0
+    },
+    "8": {
+      "lessons": 36,
+      "meaningfulInstruction": 36,
+      "actionableTask": 36,
+      "completionCriteria": 36,
+      "safeAlternative": 36,
+      "placeholders": 0
+    },
+    "9": {
+      "lessons": 36,
+      "meaningfulInstruction": 36,
+      "actionableTask": 36,
+      "completionCriteria": 36,
+      "safeAlternative": 36,
+      "placeholders": 0
+    },
+    "10": {
+      "lessons": 36,
+      "meaningfulInstruction": 36,
+      "actionableTask": 36,
+      "completionCriteria": 36,
+      "safeAlternative": 36,
+      "placeholders": 0
+    },
+    "11": {
+      "lessons": 36,
+      "meaningfulInstruction": 36,
+      "actionableTask": 36,
+      "completionCriteria": 36,
+      "safeAlternative": 36,
+      "placeholders": 0
+    },
+    "12": {
+      "lessons": 36,
+      "meaningfulInstruction": 36,
+      "actionableTask": 36,
+      "completionCriteria": 36,
+      "safeAlternative": 36,
+      "placeholders": 0
+    }
+  },
+  "packageDigest": {
+    "algorithm": "SHA-256",
+    "value": "0d88b555c0d15946734996036d2f6bfb08ba3d5a528082f1931cb7bb299c21a9"
+  }
+}

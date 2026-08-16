@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l05",
+  "lessonId": "ma-g7-ready-for-life-u02-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Category reasoning specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Tools are placed into categories with no reason given, or the reason is only 'because it's dangerous' for every tool."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least eight tools are categorized, each with a reason tied to a specific injury risk or skill level."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and reasoning distinguishes between similar tools placed in different categories based on a specific mechanical difference."
+          }
+        ]
+      },
+      {
+        "dimension": "Risk and adult-role explanation",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The named risk is vague, such as 'it could hurt someone,' with no specific mechanism or adult role described."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "For both chosen tools, a specific risk is named and a concrete trusted-adult role is described."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the explanation connects the specific risk directly to what the trusted adult should watch for."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Reasons for each placement name a specific mechanical or situational risk, not a generic 'it's dangerous.'",
+      "The trusted-adult role described in the independent task is concrete, such as what to watch for or do, not just 'supervise.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

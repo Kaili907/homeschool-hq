@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g3-physical-education-u06-assessment",
+  "courseRef": "ma-g3-physical-education",
+  "grade": 3,
+  "subject": "physical-education",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "cue use and control",
+    "movement concepts and decisions",
+    "application or performance",
+    "responsibility, safety, and inclusion"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/health-physical-education/scoring-guides/physical-education/grade-03/unit-assessments/ma-g3-physical-education-u06-assessment.json",
+  "scoringSourceAuthority": "repo:curriculum-production/final/health-physical-education/scoring-guides/physical-education/grade-03/unit-assessments/ma-g3-physical-education-u06-assessment.json",
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

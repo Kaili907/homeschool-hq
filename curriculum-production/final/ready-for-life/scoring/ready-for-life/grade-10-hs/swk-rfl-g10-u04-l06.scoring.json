@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l06",
+  "lessonId": "ma-g10-ready-for-life-u04-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "End-to-end coherence",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The log entry, escalation message, and identified term don't clearly connect to one another." },
+          { "label": "Proficient", "descriptor": "The log entry and escalation message are consistent with the identified term." },
+          { "label": "Advanced", "descriptor": "All three pieces are fully consistent and the escalation message directly quotes the term from t1." }
+        ]
+      },
+      {
+        "dimension": "Resource research quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The named resource is generic, unverifiable, or clearly not real." },
+          { "label": "Proficient", "descriptor": "Names a plausible real resource with a source." },
+          { "label": "Advanced", "descriptor": "Names a real, current, specific resource with a clear description of what it does and a named source." }
+        ]
+      },
+      {
+        "dimension": "Unit-level synthesis",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names a skill vaguely without connecting it to a real reason." },
+          { "label": "Proficient", "descriptor": "Names a specific skill from the unit and a plausible reason it's likely to be used." },
+          { "label": "Advanced", "descriptor": "Names a specific skill and gives a genuine, personal reason grounded in the learner's own circumstances or interests." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The escalation message in t2 requests a remedy that logically follows from the term named in t1.",
+      "The consumer-help resource named in t3 is described specifically enough that a reader could actually judge whether it's real and current.",
+      "The final reflection names one specific skill from this unit, not a vague summary of the whole unit."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l04",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 4,
+    "courseDay": 148,
+    "phase": "Guided practice A",
+    "focus": "two-column conversion tables",
+    "title": "Guided practice A: two-column conversion tables"
+  },
+  "standards": [
+    "4.MD.1"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 3 meters to centimeters.",
+          "workedSolution": {
+            "steps": [
+              "1 meter = 100 centimeters.",
+              "3 × 100 = 300.",
+              "3 meters = 300 centimeters."
+            ],
+            "answer": "300 centimeters"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l04#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 2 kilograms to grams.",
+          "choices": [
+            "2000 grams",
+            "2 grams",
+            "1002 grams",
+            "200 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l04#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 6 feet to inches.",
+          "choices": [
+            "72 inches",
+            "18 inches",
+            "7.2 inches",
+            "6 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l04#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 5 feet to inches.",
+          "choices": [
+            "6 inches",
+            "60 inches",
+            "17 inches",
+            "5 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l04#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 11 liters to milliliters.",
+          "choices": [
+            "1011 milliliters",
+            "1100 milliliters",
+            "11 milliliters",
+            "11000 milliliters"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l04#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 3 kilograms to grams.",
+          "choices": [
+            "3000 grams",
+            "3 grams",
+            "300 grams",
+            "1003 grams"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 6 kilograms to grams.",
+          "choices": [
+            "6000 grams",
+            "600 grams",
+            "1006 grams",
+            "6 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 5 kilograms to grams.",
+          "choices": [
+            "1005 grams",
+            "5000 grams",
+            "500 grams",
+            "5 grams"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 4 feet to inches.",
+          "choices": [
+            "4.8 inches",
+            "48 inches",
+            "16 inches",
+            "4 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 6 liters to milliliters.",
+          "choices": [
+            "6 milliliters",
+            "600 milliliters",
+            "6000 milliliters",
+            "1006 milliliters"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l04"
+  }
+}

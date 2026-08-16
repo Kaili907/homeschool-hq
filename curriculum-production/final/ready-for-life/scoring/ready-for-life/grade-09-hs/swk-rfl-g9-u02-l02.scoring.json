@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l02",
+  "lessonId": "ma-g9-ready-for-life-u02-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Inventory sheet completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fewer than five items are listed, or one or more items is missing a current amount, par level, or restock trigger." },
+          { "label": "Proficient", "descriptor": "At least five specific items are listed, each with a current amount, a par level, and a restock trigger." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and a second full inventory sheet is completed for a different supply category." }
+        ]
+      },
+      {
+        "dimension": "Reasoning behind par levels and triggers",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Par levels and triggers are identical across items with no explanation for why." },
+          { "label": "Proficient", "descriptor": "At least one item's par level or trigger is explained with a specific reason tied to how fast that item is actually used." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and the reflection names a specific real household problem this system would have prevented." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The inventory sheet names specific items (for example, 'bath towels' or 'dish soap'), not a vague category label used as if it were one item.",
+      "The reasoning for par level differences references actual usage speed, not a guess with no stated basis."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g4-tech-cs-u04-l05",
+  "unit_id": "ma-g4-tech-cs-u04",
+  "subject": "technology",
+  "band": "g3-4",
+  "grade": 4,
+  "grade_dir": "grade-04",
+  "unit_title": "Algorithms, Loops, and Debugging",
+  "lesson_title": "Mastery check: simple variables",
+  "phase": "Mastery check",
+  "work_mode": "DEMONSTRATE",
+  "focus": "simple variables",
+  "scoring_authority_kind": "RUBRIC",
+  "scoring_stance": "SUMMATIVE",
+  "rubric": [
+    {
+      "dimension": "accuracy or fidelity",
+      "exceeds": "Every step, value, or rendered choice is accurate and faithful to the stated criteria, with no notable errors.",
+      "meets": "The work is accurate and faithful to the stated criteria, with at most one minor self-correctable error.",
+      "developing": "The work is mostly accurate but has one or more errors that change the result or the intended effect.",
+      "beginning": "Multiple accuracy or fidelity errors prevent the work from meeting the stated criteria."
+    },
+    {
+      "dimension": "evidence and reasoning",
+      "exceeds": "Every claim or choice is backed by specific evidence or clearly explained reasoning a reader can follow unaided.",
+      "meets": "Most claims or choices are backed by evidence or reasoning, with only small gaps.",
+      "developing": "Some claims are supported but several are asserted without support.",
+      "beginning": "Claims are asserted with little or no supporting evidence or reasoning."
+    },
+    {
+      "dimension": "independence",
+      "exceeds": "The work was completed unaided and the explanation shows the reasoning is genuinely the student's own, transferring to an unseen case.",
+      "meets": "The work was completed without scaffold or prompts in view.",
+      "developing": "The work required prompting or reference beyond what the task allowed.",
+      "beginning": "The work could not proceed without step-by-step direction."
+    },
+    {
+      "dimension": "testing and verification",
+      "exceeds": "Test cases include normal, boundary, and deliberate-break inputs, each with expected against actual recorded and every failure resolved and re-run.",
+      "meets": "The required cases were run with expected against actual recorded, and failures were addressed.",
+      "developing": "Some checking occurred but cases are too few, results are unrecorded, or a known failure was left unresolved.",
+      "beginning": "The work was submitted without evidence it was checked against any case."
+    }
+  ],
+  "scoring_judgment_guidance": "Score this session with the rubric below, not against a fixed answer key — a design, code, or debugging task legitimately has more than one valid solution. Score only what a mastery demonstration on simple variables can show: this is evidence of record, so it must be independent work checked against the stated criteria. Record the level reached on each dimension with one specific reason drawn from the actual submission. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "lesson_success_criteria": [
+    "The learner completes the central task about simple variables.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "formative_check": "Rate confidence in simple variables, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation.",
+  "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER",
+    "review_timing": "TRUSTED_ADULT_REVIEW_AFTER_REQUIRED_INDEPENDENT_EVIDENCE_IS_SAVED",
+    "lesson_type": "review_mastery",
+    "protected_task": {
+      "task_ref": "ma-g4-tech-cs-u04-l05#protected-independent",
+      "authority": "ADULT_TRUSTED_AUTHORITY",
+      "learner_visibility": "NEVER",
+      "task_kind": "CODE_OR_DEBUG",
+      "root_cause": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "decisive_resolution": "Iteration begins at index 0; all three tests retain every step in order.",
+      "reference_implementation": "function runSteps(steps) {\n  const completed = [];\n  for (let index = 0; index < steps.length; index += 1) completed.push(steps[index]);\n  return completed.join(\" > \");\n}",
+      "expected_results": [
+        {
+          "input": "[\"open\", \"check\", \"save\"]",
+          "expected": "open > check > save"
+        },
+        {
+          "input": "[]",
+          "expected": "empty string"
+        },
+        {
+          "input": "[\"start\"]",
+          "expected": "start"
+        }
+      ],
+      "acceptance_note": "Accept any implementation or precise pseudocode that satisfies the specification and all checks for simple variables; do not require textual agreement with this reference."
+    },
+    "fresh_mastery_check": {
+      "task_ref": "ma-g4-tech-cs-u04-l05#fresh-total-label-lengths",
+      "root_cause": "The loop replaces total with the current label length instead of accumulating the current length with prior lengths.",
+      "decisive_resolution": "Update total with total + label.length on each iteration.",
+      "reference_implementation": "function totalLabelLengths(labels) {\n  let total = 0;\n  for (const label of labels) total = total + label.length;\n  return total;\n}",
+      "accepted_invariant": "After each iteration, total equals the sum of the lengths of exactly the prefix already examined.",
+      "expected_results": [
+        "[\"oak\", \"map\"] → 6",
+        "[] → 0",
+        "[\"cedar\"] → 5"
+      ]
+    },
+    "remediation_authority": {
+      "selection_rule": "Choose the smallest alternate route from observable evidence; do not repeat the original task or expose its protected resolution.",
+      "mastery_reconsideration": "Reconsider mastery only from the fresh independent record under the same criteria. A worked or guided response is instruction, not mastery evidence."
+    }
+  },
+  "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
+  "unit_assessment_reference": {
+    "assessment_id": "ma-g4-tech-cs-u04-assessment",
+    "total_points": 38,
+    "unit_rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "note": "This lesson is one session inside the unit; the unit assessment record above is the summative instrument, and this lesson rubric scores only this session's evidence."
+  },
+  "remediation_plan": "Reteaching for simple variables follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for simple variables, model it with a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the process for simple variables works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of simple variables, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking simple variables mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension_plan": "Apply simple variables under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work. Treat this as optional depth on simple variables rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+  ],
+  "task_accessibility_provisions": [
+    "You can do this with the keyboard only, no mouse needed. Text can be made bigger, and you may do it on paper instead of a screen.",
+    "You can take a break, stretch, or come back to this later. That does not lower your score."
+  ],
+  "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, voice recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.",
+  "source_integrity": {
+    "requires_review": false,
+    "status": "NOT_APPLICABLE"
+  },
+  "safety_and_privacy": {
+    "requires_review": true,
+    "status": "VERIFIED",
+    "note": "No real credential, live external system, production account, or real personal data is used anywhere in this session; all values are fictional or sandboxed and no live system may be probed or accessed."
+  },
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming"
+  ]
+}

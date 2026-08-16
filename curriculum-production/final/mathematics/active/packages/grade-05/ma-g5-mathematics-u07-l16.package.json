@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u07-l16",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u07-l16",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Decimal Operations",
+    "dayInUnit": 16,
+    "courseDay": 124,
+    "phase": "Unit assessment",
+    "focus": "decimal division",
+    "title": "Unit assessment: decimal division"
+  },
+  "standards": [
+    "5.NBT.3",
+    "5.NBT.4",
+    "5.NBT.7"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-addition",
+          "standard": "5.NBT.7",
+          "difficulty": 1,
+          "prompt": "Find 7.46 + 6.87.",
+          "choices": [
+            "14.33",
+            "7.61",
+            "8.14",
+            "1.433"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-subtraction",
+          "standard": "5.NBT.7",
+          "difficulty": 1,
+          "prompt": "Find 2.31 - 1.43.",
+          "choices": [
+            "0.88",
+            "0.0088",
+            "2.17",
+            "8.8"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 7.8 × 4.",
+          "choices": [
+            "0.312",
+            "3.12",
+            "28",
+            "31.2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-division",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 17.2 ÷ 4.",
+          "choices": [
+            "0.43",
+            "4.3",
+            "0.043",
+            "68.8"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "3 tickets cost $9.81 each. What is the total cost?",
+          "choices": [
+            "$29.43",
+            "$2943",
+            "$2.943",
+            "$294.3"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "decimal-estimation-check",
+          "standard": "5.NBT.4",
+          "difficulty": 2,
+          "prompt": "Round each number to the nearest whole number to estimate 60.96 + 32.05.",
+          "choices": [
+            "92",
+            "94",
+            "93",
+            "9.300"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "decimal-addition",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 20.08 + 52.38.",
+          "choices": [
+            "25.31",
+            "54.38",
+            "72.46",
+            "7246"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "decimal-subtraction",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 46.72 - 39.12.",
+          "choices": [
+            "0.0760",
+            "0.760",
+            "7.60",
+            "46.33"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 9.5 × 4.",
+          "choices": [
+            "3.80",
+            "13.5",
+            "38",
+            "0.380"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "decimal-division",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 20.0 ÷ 4.",
+          "choices": [
+            "50",
+            "0.50",
+            "5",
+            "0.050"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "2 tickets cost $6.51 each. What is the total cost?",
+          "choices": [
+            "$130.2",
+            "$13.02",
+            "$6.51",
+            "$1.302"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "decimal-estimation-check",
+          "standard": "5.NBT.4",
+          "difficulty": 3,
+          "prompt": "Round each number to the nearest whole number to estimate 18.77 + 28.53.",
+          "choices": [
+            "47.30",
+            "4.800",
+            "480",
+            "48"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u07-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u07-l16"
+  }
+}

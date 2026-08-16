@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u05-l08",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u05-l08",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Understanding Fractions as Numbers",
+    "dayInUnit": 8,
+    "courseDay": 80,
+    "phase": "Error analysis and repair",
+    "focus": "tick-mark counting errors",
+    "title": "Error analysis and repair: tick-mark counting errors"
+  },
+  "standards": [
+    "3.NF.2",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 1,
+          "prompt": "A number line from 0 to 1 is divided into 6 equal lengths. What fraction names the point 4 lengths from 0?",
+          "workedSolution": {
+            "steps": [
+              "Each length is 1/6.",
+              "4 lengths from 0 is 4/6."
+            ],
+            "answer": "4/6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 1,
+          "prompt": "A number line from 0 to 1 is divided into 3 equal lengths. What fraction names the point that is 1 lengths from 0?",
+          "choices": [
+            "1/3",
+            "1/2",
+            "2/3",
+            "3/1"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 1,
+          "prompt": "A number line from 0 to 1 is divided into 2 equal lengths. What fraction names the point that is 1 lengths from 0?",
+          "choices": [
+            "2/1",
+            "1/2",
+            "1/1",
+            "2/2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 2,
+          "prompt": "A number line from 0 to 1 is divided into 6 equal lengths. What fraction names the point that is 3 lengths from 0?",
+          "choices": [
+            "3/6",
+            "4/6",
+            "6/3",
+            "3/5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 2,
+          "prompt": "A number line from 0 to 1 is divided into 6 equal lengths. What fraction names the point that is 5 lengths from 0?",
+          "choices": [
+            "5/6",
+            "5/5",
+            "1/6",
+            "6/5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 2,
+          "prompt": "A number line from 0 to 1 is divided into 4 equal lengths. What fraction names the point that is 2 lengths from 0?",
+          "choices": [
+            "2/3",
+            "3/4",
+            "4/2",
+            "2/4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 2,
+          "prompt": "A number line from 0 to 1 is divided into 6 equal lengths. What fraction names the point that is 1 lengths from 0?",
+          "choices": [
+            "6/1",
+            "1/5",
+            "1/6",
+            "5/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 3,
+          "prompt": "A number line from 0 to 1 is divided into 8 equal lengths. What fraction names the point that is 2 lengths from 0?",
+          "choices": [
+            "2/7",
+            "8/2",
+            "2/8",
+            "6/8"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u05-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u05-l08"
+  }
+}

@@ -1,0 +1,278 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l07",
+  "lessonId": "ma-g12-financial-literacy-u02-l07",
+  "integratedDomains": [
+    "budgeting",
+    "consumer-protection",
+    "saving-investing",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$27.49",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The six monthly increases added. Each was accepted separately, and none was ever compared with the others."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$329.88",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$27.49 in each of 12 months. Already, one year of increases approaches the purchase the household refused."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$989.64",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$329.88 a year for 3 years, holding the increases flat as the prompt states. The flat assumption makes this a floor: any further increase raises it."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "2.47",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$989.64 measured against $400. The household refused the smaller commitment and accepted the larger one, in the same year."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Accepting the six increases",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$989.64 against $400. The increases also differ in kind: they continue beyond the 3 years unless something is done, while the purchase ends when it is paid for."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "i1 + i2 + i3 + i4 + i5 + i6",
+        "substituted": "2 + 3.5 + 9.99 + 4.25 + 6 + 1.75",
+        "result": "$27.49",
+        "why": "The six monthly increases added. Each was accepted separately, and none was ever compared with the others."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 * 12",
+        "substituted": "#t1-p1 * 12",
+        "result": "$329.88",
+        "why": "$27.49 in each of 12 months. Already, one year of increases approaches the purchase the household refused."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 * horizon",
+        "substituted": "#t1-p2 * 3",
+        "result": "$989.64",
+        "why": "$329.88 a year for 3 years, holding the increases flat as the prompt states. The flat assumption makes this a floor: any further increase raises it."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 / oneOff, 2)",
+        "substituted": "round(#t1-p3 / 400, 2)",
+        "result": "2.47",
+        "why": "$989.64 measured against $400. The household refused the smaller commitment and accepted the larger one, in the same year."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 > oneOff2",
+        "substituted": "#t1-p3 > 400",
+        "result": "Accepting the six increases",
+        "why": "$989.64 against $400. The increases also differ in kind: they continue beyond the 3 years unless something is done, while the purchase ends when it is paid for."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The household refused $400 and accepted $989.64. Name the misconception that makes this feel consistent at the time, and describe a rule the household could adopt that would have caught it — stating what your rule would cost in effort.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names the misconception: each increase was judged alone and per month, where $9.99 is small, while the purchase was judged as a single visible total, so the two decisions were never measured on the same scale.",
+          "Identifies the second element — recurrence. The $400 ends when paid; the $27.49 a month continues indefinitely, so a three-year window understates it rather than overstating it.",
+          "Proposes a workable rule, such as converting any recurring increase to its annual or multi-year cost before accepting it, or reviewing all increases together once a year rather than one at a time.",
+          "States the cost of the rule honestly — it requires tracking increases as they arrive and setting aside time for a review that nothing forces the household to do."
+        ],
+        "evidenceRequirements": [
+          "Uses the $989.64 three-year figure against the $400 refused purchase, and refers to the $27.49 monthly total."
+        ],
+        "lookFors": [
+          "The response identifies the framing difference rather than concluding the household was simply careless.",
+          "The response notes that the comparison understates the gap, because the increases do not stop at 3 years."
+        ],
+        "commonMisconception": "Comparing a recurring monthly increase with a one-off price directly, when the two are not the same kind of commitment and are not measured over the same period.",
+        "dimensions": [
+          "error-diagnosis",
+          "criteria-application",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the six increases add up to per month?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do they come to across one year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What do they come to across the 3 years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many times the refused $400 purchase is the 3-year cost of the accepted increases? Give two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Over the 3 years, which decision commits the household to more money?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The household refused $400 and accepted $989.64. Name the misconception that makes this feel consistent at the time, and describe a rule the household could adopt that would have caught it — stating what your rule would cost in effort."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the six increases add up to per month? Answer: $27.49. Verification: The six monthly increases added. Each was accepted separately, and none was ever compared with the others. t1-p2: What do they come to across one year? Answer: $329.88. Verification: $27.49 in each of 12 months. Already, one year of increases approaches the purchase the household refused. t1-p3: What do they come to across the 3 years? Answer: $989.64. Verification: $329.88 a year for 3 years, holding the increases flat as the prompt states. The flat assumption makes this a floor: any further increase raises it. t2-p1: How many times the refused $400 purchase is the 3-year cost of the accepted increases? Give two decimal places. Answer: 2.47. Verification: $989.64 measured against $400. The household refused the smaller commitment and accepted the larger one, in the same year. t2-p2: Over the 3 years, which decision commits the household to more money? Answer: Accepting the six increases. Verification: $989.64 against $400. The increases also differ in kind: they continue beyond the 3 years unless something is done, while the purchase ends when it is paid for."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The household refused $400 and accepted $989.64. Name the misconception that makes this feel consistent at the time, and describe a rule the household could adopt that would have caught it — stating what your rule would cost in effort. Names the misconception: each increase was judged alone and per month, where $9.99 is small, while the purchase was judged as a single visible total, so the two decisions were never measured on the same scale. Identifies the second element — recurrence. The $400 ends when paid; the $27.49 a month continues indefinitely, so a three-year window understates it rather than overstating it. Proposes a workable rule, such as converting any recurring increase to its annual or multi-year cost before accepting it, or reviewing all increases together once a year rather than one at a time. States the cost of the rule honestly — it requires tracking increases as they arrive and setting aside time for a review that nothing forces the household to do. Uses the $989.64 three-year figure against the $400 refused purchase, and refers to the $27.49 monthly total. The response identifies the framing difference rather than concluding the household was simply careless. The response notes that the comparison understates the gap, because the increases do not stop at 3 years."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names the misconception: each increase was judged alone and per month, where $9.99 is small, while the purchase was judged as a single visible total, so the two decisions were never measured on the same scale. Identifies the second element — recurrence. The $400 ends when paid; the $27.49 a month continues indefinitely, so a three-year window understates it rather than overstating it. Proposes a workable rule, such as converting any recurring increase to its annual or multi-year cost before accepting it, or reviewing all increases together once a year rather than one at a time. States the cost of the rule honestly — it requires tracking increases as they arrive and setting aside time for a review that nothing forces the household to do."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u02-l07.scoring.json",
+    "sourceScoringSha256": "5c665c57395283f669fb8e45777f643d37a0e3b3bd4814988187c502eeaf98be",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u02-l12",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u02-l12",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Inverse Trigonometric Functions and Composition",
+    "dayInUnit": 12,
+    "courseDay": 30,
+    "phase": "Performance task build",
+    "focus": "verifying inverse relationships by composition",
+    "title": "Performance task build: verifying inverse relationships by composition"
+  },
+  "standards": [
+    "F-TF.6",
+    "F-TF.7",
+    "F-BF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 2,
+          "prompt": "Why does sine on all real numbers not have an inverse function without further restriction?",
+          "choices": [
+            "It repeats with period π, so the domain is restricted to (−π/2, π/2) to make an inverse possible.",
+            "Because its outputs are not all positive.",
+            "It is not one-to-one, so the domain is restricted to [0, π] to make an inverse possible.",
+            "It is not one-to-one — infinitely many inputs give the same output — so it has no inverse until the domain is restricted to [−π/2, π/2]."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-trig-equation-all-solutions",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Find all solutions of sin θ = 1/2 for 0° ≤ θ < 360°.",
+          "choices": [
+            "θ = 30° or θ = 330°",
+            "θ = 30° or θ = 210°",
+            "θ = 30° or θ = 150°",
+            "θ = 30° only"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-inverse-sine",
+          "standard": "F-TF.6",
+          "difficulty": 2,
+          "prompt": "Evaluate arcsin(√2/2) in radians, giving the principal value.",
+          "choices": [
+            "0",
+            "π/3",
+            "π/6",
+            "π/4"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compose-trig-and-inverse",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Evaluate cos(arcsin(√3/2)) exactly.",
+          "choices": [
+            "1/2",
+            "√3/2",
+            "√2/2",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 3,
+          "prompt": "Why does cosine on all real numbers not have an inverse function without further restriction?",
+          "choices": [
+            "It repeats with period π, so the domain is restricted to (−π/2, π/2) to make an inverse possible.",
+            "Because its outputs are not all positive.",
+            "It is not one-to-one — infinitely many inputs give the same output — so it has no inverse until the domain is restricted to [−π/2, π/2].",
+            "It is not one-to-one, so the domain is restricted to [0, π] to make an inverse possible."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-trig-equation-all-solutions",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Find all solutions of sin θ = √2/2 for 0° ≤ θ < 360°.",
+          "choices": [
+            "θ = 45° or θ = 225°",
+            "θ = 45° or θ = 135°",
+            "θ = 45° or θ = 315°",
+            "θ = 45° only"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-inverse-sine",
+          "standard": "F-TF.6",
+          "difficulty": 3,
+          "prompt": "Evaluate arcsin(0) in radians, giving the principal value.",
+          "choices": [
+            "π/6",
+            "π/4",
+            "0",
+            "π/3"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "compose-trig-and-inverse",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Evaluate cos(arcsin(1/2)) exactly.",
+          "choices": [
+            "√2/2",
+            "0",
+            "√3/2",
+            "1/2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 3,
+          "prompt": "Why does tangent on all real numbers where it is defined not have an inverse function without further restriction?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-trig-equation-all-solutions",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Find all solutions of sin θ = √3/2 for 0° ≤ θ < 360°.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u02-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u02-l12"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-english-language-arts-u10-assessment",
+  "courseRef": "ma-g3-english-language-arts",
+  "grade": 3,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g3-english-language-arts-u10",
+    "unitNumber": 10,
+    "unitTitle": "Narrative Craft and the Year-End Portfolio",
+    "courseTitle": "Grade 3 English Language Arts",
+    "assessmentLessonRef": "ma-g3-english-language-arts-u10-l17"
+  },
+  "standards": [
+    "3.W.3",
+    "3.W.4",
+    "3.L.1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-03/ma-g3-english-language-arts-u10-l17.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: unit evidence: an independently written narrative and reflection. Essential question: How do I tell a story a reader can follow, and show a year of reading and writing growth? By the end of this lesson you should be able to: Show independent evidence of this unit's targets. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for Narrative Craft and the Year-End Portfolio. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain this idea in your own words and give one valid example: establishing a situation and a narrator or characters.\\n- (6 pts, text evidence) Answer a question about event sequence that unfolds naturally using an unfamiliar passage, and quote or precisely paraphrase the words that support your answer.\\n- (6 pts, application) Apply this to new material: temporal words that signal order. Show the process or cite the evidence.\\n- (6 pts, error or claim analysis) A plausible but flawed response about a sense of closure is provided. Identify the error, correct it, and explain why the correction is better.\\n- (9 pts, constructed writing) Write an independent response connected to portfolio selection and reflection and to the unit performance task: Publish a year-end portfolio with an original narrative, one explainer, one opinion piece, one research card, and a written reflection on growth.\\n- (4 pts, reflection and transfer) Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.\\n\\nThis assessment also includes 1 fixed-answer/selected-response item(s) delivered separately by your facilitator.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/english-language-arts/ma-g3-english-language-arts-u10-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-english-language-arts-u10-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-03/ma-g3-english-language-arts-u10-l17.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Narrative Craft and the Year-End Portfolio?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

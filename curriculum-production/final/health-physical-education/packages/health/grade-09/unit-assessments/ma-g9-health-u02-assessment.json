@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g9-health-u02-assessment",
+  "courseId": "ma-g9-health",
+  "grade": 9,
+  "subject": "health",
+  "unitNumber": 2,
+  "unitTitle": "Mental and Emotional Health: Stress, Coping, and Help-Seeking",
+  "essentialQuestion": "How do I manage stress in a way that still works on a bad week, and how do I ask for help early?",
+  "prompts": [
+    {
+      "type": "concept and vocabulary",
+      "prompt": "Explain the stress response and what it does to attention, sleep, and mood in your own words and give a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of coping strategies that are sustainable versus strategies that cost more later.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply building a personal regulation routine in a new fictional situation. Show the decision process or cite the evidence used.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving recognizing when a difficulty is bigger than self-management; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect trusted adults, school supports, and crisis lines with supporting a peer without taking responsibility for their care. Explain how the two support, constrain, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Build a two-tier support plan: strategies the learner can run alone, and the named point at which they contact a trusted adult or professional. The plan may be written entirely with general categories rather than personal detail.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Coping strategies may be movement-based, still, sensory, verbal, written, or silent; every learner selects strategies their body and setting actually allow. Responses may be selected from options rather than composed.",
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "trustedAdultNote": "Direct any urgent safety, health, or mental-health concern to a trusted adult or qualified professional; this course is not diagnosis, therapy, or treatment.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceAssessmentId": "ma-g9-health-u02-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

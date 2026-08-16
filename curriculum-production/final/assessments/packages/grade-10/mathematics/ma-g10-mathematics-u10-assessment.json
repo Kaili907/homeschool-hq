@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-mathematics-u10-assessment",
+  "courseRef": "ma-g10-mathematics",
+  "grade": 10,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g10-mathematics-u10",
+    "unitNumber": 10,
+    "unitTitle": "Measurement, Modeling, and Design Capstone",
+    "courseTitle": "Geometry",
+    "assessmentLessonRef": "ma-g10-mathematics-u10-l16"
+  },
+  "standards": [
+    "G-GMD.1",
+    "G-GMD.3",
+    "G-GMD.4",
+    "G-MG.1",
+    "G-MG.2",
+    "G-MG.3",
+    "MP.4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-10/ma-g10-mathematics-u10-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "A solid object has mass 10 g and volume 2 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+      "choices": [
+        "0.2 g/cm³; it would float",
+        "5 g/cm³; it would sink",
+        "5 g/cm³; it would float",
+        "20 g/cm³; it would sink"
+      ],
+      "standardRef": "G-MG.2"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A square patio of side 11 m is to be paved at $4 per square metre. Find the total cost, and state which quantity the cost is proportional to.",
+      "choices": [
+        "$484; the cost is proportional to the area",
+        "$176; the cost is proportional to the perimeter",
+        "$44; the cost is proportional to the area",
+        "$484; the cost is proportional to the side length"
+      ],
+      "standardRef": "G-MG.3"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Find the volume of a square pyramid with base edge 4 and height 3. Leave π in the answer where it appears.",
+      "choices": [
+        "48/3",
+        "48",
+        "48π",
+        "48π/3"
+      ],
+      "standardRef": "G-GMD.3"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Describe the cross-section formed by a cone cut by a plane parallel to its base.",
+      "choices": [
+        "a triangle",
+        "a circle",
+        "a rectangle",
+        "a square"
+      ],
+      "standardRef": "G-GMD.4"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "A solid object has mass 30 g and volume 5 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+      "choices": [
+        "6 g/cm³; it would float",
+        "150 g/cm³; it would sink",
+        "6 g/cm³; it would sink",
+        "0.17 g/cm³; it would float"
+      ],
+      "standardRef": "G-MG.2"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A square patio of side 5 m is to be paved at $6 per square metre. Find the total cost, and state which quantity the cost is proportional to.",
+      "choices": [
+        "$30; the cost is proportional to the area",
+        "$150; the cost is proportional to the area",
+        "$150; the cost is proportional to the side length",
+        "$120; the cost is proportional to the perimeter"
+      ],
+      "standardRef": "G-MG.3"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Find the volume of a cone of radius 9 and height 11. Leave π in the answer where it appears.",
+      "choices": [
+        "891/3",
+        "891",
+        "891π/3",
+        "891π"
+      ],
+      "standardRef": "G-GMD.3"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Describe the cross-section formed by a square pyramid cut by a plane parallel to its base.",
+      "choices": [
+        "a rectangle",
+        "a triangle",
+        "a circle",
+        "a square"
+      ],
+      "standardRef": "G-GMD.4"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "A solid object has mass 99 g and volume 9 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+      "choices": [
+        "11 g/cm³; it would sink",
+        "891 g/cm³; it would sink",
+        "0.09 g/cm³; it would float",
+        "11 g/cm³; it would float"
+      ],
+      "standardRef": "G-MG.2"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "A square patio of side 11 m is to be paved at $13 per square metre. Find the total cost, and state which quantity the cost is proportional to.",
+      "choices": [
+        "$143; the cost is proportional to the area",
+        "$572; the cost is proportional to the perimeter",
+        "$1573; the cost is proportional to the area",
+        "$1573; the cost is proportional to the side length"
+      ],
+      "standardRef": "G-MG.3"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "Find the volume of a square pyramid with base edge 6 and height 6. Leave π in the answer where it appears.",
+      "choices": [
+        "216π",
+        "216/3",
+        "216π/3",
+        "216"
+      ],
+      "standardRef": "G-GMD.3"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u10-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Describe the cross-section formed by a cylinder cut by a plane perpendicular to its base through the axis.",
+      "choices": [
+        "a square",
+        "a triangle",
+        "a circle",
+        "a rectangle"
+      ],
+      "standardRef": "G-GMD.4"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/mathematics/ma-g10-mathematics-u10-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-mathematics-u10-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-10/ma-g10-mathematics-u10-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Measurement, Modeling, and Design Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

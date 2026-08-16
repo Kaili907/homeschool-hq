@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-health-u04-assessment",
+  "courseRef": "ma-g3-health",
+  "grade": 3,
+  "subject": "health",
+  "location": {
+    "unitRef": "ma-g3-health-u04",
+    "unitNumber": 4,
+    "unitTitle": "Friends, Boundaries, and Speaking Up",
+    "courseTitle": "Grade 3 Health",
+    "assessmentLessonRef": "ma-g3-health-u04-l05"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-03/unit-assessments/ma-g3-health-u04-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the private-safe task without disclosing medical history, diagnosis, body measurements, or sexual history.",
+    "Use a fictional scenario when offered and identify a trusted adult or qualified professional where appropriate."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain listening and taking turns in your own words and give or identify a valid example."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "representation or source",
+      "prompt": "Use a diagram of a general figure or character rather than your own body, a picture sequence, a model, a described demonstration, or a checked source, to show what you learned about personal body boundaries and unsafe touch."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply what you learned about asking for and giving permission to a new fictional situation. Show the steps or name the source you relied on."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "A made-up character makes an unsafe or unreliable choice involving secrets, surprises, and telling. Explain what is wrong, correct it, and say why the correction is safer."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect listening and taking turns with teasing, bullying, and reporting. Explain how the two ideas support or depend on one another."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Practice and write short scripts for asking permission, saying no, and getting help, using fictional situations only."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "transfer and next step",
+      "prompt": "Name one skill you can now use somewhere else, one way to check your own work, and one question you still have. This is about the skill, not about your private life; nothing private has to be shared."
+    }
+  ],
+  "responseMode": "private-safe-task-and-reflection",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/health/ma-g3-health-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy criterion.",
+    "Provide evidence that meets the stated reasoning and evidence criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. Choosing an adapted or opt-out path is never scored as a deficit.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-health-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-03/unit-assessments/ma-g3-health-u04-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Friends, Boundaries, and Speaking Up?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

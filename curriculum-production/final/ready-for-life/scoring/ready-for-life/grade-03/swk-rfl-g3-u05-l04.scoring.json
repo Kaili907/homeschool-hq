@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l04",
+  "lessonId": "ma-g3-ready-for-life-u05-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Return accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more items are set down near the correct spot or handed to the wrong person, rather than placed exactly right."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every item on the list is returned to its exact owner or storage spot, confirmed by the adult present."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Every item is returned exactly, and the learner catches and corrects at least one near-miss placement without adult prompting."
+          }
+        ]
+      },
+      {
+        "dimension": "Naming before placing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner places items first and only explains where they belong if asked afterward."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner states out loud where each item belongs before placing it, for every item."
+          }
+        ]
+      },
+      {
+        "dimension": "Adult-confirmed completion",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The adult confirms fewer than all items were actually returned, or confirmation happens only after the fact from the learner's report."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The adult directly observes and confirms each return in the moment it happens."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The adult's confirmation is based on direct observation of the return, not the learner's later account of it.",
+      "The reflection names one specific, observable change in the space, not a vague statement about feeling better."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

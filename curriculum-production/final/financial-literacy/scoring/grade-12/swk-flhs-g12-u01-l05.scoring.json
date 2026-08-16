@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l05",
+  "lessonId": "ma-g12-financial-literacy-u01-l05",
+  "integratedDomains": [
+    "income",
+    "budgeting",
+    "saving-investing",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$53,326.61",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Each raise multiplies the standing salary by 1.03, so five raises multiply the start by 1.03 to the fifth power. Adding 3% of $46,000 five times would understate this, because later raises apply to a larger base."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$7,326.61",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$53,326.61 against the $46,000 start. Five simple 3% increments on the original salary would have produced $6,900, so compounding accounts for the remaining $426.61."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$51,773.41",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Four raises rather than five, each still 3% on the standing salary. The missing raise is not recovered later, because every subsequent raise now applies to a smaller base."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,553.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$53,326.61 against $51,773.41. Note this is larger than the 3% of the year-3 salary that was skipped, because the gap itself has been compounded by the two later raises."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$15,532.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,553.20 in each of 10 years. Holding the gap flat is a deliberate simplification stated in the prompt: if raises continued on both paths the gap would keep widening, so this figure is a floor rather than an estimate."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(startSalary * pow(1 + raiseRate, years), 2)",
+        "substituted": "round(46000 * pow(1 + 0.03, 5), 2)",
+        "result": "$53,326.61",
+        "why": "Each raise multiplies the standing salary by 1.03, so five raises multiply the start by 1.03 to the fifth power. Adding 3% of $46,000 five times would understate this, because later raises apply to a larger base."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - startSalary2",
+        "substituted": "#t1-p1 - 46000",
+        "result": "$7,326.61",
+        "why": "$53,326.61 against the $46,000 start. Five simple 3% increments on the original salary would have produced $6,900, so compounding accounts for the remaining $426.61."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(startSalary3 * pow(1 + raiseRate2, raises), 2)",
+        "substituted": "round(46000 * pow(1 + 0.03, 4), 2)",
+        "result": "$51,773.41",
+        "why": "Four raises rather than five, each still 3% on the standing salary. The missing raise is not recovered later, because every subsequent raise now applies to a smaller base."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 - #t2-p1",
+        "substituted": "#t1-p1 - #t2-p1",
+        "result": "$1,553.20",
+        "why": "$53,326.61 against $51,773.41. Note this is larger than the 3% of the year-3 salary that was skipped, because the gap itself has been compounded by the two later raises."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 * horizon",
+        "substituted": "#t2-p2 * 10",
+        "result": "$15,532.00",
+        "why": "$1,553.20 in each of 10 years. Holding the gap flat is a deliberate simplification stated in the prompt: if raises continued on both paths the gap would keep widening, so this figure is a floor rather than an estimate."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The $15,532.00 rests on holding the gap flat for 10 years. Say why that assumption makes the figure a floor rather than a best estimate, and name one other thing the projection leaves out that could push the true cost either up or down.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that if raises continue on both paths, each future raise is applied to a smaller base on the missed-raise path, so the gap widens every year and $1,553.20 a year understates it.",
+          "Identifies the flat-gap assumption as the reason $15,532.00 is a floor, and states that the real figure under continued raises would be larger.",
+          "Names a further omission with its direction — for instance a later promotion or job change that resets pay and closes the gap, which would push the cost down, or a retirement contribution set as a percentage of pay, which compounds the gap and pushes it up."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,553.20 annual gap and the $15,532.00 ten-year figure, and names the assumption that links them."
+        ],
+        "lookFors": [
+          "The response recognises that a missed raise is permanent rather than a one-year loss.",
+          "The response gives the direction of each omission, not just its existence."
+        ],
+        "commonMisconception": "Pricing a missed raise as the single year’s increase, which ignores that every later raise compounds from the lower base.",
+        "dimensions": [
+          "assumption-identification",
+          "communication-of-uncertainty",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the salary after all 5 raises? Round to the nearest cent."
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much higher is that than the starting salary?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the salary at the end of the same period with only 4 raises? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the annual gap the missed raise leaves at the end of the period?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Assume the gap stays at that same amount in each of the next 10 years, with no further raises on either path. What does the missed raise cost across those 10 years?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The $15,532.00 rests on holding the gap flat for 10 years. Say why that assumption makes the figure a floor rather than a best estimate, and name one other thing the projection leaves out that could push the true cost either up or down."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the salary after all 5 raises? Round to the nearest cent. Answer: $53,326.61. Verification: Each raise multiplies the standing salary by 1.03, so five raises multiply the start by 1.03 to the fifth power. Adding 3% of $46,000 five times would understate this, because later raises apply to a larger base. t1-p2: How much higher is that than the starting salary? Answer: $7,326.61. Verification: $53,326.61 against the $46,000 start. Five simple 3% increments on the original salary would have produced $6,900, so compounding accounts for the remaining $426.61. t2-p1: What is the salary at the end of the same period with only 4 raises? Round to the nearest cent. Answer: $51,773.41. Verification: Four raises rather than five, each still 3% on the standing salary. The missing raise is not recovered later, because every subsequent raise now applies to a smaller base. t2-p2: What is the annual gap the missed raise leaves at the end of the period? Answer: $1,553.20. Verification: $53,326.61 against $51,773.41. Note this is larger than the 3% of the year-3 salary that was skipped, because the gap itself has been compounded by the two later raises. t2-p3: Assume the gap stays at that same amount in each of the next 10 years, with no further raises on either path. What does the missed raise cost across those 10 years? Answer: $15,532.00. Verification: $1,553.20 in each of 10 years. Holding the gap flat is a deliberate simplification stated in the prompt: if raises continued on both paths the gap would keep widening, so this figure is a floor rather than an estimate."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: The $15,532.00 rests on holding the gap flat for 10 years. Say why that assumption makes the figure a floor rather than a best estimate, and name one other thing the projection leaves out that could push the true cost either up or down. Explains that if raises continue on both paths, each future raise is applied to a smaller base on the missed-raise path, so the gap widens every year and $1,553.20 a year understates it. Identifies the flat-gap assumption as the reason $15,532.00 is a floor, and states that the real figure under continued raises would be larger. Names a further omission with its direction — for instance a later promotion or job change that resets pay and closes the gap, which would push the cost down, or a retirement contribution set as a percentage of pay, which compounds the gap and pushes it up. Uses the $1,553.20 annual gap and the $15,532.00 ten-year figure, and names the assumption that links them. The response recognises that a missed raise is permanent rather than a one-year loss. The response gives the direction of each omission, not just its existence."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that if raises continue on both paths, each future raise is applied to a smaller base on the missed-raise path, so the gap widens every year and $1,553.20 a year understates it. Identifies the flat-gap assumption as the reason $15,532.00 is a floor, and states that the real figure under continued raises would be larger. Names a further omission with its direction — for instance a later promotion or job change that resets pay and closes the gap, which would push the cost down, or a retirement contribution set as a percentage of pay, which compounds the gap and pushes it up."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u01-l05.scoring.json",
+    "sourceScoringSha256": "42fee65667e07fb8d593c76af7a5c4c993f9e9d72cb17b2bf7cc5b01e9541897",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

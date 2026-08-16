@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u05-l05",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Adding and Subtracting Fractions",
+    "dayInUnit": 5,
+    "courseDay": 77,
+    "phase": "Concept model B",
+    "focus": "subtracting unlike fractions",
+    "title": "Concept model B: subtracting unlike fractions"
+  },
+  "standards": [
+    "5.NF.1",
+    "5.NF.2"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "add-mixed-numbers",
+          "standard": "5.NF.1",
+          "difficulty": 1,
+          "prompt": "Find 1 2/3 + 2 3/4. Write the answer in simplest form.",
+          "workedSolution": {
+            "steps": [
+              "Add the whole numbers: 1 + 2 = 3.",
+              "Add the fractions: 2/3 + 3/4 = 17/12 = 1 5/12.",
+              "Combine the parts: 3 + 1 5/12 = 4 5/12."
+            ],
+            "answer": "4 5/12"
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "subtract-mixed-numbers",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "Find 4 1/3 - 1 3/4. Write the answer in simplest form.",
+          "workedSolution": {
+            "steps": [
+              "Regroup 4 1/3 as 3 4/3.",
+              "Use twelfths: 4/3 = 16/12 and 3/4 = 9/12.",
+              "Subtract to get 2 7/12."
+            ],
+            "answer": "2 7/12"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "addition-word-problem",
+          "standard": "5.NF.2",
+          "difficulty": 2,
+          "prompt": "One ribbon piece is 1 4/9 meters long and another is 2 1/3 meters long. What is their total length in meters?",
+          "choices": [
+            "3 2/3",
+            "3 1/2",
+            "3 2/5",
+            "3 7/9"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "subtraction-word-problem",
+          "standard": "5.NF.2",
+          "difficulty": 2,
+          "prompt": "A ribbon is 3 11/12 meters long. If 1 2/3 meters are used, how many meters remain?",
+          "choices": [
+            "2 1/4",
+            "3 1/4",
+            "1 1/2",
+            "1 4/5"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fraction",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "Complete the equivalent fraction: 4/5 = 20/?.",
+          "choices": [
+            "30",
+            "45",
+            "26",
+            "25"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "simplify-fraction",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "Write 6/9 in simplest form.",
+          "choices": [
+            "2/3",
+            "2/5",
+            "1/3",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-to-benchmark",
+          "standard": "5.NF.2",
+          "difficulty": 2,
+          "prompt": "Compare 1/8 with the benchmark 1 using <, >, or =.",
+          "choices": [
+            ">",
+            "=",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "estimate-fraction-operation",
+          "standard": "5.NF.2",
+          "difficulty": 3,
+          "prompt": "Use 0, 1/2, or 1 for each fraction to estimate 7/17 + 2/9.",
+          "choices": [
+            "about 1",
+            "about 1 1/2",
+            "about 1/2",
+            "about 2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "least-common-denominator",
+          "standard": "5.NF.1",
+          "difficulty": 3,
+          "prompt": "What is the least common denominator of fractions with denominators 8 and 12?",
+          "choices": [
+            "32",
+            "16",
+            "24",
+            "12"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "rewrite-with-common-denominator",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "Rewrite 6/7 and 8/9 as equivalent fractions with the least common denominator.",
+          "choices": [
+            "54/63 and 56/63",
+            "6/63 and 8/63",
+            "55/63 and 56/63",
+            "56/63 and 54/63"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "add-unlike-fractions",
+          "standard": "5.NF.1",
+          "difficulty": 3,
+          "prompt": "6/7 + 1/2 = ? Write the answer in simplest form.",
+          "choices": [
+            "1 4/15",
+            "1 5/14",
+            "1 2/7",
+            "1 1/3"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u05-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u05-l05"
+  }
+}

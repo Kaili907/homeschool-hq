@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-mathematics-u09-assessment",
+  "courseRef": "ma-g12-mathematics",
+  "grade": 12,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g12-mathematics-u09",
+    "unitNumber": 9,
+    "unitTitle": "Random Variables and Probability Distributions",
+    "courseTitle": "Precalculus with Statistics",
+    "assessmentLessonRef": "ma-g12-mathematics-u09-l16"
+  },
+  "standards": [
+    "S-CP.8",
+    "S-CP.9",
+    "S-MD.1",
+    "S-MD.2",
+    "S-MD.3",
+    "MP.2"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u09-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Given P(A) = 5/10 and P(B | A) = 7/10, find P(A and B) in lowest terms.",
+      "choices": [
+        "6/5",
+        "7/20",
+        "5/7",
+        "7/2"
+      ],
+      "standardRef": "S-CP.8"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A trial succeeds with probability 3/10 and is repeated 2 times independently. Let X count the successes. Find P(X = 0) as a decimal.",
+      "choices": [
+        "0.09",
+        "0.7",
+        "0.49",
+        "1.4"
+      ],
+      "standardRef": "S-MD.1"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "From 7 distinct items, how many ways are there to choose 3 when the order does not matter?",
+      "choices": [
+        "35",
+        "210",
+        "21",
+        "343"
+      ],
+      "standardRef": "S-CP.9"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "A random variable takes values 2, 2, 6 with probabilities 3/10, 5/10, 2/10 respectively. Find its expected value.",
+      "choices": [
+        "3.3333333333333335",
+        "28",
+        "6",
+        "2.8"
+      ],
+      "standardRef": "S-MD.2"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Given P(A) = 8/10 and P(B | A) = 8/10, find P(A and B) in lowest terms.",
+      "choices": [
+        "1",
+        "8/5",
+        "16/25",
+        "32/5"
+      ],
+      "standardRef": "S-CP.8"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A trial succeeds with probability 5/10 and is repeated 3 times independently. Let X count the successes. Find P(X = 0) as a decimal.",
+      "choices": [
+        "0.0625",
+        "0.5",
+        "1.5",
+        "0.125"
+      ],
+      "standardRef": "S-MD.1"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "From 8 distinct items, how many ways are there to choose 4 when the order does not matter?",
+      "choices": [
+        "70",
+        "32",
+        "1680",
+        "4096"
+      ],
+      "standardRef": "S-CP.9"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "A random variable takes values 1, 15, 19, 20 with probabilities 5/10, 2/10, 2/10, 1/10 respectively. Find its expected value.",
+      "choices": [
+        "20",
+        "93",
+        "9.3",
+        "13.75"
+      ],
+      "standardRef": "S-MD.2"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Given P(A) = 8/10 and P(B | A) = 9/10, find P(A and B) in lowest terms.",
+      "choices": [
+        "18/25",
+        "36/5",
+        "17/10",
+        "8/9"
+      ],
+      "standardRef": "S-CP.8"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "A trial succeeds with probability 1/10 and is repeated 2 times independently. Let X count the successes. Find P(X = 0) as a decimal.",
+      "choices": [
+        "0.9",
+        "1.8",
+        "0.81",
+        "0.01"
+      ],
+      "standardRef": "S-MD.1"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "From 9 distinct items, how many ways are there to choose 4 when the order does not matter?",
+      "choices": [
+        "126",
+        "36",
+        "6561",
+        "3024"
+      ],
+      "standardRef": "S-CP.9"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u09-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "A random variable takes values 18, 4, 16, 1 with probabilities 3/10, 5/10, 1/10, 1/10 respectively. Find its expected value.",
+      "choices": [
+        "18",
+        "9.1",
+        "91",
+        "9.75"
+      ],
+      "standardRef": "S-MD.2"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/mathematics/ma-g12-mathematics-u09-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-mathematics-u09-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u09-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Random Variables and Probability Distributions?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

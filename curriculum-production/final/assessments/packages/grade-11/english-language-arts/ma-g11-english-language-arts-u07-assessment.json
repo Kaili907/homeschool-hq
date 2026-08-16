@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-english-language-arts-u07-assessment",
+  "courseRef": "ma-g11-english-language-arts",
+  "grade": 11,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g11-english-language-arts-u07",
+    "unitNumber": 7,
+    "unitTitle": "Rhetorical Power and Effective Style",
+    "courseTitle": "English 11: American Literature, Research, and Synthesis",
+    "assessmentLessonRef": "ma-g11-english-language-arts-u07-l16"
+  },
+  "standards": [
+    "11-12.RI.6",
+    "11-12.RI.5",
+    "11-12.SL.3",
+    "11-12.SL.4",
+    "11-12.SL.5",
+    "11-12.SL.6",
+    "11-12.RL.7"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-11/ma-g11-english-language-arts-u07-l16.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: assessing stance, word choice, and tone. Essential question: How does close, evidence-governed attention to assessing stance, word choice, and tone change what a reader or writer is entitled to claim? By the end of this lesson you should be able to: Explain what assessing stance, word choice, and tone means on material that resists a first reading, and say where a competent reader would slow down. You'll need: course notebook or digital equivalent; the unit's assigned texts, in an accessible reading representation; citation reference or style manual appropriate to the course.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for Rhetorical Power and Effective Style. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain rhetoric that is particularly effective in your own words and identify a valid example in an assigned text.\\n- (5 pts, textual evidence) Cite the strongest available evidence for a claim about how style and content create power or persuasiveness, and state what the evidence does not establish.\\n- (6 pts, application) Apply evaluating the effectiveness of a structure to a text you have not analyzed in this unit. Show the reasoning, not only the conclusion.\\n- (6 pts, error or claim analysis) Analyze a plausible misreading or unsupported claim involving assessing stance, word choice, and tone; correct it and explain what made it wrong.\\n- (5 pts, connection) Connect multiple interpretations of a drama or poem with conveying a clear and distinct perspective. Explain how one constrains, supports, or complicates the other.\\n- (8 pts, performance evidence) Present the strongest evidence from the unit performance task: Analyze a rhetorically powerful text and deliver an evidence-based evaluation that states a clear stance.\\n- (4 pts, reflection and transfer) Identify one skill you can now transfer, one check that improves the quality of your reading or writing, and one open question.\\n- (5 pts, sufficiency and counter-evidence) Show that your evidence for how style and content create power or persuasiveness is sufficient, not merely consistent with your claim. Identify the strongest piece of evidence that cuts against you.\\n- (5 pts, unaided transfer) Apply rhetoric that is particularly effective to a text supplied at assessment time, with no exemplar and no checklist. Explain the choice you made and why.\\n- (6 pts, uncertainty and limits) State precisely where the text or the sources leave the question unsettled, and what additional evidence would settle it.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/english-language-arts/ma-g11-english-language-arts-u07-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-english-language-arts-u07-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-11/ma-g11-english-language-arts-u07-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Rhetorical Power and Effective Style?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

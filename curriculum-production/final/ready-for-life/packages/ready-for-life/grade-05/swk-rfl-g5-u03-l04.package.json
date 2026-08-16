@@ -1,0 +1,388 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u03-l04",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Basic Food Safety",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: safe tool identification"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 07–09",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can practice safe tool identification. I will do one step at a time and check one result.",
+  "scenario": "With a trusted adult, the learner lays out at least six real kitchen tools — a mix that should include something clearly safe for independent use (a mixing spoon), something that needs supervision (a vegetable peeler), and something adult-only (a chef's knife) — and sorts each tool into one of the three categories before the adult confirms.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult is present for the entire sorting activity.",
+    "The learner handles adult-only tools only to look at them, with the adult holding or guiding, never using them unsupervised."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If six real kitchen tools with adult supervision aren't available together, the learner instead sorts six tools shown in a printed or hand-drawn kitchen-tool set into the same three categories and explains their reasoning in writing, which the adult reviews and confirms afterward."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g5-u03-l04-model-card",
+    "Embedded resource: swk-rfl-g5-u03-l04-step-card",
+    "Embedded resource: swk-rfl-g5-u03-l04-guided-card",
+    "Embedded resource: swk-rfl-g5-u03-l04-independent-card",
+    "Embedded resource: swk-rfl-g5-u03-l04-evidence-record",
+    "Embedded resource: swk-rfl-g5-u03-l04-retry-pair",
+    "Embedded resource: swk-rfl-g5-u03-l04-delivered-reference",
+    "adult-or-local: at least six real kitchen tools spanning the three safety categories"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Open swk-rfl-g5-u03-l04-model-card. Watch one complete example.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g5-u03-l04-guided-card. Do the coached move.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u03-l04-independent-card. Choose one complete route. Follow its steps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g5-u03-l04-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Pick the one tool that was hardest to categorize. What made its category less obvious than the others?"
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u03-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u03-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u03-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Category accuracy: At least five of six tools sorted correctly. | Reasoning quality: Reasons name a specific hazard type for most tools. Resume at the next unfinished step on swk-rfl-g5-u03-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Sort three additional kitchen tools not covered in the original six, applying the same three-category reasoning without adult prompting before the adult confirms.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can practice safe tool identification. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u03-l04-model-card",
+        "swk-rfl-g5-u03-l04-step-card",
+        "swk-rfl-g5-u03-l04-guided-card",
+        "swk-rfl-g5-u03-l04-independent-card",
+        "swk-rfl-g5-u03-l04-evidence-record",
+        "swk-rfl-g5-u03-l04-retry-pair",
+        "swk-rfl-g5-u03-l04-delivered-reference"
+      ],
+      "referencedArtifactWords": [
+        "reference"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g5-u03-l04-delivered-reference"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g5-u03-l04-local-1",
+          "label": "at least six real kitchen tools spanning the three safety categories",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u03-l04-model-card",
+        "kind": "model",
+        "title": "safe tool identification worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: With a trusted adult, the learner lays out at least six real kitchen tools — a mix that should include something clearly safe for independent use (a mixing spoon), something that needs supervision (a vegetable peeler), and something adult-only (a chef's knife) — and sorts each tool into one of the three categories before the adult confirms.",
+          "Model move 1: Read the condition and name the exact safe tool identification decision or action.",
+          "Model move 2: Before sorting, name one kitchen tool you're already sure is safe for you to use alone, and one you're sure is adult-only.",
+          "Model move 3: With your adult, lay out at least six kitchen tools and sort each into: safe alone, needs supervision, or adult-only.",
+          "Model check: Category accuracy: At least five of six tools sorted correctly. | Reasoning quality: Reasons name a specific hazard type for most tools."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "safe tool identification action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for safe tool identification.",
+          "2. Watch the worked move on swk-rfl-g5-u03-l04-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u03-l04-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u03-l04-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u03-l04-evidence-record; use swk-rfl-g5-u03-l04-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "safe tool identification coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: With a trusted adult, the learner lays out at least six real kitchen tools — a mix that should include something clearly safe for independent use (a mixing spoon), something that needs supervision (a vegetable peeler), and something adult-only (a chef's knife) — and sorts each tool into one of the three categories before the adult confirms.",
+          "Coach direction: Before sorting, name one kitchen tool you're already sure is safe for you to use alone, and one you're sure is adult-only.",
+          "Learner prompt: Name the two tools.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l04-independent-card",
+        "kind": "independent-task",
+        "title": "safe tool identification complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult, lay out at least six kitchen tools and sort each into: safe alone, needs supervision, or adult-only.",
+          "Response 1 (t2-p1): Every tool is sorted into exactly one of the three categories.",
+          "Response 2 (t2-p2): For each tool, I said out loud one reason for its category (sharp edge, heat, moving parts, etc.).",
+          "Response 3 (t2-p3): My adult confirmed or corrected each sort before I moved to the next tool.",
+          "Equal-access rule: If six real kitchen tools with adult supervision aren't available together, the learner instead sorts six tools shown in a printed or hand-drawn kitchen-tool set into the same three categories and explains their reasoning in writing, which the adult reviews and confirms afterward."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "safe tool identification minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Pick the one tool that was hardest to categorize. What made its category less obvious than the others?",
+          "Success checks: Category accuracy: At least five of six tools sorted correctly. | Reasoning quality: Reasons name a specific hazard type for most tools.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l04-retry-pair",
+        "kind": "retry",
+        "title": "safe tool identification supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u03-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u03-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional safe tool identification condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Category accuracy: At least five of six tools sorted correctly. | Reasoning quality: Reasons name a specific hazard type for most tools..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u03-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l04-delivered-reference",
+        "kind": "reference",
+        "title": "safe tool identification delivered reference",
+        "purpose": "Resolves the lesson's named reference so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: With a trusted adult, the learner lays out at least six real kitchen tools — a mix that should include something clearly safe for independent use (a mixing spoon), something that needs supervision (a vegetable peeler), and something adult-only (a chef's knife) — and sorts each tool into one of the three categories before the adult confirms.",
+          "Use steps: With your adult, lay out at least six kitchen tools and sort each into: safe alone, needs supervision, or adult-only.",
+          "Field 1 (t2-p1): Every tool is sorted into exactly one of the three categories.",
+          "Field 2 (t2-p2): For each tool, I said out loud one reason for its category (sharp edge, heat, moving parts, etc.).",
+          "Field 3 (t2-p3): My adult confirmed or corrected each sort before I moved to the next tool.",
+          "Check against: Category accuracy: At least five of six tools sorted correctly. | Reasoning quality: Reasons name a specific hazard type for most tools."
+        ]
+      }
+    ],
+    "model": {
+      "title": "safe tool identification worked model",
+      "startingCondition": "With a trusted adult, the learner lays out at least six real kitchen tools — a mix that should include something clearly safe for independent use (a mixing spoon), something that needs supervision (a vegetable peeler), and something adult-only (a chef's knife) — and sorts each tool into one of the three categories before the adult confirms.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact safe tool identification decision or action.",
+        "Model move 2: Before sorting, name one kitchen tool you're already sure is safe for you to use alone, and one you're sure is adult-only.",
+        "Model move 3: With your adult, lay out at least six kitchen tools and sort each into: safe alone, needs supervision, or adult-only."
+      ],
+      "reasoning": "The model names the condition, follows the ordered safe tool identification process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Category accuracy: At least five of six tools sorted correctly.",
+        "Reasoning quality: Reasons name a specific hazard type for most tools."
+      ],
+      "resourceRef": "swk-rfl-g5-u03-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for safe tool identification.",
+        "2. Watch the worked move on swk-rfl-g5-u03-l04-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u03-l04-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u03-l04-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u03-l04-evidence-record; use swk-rfl-g5-u03-l04-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u03-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "With a trusted adult, the learner lays out at least six real kitchen tools — a mix that should include something clearly safe for independent use (a mixing spoon), something that needs supervision (a vegetable peeler), and something adult-only (a chef's knife) — and sorts each tool into one of the three categories before the adult confirms.",
+      "prompt": "Name the two tools.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Category accuracy: At least five of six tools sorted correctly.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u03-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u03-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "safe tool identification — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g5-u03-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult, lay out at least six kitchen tools and sort each into: safe alone, needs supervision, or adult-only.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "safe tool identification — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u03-l04-independent-card",
+        "directions": "If six real kitchen tools with adult supervision aren't available together, the learner instead sorts six tools shown in a printed or hand-drawn kitchen-tool set into the same three categories and explains their reasoning in writing, which the adult reviews and confirms afterward.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u03-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Pick the one tool that was hardest to categorize. What made its category less obvious than the others?",
+      "observableCriteria": [
+        "Category accuracy: At least five of six tools sorted correctly.",
+        "Reasoning quality: Reasons name a specific hazard type for most tools."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u03-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u03-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u03-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u03-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Category accuracy: At least five of six tools sorted correctly. | Reasoning quality: Reasons name a specific hazard type for most tools.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u03-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u03-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

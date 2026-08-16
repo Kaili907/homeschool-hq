@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-technology-u05-assessment",
+  "courseRef": "ma-g12-technology",
+  "grade": 12,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g12-technology-u05",
+    "unitNumber": 5,
+    "unitTitle": "Capstone Design, Build, and Test",
+    "courseTitle": "Cybersecurity, AI Literacy, and Computing Capstone",
+    "assessmentLessonRef": "ma-g12-technology-u05-l11"
+  },
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Impacts of Computing"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u05-l11.task-package.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Complete the unit assessment task for capstone design, build, and test independently and under the unit's stated conditions. Produce the required artifact or solution, show the reasoning or process that produced it, and verify it against the success conditions before submitting. Include your own check: state what result you expected, what you actually got on at least two cases, and what you did about any difference. Use only your own work; a tutor may clarify the instructions but must not supply, debug, or write any part of the graded submission. Anchor today's work inside its unit: this session's evidence is about capstone design, build, and test, and it belongs to \"Capstone Design, Build, and Test\", which also covers separate topics such as problem validation and stakeholders. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Completed assessment artifact, visible reasoning or process, and a two-case self-check with resolution of any difference."
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/technology/ma-g12-technology-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task on capstone design, build, and test.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-technology-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u05-l11.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Capstone Design, Build, and Test?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

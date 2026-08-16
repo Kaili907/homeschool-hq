@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l08",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l08",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 8,
+    "courseDay": 44,
+    "phase": "Error analysis and repair",
+    "focus": "near-miss and skip-counting errors",
+    "title": "Error analysis and repair: near-miss and skip-counting errors"
+  },
+  "standards": [
+    "3.OA.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 7 × 8.",
+          "workedSolution": {
+            "steps": [
+              "7 groups of 8: 8, 16, 24, 32, 40, 48, 56.",
+              "7 × 8 = 56."
+            ],
+            "answer": "56"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 54 ÷ 9.",
+          "workedSolution": {
+            "steps": [
+              "9 × 6 = 54.",
+              "So 54 ÷ 9 = 6."
+            ],
+            "answer": "6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 6 × 3.",
+          "choices": [
+            "12",
+            "18",
+            "24",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 20 ÷ 4.",
+          "choices": [
+            "5",
+            "16",
+            "6",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 9 × 7.",
+          "choices": [
+            "63",
+            "54",
+            "72",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 42 ÷ 7.",
+          "choices": [
+            "5",
+            "7",
+            "6",
+            "35"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 8 × 5.",
+          "choices": [
+            "48",
+            "40",
+            "13",
+            "32"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 45 ÷ 9.",
+          "choices": [
+            "6",
+            "5",
+            "36",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 7 × 6.",
+          "choices": [
+            "13",
+            "35",
+            "49",
+            "42"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l08"
+  }
+}

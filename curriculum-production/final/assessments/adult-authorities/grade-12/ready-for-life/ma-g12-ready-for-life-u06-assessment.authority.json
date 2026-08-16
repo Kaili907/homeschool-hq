@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g12-ready-for-life-u06-assessment",
+  "courseRef": "ma-g12-ready-for-life",
+  "grade": 12,
+  "subject": "ready-for-life",
+  "authorityClass": "GUARDIAN_REQUIRED",
+  "rubricDimensions": [
+    "Presentation completeness",
+    "Challenge-response quality"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/ready-for-life/scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u06-l06.scoring.json",
+  "scoringSourceAuthority": {
+    "input": "hs912_normalization",
+    "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-candidates/hs912-r1/ready-for-life/grade-12/assessments.json"
+  },
+  "completionAuthority": {
+    "kind": "guardian",
+    "learnerAssertionCanCertify": false,
+    "adultAttestationRequired": true
+  },
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

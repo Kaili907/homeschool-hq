@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l01",
+  "lessonId": "ma-g12-ready-for-life-u05-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Map completeness and honesty",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Most categories left blank with no engagement, not even an honest 'no one yet.'" },
+          { "label": "Proficient", "descriptor": "All five categories have either a role label or an honest recorded gap." },
+          { "label": "Advanced", "descriptor": "Gaps are named specifically enough to act on (e.g., 'no one for health questions yet') rather than a blanket 'not sure.'" }
+        ]
+      },
+      {
+        "dimension": "Privacy discipline",
+        "levels": [
+          { "label": "Emerging", "descriptor": "A full name, address, phone number, or other identifying detail appears anywhere in the response." },
+          { "label": "Proficient", "descriptor": "Only role/relationship labels are used throughout, with no identifying details." },
+          { "label": "Advanced", "descriptor": "Role labels are specific enough to be useful to the learner (e.g., 'my aunt' vs. just 'family') while still non-identifying to an outside reader." }
+        ]
+      },
+      {
+        "dimension": "Actionable next step",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Next step is vague ('try to find someone') with no concrete action." },
+          { "label": "Proficient", "descriptor": "Next step is a concrete, realistic action tied to the named gap." },
+          { "label": "Advanced", "descriptor": "Next step includes a rough timeframe or trigger for when the learner will actually take it." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No full name, address, or contact detail appears anywhere in the response; only role/relationship labels.",
+      "Every one of the five categories has either a role label or an honestly recorded gap, not a blank.",
+      "The named next step is specific enough that a guardian reading it could recognize whether it happened."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

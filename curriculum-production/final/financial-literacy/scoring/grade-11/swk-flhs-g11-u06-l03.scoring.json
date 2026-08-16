@@ -1,0 +1,398 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l03",
+  "lessonId": "ma-g11-financial-literacy-u06-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$252.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6% of $4,200 — the average annual cost of self-insuring, spread across many years."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$3,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The deductible comes off the loss first, and $3,600 is below the limit, so the whole remainder is paid."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $600 deductible — the part of every covered loss that stays with the holder."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$431.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$395 paid every year plus 6% of the $600 deductible, since the deductible is only paid in the years the loss occurs."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$179.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$431.00 with the policy against $252.00 without — the insurer charges more than the expected loss, which is how it covers its own costs and risk."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,700.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,200 against a $1,500 reserve. Self-insuring only works if the reserve can actually absorb the loss."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,500 less the $600 deductible — the policy converts a loss the household cannot absorb into one it can."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "15.1",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,700.00 shortfall divided by the $179.00 a year that self-insuring saves — the household is exposed for the whole of that period."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "Carrying the risk is cheaper but the policy is safer",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$252.00 against $431.00 makes self-insuring cheaper on average, while the $2,700.00 shortfall against the reserve makes the policy the option the household could actually survive."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(chance * loss, 2)",
+        "substituted": "round(0.06 * 4200, 2)",
+        "result": "$252.00",
+        "why": "6% of $4,200 — the average annual cost of self-insuring, spread across many years."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "min(max(loss2 - deductible, 0), limit)",
+        "substituted": "min(max(4200 - 600, 0), 4200)",
+        "result": "$3,600.00",
+        "why": "The deductible comes off the loss first, and $3,600 is below the limit, so the whole remainder is paid."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "loss3 - #t1-p2",
+        "substituted": "4200 - #t1-p2",
+        "result": "$600.00",
+        "why": "The $600 deductible — the part of every covered loss that stays with the holder."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(premium + chance2 * deductible2, 2)",
+        "substituted": "round(395 + 0.06 * 600, 2)",
+        "result": "$431.00",
+        "why": "$395 paid every year plus 6% of the $600 deductible, since the deductible is only paid in the years the loss occurs."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p4 - #t1-p1",
+        "substituted": "#t1-p4 - #t1-p1",
+        "result": "$179.00",
+        "why": "$431.00 with the policy against $252.00 without — the insurer charges more than the expected loss, which is how it covers its own costs and risk."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "loss4 - reserve",
+        "substituted": "4200 - 1500",
+        "result": "$2,700.00",
+        "why": "$4,200 against a $1,500 reserve. Self-insuring only works if the reserve can actually absorb the loss."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "reserve2 - #t1-p3",
+        "substituted": "1500 - #t1-p3",
+        "result": "$900.00",
+        "why": "$1,500 less the $600 deductible — the policy converts a loss the household cannot absorb into one it can."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p2 / #t2-p1, 1)",
+        "substituted": "round(#t2-p2 / #t2-p1, 1)",
+        "result": "15.1",
+        "why": "The $2,700.00 shortfall divided by the $179.00 a year that self-insuring saves — the household is exposed for the whole of that period."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t1-p1 < #t1-p4",
+        "substituted": "#t1-p1 < #t1-p4",
+        "result": "Carrying the risk is cheaper but the policy is safer",
+        "why": "$252.00 against $431.00 makes self-insuring cheaper on average, while the $2,700.00 shortfall against the reserve makes the policy the option the household could actually survive."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Insuring costs $179.00 a year more in expected terms and is still the right choice here. Explain what the household is buying with that $179.00, and state the general condition under which self-insuring is the better option.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the $179.00 buys the removal of an outcome the household cannot survive: a $4,200 loss against a $1,500 reserve.",
+          "States the general condition: self-insuring is better when the reserve can absorb the largest plausible loss without disrupting the rest of the plan.",
+          "Recognises that an insurer must charge more than the expected loss, so paying more than the expectation is the normal case rather than a sign of a bad policy."
+        ],
+        "evidenceRequirements": [
+          "Cites the $252.00 expected loss, the $431.00 expected cost with the policy, and the $2,700.00 reserve shortfall."
+        ],
+        "lookFors": [
+          "The response identifies capacity to absorb the loss as the deciding factor, not the expected cost.",
+          "The response explains why the premium exceeds the expected loss rather than treating it as overcharging.",
+          "A response noting that the household could self-insure once the reserve passes about $4,200 is stating the condition correctly."
+        ],
+        "commonMisconception": "Choosing between insuring and self-insuring on expected cost alone.",
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The household is exposed for the 15.1 years it would take to build a sufficient reserve out of the saving. Say what that figure assumes, and name one way the household could shorten it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the assumptions: that the $179.00 saving is actually set aside every year, that no loss occurs during the period, and that the $4,200 loss does not grow with prices.",
+          "Names a way to shorten it, such as contributing more than the saving, holding the policy while the reserve is built, or accepting a higher deductible to reduce the premium."
+        ],
+        "evidenceRequirements": [
+          "Refers to the 15.1-year figure and to the $179.00 annual saving it is built from."
+        ],
+        "lookFors": [
+          "The assumptions named are ones the calculation actually makes.",
+          "The suggested change is checked against the figures rather than asserted."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the expected annual loss if the household carries the risk itself?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the loss occurs, how much does the policy pay, after the $600 deductible?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "If the loss occurs, how much does the household still pay?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the expected annual cost of holding the policy, counting the premium and the expected deductible?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much cheaper is carrying the risk than insuring it, in expected terms?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the loss occurs and the household has no policy, how much does its $1,500 reserve fall short by?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "With the policy, how much would the $1,500 reserve have left over after paying the deductible?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How many years of the $179.00 expected saving would it take to build a reserve able to cover the whole $4,200 loss? Give one decimal place."
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "Which option is cheaper in expected terms, and which is safer for this household?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Insuring costs $179.00 a year more in expected terms and is still the right choice here. Explain what the household is buying with that $179.00, and state the general condition under which self-insuring is the better option."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "The household is exposed for the 15.1 years it would take to build a sufficient reserve out of the saving. Say what that figure assumes, and name one way the household could shorten it."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the expected annual loss if the household carries the risk itself? Answer: $252.00. Verification: 6% of $4,200 — the average annual cost of self-insuring, spread across many years. t1-p2: If the loss occurs, how much does the policy pay, after the $600 deductible? Answer: $3,600.00. Verification: The deductible comes off the loss first, and $3,600 is below the limit, so the whole remainder is paid. t1-p3: If the loss occurs, how much does the household still pay? Answer: $600.00. Verification: The $600 deductible — the part of every covered loss that stays with the holder. t1-p4: What is the expected annual cost of holding the policy, counting the premium and the expected deductible? Answer: $431.00. Verification: $395 paid every year plus 6% of the $600 deductible, since the deductible is only paid in the years the loss occurs. t2-p1: How much cheaper is carrying the risk than insuring it, in expected terms? Answer: $179.00. Verification: $431.00 with the policy against $252.00 without — the insurer charges more than the expected loss, which is how it covers its own costs and risk. t2-p2: If the loss occurs and the household has no policy, how much does its $1,500 reserve fall short by? Answer: $2,700.00. Verification: $4,200 against a $1,500 reserve. Self-insuring only works if the reserve can actually absorb the loss. t2-p3: With the policy, how much would the $1,500 reserve have left over after paying the deductible? Answer: $900.00. Verification: $1,500 less the $600 deductible — the policy converts a loss the household cannot absorb into one it can. t2-p4: How many years of the $179.00 expected saving would it take to build a reserve able to cover the whole $4,200 loss? Give one decimal place. Answer: 15.1. Verification: The $2,700.00 shortfall divided by the $179.00 a year that self-insuring saves — the household is exposed for the whole of that period. t2-p5: Which option is cheaper in expected terms, and which is safer for this household? Answer: Carrying the risk is cheaper but the policy is safer. Verification: $252.00 against $431.00 makes self-insuring cheaper on average, while the $2,700.00 shortfall against the reserve makes the policy the option the household could actually survive."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Insuring costs $179.00 a year more in expected terms and is still the right choice here. Explain what the household is buying with that $179.00, and state the general condition under which self-insuring is the better option. Explains that the $179.00 buys the removal of an outcome the household cannot survive: a $4,200 loss against a $1,500 reserve. States the general condition: self-insuring is better when the reserve can absorb the largest plausible loss without disrupting the rest of the plan. Recognises that an insurer must charge more than the expected loss, so paying more than the expectation is the normal case rather than a sign of a bad policy. Cites the $252.00 expected loss, the $431.00 expected cost with the policy, and the $2,700.00 reserve shortfall. The response identifies capacity to absorb the loss as the deciding factor, not the expected cost. The response explains why the premium exceeds the expected loss rather than treating it as overcharging. A response noting that the household could self-insure once the reserve passes about $4,200 is stating the condition correctly. t3-p2: The household is exposed for the 15.1 years it would take to build a sufficient reserve out of the saving. Say what that figure assumes, and name one way the household could shorten it. Identifies the assumptions: that the $179.00 saving is actually set aside every year, that no loss occurs during the period, and that the $4,200 loss does not grow with prices. Names a way to shorten it, such as contributing more than the saving, holding the policy while the reserve is built, or accepting a higher deductible to reduce the premium. Refers to the 15.1-year figure and to the $179.00 annual saving it is built from. The assumptions named are ones the calculation actually makes. The suggested change is checked against the figures rather than asserted."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the $179.00 buys the removal of an outcome the household cannot survive: a $4,200 loss against a $1,500 reserve. States the general condition: self-insuring is better when the reserve can absorb the largest plausible loss without disrupting the rest of the plan. Recognises that an insurer must charge more than the expected loss, so paying more than the expectation is the normal case rather than a sign of a bad policy. Identifies the assumptions: that the $179.00 saving is actually set aside every year, that no loss occurs during the period, and that the $4,200 loss does not grow with prices. Names a way to shorten it, such as contributing more than the saving, holding the policy while the reserve is built, or accepting a higher deductible to reduce the premium."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u06-l03.scoring.json",
+    "sourceScoringSha256": "58b1c26544be04411a22cb219a07286d4a841c5a266f6c71b3e80c57b6ee0e24",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

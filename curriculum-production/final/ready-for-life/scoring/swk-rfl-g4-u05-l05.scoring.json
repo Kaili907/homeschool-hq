@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l05",
+  "lessonId": "ma-g4-ready-for-life-u05-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Proactive and specific disclosure",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The adult noticed the problem first, or the problem was described too vaguely to act on."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner initiated the conversation unprompted and described the problem specifically enough for the adult to help."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner also asked for or engaged with the adult's suggestion rather than only reporting the problem."
+          }
+        ]
+      },
+      {
+        "dimension": "Early-versus-late reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The comparison between asking early and waiting is missing or generic ('it's better to ask early')."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner gives a specific, plausible estimate of how the problem would have grown if left another day or two."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection honestly names a specific real barrier (embarrassment, fear, uncertainty) that almost stopped the learner from speaking up."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The problem raised is a real, current, task-related stuck point confirmed by the guardian, not invented for the assignment.",
+      "The guardian independently confirms the learner brought the issue forward rather than being asked about it first."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

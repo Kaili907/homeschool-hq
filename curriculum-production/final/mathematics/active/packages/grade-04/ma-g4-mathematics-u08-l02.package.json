@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l02",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 2,
+    "courseDay": 128,
+    "phase": "Concept build A",
+    "focus": "tenths and hundredths written as fractions",
+    "title": "Concept build A: tenths and hundredths written as fractions"
+  },
+  "standards": [
+    "4.NF.5"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 1,
+          "prompt": "Find 3/10 + 25/100.",
+          "workedSolution": {
+            "steps": [
+              "3/10 = 30/100.",
+              "30/100 + 25/100 = 55/100."
+            ],
+            "answer": "55/100"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 1,
+          "prompt": "Find 1/10 + 31/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "41/100",
+            "41/10",
+            "10/100",
+            "32/100"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 1,
+          "prompt": "Find 4/10 + 36/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "76/100",
+            "40/100",
+            "86/100",
+            "76/10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 2,
+          "prompt": "Find 5/10 + 10/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "60/10",
+            "15/100",
+            "50/100",
+            "60/100"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 1,
+          "prompt": "Find 2/10 + 29/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "20/100",
+            "31/100",
+            "49/100",
+            "49/10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 2,
+          "prompt": "Find 7/10 + 19/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "70/100",
+            "89/100",
+            "89/10",
+            "26/100"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 2,
+          "prompt": "Find 7/10 + 22/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "92/100",
+            "92/10",
+            "29/100",
+            "70/100"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 1,
+          "prompt": "Find 1/10 + 3/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "4/100",
+            "13/10",
+            "13/100",
+            "10/100"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 2,
+          "prompt": "Find 3/10 + 25/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "55/100",
+            "55/10",
+            "30/100",
+            "28/100"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l02"
+  }
+}

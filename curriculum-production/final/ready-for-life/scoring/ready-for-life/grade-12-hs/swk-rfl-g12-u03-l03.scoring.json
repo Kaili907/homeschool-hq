@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l03",
+  "lessonId": "ma-g12-ready-for-life-u03-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Structure of the ask",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Ask omits what was already tried, sounding like no attempt was made." },
+          { "label": "Proficient", "descriptor": "Ask states what was tried and what specifically is stuck." },
+          { "label": "Advanced", "descriptor": "Ask also proposes one possible next step, showing the learner is still engaged in solving it." }
+        ]
+      },
+      {
+        "dimension": "Specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Ask is vague ('I don't get it') with no named specific point of confusion." },
+          { "label": "Proficient", "descriptor": "Ask names the specific step or concept that is the sticking point." },
+          { "label": "Advanced", "descriptor": "Ask names the sticking point and briefly explains what the learner expected to happen instead." }
+        ]
+      },
+      {
+        "dimension": "Revision from feedback",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Revised ask is nearly unchanged from the original despite feedback." },
+          { "label": "Proficient", "descriptor": "Revised ask clearly incorporates the specific feedback given." },
+          { "label": "Advanced", "descriptor": "Learner explains why the revision makes the ask easier for a supervisor to act on." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The ask follows the three-part structure: what was tried, what's stuck, what's needed.",
+      "The revised version is meaningfully different from the first attempt.",
+      "The reflection names a specific, observable signal for when to ask, not a vague feeling."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

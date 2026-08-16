@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u05-l17",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u05-l17",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Division with Remainders",
+    "dayInUnit": 17,
+    "courseDay": 89,
+    "phase": "Targeted correction and reassessment",
+    "focus": "quotients and remainders",
+    "title": "Targeted correction and reassessment: quotients and remainders"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.6"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 53 ÷ 6.",
+          "workedSolution": {
+            "steps": [
+              "6 × 8 = 48.",
+              "53 − 48 = 5, and 5 is less than 6.",
+              "53 ÷ 6 = 8 remainder 5."
+            ],
+            "answer": "8 r5"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "29 students need vans that hold 8 students each. How many vans are needed?",
+          "workedSolution": {
+            "steps": [
+              "29 ÷ 8 = 3 remainder 5.",
+              "The 5 leftover students still need a van.",
+              "4 vans are needed."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 299 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "74 r3",
+            "75 r3",
+            "74 r1",
+            "73 r3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "53 students are going on a field trip. Each van holds 3 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "18",
+            "19",
+            "17",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 146 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "35 r2",
+            "36 r3",
+            "37 r2",
+            "36 r2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A baker has 63 eggs and needs 6 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "11",
+            "9",
+            "13",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 172 ÷ 3. Write the answer as a quotient and remainder.",
+          "choices": [
+            "57 r1",
+            "57 r2",
+            "56 r1",
+            "58 r1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 307 eggs and needs 8 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "38",
+            "39",
+            "41",
+            "37"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u05-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u05-l17"
+  }
+}

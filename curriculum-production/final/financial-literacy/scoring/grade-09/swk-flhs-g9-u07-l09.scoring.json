@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l09",
+  "lessonId": "ma-g9-financial-literacy-u07-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$44,136.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The W-2, 1099-NEC, and 1099-INT all report money received; the 1098-E reports money paid out and is not income."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "The 1098-E",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "A 1098-E reports interest the filer paid on a student loan, which may reduce taxable income rather than adding to it."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$43,796.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$44,136.00 of income less the $340 deduction the 1098-E supports."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "Expenses against the self-employed income",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The first, second, and fourth all appear on the forms above; expenses against self-employed work are known only to the filer and must come from their own records."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,190.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,800 reported on the 1099-NEC less $610 of expenses the form knows nothing about."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "wages + nec + interest",
+        "substituted": "41250 + 2800 + 86",
+        "result": "$44,136.00",
+        "why": "The W-2, 1099-NEC, and 1099-INT all report money received; the 1098-E reports money paid out and is not income."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - studentInterest",
+        "substituted": "#t1-p1 - 340",
+        "result": "$43,796.00",
+        "why": "$44,136.00 of income less the $340 deduction the 1098-E supports."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "nec2 - expenses",
+        "substituted": "2800 - 610",
+        "result": "$2,190.00",
+        "why": "$2,800 reported on the 1099-NEC less $610 of expenses the form knows nothing about."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Three of these forms are also sent to the tax authority and one figure — the $610 of expenses — is not documented anywhere but the filer’s own records. Explain what that asymmetry means for how a filer should keep records during the year.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that income figures arrive documented from third parties, so they are known to the authority whether or not the filer tracks them.",
+          "States that deductions and expenses are only as good as the filer’s own records, since no form reports them.",
+          "Draws the practical conclusion: keep contemporaneous records of anything that reduces tax, because that is the side of the return the filer alone must support."
+        ],
+        "evidenceRequirements": [
+          "Uses the $44,136.00 income total and the $610 of undocumented expenses."
+        ],
+        "lookFors": [
+          "The response does not suggest that undocumented expenses can simply be estimated.",
+          "The response recognises the forms are a check on the return, not merely a convenience."
+        ],
+        "commonMisconception": "Assuming that everything needed to file arrives in the post.",
+        "dimensions": [
+          "criteria-application",
+          "plan-coherence",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 3,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 2,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is total income across the three forms that report income received?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "Which of the four forms does not report income to the filer?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "If the $340 of student loan interest is fully deductible, what adjusted income figure does the return arrive at?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "Which of these figures would the filer normally have to supply from their own records rather than read off a form?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the filer’s own records show $610 of allowable expenses against the self-employed work, what is the net self-employed income?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Three of these forms are also sent to the tax authority and one figure — the $610 of expenses — is not documented anywhere but the filer’s own records. Explain what that asymmetry means for how a filer should keep records during the year."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is total income across the three forms that report income received? Answer: $44,136.00. Verification: The W-2, 1099-NEC, and 1099-INT all report money received; the 1098-E reports money paid out and is not income. t1-p2: Which of the four forms does not report income to the filer? Answer: The 1098-E. Verification: A 1098-E reports interest the filer paid on a student loan, which may reduce taxable income rather than adding to it. t1-p3: If the $340 of student loan interest is fully deductible, what adjusted income figure does the return arrive at? Answer: $43,796.00. Verification: $44,136.00 of income less the $340 deduction the 1098-E supports. t2-p1: Which of these figures would the filer normally have to supply from their own records rather than read off a form? Answer: Expenses against the self-employed income. Verification: The first, second, and fourth all appear on the forms above; expenses against self-employed work are known only to the filer and must come from their own records. t2-p2: If the filer’s own records show $610 of allowable expenses against the self-employed work, what is the net self-employed income? Answer: $2,190.00. Verification: $2,800 reported on the 1099-NEC less $610 of expenses the form knows nothing about."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. t3-p1: Three of these forms are also sent to the tax authority and one figure — the $610 of expenses — is not documented anywhere but the filer’s own records. Explain what that asymmetry means for how a filer should keep records during the year. States that income figures arrive documented from third parties, so they are known to the authority whether or not the filer tracks them. States that deductions and expenses are only as good as the filer’s own records, since no form reports them. Draws the practical conclusion: keep contemporaneous records of anything that reduces tax, because that is the side of the return the filer alone must support. Uses the $44,136.00 income total and the $610 of undocumented expenses. The response does not suggest that undocumented expenses can simply be estimated. The response recognises the forms are a check on the return, not merely a convenience."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States that income figures arrive documented from third parties, so they are known to the authority whether or not the filer tracks them. States that deductions and expenses are only as good as the filer’s own records, since no form reports them. Draws the practical conclusion: keep contemporaneous records of anything that reduces tax, because that is the side of the return the filer alone must support."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 3 independently recomputed or comparison-derived fixed answers and 2 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u07-l09.scoring.json",
+    "sourceScoringSha256": "d78f142dca412e46c0f260bd3585cae4d0c7bd02e0fbcda107b8534b1accda96",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

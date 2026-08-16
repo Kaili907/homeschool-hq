@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u02-l18",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u02-l18",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Multi-Digit Addition and Subtraction",
+    "dayInUnit": 18,
+    "courseDay": 36,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "checking a total before trusting it",
+    "title": "Transfer, reflection, and publication: checking a total before trusting it"
+  },
+  "standards": [
+    "4.OA.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 1,
+          "prompt": "A school raised $3,200 in September and $2,750 in October, then spent $1,400 on new books. How much remains?",
+          "workedSolution": {
+            "steps": [
+              "3,200 + 2,750 = 5,950.",
+              "5,950 − 1,400 = 4,550."
+            ],
+            "answer": "4550"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A charity collected $13352 in the spring and $4761 in the fall, then spent $2827 on supplies. How much money remains?",
+          "choices": [
+            "16179",
+            "18113",
+            "15286",
+            "20940"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A charity collected $86330 in the spring and $35789 in the fall, then spent $16044 on supplies. How much money remains?",
+          "choices": [
+            "122119",
+            "138163",
+            "106075",
+            "102374"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A charity collected $41571 in the spring and $21395 in the fall, then received an extra $4389 donation. How much money is there in total?",
+          "choices": [
+            "45960",
+            "62966",
+            "58577",
+            "67355"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A charity collected $66278 in the spring and $12166 in the fall, then spent $7814 on supplies. How much money remains?",
+          "choices": [
+            "74092",
+            "86258",
+            "70630",
+            "78444"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A charity collected $38103 in the spring and $37308 in the fall, then spent $9146 on supplies. How much money remains?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A charity collected $28868 in the spring and $22307 in the fall, then spent $6079 on supplies. How much money remains?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u02-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u02-l18"
+  }
+}

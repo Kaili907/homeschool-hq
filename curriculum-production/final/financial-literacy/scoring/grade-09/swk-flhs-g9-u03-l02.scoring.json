@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l02",
+  "lessonId": "ma-g9-financial-literacy-u03-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "Vehicle registration",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Registration is paid once a year rather than every month, which is what makes a cost periodic; rent and phone are fixed monthly and groceries are variable monthly."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$12.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$148 spread over twelve months is $12.3333, which rounds to $12.33."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$15.83",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$190 a year spread over twelve months is $15.8333, which rounds to $15.83."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$6.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$72 over twelve months is exactly $6.00."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$763.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Rent $640, insurance $78, and phone $45, all unchanged from month to month."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$366.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three recent averages: $210 groceries, $96 fuel, $60 entertainment."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "$1,163.16",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$763.00 fixed plus $366.00 variable plus $12.33, $15.83, and $6.00 of spread periodic costs."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t2-p1",
+        "expression": "round(registration / 12, 2)",
+        "substituted": "round(148 / 12, 2)",
+        "result": "$12.33",
+        "why": "$148 spread over twelve months is $12.3333, which rounds to $12.33."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(dentist * 2 / 12, 2)",
+        "substituted": "round(95 * 2 / 12, 2)",
+        "result": "$15.83",
+        "why": "$190 a year spread over twelve months is $15.8333, which rounds to $15.83."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "subscription / 12",
+        "substituted": "72 / 12",
+        "result": "$6.00",
+        "why": "$72 over twelve months is exactly $6.00."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "rent + insurance + phone",
+        "substituted": "640 + 78 + 45",
+        "result": "$763.00",
+        "why": "Rent $640, insurance $78, and phone $45, all unchanged from month to month."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "groceries + fuel + entertainment",
+        "substituted": "210 + 96 + 60",
+        "result": "$366.00",
+        "why": "The three recent averages: $210 groceries, $96 fuel, $60 entertainment."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "#t3-p1 + #t3-p2 + #t2-p1 + #t2-p2 + #t2-p3",
+        "substituted": "#t3-p1 + #t3-p2 + #t2-p1 + #t2-p2 + #t2-p3",
+        "result": "$1,163.16",
+        "why": "$763.00 fixed plus $366.00 variable plus $12.33, $15.83, and $6.00 of spread periodic costs."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "A budget that lists only the fixed and variable costs would show $1,129.00 a month. Explain what goes wrong in the month the $148 registration falls due, and what the household should do with the $34.16 of periodic money in the months it is not due.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that a budget omitting periodic costs looks balanced in most months and is short by the full bill in each month one falls due — $148 in the registration month, and again for each dentist visit and the subscription.",
+          "Explains that the $34.16 of monthly equivalents should be set aside rather than spent, so the money is there when the periodic bills fall due.",
+          "Distinguishes this from an emergency: these bills are known in advance, so being surprised by them is a budgeting failure rather than bad luck."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,163.16 full monthly figure against the $1,129.00 that omits periodic costs."
+        ],
+        "lookFors": [
+          "The response treats the set-aside as a holding place for money already committed, not as savings.",
+          "The response does not classify the periodic costs as unpredictable."
+        ],
+        "commonMisconception": "Treating a bill that arrives once a year as an unexpected expense.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "Which of the nine costs is the clearest example of a periodic cost?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly equivalent of the $148 annual vehicle registration?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly equivalent of two $95 dentist visits a year?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly equivalent of the $72 annual subscription?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the three fixed costs come to each month?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do the three variable costs average each month?"
+        },
+        {
+          "ref": "t3-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the household’s full monthly cost, including the periodic costs at their monthly equivalents?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "A budget that lists only the fixed and variable costs would show $1,129.00 a month. Explain what goes wrong in the month the $148 registration falls due, and what the household should do with the $34.16 of periodic money in the months it is not due."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: Which of the nine costs is the clearest example of a periodic cost? Answer: Vehicle registration. Verification: Registration is paid once a year rather than every month, which is what makes a cost periodic; rent and phone are fixed monthly and groceries are variable monthly. t2-p1: What is the monthly equivalent of the $148 annual vehicle registration? Answer: $12.33. Verification: $148 spread over twelve months is $12.3333, which rounds to $12.33. t2-p2: What is the monthly equivalent of two $95 dentist visits a year? Answer: $15.83. Verification: $190 a year spread over twelve months is $15.8333, which rounds to $15.83. t2-p3: What is the monthly equivalent of the $72 annual subscription? Answer: $6.00. Verification: $72 over twelve months is exactly $6.00. t3-p1: What do the three fixed costs come to each month? Answer: $763.00. Verification: Rent $640, insurance $78, and phone $45, all unchanged from month to month. t3-p2: What do the three variable costs average each month? Answer: $366.00. Verification: The three recent averages: $210 groceries, $96 fuel, $60 entertainment. t3-p3: What is the household’s full monthly cost, including the periodic costs at their monthly equivalents? Answer: $1,163.16. Verification: $763.00 fixed plus $366.00 variable plus $12.33, $15.83, and $6.00 of spread periodic costs."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t4-p1: A budget that lists only the fixed and variable costs would show $1,129.00 a month. Explain what goes wrong in the month the $148 registration falls due, and what the household should do with the $34.16 of periodic money in the months it is not due. States that a budget omitting periodic costs looks balanced in most months and is short by the full bill in each month one falls due — $148 in the registration month, and again for each dentist visit and the subscription. Explains that the $34.16 of monthly equivalents should be set aside rather than spent, so the money is there when the periodic bills fall due. Distinguishes this from an emergency: these bills are known in advance, so being surprised by them is a budgeting failure rather than bad luck. Uses the $1,163.16 full monthly figure against the $1,129.00 that omits periodic costs. The response treats the set-aside as a holding place for money already committed, not as savings. The response does not classify the periodic costs as unpredictable."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States that a budget omitting periodic costs looks balanced in most months and is short by the full bill in each month one falls due — $148 in the registration month, and again for each dentist visit and the subscription. Explains that the $34.16 of monthly equivalents should be set aside rather than spent, so the money is there when the periodic bills fall due. Distinguishes this from an emergency: these bills are known in advance, so being surprised by them is a budgeting failure rather than bad luck."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 3,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u03-l02.scoring.json",
+    "sourceScoringSha256": "4960df7916ac6a1830f5dfe1fbe54559325af5a6e464d63dedb47f7960e9f14a",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

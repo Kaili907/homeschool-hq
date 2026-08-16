@@ -1,0 +1,399 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l03",
+  "lessonId": "ma-g11-financial-literacy-u02-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$19,422.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "17% comes off the $23,400 starting value, leaving 83% of it."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$13,379.82",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three successive years of losing 17% of a shrinking value, not 51% of the original price."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$9,217.36",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five years of the same proportional loss. Under this model the value approaches zero without ever reaching it."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,978.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$23,400 against the $19,422.00 it is worth a year later."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$14,182.64",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$23,400 against the $9,217.36 remaining after five years."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "28.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,978.00 against $14,182.64 — a single year carries more than a quarter of a five-year loss, which is what \"front-loaded\" means in figures."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3,480.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$17,400 of assumed loss spread evenly over 5 years — a simpler model that gets the total roughly right and the timing wrong."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "The straight-line model, which understates the first year’s loss",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The declining-balance model puts the first year’s loss at $3,978.00 while straight-line puts it at $3,480.00, so a one-year seller relying on straight-line expects to lose $498.00 less than the front-loaded model predicts."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(price * pow(1 - rate, 1), 2)",
+        "substituted": "round(23400 * pow(1 - 0.17, 1), 2)",
+        "result": "$19,422.00",
+        "why": "17% comes off the $23,400 starting value, leaving 83% of it."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(price2 * pow(1 - rate2, 3), 2)",
+        "substituted": "round(23400 * pow(1 - 0.17, 3), 2)",
+        "result": "$13,379.82",
+        "why": "Three successive years of losing 17% of a shrinking value, not 51% of the original price."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(price3 * pow(1 - rate3, 5), 2)",
+        "substituted": "round(23400 * pow(1 - 0.17, 5), 2)",
+        "result": "$9,217.36",
+        "why": "Five years of the same proportional loss. Under this model the value approaches zero without ever reaching it."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "price4 - #t1-p1",
+        "substituted": "23400 - #t1-p1",
+        "result": "$3,978.00",
+        "why": "$23,400 against the $19,422.00 it is worth a year later."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "price5 - #t1-p3",
+        "substituted": "23400 - #t1-p3",
+        "result": "$14,182.64",
+        "why": "$23,400 against the $9,217.36 remaining after five years."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 / #t2-p2 * 100, 1)",
+        "substituted": "round(#t2-p1 / #t2-p2 * 100, 1)",
+        "result": "28.0%",
+        "why": "$3,978.00 against $14,182.64 — a single year carries more than a quarter of a five-year loss, which is what \"front-loaded\" means in figures."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round((price6 - residual) / 5, 2)",
+        "substituted": "round((23400 - 6000) / 5, 2)",
+        "result": "$3,480.00",
+        "why": "$17,400 of assumed loss spread evenly over 5 years — a simpler model that gets the total roughly right and the timing wrong."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p1 > #t2-p4",
+        "substituted": "#t2-p1 > #t2-p4",
+        "result": "The straight-line model, which understates the first year’s loss",
+        "why": "The declining-balance model puts the first year’s loss at $3,978.00 while straight-line puts it at $3,480.00, so a one-year seller relying on straight-line expects to lose $498.00 less than the front-loaded model predicts."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain why buying a vehicle and selling it after one year is expensive even if nothing goes wrong with it, and say what that implies about how long a buyer should plan to keep one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the $3,978.00 first-year loss as a real cost of that year, borne whether or not the vehicle needed anything.",
+          "Explains that because the loss is front-loaded, spreading it over more years lowers the cost per year of ownership.",
+          "Draws the implication that short holding periods carry a disproportionate share of the depreciation, so a buyer expecting to sell soon pays more per year than the price suggests."
+        ],
+        "evidenceRequirements": [
+          "Cites the 28.0% share of the five-year loss that falls in year one."
+        ],
+        "lookFors": [
+          "The response treats depreciation as a cost incurred, not as a paper figure.",
+          "The response connects holding period to cost per year rather than only to total cost.",
+          "A response noting that maintenance rises as depreciation falls is going beyond what was asked and is a strength."
+        ],
+        "commonMisconception": "Believing depreciation is only a cost at the moment a vehicle is sold.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "transfer"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Both models are simplifications. Name one thing about real vehicle values that neither the 17% declining-balance model nor the straight-line model captures, and say which of the computed figures it would move most.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names something genuine and specific, such as mileage or condition changing the value independently of age, a model’s reputation, or market shifts in fuel prices or supply.",
+          "Ties the named factor to a specific figure, most defensibly the $9,217.36 five-year value, and says in which direction it could move."
+        ],
+        "evidenceRequirements": [
+          "Refers to at least one computed value from the declining-balance schedule when naming what would move."
+        ],
+        "lookFors": [
+          "The factor named is something that actually varies between vehicles of the same age.",
+          "The response identifies a figure and a direction rather than saying the model is \"not realistic\"."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the vehicle worth after 1 year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is it worth after 3 years?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is it worth after 5 years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much value does the vehicle lose in its first year alone?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much value does it lose across all 5 years?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "The first year’s loss is what percentage of the whole five-year loss? Give one decimal place."
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "A straight-line assumption would spread the fall from $23,400 to a $6,000 value evenly across the 5 years. What annual loss does that give?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "For someone planning to sell after only 1 year, which model gives the more favourable and more misleading answer?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain why buying a vehicle and selling it after one year is expensive even if nothing goes wrong with it, and say what that implies about how long a buyer should plan to keep one."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Both models are simplifications. Name one thing about real vehicle values that neither the 17% declining-balance model nor the straight-line model captures, and say which of the computed figures it would move most."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the vehicle worth after 1 year? Answer: $19,422.00. Verification: 17% comes off the $23,400 starting value, leaving 83% of it. t1-p2: What is it worth after 3 years? Answer: $13,379.82. Verification: Three successive years of losing 17% of a shrinking value, not 51% of the original price. t1-p3: What is it worth after 5 years? Answer: $9,217.36. Verification: Five years of the same proportional loss. Under this model the value approaches zero without ever reaching it. t2-p1: How much value does the vehicle lose in its first year alone? Answer: $3,978.00. Verification: $23,400 against the $19,422.00 it is worth a year later. t2-p2: How much value does it lose across all 5 years? Answer: $14,182.64. Verification: $23,400 against the $9,217.36 remaining after five years. t2-p3: The first year’s loss is what percentage of the whole five-year loss? Give one decimal place. Answer: 28.0%. Verification: $3,978.00 against $14,182.64 — a single year carries more than a quarter of a five-year loss, which is what \"front-loaded\" means in figures. t2-p4: A straight-line assumption would spread the fall from $23,400 to a $6,000 value evenly across the 5 years. What annual loss does that give? Answer: $3,480.00. Verification: $17,400 of assumed loss spread evenly over 5 years — a simpler model that gets the total roughly right and the timing wrong. t2-p5: For someone planning to sell after only 1 year, which model gives the more favourable and more misleading answer? Answer: The straight-line model, which understates the first year’s loss. Verification: The declining-balance model puts the first year’s loss at $3,978.00 while straight-line puts it at $3,480.00, so a one-year seller relying on straight-line expects to lose $498.00 less than the front-loaded model predicts."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Explain why buying a vehicle and selling it after one year is expensive even if nothing goes wrong with it, and say what that implies about how long a buyer should plan to keep one. Identifies the $3,978.00 first-year loss as a real cost of that year, borne whether or not the vehicle needed anything. Explains that because the loss is front-loaded, spreading it over more years lowers the cost per year of ownership. Draws the implication that short holding periods carry a disproportionate share of the depreciation, so a buyer expecting to sell soon pays more per year than the price suggests. Cites the 28.0% share of the five-year loss that falls in year one. The response treats depreciation as a cost incurred, not as a paper figure. The response connects holding period to cost per year rather than only to total cost. A response noting that maintenance rises as depreciation falls is going beyond what was asked and is a strength. t3-p2: Both models are simplifications. Name one thing about real vehicle values that neither the 17% declining-balance model nor the straight-line model captures, and say which of the computed figures it would move most. Names something genuine and specific, such as mileage or condition changing the value independently of age, a model’s reputation, or market shifts in fuel prices or supply. Ties the named factor to a specific figure, most defensibly the $9,217.36 five-year value, and says in which direction it could move. Refers to at least one computed value from the declining-balance schedule when naming what would move. The factor named is something that actually varies between vehicles of the same age. The response identifies a figure and a direction rather than saying the model is \"not realistic\"."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the $3,978.00 first-year loss as a real cost of that year, borne whether or not the vehicle needed anything. Explains that because the loss is front-loaded, spreading it over more years lowers the cost per year of ownership. Draws the implication that short holding periods carry a disproportionate share of the depreciation, so a buyer expecting to sell soon pays more per year than the price suggests. Names something genuine and specific, such as mileage or condition changing the value independently of age, a model’s reputation, or market shifts in fuel prices or supply. Ties the named factor to a specific figure, most defensibly the $9,217.36 five-year value, and says in which direction it could move."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u02-l03.scoring.json",
+    "sourceScoringSha256": "eb2ebeca45aa735c7041abd8e499d7d138c9671c947d33ba0ca12238d4eba899",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

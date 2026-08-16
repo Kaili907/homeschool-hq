@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l04",
+  "lessonId": "ma-g12-ready-for-life-u05-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Message clarity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The script is missing one or more of the three parts (problem, context, need) or is too vague to act on."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The script clearly includes all three parts."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The script is concise enough to say quickly under pressure, not just complete on paper."
+          }
+        ]
+      },
+      {
+        "dimension": "Responsiveness to feedback",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The revised script is nearly unchanged from the first attempt despite feedback being given."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The revised script reflects specific feedback."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner can explain specifically why the revision is clearer or faster, not just that something changed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No audio or video recording exists anywhere for this task.",
+      "The final script contains all three parts (problem, context, need) in clear, short sentences.",
+      "Nothing in the response suggests a real emergency service was contacted as part of this drill."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

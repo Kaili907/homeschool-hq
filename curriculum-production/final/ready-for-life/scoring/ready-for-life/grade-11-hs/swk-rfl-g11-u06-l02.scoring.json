@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l02",
+  "lessonId": "ma-g11-ready-for-life-u06-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Verified vs. assumed accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Learner labels most entries 'verified' without naming a specific, checkable source, or cannot explain what would count as verification." },
+          { "label": "Proficient", "descriptor": "Learner correctly distinguishes verified from assumed entries and names a real, specific source for each verified entry." },
+          { "label": "Advanced", "descriptor": "Learner also notices when a source is weak or secondhand and downgrades that entry to 'assumed' rather than over-claiming it as verified." }
+        ]
+      },
+      {
+        "dimension": "Timeline completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Timeline has fewer than four entries, or entries are too vague to act on (for example, 'sometime senior year')." },
+          { "label": "Proficient", "descriptor": "Timeline has at least four specific, dated or clearly sequenced entries relevant to the leading pathway." },
+          { "label": "Advanced", "descriptor": "Timeline entries are sequenced logically and cover more than one type of requirement (for example, both an application deadline and a preparation requirement)." }
+        ]
+      },
+      {
+        "dimension": "Next verification step",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names an assumed entry but no real next step to verify it." },
+          { "label": "Proficient", "descriptor": "Reflection names a specific, doable next step and a rough timeframe for taking it." },
+          { "label": "Advanced", "descriptor": "The proposed step is realistic and would clearly resolve the specific uncertainty, not just gesture at 'looking into it.'" }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Sources named for verified entries are real and specific, not vague ('I heard,' 'probably').",
+      "The learner treats 'assumed' as a legitimate, honest label rather than something to hide.",
+      "No real account numbers, passwords, or legal identity details appear anywhere in the response."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

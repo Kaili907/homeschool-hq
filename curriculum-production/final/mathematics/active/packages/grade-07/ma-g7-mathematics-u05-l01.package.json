@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u05-l01",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Percent and Proportional Applications",
+    "dayInUnit": 1,
+    "courseDay": 73,
+    "phase": "Launch and diagnostic",
+    "focus": "percent increase and decrease",
+    "title": "Launch and diagnostic: percent increase and decrease"
+  },
+  "standards": [
+    "7.RP.3",
+    "7.EE.3"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "percent-increase-decrease",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "Increase $80 by 25%.",
+          "workedSolution": {
+            "steps": [
+              "Convert the percent to a fraction with denominator 100.",
+              "Use integer cents for money and simplify only after the exact calculation."
+            ],
+            "answer": "$100"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "discount-markup",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "A store discounts $100.00 by 25%. What is the new price?",
+          "choices": [
+            "$25.00",
+            "$125.00",
+            "$76.00",
+            "$75.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "tax-tip",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "A meal costs $40.00 before 25% tax. What is the total?",
+          "choices": [
+            "$30.00",
+            "$50.00",
+            "$40.00",
+            "$20.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "simple-interest",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "Find the simple interest on $500.00 at 25% for 5 years.",
+          "choices": [
+            "$125.00",
+            "$625.00",
+            "$1125.00",
+            "$650.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "percent-error",
+          "standard": "7.EE.3",
+          "difficulty": 2,
+          "prompt": "The actual value is 1800 and the measured value is 2250. What is the percent error?",
+          "choices": [
+            "25%",
+            "30%",
+            "50%",
+            "26%"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-percent-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "An item costs $160.00, is discounted 20%, then taxed 5%. What is the final price?",
+          "choices": [
+            "$136.00",
+            "$135.40",
+            "$134.40",
+            "$168.00"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "percent-increase-decrease",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "Increase $660.00 by 25%.",
+          "choices": [
+            "$660.00",
+            "$495.00",
+            "$826.00",
+            "$825.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "discount-markup",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "A store discounts $460.00 by 25%. What is the new price?",
+          "choices": [
+            "$575.00",
+            "$345.00",
+            "$346.00",
+            "$460.00"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u05-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u05-l01"
+  }
+}

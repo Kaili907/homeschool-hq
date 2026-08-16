@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u01-l07",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u01-l07",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits, Place Value, and Rounding",
+    "dayInUnit": 7,
+    "courseDay": 7,
+    "phase": "Guided practice B",
+    "focus": "addition with regrouping across place values",
+    "title": "Guided practice B: addition with regrouping across place values"
+  },
+  "standards": [
+    "3.NBT.2"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 1,
+          "prompt": "A bakery made 248 rolls, then made 175 more. How many rolls in all?",
+          "workedSolution": {
+            "steps": [
+              "248 + 175.",
+              "Add ones: 8 + 5 = 13, regroup 1 ten.",
+              "Add tens: 4 + 7 + 1 = 12, regroup 1 hundred.",
+              "Add hundreds: 2 + 1 + 1 = 4.",
+              "Total: 423."
+            ],
+            "answer": "423"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 1,
+          "prompt": "A toy store had 54 stickers. 44 stickers were given away. How many stickers are left?",
+          "choices": [
+            "10",
+            "20",
+            "98",
+            "110"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A library had 649 books. They received 305 more books. How many books are there now?",
+          "choices": [
+            "344",
+            "964",
+            "944",
+            "954"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l07#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A school had 804 pencils. 709 pencils were given away. How many pencils are left?",
+          "choices": [
+            "1513",
+            "95",
+            "105",
+            "195"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l07#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A library had 327 books. They received 332 more books. How many books are there now?",
+          "choices": [
+            "669",
+            "659",
+            "649",
+            "-5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A toy store had 548 stickers. 112 stickers were given away. How many stickers are left?",
+          "choices": [
+            "446",
+            "536",
+            "436",
+            "660"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A school had 552 pencils. They received 321 more pencils. How many pencils are there now?",
+          "choices": [
+            "873",
+            "863",
+            "231",
+            "883"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A farm had 634 apples. 186 apples were given away. How many apples are left?",
+          "choices": [
+            "820",
+            "458",
+            "548",
+            "448"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l07#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A toy store had 324 stickers. They received 155 more stickers. How many stickers are there now?",
+          "choices": [
+            "489",
+            "169",
+            "479",
+            "469"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l07#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A toy store had 755 stickers. 265 stickers were given away. How many stickers are left?",
+          "choices": [
+            "490",
+            "590",
+            "500",
+            "1020"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u01-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u01-l07"
+  }
+}

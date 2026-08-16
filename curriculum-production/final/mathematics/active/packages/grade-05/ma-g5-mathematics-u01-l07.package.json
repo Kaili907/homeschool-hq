@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u01-l07",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u01-l07",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Whole-Number Reasoning",
+    "dayInUnit": 7,
+    "courseDay": 7,
+    "phase": "Investigation or close reading",
+    "focus": "problem-solving routines",
+    "title": "Investigation or close reading: problem-solving routines"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.OA.2",
+    "5.NBT.1",
+    "MP.1",
+    "MP.3",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-numerical-expression",
+          "standard": "5.OA.1",
+          "difficulty": 1,
+          "prompt": "Evaluate {18 + [6 × (9 - 4)]}.",
+          "workedSolution": {
+            "steps": [
+              "Evaluate the innermost grouping first: 9 - 4 = 5.",
+              "Multiply inside the brackets: 6 × 5 = 30.",
+              "Add inside the braces: 18 + 30 = 48."
+            ],
+            "answer": "48"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "words-to-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Which expression means: “Multiply 17 by 5, then subtract the product from 153.”",
+          "choices": [
+            "153 + (17 × 5)",
+            "(153 + 17) × 5",
+            "153 - (17 + 5)",
+            "153 - (17 × 5)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "expression-to-words",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Which phrase describes 38 + [4 × (13 - 11)] without evaluating it?",
+          "choices": [
+            "Subtract 11 from 13, multiply the difference by 4, then add 38.",
+            "Add 38 and 4, then multiply the sum by the difference of 13 and 11.",
+            "Add 13 and 11, multiply the sum by 4, then add 38.",
+            "Subtract 11 from 13, add 4, then multiply the sum by 38."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "expression-relationship",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Let E represent 2788 + 6885. Without evaluating, how does (2788 + 6885) + 744 compare with E?",
+          "choices": [
+            "744 times as large as E",
+            "743 greater than E",
+            "745 greater than E",
+            "744 greater than E"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "choose-expression-for-situation",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "A supply cart has 49 boxes with 36 markers in each box and 6 loose markers. Which expression represents the total number of markers?",
+          "choices": [
+            "49 × 36 - 6",
+            "49 × 36 + 6",
+            "49 + 36 + 6",
+            "(49 + 6) × 36"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-multistep-problem",
+          "standard": "MP.1",
+          "difficulty": 3,
+          "prompt": "A team packs 59 crates with 32 bottles in each crate, adds 33 loose bottles, and then uses 75 bottles. How many bottles remain?",
+          "choices": [
+            "49",
+            "1921",
+            "1846",
+            "1996"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-whole-number-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "In 3486668, how does the value of the 6 in the thousands place compare with the value of the 6 in the hundreds place?",
+          "choices": [
+            "the same value",
+            "100 times as much",
+            "10 times as much",
+            "1/10 as much"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "estimate-sum-difference",
+          "standard": "MP.6",
+          "difficulty": 3,
+          "prompt": "Round each number to the nearest thousand to estimate 451500 - 117500.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "estimate-product",
+          "standard": "MP.6",
+          "difficulty": 3,
+          "prompt": "Round 550 to the nearest hundred and 75 to the nearest ten, then multiply to estimate the product.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u01-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u01-l07"
+  }
+}

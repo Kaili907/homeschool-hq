@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u08-l14",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u08-l14",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Conic Sections and Volume Arguments",
+    "dayInUnit": 14,
+    "courseDay": 140,
+    "phase": "Transfer challenge",
+    "focus": "deriving the ellipse from the sum of focal distances",
+    "title": "Transfer challenge: deriving the ellipse from the sum of focal distances"
+  },
+  "standards": [
+    "G-C.4",
+    "G-GPE.3",
+    "G-GMD.2",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u08-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "cavalieri-volume-argument",
+          "standard": "G-GMD.2",
+          "difficulty": 1,
+          "prompt": "Do an oblique and a right cylinder with the same base and height have equal volume?",
+          "workedSolution": {
+            "steps": [
+              "Cross-sections match at every height.",
+              "Cavalieri gives equal volumes."
+            ],
+            "answer": "Yes"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u08-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "tangent-construction-from-external-point",
+          "standard": "G-C.4",
+          "difficulty": 3,
+          "prompt": "A circle has radius 5 and centre O. A point P lies 13 from O. Explain the construction of a tangent from P and give the tangent length.",
+          "choices": [
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 8.",
+            "Draw the circle centred at P with radius 5; the tangent length is 12.",
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 12.",
+            "Draw the perpendicular bisector of OP; the tangent length is 12."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "ellipse-from-foci-and-sum",
+          "standard": "G-GPE.3",
+          "difficulty": 3,
+          "prompt": "An ellipse centred at the origin has foci at (±5, 0) and the sum of distances to the foci equal to 26. Write its equation.",
+          "choices": [
+            "x²/169 − y²/144 = 1",
+            "x²/144 + y²/169 = 1",
+            "x²/169 + y²/25 = 1",
+            "x²/169 + y²/144 = 1"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "hyperbola-from-foci-and-difference",
+          "standard": "G-GPE.3",
+          "difficulty": 3,
+          "prompt": "A hyperbola centred at the origin has foci at (±5, 0) and the absolute difference of distances to the foci equal to 6. Write its equation.",
+          "choices": [
+            "x²/16 − y²/9 = 1",
+            "x²/9 + y²/16 = 1",
+            "x²/9 − y²/16 = 1",
+            "y²/9 − x²/16 = 1"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "cavalieri-volume-argument",
+          "standard": "G-GMD.2",
+          "difficulty": 3,
+          "prompt": "Compare a sphere of radius r and a cylinder of radius r and height 2r with two cones removed. What does Cavalieri’s principle tell us?",
+          "choices": [
+            "The cone has one third the volume, which Cavalieri’s principle establishes by comparing cross-sections against a reference solid.",
+            "Nothing, because Cavalieri’s principle applies only to prisms.",
+            "They have equal volumes, because every horizontal cross-section has the same area at the same height.",
+            "They have equal volumes, and matching cross-sections is exactly how the sphere volume formula is derived."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "tangent-construction-from-external-point",
+          "standard": "G-C.4",
+          "difficulty": 3,
+          "prompt": "A circle has radius 3 and centre O. A point P lies 5 from O. Explain the construction of a tangent from P and give the tangent length.",
+          "choices": [
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 2.",
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 4.",
+            "Draw the perpendicular bisector of OP; the tangent length is 4.",
+            "Draw the circle centred at P with radius 3; the tangent length is 4."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u08-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "ellipse-from-foci-and-sum",
+          "standard": "G-GPE.3",
+          "difficulty": 3,
+          "prompt": "An ellipse centred at the origin has foci at (±3, 0) and the sum of distances to the foci equal to 10. Write its equation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "hyperbola-from-foci-and-difference",
+          "standard": "G-GPE.3",
+          "difficulty": 3,
+          "prompt": "A hyperbola centred at the origin has foci at (±10, 0) and the absolute difference of distances to the foci equal to 12. Write its equation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "cavalieri-volume-argument",
+          "standard": "G-GMD.2",
+          "difficulty": 3,
+          "prompt": "Compare a cone and a cylinder with the same base and height. What does Cavalieri’s principle tell us?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u08-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u08-l14"
+  }
+}

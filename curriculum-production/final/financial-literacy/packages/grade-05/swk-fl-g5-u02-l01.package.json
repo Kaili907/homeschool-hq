@@ -1,0 +1,378 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u02-l01",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Earning and Work",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: ways people earn income",
+    "focus": "ways people earn income"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1 foundations"
+  ],
+  "objective": "Learners combine invented hourly pay with an invented commission, compute a simulated total, and compare the reliability of the two income sources.",
+  "scenario": "Bruno is a made-up fifth grader studying a pretend pay stub. In an invented two-week period the worker logs 18 hours at $14.00 an hour and earns $45.00 in commission on sales. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Work out the hourly portion: 18 invented hours at $14.00 an hour.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the 18 hours pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Add the invented $45.00 commission to the hourly pay, then compare the size of the two sources.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the invented period's total pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much larger is the hourly pay than the commission?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "In a slower invented period the hours fall to 12 and no sales are made, so the commission is $0.00.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the slow period's total pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much less is that than the first invented period?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "One source vanished entirely in the slow period.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which part of this invented income should a budget be built on, and what should the other part be used for?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner combines hours and rate incorrectly, box the rate and the hours separately for Bruno and read the phrase \"fourteen dollars for each hour\" before writing the multiplication.",
+  "extension": "Ask the learner how many hours at $14.00 would be needed to match the first period without any commission at all.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u02-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the 18 hours pay?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the invented period's total pay?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much larger is the hourly pay than the commission?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the slow period's total pay?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much less is that than the first invented period?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Which part of this invented income should a budget be built on, and what should the other part be used for?"
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "EARNING_INCOME",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "DIAGNOSTIC",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.earning_income.1",
+      "meaning": "People can earn income by doing work or providing a useful product or service under stated terms."
+    },
+    {
+      "conceptId": "finlit.earning_income.2",
+      "meaning": "A simple earnings model connects the number of jobs or hours with the pretend amount earned for each one."
+    },
+    {
+      "conceptId": "finlit.earning_income.3",
+      "meaning": "Pay is one part of a work choice; time, skills, safety, responsibility, and unpaid contributions can matter too."
+    }
+  ],
+  "evidencePurpose": "Collect protected evidence about ways people earn income without answer-bearing teaching during the attempt.",
+  "conceptExplanation": {
+    "applicability": "PROFILE_BOUNDARY",
+    "title": "diagnostic boundary",
+    "paragraphs": [],
+    "protectedBoundary": "Do not preteach the measured target before the diagnostic response. Use the routed concept lesson after the attempt.",
+    "conceptLessonId": "ma-g5-financial-literacy-u02-l02"
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "EARNING_INCOME",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "DEFERRED_OR_PREREQUISITE_ONLY",
+    "reason": "A like-kind model before the diagnostic would invalidate the evidence.",
+    "modelLessonId": "ma-g5-financial-literacy-u02-l02"
+  },
+  "workedExamples": [],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1",
+      "t2"
+    ],
+    "guidedLessonId": "ma-g5-financial-literacy-u02-l01",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: A larger gross-pay number does not automatically mean the larger usable amount or the better overall option.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t3",
+      "t4"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t4-p1"
+    ],
+    "gradeBandDemand": "Name the goal, compare concrete costs or benefits, and explain one opportunity cost.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.earning_income.1",
+      "finlit.earning_income.2",
+      "finlit.earning_income.3"
+    ],
+    "evidenceLessonId": "ma-g5-financial-literacy-u02-l05",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.earning_income.core-confusion",
+      "observableSignal": "A larger gross-pay number does not automatically mean the larger usable amount or the better overall option.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-earning_income-g5",
+        "title": "Alternate model — earning, pay, and take-home income",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "Mina completes 2 invented tasks at 350 cents per task."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Add 350 + 350 = 700 cents.",
+          "Convert 700 cents to $7.00.",
+          "Check with multiplication: 2 × 350 = 700 cents.",
+          "Explain that the earnings depend on completing both fictional tasks."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g5-financial-literacy-u02-l06",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g5-financial-literacy-u02-l05",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.earning_income.1",
+      "finlit.earning_income.2",
+      "finlit.earning_income.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g5-financial-literacy-u02-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.earning_income.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "EARNING_INCOME",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g5-financial-literacy-u02-l01:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "ELEMENTARY_3_5",
+      "scaffolding": "Use concrete choices, at most two interacting constraints at a time, short labelled cent calculations, and one evidence-based reason.",
+      "reasoningDemand": "Name the goal, compare concrete costs or benefits, and explain one opportunity cost.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Use concrete choices, at most two interacting constraints at a time, short labelled cent calculations, and one evidence-based reason.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-05/swk-fl-g5-u02-l01.package.json",
+    "sourcePackageSha256": "2498d587f802ab4029c73635e53b76b45d6ff278af3b68fa53178545ee94c8a0",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g5-financial-literacy-u02-l01",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

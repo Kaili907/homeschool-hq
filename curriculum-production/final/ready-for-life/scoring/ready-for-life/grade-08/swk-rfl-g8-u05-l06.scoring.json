@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l06",
+  "lessonId": "ma-g8-ready-for-life-u05-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Revision quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The revised response stays defensive, over-blames the previous shift, or offers no specific fix for next time."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The revised response takes honest ownership of the learner's part and states one specific fix."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the tone reads as genuinely professional rather than just technically polite."
+          }
+        ]
+      },
+      {
+        "dimension": "Escalation judgment",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The second note is treated as routine feedback, or the response does not identify the false-hours request as the concerning part."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The second note is correctly identified as needing escalation, and the response names the false-hours request specifically."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names a specific trusted adult and a concrete, calm sentence to say to them."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The reflection's general signal is a real, transferable rule, not a restatement tied only to Ms. Castellano's two specific notes.",
+      "The learner never proposes simply complying with the request to falsify hours as an acceptable option."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

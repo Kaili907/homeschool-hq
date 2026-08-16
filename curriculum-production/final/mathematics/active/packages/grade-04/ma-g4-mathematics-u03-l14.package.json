@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l14",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l14",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 14,
+    "courseDay": 50,
+    "phase": "Performance task: build",
+    "focus": "portraits with factor pairs, multiples, and stories",
+    "title": "Performance task: build: portraits with factor pairs, multiples, and stories"
+  },
+  "standards": [
+    "4.OA.1",
+    "4.OA.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 6th multiple of 6?",
+          "choices": [
+            "42",
+            "36",
+            "12",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 2,
+          "prompt": "Fill in the blank so the sentence is true: 25 is ___ times as many as 5.",
+          "choices": [
+            "20",
+            "6",
+            "25",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 28 have?",
+          "choices": [
+            "5",
+            "3",
+            "7",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 8th multiple of 3?",
+          "choices": [
+            "21",
+            "27",
+            "24",
+            "11"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 45 is ___ times as many as 9.",
+          "choices": [
+            "36",
+            "45",
+            "5",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "How many whole-number factors does 63 have?",
+          "choices": [
+            "5",
+            "6",
+            "3",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "What is the 8th multiple of 9?",
+          "choices": [
+            "72",
+            "17",
+            "81",
+            "63"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 18 is ___ times as many as 3.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "How many whole-number factors does 48 have?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l14"
+  }
+}

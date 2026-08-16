@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l02",
+  "lessonId": "ma-g8-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Section coverage and authenticity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than two real items under one or more sections, or items appear invented rather than genuine."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least two genuine items appear under each of the four sections."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and items span a genuinely varied range of the learner's actual life rather than repeating one activity across sections."
+          }
+        ]
+      },
+      {
+        "dimension": "Bullet point craft",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or both rewritten bullet points do not open with an action verb, or the verb-choice explanation is missing or generic."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both bullet points open with a specific action verb and each includes a real reason for that verb choice."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the chosen verbs are precise enough that a stranger could picture the specific action performed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No last name, address, or phone number appears anywhere on the document.",
+      "The hardest-section response names one specific section, not a restatement of the whole template being hard."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

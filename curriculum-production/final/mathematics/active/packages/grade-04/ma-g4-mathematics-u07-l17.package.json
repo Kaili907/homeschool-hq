@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u07-l17",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u07-l17",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Adding, Subtracting, and Multiplying Fractions",
+    "dayInUnit": 17,
+    "courseDay": 125,
+    "phase": "Targeted correction and reassessment",
+    "focus": "fraction operations",
+    "title": "Targeted correction and reassessment: fraction operations"
+  },
+  "standards": [
+    "4.NF.3",
+    "4.NF.4"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 1,
+          "prompt": "Find 3 × 2/5.",
+          "workedSolution": {
+            "steps": [
+              "3 groups of 2/5.",
+              "2 × 3 = 6.",
+              "The product is 6/5."
+            ],
+            "answer": "6/5"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 2,
+          "prompt": "Find 5/8 − 2/8.",
+          "workedSolution": {
+            "steps": [
+              "Denominators match, subtract numerators: 5 − 2 = 3.",
+              "3/8 is already in lowest terms."
+            ],
+            "answer": "3/8"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "decompose-fraction-as-sum",
+          "standard": "4.NF.3",
+          "difficulty": 1,
+          "prompt": "Write 4/3 as a whole number plus a fraction less than 1.",
+          "choices": [
+            "1 1/3",
+            "2 1/3",
+            "0 1/3",
+            "1 2/3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 5 × 3/4.",
+          "choices": [
+            "3/20",
+            "15/20",
+            "5/4",
+            "15/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 2,
+          "prompt": "Find 1/8 + 2/8. Give the answer in lowest terms.",
+          "choices": [
+            "4/8",
+            "1/16",
+            "3/8",
+            "2/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "decompose-fraction-as-sum",
+          "standard": "4.NF.3",
+          "difficulty": 2,
+          "prompt": "Write 5/4 as a whole number plus a fraction less than 1.",
+          "choices": [
+            "1 2/4",
+            "2 1/4",
+            "1 1/4",
+            "0 1/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 4 × 3/6.",
+          "choices": [
+            "12/6",
+            "12/24",
+            "3/24",
+            "4/6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 3,
+          "prompt": "Find 7/8 − 5/8. Give the answer in lowest terms.",
+          "choices": [
+            "1/8",
+            "1/4",
+            "3/8",
+            "7/16"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u07-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u07-l17"
+  }
+}

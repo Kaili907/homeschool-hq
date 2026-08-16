@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u02-l11",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u02-l11",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Expression Structure and Equivalence",
+    "dayInUnit": 11,
+    "courseDay": 29,
+    "phase": "Performance task planning",
+    "focus": "equivalent forms and what each reveals",
+    "title": "Performance task planning: equivalent forms and what each reveals"
+  },
+  "standards": [
+    "A-SSE.1",
+    "A-SSE.2",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 1,
+          "prompt": "Factor x² − 7x + 12.",
+          "workedSolution": {
+            "steps": [
+              "Find two numbers with product 12 and sum −7: −3 and −4.",
+              "(x − 3)(x − 4)."
+            ],
+            "answer": "(x − 3)(x − 4)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "factor-greatest-common-factor",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor out the greatest common factor: 12x^2 + 30x.",
+          "choices": [
+            "6(2x² + 5x)",
+            "6x(2x + 5)",
+            "12x(x + 5)",
+            "x(12x + 30)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-expression-check",
+          "standard": "A-SSE.1",
+          "difficulty": 2,
+          "prompt": "A student claims that 3(x² + 1x + 3) expands to 3x² + 3x + 9. Is the claim correct?",
+          "choices": [
+            "No; the constant term should be 11.",
+            "Yes, the expansion is correct.",
+            "No; the x term should be 1x.",
+            "No; the leading term should be x²."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "recognize-substitution-structure",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "The expression (x + 5)^8 − 25 can be treated as a difference of squares. Which substitution makes that structure visible?",
+          "choices": [
+            "u = (x + 5)^4",
+            "u = (x + 5)^8",
+            "u = x + 5",
+            "u = x^4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "An investment is modelled by 7000(1 + 0.05)^t. In this expression, what does t represent?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "factor-difference-of-squares",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor completely: 25x² − 16.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor completely: x^2 - 14x + 33.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u02-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u02-l11"
+  }
+}

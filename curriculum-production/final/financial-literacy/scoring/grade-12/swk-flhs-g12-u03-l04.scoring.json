@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l04",
+  "lessonId": "ma-g12-financial-literacy-u03-l04",
+  "integratedDomains": [
+    "debt",
+    "credit",
+    "saving-investing",
+    "budgeting"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$68.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 21.6% applied to $3,800. The stated order matters: interest is charged on the balance before the payment is credited, which is how a card statement is normally built."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$3,448.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,800 plus $68.40 of interest less the $420 payment."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,658.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same interest charge, against a payment of $210 rather than $420. The interest is identical in month one because it is charged before either payment lands."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$210.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,658.40 against $3,448.40 — exactly the $210 that went to the reserve instead. After one month the split has cost nothing in interest; it has only moved money."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$62.07",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 21.6% applied to the reduced $3,448.40 balance."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$65.85",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same rate applied to the higher $3,658.40 balance."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3.78",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$65.85 against $62.07. This is the entire measurable cost of the split in month two, and it is what the $210 of reserve has to be worth more than."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(balance * apr / 12, 2)",
+        "substituted": "round(3800 * 0.216 / 12, 2)",
+        "result": "$68.40",
+        "why": "One twelfth of 21.6% applied to $3,800. The stated order matters: interest is charged on the balance before the payment is credited, which is how a card statement is normally built."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "balance2 + #t1-p1 - allToDebt",
+        "substituted": "3800 + #t1-p1 - 420",
+        "result": "$3,448.40",
+        "why": "$3,800 plus $68.40 of interest less the $420 payment."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "balance3 + #t1-p1 - splitToDebt",
+        "substituted": "3800 + #t1-p1 - 210",
+        "result": "$3,658.40",
+        "why": "The same interest charge, against a payment of $210 rather than $420. The interest is identical in month one because it is charged before either payment lands."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$210.00",
+        "why": "$3,658.40 against $3,448.40 — exactly the $210 that went to the reserve instead. After one month the split has cost nothing in interest; it has only moved money."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p2 * apr2 / 12, 2)",
+        "substituted": "round(#t1-p2 * 0.216 / 12, 2)",
+        "result": "$62.07",
+        "why": "One twelfth of 21.6% applied to the reduced $3,448.40 balance."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p3 * apr3 / 12, 2)",
+        "substituted": "round(#t1-p3 * 0.216 / 12, 2)",
+        "result": "$65.85",
+        "why": "The same rate applied to the higher $3,658.40 balance."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 - #t2-p2",
+        "substituted": "#t2-p3 - #t2-p2",
+        "result": "$3.78",
+        "why": "$65.85 against $62.07. This is the entire measurable cost of the split in month two, and it is what the $210 of reserve has to be worth more than."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Splitting the surplus costs this fictional household $3.78 in the second month and puts $210 into a reserve that holds only $600. Argue for either the split or the all-to-debt plan on these figures, and state plainly what your argument cannot prove.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Argues one plan on the figures — for instance that $3.78 is a small price for moving the reserve from $600 toward something usable, or that at 21.6% the balance is the more expensive problem and clearing it faster ends the interest sooner.",
+          "Notes the scale honestly: the measurable cost of the split is small in the early months, and it grows as the two balances diverge, so the comparison is not fixed.",
+          "States the limit of the argument: whether $210 of reserve is worth $3.78 depends on how likely this household is to face an expense it would otherwise put back on the card at 21.6%, which the figures given cannot establish."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3.78 second-month cost and the $600 starting reserve, and refers to the 21.6% rate."
+        ],
+        "lookFors": [
+          "The response recognises that a reserve exists partly to prevent new borrowing at the same rate.",
+          "Either plan is credited; the response is scored on whether the cost is priced and the uncertainty named, not on which plan it prefers."
+        ],
+        "commonMisconception": "Assuming that paying the highest-rate balance first is always right, without pricing what happens when an unplanned expense arrives and there is no reserve to meet it.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What interest is charged on the balance in the first month?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the whole $420 goes to the card, what is the balance after one month?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "Under the split plan, what is the balance after one month?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much higher is the balance under the split plan after one month?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What interest is charged in the second month if the whole $420 went to the card?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What interest is charged in the second month under the split plan?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What does the split cost in extra interest in the second month?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Splitting the surplus costs this fictional household $3.78 in the second month and puts $210 into a reserve that holds only $600. Argue for either the split or the all-to-debt plan on these figures, and state plainly what your argument cannot prove."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What interest is charged on the balance in the first month? Answer: $68.40. Verification: One twelfth of 21.6% applied to $3,800. The stated order matters: interest is charged on the balance before the payment is credited, which is how a card statement is normally built. t1-p2: If the whole $420 goes to the card, what is the balance after one month? Answer: $3,448.40. Verification: $3,800 plus $68.40 of interest less the $420 payment. t1-p3: Under the split plan, what is the balance after one month? Answer: $3,658.40. Verification: The same interest charge, against a payment of $210 rather than $420. The interest is identical in month one because it is charged before either payment lands. t2-p1: How much higher is the balance under the split plan after one month? Answer: $210.00. Verification: $3,658.40 against $3,448.40 — exactly the $210 that went to the reserve instead. After one month the split has cost nothing in interest; it has only moved money. t2-p2: What interest is charged in the second month if the whole $420 went to the card? Answer: $62.07. Verification: One twelfth of 21.6% applied to the reduced $3,448.40 balance. t2-p3: What interest is charged in the second month under the split plan? Answer: $65.85. Verification: The same rate applied to the higher $3,658.40 balance. t2-p4: What does the split cost in extra interest in the second month? Answer: $3.78. Verification: $65.85 against $62.07. This is the entire measurable cost of the split in month two, and it is what the $210 of reserve has to be worth more than."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Splitting the surplus costs this fictional household $3.78 in the second month and puts $210 into a reserve that holds only $600. Argue for either the split or the all-to-debt plan on these figures, and state plainly what your argument cannot prove. Argues one plan on the figures — for instance that $3.78 is a small price for moving the reserve from $600 toward something usable, or that at 21.6% the balance is the more expensive problem and clearing it faster ends the interest sooner. Notes the scale honestly: the measurable cost of the split is small in the early months, and it grows as the two balances diverge, so the comparison is not fixed. States the limit of the argument: whether $210 of reserve is worth $3.78 depends on how likely this household is to face an expense it would otherwise put back on the card at 21.6%, which the figures given cannot establish. Uses the $3.78 second-month cost and the $600 starting reserve, and refers to the 21.6% rate. The response recognises that a reserve exists partly to prevent new borrowing at the same rate. Either plan is credited; the response is scored on whether the cost is priced and the uncertainty named, not on which plan it prefers."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Argues one plan on the figures — for instance that $3.78 is a small price for moving the reserve from $600 toward something usable, or that at 21.6% the balance is the more expensive problem and clearing it faster ends the interest sooner. Notes the scale honestly: the measurable cost of the split is small in the early months, and it grows as the two balances diverge, so the comparison is not fixed. States the limit of the argument: whether $210 of reserve is worth $3.78 depends on how likely this household is to face an expense it would otherwise put back on the card at 21.6%, which the figures given cannot establish."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u03-l04.scoring.json",
+    "sourceScoringSha256": "f5f0157abbc449b8e21abf880a189a7a1b0041562cf41d42951420f73478945d",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

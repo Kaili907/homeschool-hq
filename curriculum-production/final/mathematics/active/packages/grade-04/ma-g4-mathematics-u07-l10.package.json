@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u07-l10",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u07-l10",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Adding, Subtracting, and Multiplying Fractions",
+    "dayInUnit": 10,
+    "courseDay": 118,
+    "phase": "Independent evidence B",
+    "focus": "solving word problems that multiply a fraction by a whole number",
+    "title": "Independent evidence B: solving word problems that multiply a fraction by a whole number"
+  },
+  "standards": [
+    "4.NF.4"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence B",
+    "profile": "independent-evidence-varied",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 1,
+          "prompt": "Find 3 × 2/5.",
+          "workedSolution": {
+            "steps": [
+              "3 groups of 2/5.",
+              "2 × 3 = 6.",
+              "The product is 6/5."
+            ],
+            "answer": "6/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 5 × 1/6.",
+          "choices": [
+            "6/6",
+            "5/30",
+            "1/30",
+            "5/6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 2 × 2/4.",
+          "choices": [
+            "4/8",
+            "2/8",
+            "2/4",
+            "4/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 2 × 5/8.",
+          "choices": [
+            "10/8",
+            "5/16",
+            "10/16",
+            "2/8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l10#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 4 × 4/5.",
+          "choices": [
+            "4/5",
+            "4/20",
+            "16/5",
+            "16/20"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l10#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 6 × 6/8.",
+          "choices": [
+            "6/8",
+            "36/8",
+            "36/48",
+            "6/48"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l10#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 3 × 3/5.",
+          "choices": [
+            "3/15",
+            "9/15",
+            "3/5",
+            "9/5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l10#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 7 × 3/6.",
+          "choices": [
+            "21/6",
+            "3/42",
+            "21/42",
+            "7/6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l10#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 5 × 5/8.",
+          "choices": [
+            "5/40",
+            "25/40",
+            "5/8",
+            "25/8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l10#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 4 × 1/5.",
+          "choices": [
+            "4/20",
+            "1/20",
+            "4/5",
+            "5/5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u07-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u07-l10"
+  }
+}

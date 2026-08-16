@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u04-l06",
+  "lessonId": "ma-g8-financial-literacy-u04-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Identifying a debt trap",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats the rollovers in Jocasta's case as ordinary borrowing."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The rollover cost is noted for Jocasta but the advertisement is not distinguished."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that each rollover in Jocasta's case adds fees without reducing principal, and identifies the upfront-fee advertisement as a second exploitation of the same distress."
+          }
+        ]
+      },
+      {
+        "dimension": "Finding legitimate help",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response sends the borrower to the advertised service or offers no route."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Help is suggested for Jocasta's borrower but no test of legitimacy is given."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response routes Jocasta's borrower to help that does not demand payment upfront, and gives a test such as checking registration or seeking a non-profit adviser."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Explains that rollover fees do not reduce principal.",
+      "Flags the upfront-fee offer as a further predatory step.",
+      "Describes handling collection contact without ignoring it.",
+      "Frames the situation in terms of structure rather than personal failure."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What makes the rollover structure in Jocasta's case dangerous, and why is the debt-relief advertisement a separate problem?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should the borrower do, in what order, and what makes a source of help legitimate rather than another trap?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "How should someone in Jocasta's case think about blame, and why does that framing matter for what they do next?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Identifying a debt trap — Not yet: The response treats the rollovers in Jocasta's case as ordinary borrowing. Approaching: The rollover cost is noted for Jocasta but the advertisement is not distinguished. Meets: The response explains that each rollover in Jocasta's case adds fees without reducing principal, and identifies the upfront-fee advertisement as a second exploitation of the same distress. Finding legitimate help — Not yet: The response sends the borrower to the advertised service or offers no route. Approaching: Help is suggested for Jocasta's borrower but no test of legitimacy is given. Meets: The response routes Jocasta's borrower to help that does not demand payment upfront, and gives a test such as checking registration or seeking a non-profit adviser. Explains that rollover fees do not reduce principal. Flags the upfront-fee offer as a further predatory step. Describes handling collection contact without ignoring it. Frames the situation in terms of structure rather than personal failure."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that rollover fees do not reduce principal. Flags the upfront-fee offer as a further predatory step. Describes handling collection contact without ignoring it. Frames the situation in terms of structure rather than personal failure."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u04-l06.scoring.json",
+    "sourceScoringSha256": "93966e307f5cf495540b7c6e6b461029438a5e0630e8962e00d375f45f406ee0",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

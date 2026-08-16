@@ -1,0 +1,305 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l08",
+  "lessonId": "ma-g9-financial-literacy-u07-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,352.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Job A treats $22,000 as the whole income: the $9,000 deduction leaves $13,000 taxable, taxed as $1,040 on the first $10,400 plus 12% of the remaining $2,600."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,052.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Job B also subtracts the full $9,000, leaving $7,000 taxable, all inside the 10% band at $700. Added to Job A’s $1,352.00 that is $2,052.00 withheld in total."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,272.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Taxable income is $29,000 after one $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $18,600. The deduction and the low band are each meant to be used once."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,220.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,272.00 owed against $2,052.00 withheld."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$101.67",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,220.00 spread over twelve months."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Neither employer knew about the other income, so the deduction and the low-rate band were each used twice",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The $9,000 deduction and the 10% band each apply once to total income, but each employer treated its own pay as starting from zero, so $18,000 of deduction and two low bands were applied instead of one of each."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "bracket * lowRate + (payA - deduction - bracket) * highRate",
+        "substituted": "10400 * 0.1 + (22000 - 9000 - 10400) * 0.12",
+        "result": "$1,352.00",
+        "why": "Job A treats $22,000 as the whole income: the $9,000 deduction leaves $13,000 taxable, taxed as $1,040 on the first $10,400 plus 12% of the remaining $2,600."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 + (payB - deduction2) * lowRate2",
+        "substituted": "#t1-p1 + (16000 - 9000) * 0.1",
+        "result": "$2,052.00",
+        "why": "Job B also subtracts the full $9,000, leaving $7,000 taxable, all inside the 10% band at $700. Added to Job A’s $1,352.00 that is $2,052.00 withheld in total."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "bracket3 * lowRate3 + (combined - deduction3 - bracket3) * highRate3",
+        "substituted": "10400 * 0.1 + (38000 - 9000 - 10400) * 0.12",
+        "result": "$3,272.00",
+        "why": "Taxable income is $29,000 after one $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $18,600. The deduction and the low band are each meant to be used once."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$1,220.00",
+        "why": "$3,272.00 owed against $2,052.00 withheld."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / 12, 2)",
+        "substituted": "round(#t2-p1 / 12, 2)",
+        "result": "$101.67",
+        "why": "$1,220.00 spread over twelve months."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This is the same withholding method used on a single job, applied to a case it was not designed for. Explain what changed, and name the step a two-job worker has to take that a one-job worker does not.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the method assumes the employer sees all of the worker’s income, which is true with one job and false with two, so the $9,000 deduction and the 10% band are each applied twice.",
+          "Names the step: telling one employer to withhold extra, or making a separate payment, so the total matches the $3,272.00 owed."
+        ],
+        "evidenceRequirements": [
+          "Uses the $2,052.00 withheld and the $3,272.00 owed."
+        ],
+        "lookFors": [
+          "The response does not blame either employer, both of which applied the rule correctly to what they could see."
+        ],
+        "commonMisconception": "Assuming that withholding handled correctly at each job adds up to the right total.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "A worker discovers the $1,220 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Recommends raising withholding at one job now, and notes the amount needed spreads across the remaining months rather than the whole year.",
+          "Explains that acting early spreads the same total over more paychecks, so each one is affected less than a December correction would be."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $1,220.00 shortfall or the $101.67 monthly figure."
+        ],
+        "lookFors": [
+          "The response recognises the correction must be larger per month if started later."
+        ],
+        "dimensions": [
+          "plan-coherence",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does Job A withhold over the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld across both jobs?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the tax actually owed on the combined income of $38,000?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the shortfall at filing?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much extra would need to be withheld each month across the year to close the gap? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Why did correct-looking withholding at each job still fall short?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "This is the same withholding method used on a single job, applied to a case it was not designed for. Explain what changed, and name the step a two-job worker has to take that a one-job worker does not."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "A worker discovers the $1,220 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much does Job A withhold over the year? Answer: $1,352.00. Verification: Job A treats $22,000 as the whole income: the $9,000 deduction leaves $13,000 taxable, taxed as $1,040 on the first $10,400 plus 12% of the remaining $2,600. t1-p2: How much is withheld across both jobs? Answer: $2,052.00. Verification: Job B also subtracts the full $9,000, leaving $7,000 taxable, all inside the 10% band at $700. Added to Job A’s $1,352.00 that is $2,052.00 withheld in total. t1-p3: What is the tax actually owed on the combined income of $38,000? Answer: $3,272.00. Verification: Taxable income is $29,000 after one $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $18,600. The deduction and the low band are each meant to be used once. t2-p1: What is the shortfall at filing? Answer: $1,220.00. Verification: $3,272.00 owed against $2,052.00 withheld. t2-p2: How much extra would need to be withheld each month across the year to close the gap? Round to the nearest cent. Answer: $101.67. Verification: $1,220.00 spread over twelve months. t2-p3: Why did correct-looking withholding at each job still fall short? Answer: Neither employer knew about the other income, so the deduction and the low-rate band were each used twice. Verification: The $9,000 deduction and the 10% band each apply once to total income, but each employer treated its own pay as starting from zero, so $18,000 of deduction and two low bands were applied instead of one of each."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: This is the same withholding method used on a single job, applied to a case it was not designed for. Explain what changed, and name the step a two-job worker has to take that a one-job worker does not. Explains that the method assumes the employer sees all of the worker’s income, which is true with one job and false with two, so the $9,000 deduction and the 10% band are each applied twice. Names the step: telling one employer to withhold extra, or making a separate payment, so the total matches the $3,272.00 owed. Uses the $2,052.00 withheld and the $3,272.00 owed. The response does not blame either employer, both of which applied the rule correctly to what they could see. t3-p2: A worker discovers the $1,220 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December. Recommends raising withholding at one job now, and notes the amount needed spreads across the remaining months rather than the whole year. Explains that acting early spreads the same total over more paychecks, so each one is affected less than a December correction would be. Refers to the $1,220.00 shortfall or the $101.67 monthly figure. The response recognises the correction must be larger per month if started later."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the method assumes the employer sees all of the worker’s income, which is true with one job and false with two, so the $9,000 deduction and the 10% band are each applied twice. Names the step: telling one employer to withhold extra, or making a separate payment, so the total matches the $3,272.00 owed. Recommends raising withholding at one job now, and notes the amount needed spreads across the remaining months rather than the whole year. Explains that acting early spreads the same total over more paychecks, so each one is affected less than a December correction would be."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u07-l08.scoring.json",
+    "sourceScoringSha256": "a9d97d93cd872471f011dec86aa46614cde033b1a0492a1589bdb4c221215b73",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

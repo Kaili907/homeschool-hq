@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-ready-for-life-u03-assessment",
+  "courseRef": "ma-g11-ready-for-life",
+  "grade": 11,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g11-ready-for-life-u03",
+    "unitNumber": 3,
+    "unitTitle": "Health and Wellness Self-Management",
+    "courseTitle": "Ready for Life 11: Postsecondary Planning and Portfolio",
+    "assessmentLessonRef": "ma-g11-ready-for-life-u03-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u03-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before building the plan, gather what you already have from this unit.",
+      "prompt": "Looking back at this unit, which piece (record-keeping categories, describing a concern, or recognizing urgency) do you feel most confident about already, and which do you still want this plan to help with?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "Build the three parts of your personal health-management plan.",
+      "prompt": "Build a contact list template organized by type of need (for example: routine/preventive care, urgent concerns, questions between visits). For each type, name the role of who to contact and where the actual contact information is kept -- not the real contact information itself."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "extended-response",
+      "directions": "Build the three parts of your personal health-management plan.",
+      "prompt": "Write a short description of how your personal records will be kept: what categories, where stored, and who can see them, building on the template from earlier in this unit."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "extended-response",
+      "directions": "Build the three parts of your personal health-management plan.",
+      "prompt": "Write your own short version of the urgency rule from earlier in this unit: what signs mean 'seek help now' versus 'can wait,' in your own words."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "checklist-item",
+      "directions": "Review the finished plan with a guardian.",
+      "prompt": "I reviewed all three parts of the plan with a guardian."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "checklist-item",
+      "directions": "Review the finished plan with a guardian.",
+      "prompt": "My guardian confirmed the plan is realistic for our household (for example, the contact types make sense and the record-keeping location is one we'd actually use)."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect on the plan as a whole.",
+      "prompt": "Now that the plan exists, what is the one part you're most likely to actually use in the next few months, and why?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/ready-for-life/ma-g11-ready-for-life-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Plan completeness across the three parts criterion.",
+    "Provide evidence that meets the stated Appropriate level of detail (role and location, not real private detail) criterion.",
+    "Provide evidence that meets the stated Guardian review substance criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-ready-for-life-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u03-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Health and Wellness Self-Management?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l08",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 8,
+    "courseDay": 170,
+    "phase": "Reteach and varied practice",
+    "focus": "comparing center and spread using standard deviation",
+    "title": "Reteach and varied practice: comparing center and spread using standard deviation"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 1,
+          "prompt": "Ice cream sales correlate with drowning rates. Does ice cream cause drowning?",
+          "workedSolution": {
+            "steps": [
+              "Both rise in hot weather.",
+              "A lurking variable explains the association."
+            ],
+            "answer": "No; a third variable explains it"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 2,
+          "prompt": "Find the mean and median of 4, 8, 6, 10, 2.",
+          "workedSolution": {
+            "steps": [
+              "Sum 30, count 5, mean 6.",
+              "Sorted: 2, 4, 6, 8, 10; median 6."
+            ],
+            "answer": "mean 6, median 6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 1,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 160 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "Both the mean and the median rise sharply.",
+            "The median rises sharply while the mean changes little.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 1,
+          "prompt": "A two-way table has row 1: 22 yes, 7 no; row 2: 27 yes, 23 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "7/29",
+            "22/29",
+            "22/49",
+            "22/79"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 2,
+          "prompt": "A least-squares line for a data set is ŷ = 8x + 26, where x is measured in kilometre travelleds and y in litres of fuel. Interpret the slope.",
+          "choices": [
+            "The predicted value is 8 litres of fuel when x is 0.",
+            "Each additional kilometre travelled is associated with an increase of about 8 litres of fuel.",
+            "Each additional kilometre travelled causes an increase of exactly 8 litres of fuel.",
+            "Each additional litres of fuel is associated with 8 more kilometre travelleds."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 2,
+          "prompt": "Ice cream sales and swimming-pool admissions are strongly positively correlated across a year. What conclusion is justified?",
+          "choices": [
+            "A strong correlation always establishes causation when the sample is large.",
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 1,
+          "prompt": "A data set records 12, 13, 19, 8, 11. Give the mean and the median.",
+          "choices": [
+            "mean 12.6, median 12",
+            "mean 12, median 12.6",
+            "mean 13, median 12",
+            "mean 12.6, median 13"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 2,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 221 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Both the mean and the median rise sharply.",
+            "The median rises sharply while the mean changes little.",
+            "Neither statistic changes, because one value cannot affect a summary."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 2,
+          "prompt": "A two-way table has row 1: 17 yes, 10 no; row 2: 22 yes, 18 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "10/27",
+            "17/39",
+            "17/67",
+            "17/27"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 2x + 24, where x is measured in kilometre travelleds and y in litres of fuel. Interpret the slope.",
+          "choices": [
+            "The predicted value is 2 litres of fuel when x is 0.",
+            "Each additional kilometre travelled causes an increase of exactly 2 litres of fuel.",
+            "Each additional litres of fuel is associated with 2 more kilometre travelleds.",
+            "Each additional kilometre travelled is associated with an increase of about 2 litres of fuel."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 3,
+          "prompt": "Towns with more fire engines report more fire damage. What conclusion is justified?",
+          "choices": [
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+            "A strong correlation always establishes causation when the sample is large."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l08"
+  }
+}

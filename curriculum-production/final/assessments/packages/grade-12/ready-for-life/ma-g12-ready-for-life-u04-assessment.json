@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-ready-for-life-u04-assessment",
+  "courseRef": "ma-g12-ready-for-life",
+  "grade": 12,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g12-ready-for-life-u04",
+    "unitNumber": 4,
+    "unitTitle": "Civic and Legal Adulthood",
+    "courseTitle": "Ready for Life 12: Independent Adult Living Capstone",
+    "assessmentLessonRef": "ma-g12-ready-for-life-u04-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u04-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before assembling, predict which checklist item will be hardest to actually verify.",
+      "prompt": "Looking back at this week's categories, which item do you predict will be hardest to actually verify against a real source, and why?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Assemble the checklist from the week's artifacts.",
+      "prompt": "My checklist covers identification, records, registration, and responsibilities categories from this week."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Assemble the checklist from the week's artifacts.",
+      "prompt": "With an adult, I identified at least one item to actually check against a current, real, local or official source, or marked items honestly as not yet verified."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Record what was verified and what remains unverified.",
+      "prompt": "For each checklist item, state whether it was verified against a real current source (and which kind of source), or honestly marked as not yet verified."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect on the value of an honestly incomplete checklist.",
+      "prompt": "Why is a checklist that honestly marks some items as 'not yet verified' more useful than one that guesses at everything to look complete?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/ready-for-life/ma-g12-ready-for-life-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Checklist coverage criterion.",
+    "Provide evidence that meets the stated Verification honesty criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-ready-for-life-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u04-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Civic and Legal Adulthood?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

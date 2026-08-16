@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l09",
+  "lessonId": "ma-g9-financial-literacy-u06-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$504.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$42 a month for twelve months."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$348.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$29 a month for twelve months."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$156.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$504.00 against $348.00 — the certain saving Policy H offers."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,004.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$504.00 of premium plus the $500 deductible on the claim."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,848.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$348.00 of premium plus the $1,500 deductible."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "6.41",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The extra $1,000 of deductible is repaid by $156.00 of annual premium saving in 6.41 years, so Policy H wins if claims are less frequent than roughly one every six and a half years."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "monthlyL * 12",
+        "substituted": "42 * 12",
+        "result": "$504.00",
+        "why": "$42 a month for twelve months."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "monthlyH * 12",
+        "substituted": "29 * 12",
+        "result": "$348.00",
+        "why": "$29 a month for twelve months."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$156.00",
+        "why": "$504.00 against $348.00 — the certain saving Policy H offers."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 + deductibleL",
+        "substituted": "#t1-p1 + 500",
+        "result": "$1,004.00",
+        "why": "$504.00 of premium plus the $500 deductible on the claim."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 + deductibleH",
+        "substituted": "#t1-p2 + 1500",
+        "result": "$1,848.00",
+        "why": "$348.00 of premium plus the $1,500 deductible."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round((deductibleH2 - deductibleL2) / #t1-p3, 2)",
+        "substituted": "round((1500 - 500) / #t1-p3, 2)",
+        "result": "6.41",
+        "why": "The extra $1,000 of deductible is repaid by $156.00 of annual premium saving in 6.41 years, so Policy H wins if claims are less frequent than roughly one every six and a half years."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "State plainly what the 6.41 figure means, and say what a buyer would need to believe about their own claim frequency to choose Policy H — and what they would need in savings to survive that choice.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Interprets 6.41 as the average years between claims at which the two policies cost the same over the long run.",
+          "States that Policy H is better if claims come less often than that, and worse if they come more often.",
+          "Notes the separate requirement: Policy H needs $1,500 available at any moment, and the $156 saved a year does not build that quickly."
+        ],
+        "evidenceRequirements": [
+          "Uses the $156.00 annual saving and the $1,000 difference in deductible."
+        ],
+        "lookFors": [
+          "The response separates the long-run cost question from the immediate liquidity question.",
+          "The response recognises the buyer cannot know their own claim frequency in advance."
+        ],
+        "commonMisconception": "Choosing the lower premium without asking whether the higher deductible could be paid on the day it is needed.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does Policy L cost in premiums for a year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does Policy H cost in premiums for a year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much does Policy H save in premium each year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "In a year with exactly one claim, what does Policy L cost in total?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "In a year with exactly one claim, what does Policy H cost in total?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How many years pass between claims for the two policies to cost the same? Divide the extra deductible by the annual premium saving and round to two decimal places."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "State plainly what the 6.41 figure means, and say what a buyer would need to believe about their own claim frequency to choose Policy H — and what they would need in savings to survive that choice."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does Policy L cost in premiums for a year? Answer: $504.00. Verification: $42 a month for twelve months. t1-p2: What does Policy H cost in premiums for a year? Answer: $348.00. Verification: $29 a month for twelve months. t1-p3: How much does Policy H save in premium each year? Answer: $156.00. Verification: $504.00 against $348.00 — the certain saving Policy H offers. t2-p1: In a year with exactly one claim, what does Policy L cost in total? Answer: $1,004.00. Verification: $504.00 of premium plus the $500 deductible on the claim. t2-p2: In a year with exactly one claim, what does Policy H cost in total? Answer: $1,848.00. Verification: $348.00 of premium plus the $1,500 deductible. t2-p3: How many years pass between claims for the two policies to cost the same? Divide the extra deductible by the annual premium saving and round to two decimal places. Answer: 6.41. Verification: The extra $1,000 of deductible is repaid by $156.00 of annual premium saving in 6.41 years, so Policy H wins if claims are less frequent than roughly one every six and a half years."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: State plainly what the 6.41 figure means, and say what a buyer would need to believe about their own claim frequency to choose Policy H — and what they would need in savings to survive that choice. Interprets 6.41 as the average years between claims at which the two policies cost the same over the long run. States that Policy H is better if claims come less often than that, and worse if they come more often. Notes the separate requirement: Policy H needs $1,500 available at any moment, and the $156 saved a year does not build that quickly. Uses the $156.00 annual saving and the $1,000 difference in deductible. The response separates the long-run cost question from the immediate liquidity question. The response recognises the buyer cannot know their own claim frequency in advance."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Interprets 6.41 as the average years between claims at which the two policies cost the same over the long run. States that Policy H is better if claims come less often than that, and worse if they come more often. Notes the separate requirement: Policy H needs $1,500 available at any moment, and the $156 saved a year does not build that quickly."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u06-l09.scoring.json",
+    "sourceScoringSha256": "c20cee96c1d71c8e54bc9df8eb1bf85747b0a06365aa35bd1cb837340b22c6dc",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

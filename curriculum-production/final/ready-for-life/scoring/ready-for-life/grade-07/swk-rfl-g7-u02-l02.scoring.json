@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l02",
+  "lessonId": "ma-g7-ready-for-life-u02-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Label interpretation accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Symbols are named incorrectly or garments are grouped without checking the label of each one."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Temperature, dryer, bleach, and iron symbols are correctly read on at least three garments and used to group the load."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner correctly identifies and separates out a garment whose instructions do not match the rest of its group."
+          }
+        ]
+      },
+      {
+        "dimension": "Safe, correctly-set real load",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Wash or dry settings do not match any label in the load, or the machine's fill line is not checked."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Wash and dry settings match the most restrictive label in the load, and the load stays within the machine's fill line."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains specifically which garment's label determined the settings chosen."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The three garments and their labels are real and specifically described, not a generic description of 'checking labels.'",
+      "The load was not overloaded, and the settings named match a label actually present on a garment in the load.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

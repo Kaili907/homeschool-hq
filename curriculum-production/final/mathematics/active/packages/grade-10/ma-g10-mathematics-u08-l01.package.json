@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u08-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u08-l01",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Circles",
+    "dayInUnit": 1,
+    "courseDay": 127,
+    "phase": "Launch and diagnostic",
+    "focus": "why all circles are similar",
+    "title": "Launch and diagnostic: why all circles are similar"
+  },
+  "standards": [
+    "G-C.1",
+    "G-C.2",
+    "G-C.3",
+    "G-C.5",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "inscribed-angle-measure",
+          "standard": "G-C.2",
+          "difficulty": 1,
+          "prompt": "An inscribed angle intercepts a 100° arc. Find it.",
+          "workedSolution": {
+            "steps": [
+              "Inscribed angle is half the arc.",
+              "100 ÷ 2 = 50°."
+            ],
+            "answer": "50°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "tangent-radius-perpendicularity",
+          "standard": "G-C.2",
+          "difficulty": 1,
+          "prompt": "A circle has radius 3. From an external point 5 from the centre, a tangent is drawn. Find the length of the tangent segment, and state the fact that makes this possible.",
+          "choices": [
+            "2, because the radius is perpendicular to the tangent at the point of tangency",
+            "4, because the radius is perpendicular to the tangent at the point of tangency",
+            "4, because the tangent bisects the radius",
+            "8, because the tangent extends beyond the circle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "arc-length-and-sector-area",
+          "standard": "G-C.5",
+          "difficulty": 1,
+          "prompt": "A circle has radius 9. Find the arc length and the sector area for a central angle of 60°, in terms of π.",
+          "choices": [
+            "arc 3π; sector 27/2π",
+            "arc 3/2π; sector 27/2π",
+            "arc 3π; sector 27π",
+            "arc 27/2π; sector 3π"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "cyclic-quadrilateral-angle",
+          "standard": "G-C.3",
+          "difficulty": 2,
+          "prompt": "A quadrilateral is inscribed in a circle. One angle measures 34°. Find the measure of the opposite angle.",
+          "choices": [
+            "90°",
+            "146°",
+            "34°",
+            "326°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-angle-measure",
+          "standard": "G-C.2",
+          "difficulty": 2,
+          "prompt": "An inscribed angle in a circle intercepts an arc of 104°. Find the measure of the inscribed angle.",
+          "choices": [
+            "52°",
+            "208°",
+            "76°",
+            "104°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "tangent-radius-perpendicularity",
+          "standard": "G-C.2",
+          "difficulty": 3,
+          "prompt": "A circle has radius 7. From an external point 25 from the centre, a tangent is drawn. Find the length of the tangent segment, and state the fact that makes this possible.",
+          "choices": [
+            "18, because the radius is perpendicular to the tangent at the point of tangency",
+            "24, because the radius is perpendicular to the tangent at the point of tangency",
+            "24, because the tangent bisects the radius",
+            "32, because the tangent extends beyond the circle"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "arc-length-and-sector-area",
+          "standard": "G-C.5",
+          "difficulty": 1,
+          "prompt": "A circle has radius 8. Find the arc length and the sector area for a central angle of 45°, in terms of π.",
+          "choices": [
+            "arc 8π; sector 2π",
+            "arc 2π; sector 16π",
+            "arc 1π; sector 8π",
+            "arc 2π; sector 8π"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "cyclic-quadrilateral-angle",
+          "standard": "G-C.3",
+          "difficulty": 2,
+          "prompt": "A quadrilateral is inscribed in a circle. One angle measures 81°. Find the measure of the opposite angle.",
+          "choices": [
+            "81°",
+            "279°",
+            "90°",
+            "99°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u08-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u08-l01"
+  }
+}

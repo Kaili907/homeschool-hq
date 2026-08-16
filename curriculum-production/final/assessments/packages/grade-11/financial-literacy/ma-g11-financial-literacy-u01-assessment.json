@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-financial-literacy-u01-assessment",
+  "courseRef": "ma-g11-financial-literacy",
+  "grade": 11,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g11-financial-literacy-u01",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "courseTitle": "Investing, Insurance, and Risk Management",
+    "assessmentLessonRef": "ma-g11-financial-literacy-u01-l10"
+  },
+  "standards": [
+    "PF1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u01-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The fictional programme runs 2 years at $21,300 a year, entirely borrowed. The invented loan rule is classroom simple interest: 6.5% a year charged on the full borrowed amount for each of the 2 study years, with nothing repaid until study ends. This is a simplified teaching model and not how a real amortising student loan accrues.",
+      "prompt": "What is the total amount borrowed across the 2 years?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The fictional programme runs 2 years at $21,300 a year, entirely borrowed. The invented loan rule is classroom simple interest: 6.5% a year charged on the full borrowed amount for each of the 2 study years, with nothing repaid until study ends. This is a simplified teaching model and not how a real amortising student loan accrues.",
+      "prompt": "Under the stated simple-interest rule, how much interest accrues across the 2 study years?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The fictional programme runs 2 years at $21,300 a year, entirely borrowed. The invented loan rule is classroom simple interest: 6.5% a year charged on the full borrowed amount for each of the 2 study years, with nothing repaid until study ends. This is a simplified teaching model and not how a real amortising student loan accrues.",
+      "prompt": "What is the balance owed when repayment begins?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "During the 2 study years Anouk would otherwise earn $30,200 a year. After the programme she expects $57,900 against the $33,500 she would earn without it. Build the full model.",
+      "prompt": "What earnings does Anouk give up across the 2 study years?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "During the 2 study years Anouk would otherwise earn $30,200 a year. After the programme she expects $57,900 against the $33,500 she would earn without it. Build the full model.",
+      "prompt": "What is the total economic cost of the pathway, counting the balance owed and the earnings given up?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "During the 2 study years Anouk would otherwise earn $30,200 a year. After the programme she expects $57,900 against the $33,500 she would earn without it. Build the full model.",
+      "prompt": "What is the annual salary advantage the programme is expected to produce?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "During the 2 study years Anouk would otherwise earn $30,200 a year. After the programme she expects $57,900 against the $33,500 she would earn without it. Build the full model.",
+      "prompt": "How long does the pathway take to pay back at that advantage? Give one decimal place.",
+      "responseUnit": "years"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now stress the model. Suppose the salary advantage turns out to be only $18,300 a year.",
+      "prompt": "What is the payback period under the weaker advantage? Give one decimal place.",
+      "responseUnit": "years"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now stress the model. Suppose the salary advantage turns out to be only $18,300 a year.",
+      "prompt": "How much longer is the payback under the weaker assumption? Give one decimal place.",
+      "responseUnit": "years"
+    },
+    {
+      "taskRef": "t3-p3",
+      "kind": "fixed-choice",
+      "directions": "Now stress the model. Suppose the salary advantage turns out to be only $18,300 a year.",
+      "prompt": "A reviewer asks which single input the recommendation is most exposed to. Which is the defensible answer?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Write your recommendation. Answer both.",
+      "prompt": "Recommend for or against the programme for Anouk. State the payback period you are relying on, the assumptions the recommendation rests on, and the single piece of evidence that would most change your mind."
+    },
+    {
+      "taskRef": "t4-p2",
+      "kind": "short-response",
+      "directions": "Write your recommendation. Answer both.",
+      "prompt": "The loan in this task uses a simplified simple-interest rule. Explain what a real amortising loan would do differently, and say whether that would make the payback period longer or shorter than the 4.4 years you computed."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/financial-literacy/ma-g11-financial-literacy-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Identifying the assumption criterion.",
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion.",
+    "Provide evidence that meets the stated Transfer to the new case criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-financial-literacy-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u01-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

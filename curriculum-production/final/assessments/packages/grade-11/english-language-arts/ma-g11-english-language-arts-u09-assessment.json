@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-english-language-arts-u09-assessment",
+  "courseRef": "ma-g11-english-language-arts",
+  "grade": 11,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g11-english-language-arts-u09",
+    "unitNumber": 9,
+    "unitTitle": "Early Twentieth-Century Works and Interpretation",
+    "courseTitle": "English 11: American Literature, Research, and Synthesis",
+    "assessmentLessonRef": "ma-g11-english-language-arts-u09-l16"
+  },
+  "standards": [
+    "11-12.RL.9",
+    "11-12.RL.7",
+    "11-12.RL.6",
+    "11-12.RL.4",
+    "11-12.SL.1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-11/ma-g11-english-language-arts-u09-l16.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: words with multiple meanings in literary language. Essential question: How does close, evidence-governed attention to words with multiple meanings in literary language change what a reader or writer is entitled to claim? By the end of this lesson you should be able to: Explain what words with multiple meanings in literary language means on material that resists a first reading, and say where a competent reader would slow down. You'll need: course notebook or digital equivalent; the unit's assigned texts, in an accessible reading representation; citation reference or style manual appropriate to the course.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for Early Twentieth-Century Works and Interpretation. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain early-twentieth-century foundational works in your own words and identify a valid example in an assigned text.\\n- (5 pts, textual evidence) Cite the strongest available evidence for a claim about multiple interpretations of one dramatic work, and state what the evidence does not establish.\\n- (6 pts, application) Apply what is directly stated versus what is meant to a text you have not analyzed in this unit. Show the reasoning, not only the conclusion.\\n- (6 pts, error or claim analysis) Analyze a plausible misreading or unsupported claim involving words with multiple meanings in literary language; correct it and explain what made it wrong.\\n- (5 pts, connection) Connect at least one Shakespeare play and one American dramatist with resolving contradictions in discussion. Explain how one constrains, supports, or complicates the other.\\n- (8 pts, performance evidence) Present the strongest evidence from the unit performance task: Compare interpretations of one dramatic work and argue which reading the text itself best supports.\\n- (4 pts, reflection and transfer) Identify one skill you can now transfer, one check that improves the quality of your reading or writing, and one open question.\\n- (5 pts, sufficiency and counter-evidence) Show that your evidence for multiple interpretations of one dramatic work is sufficient, not merely consistent with your claim. Identify the strongest piece of evidence that cuts against you.\\n- (5 pts, unaided transfer) Apply early-twentieth-century foundational works to a text supplied at assessment time, with no exemplar and no checklist. Explain the choice you made and why.\\n- (6 pts, uncertainty and limits) State precisely where the text or the sources leave the question unsettled, and what additional evidence would settle it.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/english-language-arts/ma-g11-english-language-arts-u09-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-english-language-arts-u09-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-11/ma-g11-english-language-arts-u09-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Early Twentieth-Century Works and Interpretation?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

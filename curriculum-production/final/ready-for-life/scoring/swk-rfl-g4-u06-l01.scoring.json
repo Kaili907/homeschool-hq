@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l01",
+  "lessonId": "ma-g4-ready-for-life-u06-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Idea generation and criteria use",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than three genuinely different ideas are listed, or the criteria comparison is skipped or applied to only one idea."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least three distinct ideas are listed and each is checked against all three criteria (helps the household, nothing bought, matches a known skill)."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains a specific tradeoff between two of their ideas before choosing."
+          }
+        ]
+      },
+      {
+        "dimension": "Choice justification and household relevance",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The chosen contribution and the named beneficiary are vague or the stated reason does not connect to any of the three criteria."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The choice is justified by a specific criterion, and a specific household member and specific benefit are named."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner accurately names which part of the rest of the project they expect to be hardest, with a reason."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The three ideas belong to genuinely different categories, not the same task worded three ways.",
+      "The chosen contribution requires nothing bought and does not assume a specific room, tool, or family structure."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

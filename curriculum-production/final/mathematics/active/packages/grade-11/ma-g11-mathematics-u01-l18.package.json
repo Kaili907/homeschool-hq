@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u01-l18",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u01-l18",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Polynomial Arithmetic, Identities, and Zeros",
+    "dayInUnit": 18,
+    "courseDay": 18,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "using identities to generate and verify results",
+    "title": "Publication, presentation, or reflection: using identities to generate and verify results"
+  },
+  "standards": [
+    "A-APR.1",
+    "A-APR.2",
+    "A-APR.3",
+    "A-APR.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 1,
+          "prompt": "Zeros of (x − 1)(x + 2)(x − 4)?",
+          "workedSolution": {
+            "steps": [
+              "Each factor zero gives a root.",
+              "x = 1, −2, 4; sorted: −2, 1, 4."
+            ],
+            "answer": "−2, 1, 4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 2,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 4 and y = 2 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "12, 12, 16",
+            "12, 16, 20",
+            "8, 12, 20",
+            "2, 4, 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 2,
+          "prompt": "Expand and simplify: (-2x + 2)(-4x − 4).",
+          "choices": [
+            "8x^2 - 8",
+            "8x^2 - 8x",
+            "8x^2 + 16x - 8",
+            "-6x^2 - 2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 3,
+          "prompt": "Find the remainder when -8x^2 + 4x - 3 is divided by (x + 4).",
+          "choices": [
+            "-147",
+            "-115",
+            "-141",
+            "-7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 3,
+          "prompt": "A cubic polynomial factors as (x + 3)(x − 2)(x − 3). List its zeros in increasing order.",
+          "choices": [
+            "-3, 2, 3",
+            "-3, -2, 3",
+            "-3, 3, 2",
+            "-2, 3, 4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 3,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 2 and y = 4 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 3,
+          "prompt": "Expand and simplify: (3x − 5)(-8x − 3).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u01-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u01-l18"
+  }
+}

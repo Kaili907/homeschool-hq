@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u06-l07",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u06-l07",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Vectors",
+    "dayInUnit": 7,
+    "courseDay": 97,
+    "phase": "Investigation or close reading",
+    "focus": "vectors as magnitude and direction with proper notation",
+    "title": "Investigation or close reading: vectors as magnitude and direction with proper notation"
+  },
+  "standards": [
+    "N-VM.1",
+    "N-VM.2",
+    "N-VM.3",
+    "N-VM.4",
+    "N-VM.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 1,
+          "prompt": "Find the magnitude of ⟨3, 4⟩.",
+          "workedSolution": {
+            "steps": [
+              "√(9 + 16) = √25.",
+              "= 5."
+            ],
+            "answer": "5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 2,
+          "prompt": "Given u = ⟨7, -4⟩ and v = ⟨4, 4⟩, find u − v.",
+          "choices": [
+            "⟨3, 0⟩",
+            "⟨11, 0⟩",
+            "⟨-3, 8⟩",
+            "⟨3, -8⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 3,
+          "prompt": "Let v = ⟨5, 12⟩, which has magnitude 13. Find -4v and its magnitude, and say how the direction changes.",
+          "choices": [
+            "⟨-20, -48⟩, magnitude 52, direction reversed",
+            "⟨1, 8⟩, magnitude 52, direction unchanged",
+            "⟨-20, -48⟩, magnitude 52, direction unchanged",
+            "⟨-20, -48⟩, magnitude 13, direction reversed"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 2,
+          "prompt": "Find the unit vector in the direction of ⟨8, 15⟩.",
+          "choices": [
+            "⟨8, 15⟩",
+            "⟨8/17, 15/17⟩",
+            "⟨17/8, 17/15⟩",
+            "⟨8/289, 15/289⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 3,
+          "prompt": "A vector has components ⟨-5, -12⟩. Find its magnitude.",
+          "choices": [
+            "17",
+            "7",
+            "13",
+            "169"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 3,
+          "prompt": "Given u = ⟨-2, 10⟩ and v = ⟨-6, -1⟩, find u − v.",
+          "choices": [
+            "⟨4, 11⟩",
+            "⟨-4, -11⟩",
+            "⟨4, 9⟩",
+            "⟨-8, 9⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 3,
+          "prompt": "Let v = ⟨6, 8⟩, which has magnitude 10. Find -3v and its magnitude, and say how the direction changes.",
+          "choices": [
+            "⟨-18, -24⟩, magnitude 30, direction reversed",
+            "⟨-18, -24⟩, magnitude 10, direction reversed",
+            "⟨3, 5⟩, magnitude 30, direction unchanged",
+            "⟨-18, -24⟩, magnitude 30, direction unchanged"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 3,
+          "prompt": "Find the unit vector in the direction of ⟨3, -4⟩.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 3,
+          "prompt": "A vector has components ⟨7, 24⟩. Find its magnitude.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u06-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u06-l07"
+  }
+}

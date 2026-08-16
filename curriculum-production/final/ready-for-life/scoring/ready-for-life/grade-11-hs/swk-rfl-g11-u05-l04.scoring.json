@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l04",
+  "lessonId": "ma-g11-ready-for-life-u05-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Specificity of the missing-information analysis",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Missing piece and possible source are vague or unnamed." },
+          { "label": "Proficient", "descriptor": "A specific missing piece and at least one specific person or source is named." },
+          { "label": "Advanced", "descriptor": "The learner also weighs the real cost of waiting against deciding now." }
+        ]
+      },
+      {
+        "dimension": "Decide-now-or-wait conclusion",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Conclusion defaults to 'wait and see' with no trigger or next step." },
+          { "label": "Proficient", "descriptor": "Conclusion states a clear choice (act, wait, or verify) with reasoning." },
+          { "label": "Advanced", "descriptor": "Conclusion includes a specific deadline or trigger for deciding anyway." }
+        ]
+      },
+      {
+        "dimension": "Quality of guardian engagement",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No evidence the guardian contributed a question or perspective." },
+          { "label": "Proficient", "descriptor": "Guardian asked at least one question, per the learner's account." },
+          { "label": "Advanced", "descriptor": "The write-up shows the guardian's question changed or sharpened the learner's reasoning." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The named missing piece of information is specific, not generic.",
+      "There is a concrete next step or deadline, not just an open-ended 'wait and see.'",
+      "The guardian's contribution is reflected in the write-up, not just checked off."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

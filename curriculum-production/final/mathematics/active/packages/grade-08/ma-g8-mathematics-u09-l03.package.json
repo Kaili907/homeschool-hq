@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u09-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u09-l03",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Volume and Bivariate Data",
+    "dayInUnit": 3,
+    "courseDay": 151,
+    "phase": "Guided practice A",
+    "focus": "association and outliers",
+    "title": "Guided practice A: association and outliers"
+  },
+  "standards": [
+    "8.G.9",
+    "8.SP.1",
+    "8.SP.2",
+    "8.SP.3",
+    "8.SP.4"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-scatter-association",
+          "standard": "8.SP.1",
+          "difficulty": 1,
+          "prompt": "As x increases, y generally increases. Identify the association.",
+          "workedSolution": {
+            "steps": [
+              "Identify the quantities and the applicable model.",
+              "Compute using the stated relationship.",
+              "Check that the result answers the question."
+            ],
+            "answer": "positive"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-outlier",
+          "standard": "8.SP.1",
+          "difficulty": 1,
+          "prompt": "Most plotted points follow y = 2x + 1. Of these points, (7, 15), (8, 17), (6, 13), (7, 27), which point is an outlier?",
+          "choices": [
+            "(7, 27)",
+            "(6, 13)",
+            "(8, 17)",
+            "(7, 15)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "line-of-fit-prediction",
+          "standard": "8.SP.2",
+          "difficulty": 1,
+          "prompt": "A line of fit is y = 5x + 1. Predict y when x = 9.",
+          "choices": [
+            "46",
+            "57",
+            "40",
+            "52"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpolation-or-extrapolation",
+          "standard": "8.SP.2",
+          "difficulty": 2,
+          "prompt": "A data set has x-values from 4 through 13. A prediction is made at x = 15. Is this interpolation or extrapolation?",
+          "choices": [
+            "a census",
+            "causation",
+            "interpolation",
+            "extrapolation"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "sphere-volume",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "Find the exact volume of a sphere with radius 6 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "72π cubic units",
+            "216π cubic units",
+            "288π cubic units",
+            "864π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "8.SP.3",
+          "difficulty": 2,
+          "prompt": "Umbrella sales and rainy-day traffic delays are correlated. Which conclusion is justified?",
+          "choices": [
+            "Umbrella sales cause traffic delays.",
+            "Traffic delays cause umbrella sales.",
+            "They are correlated; this alone does not prove causation.",
+            "There is no relationship at all."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "cylinder-volume",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "Find the exact volume of a cylinder with radius 5 units and height 21 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "530π cubic units",
+            "1050π cubic units",
+            "525π cubic units",
+            "175π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "cone-volume",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "Find the exact volume of a cone with radius 5 units and height 12 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "50π cubic units",
+            "100π cubic units",
+            "300π cubic units",
+            "105π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "sphere-volume",
+          "standard": "8.G.9",
+          "difficulty": 3,
+          "prompt": "Find the exact volume of a sphere with radius 3 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "108π cubic units",
+            "9π cubic units",
+            "27π cubic units",
+            "36π cubic units"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-solid-volumes",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "A cylinder and cone each have radius 4 units and height 3 units. Which has the greater volume?",
+          "choices": [
+            "the cone",
+            "not enough information",
+            "the cylinder",
+            "they have equal volume"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-scatter-association",
+          "standard": "8.SP.1",
+          "difficulty": 2,
+          "prompt": "As x increases, y shows no consistent change. What association does this scatter plot describe?",
+          "choices": [
+            "causation",
+            "positive",
+            "none",
+            "negative"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u09-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u09-l03"
+  }
+}

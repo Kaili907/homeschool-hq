@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u09-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u09-l06",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability Rules and Interpretation",
+    "dayInUnit": 6,
+    "courseDay": 150,
+    "phase": "Guided practice B",
+    "focus": "common probabilistic reasoning errors",
+    "title": "Guided practice B: common probabilistic reasoning errors"
+  },
+  "standards": [
+    "S-CP.5",
+    "S-CP.6",
+    "S-CP.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 1,
+          "prompt": "P(delay | rain) = P(delay). What does that mean?",
+          "workedSolution": {
+            "steps": [
+              "Conditioning changes nothing.",
+              "The events are independent."
+            ],
+            "answer": "They are independent"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "A box holds 7 items, of which 3 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "9/49",
+            "3/7",
+            "6/49",
+            "1/7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 2,
+          "prompt": "Given P(A and B) = 11/20 and P(B) = 13/20, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "11/13",
+            "11/20",
+            "13/11",
+            "143/400"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 32/100, P(B) = 29/100, and P(A and B) = 11/100, find P(A or B) in lowest terms.",
+          "choices": [
+            "1/2",
+            "61/100",
+            "7/50",
+            "18/25"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, P(has the condition | tested positive) is much smaller than P(tested positive | has the condition). What is the correct interpretation?",
+          "choices": [
+            "The two conditional probabilities condition on different events, so they need not be close; a rare condition makes the first much smaller.",
+            "The relationship proves that one event causes the other.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The two events are mutually exclusive."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "A box holds 11 items, of which 7 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "49/121",
+            "7/11",
+            "21/55",
+            "42/121"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 10/100 and P(B) = 59/100, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "59/10",
+            "59/1000",
+            "10/59",
+            "1/10"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 23/100, P(B) = 19/100, and P(A and B) = 9/100, find P(A or B) in lowest terms.",
+          "choices": [
+            "33/100",
+            "21/50",
+            "51/100",
+            "13/100"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, the probability of a delay is the same whether or not it is raining. What is the correct interpretation?",
+          "choices": [
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "Delay and rain are independent, because conditioning on rain does not change the probability of a delay.",
+            "The relationship proves that one event causes the other.",
+            "The two events are mutually exclusive."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 17 items, of which 13 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "39/68",
+            "13/17",
+            "169/289",
+            "156/289"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 14/100 and P(B) = 50/100, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "7/25",
+            "7/100",
+            "25/7",
+            "7/50"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u09-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u09-l06"
+  }
+}

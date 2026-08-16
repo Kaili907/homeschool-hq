@@ -1,0 +1,382 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l08",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u01-l08",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: health, retirement, and leave benefits valued"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "health, retirement, and leave benefits valued",
+  "objective": "Apply the benefits-valuation method to a fictional gig arrangement that provides none, and compare the two on a per-hour basis.",
+  "scenario": "A fictional worker can take gig work at an hourly rate or an employed role at a lower rate with benefits. Every figure below is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional arrangements in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The gig work pays $26 an hour with no benefits, and realistically supports 1,300 paid hours a year. The employed role pays $21 an hour for 2,080 hours, with benefits the employer values at $11,200.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the gig work pay over a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the employed role pay in wages over a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the employed role worth in total compensation?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now put both on a per-hour basis.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the employed role worth per hour, counting benefits? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "On a per-hour basis including benefits, which arrangement pays more?",
+          "choices": [
+            "The gig work, at $26 an hour",
+            "The employed role, at $21 an hour"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the employed role provide over the year in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The per-hour comparison is nearly a tie and the annual comparison is not close at all. Explain why the two comparisons disagree, and say which one a person choosing between these should use."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the gig work looks better, check the hours. $26 an hour is a higher rate, and 1,300 hours is 780 fewer than a full-time year; the rate advantage cannot make up for hours that do not exist.",
+  "extension": "Find the number of gig hours a year at which the gig work would match the employed role’s total compensation, and say whether that number is realistic given the arrangement described.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u01-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the gig work pay over a year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the employed role pay in wages over a year?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the employed role worth in total compensation?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the employed role worth per hour, counting benefits? Round to the nearest cent."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "On a per-hour basis including benefits, which arrangement pays more?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much more does the employed role provide over the year in total?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The per-hour comparison is nearly a tie and the annual comparison is not close at all. Explain why the two comparisons disagree, and say which one a person choosing between these should use."
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "EARNING_INCOME",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "APPLICATION_TRANSFER",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.earning_income.1",
+      "meaning": "Gross pay is earned before stated deductions; take-home pay is what remains after them."
+    },
+    {
+      "conceptId": "finlit.earning_income.2",
+      "meaning": "Hours, rate, benefits, reliability, and working conditions can all matter in a work choice."
+    },
+    {
+      "conceptId": "finlit.earning_income.3",
+      "meaning": "An estimate is only as reliable as its stated hours, rate, and deduction assumptions."
+    }
+  ],
+  "evidencePurpose": "Develop and apply earning, pay, and take-home income through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "PROFILE_BOUNDARY",
+    "title": "application transfer boundary",
+    "paragraphs": [],
+    "protectedBoundary": "Retrieve only the named prerequisite; do not model the protected transfer solution before the response.",
+    "conceptLessonId": "ma-g10-financial-literacy-u01-l02"
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "EARNING_INCOME",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "DEFERRED_OR_PREREQUISITE_ONLY",
+    "reason": "The transfer task depends on prior teaching; the named concept lesson contains the model.",
+    "modelLessonId": "ma-g10-financial-literacy-u01-l02"
+  },
+  "workedExamples": [],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g10-financial-literacy-u01-l08",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: A larger gross-pay number does not automatically mean the larger usable amount or the better overall option.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t3-p1"
+    ],
+    "gradeBandDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.earning_income.1",
+      "finlit.earning_income.2",
+      "finlit.earning_income.3"
+    ],
+    "evidenceLessonId": "ma-g10-financial-literacy-u01-l09",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.earning_income.core-confusion",
+      "observableSignal": "A larger gross-pay number does not automatically mean the larger usable amount or the better overall option.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-earning_income-g10",
+        "title": "Alternate model — earning, pay, and take-home income",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "Sol works 4 invented hours at $8.00 per hour.",
+          "A flat $2.00 training-material deduction is stated."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Gross pay: 4 × 800 = 3,200 cents.",
+          "Deduction: 200 cents.",
+          "Take-home pay: 3,200 − 200 = 3,000 cents, or $30.00.",
+          "Check: 3,000 + 200 = 3,200 cents."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g10-financial-literacy-u01-l07",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g10-financial-literacy-u01-l09",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.earning_income.1",
+      "finlit.earning_income.2",
+      "finlit.earning_income.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g10-financial-literacy-u01-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.earning_income.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "EARNING_INCOME",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g10-financial-literacy-u01-l08:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "HIGH_SCHOOL_9_12",
+      "scaffolding": "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+      "reasoningDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-10/swk-flhs-g10-u01-l08.package.json",
+    "sourcePackageSha256": "5a9fa69b361c882c5b5fa375c0d53d50e11680dbbfed91e73f0d0c17b9cad52e",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u01-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

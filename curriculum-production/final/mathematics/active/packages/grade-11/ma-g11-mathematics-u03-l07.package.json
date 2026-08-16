@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u03-l07",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u03-l07",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Complex Numbers and Nonlinear Systems",
+    "dayInUnit": 7,
+    "courseDay": 43,
+    "phase": "Investigation or close reading",
+    "focus": "the complex unit i and the form a plus bi",
+    "title": "Investigation or close reading: the complex unit i and the form a plus bi"
+  },
+  "standards": [
+    "N-CN.1",
+    "N-CN.2",
+    "N-CN.7",
+    "A-REI.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 1,
+          "prompt": "Multiply (2 + 3i)(1 − 4i).",
+          "workedSolution": {
+            "steps": [
+              "2 − 8i + 3i − 12i².",
+              "i² = −1 gives 2 + 12 − 5i.",
+              "14 − 5i."
+            ],
+            "answer": "14 − 5i"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 2,
+          "prompt": "Solve x^2 - 4x + 8 = 0 over the complex numbers.",
+          "choices": [
+            "x = 2 + 2i only",
+            "x = -2 + 2i or x = -2 − 2i",
+            "x = 2 + 2i or x = 2 − 2i",
+            "x = 2 or x = -2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = 1x + 6. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "-3, 2",
+            "1, 6",
+            "-1, 4",
+            "-2, 3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 2,
+          "prompt": "Simplify i^6.",
+          "choices": [
+            "−1",
+            "1",
+            "i",
+            "−i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 3,
+          "prompt": "Multiply and write in the form a + bi: (-2 − 7i)(-3 + 7i).",
+          "choices": [
+            "-43 + 7i",
+            "6 − 49i",
+            "55 + 7i",
+            "55 − 35i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 3,
+          "prompt": "Solve x^2 + 12x + 40 = 0 over the complex numbers.",
+          "choices": [
+            "x = -6 + 2i only",
+            "x = -6 + 2i or x = -6 − 2i",
+            "x = -6 or x = 6",
+            "x = 6 + 2i or x = 6 − 2i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = 1x + 12. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "-4, 3",
+            "-2, 5",
+            "1, 12",
+            "-3, 4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 3,
+          "prompt": "Simplify i^45.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 3,
+          "prompt": "Multiply and write in the form a + bi: (-5 − 8i)(5 + 3i).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u03-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u03-l07"
+  }
+}

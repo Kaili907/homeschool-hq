@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-mathematics-u09-assessment",
+  "courseRef": "ma-g4-mathematics",
+  "grade": 4,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g4-mathematics-u09",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "courseTitle": "Grade 4 Mathematics",
+    "assessmentLessonRef": "ma-g4-mathematics-u09-l16"
+  },
+  "standards": [
+    "4.MD.1",
+    "4.MD.2",
+    "4.MD.3",
+    "4.MD.4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u09-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "A rectangle has area 21 square units and one side is 3 units. What is the length of the other side?",
+      "choices": [
+        "21",
+        "18",
+        "7",
+        "3"
+      ],
+      "standardRef": "4.MD.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A line plot shows 6 ribbon lengths to the nearest 1/2 yard: 2/2, 1/2, 2/2, 1/2, 1/2, 1/2. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 2/2 yard?",
+      "choices": [
+        "4/2",
+        "3/2",
+        "4/4",
+        "5/2"
+      ],
+      "standardRef": "4.MD.4"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Convert 12 feet to inches.",
+      "choices": [
+        "14.4 inches",
+        "24 inches",
+        "12 inches",
+        "144 inches"
+      ],
+      "standardRef": "4.MD.1"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "A tank has 442 liters of water. 5 containers of 80 liters each are drained from it. How many liters remain?",
+      "choices": [
+        "42",
+        "442",
+        "400",
+        "842"
+      ],
+      "standardRef": "4.MD.2"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "A rectangle has area 54 square units and one side is 6 units. What is the length of the other side?",
+      "choices": [
+        "9",
+        "48",
+        "6",
+        "54"
+      ],
+      "standardRef": "4.MD.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 1/4, 3/4, 2/4, 2/4, 2/4, 1/4, 1/4, 1/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 1/4 yard?",
+      "choices": [
+        "3/4",
+        "4/8",
+        "4/4",
+        "5/4"
+      ],
+      "standardRef": "4.MD.4"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Convert 20 feet to inches.",
+      "choices": [
+        "20 inches",
+        "240 inches",
+        "32 inches",
+        "24 inches"
+      ],
+      "standardRef": "4.MD.1"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "A hiker walks 352 meters, then walks 3 more trips of 146 meters each. How many meters total?",
+      "choices": [
+        "438",
+        "791",
+        "790",
+        "352"
+      ],
+      "standardRef": "4.MD.2"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "A rectangle has area 154 square units and one side is 11 units. What is the length of the other side?",
+      "choices": [
+        "154",
+        "14",
+        "143",
+        "11"
+      ],
+      "standardRef": "4.MD.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u09-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 7/8, 3/8, 2/8, 1/8, 5/8, 3/8, 4/8, 6/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 5/8 yard?",
+      "choices": [
+        "5/16",
+        "5/8",
+        "6/8",
+        "4/8"
+      ],
+      "standardRef": "4.MD.4"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/mathematics/ma-g4-mathematics-u09-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-mathematics-u09-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u09-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Measurement, Conversion, and Data?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

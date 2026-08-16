@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "unit_id": "ma-g8-technology-u06",
+  "source_course_id": "ma-g8-technology",
+  "subject": "technology",
+  "band": "canonical-5-7-8",
+  "grade": 8,
+  "grade_dir": "grade-08",
+  "unit_number": 6,
+  "unit_title": "Technology Capstone and Impact Review",
+  "task_type": "data_and_evidence",
+  "task_label": "Data and evidence task",
+  "essential_question": "How can understanding technology capstone and impact review help us explain, decide, create, or solve something that matters?",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Impacts of Computing"
+  ],
+  "estimated_days": 6,
+  "project_brief": "Deliver a software, data, automation, or design capstone with a full impact, privacy, accessibility, and security review. This is the grade 8 culminating project for \"Technology Capstone and Impact Review\" (ma-g8-technology-u06, unit 6), built around problem framing, stakeholders and unintended effects, prototype development, testing and accessibility, and privacy and security review. Collect or use a small, fictional or already-approved data set related to problem framing, stakeholders and unintended effects, prototype development, and testing and accessibility, and turn it into a labeled visual with a one-paragraph, evidence-based conclusion.",
+  "requirements": [
+    "Address every topic listed for this unit: problem framing, stakeholders and unintended effects, prototype development, testing and accessibility, privacy and security review, and presentation and maintenance plan.",
+    "Meet the performance task as written: Deliver a software, data, automation, or design capstone with a full impact, privacy, accessibility, and security review.",
+    "Show your work or process, not just a final result — a process note, sketch log, commit history, or draft trail.",
+    "Complete the checklist in this package before submitting."
+  ],
+  "primary_task": "Collect or use a small, fictional or already-approved data set related to problem framing, stakeholders and unintended effects, prototype development, and testing and accessibility, and turn it into a labeled visual with a one-paragraph, evidence-based conclusion.",
+  "test_or_check_criteria": [
+    "Every claim or design choice in the submission can be traced to problem framing or another named topic from this unit — nothing is left unexplained.",
+    "The submission runs, displays, or demonstrates correctly on at least two different sample inputs or scenarios the student chooses.",
+    "No real password, API key, account credential, precise location, or other real personal/system data appears anywhere in the submission — fictional or sandbox examples only.",
+    "The student can explain, in their own words, why each step or decision was made, not just that it works."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "This project never touches a real account, a real password or API key, a live production system, or another person's real data. Use fictional names, sandbox environments, local files, or already-approved sample data throughout. Submit code, screenshots of your own sandbox, diagrams, or a written walkthrough — a live public deployment is never required."
+  },
+  "copyright_and_authorship": "The final submitted work must remain your own authorship. A parent, tutor, or AI assistant may help you plan, explain a concept, demonstrate a technique, or give feedback on a draft, but may not produce the graded work itself. Never request, store, or submit a real password, API key, access token, or other real credential; use only fictional accounts and sandboxed or offline systems.",
+  "remediation": "If the project stalls, step back to the smallest version of the task: rebuild just the part covering problem framing in isolation, using a worked example from this unit as a model, then re-attach it to the full project once that smaller piece works and you can explain why.",
+  "extension": "Once the core project is working, extend it to handle a new constraint or edge case related to stakeholders and unintended effects, or compare two different approaches to the same problem and explain the real tradeoff between them in your own words."
+}

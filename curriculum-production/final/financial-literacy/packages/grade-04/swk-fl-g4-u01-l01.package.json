@@ -1,0 +1,387 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u01-l01",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Money Choices and Tradeoffs",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: needs, wants, and priorities",
+    "focus": "needs, wants, and priorities"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 1 — choices, scarcity, and tradeoffs"
+  ],
+  "objective": "Learners sort an invented month of spending into needs and wants, total each group, and test the combined plan against a fixed pretend amount to see what priority order protects.",
+  "scenario": "Ayana is a made-up fourth grader planning a pretend month with $60.00 of simulated money. Her invented list holds two needs, a $24.00 bus pass and $18.00 of lunch supplies, and two wants, a $9.50 game and a $6.25 poster.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total the two invented needs on Ayana's list: the $24.00 bus pass and the $18.00 of lunch supplies.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Ayana's needs cost together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now total the wants separately, then bring both groups together against the $60.00 Ayana has for the pretend month.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Ayana's wants cost together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Ayana's whole plan cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Ayana checks the finished plan against her $60.00, then finds out the bus pass has gone up to $27.00 while everything else stays the same.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $60.00 is left under the original plan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "With the $27.00 bus pass, how does the plan compare with Ayana's $60.00?",
+          "choices": [
+            "It fits",
+            "It comes out exactly even",
+            "It runs over"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The price rise fell on a need, not a want.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Ayana has to cut something. Which item would you cut first and why does priority order matter more than which item she likes least?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cuts by preference, cover the price column and have the learner write, for each item, what would go wrong for Ayana without it, then restore prices and cut only from the items with no consequence attached.",
+  "extension": "Ask the learner to rebuild Ayana's plan under the $27.00 bus pass so it fits $60.00 exactly, showing the totals for both groups.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u01-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do Ayana's needs cost together?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do Ayana's wants cost together?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does Ayana's whole plan cost?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much of the $60.00 is left under the original plan?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "With the $27.00 bus pass, how does the plan compare with Ayana's $60.00?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Ayana has to cut something. Which item would you cut first and why does priority order matter more than which item she likes least?"
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "MONEY_CONCEPT",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "DIAGNOSTIC",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.money_concept.1",
+      "meaning": "Money is limited, so choosing one use can mean giving up another use."
+    },
+    {
+      "conceptId": "finlit.money_concept.2",
+      "meaning": "Needs, wants, goals, and constraints help explain why a choice fits a situation."
+    },
+    {
+      "conceptId": "finlit.money_concept.3",
+      "meaning": "A sound choice uses the fictional facts without judging a person or family."
+    }
+  ],
+  "evidencePurpose": "Collect protected evidence about needs, wants, and priorities without answer-bearing teaching during the attempt.",
+  "conceptExplanation": {
+    "applicability": "PROFILE_BOUNDARY",
+    "title": "diagnostic boundary",
+    "paragraphs": [],
+    "protectedBoundary": "Do not preteach the measured target before the diagnostic response. Use the routed concept lesson after the attempt.",
+    "conceptLessonId": "ma-g4-financial-literacy-u01-l02"
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "MONEY_CONCEPT",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "DEFERRED_OR_PREREQUISITE_ONLY",
+    "reason": "A like-kind model before the diagnostic would invalidate the evidence.",
+    "modelLessonId": "ma-g4-financial-literacy-u01-l02"
+  },
+  "workedExamples": [],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1",
+      "t2"
+    ],
+    "guidedLessonId": "ma-g4-financial-literacy-u01-l01",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: Calling an option a want does not make it bad; the category depends on the stated goal and circumstances.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t3",
+      "t4"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t4-p1"
+    ],
+    "gradeBandDemand": "Name the goal, compare concrete costs or benefits, and explain one opportunity cost.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.money_concept.1",
+      "finlit.money_concept.2",
+      "finlit.money_concept.3"
+    ],
+    "evidenceLessonId": "ma-g4-financial-literacy-u01-l05",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.money_concept.core-confusion",
+      "observableSignal": "Calling an option a want does not make it bad; the category depends on the stated goal and circumstances.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-money_concept-g4",
+        "title": "Alternate model — money choices and opportunity cost",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "Leo has an invented 1,500-cent limit.",
+          "A bus pass for the fictional event is 900 cents.",
+          "A souvenir is 800 cents."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Mark the bus pass as a constraint because it is required to reach the event.",
+          "Compute 1,500 − 900 = 600 cents.",
+          "Compare 600 cents remaining with the 800-cent souvenir; the gap is 200 cents.",
+          "Delay the souvenir and explain that the decision would change if transportation were already provided."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g4-financial-literacy-u01-l06",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g4-financial-literacy-u01-l05",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.money_concept.1",
+      "finlit.money_concept.2",
+      "finlit.money_concept.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g4-financial-literacy-u01-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.money_concept.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "MONEY_CONCEPT",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g4-financial-literacy-u01-l01:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "ELEMENTARY_3_5",
+      "scaffolding": "Use concrete choices, at most two interacting constraints at a time, short labelled cent calculations, and one evidence-based reason.",
+      "reasoningDemand": "Name the goal, compare concrete costs or benefits, and explain one opportunity cost.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Use concrete choices, at most two interacting constraints at a time, short labelled cent calculations, and one evidence-based reason.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-04/swk-fl-g4-u01-l01.package.json",
+    "sourcePackageSha256": "ff0c9071cd54a754513af1ac0e2e3a100ecdf89f216fa3643e01a540a1cd951e",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g4-financial-literacy-u01-l01",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

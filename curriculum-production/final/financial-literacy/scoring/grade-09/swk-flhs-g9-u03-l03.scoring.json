@@ -1,0 +1,287 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l03",
+  "lessonId": "ma-g9-financial-literacy-u03-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$189.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Simple interest applies the rate to the original principal each year: $1,400 x 4.5% x 3."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,589.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The original $1,400 plus $189.00 of simple interest."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,597.63",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,400 x 1.045 x 1.045 x 1.045 is $1,597.6326, which rounds to $1,597.63."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$197.63",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,597.63 ending balance less the $1,400 deposited."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$8.63",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,597.63 against $1,589.00 — the same quoted rate, the same term, and a difference of $8.63."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$1,463.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,400 x 1.045, which is the same $63 of interest simple interest would pay in year one."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$65.84",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4.5% of the $1,463.00 balance, which is $2.84 more than the $63.00 simple interest pays in the same year because the first year’s interest is now earning too."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "principal * rate * years",
+        "substituted": "1400 * 0.045 * 3",
+        "result": "$189.00",
+        "why": "Simple interest applies the rate to the original principal each year: $1,400 x 4.5% x 3."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "principal2 + #t1-p1",
+        "substituted": "1400 + #t1-p1",
+        "result": "$1,589.00",
+        "why": "The original $1,400 plus $189.00 of simple interest."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(principal3 * pow(growth, years2), 2)",
+        "substituted": "round(1400 * pow(1.045, 3), 2)",
+        "result": "$1,597.63",
+        "why": "$1,400 x 1.045 x 1.045 x 1.045 is $1,597.6326, which rounds to $1,597.63."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - principal4",
+        "substituted": "#t2-p1 - 1400",
+        "result": "$197.63",
+        "why": "The $1,597.63 ending balance less the $1,400 deposited."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t1-p2",
+        "substituted": "#t2-p1 - #t1-p2",
+        "result": "$8.63",
+        "why": "$1,597.63 against $1,589.00 — the same quoted rate, the same term, and a difference of $8.63."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "principal5 * growth2",
+        "substituted": "1400 * 1.045",
+        "result": "$1,463.00",
+        "why": "$1,400 x 1.045, which is the same $63 of interest simple interest would pay in year one."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "round(#t3-p1 * rate3, 2)",
+        "substituted": "round(#t3-p1 * 0.045, 2)",
+        "result": "$65.84",
+        "why": "4.5% of the $1,463.00 balance, which is $2.84 more than the $63.00 simple interest pays in the same year because the first year’s interest is now earning too."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Both accounts quote 4.5%. Explain in your own words where Account C’s extra $8.63 came from, and say whether that gap would grow or shrink over a longer term.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that compounding pays interest on interest already earned, which simple interest does not, using the second-year figures of $65.84 against $63.00.",
+          "States that the gap grows over a longer term, because the base the rate is applied to keeps rising."
+        ],
+        "evidenceRequirements": [
+          "Uses the year-one balance of $1,463.00 and the year-two interest of $65.84 to show the mechanism."
+        ],
+        "lookFors": [
+          "The response identifies the growing base as the mechanism, not a higher rate.",
+          "The response notices the two accounts are identical in the first year."
+        ],
+        "commonMisconception": "Believing a quoted rate tells you the return without knowing how often interest is applied.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much interest does Account S pay over the 3 years?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "Including the deposit, what has Account S produced after 3 years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the Account C balance after 3 years? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much interest did Account C earn?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much more did compounding earn than simple interest over the 3 years?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Account C’s balance after just the first year?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What interest does Account C earn in its second year alone?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Both accounts quote 4.5%. Explain in your own words where Account C’s extra $8.63 came from, and say whether that gap would grow or shrink over a longer term."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much interest does Account S pay over the 3 years? Answer: $189.00. Verification: Simple interest applies the rate to the original principal each year: $1,400 x 4.5% x 3. t1-p2: Including the deposit, what has Account S produced after 3 years? Answer: $1,589.00. Verification: The original $1,400 plus $189.00 of simple interest. t2-p1: What is the Account C balance after 3 years? Round to the nearest cent. Answer: $1,597.63. Verification: $1,400 x 1.045 x 1.045 x 1.045 is $1,597.6326, which rounds to $1,597.63. t2-p2: How much interest did Account C earn? Answer: $197.63. Verification: The $1,597.63 ending balance less the $1,400 deposited. t2-p3: How much more did compounding earn than simple interest over the 3 years? Answer: $8.63. Verification: $1,597.63 against $1,589.00 — the same quoted rate, the same term, and a difference of $8.63. t3-p1: What is Account C’s balance after just the first year? Answer: $1,463.00. Verification: $1,400 x 1.045, which is the same $63 of interest simple interest would pay in year one. t3-p2: What interest does Account C earn in its second year alone? Answer: $65.84. Verification: 4.5% of the $1,463.00 balance, which is $2.84 more than the $63.00 simple interest pays in the same year because the first year’s interest is now earning too."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t4-p1: Both accounts quote 4.5%. Explain in your own words where Account C’s extra $8.63 came from, and say whether that gap would grow or shrink over a longer term. Explains that compounding pays interest on interest already earned, which simple interest does not, using the second-year figures of $65.84 against $63.00. States that the gap grows over a longer term, because the base the rate is applied to keeps rising. Uses the year-one balance of $1,463.00 and the year-two interest of $65.84 to show the mechanism. The response identifies the growing base as the mechanism, not a higher rate. The response notices the two accounts are identical in the first year."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that compounding pays interest on interest already earned, which simple interest does not, using the second-year figures of $65.84 against $63.00. States that the gap grows over a longer term, because the base the rate is applied to keeps rising."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 3,
+      "acceptableAnswerCriteriaCount": 2
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u03-l03.scoring.json",
+    "sourceScoringSha256": "385d98fa37c4862dc06f55f28f5ac77c14d2441753d1d7f0805fac46beef71c7",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

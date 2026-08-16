@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u01-l12",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u01-l12",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Place Value to One Million",
+    "dayInUnit": 12,
+    "courseDay": 12,
+    "phase": "Applied problem solving",
+    "focus": "choosing a rounding place and estimating to judge reasonableness",
+    "title": "Applied problem solving: choosing a rounding place and estimating to judge reasonableness"
+  },
+  "standards": [
+    "4.NBT.3",
+    "MP.1",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 1,
+          "prompt": "Round 583,204 to the nearest 10,000.",
+          "workedSolution": {
+            "steps": [
+              "The nearest multiples of 10,000 are 580,000 and 590,000.",
+              "583,204 is closer to 580,000."
+            ],
+            "answer": "580000"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "mathematical-habits-strategy-choice",
+          "standard": "MP.1",
+          "difficulty": 2,
+          "prompt": "You solved a multi-digit problem, but the answer has way more digits than makes sense. What should you do?",
+          "choices": [
+            "Estimate the answer first, then compare your exact answer to the estimate to check for a place-value mistake.",
+            "Multiply every number in the problem together.",
+            "Skip the problem without trying it.",
+            "Guess an answer and move on to the next problem."
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 29788 to the nearest 1,000.",
+          "choices": [
+            "30001",
+            "30000",
+            "29000",
+            "29788"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "mathematical-habits-strategy-choice",
+          "standard": "MP.1",
+          "difficulty": 2,
+          "prompt": "A problem could be solved more than one way. What should you do before picking a method?",
+          "choices": [
+            "Multiply every number in the problem together.",
+            "Guess an answer and move on to the next problem.",
+            "Think about which method fits the numbers best, then explain why you chose it.",
+            "Skip the problem without trying it."
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 773899 to the nearest 10,000.",
+          "choices": [
+            "770000",
+            "770001",
+            "773899",
+            "780000"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "mathematical-habits-strategy-choice",
+          "standard": "MP.1",
+          "difficulty": 3,
+          "prompt": "You read a word problem with several numbers in it and are not sure where to start. What should you do first?",
+          "choices": [
+            "Guess an answer and move on to the next problem.",
+            "Restate the problem in your own words and identify exactly what question is being asked.",
+            "Multiply every number in the problem together.",
+            "Skip the problem without trying it."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 489385 to the nearest 10,000.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 243247 to the nearest 10,000.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u01-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u01-l12"
+  }
+}

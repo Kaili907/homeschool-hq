@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l01",
+  "lessonId": "ma-g10-financial-literacy-u01-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,080.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4% of the $52,000 salary, though a target bonus is a stated aim rather than a guaranteed payment."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$63,060.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$52,000 salary + $2,080 bonus + $2,080 match + $6,900 of employer health contribution."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A day of this salary is $52,000 / 260 = $200.00, and 15 of them come to $3,000.00."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$66,060.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$63,060.00 of cash and employer contributions plus $3,000.00 of paid leave."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "78.7%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$52,000 of a $66,060 package is 0.78716, so more than a fifth of the offer sits outside the salary line."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$14,060.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$66,060.00 total less the $52,000 salary line."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "salary * bonusRate",
+        "substituted": "52000 * 0.04",
+        "result": "$2,080.00",
+        "why": "4% of the $52,000 salary, though a target bonus is a stated aim rather than a guaranteed payment."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "salary2 + #t1-p1 + salary2 * matchRate + health",
+        "substituted": "52000 + #t1-p1 + 52000 * 0.04 + 6900",
+        "result": "$63,060.00",
+        "why": "$52,000 salary + $2,080 bonus + $2,080 match + $6,900 of employer health contribution."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(salary3 / workYear * paidDays, 2)",
+        "substituted": "round(52000 / 260 * 15, 2)",
+        "result": "$3,000.00",
+        "why": "A day of this salary is $52,000 / 260 = $200.00, and 15 of them come to $3,000.00."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 + #t1-p3",
+        "substituted": "#t1-p2 + #t1-p3",
+        "result": "$66,060.00",
+        "why": "$63,060.00 of cash and employer contributions plus $3,000.00 of paid leave."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(salary4 / #t2-p1 * 100, 1)",
+        "substituted": "round(52000 / #t2-p1 * 100, 1)",
+        "result": "78.7%",
+        "why": "$52,000 of a $66,060 package is 0.78716, so more than a fifth of the offer sits outside the salary line."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - salary5",
+        "substituted": "#t2-p1 - 52000",
+        "result": "$14,060.00",
+        "why": "$66,060.00 total less the $52,000 salary line."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Not all $14,060 of non-salary compensation is equally certain or equally useful. Rank the four non-salary components by how confident the candidate should be in each, and explain the ranking.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the target bonus as the least certain, because a target is not a promise and the $2,080 may not be paid in full.",
+          "Notes that the retirement match at $2,080 usually requires the employee to contribute to receive it, and may vest over time, so it is conditional in a different way.",
+          "Treats the $6,900 health contribution and the $3,000 of paid leave as the most reliable, while noting the health figure is only worth its face value to someone who needs that coverage."
+        ],
+        "evidenceRequirements": [
+          "Uses all four non-salary figures: $2,080, $2,080, $6,900, and $3,000."
+        ],
+        "lookFors": [
+          "The response distinguishes conditional on performance, conditional on the employee acting, and unconditional.",
+          "The response does not discount the whole $14,060 simply because parts of it are conditional."
+        ],
+        "commonMisconception": "Adding every listed benefit into total compensation at face value without asking what each one is conditional on.",
+        "dimensions": [
+          "assumption-identification",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the target bonus worth?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total of salary, bonus, retirement match, and health contribution?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What are the 15 paid days off worth at the salary’s daily rate?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is total compensation including the paid leave?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What percentage of total compensation is the salary line? Round to one decimal place."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much of the package is not salary?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Not all $14,060 of non-salary compensation is equally certain or equally useful. Rank the four non-salary components by how confident the candidate should be in each, and explain the ranking."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the target bonus worth? Answer: $2,080.00. Verification: 4% of the $52,000 salary, though a target bonus is a stated aim rather than a guaranteed payment. t1-p2: What is the total of salary, bonus, retirement match, and health contribution? Answer: $63,060.00. Verification: $52,000 salary + $2,080 bonus + $2,080 match + $6,900 of employer health contribution. t1-p3: What are the 15 paid days off worth at the salary’s daily rate? Answer: $3,000.00. Verification: A day of this salary is $52,000 / 260 = $200.00, and 15 of them come to $3,000.00. t2-p1: What is total compensation including the paid leave? Answer: $66,060.00. Verification: $63,060.00 of cash and employer contributions plus $3,000.00 of paid leave. t2-p2: What percentage of total compensation is the salary line? Round to one decimal place. Answer: 78.7%. Verification: $52,000 of a $66,060 package is 0.78716, so more than a fifth of the offer sits outside the salary line. t2-p3: How much of the package is not salary? Answer: $14,060.00. Verification: $66,060.00 total less the $52,000 salary line."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. t3-p1: Not all $14,060 of non-salary compensation is equally certain or equally useful. Rank the four non-salary components by how confident the candidate should be in each, and explain the ranking. Identifies the target bonus as the least certain, because a target is not a promise and the $2,080 may not be paid in full. Notes that the retirement match at $2,080 usually requires the employee to contribute to receive it, and may vest over time, so it is conditional in a different way. Treats the $6,900 health contribution and the $3,000 of paid leave as the most reliable, while noting the health figure is only worth its face value to someone who needs that coverage. Uses all four non-salary figures: $2,080, $2,080, $6,900, and $3,000. The response distinguishes conditional on performance, conditional on the employee acting, and unconditional. The response does not discount the whole $14,060 simply because parts of it are conditional."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the target bonus as the least certain, because a target is not a promise and the $2,080 may not be paid in full. Notes that the retirement match at $2,080 usually requires the employee to contribute to receive it, and may vest over time, so it is conditional in a different way. Treats the $6,900 health contribution and the $3,000 of paid leave as the most reliable, while noting the health figure is only worth its face value to someone who needs that coverage."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-10/swk-flhs-g10-u01-l01.scoring.json",
+    "sourceScoringSha256": "beb38430e1295b9df6aef8c201e0dd4f0945bd737b6bcdebb2860cf9583105da",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l06",
+  "lessonId": "ma-g10-financial-literacy-u02-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$148.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The full $268.40 refund against the $120 offered on day 26."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$32.98",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$148.40 recovered across 4.5 hours of calls, writing, and following up."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "38",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "From the first contact on day 3 to the resolution on day 41."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$59.64",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$268.40 across 4.5 hours, if the alternative to complaining at all was recovering nothing."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "The written complaint on day 18, of which a copy was kept",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "A complaints body needs a record of what was claimed and when; the telephone call left none, and the kept copy is what turned the dispute into something a third party could act on."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "charge - partialOffer",
+        "substituted": "268.4 - 120",
+        "result": "$148.40",
+        "why": "The full $268.40 refund against the $120 offered on day 26."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 / hours, 2)",
+        "substituted": "round(#t1-p1 / 4.5, 2)",
+        "result": "$32.98",
+        "why": "$148.40 recovered across 4.5 hours of calls, writing, and following up."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "resolved - firstContact",
+        "substituted": "41 - 3",
+        "result": "38",
+        "why": "From the first contact on day 3 to the resolution on day 41."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(charge2 / hours2, 2)",
+        "substituted": "round(268.4 / 4.5, 2)",
+        "result": "$59.64",
+        "why": "$268.40 across 4.5 hours, if the alternative to complaining at all was recovering nothing."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The partial offer on day 26 was $120 against a $268.40 claim. Explain what a partial offer at that stage is testing, and set out the rule you would use to decide whether to accept one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a partial offer tests whether the consumer will stop for less than the full claim, and that accepting typically ends the dispute.",
+          "Sets out a usable rule that weighs the amount still in dispute against the effort and uncertainty of continuing — here, $148.40 more for an unknown amount of further time.",
+          "Acknowledges the uncertainty honestly: the full recovery was not guaranteed at day 26, so accepting $120 would not have been unreasonable."
+        ],
+        "evidenceRequirements": [
+          "Uses the $120 offer, the $148.40 still in dispute, and the 4.5 hours spent."
+        ],
+        "lookFors": [
+          "The response does not treat the eventual full recovery as proof that accepting would have been a mistake.",
+          "The rule offered could be applied to a different dispute."
+        ],
+        "commonMisconception": "Judging a decision made under uncertainty by the outcome that happened to follow.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much more did escalating recover than accepting the partial offer?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What did that additional recovery work out to per hour of the consumer’s time? Round to the nearest cent."
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How many days passed between the first contact and the resolution?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "Taking the whole $268.40 as what the complaint recovered, what was that per hour? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Which single step in the timeline most likely made the escalation possible?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The partial offer on day 26 was $120 against a $268.40 claim. Explain what a partial offer at that stage is testing, and set out the rule you would use to decide whether to accept one."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much more did escalating recover than accepting the partial offer? Answer: $148.40. Verification: The full $268.40 refund against the $120 offered on day 26. t1-p2: What did that additional recovery work out to per hour of the consumer’s time? Round to the nearest cent. Answer: $32.98. Verification: $148.40 recovered across 4.5 hours of calls, writing, and following up. t1-p3: How many days passed between the first contact and the resolution? Answer: 38. Verification: From the first contact on day 3 to the resolution on day 41. t2-p1: Taking the whole $268.40 as what the complaint recovered, what was that per hour? Round to the nearest cent. Answer: $59.64. Verification: $268.40 across 4.5 hours, if the alternative to complaining at all was recovering nothing. t2-p2: Which single step in the timeline most likely made the escalation possible? Answer: The written complaint on day 18, of which a copy was kept. Verification: A complaints body needs a record of what was claimed and when; the telephone call left none, and the kept copy is what turned the dispute into something a third party could act on."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The partial offer on day 26 was $120 against a $268.40 claim. Explain what a partial offer at that stage is testing, and set out the rule you would use to decide whether to accept one. Explains that a partial offer tests whether the consumer will stop for less than the full claim, and that accepting typically ends the dispute. Sets out a usable rule that weighs the amount still in dispute against the effort and uncertainty of continuing — here, $148.40 more for an unknown amount of further time. Acknowledges the uncertainty honestly: the full recovery was not guaranteed at day 26, so accepting $120 would not have been unreasonable. Uses the $120 offer, the $148.40 still in dispute, and the 4.5 hours spent. The response does not treat the eventual full recovery as proof that accepting would have been a mistake. The rule offered could be applied to a different dispute."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that a partial offer tests whether the consumer will stop for less than the full claim, and that accepting typically ends the dispute. Sets out a usable rule that weighs the amount still in dispute against the effort and uncertainty of continuing — here, $148.40 more for an unknown amount of further time. Acknowledges the uncertainty honestly: the full recovery was not guaranteed at day 26, so accepting $120 would not have been unreasonable."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 4 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-10/swk-flhs-g10-u02-l06.scoring.json",
+    "sourceScoringSha256": "2772b659deedea84a6067b167c53e58b853f7d299f6f03449be6190a1c180a9f",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

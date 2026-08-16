@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l05",
+  "lessonId": "ma-g10-financial-literacy-u04-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$866.25",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5.5% of $3,500 for each of 4.5 years, at a simple rate. This accrues while the student is enrolled and earning nothing from the loan."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,366.25",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $3,500 borrowed plus the $866.25 accrued, capitalised once. From this point interest is charged on the larger figure, which is what capitalisation means."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,716.75",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10.9% of $3,500 for 4.5 years. The same borrowed amount over the same period, at roughly double the rate."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$5,216.75",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $3,500 borrowed plus $1,716.75 of accrued interest, capitalised once."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$850.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,216.75 against $4,366.25. Both borrowed the same amount for the same time; the gap is entirely the rate difference over the in-school period."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "149.05%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,216.75 against the $3,500 the subsidised borrower still owes. Before a single repayment has been made, one borrower owes about half again as much as the other on identical borrowing."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The private loan",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "At $5,216.75 the private loan exceeds the unsubsidised loan’s $4,366.25, and both exceed the subsidised loan’s unchanged $3,500. The ordering was fixed before repayment started."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "principal * fedRate * years",
+        "substituted": "3500 * 0.055 * 4.5",
+        "result": "$866.25",
+        "why": "5.5% of $3,500 for each of 4.5 years, at a simple rate. This accrues while the student is enrolled and earning nothing from the loan."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "principal2 + #t1-p1",
+        "substituted": "3500 + #t1-p1",
+        "result": "$4,366.25",
+        "why": "The $3,500 borrowed plus the $866.25 accrued, capitalised once. From this point interest is charged on the larger figure, which is what capitalisation means."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "principal3 * privRate * years2",
+        "substituted": "3500 * 0.109 * 4.5",
+        "result": "$1,716.75",
+        "why": "10.9% of $3,500 for 4.5 years. The same borrowed amount over the same period, at roughly double the rate."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "principal4 + #t1-p3",
+        "substituted": "3500 + #t1-p3",
+        "result": "$5,216.75",
+        "why": "The $3,500 borrowed plus $1,716.75 of accrued interest, capitalised once."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p2",
+        "substituted": "#t2-p1 - #t1-p2",
+        "result": "$850.50",
+        "why": "$5,216.75 against $4,366.25. Both borrowed the same amount for the same time; the gap is entirely the rate difference over the in-school period."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 / subBal * 100",
+        "substituted": "#t2-p1 / 3500 * 100",
+        "result": "149.05%",
+        "why": "$5,216.75 against the $3,500 the subsidised borrower still owes. Before a single repayment has been made, one borrower owes about half again as much as the other on identical borrowing."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p1 > #t1-p2",
+        "substituted": "#t2-p1 > #t1-p2",
+        "result": "The private loan",
+        "why": "At $5,216.75 the private loan exceeds the unsubsidised loan’s $4,366.25, and both exceed the subsidised loan’s unchanged $3,500. The ordering was fixed before repayment started."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "All three fictional students borrowed $3,500 and none of them made a payment during school, yet they owe three different amounts on the first day of repayment. Explain what a subsidy actually pays for, and say what a borrower could do during school to make the unsubsidised loan behave more like the subsidised one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the subsidy is the government paying the interest that accrues during the in-school and grace period, so the balance does not grow, rather than a lower rate — both federal loans here are charged 5.5%.",
+          "States the concrete action: paying the interest as it accrues during school prevents it from capitalising, so repayment starts on the $3,500 rather than on $4,366.25.",
+          "Notes that the private loan’s gap comes from its 10.9% rate rather than from a missing subsidy, so the two effects are different and stack."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3,500 principal shared by all three and at least two of the three repayment-start balances."
+        ],
+        "lookFors": [
+          "The response separates the subsidy from the rate; both federal loans carry the same rate.",
+          "The response recognises that paying interest during school means finding the money during school, which is the cost of that choice."
+        ],
+        "commonMisconception": "Believing a subsidised loan simply carries a lower interest rate than an unsubsidised one.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "transfer",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much interest accrues on the unsubsidised loan before repayment begins?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the unsubsidised borrower owe when repayment begins?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much interest accrues on the private loan before repayment begins?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the private borrower owe when repayment begins?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much more does the private borrower owe than the unsubsidised federal borrower?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "The private balance is what percentage of the subsidised balance at that same moment?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Which loan owes the most at the moment repayment begins?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "All three fictional students borrowed $3,500 and none of them made a payment during school, yet they owe three different amounts on the first day of repayment. Explain what a subsidy actually pays for, and say what a borrower could do during school to make the unsubsidised loan behave more like the subsidised one."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much interest accrues on the unsubsidised loan before repayment begins? Answer: $866.25. Verification: 5.5% of $3,500 for each of 4.5 years, at a simple rate. This accrues while the student is enrolled and earning nothing from the loan. t1-p2: What does the unsubsidised borrower owe when repayment begins? Answer: $4,366.25. Verification: The $3,500 borrowed plus the $866.25 accrued, capitalised once. From this point interest is charged on the larger figure, which is what capitalisation means. t1-p3: How much interest accrues on the private loan before repayment begins? Answer: $1,716.75. Verification: 10.9% of $3,500 for 4.5 years. The same borrowed amount over the same period, at roughly double the rate. t2-p1: What does the private borrower owe when repayment begins? Answer: $5,216.75. Verification: The $3,500 borrowed plus $1,716.75 of accrued interest, capitalised once. t2-p2: How much more does the private borrower owe than the unsubsidised federal borrower? Answer: $850.50. Verification: $5,216.75 against $4,366.25. Both borrowed the same amount for the same time; the gap is entirely the rate difference over the in-school period. t2-p3: The private balance is what percentage of the subsidised balance at that same moment? Answer: 149.05%. Verification: $5,216.75 against the $3,500 the subsidised borrower still owes. Before a single repayment has been made, one borrower owes about half again as much as the other on identical borrowing. t2-p4: Which loan owes the most at the moment repayment begins? Answer: The private loan. Verification: At $5,216.75 the private loan exceeds the unsubsidised loan’s $4,366.25, and both exceed the subsidised loan’s unchanged $3,500. The ordering was fixed before repayment started."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: All three fictional students borrowed $3,500 and none of them made a payment during school, yet they owe three different amounts on the first day of repayment. Explain what a subsidy actually pays for, and say what a borrower could do during school to make the unsubsidised loan behave more like the subsidised one. Explains that the subsidy is the government paying the interest that accrues during the in-school and grace period, so the balance does not grow, rather than a lower rate — both federal loans here are charged 5.5%. States the concrete action: paying the interest as it accrues during school prevents it from capitalising, so repayment starts on the $3,500 rather than on $4,366.25. Notes that the private loan’s gap comes from its 10.9% rate rather than from a missing subsidy, so the two effects are different and stack. Uses the $3,500 principal shared by all three and at least two of the three repayment-start balances. The response separates the subsidy from the rate; both federal loans carry the same rate. The response recognises that paying interest during school means finding the money during school, which is the cost of that choice."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the subsidy is the government paying the interest that accrues during the in-school and grace period, so the balance does not grow, rather than a lower rate — both federal loans here are charged 5.5%. States the concrete action: paying the interest as it accrues during school prevents it from capitalising, so repayment starts on the $3,500 rather than on $4,366.25. Notes that the private loan’s gap comes from its 10.9% rate rather than from a missing subsidy, so the two effects are different and stack."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u04-l05.scoring.json",
+    "sourceScoringSha256": "abd81e42c4e4ed944f78057d43489b10014243e75a1710c22e4968f56af7ef74",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

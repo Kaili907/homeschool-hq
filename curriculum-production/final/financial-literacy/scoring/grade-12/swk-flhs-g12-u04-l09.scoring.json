@@ -1,0 +1,337 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l09",
+  "lessonId": "ma-g12-financial-literacy-u04-l09",
+  "integratedDomains": [
+    "postsecondary-financing",
+    "debt",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$7,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The year-one cost less gift aid, the family contribution, and the work expectation."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$26,986.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$26,200 raised by 3%. The whole increase of $786.00 falls on the applicant, because the aid does not move with it."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$8,086.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The higher cost against unchanged aid, contribution, and work. Borrowing rises by the full $786.00 of the cost increase."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$9,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same calculation applied to package Q, which starts with $2,000 more borrowing despite a lower cost."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$21,630.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$21,000 raised by 3%, an increase of $630.00."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$9,930.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The higher cost against unchanged aid. Q’s borrowing rises by $630.00, less than P’s $786.00, because the smaller base produces a smaller increase."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$15,386.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,300.00 in year one plus $8,086.00 in year two."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$19,230.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,300.00 plus $9,930.00 — $3,844.00 more than package P across the same two years."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "costP - aidP - family - work",
+        "substituted": "26200 - 12400 - 4000 - 2500",
+        "result": "$7,300.00",
+        "why": "The year-one cost less gift aid, the family contribution, and the work expectation."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(costP2 * (1 + rise), 2)",
+        "substituted": "round(26200 * (1 + 0.03), 2)",
+        "result": "$26,986.00",
+        "why": "$26,200 raised by 3%. The whole increase of $786.00 falls on the applicant, because the aid does not move with it."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - aidP2 - family2 - work2",
+        "substituted": "#t1-p2 - 12400 - 4000 - 2500",
+        "result": "$8,086.00",
+        "why": "The higher cost against unchanged aid, contribution, and work. Borrowing rises by the full $786.00 of the cost increase."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "costQ - aidQ - family3 - work3",
+        "substituted": "21000 - 5200 - 4000 - 2500",
+        "result": "$9,300.00",
+        "why": "The same calculation applied to package Q, which starts with $2,000 more borrowing despite a lower cost."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(costQ2 * (1 + rise2), 2)",
+        "substituted": "round(21000 * (1 + 0.03), 2)",
+        "result": "$21,630.00",
+        "why": "$21,000 raised by 3%, an increase of $630.00."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - aidQ2 - family4 - work4",
+        "substituted": "#t2-p2 - 5200 - 4000 - 2500",
+        "result": "$9,930.00",
+        "why": "The higher cost against unchanged aid. Q’s borrowing rises by $630.00, less than P’s $786.00, because the smaller base produces a smaller increase."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p1 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p3",
+        "result": "$15,386.00",
+        "why": "$7,300.00 in year one plus $8,086.00 in year two."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p1 + #t2-p3",
+        "substituted": "#t2-p1 + #t2-p3",
+        "result": "$19,230.00",
+        "why": "$9,300.00 plus $9,930.00 — $3,844.00 more than package P across the same two years."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Package P costs more every year and requires less borrowing in both. Explain what makes that happen, and say what a fictional applicant should ask each institution that this two-year projection assumes an answer to.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the mechanism: package P’s $12,400 of gift aid covers a far larger share of its cost than package Q’s $5,200 does, so the gap the applicant must fill is smaller despite the higher price.",
+          "Identifies the divergence: P’s borrowing rises $786.00 in year two and Q’s rises $630.00, so P’s advantage narrows slightly but does not reverse, and the two-year gap stands at $3,844.00.",
+          "Names the question the projection assumes: whether each gift aid award is guaranteed for the full programme or renewed annually against conditions, since the whole comparison depends on the $12,400 remaining in place."
+        ],
+        "evidenceRequirements": [
+          "Uses the $15,386.00 and $19,230.00 two-year borrowing totals, and refers to the fixed gift aid against rising cost."
+        ],
+        "lookFors": [
+          "The response recognises that aid fixed in dollars loses ground to a cost rising in percentage terms.",
+          "The response frames the aid-renewal question as decisive rather than as a detail."
+        ],
+        "commonMisconception": "Comparing packages on year one alone, when fixed aid against rising costs makes each later year worse than the first in a way the first-year figures do not show.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What must be borrowed in year one under package P?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does package P cost in year two after the 3% increase?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What must be borrowed in year two under package P?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What must be borrowed in year one under package Q?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does package Q cost in year two?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What must be borrowed in year two under package Q?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the two-year borrowing under package P?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What is the two-year borrowing under package Q?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Package P costs more every year and requires less borrowing in both. Explain what makes that happen, and say what a fictional applicant should ask each institution that this two-year projection assumes an answer to."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What must be borrowed in year one under package P? Answer: $7,300.00. Verification: The year-one cost less gift aid, the family contribution, and the work expectation. t1-p2: What does package P cost in year two after the 3% increase? Answer: $26,986.00. Verification: $26,200 raised by 3%. The whole increase of $786.00 falls on the applicant, because the aid does not move with it. t1-p3: What must be borrowed in year two under package P? Answer: $8,086.00. Verification: The higher cost against unchanged aid, contribution, and work. Borrowing rises by the full $786.00 of the cost increase. t2-p1: What must be borrowed in year one under package Q? Answer: $9,300.00. Verification: The same calculation applied to package Q, which starts with $2,000 more borrowing despite a lower cost. t2-p2: What does package Q cost in year two? Answer: $21,630.00. Verification: $21,000 raised by 3%, an increase of $630.00. t2-p3: What must be borrowed in year two under package Q? Answer: $9,930.00. Verification: The higher cost against unchanged aid. Q’s borrowing rises by $630.00, less than P’s $786.00, because the smaller base produces a smaller increase. t2-p4: What is the two-year borrowing under package P? Answer: $15,386.00. Verification: $7,300.00 in year one plus $8,086.00 in year two. t2-p5: What is the two-year borrowing under package Q? Answer: $19,230.00. Verification: $9,300.00 plus $9,930.00 — $3,844.00 more than package P across the same two years."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Package P costs more every year and requires less borrowing in both. Explain what makes that happen, and say what a fictional applicant should ask each institution that this two-year projection assumes an answer to. Explains the mechanism: package P’s $12,400 of gift aid covers a far larger share of its cost than package Q’s $5,200 does, so the gap the applicant must fill is smaller despite the higher price. Identifies the divergence: P’s borrowing rises $786.00 in year two and Q’s rises $630.00, so P’s advantage narrows slightly but does not reverse, and the two-year gap stands at $3,844.00. Names the question the projection assumes: whether each gift aid award is guaranteed for the full programme or renewed annually against conditions, since the whole comparison depends on the $12,400 remaining in place. Uses the $15,386.00 and $19,230.00 two-year borrowing totals, and refers to the fixed gift aid against rising cost. The response recognises that aid fixed in dollars loses ground to a cost rising in percentage terms. The response frames the aid-renewal question as decisive rather than as a detail."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the mechanism: package P’s $12,400 of gift aid covers a far larger share of its cost than package Q’s $5,200 does, so the gap the applicant must fill is smaller despite the higher price. Identifies the divergence: P’s borrowing rises $786.00 in year two and Q’s rises $630.00, so P’s advantage narrows slightly but does not reverse, and the two-year gap stands at $3,844.00. Names the question the projection assumes: whether each gift aid award is guaranteed for the full programme or renewed annually against conditions, since the whole comparison depends on the $12,400 remaining in place."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u04-l09.scoring.json",
+    "sourceScoringSha256": "c06d3af326ff1d898846859c38b456b944c404959c216b774a8717697187a655",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

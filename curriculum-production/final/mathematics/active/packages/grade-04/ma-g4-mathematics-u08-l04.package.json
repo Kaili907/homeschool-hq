@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l04",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 4,
+    "courseDay": 130,
+    "phase": "Guided practice A",
+    "focus": "writing fractions with denominator 10 or 100 in decimal notation",
+    "title": "Guided practice A: writing fractions with denominator 10 or 100 in decimal notation"
+  },
+  "standards": [
+    "4.NF.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 7/100 using decimal notation.",
+          "workedSolution": {
+            "steps": [
+              "A denominator of 100 means two decimal places.",
+              "7/100 = 0.07."
+            ],
+            "answer": "0.07"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l04#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 3/10 using decimal notation.",
+          "choices": [
+            "0.2",
+            "0.6",
+            "0.4",
+            "0.3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l04#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 5/10 using decimal notation.",
+          "choices": [
+            "0.5",
+            "0.8",
+            "0.6",
+            "0.4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l04#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 4/10 using decimal notation.",
+          "choices": [
+            "0.3",
+            "0.5",
+            "0.7",
+            "0.4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l04#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 23/100 using decimal notation.",
+          "choices": [
+            "0.26",
+            "0.22",
+            "0.24",
+            "0.23"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l04#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 70/100 using decimal notation.",
+          "choices": [
+            "0.70",
+            "0.71",
+            "0.73",
+            "0.69"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 26/100 using decimal notation.",
+          "choices": [
+            "0.25",
+            "0.29",
+            "0.27",
+            "0.26"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 52/100 using decimal notation.",
+          "choices": [
+            "0.52",
+            "0.51",
+            "0.53",
+            "0.55"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 2/10 using decimal notation.",
+          "choices": [
+            "0.2",
+            "0.1",
+            "0.3",
+            "0.5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 3/100 using decimal notation.",
+          "choices": [
+            "0.02",
+            "0.03",
+            "0.04",
+            "0.06"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l04"
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l16",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l16",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 16,
+    "courseDay": 142,
+    "phase": "Unit assessment",
+    "focus": "decimal notation and comparison",
+    "title": "Unit assessment: decimal notation and comparison"
+  },
+  "standards": [
+    "4.NF.5",
+    "4.NF.6",
+    "4.NF.7"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 1,
+          "prompt": "Find 2/10 + 17/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "37/10",
+            "19/100",
+            "37/100",
+            "20/100"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 2/10 using decimal notation.",
+          "choices": [
+            "0.5",
+            "0.2",
+            "0.1",
+            "0.3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.39 ___ 0.12",
+          "choices": [
+            "<",
+            "=",
+            "Cannot be compared without more information",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 2,
+          "prompt": "Find 8/10 + 38/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "118/10",
+            "118/100",
+            "80/100",
+            "46/100"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 53/100 using decimal notation.",
+          "choices": [
+            "0.56",
+            "0.53",
+            "0.52",
+            "0.54"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.91 ___ 0.88",
+          "choices": [
+            "<",
+            "Cannot be compared without more information",
+            ">",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 3,
+          "prompt": "Find 1/10 + 6/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "16/100",
+            "7/100",
+            "16/10",
+            "10/100"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 17/100 using decimal notation.",
+          "choices": [
+            "0.17",
+            "0.20",
+            "0.18",
+            "0.16"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 0.10 ___ 0.94",
+          "choices": [
+            "=",
+            ">",
+            "Cannot be compared without more information",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 3,
+          "prompt": "Find 7/10 + 59/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "129/100",
+            "129/10",
+            "66/100",
+            "70/100"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l16"
+  }
+}

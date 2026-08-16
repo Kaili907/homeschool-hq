@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u05-l08",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u05-l08",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Percent and Proportional Applications",
+    "dayInUnit": 8,
+    "courseDay": 80,
+    "phase": "Reteach and varied practice",
+    "focus": "discounts and markups",
+    "title": "Reteach and varied practice: discounts and markups"
+  },
+  "standards": [
+    "7.RP.3",
+    "7.EE.3"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "tax-tip",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "Find a 15% tip on $40.",
+          "workedSolution": {
+            "steps": [
+              "Convert the percent to a fraction with denominator 100.",
+              "Use integer cents for money and simplify only after the exact calculation."
+            ],
+            "answer": "$6"
+          }
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "simple-interest",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "Find simple interest on $200 at 5% for 3 years.",
+          "workedSolution": {
+            "steps": [
+              "Convert the percent to a fraction with denominator 100.",
+              "Use integer cents for money and simplify only after the exact calculation."
+            ],
+            "answer": "$30"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "percent-error",
+          "standard": "7.EE.3",
+          "difficulty": 1,
+          "prompt": "The actual value is 1200 and the measured value is 1440. What is the percent error?",
+          "choices": [
+            "25%",
+            "21%",
+            "20%",
+            "40%"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-percent-problem",
+          "standard": "7.EE.3",
+          "difficulty": 1,
+          "prompt": "An item costs $320.00, is discounted 25%, then taxed 5%. What is the final price?",
+          "choices": [
+            "$256.00",
+            "$240.00",
+            "$252.00",
+            "$336.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "percent-increase-decrease",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "Decrease $120.00 by 20%.",
+          "choices": [
+            "$144.00",
+            "$96.00",
+            "$120.00",
+            "$97.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "discount-markup",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "A store discounts $500.00 by 10%. What is the new price?",
+          "choices": [
+            "$550.00",
+            "$500.00",
+            "$451.00",
+            "$450.00"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "tax-tip",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "A meal costs $50.00. What is a 5% tip?",
+          "choices": [
+            "$50.00",
+            "$5.00",
+            "$3.50",
+            "$2.50"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "simple-interest",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "Find the simple interest on $580.00 at 20% for 3 years.",
+          "choices": [
+            "$349.00",
+            "$348.00",
+            "$368.00",
+            "$116.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "percent-error",
+          "standard": "7.EE.3",
+          "difficulty": 2,
+          "prompt": "The actual value is 900 and the measured value is 1080. What is the percent error?",
+          "choices": [
+            "4%",
+            "20%",
+            "21%",
+            "25%"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-percent-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "An item costs $160.00, is discounted 10%, then taxed 10%. What is the final price?",
+          "choices": [
+            "$158.40",
+            "$176.00",
+            "$159.40",
+            "$144.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "percent-increase-decrease",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "Increase $760.00 by 10%.",
+          "choices": [
+            "$760.00",
+            "$76.00",
+            "$836.00",
+            "$837.00"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u05-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u05-l08"
+  }
+}

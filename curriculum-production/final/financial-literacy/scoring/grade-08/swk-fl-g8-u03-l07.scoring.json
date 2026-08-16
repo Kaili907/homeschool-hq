@@ -1,0 +1,287 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u03-l07",
+  "lessonId": "ma-g8-financial-literacy-u03-l07",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the net in month one?",
+        "answer": "-$150.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2,900.00 - 3,050.00) = -150.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 290000
+            },
+            "less": {
+              "op": "money",
+              "cents": 305000
+            }
+          },
+          "trace": "(2,900.00 - 3,050.00) = -150.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the net in month two?",
+        "answer": "$170.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(3,150.00 - 2,980.00) = 170.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 315000
+            },
+            "less": {
+              "op": "money",
+              "cents": 298000
+            }
+          },
+          "trace": "(3,150.00 - 2,980.00) = 170.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is the net in month three?",
+        "answer": "-$350.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2,750.00 - 3,100.00) = -350.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 275000
+            },
+            "less": {
+              "op": "money",
+              "cents": 310000
+            }
+          },
+          "trace": "(2,750.00 - 3,100.00) = -350.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is the combined three-month net?",
+        "answer": "-$330.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2,900.00 - 3,050.00) + (3,150.00 - 2,980.00) + (2,750.00 - 3,100.00)) = -330.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 290000
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 305000
+                }
+              },
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 315000
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 298000
+                }
+              },
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 275000
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 310000
+                }
+              }
+            ]
+          },
+          "trace": "((2,900.00 - 3,050.00) + (3,150.00 - 2,980.00) + (2,750.00 - 3,100.00)) = -330.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What is the average monthly net?",
+        "answer": "-$110.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(((2,900.00 - 3,050.00) + (3,150.00 - 2,980.00) + (2,750.00 - 3,100.00)) / 3) = -110.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "diff",
+                  "from": {
+                    "op": "money",
+                    "cents": 290000
+                  },
+                  "less": {
+                    "op": "money",
+                    "cents": 305000
+                  }
+                },
+                {
+                  "op": "diff",
+                  "from": {
+                    "op": "money",
+                    "cents": 315000
+                  },
+                  "less": {
+                    "op": "money",
+                    "cents": 298000
+                  }
+                },
+                {
+                  "op": "diff",
+                  "from": {
+                    "op": "money",
+                    "cents": 275000
+                  },
+                  "less": {
+                    "op": "money",
+                    "cents": 310000
+                  }
+                }
+              ]
+            },
+            "by": 3,
+            "round": "exact"
+          },
+          "trace": "(((2,900.00 - 3,050.00) + (3,150.00 - 2,980.00) + (2,750.00 - 3,100.00)) / 3) = -110.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing a cash-flow pattern",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response reports Anselm's totals without diagnosing a cause."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A cause is asserted for Anselm without reference to the month-by-month figures."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response uses Anselm's month-by-month movement on both sides to argue which side drives the deficit, and names further data that would confirm it."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the net in month one?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the net in month two?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the net in month three?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the combined three-month net?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the average monthly net?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Using Anselm's figures, identify whether the deficit is driven more by variable inflows or by rising outflows, and say what further data would confirm it."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the net in month one? Answer: -$150.00. Verification: (2,900.00 - 3,050.00) = -150.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What is the net in month two? Answer: $170.00. Verification: (3,150.00 - 2,980.00) = 170.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What is the net in month three? Answer: -$350.00. Verification: (2,750.00 - 3,100.00) = -350.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What is the combined three-month net? Answer: -$330.00. Verification: ((2,900.00 - 3,050.00) + (3,150.00 - 2,980.00) + (2,750.00 - 3,100.00)) = -330.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What is the average monthly net? Answer: -$110.00. Verification: (((2,900.00 - 3,050.00) + (3,150.00 - 2,980.00) + (2,750.00 - 3,100.00)) / 3) = -110.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Diagnosing a cash-flow pattern — Not yet: The response reports Anselm's totals without diagnosing a cause. Approaching: A cause is asserted for Anselm without reference to the month-by-month figures. Meets: The response uses Anselm's month-by-month movement on both sides to argue which side drives the deficit, and names further data that would confirm it. The response uses Anselm's month-by-month movement on both sides to argue which side drives the deficit, and names further data that would confirm it."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response uses Anselm's month-by-month movement on both sides to argue which side drives the deficit, and names further data that would confirm it."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u03-l07.scoring.json",
+    "sourceScoringSha256": "28cb5d13b5ceb31ee4e24f235ac21b30e20b06d01b26bcd4aabec5ab61c17e64",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

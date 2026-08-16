@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u03-l03",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Expressions and Equivalent Forms",
+    "dayInUnit": 3,
+    "courseDay": 39,
+    "phase": "Guided practice A",
+    "focus": "factoring simple expressions",
+    "title": "Guided practice A: factoring simple expressions"
+  },
+  "standards": [
+    "7.EE.1",
+    "7.EE.2"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u03-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-expression",
+          "standard": "7.EE.2",
+          "difficulty": 1,
+          "prompt": "Expand -3(x - 4).",
+          "workedSolution": {
+            "steps": [
+              "Multiply -3 by both terms.",
+              "-3x + 12 is equivalent."
+            ],
+            "answer": "-3x + 12"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u03-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "context-expression",
+          "standard": "7.EE.2",
+          "difficulty": 1,
+          "prompt": "A trip has a -6 dollar starting adjustment and costs -3 dollars per ticket t. Write an expression.",
+          "choices": [
+            "2xx - 8",
+            "-2xx + 18",
+            "-3t - 6",
+            "-4"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u03-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "distribute",
+          "standard": "7.EE.1",
+          "difficulty": 1,
+          "prompt": "Expand 4(x + 2).",
+          "choices": [
+            "4xx + 2",
+            "4xx + 8",
+            "3",
+            "5xx + 8"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u03-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "combine-like-terms",
+          "standard": "7.EE.1",
+          "difficulty": 2,
+          "prompt": "Combine like terms: 6xx - 1 - 4xx - 2.",
+          "choices": [
+            "7xx - 6",
+            "2xx - 3",
+            "1",
+            "6xx - 1"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u03-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "factor-expression",
+          "standard": "7.EE.1",
+          "difficulty": 2,
+          "prompt": "Factor 4x - 12 using the greatest common factor.",
+          "choices": [
+            "-5xx - 7",
+            "0xx - 12",
+            "4(x - 3)",
+            "-4xx + 35"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u03-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-form",
+          "standard": "7.EE.1",
+          "difficulty": 2,
+          "prompt": "Evaluate -4(x + 4) when x = -2.",
+          "choices": [
+            "-2",
+            "-6xx - 1",
+            "-3xx - 16",
+            "-8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u03-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression",
+          "standard": "7.EE.2",
+          "difficulty": 2,
+          "prompt": "In 5n + 4, what does 5 represent?",
+          "choices": [
+            "5xx + 4",
+            "5 per group",
+            "6xx + 20",
+            "13"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u03-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "context-expression",
+          "standard": "7.EE.2",
+          "difficulty": 2,
+          "prompt": "A trip has a -6 dollar starting adjustment and costs -7 dollars per ticket t. Write an expression.",
+          "choices": [
+            "-7t - 6",
+            "-10xx - 3",
+            "-16",
+            "-7xx - 6"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u03-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "distribute",
+          "standard": "7.EE.1",
+          "difficulty": 3,
+          "prompt": "Expand 2(x - 6).",
+          "choices": [
+            "9xx - 3",
+            "2xx - 12",
+            "2xx - 6",
+            "3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u03-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "combine-like-terms",
+          "standard": "7.EE.1",
+          "difficulty": 2,
+          "prompt": "Combine like terms: 3xx - 5 - xx + 6.",
+          "choices": [
+            "-3",
+            "3xx - 5",
+            "2xx + 1",
+            "4xx - 15"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u03-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "factor-expression",
+          "standard": "7.EE.1",
+          "difficulty": 2,
+          "prompt": "Factor 3x - 15 using the greatest common factor.",
+          "choices": [
+            "-4xx - 5",
+            "-3xx + 20",
+            "-11xx - 9",
+            "3(x - 5)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u03-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u03-l03"
+  }
+}

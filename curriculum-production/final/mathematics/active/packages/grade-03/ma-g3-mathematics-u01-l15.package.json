@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u01-l15",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u01-l15",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits, Place Value, and Rounding",
+    "dayInUnit": 15,
+    "courseDay": 15,
+    "phase": "Synthesis and review",
+    "focus": "place value, rounding, addition, and subtraction",
+    "title": "Synthesis and review: place value, rounding, addition, and subtraction"
+  },
+  "standards": [
+    "3.NBT.1",
+    "3.NBT.2"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 1,
+          "prompt": "A school had 50 pencils. They received 139 more pencils. How many pencils are there now?",
+          "choices": [
+            "179",
+            "-89",
+            "189",
+            "199"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A farm had 438 apples. 123 apples were given away. How many apples are left?",
+          "choices": [
+            "325",
+            "415",
+            "315",
+            "561"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 917 to the nearest 10.",
+          "choices": [
+            "910",
+            "917",
+            "921",
+            "920"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A library had 592 books. They received 224 more books. How many books are there now?",
+          "choices": [
+            "368",
+            "816",
+            "826",
+            "806"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A school had 900 pencils. 323 pencils were given away. How many pencils are left?",
+          "choices": [
+            "677",
+            "1223",
+            "587",
+            "577"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 3,
+          "prompt": "Round 139 to the nearest 100.",
+          "choices": [
+            "200",
+            "101",
+            "139",
+            "100"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A toy store had 370 stickers. They received 184 more stickers. How many stickers are there now?",
+          "choices": [
+            "564",
+            "554",
+            "544",
+            "186"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A farm had 714 apples. 533 apples were given away. How many apples are left?",
+          "choices": [
+            "181",
+            "281",
+            "1247",
+            "191"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 3,
+          "prompt": "Round 773 to the nearest 100.",
+          "choices": [
+            "700",
+            "800",
+            "773",
+            "801"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u01-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u01-l15"
+  }
+}

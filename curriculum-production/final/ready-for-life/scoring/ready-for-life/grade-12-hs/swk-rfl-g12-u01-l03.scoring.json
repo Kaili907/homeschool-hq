@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l03",
+  "lessonId": "ma-g12-ready-for-life-u01-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Calendar completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the four categories is missing from the calendar entirely."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All four categories appear on the calendar with a plausible invented recurrence."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The annual renewal is placed thoughtfully rather than arbitrarily, showing awareness that its timing affects clustering."
+          }
+        ]
+      },
+      {
+        "dimension": "Smoothing proposal",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No specific heaviest month is named, or the smoothing idea is not connected to that month's actual obligations."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific heaviest month is named with a workable smoothing idea."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The smoothing idea addresses the root cause of the clustering, not just one symptom of it."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All four categories appear at least once on the calendar.",
+      "The named heaviest month is actually the one with the most items on the learner's own calendar.",
+      "No real bill amount, account, or provider name appears anywhere."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

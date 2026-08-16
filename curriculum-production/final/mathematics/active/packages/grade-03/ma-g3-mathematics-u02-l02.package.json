@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l02",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 2,
+    "courseDay": 20,
+    "phase": "Concept build A",
+    "focus": "multiplication as a count of equal groups",
+    "title": "Concept build A: multiplication as a count of equal groups"
+  },
+  "standards": [
+    "3.OA.1"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 1,
+          "prompt": "There are 4 boxes with 6 pencils in each box. How many pencils in all?",
+          "workedSolution": {
+            "steps": [
+              "4 equal groups of 6 is 4 × 6.",
+              "4 × 6 = 24."
+            ],
+            "answer": "24"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 1,
+          "prompt": "There are 4 bags with 2 cookies in each bag. How many cookies are there in all?",
+          "choices": [
+            "4",
+            "12",
+            "8",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 1,
+          "prompt": "There are 5 bags with 5 marbles in each bag. How many marbles are there in all?",
+          "choices": [
+            "30",
+            "20",
+            "10",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 8 bags with 4 marbles in each bag. How many marbles are there in all?",
+          "choices": [
+            "12",
+            "32",
+            "24",
+            "40"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 1,
+          "prompt": "There are 5 bags with 3 marbles in each bag. How many marbles are there in all?",
+          "choices": [
+            "8",
+            "20",
+            "10",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 9 bags with 4 seashells in each bag. How many seashells are there in all?",
+          "choices": [
+            "45",
+            "27",
+            "13",
+            "36"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 3 bags with 4 marbles in each bag. How many marbles are there in all?",
+          "choices": [
+            "15",
+            "9",
+            "7",
+            "12"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 1,
+          "prompt": "There are 5 bags with 5 stickers in each bag. How many stickers are there in all?",
+          "choices": [
+            "20",
+            "30",
+            "10",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 5 bags with 4 seashells in each bag. How many seashells are there in all?",
+          "choices": [
+            "25",
+            "9",
+            "20",
+            "15"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l02"
+  }
+}

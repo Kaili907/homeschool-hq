@@ -1,0 +1,358 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l10",
+  "lessonId": "ma-g10-financial-literacy-u01-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$53,466.67",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$16,800 of tuition plus 20 months of giving up $22,000 a year against the baseline."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$144,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$52,000 of tuition plus four years of giving up $23,000 a year."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "10.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$53,466.67 of cost against a $5,200 annual gain at the entry wage — a very different picture from using the $53,700 median."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "11.43",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$144,000 of cost against a $12,600 annual gain at the entry wage."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "2.46",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$53,466.67 against a $21,700 annual gain at the median — four times faster than at the entry wage."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "3.65",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$144,000 against a $39,400 annual gain at the median."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(tuitionM + (baseline - duringM) * monthsM / 12, 2)",
+        "substituted": "round(16800 + (32000 - 10000) * 20 / 12, 2)",
+        "result": "$53,466.67",
+        "why": "$16,800 of tuition plus 20 months of giving up $22,000 a year against the baseline."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "tuitionN + (baseline2 - duringN) * monthsN / 12",
+        "substituted": "52000 + (32000 - 9000) * 48 / 12",
+        "result": "$144,000.00",
+        "why": "$52,000 of tuition plus four years of giving up $23,000 a year."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p1 / (p10M - baseline3), 2)",
+        "substituted": "round(#t1-p1 / (37200 - 32000), 2)",
+        "result": "10.28",
+        "why": "$53,466.67 of cost against a $5,200 annual gain at the entry wage — a very different picture from using the $53,700 median."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p2 / (p10N - baseline4), 2)",
+        "substituted": "round(#t1-p2 / (44600 - 32000), 2)",
+        "result": "11.43",
+        "why": "$144,000 of cost against a $12,600 annual gain at the entry wage."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p1 / (medM - baseline5), 2)",
+        "substituted": "round(#t1-p1 / (53700 - 32000), 2)",
+        "result": "2.46",
+        "why": "$53,466.67 against a $21,700 annual gain at the median — four times faster than at the entry wage."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p2 / (medN - baseline6), 2)",
+        "substituted": "round(#t1-p2 / (71400 - 32000), 2)",
+        "result": "3.65",
+        "why": "$144,000 against a $39,400 annual gain at the median."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Recommend one pathway for a learner who can fund at most $20,000 of tuition and needs to be earning above the baseline within three years. Use the entry-wage figures, not the median figures, as your working assumption, and say what you are assuming and why.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Applies both stated constraints: the $20,000 tuition ceiling rules out Occupation N’s $52,000 programme outright, and the three-year requirement rules out its 48-month duration.",
+          "Justifies working from the 10th percentile rather than the median, on the grounds that an entrant is not a median worker.",
+          "States the resulting recommendation honestly, including that Occupation M repays in 10.28 years at the entry wage and only 2.46 at the median, so the outcome depends heavily on how quickly the learner moves up."
+        ],
+        "evidenceRequirements": [
+          "Cites at least one pathway cost, one entry-wage payback, and one openings or growth figure."
+        ],
+        "lookFors": [
+          "The constraints are applied as constraints rather than weighed against the pay.",
+          "The response uses the 2,900 openings and 9% growth for M against 620 and 1% for N as part of the case, not only the wages."
+        ],
+        "commonMisconception": "Recommending a pathway on median wages when the person will enter near the bottom of the distribution.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "communication-of-uncertainty",
+          "evidence-use"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Name the single figure in this lesson you would most want verified before giving this recommendation to a real person, and say how you would try to verify it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names a specific figure — the 10th percentile wage, the openings count, the programme cost, or the growth rate — rather than expressing general doubt.",
+          "Describes a concrete verification route, such as published regional wage data, the programme’s own published cost and completion figures, or graduate outcome reporting."
+        ],
+        "evidenceRequirements": [
+          "Refers to the chosen figure by value and says what depends on it."
+        ],
+        "lookFors": [
+          "The verification route named would actually be available to a person making this decision."
+        ],
+        "dimensions": [
+          "communication-of-uncertainty",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the full cost of the pathway into Occupation M?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the full cost of the pathway into Occupation N?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "Using the 10th percentile rather than the median as the realistic entry wage, how long does Occupation M take to repay its pathway cost? Round to two decimal places."
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "At its 10th percentile wage, how long does Occupation N take to repay its pathway cost? Round to two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "At its median wage, how long does Occupation M take to repay? Round to two decimal places."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "At its median wage, how long does Occupation N take to repay? Round to two decimal places."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Recommend one pathway for a learner who can fund at most $20,000 of tuition and needs to be earning above the baseline within three years. Use the entry-wage figures, not the median figures, as your working assumption, and say what you are assuming and why."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Name the single figure in this lesson you would most want verified before giving this recommendation to a real person, and say how you would try to verify it."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the full cost of the pathway into Occupation M? Answer: $53,466.67. Verification: $16,800 of tuition plus 20 months of giving up $22,000 a year against the baseline. t1-p2: What is the full cost of the pathway into Occupation N? Answer: $144,000.00. Verification: $52,000 of tuition plus four years of giving up $23,000 a year. t1-p3: Using the 10th percentile rather than the median as the realistic entry wage, how long does Occupation M take to repay its pathway cost? Round to two decimal places. Answer: 10.28. Verification: $53,466.67 of cost against a $5,200 annual gain at the entry wage — a very different picture from using the $53,700 median. t2-p1: At its 10th percentile wage, how long does Occupation N take to repay its pathway cost? Round to two decimal places. Answer: 11.43. Verification: $144,000 of cost against a $12,600 annual gain at the entry wage. t2-p2: At its median wage, how long does Occupation M take to repay? Round to two decimal places. Answer: 2.46. Verification: $53,466.67 against a $21,700 annual gain at the median — four times faster than at the entry wage. t2-p3: At its median wage, how long does Occupation N take to repay? Round to two decimal places. Answer: 3.65. Verification: $144,000 against a $39,400 annual gain at the median."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. t3-p1: Recommend one pathway for a learner who can fund at most $20,000 of tuition and needs to be earning above the baseline within three years. Use the entry-wage figures, not the median figures, as your working assumption, and say what you are assuming and why. Applies both stated constraints: the $20,000 tuition ceiling rules out Occupation N’s $52,000 programme outright, and the three-year requirement rules out its 48-month duration. Justifies working from the 10th percentile rather than the median, on the grounds that an entrant is not a median worker. States the resulting recommendation honestly, including that Occupation M repays in 10.28 years at the entry wage and only 2.46 at the median, so the outcome depends heavily on how quickly the learner moves up. Cites at least one pathway cost, one entry-wage payback, and one openings or growth figure. The constraints are applied as constraints rather than weighed against the pay. The response uses the 2,900 openings and 9% growth for M against 620 and 1% for N as part of the case, not only the wages. t3-p2: Name the single figure in this lesson you would most want verified before giving this recommendation to a real person, and say how you would try to verify it. Names a specific figure — the 10th percentile wage, the openings count, the programme cost, or the growth rate — rather than expressing general doubt. Describes a concrete verification route, such as published regional wage data, the programme’s own published cost and completion figures, or graduate outcome reporting. Refers to the chosen figure by value and says what depends on it. The verification route named would actually be available to a person making this decision."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Applies both stated constraints: the $20,000 tuition ceiling rules out Occupation N’s $52,000 programme outright, and the three-year requirement rules out its 48-month duration. Justifies working from the 10th percentile rather than the median, on the grounds that an entrant is not a median worker. States the resulting recommendation honestly, including that Occupation M repays in 10.28 years at the entry wage and only 2.46 at the median, so the outcome depends heavily on how quickly the learner moves up. Names a specific figure — the 10th percentile wage, the openings count, the programme cost, or the growth rate — rather than expressing general doubt. Describes a concrete verification route, such as published regional wage data, the programme’s own published cost and completion figures, or graduate outcome reporting."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-10/swk-flhs-g10-u01-l10.scoring.json",
+    "sourceScoringSha256": "2c98aaa4559131d0b587a1999f2039f6a3c65e1625502cfd8c5452be593f11b5",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

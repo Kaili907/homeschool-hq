@@ -1,0 +1,416 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u05-l01",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Markets, Vehicles, and Regulation",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: stocks, bonds, funds, and index vehicles"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "stocks, bonds, funds, and index vehicles",
+  "objective": "Compute the total return on a fictional share position from both price change and dividends, compute the current yield on a fictional bond bought below face value, and distinguish what each instrument promises.",
+  "scenario": "The simulated share, bond, and fund described below are invented for this exercise. No real company, security, or fund is named, and the price movements shown are a stated outcome of a simulated period rather than a prediction.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional holdings described in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional investor bought 40 shares of a simulated company at $28.50 a share. Over the simulated year the price moved to $31.75 and the company paid a dividend of $0.42 a share. Ignore any commission.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did the share position cost to buy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the position worth at the end of the simulated year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much did the position gain from the price move alone?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now add the dividends, state the whole result as a return, and compare with a fictional bond. The simulated bond has a face value of $1,000 and pays a 4.5% coupon each year; the investor bought it for $960.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much did the shares pay in dividends over the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total return on the share position in dollars?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is that total return as a percentage of what the position cost?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does the fictional bond pay in coupon each year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What is the bond’s current yield — the coupon measured against the $960 actually paid?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-choice",
+          "text": "Which of these instruments carries a stated promise to pay a fixed amount on a schedule?",
+          "choices": [
+            "The share",
+            "The bond",
+            "Both of them",
+            "Neither of them"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A fictional index fund holds small pieces of hundreds of companies at once, while the share position above is one company. Explain what the fund changes about the risk the investor is exposed to, and name one risk it does not remove."
+        }
+      ]
+    }
+  ],
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "Work out what the share position would have returned if the price had ended at $26.00 and the same dividend had been paid, and say whether the dividend made the year positive.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u05-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What did the share position cost to buy?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the position worth at the end of the simulated year?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much did the position gain from the price move alone?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much did the shares pay in dividends over the year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total return on the share position in dollars?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is that total return as a percentage of what the position cost?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What does the fictional bond pay in coupon each year?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "What is the bond’s current yield — the coupon measured against the $960 actually paid?"
+      },
+      {
+        "ref": "t2-p6",
+        "responseMode": "FIXED",
+        "promptText": "Which of these instruments carries a stated promise to pay a fixed amount on a schedule?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "A fictional index fund holds small pieces of hundreds of companies at once, while the share position above is one company. Explain what the fund changes about the risk the investor is exposed to, and name one risk it does not remove."
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "INVESTING",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "DIAGNOSTIC",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.investing.1",
+      "meaning": "Expected return describes uncertainty; it is not a promised result."
+    },
+    {
+      "conceptId": "finlit.investing.2",
+      "meaning": "Risk, diversification, fees, liquidity, and time horizon must be considered together."
+    },
+    {
+      "conceptId": "finlit.investing.3",
+      "meaning": "A comparison should use the same time period and include stated fees and losses as well as gains."
+    }
+  ],
+  "evidencePurpose": "Collect protected evidence about stocks, bonds, funds, and index vehicles without answer-bearing teaching during the attempt.",
+  "conceptExplanation": {
+    "applicability": "PROFILE_BOUNDARY",
+    "title": "diagnostic boundary",
+    "paragraphs": [],
+    "protectedBoundary": "Do not preteach the measured target before the diagnostic response. Use the routed concept lesson after the attempt.",
+    "conceptLessonId": "ma-g10-financial-literacy-u05-l02"
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "INVESTING",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "Use only the stated principal or balance, rate meaning, period, compounding method, timing, fees, payment allocation, and rounding rule.",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "DEFERRED_OR_PREREQUISITE_ONLY",
+    "reason": "A like-kind model before the diagnostic would invalidate the evidence.",
+    "modelLessonId": "ma-g10-financial-literacy-u05-l02"
+  },
+  "workedExamples": [],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g10-financial-literacy-u05-l01",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: A higher possible return does not make an option automatically better for every goal or time horizon.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t3-p1"
+    ],
+    "gradeBandDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.investing.1",
+      "finlit.investing.2",
+      "finlit.investing.3"
+    ],
+    "evidenceLessonId": "ma-g10-financial-literacy-u05-l09",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.investing.core-confusion",
+      "observableSignal": "A higher possible return does not make an option automatically better for every goal or time horizon.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-investing-g10",
+        "title": "Alternate model — investing, risk, return, fees, and time horizon",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "A fictional fund starts at 30,000 cents, has a stated 3.00% scenario gain, and charges a 200-cent fee."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Gain: 30,000 × 300 ÷ 10,000 = 900 cents.",
+          "Net gain: 900 − 200 = 700 cents.",
+          "Ending amount: 30,700 cents.",
+          "State that this scenario result is not guaranteed and compare the goal’s time horizon."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g10-financial-literacy-u05-l07",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g10-financial-literacy-u05-l09",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.investing.1",
+      "finlit.investing.2",
+      "finlit.investing.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g10-financial-literacy-u05-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.investing.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "INVESTING",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "Use only the stated principal or balance, rate meaning, period, compounding method, timing, fees, payment allocation, and rounding rule.",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g10-financial-literacy-u05-l01:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "HIGH_SCHOOL_9_12",
+      "scaffolding": "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+      "reasoningDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u05-l01.package.json",
+    "sourcePackageSha256": "a4128d46f6770572baee81428f046239e3dc15ac5254005e573bf05cd8dd374d",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u05-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

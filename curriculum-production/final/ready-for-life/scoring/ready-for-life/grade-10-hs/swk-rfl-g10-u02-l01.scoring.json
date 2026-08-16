@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l01",
+  "lessonId": "ma-g10-ready-for-life-u02-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Bullet point specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Bullet points are vague ('helped out') with no specific action or result." },
+          { "label": "Proficient", "descriptor": "Most bullet points name a specific action and a real, concrete result." },
+          { "label": "Advanced", "descriptor": "All four bullet points name a specific action verb, a concrete result, and read as genuinely distinct from each other." }
+        ]
+      },
+      {
+        "dimension": "Honesty of content",
+        "levels": [
+          { "label": "Emerging", "descriptor": "A bullet point appears exaggerated or describes something inconsistent with the warm-up list." },
+          { "label": "Proficient", "descriptor": "All bullet points are consistent with the real activities listed in the warm-up." },
+          { "label": "Advanced", "descriptor": "Bullet points are consistent with the warm-up and avoid inflated titles or invented scope." }
+        ]
+      },
+      {
+        "dimension": "Relevance ordering",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Ordering has no stated reasoning, or the reasoning doesn't match the actual order." },
+          { "label": "Proficient", "descriptor": "Ordering reasoning connects to the learner's stated interest from Unit 1." },
+          { "label": "Advanced", "descriptor": "Ordering reasoning is specific about why each top item matters for the kind of work targeted." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each bullet point begins with a distinct action verb, not the same verb repeated.",
+      "No bullet point describes a role, title, or outcome absent from the learner's own warm-up list.",
+      "The reflection names one specific activity, not a general statement about the exercise."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

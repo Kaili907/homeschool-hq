@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u05-l12",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u05-l12",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Trigonometric Functions and Periodic Models",
+    "dayInUnit": 12,
+    "courseDay": 84,
+    "phase": "Performance task build",
+    "focus": "the Pythagorean identity and finding one ratio from another",
+    "title": "Performance task build: the Pythagorean identity and finding one ratio from another"
+  },
+  "standards": [
+    "F-TF.1",
+    "F-TF.2",
+    "F-TF.5",
+    "F-TF.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 2,
+          "prompt": "A model is f(t) = 3·sin(3t) + 9. State the amplitude, period, and midline.",
+          "choices": [
+            "amplitude 3; period 3·2π; midline y = 9",
+            "amplitude 3; period 2π/3; midline y = 9",
+            "amplitude 6; period 2π/3; midline y = 9",
+            "amplitude 9; period 2π/3; midline y = 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 3,
+          "prompt": "Given sin θ = 3/5 and θ is in the second quadrant, find cos θ exactly.",
+          "choices": [
+            "4/5",
+            "5/4",
+            "−4/5",
+            "3/5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 2,
+          "prompt": "Convert 90° to radian measure, in terms of π.",
+          "choices": [
+            "0",
+            "π/4",
+            "π/2",
+            "π/6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 3,
+          "prompt": "Give the exact value of cos(π/4).",
+          "choices": [
+            "√3/2",
+            "0",
+            "√2/2",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 3,
+          "prompt": "A model is f(t) = 11·sin(3t) + 9. State the amplitude, period, and midline.",
+          "choices": [
+            "amplitude 9; period 2π/3; midline y = 11",
+            "amplitude 11; period 3·2π; midline y = 9",
+            "amplitude 11; period 2π/3; midline y = 9",
+            "amplitude 22; period 2π/3; midline y = 9"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 3,
+          "prompt": "Given sin θ = 3/5 and θ is in the first quadrant, find cos θ exactly.",
+          "choices": [
+            "4/5",
+            "5/4",
+            "3/5",
+            "−4/5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 3,
+          "prompt": "Convert 30° to radian measure, in terms of π.",
+          "choices": [
+            "π/6",
+            "π/3",
+            "π/4",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 3,
+          "prompt": "Give the exact value of sin(π/6).",
+          "choices": [
+            "1/2",
+            "√3/2",
+            "0",
+            "√2/2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 3,
+          "prompt": "A model is f(t) = 5·sin(4t) + 3. State the amplitude, period, and midline.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 3,
+          "prompt": "Given sin θ = 8/17 and θ is in the first quadrant, find cos θ exactly.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u05-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u05-l12"
+  }
+}

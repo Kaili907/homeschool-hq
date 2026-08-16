@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l13",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l13",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 13,
+    "courseDay": 31,
+    "phase": "Performance task: plan",
+    "focus": "the Equal Groups Museum",
+    "title": "Performance task: plan: the Equal Groups Museum"
+  },
+  "standards": [
+    "3.OA.1",
+    "3.OA.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 1,
+          "prompt": "There are 4 boxes with 6 pencils in each box. How many pencils in all?",
+          "workedSolution": {
+            "steps": [
+              "4 equal groups of 6 is 4 × 6.",
+              "4 × 6 = 24."
+            ],
+            "answer": "24"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 2,
+          "prompt": "10 crayons are shared equally among 5 bags. How many crayons go in each bag?",
+          "choices": [
+            "7",
+            "2",
+            "10",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 2 bags with 6 seashells in each bag. How many seashells are there in all?",
+          "choices": [
+            "14",
+            "10",
+            "12",
+            "8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 3,
+          "prompt": "48 crayons are shared equally among 8 bags. How many crayons go in each bag?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 5 bags with 9 stickers in each bag. How many stickers are there in all?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l13"
+  }
+}

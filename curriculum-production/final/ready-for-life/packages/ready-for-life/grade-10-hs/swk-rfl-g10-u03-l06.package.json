@@ -1,0 +1,358 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u03-l06",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Professional Communication",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: receiving and acting on feedback"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic receiving and acting on feedback task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "The learner reads two provided fictional feedback messages, one straightforward and one that is difficult to hear (specific and somewhat critical but professionally delivered), drafts a brief professional response to each that neither over-apologizes nor gets defensive, and writes a short justification connecting this response to at least one other message drafted earlier in the unit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Both feedback messages are fictional and provided with this lesson; no real supervisor, workplace, or evaluation of the learner personally is involved."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "Embedded resource: swk-rfl-g10-u03-l06-model-card",
+    "Embedded resource: swk-rfl-g10-u03-l06-step-card",
+    "Embedded resource: swk-rfl-g10-u03-l06-guided-card",
+    "Embedded resource: swk-rfl-g10-u03-l06-independent-card",
+    "Embedded resource: swk-rfl-g10-u03-l06-evidence-record",
+    "Embedded resource: swk-rfl-g10-u03-l06-retry-pair",
+    "learner-local: the two provided fictional feedback messages",
+    "learner-local: earlier drafts from this unit",
+    "learner-local: a notebook or document"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Analyze the complete worked example on swk-rfl-g10-u03-l06-model-card before beginning.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g10-u03-l06-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g10-u03-l06-independent-card; follow every step and retain only the named minimal evidence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Complete the minimal evidence record on swk-rfl-g10-u03-l06-evidence-record; omit or fictionalize private details.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "What is the difference between accepting feedback and agreeing that you're a bad person, and how does your response show that difference?"
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g10-u03-l06-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g10-u03-l06-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g10-u03-l06-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Response to difficult feedback: The response acknowledges the point and names one specific action. | Justification quality: Connects one specific choice to something from an earlier lesson this unit. | Distinguishing feedback from character judgment: States the distinction between accepting feedback and self-judgment. Resume at the next unfinished step on swk-rfl-g10-u03-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner draft a short follow-up message to send after acting on the feedback for one week, reporting back on the specific change made.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "career-work",
+    "practicalGoal": "I can complete a realistic receiving and acting on feedback task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g10-u03-l06-model-card",
+        "swk-rfl-g10-u03-l06-step-card",
+        "swk-rfl-g10-u03-l06-guided-card",
+        "swk-rfl-g10-u03-l06-independent-card",
+        "swk-rfl-g10-u03-l06-evidence-record",
+        "swk-rfl-g10-u03-l06-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g10-u03-l06-local-1",
+          "label": "the two provided fictional feedback messages",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g10-u03-l06-local-2",
+          "label": "earlier drafts from this unit",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g10-u03-l06-local-3",
+          "label": "a notebook or document",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g10-u03-l06-model-card",
+        "kind": "model",
+        "title": "receiving and acting on feedback worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner reads two provided fictional feedback messages, one straightforward and one that is difficult to hear (specific and somewhat critical but professionally delivered), drafts a brief professional response to each that neither over-apologizes nor gets defensive, and writes a short justification connecting this response to at least one other message drafted earlier in the unit.",
+          "Model move 1: Read the condition and name the exact receiving and acting on feedback decision or action.",
+          "Model move 2: Read both feedback messages and note your honest first reaction to each, especially the harder one.",
+          "Model move 3: Draft a brief professional response to each feedback message.",
+          "Model check: Response to difficult feedback: The response acknowledges the point and names one specific action. | Justification quality: Connects one specific choice to something from an earlier lesson this unit. | Distinguishing feedback from character judgment: States the distinction between accepting feedback and self-judgment."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u03-l06-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "receiving and acting on feedback action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for receiving and acting on feedback.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u03-l06-guided-card",
+        "kind": "guided-practice",
+        "title": "receiving and acting on feedback coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner reads two provided fictional feedback messages, one straightforward and one that is difficult to hear (specific and somewhat critical but professionally delivered), drafts a brief professional response to each that neither over-apologizes nor gets defensive, and writes a short justification connecting this response to at least one other message drafted earlier in the unit.",
+          "Coach direction: Read both feedback messages and note your honest first reaction to each, especially the harder one.",
+          "Learner prompt: Describe your honest first reaction to the harder feedback message, before drafting a response.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u03-l06-independent-card",
+        "kind": "independent-task",
+        "title": "receiving and acting on feedback complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Draft a brief professional response to each feedback message.",
+          "Response 1 (t2-p1): Draft your response to the straightforward feedback.",
+          "Response 2 (t2-p2): Draft your response to the harder feedback, naming one specific thing you'll do differently, without over-apologizing or getting defensive.",
+          "Response 3 (t2-p3): My response to the harder feedback names a specific action, not just an acknowledgment.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u03-l06-evidence-record",
+        "kind": "evidence-record",
+        "title": "receiving and acting on feedback minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: What is the difference between accepting feedback and agreeing that you're a bad person, and how does your response show that difference?",
+          "Success checks: Response to difficult feedback: The response acknowledges the point and names one specific action. | Justification quality: Connects one specific choice to something from an earlier lesson this unit. | Distinguishing feedback from character judgment: States the distinction between accepting feedback and self-judgment.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u03-l06-retry-pair",
+        "kind": "retry",
+        "title": "receiving and acting on feedback supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g10-u03-l06-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g10-u03-l06-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional receiving and acting on feedback condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Response to difficult feedback: The response acknowledges the point and names one specific action. | Justification quality: Connects one specific choice to something from an earlier lesson this unit. | Distinguishing feedback from character judgment: States the distinction between accepting feedback and self-judgment..",
+          "Return: resume at the next unfinished step on swk-rfl-g10-u03-l06-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "receiving and acting on feedback worked model",
+      "startingCondition": "The learner reads two provided fictional feedback messages, one straightforward and one that is difficult to hear (specific and somewhat critical but professionally delivered), drafts a brief professional response to each that neither over-apologizes nor gets defensive, and writes a short justification connecting this response to at least one other message drafted earlier in the unit.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact receiving and acting on feedback decision or action.",
+        "Model move 2: Read both feedback messages and note your honest first reaction to each, especially the harder one.",
+        "Model move 3: Draft a brief professional response to each feedback message."
+      ],
+      "reasoning": "The model names the condition, follows the ordered receiving and acting on feedback process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Response to difficult feedback: The response acknowledges the point and names one specific action.",
+        "Justification quality: Connects one specific choice to something from an earlier lesson this unit.",
+        "Distinguishing feedback from character judgment: States the distinction between accepting feedback and self-judgment."
+      ],
+      "resourceRef": "swk-rfl-g10-u03-l06-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for receiving and acting on feedback.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g10-u03-l06-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner reads two provided fictional feedback messages, one straightforward and one that is difficult to hear (specific and somewhat critical but professionally delivered), drafts a brief professional response to each that neither over-apologizes nor gets defensive, and writes a short justification connecting this response to at least one other message drafted earlier in the unit.",
+      "prompt": "Describe your honest first reaction to the harder feedback message, before drafting a response.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Response to difficult feedback: The response acknowledges the point and names one specific action.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g10-u03-l06-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g10-u03-l06-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "receiving and acting on feedback — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g10-u03-l06-independent-card",
+        "directions": "Complete the receiving and acting on feedback task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g10-u03-l06-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "What is the difference between accepting feedback and agreeing that you're a bad person, and how does your response show that difference?",
+      "observableCriteria": [
+        "Response to difficult feedback: The response acknowledges the point and names one specific action.",
+        "Justification quality: Connects one specific choice to something from an earlier lesson this unit.",
+        "Distinguishing feedback from character judgment: States the distinction between accepting feedback and self-judgment."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g10-u03-l06-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g10-u03-l06-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g10-u03-l06-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g10-u03-l06-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Response to difficult feedback: The response acknowledges the point and names one specific action. | Justification quality: Connects one specific choice to something from an earlier lesson this unit. | Distinguishing feedback from character judgment: States the distinction between accepting feedback and self-judgment.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g10-u03-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g10-u03-l06-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

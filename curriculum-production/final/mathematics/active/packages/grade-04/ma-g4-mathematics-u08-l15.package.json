@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l15",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l15",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 15,
+    "courseDay": 141,
+    "phase": "Synthesis and review",
+    "focus": "fraction and decimal connections",
+    "title": "Synthesis and review: fraction and decimal connections"
+  },
+  "standards": [
+    "4.NF.5",
+    "4.NF.6",
+    "4.NF.7"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 6/10 using decimal notation.",
+          "choices": [
+            "0.6",
+            "0.9",
+            "0.5",
+            "0.7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.89 ___ 0.42",
+          "choices": [
+            "Cannot be compared without more information",
+            ">",
+            "<",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 2,
+          "prompt": "Find 8/10 + 27/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "35/100",
+            "80/100",
+            "107/100",
+            "107/10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 68/100 using decimal notation.",
+          "choices": [
+            "0.67",
+            "0.68",
+            "0.69",
+            "0.71"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 0.96 ___ 0.68",
+          "choices": [
+            ">",
+            "=",
+            "Cannot be compared without more information",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 3,
+          "prompt": "Find 5/10 + 11/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "16/100",
+            "50/100",
+            "61/100",
+            "61/10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 95/100 using decimal notation.",
+          "choices": [
+            "0.96",
+            "0.94",
+            "0.95",
+            "0.98"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "4.NF.7",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 0.92 ___ 0.33",
+          "choices": [
+            "<",
+            "=",
+            ">",
+            "Cannot be compared without more information"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "add-tenths-and-hundredths",
+          "standard": "4.NF.5",
+          "difficulty": 3,
+          "prompt": "Find 8/10 + 61/100. Give the answer as a fraction over 100.",
+          "choices": [
+            "141/10",
+            "69/100",
+            "141/100",
+            "80/100"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l15"
+  }
+}

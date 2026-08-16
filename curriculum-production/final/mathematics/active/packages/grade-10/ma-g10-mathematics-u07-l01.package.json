@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u07-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u07-l01",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Right Triangle Trigonometry",
+    "dayInUnit": 1,
+    "courseDay": 109,
+    "phase": "Launch and diagnostic",
+    "focus": "side ratios determined by similarity, not by size",
+    "title": "Launch and diagnostic: side ratios determined by similarity, not by size"
+  },
+  "standards": [
+    "G-SRT.6",
+    "G-SRT.7",
+    "G-SRT.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 1,
+          "prompt": "A 3-4-5 triangle, θ opposite the side 3. Find sin θ.",
+          "workedSolution": {
+            "steps": [
+              "Opposite 3, hypotenuse 5.",
+              "sin θ = 3/5."
+            ],
+            "answer": "3/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 1,
+          "prompt": "A right triangle has hypotenuse 13 and one leg 5. Find the other leg.",
+          "choices": [
+            "12",
+            "8",
+            "14",
+            "13"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 1,
+          "prompt": "Express sin 55° as a cosine of another angle, and explain why the two are equal.",
+          "choices": [
+            "cos 35°, because the two angles are complementary and swap the roles of opposite and adjacent",
+            "cos 125°, because the angles are supplementary",
+            "cos 145°, because the angles differ by a right angle",
+            "cos 55°, because sine and cosine are always equal"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 2,
+          "prompt": "From a point 30 m from the base of a tower, the angle of elevation to the top is θ, and the tower is 16 m tall. Which equation correctly determines θ?",
+          "choices": [
+            "cos θ = 16/30",
+            "tan θ = 16/30",
+            "tan θ = 30/16",
+            "sin θ = 16/30"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 2,
+          "prompt": "A right triangle has legs 3 and 4 and hypotenuse 5. Angle θ is opposite the leg of length 3. Find sin θ as an exact fraction in lowest terms.",
+          "choices": [
+            "5/3",
+            "3/5",
+            "4/5",
+            "3/4"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "A right triangle has hypotenuse 29 and one leg 20. Find the other leg.",
+          "choices": [
+            "22",
+            "21",
+            "9",
+            "35"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 1,
+          "prompt": "Express sin 56° as a cosine of another angle, and explain why the two are equal.",
+          "choices": [
+            "cos 34°, because the two angles are complementary and swap the roles of opposite and adjacent",
+            "cos 124°, because the angles are supplementary",
+            "cos 56°, because sine and cosine are always equal",
+            "cos 146°, because the angles differ by a right angle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 2,
+          "prompt": "From a point 4 m from the base of a tower, the angle of elevation to the top is θ, and the tower is 3 m tall. Which equation correctly determines θ?",
+          "choices": [
+            "sin θ = 3/4",
+            "cos θ = 3/4",
+            "tan θ = 4/3",
+            "tan θ = 3/4"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u07-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u07-l01"
+  }
+}

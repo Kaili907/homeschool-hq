@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l12",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l12",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 12,
+    "courseDay": 48,
+    "phase": "Applied problem solving",
+    "focus": "division facts derived from related multiplication",
+    "title": "Applied problem solving: division facts derived from related multiplication"
+  },
+  "standards": [
+    "3.OA.6",
+    "3.OA.7"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 54 ÷ 9.",
+          "workedSolution": {
+            "steps": [
+              "9 × 6 = 54.",
+              "So 54 ÷ 9 = 6."
+            ],
+            "answer": "6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "A teacher has 20 crayons to put into cups of 5 crayons each. How many cups are needed?",
+          "choices": [
+            "5",
+            "4",
+            "15",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 6 × 6.",
+          "choices": [
+            "42",
+            "36",
+            "12",
+            "30"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 48 ÷ 8.",
+          "choices": [
+            "40",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "A teacher has 18 crayons to put into cups of 9 crayons each. How many cups are needed?",
+          "choices": [
+            "3",
+            "18",
+            "2",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 8 × 8.",
+          "choices": [
+            "64",
+            "72",
+            "56",
+            "16"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 10 ÷ 2.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "A teacher has 24 crayons to put into cups of 3 crayons each. How many cups are needed?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l12"
+  }
+}

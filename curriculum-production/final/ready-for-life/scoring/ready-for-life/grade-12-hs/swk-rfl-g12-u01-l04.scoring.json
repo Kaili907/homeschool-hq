@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l04",
+  "lessonId": "ma-g12-ready-for-life-u01-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Conversation completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The summary shows no evidence a real conversation covered both physical and digital storage."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The summary reflects a conversation that covered both physical and digital storage categories."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The summary also names a still-unresolved category honestly rather than implying everything is fully solved."
+          }
+        ]
+      },
+      {
+        "dimension": "Privacy discipline",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Any actual password, PIN, or account credential appears anywhere in the response."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "No credential of any kind appears; only storage categories and locations are described."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner's own explanation shows they understand why credentials are excluded from written plans generally, not just this one."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No password, PIN, or account credential appears anywhere in the response.",
+      "The guardian confirmation is present and distinct from the learner's own summary.",
+      "An honest gap is treated as acceptable, not hidden or glossed over."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

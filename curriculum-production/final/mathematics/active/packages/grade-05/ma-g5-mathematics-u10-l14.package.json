@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u10-l14",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u10-l14",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 14,
+    "courseDay": 176,
+    "phase": "Transfer challenge",
+    "focus": "multi-step modeling",
+    "title": "Transfer challenge: multi-step modeling"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.NBT.5",
+    "5.NBT.6",
+    "5.NBT.7",
+    "5.NF.1",
+    "5.NF.4",
+    "5.MD.5",
+    "5.G.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "model-argument",
+          "standard": "MP.4",
+          "difficulty": 1,
+          "prompt": "A student says a 4 by 3 by 2 box has volume 9. Is the claim correct?",
+          "workedSolution": {
+            "steps": [
+              "Volume uses all three dimensions.",
+              "4 × 3 × 2 = 24, not 9."
+            ],
+            "answer": "No; the volume is 24 cubic units."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "choose-operation",
+          "standard": "5.OA.1",
+          "difficulty": 3,
+          "prompt": "10 packs hold 10 markers each, and 12 markers are loose. How many markers are there?",
+          "choices": [
+            "116",
+            "112",
+            "114",
+            "113"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "whole-number-model",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 87 × 33.",
+          "choices": [
+            "2872",
+            "2958",
+            "2871",
+            "120"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-model",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "264 supplies are shared equally among 11 teams. How many supplies does each team receive?",
+          "choices": [
+            "25",
+            "24",
+            "27",
+            "26"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-budget",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "2 tickets cost $7.60 each and there is a $0.58 fee. What is the total cost?",
+          "choices": [
+            "$15.20",
+            "$16.78",
+            "$15.78",
+            "$23.38"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "fraction-project",
+          "standard": "5.NF.1",
+          "difficulty": 3,
+          "prompt": "A project uses 3/8 meter of blue ribbon and 3/8 meter of gold ribbon. How much ribbon is used?",
+          "choices": [
+            "2/3",
+            "0",
+            "3/4",
+            "7/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "scale-project",
+          "standard": "5.NF.4",
+          "difficulty": 3,
+          "prompt": "A 2/3-meter path is scaled by 2. What is the new length in meters?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "volume-plan",
+          "standard": "5.MD.5",
+          "difficulty": 3,
+          "prompt": "A storage box is 2 units long, 7 units wide, and 5 units high. What is its volume in cubic units?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "coordinate-data",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "A data point is at (1, 6). Move right 2 and up 2. What is the new point?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u10-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u10-l14"
+  }
+}

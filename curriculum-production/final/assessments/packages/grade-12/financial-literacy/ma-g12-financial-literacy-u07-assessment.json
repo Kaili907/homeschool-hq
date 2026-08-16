@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-financial-literacy-u07-assessment",
+  "courseRef": "ma-g12-financial-literacy",
+  "grade": 12,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g12-financial-literacy-u07",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "courseTitle": "Financial Transition to Adulthood",
+    "assessmentLessonRef": "ma-g12-financial-literacy-u07-l11"
+  },
+  "standards": [
+    "PF7"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u07-l11.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Case R ends the year with a reserve of $6,400, living costs of $2,045 a month, and a student loan payment of $198.54 a month that continues regardless of income. Test the plan against a harder shock than before: 5 months with no income at all. As in the earlier test, the figures exclude the cost of keeping health cover once pay stops, since the $2,040 premium was deducted from pay.",
+      "prompt": "What does the 5-month shock require in total?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "Case R ends the year with a reserve of $6,400, living costs of $2,045 a month, and a student loan payment of $198.54 a month that continues regardless of income. Test the plan against a harder shock than before: 5 months with no income at all. As in the earlier test, the figures exclude the cost of keeping health cover once pay stops, since the $2,040 premium was deducted from pay.",
+      "prompt": "By how much does that exceed the reserve?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "Case R ends the year with a reserve of $6,400, living costs of $2,045 a month, and a student loan payment of $198.54 a month that continues regardless of income. Test the plan against a harder shock than before: 5 months with no income at all. As in the earlier test, the figures exclude the cost of keeping health cover once pay stops, since the $2,040 premium was deducted from pay.",
+      "prompt": "How many months of full costs does the reserve alone cover? Give two decimal places."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now test two responses: cutting costs during the shock, and building a larger reserve in advance.",
+      "prompt": "If $285 a month of food and transport spending were cut during the shock, what would living costs fall to?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now test two responses: cutting costs during the shock, and building a larger reserve in advance.",
+      "prompt": "How many months would the reserve then cover, still paying the loan? Give two decimal places."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now test two responses: cutting costs during the shock, and building a larger reserve in advance.",
+      "prompt": "What additional monthly reserve transfer across the year would have closed the $4,817.70 gap?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write the capstone defence. This is the final entry in the record.",
+      "prompt": "Defend the plan. State honestly what this shock shows it cannot withstand, decide whether to change the plan in response and say exactly what your decision costs, and answer the strongest objection to your decision. Finish by saying what someone with different priorities would reasonably do instead, and why that would also be defensible."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/financial-literacy/ma-g12-financial-literacy-u07-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Identifying the assumption criterion.",
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-financial-literacy-u07-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u07-l11.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

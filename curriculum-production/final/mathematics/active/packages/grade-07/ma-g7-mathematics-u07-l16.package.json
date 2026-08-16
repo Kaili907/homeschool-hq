@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u07-l16",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u07-l16",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Circles, Angles, Area, and Surface Area",
+    "dayInUnit": 16,
+    "courseDay": 124,
+    "phase": "Unit assessment",
+    "focus": "unknown angles",
+    "title": "Unit assessment: unknown angles"
+  },
+  "standards": [
+    "7.G.4",
+    "7.G.5",
+    "7.G.6"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "angle-equation-multistep",
+          "standard": "7.G.5",
+          "difficulty": 1,
+          "prompt": "Two angles are supplementary. Their measures are (3x + 1)° and (2x + 154)°. Find the value of x and the measure of each angle.",
+          "choices": [
+            "x = 5, angles measure 16° and 164°",
+            "x = 6, angles measure 19° and 161°",
+            "x = 5, angles measure 164° and 16°",
+            "x = 5, angles measure 16° and 16°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "angles-on-a-line-or-around-a-point",
+          "standard": "7.G.5",
+          "difficulty": 1,
+          "prompt": "Two angles lie along a straight line and measure 28°, 116°, and x°. What is the value of x?",
+          "choices": [
+            "39°",
+            "37°",
+            "36°",
+            "46°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "area-of-composite-figure",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A room shaped like an L is made from a 17-by-18 rectangle with a 5-by-3 rectangular corner cut out. What is the area of the room, in square units?",
+          "choices": [
+            "294",
+            "293",
+            "291",
+            "298"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "missing-dimension-from-area",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangle has an area of 54 square units and a width of 6 units. What is its exact length, in units?",
+          "choices": [
+            "9",
+            "48",
+            "10",
+            "54"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "surface-area-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangular prism has length 14, width 10, and height 8 (all in units). What is its exact surface area, in square units?",
+          "choices": [
+            "667",
+            "664",
+            "665",
+            "663"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "What is the exact volume of a rectangular prism with length 10, width 12, and height 11 (units)? Give your answer in cubic units.",
+          "choices": [
+            "120 cubic units",
+            "1321 cubic units",
+            "1323 cubic units",
+            "1320 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "circumference-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a radius of 6 1/2 cm. What is its exact circumference? Express your answer as a multiple of π.",
+          "choices": [
+            "13/2π cm",
+            "16π cm",
+            "13π cm",
+            "14π cm"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "find-radius-or-diameter-from-circumference",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a circumference of 16π cm. What is its exact diameter?",
+          "choices": [
+            "16 cm",
+            "17 cm",
+            "18 cm",
+            "15 cm"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "area-of-circle-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a diameter of 12 ft. What is its exact area? Express your answer as a multiple of π (use a fraction for the coefficient if it is not a whole number).",
+          "choices": [
+            "144π ft²",
+            "12π ft²",
+            "39π ft²",
+            "36π ft²"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "circumference-area-relationship",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle's radius equals its circumference divided by 2π. A circle has a circumference of 10π ft. Use this relationship to find the circle's exact area, as a multiple of π.",
+          "choices": [
+            "50π ft²",
+            "10π ft²",
+            "25π ft²",
+            "27π ft²"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "complementary-supplementary-angle",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two angles are complementary. One angle measures 2°. What is the measure of the other angle?",
+          "choices": [
+            "88°",
+            "178°",
+            "89°",
+            "90°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "vertical-angles-with-expressions",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two lines intersect, forming vertical angles that measure (5x + 1)° and (3x + 15)°. Vertical angles are congruent. Find the value of x and the measure of the angles.",
+          "choices": [
+            "x = 7, each angle measures 26°",
+            "x = 6, each angle measures 31°",
+            "x = 7, each angle measures 46°",
+            "x = 7, each angle measures 36°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u07-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u07-l16"
+  }
+}

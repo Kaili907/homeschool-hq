@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u06-l18",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u06-l18",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Fraction Equivalence and Comparison",
+    "dayInUnit": 18,
+    "courseDay": 108,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "recognizing equivalent amounts in real settings",
+    "title": "Transfer, reflection, and publication: recognizing equivalent amounts in real settings"
+  },
+  "standards": [
+    "4.NF.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "compare-fractions-different-denominators",
+          "standard": "4.NF.2",
+          "difficulty": 1,
+          "prompt": "Compare using <, >, or =: 3/4 ___ 5/8",
+          "workedSolution": {
+            "steps": [
+              "Common denominator 8: 3/4 = 6/8.",
+              "6/8 vs 5/8.",
+              "3/4 > 5/8."
+            ],
+            "answer": ">"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-fractions-different-denominators",
+          "standard": "4.NF.2",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 1/4 ___ 4/6",
+          "choices": [
+            "<",
+            "Cannot be compared without more information",
+            "=",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-fractions-different-denominators",
+          "standard": "4.NF.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 3/5 ___ 1/4",
+          "choices": [
+            "<",
+            "Cannot be compared without more information",
+            "=",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-fractions-different-denominators",
+          "standard": "4.NF.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 1/8 ___ 2/5",
+          "choices": [
+            "=",
+            ">",
+            "Cannot be compared without more information",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-fractions-different-denominators",
+          "standard": "4.NF.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 1/8 ___ 1/6",
+          "choices": [
+            ">",
+            "Cannot be compared without more information",
+            "<",
+            "="
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "compare-fractions-different-denominators",
+          "standard": "4.NF.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 3/6 ___ 4/5",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "compare-fractions-different-denominators",
+          "standard": "4.NF.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 1/8 ___ 2/4",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u06-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u06-l18"
+  }
+}

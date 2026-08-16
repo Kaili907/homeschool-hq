@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-physical-education-u09-assessment",
+  "courseRef": "ma-g11-physical-education",
+  "grade": 11,
+  "subject": "physical-education",
+  "location": {
+    "unitRef": "ma-g11-physical-education-u09",
+    "unitNumber": 9,
+    "unitTitle": "Grade 11 Capstone: LEVEL 2 Portfolio",
+    "courseTitle": "Strength, Conditioning, and Training Design",
+    "assessmentLessonRef": "ma-g11-physical-education-u09-l11"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-11/unit-assessments/ma-g11-physical-education-u09-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the safe activity or accessible equivalent and document the requested performance evidence.",
+    "Stop for pain, dizziness, breathing trouble, unsafe conditions, or missing adult supervision."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and cues",
+      "prompt": "Explain the critical features or key principle of assembling periodization, specialization, and leadership evidence in your own words."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "demonstration or description",
+      "prompt": "Demonstrate or fully describe self-assessment against LEVEL 2 expectations using a version your body and setting allow. A described or adapted version earns full credit."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply evaluating the cycle honestly, including what failed in a new situation and explain the decision or adjustment you made."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving identifying remaining dependencies on adult direction; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect setting the Grade 12 independence goal with defending design choices under questioning and explain how one affects the other."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Present the LEVEL 2 portfolio to one trusted adult, defend the design choices in the training cycle and the facilitated session, and revise the Grade 12 plan after critique."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself."
+    }
+  ],
+  "responseMode": "performance-log-or-accessible-equivalent",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/physical-education/ma-g11-physical-education-u09-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated safe participation and self-management criterion.",
+    "Provide evidence that meets the stated skill cues or movement quality criterion.",
+    "Provide evidence that meets the stated tactical or training reasoning criterion.",
+    "Provide evidence that meets the stated self-assessment and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-physical-education-u09-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-11/unit-assessments/ma-g11-physical-education-u09-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Grade 11 Capstone: LEVEL 2 Portfolio?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u01-l06",
+  "lessonId": "ma-g7-financial-literacy-u01-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Analysing rights and pressure",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response accepts that everyone does it as settling the question."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The pressure is noticed in Marisela's case but the underlying agreement is not examined."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response distinguishes what was agreed from what is being asked in Marisela's case, and names the appeal to common practice as pressure rather than justification."
+          }
+        ]
+      },
+      {
+        "dimension": "Proposing a workable response",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response tells the worker to quit or to comply silently."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A response is proposed but ignores the worker's need to keep the job."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response proposes a concrete step, such as asking about the policy in writing or keeping a record of hours, that raises the issue while accounting for the worker's position."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Distinguishes the agreed schedule from the additional request.",
+      "Identifies the appeal to common practice as pressure.",
+      "Proposes documentation or a specific person to ask.",
+      "Names a responsibility on each side."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What was agreed, what is now being asked, and what makes the manager's reasoning a form of pressure?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should the worker do, who should they raise it with, and how does your answer account for their need to keep the job?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Name one responsibility the worker owes the employer and one the employer owes the worker in this invented case."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Analysing rights and pressure — Not yet: The response accepts that everyone does it as settling the question. Approaching: The pressure is noticed in Marisela's case but the underlying agreement is not examined. Meets: The response distinguishes what was agreed from what is being asked in Marisela's case, and names the appeal to common practice as pressure rather than justification. Proposing a workable response — Not yet: The response tells the worker to quit or to comply silently. Approaching: A response is proposed but ignores the worker's need to keep the job. Meets: The response proposes a concrete step, such as asking about the policy in writing or keeping a record of hours, that raises the issue while accounting for the worker's position. Distinguishes the agreed schedule from the additional request. Identifies the appeal to common practice as pressure. Proposes documentation or a specific person to ask. Names a responsibility on each side."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Distinguishes the agreed schedule from the additional request. Identifies the appeal to common practice as pressure. Proposes documentation or a specific person to ask. Names a responsibility on each side."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-07/swk-fl-g7-u01-l06.scoring.json",
+    "sourceScoringSha256": "a0d9959a9beb6c84bbc553651ad35030927e4658bc0f3425f85018ffad8fd701",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

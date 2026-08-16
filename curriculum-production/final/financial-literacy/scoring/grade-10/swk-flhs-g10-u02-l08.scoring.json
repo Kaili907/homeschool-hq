@@ -1,0 +1,333 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l08",
+  "lessonId": "ma-g10-financial-literacy-u02-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$149.94",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6 months at the promotional $24.99."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,439.82",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "18 months at the standard $79.99."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,589.76",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$149.94 of promotional months plus $1,439.82 at the standard rate."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$66.24",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,589.76 total commitment spread across the 24 months of the agreement."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$41.25",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$66.24 against the $24.99 the advertisement leads with."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "No, six months genuinely cost $24.99, so \"from\" is literally accurate",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Six of the 24 months really are billed at $24.99, so the word \"from\" is defensible — which is exactly why the average of $66.24 is the figure that matters."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(promo * promoMonths, 2)",
+        "substituted": "round(24.99 * 6, 2)",
+        "result": "$149.94",
+        "why": "6 months at the promotional $24.99."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(standard * standardMonths, 2)",
+        "substituted": "round(79.99 * 18, 2)",
+        "result": "$1,439.82",
+        "why": "18 months at the standard $79.99."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$1,589.76",
+        "why": "$149.94 of promotional months plus $1,439.82 at the standard rate."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 / months, 2)",
+        "substituted": "round(#t1-p3 / 24, 2)",
+        "result": "$66.24",
+        "why": "The $1,589.76 total commitment spread across the 24 months of the agreement."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - advertised",
+        "substituted": "#t2-p1 - 24.99",
+        "result": "$41.25",
+        "why": "$66.24 against the $24.99 the advertisement leads with."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "promoMonths2 >= 1",
+        "substituted": "6 >= 1",
+        "result": "No, six months genuinely cost $24.99, so \"from\" is literally accurate",
+        "why": "Six of the 24 months really are billed at $24.99, so the word \"from\" is defensible — which is exactly why the average of $66.24 is the figure that matters."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The earlier lesson on subscriptions compared two prices for the same service. This one compares one price that changes over time. Say what stayed the same in the method and what had to be added.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that the method is unchanged: total the whole commitment and divide by the months it covers.",
+          "Identifies what had to be added: the schedule has two segments, so the total is built from two products rather than one."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,589.76 total and the $66.24 average."
+        ],
+        "lookFors": [
+          "The response recognises the promotional rate is a segment of the schedule rather than the price of the service."
+        ],
+        "commonMisconception": "Reading a promotional rate as the price of a service that carries a longer commitment.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Write the one figure you would want an advertisement for this bundle to display, and say why that figure rather than any other.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names the total 24-month commitment of $1,589.76, or the $66.24 average, and says why it represents what the customer actually agrees to.",
+          "Explains why the chosen figure cannot be gamed by restructuring the schedule the way a \"from\" price can."
+        ],
+        "evidenceRequirements": [
+          "Refers to both the $24.99 advertised price and the chosen replacement figure."
+        ],
+        "lookFors": [
+          "The response justifies the choice rather than only naming a bigger number."
+        ],
+        "dimensions": [
+          "criteria-application",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the first 6 months cost?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do months 7 through 24 cost?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the whole 24-month agreement cost?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the true average monthly price across the 24 months? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much higher is the true average than the advertised \"from\" price?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Is the advertised claim \"from $24.99 a month\" false as stated?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The earlier lesson on subscriptions compared two prices for the same service. This one compares one price that changes over time. Say what stayed the same in the method and what had to be added."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Write the one figure you would want an advertisement for this bundle to display, and say why that figure rather than any other."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the first 6 months cost? Answer: $149.94. Verification: 6 months at the promotional $24.99. t1-p2: What do months 7 through 24 cost? Answer: $1,439.82. Verification: 18 months at the standard $79.99. t1-p3: What does the whole 24-month agreement cost? Answer: $1,589.76. Verification: $149.94 of promotional months plus $1,439.82 at the standard rate. t2-p1: What is the true average monthly price across the 24 months? Round to the nearest cent. Answer: $66.24. Verification: The $1,589.76 total commitment spread across the 24 months of the agreement. t2-p2: How much higher is the true average than the advertised \"from\" price? Answer: $41.25. Verification: $66.24 against the $24.99 the advertisement leads with. t2-p3: Is the advertised claim \"from $24.99 a month\" false as stated? Answer: No, six months genuinely cost $24.99, so \"from\" is literally accurate. Verification: Six of the 24 months really are billed at $24.99, so the word \"from\" is defensible — which is exactly why the average of $66.24 is the figure that matters."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The earlier lesson on subscriptions compared two prices for the same service. This one compares one price that changes over time. Say what stayed the same in the method and what the updated method newly includes. States that the method is unchanged: total the whole commitment and divide by the months it covers. Identifies what the updated method newly includes: the schedule has two segments, so the total is built from two products rather than one. Uses the $1,589.76 total and the $66.24 average. The response recognises the promotional rate is a segment of the schedule rather than the price of the service. t3-p2: Write the one figure you would want an advertisement for this bundle to display, and say why that figure rather than any other. Names the total 24-month commitment of $1,589.76, or the $66.24 average, and says why it represents what the customer actually agrees to. Explains why the chosen figure cannot be gamed by restructuring the schedule the way a \"from\" price can. Refers to both the $24.99 advertised price and the chosen replacement figure. The response justifies the choice rather than only naming a bigger number."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States that the method is unchanged: total the whole commitment and divide by the months it covers. Identifies what the updated method newly includes: the schedule has two segments, so the total is built from two products rather than one. Names the total 24-month commitment of $1,589.76, or the $66.24 average, and says why it represents what the customer actually agrees to. Explains why the chosen figure cannot be gamed by restructuring the schedule the way a \"from\" price can."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-10/swk-flhs-g10-u02-l08.scoring.json",
+    "sourceScoringSha256": "dd4c108914bcc89ad416134042f3e639142a00eb7e4a1715f55eebb1353439cb",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

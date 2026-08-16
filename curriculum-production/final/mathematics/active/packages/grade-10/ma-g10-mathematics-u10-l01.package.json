@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u10-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u10-l01",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Measurement, Modeling, and Design Capstone",
+    "dayInUnit": 1,
+    "courseDay": 163,
+    "phase": "Launch and diagnostic",
+    "focus": "informal arguments for circumference, area, and volume formulas",
+    "title": "Launch and diagnostic: informal arguments for circumference, area, and volume formulas"
+  },
+  "standards": [
+    "G-GMD.1",
+    "G-GMD.3",
+    "G-GMD.4",
+    "G-MG.1",
+    "G-MG.2",
+    "G-MG.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "volume-of-solid",
+          "standard": "G-GMD.3",
+          "difficulty": 1,
+          "prompt": "Volume of a cone with radius 3 and height 4?",
+          "workedSolution": {
+            "steps": [
+              "Cylinder would be π(9)(4) = 36π.",
+              "A cone is one third: 12π."
+            ],
+            "answer": "12π"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "cross-section-identification",
+          "standard": "G-GMD.4",
+          "difficulty": 1,
+          "prompt": "Describe the cross-section formed by a cylinder cut by a plane perpendicular to its base through the axis.",
+          "choices": [
+            "a square",
+            "a rectangle",
+            "a circle",
+            "a triangle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "density-modelling",
+          "standard": "G-MG.2",
+          "difficulty": 1,
+          "prompt": "A solid object has mass 21 g and volume 3 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+          "choices": [
+            "7 g/cm³; it would float",
+            "0.14 g/cm³; it would float",
+            "63 g/cm³; it would sink",
+            "7 g/cm³; it would sink"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "design-constraint-modelling",
+          "standard": "G-MG.3",
+          "difficulty": 2,
+          "prompt": "A square patio of side 3 m is to be paved at $6 per square metre. Find the total cost, and state which quantity the cost is proportional to.",
+          "choices": [
+            "$18; the cost is proportional to the area",
+            "$72; the cost is proportional to the perimeter",
+            "$54; the cost is proportional to the area",
+            "$54; the cost is proportional to the side length"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-solid",
+          "standard": "G-GMD.3",
+          "difficulty": 2,
+          "prompt": "Find the volume of a square pyramid with base edge 7 and height 4. Leave π in the answer where it appears.",
+          "choices": [
+            "196π/3",
+            "196/3",
+            "196π",
+            "196"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "cross-section-identification",
+          "standard": "G-GMD.4",
+          "difficulty": 3,
+          "prompt": "Describe the cross-section formed by a cylinder cut by a plane parallel to its base.",
+          "choices": [
+            "a rectangle",
+            "a square",
+            "a triangle",
+            "a circle"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "density-modelling",
+          "standard": "G-MG.2",
+          "difficulty": 1,
+          "prompt": "A solid object has mass 18 g and volume 3 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+          "choices": [
+            "0.17 g/cm³; it would float",
+            "6 g/cm³; it would sink",
+            "54 g/cm³; it would sink",
+            "6 g/cm³; it would float"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "design-constraint-modelling",
+          "standard": "G-MG.3",
+          "difficulty": 2,
+          "prompt": "A square patio of side 12 m is to be paved at $8 per square metre. Find the total cost, and state which quantity the cost is proportional to.",
+          "choices": [
+            "$1152; the cost is proportional to the side length",
+            "$1152; the cost is proportional to the area",
+            "$384; the cost is proportional to the perimeter",
+            "$96; the cost is proportional to the area"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u10-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u10-l01"
+  }
+}

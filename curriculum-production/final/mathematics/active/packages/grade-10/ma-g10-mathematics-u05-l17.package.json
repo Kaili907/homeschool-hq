@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u05-l17",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u05-l17",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Dilations and Similarity",
+    "dayInUnit": 17,
+    "courseDay": 89,
+    "phase": "Targeted correction",
+    "focus": "establishing the AA criterion",
+    "title": "Targeted correction: establishing the AA criterion"
+  },
+  "standards": [
+    "G-SRT.1",
+    "G-SRT.2",
+    "G-SRT.3",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 1,
+          "prompt": "Dilate (3, −2) about the origin by factor 4.",
+          "workedSolution": {
+            "steps": [
+              "Multiply both coordinates by 4.",
+              "(12, −8)."
+            ],
+            "answer": "(12, −8)"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "scale-factor-from-lengths",
+          "standard": "G-SRT.2",
+          "difficulty": 2,
+          "prompt": "A side of 5 becomes 15. Scale factor and area change?",
+          "workedSolution": {
+            "steps": [
+              "15 ÷ 5 = 3.",
+              "Area scales by 3² = 9."
+            ],
+            "answer": "scale factor 3; area ×9"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "aa-similarity-criterion",
+          "standard": "G-SRT.3",
+          "difficulty": 1,
+          "prompt": "Triangle ABC has ∠A = 65° and ∠B = 48°. Triangle DEF has ∠D = 65° and ∠E = 48°. Are the triangles similar, and on what grounds?",
+          "choices": [
+            "No; angle information alone never establishes similarity.",
+            "Yes, by AA similarity: two pairs of congruent angles force the third pair to be congruent as well.",
+            "Yes, but only if a pair of corresponding sides is also known to be congruent.",
+            "Yes, by SSS similarity."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "dilation-effect-on-line",
+          "standard": "G-SRT.1",
+          "difficulty": 2,
+          "prompt": "Under a dilation, a line that does not pass through the centre of dilation …",
+          "choices": [
+            "is mapped to a line with slope multiplied by the scale factor",
+            "is mapped to a parallel line",
+            "is mapped onto itself",
+            "is mapped to a perpendicular line"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 2,
+          "prompt": "Dilate the point (3, 1) about the origin with scale factor 2. Give the image.",
+          "choices": [
+            "(6, 2)",
+            "(3, 2)",
+            "(6, 1)",
+            "(5, 3)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "scale-factor-from-lengths",
+          "standard": "G-SRT.2",
+          "difficulty": 3,
+          "prompt": "A figure is dilated so that a side of length 10 becomes a side of length 30. What is the scale factor, and what happens to the figure's area?",
+          "choices": [
+            "scale factor 3; the area is multiplied by 9",
+            "scale factor 20; the area is multiplied by 9",
+            "scale factor 3; the area is multiplied by 3",
+            "scale factor 1/3; the area is multiplied by 9"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "aa-similarity-criterion",
+          "standard": "G-SRT.3",
+          "difficulty": 2,
+          "prompt": "Triangle ABC has ∠A = 50° and ∠B = 74°. Triangle DEF has ∠D = 50° and ∠E = 74°. Are the triangles similar, and on what grounds?",
+          "choices": [
+            "Yes, but only if a pair of corresponding sides is also known to be congruent.",
+            "No; angle information alone never establishes similarity.",
+            "Yes, by AA similarity: two pairs of congruent angles force the third pair to be congruent as well.",
+            "Yes, by SSS similarity."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "dilation-effect-on-line",
+          "standard": "G-SRT.1",
+          "difficulty": 2,
+          "prompt": "Under a dilation, a line that passes through the centre of dilation …",
+          "choices": [
+            "is mapped onto itself",
+            "is mapped to a line through the origin with a different slope",
+            "is mapped to a perpendicular line",
+            "is mapped to a parallel line a fixed distance away"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 3,
+          "prompt": "Dilate the point (3, 3) about the origin with scale factor 3. Give the image.",
+          "choices": [
+            "(6, 6)",
+            "(9, 3)",
+            "(9, 9)",
+            "(3, 9)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "scale-factor-from-lengths",
+          "standard": "G-SRT.2",
+          "difficulty": 3,
+          "prompt": "A figure is dilated so that a side of length 13 becomes a side of length 65. What is the scale factor, and what happens to the figure's area?",
+          "choices": [
+            "scale factor 5; the area is multiplied by 25",
+            "scale factor 1/5; the area is multiplied by 25",
+            "scale factor 52; the area is multiplied by 25",
+            "scale factor 5; the area is multiplied by 5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u05-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u05-l17"
+  }
+}

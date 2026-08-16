@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u10-l14",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u10-l14",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Algebraic Modeling Capstone",
+    "dayInUnit": 14,
+    "courseDay": 176,
+    "phase": "Transfer challenge",
+    "focus": "selecting linear or nonlinear models",
+    "title": "Transfer challenge: selecting linear or nonlinear models"
+  },
+  "standards": [
+    "8.EE.7",
+    "8.EE.8",
+    "8.F.4",
+    "8.G.7",
+    "8.SP.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-data-trend",
+          "standard": "8.SP.3",
+          "difficulty": 1,
+          "prompt": "As study time increases, scores tend to increase. Identify the trend.",
+          "workedSolution": {
+            "steps": [
+              "Define the relevant quantities and assumptions.",
+              "Use the selected model consistently.",
+              "State a conclusion with its limitation or evidence."
+            ],
+            "answer": "positive"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-model-limitation",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A line of fit was made from data for temperatures 40° through 80°. It is used to predict a temperature at 120°. Which limitation is most important?",
+          "choices": [
+            "The line proves causation.",
+            "The data range no longer matters.",
+            "The prediction is an extrapolation and may be less reliable.",
+            "The prediction must be exactly correct."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "choose-mathematical-evidence",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "Which action provides the strongest evidence that a model fits a situation?",
+          "choices": [
+            "show calculations and compare predictions to data",
+            "state an answer without units",
+            "choose the first equation written",
+            "ignore data that disagree"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "communicate-model-conclusion",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "Which conclusion communicates a mathematical model responsibly?",
+          "choices": [
+            "State the result, units, assumption, and limitation.",
+            "Hide the assumption and data source.",
+            "Claim the model is always correct.",
+            "State only a number."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "define-variable",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A moving company charges by the number of hours worked. Which definition of x best models this situation?",
+          "choices": [
+            "x = number of hours worked",
+            "x = total cost in dollars",
+            "x = number of workers",
+            "x = company name"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "state-model-assumption",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A service is modeled by C = 12h + 25, where h is hours. Which assumption supports this model?",
+          "choices": [
+            "The flat fee changes each hour.",
+            "The number of hours is always zero.",
+            "The hourly charge remains $12 for every hour.",
+            "Every service has the same total cost."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "select-linear-or-nonlinear-model",
+          "standard": "8.F.4",
+          "difficulty": 3,
+          "prompt": "The area of a square changes as its side length is squared. Which model type is appropriate?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-model-equation",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A model gives 12x + 17 = 41. What is x?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "solve-system-constraint",
+          "standard": "8.EE.8",
+          "difficulty": 3,
+          "prompt": "Two constraints are y = 1x + 0 and y = 6x - 40. What is their shared solution?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u10-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u10-l14"
+  }
+}

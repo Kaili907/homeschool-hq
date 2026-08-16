@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g4-health-u02-l06",
+  "courseId": "ma-g4-health",
+  "grade": 4,
+  "subject": "health",
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "I use two facts.",
+    "I explain reading a simple food label.",
+    "I choose a safe action and give a reason.",
+    "I name the right kind of help."
+  ],
+  "scoringGuidance": "Judge the learner's accurate use of reading a simple food label, stated facts, type-appropriate reasoning, safe next step, and support or authority route. Accept equivalent wording and response modes. Do not score private experience, feelings, confidence, speed, handwriting, access support, or similarity to the model. Do not infer diagnosis, effort, motivation, character, family situation, or health status.",
+  "masteryRule": "Do not mark mastery of reading a simple food label from the entry check, vocabulary check, worked model, guided case, one response, confidence, or private reflection. Require accurate independent evidence on the Maple case and accurate retrieval or transfer on a later, meaningfully different fictional or public case. Both occasions must meet the lesson-specific criteria without answer-bearing help.",
+  "remediation": "Name the smallest observable gap for reading a simple food label. Use the alternate model in ma-g4-health-u02-l06#remediation-alternate-model instead of repeating the first explanation. Complete the bounded guided correction, then use ma-g4-health-u02-l06#remediation-fresh-retry without answer-bearing help. Exit only when the learner accurately uses a fact, applies the lesson idea, explains a safe response, and identifies responsible support.",
+  "adaptiveRoutes": [
+    {
+      "signal": "HLTH-G4-READING-A-SIMPLE-FOOD-LABEL-ASSUMPTION-AS-FACT",
+      "action": "Replace the assumption with a stated fact and limit the conclusion to what that fact supports. Use the alternate remediation model and guided correction, then remove answer-bearing support for the fresh Oak Street retry."
+    },
+    {
+      "signal": "HLTH-G4-READING-A-SIMPLE-FOOD-LABEL-TERM-WITHOUT-MEANING",
+      "action": "Connect one required fact to the meaning or process taught in the explanation. Use the alternate remediation model and guided correction, then remove answer-bearing support for the fresh Oak Street retry."
+    },
+    {
+      "signal": "HLTH-G4-READING-A-SIMPLE-FOOD-LABEL-REASON-MISSING",
+      "action": "Add the controlling fact and explain why it supports the response. Use the alternate remediation model and guided correction, then remove answer-bearing support for the fresh Oak Street retry."
+    },
+    {
+      "signal": "HLTH-G4-READING-A-SIMPLE-FOOD-LABEL-AUTHORITY-MISSING",
+      "action": "Name the appropriate adult, professional, service, or public authority and the escalation condition. Use the alternate remediation model and guided correction, then remove answer-bearing support for the fresh Oak Street retry."
+    }
+  ],
+  "guardianOrParentVisibility": "Share the learning goal, completion state, evidence type, and next instructional step. Do not expose private reflection or ask for proof that it occurred. Do not infer or report diagnosis, feelings, effort, motivation, character, family circumstances, or health status.",
+  "guardianSafetyReview": {
+    "requiredForLessonCompletion": false,
+    "authority": "A parent, guardian, teacher, school staff member, or another trusted adult handles real safety concerns. A qualified health professional gives medical advice. Emergency services handle emergencies.",
+    "boundary": "The lesson and scorer do not diagnose, prescribe, investigate private information, or override guardian, professional, school, legal, or emergency authority."
+  },
+  "safetyAndPrivacyNotes": [
+    "Use respectful, neutral, non-shaming language.",
+    "Required evidence uses fictional or public situations and never requires sensitive personal disclosure.",
+    "Do not infer health, feelings, diagnosis, motives, effort, character, or family circumstances from a response.",
+    "Do not use dieting, calorie-target, weight-loss, body-value, appearance, or body-scoring language.",
+    "Do not provide individualized treatment, medication, food, supplement, or exercise advice.",
+    "Direct real health or safety concerns to a trusted adult or qualified professional; use emergency services for an emergency."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",
+    "sourceLessonId": "ma-g4-health-u02-l06"
+  },
+  "standards": [
+    "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+    "Michigan Health Practice 5: Self-Management and Goal Setting",
+    "Michigan Health Topic (Grades 3-5): Balanced Eating and Physical Activity"
+  ],
+  "primaryLessonType": "REMEDIATION_RETRY",
+  "secondaryLessonTypes": [
+    "DECISION_REASONING",
+    "CONCEPT_VOCABULARY"
+  ],
+  "protectedAuthority": {
+    "authorityVersion": "health-production-depth-r1",
+    "independentEvidence": {
+      "caseRef": "ma-g4-health-u02-l06#independent-maple",
+      "requiredFacts": [
+        "Ingredients are listed by weight, so the first few make up most of the product.",
+        "The allergen information is usually emphasised in bold or a separate statement.",
+        "Serving size matters: the numbers on the label describe one serving, not the whole pack.",
+        "A label describes what is in a food; it does not tell you whether the food is allowed or forbidden."
+      ],
+      "requiredReasoning": [
+        "Accurately applies reading a simple food label rather than merely repeating the topic name.",
+        "Separates stated or observable facts from assumptions, labels, and personal judgments.",
+        "Uses a safe and feasible action, interpretation, communication move, process, or product supported by lesson information.",
+        "Names the adult, professional, service, or public authority responsible when help or escalation is needed."
+      ],
+      "acceptableConclusions": [
+        "The modeled conclusion is not required; another conclusion is sufficient when it uses the same taught facts, stays within the learner role, and meets every safety boundary.",
+        "For REMEDIATION_RETRY, judge the accuracy of the concept and reasoning, not the learner's speed, confidence, response mode, or personal preference."
+      ]
+    },
+    "freshMasteryCheck": {
+      "caseRef": "ma-g4-health-u02-l06#fresh-check-lakeside",
+      "requiredUnderstanding": [
+        "Serving size matters: the numbers on the label describe one serving, not the whole pack.",
+        "The learner must transfer the rule for reading a simple food label instead of copying the model.",
+        "The response must include a safe next step and the responsible support or authority route."
+      ]
+    },
+    "acceptableVariation": [
+      "Equivalent accurate vocabulary is acceptable when the learner explains the same lesson distinction.",
+      "A reasonable alternate action or conclusion is acceptable when it is supported by stated facts, safe, feasible, respectful, and within the learner role.",
+      "Typed, handwritten, drawn-and-labeled, signed, selected, or spoken evidence earns equal credit when it supplies the same reasoning.",
+      "A learner may state uncertainty and request qualified help; appropriate uncertainty is not an error."
+    ],
+    "misconceptionBoundaries": [
+      {
+        "id": "HLTH-G4-READING-A-SIMPLE-FOOD-LABEL-ASSUMPTION-AS-FACT",
+        "insufficientPattern": "Adds a diagnosis, motive, character judgment, or private claim that the reading a simple food label case does not provide.",
+        "revisionNeeded": "Replace the assumption with a stated fact and limit the conclusion to what that fact supports."
+      },
+      {
+        "id": "HLTH-G4-READING-A-SIMPLE-FOOD-LABEL-TERM-WITHOUT-MEANING",
+        "insufficientPattern": "Names reading a simple food label or a lesson term without explaining what it means in the case.",
+        "revisionNeeded": "Connect one required fact to the meaning or process taught in the explanation."
+      },
+      {
+        "id": "HLTH-G4-READING-A-SIMPLE-FOOD-LABEL-REASON-MISSING",
+        "insufficientPattern": "Chooses an action, interpretation, message, process, or product without a reason grounded in lesson information.",
+        "revisionNeeded": "Add the controlling fact and explain why it supports the response."
+      },
+      {
+        "id": "HLTH-G4-READING-A-SIMPLE-FOOD-LABEL-AUTHORITY-MISSING",
+        "insufficientPattern": "Leaves out responsible help or directs a learner to act beyond the learner role.",
+        "revisionNeeded": "Name the appropriate adult, professional, service, or public authority and the escalation condition."
+      }
+    ],
+    "safetyCriticalErrors": [
+      "Diagnosing, prescribing, or directing individualized treatment, medication, food, supplement, or exercise changes.",
+      "Requiring private health, body, treatment, family, sexual, substance-use, or feeling information as evidence.",
+      "Never use shame, stigma, dieting, weight-loss, appearance, body-value, or disability-value judgments.",
+      "Directing a learner to manage danger or an emergency alone, exceed current training, or bypass responsible adult or professional authority."
+    ],
+    "scoringNotes": [
+      "A correct term without a fact-to-meaning connection is partial evidence.",
+      "A safe response with incomplete reasoning is partial evidence and receives a bounded fact-link cue before a fresh retry.",
+      "A pause, privacy choice, access support, alternate response mode, or request for adult help is not evidence of failure.",
+      "Subjective reflection, preference, and personal meaning are not automatically right or wrong and are not mastery evidence."
+    ]
+  },
+  "masteryPlan": {
+    "minimumEvidenceOccasions": 2,
+    "occasionOneRef": "ma-g4-health-u02-l06#independent-maple",
+    "laterRetrievalOrTransferRef": "ma-g4-health-u02-l06#later-transfer",
+    "independenceRule": "Definitions, directions, read-aloud, translation, access tools, and response alternatives are permitted. Evidence is guided rather than independent if support supplies the controlling fact, conclusion, action, decisive reason, safety judgment, or help route.",
+    "privateReflectionContributes": false,
+    "decisionAuthority": "An authorized adult or separately approved scoring runtime applies this protected guide. Curriculum coaching cannot make or override the mastery decision."
+  },
+  "reflectionPolicy": {
+    "mode": "PRIVATE_OPTIONAL",
+    "visibleTo": [
+      "LEARNER"
+    ],
+    "scored": false,
+    "contributesToCompletion": false,
+    "contributesToMastery": false,
+    "subjectiveJudgmentPolicy": "SUBJECTIVE_REFLECTION_NOT_AUTOMATICALLY_RIGHT_OR_WRONG"
+  },
+  "contentProvenance": {
+    "factSourceLane": "canonical-grade-3-4-health-authoring",
+    "productionDepthLane": "mac/health-production-depth-r1",
+    "standardRef": "docs/curriculum-quality/health/HEALTH_LESSON_STANDARD_R1.md",
+    "productionDepthVersion": "health-production-depth-r1"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

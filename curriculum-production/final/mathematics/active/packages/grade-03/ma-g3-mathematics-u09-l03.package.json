@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u09-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u09-l03",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Area and the Distributive Property",
+    "dayInUnit": 3,
+    "courseDay": 147,
+    "phase": "Concept build B",
+    "focus": "measuring area by tiling",
+    "title": "Concept build B: measuring area by tiling"
+  },
+  "standards": [
+    "3.MD.6"
+  ],
+  "blueprint": {
+    "phase": "Concept build B",
+    "profile": "concept-build-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 1,
+          "prompt": "A rectangle is covered by unit squares in 4 rows of 5 squares each. How many unit squares cover it?",
+          "workedSolution": {
+            "steps": [
+              "4 rows of 5 is 4 × 5.",
+              "4 × 5 = 20."
+            ],
+            "answer": "20"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 1,
+          "prompt": "A rectangle is covered by unit squares in 4 rows of 4 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "17",
+            "12",
+            "16",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 2 rows of 4 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "9",
+            "12",
+            "6",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 6 rows of 6 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "36",
+            "12",
+            "30",
+            "24"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 4 rows of 2 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "6",
+            "8",
+            "12",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 8 rows of 4 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "12",
+            "32",
+            "33",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 3,
+          "prompt": "A rectangle is covered by unit squares in 3 rows of 9 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "12",
+            "24",
+            "28",
+            "27"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l03#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 3,
+          "prompt": "A rectangle is covered by unit squares in 9 rows of 7 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "32",
+            "54",
+            "16",
+            "63"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 7 rows of 6 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "26",
+            "42",
+            "13",
+            "35"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 5 rows of 6 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "25",
+            "30",
+            "11",
+            "22"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u09-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u09-l03"
+  }
+}

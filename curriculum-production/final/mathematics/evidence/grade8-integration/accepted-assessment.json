@@ -1,0 +1,67 @@
+[
+  {
+    "assessment_id": "ma-g8-mathematics-c01-assessment",
+    "correction_id": "g8-math-8ee2-2026-08-12",
+    "unit_number": 1,
+    "unit_title": "Real Numbers and Irrational Numbers — 8.EE.2 correction block",
+    "standards": [
+      "8.EE.2",
+      "MP.2",
+      "MP.6"
+    ],
+    "total_points": 30,
+    "purpose": "Supply the independent mastery evidence for 8.EE.2 that release 1.0.0 does not contain. This assessment does not replace ma-g8-mathematics-u01-assessment; it is additional evidence covering only the corrected standard.",
+    "prompts": [
+      {
+        "type": "notation and exact solutions",
+        "prompt": "Write the exact solution or solutions of each equation using root notation: x² = 49, x² = 11, x³ = 27, x³ = 5. For each, state how many real solutions the equation has and why.",
+        "points": 6
+      },
+      {
+        "type": "evaluation of perfect squares and cubes",
+        "prompt": "Evaluate exactly, without a calculator: √121, √(16/49), ∛64, ∛(1/27). Verify two of your four answers using the inverse operation and show that verification.",
+        "points": 6
+      },
+      {
+        "type": "exact versus approximate",
+        "prompt": "For √45 and ∛50, state the two consecutive whole numbers each value lies between and explain how you know without a calculator. Then explain why neither can be written as an exact whole number.",
+        "points": 5
+      },
+      {
+        "type": "irrationality reasoning",
+        "prompt": "Explain why √2 is irrational but √49 is rational. Give a reason rather than an assertion; reference the decimal expansion, the ratio-of-integers definition, or the informal contradiction argument.",
+        "points": 5
+      },
+      {
+        "type": "error analysis",
+        "prompt": "A learner writes: “x² = 25, so x = 5,” and “∛(−27) has no real solution because you cannot take a root of a negative.” Identify what is wrong with each statement, correct it, and explain why the error is tempting.",
+        "points": 4
+      },
+      {
+        "type": "application and transfer",
+        "prompt": "A square garden bed must enclose 20 square feet. Give the exact side length in root notation, classify it as rational or irrational with a reason, give an approximation appropriate for buying lumber, and explain why the exact and rounded forms are each correct for their own purpose.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application, correct exact-versus-approximate discrimination, and a reasoned rather than asserted account of irrationality.",
+      "developing": "70–84%, or correct evaluation paired with inconsistent notation or explanation; assign targeted review and a fresh transfer check on a later occasion.",
+      "not_yet": "Below 70%, or reliance on decimal approximations where exact values exist; reteach from the squaring-and-cubing inverse relationship using concrete area and volume models, then reassess on a separate occasion."
+    },
+    "rubric_dimensions": [
+      "Correct use of √ and ∛ notation to name exact solutions",
+      "Accuracy of evaluation for small perfect squares and perfect cubes",
+      "Discrimination between exact values and approximations, with justification",
+      "Quality of reasoning about rationality and irrationality",
+      "Verification and self-correction"
+    ],
+    "accommodation_guidance": [
+      "Permit a squaring and cubing reference table for every learner; the target is root reasoning, not recall of the table.",
+      "Accept spoken, typed, handwritten, drawn, or manipulatives-based responses.",
+      "Allow extended time and a hidden timer; allow the assessment to be completed across two sittings.",
+      "Provide read-aloud support and reduced-copying formats; do not require the learner to transcribe the prompts.",
+      "The formal proof of the irrationality of √2 is never required for mastery at this grade."
+    ],
+    "mastery_rule": "Do not mark 8.EE.2 mastered from this assessment alone. Require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible."
+  }
+]

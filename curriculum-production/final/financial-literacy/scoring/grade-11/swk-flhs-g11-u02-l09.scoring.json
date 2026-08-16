@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l09",
+  "lessonId": "ma-g11-financial-literacy-u02-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$15,706.66",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three years of losing 16% of a shrinking value on the $26,500 purchase price."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$6,568.71",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Eight years of the same proportional loss. Most of the fall has already happened by year 3."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$10,793.34",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$26,500 against $15,706.66 — over $10,000 gone in three years, which is the cost of the early years of ownership."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$19,931.29",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$26,500 against $6,568.71. The extra five years add only about $9,100 more of depreciation than the first three did."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$8,880.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three years at the lower early-ownership rate."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$27,730.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$14,800 across the first five years and $12,930 across the last three — the later years cost nearly as much as the earlier five."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$6,557.78",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,793.34 of depreciation plus $8,880.00 of running costs, spread over 3 years."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$5,957.66",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$19,931.29 of depreciation plus $27,730.00 of running costs, spread over 8 years."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$600.12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,557.78 against $5,957.66 — the front-loaded depreciation is spread thinner, and that gain survives the rising repair bills, but only just."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(price * pow(1 - rate, 3), 2)",
+        "substituted": "round(26500 * pow(1 - 0.16, 3), 2)",
+        "result": "$15,706.66",
+        "why": "Three years of losing 16% of a shrinking value on the $26,500 purchase price."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(price2 * pow(1 - rate2, 8), 2)",
+        "substituted": "round(26500 * pow(1 - 0.16, 8), 2)",
+        "result": "$6,568.71",
+        "why": "Eight years of the same proportional loss. Most of the fall has already happened by year 3."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "price3 - #t1-p1",
+        "substituted": "26500 - #t1-p1",
+        "result": "$10,793.34",
+        "why": "$26,500 against $15,706.66 — over $10,000 gone in three years, which is the cost of the early years of ownership."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "price4 - #t1-p2",
+        "substituted": "26500 - #t1-p2",
+        "result": "$19,931.29",
+        "why": "$26,500 against $6,568.71. The extra five years add only about $9,100 more of depreciation than the first three did."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "early * 3",
+        "substituted": "2960 * 3",
+        "result": "$8,880.00",
+        "why": "Three years at the lower early-ownership rate."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "early2 * 5 + late * 3",
+        "substituted": "2960 * 5 + 4310 * 3",
+        "result": "$27,730.00",
+        "why": "$14,800 across the first five years and $12,930 across the last three — the later years cost nearly as much as the earlier five."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round((#t1-p3 + #t2-p1) / 3, 2)",
+        "substituted": "round((#t1-p3 + #t2-p1) / 3, 2)",
+        "result": "$6,557.78",
+        "why": "$10,793.34 of depreciation plus $8,880.00 of running costs, spread over 3 years."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round((#t1-p4 + #t2-p2) / 8, 2)",
+        "substituted": "round((#t1-p4 + #t2-p2) / 8, 2)",
+        "result": "$5,957.66",
+        "why": "$19,931.29 of depreciation plus $27,730.00 of running costs, spread over 8 years."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p3 - #t2-p4",
+        "substituted": "#t2-p3 - #t2-p4",
+        "result": "$600.12",
+        "why": "$6,557.78 against $5,957.66 — the front-loaded depreciation is spread thinner, and that gain survives the rising repair bills, but only just."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Two forces pull in opposite directions as a vehicle is held longer. Name both, say which one is winning at eight years and by how much, and describe what would have to happen for the answer to flip.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names depreciation per year falling as the holding period lengthens, and running costs per year rising as the vehicle ages, as the two opposing forces.",
+          "States that at eight years the depreciation effect still wins, by $600.12 a year, and identifies that as a narrow margin.",
+          "Describes a flip condition in figures — repairs rising further, or an unreliable year adding a large one-off cost — rather than as a general possibility."
+        ],
+        "evidenceRequirements": [
+          "Cites the two cost-per-year figures, $6,557.78 and $5,957.66, and at least one of the running-cost totals behind them."
+        ],
+        "lookFors": [
+          "The response names both forces and attaches each to the right figure.",
+          "The response treats $600.12 a year as a narrow margin rather than as a decisive result.",
+          "A response observing that the running-cost step from $2,960 to $4,310 is itself an assumption is going beyond the question well."
+        ],
+        "commonMisconception": "Assuming that keeping a vehicle longer always lowers the cost of owning it.",
+        "dimensions": [
+          "tradeoff-defense",
+          "reasoning-from-figures",
+          "plan-coherence"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Yolanda says she will decide by the vehicle’s condition rather than by the cost per year. Say what the cost-per-year figures are still useful for in that case, and what they cannot tell her.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the figures set the price of the choice — around $600.12 a year — so she can judge whether the condition problem is worth that much to avoid.",
+          "States what the figures cannot supply, such as the chance of a breakdown, the value of reliability for her, or a repair large enough to break the $2,960 and $4,310 assumptions."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $600.12 annual difference when describing what the figures do supply."
+        ],
+        "lookFors": [
+          "The response treats the figures as pricing a decision rather than as making it.",
+          "What the figures cannot say is stated specifically, not as a general limit of arithmetic."
+        ],
+        "dimensions": [
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the vehicle worth after 3 years?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is it worth after 8 years?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much value is lost across the first 3 years?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much value is lost across all 8 years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do running costs come to across the first 3 years, at $2,960 a year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do running costs come to across the full 8 years, at $2,960 for the first 5 and $4,310 for the last 3?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the cost per year of ownership if Yolanda sells at 3 years?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the cost per year of ownership if she sells at 8 years?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "How much does holding for 8 years rather than 3 save per year of ownership?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Two forces pull in opposite directions as a vehicle is held longer. Name both, say which one is winning at eight years and by how much, and describe what would have to happen for the answer to flip."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Yolanda says she will decide by the vehicle’s condition rather than by the cost per year. Say what the cost-per-year figures are still useful for in that case, and what they cannot tell her."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the vehicle worth after 3 years? Answer: $15,706.66. Verification: Three years of losing 16% of a shrinking value on the $26,500 purchase price. t1-p2: What is it worth after 8 years? Answer: $6,568.71. Verification: Eight years of the same proportional loss. Most of the fall has already happened by year 3. t1-p3: How much value is lost across the first 3 years? Answer: $10,793.34. Verification: $26,500 against $15,706.66 — over $10,000 gone in three years, which is the cost of the early years of ownership. t1-p4: How much value is lost across all 8 years? Answer: $19,931.29. Verification: $26,500 against $6,568.71. The extra five years add only about $9,100 more of depreciation than the first three did. t2-p1: What do running costs come to across the first 3 years, at $2,960 a year? Answer: $8,880.00. Verification: Three years at the lower early-ownership rate. t2-p2: What do running costs come to across the full 8 years, at $2,960 for the first 5 and $4,310 for the last 3? Answer: $27,730.00. Verification: $14,800 across the first five years and $12,930 across the last three — the later years cost nearly as much as the earlier five. t2-p3: What is the cost per year of ownership if Yolanda sells at 3 years? Answer: $6,557.78. Verification: $10,793.34 of depreciation plus $8,880.00 of running costs, spread over 3 years. t2-p4: What is the cost per year of ownership if she sells at 8 years? Answer: $5,957.66. Verification: $19,931.29 of depreciation plus $27,730.00 of running costs, spread over 8 years. t2-p5: How much does holding for 8 years rather than 3 save per year of ownership? Answer: $600.12. Verification: $6,557.78 against $5,957.66 — the front-loaded depreciation is spread thinner, and that gain survives the rising repair bills, but only just."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Two forces pull in opposite directions as a vehicle is held longer. Name both, say which one is winning at eight years and by how much, and describe what would have to happen for the answer to flip. Names depreciation per year falling as the holding period lengthens, and running costs per year rising as the vehicle ages, as the two opposing forces. States that at eight years the depreciation effect still wins, by $600.12 a year, and identifies that as a narrow margin. Describes a flip condition in figures — repairs rising further, or an unreliable year adding a large one-off cost — rather than as a general possibility. Cites the two cost-per-year figures, $6,557.78 and $5,957.66, and at least one of the running-cost totals behind them. The response names both forces and attaches each to the right figure. The response treats $600.12 a year as a narrow margin rather than as a decisive result. A response observing that the running-cost step from $2,960 to $4,310 is itself an assumption is going beyond the question well. t3-p2: Yolanda says she will decide by the vehicle’s condition rather than by the cost per year. Say what the cost-per-year figures are still useful for in that case, and what they cannot tell her. Explains that the figures set the price of the choice — around $600.12 a year — so she can judge whether the condition problem is worth that much to avoid. States what the figures cannot supply, such as the chance of a breakdown, the value of reliability for her, or a repair large enough to break the $2,960 and $4,310 assumptions. Refers to the $600.12 annual difference when describing what the figures do supply. The response treats the figures as pricing a decision rather than as making it. What the figures cannot say is stated specifically, not as a general limit of arithmetic."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names depreciation per year falling as the holding period lengthens, and running costs per year rising as the vehicle ages, as the two opposing forces. States that at eight years the depreciation effect still wins, by $600.12 a year, and identifies that as a narrow margin. Describes a flip condition in figures — repairs rising further, or an unreliable year adding a large one-off cost — rather than as a general possibility. Explains that the figures set the price of the choice — around $600.12 a year — so she can judge whether the condition problem is worth that much to avoid. States what the figures cannot supply, such as the chance of a breakdown, the value of reliability for her, or a repair large enough to break the $2,960 and $4,310 assumptions."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u02-l09.scoring.json",
+    "sourceScoringSha256": "5d534498de4c02c988b1f7ad69674d4d2e3fda944ba2cc24e7a98b383573f585",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

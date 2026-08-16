@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l03",
+  "lessonId": "ma-g3-ready-for-life-u01-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Home specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Assigns vague homes, such as \"in the closet somewhere,\" for one or more items."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Assigns one exact, specific home for every one of the five items."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Assigns exact homes and explains why a specific home was chosen based on how often that item is used."
+          }
+        ]
+      },
+      {
+        "dimension": "Recall and retention",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Recalls fewer than three of the five item-and-home pairs from memory."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Recalls four or five of the five item-and-home pairs from memory."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Recalls all five pairs and explains what made one specific home easy to remember."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The reflection names a specific before location and a specific after location, not a vague \"it's better now.\"",
+      "Homes chosen are places the learner can realistically reach without help."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

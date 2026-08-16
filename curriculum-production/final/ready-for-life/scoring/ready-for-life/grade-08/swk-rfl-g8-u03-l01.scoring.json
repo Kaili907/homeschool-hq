@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l01",
+  "lessonId": "ma-g8-ready-for-life-u03-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Food-group sorting accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Several foods are sorted into the wrong food group or left unsorted."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Nearly all foods from the day are sorted into a correct food group."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All foods are sorted correctly, including foods that reasonably belong to more than one group."
+          }
+        ]
+      },
+      {
+        "dimension": "Gap identification and fix",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cannot name which food group appeared least, or the suggested fix is not realistic for the meal named."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly names the least-represented food group and proposes a realistic, specific food to close the gap."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names the gap, proposes a realistic fix, and explains why that specific meal is the easiest place to make the change."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Foods listed in the warm-up are specific (named dishes or ingredients), not vague meal labels like 'breakfast.'",
+      "The reported food-group counts in the independent task match the sorting done in the guided task."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

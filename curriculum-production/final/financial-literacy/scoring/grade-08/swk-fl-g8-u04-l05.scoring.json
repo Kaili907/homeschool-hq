@@ -1,0 +1,314 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u04-l05",
+  "lessonId": "ma-g8-financial-literacy-u04-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What does the non-repayable aid come to?",
+        "answer": "$13,500.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(9,500.00 + 4,000.00) = 13,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 950000
+              },
+              {
+                "op": "money",
+                "cents": 400000
+              }
+            ]
+          },
+          "trace": "(9,500.00 + 4,000.00) = 13,500.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What do aid and earnings cover together?",
+        "answer": "$16,500.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(9,500.00 + 4,000.00 + 3,000.00) = 16,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 950000
+              },
+              {
+                "op": "money",
+                "cents": 400000
+              },
+              {
+                "op": "money",
+                "cents": 300000
+              }
+            ]
+          },
+          "trace": "(9,500.00 + 4,000.00 + 3,000.00) = 16,500.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much must be borrowed?",
+        "answer": "$11,500.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(28,000.00 - (9,500.00 + 4,000.00 + 3,000.00)) = 11,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 2800000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 950000
+                },
+                {
+                  "op": "money",
+                  "cents": 400000
+                },
+                {
+                  "op": "money",
+                  "cents": 300000
+                }
+              ]
+            }
+          },
+          "trace": "(28,000.00 - (9,500.00 + 4,000.00 + 3,000.00)) = 11,500.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What does one year of interest cost?",
+        "answer": "$690.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6% of (28,000.00 - (9,500.00 + 4,000.00 + 3,000.00))) = 690.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "diff",
+              "from": {
+                "op": "money",
+                "cents": 2800000
+              },
+              "less": {
+                "op": "sum",
+                "of": [
+                  {
+                    "op": "money",
+                    "cents": 950000
+                  },
+                  {
+                    "op": "money",
+                    "cents": 400000
+                  },
+                  {
+                    "op": "money",
+                    "cents": 300000
+                  }
+                ]
+              }
+            },
+            "bps": 600,
+            "round": "exact"
+          },
+          "trace": "(6% of (28,000.00 - (9,500.00 + 4,000.00 + 3,000.00))) = 690.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What would be repaid in total after one year?",
+        "answer": "$12,190.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((28,000.00 - (9,500.00 + 4,000.00 + 3,000.00)) + (6% of (28,000.00 - (9,500.00 + 4,000.00 + 3,000.00)))) = 12,190.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 2800000
+                },
+                "less": {
+                  "op": "sum",
+                  "of": [
+                    {
+                      "op": "money",
+                      "cents": 950000
+                    },
+                    {
+                      "op": "money",
+                      "cents": 400000
+                    },
+                    {
+                      "op": "money",
+                      "cents": 300000
+                    }
+                  ]
+                }
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "diff",
+                  "from": {
+                    "op": "money",
+                    "cents": 2800000
+                  },
+                  "less": {
+                    "op": "sum",
+                    "of": [
+                      {
+                        "op": "money",
+                        "cents": 950000
+                      },
+                      {
+                        "op": "money",
+                        "cents": 400000
+                      },
+                      {
+                        "op": "money",
+                        "cents": 300000
+                      }
+                    ]
+                  }
+                },
+                "bps": 600,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "((28,000.00 - (9,500.00 + 4,000.00 + 3,000.00)) + (6% of (28,000.00 - (9,500.00 + 4,000.00 + 3,000.00)))) = 12,190.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Ranking funding sources by true cost",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats all of Ivo's funding as equivalent."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Aid and borrowing are separated for Ivo but earnings are not distinguished."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response ranks Ivo's sources with aid cheapest, earnings costing time and study capacity, and borrowing costing interest, and supports the ranking with figures."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the non-repayable aid come to?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do aid and earnings cover together?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much must be borrowed?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does one year of interest cost?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would be repaid in total after one year?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Rank Ivo's three funding sources by their true cost to him, and explain what makes term-time earnings different from both aid and borrowing."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the non-repayable aid come to? Answer: $13,500.00. Verification: (9,500.00 + 4,000.00) = 13,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What do aid and earnings cover together? Answer: $16,500.00. Verification: (9,500.00 + 4,000.00 + 3,000.00) = 16,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How much must be borrowed? Answer: $11,500.00. Verification: (28,000.00 - (9,500.00 + 4,000.00 + 3,000.00)) = 11,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What does one year of interest cost? Answer: $690.00. Verification: (6% of (28,000.00 - (9,500.00 + 4,000.00 + 3,000.00))) = 690.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What would be repaid in total after one year? Answer: $12,190.00. Verification: ((28,000.00 - (9,500.00 + 4,000.00 + 3,000.00)) + (6% of (28,000.00 - (9,500.00 + 4,000.00 + 3,000.00)))) = 12,190.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Ranking funding sources by true cost — Not yet: The response treats all of Ivo's funding as equivalent. Approaching: Aid and borrowing are separated for Ivo but earnings are not distinguished. Meets: The response ranks Ivo's sources with aid cheapest, earnings costing time and study capacity, and borrowing costing interest, and supports the ranking with figures. The response ranks Ivo's sources with aid cheapest, earnings costing time and study capacity, and borrowing costing interest, and supports the ranking with figures."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response ranks Ivo's sources with aid cheapest, earnings costing time and study capacity, and borrowing costing interest, and supports the ranking with figures."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u04-l05.scoring.json",
+    "sourceScoringSha256": "fc3c82206e66a38232ccf5fe8986702d6132eac750e20c39ef5b7812c9e82bc3",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

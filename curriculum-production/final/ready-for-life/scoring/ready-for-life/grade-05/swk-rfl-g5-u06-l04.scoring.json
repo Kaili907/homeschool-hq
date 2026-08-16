@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l04",
+  "lessonId": "ma-g5-ready-for-life-u06-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Following the confirmed plan",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Skips steps or does them out of the confirmed order without adjusting."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Completes all steps in the confirmed order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Completes all steps in order and catches or corrects a deviation on their own."
+          }
+        ]
+      },
+      {
+        "dimension": "Respecting supervision categories",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Attempts a supervision-required step without the adult present."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Follows every category correctly."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Follows every category correctly and proactively checks in before an ambiguous step."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Adult present for the full duration of every supervision-required step, confirmed by the adult.",
+      "Every plan step is verifiably completed, not just attempted.",
+      "Reflection critiques the plan itself, not just the learner's effort."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

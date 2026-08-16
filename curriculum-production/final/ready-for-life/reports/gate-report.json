@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "corpusId": "manuel-academy-ready-for-life-production-depth-r1",
+  "status": "PASS",
+  "lessonCount": 324,
+  "gradeCounts": {
+    "3": 36,
+    "4": 36,
+    "5": 36,
+    "7": 36,
+    "8": 36,
+    "9": 36,
+    "10": 36,
+    "11": 36,
+    "12": 36
+  },
+  "checks": {
+    "sourceCoverage": {
+      "status": "PASS",
+      "expected": 324,
+      "actual": 324,
+      "gradeCounts": {
+        "3": 36,
+        "4": 36,
+        "5": 36,
+        "7": 36,
+        "8": 36,
+        "9": 36,
+        "10": 36,
+        "11": 36,
+        "12": 36
+      }
+    },
+    "uniqueIdsAndNoOrphans": {
+      "status": "PASS"
+    },
+    "substantiveRubrics": {
+      "status": "PASS"
+    },
+    "noFakeAnswerKeys": {
+      "status": "PASS"
+    },
+    "privacy": {
+      "status": "PASS"
+    },
+    "noMediaProof": {
+      "status": "PASS"
+    },
+    "equalCreditSimulation": {
+      "status": "PASS"
+    },
+    "completionAuthority": {
+      "status": "PASS"
+    },
+    "progression": {
+      "status": "PASS"
+    },
+    "duplicateCollapse": {
+      "status": "PASS"
+    },
+    "productionDepth": {
+      "status": "PASS",
+      "lessonsRebuilt": 324
+    }
+  },
+  "validationIssueCount": 0,
+  "validationIssues": [],
+  "h3": {
+    "inputGateBranch": "mac/curriculum-production-gate-h3",
+    "inputGateSha": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "status": "READY",
+    "totalLessons": 324,
+    "readyCount": 324,
+    "needsHumanReviewCount": 0,
+    "notReadyCount": 0,
+    "codeCounts": {
+      "READY": 324,
+      "MISSING_INSTRUCTION": 0,
+      "MISSING_STUDENT_WORK": 0,
+      "MISSING_GUIDED_PRACTICE": 0,
+      "MISSING_INDEPENDENT_WORK": 0,
+      "MISSING_SCORING_AUTHORITY": 0,
+      "MISSING_ANSWER_KEY": 0,
+      "ANSWER_KEY_NOT_SUBSTANTIVE": 0,
+      "ANSWER_KEY_CONTENT_UNCERTAIN": 0,
+      "ANSWER_KEY_UNVERIFIED": 0,
+      "MISSING_RUBRIC": 0,
+      "RUBRIC_NOT_SUBSTANTIVE": 0,
+      "RUBRIC_CONTENT_UNCERTAIN": 0,
+      "MISSING_RESPONSE_SCORING_MODE": 0,
+      "CONTRADICTORY_RESPONSE_SCORING": 0,
+      "MISSING_REMEDIATION": 0,
+      "MISSING_EXTENSION": 0,
+      "ASSESSMENT_NOT_ALIGNED": 0,
+      "SOURCE_INTEGRITY_GAP": 0,
+      "SAFETY_OR_PRIVACY_GAP": 0,
+      "CREDENTIAL_REQUEST": 0,
+      "CREDENTIAL_REQUEST_QUOTED": 0,
+      "NEEDS_HUMAN_REVIEW": 0
+    },
+    "nonReadyLessons": []
+  }
+}

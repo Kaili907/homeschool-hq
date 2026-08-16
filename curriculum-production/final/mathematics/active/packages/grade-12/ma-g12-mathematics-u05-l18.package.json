@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u05-l18",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u05-l18",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Complex Solutions, Polynomials, and the Binomial Theorem",
+    "dayInUnit": 18,
+    "courseDay": 90,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "closure and arithmetic of rational expressions",
+    "title": "Publication, presentation, or reflection: closure and arithmetic of rational expressions"
+  },
+  "standards": [
+    "N-CN.8",
+    "N-CN.9",
+    "A-APR.5",
+    "A-APR.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 1,
+          "prompt": "Coefficient of x²y³ in (x + y)⁵?",
+          "workedSolution": {
+            "steps": [
+              "C(5, 3) = 10."
+            ],
+            "answer": "10"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 2,
+          "prompt": "Complete the statement: the product of two rational expressions …",
+          "choices": [
+            "is always a rational expression, because a common denominator can always be formed",
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because numerators and denominators multiply directly",
+            "need not be a rational expression, because the denominators may differ"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 2,
+          "prompt": "Factor x² + 49 completely over the complex numbers.",
+          "choices": [
+            "(x + 7i)²",
+            "(x + 7i)(x + 7i)",
+            "(x + 7i)(x − 7i)",
+            "(x + 7)(x − 7)"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 3,
+          "prompt": "A polynomial with real coefficients has degree 4. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 4, and any non-real roots occur in conjugate pairs",
+            "exactly 5, and any non-real roots occur in conjugate pairs",
+            "exactly 2, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 3,
+          "prompt": "In the expansion of (x + y)^6, find the coefficient of the term x^3·y^3.",
+          "choices": [
+            "18",
+            "15",
+            "9",
+            "20"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 3,
+          "prompt": "Complete the statement: the sum of two rational expressions …",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 3,
+          "prompt": "Factor x² + 121 completely over the complex numbers.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u05-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u05-l18"
+  }
+}

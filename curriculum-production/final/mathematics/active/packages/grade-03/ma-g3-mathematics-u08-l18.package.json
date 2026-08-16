@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u08-l18",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u08-l18",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "dayInUnit": 18,
+    "courseDay": 144,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "judging whether a real graph is honest",
+    "title": "Transfer, reflection, and publication: judging whether a real graph is honest"
+  },
+  "standards": [
+    "3.MD.3",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "A scaled bar graph uses a scale of 5 per symbol. A bar shows 3 symbols. What does that bar represent?",
+          "workedSolution": {
+            "steps": [
+              "3 symbols × 5 per symbol = 15."
+            ],
+            "answer": "15"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Red\" has 4 symbols and \"Blue\" has 2 symbols. How many more does \"Red\" have than \"Blue\"?",
+          "choices": [
+            "12",
+            "8",
+            "2",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Fish\" is worth 4 symbols. How many does \"Fish\" represent?",
+          "choices": [
+            "4",
+            "15",
+            "20",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "On a scaled bar graph with 5 per symbol, \"Apples\" has 8 symbols and \"Bananas\" has 6 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+          "choices": [
+            "40",
+            "70",
+            "10",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Cats\" is worth 1 symbols. How many does \"Cats\" represent?",
+          "choices": [
+            "0",
+            "5",
+            "10",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "On a scaled bar graph with 5 per symbol, \"Red\" has 4 symbols and \"Blue\" has 1 symbols. How many more does \"Red\" have than \"Blue\"?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Cats\" is worth 5 symbols. How many does \"Cats\" represent?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u08-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u08-l18"
+  }
+}

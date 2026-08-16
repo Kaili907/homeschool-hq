@@ -1,0 +1,395 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u03-l05",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Food Safety",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: a simple no-heat preparation"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can practice a simple no-heat preparation. I will do one step at a time and check one result.",
+  "scenario": "A trusted adult and the learner choose one real, simple no-heat food to make together, gathering only ingredients that are already washed, cooked, or pre-sliced so no stove, oven, or knife is needed.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult stays in the kitchen for the entire preparation and confirms every ingredient is already washed, cooked, or pre-sliced before the learner touches it.",
+    "No stove, oven, small appliance, or sharp-bladed knife is used at any point; if a step would normally need one of these, an adult has already completed it ahead of time.",
+    "Any ingredient that has been sitting out, such as dairy or a cooked item left unrefrigerated for more than two hours, is checked with the adult before use rather than assumed safe."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no safe kitchen access or pre-prepared ingredients are available, the learner instead plans the same no-heat food item in writing, listing every ingredient, the order of assembly, and one handwashing or surface-cleaning step at each stage, then explains how they would check that each ingredient was ready to eat before using it."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g4-u03-l05-model-card",
+    "Embedded resource: swk-rfl-g4-u03-l05-step-card",
+    "Embedded resource: swk-rfl-g4-u03-l05-guided-card",
+    "Embedded resource: swk-rfl-g4-u03-l05-independent-card",
+    "Embedded resource: swk-rfl-g4-u03-l05-evidence-record",
+    "Embedded resource: swk-rfl-g4-u03-l05-retry-pair",
+    "learner-local: ready-to-eat ingredients that need no cutting or cooking, such as bread, pre-sliced cheese or deli item, yogurt, granola, or washed berries or grapes",
+    "learner-local: a clean plate or bowl",
+    "learner-local: a spoon or butter knife for spreading",
+    "learner-local: soap and water for handwashing",
+    "learner-local: a clean cloth for the workspace"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Open swk-rfl-g4-u03-l05-model-card. Watch one complete example.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g4-u03-l05-guided-card. Do the coached move.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g4-u03-l05-independent-card. Choose one complete route. Follow its steps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g4-u03-l05-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific food-safety step you did during this preparation that someone rushing without thinking might skip, and what could go wrong if they skipped it."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g4-u03-l05-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g4-u03-l05-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g4-u03-l05-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Food-safety practice during assembly: The full 20-second handwash and workspace wipe happen before assembly, and ready-to-eat ingredients stay separated from anything unconfirmed clean. | Explanation of safety reasoning: The learner names a specific moment they checked a surface or utensil was clean, and the reflection names a real skippable step and its consequence. Resume at the next unfinished step on swk-rfl-g4-u03-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner plan and assemble a second no-heat food item that uses at least one ingredient not used the first time, then write a short comparison of which of the two items required more careful handling to avoid cross-contamination and why.",
+  "scoringRef": "scoring/swk-rfl-g4-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can practice a simple no-heat preparation. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g4-u03-l05-model-card",
+        "swk-rfl-g4-u03-l05-step-card",
+        "swk-rfl-g4-u03-l05-guided-card",
+        "swk-rfl-g4-u03-l05-independent-card",
+        "swk-rfl-g4-u03-l05-evidence-record",
+        "swk-rfl-g4-u03-l05-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g4-u03-l05-local-1",
+          "label": "ready-to-eat ingredients that need no cutting or cooking, such as bread, pre-sliced cheese or deli item, yogurt, granola, or washed berries or grapes",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u03-l05-local-2",
+          "label": "a clean plate or bowl",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u03-l05-local-3",
+          "label": "a spoon or butter knife for spreading",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u03-l05-local-4",
+          "label": "soap and water for handwashing",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u03-l05-local-5",
+          "label": "a clean cloth for the workspace",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g4-u03-l05-model-card",
+        "kind": "model",
+        "title": "a simple no-heat preparation worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: A trusted adult and the learner choose one real, simple no-heat food to make together, gathering only ingredients that are already washed, cooked, or pre-sliced so no stove, oven, or knife is needed.",
+          "Model move 1: Read the condition and name the exact a simple no-heat preparation decision or action.",
+          "Model move 2: Before touching any ingredient, wash your hands and clean your workspace.",
+          "Model move 3: With your adult supervising, gather your ready-to-eat ingredients, check each one for freshness with your adult, and lay them out in the order you will use them.",
+          "Model check: Food-safety practice during assembly: The full 20-second handwash and workspace wipe happen before assembly, and ready-to-eat ingredients stay separated from anything unconfirmed clean. | Explanation of safety reasoning: The learner names a specific moment they checked a surface or utensil was clean, and the reflection names a real skippable step and its consequence."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l05-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "a simple no-heat preparation action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for a simple no-heat preparation.",
+          "2. Watch the worked move on swk-rfl-g4-u03-l05-model-card.",
+          "3. Do one coached move on swk-rfl-g4-u03-l05-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g4-u03-l05-independent-card.",
+          "5. Save the small record on swk-rfl-g4-u03-l05-evidence-record; use swk-rfl-g4-u03-l05-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l05-guided-card",
+        "kind": "guided-practice",
+        "title": "a simple no-heat preparation coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: A trusted adult and the learner choose one real, simple no-heat food to make together, gathering only ingredients that are already washed, cooked, or pre-sliced so no stove, oven, or knife is needed.",
+          "Coach direction: Before touching any ingredient, wash your hands and clean your workspace.",
+          "Learner prompt: I washed my hands with soap for a full 20 seconds before touching any ingredient.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l05-independent-card",
+        "kind": "independent-task",
+        "title": "a simple no-heat preparation complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult supervising, gather your ready-to-eat ingredients, check each one for freshness with your adult, and lay them out in the order you will use them.",
+          "Response 1 (t2-p1): I checked with my adult that every ingredient was already washed, cooked, or pre-sliced and safe to use.",
+          "Response 2 (t2-p2): I laid out my ingredients in the order I planned to use them before starting to assemble.",
+          "Equal-access rule: If no safe kitchen access or pre-prepared ingredients are available, the learner instead plans the same no-heat food item in writing, listing every ingredient, the order of assembly, and one handwashing or surface-cleaning step at each stage, then explains how they would check that each ingredient was ready to eat before using it."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l05-evidence-record",
+        "kind": "evidence-record",
+        "title": "a simple no-heat preparation minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain one specific food-safety step you did during this preparation that someone rushing without thinking might skip, and what could go wrong if they skipped it.",
+          "Success checks: Food-safety practice during assembly: The full 20-second handwash and workspace wipe happen before assembly, and ready-to-eat ingredients stay separated from anything unconfirmed clean. | Explanation of safety reasoning: The learner names a specific moment they checked a surface or utensil was clean, and the reflection names a real skippable step and its consequence.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l05-retry-pair",
+        "kind": "retry",
+        "title": "a simple no-heat preparation supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g4-u03-l05-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g4-u03-l05-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional a simple no-heat preparation condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Food-safety practice during assembly: The full 20-second handwash and workspace wipe happen before assembly, and ready-to-eat ingredients stay separated from anything unconfirmed clean. | Explanation of safety reasoning: The learner names a specific moment they checked a surface or utensil was clean, and the reflection names a real skippable step and its consequence..",
+          "Return: resume at the next unfinished step on swk-rfl-g4-u03-l05-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "a simple no-heat preparation worked model",
+      "startingCondition": "A trusted adult and the learner choose one real, simple no-heat food to make together, gathering only ingredients that are already washed, cooked, or pre-sliced so no stove, oven, or knife is needed.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact a simple no-heat preparation decision or action.",
+        "Model move 2: Before touching any ingredient, wash your hands and clean your workspace.",
+        "Model move 3: With your adult supervising, gather your ready-to-eat ingredients, check each one for freshness with your adult, and lay them out in the order you will use them."
+      ],
+      "reasoning": "The model names the condition, follows the ordered a simple no-heat preparation process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Food-safety practice during assembly: The full 20-second handwash and workspace wipe happen before assembly, and ready-to-eat ingredients stay separated from anything unconfirmed clean.",
+        "Explanation of safety reasoning: The learner names a specific moment they checked a surface or utensil was clean, and the reflection names a real skippable step and its consequence."
+      ],
+      "resourceRef": "swk-rfl-g4-u03-l05-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for a simple no-heat preparation.",
+        "2. Watch the worked move on swk-rfl-g4-u03-l05-model-card.",
+        "3. Do one coached move on swk-rfl-g4-u03-l05-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g4-u03-l05-independent-card.",
+        "5. Save the small record on swk-rfl-g4-u03-l05-evidence-record; use swk-rfl-g4-u03-l05-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g4-u03-l05-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "A trusted adult and the learner choose one real, simple no-heat food to make together, gathering only ingredients that are already washed, cooked, or pre-sliced so no stove, oven, or knife is needed.",
+      "prompt": "I washed my hands with soap for a full 20 seconds before touching any ingredient.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Food-safety practice during assembly: The full 20-second handwash and workspace wipe happen before assembly, and ready-to-eat ingredients stay separated from anything unconfirmed clean.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g4-u03-l05-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g4-u03-l05-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "a simple no-heat preparation — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g4-u03-l05-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult supervising, gather your ready-to-eat ingredients, check each one for freshness with your adult, and lay them out in the order you will use them.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "a simple no-heat preparation — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g4-u03-l05-independent-card",
+        "directions": "If no safe kitchen access or pre-prepared ingredients are available, the learner instead plans the same no-heat food item in writing, listing every ingredient, the order of assembly, and one handwashing or surface-cleaning step at each stage, then explains how they would check that each ingredient was ready to eat before using it.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g4-u03-l05-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain one specific food-safety step you did during this preparation that someone rushing without thinking might skip, and what could go wrong if they skipped it.",
+      "observableCriteria": [
+        "Food-safety practice during assembly: The full 20-second handwash and workspace wipe happen before assembly, and ready-to-eat ingredients stay separated from anything unconfirmed clean.",
+        "Explanation of safety reasoning: The learner names a specific moment they checked a surface or utensil was clean, and the reflection names a real skippable step and its consequence."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g4-u03-l05-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g4-u03-l05-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g4-u03-l05-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g4-u03-l05-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Food-safety practice during assembly: The full 20-second handwash and workspace wipe happen before assembly, and ready-to-eat ingredients stay separated from anything unconfirmed clean. | Explanation of safety reasoning: The learner names a specific moment they checked a surface or utensil was clean, and the reflection names a real skippable step and its consequence.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g4-u03-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g4-u03-l05-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l04",
+  "lessonId": "ma-g10-ready-for-life-u01-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Question quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Questions are generic and could apply to any job (e.g., 'is it fun')." },
+          { "label": "Proficient", "descriptor": "At least three of five questions are specific to this job and could not be answered by a general web search." },
+          { "label": "Advanced", "descriptor": "Questions probe day-to-day reality, entry path, and one honest tradeoff of the job." }
+        ]
+      },
+      {
+        "dimension": "Conversation conduct",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Conversation happened but the learner needed heavy adult prompting to ask questions." },
+          { "label": "Proficient", "descriptor": "Learner asked at least three prepared questions and shared only first name and questions." },
+          { "label": "Advanced", "descriptor": "Learner asked follow-up questions beyond the prepared five based on what the person said." }
+        ]
+      },
+      {
+        "dimension": "Synthesis",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Summary restates a fact without connecting it to the learner's own thinking." },
+          { "label": "Proficient", "descriptor": "Summary names a specific, useful piece of information and states whether it changed the learner's interest." },
+          { "label": "Advanced", "descriptor": "Reflection names a specific reason for the shift in interest, not a vague 'it was interesting.'" }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The five warm-up questions are specific to the named job, not generic.",
+      "The learner's checklist confirms an adult helped set up contact and confirms only first name/questions were shared.",
+      "The reflection response names a concrete cause for the shift, or explicitly states there was no shift and why."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

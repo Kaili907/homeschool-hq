@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u09-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u09-l07",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Linear, Quadratic, and Exponential Models",
+    "dayInUnit": 7,
+    "courseDay": 151,
+    "phase": "Investigation or close reading",
+    "focus": "constant rate of change versus constant ratio",
+    "title": "Investigation or close reading: constant rate of change versus constant ratio"
+  },
+  "standards": [
+    "F-LE.1",
+    "F-LE.2",
+    "F-LE.3",
+    "F-LE.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 1,
+          "prompt": "Does 100t ever fall behind 2^t?",
+          "workedSolution": {
+            "steps": [
+              "2^t doubles each step while 100t adds 100.",
+              "Doubling overtakes any fixed addition."
+            ],
+            "answer": "Yes, eventually"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 2,
+          "prompt": "An asset's value is modelled by V(t) = 2700(0.97)^t, with t in years. What does 2700 represent?",
+          "choices": [
+            "the fraction of value retained each year, 0.97, meaning a 3% annual loss",
+            "the number of years until the asset is worthless",
+            "the total value lost over the asset's life",
+            "the value of the asset when it was new, $2700"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A linear model passes through (3, -6) and (8, -1). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = 1x + 9",
+            "f(x) = -1x − 9",
+            "f(x) = -9x + 1",
+            "f(x) = 1x − 9"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 2,
+          "prompt": "A table of successive outputs reads 2, 4, 6, 8. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Neither; the pattern does not repeat.",
+            "Exponential; successive outputs have a constant ratio of 2.",
+            "Quadratic; the second differences are constant.",
+            "Linear; successive outputs differ by a constant 2."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A population of 2700 grows by 16% per year. Write the model P(t) and find the population after 4 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 2700(1.16)^t; P(4) ≈ 4889",
+            "P(t) = 2700(1.16)^t; P(4) ≈ 5671",
+            "P(t) = 2700 + 16t; P(4) ≈ 2764",
+            "P(t) = 2700(0.16)^t; P(4) ≈ 2"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 3,
+          "prompt": "Quantity A grows by 106 units each year. Quantity B doubles or triples each year, with ratio 2, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "The two grow at the same eventual rate.",
+            "A stays ahead permanently because 106 is larger than 2.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+            "B exceeds A only if B starts larger than A."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 3,
+          "prompt": "An asset's value is modelled by V(t) = 2500(0.9)^t, with t in years. What does 2500 represent?",
+          "choices": [
+            "the total value lost over the asset's life",
+            "the value of the asset when it was new, $2500",
+            "the fraction of value retained each year, 0.9, meaning a 10% annual loss",
+            "the number of years until the asset is worthless"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A linear model passes through (1, 8) and (3, 0). Write it in the form f(x) = mx + b.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 3,
+          "prompt": "A table of successive outputs reads 6, 12, 18, 24. Is the relationship linear or exponential, and why?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u09-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u09-l07"
+  }
+}

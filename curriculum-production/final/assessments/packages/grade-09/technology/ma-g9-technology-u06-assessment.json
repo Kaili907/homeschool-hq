@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-technology-u06-assessment",
+  "courseRef": "ma-g9-technology",
+  "grade": 9,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g9-technology-u06",
+    "unitNumber": 6,
+    "unitTitle": "Foundations Project and Impact Review",
+    "courseTitle": "Computer Science Principles and Digital Citizenship",
+    "assessmentLessonRef": "ma-g9-technology-u06-l05"
+  },
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Impacts of Computing"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u06-l05.task-package.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Demonstrate foundations project and impact review independently, with no scaffold, prompts, or worked example in view. Produce a complete correct solution to a new problem, then prove it works: state the expected result first, run or hand-trace at least two cases including one boundary case, and show actual against expected. Then explain the reasoning in your own words well enough that a reader who has not seen foundations project and impact review could follow why each decision was made. Both the working result and the explanation are required — either one alone is incomplete. Anchor today's work inside its unit: this session's evidence is about foundations project and impact review, and it belongs to \"Foundations Project and Impact Review\", which also covers separate topics such as project scoping and success criteria. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Independent complete solution, a two-case verification with expected against actual, and a self-contained written explanation."
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/technology/ma-g9-technology-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task on foundations project and impact review.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-technology-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u06-l05.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Foundations Project and Impact Review?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

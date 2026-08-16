@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l01",
+  "lessonId": "ma-g7-ready-for-life-u01-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Grid completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more days are blank, or an entire category of commitments (school, chores, activities) is missing across the week."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All seven days are filled in with the commitments the learner already knew about, across school, chores, and activities as applicable."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the grid distinguishes fixed commitments (school) from flexible ones (chores, personal time)."
+          }
+        ]
+      },
+      {
+        "dimension": "Load analysis",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The most-loaded day is not identified, or the named risk is generic rather than specific to that day's actual commitments."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The most-loaded day is correctly identified from the grid and paired with a specific, plausible risk."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the proposed change to reduce the risk is concrete and actually feasible given the rest of the grid."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The week mapped is the learner's own real upcoming week, not an invented example.",
+      "Commitments reflect the learner's actual household and activities rather than an assumed set every learner would have."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

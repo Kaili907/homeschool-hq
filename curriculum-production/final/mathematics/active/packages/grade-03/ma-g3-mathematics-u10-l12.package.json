@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l12",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l12",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 12,
+    "courseDay": 174,
+    "phase": "Applied problem solving",
+    "focus": "connecting geometry, fractions, and measurement",
+    "title": "Applied problem solving: connecting geometry, fractions, and measurement"
+  },
+  "standards": [
+    "3.NF.1",
+    "3.MD.7",
+    "3.G.2"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 1,
+          "prompt": "A rectangular patio is 7 m long and 4 m wide. What is its area?",
+          "workedSolution": {
+            "steps": [
+              "7 × 4 = 28.",
+              "The area is 28 square meters."
+            ],
+            "answer": "28 sq m"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 2,
+          "prompt": "A garden bed is divided into 6 equal sections. 2 sections are planted with flowers. What fraction of the bed is planted?",
+          "choices": [
+            "2/6",
+            "2/5",
+            "6/2",
+            "2/7"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "partition-shape-equal-areas-capstone",
+          "standard": "3.G.2",
+          "difficulty": 2,
+          "prompt": "A square garden plot is partitioned into 6 parts of equal area. What fraction of the plot does one part represent?",
+          "choices": [
+            "1/7",
+            "1/6",
+            "1/5",
+            "6/1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangular patio is 6 ft long and 8 ft wide. What is its area?",
+          "choices": [
+            "14 sq ft",
+            "49 sq ft",
+            "28 sq ft",
+            "48 sq ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A garden bed is divided into 8 equal sections. 2 sections are planted with flowers. What fraction of the bed is planted?",
+          "choices": [
+            "2/8",
+            "2/7",
+            "2/9",
+            "8/2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "partition-shape-equal-areas-capstone",
+          "standard": "3.G.2",
+          "difficulty": 3,
+          "prompt": "A square garden plot is partitioned into 8 parts of equal area. What fraction of the plot does one part represent?",
+          "choices": [
+            "1/8",
+            "1/9",
+            "1/7",
+            "8/1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular patio is 8 ft long and 12 ft wide. What is its area?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A garden bed is divided into 8 equal sections. 3 sections are planted with flowers. What fraction of the bed is planted?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l12"
+  }
+}

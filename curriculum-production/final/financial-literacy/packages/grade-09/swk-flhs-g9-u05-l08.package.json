@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u05-l08",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: how inflation changes real returns"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "how inflation changes real returns",
+  "objective": "Apply the real-versus-nominal method to wages rather than investments, and determine whether a fictional pay rise left the worker better off.",
+  "scenario": "A fictional worker’s hourly wage rises from $18.40 to a new figure while prices in the same simulated year rise 3.4%. All figures are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional wage and inflation figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional wage of $18.40 an hour rises by 2.2%. Over the same year, prices rise 3.4%, so a basket costing $1.00 now costs $1.034.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the new hourly wage? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the new wage worth in the prices of a year ago? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much purchasing power did the worker lose per hour despite the rise?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Scale the effect up to a working year of 1,760 hours.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Over 1,760 hours, how much purchasing power is lost across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Did this pay rise leave the worker better off?",
+          "choices": [
+            "Yes, wages rose",
+            "No, prices rose faster than wages",
+            "It cannot be determined from these figures"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What hourly wage would have exactly kept pace with prices? Round to the nearest cent.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "The same method was used earlier on an investment return. Explain what is being measured in both cases, and one way the wage case differs from the investment case."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The figure of 3.4% describes prices across a whole simulated economy. Say why an individual worker’s own experience of price rises could differ, and what that means for the $387.20 figure."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the real wage comes out above $18.40, check the direction of the division: dividing by 1.034 must make the figure smaller, because the same dollars buy less. Multiplying by 1.034 answers a different question, the one in t2-p3.",
+  "extension": "Compute the real change if inflation had been 1.4% instead, and state the rule for when a nominal rise is also a real one.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u05-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the new hourly wage? Round to the nearest cent."
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the new wage worth in the prices of a year ago? Round to the nearest cent."
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much purchasing power did the worker lose per hour despite the rise?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "Over 1,760 hours, how much purchasing power is lost across the year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Did this pay rise leave the worker better off?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What hourly wage would have exactly kept pace with prices? Round to the nearest cent."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The same method was used earlier on an investment return. Explain what is being measured in both cases, and one way the wage case differs from the investment case."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The figure of 3.4% describes prices across a whole simulated economy. Say why an individual worker’s own experience of price rises could differ, and what that means for the $387.20 figure."
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "INVESTING",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "APPLICATION_TRANSFER",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.investing.1",
+      "meaning": "Expected return describes uncertainty; it is not a promised result."
+    },
+    {
+      "conceptId": "finlit.investing.2",
+      "meaning": "Risk, diversification, fees, liquidity, and time horizon must be considered together."
+    },
+    {
+      "conceptId": "finlit.investing.3",
+      "meaning": "A comparison should use the same time period and include stated fees and losses as well as gains."
+    }
+  ],
+  "evidencePurpose": "Develop and apply investing, risk, return, fees, and time horizon through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "PROFILE_BOUNDARY",
+    "title": "application transfer boundary",
+    "paragraphs": [],
+    "protectedBoundary": "Retrieve only the named prerequisite; do not model the protected transfer solution before the response.",
+    "conceptLessonId": "ma-g9-financial-literacy-u05-l02"
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "INVESTING",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "Use only the stated principal or balance, rate meaning, period, compounding method, timing, fees, payment allocation, and rounding rule.",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "DEFERRED_OR_PREREQUISITE_ONLY",
+    "reason": "The transfer task depends on prior teaching; the named concept lesson contains the model.",
+    "modelLessonId": "ma-g9-financial-literacy-u05-l02"
+  },
+  "workedExamples": [],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g9-financial-literacy-u05-l08",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: A higher possible return does not make an option automatically better for every goal or time horizon.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t3-p1",
+      "t3-p2"
+    ],
+    "gradeBandDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.investing.1",
+      "finlit.investing.2",
+      "finlit.investing.3"
+    ],
+    "evidenceLessonId": "ma-g9-financial-literacy-u05-l09",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.investing.core-confusion",
+      "observableSignal": "A higher possible return does not make an option automatically better for every goal or time horizon.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-investing-g9",
+        "title": "Alternate model — investing, risk, return, fees, and time horizon",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "A fictional fund starts at 30,000 cents, has a stated 3.00% scenario gain, and charges a 200-cent fee."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Gain: 30,000 × 300 ÷ 10,000 = 900 cents.",
+          "Net gain: 900 − 200 = 700 cents.",
+          "Ending amount: 30,700 cents.",
+          "State that this scenario result is not guaranteed and compare the goal’s time horizon."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g9-financial-literacy-u05-l07",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g9-financial-literacy-u05-l09",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.investing.1",
+      "finlit.investing.2",
+      "finlit.investing.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g9-financial-literacy-u05-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.investing.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "INVESTING",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "Use only the stated principal or balance, rate meaning, period, compounding method, timing, fees, payment allocation, and rounding rule.",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g9-financial-literacy-u05-l08:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "HIGH_SCHOOL_9_12",
+      "scaffolding": "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+      "reasoningDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u05-l08.package.json",
+    "sourcePackageSha256": "aaa1c395c8eb9c2c62d7cf2124f523e8666e58be840c9e30ea4879a6373d133a",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u05-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

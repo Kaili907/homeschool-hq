@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l10",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l10",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 10,
+    "courseDay": 10,
+    "phase": "Discussion or problem seminar",
+    "focus": "copying segments and angles",
+    "title": "Discussion or problem seminar: copying segments and angles"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 1,
+          "prompt": "A regular hexagon is inscribed in a circle. Central angle per side?",
+          "workedSolution": {
+            "steps": [
+              "Six equal arcs make 360°.",
+              "360 ÷ 6 = 60°."
+            ],
+            "answer": "60°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the angle bisector construction?",
+          "choices": [
+            "The construction relies on the angle being acute.",
+            "The construction builds two congruent triangles by SSS, so the angles at the vertex are congruent.",
+            "Equal arcs always produce equal angles regardless of the triangle.",
+            "The ray drawn appears to split the angle evenly."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a line segment?",
+          "choices": [
+            "part of a line that goes on forever in one direction",
+            "a line with a measurable length",
+            "the set of two endpoints and all points between them on the line through them",
+            "the shortest path between two shapes"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. From vertex V draw an arc crossing both rays at P and Q. From P and Q draw equal arcs meeting at R. Draw ray VR. What has been constructed?",
+          "choices": [
+            "the bisector of the angle at V",
+            "a line perpendicular to one ray",
+            "the perpendicular bisector of PQ only",
+            "an equilateral triangle on PQ"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 12. What central angle does each side subtend?",
+          "choices": [
+            "120°",
+            "30°",
+            "61°",
+            "60°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "Which statement correctly justifies the perpendicular bisector construction?",
+          "choices": [
+            "Any line through the midpoint is a perpendicular bisector.",
+            "The compass width was more than half the segment, which forces perpendicularity.",
+            "The arcs look symmetric, so the line must be perpendicular.",
+            "Both constructed points are equidistant from the endpoints, and the locus of such points is exactly the perpendicular bisector."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a angle?",
+          "choices": [
+            "the space between two intersecting lines",
+            "the amount of turn measured in degrees",
+            "the figure formed by two rays sharing a common endpoint",
+            "a corner of a polygon"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. Through point P not on line ℓ, copy the angle that a transversal makes with ℓ, placing the copy at P on the same transversal. What has been constructed?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular quadrilateral is inscribed in a circle of radius 2. What central angle does each side subtend?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l10"
+  }
+}

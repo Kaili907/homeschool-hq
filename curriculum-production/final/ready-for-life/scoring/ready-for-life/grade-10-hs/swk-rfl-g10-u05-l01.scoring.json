@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l01",
+  "lessonId": "ma-g10-ready-for-life-u05-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Source independence",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The two sources are actually the same source checked twice." },
+          { "label": "Proficient", "descriptor": "The two sources are genuinely independent." },
+          { "label": "Advanced", "descriptor": "The two sources are independent and the learner explains why each is a credible type of source for this fact." }
+        ]
+      },
+      {
+        "dimension": "Cross-checking reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No real comparison is made between the two sources' findings." },
+          { "label": "Proficient", "descriptor": "States whether the sources agreed or disagreed." },
+          { "label": "Advanced", "descriptor": "States agreement or disagreement and gives specific reasoning for which source to trust or why confidence is warranted." }
+        ]
+      },
+      {
+        "dimension": "Understanding of information currency",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection doesn't identify a genuine reason a source could be outdated." },
+          { "label": "Proficient", "descriptor": "Names a plausible, specific reason." },
+          { "label": "Advanced", "descriptor": "Names a specific reason connected to the actual type of fact researched." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The chosen fact is specific and checkable, not a vague topic.",
+      "Both source entries record what was actually found, not a restated guess.",
+      "The reflection's reason for outdated information is genuine and specific, not a generic 'things change.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

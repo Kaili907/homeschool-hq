@@ -1,0 +1,267 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u02-l03",
+  "lessonId": "ma-g4-financial-literacy-u02-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much does Hugo set aside for saving?",
+        "answer": "$6.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(10% of 60.00) = 6.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 6000
+            },
+            "bps": 1000,
+            "round": "exact"
+          },
+          "trace": "(10% of 60.00) = 6.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much does Hugo set aside for giving?",
+        "answer": "$3.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5% of 60.00) = 3.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 6000
+            },
+            "bps": 500,
+            "round": "exact"
+          },
+          "trace": "(5% of 60.00) = 3.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What do both set-asides come to together?",
+        "answer": "$9.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((10% of 60.00) + (5% of 60.00)) = 9.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 6000
+                },
+                "bps": 1000,
+                "round": "exact"
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 6000
+                },
+                "bps": 500,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "((10% of 60.00) + (5% of 60.00)) = 9.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How much of the $60.00 is left to plan with?",
+        "answer": "$51.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(60.00 - ((10% of 60.00) + (5% of 60.00))) = 51.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 6000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 6000
+                  },
+                  "bps": 1000,
+                  "round": "exact"
+                },
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 6000
+                  },
+                  "bps": 500,
+                  "round": "exact"
+                }
+              ]
+            }
+          },
+          "trace": "(60.00 - ((10% of 60.00) + (5% of 60.00))) = 51.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "On an $80.00 pay-day, how much would the two set-asides come to?",
+        "answer": "$12.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((10% of 80.00) + (5% of 80.00)) = 12.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 8000
+                },
+                "bps": 1000,
+                "round": "exact"
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 8000
+                },
+                "bps": 500,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "((10% of 80.00) + (5% of 80.00)) = 12.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning about percentage set-asides",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Hugo's set-asides as fixed amounts that never move."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response notices the set-asides changed but does not connect that to the percentage."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Hugo's percentages scale with his pay, so bigger pay sets aside more automatically and smaller pay sets aside less."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does Hugo set aside for saving?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does Hugo set aside for giving?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do both set-asides come to together?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much of the $60.00 is left to plan with?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "On an $80.00 pay-day, how much would the two set-asides come to?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Hugo sets aside a percentage rather than a fixed dollar amount. What does that do when his pay changes?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much does Hugo set aside for saving? Answer: $6.00. Verification: (10% of 60.00) = 6.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How much does Hugo set aside for giving? Answer: $3.00. Verification: (5% of 60.00) = 3.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What do both set-asides come to together? Answer: $9.00. Verification: ((10% of 60.00) + (5% of 60.00)) = 9.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: How much of the $60.00 is left to plan with? Answer: $51.00. Verification: (60.00 - ((10% of 60.00) + (5% of 60.00))) = 51.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: On an $80.00 pay-day, how much would the two set-asides come to? Answer: $12.00. Verification: ((10% of 80.00) + (5% of 80.00)) = 12.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Reasoning about percentage set-asides — Not yet: The response treats Hugo's set-asides as fixed amounts that never move. Approaching: The response notices the set-asides changed but does not connect that to the percentage. Meets: The response explains that Hugo's percentages scale with his pay, so bigger pay sets aside more automatically and smaller pay sets aside less. The response explains that Hugo's percentages scale with his pay, so bigger pay sets aside more automatically and smaller pay sets aside less."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Hugo's percentages scale with his pay, so bigger pay sets aside more automatically and smaller pay sets aside less."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-04/swk-fl-g4-u02-l03.scoring.json",
+    "sourceScoringSha256": "515252a6e30ad7b6214caa56191492f5a0619bbfd8647e8cecbfadbef0e9355d",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

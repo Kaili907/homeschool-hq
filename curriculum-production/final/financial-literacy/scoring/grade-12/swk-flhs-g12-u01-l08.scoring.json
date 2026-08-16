@@ -1,0 +1,337 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l08",
+  "lessonId": "ma-g12-financial-literacy-u01-l08",
+  "integratedDomains": [
+    "income",
+    "taxes",
+    "budgeting",
+    "banking"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$27,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,900 a month for the 7 months worked at the first employer. Pay is counted where it was earned, because each employer withholds only against its own payments."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$27,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,400 a month for the remaining 5 months. The two jobs together account for all 12 months, so no pay is counted twice or left out."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$54,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$27,300.00 plus $27,000.00. The schedule is written to apply once, to this figure."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$45,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$54,300.00 less one $9,000 deduction. The deduction is available once, against total income."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$5,358.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,040.00 on the first $10,400, $4,032.00 on the $33,600 band that runs to $44,000, and 22% of the $1,300 above $44,000, which is $286.00. Taxable income crosses into the third band this year, which neither job alone would have reached."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,988.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The first employer sees $27,300.00, subtracts the whole $9,000 deduction to reach $18,300.00 taxable, and charges $1,040.00 on the first $10,400 plus 12% of the remaining $7,900."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,952.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The second employer sees $27,000.00, subtracts its own full $9,000 deduction to reach $18,000.00 taxable, and charges $1,040.00 plus 12% of $7,600."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$1,418.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,358.00 owed against $3,940.00 withheld between the two employers. The $9,000 deduction was applied twice and the 10% band was used twice, and no employer applied the 22% band at all."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "job1Monthly * job1Months",
+        "substituted": "3900 * 7",
+        "result": "$27,300.00",
+        "why": "$3,900 a month for the 7 months worked at the first employer. Pay is counted where it was earned, because each employer withholds only against its own payments."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "job2Monthly * job2Months",
+        "substituted": "5400 * 5",
+        "result": "$27,000.00",
+        "why": "$5,400 a month for the remaining 5 months. The two jobs together account for all 12 months, so no pay is counted twice or left out."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$54,300.00",
+        "why": "$27,300.00 plus $27,000.00. The schedule is written to apply once, to this figure."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - deduction",
+        "substituted": "#t1-p3 - 9000",
+        "result": "$45,300.00",
+        "why": "$54,300.00 less one $9,000 deduction. The deduction is available once, against total income."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "band1 * lowRate + (band2 - band1) * midRate + (#t2-p1 - band2) * highRate",
+        "substituted": "10400 * 0.1 + (44000 - 10400) * 0.12 + (#t2-p1 - 44000) * 0.22",
+        "result": "$5,358.00",
+        "why": "$1,040.00 on the first $10,400, $4,032.00 on the $33,600 band that runs to $44,000, and 22% of the $1,300 above $44,000, which is $286.00. Taxable income crosses into the third band this year, which neither job alone would have reached."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "band1b * lowRate2 + (#t1-p1 - deduction2 - band1b) * midRate2",
+        "substituted": "10400 * 0.1 + (#t1-p1 - 9000 - 10400) * 0.12",
+        "result": "$1,988.00",
+        "why": "The first employer sees $27,300.00, subtracts the whole $9,000 deduction to reach $18,300.00 taxable, and charges $1,040.00 on the first $10,400 plus 12% of the remaining $7,900."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "band1c * lowRate3 + (#t1-p2 - deduction3 - band1c) * midRate3",
+        "substituted": "10400 * 0.1 + (#t1-p2 - 9000 - 10400) * 0.12",
+        "result": "$1,952.00",
+        "why": "The second employer sees $27,000.00, subtracts its own full $9,000 deduction to reach $18,000.00 taxable, and charges $1,040.00 plus 12% of $7,600."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p2 - #t2-p3 - #t2-p4",
+        "substituted": "#t2-p2 - #t2-p3 - #t2-p4",
+        "result": "$1,418.00",
+        "why": "$5,358.00 owed against $3,940.00 withheld between the two employers. The $9,000 deduction was applied twice and the 10% band was used twice, and no employer applied the 22% band at all."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The fictional worker will owe $1,418.00 at filing through no error of their own. Explain why the withholding method produces this, and set out one workable plan for meeting the bill, stating what your plan requires the worker to do each month.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the cause structurally: each employer applied a $9,000 deduction and a 10% band that are each available only once, and neither employer could see the income that pushed the worker into the 22% band.",
+          "Sets out a workable plan with a monthly figure attached — for example setting aside roughly $118 a month across twelve months, or a larger amount across the five months remaining after the job change — and states where the money is held until filing.",
+          "States that the alternative route is to have withholding increased at the second job so the shortfall is collected through payroll instead, and notes what that costs: less take-home pay each period."
+        ],
+        "evidenceRequirements": [
+          "Uses the $5,358.00 owed and the $3,940.00 withheld, and shows how the $1,418.00 gap follows from them."
+        ],
+        "lookFors": [
+          "The plan names where the set-aside money sits between now and filing, rather than leaving it in general spending.",
+          "The response does not treat the shortfall as a penalty or a mistake by the worker."
+        ],
+        "commonMisconception": "Assuming that because an employer withheld tax from every paycheque, the correct amount for the year has necessarily been collected.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What did the first job pay across the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What did the second job pay across the year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is total pay for the year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is taxable income for the year after one standard deduction?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the federal income tax owed on that taxable income?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What did the first employer withhold, treating its own pay as the only income?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What did the second employer withhold on the same basis?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What is still owed when the year is filed?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The fictional worker will owe $1,418.00 at filing through no error of their own. Explain why the withholding method produces this, and set out one workable plan for meeting the bill, stating what your plan requires the worker to do each month."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What did the first job pay across the year? Answer: $27,300.00. Verification: $3,900 a month for the 7 months worked at the first employer. Pay is counted where it was earned, because each employer withholds only against its own payments. t1-p2: What did the second job pay across the year? Answer: $27,000.00. Verification: $5,400 a month for the remaining 5 months. The two jobs together account for all 12 months, so no pay is counted twice or left out. t1-p3: What is total pay for the year? Answer: $54,300.00. Verification: $27,300.00 plus $27,000.00. The schedule is written to apply once, to this figure. t2-p1: What is taxable income for the year after one standard deduction? Answer: $45,300.00. Verification: $54,300.00 less one $9,000 deduction. The deduction is available once, against total income. t2-p2: What is the federal income tax owed on that taxable income? Answer: $5,358.00. Verification: $1,040.00 on the first $10,400, $4,032.00 on the $33,600 band that runs to $44,000, and 22% of the $1,300 above $44,000, which is $286.00. Taxable income crosses into the third band this year, which neither job alone would have reached. t2-p3: What did the first employer withhold, treating its own pay as the only income? Answer: $1,988.00. Verification: The first employer sees $27,300.00, subtracts the whole $9,000 deduction to reach $18,300.00 taxable, and charges $1,040.00 on the first $10,400 plus 12% of the remaining $7,900. t2-p4: What did the second employer withhold on the same basis? Answer: $1,952.00. Verification: The second employer sees $27,000.00, subtracts its own full $9,000 deduction to reach $18,000.00 taxable, and charges $1,040.00 plus 12% of $7,600. t2-p5: What is still owed when the year is filed? Answer: $1,418.00. Verification: $5,358.00 owed against $3,940.00 withheld between the two employers. The $9,000 deduction was applied twice and the 10% band was used twice, and no employer applied the 22% band at all."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The fictional worker will owe $1,418.00 at filing through no error of their own. Explain why the withholding method produces this, and set out one workable plan for meeting the bill, stating what your plan requires the worker to do each month. Explains the cause structurally: each employer applied a $9,000 deduction and a 10% band that are each available only once, and neither employer could see the income that pushed the worker into the 22% band. Sets out a workable plan with a monthly figure attached — for example setting aside roughly $118 a month across twelve months, or a larger amount across the five months remaining after the job change — and states where the money is held until filing. States that the alternative route is to have withholding increased at the second job so the shortfall is collected through payroll instead, and notes what that costs: less take-home pay each period. Uses the $5,358.00 owed and the $3,940.00 withheld, and shows how the $1,418.00 gap follows from them. The plan names where the set-aside money sits between now and filing, rather than leaving it in general spending. The response does not treat the shortfall as a penalty or a mistake by the worker."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the cause structurally: each employer applied a $9,000 deduction and a 10% band that are each available only once, and neither employer could see the income that pushed the worker into the 22% band. Sets out a workable plan with a monthly figure attached — for example setting aside roughly $118 a month across twelve months, or a larger amount across the five months remaining after the job change — and states where the money is held until filing. States that the alternative route is to have withholding increased at the second job so the shortfall is collected through payroll instead, and notes what that costs: less take-home pay each period."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u01-l08.scoring.json",
+    "sourceScoringSha256": "616f56f0c52dff07b6ae1cbcb8e6d5f102b6d8f5ac9b2998f6df1ba45a78881e",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

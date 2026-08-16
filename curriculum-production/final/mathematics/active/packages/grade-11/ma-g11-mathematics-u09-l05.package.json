@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u09-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u09-l05",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability Rules and Interpretation",
+    "dayInUnit": 5,
+    "courseDay": 149,
+    "phase": "Concept model B",
+    "focus": "interpreting probability results in context",
+    "title": "Concept model B: interpreting probability results in context"
+  },
+  "standards": [
+    "S-CP.5",
+    "S-CP.6",
+    "S-CP.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 1,
+          "prompt": "P(A and B) = 3/20, P(B) = 5/20. Find P(A|B).",
+          "workedSolution": {
+            "steps": [
+              "Divide: (3/20)/(5/20) = 3/5."
+            ],
+            "answer": "3/5"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "P(A) = 8/20, P(B) = 7/20, P(A and B) = 3/20. Find P(A or B).",
+          "workedSolution": {
+            "steps": [
+              "8 + 7 − 3 = 12.",
+              "12/20 = 3/5."
+            ],
+            "answer": "3/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 2,
+          "prompt": "In a study, P(passes | attended the workshop) is higher than P(passes) overall. What is the correct interpretation?",
+          "choices": [
+            "The relationship proves that one event causes the other.",
+            "The two events are mutually exclusive.",
+            "Attendance and passing are associated, though this alone does not show that the workshop caused the improvement.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "A box holds 9 items, of which 4 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "16/81",
+            "4/27",
+            "4/9",
+            "1/6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 2,
+          "prompt": "Given P(A and B) = 4/20 and P(B) = 7/20, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "1/5",
+            "7/4",
+            "7/100",
+            "4/7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "Given P(A) = 5/20, P(B) = 7/20, and P(A and B) = 3/20, find P(A or B) in lowest terms.",
+          "choices": [
+            "3/5",
+            "3/4",
+            "9/20",
+            "1/20"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 2,
+          "prompt": "In a study, P(has the condition | tested positive) is much smaller than P(tested positive | has the condition). What is the correct interpretation?",
+          "choices": [
+            "The relationship proves that one event causes the other.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The two events are mutually exclusive.",
+            "The two conditional probabilities condition on different events, so they need not be close; a rare condition makes the first much smaller."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 11 items, of which 9 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "72/121",
+            "9/11",
+            "81/121",
+            "36/55"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 18/100 and P(B) = 19/100, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "9/50",
+            "19/18",
+            "18/19",
+            "171/5000"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "Given P(A) = 7/20, P(B) = 5/20, and P(A and B) = 4/20, find P(A or B) in lowest terms.",
+          "choices": [
+            "4/5",
+            "2/5",
+            "3/10",
+            "3/5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, the probability of a delay is the same whether or not it is raining. What is the correct interpretation?",
+          "choices": [
+            "Delay and rain are independent, because conditioning on rain does not change the probability of a delay.",
+            "The relationship proves that one event causes the other.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The two events are mutually exclusive."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u09-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u09-l05"
+  }
+}

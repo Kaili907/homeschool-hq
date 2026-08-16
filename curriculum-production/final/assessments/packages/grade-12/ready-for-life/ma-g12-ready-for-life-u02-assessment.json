@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-ready-for-life-u02-assessment",
+  "courseRef": "ma-g12-ready-for-life",
+  "grade": 12,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g12-ready-for-life-u02",
+    "unitNumber": 2,
+    "unitTitle": "Independent Living Simulation",
+    "courseTitle": "Ready for Life 12: Independent Adult Living Capstone",
+    "assessmentLessonRef": "ma-g12-ready-for-life-u02-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u02-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before the review, predict what an outside reader would flag first.",
+      "prompt": "If someone else read your whole month's plan for the first time, what part do you predict they'd question first?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Assemble the month's artifacts into one written review and walk through it with an adult (or self-review).",
+      "prompt": "I assembled the budget, meal plan, maintenance judgments, transport plan, and disruption response into one written review."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Assemble the month's artifacts into one written review and walk through it with an adult (or self-review).",
+      "prompt": "I reviewed it with an adult, or completed the structured self-review checklist."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Record the feedback and what you'd change.",
+      "prompt": "What was the one piece of feedback (from the adult or the self-review checklist), and what specifically would you change about the plan in response to it?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect honestly on the whole month.",
+      "prompt": "Being honest, not just optimistic: could this plan have actually run for a real month, or where would it likely have broken down?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/ready-for-life/ma-g12-ready-for-life-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Assembly completeness criterion.",
+    "Provide evidence that meets the stated Honest self-assessment criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-ready-for-life-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u02-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Independent Living Simulation?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

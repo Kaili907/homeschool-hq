@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u03-l15",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u03-l15",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Complex Numbers and Nonlinear Systems",
+    "dayInUnit": 15,
+    "courseDay": 51,
+    "phase": "Assessment preparation",
+    "focus": "solving quadratic equations with complex solutions",
+    "title": "Assessment preparation: solving quadratic equations with complex solutions"
+  },
+  "standards": [
+    "N-CN.1",
+    "N-CN.2",
+    "N-CN.7",
+    "A-REI.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 1,
+          "prompt": "Multiply and write in the form a + bi: (-5 − 5i)(-2 − i).",
+          "choices": [
+            "5 − 5i",
+            "10 + 5i",
+            "15 + 15i",
+            "5 + 15i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 2,
+          "prompt": "Solve x^2 + 4x + 13 = 0 over the complex numbers.",
+          "choices": [
+            "x = -2 + 3i or x = -2 − 3i",
+            "x = -2 + 3i only",
+            "x = -2 or x = 2",
+            "x = 2 + 3i or x = 2 − 3i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 2,
+          "prompt": "Solve the system y = x² and y = -7x − 12. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "-3, -2",
+            "-7, -12",
+            "-4, -3",
+            "3, 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 2,
+          "prompt": "Simplify i^7.",
+          "choices": [
+            "i",
+            "−1",
+            "1",
+            "−i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 3,
+          "prompt": "Multiply and write in the form a + bi: (-8 + 8i)(-7 + 3i).",
+          "choices": [
+            "32 + 32i",
+            "80 − 80i",
+            "56 + 24i",
+            "32 − 80i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 3,
+          "prompt": "Solve x^2 - 10x + 61 = 0 over the complex numbers.",
+          "choices": [
+            "x = -5 + 6i or x = -5 − 6i",
+            "x = 5 or x = -5",
+            "x = 5 + 6i only",
+            "x = 5 + 6i or x = 5 − 6i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = 3x + 4. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "0, 5",
+            "-4, 1",
+            "-1, 4",
+            "3, 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 3,
+          "prompt": "Simplify i^17.",
+          "choices": [
+            "−i",
+            "1",
+            "−1",
+            "i"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 2,
+          "prompt": "Multiply and write in the form a + bi: (-3 − 5i)(-1 + 5i).",
+          "choices": [
+            "28 − 10i",
+            "-22 − 10i",
+            "28 − 20i",
+            "3 − 25i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 2,
+          "prompt": "Solve x^2 - 6x + 10 = 0 over the complex numbers.",
+          "choices": [
+            "x = 3 + i only",
+            "x = -3 + i or x = -3 − i",
+            "x = 3 + i or x = 3 − i",
+            "x = 3 or x = -3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = 1x + 20. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "-5, 4",
+            "1, 20",
+            "-3, 6",
+            "-4, 5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 3,
+          "prompt": "Simplify i^3.",
+          "choices": [
+            "1",
+            "i",
+            "−i",
+            "−1"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u03-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u03-l15"
+  }
+}

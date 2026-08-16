@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l03",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 3,
+    "courseDay": 147,
+    "phase": "Concept build B",
+    "focus": "relative sizes of customary units",
+    "title": "Concept build B: relative sizes of customary units"
+  },
+  "standards": [
+    "4.MD.1"
+  ],
+  "blueprint": {
+    "phase": "Concept build B",
+    "profile": "concept-build-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 3 meters to centimeters.",
+          "workedSolution": {
+            "steps": [
+              "1 meter = 100 centimeters.",
+              "3 × 100 = 300.",
+              "3 meters = 300 centimeters."
+            ],
+            "answer": "300 centimeters"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 4 feet to inches.",
+          "choices": [
+            "16 inches",
+            "4.8 inches",
+            "48 inches",
+            "4 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 6 kilograms to grams.",
+          "choices": [
+            "600 grams",
+            "6 grams",
+            "1006 grams",
+            "6000 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 4 kilograms to grams.",
+          "choices": [
+            "1004 grams",
+            "4 grams",
+            "4000 grams",
+            "400 grams"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 2 kilograms to grams.",
+          "choices": [
+            "1002 grams",
+            "200 grams",
+            "2000 grams",
+            "2 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 3 feet to inches.",
+          "choices": [
+            "15 inches",
+            "3 inches",
+            "36 inches",
+            "3.6 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 16 feet to inches.",
+          "choices": [
+            "28 inches",
+            "19.2 inches",
+            "192 inches",
+            "16 inches"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l03#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 4 meters to centimeters.",
+          "choices": [
+            "4 centimeters",
+            "104 centimeters",
+            "40 centimeters",
+            "400 centimeters"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 10 kilograms to grams.",
+          "choices": [
+            "10 grams",
+            "1010 grams",
+            "10000 grams",
+            "1000 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 8 feet to inches.",
+          "choices": [
+            "8 inches",
+            "20 inches",
+            "9.6 inches",
+            "96 inches"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l03"
+  }
+}

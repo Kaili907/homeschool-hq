@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g11-health-u03-assessment",
+  "courseRef": "ma-g11-health",
+  "grade": 11,
+  "subject": "health",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy of health information",
+    "evidence and reasoning",
+    "skill application",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/health-physical-education/scoring-guides/health/grade-11/unit-assessments/ma-g11-health-u03-assessment.json",
+  "scoringSourceAuthority": "repo:curriculum-production/final/health-physical-education/scoring-guides/health/grade-11/unit-assessments/ma-g11-health-u03-assessment.json",
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

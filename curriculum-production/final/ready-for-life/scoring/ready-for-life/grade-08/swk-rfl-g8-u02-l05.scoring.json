@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l05",
+  "lessonId": "ma-g8-ready-for-life-u02-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Feature location and non-operation compliance",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Locates one or fewer of the three features with adult confirmation, or touches, flips, or tests a feature during the walkthrough."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Locates and correctly names all three features with the adult present the entire time, without touching, testing, or operating any of them."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Locates all three accurately and independently points out one additional relevant detail per feature (for example, the shutoff valve's turn direction without turning it, or the extinguisher's rating label) without touching anything."
+          }
+        ]
+      },
+      {
+        "dimension": "Hazard reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cannot explain what emergency situation would call for using a given feature, or the explanation is generic ('it's for emergencies') for more than one feature."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Explains a specific, accurate emergency situation and the consequence of not finding the feature quickly, for all three features."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Explains specific situations and consequences for all three, and also names who in the household should act in each emergency and why that's a reasonable choice."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The adult was present for every step of the walkthrough, confirmed in the guardian sign-off.",
+      "The learner never touched, flipped, tested, or discharged any of the three features."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

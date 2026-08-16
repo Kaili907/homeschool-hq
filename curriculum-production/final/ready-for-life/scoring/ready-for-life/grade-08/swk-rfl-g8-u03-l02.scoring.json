@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l02",
+  "lessonId": "ma-g8-ready-for-life-u03-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Unit-cost calculation",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more unit-cost calculations are missing or use the wrong operation (size divided by price, or mismatched units)."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All unit costs are calculated correctly and the better-value size is correctly identified for each product."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All unit costs are correct, and the learner explains a case where the numeric better-value size is not automatically the smarter household choice."
+          }
+        ]
+      },
+      {
+        "dimension": "Shopping list organization",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Items are listed but not grouped by store section, or a section is missing entirely."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All items are correctly grouped under the four store-section headings and match the planned dinners."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Items are grouped correctly, and each package-size choice is justified with a specific, non-generic reason tied to the five-dinner quantity."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The five planned dinners are realistic and use the sample-priced products the learner actually selected.",
+      "The reflection response uses actual numbers from the learner's own calculation, not a general statement."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

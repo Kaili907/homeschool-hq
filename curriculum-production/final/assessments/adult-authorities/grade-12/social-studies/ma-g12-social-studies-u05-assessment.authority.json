@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g12-social-studies-u05-assessment",
+  "courseRef": "ma-g12-social-studies",
+  "grade": 12,
+  "subject": "social-studies",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/student-work/social-studies/grade-12/ma-g12-social-studies/ma-g12-social-studies-u05-l11.md",
+  "scoringSourceAuthority": {
+    "input": "hs912_normalization",
+    "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-candidates/hs912-r1/social-studies/grade-12/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

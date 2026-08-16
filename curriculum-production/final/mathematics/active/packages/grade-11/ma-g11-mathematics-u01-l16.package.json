@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u01-l16",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u01-l16",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Polynomial Arithmetic, Identities, and Zeros",
+    "dayInUnit": 16,
+    "courseDay": 16,
+    "phase": "Unit assessment",
+    "focus": "using zeros to sketch a rough polynomial graph",
+    "title": "Unit assessment: using zeros to sketch a rough polynomial graph"
+  },
+  "standards": [
+    "A-APR.1",
+    "A-APR.2",
+    "A-APR.3",
+    "A-APR.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 1,
+          "prompt": "A cubic polynomial factors as (x + 4)(x + 1)(x − 4). List its zeros in increasing order.",
+          "choices": [
+            "-3, 0, 5",
+            "-4, -1, 4",
+            "-4, 1, 4",
+            "-4, 4, -1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 1,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 5 and y = 4 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "9, 9, 40",
+            "9, 20, 41",
+            "4, 5, 9",
+            "9, 40, 41"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 2,
+          "prompt": "Expand and simplify: (-1x + 2)(-2x − 3).",
+          "choices": [
+            "-3x^2 - x - 1",
+            "2x^2 + 7x - 6",
+            "2x^2 - 6x",
+            "2x^2 - x - 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 2,
+          "prompt": "Find the remainder when -3x^2 - x + 3 is divided by (x − 3).",
+          "choices": [
+            "-33",
+            "-1",
+            "-21",
+            "-27"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 2,
+          "prompt": "A cubic polynomial factors as (x + 3)(x − 3)(x + 4). List its zeros in increasing order.",
+          "choices": [
+            "-3, 3, 4",
+            "-4, -3, 3",
+            "-3, 3, -4",
+            "-3, -2, 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 2,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 3 and y = 4 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "-7, 12, 25",
+            "-7, 7, 24",
+            "3, 4, 7",
+            "7, 24, 25"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 3,
+          "prompt": "Expand and simplify: (-5x + 4)(-5x − 7).",
+          "choices": [
+            "25x^2 + 55x - 28",
+            "25x^2 + 15x - 28",
+            "25x^2 - 28x",
+            "-10x^2 + 15x - 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 3,
+          "prompt": "Find the remainder when -x^2 + 2x + 6 is divided by (x + 3).",
+          "choices": [
+            "-21",
+            "-9",
+            "7",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 3,
+          "prompt": "A cubic polynomial factors as (x − 4)(x + 3)(x + 4). List its zeros in increasing order.",
+          "choices": [
+            "-4, 3, 4",
+            "-3, -2, 5",
+            "4, -3, -4",
+            "-4, -3, 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 3,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 5 and y = 3 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "16, 30, 34",
+            "15, 16, 34",
+            "3, 5, 8",
+            "16, 16, 30"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 3,
+          "prompt": "Expand and simplify: (6x + 2)(-6x + 2).",
+          "choices": [
+            "-36x^2 + 4",
+            "4",
+            "-36x^2 + 4x",
+            "-36x^2 + 24x + 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 3,
+          "prompt": "Find the remainder when -2x^2 - 2x + 3 is divided by (x − 2).",
+          "choices": [
+            "-7",
+            "-9",
+            "-15",
+            "-1"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u01-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u01-l16"
+  }
+}

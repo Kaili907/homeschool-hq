@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u01-l03",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Whole-Number Reasoning",
+    "dayInUnit": 3,
+    "courseDay": 3,
+    "phase": "Guided practice A",
+    "focus": "place-value language",
+    "title": "Guided practice A: place-value language"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.OA.2",
+    "5.NBT.1",
+    "MP.1",
+    "MP.3",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "choose-expression-for-situation",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "Six boxes hold 8 markers each, and 3 markers are loose. Which expression represents the total?",
+          "workedSolution": {
+            "steps": [
+              "Six equal groups of 8 are represented by 6 × 8.",
+              "Add the 3 loose markers: 6 × 8 + 3."
+            ],
+            "answer": "6 × 8 + 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-multistep-problem",
+          "standard": "MP.1",
+          "difficulty": 1,
+          "prompt": "A garden has 8 trays with 5 seedlings in each tray and 15 extra seedlings. How many seedlings are there in all?",
+          "choices": [
+            "57",
+            "54",
+            "53",
+            "55"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-whole-number-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 1,
+          "prompt": "In 1266, how does the value of the 6 in the ones place compare with the value of the 6 in the tens place?",
+          "choices": [
+            "the same value",
+            "10 times as much",
+            "1/10 as much",
+            "100 times as much"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "estimate-sum-difference",
+          "standard": "MP.6",
+          "difficulty": 2,
+          "prompt": "Round each number to the nearest hundred to estimate 3395 - 3023.",
+          "choices": [
+            "400",
+            "398",
+            "372",
+            "500"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "MP.6",
+          "difficulty": 2,
+          "prompt": "Round 964 to the nearest hundred and 43 to the nearest ten, then multiply to estimate the product.",
+          "choices": [
+            "44000",
+            "41452",
+            "40001",
+            "40000"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "reasonableness-check",
+          "standard": "MP.6",
+          "difficulty": 2,
+          "prompt": "A student says 1019 - 550 = 569. Round each number to the nearest hundred. Which choice correctly checks the claim?",
+          "choices": [
+            "The claim is not exact; the exact result is 469 and the rounded estimate is 400.",
+            "The claim is not exact; the exact result is 469 and the rounded estimate is 500.",
+            "The claim is not exact; the exact result is 569 and the rounded estimate is 400.",
+            "The claim is exact; the rounded estimate is 400."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "expression-error-analysis",
+          "standard": "MP.3",
+          "difficulty": 2,
+          "prompt": "A student evaluates [68 + 9] × 2 - 13: “They multiply 9 by 2 first, then finish the calculation, so the value is 73.” Which statement best identifies the error?",
+          "choices": [
+            "The first error is in the final addition or subtraction; the value should be 142.",
+            "The work is correct; 73 is the value.",
+            "The student multiplied before evaluating [68 + 9]; the grouped sum is 77, giving 141.",
+            "The grouping symbols do not affect the order; 73 is the value."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "place-value-error-analysis",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "A student says, “In 211477, the value of the 1 in the thousands place is 10 times as much as the value of the 1 in the ten-thousands place.” Which statement best analyzes the error?",
+          "choices": [
+            "The values are 1000 and 10000; 1000 is 10 times as much as 10000, so the student's comparison is correct.",
+            "The values are 1000 and 10000; 1000 is 1/10 as much as 10000, so the student's comparison is incorrect.",
+            "The places are adjacent, so 1000 is 100 times as much as 10000.",
+            "The values are 1000 and 10000; 1000 is 10 times as much as 10000."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-numerical-expression",
+          "standard": "5.OA.1",
+          "difficulty": 3,
+          "prompt": "Evaluate {10 × [10 + (17 - 9)]} + 23.",
+          "choices": [
+            "204",
+            "203",
+            "202",
+            "131"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "words-to-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Which expression means: “Multiply 13 by 2, then subtract the product from 61.”",
+          "choices": [
+            "61 - (13 + 2)",
+            "(61 - 13) × 2",
+            "(61 + 13) × 2",
+            "61 - (13 × 2)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "expression-to-words",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Which phrase describes 96 - (5 × 9) without evaluating it?",
+          "choices": [
+            "Add 5 and 9, then subtract the sum from 96.",
+            "Subtract 5 from 96, then multiply the difference by 9.",
+            "Add 96 and 5, then multiply the sum by 9.",
+            "Multiply 5 by 9, then subtract the product from 96."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u01-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u01-l03"
+  }
+}

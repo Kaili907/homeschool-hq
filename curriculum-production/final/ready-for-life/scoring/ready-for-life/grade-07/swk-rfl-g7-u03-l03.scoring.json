@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l03",
+  "lessonId": "ma-g7-ready-for-life-u03-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Annotation completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Several ingredients, quantities, or tools from the real recipe are missing from the annotation."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every ingredient with its exact quantity and every required tool from the real recipe is listed."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner notes at least one place where the recipe's wording about quantity or tool is ambiguous and explains how they resolved it."
+          }
+        ]
+      },
+      {
+        "dimension": "Step-order reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are listed but no dependency between steps is identified, or the identified dependency is incorrect."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least two correct step dependencies are identified, and one specific out-of-order problem is described."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the described out-of-order problem explains a specific, plausible consequence rather than a general 'it wouldn't work.'"
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The recipe used is a real one with at least five ingredients and four steps, not an invented or partial example.",
+      "The reflection names a specific detail caught by annotating, not a general statement about paying attention."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

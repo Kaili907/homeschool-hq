@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l05",
+  "lessonId": "ma-g5-ready-for-life-u05-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Choosing the right person to ask",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Asks someone unlikely to be able to help, with no reasoning."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Asks a plausible person with a stated reason."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Asks the most fitting person and explains why that person specifically."
+          }
+        ]
+      },
+      {
+        "dimension": "Request specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Request is vague, for example 'help me.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Request names the specific problem."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Request names the specific problem and what kind of help would actually solve it."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Situation described is genuine or a genuine provided scenario, not invented to look good.",
+      "Request is specific enough that the person asked would know exactly what to do.",
+      "Confidence rating ties to the actual request made today."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

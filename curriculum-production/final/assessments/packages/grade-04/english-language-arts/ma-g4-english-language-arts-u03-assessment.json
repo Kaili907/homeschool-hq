@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-english-language-arts-u03-assessment",
+  "courseRef": "ma-g4-english-language-arts",
+  "grade": 4,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g4-english-language-arts-u03",
+    "unitNumber": 3,
+    "unitTitle": "In-Depth Study: Character, Setting, Event, and Point of View",
+    "courseTitle": "Grade 4 English Language Arts",
+    "assessmentLessonRef": "ma-g4-english-language-arts-u03-l17"
+  },
+  "standards": [
+    "4.RL.1",
+    "4.RL.3",
+    "4.RL.6"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-04/ma-g4-english-language-arts-u03-l17.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: unit evidence: an in-depth study with cited detail and point of view. Essential question: How do specific details let me describe a character, setting, or event in depth? By the end of this lesson you should be able to: Produce independent evidence of the unit's targets. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for In-Depth Study: Character, Setting, Event, and Point of View. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain this idea in your own words and give one valid example: describing in depth from specific details.\\n- (6 pts, text evidence) Answer a question about first-person and third-person narration using an unfamiliar passage, and quote or precisely paraphrase the words that support your answer.\\n- (6 pts, application) Apply this to new material: text and its visual or oral presentation. Show the process or cite the evidence.\\n- (6 pts, error or claim analysis) A plausible but flawed response about similar themes and patterns across cultures is provided. Identify the error, correct it, and explain why the correction is better.\\n- (9 pts, constructed writing) Write an independent response connected to similes and metaphors in context and to the unit performance task: Produce an in-depth character, setting, or event study drawing on at least four specific details, one point-of-view observation, and one cross-text pattern.\\n- (4 pts, reflection and transfer) Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.\\n\\nThis assessment also includes 1 fixed-answer/selected-response item(s) delivered separately by your facilitator.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/english-language-arts/ma-g4-english-language-arts-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-english-language-arts-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-04/ma-g4-english-language-arts-u03-l17.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of In-Depth Study: Character, Setting, Event, and Point of View?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

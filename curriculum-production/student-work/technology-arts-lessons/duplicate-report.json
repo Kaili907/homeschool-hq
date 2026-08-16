@@ -1,0 +1,30 @@
+{
+  "generatedFor": "curriculum-production/student-work/technology-arts-lessons",
+  "method": "5-gram word-shingle Jaccard similarity over student-facing task text (brief + primary task + requirements + deliverable + check/critique criteria)",
+  "totals": {
+    "lessons": 984,
+    "units": 108,
+    "siblingPairsCompared": 4476,
+    "unitPackagesCompared": 984
+  },
+  "exactDuplicates": {
+    "count": 0,
+    "groups": []
+  },
+  "siblingSimilarity": {
+    "ceiling": 0.6,
+    "max": 0.5863,
+    "maxPair": [
+      "ma-g8-arts-and-music-u04-l04",
+      "ma-g8-arts-and-music-u04-l10"
+    ],
+    "mean": 0.3246,
+    "violations": []
+  },
+  "unitEcho": {
+    "ceiling": 0.6,
+    "max": 0.0761,
+    "maxLesson": "ma-g12-technology-u03-l03",
+    "violations": []
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u08-l14",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u08-l14",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Sampling and Statistical Inference",
+    "dayInUnit": 14,
+    "courseDay": 140,
+    "phase": "Transfer challenge",
+    "focus": "random sampling",
+    "title": "Transfer challenge: random sampling"
+  },
+  "standards": [
+    "7.SP.1",
+    "7.SP.2",
+    "7.SP.3",
+    "7.SP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "estimate-population-from-sample-proportion",
+          "standard": "7.SP.2",
+          "difficulty": 1,
+          "prompt": "In a random sample of 20 students, 8 preferred pizza. Based on this sample, about how many of the 200 students in the school would you expect to prefer pizza?",
+          "workedSolution": {
+            "steps": [
+              "Find the sample proportion: 8 out of 20 preferred pizza.",
+              "Scale up to the population: the school is 200 ÷ 20 = 10 times the sample size.",
+              "Multiply: 8 × 10 = 80 students."
+            ],
+            "answer": "80"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "sample-estimate-variation-range",
+          "standard": "7.SP.2",
+          "difficulty": 3,
+          "prompt": "Five random samples of the same population produced these mean scores: 16, 15, 17, 11, 11. What is the range of these sample estimates?",
+          "choices": [
+            "9",
+            "17",
+            "7",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "sample-size-representativeness",
+          "standard": "7.SP.2",
+          "difficulty": 3,
+          "prompt": "A population has 1033 commuters on a train line. Student A takes a random sample of 48. Student B takes a random sample of 16. Both use proper random selection. Whose sample is more likely to give an estimate closer to the true population value?",
+          "choices": [
+            "Student B's sample of 16, because smaller samples are easier to analyze.",
+            "Student A's sample of 48, because larger random samples tend to produce more consistent, accurate estimates.",
+            "Neither sample is reliable unless it includes the entire population.",
+            "Both are equally likely to be accurate, because both are random."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "generalization-validity-check",
+          "standard": "7.SP.1",
+          "difficulty": 3,
+          "prompt": "A student surveys 79 students at Lincoln Middle School using a convenience sample of her classmates only and records the results. Is it valid to generalize this result to all 3239 students at Lincoln Middle School?",
+          "choices": [
+            "Yes, because the sample size is large enough regardless of how it was chosen.",
+            "Yes, because the sample was selected randomly, so it is likely representative of the population.",
+            "No, because samples can never be generalized to a population.",
+            "No, because the sample was not randomly selected, so it may not represent the population."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compute-mean-median-range",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "A sample of 7 values is: 38, 40, 37, 20, 9, 31, 9. What is the mean of this data set?",
+          "choices": [
+            "184",
+            "26 2/7",
+            "29 2/7",
+            "40"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "mean-vs-median-with-outlier",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "A data set has 6 values: 26, 29, 32, 27, 31, 31. What is the new mean if an outlier of 87 is added to the data set, making 7 values in all?",
+          "choices": [
+            "29 1/3",
+            "37 4/7",
+            "39 4/7",
+            "43 5/6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "compute-mean-absolute-deviation",
+          "standard": "7.SP.3",
+          "difficulty": 3,
+          "prompt": "A data set is: 48, 20, 40, 33, 29, with a mean of 34. What is the mean absolute deviation (MAD) of this data set?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "visual-overlap-in-mad-units",
+          "standard": "7.SP.3",
+          "difficulty": 3,
+          "prompt": "Two data sets have means of 60 and 83. Their mean absolute deviation (MAD) is 7. Express the difference between the means as a multiple of the MAD.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "compare-two-samples-center",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "Sample A: 55, 30, 54, 55, 49, 21. Sample B: 58, 45, 55, 52, 65, 79. Based on the means, which sample tends to have greater values?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u08-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u08-l14"
+  }
+}

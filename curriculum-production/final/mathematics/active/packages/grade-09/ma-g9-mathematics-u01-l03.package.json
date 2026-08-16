@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l03",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 3,
+    "courseDay": 3,
+    "phase": "Guided practice A",
+    "focus": "square and cube roots as solutions to x squared and x cubed equations",
+    "title": "Guided practice A: square and cube roots as solutions to x squared and x cubed equations"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 1,
+          "prompt": "Is 5 + √3 rational or irrational?",
+          "workedSolution": {
+            "steps": [
+              "Suppose 5 + √3 were rational.",
+              "Subtracting the rational number 5 would leave √3 rational, but √3 is irrational.",
+              "The assumption fails, so 5 + √3 is irrational."
+            ],
+            "answer": "irrational"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 1,
+          "prompt": "Option A delivers 40 units of output over 4 hours. Option B delivers 54 units over 9 hours. Which has the greater output per hour?",
+          "choices": [
+            "There is not enough information without knowing the total hours available.",
+            "The two rates are equal.",
+            "Option B",
+            "Option A"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 1,
+          "prompt": "A rectangular plot measures 81.6 m by 26.6 m, each measured to the nearest tenth of a metre. Report the area to 1 decimal place.",
+          "choices": [
+            "2170.6 m²",
+            "108.2 m²",
+            "216.4 m²",
+            "2170.560 m²"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 2,
+          "prompt": "You are building a model of the rate at which a reservoir is draining. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "cubic metres per hour",
+            "cubic metres",
+            "hours per cubic metre",
+            "metres per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 2,
+          "prompt": "A bottling line operates at 18 grams per second. Express this rate in kilograms per hour.",
+          "choices": [
+            "18 kilograms per hour",
+            "5 kilograms per hour",
+            "648 kilograms per hour",
+            "64.8 kilograms per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 2,
+          "prompt": "Rewrite the index-5 radical expression 5√(x^5) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(0)",
+            "5x^(1/5)",
+            "x^(25)",
+            "x^(1)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Evaluate 4^(3/2) exactly.",
+          "choices": [
+            "12",
+            "16",
+            "8",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Write √28 in simplest radical form.",
+          "choices": [
+            "4√7",
+            "7√2",
+            "14",
+            "2√7"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 3,
+          "prompt": "Classify the sum of the irrational numbers √6 and −√6 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "irrational",
+            "rational",
+            "both rational and irrational",
+            "undefined"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 2,
+          "prompt": "Option A delivers 72 units of output over 8 hours. Option B delivers 81 units over 9 hours. Which has the greater output per hour?",
+          "choices": [
+            "The two rates are equal.",
+            "Option A",
+            "Option B",
+            "There is not enough information without knowing the total hours available."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 2,
+          "prompt": "A rectangular plot measures 46.6 m by 15.6 m, each measured to the nearest tenth of a metre. Report the area to 1 decimal place.",
+          "choices": [
+            "726.960 m²",
+            "62.2 m²",
+            "727.0 m²",
+            "124.4 m²"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l03"
+  }
+}

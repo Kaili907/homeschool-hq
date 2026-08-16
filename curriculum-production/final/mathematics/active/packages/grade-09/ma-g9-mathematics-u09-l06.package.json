@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u09-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u09-l06",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Linear, Quadratic, and Exponential Models",
+    "dayInUnit": 6,
+    "courseDay": 150,
+    "phase": "Guided practice B",
+    "focus": "interpreting model parameters in context",
+    "title": "Guided practice B: interpreting model parameters in context"
+  },
+  "standards": [
+    "F-LE.1",
+    "F-LE.2",
+    "F-LE.3",
+    "F-LE.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 1,
+          "prompt": "Is 3, 6, 12, 24 linear or exponential?",
+          "workedSolution": {
+            "steps": [
+              "Differences 3, 6, 12 are not constant.",
+              "Ratios 2, 2, 2 are constant."
+            ],
+            "answer": "Exponential with ratio 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A population of 1800 grows by 3% per year. Write the model P(t) and find the population after 6 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 1800(1.03)^t; P(6) ≈ 2149",
+            "P(t) = 1800(0.03)^t; P(6) ≈ 0",
+            "P(t) = 1800 + 3t; P(6) ≈ 1818",
+            "P(t) = 1800(1.03)^t; P(6) ≈ 2214"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 2,
+          "prompt": "Quantity A grows by 94 units each year. Quantity B doubles or triples each year, with ratio 2, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "B exceeds A only if B starts larger than A.",
+            "A stays ahead permanently because 94 is larger than 2.",
+            "The two grow at the same eventual rate.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 3,
+          "prompt": "An asset's value is modelled by V(t) = 3600(0.95)^t, with t in years. What does 0.95 represent?",
+          "choices": [
+            "the value of the asset when it was new, $3600",
+            "the total value lost over the asset's life",
+            "the number of years until the asset is worthless",
+            "the fraction of value retained each year, 0.95, meaning a 5% annual loss"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A linear model passes through (2, 21) and (6, 57). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = 3x + 9",
+            "f(x) = -9x + 3",
+            "f(x) = 9x + 3",
+            "f(x) = 9x − 3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 2,
+          "prompt": "A table of successive outputs reads 8, 11, 14, 17. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Linear; successive outputs differ by a constant 3.",
+            "Neither; the pattern does not repeat.",
+            "Quadratic; the second differences are constant.",
+            "Exponential; successive outputs have a constant ratio of 3."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A population of 400 grows by 16% per year. Write the model P(t) and find the population after 2 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 400(0.16)^t; P(2) ≈ 10",
+            "P(t) = 400 + 16t; P(2) ≈ 432",
+            "P(t) = 400(1.16)^t; P(2) ≈ 624",
+            "P(t) = 400(1.16)^t; P(2) ≈ 538"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 3,
+          "prompt": "Quantity A grows by 86 units each year. Quantity B doubles or triples each year, with ratio 2, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "The two grow at the same eventual rate.",
+            "B exceeds A only if B starts larger than A.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+            "A stays ahead permanently because 86 is larger than 2."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 3,
+          "prompt": "An asset's value is modelled by V(t) = 3900(0.92)^t, with t in years. What does 0.92 represent?",
+          "choices": [
+            "the fraction of value retained each year, 0.92, meaning a 8% annual loss",
+            "the number of years until the asset is worthless",
+            "the value of the asset when it was new, $3900",
+            "the total value lost over the asset's life"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A linear model passes through (4, -3) and (8, 1). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = -1x − 7",
+            "f(x) = 1x + 7",
+            "f(x) = -7x + 1",
+            "f(x) = 1x − 7"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 3,
+          "prompt": "A table of successive outputs reads 13, 39, 117, 351. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Exponential; successive outputs have a constant ratio of 3.",
+            "Linear; successive outputs differ by a constant 3.",
+            "Quadratic; the second differences are constant.",
+            "Neither; the pattern does not repeat."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u09-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u09-l06"
+  }
+}

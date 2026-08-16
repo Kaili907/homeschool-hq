@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-mathematics-u04-assessment",
+  "courseRef": "ma-g11-mathematics",
+  "grade": 11,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g11-mathematics-u04",
+    "unitNumber": 4,
+    "unitTitle": "Exponential, Logarithmic, and Series Models",
+    "courseTitle": "Algebra II",
+    "assessmentLessonRef": "ma-g11-mathematics-u04-l16"
+  },
+  "standards": [
+    "F-LE.4",
+    "A-SSE.4",
+    "MP.4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u04-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Find the sum of the first 5 terms of the geometric series with first term 2 and common ratio 3.",
+      "choices": [
+        "10",
+        "486",
+        "242",
+        "162"
+      ],
+      "standardRef": "A-SSE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "An investment of $1000 grows by 10% per year. Using logarithms, find the least whole number of years for it to at least double.",
+      "choices": [
+        "10 years",
+        "9 years",
+        "8 years",
+        "7 years"
+      ],
+      "standardRef": "F-LE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate log_2(16).",
+      "choices": [
+        "4",
+        "16",
+        "2",
+        "8"
+      ],
+      "standardRef": "F-LE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Solve 5^x = 125 exactly, and state the logarithmic form used.",
+      "choices": [
+        "x = log_5(125) = 4",
+        "x = 125/5 = 25",
+        "x = log_125(5) = 1/3",
+        "x = log_5(125) = 3"
+      ],
+      "standardRef": "F-LE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Find the sum of the first 5 terms of the geometric series with first term 3 and common ratio 2.",
+      "choices": [
+        "96",
+        "93",
+        "48",
+        "15"
+      ],
+      "standardRef": "A-SSE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "An investment of $200 grows by 4% per year. Using logarithms, find the least whole number of years for it to at least double.",
+      "choices": [
+        "25 years",
+        "20 years",
+        "18 years",
+        "21 years"
+      ],
+      "standardRef": "F-LE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate log_3(81).",
+      "choices": [
+        "27",
+        "81",
+        "3",
+        "4"
+      ],
+      "standardRef": "F-LE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Solve 2^x = 16 exactly, and state the logarithmic form used.",
+      "choices": [
+        "x = 16/2 = 8",
+        "x = log_2(16) = 5",
+        "x = log_2(16) = 4",
+        "x = log_16(2) = 1/4"
+      ],
+      "standardRef": "F-LE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Find the sum of the first 3 terms of the geometric series with first term 3 and common ratio 4.",
+      "choices": [
+        "9",
+        "48",
+        "192",
+        "63"
+      ],
+      "standardRef": "A-SSE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "An investment of $600 grows by 10% per year. Using logarithms, find the least whole number of years for it to at least double.",
+      "choices": [
+        "9 years",
+        "10 years",
+        "8 years",
+        "7 years"
+      ],
+      "standardRef": "F-LE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate log_3(9).",
+      "choices": [
+        "2",
+        "9",
+        "3",
+        "6"
+      ],
+      "standardRef": "F-LE.4"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u04-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Solve 3^x = 243 exactly, and state the logarithmic form used.",
+      "choices": [
+        "x = 243/3 = 81",
+        "x = log_3(243) = 6",
+        "x = log_3(243) = 5",
+        "x = log_243(3) = 1/5"
+      ],
+      "standardRef": "F-LE.4"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/mathematics/ma-g11-mathematics-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-mathematics-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u04-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Exponential, Logarithmic, and Series Models?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

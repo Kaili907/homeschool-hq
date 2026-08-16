@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u02-l01",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Expression Structure and Equivalence",
+    "dayInUnit": 1,
+    "courseDay": 19,
+    "phase": "Launch and diagnostic",
+    "focus": "interpreting parts of an expression in context",
+    "title": "Launch and diagnostic: interpreting parts of an expression in context"
+  },
+  "standards": [
+    "A-SSE.1",
+    "A-SSE.2",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 1,
+          "prompt": "In 1200(1 + 0.05)^t, what does 1200 represent?",
+          "workedSolution": {
+            "steps": [
+              "The form is P(1 + r)^t.",
+              "P is the value before any growth is applied."
+            ],
+            "answer": "the starting amount"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "factor-difference-of-squares",
+          "standard": "A-SSE.2",
+          "difficulty": 1,
+          "prompt": "Factor completely: x² − 4.",
+          "choices": [
+            "(x − 2)(x + 2)",
+            "(x − 2)²",
+            "(x − 4)(x + 1)",
+            "(x + 2)²"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 1,
+          "prompt": "Factor completely: x^2 + 9x + 20.",
+          "choices": [
+            "(x − 4)(x + 5)",
+            "(x + 4)(x + 5)",
+            "(x − 20)(x − 9)",
+            "(x − 4)(x − 5)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "factor-greatest-common-factor",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor out the greatest common factor: 18x^2 + 6x.",
+          "choices": [
+            "3(6x² + 2x)",
+            "x(18x + 6)",
+            "18x(x + 2)",
+            "3x(6x + 2)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-expression-check",
+          "standard": "A-SSE.1",
+          "difficulty": 2,
+          "prompt": "A student claims that 5(x² + 3x − 1) expands to 5x² + 15x − 5. Is the claim correct?",
+          "choices": [
+            "No; the leading term should be x².",
+            "No; the constant term should be -3.",
+            "No; the x term should be 3x.",
+            "Yes, the expansion is correct."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "recognize-substitution-structure",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "The expression (x + 8)^8 − 64 can be treated as a difference of squares. Which substitution makes that structure visible?",
+          "choices": [
+            "u = (x + 8)^8",
+            "u = (x + 8)^4",
+            "u = x + 8",
+            "u = x^4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 1,
+          "prompt": "An investment is modelled by 4000(1 + 0.03)^t. In this expression, what does (1 + 0.03) represent?",
+          "choices": [
+            "the amount invested before any interest is added",
+            "the growth factor applied once per year",
+            "the number of years the investment grows",
+            "the total interest earned over the whole period"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "factor-difference-of-squares",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor completely: 9x² − 16.",
+          "choices": [
+            "(3x + 4)²",
+            "(3x − 4)(3x + 4)",
+            "(3x − 4)²",
+            "(3x − 16)(3x + 1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u02-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u02-l01"
+  }
+}

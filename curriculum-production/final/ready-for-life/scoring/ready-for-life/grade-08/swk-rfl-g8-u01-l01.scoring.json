@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l01",
+  "lessonId": "ma-g8-ready-for-life-u01-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Goal specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The goal is vague or generic (e.g. 'get better at school') with no clear picture of what finishing would look like."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The goal is a real, currently-pursued goal with a concrete description of what finishing looks like."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The goal is real and specific, and the learner also names why it currently matters to them."
+          }
+        ]
+      },
+      {
+        "dimension": "Milestone quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Milestones are missing, undated, or described only as 'work on it more' with no observable checkpoint."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least three dated milestones are listed, each with an observable sign of being on track."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Milestones are dated and observable, and the learner connects the diagnostic warm-up to a specific change in how this timeline was built."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The four-week window is realistic (not compressed into a few days or stretched past a month).",
+      "The warm-up response is honest about current habits, including admitting when little or no planning happened before."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

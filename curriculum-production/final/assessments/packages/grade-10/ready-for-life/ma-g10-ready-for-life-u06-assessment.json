@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-ready-for-life-u06-assessment",
+  "courseRef": "ma-g10-ready-for-life",
+  "grade": 10,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g10-ready-for-life-u06",
+    "unitNumber": 6,
+    "unitTitle": "Grade 10 Work-Readiness Capstone",
+    "courseTitle": "Ready for Life 10: Career Exploration and Workplace Communication",
+    "assessmentLessonRef": "ma-g10-ready-for-life-u06-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u06-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Outline your two-minute presentation before delivering it: what you'll cover and in what order.",
+      "prompt": "Outline the order you'll present your materials in, and note at least two specific remaining gaps you'll name honestly."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Present your capstone materials to your trusted adult, including your named strengths and at least two specific remaining gaps.",
+      "prompt": "I presented my portfolio, practice interview reflection, professional communication set, local rule check, and weekly plan."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Present your capstone materials to your trusted adult, including your named strengths and at least two specific remaining gaps.",
+      "prompt": "I honestly named at least two specific remaining gaps, not a vague 'I could always improve.'"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Right after presenting, while it's fresh, write down what your adult said in response to your strengths and to each of your two named gaps.",
+      "prompt": "Summarize what your adult said in response, including anything they agreed with, added, questioned, or saw differently than you did."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Reflect on the year's work as a whole.",
+      "prompt": "Looking back at this entire year, what is the one specific skill from this course you feel most genuinely confident in now, and what evidence from your own work backs that up?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/ready-for-life/ma-g10-ready-for-life-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Presentation completeness criterion.",
+    "Provide evidence that meets the stated Honesty of named gaps criterion.",
+    "Provide evidence that meets the stated Depth of year-end reflection criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-ready-for-life-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u06-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Grade 10 Work-Readiness Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

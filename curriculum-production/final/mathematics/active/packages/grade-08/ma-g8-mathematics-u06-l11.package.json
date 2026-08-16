@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u06-l11",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u06-l11",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Systems of Linear Equations",
+    "dayInUnit": 11,
+    "courseDay": 105,
+    "phase": "Performance task planning",
+    "focus": "systems from contexts",
+    "title": "Performance task planning: systems from contexts"
+  },
+  "standards": [
+    "8.EE.8"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "system-from-context-solve",
+          "standard": "8.EE.8c",
+          "difficulty": 1,
+          "prompt": "Plan A charges a $10 flat fee plus $3 per month. Plan B charges a $4 flat fee plus $5 per month. After how many months do the two plans cost the same, and what is that cost?",
+          "workedSolution": {
+            "steps": [
+              "Set the two cost expressions equal: 10 + 3x = 4 + 5x.",
+              "Subtract 3x and 4 from both sides: 6 = 2x, so x = 3.",
+              "Substitute x = 3 into either plan to get a cost of 19, so the plans cost the same after 3 months at $19."
+            ],
+            "answer": "(3, 19)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-context-solution",
+          "standard": "8.EE.8c",
+          "difficulty": 2,
+          "prompt": "Plan A charges a $31 flat fee plus $9 per month. Plan B charges a $37 flat fee plus $6 per month. The solution to the system is (2, 49). What does this solution represent?",
+          "choices": [
+            "Plan A costs $49 more than Plan B after 2 months.",
+            "After 3 months, both plans cost $49.",
+            "After 49 months, both plans cost $2.",
+            "After 2 months, both plans cost $49."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "check-solution-against-system",
+          "standard": "8.EE.8",
+          "difficulty": 2,
+          "prompt": "System: y = -x + 1 and y = 3x - 3. Does the point (2, -1) satisfy both equations, fail one, or fail both?",
+          "choices": [
+            "fails both equations",
+            "fails the second equation only",
+            "satisfies both equations",
+            "fails the first equation only"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-solution-meaning",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Plan A charges a $71 flat fee plus $11 per month. Plan B charges a $77 flat fee plus $10 per month. The solution to the system is (6, 137). What does the y-coordinate of the solution represent?",
+          "choices": [
+            "The number of months after which the two plans cost the same.",
+            "The shared cost, in dollars, when the two plans are equal.",
+            "The difference in cost between the two plans.",
+            "The rate Plan B charges per month."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "verify-solution-of-system",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "System: y = -4x + 34 and y = -2x + 20. Which point (x, y) satisfies both equations?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-system-for-intersection-point",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Solve the system: y = x + 21 and y = -9x - 129. What is the intersection point (x, y)?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "intersection-from-two-tables",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Relationship A: x: 6, 7, 8, 9 y: -13, -8, -3, 2. Relationship B: x: 6, 7, 8, 9 y: 15, 6, -3, -12. At which x-value do the two relationships have the same y-value?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u06-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u06-l11"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-ma-g3-english-language-arts-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-english-language-arts-u04-l04",
+    "courseId": "ma-g3-english-language-arts",
+    "grade": 3,
+    "subject": "english-language-arts",
+    "unitNumber": 4,
+    "unitTitle": "Reading to Learn: Main Idea and Key Details",
+    "dayInUnit": 4,
+    "courseDay": 58,
+    "phase": "Guided practice A",
+    "focus": "naming a paragraph's main idea and underlining two details",
+    "title": "Guided practice A: naming a paragraph's main idea and underlining two details",
+    "estimatedMinutes": "40–55"
+  },
+  "standards": [
+    "3.RI.2",
+    "3.RI.1"
+  ],
+  "studentTask": {
+    "present": true,
+    "text": "This Grade 3 lesson develops naming a paragraph's main idea and underlining two details within the unit “Reading to Learn: Main Idea and Key Details.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's guided practice a work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
+  },
+  "sourceReference": {
+    "present": true,
+    "mode": "academy-original-inline",
+    "text": "Anyone can study the night sky with nothing but a notebook, a pencil, and patience. Astronomers did exactly this for thousands of years before telescopes existed.\n\nStart by choosing one spot and returning to it. Standing in the same place each night means that a tree, a roofline, or a pole can serve as a fixed marker. Without a marker, it is nearly impossible to tell whether an object has moved.\n\nNext, record the date and the time. The sky turns slowly all night and also shifts from month to month. A drawing without a time written beside it cannot be compared with any other drawing.\n\nThen sketch what you see above the marker. Sketches do not need to be beautiful. They need to show which points of light are brighter, and roughly how far apart they sit.\n\nAfter a week, patterns begin to appear. Most points of light hold the same positions relative to one another. These are stars. A few points wander slowly against that background from night to night. These are planets, and the ancient Greek word for wanderer is where the word planet comes from.\n\nThe moon changes fastest of all, shifting position and shape night by night in a cycle of about a month.\n\nNone of this requires equipment. It requires only the same spot, the same notebook, and enough nights to let a pattern show itself.",
+    "refs": [
+      {
+        "textId": "g3-text-08",
+        "title": "The Night Sky Notebook",
+        "author": "Manuel Academy",
+        "form": "informational",
+        "rightsCategory": "original",
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 232,
+        "sha256": "f233b53ba16c34604968f510f5d5d4828a879a538d6fe1635973fc0bfc91660f",
+        "origin": "academy_original_bank"
+      }
+    ]
+  },
+  "guidedSupport": {
+    "present": true,
+    "text": "Use this source-specific routine for “The Night Sky Notebook”:\n1. Preview the title and paragraph structure; write what naming a paragraph's main idea and underlining two details asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
+  },
+  "independentEvidenceTask": {
+    "present": true,
+    "text": "Read “The Night Sky Notebook,” then answer: Apply naming a paragraph's main idea and underlining two details to paragraph 2, then check your decision against paragraph 4. What survives the check?\n\nDeliverable: Grade 3: a checked application with an initial decision, evidence, and a revision if needed; write 3–5 complete sentences.\n\nEvidence requirement: Use one exact detail. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 3: a checked application with an initial decision, evidence, and a revision if needed; write 3–5 complete sentences.",
+  "learning_objectives": [
+    "Use the delivered reading to apply naming a paragraph's main idea and underlining two details.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about naming a paragraph's main idea and underlining two details and complete the named deliverable.",
+    "I use one exact detail from “The Night Sky Notebook” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about naming a paragraph's main idea and underlining two details and complete the named deliverable.",
+    "I use one exact detail from “The Night Sky Notebook” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “The Night Sky Notebook” in full and mark evidence connected to naming a paragraph's main idea and underlining two details.",
+    "Answer the lesson question using one exact detail; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": false,
+    "prompt": "Apply naming a paragraph's main idea and underlining two details to paragraph 2, then check your decision against paragraph 4. What survives the check?",
+    "deliverable": "Grade 3: a checked application with an initial decision, evidence, and a revision if needed; write 3–5 complete sentences."
+  },
+  "remediation": {
+    "present": true,
+    "text": "If naming a paragraph's main idea and underlining two details is not yet secure, return to “The Night Sky Notebook” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
+  },
+  "extension": {
+    "present": true,
+    "text": "Apply naming a paragraph's main idea and underlining two details to a different paragraph or a defensible alternative interpretation of “The Night Sky Notebook.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
+  }
+}

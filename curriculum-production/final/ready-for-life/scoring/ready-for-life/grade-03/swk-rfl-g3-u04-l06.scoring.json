@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l06",
+  "lessonId": "ma-g3-ready-for-life-u04-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Script completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The script is missing one or more of the three parts: naming the signal, when it started, or what is needed."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The script includes all three parts in order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The script includes all three parts in order, using calm, specific wording for each part."
+          }
+        ]
+      },
+      {
+        "dimension": "Recall specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner cannot recall or name a specific earlier signal."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names a specific signal and roughly when it happened."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner names the specific signal, when it happened, and why it went unmentioned at the time."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to a new signal",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner cannot write a script for a different signal than the one already practiced."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner writes a complete three-part script for a new signal."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner writes a complete script for a new signal that is fully distinct from the one just practiced, with different wording throughout."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The three parts of each script always appear in the same order: name, timing, need.",
+      "No script frames the earlier unmentioned signal as a mistake or a failure to speak up."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

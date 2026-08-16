@@ -1,0 +1,418 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l02",
+  "lessonId": "ma-g11-financial-literacy-u06-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$540.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The policy pays the loss above the $1,000 deductible, so 4% of $13,500 is what it removes on average. The deductible stays with the household."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$710.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2% of the $35,500 above the deductible — the largest reduction of the four, from the cheapest premium."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "0.84",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$540.00 of reduction for $640 of premium — under a dollar of expected loss removed per dollar spent."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "1.73",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$710.00 of reduction for $410 of premium — over twice as much per dollar as Policy A."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$184.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "22% of the $840 above the deductible."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$567.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "9% of the $6,300 above the deductible."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "0.97",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$184.80 of reduction for $190 of premium — better value than Policy A but well behind Policy D."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,240.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$410, $190, and $640 — the three policies ranked highest on reduction per premium dollar, taken in that order."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$610.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,850 less $1,240.00 — not enough for Policy B at $780, which is why the last policy on the ranking is the one that goes unbought."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "$1,434.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$710.00 from D, $184.80 from C, and $540.00 from A — bought for $1,240.00 of premium."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(roofChance * (roofLoss - roofDeductible), 2)",
+        "substituted": "round(0.04 * (14500 - 1000), 2)",
+        "result": "$540.00",
+        "why": "The policy pays the loss above the $1,000 deductible, so 4% of $13,500 is what it removes on average. The deductible stays with the household."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(illnessChance * (illnessLoss - illnessDeductible), 2)",
+        "substituted": "round(0.02 * (38000 - 2500), 2)",
+        "result": "$710.00",
+        "why": "2% of the $35,500 above the deductible — the largest reduction of the four, from the cheapest premium."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p1 / premiumA, 2)",
+        "substituted": "round(#t1-p1 / 640, 2)",
+        "result": "0.84",
+        "why": "$540.00 of reduction for $640 of premium — under a dollar of expected loss removed per dollar spent."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(#t1-p2 / premiumD, 2)",
+        "substituted": "round(#t1-p2 / 410, 2)",
+        "result": "1.73",
+        "why": "$710.00 of reduction for $410 of premium — over twice as much per dollar as Policy A."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(phoneChance * (phoneLoss - phoneDeductible), 2)",
+        "substituted": "round(0.22 * (940 - 100), 2)",
+        "result": "$184.80",
+        "why": "22% of the $840 above the deductible."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(collisionChance * (collisionLoss - collisionDeductible), 2)",
+        "substituted": "round(0.09 * (6800 - 500), 2)",
+        "result": "$567.00",
+        "why": "9% of the $6,300 above the deductible."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 / premiumC0, 2)",
+        "substituted": "round(#t2-p1 / 190, 2)",
+        "result": "0.97",
+        "why": "$184.80 of reduction for $190 of premium — better value than Policy A but well behind Policy D."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "premiumD2 + premiumC + premiumA2",
+        "substituted": "410 + 190 + 640",
+        "result": "$1,240.00",
+        "why": "$410, $190, and $640 — the three policies ranked highest on reduction per premium dollar, taken in that order."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "budget - #t2-p4",
+        "substituted": "1850 - #t2-p4",
+        "result": "$610.00",
+        "why": "$1,850 less $1,240.00 — not enough for Policy B at $780, which is why the last policy on the ranking is the one that goes unbought."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t1-p2 + #t2-p1 + #t1-p1",
+        "substituted": "#t1-p2 + #t2-p1 + #t1-p1",
+        "result": "$1,434.80",
+        "why": "$710.00 from D, $184.80 from C, and $540.00 from A — bought for $1,240.00 of premium."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The ranking measure is expected loss removed per premium dollar. Say what it captures well, name one thing it ignores entirely, and explain how that omission could lead to the wrong purchase.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States what it captures: value for money across policies with different premiums, letting a $410 policy and a $780 one be compared on the same basis.",
+          "Names a genuine omission — most importantly that it treats a $940 phone loss and a $38,000 illness loss as equivalent per dollar, ignoring whether the household could survive the loss at all.",
+          "Explains the consequence: the measure could rank a cheap policy against a survivable risk above an expensive one against a ruinous risk."
+        ],
+        "evidenceRequirements": [
+          "Cites at least two of the per-dollar figures, such as 1.73 for Policy D and 0.97 for Policy C, when describing what the measure compares."
+        ],
+        "lookFors": [
+          "The omission named is about the size of the loss relative to the household, not about the arithmetic.",
+          "The response does not reject the measure; it says what it is for and where it stops.",
+          "A response arguing that catastrophic risks should be insured first regardless of the ratio is making the right argument."
+        ],
+        "commonMisconception": "Treating a value-for-money ranking as a complete guide to what should be insured.",
+        "dimensions": [
+          "criteria-application",
+          "tradeoff-defense",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Policy B is the one that goes unbought, leaving $610.00 of budget unspent. Say what the household could do with that $610.00, and what it would be giving up by leaving the collision risk uncovered.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Proposes a use for the $610.00 with a reason, such as holding it as reserve against the uncovered collision risk or against the deductibles on the three policies bought.",
+          "States what is given up in figures: the $567.00 of expected loss Policy B would have removed, and exposure to a $6,800 loss at a 9% chance."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $610.00 remaining and the $567.00 reduction Policy B would have provided."
+        ],
+        "lookFors": [
+          "The proposed use is connected to the risk left uncovered rather than being arbitrary.",
+          "The response notices that the deductibles on the purchased policies are themselves an exposure."
+        ],
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 10,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What expected annual loss does Policy A remove?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What expected annual loss does Policy D remove?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much expected loss does Policy A remove per premium dollar? Give two decimal places."
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much expected loss does Policy D remove per premium dollar? Give two decimal places."
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What expected annual loss does Policy C remove?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What expected annual loss does Policy B remove?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much expected loss does Policy C remove per premium dollar? Give two decimal places."
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Buying Policy D, then Policy C, then Policy A in that order, what do the three premiums come to?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "How much of the $1,850 budget is left after those three?"
+        },
+        {
+          "ref": "t2-p6",
+          "responseMode": "FIXED",
+          "promptText": "What total expected annual loss do the three purchased policies remove?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The ranking measure is expected loss removed per premium dollar. Say what it captures well, name one thing it ignores entirely, and explain how that omission could lead to the wrong purchase."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Policy B is the one that goes unbought, leaving $610.00 of budget unspent. Say what the household could do with that $610.00, and what it would be giving up by leaving the collision risk uncovered."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What expected annual loss does Policy A remove? Answer: $540.00. Verification: The policy pays the loss above the $1,000 deductible, so 4% of $13,500 is what it removes on average. The deductible stays with the household. t1-p2: What expected annual loss does Policy D remove? Answer: $710.00. Verification: 2% of the $35,500 above the deductible — the largest reduction of the four, from the cheapest premium. t1-p3: How much expected loss does Policy A remove per premium dollar? Give two decimal places. Answer: 0.84. Verification: $540.00 of reduction for $640 of premium — under a dollar of expected loss removed per dollar spent. t1-p4: How much expected loss does Policy D remove per premium dollar? Give two decimal places. Answer: 1.73. Verification: $710.00 of reduction for $410 of premium — over twice as much per dollar as Policy A. t2-p1: What expected annual loss does Policy C remove? Answer: $184.80. Verification: 22% of the $840 above the deductible. t2-p2: What expected annual loss does Policy B remove? Answer: $567.00. Verification: 9% of the $6,300 above the deductible. t2-p3: How much expected loss does Policy C remove per premium dollar? Give two decimal places. Answer: 0.97. Verification: $184.80 of reduction for $190 of premium — better value than Policy A but well behind Policy D. t2-p4: Buying Policy D, then Policy C, then Policy A in that order, what do the three premiums come to? Answer: $1,240.00. Verification: $410, $190, and $640 — the three policies ranked highest on reduction per premium dollar, taken in that order. t2-p5: How much of the $1,850 budget is left after those three? Answer: $610.00. Verification: $1,850 less $1,240.00 — not enough for Policy B at $780, which is why the last policy on the ranking is the one that goes unbought. t2-p6: What total expected annual loss do the three purchased policies remove? Answer: $1,434.80. Verification: $710.00 from D, $184.80 from C, and $540.00 from A — bought for $1,240.00 of premium."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The ranking measure is expected loss removed per premium dollar. Say what it captures well, name one thing it ignores entirely, and explain how that omission could lead to the wrong purchase. States what it captures: value for money across policies with different premiums, letting a $410 policy and a $780 one be compared on the same basis. Names a genuine omission — most importantly that it treats a $940 phone loss and a $38,000 illness loss as equivalent per dollar, ignoring whether the household could survive the loss at all. Explains the consequence: the measure could rank a cheap policy against a survivable risk above an expensive one against a ruinous risk. Cites at least two of the per-dollar figures, such as 1.73 for Policy D and 0.97 for Policy C, when describing what the measure compares. The omission named is about the size of the loss relative to the household, not about the arithmetic. The response does not reject the measure; it says what it is for and where it stops. A response arguing that catastrophic risks should be insured first regardless of the ratio is making the right argument. t3-p2: Policy B is the one that goes unbought, leaving $610.00 of budget unspent. Say what the household could do with that $610.00, and what it would be giving up by leaving the collision risk uncovered. Proposes a use for the $610.00 with a reason, such as holding it as reserve against the uncovered collision risk or against the deductibles on the three policies bought. States what is given up in figures: the $567.00 of expected loss Policy B would have removed, and exposure to a $6,800 loss at a 9% chance. Refers to the $610.00 remaining and the $567.00 reduction Policy B would have provided. The proposed use is connected to the risk left uncovered rather than being arbitrary. The response notices that the deductibles on the purchased policies are themselves an exposure."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States what it captures: value for money across policies with different premiums, letting a $410 policy and a $780 one be compared on the same basis. Names a genuine omission — most importantly that it treats a $940 phone loss and a $38,000 illness loss as equivalent per dollar, ignoring whether the household could survive the loss at all. Explains the consequence: the measure could rank a cheap policy against a survivable risk above an expensive one against a ruinous risk. Proposes a use for the $610.00 with a reason, such as holding it as reserve against the uncovered collision risk or against the deductibles on the three policies bought. States what is given up in figures: the $567.00 of expected loss Policy B would have removed, and exposure to a $6,800 loss at a 9% chance."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 10 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 10,
+      "contractFixedItemCount": 10,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u06-l02.scoring.json",
+    "sourceScoringSha256": "03722c72ea47a15adc7e8b61ffcbebe573361a375a82652fd3c47201d59c1ea2",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

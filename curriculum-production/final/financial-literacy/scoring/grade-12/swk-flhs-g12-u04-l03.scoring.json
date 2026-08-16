@@ -1,0 +1,337 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l03",
+  "lessonId": "ma-g12-financial-literacy-u04-l03",
+  "integratedDomains": [
+    "postsecondary-financing",
+    "debt",
+    "consumer-protection",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$9,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The cost less everything that is not borrowed. Borrowing is what the package leaves over, so it is the figure the two packages should be compared on."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$9,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same calculation on package N. The institution costs $8,400 less a year and the borrowing differs by only $800."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "40.29%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,200 measured against $27,800."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "18.56%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,600 measured against $19,400 — less than half the share package M covers."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$39,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,800.00 in each of the four years, on the stated assumption that the figures repeat."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$36,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,000.00 in each of the four years."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$39,200.00 against $36,000.00. The institution costing $33,600 more across four years produces only $3,200 more borrowing, because its gift aid absorbs the rest."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "Package N",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$36,000.00 against $39,200.00. N still wins, but by far less than the difference in sticker price would suggest."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "costM - aidM - workM - familyM",
+        "substituted": "27800 - 11200 - 2600 - 4200",
+        "result": "$9,800.00",
+        "why": "The cost less everything that is not borrowed. Borrowing is what the package leaves over, so it is the figure the two packages should be compared on."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "costN - aidN - workN - familyN",
+        "substituted": "19400 - 3600 - 2600 - 4200",
+        "result": "$9,000.00",
+        "why": "The same calculation on package N. The institution costs $8,400 less a year and the borrowing differs by only $800."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(aidM2 / costM2 * 100, 2)",
+        "substituted": "round(11200 / 27800 * 100, 2)",
+        "result": "40.29%",
+        "why": "$11,200 measured against $27,800."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(aidN2 / costN2 * 100, 2)",
+        "substituted": "round(3600 / 19400 * 100, 2)",
+        "result": "18.56%",
+        "why": "$3,600 measured against $19,400 — less than half the share package M covers."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 * 4",
+        "substituted": "#t1-p1 * 4",
+        "result": "$39,200.00",
+        "why": "$9,800.00 in each of the four years, on the stated assumption that the figures repeat."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p2 * 4",
+        "substituted": "#t1-p2 * 4",
+        "result": "$36,000.00",
+        "why": "$9,000.00 in each of the four years."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p2 - #t2-p3",
+        "substituted": "#t2-p2 - #t2-p3",
+        "result": "$3,200.00",
+        "why": "$39,200.00 against $36,000.00. The institution costing $33,600 more across four years produces only $3,200 more borrowing, because its gift aid absorbs the rest."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p3 < #t2-p2",
+        "substituted": "#t2-p3 < #t2-p2",
+        "result": "Package N",
+        "why": "$36,000.00 against $39,200.00. N still wins, but by far less than the difference in sticker price would suggest."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The institution costing $8,400 more a year requires only $800 a year more in borrowing. Explain what makes that possible, and say which single change to the stated assumptions would most alter the comparison and in which direction.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the mechanism: gift aid covers 40.29% of package M’s cost against 18.56% of package N’s, so most of the higher price is met by the institution rather than by the applicant.",
+          "States the conclusion clearly: sticker price and the amount actually borrowed are different quantities, and only the second one has to be repaid.",
+          "Names a decisive assumption with its direction — most defensibly that the figures repeat for four years, since gift aid that is not guaranteed beyond year one would push package M’s borrowing up sharply while package N’s changed little."
+        ],
+        "evidenceRequirements": [
+          "Uses the 40.29% and 18.56% aid shares and the $3,200.00 four-year borrowing difference."
+        ],
+        "lookFors": [
+          "The response compares the packages on borrowing rather than on price.",
+          "The response identifies the four-year repetition as an assumption rather than a fact of the offers."
+        ],
+        "commonMisconception": "Ruling out a higher-priced option before reading its aid offer, when the amount that must actually be borrowed is what the two options differ by.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much must be borrowed in one year under package M?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much must be borrowed in one year under package N?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What share of package M’s cost does its gift aid cover, to two decimal places?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What share of package N’s cost does its gift aid cover, to two decimal places?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total borrowing across four years under package M?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the total borrowing across four years under package N?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much more borrowing does package M require across the programme?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "Which package requires less borrowing across the four years?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The institution costing $8,400 more a year requires only $800 a year more in borrowing. Explain what makes that possible, and say which single change to the stated assumptions would most alter the comparison and in which direction."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much must be borrowed in one year under package M? Answer: $9,800.00. Verification: The cost less everything that is not borrowed. Borrowing is what the package leaves over, so it is the figure the two packages should be compared on. t1-p2: How much must be borrowed in one year under package N? Answer: $9,000.00. Verification: The same calculation on package N. The institution costs $8,400 less a year and the borrowing differs by only $800. t1-p3: What share of package M’s cost does its gift aid cover, to two decimal places? Answer: 40.29%. Verification: $11,200 measured against $27,800. t2-p1: What share of package N’s cost does its gift aid cover, to two decimal places? Answer: 18.56%. Verification: $3,600 measured against $19,400 — less than half the share package M covers. t2-p2: What is the total borrowing across four years under package M? Answer: $39,200.00. Verification: $9,800.00 in each of the four years, on the stated assumption that the figures repeat. t2-p3: What is the total borrowing across four years under package N? Answer: $36,000.00. Verification: $9,000.00 in each of the four years. t2-p4: How much more borrowing does package M require across the programme? Answer: $3,200.00. Verification: $39,200.00 against $36,000.00. The institution costing $33,600 more across four years produces only $3,200 more borrowing, because its gift aid absorbs the rest. t2-p5: Which package requires less borrowing across the four years? Answer: Package N. Verification: $36,000.00 against $39,200.00. N still wins, but by far less than the difference in sticker price would suggest."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: The institution costing $8,400 more a year requires only $800 a year more in borrowing. Explain what makes that possible, and say which single change to the stated assumptions would most alter the comparison and in which direction. Explains the mechanism: gift aid covers 40.29% of package M’s cost against 18.56% of package N’s, so most of the higher price is met by the institution rather than by the applicant. States the conclusion clearly: sticker price and the amount actually borrowed are different quantities, and only the second one has to be repaid. Names a decisive assumption with its direction — most defensibly that the figures repeat for four years, since gift aid that is not guaranteed beyond year one would push package M’s borrowing up sharply while package N’s changed little. Uses the 40.29% and 18.56% aid shares and the $3,200.00 four-year borrowing difference. The response compares the packages on borrowing rather than on price. The response identifies the four-year repetition as an assumption rather than a fact of the offers."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the mechanism: gift aid covers 40.29% of package M’s cost against 18.56% of package N’s, so most of the higher price is met by the institution rather than by the applicant. States the conclusion clearly: sticker price and the amount actually borrowed are different quantities, and only the second one has to be repaid. Names a decisive assumption with its direction — most defensibly that the figures repeat for four years, since gift aid that is not guaranteed beyond year one would push package M’s borrowing up sharply while package N’s changed little."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u04-l03.scoring.json",
+    "sourceScoringSha256": "49ad711e172bc3d92a25e0c1dd15d98a85c658201aafa010796f2f1aacb42119",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

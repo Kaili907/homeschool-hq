@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u07-l11",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations and Inverse Functions",
+    "dayInUnit": 11,
+    "courseDay": 119,
+    "phase": "Performance task planning",
+    "focus": "finding the inverse of a function",
+    "title": "Performance task planning: finding the inverse of a function"
+  },
+  "standards": [
+    "F-BF.3",
+    "F-BF.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 1,
+          "prompt": "Describe y = f(x − 3).",
+          "workedSolution": {
+            "steps": [
+              "The change is inside the function, so horizontal.",
+              "x − 3 shifts the graph right by 3."
+            ],
+            "answer": "a horizontal shift right by 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "Find the inverse of f(x) = -2x + 6.",
+          "choices": [
+            "f⁻¹(x) = (x − 6) / -2",
+            "f⁻¹(x) = (x + 6) / -2",
+            "f⁻¹(x) = 1 / (-2x + 6)",
+            "f⁻¹(x) = -2x − 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "For f(x) = 3x − 6 and its inverse f⁻¹, evaluate f⁻¹(f(5)).",
+          "choices": [
+            "-5",
+            "-1",
+            "5",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x⁵ + x³ as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "even; its graph is symmetric about the origin",
+            "odd; its graph is symmetric about the origin",
+            "even; its graph is symmetric about the y-axis",
+            "neither even nor odd"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = f(2x). Describe the transformation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = 4x + 7.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = 7x − 2 and its inverse f⁻¹, evaluate f⁻¹(f(-4)).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u07-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u07-l11"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-english-language-arts-u04-assessment",
+  "courseRef": "ma-g4-english-language-arts",
+  "grade": 4,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g4-english-language-arts-u04",
+    "unitNumber": 4,
+    "unitTitle": "Informational Main Idea, Summary, and Explanation",
+    "courseTitle": "Grade 4 English Language Arts",
+    "assessmentLessonRef": "ma-g4-english-language-arts-u04-l17"
+  },
+  "standards": [
+    "4.RI.1",
+    "4.RI.2",
+    "4.RI.3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-04/ma-g4-english-language-arts-u04-l17.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: unit evidence: main idea, objective summary, and causal explanation. Essential question: How do I determine a main idea, explain what it rests on, and summarize without opinion? By the end of this lesson you should be able to: Produce independent evidence of the unit's targets. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for Informational Main Idea, Summary, and Explanation. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain this idea in your own words and give one valid example: main idea and how key details support it.\\n- (6 pts, text evidence) Answer a question about objective summary of informational text using an unfamiliar passage, and quote or precisely paraphrase the words that support your answer.\\n- (6 pts, application) Apply this to new material: what happened and why it happened. Show the process or cite the evidence.\\n- (6 pts, error or claim analysis) A plausible but flawed response about domain-specific vocabulary is provided. Identify the error, correct it, and explain why the correction is better.\\n- (9 pts, constructed writing) Write an independent response connected to evidence drawn from informational text and to the unit performance task: Write a main-idea and summary brief for an original informational passage, including an explanation of one process or event the text describes and why it occurs.\\n- (4 pts, reflection and transfer) Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.\\n\\nThis assessment also includes 1 fixed-answer/selected-response item(s) delivered separately by your facilitator.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/english-language-arts/ma-g4-english-language-arts-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-english-language-arts-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-04/ma-g4-english-language-arts-u04-l17.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Informational Main Idea, Summary, and Explanation?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

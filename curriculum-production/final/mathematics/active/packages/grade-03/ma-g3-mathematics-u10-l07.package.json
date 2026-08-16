@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l07",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l07",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 7,
+    "courseDay": 169,
+    "phase": "Guided practice B",
+    "focus": "attributes shared across shape categories",
+    "title": "Guided practice B: attributes shared across shape categories"
+  },
+  "standards": [
+    "3.G.1"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 1,
+          "prompt": "Which quadrilateral has four equal sides and four right angles?",
+          "workedSolution": {
+            "steps": [
+              "Four equal sides and four right angles describes a square."
+            ],
+            "answer": "square"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 1,
+          "prompt": "Which quadrilateral is defined by having four right angles, with opposite sides equal?",
+          "choices": [
+            "rhombus",
+            "trapezoid",
+            "square",
+            "rectangle"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "Which quadrilateral is defined by having four equal sides and four right angles?",
+          "choices": [
+            "rhombus",
+            "trapezoid",
+            "rectangle",
+            "square"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l07#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "Which quadrilateral is defined by having exactly one pair of parallel sides?",
+          "choices": [
+            "rhombus",
+            "rectangle",
+            "square",
+            "trapezoid"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l07#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "Which quadrilateral is defined by having four equal sides, but not necessarily right angles?",
+          "choices": [
+            "rectangle",
+            "square",
+            "rhombus",
+            "trapezoid"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "A shape has four equal sides and four right angles. Which quadrilateral name must apply?",
+          "choices": [
+            "square",
+            "trapezoid",
+            "rhombus",
+            "rectangle"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "A shape has four right angles, with opposite sides equal. Which quadrilateral name must apply?",
+          "choices": [
+            "rhombus",
+            "square",
+            "trapezoid",
+            "rectangle"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 3,
+          "prompt": "A shape has exactly one pair of parallel sides. Which quadrilateral name must apply?",
+          "choices": [
+            "rhombus",
+            "rectangle",
+            "trapezoid",
+            "square"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l07#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "A shape has four equal sides, but not necessarily right angles. Which quadrilateral name must apply?",
+          "choices": [
+            "trapezoid",
+            "square",
+            "rhombus",
+            "rectangle"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l07#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 3,
+          "prompt": "Which name belongs to a four-sided figure with four equal sides, but not necessarily right angles?",
+          "choices": [
+            "rectangle",
+            "trapezoid",
+            "square",
+            "rhombus"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l07"
+  }
+}

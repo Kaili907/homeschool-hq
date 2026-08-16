@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u07-l11",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Circles, Angles, Area, and Surface Area",
+    "dayInUnit": 11,
+    "courseDay": 119,
+    "phase": "Performance task planning",
+    "focus": "area of composite figures",
+    "title": "Performance task planning: area of composite figures"
+  },
+  "standards": [
+    "7.G.4",
+    "7.G.5",
+    "7.G.6"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-of-composite-figure",
+          "standard": "7.G.6",
+          "difficulty": 1,
+          "prompt": "A room shaped like an L is made from a 10-by-8 rectangle with a 3-by-2 rectangular corner cut out. What is the area of the room, in square units?",
+          "workedSolution": {
+            "steps": [
+              "Find the area of the full rectangle: 10 × 8 = 80.",
+              "Find the area of the removed corner: 3 × 2 = 6.",
+              "Subtract the corner from the rectangle: 80 − 6 = 74 square units."
+            ],
+            "answer": "74"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "missing-dimension-from-area",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangle has an area of 156 square units and a width of 13 units. What is its exact length, in units?",
+          "choices": [
+            "14",
+            "15",
+            "11",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "surface-area-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangular prism has length 6, width 13, and height 8 (all in units). What is its exact surface area, in square units?",
+          "choices": [
+            "462",
+            "463",
+            "460",
+            "230"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 3,
+          "prompt": "What is the exact volume of a rectangular prism with length 15, width 10, and height 7 (units)? Give your answer in cubic units.",
+          "choices": [
+            "1051 cubic units",
+            "1053 cubic units",
+            "1050 cubic units",
+            "2100 cubic units"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "circumference-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a radius of 4 1/2 ft. What is its exact circumference? Express your answer as a multiple of π.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "find-radius-or-diameter-from-circumference",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a circumference of 31/2π m. What is its exact radius?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "area-of-circle-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a diameter of 11 in. What is its exact area? Express your answer as a multiple of π (use a fraction for the coefficient if it is not a whole number).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u07-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u07-l11"
+  }
+}

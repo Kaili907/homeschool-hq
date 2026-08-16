@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g12-english-language-arts-u08-assessment",
+  "courseRef": "ma-g12-english-language-arts",
+  "grade": 12,
+  "subject": "english-language-arts",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/student-work/english-language-arts/scoring-guides/grade-12/ma-g12-english-language-arts-u08-l16.scoring.json",
+  "scoringSourceAuthority": {
+    "input": "hs912_normalization",
+    "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-candidates/hs912-r1/english-language-arts/grade-12/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l05",
+  "lessonId": "ma-g12-financial-literacy-u02-l05",
+  "integratedDomains": [
+    "consumer-protection",
+    "credit",
+    "insurance-risk",
+    "budgeting"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$68.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10% of the $684 price. Computing this makes the point that even the return route was never a full refund."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$615.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$684 less the $68.40 restocking fee. This is the benchmark the remaining routes are judged against."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "24",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "120 days from the charge, less the 96 already elapsed. This route is still open but closing, which is what makes the ordering of the escalation matter."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "21",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "24 months of cover less the 3 counted as used. This is much the longest-running of the three routes, and the only one that covers a failure rather than a transaction."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$273.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $228 repair plus the $45 diagnostic. This is the amount the warranty route is worth to the household if it is honoured."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "No — the 30-day return window closed 66 days ago",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The stated store policy accepts returns for 30 days and attaches no exception for a later defect, so day 96 is outside it. The warranty exists precisely to cover the period the return policy does not; this is read from the stated terms rather than derived from a comparison."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "price * restockRate",
+        "substituted": "684 * 0.1",
+        "result": "$68.40",
+        "why": "10% of the $684 price. Computing this makes the point that even the return route was never a full refund."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "price2 - #t1-p1",
+        "substituted": "684 - #t1-p1",
+        "result": "$615.60",
+        "why": "$684 less the $68.40 restocking fee. This is the benchmark the remaining routes are judged against."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "disputeWindow - dayOfFailure",
+        "substituted": "120 - 96",
+        "result": "24",
+        "why": "120 days from the charge, less the 96 already elapsed. This route is still open but closing, which is what makes the ordering of the escalation matter."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "warrantyMonths - elapsedMonths",
+        "substituted": "24 - 3",
+        "result": "21",
+        "why": "24 months of cover less the 3 counted as used. This is much the longest-running of the three routes, and the only one that covers a failure rather than a transaction."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "repairQuote + diagnostic",
+        "substituted": "228 + 45",
+        "result": "$273.00",
+        "why": "The $228 repair plus the $45 diagnostic. This is the amount the warranty route is worth to the household if it is honoured."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Put the remaining routes in the order you would use them, and justify the order with the figures. Say specifically why the 24 days left on one window should affect the order even though that route is not the one you would try first.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Puts the manufacturer warranty first and justifies it: it directly covers the failure, runs for another 21 months, and saves the full $273.00 the household would otherwise pay.",
+          "Explains the effect of the 24 days: the card dispute route expires soon, so the household should open the warranty claim promptly and be ready to raise the dispute before day 120 if the warranty claim stalls — the clock constrains how long the first route can be allowed to run.",
+          "Notes that the store return is closed and the $615.60 benchmark is no longer available, so it does not belong in the order."
+        ],
+        "evidenceRequirements": [
+          "Uses the 21 months of remaining warranty, the 24 days remaining on the dispute window, and the $273.00 repair cost."
+        ],
+        "lookFors": [
+          "The order is justified by what each route covers and by its deadline, not by which is easiest.",
+          "The response treats the shortest deadline as a constraint on timing rather than as a reason to use that route first."
+        ],
+        "commonMisconception": "Treating consumer remedies as one queue to be tried in sequence, without noticing that the routes expire on different clocks.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "If a return were still possible, what would the restocking fee be?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would a return inside the window have refunded?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many days remain in the card issuer’s dispute window on day 96?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many months of manufacturer warranty remain?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What would the household pay to have the appliance repaired without using the warranty?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Is the store return route available on day 96?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Put the remaining routes in the order you would use them, and justify the order with the figures. Say specifically why the 24 days left on one window should affect the order even though that route is not the one you would try first."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: If a return were still possible, what would the restocking fee be? Answer: $68.40. Verification: 10% of the $684 price. Computing this makes the point that even the return route was never a full refund. t1-p2: What would a return inside the window have refunded? Answer: $615.60. Verification: $684 less the $68.40 restocking fee. This is the benchmark the remaining routes are judged against. t2-p1: How many days remain in the card issuer’s dispute window on day 96? Answer: 24. Verification: 120 days from the charge, less the 96 already elapsed. This route is still open but closing, which is what makes the ordering of the escalation matter. t2-p2: How many months of manufacturer warranty remain? Answer: 21. Verification: 24 months of cover less the 3 counted as used. This is much the longest-running of the three routes, and the only one that covers a failure rather than a transaction. t2-p3: What would the household pay to have the appliance repaired without using the warranty? Answer: $273.00. Verification: The $228 repair plus the $45 diagnostic. This is the amount the warranty route is worth to the household if it is honoured. t2-p4: Is the store return route available on day 96? Answer: No — the 30-day return window closed 66 days ago. Verification: The stated store policy accepts returns for 30 days and attaches no exception for a later defect, so day 96 is outside it. The warranty exists precisely to cover the period the return policy does not; this is read from the stated terms rather than derived from a comparison."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. t3-p1: Put the remaining routes in the order you would use them, and justify the order with the figures. Say specifically why the 24 days left on one window should affect the order even though that route is not the one you would try first. Puts the manufacturer warranty first and justifies it: it directly covers the failure, runs for another 21 months, and saves the full $273.00 the household would otherwise pay. Explains the effect of the 24 days: the card dispute route expires soon, so the household should open the warranty claim promptly and be ready to raise the dispute before day 120 if the warranty claim stalls — the clock constrains how long the first route can be allowed to run. Notes that the store return is closed and the $615.60 benchmark is no longer available, so it does not belong in the order. Uses the 21 months of remaining warranty, the 24 days remaining on the dispute window, and the $273.00 repair cost. The order is justified by what each route covers and by its deadline, not by which is easiest. The response treats the shortest deadline as a constraint on timing rather than as a reason to use that route first."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Puts the manufacturer warranty first and justifies it: it directly covers the failure, runs for another 21 months, and saves the full $273.00 the household would otherwise pay. Explains the effect of the 24 days: the card dispute route expires soon, so the household should open the warranty claim promptly and be ready to raise the dispute before day 120 if the warranty claim stalls — the clock constrains how long the first route can be allowed to run. Notes that the store return is closed and the $615.60 benchmark is no longer available, so it does not belong in the order."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u02-l05.scoring.json",
+    "sourceScoringSha256": "6c5a813e2977979cc4fa5214f96406c9044444d927f403a394c62ca729703de7",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}
