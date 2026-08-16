@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "namespace": "director-review:mathematics:r2",
+  "reviewMetadata": {
+    "grade": 12,
+    "courseRef": "ma-g12-mathematics",
+    "sourceLessonRef": "ma-g12-mathematics-u01-l03",
+    "sourceLessonFamily": "Advanced Trigonometry: Unit Circle and Identities",
+    "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u01-l03.package.json",
+    "standards": ["F-TF.3", "F-TF.4", "F-TF.9", "MP.7"],
+    "normalInstructionalLesson": true
+  },
+  "learnerMaterial": {
+    "lessonRef": "director-math-r2-g12-unit-circle-symmetry",
+    "title": "Derive Unit-Circle Symmetry Identities",
+    "subject": "mathematics",
+    "format": "structured",
+    "lessonGoal": "Use unit-circle coordinates and transformations to derive trigonometric symmetry and periodicity identities.",
+    "successCriteria": ["I connect cosine and sine to x- and y-coordinates.", "I derive signs from a geometric transformation rather than memorizing a quadrant rule.", "I distinguish symmetry from periodicity."],
+    "keyPoints": ["The point at angle θ is (cos θ, sin θ).", "Reflections and rotations determine how coordinates change.", "A full 2π rotation returns to the same point."],
+    "vocabulary": [
+      {"term": "periodic", "definition": "repeating after a fixed input interval"},
+      {"term": "symmetry identity", "definition": "an equality derived from a geometric symmetry of the unit circle"}
+    ],
+    "sections": [
+      {
+        "sectionRef": "director-math-r2-g12-unit-circle-symmetry:teach",
+        "sectionKind": "data-table",
+        "title": "Track coordinates under symmetry",
+        "data": {"columns": ["Angle", "Geometric move from θ", "Coordinate"], "rows": ["−θ | reflect across x-axis | (cos θ, −sin θ)", "π − θ | reflect across y-axis | (−cos θ, sin θ)", "θ + 2π | full rotation | (cos θ, sin θ)"]}
+      },
+      {
+        "sectionRef": "director-math-r2-g12-unit-circle-symmetry:example",
+        "sectionKind": "worked-example",
+        "title": "Worked example: derive sin(π − θ)",
+        "directions": "The identity is derived from coordinates on this page.",
+        "items": [{
+          "itemRef": "director-math-r2-g12-unit-circle-symmetry:example:1",
+          "itemKind": "worked-example",
+          "prompt": "Derive sin(π − θ) and cos(π − θ).",
+          "workedSolution": {"steps": ["The point at θ is (cos θ, sin θ).", "The angle π − θ reflects that point across the y-axis.", "A y-axis reflection changes (x,y) to (−x,y).", "Therefore the new point is (−cos θ, sin θ).", "So cos(π − θ) = −cos θ and sin(π − θ) = sin θ."]}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g12-unit-circle-symmetry:guided",
+        "sectionKind": "guided-practice",
+        "title": "Your turn: identify the transformation",
+        "items": [{
+          "itemRef": "director-math-r2-g12-unit-circle-symmetry:guided:1",
+          "itemKind": "multiple-choice",
+          "prompt": "Which transformation takes the point for θ to the point for −θ?",
+          "responseKind": "CHOICE",
+          "choices": ["Reflection across the x-axis", "Reflection across the y-axis", "Rotation by π"],
+          "feedback": {"correct": "That reflection preserves the x-coordinate and negates the y-coordinate.", "incorrect": "Compare (cos θ, sin θ) with (cos θ, −sin θ) and identify which axis reflection has that effect."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g12-unit-circle-symmetry:practice",
+        "sectionKind": "independent-practice",
+        "title": "Practice: derive, do not memorize",
+        "items": [
+          {
+            "itemRef": "director-math-r2-g12-unit-circle-symmetry:practice:1",
+            "itemKind": "constructed-response",
+            "prompt": "Derive sin(−θ) and cos(−θ) from the unit-circle reflection across the x-axis.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "Your coordinate transformation establishes sine's odd behavior and cosine's even behavior.", "incorrect": "Write the original coordinate pair, apply (x,y) → (x,−y), then read cosine and sine from the result."}
+          },
+          {
+            "itemRef": "director-math-r2-g12-unit-circle-symmetry:practice:2",
+            "itemKind": "constructed-response",
+            "prompt": "Explain why sin(θ + 2π) = sin θ and cos(θ + 2π) = cos θ without citing a memorized formula.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "You connected a full rotation to the same terminal point and therefore the same coordinates.", "incorrect": "Describe where a 2π rotation sends the terminal point on the unit circle."}
+          }
+        ]
+      },
+      {
+        "sectionRef": "director-math-r2-g12-unit-circle-symmetry:reteach",
+        "sectionKind": "remediation",
+        "title": "Reteach: use a coordinate-change ledger",
+        "body": "For each move, record x: same or negated; y: same or negated. Then translate x to cosine and y to sine.",
+        "items": [{
+          "itemRef": "director-math-r2-g12-unit-circle-symmetry:reteach:1",
+          "itemKind": "constructed-response",
+          "prompt": "A rotation by π sends (x,y) to (−x,−y). Use that fact to state sin(θ + π) and cos(θ + π).",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "feedback": {"correct": "Your ledger negated both coordinates under a half-turn.", "incorrect": "Replace x with cos θ and y with sin θ after applying (x,y) → (−x,−y)."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g12-unit-circle-symmetry:check",
+        "sectionKind": "mastery-check",
+        "title": "Check: connect identity and geometry",
+        "items": [{
+          "itemRef": "director-math-r2-g12-unit-circle-symmetry:check:1",
+          "itemKind": "constructed-response",
+          "prompt": "Derive the sine and cosine identities for 2π − θ. Name the unit-circle transformation, show the coordinate change, and state both identities.",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "feedback": {"correct": "Your transformation, coordinates, and identities form one coherent derivation.", "incorrect": "Locate 2π − θ as the reflection of θ across the x-axis, then track x and y separately."}
+        }]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": ["Unit-circle coordinates generate symmetry identities.", "Reflections explain sign changes in sine and cosine.", "Periodicity follows from returning to the same point after a full rotation."],
+      "courseProgress": "This sample is based on Grade 12 Unit 1, lesson family 3. It does not change your production-course progress.",
+      "nextAction": "Done for today",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}

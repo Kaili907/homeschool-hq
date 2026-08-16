@@ -1246,6 +1246,7 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh,
     answeredItemRefs: responsePresentation.answeredItemRefs,
     requiredItemRefs: responsePresentation.requiredItemRefs,
     canCompleteSegment: responsePresentation.canCompleteSegment,
+    assessmentDecisions: responsePresentation.assessmentDecisions,
   } as const : {
     title: 'Responses saved',
     prompt: 'All required responses for this Study step are saved on this device.',
@@ -1254,6 +1255,7 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh,
     answeredItemRefs: responsePresentation.answeredItemRefs,
     requiredItemRefs: responsePresentation.requiredItemRefs,
     canCompleteSegment: responsePresentation.canCompleteSegment,
+    assessmentDecisions: responsePresentation.assessmentDecisions,
   }
 
   const submitLearnerResponse = async (value: string) => {

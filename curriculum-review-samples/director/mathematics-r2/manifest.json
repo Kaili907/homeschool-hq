@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "namespace": "director-review:mathematics:r2",
+  "status": "READY_FOR_DIRECTOR_REVIEW",
+  "purpose": "Nine isolated normal-lesson samples for approval of the Mathematics R2 lesson model. These files do not replace production curriculum.",
+  "supportedGrades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "intentionallyUnsupportedGrades": [6],
+  "playerContract": "LearnerMaterialDto -> createRichLessonRenderModel -> RichLessonPresentation",
+  "restrictedAssessmentAuthority": "restricted/assessment-authority.json",
+  "samples": [
+    {
+      "grade": 3,
+      "sampleRef": "director-math-r2-g3-place-value",
+      "file": "samples/grade-3.json",
+      "courseRef": "ma-g3-mathematics",
+      "sourceLessonRef": "ma-g3-mathematics-u01-l01",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u01-l01.package.json",
+      "topic": "A digit is worth ten times as much one place to the left",
+      "standards": ["MP.1", "MP.3", "3.NBT.1", "3.NBT.2"]
+    },
+    {
+      "grade": 4,
+      "sampleRef": "director-math-r2-g4-ten-times-place-value",
+      "file": "samples/grade-4.json",
+      "courseRef": "ma-g4-mathematics",
+      "sourceLessonRef": "ma-g4-mathematics-u01-l02",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u01-l02.package.json",
+      "topic": "Use place value to explain a ten-times relationship",
+      "standards": ["4.NBT.1", "MP.7"]
+    },
+    {
+      "grade": 5,
+      "sampleRef": "director-math-r2-g5-decimal-place-value",
+      "file": "samples/grade-5.json",
+      "courseRef": "ma-g5-mathematics",
+      "sourceLessonRef": "ma-g5-mathematics-u02-l02",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-05/ma-g5-mathematics-u02-l02.package.json",
+      "topic": "Read decimals through thousandths using place value",
+      "standards": ["5.NBT.1", "5.NBT.2", "5.NBT.3", "5.NBT.4"]
+    },
+    {
+      "grade": 7,
+      "sampleRef": "director-math-r2-g7-constant-of-proportionality",
+      "file": "samples/grade-7.json",
+      "courseRef": "ma-g7-mathematics",
+      "sourceLessonRef": "ma-g7-mathematics-u01-l04",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-07/ma-g7-mathematics-u01-l04.package.json",
+      "topic": "Find and interpret the constant of proportionality",
+      "standards": ["7.RP.1", "7.RP.2", "MP.1", "MP.3", "MP.6"]
+    },
+    {
+      "grade": 8,
+      "sampleRef": "director-math-r2-g8-decimal-expansions",
+      "file": "samples/grade-8.json",
+      "courseRef": "ma-g8-mathematics",
+      "sourceLessonRef": "ma-g8-mathematics-u01-l02",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-08/ma-g8-mathematics-u01-l02.package.json",
+      "topic": "Use decimal expansions to distinguish rational and irrational numbers",
+      "standards": ["8.NS.1", "8.NS.2", "MP.2", "MP.6"]
+    },
+    {
+      "grade": 9,
+      "sampleRef": "director-math-r2-g9-inequality-reversal",
+      "file": "samples/grade-9.json",
+      "courseRef": "ma-g9-mathematics",
+      "sourceLessonRef": "ma-g9-mathematics-u03-l03",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u03-l03.package.json",
+      "topic": "Explain the sign-reversal rule for linear inequalities",
+      "standards": ["A-REI.1", "A-REI.3", "A-REI.10", "A-REI.11", "MP.3"]
+    },
+    {
+      "grade": 10,
+      "sampleRef": "director-math-r2-g10-transformation-sequences",
+      "file": "samples/grade-10.json",
+      "courseRef": "ma-g10-mathematics",
+      "sourceLessonRef": "ma-g10-mathematics-u02-l05",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-10/ma-g10-mathematics-u02-l05.package.json",
+      "topic": "Specify and verify a sequence of rigid transformations",
+      "standards": ["G-CO.2", "G-CO.3", "G-CO.4", "G-CO.5", "MP.5"]
+    },
+    {
+      "grade": 11,
+      "sampleRef": "director-math-r2-g11-extraneous-solutions",
+      "file": "samples/grade-11.json",
+      "courseRef": "ma-g11-mathematics",
+      "sourceLessonRef": "ma-g11-mathematics-u02-l06",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u02-l06.package.json",
+      "topic": "Detect extraneous solutions in radical equations",
+      "standards": ["A-APR.6", "A-REI.2", "MP.6"]
+    },
+    {
+      "grade": 12,
+      "sampleRef": "director-math-r2-g12-unit-circle-symmetry",
+      "file": "samples/grade-12.json",
+      "courseRef": "ma-g12-mathematics",
+      "sourceLessonRef": "ma-g12-mathematics-u01-l03",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u01-l03.package.json",
+      "topic": "Derive trigonometric values from unit-circle symmetry and periodicity",
+      "standards": ["F-TF.3", "F-TF.4", "F-TF.9", "MP.7"]
+    }
+  ]
+}

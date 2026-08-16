@@ -79,7 +79,9 @@ describe('LearnerResponseRuntime', () => {
     }
     const held = runtime(new MemoryLearnerResponseStore(), assessor)
     const view = await held.open(2, 'segment:practice')
-    expect(await held.submit({ lessonRef: context.lessonRef, sectionRef: view.item!.sectionRef, itemRef: view.item!.itemRef, segmentRef: view.segmentRef, value: view.item!.choices[0]!.choiceRef })).toMatchObject({ status: 'saved', assessmentStatus: 'ASSESSED', record: { assessment: { assessorRef: 'trusted:session-1' } } })
+    const itemRef = view.item!.itemRef
+    expect(await held.submit({ lessonRef: context.lessonRef, sectionRef: view.item!.sectionRef, itemRef, segmentRef: view.segmentRef, value: view.item!.choices[0]!.choiceRef })).toMatchObject({ status: 'saved', assessmentStatus: 'ASSESSED', record: { assessment: { assessorRef: 'trusted:session-1' } } })
+    expect((await held.open(2, 'segment:practice')).assessmentDecisions).toEqual({ [itemRef]: 'CORRECT' })
   })
 
   it('never overwrites unreadable local progress and never advances when storage fails', async () => {

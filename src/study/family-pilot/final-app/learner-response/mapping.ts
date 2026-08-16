@@ -130,6 +130,7 @@ function mappedItem(input: {
     choices,
     required: !['NONE', 'READ', 'RUBRIC_REVIEW_PENDING', 'GUARDIAN_ATTESTATION'].includes(instructionalExample ? 'READ' : responseType),
     instructionalExample,
+    ...(input.item?.feedback ? { feedback: Object.freeze({ ...input.item.feedback }) } : {}),
   })
 }
 

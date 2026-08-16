@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "namespace": "director-review:mathematics:r2",
+  "reviewMetadata": {
+    "grade": 4,
+    "courseRef": "ma-g4-mathematics",
+    "sourceLessonRef": "ma-g4-mathematics-u01-l02",
+    "sourceLessonFamily": "Mathematical Habits and Place Value to One Million",
+    "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u01-l02.package.json",
+    "standards": ["4.NBT.1", "MP.7"],
+    "normalInstructionalLesson": true
+  },
+  "learnerMaterial": {
+    "lessonRef": "director-math-r2-g4-ten-times-place-value",
+    "title": "Ten Times the Value",
+    "subject": "mathematics",
+    "format": "structured",
+    "lessonGoal": "Today you will use place value to explain why the same digit can be worth 10 times as much.",
+    "successCriteria": ["I can identify a digit's place and value.", "I can write and explain a ten-times comparison."],
+    "keyPoints": ["Each place to the left is 10 times the place to its right.", "Compare digit values, not just the digits."],
+    "vocabulary": [{"term": "relationship", "definition": "a rule that tells how two values are connected"}],
+    "sections": [
+      {
+        "sectionRef": "director-math-r2-g4-ten-times-place-value:teach",
+        "sectionKind": "data-table",
+        "title": "Follow the 7",
+        "body": "The digit stays 7. Its place changes, so its value changes.",
+        "data": {"columns": ["Number", "Place of 7", "Value of 7"], "rows": ["7,000 | thousands | 7,000", "70,000 | ten-thousands | 70,000"]}
+      },
+      {
+        "sectionRef": "director-math-r2-g4-ten-times-place-value:example",
+        "sectionKind": "worked-example",
+        "title": "Worked example: compare two 7s",
+        "directions": "This page shows the complete example. No response is expected.",
+        "items": [{
+          "itemRef": "director-math-r2-g4-ten-times-place-value:example:1",
+          "itemKind": "worked-example",
+          "prompt": "How does the value of the 7 in 70,000 compare with the 7 in 7,000?",
+          "workedSolution": {"steps": ["The 7 in 70,000 is in the ten-thousands place.", "The 7 in 7,000 is in the thousands place.", "The first 7 is one place left of the second 7.", "Therefore, its value is 10 times as much."]}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g4-ten-times-place-value:guided",
+        "sectionKind": "guided-practice",
+        "title": "Your turn: choose the comparison",
+        "directions": "Choose one answer, then save it.",
+        "items": [{
+          "itemRef": "director-math-r2-g4-ten-times-place-value:guided:1",
+          "itemKind": "multiple-choice",
+          "prompt": "How does the 4 in 640,000 compare with the 4 in 64,000?",
+          "responseKind": "CHOICE",
+          "choices": ["It is 10 times as much.", "It is one tenth as much.", "It has the same value."],
+          "feedback": {"correct": "You compared the hundred-thousands place with the ten-thousands place.", "incorrect": "Locate each 4. Decide which one is one place farther left before comparing the values."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g4-ten-times-place-value:practice",
+        "sectionKind": "independent-practice",
+        "title": "Practice: explain the pattern",
+        "items": [
+          {
+            "itemRef": "director-math-r2-g4-ten-times-place-value:practice:1",
+            "itemKind": "numeric-entry",
+            "prompt": "The 8 in 82,000 is how many times the value of the 8 in 8,200?",
+            "responseKind": "NUMERIC",
+            "feedback": {"correct": "You tracked the 8 one place to the left.", "incorrect": "Name the place of each 8. Then use the relationship between neighboring places."}
+          },
+          {
+            "itemRef": "director-math-r2-g4-ten-times-place-value:practice:2",
+            "itemKind": "constructed-response",
+            "prompt": "Explain the relationship between the 5s in 50,000 and 5,000.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {"correct": "Your explanation uses both place names and the ten-times relationship.", "incorrect": "State what each 5 is worth, then compare those two values."}
+          }
+        ]
+      },
+      {
+        "sectionRef": "director-math-r2-g4-ten-times-place-value:reteach",
+        "sectionKind": "remediation",
+        "title": "Reteach: build a place-value ladder",
+        "body": "Read the ladder from right to left: ones → tens → hundreds → thousands. Every left step multiplies the value by 10.",
+        "items": [{
+          "itemRef": "director-math-r2-g4-ten-times-place-value:reteach:1",
+          "itemKind": "multiple-choice",
+          "prompt": "Which statement is true about the 3s in 3,600 and 36,000?",
+          "responseKind": "CHOICE",
+          "choices": ["The 3 in 36,000 is 10 times as much.", "The 3 in 3,600 is 10 times as much.", "The 3s have equal values."],
+          "feedback": {"correct": "You used one left step on the place-value ladder.", "incorrect": "Put each 3 on the ladder. The farther-left 3 has the greater value."}
+        }]
+      },
+      {
+        "sectionRef": "director-math-r2-g4-ten-times-place-value:check",
+        "sectionKind": "mastery-check",
+        "title": "Check: make your own comparison",
+        "directions": "Use a fresh pair of numbers.",
+        "items": [{
+          "itemRef": "director-math-r2-g4-ten-times-place-value:check:1",
+          "itemKind": "constructed-response",
+          "prompt": "Write two numbers in which the digit 9 has a ten-times relationship. Explain your pair.",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "feedback": {"correct": "Your original pair demonstrates the one-place, ten-times structure.", "incorrect": "Check that both numbers contain 9 and that the 9s are exactly one place apart."}
+        }]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": ["A digit's value depends on its place.", "One place left means 10 times the value.", "A complete explanation names both places and compares their values."],
+      "courseProgress": "This sample is based on Grade 4 Unit 1, lesson family 2. It does not change your production-course progress.",
+      "nextAction": "Done for today",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}

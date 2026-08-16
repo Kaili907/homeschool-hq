@@ -33,6 +33,19 @@ export interface LearnerResponseItem {
   readonly choices: readonly LearnerResponseChoice[]
   readonly required: boolean
   readonly instructionalExample: boolean
+  readonly feedback?: LearnerItemFeedback
+}
+
+export interface LearnerItemFeedback {
+  readonly correct: string
+  readonly incorrect: string
+}
+
+export interface LearnerLessonReview {
+  readonly whatYouLearned: readonly string[]
+  readonly courseProgress: string
+  readonly nextAction: 'Done for today' | 'Continue required work' | 'Keep learning / Work ahead' | 'Waiting for Parent'
+  readonly reviewActionLabel: string
 }
 
 export interface LearnerResponseStudySegment {
@@ -104,6 +117,7 @@ export interface LearnerResponsePresentation {
   readonly requiredItemRefs: readonly string[]
   readonly canCompleteSegment: boolean
   readonly pendingAssessmentCount: number
+  readonly assessmentDecisions: Readonly<Record<string, LearnerAssessmentReceipt['decision']>>
 }
 
 export type LearnerResponseSubmissionResult =
@@ -159,6 +173,7 @@ export interface LearnerMaterialDto {
   readonly learnerResource?: unknown
   readonly sourceMetadata?: unknown
   readonly rubricCriteria?: readonly unknown[]
+  readonly lessonReview?: LearnerLessonReview
 }
 
 export interface LearnerMaterialSectionDto {
@@ -196,4 +211,5 @@ export interface LearnerMaterialItemDto {
   readonly map?: unknown
   readonly image?: unknown
   readonly reference?: unknown
+  readonly feedback?: LearnerItemFeedback
 }
