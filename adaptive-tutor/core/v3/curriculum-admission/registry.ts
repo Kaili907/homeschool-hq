@@ -8,7 +8,9 @@ import {
 
 export interface CurriculumCoverage {
   readonly releaseRef: string;
+  readonly packageRef: string;
   readonly releaseVersion: string;
+  readonly releaseDigest: string;
   readonly reviewState: "reviewed" | "not-reviewed";
   readonly admissionState: "admitted" | "not-admitted";
   readonly grades: readonly number[];
@@ -69,7 +71,9 @@ function validateMetadataInBoundedSegments(
     "metadataKind",
     "source",
     "releaseRef",
+    "packageRef",
     "releaseVersion",
+    "releaseDigest",
     "reviewState",
     "admissionState",
     "courses",
@@ -175,7 +179,9 @@ export function buildCurriculumCapabilityRegistry(
   const courseRefs = metadata.courses.map((course) => course.courseRef).sort();
   const coverage = Object.freeze({
     releaseRef: metadata.releaseRef,
+    packageRef: metadata.packageRef,
     releaseVersion: metadata.releaseVersion,
+    releaseDigest: metadata.releaseDigest,
     reviewState: metadata.reviewState,
     admissionState: metadata.admissionState,
     grades: Object.freeze(grades),

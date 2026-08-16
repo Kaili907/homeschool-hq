@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { COMMERCIAL_ROUTE_ATTEMPT_PLAN_VERSION } from "../../commercial-operation/index.js";
+import {
+  COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION,
+  COMMERCIAL_ROUTE_ATTEMPT_PLAN_VERSION,
+  type CommercialAttemptUsageReceipt,
+} from "../../commercial-operation/index.js";
 import {
   BUDGET_RESILIENCE_VERSION,
   MAX_INTEGER_MICROS,
@@ -90,6 +94,29 @@ function reserve(
   });
   assert.ok("status" in result);
   return result;
+}
+
+function receipt(
+  reservation: BudgetReservation,
+  attemptIndex: 0 | 1,
+  actualCostMicros: string,
+  overrides: Partial<CommercialAttemptUsageReceipt> = {},
+): CommercialAttemptUsageReceipt {
+  const reservedAttempt = reservation.attempts[attemptIndex];
+  assert.ok(reservedAttempt);
+  return {
+    contractVersion: COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION,
+    receiptKind: "commercial-attempt-usage-receipt",
+    logicalOperationRef: reservedAttempt.logicalOperationRef,
+    physicalAttemptRef: reservedAttempt.physicalAttemptRef,
+    reservationRef: reservation.reservationRef,
+    routeRef: reservedAttempt.routeRef,
+    attemptIndex: reservedAttempt.attemptIndex,
+    role: reservedAttempt.role,
+    reservedCostMicros: reservedAttempt.reservedCostMicros,
+    actualCostMicros,
+    ...overrides,
+  };
 }
 
 function retryPolicy(): RetryPolicy {
@@ -287,15 +314,19 @@ test("rate limit fails over once without sleeping on the limited route", () => {
 test("provider timeout retains its full reservation before failover", () => {
   const reservation = reserve();
   assert.deepEqual(
-    settleBudgetReservation(reservation, "indeterminate-hold", null),
+    settleBudgetReservation(
+      reservation,
+      [],
+      [reservation.attempts[0]?.physicalAttemptRef],
+    ),
     {
       contractVersion: BUDGET_RESILIENCE_VERSION,
       reservationRef: reservation.reservationRef,
       logicalOperationRef: reservation.logicalOperationRef,
       outcome: "indeterminate-hold",
       actualCostMicros: null,
-      consumedCostMicros: "200",
-      releasedCostMicros: "0",
+      consumedCostMicros: "100",
+      releasedCostMicros: "100",
       accountingGap: true,
       costAnomaly: false,
     },
@@ -487,7 +518,11 @@ test("reservation rejects duplicate physical attempt references", () => {
 });
 
 test("cost over reservation becomes an anomaly without fabricated release", () => {
-  const settlement = settleBudgetReservation(reserve(), "settled", "201");
+  const reservation = reserve();
+  const settlement = settleBudgetReservation(
+    reservation,
+    [receipt(reservation, 0, "101")],
+  );
   assert.ok(settlement);
   assert.equal(settlement.outcome, "rejected-over-reservation");
   assert.equal(settlement.costAnomaly, true);
@@ -495,7 +530,79 @@ test("cost over reservation becomes an anomaly without fabricated release", () =
 
   const inconsistent = structuredClone(reserve());
   inconsistent.totalReservedMicros = "199";
-  assert.equal(settleBudgetReservation(inconsistent, "settled", "100"), null);
+  assert.equal(
+    settleBudgetReservation(inconsistent, [receipt(reservation, 0, "100")]),
+    null,
+  );
+});
+
+test("settles each executed attempt independently and exactly", () => {
+  const reservation = reserve();
+  const primaryOnly = settleBudgetReservation(
+    reservation,
+    [receipt(reservation, 0, "40")],
+  );
+  assert.deepEqual(primaryOnly, {
+    contractVersion: BUDGET_RESILIENCE_VERSION,
+    reservationRef: reservation.reservationRef,
+    logicalOperationRef: reservation.logicalOperationRef,
+    outcome: "settled",
+    actualCostMicros: "40",
+    consumedCostMicros: "40",
+    releasedCostMicros: "160",
+    accountingGap: false,
+    costAnomaly: false,
+  });
+
+  const both = settleBudgetReservation(reservation, [
+    receipt(reservation, 0, "40"),
+    receipt(reservation, 1, "60"),
+  ]);
+  assert.equal(both?.outcome, "settled");
+  assert.equal(both?.actualCostMicros, "100");
+  assert.equal(both?.releasedCostMicros, "100");
+});
+
+test("attempt receipt money remains canonical IntegerMicros beyond MAX_SAFE_INTEGER", () => {
+  const primaryReserve = "9007199254740993";
+  const failoverReserve = "2";
+  const total = "9007199254740995";
+  const reservation = reserve(executionBudget(total), [
+    attempt(0, { reservedCostMicros: primaryReserve }),
+    attempt(1, { reservedCostMicros: failoverReserve }),
+  ]);
+  const settlement = settleBudgetReservation(reservation, [
+    receipt(reservation, 0, primaryReserve),
+    receipt(reservation, 1, failoverReserve),
+  ]);
+  assert.equal(settlement?.actualCostMicros, total);
+  assert.equal(settlement?.consumedCostMicros, total);
+  assert.equal(settlement?.releasedCostMicros, "0");
+});
+
+test("rejects malformed, mismatched, and duplicate attempt receipts", () => {
+  const reservation = reserve();
+  for (const invalidMoney of ["-1", "1.5", "1e2", "01"]) {
+    assert.equal(
+      settleBudgetReservation(reservation, [receipt(reservation, 0, invalidMoney)]),
+      null,
+      invalidMoney,
+    );
+  }
+  assert.equal(
+    settleBudgetReservation(reservation, [receipt(reservation, 0, "10", {
+      physicalAttemptRef: "physical-attempt:foreign",
+    })]),
+    null,
+  );
+  assert.equal(
+    settleBudgetReservation(reservation, [receipt(reservation, 0, "10", {
+      reservationRef: "reservation:foreign",
+    })]),
+    null,
+  );
+  const duplicate = receipt(reservation, 0, "10");
+  assert.equal(settleBudgetReservation(reservation, [duplicate, duplicate]), null);
 });
 
 test("budget exhaustion selects only the trusted reviewed static fallback", () => {

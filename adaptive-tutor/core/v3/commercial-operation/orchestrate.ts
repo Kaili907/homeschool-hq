@@ -31,6 +31,7 @@ import {
   settleBudgetReservation,
   type AttemptBudget,
   type BudgetReservation,
+  type BudgetSettlement,
   type ExecutionBudget,
 } from "../routing/budget-resilience/index.js";
 import {
@@ -56,7 +57,11 @@ import {
   type StudyCommercialTutorAdvisory,
   type StudyCommercialTutorInvocation,
 } from "../contracts/index.js";
-import type { CommercialAttempt } from "./contracts.js";
+import {
+  CommercialAttemptUsageReceiptSchema,
+  type CommercialAttempt,
+  type CommercialAttemptUsageReceipt,
+} from "./contracts.js";
 
 export type CommercialTransportFailureKind =
   | "provider-outage"
@@ -73,18 +78,38 @@ export interface CommercialTransportMetrics {
 }
 
 export type CommercialProviderTransportResult =
-  | { readonly status: "response"; readonly response: unknown }
+  | {
+      readonly status: "response";
+      readonly response: unknown;
+      readonly usageReceipt: unknown;
+    }
   | {
       readonly status: "failure";
       readonly kind: CommercialTransportFailureKind;
       readonly metrics: CommercialTransportMetrics;
+      readonly usageReceipt: unknown | null;
     };
+
+export interface CommercialOperationClock {
+  nowMs(): number;
+}
+
+export interface CommercialAttemptExecutionContext {
+  readonly reservationRef: string;
+  readonly operationStartedAtMs: number;
+  readonly operationDeadlineAtMs: number;
+  readonly attemptStartedAtMs: number;
+  readonly attemptDeadlineAtMs: number;
+  readonly attemptTimeoutMs: number;
+  readonly remainingOperationMs: number;
+}
 
 /** Injected provider-neutral transport. Production adapters are out of scope. */
 export interface CommercialProviderTransport {
   execute(
     request: BoundedCommercialProviderRequest,
     attempt: CommercialAttempt,
+    context: CommercialAttemptExecutionContext,
   ): CommercialProviderTransportResult;
 }
 
@@ -125,6 +150,7 @@ export interface CommercialTutorExecutionInput {
   readonly curriculumMetadata: TrustedCurriculumMetadata | unknown;
   readonly capabilityDeclaration: TutorCapabilityDeclaration | null;
   readonly routing: CommercialTutorRoutingContext;
+  readonly clock: CommercialOperationClock;
   readonly transport: CommercialProviderTransport;
 }
 
@@ -146,6 +172,8 @@ export type CommercialTutorExecutionResult =
       readonly advisory: StudyCommercialTutorAdvisory;
       readonly commercialResponse: CommercialModelResponse;
       readonly reservation: BudgetReservation;
+      readonly settlement: BudgetSettlement;
+      readonly usageReceipts: readonly CommercialAttemptUsageReceipt[];
       readonly providerCalls: number;
       readonly telemetry: readonly TutorCommercialTelemetryEvent[];
     };
@@ -278,13 +306,63 @@ function responseMetrics(response: BoundedCommercialProviderResponse): Commercia
   return response.metrics;
 }
 
-function addMicros(left: string, right: string): string | null {
+function checkedMillisecondsSum(values: readonly number[]): number | null {
+  let total = 0;
+  for (const value of values) {
+    if (!Number.isSafeInteger(value) || value < 0 || value > Number.MAX_SAFE_INTEGER - total) {
+      return null;
+    }
+    total += value;
+  }
+  return total;
+}
+
+function readMonotonicClock(
+  clock: CommercialOperationClock,
+  notBeforeMs: number | null,
+): number | null {
   try {
-    if (!/^(0|[1-9][0-9]*)$/.test(left) || !/^(0|[1-9][0-9]*)$/.test(right)) return null;
-    return (BigInt(left) + BigInt(right)).toString();
+    const value = clock.nowMs();
+    if (
+      !Number.isSafeInteger(value) ||
+      value < 0 ||
+      (notBeforeMs !== null && value < notBeforeMs)
+    ) {
+      return null;
+    }
+    return value;
   } catch {
     return null;
   }
+}
+
+function validateUsageReceipt(
+  receiptInput: unknown,
+  reservation: BudgetReservation,
+  attempt: CommercialAttempt,
+  actualCostMicros: string,
+): CommercialAttemptUsageReceipt | null {
+  const validation = validateExact(CommercialAttemptUsageReceiptSchema, receiptInput);
+  if (validation.status === "rejected") return null;
+  const receipt = validation.value;
+  if (
+    receipt.logicalOperationRef !== attempt.logicalOperationRef ||
+    receipt.physicalAttemptRef !== attempt.physicalAttemptRef ||
+    receipt.reservationRef !== reservation.reservationRef ||
+    receipt.routeRef !== attempt.routeRef ||
+    receipt.attemptIndex !== attempt.attemptIndex ||
+    receipt.role !== attempt.role ||
+    receipt.reservedCostMicros !== attempt.reservedCostMicros ||
+    receipt.actualCostMicros !== actualCostMicros
+  ) {
+    return null;
+  }
+  try {
+    if (BigInt(receipt.actualCostMicros) > BigInt(attempt.reservedCostMicros)) return null;
+  } catch {
+    return null;
+  }
+  return receipt;
 }
 
 /**
@@ -294,6 +372,7 @@ function addMicros(left: string, right: string): string | null {
 export function executeCommercialTutorInvocation(
   input: CommercialTutorExecutionInput,
 ): CommercialTutorExecutionResult {
+  const operationStartedAtMs = readMonotonicClock(input.clock, null);
   const invocationValidation = validateExact(
     StudyCommercialTutorInvocationSchema,
     input.invocation,
@@ -307,6 +386,17 @@ export function executeCommercialTutorInvocation(
     };
   }
   const invocation = invocationValidation.value;
+  const operationDeadlineAtMs = operationStartedAtMs === null
+    ? null
+    : checkedMillisecondsSum([operationStartedAtMs, input.routing.latencyCeilingMs]);
+  if (operationStartedAtMs === null || operationDeadlineAtMs === null) {
+    return {
+      status: "static-fallback",
+      advisory: staticAdvisory(invocation, "BUDGET_OR_DEADLINE_EXHAUSTED"),
+      providerCalls: 0,
+      telemetry: [],
+    };
+  }
   if (
     invocation.householdScopeRef !== input.trustedScope.householdScopeRef ||
     invocation.learnerScopeRef !== input.trustedScope.learnerScopeRef ||
@@ -359,7 +449,15 @@ export function executeCommercialTutorInvocation(
   if (
     curriculumDecision.status !== "admitted" ||
     metadata.releaseRef !== invocation.curriculum.releaseRef ||
-    metadata.releaseVersion !== invocation.curriculum.version
+    metadata.packageRef !== invocation.curriculum.packageRef ||
+    metadata.releaseVersion !== invocation.curriculum.version ||
+    metadata.releaseDigest !== invocation.curriculum.digest ||
+    curriculumDecision.releaseRef !== invocation.curriculum.releaseRef ||
+    curriculumDecision.subjectRef !== invocation.curriculum.subjectId ||
+    curriculumDecision.courseRef !== invocation.curriculum.courseRef ||
+    curriculumDecision.unitRef !== invocation.curriculum.unitRef ||
+    curriculumDecision.lessonRef !== invocation.curriculum.lessonRef ||
+    invocation.subjectRef !== `subject:${curriculumDecision.subjectRef}`
   ) {
     return {
       status: "static-fallback",
@@ -478,8 +576,8 @@ export function executeCommercialTutorInvocation(
     invocationRef: invocation.interactionRef,
     logicalOperationRef: invocation.logicalOperationRef,
     academicScope: {
-      subjectRef: invocation.subjectRef,
-      courseRef: `course:${invocation.curriculum.courseRef}`,
+      subjectRef: `subject:${curriculumDecision.subjectRef}`,
+      courseRef: `course:${curriculumDecision.courseRef}`,
       conceptRef: invocation.curriculum.conceptRef,
     },
     actionFamily: invocation.requestedActionFamily,
@@ -511,23 +609,76 @@ export function executeCommercialTutorInvocation(
   }
 
   const telemetry: TutorCommercialTelemetryEvent[] = [];
+  const usageReceipts: CommercialAttemptUsageReceipt[] = [];
+  const indeterminateTimeoutAttemptRefs: string[] = [];
   let providerCalls = 0;
-  let actualCostMicros = "0";
   let acceptedResponse: BoundedCommercialProviderResponse | null = null;
+  let lastClockReadingMs = operationStartedAtMs;
   for (let index = 0; index < reservation.attempts.length; index += 1) {
     const attempt = reservation.attempts[index];
     if (!attempt) break;
+    const attemptStartedAtMs = readMonotonicClock(input.clock, lastClockReadingMs);
+    if (attemptStartedAtMs === null) {
+      return {
+        status: "static-fallback",
+        advisory: staticAdvisory(invocation, "BUDGET_OR_DEADLINE_EXHAUSTED"),
+        providerCalls,
+        telemetry,
+      };
+    }
+    lastClockReadingMs = attemptStartedAtMs;
+    const dispatchWindowEndMs = checkedMillisecondsSum([
+      attemptStartedAtMs,
+      input.routing.deterministicReserveMs,
+      index === 0 ? 0 : input.routing.failoverBackoffMs,
+      attempt.timeoutMs,
+    ]);
+    const attemptDeadlineAtMs = checkedMillisecondsSum([
+      attemptStartedAtMs,
+      attempt.timeoutMs,
+    ]);
+    if (
+      dispatchWindowEndMs === null ||
+      attemptDeadlineAtMs === null ||
+      dispatchWindowEndMs > operationDeadlineAtMs ||
+      attemptStartedAtMs >= operationDeadlineAtMs
+    ) {
+      break;
+    }
     providerCalls += 1;
     let transportResult: CommercialProviderTransportResult;
     try {
-      transportResult = input.transport.execute(providerRequest.request, attempt);
+      transportResult = input.transport.execute(providerRequest.request, attempt, {
+        reservationRef: reservation.reservationRef,
+        operationStartedAtMs,
+        operationDeadlineAtMs,
+        attemptStartedAtMs,
+        attemptDeadlineAtMs: Math.min(attemptDeadlineAtMs, operationDeadlineAtMs),
+        attemptTimeoutMs: attempt.timeoutMs,
+        remainingOperationMs: operationDeadlineAtMs - attemptStartedAtMs,
+      });
     } catch {
       transportResult = {
         status: "failure",
         kind: "confirmed-not-dispatched-transport-failure",
         metrics: { inputTokenCount: 0, outputTokenCount: 0, latencyMs: 0, costMicros: "0" },
+        usageReceipt: null,
       };
     }
+    const attemptCompletedAtMs = readMonotonicClock(input.clock, lastClockReadingMs);
+    if (attemptCompletedAtMs === null) {
+      return {
+        status: "static-fallback",
+        advisory: staticAdvisory(invocation, "BUDGET_OR_DEADLINE_EXHAUSTED"),
+        providerCalls,
+        telemetry,
+      };
+    }
+    lastClockReadingMs = attemptCompletedAtMs;
+    const observedAttemptMs = attemptCompletedAtMs - attemptStartedAtMs;
+    let failureKind: CommercialTransportFailureKind | null = null;
+    let failureMetrics: CommercialTransportMetrics | null = null;
+    let reportedLatencyMs: number;
 
     if (transportResult.status === "response") {
       const responseValidation = validateExact(
@@ -542,27 +693,116 @@ export function executeCommercialTutorInvocation(
           telemetry,
         };
       }
-      acceptedResponse = responseValidation.value;
-      actualCostMicros = addMicros(actualCostMicros, responseValidation.value.metrics.costMicros) ?? "";
-      const event = telemetryFor(attempt, reservation, input.routing, {
-        status: "success",
-        metrics: responseMetrics(responseValidation.value),
-      });
-      if (event) telemetry.push(event);
-      break;
+      const response = responseValidation.value;
+      const receipt = validateUsageReceipt(
+        transportResult.usageReceipt,
+        reservation,
+        attempt,
+        response.metrics.costMicros,
+      );
+      if (receipt === null) {
+        return {
+          status: "static-fallback",
+          advisory: staticAdvisory(invocation, "BUDGET_OR_DEADLINE_EXHAUSTED"),
+          providerCalls,
+          telemetry,
+        };
+      }
+      usageReceipts.push(receipt);
+      reportedLatencyMs = response.metrics.latencyMs;
+      const reportedCompletionElapsedMs = checkedMillisecondsSum([
+        attemptStartedAtMs - operationStartedAtMs,
+        reportedLatencyMs,
+      ]);
+      const operationElapsedMs = Math.max(
+        attemptCompletedAtMs - operationStartedAtMs,
+        reportedCompletionElapsedMs ?? Number.MAX_SAFE_INTEGER,
+      );
+      const late =
+        observedAttemptMs > attempt.timeoutMs ||
+        reportedLatencyMs > attempt.timeoutMs ||
+        attemptCompletedAtMs > operationDeadlineAtMs ||
+        operationElapsedMs > input.routing.latencyCeilingMs;
+      if (!late) {
+        acceptedResponse = response;
+        const event = telemetryFor(attempt, reservation, input.routing, {
+          status: "success",
+          metrics: responseMetrics(response),
+        });
+        if (event) telemetry.push(event);
+        break;
+      }
+      failureKind = "provider-timeout";
+      failureMetrics = response.metrics;
+    } else {
+      reportedLatencyMs = transportResult.metrics.latencyMs;
+      if (
+        !Number.isSafeInteger(reportedLatencyMs) ||
+        reportedLatencyMs < 0 ||
+        !/^(0|[1-9][0-9]*)$/.test(transportResult.metrics.costMicros)
+      ) {
+        return {
+          status: "static-fallback",
+          advisory: staticAdvisory(invocation, "BUDGET_OR_DEADLINE_EXHAUSTED"),
+          providerCalls,
+          telemetry,
+        };
+      }
+      if (transportResult.usageReceipt === null) {
+        if (transportResult.kind === "provider-timeout") {
+          indeterminateTimeoutAttemptRefs.push(attempt.physicalAttemptRef);
+        } else if (transportResult.kind !== "confirmed-not-dispatched-transport-failure") {
+          return {
+            status: "static-fallback",
+            advisory: staticAdvisory(invocation, "BUDGET_OR_DEADLINE_EXHAUSTED"),
+            providerCalls,
+            telemetry,
+          };
+        }
+      } else {
+        const receipt = validateUsageReceipt(
+          transportResult.usageReceipt,
+          reservation,
+          attempt,
+          transportResult.metrics.costMicros,
+        );
+        if (receipt === null) {
+          return {
+            status: "static-fallback",
+            advisory: staticAdvisory(invocation, "BUDGET_OR_DEADLINE_EXHAUSTED"),
+            providerCalls,
+            telemetry,
+          };
+        }
+        usageReceipts.push(receipt);
+      }
+      failureKind =
+        observedAttemptMs > attempt.timeoutMs ||
+        reportedLatencyMs > attempt.timeoutMs ||
+        attemptCompletedAtMs > operationDeadlineAtMs
+          ? "provider-timeout"
+          : transportResult.kind;
+      failureMetrics = transportResult.metrics;
     }
 
-    actualCostMicros = addMicros(actualCostMicros, transportResult.metrics.costMicros) ?? "";
     const event = telemetryFor(attempt, reservation, input.routing, {
       status: "failure",
-      metrics: transportResult.metrics,
-      reasonCode: executionFailureReason(transportResult.kind),
+      metrics: failureMetrics,
+      reasonCode: executionFailureReason(failureKind),
     });
     if (event) telemetry.push(event);
 
     const primary = reservation.attempts[0];
     const failover = reservation.attempts[1];
     if (!primary) break;
+    const reportedCompletionElapsedMs = checkedMillisecondsSum([
+      attemptStartedAtMs - operationStartedAtMs,
+      reportedLatencyMs,
+    ]);
+    const elapsedMs = Math.max(
+      attemptCompletedAtMs - operationStartedAtMs,
+      reportedCompletionElapsedMs ?? Number.MAX_SAFE_INTEGER,
+    );
     const fallback = decideFallback({
       executionBudget: input.routing.executionBudget,
       reservation,
@@ -570,7 +810,7 @@ export function executeCommercialTutorInvocation(
         contractVersion: BUDGET_RESILIENCE_VERSION,
         endToEndDeadlineMs: input.routing.latencyCeilingMs,
         deterministicReserveMs: input.routing.deterministicReserveMs,
-        elapsedMs: transportResult.metrics.latencyMs,
+        elapsedMs,
       },
       retryPolicy: {
         contractVersion: BUDGET_RESILIENCE_VERSION,
@@ -592,9 +832,9 @@ export function executeCommercialTutorInvocation(
       primaryAttempt: toAttemptBudget(primary, input.routing),
       failoverAttempt: failover ? toAttemptBudget(failover, input.routing) : null,
       failure: {
-        kind: transportResult.kind,
+        kind: failureKind,
         retryAfterMs: null,
-        indeterminatePrimaryReserveHeld: transportResult.kind === "provider-timeout",
+        indeterminatePrimaryReserveHeld: failureKind === "provider-timeout",
       },
       failoverAvailability: "eligible",
       failoverCircuitState: {
@@ -608,7 +848,7 @@ export function executeCommercialTutorInvocation(
     if (fallback.decision !== "commercial-failover" || index !== 0) break;
   }
 
-  if (acceptedResponse === null || actualCostMicros.length === 0) {
+  if (acceptedResponse === null) {
     return {
       status: "static-fallback",
       advisory: staticAdvisory(invocation, "PROVIDER_TRANSPORT_FAILED"),
@@ -616,7 +856,11 @@ export function executeCommercialTutorInvocation(
       telemetry,
     };
   }
-  const settlement = settleBudgetReservation(reservation, "settled", actualCostMicros);
+  const settlement = settleBudgetReservation(
+    reservation,
+    usageReceipts,
+    indeterminateTimeoutAttemptRefs,
+  );
   if (settlement === null || settlement.costAnomaly) {
     return {
       status: "static-fallback",
@@ -691,6 +935,8 @@ export function executeCommercialTutorInvocation(
     advisory: finalizedAdvisory(invocation, mapped.response, grounding),
     commercialResponse: mapped.response,
     reservation,
+    settlement: Object.freeze({ ...settlement }),
+    usageReceipts: usageReceipts.map((receipt) => Object.freeze({ ...receipt })),
     providerCalls,
     telemetry,
   };

@@ -1,11 +1,13 @@
 import { Type, type Static } from "../../../schema/typebox.js";
 import { validateExact } from "../../../v2/contracts/validation.js";
 import {
+  CommercialAttemptUsageReceiptSchema,
   commercialAttemptsEqual,
   CommercialRouteAttemptPlanSchema,
   isCanonicalCommercialAttempt,
   validateCommercialRouteAttemptPlan,
   type CommercialAttempt,
+  type CommercialAttemptUsageReceipt,
 } from "../../commercial-operation/index.js";
 import {
   AttemptBudgetSchema,
@@ -399,11 +401,31 @@ export function reserveCommercialRouteAttemptPlan(input: unknown):
   return reserveExecutionBudget({ executionBudget, reservationRef, attempts });
 }
 
-/** Retains the full reservation for indeterminate billing outcomes. */
+function usageReceiptMatchesAttempt(
+  receipt: CommercialAttemptUsageReceipt,
+  reservation: BudgetReservation,
+  attempt: CommercialAttempt,
+): boolean {
+  return (
+    receipt.logicalOperationRef === attempt.logicalOperationRef &&
+    receipt.physicalAttemptRef === attempt.physicalAttemptRef &&
+    receipt.reservationRef === reservation.reservationRef &&
+    receipt.routeRef === attempt.routeRef &&
+    receipt.attemptIndex === attempt.attemptIndex &&
+    receipt.role === attempt.role &&
+    receipt.reservedCostMicros === attempt.reservedCostMicros
+  );
+}
+
+/**
+ * Settles every executed physical attempt against its own immutable reserve.
+ * Indeterminate timeouts retain that attempt's full reserve; an unused reserve
+ * can never compensate for another attempt's overrun.
+ */
 export function settleBudgetReservation(
   reservationInput: unknown,
-  outcome: "settled" | "indeterminate-hold",
-  actualCostMicrosInput: unknown,
+  usageReceiptsInput: unknown,
+  indeterminateTimeoutAttemptRefsInput: unknown = [],
 ): BudgetSettlement | null {
   const reservation = validateBudgetReservationSnapshot(reservationInput);
   if (reservation === null) return null;
@@ -419,31 +441,80 @@ export function settleBudgetReservation(
     return null;
   }
 
-  if (outcome === "indeterminate-hold") {
-    if (actualCostMicrosInput !== null) return null;
-    return {
-      contractVersion: BUDGET_RESILIENCE_VERSION,
-      reservationRef: reservation.reservationRef,
-      logicalOperationRef: reservation.logicalOperationRef,
-      outcome,
-      actualCostMicros: null,
-      consumedCostMicros: reservation.totalReservedMicros,
-      releasedCostMicros: "0",
-      accountingGap: true,
-      costAnomaly: false,
-    };
+  if (
+    !Array.isArray(usageReceiptsInput) ||
+    usageReceiptsInput.length > reservation.attempts.length ||
+    !Array.isArray(indeterminateTimeoutAttemptRefsInput) ||
+    indeterminateTimeoutAttemptRefsInput.length > reservation.attempts.length ||
+    !indeterminateTimeoutAttemptRefsInput.every((value) => typeof value === "string")
+  ) {
+    return null;
+  }
+  const receipts: CommercialAttemptUsageReceipt[] = [];
+  for (const receiptInput of usageReceiptsInput) {
+    const validation = validateExact(CommercialAttemptUsageReceiptSchema, receiptInput);
+    if (validation.status === "rejected") return null;
+    receipts.push(validation.value);
+  }
+  const indeterminateRefs = indeterminateTimeoutAttemptRefsInput as string[];
+  const executedRefs = [
+    ...receipts.map((receipt) => receipt.physicalAttemptRef),
+    ...indeterminateRefs,
+  ];
+  if (
+    executedRefs.length === 0 ||
+    new Set(executedRefs).size !== executedRefs.length
+  ) {
+    return null;
   }
 
-  if (typeof actualCostMicrosInput !== "string") return null;
-  const actual = parseMicros(actualCostMicrosInput);
-  if (actual === null) return null;
-  if (actual > reserved) {
+  let knownActual = 0n;
+  let consumed = 0n;
+  for (const receipt of receipts) {
+    const attempt = reservation.attempts.find(
+      (candidate) => candidate.physicalAttemptRef === receipt.physicalAttemptRef,
+    );
+    const actual = parseMicros(receipt.actualCostMicros);
+    const attemptReserved = attempt ? parseMicros(attempt.reservedCostMicros) : null;
+    if (
+      !attempt ||
+      actual === null ||
+      attemptReserved === null ||
+      !usageReceiptMatchesAttempt(receipt, reservation, attempt)
+    ) {
+      return null;
+    }
+    if (actual > attemptReserved) {
+      return {
+        contractVersion: BUDGET_RESILIENCE_VERSION,
+        reservationRef: reservation.reservationRef,
+        logicalOperationRef: reservation.logicalOperationRef,
+        outcome: "rejected-over-reservation",
+        actualCostMicros: receipt.actualCostMicros,
+        consumedCostMicros: reservation.totalReservedMicros,
+        releasedCostMicros: "0",
+        accountingGap: true,
+        costAnomaly: true,
+      };
+    }
+    knownActual += actual;
+    consumed += actual;
+  }
+  for (const physicalAttemptRef of indeterminateRefs) {
+    const attempt = reservation.attempts.find(
+      (candidate) => candidate.physicalAttemptRef === physicalAttemptRef,
+    );
+    const attemptReserved = attempt ? parseMicros(attempt.reservedCostMicros) : null;
+    if (!attempt || attemptReserved === null) return null;
+    consumed += attemptReserved;
+  }
+  if (consumed > reserved) {
     return {
       contractVersion: BUDGET_RESILIENCE_VERSION,
       reservationRef: reservation.reservationRef,
       logicalOperationRef: reservation.logicalOperationRef,
       outcome: "rejected-over-reservation",
-      actualCostMicros: actualCostMicrosInput,
+      actualCostMicros: indeterminateRefs.length === 0 ? knownActual.toString() : null,
       consumedCostMicros: reservation.totalReservedMicros,
       releasedCostMicros: "0",
       accountingGap: true,
@@ -454,11 +525,11 @@ export function settleBudgetReservation(
     contractVersion: BUDGET_RESILIENCE_VERSION,
     reservationRef: reservation.reservationRef,
     logicalOperationRef: reservation.logicalOperationRef,
-    outcome: "settled",
-    actualCostMicros: actualCostMicrosInput,
-    consumedCostMicros: actualCostMicrosInput,
-    releasedCostMicros: (reserved - actual).toString(),
-    accountingGap: false,
+    outcome: indeterminateRefs.length === 0 ? "settled" : "indeterminate-hold",
+    actualCostMicros: indeterminateRefs.length === 0 ? knownActual.toString() : null,
+    consumedCostMicros: consumed.toString(),
+    releasedCostMicros: (reserved - consumed).toString(),
+    accountingGap: indeterminateRefs.length > 0,
     costAnomaly: false,
   };
 }

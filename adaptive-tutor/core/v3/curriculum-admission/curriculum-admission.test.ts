@@ -26,7 +26,9 @@ function metadata(): TrustedCurriculumMetadata {
     metadataKind: "accepted-curriculum-metadata",
     source: "accepted-curriculum-release",
     releaseRef: "family-pilot-r1",
+    packageRef: "curriculum-package:family-pilot-r1",
     releaseVersion: "2.0.0",
+    releaseDigest: `sha256:${"a".repeat(64)}`,
     reviewState: "reviewed",
     admissionState: "admitted",
     courses: [
@@ -377,7 +379,9 @@ test("rejects ambiguous or malformed curriculum and capability metadata", () => 
   const forgedRegistry = {
     coverage: {
       releaseRef: "family-pilot-r1",
+      packageRef: "curriculum-package:family-pilot-r1",
       releaseVersion: "2.0.0",
+      releaseDigest: `sha256:${"a".repeat(64)}`,
       reviewState: "reviewed" as const,
       admissionState: "admitted" as const,
       grades: [3],
@@ -436,7 +440,9 @@ test("coverage matches the current admitted canonical curriculum metadata", () =
     metadataKind: "accepted-curriculum-metadata",
     source: "accepted-curriculum-release",
     releaseRef: "family-pilot-r1",
+    packageRef: "curriculum-package:family-pilot-r1",
     releaseVersion: manifest.releaseVersion,
+    releaseDigest: `sha256:${"a".repeat(64)}`,
     reviewState: "reviewed",
     admissionState: "admitted",
     courses: manifest.courses.map((course) => {

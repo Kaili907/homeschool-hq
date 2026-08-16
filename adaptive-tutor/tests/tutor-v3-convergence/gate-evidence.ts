@@ -136,6 +136,53 @@ export async function collectWave3HardGateEvidence(): Promise<Wave3HardGateEvide
   ]);
   const failover = executeCommercialTutorInvocation(executionInput(failoverTransport));
 
+  const overReservationTransport = new ScriptedCommercialTransport([{
+    status: "response",
+    response: successfulProviderResponse({
+      metrics: {
+        inputTokenCount: 120,
+        outputTokenCount: 30,
+        latencyMs: 100,
+        costMicros: "150",
+      },
+    }),
+  }]);
+  const overReservation = executeCommercialTutorInvocation(
+    executionInput(overReservationTransport),
+  );
+
+  const reportedLateTransport = new ScriptedCommercialTransport([{
+    status: "response",
+    response: successfulProviderResponse({
+      metrics: {
+        inputTokenCount: 120,
+        outputTokenCount: 30,
+        latencyMs: 10_000,
+        costMicros: "100",
+      },
+    }),
+  }]);
+  const reportedLate = executeCommercialTutorInvocation(
+    executionInput(reportedLateTransport),
+  );
+  const measuredLateTransport = new ScriptedCommercialTransport([{
+    status: "response",
+    observedExecutionMs: 800,
+    response: successfulProviderResponse(),
+  }]);
+  const measuredLate = executeCommercialTutorInvocation(
+    executionInput(measuredLateTransport),
+  );
+  const insufficientDeadlineTransport = new ScriptedCommercialTransport([{
+    status: "failure",
+    kind: "provider-timeout",
+    observedExecutionMs: 1_300,
+    metrics: { inputTokenCount: 1, outputTokenCount: 0, latencyMs: 100, costMicros: "0" },
+  }]);
+  const insufficientDeadline = executeCommercialTutorInvocation(
+    executionInput(insufficientDeadlineTransport),
+  );
+
   const authorityResponse = successfulProviderResponse();
   (authorityResponse as Record<string, unknown>).officialMastery = true;
   const authorityRejected = executeCommercialTutorInvocation(executionInput(
@@ -154,6 +201,18 @@ export async function collectWave3HardGateEvidence(): Promise<Wave3HardGateEvide
   const curriculumRejected = executeCommercialTutorInvocation({
     ...curriculumInput,
     invocation: unknownCurriculum,
+  });
+  const foreignDigest = structuredClone(curriculumInput.invocation) as Record<string, unknown>;
+  (foreignDigest.curriculum as Record<string, unknown>).digest = `sha256:${"e".repeat(64)}`;
+  const foreignDigestRejected = executeCommercialTutorInvocation({
+    ...curriculumInput,
+    invocation: foreignDigest,
+  });
+  const foreignSubject = structuredClone(curriculumInput.invocation) as Record<string, unknown>;
+  foreignSubject.subjectRef = "subject:science";
+  const foreignSubjectRejected = executeCommercialTutorInvocation({
+    ...curriculumInput,
+    invocation: foreignSubject,
   });
   const unknownStage = structuredClone(curriculumInput.invocation) as Record<string, unknown>;
   unknownStage.learnerStageRef = "learner-stage:not-approved";
@@ -202,12 +261,21 @@ export async function collectWave3HardGateEvidence(): Promise<Wave3HardGateEvide
     INTEGER_MICROS_ATTEMPT_BUDGET:
       success.status === "advisory" && success.reservation.attempts.every((item) =>
         typeof item.reservedCostMicros === "string" && /^(0|[1-9][0-9]*)$/.test(item.reservedCostMicros)
-      ),
+      ) && overReservation.status === "static-fallback" &&
+      overReservationTransport.requests.length === 1,
     END_TO_END_DEADLINE_BOUNDED_FAILOVER:
-      failover.status === "advisory" && failover.providerCalls === 2 && failoverTransport.attempts.length === 2,
+      failover.status === "advisory" && failover.providerCalls === 2 &&
+      failoverTransport.attempts.length === 2 &&
+      reportedLate.status === "static-fallback" &&
+      measuredLate.status === "static-fallback" &&
+      insufficientDeadline.status === "static-fallback" &&
+      insufficientDeadline.providerCalls === 1,
     UNTRUSTED_MODEL_OUTPUT_BOUNDARY: authorityRejected.status === "static-fallback",
     GROUNDED_CONTEXT_OR_REFUSAL: groundingRejected.status === "static-fallback",
-    CURRICULUM_TUTOR_ADMISSION: curriculumRejected.status === "static-fallback" && curriculumRejected.providerCalls === 0,
+    CURRICULUM_TUTOR_ADMISSION:
+      curriculumRejected.status === "static-fallback" && curriculumRejected.providerCalls === 0 &&
+      foreignDigestRejected.status === "static-fallback" && foreignDigestRejected.providerCalls === 0 &&
+      foreignSubjectRejected.status === "static-fallback" && foreignSubjectRejected.providerCalls === 0,
     APPROVED_LEARNER_STAGE_CATALOG: stageRejected.status === "static-fallback" && stageRejected.providerCalls === 0,
     RECOVERABLE_EFFECT_MEMORY_REPLAY: recoveryProbe(),
     TRANSIENT_MULTIMODAL_MINIMIZATION:

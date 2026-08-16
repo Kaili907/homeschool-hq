@@ -26,9 +26,15 @@ import {
   type TutorCapabilityDeclaration,
 } from "../../core/v3/curriculum-admission/index.js";
 import {
+  type CommercialAttemptExecutionContext,
+  type CommercialOperationClock,
   type CommercialProviderTransportResult,
   type CommercialTutorExecutionInput,
 } from "../../core/v3/commercial-operation/orchestrate.js";
+import {
+  COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION,
+  type CommercialAttempt,
+} from "../../core/v3/commercial-operation/contracts.js";
 import {
   GROUNDING_CONTRACT_VERSION,
 } from "../../core/v3/grounding/index.js";
@@ -43,22 +49,104 @@ const DIGEST_C = `sha256:${"c".repeat(64)}`;
 const DIGEST_D = `sha256:${"d".repeat(64)}`;
 const DIGEST_F = `sha256:${"f".repeat(64)}`;
 
+type ScriptedCommercialTransportResult =
+  | (Omit<Extract<CommercialProviderTransportResult, { status: "response" }>, "usageReceipt"> & {
+      readonly usageReceipt?: unknown;
+      readonly observedExecutionMs?: number;
+    })
+  | (Omit<Extract<CommercialProviderTransportResult, { status: "failure" }>, "usageReceipt"> & {
+      readonly usageReceipt?: unknown | null;
+      readonly observedExecutionMs?: number;
+    });
+
+export class ManualCommercialOperationClock implements CommercialOperationClock {
+  #nowMs = 0;
+
+  nowMs(): number {
+    return this.#nowMs;
+  }
+
+  advance(milliseconds: number): void {
+    this.#nowMs += milliseconds;
+  }
+}
+
+function scriptedCostMicros(result: ScriptedCommercialTransportResult): string {
+  if (result.status === "failure") return result.metrics.costMicros;
+  const response = result.response as { metrics?: { costMicros?: unknown } };
+  return typeof response?.metrics?.costMicros === "string"
+    ? response.metrics.costMicros
+    : "0";
+}
+
+export function commercialUsageReceipt(
+  attempt: CommercialAttempt,
+  reservationRef: string,
+  actualCostMicros: string,
+): unknown {
+  return {
+    contractVersion: COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION,
+    receiptKind: "commercial-attempt-usage-receipt",
+    logicalOperationRef: attempt.logicalOperationRef,
+    physicalAttemptRef: attempt.physicalAttemptRef,
+    reservationRef,
+    routeRef: attempt.routeRef,
+    attemptIndex: attempt.attemptIndex,
+    role: attempt.role,
+    reservedCostMicros: attempt.reservedCostMicros,
+    actualCostMicros,
+  };
+}
+
 export class ScriptedCommercialTransport {
   readonly requests: unknown[] = [];
   readonly attempts: unknown[] = [];
-  readonly #results: CommercialProviderTransportResult[];
+  readonly contexts: CommercialAttemptExecutionContext[] = [];
+  readonly clock = new ManualCommercialOperationClock();
+  readonly #results: ScriptedCommercialTransportResult[];
 
-  constructor(results: readonly CommercialProviderTransportResult[]) {
+  constructor(results: readonly ScriptedCommercialTransportResult[]) {
     this.#results = results.map((result) => structuredClone(result));
   }
 
-  execute(request: unknown, attempt: unknown): CommercialProviderTransportResult {
+  execute(
+    request: unknown,
+    attempt: CommercialAttempt,
+    context: CommercialAttemptExecutionContext,
+  ): CommercialProviderTransportResult {
     this.requests.push(structuredClone(request));
     this.attempts.push(structuredClone(attempt));
-    return this.#results.shift() ?? {
+    this.contexts.push(structuredClone(context));
+    const scripted = this.#results.shift() ?? {
       status: "failure",
       kind: "confirmed-not-dispatched-transport-failure",
       metrics: { inputTokenCount: 0, outputTokenCount: 0, latencyMs: 0, costMicros: "0" },
+    };
+    this.clock.advance(scripted.observedExecutionMs ?? 0);
+    const result = structuredClone(scripted) as ScriptedCommercialTransportResult & {
+      observedExecutionMs?: number;
+    };
+    delete result.observedExecutionMs;
+    if (result.status === "response") {
+      return {
+        status: "response",
+        response: result.response,
+        usageReceipt: result.usageReceipt ?? commercialUsageReceipt(
+          attempt,
+          context.reservationRef,
+          scriptedCostMicros(result),
+        ),
+      };
+    }
+    return {
+      status: "failure",
+      kind: result.kind,
+      metrics: result.metrics,
+      usageReceipt: result.usageReceipt === undefined
+        ? result.kind === "provider-timeout"
+          ? null
+          : commercialUsageReceipt(attempt, context.reservationRef, result.metrics.costMicros)
+        : result.usageReceipt,
     };
   }
 }
@@ -272,7 +360,9 @@ export function curriculumMetadata(): TrustedCurriculumMetadata {
     metadataKind: "accepted-curriculum-metadata",
     source: "accepted-curriculum-release",
     releaseRef: "family-pilot-r1",
+    packageRef: "curriculum-package:family-pilot-r1",
     releaseVersion: "2.0.0",
+    releaseDigest: DIGEST_A,
     reviewState: "reviewed",
     admissionState: "admitted",
     courses: [{
@@ -349,6 +439,7 @@ export function executionInput(
     },
     curriculumMetadata: curriculumMetadata(),
     capabilityDeclaration: capabilityDeclaration(),
+    clock: transport.clock,
     routing: {
       requestRef: "routing-request:commercial-one",
       routePlanRef: "route-plan:commercial-one",

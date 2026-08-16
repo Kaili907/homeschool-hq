@@ -1,6 +1,7 @@
 import { Type, type Static } from "../../schema/typebox.js";
 import {
   AssessmentPhaseSchema,
+  ContentDigestSchema,
   OpaqueReferenceSchema,
   PolicyCodeSchema,
 } from "../../v2/contracts/primitives.js";
@@ -46,7 +47,9 @@ export const TrustedCurriculumMetadataSchema = Type.Object(
     metadataKind: Type.Literal("accepted-curriculum-metadata"),
     source: Type.Literal("accepted-curriculum-release"),
     releaseRef: CurriculumIdentifierSchema,
+    packageRef: OpaqueReferenceSchema,
     releaseVersion: Type.String({ minLength: 1, maxLength: 40 }),
+    releaseDigest: ContentDigestSchema,
     reviewState: Type.Union([
       Type.Literal("reviewed"),
       Type.Literal("not-reviewed"),

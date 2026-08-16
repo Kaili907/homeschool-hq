@@ -3,6 +3,8 @@ import { OpaqueReferenceSchema } from "../../v2/contracts/primitives.js";
 
 export const COMMERCIAL_ROUTE_ATTEMPT_PLAN_VERSION =
   "study-tutor-v3.commercial-route-attempt-plan.v1" as const;
+export const COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION =
+  "study-tutor-v3.commercial-attempt-usage-receipt.v1" as const;
 
 /** Signed 64-bit positive range shared by routing, reservations, and telemetry. */
 export const MAX_CANONICAL_INTEGER_MICROS = 9_223_372_036_854_775_807n;
@@ -41,6 +43,26 @@ export const CommercialAttemptSchema = Type.Object(
   { additionalProperties: false, $id: "TutorV3CommercialAttempt" },
 );
 export type CommercialAttempt = Static<typeof CommercialAttemptSchema>;
+
+/** Trusted transport settlement identity for one physical provider execution. */
+export const CommercialAttemptUsageReceiptSchema = Type.Object(
+  {
+    contractVersion: Type.Literal(COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION),
+    receiptKind: Type.Literal("commercial-attempt-usage-receipt"),
+    logicalOperationRef: OpaqueReferenceSchema,
+    physicalAttemptRef: OpaqueReferenceSchema,
+    reservationRef: OpaqueReferenceSchema,
+    routeRef: OpaqueReferenceSchema,
+    attemptIndex: Type.Union([Type.Literal(0), Type.Literal(1)]),
+    role: Type.Union([Type.Literal("primary"), Type.Literal("failover")]),
+    reservedCostMicros: CanonicalIntegerMicrosSchema,
+    actualCostMicros: CanonicalIntegerMicrosSchema,
+  },
+  { additionalProperties: false, $id: "TutorV3CommercialAttemptUsageReceipt" },
+);
+export type CommercialAttemptUsageReceipt = Static<
+  typeof CommercialAttemptUsageReceiptSchema
+>;
 
 export const CommercialRouteAttemptPlanSchema = Type.Object(
   {
