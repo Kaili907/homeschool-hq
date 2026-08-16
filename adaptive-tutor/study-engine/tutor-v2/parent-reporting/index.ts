@@ -3,8 +3,10 @@ export {
   PARENT_REPORT_DISCLAIMER,
   PARENT_REPORT_REASON_CODES,
   PARENT_REPORT_VERSION,
+  ParentReportConsentSchema,
   ParentReportEvidenceSchema,
   ParentReportEvidenceScopeSchema,
+  ParentReportGuardianAuthorizationSchema,
   ParentReportRequestSchema,
   ParentReportRequestScopeSchema,
   ParentReportResultSchema,
@@ -16,9 +18,11 @@ export {
 } from "./parent-report.js";
 export type {
   ParentReport,
+  ParentReportConsent,
   ParentReportDecisionStatus,
   ParentReportEvidence,
   ParentReportEvidenceScope,
+  ParentReportGuardianAuthorization,
   ParentReportReasonCode,
   ParentReportRequest,
   ParentReportRequestScope,

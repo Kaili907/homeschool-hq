@@ -6,7 +6,7 @@ import {
   validateExact,
 } from "../../../core/v2/contracts/index.js";
 
-export const PARENT_REPORT_VERSION = "tutor-parent-report/v1" as const;
+export const PARENT_REPORT_VERSION = "tutor-parent-report/v2" as const;
 
 export const PARENT_REPORT_DECISION_STATUSES = [
   "tutor-proposed",
@@ -193,9 +193,9 @@ export const PARENT_REPORT_DISCLAIMER =
 const SessionReportRequestScopeSchema = Type.Object(
   {
     scopeKind: Type.Literal("session"),
+    guardianRef: OpaqueReferenceSchema,
     householdScopeRef: OpaqueReferenceSchema,
     selectedLearnerRef: OpaqueReferenceSchema,
-    authorizedLearnerRef: OpaqueReferenceSchema,
     sessionRef: OpaqueReferenceSchema,
   },
   { additionalProperties: false },
@@ -204,9 +204,9 @@ const SessionReportRequestScopeSchema = Type.Object(
 const ReportingPeriodRequestScopeSchema = Type.Object(
   {
     scopeKind: Type.Literal("reporting-period"),
+    guardianRef: OpaqueReferenceSchema,
     householdScopeRef: OpaqueReferenceSchema,
     selectedLearnerRef: OpaqueReferenceSchema,
-    authorizedLearnerRef: OpaqueReferenceSchema,
     reportingPeriodRef: OpaqueReferenceSchema,
     startsAt: ISODateTimeSchema,
     endsAt: ISODateTimeSchema,
@@ -220,6 +220,89 @@ export const ParentReportRequestScopeSchema = Type.Union([
 ]);
 export type ParentReportRequestScope = Static<
   typeof ParentReportRequestScopeSchema
+>;
+
+const ParentReportConsentStateSchema = Type.Union([
+  Type.Literal("granted"),
+  Type.Literal("withdrawn"),
+  Type.Literal("expired"),
+]);
+
+const ParentReportConsentNotRequiredSchema = Type.Object(
+  {
+    policyRequirement: Type.Literal("not-required"),
+    consentState: Type.Literal("not-required"),
+  },
+  { additionalProperties: false },
+);
+
+const ParentReportRequiredConsentSchema = Type.Object(
+  {
+    policyRequirement: Type.Literal("required"),
+    consentRef: OpaqueReferenceSchema,
+    consentState: ParentReportConsentStateSchema,
+  },
+  { additionalProperties: false },
+);
+
+export const ParentReportConsentSchema = Type.Union(
+  [ParentReportConsentNotRequiredSchema, ParentReportRequiredConsentSchema],
+  { $id: "TutorV2ParentReportConsent" },
+);
+export type ParentReportConsent = Static<typeof ParentReportConsentSchema>;
+
+const GuardianAuthorizationCommonProperties = {
+  guardianAuthorizationKind: Type.Literal(
+    "study-parent-report-guardian-authorization",
+  ),
+  issuer: Type.Literal("study"),
+  authorizationRef: OpaqueReferenceSchema,
+  policyRef: OpaqueReferenceSchema,
+  guardianRef: OpaqueReferenceSchema,
+  householdScopeRef: OpaqueReferenceSchema,
+  learnerScopeRef: OpaqueReferenceSchema,
+  authorizationRevisionRef: OpaqueReferenceSchema,
+  currentAuthorizationRevisionRef: OpaqueReferenceSchema,
+  authorizationRevisionStatus: Type.Union([
+    Type.Literal("current"),
+    Type.Literal("superseded"),
+    Type.Literal("revoked"),
+  ]),
+  visibility: Type.Literal("parent-report"),
+  consent: ParentReportConsentSchema,
+};
+
+const SessionGuardianAuthorizationSchema = Type.Object(
+  {
+    ...GuardianAuthorizationCommonProperties,
+    scopeKind: Type.Literal("session"),
+    sessionRef: OpaqueReferenceSchema,
+  },
+  { additionalProperties: false },
+);
+
+const ReportingPeriodGuardianAuthorizationSchema = Type.Object(
+  {
+    ...GuardianAuthorizationCommonProperties,
+    scopeKind: Type.Literal("reporting-period"),
+    reportingPeriodRef: OpaqueReferenceSchema,
+  },
+  { additionalProperties: false },
+);
+
+/**
+ * Closed authorization evidence issued by Study. Request scope equality alone
+ * never establishes guardian authority.
+ */
+export const ParentReportGuardianAuthorizationSchema = Type.Union(
+  [
+    SessionGuardianAuthorizationSchema,
+    ReportingPeriodGuardianAuthorizationSchema,
+  ],
+  { $id: "TutorV2ParentReportGuardianAuthorization" },
+);
+export type ParentReportGuardianAuthorization = Static<
+  typeof ParentReportGuardianAuthorizationSchema
 >;
 
 const SessionEvidenceScopeSchema = Type.Object(
@@ -288,6 +371,7 @@ export const ParentReportRequestSchema = Type.Object(
     policyRef: OpaqueReferenceSchema,
     generatedAt: ISODateTimeSchema,
     scope: ParentReportRequestScopeSchema,
+    guardianAuthorization: ParentReportGuardianAuthorizationSchema,
     evidence: Type.Array(ParentReportEvidenceSchema, { maxItems: 1_000 }),
   },
   { additionalProperties: false, $id: "TutorV2ParentReportRequest" },
@@ -298,6 +382,7 @@ const ParentReportOutputScopeSchema = Type.Union([
   Type.Object(
     {
       scopeKind: Type.Literal("session"),
+      guardianRef: OpaqueReferenceSchema,
       householdScopeRef: OpaqueReferenceSchema,
       learnerScopeRef: OpaqueReferenceSchema,
       sessionRef: OpaqueReferenceSchema,
@@ -307,6 +392,7 @@ const ParentReportOutputScopeSchema = Type.Union([
   Type.Object(
     {
       scopeKind: Type.Literal("reporting-period"),
+      guardianRef: OpaqueReferenceSchema,
       householdScopeRef: OpaqueReferenceSchema,
       learnerScopeRef: OpaqueReferenceSchema,
       reportingPeriodRef: OpaqueReferenceSchema,
@@ -351,6 +437,9 @@ export const ParentReportSchema = Type.Object(
         reportRef: OpaqueReferenceSchema,
         policyRef: OpaqueReferenceSchema,
         generatedAt: ISODateTimeSchema,
+        authorizationRef: OpaqueReferenceSchema,
+        authorizationRevisionRef: OpaqueReferenceSchema,
+        consentRef: Type.Union([OpaqueReferenceSchema, Type.Null()]),
         sourceEvidenceCount: Type.Integer({ minimum: 0, maximum: 1_000 }),
       },
       { additionalProperties: false },
@@ -371,6 +460,8 @@ export const ParentReportResultSchema = Type.Union(
         status: Type.Literal("rejected"),
         code: Type.Union([
           Type.Literal("PARENT_REPORT_REQUEST_REJECTED"),
+          Type.Literal("PARENT_REPORT_AUTHORIZATION_REJECTED"),
+          Type.Literal("PARENT_REPORT_CONSENT_REJECTED"),
           Type.Literal("PARENT_REPORT_SCOPE_MISMATCH"),
           Type.Literal("PARENT_REPORT_UNKNOWN_REASON"),
           Type.Literal("PARENT_REPORT_STATUS_MISMATCH"),
@@ -442,10 +533,44 @@ function evidenceMatchesScope(
   return false;
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function authorizationMatchesScope(
+  reportScope: ParentReportRequestScope,
+  authorization: ParentReportGuardianAuthorization,
+): boolean {
+  if (
+    authorization.guardianRef !== reportScope.guardianRef ||
+    authorization.householdScopeRef !== reportScope.householdScopeRef ||
+    authorization.learnerScopeRef !== reportScope.selectedLearnerRef ||
+    authorization.scopeKind !== reportScope.scopeKind
+  ) {
+    return false;
+  }
+  if (
+    reportScope.scopeKind === "session" &&
+    authorization.scopeKind === "session"
+  ) {
+    return authorization.sessionRef === reportScope.sessionRef;
+  }
+  if (
+    reportScope.scopeKind === "reporting-period" &&
+    authorization.scopeKind === "reporting-period"
+  ) {
+    return (
+      authorization.reportingPeriodRef === reportScope.reportingPeriodRef
+    );
+  }
+  return false;
+}
+
 function outputScope(scope: ParentReportRequestScope) {
   if (scope.scopeKind === "session") {
     return {
       scopeKind: scope.scopeKind,
+      guardianRef: scope.guardianRef,
       householdScopeRef: scope.householdScopeRef,
       learnerScopeRef: scope.selectedLearnerRef,
       sessionRef: scope.sessionRef,
@@ -453,6 +578,7 @@ function outputScope(scope: ParentReportRequestScope) {
   }
   return {
     scopeKind: scope.scopeKind,
+    guardianRef: scope.guardianRef,
     householdScopeRef: scope.householdScopeRef,
     learnerScopeRef: scope.selectedLearnerRef,
     reportingPeriodRef: scope.reportingPeriodRef,
@@ -468,12 +594,37 @@ function outputScope(scope: ParentReportRequestScope) {
 export function buildMinimizedParentHubReport(
   value: unknown,
 ): ParentReportResult {
+  if (!isRecord(value) || !isRecord(value.guardianAuthorization)) {
+    return {
+      status: "rejected",
+      code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+    };
+  }
+  const consentResult = validateExact(
+    ParentReportConsentSchema,
+    value.guardianAuthorization.consent,
+  );
+  if (consentResult.status === "rejected") {
+    return { status: "rejected", code: "PARENT_REPORT_CONSENT_REJECTED" };
+  }
+  const authorizationResult = validateExact(
+    ParentReportGuardianAuthorizationSchema,
+    value.guardianAuthorization,
+  );
+  if (authorizationResult.status === "rejected") {
+    return {
+      status: "rejected",
+      code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+    };
+  }
+
   const requestResult = validateExact(ParentReportRequestSchema, value);
   if (requestResult.status === "rejected") {
     return { status: "rejected", code: "PARENT_REPORT_REQUEST_REJECTED" };
   }
 
   const request = requestResult.value;
+  const authorization = authorizationResult.value;
   if (!isValidDateTime(request.generatedAt)) {
     return { status: "rejected", code: "PARENT_REPORT_REQUEST_REJECTED" };
   }
@@ -483,10 +634,24 @@ export function buildMinimizedParentHubReport(
   ) {
     return { status: "rejected", code: "PARENT_REPORT_INVALID_PERIOD" };
   }
-  if (request.scope.authorizedLearnerRef !== request.scope.selectedLearnerRef) {
-    return { status: "rejected", code: "PARENT_REPORT_SCOPE_MISMATCH" };
+  if (
+    authorization.authorizationRevisionStatus !== "current" ||
+    authorization.authorizationRevisionRef !==
+      authorization.currentAuthorizationRevisionRef ||
+    authorization.policyRef !== request.policyRef ||
+    !authorizationMatchesScope(request.scope, authorization)
+  ) {
+    return {
+      status: "rejected",
+      code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+    };
   }
-
+  if (
+    authorization.consent.policyRequirement === "required" &&
+    authorization.consent.consentState !== "granted"
+  ) {
+    return { status: "rejected", code: "PARENT_REPORT_CONSENT_REJECTED" };
+  }
   const evidenceRefs = new Set<string>();
   const sourceEventRefs = new Set<string>();
   const counts = new Map<string, number>();
@@ -557,6 +722,12 @@ export function buildMinimizedParentHubReport(
       reportRef: request.reportRef,
       policyRef: request.policyRef,
       generatedAt: request.generatedAt,
+      authorizationRef: authorization.authorizationRef,
+      authorizationRevisionRef: authorization.authorizationRevisionRef,
+      consentRef:
+        authorization.consent.policyRequirement === "required"
+          ? authorization.consent.consentRef
+          : null,
       sourceEvidenceCount: request.evidence.length,
     },
   } as const;

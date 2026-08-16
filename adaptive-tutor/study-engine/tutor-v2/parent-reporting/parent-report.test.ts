@@ -4,6 +4,8 @@ import { validateExact } from "../../../core/v2/contracts/index.js";
 import {
   PARENT_REPORT_DISCLAIMER,
   PARENT_REPORT_VERSION,
+  ParentReportConsentSchema,
+  ParentReportGuardianAuthorizationSchema,
   ParentReportRequestSchema,
   ParentReportResultSchema,
   REVIEWED_PARENT_REPORT_COPY,
@@ -13,9 +15,31 @@ import {
 function sessionScope() {
   return {
     scopeKind: "session",
+    guardianRef: "guardian:guardian-a",
     householdScopeRef: "household:family-a",
     selectedLearnerRef: "learner:child-a",
-    authorizedLearnerRef: "learner:child-a",
+    sessionRef: "session:session-a",
+  };
+}
+
+function sessionAuthorization() {
+  return {
+    guardianAuthorizationKind: "study-parent-report-guardian-authorization",
+    issuer: "study",
+    authorizationRef: "authorization:parent-report-a",
+    policyRef: "policy:parent-reporting-v1",
+    guardianRef: "guardian:guardian-a",
+    householdScopeRef: "household:family-a",
+    learnerScopeRef: "learner:child-a",
+    authorizationRevisionRef: "authorization-revision:parent-report-a-r3",
+    currentAuthorizationRevisionRef: "authorization-revision:parent-report-a-r3",
+    authorizationRevisionStatus: "current",
+    visibility: "parent-report",
+    consent: {
+      policyRequirement: "not-required",
+      consentState: "not-required",
+    },
+    scopeKind: "session",
     sessionRef: "session:session-a",
   };
 }
@@ -46,18 +70,48 @@ function sessionEvidence(
   };
 }
 
-function sessionRequest(evidence: unknown[] = [sessionEvidence()]) {
+function sessionRequest(
+  evidence: unknown[] = [sessionEvidence()],
+  guardianAuthorization: unknown = sessionAuthorization(),
+) {
   return {
     requestKind: "parent-hub-report",
     reportRef: "report:report-a",
     policyRef: "policy:parent-reporting-v1",
     generatedAt: "2026-08-15T15:00:00.000Z",
     scope: sessionScope(),
+    guardianAuthorization,
     evidence,
   };
 }
 
-function periodRequest(evidence: unknown[] = []) {
+function periodAuthorization() {
+  return {
+    guardianAuthorizationKind: "study-parent-report-guardian-authorization",
+    issuer: "study",
+    authorizationRef: "authorization:weekly-a",
+    policyRef: "policy:parent-reporting-v1",
+    guardianRef: "guardian:guardian-a",
+    householdScopeRef: "household:family-a",
+    learnerScopeRef: "learner:child-a",
+    authorizationRevisionRef: "authorization-revision:weekly-a-r2",
+    currentAuthorizationRevisionRef: "authorization-revision:weekly-a-r2",
+    authorizationRevisionStatus: "current",
+    visibility: "parent-report",
+    consent: {
+      policyRequirement: "required",
+      consentRef: "consent:weekly-a",
+      consentState: "granted",
+    },
+    scopeKind: "reporting-period",
+    reportingPeriodRef: "period:week-a",
+  };
+}
+
+function periodRequest(
+  evidence: unknown[] = [],
+  guardianAuthorization: unknown = periodAuthorization(),
+) {
   return {
     requestKind: "parent-hub-report",
     reportRef: "report:weekly-a",
@@ -65,13 +119,14 @@ function periodRequest(evidence: unknown[] = []) {
     generatedAt: "2026-08-16T13:00:00.000Z",
     scope: {
       scopeKind: "reporting-period",
+      guardianRef: "guardian:guardian-a",
       householdScopeRef: "household:family-a",
       selectedLearnerRef: "learner:child-a",
-      authorizedLearnerRef: "learner:child-a",
       reportingPeriodRef: "period:week-a",
       startsAt: "2026-08-10T00:00:00.000Z",
       endsAt: "2026-08-16T23:59:59.000Z",
     },
+    guardianAuthorization,
     evidence,
   };
 }
@@ -108,6 +163,22 @@ function accepted(value: unknown = sessionRequest()) {
 
 test("accepts the complete exact request and result boundaries", () => {
   const request = sessionRequest();
+  assert.equal(
+    validateExact(
+      ParentReportGuardianAuthorizationSchema,
+      request.guardianAuthorization,
+    ).status,
+    "accepted",
+  );
+  assert.equal(
+    validateExact(
+      ParentReportConsentSchema,
+      (request.guardianAuthorization as ReturnType<
+        typeof sessionAuthorization
+      >).consent,
+    ).status,
+    "accepted",
+  );
   assert.equal(validateExact(ParentReportRequestSchema, request).status, "accepted");
   assert.equal(
     validateExact(ParentReportResultSchema, {
@@ -184,6 +255,7 @@ test("every reviewed status/reason contract emits only its bound literal copy", 
 test("session reports retain household, learner, and session scope", () => {
   assert.deepEqual(accepted().scope, {
     scopeKind: "session",
+    guardianRef: "guardian:guardian-a",
     householdScopeRef: "household:family-a",
     learnerScopeRef: "learner:child-a",
     sessionRef: "session:session-a",
@@ -194,6 +266,7 @@ test("reporting-period reports retain the exact bounded period scope", () => {
   const report = accepted(periodRequest([periodEvidence()]));
   assert.deepEqual(report.scope, {
     scopeKind: "reporting-period",
+    guardianRef: "guardian:guardian-a",
     householdScopeRef: "household:family-a",
     learnerScopeRef: "learner:child-a",
     reportingPeriodRef: "period:week-a",
@@ -208,13 +281,179 @@ test("empty in-scope reports are valid and do not invent evidence", () => {
   assert.equal(report.provenance.sourceEvidenceCount, 0);
 });
 
-test("cross-learner, household, session, and period reuse fails closed", () => {
+test("exact current Study guardian authorization binds the generated report", () => {
+  const sessionReport = accepted();
+  assert.deepEqual(
+    {
+      authorizationRef: sessionReport.provenance.authorizationRef,
+      authorizationRevisionRef:
+        sessionReport.provenance.authorizationRevisionRef,
+      consentRef: sessionReport.provenance.consentRef,
+    },
+    {
+      authorizationRef: "authorization:parent-report-a",
+      authorizationRevisionRef:
+        "authorization-revision:parent-report-a-r3",
+      consentRef: null,
+    },
+  );
+
+  const periodReport = accepted(periodRequest([periodEvidence()]));
+  assert.equal(periodReport.provenance.consentRef, "consent:weekly-a");
+});
+
+test("missing or foreign guardian authorization fails closed", () => {
+  const missing = sessionRequest() as Record<string, unknown>;
+  delete missing.guardianAuthorization;
+  assert.deepEqual(buildMinimizedParentHubReport(missing), {
+    status: "rejected",
+    code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+  });
+
+  const callerEquality = sessionRequest() as Record<string, unknown>;
+  delete callerEquality.guardianAuthorization;
+  const scope = callerEquality.scope as Record<string, unknown>;
+  scope.authorizedLearnerRef = scope.selectedLearnerRef;
+  assert.deepEqual(buildMinimizedParentHubReport(callerEquality), {
+    status: "rejected",
+    code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+  });
+
+  const foreign = sessionAuthorization() as Record<string, unknown>;
+  foreign.issuer = "tutor";
+  assert.deepEqual(buildMinimizedParentHubReport(sessionRequest([], foreign)), {
+    status: "rejected",
+    code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+  });
+});
+
+test("wrong guardian, household, learner, session, or period authorization fails closed", () => {
+  const sessionMutations = [
+    (authorization: Record<string, unknown>) => {
+      authorization.guardianRef = "guardian:guardian-b";
+    },
+    (authorization: Record<string, unknown>) => {
+      authorization.householdScopeRef = "household:family-b";
+    },
+    (authorization: Record<string, unknown>) => {
+      authorization.learnerScopeRef = "learner:child-b";
+    },
+    (authorization: Record<string, unknown>) => {
+      authorization.sessionRef = "session:other";
+    },
+  ];
+  for (const mutate of sessionMutations) {
+    const authorization = structuredClone(
+      sessionAuthorization(),
+    ) as Record<string, unknown>;
+    mutate(authorization);
+    const result = buildMinimizedParentHubReport(
+      sessionRequest([], authorization),
+    );
+    assert.deepEqual(result, {
+      status: "rejected",
+      code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+    });
+    assert.doesNotMatch(
+      JSON.stringify(result),
+      /guardian-a|guardian-b|child-a|child-b|family-a|family-b/i,
+    );
+  }
+
+  const authorization = periodAuthorization();
+  authorization.reportingPeriodRef = "period:other";
+  assert.deepEqual(
+    buildMinimizedParentHubReport(periodRequest([], authorization)),
+    {
+      status: "rejected",
+      code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+    },
+  );
+});
+
+test("stale authorization revision and wrong visibility fail closed", () => {
+  const staleRevision = sessionAuthorization();
+  staleRevision.authorizationRevisionRef =
+    "authorization-revision:parent-report-a-r2";
+  assert.deepEqual(
+    buildMinimizedParentHubReport(sessionRequest([], staleRevision)),
+    {
+      status: "rejected",
+      code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+    },
+  );
+
+  const superseded = sessionAuthorization();
+  superseded.authorizationRevisionStatus = "superseded";
+  assert.deepEqual(
+    buildMinimizedParentHubReport(sessionRequest([], superseded)),
+    {
+      status: "rejected",
+      code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+    },
+  );
+
+  const wrongVisibility = sessionAuthorization() as Record<string, unknown>;
+  wrongVisibility.visibility = "learner-report";
+  assert.deepEqual(
+    buildMinimizedParentHubReport(sessionRequest([], wrongVisibility)),
+    {
+      status: "rejected",
+      code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+    },
+  );
+});
+
+test("guardian authorization is bound to the report policy", () => {
+  const wrongPolicy = sessionAuthorization();
+  wrongPolicy.policyRef = "policy:other";
+  assert.deepEqual(
+    buildMinimizedParentHubReport(sessionRequest([], wrongPolicy)),
+    {
+      status: "rejected",
+      code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+    },
+  );
+});
+
+test("required consent must be present and currently granted", () => {
+  const absent = periodAuthorization();
+  delete (absent.consent as Partial<typeof absent.consent>).consentRef;
+  assert.deepEqual(buildMinimizedParentHubReport(periodRequest([], absent)), {
+    status: "rejected",
+    code: "PARENT_REPORT_CONSENT_REJECTED",
+  });
+
+  for (const consentState of ["withdrawn", "expired"] as const) {
+    const authorization = periodAuthorization();
+    authorization.consent.consentState = consentState;
+    assert.deepEqual(
+      buildMinimizedParentHubReport(periodRequest([], authorization)),
+      {
+        status: "rejected",
+        code: "PARENT_REPORT_CONSENT_REJECTED",
+      },
+    );
+  }
+});
+
+test("cross-child report requests fail even when their evidence is internally consistent", () => {
+  const request = sessionRequest();
+  request.scope.selectedLearnerRef = "learner:child-b";
+  const evidence = request.evidence[0] as ReturnType<typeof sessionEvidence>;
+  evidence.learnerRef = "learner:child-b";
+  evidence.provenance.scope.learnerScopeRef = "learner:child-b";
+  assert.deepEqual(buildMinimizedParentHubReport(request), {
+    status: "rejected",
+    code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+  });
+});
+
+test("evidence cannot be reused across learner, household, session, or period scope", () => {
   const mutations = [
     (value: ReturnType<typeof sessionRequest>) => {
-      value.scope.authorizedLearnerRef = "learner:child-b";
-    },
-    (value: ReturnType<typeof sessionRequest>) => {
-      (value.evidence[0] as ReturnType<typeof sessionEvidence>).learnerRef = "learner:child-b";
+      (value.evidence[0] as ReturnType<typeof sessionEvidence>).learnerRef =
+        "learner:child-b";
     },
     (value: ReturnType<typeof sessionRequest>) => {
       (value.evidence[0] as ReturnType<typeof sessionEvidence>).provenance.scope.householdScopeRef =
@@ -228,12 +467,10 @@ test("cross-learner, household, session, and period reuse fails closed", () => {
   for (const mutate of mutations) {
     const contaminated = structuredClone(sessionRequest());
     mutate(contaminated);
-    const result = buildMinimizedParentHubReport(contaminated);
-    assert.deepEqual(result, {
+    assert.deepEqual(buildMinimizedParentHubReport(contaminated), {
       status: "rejected",
       code: "PARENT_REPORT_SCOPE_MISMATCH",
     });
-    assert.doesNotMatch(JSON.stringify(result), /child-a|child-b|family-a|family-b/i);
   }
 
   const wrongPeriod = periodRequest([periodEvidence()]);
@@ -376,6 +613,30 @@ test("raw and sensitive content is rejected without reflection", () => {
   }
 });
 
+test("raw learner data cannot substitute for guardian authorization or consent", () => {
+  const authorizationSubstitution = sessionRequest() as Record<string, unknown>;
+  authorizationSubstitution.guardianAuthorization = {
+    rawAnswer: "private learner answer",
+    selectedLearnerRef: "learner:child-a",
+    authorizedLearnerRef: "learner:child-a",
+  };
+  const authorizationResult = buildMinimizedParentHubReport(
+    authorizationSubstitution,
+  );
+  assert.equal(authorizationResult.status, "rejected");
+  assert.doesNotMatch(JSON.stringify(authorizationResult), /private|child-a/i);
+
+  const consentSubstitution = sessionAuthorization() as Record<string, unknown>;
+  consentSubstitution.consent = { rawTutorTranscript: "private transcript" };
+  const consentResult = buildMinimizedParentHubReport(
+    sessionRequest([], consentSubstitution),
+  );
+  assert.deepEqual(consentResult, {
+    status: "rejected",
+    code: "PARENT_REPORT_CONSENT_REJECTED",
+  });
+});
+
 test("delivery wiring and arbitrary report prose are outside the contract", () => {
   for (const contamination of [
     { deliveryChannel: "email" },
@@ -407,6 +668,9 @@ test("accepted report is minimized and explanatory only", () => {
     "summaries",
   ]);
   assert.deepEqual(Object.keys(report.provenance).sort(), [
+    "authorizationRef",
+    "authorizationRevisionRef",
+    "consentRef",
     "generatedAt",
     "policyRef",
     "producer",
