@@ -6,7 +6,11 @@ import {
   type EvalCase,
   type EvalScore,
   type ModelProvenance,
-} from "./contracts.ts";
+} from "./contracts.js";
+import {
+  validateGroundedContextBundle,
+  validateGroundingRequirements,
+} from "../../../core/v3/grounding/index.js";
 
 const SHA256_PATTERN = /^sha256:[a-f0-9]{64}$/u;
 const CASE_ID_PATTERN = /^commercial\.[a-z0-9-]+\.v[1-9][0-9]*$/u;
@@ -106,6 +110,16 @@ export function validateEvalCase(evalCase: EvalCase): readonly string[] {
   if (!SHA256_PATTERN.test(evalCase.contentDigest)) issues.push(`${prefix}: contentDigest must be a lowercase sha256 digest`);
   if (evalCase.corpusRevision.trim().length === 0) issues.push(`${prefix}: corpusRevision is required`);
   if (evalCase.request.learnerRef.trim().length === 0) issues.push(`${prefix}: learnerRef is required`);
+  if (evalCase.request.scopeRef.trim().length === 0) issues.push(`${prefix}: scopeRef is required`);
+  if (!validateGroundedContextBundle(evalCase.trustedPolicy.groundingBundle)) {
+    issues.push(`${prefix}: trusted groundingBundle must satisfy the W3-03 contract`);
+  }
+  if (!validateGroundingRequirements(evalCase.trustedPolicy.groundingRequirements)) {
+    issues.push(`${prefix}: trusted groundingRequirements must satisfy the W3-03 contract`);
+  }
+  if (evalCase.trustedPolicy.groundingBundle.scopeRef !== evalCase.request.scopeRef) {
+    issues.push(`${prefix}: grounding bundle scope must match request scope`);
+  }
   if (!SHA256_PATTERN.test(evalCase.sealedOracle.authoritySnapshotDigest)) {
     issues.push(`${prefix}: authoritySnapshotDigest must be a lowercase sha256 digest`);
   }
@@ -203,8 +217,20 @@ export function validateCertificationRun(run: CertificationRun): readonly string
       if (!["pass", "violation", "not-evaluated"].includes(gate.modelBehavior)) {
         issues.push(`${attempt.attemptId}: invalid model-behavior gate outcome`);
       }
-      if (!["pass", "violation"].includes(gate.composedSystem)) {
+      if (!["pass", "violation", "not-evaluated"].includes(gate.composedSystem)) {
         issues.push(`${attempt.attemptId}: invalid composed-system gate outcome`);
+      }
+      if (gate.checkExecuted) {
+        if (gate.evidenceSource === null) issues.push(`${attempt.attemptId}: executed hard gate requires evidenceSource`);
+        if (gate.modelBehavior === "not-evaluated" || gate.composedSystem === "not-evaluated") {
+          issues.push(`${attempt.attemptId}: executed hard gate requires derived outcomes`);
+        }
+      } else if (
+        gate.evidenceSource !== null ||
+        gate.modelBehavior !== "not-evaluated" ||
+        gate.composedSystem !== "not-evaluated"
+      ) {
+        issues.push(`${attempt.attemptId}: unexecuted hard gate cannot claim an outcome`);
       }
     }
     if (evalCase && run.mode === "stochastic-live-model" && attempt.providerInvoked) {
@@ -218,14 +244,28 @@ export function validateCertificationRun(run: CertificationRun): readonly string
     if (attempt.providerInvoked !== (attempt.providerCallCount === 1)) {
       issues.push(`${attempt.attemptId}: providerInvoked and providerCallCount disagree`);
     }
-    if ((attempt.rawModelResultKind === "not-invoked") !== !attempt.providerInvoked) {
-      issues.push(`${attempt.attemptId}: rawModelResultKind and provider invocation disagree`);
+    if ((attempt.rawProviderResultKind === "not-invoked") !== !attempt.providerInvoked) {
+      issues.push(`${attempt.attemptId}: rawProviderResultKind and provider invocation disagree`);
     }
     if (attempt.expectationMatched !== (attempt.disposition === attempt.expectedDisposition)) {
       issues.push(`${attempt.attemptId}: expectationMatched is inconsistent with dispositions`);
     }
     if (!SHA256_PATTERN.test(attempt.authorityBeforeDigest) || !SHA256_PATTERN.test(attempt.authorityAfterDigest)) {
       issues.push(`${attempt.attemptId}: authority snapshots must use lowercase sha256 digests`);
+    }
+    if (attempt.policyOutcome.disposition !== attempt.disposition) {
+      issues.push(`${attempt.attemptId}: policy outcome and attempt disposition disagree`);
+    }
+    if (attempt.policyOutcome.providerProposalReleased !== (attempt.disposition === "accepted")) {
+      issues.push(`${attempt.attemptId}: only an accepted policy outcome may release a provider proposal`);
+    }
+    if (attempt.pipelineTrace.at(-1) !== "academic-grader") {
+      issues.push(`${attempt.attemptId}: academic grader must be the final pipeline stage`);
+    }
+    const policyIndex = attempt.pipelineTrace.lastIndexOf("policy-outcome");
+    const graderIndex = attempt.pipelineTrace.lastIndexOf("academic-grader");
+    if (policyIndex < 0 || graderIndex <= policyIndex) {
+      issues.push(`${attempt.attemptId}: grading must follow an executed policy outcome`);
     }
   }
   return issues;

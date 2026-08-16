@@ -1,30 +1,29 @@
 import type {
-  DeterministicModelAdapter,
-  MockModelResult,
+  DeterministicProviderAdapter,
   ProviderEvalRequest,
-} from "./contracts.ts";
+  RawProviderResult,
+} from "./contracts.js";
 
 function detached<T>(value: T): T {
   return structuredClone(value);
 }
 
-export class ScriptedMockModelAdapter implements DeterministicModelAdapter {
+export class ScriptedMockProviderAdapter implements DeterministicProviderAdapter {
   public readonly transportKind = "in-memory-mock" as const;
   public readonly liveNetworkEnabled = false as const;
   public readonly adapterRef: string;
   public readonly requests: ProviderEvalRequest[] = [];
-  readonly #scripts: ReadonlyMap<string, MockModelResult>;
+  readonly #scripts: ReadonlyMap<string, RawProviderResult>;
 
-  public constructor(adapterRef: string, scripts: ReadonlyMap<string, MockModelResult>) {
+  public constructor(adapterRef: string, scripts: ReadonlyMap<string, RawProviderResult>) {
     this.adapterRef = adapterRef;
     this.#scripts = new Map([...scripts].map(([caseId, result]) => [caseId, detached(result)]));
   }
 
-  public async execute(request: ProviderEvalRequest): Promise<MockModelResult> {
+  public async execute(request: ProviderEvalRequest): Promise<RawProviderResult> {
     this.requests.push(detached(request));
     const result = this.#scripts.get(request.caseRef);
-    if (!result) return { kind: "malformed" };
-    return detached(result);
+    return result ? detached(result) : { kind: "fault" };
   }
 
   public callsFor(caseId: string): number {

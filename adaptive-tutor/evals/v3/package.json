@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --disable-warning=ExperimentalWarning --experimental-strip-types --test tests/*.test.ts",
-    "evaluate": "node --disable-warning=ExperimentalWarning --experimental-strip-types src/cli.ts"
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node scripts/run-compiled.mjs test",
+    "evaluate": "node scripts/run-compiled.mjs evaluate"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",

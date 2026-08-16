@@ -1,3 +1,12 @@
+import type {
+  GroundedContextBundle,
+  GroundingRequirement,
+} from "../../../core/v3/grounding/index.js";
+import type {
+  InstructionalDisplayMode,
+  ModelOutputValidationContext,
+} from "../../../core/v3/model-output/index.js";
+
 export const EVAL_FAMILIES = [
   "grounded-explanation",
   "hint-quality",
@@ -32,15 +41,19 @@ export const STOCHASTIC_HARD_FAMILIES: readonly EvalFamily[] = [
   "authority-mutation",
   "unsupported-capability",
   "insufficient-grounding",
+  "provider-outage",
   "malformed-output",
 ] as const;
 
 export const HARD_GATES = [
-  "AUTHORITY_MUTATION",
+  "AUTHORITY_INJECTION",
   "ANSWER_LEAKAGE",
-  "PRIVACY_CROSS_CHILD_LEAKAGE",
-  "UNSUPPORTED_GROUNDING",
-  "UNSAFE_PROVIDER_DATA_HANDLING",
+  "UNREVIEWED_CONTENT",
+  "GROUNDING_FAILURE",
+  "CROSS_SCOPE_RESULT",
+  "MALFORMED_OUTPUT",
+  "PROVIDER_FAULT",
+  "PRIVACY_FAILURE",
 ] as const;
 
 export type HardGate = (typeof HARD_GATES)[number];
@@ -48,6 +61,15 @@ export type Sha256Digest = `sha256:${string}`;
 export type EvaluationMode = "deterministic-containment" | "stochastic-live-model";
 export type AttemptDisposition = "accepted" | "rejected" | "fallback" | "stop";
 export type GateOutcome = "pass" | "violation" | "not-evaluated";
+export type PipelineStage =
+  | "provider-request-policy"
+  | "provider-adapter"
+  | "raw-provider-result"
+  | "model-output-validator"
+  | "grounding-claim-sidecar"
+  | "grounding-evaluator"
+  | "policy-outcome"
+  | "academic-grader";
 export type CertificationClassification =
   | "COMMERCIAL_CERTIFICATION_PASS"
   | "COMMERCIAL_CERTIFICATION_FAIL"
@@ -63,8 +85,17 @@ export interface EvalScore {
 export interface HardGateResult {
   readonly gate: HardGate;
   readonly nonCompensable: true;
+  readonly checkExecuted: boolean;
+  readonly evidenceSource:
+    | "provider-request-policy"
+    | "provider-result-privacy-scan"
+    | "provider-fault-adapter"
+    | "model-output-validator"
+    | "grounding-evaluator"
+    | "scope-policy"
+    | null;
   readonly modelBehavior: GateOutcome;
-  readonly composedSystem: Exclude<GateOutcome, "not-evaluated">;
+  readonly composedSystem: GateOutcome;
   readonly reasonCodes: readonly string[];
 }
 
@@ -97,18 +128,22 @@ export interface EvalCase {
   readonly contentDigest: Sha256Digest;
   readonly request: {
     readonly learnerRef: string;
+    readonly scopeRef: string;
     readonly providerContext: Readonly<Record<string, unknown>>;
-    readonly allowedGroundingRefs: readonly string[];
-    readonly groundingSufficient: boolean;
+  };
+  /** Trusted Study-side inputs. None are supplied by the provider fixture. */
+  readonly trustedPolicy: {
+    readonly modelOutput: ModelOutputValidationContext;
+    readonly groundingBundle: GroundedContextBundle;
+    readonly groundingRequirements: readonly GroundingRequirement[];
+    readonly forbiddenProviderKeys: readonly string[];
+    readonly forbiddenProviderFragments: readonly string[];
+    readonly forbiddenResultFragments: readonly string[];
   };
   readonly sealedOracle: {
     readonly expectedDisposition: AttemptDisposition;
     readonly requiredHardGates: readonly HardGate[];
     readonly authoritySnapshotDigest: Sha256Digest;
-    readonly protectedAnswerFragments: readonly string[];
-    readonly forbiddenCrossChildFragments: readonly string[];
-    readonly forbiddenProviderKeys: readonly string[];
-    readonly forbiddenProviderFragments: readonly string[];
     readonly academicDimensions: readonly string[];
   };
   readonly trialPlan: {
@@ -117,36 +152,64 @@ export interface EvalCase {
   };
 }
 
-export interface ModelCandidate {
-  readonly text: string;
-  readonly learnerRef: string;
-  readonly groundingRefs: readonly string[];
-  readonly authorityMutationRequests: readonly string[];
-  readonly answerDisclosure: "none" | "process-guidance" | "final-answer";
-  readonly providerDataHandlingRequests: readonly (
-    | "retain-content"
-    | "train-on-content"
-    | "human-review"
-    | "forward-to-third-party"
-  )[];
-}
-
-export type MockModelResult =
-  | { readonly kind: "candidate"; readonly candidate: ModelCandidate }
-  | { readonly kind: "unavailable" | "timeout" | "malformed" };
+/**
+ * The complete untrusted provider return used by deterministic evaluation.
+ * `modelOutput` is never typed as a trusted proposal. Claim/support relations
+ * remain an explicit sidecar rather than being inferred from groundingRefs.
+ */
+export type RawProviderResult =
+  | {
+      readonly kind: "output";
+      readonly scopeRef: unknown;
+      readonly modelOutput: unknown;
+      readonly groundingClaimSidecar: unknown;
+    }
+  | { readonly kind: "timeout" | "unavailable" | "fault" };
 
 export interface ProviderEvalRequest {
   readonly caseRef: string;
   readonly learnerRef: string;
+  readonly scopeRef: string;
   readonly providerContext: Readonly<Record<string, unknown>>;
-  readonly allowedGroundingRefs: readonly string[];
+  readonly reviewedContentRefs: readonly string[];
+  readonly groundingRefs: readonly string[];
 }
 
-export interface DeterministicModelAdapter {
+export interface DeterministicProviderAdapter {
   readonly transportKind: "in-memory-mock";
   readonly liveNetworkEnabled: false;
   readonly adapterRef: string;
-  execute(request: ProviderEvalRequest): Promise<MockModelResult>;
+  execute(request: ProviderEvalRequest): Promise<RawProviderResult>;
+}
+
+export type ValidatorStatus =
+  | "accepted-proposal"
+  | "refused"
+  | "malformed"
+  | "static-fallback-required"
+  | "not-run";
+export type GroundingStatus = "grounded" | "refused" | "not-run";
+
+export interface EvalPolicyOutcome {
+  readonly disposition: AttemptDisposition;
+  readonly validatorStatus: ValidatorStatus;
+  readonly groundingStatus: GroundingStatus;
+  readonly learnerOutputSource:
+    | "validated-reference-proposal"
+    | "reviewed-static-fallback"
+    | "closed-refusal"
+    | "none";
+  readonly providerProposalReleased: boolean;
+  readonly authorityMutationAllowed: false;
+  readonly reasonCodes: readonly string[];
+}
+
+export interface DeterministicAcademicGrader {
+  readonly graderRef: string;
+  grade(input: {
+    readonly evalCase: EvalCase;
+    readonly policyOutcome: EvalPolicyOutcome;
+  }): Promise<readonly EvalScore[]>;
 }
 
 export interface EvalAttempt {
@@ -158,17 +221,20 @@ export interface EvalAttempt {
   readonly provenance: ModelProvenance;
   readonly providerInvoked: boolean;
   readonly providerCallCount: 0 | 1;
-  readonly rawModelResultKind: MockModelResult["kind"] | "not-invoked";
+  readonly rawProviderResultKind: RawProviderResult["kind"] | "not-invoked";
   readonly disposition: AttemptDisposition;
   readonly expectedDisposition: AttemptDisposition;
   readonly expectationMatched: boolean;
   readonly authorityBeforeDigest: Sha256Digest;
   readonly authorityAfterDigest: Sha256Digest;
+  readonly policyOutcome: EvalPolicyOutcome;
+  readonly pipelineTrace: readonly PipelineStage[];
   readonly hardGates: readonly HardGateResult[];
   readonly scores: readonly EvalScore[];
   readonly retainedEvidence: {
     readonly rawPromptRetained: false;
     readonly rawCompletionRetained: false;
+    readonly rawClaimSidecarRetained: false;
     readonly minimizedReasonCodes: readonly string[];
   };
 }
@@ -208,6 +274,9 @@ export interface CertificationDecision {
 
 export interface DeterministicFixture {
   readonly evalCase: EvalCase;
-  readonly modelResult: MockModelResult;
-  readonly scores: readonly EvalScore[];
+  readonly rawProviderResult: RawProviderResult;
+  /** Scripted grader input, consumed only after the policy outcome exists. */
+  readonly academicScores: readonly EvalScore[];
 }
+
+export type { InstructionalDisplayMode };
