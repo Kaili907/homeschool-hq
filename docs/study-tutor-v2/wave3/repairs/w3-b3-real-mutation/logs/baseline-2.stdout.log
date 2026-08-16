@@ -1,0 +1,191 @@
+TAP version 13
+# Subtest: canonical commercial flow returns only a Study advisory
+ok 1 - canonical commercial flow returns only a Study advisory
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: provider request is structurally minimized
+ok 2 - provider request is structurally minimized
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: curriculum admission happens before provider execution
+ok 3 - curriculum admission happens before provider execution
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: foreign trusted invocation curriculum digest fails before provider execution
+ok 4 - foreign trusted invocation curriculum digest fails before provider execution
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: top-level science subject cannot execute admitted mathematics curriculum
+ok 5 - top-level science subject cannot execute admitted mathematics curriculum
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: every trusted curriculum authority tuple field reconciles before transport
+ok 6 - every trusted curriculum authority tuple field reconciles before transport
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: active assessment remains static-only and cannot expose answers
+ok 7 - active assessment remains static-only and cannot expose answers
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: unknown learner stage fails closed before provider execution
+ok 8 - unknown learner stage fails closed before provider execution
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: provider policy revision mismatch fails before routing
+ok 9 - provider policy revision mismatch fails before routing
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: route and reservation preserve immutable model identity and integer micros
+ok 10 - route and reservation preserve immutable model identity and integer micros
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: one preplanned failover is used after a retryable primary failure
+ok 11 - one preplanned failover is used after a retryable primary failure
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: deadline exhaustion blocks failover and returns reviewed static fallback
+ok 12 - deadline exhaustion blocks failover and returns reviewed static fallback
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: a 10,000 ms successful response cannot bypass 2,000/700 ms deadlines
+ok 13 - a 10,000 ms successful response cannot bypass 2,000/700 ms deadlines
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: measured execution over attempt timeout rejects low reported latency
+ok 14 - measured execution over attempt timeout rejects low reported latency
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: measured operation time blocks failover despite low reported latency
+ok 15 - measured operation time blocks failover despite low reported latency
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: an attempt is not dispatched when its bounded window crosses the operation deadline
+ok 16 - an attempt is not dispatched when its bounded window crosses the operation deadline
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: late successful failover cannot become a Study advisory
+ok 17 - late successful failover cannot become a Study advisory
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: a physical attempt cannot overrun its reserve using unused failover reserve
+ok 18 - a physical attempt cannot overrun its reserve using unused failover reserve
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: failover cannot overrun its own reserve
+ok 19 - failover cannot overrun its own reserve
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: both executed attempts settle when each stays within its own reserve
+ok 20 - both executed attempts settle when each stays within its own reserve
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: usage receipt physical-attempt and reservation identities are authoritative
+ok 21 - usage receipt physical-attempt and reservation identities are authoritative
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: unknown and authority-bearing provider fields are rejected
+ok 22 - unknown and authority-bearing provider fields are rejected
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: unsupported grounded claim forces refusal/static fallback
+ok 23 - unsupported grounded claim forces refusal/static fallback
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: closed presentation intent rejects provider-custom modes
+ok 24 - closed presentation intent rejects provider-custom modes
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: foreign learner scope cannot influence the invocation
+ok 25 - foreign learner scope cannot influence the invocation
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: invalid Study invocation cannot be replaced by browser/provider assertions
+ok 26 - invalid Study invocation cannot be replaced by browser/provider assertions
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: Wave 3 foundation has no vendor, deployment, credential, or production UI imports
+ok 27 - Wave 3 foundation has no vendor, deployment, credential, or production UI imports
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: all 18 non-compensable Wave 3 hard-gate families derive PASS from executed evidence
+ok 28 - all 18 non-compensable Wave 3 hard-gate families derive PASS from executed evidence
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# PASS wave3-schema-generation 8 schemas + inventory
+# Subtest: all eight generated serialized schemas exactly match runtime schemas and are recursively closed
+ok 29 - all eight generated serialized schemas exactly match runtime schemas and are recursively closed
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: schema inventory records zero internal-port schemas
+ok 30 - schema inventory records zero internal-port schemas
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms <duration>

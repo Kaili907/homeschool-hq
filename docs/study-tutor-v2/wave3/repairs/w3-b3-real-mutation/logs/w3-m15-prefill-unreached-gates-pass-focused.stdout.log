@@ -1,0 +1,32 @@
+TAP version 13
+# Subtest: unreached hard gates remain not-evaluated instead of defaulting to pass
+not ok 1 - unreached hard gates remain not-evaluated instead of defaulting to pass
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  location: '/private$MUTANT_ROOT/adaptive-tutor/scripts/tutor-v3/.dist/evals/v3/tests/harness.test.js:88:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private$MUTANT_ROOT/adaptive-tutor/scripts/tutor-v3/.dist/evals/v3/tests/harness.test.js:92:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms <duration>
