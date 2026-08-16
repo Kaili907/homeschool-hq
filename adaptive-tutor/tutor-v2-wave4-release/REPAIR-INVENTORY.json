@@ -1,0 +1,68 @@
+{
+  "inventoryVersion": 1,
+  "repairCount": 5,
+  "repairs": [
+    {
+      "invariants": [
+        "canonical-commercial-scope",
+        "current-provider-state",
+        "bounded-policy-collections",
+        "single-use-dispatch"
+      ],
+      "name": "Commercial Integrity",
+      "repair": "R1",
+      "result": "PASS_27_OF_27",
+      "sourceSha": "ef672ba2e65e83e17f84057782d8005cc1a03016"
+    },
+    {
+      "invariants": [
+        "hostile-object-rejection",
+        "caption-anti-answer",
+        "scope-lineage",
+        "digest",
+        "audio-capability",
+        "media-kind",
+        "fallback-uniqueness",
+        "raw-media-minimization"
+      ],
+      "name": "Multimodal Boundary",
+      "repair": "R2",
+      "result": "PASS",
+      "sourceSha": "25dbebebf44770d1fb4fa5a32cf832e8476bbbf0"
+    },
+    {
+      "invariants": [
+        "exact-guardian-authorization",
+        "consent-revision",
+        "truthful-study-state"
+      ],
+      "name": "Parent Guardian",
+      "repair": "R3",
+      "result": "PASS_22_OF_22",
+      "sourceSha": "bb8d4f5a9f02561e480daaa87cb00ab2f6e323b5"
+    },
+    {
+      "invariants": [
+        "accepted-effect-scope",
+        "memory-scope",
+        "same-scope-idempotency",
+        "changed-scope-conflict"
+      ],
+      "name": "Study Accepted-Effect / Memory Lineage",
+      "repair": "R4",
+      "result": "PASS_9_OF_9",
+      "sourceSha": "84ed21176e1c7d5a667b39b012f1a0747358b737"
+    },
+    {
+      "invariants": [
+        "canonical-scope",
+        "study-advisory",
+        "reviewed-content-provenance"
+      ],
+      "name": "Presentation Acceptance Lineage",
+      "repair": "R5",
+      "result": "PASS_20_OF_20",
+      "sourceSha": "7bc73bfb48ce5c485c2225ac0e13cce3cc15eb83"
+    }
+  ]
+}

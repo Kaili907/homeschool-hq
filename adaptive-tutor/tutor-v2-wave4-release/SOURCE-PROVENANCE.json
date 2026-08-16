@@ -1,0 +1,156 @@
+{
+  "branch": "mac/tutor-v2-w4-convergence-r1",
+  "duplicateImportRuling": "PASS_13_LANES_AND_R1_R5_IMPORTED_EXACTLY_ONCE_R1_R2_NOT_DUPLICATED",
+  "externalStudyAuthorityDependency": {
+    "branch": "mac/study-runtime-tutor-authority-port-r2",
+    "containedInTutorCandidate": false,
+    "repairSha": "527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4",
+    "ruling": "SEPARATE_VERIFIED_STUDY_AUTHORITY_ARTIFACT_NOT_MERGED"
+  },
+  "finalCandidate": {
+    "exactShaRecordedAfterCommitInSessionReturn": true,
+    "selfReferencedInsideChecksummedArtifacts": false
+  },
+  "importOrder": [
+    "W4_01",
+    "W4_02",
+    "W4_03",
+    "W4_04",
+    "W4_05",
+    "W4_06",
+    "W4_07",
+    "W4_08",
+    "W4_09",
+    "W4_10",
+    "W4_11",
+    "W4_12",
+    "W4_13",
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5"
+  ],
+  "imports": {
+    "R1": {
+      "resultingPatchId": "880eda43e024a280f32c458b840a5df39a686cb4",
+      "resultingSha": "752a61e6928c8b63a8f2db58c17036ac8894652a",
+      "sourcePatchId": "880eda43e024a280f32c458b840a5df39a686cb4",
+      "sourceSha": "ef672ba2e65e83e17f84057782d8005cc1a03016"
+    },
+    "R2": {
+      "resultingPatchId": "82073e8be1e81a530c0cbb69f9f476c4486ab25e",
+      "resultingSha": "94a4293ee8ea07c54a8fe9e5cd961e6e3c2b3eee",
+      "sourcePatchId": "82073e8be1e81a530c0cbb69f9f476c4486ab25e",
+      "sourceSha": "25dbebebf44770d1fb4fa5a32cf832e8476bbbf0"
+    },
+    "R3": {
+      "resultingPatchId": "b394be4028febb0fbdd6013652deeff0d83db277",
+      "resultingSha": "a1e26f1d16f99bdc1a39cbcdc0af934457a6f2f4",
+      "sourcePatchId": "b394be4028febb0fbdd6013652deeff0d83db277",
+      "sourceSha": "bb8d4f5a9f02561e480daaa87cb00ab2f6e323b5"
+    },
+    "R4": {
+      "resultingPatchId": "8a3a0f1799b34aca539859d0e711febaf091bbc2",
+      "resultingSha": "36fece86e80d646e21a8d3328227feeadebc18ce",
+      "sourcePatchId": "8a3a0f1799b34aca539859d0e711febaf091bbc2",
+      "sourceSha": "84ed21176e1c7d5a667b39b012f1a0747358b737"
+    },
+    "R5": {
+      "resultingPatchId": "be9538f29c95961d2ce759ff609903e5df7fb607",
+      "resultingSha": "6cea138eb284c8cc651f885472da206d68faa0ee",
+      "sourcePatchId": "be9538f29c95961d2ce759ff609903e5df7fb607",
+      "sourceSha": "7bc73bfb48ce5c485c2225ac0e13cce3cc15eb83"
+    },
+    "W4_01": {
+      "resultingPatchId": "e3e986665cd710d0bd1b7af040b706afee5a9f9c",
+      "resultingSha": "baac0f9d1ed9ddf97520280baa8f201378e9240f",
+      "sourcePatchId": "e3e986665cd710d0bd1b7af040b706afee5a9f9c",
+      "sourceSha": "6915b5c24a75407b13b99c6370889c5cfefd7e38"
+    },
+    "W4_02": {
+      "resultingPatchId": "d9595af19573a55bbc1aa7895cfd492669418763",
+      "resultingSha": "d16d644d3ba66db77751f07a87da0c76bf771d19",
+      "sourcePatchId": "d9595af19573a55bbc1aa7895cfd492669418763",
+      "sourceSha": "4510bf2a99825b98e5ea2b6097eab97990eb1cf5"
+    },
+    "W4_03": {
+      "resultingPatchId": "bac0c6cc1bba316c0c1e59f1b11209a88204da90",
+      "resultingSha": "1dc7e8435bcd930ef0fbaa7d0880c185a1b34498",
+      "sourcePatchId": "bac0c6cc1bba316c0c1e59f1b11209a88204da90",
+      "sourceSha": "0606f7b7c3e2f5bf24bde42aebf35d4e9305cdda"
+    },
+    "W4_04": {
+      "resultingPatchId": "f79d921ed2abef41ce3c05e7eb6899563bf0b520",
+      "resultingSha": "951f90c4a7bc24545d859a51a8448a5e3e27f761",
+      "sourcePatchId": "f79d921ed2abef41ce3c05e7eb6899563bf0b520",
+      "sourceSha": "2554fa98ef7ab93501d99af64ec9b5d93c0b640e"
+    },
+    "W4_05": {
+      "resultingPatchId": "50a251a33aaaa2379b382cc87bf0a2f91a14216c",
+      "resultingSha": "5b66100c6a0dc16a786bdc6c36b3fa28d5174f15",
+      "sourcePatchId": "50a251a33aaaa2379b382cc87bf0a2f91a14216c",
+      "sourceSha": "29a476fee15b92dee6bf7d070c21a4338afe59a5"
+    },
+    "W4_06": {
+      "resultingPatchId": "8f68c89d936478ec9a33f6c14fa41b85ad78720c",
+      "resultingSha": "41ce3a464612e36e07d7eab52a7d104ebab0515c",
+      "sourcePatchId": "8f68c89d936478ec9a33f6c14fa41b85ad78720c",
+      "sourceSha": "9180d0279025a2a83034c7457475bedad8bdbd9d"
+    },
+    "W4_07": {
+      "resultingPatchId": "d094cbe7e3c758bad255d4ea591b3ca40bf2e0cc",
+      "resultingSha": "02995dbc51dc2d4261ef4e3a68bcab5c05d7474b",
+      "sourcePatchId": "d094cbe7e3c758bad255d4ea591b3ca40bf2e0cc",
+      "sourceSha": "b9e5bd3dd64e6a3c0337db91e8190211d50d228b"
+    },
+    "W4_08": {
+      "resultingPatchId": "0f0b71931234813263c0f070eb4e568acc89876c",
+      "resultingSha": "f276065700cd93ca7803a5804ad69e05024cbf3d",
+      "sourcePatchId": "0f0b71931234813263c0f070eb4e568acc89876c",
+      "sourceSha": "383681a89fac8de77eae45c83d761cb10646595b"
+    },
+    "W4_09": {
+      "resultingPatchId": "cf92ff2bd584694e77f2e39e030fc288a96878fe",
+      "resultingSha": "5890803d6a040040b0e5efd4b9443e69e08cf4d8",
+      "sourcePatchId": "cf92ff2bd584694e77f2e39e030fc288a96878fe",
+      "sourceSha": "f07f552bed446c3d5a8b118ee51cb5047e839bc0"
+    },
+    "W4_10": {
+      "resultingPatchId": "bff2ae52e9d0f8bab7830a366ff8151044c68f18",
+      "resultingSha": "8f1b8b82916e3f36b4cf2f74d31868765c08dbbe",
+      "sourcePatchId": "bff2ae52e9d0f8bab7830a366ff8151044c68f18",
+      "sourceSha": "43c6f8e35097c3dc5e635b0c5b5f7090aefca637"
+    },
+    "W4_11": {
+      "resultingPatchId": "8e22499708bf024f58c30de709f450b6049dad83",
+      "resultingSha": "52a97423d033bc1ea153021d3822e1d712d009f0",
+      "sourcePatchId": "8e22499708bf024f58c30de709f450b6049dad83",
+      "sourceSha": "2bac9f90879cc9929b2044f122399d27724679b4"
+    },
+    "W4_12": {
+      "resultingPatchId": "3bf954d3873f06aa6717e8f65cc1b74abc1bdcb4",
+      "resultingSha": "d73b9189f46339140180a905fd6e7ae091e5f22e",
+      "sourcePatchId": "3bf954d3873f06aa6717e8f65cc1b74abc1bdcb4",
+      "sourceSha": "110e222bc38511711651b8b14f5606e1c2bcf58f"
+    },
+    "W4_13": {
+      "resultingPatchId": "ce4e5711150f2f333e131c3a405561dc8e989852",
+      "resultingSha": "0ba4cb5463da713f1584564a4f387ad09cc3477f",
+      "sourcePatchId": "ce4e5711150f2f333e131c3a405561dc8e989852",
+      "sourceSha": "eed4b9e62dd3b754f3ab0c4f06dd847b5f5ffd2e"
+    }
+  },
+  "prohibitedAssembledR2Cherry": {
+    "imported": false,
+    "matchesR2PatchId": true,
+    "sha": "b0720b1d3243f6587a6538c7225849ce88d953ef",
+    "stablePatchId": "82073e8be1e81a530c0cbb69f9f476c4486ab25e"
+  },
+  "provenanceVersion": 1,
+  "semanticCherryPickAdaptations": [],
+  "semanticConflictRuling": "NO_TEXT_CONFLICTS_R4_AND_R5_INVARIANTS_COEXIST",
+  "session": "STUDY-TUTOR-V2-W4-14 Wave 4 Adversarial Certification + Repair Reconvergence",
+  "startingWave3Sha": "a2fdf1858cd50c998f5da53970d36ee6c90ff31a",
+  "wave3AcceptanceRuling": "WAVE3_ACCEPTED_FOR_WAVE4"
+}

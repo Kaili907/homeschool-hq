@@ -1,0 +1,347 @@
+{
+  "aggregateStatus": "PASS",
+  "assertionCount": 38,
+  "assertions": [
+    {
+      "assertion": "foreign curriculum",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: sibling curriculum tuple fails",
+      "id": "W4-03-01",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "route",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: sibling route fails before dispatch",
+      "id": "W4-03-02",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "reservation",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: sibling reservation fails before dispatch",
+      "id": "W4-03-03",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "attempt",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: sibling physical attempt fails before dispatch",
+      "id": "W4-03-04",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "stage",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: sibling stage fails before dispatch",
+      "id": "W4-03-05",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "concept",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: sibling concept fails before dispatch",
+      "id": "W4-03-06",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "opportunity",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: sibling opportunity fails before dispatch",
+      "id": "W4-03-07",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "presentation",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: sibling presentation fails before dispatch",
+      "id": "W4-03-08",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "provider call",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: attacked scopes produce zero provider calls",
+      "id": "W4-03-09",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "cost receipt",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: attacked scopes produce no usage receipt",
+      "id": "W4-03-10",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "telemetry",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: attacked scopes produce no telemetry",
+      "id": "W4-03-11",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "memory concept",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "study-lineage: sibling concept cannot enter memory",
+      "id": "W4-03-12",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "effect lineage",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "study-lineage: sibling accepted effect cannot be reused",
+      "id": "W4-03-13",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "household lineage",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "study-lineage: foreign household is a conflict",
+      "id": "W4-03-14",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "learner lineage",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "study-lineage: foreign learner is a conflict",
+      "id": "W4-03-15",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "session lineage",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "study-lineage: session substitution fails before lookup",
+      "id": "W4-03-16",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "logical operation",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "study-lineage: exact logical operation identity is reconciled",
+      "id": "W4-03-17",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "accepted effect/memory scope",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "study-lineage: foreign commercial scope is a conflict",
+      "id": "W4-03-18",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "presentation acceptance scope",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "presentation-lineage: exact R1 scope is mandatory",
+      "id": "W4-03-19",
+      "lane": "W4-03"
+    },
+    {
+      "assertion": "forged model revision",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: forged model revision becomes static fallback",
+      "id": "W4-05-01",
+      "lane": "W4-05"
+    },
+    {
+      "assertion": "forged configuration digest",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: forged configuration digest becomes static fallback",
+      "id": "W4-05-02",
+      "lane": "W4-05"
+    },
+    {
+      "assertion": "stale availability",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: current outage blocks failover",
+      "id": "W4-05-03",
+      "lane": "W4-05"
+    },
+    {
+      "assertion": "stale circuit state",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: current open circuit blocks failover",
+      "id": "W4-05-04",
+      "lane": "W4-05"
+    },
+    {
+      "assertion": "revoked provider policy",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: response acceptance revalidates policy",
+      "id": "W4-05-05",
+      "lane": "W4-05"
+    },
+    {
+      "assertion": "unbounded policy collection",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: max+1 and malicious policy lists reject",
+      "id": "W4-06-01",
+      "lane": "W4-06"
+    },
+    {
+      "assertion": "duplicate reservation/attempt dispatch",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "commercial-integrity: explicit claim store blocks exact replay",
+      "id": "W4-06-02",
+      "lane": "W4-06"
+    },
+    {
+      "assertion": "prototype-shaped presentation",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "multimodal-boundary: hostile object shapes reject without getter execution",
+      "id": "W4-08-01",
+      "lane": "W4-08"
+    },
+    {
+      "assertion": "active-assessment caption injection",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "multimodal-boundary: answer canaries cannot enter caption metadata",
+      "id": "W4-08-02",
+      "lane": "W4-08"
+    },
+    {
+      "assertion": "cross-child/session media reference",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "multimodal-boundary: sibling scope cannot influence acceptance",
+      "id": "W4-08-03",
+      "lane": "W4-08"
+    },
+    {
+      "assertion": "wrong digest",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "multimodal-boundary: wrong digest and provenance reject",
+      "id": "W4-08-04",
+      "lane": "W4-08"
+    },
+    {
+      "assertion": "unsupported learner audio input",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "multimodal-boundary: exact audio capability gate required",
+      "id": "W4-08-05",
+      "lane": "W4-08"
+    },
+    {
+      "assertion": "MIME/media-kind confusion",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "multimodal-boundary: media kind and MIME confusion reject",
+      "id": "W4-08-06",
+      "lane": "W4-08"
+    },
+    {
+      "assertion": "duplicate fallback channels",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "multimodal-boundary: fallback channels are unique and canonical",
+      "id": "W4-08-07",
+      "lane": "W4-08"
+    },
+    {
+      "assertion": "sibling consent substitution",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "parent-guardian: PG-01 sibling consent rejects",
+      "id": "W4-10-01",
+      "lane": "W4-10"
+    },
+    {
+      "assertion": "consent-required downgrade",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "parent-guardian: PG-01 policy downgrade rejects",
+      "id": "W4-10-02",
+      "lane": "W4-10"
+    },
+    {
+      "assertion": "authorization replay",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "parent-guardian: PG-02 report-bound authorization rejects replay",
+      "id": "W4-10-03",
+      "lane": "W4-10"
+    },
+    {
+      "assertion": "Tutor-proposed to Study-applied",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "parent-guardian: PG-03 proposal relabel rejects",
+      "id": "W4-10-04",
+      "lane": "W4-10"
+    },
+    {
+      "assertion": "Study-approved to completed-practice",
+      "baseline": "BASELINE_ADVERSARIAL_FINDING",
+      "current": "CLOSED",
+      "detector": "parent-guardian: PG-03 completion reclassification rejects",
+      "id": "W4-10-05",
+      "lane": "W4-10"
+    }
+  ],
+  "closedCount": 38,
+  "currentReplayKind": "CONVERGENCE_OWNED_POST_REPAIR_REPLAY",
+  "evidenceVersion": 1,
+  "expectedHistoricalBlockerCount": 38,
+  "historicalEvidenceRewritten": false,
+  "lanes": {
+    "W4-03": {
+      "assertionCount": 19,
+      "closedCount": 19,
+      "historicalResult": "BASELINE_ADVERSARIAL_FINDING",
+      "postRepairResult": "CLOSED"
+    },
+    "W4-05": {
+      "assertionCount": 5,
+      "closedCount": 5,
+      "historicalResult": "BASELINE_ADVERSARIAL_FINDING",
+      "postRepairResult": "CLOSED"
+    },
+    "W4-06": {
+      "assertionCount": 2,
+      "closedCount": 2,
+      "historicalResult": "BASELINE_ADVERSARIAL_FINDING",
+      "postRepairResult": "CLOSED"
+    },
+    "W4-08": {
+      "assertionCount": 7,
+      "closedCount": 7,
+      "historicalResult": "BASELINE_ADVERSARIAL_FINDING",
+      "postRepairResult": "CLOSED"
+    },
+    "W4-10": {
+      "assertionCount": 5,
+      "closedCount": 5,
+      "historicalResult": "BASELINE_ADVERSARIAL_FINDING",
+      "postRepairResult": "CLOSED"
+    }
+  }
+}

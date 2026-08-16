@@ -32,7 +32,17 @@
     "tutor-v3:gate": "node scripts/tutor-v3/run-compiled.mjs gate",
     "tutor-v3:mutation": "node scripts/tutor-v3/run-compiled.mjs mutation",
     "tutor-v3:release": "node scripts/tutor-v3/run-compiled.mjs release",
-    "tutor-v3:release-check": "node scripts/tutor-v3/run-compiled.mjs release --check"
+    "tutor-v3:release-check": "node scripts/tutor-v3/run-compiled.mjs release --check",
+    "tutor-v4:typecheck": "tsc -p scripts/tutor-v4/tsconfig.json --noEmit",
+    "tutor-v4:test": "node scripts/tutor-v4/run-compiled.mjs test",
+    "tutor-v4:closure": "node scripts/tutor-v4/run-compiled.mjs closure",
+    "tutor-v4:gate": "node scripts/tutor-v4/run-compiled.mjs gate",
+    "tutor-v4:negative": "node scripts/tutor-v4/run-compiled.mjs negative",
+    "tutor-v4:supply-chain": "node scripts/tutor-v4/run-compiled.mjs supply-chain",
+    "tutor-v4:schema": "node scripts/tutor-v4/run-compiled.mjs schema",
+    "tutor-v4:schema-check": "node scripts/tutor-v4/run-compiled.mjs schema --check",
+    "tutor-v4:release": "node scripts/tutor-v4/run-compiled.mjs release",
+    "tutor-v4:release-check": "node scripts/tutor-v4/run-compiled.mjs release --check"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",

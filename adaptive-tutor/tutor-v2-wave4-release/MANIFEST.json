@@ -1,0 +1,25 @@
+{
+  "artifacts": [
+    "ADVERSARIAL-BASELINE-FINDINGS.json",
+    "CERTIFICATION-STATUS.json",
+    "CHECKSUMS.json",
+    "HARD-GATE-RESULT.json",
+    "KNOWN-LIMITATIONS.json",
+    "LANE-INVENTORY.json",
+    "MANIFEST.json",
+    "NEGATIVE-CONTROL-EVIDENCE.json",
+    "POST-REPAIR-BLOCKER-CLOSURE.json",
+    "PRODUCTION-RESTRICTIONS.json",
+    "REPAIR-INVENTORY.json",
+    "SCHEMA-INVENTORY.json",
+    "SERIALIZED-BOUNDARY-INVENTORY.json",
+    "SOURCE-PROVENANCE.json",
+    "STATUS.json",
+    "SUPPLY-CHAIN-ADJUDICATION.json",
+    "TEST-EVIDENCE.json"
+  ],
+  "finalClassification": "WAVE4_RECONVERGED_CANDIDATE_READY_FOR_FINAL_INDEPENDENT_REREVIEW",
+  "manifestVersion": 1,
+  "product": "Manuel Academy Study Tutor V2",
+  "wave": "Wave 4 Adversarial Certification + Repair Reconvergence"
+}

@@ -1,0 +1,15 @@
+{
+  "extends": "../tutor-v3/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "../..",
+    "outDir": ".dist"
+  },
+  "include": [
+    "../../core/schema/**/*.ts",
+    "../../core/v2/contracts/**/*.ts",
+    "../../core/v3/**/*.ts",
+    "../../study-engine/tutor-v2/parent-reporting/**/*.ts",
+    "../../tests/wave4-convergence/**/*.ts",
+    "./**/*.ts"
+  ]
+}

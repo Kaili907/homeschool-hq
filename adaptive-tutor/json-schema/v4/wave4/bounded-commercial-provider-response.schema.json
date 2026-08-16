@@ -1,0 +1,329 @@
+{
+  "$id": "BoundedCommercialProviderResponse",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "groundedClaims": {
+      "items": {
+        "$id": "TutorV3GroundedClaim",
+        "additionalProperties": false,
+        "properties": {
+          "claimRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "supportRefs": {
+            "items": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "maxItems": 16,
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "claimRef",
+          "supportRefs"
+        ],
+        "type": "object"
+      },
+      "maxItems": 32,
+      "type": "array"
+    },
+    "metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "costMicros": {
+          "maxLength": 19,
+          "minLength": 1,
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "type": "string"
+        },
+        "inputTokenCount": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "latencyMs": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "outputTokenCount": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "inputTokenCount",
+        "outputTokenCount",
+        "latencyMs",
+        "costMicros"
+      ],
+      "type": "object"
+    },
+    "output": {
+      "$id": "TutorV3ProviderModelOutputEnvelope",
+      "anyOf": [
+        {
+          "$id": "TutorV3ProviderModelProposalEnvelope",
+          "additionalProperties": false,
+          "properties": {
+            "groundingRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 12,
+              "minItems": 1,
+              "type": "array"
+            },
+            "instructionalDisplayMode": {
+              "anyOf": [
+                {
+                  "const": "reviewed-text",
+                  "type": "string"
+                },
+                {
+                  "const": "reviewed-visual",
+                  "type": "string"
+                },
+                {
+                  "const": "reviewed-text-and-visual",
+                  "type": "string"
+                },
+                {
+                  "const": "structured-check",
+                  "type": "string"
+                }
+              ]
+            },
+            "reasonCodes": {
+              "items": {
+                "anyOf": [
+                  {
+                    "const": "needs-explanation",
+                    "type": "string"
+                  },
+                  {
+                    "const": "needs-hint",
+                    "type": "string"
+                  },
+                  {
+                    "const": "needs-check",
+                    "type": "string"
+                  },
+                  {
+                    "const": "needs-example",
+                    "type": "string"
+                  },
+                  {
+                    "const": "needs-reteach",
+                    "type": "string"
+                  },
+                  {
+                    "const": "needs-prerequisite-check",
+                    "type": "string"
+                  },
+                  {
+                    "const": "break-suggested",
+                    "type": "string"
+                  },
+                  {
+                    "const": "adult-review-suggested",
+                    "type": "string"
+                  },
+                  {
+                    "const": "return-to-lesson-suggested",
+                    "type": "string"
+                  }
+                ]
+              },
+              "maxItems": 6,
+              "minItems": 1,
+              "type": "array"
+            },
+            "refusalState": {
+              "const": "not-refused",
+              "type": "string"
+            },
+            "requestedTutorAction": {
+              "anyOf": [
+                {
+                  "const": "explain",
+                  "type": "string"
+                },
+                {
+                  "const": "hint",
+                  "type": "string"
+                },
+                {
+                  "const": "ask-check",
+                  "type": "string"
+                },
+                {
+                  "const": "show-example",
+                  "type": "string"
+                },
+                {
+                  "const": "reteach",
+                  "type": "string"
+                },
+                {
+                  "const": "check-prerequisite",
+                  "type": "string"
+                },
+                {
+                  "const": "suggest-break",
+                  "type": "string"
+                },
+                {
+                  "const": "escalate",
+                  "type": "string"
+                },
+                {
+                  "const": "return-to-lesson",
+                  "type": "string"
+                }
+              ]
+            },
+            "responseKind": {
+              "const": "proposal",
+              "type": "string"
+            },
+            "reviewedContentRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 12,
+              "minItems": 1,
+              "type": "array"
+            }
+          },
+          "required": [
+            "responseKind",
+            "reviewedContentRefs",
+            "groundingRefs",
+            "reasonCodes",
+            "requestedTutorAction",
+            "instructionalDisplayMode",
+            "refusalState"
+          ],
+          "type": "object"
+        },
+        {
+          "$id": "TutorV3ProviderModelRefusalEnvelope",
+          "additionalProperties": false,
+          "properties": {
+            "groundingRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 0,
+              "type": "array"
+            },
+            "instructionalDisplayMode": {
+              "const": "none",
+              "type": "string"
+            },
+            "reasonCodes": {
+              "items": {
+                "anyOf": [
+                  {
+                    "const": "insufficient-grounding",
+                    "type": "string"
+                  },
+                  {
+                    "const": "unreviewed-content-required",
+                    "type": "string"
+                  },
+                  {
+                    "const": "safety-restriction",
+                    "type": "string"
+                  },
+                  {
+                    "const": "assessment-answer-risk",
+                    "type": "string"
+                  },
+                  {
+                    "const": "unsupported-request",
+                    "type": "string"
+                  },
+                  {
+                    "const": "provider-declined",
+                    "type": "string"
+                  }
+                ]
+              },
+              "maxItems": 6,
+              "minItems": 1,
+              "type": "array"
+            },
+            "refusalState": {
+              "const": "refused",
+              "type": "string"
+            },
+            "requestedTutorAction": {
+              "type": "null"
+            },
+            "responseKind": {
+              "const": "refusal",
+              "type": "string"
+            },
+            "reviewedContentRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 0,
+              "type": "array"
+            }
+          },
+          "required": [
+            "responseKind",
+            "reviewedContentRefs",
+            "groundingRefs",
+            "reasonCodes",
+            "requestedTutorAction",
+            "instructionalDisplayMode",
+            "refusalState"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "responseKind": {
+      "const": "bounded-commercial-provider-response",
+      "type": "string"
+    },
+    "responseVersion": {
+      "const": "study-tutor-v3.bounded-provider-response.v1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "responseVersion",
+    "responseKind",
+    "output",
+    "groundedClaims",
+    "metrics"
+  ],
+  "title": "Bounded Commercial Provider Response",
+  "type": "object"
+}

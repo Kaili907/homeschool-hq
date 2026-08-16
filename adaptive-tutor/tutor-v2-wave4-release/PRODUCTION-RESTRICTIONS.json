@@ -1,0 +1,16 @@
+{
+  "candidateOnly": true,
+  "deploymentPerformed": false,
+  "liveEndpointIncluded": false,
+  "liveProviderWiringPerformed": false,
+  "masterMergePerformed": false,
+  "productionRoots": [
+    "src/**",
+    "netlify/**",
+    "supabase/**"
+  ],
+  "providerCredentialsIncluded": false,
+  "providerSdkIncluded": false,
+  "restrictionVersion": 1,
+  "unauthorizedChangesUnderProductionRoots": 0
+}

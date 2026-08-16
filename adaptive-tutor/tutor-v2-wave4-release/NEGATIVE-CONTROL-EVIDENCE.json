@@ -1,0 +1,142 @@
+{
+  "aggregateStatus": "PASS",
+  "compilerFailureAloneCountsAsDetection": false,
+  "controlCount": 13,
+  "controls": [
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "adversarial/v4/prompt-injection: 40/40 and 6/6 controls",
+      "failedFamilies": [
+        "PROMPT_INJECTION_AUTHORITY_CONTAINMENT"
+      ],
+      "family": "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
+      "id": "W4-NC-01",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "adversarial/v4/answer-extraction: 66/66 and 4/4 controls",
+      "failedFamilies": [
+        "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE"
+      ],
+      "family": "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
+      "id": "W4-NC-02",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "R1 + R4 + R5 post-repair lineage replay",
+      "failedFamilies": [
+        "CROSS_SCOPE_COMMERCIAL_ISOLATION"
+      ],
+      "family": "CROSS_SCOPE_COMMERCIAL_ISOLATION",
+      "id": "W4-NC-03",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "adversarial/v4/replay-crash: 28/28",
+      "failedFamilies": [
+        "REPLAY_CRASH_IDEMPOTENCY"
+      ],
+      "family": "REPLAY_CRASH_IDEMPOTENCY",
+      "id": "W4-NC-04",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "R1 forged identity and current-state replay",
+      "failedFamilies": [
+        "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION"
+      ],
+      "family": "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
+      "id": "W4-NC-05",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "R1 bounded collections and caller-owned claim replay",
+      "failedFamilies": [
+        "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH"
+      ],
+      "family": "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
+      "id": "W4-NC-06",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "adversarial/v4/privacy-retention canary and schema campaign",
+      "failedFamilies": [
+        "PRIVACY_RETENTION_MINIMIZATION"
+      ],
+      "family": "PRIVACY_RETENTION_MINIMIZATION",
+      "id": "W4-NC-07",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "R2 seeded boundary replay and R5 presentation lineage",
+      "failedFamilies": [
+        "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING"
+      ],
+      "family": "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
+      "id": "W4-NC-08",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "adversarial/v4/multilingual-eval deterministic corpus",
+      "failedFamilies": [
+        "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION"
+      ],
+      "family": "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION",
+      "id": "W4-NC-09",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "R3 Parent/guardian 22/22 replay",
+      "failedFamilies": [
+        "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS"
+      ],
+      "family": "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
+      "id": "W4-NC-10",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "certification/v4/model-drift exact identity policy",
+      "failedFamilies": [
+        "MODEL_DRIFT_CERTIFICATION_IDENTITY"
+      ],
+      "family": "MODEL_DRIFT_CERTIFICATION_IDENTITY",
+      "id": "W4-NC-11",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "certification/v4/live-runner six immediate hard violations",
+      "failedFamilies": [
+        "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL"
+      ],
+      "family": "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL",
+      "id": "W4-NC-12",
+      "status": "DETECTED"
+    },
+    {
+      "compilerFailureUsedAsDetection": false,
+      "detector": "adversarial/v4/supply-chain provider-neutral scanner",
+      "failedFamilies": [
+        "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION"
+      ],
+      "family": "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
+      "id": "W4-NC-13",
+      "status": "DETECTED"
+    }
+  ],
+  "detected": 13,
+  "disposableSemanticMutationsOnly": true,
+  "evidenceVersion": 1,
+  "requiredControlCount": 13,
+  "survived": 0
+}

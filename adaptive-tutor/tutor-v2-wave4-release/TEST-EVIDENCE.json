@@ -1,0 +1,41 @@
+{
+  "convergenceRepairReplay": "86/86 TAP assertions",
+  "evidenceVersion": 1,
+  "foundationCorpus": "128/128; FOUNDATION_GATE_PASS; releaseReady=false",
+  "fullValidationRecordedInSessionReturn": true,
+  "historicalBlockerClosure": "38/38",
+  "historicalWrapperLimitationsPreserved": true,
+  "importedLaneSuites": 13,
+  "nodeVersion": "22.23.2",
+  "originalLaneReplay": {
+    "W4_01": "40/40; 6/6 controls",
+    "W4_02": "66/66; 4/4 controls",
+    "W4_03": "historical RED reproduced: 36 pass, 22 fail across 58 tests; 19 recorded blockers",
+    "W4_04": "28/28 historical source replay; current replay covered by repaired convergence",
+    "W4_05": "historical finding preserved: 16/21 matrix, 5 blockers",
+    "W4_06": "historical finding preserved: 2 explicit blocker cases",
+    "W4_07": "14-category canary scan PASS; 18/18 Wave 3 gates",
+    "W4_08": "historical RED reproduced: 5 pass, 10 fail across 15 tests; 7 blocker categories",
+    "W4_09": "10/10; evaluation only",
+    "W4_10": "historical RED reproduced: 25 pass, 5 fail across 30 tests",
+    "W4_11": "21/21",
+    "W4_12": "11/11; six hard violations fail immediately; offline only",
+    "W4_13": "production-scoped scan PASS with 0 findings; 4/4 controls"
+  },
+  "repairs": {
+    "R1": "27/27",
+    "R2": "30/30 combined",
+    "R3": "22/22",
+    "R4": "9/9",
+    "R5": "20/20"
+  },
+  "repositoryRoot": "typecheck PASS; production build PASS",
+  "studyCoreBridge": "35/36 pass; 1 skipped for unavailable external archives",
+  "studyTutorBridge": "209/209",
+  "tutorCore": "21/21; build PASS; smoke PASS",
+  "wave2Convergence": "288/288",
+  "wave3Convergence": "33/33",
+  "wave3HardGates": "18/18",
+  "wave4HardGates": "13/13",
+  "wave4NegativeControls": "13/13 detected"
+}

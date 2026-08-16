@@ -1,0 +1,287 @@
+{
+  "$id": "TutorV3DurableMultimodalEvidence",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assistanceLevel": {
+      "anyOf": [
+        {
+          "const": "independent",
+          "type": "string"
+        },
+        {
+          "const": "light-hint",
+          "type": "string"
+        },
+        {
+          "const": "guided",
+          "type": "string"
+        },
+        {
+          "const": "reteach-required",
+          "type": "string"
+        }
+      ]
+    },
+    "captionAvailability": {
+      "const": "available",
+      "type": "string"
+    },
+    "captionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "commercialExecutionScopeRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "conceptRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "contractVersion": {
+      "const": "3.0.0-foundation.3",
+      "type": "string"
+    },
+    "envelope": {
+      "const": "durable-multimodal-evidence",
+      "type": "string"
+    },
+    "evidenceRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "householdScopeRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "interactionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "learnerScopeRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "logicalOperationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "mode": {
+      "anyOf": [
+        {
+          "const": "text",
+          "type": "string"
+        },
+        {
+          "const": "speech",
+          "type": "string"
+        },
+        {
+          "const": "reviewed-image",
+          "type": "string"
+        },
+        {
+          "const": "reviewed-diagram",
+          "type": "string"
+        },
+        {
+          "const": "caption",
+          "type": "string"
+        }
+      ]
+    },
+    "observedAt": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+      "type": "string"
+    },
+    "opportunityRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "outcome": {
+      "anyOf": [
+        {
+          "const": "demonstrated",
+          "type": "string"
+        },
+        {
+          "const": "not-demonstrated",
+          "type": "string"
+        },
+        {
+          "const": "inconclusive",
+          "type": "string"
+        }
+      ]
+    },
+    "presentationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "rawMediaPersisted": {
+      "const": false,
+      "type": "boolean"
+    },
+    "reviewedVisual": {
+      "additionalProperties": false,
+      "properties": {
+        "contentDigest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "mimeType": {
+          "anyOf": [
+            {
+              "const": "image/png",
+              "type": "string"
+            },
+            {
+              "const": "image/jpeg",
+              "type": "string"
+            },
+            {
+              "const": "image/webp",
+              "type": "string"
+            },
+            {
+              "const": "image/gif",
+              "type": "string"
+            },
+            {
+              "const": "image/svg+xml",
+              "type": "string"
+            }
+          ]
+        },
+        "provenanceRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "reviewRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "reviewStatus": {
+          "const": "approved",
+          "type": "string"
+        },
+        "visualKind": {
+          "anyOf": [
+            {
+              "const": "image",
+              "type": "string"
+            },
+            {
+              "const": "diagram",
+              "type": "string"
+            }
+          ]
+        },
+        "visualRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "visualRef",
+        "reviewRef",
+        "contentDigest",
+        "mimeType",
+        "visualKind",
+        "reviewStatus",
+        "provenanceRef"
+      ],
+      "type": "object"
+    },
+    "sessionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "transcriptPersisted": {
+      "const": false,
+      "type": "boolean"
+    },
+    "turnRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "visualStep": {
+      "$id": "TutorV3VisualStepReference",
+      "additionalProperties": false,
+      "properties": {
+        "stepIndex": {
+          "maximum": 200,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "visualStepRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "visualStepRef",
+        "stepIndex"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "envelope",
+    "evidenceRef",
+    "commercialExecutionScopeRef",
+    "householdScopeRef",
+    "learnerScopeRef",
+    "sessionRef",
+    "interactionRef",
+    "logicalOperationRef",
+    "conceptRef",
+    "opportunityRef",
+    "presentationRef",
+    "turnRef",
+    "mode",
+    "outcome",
+    "assistanceLevel",
+    "observedAt",
+    "captionRef",
+    "captionAvailability",
+    "transcriptPersisted",
+    "rawMediaPersisted"
+  ],
+  "title": "Durable Multimodal Evidence",
+  "type": "object"
+}

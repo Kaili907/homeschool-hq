@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
-import { WAVE3_SERIALIZED_SCHEMA_ARTIFACTS } from "../../scripts/tutor-v3/generate-schemas.js";
+import { WAVE4_SERIALIZED_SCHEMA_ARTIFACTS } from "../../scripts/tutor-v4/generate-schemas.js";
 import type { TSchema } from "../../core/schema/typebox.js";
 import { Value } from "../../core/schema/value.js";
 
@@ -32,13 +32,13 @@ function assertClosed(value: unknown, path: string): void {
 
 function generatedSchema(file: string): TSchema {
   return JSON.parse(readFileSync(
-    resolve(tutorRoot, "json-schema/v3/wave3", file),
+    resolve(tutorRoot, "json-schema/v4/wave4", file),
     "utf8",
   )) as TSchema;
 }
 
 function runtimeSchema(file: string): TSchema {
-  const artifact = WAVE3_SERIALIZED_SCHEMA_ARTIFACTS.find(
+  const artifact = WAVE4_SERIALIZED_SCHEMA_ARTIFACTS.find(
     (candidate) => candidate.file === file,
   );
   assert.ok(artifact, `missing runtime artifact ${file}`);
@@ -102,11 +102,18 @@ const memoryDelta = {
 };
 
 const durableMultimodalEvidence = {
-  contractVersion: "3.0.0-foundation.1",
+  contractVersion: "3.0.0-foundation.3",
   envelope: "durable-multimodal-evidence",
   evidenceRef: "evidence:multimodal-001",
+  commercialExecutionScopeRef: "commercial-scope:hint-a",
+  householdScopeRef: "household-scope:family-a",
+  learnerScopeRef: "learner:child-a",
   sessionRef: "session:math-a",
   interactionRef: "interaction:practice-a",
+  logicalOperationRef: "logical-operation:hint-a",
+  conceptRef: "concept:fractions",
+  opportunityRef: "opportunity:practice-a",
+  presentationRef: "presentation:hint-a",
   turnRef: "turn:hint-a",
   mode: "reviewed-diagram",
   outcome: "demonstrated",
@@ -120,8 +127,10 @@ const durableMultimodalEvidence = {
     visualRef: "visual:fractions-a",
     reviewRef: "review:fractions-a",
     contentDigest: `sha256:${"a".repeat(64)}`,
+    mimeType: "image/svg+xml",
     visualKind: "diagram",
     reviewStatus: "approved",
+    provenanceRef: "provenance:fractions-a",
   },
   visualStep: {
     visualStepRef: "visual-step:fractions-a-1",
@@ -154,8 +163,8 @@ const minimizedAcceptedStudyEffectEvent = {
 };
 
 test("all ten generated serialized schemas exactly match runtime schemas and are recursively closed", () => {
-  assert.equal(WAVE3_SERIALIZED_SCHEMA_ARTIFACTS.length, 10);
-  assert.deepEqual(WAVE3_SERIALIZED_SCHEMA_ARTIFACTS.map(({ file }) => file), [
+  assert.equal(WAVE4_SERIALIZED_SCHEMA_ARTIFACTS.length, 10);
+  assert.deepEqual(WAVE4_SERIALIZED_SCHEMA_ARTIFACTS.map(({ file }) => file), [
     "study-commercial-tutor-invocation.schema.json",
     "bounded-commercial-provider-request.schema.json",
     "bounded-commercial-provider-response.schema.json",
@@ -167,7 +176,7 @@ test("all ten generated serialized schemas exactly match runtime schemas and are
     "durable-multimodal-evidence.schema.json",
     "minimized-accepted-study-effect-event.schema.json",
   ]);
-  for (const artifact of WAVE3_SERIALIZED_SCHEMA_ARTIFACTS) {
+  for (const artifact of WAVE4_SERIALIZED_SCHEMA_ARTIFACTS) {
     const generated = generatedSchema(artifact.file) as Record<string, unknown>;
     delete generated.$schema;
     delete generated.title;
@@ -178,7 +187,7 @@ test("all ten generated serialized schemas exactly match runtime schemas and are
 
 test("schema inventory records ten serialized schemas and zero internal-port schemas", () => {
   const inventory = JSON.parse(readFileSync(
-    resolve(tutorRoot, "json-schema/v3/wave3/SCHEMA-INVENTORY.json"),
+    resolve(tutorRoot, "json-schema/v4/wave4/SCHEMA-INVENTORY.json"),
     "utf8",
   )) as { generatedSchemaCount: number; internalPortSchemasGenerated: number };
   assert.deepEqual(inventory, {
@@ -190,26 +199,18 @@ test("schema inventory records ten serialized schemas and zero internal-port sch
 
 test("boundary inventory identifies exactly ten durable schemas and classifies every non-boundary", () => {
   const inventory = JSON.parse(readFileSync(
-    resolve(tutorRoot, "../docs/study-tutor-v2/wave3/SERIALIZED-BOUNDARY-INVENTORY.json"),
+    resolve(tutorRoot, "tutor-v2-wave4-release/SERIALIZED-BOUNDARY-INVENTORY.json"),
     "utf8",
   )) as {
-    serializedSchemaCount: number;
+    currentSerializedBoundaryCount: number;
     internalPortSchemaCount: number;
-    contracts: Array<{
-      name: string;
-      classification: string;
-      schemaGenerated: boolean;
-      reason?: string;
-    }>;
+    serializedBoundaries: string[];
+    additionalCandidates: Array<{ candidate: string; classification: string }>;
   };
-  const serialized = inventory.contracts.filter(
-    ({ classification }) => classification === "SERIALIZED_BOUNDARY",
-  );
-  assert.equal(inventory.serializedSchemaCount, 10);
+  assert.equal(inventory.currentSerializedBoundaryCount, 10);
   assert.equal(inventory.internalPortSchemaCount, 0);
-  assert.equal(serialized.length, 10);
   assert.deepEqual(
-    serialized.map(({ name }) => name),
+    inventory.serializedBoundaries,
     [
       "StudyCommercialTutorInvocation",
       "BoundedCommercialProviderRequest",
@@ -223,19 +224,12 @@ test("boundary inventory identifies exactly ten durable schemas and classifies e
       "MinimizedAcceptedStudyEffectEvent",
     ],
   );
-  for (const contract of inventory.contracts) {
-    assert.ok(contract.reason && contract.reason.length > 0, contract.name);
-    if (contract.classification === "SERIALIZED_BOUNDARY") {
-      assert.equal(contract.schemaGenerated, true, contract.name);
-    } else {
-      assert.ok([
-        "TRUSTED_INTERNAL_CONTRACT",
-        "EPHEMERAL_TRANSIENT",
-        "FUTURE_PRODUCTION_BOUNDARY",
-      ].includes(contract.classification), contract.name);
-      assert.equal(contract.schemaGenerated, false, contract.name);
-    }
-  }
+  assert.deepEqual(inventory.additionalCandidates.map(({ classification }) => classification), [
+    "TRUSTED_INTERNAL_CONTRACT",
+    "TOOLING_ARTIFACT",
+    "TOOLING_ARTIFACT",
+    "TRUSTED_INTERNAL_CONTRACT",
+  ]);
 });
 
 test("durable multimodal evidence has runtime/generated parity for valid and adversarial objects", () => {

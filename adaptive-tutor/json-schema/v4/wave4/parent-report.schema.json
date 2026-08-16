@@ -1,0 +1,960 @@
+{
+  "$id": "TutorV2ParentReport",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "audience": {
+      "const": "parent-hub",
+      "type": "string"
+    },
+    "authority": {
+      "const": "explanatory-only",
+      "type": "string"
+    },
+    "disclaimer": {
+      "const": "This report explains Study-approved records. Tutor may propose a step, but only Study can approve or apply it. This report does not make or change a learning decision.",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "authorizationIssuedEventRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "authorizationRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "authorizationRevisionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "consentRef": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "consentRevisionRef": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generatedAt": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+          "type": "string"
+        },
+        "policyRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "policyRevisionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "producer": {
+          "const": "study-engine",
+          "type": "string"
+        },
+        "reportRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "sourceEvidenceCount": {
+          "maximum": 1000,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "producer",
+        "generatedAt",
+        "consentRef",
+        "consentRevisionRef",
+        "sourceEvidenceCount"
+      ],
+      "type": "object"
+    },
+    "reportVersion": {
+      "const": "tutor-parent-report/v2",
+      "type": "string"
+    },
+    "scope": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "guardianRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "householdScopeRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "learnerScopeRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "scopeKind": {
+              "const": "session",
+              "type": "string"
+            },
+            "sessionRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "scopeKind"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "endsAt": {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+              "type": "string"
+            },
+            "guardianRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "householdScopeRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "learnerScopeRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "reportingPeriodRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "scopeKind": {
+              "const": "reporting-period",
+              "type": "string"
+            },
+            "startsAt": {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "scopeKind",
+            "startsAt",
+            "endsAt"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "summaries": {
+      "items": {
+        "$id": "TutorV2ParentReportSummary",
+        "anyOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": null,
+                "type": "null"
+              },
+              "explanation": {
+                "const": "Study recorded completed practice in this report scope.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "practice-completed",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study recorded",
+                "type": "string"
+              },
+              "title": {
+                "const": "Practice completed",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": null,
+                "type": "null"
+              },
+              "explanation": {
+                "const": "Study recorded that an approved level of support was used during practice.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "support-level-used",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study recorded",
+                "type": "string"
+              },
+              "title": {
+                "const": "Support used",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "tutor-proposed",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Tutor requested a review. Study has not approved or applied this request.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "review-requested",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Tutor proposed",
+                "type": "string"
+              },
+              "title": {
+                "const": "Tutor requested review",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "study-approved",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Study approved the requested review. Approval does not mean the review was applied.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "review-requested",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study approved",
+                "type": "string"
+              },
+              "title": {
+                "const": "Study approved review",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "study-applied",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Study recorded that the approved review was applied.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "review-requested",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study applied",
+                "type": "string"
+              },
+              "title": {
+                "const": "Study applied review",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "tutor-proposed",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Tutor proposed reviewing an earlier skill. Study has not approved or applied this proposal.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "prerequisite-review",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Tutor proposed",
+                "type": "string"
+              },
+              "title": {
+                "const": "Tutor proposed prerequisite review",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "study-approved",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Study approved a prerequisite review. Approval does not mean the review was applied.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "prerequisite-review",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study approved",
+                "type": "string"
+              },
+              "title": {
+                "const": "Study approved prerequisite review",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "study-applied",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Study recorded that the approved prerequisite review was applied.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "prerequisite-review",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study applied",
+                "type": "string"
+              },
+              "title": {
+                "const": "Study applied prerequisite review",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "tutor-proposed",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Tutor proposed another explanation. Study has not approved or applied this proposal.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "reteach",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Tutor proposed",
+                "type": "string"
+              },
+              "title": {
+                "const": "Tutor proposed reteach",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "study-approved",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Study approved another explanation. Approval does not mean the reteach was applied.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "reteach",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study approved",
+                "type": "string"
+              },
+              "title": {
+                "const": "Study approved reteach",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "study-applied",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Study recorded that the approved reteach was applied.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "reteach",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study applied",
+                "type": "string"
+              },
+              "title": {
+                "const": "Study applied reteach",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": null,
+                "type": "null"
+              },
+              "explanation": {
+                "const": "Study recorded approved evidence that independent work was observed in this report scope.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "independent-evidence-observed",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study recorded",
+                "type": "string"
+              },
+              "title": {
+                "const": "Independent evidence observed",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "tutor-proposed",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Tutor proposed a next step. Study has not approved or applied the proposal.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "study-decision",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Tutor proposed",
+                "type": "string"
+              },
+              "title": {
+                "const": "Tutor proposal awaiting Study",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "study-approved",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Study approved the proposed next step. Approval does not mean the step was applied.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "study-decision",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study approved",
+                "type": "string"
+              },
+              "title": {
+                "const": "Study decision approved",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": "study-applied",
+                "type": "string"
+              },
+              "explanation": {
+                "const": "Study recorded that the approved next step was applied.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "study-decision",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study applied",
+                "type": "string"
+              },
+              "title": {
+                "const": "Study decision applied",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": null,
+                "type": "null"
+              },
+              "explanation": {
+                "const": "Trusted Study metadata placed time on task in the under 15 minutes bucket.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "time-on-task-under-15-minutes",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study recorded",
+                "type": "string"
+              },
+              "title": {
+                "const": "Time on task: under 15 minutes",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": null,
+                "type": "null"
+              },
+              "explanation": {
+                "const": "Trusted Study metadata placed time on task in the 15 to 30 minutes bucket.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "time-on-task-15-to-30-minutes",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study recorded",
+                "type": "string"
+              },
+              "title": {
+                "const": "Time on task: 15 to 30 minutes",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": null,
+                "type": "null"
+              },
+              "explanation": {
+                "const": "Trusted Study metadata placed time on task in the 31 to 60 minutes bucket.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "time-on-task-31-to-60-minutes",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study recorded",
+                "type": "string"
+              },
+              "title": {
+                "const": "Time on task: 31 to 60 minutes",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "decisionStatus": {
+                "const": null,
+                "type": "null"
+              },
+              "explanation": {
+                "const": "Trusted Study metadata placed time on task in the over 60 minutes bucket.",
+                "type": "string"
+              },
+              "occurrenceCount": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "reasonCode": {
+                "const": "time-on-task-over-60-minutes",
+                "type": "string"
+              },
+              "statusLabel": {
+                "const": "Study recorded",
+                "type": "string"
+              },
+              "title": {
+                "const": "Time on task: over 60 minutes",
+                "type": "string"
+              }
+            },
+            "required": [
+              "decisionStatus",
+              "reasonCode",
+              "statusLabel",
+              "title",
+              "explanation",
+              "occurrenceCount"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "maxItems": 19,
+      "type": "array"
+    }
+  },
+  "required": [
+    "reportVersion",
+    "audience",
+    "authority",
+    "scope",
+    "summaries",
+    "disclaimer",
+    "provenance"
+  ],
+  "title": "Authorized Commercial Parent Report",
+  "type": "object"
+}
