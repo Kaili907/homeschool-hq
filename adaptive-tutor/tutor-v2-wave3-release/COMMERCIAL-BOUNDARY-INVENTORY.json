@@ -3,41 +3,61 @@
     {
       "classification": "SERIALIZED_BOUNDARY",
       "name": "StudyCommercialTutorInvocation",
+      "reason": "Serialized invocation envelope crossing from the Study runtime into the commercial tutor operation boundary.",
       "schemaGenerated": true
     },
     {
       "classification": "SERIALIZED_BOUNDARY",
       "name": "BoundedCommercialProviderRequest",
+      "reason": "Serialized minimized request sent across the commercial provider boundary.",
       "schemaGenerated": true
     },
     {
       "classification": "SERIALIZED_BOUNDARY",
       "name": "BoundedCommercialProviderResponse",
+      "reason": "Serialized bounded response received from the commercial provider boundary before validation.",
       "schemaGenerated": true
     },
     {
       "classification": "SERIALIZED_BOUNDARY",
       "name": "StudyCommercialTutorAdvisory",
+      "reason": "Serialized non-authoritative advisory returned to the Study runtime.",
       "schemaGenerated": true
     },
     {
       "classification": "SERIALIZED_BOUNDARY",
       "name": "StudyCommercialEffectReceipt",
+      "reason": "Durable receipt used to reconcile acceptance of a Study-owned effect.",
       "schemaGenerated": true
     },
     {
       "classification": "SERIALIZED_BOUNDARY",
       "name": "CommercialOperationTelemetryEvent",
+      "reason": "Serialized minimized telemetry emitted for commercial operation observability.",
       "schemaGenerated": true
     },
     {
       "classification": "SERIALIZED_BOUNDARY",
       "name": "ParentReport",
+      "reason": "Serialized authorized report delivered across the parent-reporting boundary.",
       "schemaGenerated": true
     },
     {
       "classification": "SERIALIZED_BOUNDARY",
       "name": "InstructionalMemoryDelta",
+      "reason": "Recoverable serialized delta used to reconcile bounded instructional memory effects.",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "DurableMultimodalEvidence",
+      "reason": "Durable minimized evidence persisted after multimodal projection; raw media, transcripts, biometric identity, and diagnostic inference are excluded.",
+      "schemaGenerated": true
+    },
+    {
+      "classification": "SERIALIZED_BOUNDARY",
+      "name": "MinimizedAcceptedStudyEffectEvent",
+      "reason": "Durable minimized acceptance event replayed for effect and instructional-memory reconciliation without raw provider, tutor, or learner data.",
       "schemaGenerated": true
     },
     {
@@ -49,25 +69,29 @@
     {
       "classification": "EPHEMERAL_TRANSIENT",
       "name": "CommercialProviderTransport",
+      "reason": "Transport input exists only for the live request attempt and is not a durable artifact.",
       "schemaGenerated": false
     },
     {
       "classification": "EPHEMERAL_TRANSIENT",
       "name": "RawAudioImageInput",
+      "reason": "Raw media is an in-memory transient capability and is prohibited from durable evidence.",
       "schemaGenerated": false
     },
     {
       "classification": "FUTURE_PRODUCTION_BOUNDARY",
       "name": "ProductionProviderAdapter",
+      "reason": "The current adapter is a port/future integration seam rather than a shipped serialized boundary.",
       "schemaGenerated": false
     },
     {
       "classification": "FUTURE_PRODUCTION_BOUNDARY",
       "name": "ProductionCurriculumRegistryAdapter",
+      "reason": "The current adapter is a port/future integration seam rather than a shipped serialized boundary.",
       "schemaGenerated": false
     }
   ],
   "internalPortSchemaCount": 0,
-  "inventoryVersion": 1,
-  "serializedSchemaCount": 8
+  "inventoryVersion": 2,
+  "serializedSchemaCount": 10
 }

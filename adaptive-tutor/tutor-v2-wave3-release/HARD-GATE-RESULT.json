@@ -20,6 +20,317 @@
     "TRANSIENT_MULTIMODAL_MINIMIZATION": true,
     "UNTRUSTED_MODEL_OUTPUT_BOUNDARY": true
   },
+  "hardGateAdequacy": [
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "COMMERCIAL_PROVIDER_REQUEST_MINIMIZATION",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M01-DISCLOSURE-TRUE"
+      },
+      "name": "COMMERCIAL_PROVIDER_REQUEST_MINIMIZATION",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "provider request is structurally minimized"
+        ]
+      },
+      "sourceInvariant": "The executable provider request is allowlisted and never permits raw learner-attempt disclosure.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "PROVIDER_POLICY_BEFORE_ROUTING",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M02-BYPASS-POLICY-DECISION"
+      },
+      "name": "PROVIDER_POLICY_BEFORE_ROUTING",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/core/v3/routing/provider-routing/provider-routing.test.js",
+        "testNames": [
+          "provider-policy must be evaluated per provider and revision"
+        ]
+      },
+      "sourceInvariant": "Only providers with an eligible decision for the required policy revision enter the routing catalog.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "IMMUTABLE_PROVIDER_MODEL_ROUTE_IDENTITY",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M03-MUTABLE-MODEL-ALIAS"
+      },
+      "name": "IMMUTABLE_PROVIDER_MODEL_ROUTE_IDENTITY",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/core/v3/routing/provider-routing/provider-routing.test.js",
+        "testNames": [
+          "selects a bounded provider-independent immutable attempt"
+        ]
+      },
+      "sourceInvariant": "Every planned physical attempt pins immutable provider, model revision, configuration, capability, and policy evidence identity.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "INTEGER_MICROS_ATTEMPT_BUDGET",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M04-REMOVE-PER-ATTEMPT-COST-BOUND"
+      },
+      "name": "INTEGER_MICROS_ATTEMPT_BUDGET",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "a physical attempt cannot overrun its reserve using unused failover reserve"
+        ]
+      },
+      "sourceInvariant": "Canonical decimal-string IntegerMicros are settled per physical attempt, and no attempt may exceed its own immutable reserve.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "END_TO_END_DEADLINE_BOUNDED_FAILOVER",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M05-TRUST-PROVIDER-LATENCY"
+      },
+      "name": "END_TO_END_DEADLINE_BOUNDED_FAILOVER",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "measured execution over attempt timeout rejects low reported latency"
+        ]
+      },
+      "sourceInvariant": "Trusted measured attempt and operation deadlines reject late success and permit failover only inside the remaining bounded window.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "UNTRUSTED_MODEL_OUTPUT_BOUNDARY",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M06-OPEN-PROVIDER-RESPONSE"
+      },
+      "name": "UNTRUSTED_MODEL_OUTPUT_BOUNDARY",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "unknown and authority-bearing provider fields are rejected"
+        ]
+      },
+      "sourceInvariant": "Provider output is parsed through a recursively closed bounded response contract before any advisory is constructed.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "GROUNDED_CONTEXT_OR_REFUSAL",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M07-BYPASS-GROUNDING-REFUSAL"
+      },
+      "name": "GROUNDED_CONTEXT_OR_REFUSAL",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "unsupported grounded claim forces refusal/static fallback"
+        ]
+      },
+      "sourceInvariant": "Unsupported provider claims cannot become instructional advice and instead produce reviewed static fallback.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "CURRICULUM_TUTOR_ADMISSION",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M08-REMOVE-CURRICULUM-DIGEST-RECONCILIATION"
+      },
+      "name": "CURRICULUM_TUTOR_ADMISSION",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "foreign trusted invocation curriculum digest fails before provider execution"
+        ]
+      },
+      "sourceInvariant": "The full trusted curriculum authority tuple, including digest and reconciled subject, must match before provider execution.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "APPROVED_LEARNER_STAGE_CATALOG",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M09-DEFAULT-UNKNOWN-STAGE"
+      },
+      "name": "APPROVED_LEARNER_STAGE_CATALOG",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "unknown learner stage fails closed before provider execution"
+        ]
+      },
+      "sourceInvariant": "Unknown learner-stage bindings fail closed rather than defaulting to an approved routing profile.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "RECOVERABLE_EFFECT_MEMORY_REPLAY",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M10-FORCE-ACCEPTED-EFFECT-MISSING"
+      },
+      "name": "RECOVERABLE_EFFECT_MEMORY_REPLAY",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/core/v3/recovery/recoverable-memory-replay.test.js",
+        "testNames": [
+          "memory failure after effect acceptance remains memory-pending and retry repairs it"
+        ]
+      },
+      "sourceInvariant": "Accepted Study effects are recovered by canonical identity and memory replay remains idempotent after partial failure.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "TRANSIENT_MULTIMODAL_MINIMIZATION",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M11-PERSIST-TRANSCRIPT-IN-CAPTION-REF"
+      },
+      "name": "TRANSIENT_MULTIMODAL_MINIMIZATION",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/core/v3/multimodal/multimodal.test.js",
+        "testNames": [
+          "minimization projection cannot carry raw media, transcript, caption, or content"
+        ]
+      },
+      "sourceInvariant": "Raw media, transcripts, captions, and content remain transient and cannot enter durable multimodal evidence.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "PARENT_REPORT_GUARDIAN_AUTHORIZATION",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M12-REMOVE-PARENT-LEARNER-SCOPE"
+      },
+      "name": "PARENT_REPORT_GUARDIAN_AUTHORIZATION",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/study-engine/tutor-v2/parent-reporting/parent-report.test.js",
+        "testNames": [
+          "wrong guardian, household, learner, session, or period authorization fails closed"
+        ]
+      },
+      "sourceInvariant": "Parent reporting requires exact guardian, household, learner, session, and reporting-period authorization scope.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "TELEMETRY_OPERATION_ATTEMPT_LINEAGE",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M13-COLLAPSE-TELEMETRY-LINEAGE"
+      },
+      "name": "TELEMETRY_OPERATION_ATTEMPT_LINEAGE",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/core/v3/telemetry/telemetry.test.js",
+        "testNames": [
+          "projects exact commercial attempt and reservation lineage"
+        ]
+      },
+      "sourceInvariant": "Commercial telemetry preserves distinct logical-operation, physical-attempt, route-plan, and reservation lineage.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "CLOSED_PRESENTATION_INTENT",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M14-BYPASS-PROPOSAL-INTENT-MATCH"
+      },
+      "name": "CLOSED_PRESENTATION_INTENT",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/core/v3/presentation/presentation.test.js",
+        "testNames": [
+          "authority fields are rejected from intent and commercial wrapper"
+        ]
+      },
+      "sourceInvariant": "Presentation proposals must match the closed trusted intent contract and cannot carry authority fields.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "COMPOSED_EVALUATION_EXECUTION",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M15-PREFILL-UNREACHED-GATES-PASS"
+      },
+      "name": "COMPOSED_EVALUATION_EXECUTION",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/evals/v3/tests/harness.test.js",
+        "testNames": [
+          "unreached hard gates remain not-evaluated instead of defaulting to pass"
+        ]
+      },
+      "sourceInvariant": "Only executed composed-system checks may pass; unreached hard gates remain explicitly not evaluated.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "CROSS_CHILD_COMMERCIAL_ISOLATION",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M16-REMOVE-COMMERCIAL-LEARNER-SCOPE"
+      },
+      "name": "CROSS_CHILD_COMMERCIAL_ISOLATION",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "foreign learner scope cannot influence the invocation"
+        ]
+      },
+      "sourceInvariant": "The trusted learner scope must exactly match the commercial invocation before any provider call.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "ONE_STUDY_ENGINE_AUTHORITY",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M17-GRANT-STUDY-MUTATION-AUTHORITY"
+      },
+      "name": "ONE_STUDY_ENGINE_AUTHORITY",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "canonical commercial flow returns only a Study advisory"
+        ]
+      },
+      "sourceInvariant": "Tutor output remains advisory and cannot mutate Study mastery, working level, curriculum, or segment completion.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    },
+    {
+      "mutationDetector": {
+        "expectedFailedGate": "NO_VENDOR_PRODUCTION_IMPORT",
+        "method": "guarded-function-scoped-source-rewrite",
+        "mutationId": "W3-M18-ADD-VENDOR-IMPORT"
+      },
+      "name": "NO_VENDOR_PRODUCTION_IMPORT",
+      "permanentDetector": {
+        "testFile": "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "testNames": [
+          "Wave 3 foundation has no vendor, deployment, credential, or production UI imports"
+        ]
+      },
+      "sourceInvariant": "Wave 3 foundation source contains no vendor SDK, deployment, credential, hosted-service, or production UI import.",
+      "sourceInvariantPresent": true,
+      "status": "ADEQUATE"
+    }
+  ],
+  "hardGateAdequacyAggregateStatus": "PASS",
+  "hardGateAdequacyFamiliesPassed": 18,
+  "hardGateAdequacyFamilyCount": 18,
   "hardGateFamilies": [
     {
       "name": "COMMERCIAL_PROVIDER_REQUEST_MINIMIZATION",

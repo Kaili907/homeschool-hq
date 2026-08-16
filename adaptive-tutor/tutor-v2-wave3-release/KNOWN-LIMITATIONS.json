@@ -12,16 +12,16 @@
   "inherited": [
     {
       "code": "OBSOLETE_BROAD_PLATFORM_VALIDATOR",
-      "detail": "The legacy broad platform-boundary substring validator remains classified rather than rewritten in this convergence lane."
+      "detail": "The accepted inherited broad platform-boundary validator remains 18/19 because its obsolete substring rule flags accepted authority paths/generated output."
     },
     {
       "code": "INHERITED_DEPENDENCY_ADVISORIES",
-      "detail": "Repository dependency advisories remain external to Wave 3 foundation ownership."
+      "detail": "Three inherited high advisories remain for @playwright/test, playwright, and nanoid; manifests are unchanged."
     },
     {
       "code": "SESSION6_ARCHIVES_NOT_MOUNTED",
-      "detail": "Frozen Session 6 archives remain unavailable; current executable bridge tests are used instead."
+      "detail": "Four frozen Session 6 archives remain unavailable; current executable bridge tests are used without replacing archive checksum evidence."
     }
   ],
-  "limitationsVersion": 1
+  "limitationsVersion": 2
 }

@@ -1,15 +1,18 @@
 {
-  "evidenceVersion": 1,
+  "baselineBlocked": 0,
+  "booleanEvidenceFlipOnly": false,
+  "compileValidMutations": 18,
+  "evidenceVersion": 2,
   "focusedLaneCounts": {
     "R1": 8,
-    "R2": 56,
+    "R2": 59,
     "R3": 28,
     "R4": 12,
     "R5": 22,
     "R6": 26,
     "R7": 13,
     "W3_01": 12,
-    "W3_02": 20,
+    "W3_02": 23,
     "W3_03": 32,
     "W3_04": 17,
     "W3_05": 12,
@@ -21,11 +24,22 @@
     "W3_11": 22,
     "W3_12": 13
   },
+  "fullUniqueWave3RegressionTests": 274,
   "fullValidationRecordedInSessionReturn": true,
+  "hardGateAdequacyFamilies": 18,
   "hardGateFamilies": 18,
   "internalPortSchemaCount": 0,
+  "invalidMutations": 0,
+  "mutationEvidenceVersion": 2,
+  "mutationKind": "implementation",
   "mutationProof": "18/18 killed",
   "nodeVersion": "22.23.2",
-  "schemaCount": 8,
-  "wave3ConvergenceTests": 18
+  "repairFocusedCounts": {
+    "B1_OPERATION_INTEGRITY": 90,
+    "B2_SCHEMA_FOCUSED": 5,
+    "B3_BASELINE_COMMANDS": 8
+  },
+  "schemaCount": 10,
+  "survivedMutations": 0,
+  "wave3ConvergenceTests": 33
 }

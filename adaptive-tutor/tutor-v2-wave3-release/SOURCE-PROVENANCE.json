@@ -1,10 +1,10 @@
 {
   "acceptedWave2Sha": "e8d852c3fa374abb8f5cb93b7ecbddc1786671b2",
-  "branch": "mac/tutor-v2-w3-convergence-r1",
+  "branch": "mac/tutor-v2-w3-reconvergence-r2",
   "convergenceAdaptations": [
     "R7 presentation test fixture was updated after import to the accepted R2 provider-policy catalog and immutable route identity APIs; production R2 and R7 meanings are both preserved."
   ],
-  "duplicateImportPrevention": "PASS_ORIGINAL_LANES_ONCE_REPAIR_FINAL_COMMITS_ONLY",
+  "duplicateImportPrevention": "PASS_B1_START_NOT_REIMPORTED_B2_ONCE_B3_COMMITS_ONCE",
   "externalStudyProgressionAuthorityRepair": {
     "branch": "mac/study-runtime-tutor-authority-port-r2",
     "containedInTutorCandidate": false,
@@ -12,31 +12,11 @@
     "repairSha": "527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4",
     "ruling": "SEPARATE_VERIFIED_STUDY_AUTHORITY_ARTIFACT_NOT_MERGED"
   },
+  "failedWave3CandidateSha": "4ea58cfb4346c579fd6a18898dd48d491e5cd8fd",
   "finalCandidate": {
     "exactShaRecordedAfterCommitInSessionReturn": true,
     "selfReferencedInsideChecksummedArtifacts": false
   },
-  "importOrder": [
-    "W3_01",
-    "W3_02",
-    "W3_03",
-    "W3_04",
-    "W3_05",
-    "W3_06",
-    "W3_07",
-    "W3_08",
-    "W3_09",
-    "W3_10",
-    "W3_11",
-    "W3_12",
-    "R1",
-    "R2",
-    "R3",
-    "R4",
-    "R5",
-    "R6",
-    "R7"
-  ],
   "imports": {
     "R1": {
       "resultingSha": "98d071cbe82041b12471c43067d789fd259f04ff",
@@ -134,8 +114,63 @@
       "stablePatchId": "a3b140021b7f119e94438d96b7450646cc4ede06"
     }
   },
-  "provenanceVersion": 1,
+  "originalConvergenceImportOrder": [
+    "W3_01",
+    "W3_02",
+    "W3_03",
+    "W3_04",
+    "W3_05",
+    "W3_06",
+    "W3_07",
+    "W3_08",
+    "W3_09",
+    "W3_10",
+    "W3_11",
+    "W3_12",
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5",
+    "R6",
+    "R7"
+  ],
+  "provenanceVersion": 2,
+  "repairConflictRuling": "NO_CHERRY_PICK_CONFLICTS_NO_SEMANTIC_ADAPTATIONS_REQUIRED",
+  "repairImportOrder": [
+    "B1",
+    "B2",
+    "B3_1",
+    "B3_2"
+  ],
+  "repairImports": {
+    "B1": {
+      "resultingSha": "dfc512283ad1e7194558bdddb5debb2c0f8c7589",
+      "ruling": "STARTING_B1_PRESERVED_NOT_REIMPORTED",
+      "sourceSha": "dfc512283ad1e7194558bdddb5debb2c0f8c7589",
+      "stablePatchId": "f3f73ee52b210d1f4e68adf13269715f9862de6e"
+    },
+    "B2": {
+      "resultingSha": "cc1a89da82719666c5c3a78344cb1173a99a27cc",
+      "ruling": "IMPORTED_EXACTLY_ONCE_PATCH_ID_MATCH",
+      "sourceSha": "add32beacaabe7b2d81ad48095fd2f4c3508a763",
+      "stablePatchId": "72ed3dea2f79ef2bf47bdae84943ddd979139dc6"
+    },
+    "B3_1": {
+      "resultingSha": "99e6d6d209a788baabdc3b948b1bf938d184ce15",
+      "ruling": "IMPORTED_EXACTLY_ONCE_PATCH_ID_MATCH",
+      "sourceSha": "ef22278b5b402a43af042dfa5cb1ef1b28e2a6cc",
+      "stablePatchId": "6303f3922b581f274d4a8022965f59bc7d5f26c5"
+    },
+    "B3_2": {
+      "resultingSha": "0bd3d655622833b83dc94daf3c6272ff1dd1d825",
+      "ruling": "IMPORTED_EXACTLY_ONCE_PATCH_ID_MATCH",
+      "sourceSha": "b29ff3dde5d678c0db44ee053990a963d69875e1",
+      "stablePatchId": "6b11ed244a3be268d4298906171ddafc6d6d78af"
+    }
+  },
   "semanticCherryPickAdaptations": [],
-  "session": "STUDY-TUTOR-V2-W3-13 Full Wave 3 Commercial Foundation Semantic Convergence",
+  "session": "STUDY-TUTOR-V2-W3-15 Post-W3-14 Repair Reconvergence",
+  "startingB1Sha": "dfc512283ad1e7194558bdddb5debb2c0f8c7589",
   "wave2Classification": "WAVE2_ACCEPTED_FOR_WAVE3"
 }

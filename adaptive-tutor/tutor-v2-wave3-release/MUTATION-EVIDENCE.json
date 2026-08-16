@@ -13,7 +13,7 @@
         "command": "node scripts/tutor-v3/run-compiled.mjs test",
         "exitStatus": 0,
         "stderrHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "stdoutHash": "60e577ccc14f2226bc48f5c2074dbf37ab3f812cfabc3bf9744b44600ead5afd"
+        "stdoutHash": "f86a44c6f9ad29c5c0aad2a9d282442deddc135cfe039beef392f7e1b667389f"
       },
       {
         "command": "node scripts/tutor-v3/.dist/scripts/tutor-v3/run-hard-gates.js",
@@ -84,6 +84,7 @@
   "candidateSha": "dfc512283ad1e7194558bdddb5debb2c0f8c7589",
   "cleanupComplete": true,
   "compileValidMutationCount": 18,
+  "compileValidMutations": 18,
   "disposableWorktreesOnly": true,
   "exactKilledRatio": "18/18",
   "executedMutationCount": 18,
@@ -153,7 +154,7 @@
         "guarded-function-scoped-source-rewrite W3-M01-DISCLOSURE-TRUE"
       ],
       "mutationId": "W3-M01-DISCLOSURE-TRUE",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/provider-request/contracts.ts"
       ],
@@ -215,7 +216,7 @@
         "guarded-function-scoped-source-rewrite W3-M02-BYPASS-POLICY-DECISION"
       ],
       "mutationId": "W3-M02-BYPASS-POLICY-DECISION",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/routing/provider-routing/catalog.ts"
       ],
@@ -277,7 +278,7 @@
         "guarded-function-scoped-source-rewrite W3-M03-MUTABLE-MODEL-ALIAS"
       ],
       "mutationId": "W3-M03-MUTABLE-MODEL-ALIAS",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/routing/provider-routing/router.ts"
       ],
@@ -343,7 +344,7 @@
         "guarded-function-scoped-source-rewrite W3-M04-REMOVE-PER-ATTEMPT-COST-BOUND"
       ],
       "mutationId": "W3-M04-REMOVE-PER-ATTEMPT-COST-BOUND",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts",
         "adaptive-tutor/core/v3/routing/budget-resilience/policy.ts"
@@ -408,7 +409,7 @@
         "guarded-function-scoped-source-rewrite W3-M05-TRUST-PROVIDER-LATENCY"
       ],
       "mutationId": "W3-M05-TRUST-PROVIDER-LATENCY",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -472,7 +473,7 @@
         "guarded-function-scoped-source-rewrite W3-M06-OPEN-PROVIDER-RESPONSE"
       ],
       "mutationId": "W3-M06-OPEN-PROVIDER-RESPONSE",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/contracts/commercial.ts"
       ],
@@ -536,7 +537,7 @@
         "guarded-function-scoped-source-rewrite W3-M07-BYPASS-GROUNDING-REFUSAL"
       ],
       "mutationId": "W3-M07-BYPASS-GROUNDING-REFUSAL",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -600,7 +601,7 @@
         "guarded-function-scoped-source-rewrite W3-M08-REMOVE-CURRICULUM-DIGEST-RECONCILIATION"
       ],
       "mutationId": "W3-M08-REMOVE-CURRICULUM-DIGEST-RECONCILIATION",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -664,7 +665,7 @@
         "guarded-function-scoped-source-rewrite W3-M09-DEFAULT-UNKNOWN-STAGE"
       ],
       "mutationId": "W3-M09-DEFAULT-UNKNOWN-STAGE",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/learner-stage-policy/catalog.ts"
       ],
@@ -728,7 +729,7 @@
         "guarded-function-scoped-source-rewrite W3-M10-FORCE-ACCEPTED-EFFECT-MISSING"
       ],
       "mutationId": "W3-M10-FORCE-ACCEPTED-EFFECT-MISSING",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/recovery/recoverable-memory-replay.ts"
       ],
@@ -790,7 +791,7 @@
         "guarded-function-scoped-source-rewrite W3-M11-PERSIST-TRANSCRIPT-IN-CAPTION-REF"
       ],
       "mutationId": "W3-M11-PERSIST-TRANSCRIPT-IN-CAPTION-REF",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/multimodal/projection.ts"
       ],
@@ -852,7 +853,7 @@
         "guarded-function-scoped-source-rewrite W3-M12-REMOVE-PARENT-LEARNER-SCOPE"
       ],
       "mutationId": "W3-M12-REMOVE-PARENT-LEARNER-SCOPE",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts"
       ],
@@ -916,7 +917,7 @@
         "guarded-function-scoped-source-rewrite W3-M13-COLLAPSE-TELEMETRY-LINEAGE"
       ],
       "mutationId": "W3-M13-COLLAPSE-TELEMETRY-LINEAGE",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/telemetry/projection.ts"
       ],
@@ -978,7 +979,7 @@
         "guarded-function-scoped-source-rewrite W3-M14-BYPASS-PROPOSAL-INTENT-MATCH"
       ],
       "mutationId": "W3-M14-BYPASS-PROPOSAL-INTENT-MATCH",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/presentation/presentation.ts"
       ],
@@ -1040,7 +1041,7 @@
         "guarded-function-scoped-source-rewrite W3-M15-PREFILL-UNREACHED-GATES-PASS"
       ],
       "mutationId": "W3-M15-PREFILL-UNREACHED-GATES-PASS",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/evals/v3/src/containment.ts"
       ],
@@ -1104,7 +1105,7 @@
         "guarded-function-scoped-source-rewrite W3-M16-REMOVE-COMMERCIAL-LEARNER-SCOPE"
       ],
       "mutationId": "W3-M16-REMOVE-COMMERCIAL-LEARNER-SCOPE",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -1168,7 +1169,7 @@
         "guarded-function-scoped-source-rewrite W3-M17-GRANT-STUDY-MUTATION-AUTHORITY"
       ],
       "mutationId": "W3-M17-GRANT-STUDY-MUTATION-AUTHORITY",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -1234,7 +1235,7 @@
         "guarded-function-scoped-source-rewrite W3-M18-ADD-VENDOR-IMPORT"
       ],
       "mutationId": "W3-M18-ADD-VENDOR-IMPORT",
-      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+      "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
       "sourcePaths": [
         "adaptive-tutor/core/v3/index.ts",
         "adaptive-tutor/core/v3/mutation-vendor-stub.d.ts"
@@ -1243,8 +1244,8 @@
       "stdoutHash": "98c0578aebc0c5612fef1ae7224abb60b72bda9fe37bf31e8517344f6c4b158b"
     }
   ],
-  "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
+  "runnerRevision": "6bd35fc0a89a23b829b1a26860a10f0168ce12bb6fdf053552919a9c462833df",
   "session": "STUDY-TUTOR-V2-W3-B3 Real Executable Implementation Mutation Proof",
   "survived": 0,
-  "writerSha": "ef22278b5b402a43af042dfa5cb1ef1b28e2a6cc"
+  "writerSha": "0bd3d655622833b83dc94daf3c6272ff1dd1d825"
 }

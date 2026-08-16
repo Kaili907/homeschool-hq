@@ -26,17 +26,49 @@ const hardGate = JSON.parse(hardGateText) as {
   readonly aggregateStatus: string;
   readonly hardGateFamilyCount: number;
   readonly hardGateFamiliesPassed: number;
+  readonly hardGateAdequacyFamilyCount: number;
+  readonly hardGateAdequacyFamiliesPassed: number;
+  readonly hardGateAdequacyAggregateStatus: string;
 };
 const mutationText = await readFile(resolve(outputDirectory, "MUTATION-EVIDENCE.json"), "utf8");
 const mutation = JSON.parse(mutationText) as {
   readonly aggregateStatus: string;
+  readonly mutationEvidenceVersion: number;
+  readonly mutationKind: string;
+  readonly booleanEvidenceFlipOnly: boolean;
   readonly mutationCount: number;
+  readonly qualifyingMutationCount: number;
+  readonly compileValidMutationCount: number;
+  readonly compileValidMutations: number;
   readonly killed: number;
+  readonly survived: number;
+  readonly invalidMutants: number;
+  readonly baselineBlocked: number;
 };
-if (hardGate.aggregateStatus !== "PASS" || hardGate.hardGateFamilyCount !== 18) {
+if (
+  hardGate.aggregateStatus !== "PASS" ||
+  hardGate.hardGateFamilyCount !== 18 ||
+  hardGate.hardGateFamiliesPassed !== 18 ||
+  hardGate.hardGateAdequacyFamilyCount !== 18 ||
+  hardGate.hardGateAdequacyFamiliesPassed !== 18 ||
+  hardGate.hardGateAdequacyAggregateStatus !== "PASS"
+) {
   throw new Error("Wave 3 hard gates must pass before release evidence generation.");
 }
-if (mutation.aggregateStatus !== "PASS" || mutation.killed !== mutation.mutationCount) {
+if (
+  mutation.aggregateStatus !== "PASS" ||
+  mutation.mutationEvidenceVersion < 2 ||
+  mutation.mutationKind !== "implementation" ||
+  mutation.booleanEvidenceFlipOnly ||
+  mutation.mutationCount !== 18 ||
+  mutation.qualifyingMutationCount !== 18 ||
+  mutation.compileValidMutationCount !== 18 ||
+  mutation.compileValidMutations !== 18 ||
+  mutation.killed !== 18 ||
+  mutation.survived !== 0 ||
+  mutation.invalidMutants !== 0 ||
+  mutation.baselineBlocked !== 0
+) {
   throw new Error("Wave 3 mutation proof must kill every mutation before release generation.");
 }
 
@@ -72,8 +104,35 @@ const imports = {
   R7: { sourceSha: "8b07eb5f61a7c744a8073534e8e5e2873c457743", resultingSha: "c7592ff56dab4bc585c229f679e159f5d19862d9", stablePatchId: "1535db49e78b2d818e51b6fba491d832bba31065" },
 } as const;
 
+const repairImports = {
+  B1: {
+    sourceSha: "dfc512283ad1e7194558bdddb5debb2c0f8c7589",
+    resultingSha: "dfc512283ad1e7194558bdddb5debb2c0f8c7589",
+    stablePatchId: "f3f73ee52b210d1f4e68adf13269715f9862de6e",
+    ruling: "STARTING_B1_PRESERVED_NOT_REIMPORTED",
+  },
+  B2: {
+    sourceSha: "add32beacaabe7b2d81ad48095fd2f4c3508a763",
+    resultingSha: "cc1a89da82719666c5c3a78344cb1173a99a27cc",
+    stablePatchId: "72ed3dea2f79ef2bf47bdae84943ddd979139dc6",
+    ruling: "IMPORTED_EXACTLY_ONCE_PATCH_ID_MATCH",
+  },
+  B3_1: {
+    sourceSha: "ef22278b5b402a43af042dfa5cb1ef1b28e2a6cc",
+    resultingSha: "99e6d6d209a788baabdc3b948b1bf938d184ce15",
+    stablePatchId: "6303f3922b581f274d4a8022965f59bc7d5f26c5",
+    ruling: "IMPORTED_EXACTLY_ONCE_PATCH_ID_MATCH",
+  },
+  B3_2: {
+    sourceSha: "b29ff3dde5d678c0db44ee053990a963d69875e1",
+    resultingSha: "0bd3d655622833b83dc94daf3c6272ff1dd1d825",
+    stablePatchId: "6b11ed244a3be268d4298906171ddafc6d6d78af",
+    ruling: "IMPORTED_EXACTLY_ONCE_PATCH_ID_MATCH",
+  },
+} as const;
+
 const status = {
-  statusVersion: 1,
+  statusVersion: 2,
   WAVE_3_COMPLETE: false,
   WAVE_4_AUTHORIZED_BY_TECHNICAL_ACCEPTANCE: false,
   FINAL_WAVE3_INDEPENDENT_REREVIEW_REQUIRED: true,
@@ -87,19 +146,24 @@ const status = {
   NOT_AUTHORIZED_FOR_HOSTED_SUPABASE: true,
   NOT_AUTHORIZED_FOR_BROWSER_AI_WIRING: true,
   NOT_AUTHORIZED_FOR_LIVE_PROVIDER_EXECUTION: true,
-  FINAL_CLASSIFICATION: "WAVE3_CONVERGENCE_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  FINAL_CLASSIFICATION: "WAVE3_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
 };
 
 const provenance = {
-  provenanceVersion: 1,
-  session: "STUDY-TUTOR-V2-W3-13 Full Wave 3 Commercial Foundation Semantic Convergence",
-  branch: "mac/tutor-v2-w3-convergence-r1",
+  provenanceVersion: 2,
+  session: "STUDY-TUTOR-V2-W3-15 Post-W3-14 Repair Reconvergence",
+  branch: "mac/tutor-v2-w3-reconvergence-r2",
+  startingB1Sha: "dfc512283ad1e7194558bdddb5debb2c0f8c7589",
+  failedWave3CandidateSha: "4ea58cfb4346c579fd6a18898dd48d491e5cd8fd",
   acceptedWave2Sha: "e8d852c3fa374abb8f5cb93b7ecbddc1786671b2",
   wave2Classification: "WAVE2_ACCEPTED_FOR_WAVE3",
-  importOrder: Object.keys(imports),
+  originalConvergenceImportOrder: Object.keys(imports),
   imports,
-  duplicateImportPrevention: "PASS_ORIGINAL_LANES_ONCE_REPAIR_FINAL_COMMITS_ONLY",
+  repairImportOrder: Object.keys(repairImports),
+  repairImports,
+  duplicateImportPrevention: "PASS_B1_START_NOT_REIMPORTED_B2_ONCE_B3_COMMITS_ONCE",
   semanticCherryPickAdaptations: [],
+  repairConflictRuling: "NO_CHERRY_PICK_CONFLICTS_NO_SEMANTIC_ADAPTATIONS_REQUIRED",
   convergenceAdaptations: [
     "R7 presentation test fixture was updated after import to the accepted R2 provider-policy catalog and immutable route identity APIs; production R2 and R7 meanings are both preserved.",
   ],
@@ -117,11 +181,11 @@ const provenance = {
 };
 
 const limitations = {
-  limitationsVersion: 1,
+  limitationsVersion: 2,
   inherited: [
-    { code: "OBSOLETE_BROAD_PLATFORM_VALIDATOR", detail: "The legacy broad platform-boundary substring validator remains classified rather than rewritten in this convergence lane." },
-    { code: "INHERITED_DEPENDENCY_ADVISORIES", detail: "Repository dependency advisories remain external to Wave 3 foundation ownership." },
-    { code: "SESSION6_ARCHIVES_NOT_MOUNTED", detail: "Frozen Session 6 archives remain unavailable; current executable bridge tests are used instead." },
+    { code: "OBSOLETE_BROAD_PLATFORM_VALIDATOR", detail: "The accepted inherited broad platform-boundary validator remains 18/19 because its obsolete substring rule flags accepted authority paths/generated output." },
+    { code: "INHERITED_DEPENDENCY_ADVISORIES", detail: "Three inherited high advisories remain for @playwright/test, playwright, and nanoid; manifests are unchanged." },
+    { code: "SESSION6_ARCHIVES_NOT_MOUNTED", detail: "Four frozen Session 6 archives remain unavailable; current executable bridge tests are used without replacing archive checksum evidence." },
   ],
   deferred: [
     "durable production persistence for budgets, telemetry, and replay",
@@ -136,16 +200,30 @@ const limitations = {
 };
 
 const testEvidence = {
-  evidenceVersion: 1,
+  evidenceVersion: 2,
   nodeVersion: "22.23.2",
   focusedLaneCounts: {
-    W3_01: 12, W3_02: 20, W3_03: 32, W3_04: 17, W3_05: 12, W3_06: 9,
+    W3_01: 12, W3_02: 23, W3_03: 32, W3_04: 17, W3_05: 12, W3_06: 9,
     W3_07: 26, W3_08: 13, W3_09: 11, W3_10: 15, W3_11: 22, W3_12: 13,
-    R1: 8, R2: 56, R3: 28, R4: 12, R5: 22, R6: 26, R7: 13,
+    R1: 8, R2: 59, R3: 28, R4: 12, R5: 22, R6: 26, R7: 13,
   },
-  wave3ConvergenceTests: 18,
+  repairFocusedCounts: {
+    B1_OPERATION_INTEGRITY: 90,
+    B2_SCHEMA_FOCUSED: 5,
+    B3_BASELINE_COMMANDS: 8,
+  },
+  wave3ConvergenceTests: 33,
+  fullUniqueWave3RegressionTests: 274,
   hardGateFamilies: hardGate.hardGateFamilyCount,
+  hardGateAdequacyFamilies: hardGate.hardGateAdequacyFamilyCount,
   mutationProof: `${mutation.killed}/${mutation.mutationCount} killed`,
+  mutationEvidenceVersion: mutation.mutationEvidenceVersion,
+  mutationKind: mutation.mutationKind,
+  booleanEvidenceFlipOnly: mutation.booleanEvidenceFlipOnly,
+  compileValidMutations: mutation.compileValidMutationCount,
+  survivedMutations: mutation.survived,
+  invalidMutations: mutation.invalidMutants,
+  baselineBlocked: mutation.baselineBlocked,
   schemaCount: schemaInventory.generatedSchemaCount,
   internalPortSchemaCount: schemaInventory.internalPortSchemasGenerated,
   fullValidationRecordedInSessionReturn: true,
@@ -181,7 +259,7 @@ const outputs = new Map<string, string>([
 outputs.set("MANIFEST.json", serialize({
   manifestVersion: 1,
   product: "Manuel Academy Study Tutor V2",
-  wave: "Wave 3 Commercial Foundation Convergence",
+  wave: "Wave 3 Post-Review Repair Reconvergence",
   finalClassification: status.FINAL_CLASSIFICATION,
   artifacts: [...outputs.keys(), "MANIFEST.json", "CHECKSUMS.json"].sort(),
 }));

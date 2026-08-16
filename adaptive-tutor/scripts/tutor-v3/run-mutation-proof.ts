@@ -528,6 +528,7 @@ const output = {
   executedMutationCount: results.length,
   qualifyingMutationCount,
   compileValidMutationCount,
+  compileValidMutations: compileValidMutationCount,
   killed,
   survived,
   invalidMutants,

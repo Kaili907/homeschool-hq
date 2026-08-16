@@ -167,23 +167,41 @@ ok 28 - all 18 non-compensable Wave 3 hard-gate families derive PASS from execut
   duration_ms: <duration>
   type: 'test'
   ...
-# PASS wave3-schema-generation 8 schemas + inventory
-# Subtest: all eight generated serialized schemas exactly match runtime schemas and are recursively closed
-ok 29 - all eight generated serialized schemas exactly match runtime schemas and are recursively closed
+# PASS wave3-schema-generation 10 schemas + inventory
+# Subtest: all ten generated serialized schemas exactly match runtime schemas and are recursively closed
+ok 29 - all ten generated serialized schemas exactly match runtime schemas and are recursively closed
   ---
   duration_ms: <duration>
   type: 'test'
   ...
-# Subtest: schema inventory records zero internal-port schemas
-ok 30 - schema inventory records zero internal-port schemas
+# Subtest: schema inventory records ten serialized schemas and zero internal-port schemas
+ok 30 - schema inventory records ten serialized schemas and zero internal-port schemas
   ---
   duration_ms: <duration>
   type: 'test'
   ...
-1..30
-# tests 30
+# Subtest: boundary inventory identifies exactly ten durable schemas and classifies every non-boundary
+ok 31 - boundary inventory identifies exactly ten durable schemas and classifies every non-boundary
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: durable multimodal evidence has runtime/generated parity for valid and adversarial objects
+ok 32 - durable multimodal evidence has runtime/generated parity for valid and adversarial objects
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+# Subtest: minimized accepted Study effect has runtime/generated parity and rejects raw or authoritative data
+ok 33 - minimized accepted Study effect has runtime/generated parity and rejects raw or authoritative data
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+1..33
+# tests 33
 # suites 0
-# pass 30
+# pass 33
 # fail 0
 # cancelled 0
 # skipped 0
