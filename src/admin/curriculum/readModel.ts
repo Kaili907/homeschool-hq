@@ -118,7 +118,7 @@ function parseCsv(raw: string): string[][] {
 function parseSourceIdentity(manifestJson: string, validationPassed: boolean): {
   source: CurriculumSourceIdentity
   grades: CurriculumGrade[]
-  expectedCounts: { courses: number; units: number; lessons: number }
+  expectedCounts: { courses: number; units: number; lessons: number; assessments?: number }
 } {
   const manifest = object(parseJson(manifestJson, 'curriculum-manifest.json'), 'curriculum manifest')
   const counts = object(manifest.counts, 'curriculum manifest counts')
@@ -141,6 +141,9 @@ function parseSourceIdentity(manifestJson: string, validationPassed: boolean): {
       courses: number(counts.courses, 'curriculum manifest course count'),
       units: number(counts.units, 'curriculum manifest unit count'),
       lessons: number(counts.lessons, 'curriculum manifest lesson count'),
+      assessments: counts.assessments === undefined
+        ? undefined
+        : number(counts.assessments, 'curriculum manifest assessment count'),
     },
   }
 }
@@ -212,6 +215,7 @@ function parseLessonIndex(raw: string): CurriculumLessonSummary[] {
 
 function parseAssessments(
   rawByCourse: Readonly<Record<string, string>>,
+  unitsByCourseAndNumber: ReadonlyMap<string, CurriculumUnitSummary>,
   unitsByAssessmentId: ReadonlyMap<string, CurriculumUnitSummary>,
 ): CurriculumAssessmentEvidence[] {
   const assessments: CurriculumAssessmentEvidence[] = []
@@ -220,12 +224,16 @@ function parseAssessments(
     for (const [index, value] of values.entries()) {
       const assessment = object(value, `${courseId} assessment ${index + 1}`)
       const assessmentId = string(assessment.assessment_id, `${courseId} assessment ${index + 1} id`)
-      const unit = unitsByAssessmentId.get(assessmentId)
-      if (!unit || unit.courseId !== courseId) inconsistent(`${assessmentId} is not linked by unit-index.json`)
+      const unitNumber = number(assessment.unit_number, `${assessmentId} unit_number`)
+      const unit = unitsByCourseAndNumber.get(`${courseId}:${unitNumber}`)
+      const declaredUnit = unitsByAssessmentId.get(assessmentId)
+      if (!unit || (declaredUnit && declaredUnit !== unit)) {
+        inconsistent(`${assessmentId} is not linked by unit-index.json`)
+      }
       assessments.push({
         assessmentId,
         courseId,
-        unitNumber: number(assessment.unit_number, `${assessmentId} unit_number`),
+        unitNumber,
         unitTitle: string(assessment.unit_title, `${assessmentId} unit_title`),
         standards: stringArray(assessment.standards, `${assessmentId} standards`, true),
         totalPoints: assessment.total_points === undefined
@@ -281,8 +289,19 @@ export function buildCurriculumCatalog(input: CurriculumCatalogInput): Curriculu
       inconsistent(`${lesson.lessonId} is not linked by the course and unit indexes`)
     }
   }
-  const assessments = parseAssessments(input.assessmentJsonByCourse, unitsByAssessmentId)
+  const assessments = parseAssessments(
+    input.assessmentJsonByCourse,
+    unitsByCourseAndNumber,
+    unitsByAssessmentId,
+  )
   assertUnique(assessments.map((item) => item.assessmentId), 'assessment index')
+  const assessmentIds = new Set(assessments.map((item) => item.assessmentId))
+  if ([...unitsByAssessmentId.keys()].some((assessmentId) => !assessmentIds.has(assessmentId))) {
+    inconsistent('unit index references an assessment missing from assessments.json')
+  }
+  if (expectedCounts.assessments !== undefined && assessments.length !== expectedCounts.assessments) {
+    inconsistent('curriculum assessments do not match manifest counts')
+  }
   return { source, grades, courses, units, lessons, assessments }
 }
 

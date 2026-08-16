@@ -10,9 +10,12 @@ import {
   type CurriculumLessonDetail,
 } from './contracts'
 import { CurriculumBrowserView, type CurriculumBrowserLocation } from './CurriculumBrowser'
-import { createFilesystemCurriculumSource } from './filesystemSource.node'
+import {
+  createFilesystemCurriculumSource,
+  resolveFilesystemCurriculumReleaseRoot,
+} from './filesystemSource.node'
 import { createAdminCurriculumHttpSource } from './httpSource'
-import { deriveCurriculumCatalogTotals, searchCurriculum } from './readModel'
+import { buildCurriculumCatalog, deriveCurriculumCatalogTotals, searchCurriculum } from './readModel'
 
 const courseId = 'fixture-grade-10-mathematics'
 const unitId = 'fixture-unit-without-an-id-grade-parser'
@@ -102,6 +105,25 @@ afterAll(async () => {
 })
 
 describe('expanded Admin curriculum grades', () => {
+  it('resolves the repository current release instead of pinning the legacy package', async () => {
+    const academyRoot = await mkdtemp(join(tmpdir(), 'admin-curriculum-registry-'))
+    try {
+      await mkdir(join(academyRoot, '2.0.0'))
+      await writeFile(join(academyRoot, 'production-release-registry.json'), JSON.stringify({
+        schemaVersion: 1,
+        currentRelease: '2.0.0',
+        releases: [
+          { version: '1.0.0', status: 'inactive', sourceDirectory: '1.0.0' },
+          { version: '2.0.0', status: 'active', sourceDirectory: '2.0.0' },
+        ],
+      }))
+      await expect(resolveFilesystemCurriculumReleaseRoot(academyRoot))
+        .resolves.toBe(join(academyRoot, '2.0.0'))
+    } finally {
+      await rm(academyRoot, { recursive: true, force: true })
+    }
+  })
+
   it('uses the canonical grade set in canonical order', () => {
     expect(CURRICULUM_GRADES).toEqual([3, 4, 5, 7, 8, 9, 10, 11, 12])
     expect(catalog.grades).toEqual(CURRICULUM_GRADES)
@@ -152,6 +174,35 @@ describe('expanded Admin curriculum grades', () => {
     )
     expect(deriveCurriculumCatalogTotals(emptyCatalog)).toEqual({ grades: 0, courses: 0, units: 0, lessons: 0, assessments: 0 })
     expect(markup).toContain('No published curriculum records are available in this source.')
+  })
+
+  it('counts multiple release assessments attached to the same unit', () => {
+    const multiAssessmentCatalog = buildCurriculumCatalog({
+      manifestJson: JSON.stringify({
+        package_id: 'multi-assessment-fixture', version: '2.0.0', authored_on: '2026-08-15',
+        status: 'test-fixture', grades: [8], counts: { courses: 1, units: 1, lessons: 1, assessments: 2 },
+      }),
+      courseIndexJson: JSON.stringify([{
+        course_id: courseId, grade: 8, subject: 'mathematics', title: 'Course', days: 1,
+      }]),
+      unitIndexJson: JSON.stringify([{
+        unit_id: unitId, course_id: courseId, grade: 8, subject: 'mathematics', unit_number: 1,
+        title: 'Unit', days: 1, standards: [], topics: [], lesson_ids: [lessonId],
+        assessment_id: 'primary-assessment',
+      }]),
+      lessonIndexCsv: [
+        'lesson_id,course_id,grade,subject,course_day,unit_number,unit_title,day_in_unit,title,phase,focus,standards',
+        `${lessonId},${courseId},8,mathematics,1,1,Unit,1,Lesson,,,`,
+      ].join('\n'),
+      assessmentJsonByCourse: {
+        [courseId]: JSON.stringify([
+          { assessment_id: 'primary-assessment', unit_number: 1, unit_title: 'Unit', standards: [] },
+          { assessment_id: 'supplemental-assessment', unit_number: 1, unit_title: 'Unit', standards: [] },
+        ]),
+      },
+      validationPassed: true,
+    })
+    expect(deriveCurriculumCatalogTotals(multiAssessmentCatalog).assessments).toBe(2)
   })
 
   it('accepts the expanded catalog through the strict HTTP projection and rejects non-canonical grades', async () => {

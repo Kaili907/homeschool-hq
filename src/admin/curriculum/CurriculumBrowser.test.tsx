@@ -29,6 +29,11 @@ const source = createFilesystemCurriculumSource()
 let catalog: CurriculumCatalog
 let knownLesson: CurriculumLessonDetail
 
+const RELEASE_TOTALS = {
+  '1.0.0': { grades: 3, courses: 30, units: 232, lessons: 2736, assessments: 232 },
+  '2.0.0': { grades: 9, courses: 90, units: 698, lessons: 8292, assessments: 699 },
+} as const
+
 beforeAll(async () => {
   catalog = await source.loadCatalog()
   knownLesson = await source.loadLesson('ma-g5-mathematics-u01-l01')
@@ -57,19 +62,13 @@ function renderView(
 describe('ADMIN-11 canonical read model', () => {
   it('loads the published manifest and derives release totals from loaded records', () => {
     expect(catalog.source).toMatchObject({
-      packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
-      version: '1.0.0',
       lifecycle: 'published',
       validationStatus: 'passed',
     })
-    expect(catalog.grades).toEqual([5, 7, 8])
-    expect(deriveCurriculumCatalogTotals(catalog)).toEqual({
-      grades: catalog.grades.length,
-      courses: catalog.courses.length,
-      units: catalog.units.length,
-      lessons: catalog.lessons.length,
-      assessments: catalog.assessments.length,
-    })
+    expect(Object.keys(RELEASE_TOTALS)).toContain(catalog.source.version)
+    expect(deriveCurriculumCatalogTotals(catalog)).toEqual(
+      RELEASE_TOTALS[catalog.source.version as keyof typeof RELEASE_TOTALS],
+    )
   })
 
   it('supports grade to course to unit to lesson navigation from canonical indexes', () => {
@@ -170,7 +169,7 @@ describe('ADMIN-11 canonical read model', () => {
 describe('ADMIN-11 read-only Admin surface', () => {
   it('shows the immutable published source version and validation status', () => {
     const markup = renderView({ mode: 'hierarchy' })
-    expect(markup).toContain('version <strong>1.0.0</strong>')
+    expect(markup).toContain(`version <strong>${catalog.source.version}</strong>`)
     expect(markup).toContain('validation passed')
     expect(markup).toContain('published')
   })

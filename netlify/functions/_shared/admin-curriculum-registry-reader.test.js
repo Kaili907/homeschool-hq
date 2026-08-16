@@ -198,6 +198,38 @@ describe('ADMIN-16A curriculum registry reader', () => {
     expect(JSON.stringify(detail)).not.toContain('must not cross')
   })
 
+  it('projects every canonical release grade and verifies aggregate counts', async () => {
+    const release2Counts = {
+      courses: 90, units: 698, lessons: 8292, assessments: 699, texts: 0, schedules: 9,
+    }
+    const release2GradeCounts = Object.fromEntries([
+      [3, 10, 77, 900, 77], [4, 10, 77, 900, 77], [5, 10, 77, 900, 77],
+      [7, 10, 77, 900, 77], [8, 10, 78, 936, 79], [9, 10, 78, 936, 78],
+      [10, 10, 78, 936, 78], [11, 10, 78, 936, 78], [12, 10, 78, 948, 78],
+    ].map(([grade, courses, units, lessons, assessments]) => [String(grade), {
+      courses, units, lessons, assessments, texts: 0, schedules: 1,
+    }]))
+    const values = structuredClone(projections)
+    values.academy_admin_read_curriculum_release_v1 = {
+      ...values.academy_admin_read_curriculum_release_v1,
+      version: '2.0.0',
+      sourceRoot: 'curriculum-content/manuel-academy/2.0.0',
+      counts: release2Counts,
+      gradeCounts: release2GradeCounts,
+    }
+    values.academy_admin_read_curriculum_release_v1.files[0].immutableLocator =
+      'git_commit_path:4056e31d8beb36622be5ac27ea7f20145266343b:curriculum-content/manuel-academy/2.0.0/README.md'
+
+    const reader = createAdminCurriculumRegistryReader({ client: clientFor(values) })
+    await expect(reader.details('2.0.0')).resolves.toMatchObject({
+      version: '2.0.0', counts: release2Counts, gradeCounts: release2GradeCounts,
+    })
+
+    values.academy_admin_read_curriculum_release_v1.counts.lessons--
+    await expect(createAdminCurriculumRegistryReader({ client: clientFor(values) }).details('2.0.0'))
+      .rejects.toThrow('curriculum_registry_unavailable')
+  })
+
   it('projects governed default authority without claiming existing learner repins', async () => {
     const values = structuredClone(projections)
     values.academy_admin_read_curriculum_production_pointer_v1 = {
