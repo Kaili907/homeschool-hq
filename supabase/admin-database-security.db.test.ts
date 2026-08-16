@@ -258,7 +258,7 @@ describe('full-chain Admin database security red team', () => {
         and routine.prosecdef
       order by namespace.nspname, routine.proname, identity_arguments
     `)
-    expect(routines.rows).toHaveLength(219)
+    expect(routines.rows).toHaveLength(221)
     expect(routines.rows.every(({ owner_name: owner }) => owner === 'postgres')).toBe(true)
     expect(routines.rows.every(({ configuration }) => (
       configuration?.length === 1

@@ -54,16 +54,16 @@ describe('A6-3-C red proof', () => {
   it('denies a valid reference presented by a different authenticated actor', async () => {
     const port = createVerifiedStudySessionAuthorizationPort({
       env: ENV,
-      fetchImpl: async (_url, init) => {
-        const parameters = JSON.parse(init.body)
-        const body = Object.hasOwn(parameters, 'p_actor_user_id') && parameters.p_actor_user_id !== IDS.actor
-          ? { schemaVersion: 1, status: 'denied', code: 'student-session-invalid' }
+      fetchImpl: async (url) => {
+        const body = url.endsWith('/rpc/academy_study_authorize_guardian_session_v1')
+          ? { schemaVersion: 1, status: 'denied' }
           : verifiedGrant()
         return new Response(JSON.stringify(body), { headers: { 'content-type': 'application/json' } })
       },
     })
     expect((await port.resolve({
       actorUserId: IDS.otherActor,
+      accessToken: 'other-actor.access.token',
       studentRef: { kind: 'academy-student-id', value: IDS.student },
       sessionReference: REFERENCE,
     })).status).toBe('denied')

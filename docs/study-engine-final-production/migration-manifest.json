@@ -503,6 +503,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-curriculum-performance-bounds-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260816160000",
+      "filename": "20260816160000_academy_study_actor_authorization.sql",
+      "sha256": "697f3bcb7bf5609822a7fea85d83249828cedb20121b2a9ed5d0d83c0c14e4d2",
+      "dependency": "20260810200000_academy_admin_curriculum_performance_bounds.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-study-actor-authorization-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

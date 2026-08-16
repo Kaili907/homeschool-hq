@@ -340,6 +340,12 @@ describe('adult-review HTTP boundaries', () => {
       reasonCode: 'completed',
     })
     const health = createStudyAdultReviewHealthHandler({
+      authorization: {
+        require: vi.fn(async (_event, capability) => ({
+          ok: capability === 'health:read',
+          principal: { userId: 'staff-user' },
+        })),
+      },
       readiness: readyPort({
         isDurable: true,
         evaluate: async () => ({ state: 'degraded', secret: 'not-returned' }),
@@ -349,6 +355,24 @@ describe('adult-review HTTP boundaries', () => {
       httpMethod: 'GET', path: '/api/study/adult-review/health', headers: {},
     })
     expect(JSON.parse(healthResponse.body)).toEqual({ state: 'degraded', schemaVersion: 2 })
+  })
+
+  it('requires exact staff health capability before adult-review readiness work', async () => {
+    const evaluate = vi.fn()
+    const requireAuthorization = vi.fn(async () => ({
+      ok: false,
+      response: { statusCode: 403, body: '{"error":{"code":"admin_access_denied"}}' },
+    }))
+    const health = createStudyAdultReviewHealthHandler({
+      authorization: { require: requireAuthorization },
+      readiness: readyPort({ isDurable: true, evaluate }),
+    })
+    const response = await health({
+      httpMethod: 'GET', path: '/api/study/adult-review/health', headers: {},
+    })
+    expect(response.statusCode).toBe(403)
+    expect(requireAuthorization).toHaveBeenCalledWith(expect.anything(), 'health:read')
+    expect(evaluate).not.toHaveBeenCalled()
   })
 
   it('refuses an unauthorized worker and records only a minimized denial event', async () => {

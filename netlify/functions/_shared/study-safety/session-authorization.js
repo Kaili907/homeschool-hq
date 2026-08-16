@@ -19,6 +19,8 @@ import { validUuid } from './contracts.js'
  * session must still hold the attempt capability, not merely a read scope.
  */
 const REQUIRED_CAPABILITY = 'student:attempts:create'
+const ACTOR_AUTHORIZATION_RPC = 'academy_study_authorize_guardian_session_v1'
+const ACTOR_AUTHORIZATION_TIMEOUT_MS = 3_000
 
 const DENIED = Object.freeze({ status: 'denied', code: 'student-session-invalid' })
 const UNAVAILABLE = Object.freeze({ status: 'unavailable', code: 'learner-authorization-unavailable' })
@@ -27,6 +29,69 @@ const UNAVAILABLE = Object.freeze({ status: 'unavailable', code: 'learner-author
 // cannot claim that it verifies durable Study sessions.
 const VERIFIED_SESSION_AUTHORIZATION_PORTS = new WeakSet()
 const TEST_SESSION_AUTHORIZATION_PORTS = new WeakSet()
+
+function actorAuthorizationConfig(env) {
+  const rawUrl = (env?.SUPABASE_URL || env?.VITE_SUPABASE_URL || '').trim()
+  const anonKey = (env?.SUPABASE_ANON_KEY || env?.VITE_SUPABASE_ANON_KEY || '').trim()
+  try {
+    const url = new URL(rawUrl)
+    if (
+      url.protocol !== 'https:' || url.username || url.password ||
+      url.search || url.hash || !anonKey
+    ) return null
+    return { url: url.toString().replace(/\/+$/, ''), anonKey }
+  } catch {
+    return null
+  }
+}
+
+async function authorizeActorSession({ config, fetchImpl, accessToken, tokenDigest }) {
+  if (!config || typeof fetchImpl !== 'function' || typeof accessToken !== 'string' || accessToken === '') {
+    return UNAVAILABLE
+  }
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), ACTOR_AUTHORIZATION_TIMEOUT_MS)
+  let response
+  try {
+    response = await fetchImpl(`${config.url}/rest/v1/rpc/${ACTOR_AUTHORIZATION_RPC}`, {
+      method: 'POST',
+      redirect: 'error',
+      signal: controller.signal,
+      headers: {
+        apikey: config.anonKey,
+        Authorization: `Bearer ${accessToken}`,
+        'content-type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify({
+        p_token_digest: tokenDigest,
+        p_required_capability: REQUIRED_CAPABILITY,
+      }),
+    })
+  } catch {
+    return UNAVAILABLE
+  } finally {
+    clearTimeout(timer)
+  }
+  if ([401, 403].includes(response.status)) return DENIED
+  if (!response.ok) return UNAVAILABLE
+  let result
+  try {
+    result = await response.json()
+  } catch {
+    return UNAVAILABLE
+  }
+  if (
+    result?.schemaVersion === STUDY_IDENTITY_SCHEMA_VERSION &&
+    result?.status === 'authorized' &&
+    Object.keys(result).length === 2
+  ) return result
+  if (
+    result?.schemaVersion === STUDY_IDENTITY_SCHEMA_VERSION &&
+    result?.status === 'denied'
+  ) return DENIED
+  return UNAVAILABLE
+}
 
 export function isVerifiedStudySessionAuthorizationPort(port) {
   return Boolean(port && VERIFIED_SESSION_AUTHORIZATION_PORTS.has(port))
@@ -45,14 +110,31 @@ export function createTestStudySessionAuthorizationPort(port) {
 }
 
 export function createVerifiedStudySessionAuthorizationPort(options = {}) {
+  const env = options.env ?? process.env
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch
+  const actorConfig = actorAuthorizationConfig(env)
   const rpc = createSupabaseServiceRpc(options)
 
   const port = Object.freeze({
-    isReady: () => rpc?.isConfigured?.() === true,
+    isReady: () => actorConfig !== null && typeof fetchImpl === 'function' && rpc?.isConfigured?.() === true,
     isDurable: true,
-    async resolve({ actorUserId, sessionReference, studentRef }) {
+    async resolve({ actorUserId, accessToken, sessionReference, studentRef }) {
       const tokenDigest = digestStudySessionReference(sessionReference)
-      if (!validUuid(actorUserId) || !tokenDigest) return DENIED
+      if (!validUuid(actorUserId) || typeof accessToken !== 'string' || accessToken === '' || !tokenDigest) {
+        return DENIED
+      }
+
+      // The adult bearer is presented only to the actor-authorized RPC. That
+      // RPC derives auth.uid() from Supabase Auth and proves the current
+      // guardian owns this exact Study grant and action capability. The
+      // service-role verifier below cannot stand in for this actor check.
+      const actorAuthorization = await authorizeActorSession({
+        config: actorConfig,
+        fetchImpl,
+        accessToken,
+        tokenDigest,
+      })
+      if (actorAuthorization?.status !== 'authorized') return actorAuthorization
 
       let result
       try {
@@ -60,9 +142,6 @@ export function createVerifiedStudySessionAuthorizationPort(options = {}) {
         result = await rpc.call('academy_study_verify_session_v1', {
           p_token_digest: tokenDigest,
           p_required_capability: REQUIRED_CAPABILITY,
-          // The hosted verifier compares this authenticated actor to the
-          // grant owner. It is never derived from a request body or header.
-          p_actor_user_id: actorUserId,
         })
       } catch {
         return UNAVAILABLE

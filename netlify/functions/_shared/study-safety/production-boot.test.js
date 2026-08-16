@@ -83,9 +83,11 @@ function readyProductionHarness(classifier, logBoot = vi.fn()) {
       user: { id: IDS.actor },
       accessToken: 'test.access.token',
     }),
-    fetchImpl: async () => new Response(JSON.stringify(verifiedGrant()), {
-      headers: { 'content-type': 'application/json' },
-    }),
+    fetchImpl: async (url) => new Response(JSON.stringify(
+      url.endsWith('/rpc/academy_study_authorize_guardian_session_v1')
+        ? { schemaVersion: 1, status: 'authorized' }
+        : verifiedGrant(),
+    ), { headers: { 'content-type': 'application/json' } }),
     proposalPersistence: store,
     outbox: store,
     recipientResolver: {
