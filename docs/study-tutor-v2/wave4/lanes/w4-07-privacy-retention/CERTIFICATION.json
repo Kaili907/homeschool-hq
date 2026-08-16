@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "study-tutor-v2.w4-privacy-retention-certification.v1",
+  "session": "STUDY-TUTOR-V2-W4-07",
+  "startingSha": "a2fdf1858cd50c998f5da53970d36ee6c90ff31a",
+  "verdict": "W4_PRIVACY_RETENTION_READY_FOR_CONVERGENCE",
+  "constraints": {
+    "syntheticOnly": true,
+    "productionStorageBuilt": false,
+    "liveNetworkCalls": 0,
+    "singleAgent": true
+  },
+  "canaries": {
+    "count": 14,
+    "valuesRetainedInEvidence": false,
+    "categories": [
+      "learnerAnswer",
+      "learnerFreeFormAttempt",
+      "tutorProse",
+      "providerPrompt",
+      "providerResponse",
+      "rawTranscript",
+      "audioMetadata",
+      "rawImageMetadata",
+      "learnerName",
+      "email",
+      "credentialLikeSecret",
+      "diagnosticText",
+      "emotionLabel",
+      "personalityJudgment"
+    ],
+    "scanForms": [
+      "direct",
+      "case-normalized",
+      "url-encoded",
+      "base64",
+      "hex"
+    ]
+  },
+  "durableSurfaceResults": [
+    { "surface": "provider-request", "status": "PASS", "matches": 0 },
+    { "surface": "provider-response-normalization", "status": "PASS", "matches": 0 },
+    { "surface": "advisory", "status": "PASS", "matches": 0 },
+    { "surface": "accepted-effect-event", "status": "PASS", "matches": 0 },
+    { "surface": "memory-delta-and-snapshot", "status": "PASS", "matches": 0 },
+    { "surface": "telemetry", "status": "PASS", "matches": 0 },
+    { "surface": "multimodal-durable-evidence", "status": "PASS", "matches": 0 },
+    { "surface": "parent-report", "status": "PASS", "matches": 0 },
+    { "surface": "eval-evidence", "status": "PASS", "matches": 0 },
+    { "surface": "mutation-evidence", "status": "PASS", "matches": 0 },
+    { "surface": "release-evidence", "status": "PASS", "matches": 0 }
+  ],
+  "providerPolicyResults": [
+    {
+      "scenario": "unknown-retention",
+      "status": "PASS",
+      "decision": "static-fallback-required",
+      "reason": "retention-class-unknown",
+      "providerCalls": 0
+    },
+    {
+      "scenario": "training-enabled",
+      "status": "PASS",
+      "decision": "ineligible",
+      "reason": "training-use-allowed",
+      "providerCalls": 0
+    },
+    {
+      "scenario": "minor-data-unsupported",
+      "status": "PASS",
+      "decision": "ineligible",
+      "reason": "minor-data-unsupported",
+      "providerCalls": 0
+    },
+    {
+      "scenario": "wrong-region",
+      "status": "PASS",
+      "decision": "ineligible",
+      "reason": "region-not-approved",
+      "providerCalls": 0
+    },
+    {
+      "scenario": "expired-evidence",
+      "status": "PASS",
+      "decision": "static-fallback-required",
+      "reason": "policy-evidence-expired",
+      "providerCalls": 0
+    },
+    {
+      "scenario": "policy-revision-drift",
+      "status": "PASS",
+      "decision": "static-fallback-required",
+      "reason": "policy-revision-mismatch",
+      "providerCalls": 0
+    }
+  ],
+  "closedSchemaMutationResults": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0
+  },
+  "wave3HardGates": {
+    "total": 18,
+    "passed": 18,
+    "failed": 0
+  },
+  "staticArtifactScans": {
+    "wave3ReleaseJsonFiles": 11,
+    "wave3MutationCampaignFiles": 1,
+    "matches": 0
+  },
+  "opaqueReferencePolicy": {
+    "status": "PASS",
+    "rule": "Only fields admitted by current closed Wave 3 schemas may carry opaque references or digests.",
+    "canaryEncodedAsReferenceOrDigest": false
+  }
+}
+
