@@ -283,6 +283,14 @@ for (const probe of baselineProbeNames) {
   baselineRuns.push(run(process.execPath, ["--test", "--test-name-pattern", pattern, commercialFlowPath()], tutorRoot,
     `node --test --test-name-pattern ${JSON.stringify(pattern)} ${commercialFlowPath()}`));
 }
+const costAnomalyPattern = "^(?:cost over reservation becomes an anomaly without fabricated release)$";
+baselineRuns.push(run(process.execPath, [
+  "--test",
+  "--test-name-pattern",
+  costAnomalyPattern,
+  "scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js",
+], tutorRoot,
+`node --test --test-name-pattern ${JSON.stringify(costAnomalyPattern)} scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js`));
 
 function commercialFlowPath(): string {
   return "scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js";
@@ -509,7 +517,8 @@ const output = {
     probes: {
       foreignCurriculumDigest: baselineRuns[3]?.exitStatus === 0,
       topLevelSubjectMismatch: baselineRuns[4]?.exitStatus === 0,
-      perPhysicalAttemptCost: baselineRuns[5]?.exitStatus === 0,
+      perPhysicalAttemptCost:
+        baselineRuns[5]?.exitStatus === 0 && baselineRuns[7]?.exitStatus === 0,
       trustedDeadline: baselineRuns[6]?.exitStatus === 0,
     },
   },

@@ -44,6 +44,12 @@
         "exitStatus": 0,
         "stderrHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "stdoutHash": "5a293edea589afcd4448308ef7823382c21609f7bab7cb95ad4a5398d12c6a83"
+      },
+      {
+        "command": "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js",
+        "exitStatus": 0,
+        "stderrHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutHash": "46470f40933064bfed245091b3a35698b490a1db52ee0283fd89a6b7d6a55230"
       }
     ],
     "logFiles": {
@@ -60,7 +66,9 @@
       "command6Stderr": "docs/study-tutor-v2/wave3/repairs/w3-b3-real-mutation/logs/baseline-6.stderr.log",
       "command6Stdout": "docs/study-tutor-v2/wave3/repairs/w3-b3-real-mutation/logs/baseline-6.stdout.log",
       "command7Stderr": "docs/study-tutor-v2/wave3/repairs/w3-b3-real-mutation/logs/baseline-7.stderr.log",
-      "command7Stdout": "docs/study-tutor-v2/wave3/repairs/w3-b3-real-mutation/logs/baseline-7.stdout.log"
+      "command7Stdout": "docs/study-tutor-v2/wave3/repairs/w3-b3-real-mutation/logs/baseline-7.stdout.log",
+      "command8Stderr": "docs/study-tutor-v2/wave3/repairs/w3-b3-real-mutation/logs/baseline-8.stderr.log",
+      "command8Stdout": "docs/study-tutor-v2/wave3/repairs/w3-b3-real-mutation/logs/baseline-8.stdout.log"
     },
     "probes": {
       "foreignCurriculumDigest": true,
@@ -106,7 +114,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/provider-request/contracts.ts": "72f2080d5f1465ea752392851e726627c3140ac2"
@@ -144,7 +153,7 @@
         "guarded-function-scoped-source-rewrite W3-M01-DISCLOSURE-TRUE"
       ],
       "mutationId": "W3-M01-DISCLOSURE-TRUE",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/provider-request/contracts.ts"
       ],
@@ -167,7 +176,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/routing/provider-routing/catalog.ts": "37db5016fb964b329f0c6282bd1076a8dc0e16cc"
@@ -205,7 +215,7 @@
         "guarded-function-scoped-source-rewrite W3-M02-BYPASS-POLICY-DECISION"
       ],
       "mutationId": "W3-M02-BYPASS-POLICY-DECISION",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/routing/provider-routing/catalog.ts"
       ],
@@ -228,7 +238,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/routing/provider-routing/router.ts": "5892c0461320e88562ec3c0201c0b7e14dc15207"
@@ -266,7 +277,7 @@
         "guarded-function-scoped-source-rewrite W3-M03-MUTABLE-MODEL-ALIAS"
       ],
       "mutationId": "W3-M03-MUTABLE-MODEL-ALIAS",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/routing/provider-routing/router.ts"
       ],
@@ -292,7 +303,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "23185a673b93269cab7954589be080eaa1f21da3",
@@ -331,7 +343,7 @@
         "guarded-function-scoped-source-rewrite W3-M04-REMOVE-PER-ATTEMPT-COST-BOUND"
       ],
       "mutationId": "W3-M04-REMOVE-PER-ATTEMPT-COST-BOUND",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts",
         "adaptive-tutor/core/v3/routing/budget-resilience/policy.ts"
@@ -357,7 +369,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "23185a673b93269cab7954589be080eaa1f21da3"
@@ -395,7 +408,7 @@
         "guarded-function-scoped-source-rewrite W3-M05-TRUST-PROVIDER-LATENCY"
       ],
       "mutationId": "W3-M05-TRUST-PROVIDER-LATENCY",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -420,7 +433,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/contracts/commercial.ts": "c4b130c52f8495e676b79af523070a48c4e82413"
@@ -458,7 +472,7 @@
         "guarded-function-scoped-source-rewrite W3-M06-OPEN-PROVIDER-RESPONSE"
       ],
       "mutationId": "W3-M06-OPEN-PROVIDER-RESPONSE",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/contracts/commercial.ts"
       ],
@@ -483,7 +497,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "23185a673b93269cab7954589be080eaa1f21da3"
@@ -521,7 +536,7 @@
         "guarded-function-scoped-source-rewrite W3-M07-BYPASS-GROUNDING-REFUSAL"
       ],
       "mutationId": "W3-M07-BYPASS-GROUNDING-REFUSAL",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -546,7 +561,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "23185a673b93269cab7954589be080eaa1f21da3"
@@ -584,7 +600,7 @@
         "guarded-function-scoped-source-rewrite W3-M08-REMOVE-CURRICULUM-DIGEST-RECONCILIATION"
       ],
       "mutationId": "W3-M08-REMOVE-CURRICULUM-DIGEST-RECONCILIATION",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -609,7 +625,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/learner-stage-policy/catalog.ts": "5a1cb8aa2d9a26cab3095520b34bf37eb52faa50"
@@ -647,7 +664,7 @@
         "guarded-function-scoped-source-rewrite W3-M09-DEFAULT-UNKNOWN-STAGE"
       ],
       "mutationId": "W3-M09-DEFAULT-UNKNOWN-STAGE",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/learner-stage-policy/catalog.ts"
       ],
@@ -672,7 +689,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/recovery/recoverable-memory-replay.ts": "82c1615e761e69d8c8e2b21489b7c51c235209e9"
@@ -710,7 +728,7 @@
         "guarded-function-scoped-source-rewrite W3-M10-FORCE-ACCEPTED-EFFECT-MISSING"
       ],
       "mutationId": "W3-M10-FORCE-ACCEPTED-EFFECT-MISSING",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/recovery/recoverable-memory-replay.ts"
       ],
@@ -733,7 +751,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/multimodal/projection.ts": "41a9fda5762a4198875809bb16d7dd39067012e1"
@@ -771,7 +790,7 @@
         "guarded-function-scoped-source-rewrite W3-M11-PERSIST-TRANSCRIPT-IN-CAPTION-REF"
       ],
       "mutationId": "W3-M11-PERSIST-TRANSCRIPT-IN-CAPTION-REF",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/multimodal/projection.ts"
       ],
@@ -794,7 +813,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts": "31774c3dbb86abdef20e9a1edc047cea492c8c1b"
@@ -832,7 +852,7 @@
         "guarded-function-scoped-source-rewrite W3-M12-REMOVE-PARENT-LEARNER-SCOPE"
       ],
       "mutationId": "W3-M12-REMOVE-PARENT-LEARNER-SCOPE",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts"
       ],
@@ -857,7 +877,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/telemetry/projection.ts": "63d0ee7dbf7df33464260cd2c84d4c076a439128"
@@ -895,7 +916,7 @@
         "guarded-function-scoped-source-rewrite W3-M13-COLLAPSE-TELEMETRY-LINEAGE"
       ],
       "mutationId": "W3-M13-COLLAPSE-TELEMETRY-LINEAGE",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/telemetry/projection.ts"
       ],
@@ -918,7 +939,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/presentation/presentation.ts": "e938b7fa82b19a4e0d3b16355cdd1cfda1b2bfd4"
@@ -956,7 +978,7 @@
         "guarded-function-scoped-source-rewrite W3-M14-BYPASS-PROPOSAL-INTENT-MATCH"
       ],
       "mutationId": "W3-M14-BYPASS-PROPOSAL-INTENT-MATCH",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/presentation/presentation.ts"
       ],
@@ -979,7 +1001,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/evals/v3/src/containment.ts": "4e9ec52ec2a15382d66e1427045ff88bd64b562e"
@@ -1017,7 +1040,7 @@
         "guarded-function-scoped-source-rewrite W3-M15-PREFILL-UNREACHED-GATES-PASS"
       ],
       "mutationId": "W3-M15-PREFILL-UNREACHED-GATES-PASS",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/evals/v3/src/containment.ts"
       ],
@@ -1042,7 +1065,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "23185a673b93269cab7954589be080eaa1f21da3"
@@ -1080,7 +1104,7 @@
         "guarded-function-scoped-source-rewrite W3-M16-REMOVE-COMMERCIAL-LEARNER-SCOPE"
       ],
       "mutationId": "W3-M16-REMOVE-COMMERCIAL-LEARNER-SCOPE",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -1105,7 +1129,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "23185a673b93269cab7954589be080eaa1f21da3"
@@ -1143,7 +1168,7 @@
         "guarded-function-scoped-source-rewrite W3-M17-GRANT-STUDY-MUTATION-AUTHORITY"
       ],
       "mutationId": "W3-M17-GRANT-STUDY-MUTATION-AUTHORITY",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
       ],
@@ -1169,7 +1194,8 @@
         "node --test --test-name-pattern \"^(?:foreign trusted invocation curriculum digest fails before provider execution)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:top-level science subject cannot execute admitted mathematics curriculum)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
         "node --test --test-name-pattern \"^(?:a physical attempt cannot overrun its reserve using unused failover reserve)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
-        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js"
+        "node --test --test-name-pattern \"^(?:measured execution over attempt timeout rejects low reported latency)$\" scripts/tutor-v3/.dist/tests/tutor-v3-convergence/commercial-flow.test.js",
+        "node --test --test-name-pattern \"^(?:cost over reservation becomes an anomaly without fabricated release)$\" scripts/tutor-v3/.dist/core/v3/routing/budget-resilience/budget-resilience.test.js"
       ],
       "beforeGitBlobs": {
         "adaptive-tutor/core/v3/index.ts": "38b2cf74999982e6a78d6992da0b07aea43bd7da",
@@ -1208,7 +1234,7 @@
         "guarded-function-scoped-source-rewrite W3-M18-ADD-VENDOR-IMPORT"
       ],
       "mutationId": "W3-M18-ADD-VENDOR-IMPORT",
-      "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+      "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
       "sourcePaths": [
         "adaptive-tutor/core/v3/index.ts",
         "adaptive-tutor/core/v3/mutation-vendor-stub.d.ts"
@@ -1217,8 +1243,8 @@
       "stdoutHash": "98c0578aebc0c5612fef1ae7224abb60b72bda9fe37bf31e8517344f6c4b158b"
     }
   ],
-  "runnerRevision": "e23864fc01871879965814793039c54e4de4338898b6f482a0996edc758dfe05",
+  "runnerRevision": "f5cf108de489e5b223b0d9423f8841971750f79627252b54e7c3cc18236a287e",
   "session": "STUDY-TUTOR-V2-W3-B3 Real Executable Implementation Mutation Proof",
   "survived": 0,
-  "writerSha": "dfc512283ad1e7194558bdddb5debb2c0f8c7589"
+  "writerSha": "ef22278b5b402a43af042dfa5cb1ef1b28e2a6cc"
 }
