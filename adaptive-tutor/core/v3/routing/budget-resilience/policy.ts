@@ -1,6 +1,13 @@
 import { Type, type Static } from "../../../schema/typebox.js";
 import { validateExact } from "../../../v2/contracts/validation.js";
 import {
+  commercialAttemptsEqual,
+  CommercialRouteAttemptPlanSchema,
+  isCanonicalCommercialAttempt,
+  validateCommercialRouteAttemptPlan,
+  type CommercialAttempt,
+} from "../../commercial-operation/index.js";
+import {
   AttemptBudgetSchema,
   BUDGET_RESILIENCE_VERSION,
   BudgetReservationSchema,
@@ -38,6 +45,17 @@ const ReserveExecutionInputSchema = Type.Object(
     executionBudget: ExecutionBudgetSchema,
     reservationRef: ReferenceSchema,
     attempts: Type.Array(AttemptBudgetSchema, { maxItems: 2 }),
+  },
+  { additionalProperties: false },
+);
+
+const ReserveCommercialRouteAttemptPlanInputSchema = Type.Object(
+  {
+    executionBudget: ExecutionBudgetSchema,
+    reservationRef: ReferenceSchema,
+    routeAttemptPlan: CommercialRouteAttemptPlanSchema,
+    eligibilityClassRef: ReferenceSchema,
+    failoverBackoffMs: Type.Integer({ minimum: 0, maximum: MAX_SAFE_MILLISECONDS }),
   },
   { additionalProperties: false },
 );
@@ -204,7 +222,9 @@ function isValidAttemptPlan(
   if (
     !primary ||
     primary.attemptIndex !== 0 ||
-    primary.routeRole !== "primary" ||
+    primary.role !== "primary" ||
+    primary.logicalOperationRef !== budget.logicalOperationRef ||
+    !isCanonicalCommercialAttempt(reservationAttempt(primary)) ||
     !primary.hardConstraintsSatisfied
   ) {
     return false;
@@ -213,7 +233,10 @@ function isValidAttemptPlan(
   if (!failover) return attempts.length === 1;
   return (
     failover.attemptIndex === 1 &&
-    failover.routeRole === "failover" &&
+    failover.role === "failover" &&
+    failover.logicalOperationRef === budget.logicalOperationRef &&
+    isCanonicalCommercialAttempt(reservationAttempt(failover)) &&
+    failover.physicalAttemptRef !== primary.physicalAttemptRef &&
     failover.routeRef !== primary.routeRef &&
     failover.eligibilityClassRef === primary.eligibilityClassRef &&
     failover.hardConstraintsSatisfied
@@ -244,11 +267,69 @@ function reservationIsConsistent(
   ) {
     return false;
   }
-  return reservation.attempts.every(
-    (attempt, index) =>
-      attempt.attemptIndex === index &&
-      attempt.routeRole === (index === 0 ? "primary" : "failover"),
+  return (
+    new Set(reservation.attempts.map((attempt) => attempt.physicalAttemptRef)).size ===
+      reservation.attempts.length &&
+    (reservation.attempts.length === 1 ||
+      reservation.attempts[0]?.routeRef !== reservation.attempts[1]?.routeRef) &&
+    reservation.attempts.every(
+      (attempt, index) =>
+        attempt.attemptIndex === index &&
+        attempt.role === (index === 0 ? "primary" : "failover") &&
+        attempt.logicalOperationRef === budget.logicalOperationRef &&
+        isCanonicalCommercialAttempt(attempt),
+    )
   );
+}
+
+function reservationAttempt(attempt: AttemptBudget): CommercialAttempt {
+  return {
+    logicalOperationRef: attempt.logicalOperationRef,
+    physicalAttemptRef: attempt.physicalAttemptRef,
+    attemptIndex: attempt.attemptIndex,
+    role: attempt.role,
+    routeRef: attempt.routeRef,
+    providerRef: attempt.providerRef,
+    modelRef: attempt.modelRef,
+    modelRevisionRef: attempt.modelRevisionRef,
+    configurationDigest: attempt.configurationDigest,
+    capabilityProfileRevisionRef: attempt.capabilityProfileRevisionRef,
+    capabilityProfileDigest: attempt.capabilityProfileDigest,
+    providerPolicyRevisionRef: attempt.providerPolicyRevisionRef,
+    providerPolicyEvidenceRef: attempt.providerPolicyEvidenceRef,
+    reservedCostMicros: attempt.reservedCostMicros,
+    timeoutMs: attempt.timeoutMs,
+  };
+}
+
+/** Validates the self-contained reservation snapshot and its exact cost sum. */
+export function validateBudgetReservationSnapshot(input: unknown): BudgetReservation | null {
+  const validation = validateExact(BudgetReservationSchema, input);
+  if (validation.status === "rejected") return null;
+  const reservation = validation.value;
+  const sum = checkedMicrosSum(
+    reservation.attempts.map((attempt) => attempt.reservedCostMicros),
+  );
+  const declaredTotal = parseMicros(reservation.totalReservedMicros);
+  if (
+    sum === null ||
+    declaredTotal === null ||
+    sum !== declaredTotal ||
+    new Set(reservation.attempts.map((attempt) => attempt.physicalAttemptRef)).size !==
+      reservation.attempts.length ||
+    (reservation.attempts.length === 2 &&
+      reservation.attempts[0]?.routeRef === reservation.attempts[1]?.routeRef) ||
+    !reservation.attempts.every(
+      (attempt, index) =>
+        attempt.logicalOperationRef === reservation.logicalOperationRef &&
+        attempt.attemptIndex === index &&
+        attempt.role === (index === 0 ? "primary" : "failover") &&
+        isCanonicalCommercialAttempt(attempt),
+    )
+  ) {
+    return null;
+  }
+  return reservation;
 }
 
 /**
@@ -285,13 +366,37 @@ export function reserveExecutionBudget(input: unknown):
     logicalOperationRef: budget.logicalOperationRef,
     status: "reserved",
     totalReservedMicros: total.toString(),
-    attempts: attempts.map((attempt) => ({
-      attemptIndex: attempt.attemptIndex,
-      routeRole: attempt.routeRole,
-      routeRef: attempt.routeRef,
-      reservedCostMicros: attempt.reservedCostMicros,
-    })),
+    attempts: attempts.map(reservationAttempt),
   };
+}
+
+/** Reserves the immutable routing snapshot without re-reading any route catalog. */
+export function reserveCommercialRouteAttemptPlan(input: unknown):
+  | BudgetReservation
+  | FallbackDecision {
+  const validation = validateExact(ReserveCommercialRouteAttemptPlanInputSchema, input);
+  if (validation.status === "rejected") return TRUSTED_INVALID_BUDGET_STOP;
+  const {
+    executionBudget,
+    reservationRef,
+    routeAttemptPlan,
+    eligibilityClassRef,
+    failoverBackoffMs,
+  } = validation.value;
+  if (
+    validateCommercialRouteAttemptPlan(routeAttemptPlan) === null ||
+    routeAttemptPlan.logicalOperationRef !== executionBudget.logicalOperationRef
+  ) {
+    return TRUSTED_INVALID_BUDGET_STOP;
+  }
+  const attempts: AttemptBudget[] = routeAttemptPlan.attempts.map((attempt) => ({
+    ...attempt,
+    contractVersion: BUDGET_RESILIENCE_VERSION,
+    eligibilityClassRef,
+    hardConstraintsSatisfied: true,
+    backoffBeforeMs: attempt.attemptIndex === 0 ? 0 : failoverBackoffMs,
+  }));
+  return reserveExecutionBudget({ executionBudget, reservationRef, attempts });
 }
 
 /** Retains the full reservation for indeterminate billing outcomes. */
@@ -300,12 +405,8 @@ export function settleBudgetReservation(
   outcome: "settled" | "indeterminate-hold",
   actualCostMicrosInput: unknown,
 ): BudgetSettlement | null {
-  const reservationValidation = validateExact(
-    BudgetReservationSchema,
-    reservationInput,
-  );
-  if (reservationValidation.status === "rejected") return null;
-  const reservation = reservationValidation.value;
+  const reservation = validateBudgetReservationSnapshot(reservationInput);
+  if (reservation === null) return null;
   const reserved = parseMicros(reservation.totalReservedMicros);
   const attemptSum = checkedMicrosSum(
     reservation.attempts.map((attempt) => attempt.reservedCostMicros),
@@ -313,14 +414,7 @@ export function settleBudgetReservation(
   if (
     reserved === null ||
     attemptSum === null ||
-    reserved !== attemptSum ||
-    !reservation.attempts.every(
-      (attempt, index) =>
-        attempt.attemptIndex === index &&
-        attempt.routeRole === (index === 0 ? "primary" : "failover"),
-    ) ||
-    (reservation.attempts.length === 2 &&
-      reservation.attempts[0]?.routeRef === reservation.attempts[1]?.routeRef)
+    reserved !== attemptSum
   ) {
     return null;
   }
@@ -427,10 +521,11 @@ export function decideFallback(input: unknown): FallbackDecision {
     new Set(retryPolicy.retryableFailures).size !==
       retryPolicy.retryableFailures.length ||
     primaryAttempt.attemptIndex !== 0 ||
-    primaryAttempt.routeRole !== "primary" ||
+    primaryAttempt.role !== "primary" ||
+    primaryAttempt.logicalOperationRef !== budget.logicalOperationRef ||
+    !isCanonicalCommercialAttempt(reservationAttempt(primaryAttempt)) ||
     !reservedPrimary ||
-    reservedPrimary.routeRef !== primaryAttempt.routeRef ||
-    reservedPrimary.reservedCostMicros !== primaryAttempt.reservedCostMicros
+    !commercialAttemptsEqual(reservedPrimary, primaryAttempt)
   ) {
     return TRUSTED_INVALID_BUDGET_STOP;
   }
@@ -452,6 +547,15 @@ export function decideFallback(input: unknown): FallbackDecision {
   }
   if (failoverAttempt === null) {
     return reviewedFallback(budget, failureFallbackReason(failure.kind));
+  }
+  if (
+    failoverAttempt.attemptIndex !== 1 ||
+    failoverAttempt.role !== "failover" ||
+    failoverAttempt.logicalOperationRef !== budget.logicalOperationRef ||
+    failoverAttempt.physicalAttemptRef === primaryAttempt.physicalAttemptRef ||
+    !isCanonicalCommercialAttempt(reservationAttempt(failoverAttempt))
+  ) {
+    return TRUSTED_INVALID_BUDGET_STOP;
   }
   if (failoverAttempt.routeRef === primaryAttempt.routeRef) {
     return reviewedFallback(budget, "same-route-retry-forbidden");
@@ -480,8 +584,7 @@ export function decideFallback(input: unknown): FallbackDecision {
   );
   if (
     !reservedFailover ||
-    reservedFailover.routeRef !== failoverAttempt.routeRef ||
-    reservedFailover.reservedCostMicros !== failoverAttempt.reservedCostMicros
+    !commercialAttemptsEqual(reservedFailover, failoverAttempt)
   ) {
     return reviewedFallback(budget, "failover-not-pre-reserved");
   }

@@ -17,6 +17,7 @@ function approvedProfile(): TrustedProviderProfile {
     dataDeletionCapability: "supported",
     multimodalEligibility: "approved",
     contractPolicyRevision: "contract-policy:2026-08-r1",
+    policyEvidenceRef: "provider-policy-evidence:approved-fixture-r1",
     policyEvidenceValidUntil: "2027-01-01T00:00:00.000Z",
     status: "active",
   };
@@ -110,6 +111,9 @@ test("all requirements satisfied is eligible", () => {
   assert.deepEqual(result, {
     decision: "eligible",
     providerRef: "provider:approved-fixture",
+    providerPolicyRevisionRef: "contract-policy:2026-08-r1",
+    providerPolicyEvidenceRef: "provider-policy-evidence:approved-fixture-r1",
+    evaluatedAt: "2026-08-15T16:00:00.000Z",
     reasons: [],
   });
 });
@@ -130,6 +134,7 @@ test("every unknown required profile field requires static fallback", () => {
     { ...approvedProfile(), dataDeletionCapability: "unknown" },
     { ...approvedProfile(), multimodalEligibility: "unknown" },
     { ...approvedProfile(), contractPolicyRevision: null },
+    { ...approvedProfile(), policyEvidenceRef: null },
     { ...approvedProfile(), policyEvidenceValidUntil: null },
   ];
 

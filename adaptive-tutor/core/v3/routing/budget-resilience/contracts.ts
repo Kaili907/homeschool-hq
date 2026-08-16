@@ -1,19 +1,19 @@
 import { Type, type Static } from "../../../schema/typebox.js";
+import {
+  CanonicalIntegerMicrosSchema,
+  CommercialAttemptSchema,
+  MAX_CANONICAL_INTEGER_MICROS,
+  type CanonicalIntegerMicros,
+} from "../../commercial-operation/index.js";
 
 export const BUDGET_RESILIENCE_VERSION =
   "study-tutor-v3.budget-resilience.v1" as const;
 
-export const MAX_INTEGER_MICROS = 9_223_372_036_854_775_807n;
+export const MAX_INTEGER_MICROS = MAX_CANONICAL_INTEGER_MICROS;
 export const MAX_SAFE_MILLISECONDS = Number.MAX_SAFE_INTEGER;
 
-export const CanonicalIntegerMicrosSchema = Type.String({
-  pattern: "^(0|[1-9][0-9]*)$",
-  minLength: 1,
-  maxLength: 19,
-});
-export type CanonicalIntegerMicros = Static<
-  typeof CanonicalIntegerMicrosSchema
->;
+export { CanonicalIntegerMicrosSchema };
+export type { CanonicalIntegerMicros };
 
 const ReferenceSchema = Type.String({
   pattern: "^[a-z][a-z0-9-]*(?::[a-zA-Z0-9._-]+)+$",
@@ -66,37 +66,22 @@ export const ExecutionBudgetSchema = Type.Object(
 );
 export type ExecutionBudget = Static<typeof ExecutionBudgetSchema>;
 
-export const AttemptBudgetSchema = Type.Object(
-  {
-    contractVersion: Type.Literal(BUDGET_RESILIENCE_VERSION),
-    attemptIndex: Type.Union([Type.Literal(0), Type.Literal(1)]),
-    routeRole: Type.Union([
-      Type.Literal("primary"),
-      Type.Literal("failover"),
-    ]),
-    routeRef: ReferenceSchema,
-    eligibilityClassRef: ReferenceSchema,
-    hardConstraintsSatisfied: Type.Boolean(),
-    reservedCostMicros: CanonicalIntegerMicrosSchema,
-    timeoutMs: PositiveMillisecondsSchema,
-    backoffBeforeMs: MillisecondsSchema,
-  },
+export const AttemptBudgetSchema = Type.Composite(
+  [
+    CommercialAttemptSchema,
+    Type.Object(
+      {
+        contractVersion: Type.Literal(BUDGET_RESILIENCE_VERSION),
+        eligibilityClassRef: ReferenceSchema,
+        hardConstraintsSatisfied: Type.Boolean(),
+        backoffBeforeMs: MillisecondsSchema,
+      },
+      { additionalProperties: false },
+    ),
+  ],
   { additionalProperties: false, $id: "TutorV3AttemptBudget" },
 );
 export type AttemptBudget = Static<typeof AttemptBudgetSchema>;
-
-const ReservedAttemptSchema = Type.Object(
-  {
-    attemptIndex: Type.Union([Type.Literal(0), Type.Literal(1)]),
-    routeRole: Type.Union([
-      Type.Literal("primary"),
-      Type.Literal("failover"),
-    ]),
-    routeRef: ReferenceSchema,
-    reservedCostMicros: CanonicalIntegerMicrosSchema,
-  },
-  { additionalProperties: false },
-);
 
 export const BudgetReservationSchema = Type.Object(
   {
@@ -105,7 +90,7 @@ export const BudgetReservationSchema = Type.Object(
     logicalOperationRef: ReferenceSchema,
     status: Type.Literal("reserved"),
     totalReservedMicros: CanonicalIntegerMicrosSchema,
-    attempts: Type.Array(ReservedAttemptSchema, { minItems: 1, maxItems: 2 }),
+    attempts: Type.Array(CommercialAttemptSchema, { minItems: 1, maxItems: 2 }),
   },
   { additionalProperties: false, $id: "TutorV3BudgetReservation" },
 );

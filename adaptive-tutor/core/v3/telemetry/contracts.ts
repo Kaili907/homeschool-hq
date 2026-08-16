@@ -1,6 +1,16 @@
 import { Type, type Static } from "../../schema/typebox.js";
+import {
+  CanonicalIntegerMicrosSchema,
+  CommercialAttemptSchema,
+  ImmutableDigestSchema,
+  type CommercialAttempt,
+} from "../commercial-operation/index.js";
+import {
+  BudgetReservationSchema,
+  type BudgetReservation,
+} from "../routing/budget-resilience/index.js";
 
-export const TUTOR_COMMERCIAL_TELEMETRY_CONTRACT_VERSION = "3.0.0" as const;
+export const TUTOR_COMMERCIAL_TELEMETRY_CONTRACT_VERSION = "3.1.0" as const;
 
 export const TELEMETRY_ACTION_FAMILIES = [
   "explanation",
@@ -128,20 +138,30 @@ export const TutorCommercialTelemetryEventSchema = Type.Object(
     contractVersion: Type.Literal(TUTOR_COMMERCIAL_TELEMETRY_CONTRACT_VERSION),
     eventKind: Type.Literal("tutor-commercial-operation"),
     eventRef: OpaqueReferenceSchema,
+    logicalOperationRef: OpaqueReferenceSchema,
+    physicalAttemptRef: OpaqueReferenceSchema,
+    reservationRef: OpaqueReferenceSchema,
+    routeRef: OpaqueReferenceSchema,
     providerRef: OpaqueReferenceSchema,
     modelRef: OpaqueReferenceSchema,
+    modelRevisionRef: OpaqueReferenceSchema,
+    configurationDigest: ImmutableDigestSchema,
+    capabilityProfileRevisionRef: OpaqueReferenceSchema,
+    capabilityProfileDigest: ImmutableDigestSchema,
+    providerPolicyRevisionRef: OpaqueReferenceSchema,
+    providerPolicyEvidenceRef: OpaqueReferenceSchema,
+    attemptIndex: Type.Union([Type.Literal(0), Type.Literal(1)]),
+    role: Type.Union([Type.Literal("primary"), Type.Literal("failover")]),
     actionFamily: TelemetryActionFamilySchema,
     routeClass: TelemetryRouteClassSchema,
     inputTokenCount: SafeCounterSchema,
     outputTokenCount: SafeCounterSchema,
     latencyMs: SafeCounterSchema,
-    costMicros: SafeCounterSchema,
+    costMicros: CanonicalIntegerMicrosSchema,
     cacheClass: TelemetryCacheClassSchema,
     fallbackClass: TelemetryFallbackClassSchema,
     outcome: Type.Union([Type.Literal("success"), Type.Literal("failure")]),
     reasonCode: TelemetryReasonCodeSchema,
-    policyRevisionRef: Type.Union([OpaqueReferenceSchema, Type.Null()]),
-    configRevisionRef: Type.Union([OpaqueReferenceSchema, Type.Null()]),
     authorityScope: Type.Literal("commercial-operations-only"),
     instructionalUseAllowed: Type.Literal(false),
     studyAuthority: Type.Literal(false),
@@ -158,25 +178,34 @@ export type TutorCommercialTelemetryEvent = Static<typeof TutorCommercialTelemet
 export interface TutorExecutionResultTelemetrySource {
   readonly status: "success" | "failure";
   readonly eventRef: string;
-  readonly providerRef: string;
-  readonly modelRef: string;
   readonly actionFamily?: string;
   readonly routeClass?: string;
   readonly metrics: {
     readonly inputTokenCount: number;
     readonly outputTokenCount: number;
     readonly latencyMs: number;
-    readonly costMicros: number;
+    readonly costMicros: string;
   };
   readonly cacheClass?: string;
   readonly fallbackClass?: string;
   readonly reasonCode?: string;
-  readonly policyRevisionRef?: string;
-  readonly configRevisionRef?: string;
+}
+
+export const CommercialTelemetryLineageSchema = Type.Object(
+  {
+    attempt: CommercialAttemptSchema,
+    reservation: BudgetReservationSchema,
+  },
+  { additionalProperties: false, $id: "TutorCommercialTelemetryLineageV3" },
+);
+export interface CommercialTelemetryLineage {
+  readonly attempt: CommercialAttempt;
+  readonly reservation: BudgetReservation;
 }
 
 export type TelemetryProjectionRejectionCode =
   | "INVALID_EXECUTION_RESULT"
+  | "INVALID_COMMERCIAL_LINEAGE"
   | "INVALID_OPERATIONAL_REFERENCE"
   | "INVALID_NUMERIC_METRIC";
 

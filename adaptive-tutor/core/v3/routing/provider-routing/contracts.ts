@@ -1,14 +1,20 @@
 import { Type } from "../../../schema/typebox.js";
 import { OpaqueReferenceSchema } from "../../../v2/contracts/primitives.js";
+import {
+  CommercialRouteAttemptPlanSchema,
+  CanonicalIntegerMicrosSchema,
+  ImmutableDigestSchema,
+  type CommercialRouteAttemptPlan,
+} from "../../commercial-operation/index.js";
 
 export const PROVIDER_CAPABILITY_PROFILE_VERSION =
-  "study-tutor-v2.provider-capability-profile.v1" as const;
+  "study-tutor-v2.provider-capability-profile.v2" as const;
 export const MODEL_CAPABILITY_PROFILE_VERSION =
-  "study-tutor-v2.model-capability-profile.v1" as const;
-export const ROUTING_REQUEST_VERSION = "study-tutor-v2.routing-request.v1" as const;
-export const ROUTING_DECISION_VERSION = "study-tutor-v2.routing-decision.v1" as const;
+  "study-tutor-v2.model-capability-profile.v2" as const;
+export const ROUTING_REQUEST_VERSION = "study-tutor-v2.routing-request.v2" as const;
+export const ROUTING_DECISION_VERSION = "study-tutor-v2.routing-decision.v2" as const;
 export const PROVIDER_AVAILABILITY_STATE_VERSION =
-  "study-tutor-v2.provider-availability-state.v1" as const;
+  "study-tutor-v2.provider-availability-state.v2" as const;
 
 export const ACTION_FAMILIES = [
   "EXPLANATION",
@@ -105,7 +111,6 @@ export interface ProviderCapabilityProfile {
   readonly providerRef: string;
   readonly providerClass: ProviderClass;
   readonly lifecycle: ProfileLifecycle;
-  readonly providerPolicyEligibilityRefs: readonly string[];
   readonly modelRefs: readonly string[];
   readonly minimumTimeoutMs: number;
   readonly maximumTimeoutMs: number;
@@ -114,6 +119,10 @@ export interface ProviderCapabilityProfile {
 export interface ModelCapabilityProfile {
   readonly profileVersion: typeof MODEL_CAPABILITY_PROFILE_VERSION;
   readonly modelRef: string;
+  readonly modelRevisionRef: string;
+  readonly configurationDigest: string;
+  readonly capabilityProfileRevisionRef: string;
+  readonly capabilityProfileDigest: string;
   readonly modelClass: ModelClass;
   readonly providerRef: string;
   readonly routeRef: string;
@@ -136,6 +145,7 @@ export interface ProviderAvailabilityState {
   readonly availabilityRef: string;
   readonly providerRef: string;
   readonly modelRef: string;
+  readonly modelRevisionRef: string;
   readonly state: ProviderAvailabilityCode;
 }
 
@@ -152,6 +162,9 @@ export interface StudyPermissionBoundary {
 export interface RoutingRequest {
   readonly requestVersion: typeof ROUTING_REQUEST_VERSION;
   readonly requestRef: string;
+  readonly routePlanRef: string;
+  readonly logicalOperationRef: string;
+  readonly physicalAttemptRefs: readonly string[];
   readonly actionFamily: ActionFamily;
   readonly subjectCapability: SubjectCapability;
   readonly learnerStage: LearnerStage;
@@ -165,7 +178,6 @@ export interface RoutingRequest {
   readonly reviewedContentRequirement: ReviewedContentRequirement;
   readonly multimodalRequirement: MultimodalRequirement;
   readonly providerAvailability: readonly ProviderAvailabilityState[];
-  readonly providerPolicyEligibilityRef: string;
   readonly studyPermissionBoundary: StudyPermissionBoundary;
   readonly staticFallbackPolicyRef: string;
 }
@@ -192,20 +204,7 @@ interface RoutingDecisionBase {
 
 export interface SelectedRoutingDecision extends RoutingDecisionBase {
   readonly status: "ROUTE_SELECTED";
-  readonly providerClass: ProviderClass;
-  readonly providerRef: string;
-  readonly modelClass: ModelClass;
-  readonly modelRef: string;
-  readonly routeRef: string;
-  readonly maxOutputTokens: number;
-  readonly timeoutMs: number;
-  readonly fallbackProviderClass: ProviderClass | null;
-  readonly fallbackProviderRef: string | null;
-  readonly fallbackModelClass: ModelClass | null;
-  readonly fallbackModelRef: string | null;
-  readonly fallbackRouteRef: string | null;
-  readonly fallbackMaxOutputTokens: number;
-  readonly fallbackTimeoutMs: number;
+  readonly routeAttemptPlan: CommercialRouteAttemptPlan;
   readonly reservedCostMicros: string;
   readonly staticReviewedFallbackRequirement: "REQUIRED_ON_ROUTE_FAILURE";
 }
@@ -244,12 +243,6 @@ const PositiveIntegerSchema = Type.Integer({
   minimum: 1,
   maximum: Number.MAX_SAFE_INTEGER,
 });
-const CanonicalIntegerMicrosSchema = Type.String({
-  minLength: 1,
-  maxLength: 30,
-  pattern: "^(0|[1-9][0-9]*)$",
-});
-
 const ActionFamilySchema = literals(ACTION_FAMILIES);
 const SubjectCapabilitySchema = literals(SUBJECT_CAPABILITIES);
 const LearnerStageSchema = literals(LEARNER_STAGES);
@@ -268,10 +261,6 @@ export const ProviderCapabilityProfileSchema = Type.Object(
     providerRef: OpaqueReferenceSchema,
     providerClass: ProviderClassSchema,
     lifecycle: ProfileLifecycleSchema,
-    providerPolicyEligibilityRefs: Type.Array(OpaqueReferenceSchema, {
-      minItems: 1,
-      maxItems: 16,
-    }),
     modelRefs: Type.Array(OpaqueReferenceSchema, { minItems: 1, maxItems: 32 }),
     minimumTimeoutMs: PositiveIntegerSchema,
     maximumTimeoutMs: PositiveIntegerSchema,
@@ -283,6 +272,10 @@ export const ModelCapabilityProfileSchema = Type.Object(
   {
     profileVersion: Type.Literal(MODEL_CAPABILITY_PROFILE_VERSION),
     modelRef: OpaqueReferenceSchema,
+    modelRevisionRef: OpaqueReferenceSchema,
+    configurationDigest: ImmutableDigestSchema,
+    capabilityProfileRevisionRef: OpaqueReferenceSchema,
+    capabilityProfileDigest: ImmutableDigestSchema,
     modelClass: ModelClassSchema,
     providerRef: OpaqueReferenceSchema,
     routeRef: OpaqueReferenceSchema,
@@ -314,6 +307,7 @@ export const ProviderAvailabilityStateSchema = Type.Object(
     availabilityRef: OpaqueReferenceSchema,
     providerRef: OpaqueReferenceSchema,
     modelRef: OpaqueReferenceSchema,
+    modelRevisionRef: OpaqueReferenceSchema,
     state: ProviderAvailabilityCodeSchema,
   },
   { additionalProperties: false, $id: "TutorV2ProviderAvailabilityState" },
@@ -336,6 +330,9 @@ export const RoutingRequestSchema = Type.Object(
   {
     requestVersion: Type.Literal(ROUTING_REQUEST_VERSION),
     requestRef: OpaqueReferenceSchema,
+    routePlanRef: OpaqueReferenceSchema,
+    logicalOperationRef: OpaqueReferenceSchema,
+    physicalAttemptRefs: Type.Array(OpaqueReferenceSchema, { minItems: 1, maxItems: 2 }),
     actionFamily: ActionFamilySchema,
     subjectCapability: SubjectCapabilitySchema,
     learnerStage: LearnerStageSchema,
@@ -355,7 +352,6 @@ export const RoutingRequestSchema = Type.Object(
       minItems: 1,
       maxItems: 64,
     }),
-    providerPolicyEligibilityRef: OpaqueReferenceSchema,
     studyPermissionBoundary: StudyPermissionBoundarySchema,
     staticFallbackPolicyRef: OpaqueReferenceSchema,
   },
@@ -389,20 +385,7 @@ const SelectedRoutingDecisionSchema = Type.Object(
   {
     ...DecisionCommonProperties,
     status: Type.Literal("ROUTE_SELECTED"),
-    providerClass: ProviderClassSchema,
-    providerRef: OpaqueReferenceSchema,
-    modelClass: ModelClassSchema,
-    modelRef: OpaqueReferenceSchema,
-    routeRef: OpaqueReferenceSchema,
-    maxOutputTokens: PositiveIntegerSchema,
-    timeoutMs: PositiveIntegerSchema,
-    fallbackProviderClass: Type.Union([ProviderClassSchema, Type.Null()]),
-    fallbackProviderRef: Type.Union([OpaqueReferenceSchema, Type.Null()]),
-    fallbackModelClass: Type.Union([ModelClassSchema, Type.Null()]),
-    fallbackModelRef: Type.Union([OpaqueReferenceSchema, Type.Null()]),
-    fallbackRouteRef: Type.Union([OpaqueReferenceSchema, Type.Null()]),
-    fallbackMaxOutputTokens: SafeNonNegativeIntegerSchema,
-    fallbackTimeoutMs: SafeNonNegativeIntegerSchema,
+    routeAttemptPlan: CommercialRouteAttemptPlanSchema,
     reservedCostMicros: CanonicalIntegerMicrosSchema,
     staticReviewedFallbackRequirement: Type.Literal("REQUIRED_ON_ROUTE_FAILURE"),
   },

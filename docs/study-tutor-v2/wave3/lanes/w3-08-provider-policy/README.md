@@ -21,6 +21,7 @@ Each trusted profile records:
 - deletion capability;
 - multimodal approval;
 - the joint contract/privacy-policy revision;
+- the host-owned policy evidence reference;
 - policy-evidence expiration; and
 - provider status.
 
@@ -46,9 +47,14 @@ and the policy never reads the system clock. The expiration instant is exclusive
 evidence is expired when `evaluatedAt` is equal to or later than
 `policyEvidenceValidUntil`.
 
+Every decision records the provider, evaluated instant, policy revision, and
+policy evidence reference it evaluated. Eligible decisions therefore carry the
+exact evidence W3-01 binds into each route attempt. Missing evidence references
+fail closed just like missing revisions or expirations.
+
 ## Integration
 
 Import from `adaptive-tutor/core/v3/provider-policy/index.js`. Build the registry
-from separately reviewed host policy evidence, then evaluate a route before any
-student/minor data is sent. Any result other than `eligible` must prevent provider
-execution; `static-fallback-required` directs Study to reviewed static content.
+from separately reviewed host policy evidence. W3-01 performs the per-provider
+evaluation while constructing its trusted eligible-route catalog. Any result
+other than `eligible` prevents that provider from entering the catalog.
