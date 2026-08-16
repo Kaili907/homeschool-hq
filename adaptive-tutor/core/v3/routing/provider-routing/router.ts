@@ -254,6 +254,7 @@ function commercialAttempt(
   const physicalAttemptRef = request.physicalAttemptRefs[attemptIndex];
   if (!physicalAttemptRef) return null;
   return {
+    commercialScopeRef: request.commercialScopeRef,
     logicalOperationRef: request.logicalOperationRef,
     physicalAttemptRef,
     attemptIndex,
@@ -287,6 +288,7 @@ function selectedDecision(
   const attempts = fallbackAttempt === null ? [primaryAttempt] : [primaryAttempt, fallbackAttempt];
   const routeAttemptPlan = createCommercialRouteAttemptPlan({
     routePlanRef: request.routePlanRef,
+    commercialScopeRef: request.commercialScopeRef,
     logicalOperationRef: request.logicalOperationRef,
     attempts,
   });

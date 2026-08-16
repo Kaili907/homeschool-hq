@@ -312,6 +312,7 @@ test("routing receives only the derived requirement and fails when modality is a
     requestVersion: ROUTING_REQUEST_VERSION,
     requestRef: "routing-request:presentation-one",
     routePlanRef: "route-plan:presentation-one",
+    commercialScopeRef: "commercial-scope:presentation-one",
     logicalOperationRef: "logical-operation:presentation-one",
     physicalAttemptRefs: ["physical-attempt:presentation-one"],
     actionFamily: "HINT",

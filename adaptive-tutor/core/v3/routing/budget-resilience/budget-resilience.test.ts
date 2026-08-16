@@ -32,6 +32,7 @@ function executionBudget(
 ): ExecutionBudget {
   return {
     contractVersion: BUDGET_RESILIENCE_VERSION,
+    commercialScopeRef: "commercial-scope:budget-resilience-001",
     logicalOperationRef: "operation:budget-resilience-001",
     currency: "USD",
     operationMaximumMicros: maximumMicros,
@@ -54,6 +55,7 @@ function attempt(
 ): AttemptBudget {
   return {
     contractVersion: BUDGET_RESILIENCE_VERSION,
+    commercialScopeRef: "commercial-scope:budget-resilience-001",
     logicalOperationRef: "operation:budget-resilience-001",
     physicalAttemptRef: `physical-attempt:budget-resilience-00${attemptIndex + 1}`,
     attemptIndex,
@@ -107,10 +109,19 @@ function receipt(
   return {
     contractVersion: COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION,
     receiptKind: "commercial-attempt-usage-receipt",
+    commercialScopeRef: reservedAttempt.commercialScopeRef,
     logicalOperationRef: reservedAttempt.logicalOperationRef,
     physicalAttemptRef: reservedAttempt.physicalAttemptRef,
     reservationRef: reservation.reservationRef,
     routeRef: reservedAttempt.routeRef,
+    providerRef: reservedAttempt.providerRef,
+    modelRef: reservedAttempt.modelRef,
+    modelRevisionRef: reservedAttempt.modelRevisionRef,
+    configurationDigest: reservedAttempt.configurationDigest,
+    capabilityProfileRevisionRef: reservedAttempt.capabilityProfileRevisionRef,
+    capabilityProfileDigest: reservedAttempt.capabilityProfileDigest,
+    providerPolicyRevisionRef: reservedAttempt.providerPolicyRevisionRef,
+    providerPolicyEvidenceRef: reservedAttempt.providerPolicyEvidenceRef,
     attemptIndex: reservedAttempt.attemptIndex,
     role: reservedAttempt.role,
     reservedCostMicros: reservedAttempt.reservedCostMicros,
@@ -247,6 +258,7 @@ test("reserves an immutable route attempt plan without a catalog re-read", () =>
     routeAttemptPlan: {
       contractVersion: COMMERCIAL_ROUTE_ATTEMPT_PLAN_VERSION,
       routePlanRef: "route-plan:budget-resilience-001",
+      commercialScopeRef: original.commercialScopeRef,
       logicalOperationRef: original.logicalOperationRef,
       attempts: original.attempts,
       totalReservedCostMicros: original.totalReservedMicros,

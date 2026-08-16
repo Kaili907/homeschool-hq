@@ -115,6 +115,7 @@ function request(overrides: Partial<RoutingRequest> = {}): RoutingRequest {
     requestVersion: ROUTING_REQUEST_VERSION,
     requestRef: "routing-request:w3-01",
     routePlanRef: "route-plan:w3-r2-001",
+    commercialScopeRef: "commercial-scope:w3-r2-001",
     logicalOperationRef: "logical-operation:w3-r2-001",
     physicalAttemptRefs: ["physical-attempt:w3-r2-001-primary"],
     actionFamily: "HINT",

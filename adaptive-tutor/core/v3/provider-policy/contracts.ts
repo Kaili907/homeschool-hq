@@ -11,6 +11,11 @@ export type DataDeletionCapability = "supported" | "unsupported" | "unknown";
 export type MultimodalEligibility = "approved" | "not-approved" | "unknown";
 export type ProviderStatus = "active" | "suspended" | "retired" | "unknown";
 
+export const MAXIMUM_PROVIDER_POLICY_REQUIREMENTS = 64;
+export const MAXIMUM_ALLOWED_RETENTION_CLASSES = 3;
+export const MAXIMUM_TRUSTED_PROVIDER_PROFILES = 64;
+export const MAXIMUM_APPROVED_PROVIDER_REGIONS = 32;
+
 /**
  * Host-owned governance evidence. Provider responses must never be accepted as
  * this profile or as an eligibility decision.

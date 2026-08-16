@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { Value } from "../../schema/value.js";
 import {
+  COMMERCIAL_EXECUTION_SCOPE_VERSION,
   type CommercialAttempt,
 } from "../commercial-operation/index.js";
 import {
@@ -18,6 +19,7 @@ const PROFILE_DIGEST = `sha256:${"b".repeat(64)}`;
 
 function attempt(overrides: Partial<CommercialAttempt> = {}): CommercialAttempt {
   return {
+    commercialScopeRef: "commercial-scope:telemetry-001",
     logicalOperationRef: "logical-operation:telemetry-001",
     physicalAttemptRef: "physical-attempt:telemetry-001-primary",
     attemptIndex: 0,
@@ -44,6 +46,7 @@ function reservation(
   return {
     contractVersion: BUDGET_RESILIENCE_VERSION,
     reservationRef: "reservation:telemetry-001",
+    commercialScopeRef: reservedAttempt.commercialScopeRef,
     logicalOperationRef: reservedAttempt.logicalOperationRef,
     status: "reserved",
     totalReservedMicros: reservedAttempt.reservedCostMicros,
@@ -52,8 +55,41 @@ function reservation(
   };
 }
 
+function commercialScope() {
+  return {
+    scopeVersion: COMMERCIAL_EXECUTION_SCOPE_VERSION,
+    scopeKind: "trusted-study-commercial-execution-scope" as const,
+    issuedBy: "study-engine" as const,
+    scopeRef: "commercial-scope:telemetry-001",
+    householdScopeRef: "household-scope:telemetry-001",
+    learnerScopeRef: "learner-scope:telemetry-001",
+    sessionRef: "session:telemetry-001",
+    interactionRef: "interaction:telemetry-001",
+    logicalOperationRef: "logical-operation:telemetry-001",
+    curriculumReleaseRef: "telemetry-r1",
+    curriculumPackageRef: "curriculum-package:telemetry-001",
+    curriculumCourseRef: "telemetry-course",
+    curriculumSubjectRef: "mathematics",
+    curriculumUnitRef: "telemetry-unit",
+    curriculumLessonRef: "telemetry-lesson",
+    conceptRef: "concept:telemetry-001",
+    opportunityRef: "opportunity:telemetry-001",
+    learnerStageRef: "learner-stage:middle-grades",
+    presentationRef: "presentation-fallback:telemetry-001",
+    routingRequestRef: "routing-request:telemetry-001",
+    routePlanRef: "route-plan:telemetry-001",
+    reservationRef: "reservation:telemetry-001",
+    physicalAttemptRefs: [
+      "physical-attempt:telemetry-001-primary",
+      "physical-attempt:telemetry-001-failover",
+    ],
+    allowedRouteRefs: ["route:telemetry-primary-r1", "route:telemetry-failover-r1"],
+    telemetryEventRefs: ["event:tutor-operation-001", "event:tutor-operation-002"],
+  };
+}
+
 function lineage(currentAttempt = attempt(), currentReservation = reservation(currentAttempt)) {
-  return { attempt: currentAttempt, reservation: currentReservation };
+  return { commercialScope: commercialScope(), attempt: currentAttempt, reservation: currentReservation };
 }
 
 function source(overrides: Record<string, unknown> = {}): Record<string, unknown> {
@@ -88,6 +124,13 @@ test("projects exact commercial attempt and reservation lineage", () => {
     contractVersion: "3.1.0",
     eventKind: "tutor-commercial-operation",
     eventRef: "event:tutor-operation-001",
+    commercialScopeRef: "commercial-scope:telemetry-001",
+    householdScopeRef: "household-scope:telemetry-001",
+    learnerScopeRef: "learner-scope:telemetry-001",
+    sessionRef: "session:telemetry-001",
+    interactionRef: "interaction:telemetry-001",
+    conceptRef: "concept:telemetry-001",
+    opportunityRef: "opportunity:telemetry-001",
     logicalOperationRef: "logical-operation:telemetry-001",
     physicalAttemptRef: "physical-attempt:telemetry-001-primary",
     reservationRef: "reservation:telemetry-001",
@@ -139,7 +182,7 @@ test("correlates primary and failover attempts under one logical operation", () 
   });
   const primaryEvent = requireEvent(source(), lineage(primary, sharedReservation));
   const failoverEvent = requireEvent(
-    source({ fallbackClass: "alternate-provider" }),
+    source({ eventRef: "event:tutor-operation-002", fallbackClass: "alternate-provider" }),
     lineage(failover, sharedReservation),
   );
   assert.equal(primaryEvent.logicalOperationRef, failoverEvent.logicalOperationRef);

@@ -163,6 +163,7 @@ export interface RoutingRequest {
   readonly requestVersion: typeof ROUTING_REQUEST_VERSION;
   readonly requestRef: string;
   readonly routePlanRef: string;
+  readonly commercialScopeRef: string;
   readonly logicalOperationRef: string;
   readonly physicalAttemptRefs: readonly string[];
   readonly actionFamily: ActionFamily;
@@ -331,6 +332,7 @@ export const RoutingRequestSchema = Type.Object(
     requestVersion: Type.Literal(ROUTING_REQUEST_VERSION),
     requestRef: OpaqueReferenceSchema,
     routePlanRef: OpaqueReferenceSchema,
+    commercialScopeRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     physicalAttemptRefs: Type.Array(OpaqueReferenceSchema, { minItems: 1, maxItems: 2 }),
     actionFamily: ActionFamilySchema,

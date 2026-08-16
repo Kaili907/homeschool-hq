@@ -1,9 +1,11 @@
 import { Type, type Static } from "../../schema/typebox.js";
 import {
   CanonicalIntegerMicrosSchema,
+  CommercialExecutionScopeSchema,
   CommercialAttemptSchema,
   ImmutableDigestSchema,
   type CommercialAttempt,
+  type CommercialExecutionScope,
 } from "../commercial-operation/index.js";
 import {
   BudgetReservationSchema,
@@ -138,6 +140,13 @@ export const TutorCommercialTelemetryEventSchema = Type.Object(
     contractVersion: Type.Literal(TUTOR_COMMERCIAL_TELEMETRY_CONTRACT_VERSION),
     eventKind: Type.Literal("tutor-commercial-operation"),
     eventRef: OpaqueReferenceSchema,
+    commercialScopeRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    interactionRef: OpaqueReferenceSchema,
+    conceptRef: OpaqueReferenceSchema,
+    opportunityRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     physicalAttemptRef: OpaqueReferenceSchema,
     reservationRef: OpaqueReferenceSchema,
@@ -193,12 +202,14 @@ export interface TutorExecutionResultTelemetrySource {
 
 export const CommercialTelemetryLineageSchema = Type.Object(
   {
+    commercialScope: CommercialExecutionScopeSchema,
     attempt: CommercialAttemptSchema,
     reservation: BudgetReservationSchema,
   },
   { additionalProperties: false, $id: "TutorCommercialTelemetryLineageV3" },
 );
 export interface CommercialTelemetryLineage {
+  readonly commercialScope: CommercialExecutionScope;
   readonly attempt: CommercialAttempt;
   readonly reservation: BudgetReservation;
 }
