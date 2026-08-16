@@ -9,7 +9,7 @@ import {
   ParentReportRequestSchema,
   ParentReportResultSchema,
   REVIEWED_PARENT_REPORT_COPY,
-  buildMinimizedParentHubReport,
+  buildMinimizedParentHubReport as buildReportWithTrustedAuthority,
 } from "./parent-report.js";
 
 function sessionScope() {
@@ -27,17 +27,32 @@ function sessionAuthorization() {
     guardianAuthorizationKind: "study-parent-report-guardian-authorization",
     issuer: "study",
     authorizationRef: "authorization:parent-report-a",
+    reportRef: "report:report-a",
     policyRef: "policy:parent-reporting-v1",
+    policyRevisionRef: "policy-revision:parent-reporting-v1-r4",
     guardianRef: "guardian:guardian-a",
     householdScopeRef: "household:family-a",
     learnerScopeRef: "learner:child-a",
     authorizationRevisionRef: "authorization-revision:parent-report-a-r3",
     currentAuthorizationRevisionRef: "authorization-revision:parent-report-a-r3",
     authorizationRevisionStatus: "current",
+    authorizationIssuedEventRef: "event:authorization-parent-report-a-r3",
+    authorizationIssuedAt: "2026-08-15T13:00:00.000Z",
+    authorizationExpiresAt: "2026-08-15T16:00:00.000Z",
     visibility: "parent-report",
     consent: {
       policyRequirement: "not-required",
       consentState: "not-required",
+      policyRef: "policy:parent-reporting-v1",
+      policyRevisionRef: "policy-revision:parent-reporting-v1-r4",
+      guardianRef: "guardian:guardian-a",
+      householdScopeRef: "household:family-a",
+      learnerScopeRef: "learner:child-a",
+      authorizationRef: "authorization:parent-report-a",
+      authorizationRevisionRef: "authorization-revision:parent-report-a-r3",
+      visibility: "parent-report",
+      scopeKind: "session",
+      sessionRef: "session:session-a",
     },
     scopeKind: "session",
     sessionRef: "session:session-a",
@@ -59,6 +74,7 @@ function sessionEvidence(
       reportingApproval: "study-approved-for-parent-reporting",
       sourceEventRef: `event:${evidenceRef.slice(evidenceRef.indexOf(":") + 1)}`,
       policyRef: "policy:parent-reporting-v1",
+      policyRevisionRef: "policy-revision:parent-reporting-v1-r4",
       recordedAt: "2026-08-15T14:00:00.000Z",
       scope: {
         scopeKind: "session",
@@ -78,6 +94,7 @@ function sessionRequest(
     requestKind: "parent-hub-report",
     reportRef: "report:report-a",
     policyRef: "policy:parent-reporting-v1",
+    policyRevisionRef: "policy-revision:parent-reporting-v1-r4",
     generatedAt: "2026-08-15T15:00:00.000Z",
     scope: sessionScope(),
     guardianAuthorization,
@@ -90,21 +107,43 @@ function periodAuthorization() {
     guardianAuthorizationKind: "study-parent-report-guardian-authorization",
     issuer: "study",
     authorizationRef: "authorization:weekly-a",
+    reportRef: "report:weekly-a",
     policyRef: "policy:parent-reporting-v1",
+    policyRevisionRef: "policy-revision:parent-reporting-v1-r4",
     guardianRef: "guardian:guardian-a",
     householdScopeRef: "household:family-a",
     learnerScopeRef: "learner:child-a",
     authorizationRevisionRef: "authorization-revision:weekly-a-r2",
     currentAuthorizationRevisionRef: "authorization-revision:weekly-a-r2",
     authorizationRevisionStatus: "current",
+    authorizationIssuedEventRef: "event:authorization-weekly-a-r2",
+    authorizationIssuedAt: "2026-08-10T00:00:00.000Z",
+    authorizationExpiresAt: "2026-08-16T23:59:59.000Z",
     visibility: "parent-report",
     consent: {
       policyRequirement: "required",
       consentRef: "consent:weekly-a",
+      consentRevisionRef: "consent-revision:weekly-a-r2",
+      currentConsentRevisionRef: "consent-revision:weekly-a-r2",
+      consentRevisionStatus: "current",
       consentState: "granted",
+      policyRef: "policy:parent-reporting-v1",
+      policyRevisionRef: "policy-revision:parent-reporting-v1-r4",
+      guardianRef: "guardian:guardian-a",
+      householdScopeRef: "household:family-a",
+      learnerScopeRef: "learner:child-a",
+      authorizationRef: "authorization:weekly-a",
+      authorizationRevisionRef: "authorization-revision:weekly-a-r2",
+      visibility: "parent-report",
+      scopeKind: "reporting-period",
+      reportingPeriodRef: "period:week-a",
+      startsAt: "2026-08-10T00:00:00.000Z",
+      endsAt: "2026-08-16T23:59:59.000Z",
     },
     scopeKind: "reporting-period",
     reportingPeriodRef: "period:week-a",
+    startsAt: "2026-08-10T00:00:00.000Z",
+    endsAt: "2026-08-16T23:59:59.000Z",
   };
 }
 
@@ -116,6 +155,7 @@ function periodRequest(
     requestKind: "parent-hub-report",
     reportRef: "report:weekly-a",
     policyRef: "policy:parent-reporting-v1",
+    policyRevisionRef: "policy-revision:parent-reporting-v1-r4",
     generatedAt: "2026-08-16T13:00:00.000Z",
     scope: {
       scopeKind: "reporting-period",
@@ -142,6 +182,7 @@ function periodEvidence() {
       reportingApproval: "study-approved-for-parent-reporting",
       sourceEventRef: "event:weekly-a",
       policyRef: "policy:parent-reporting-v1",
+      policyRevisionRef: "policy-revision:parent-reporting-v1-r4",
       recordedAt: "2026-08-12T14:00:00.000Z",
       scope: {
         scopeKind: "reporting-period",
@@ -153,6 +194,96 @@ function periodEvidence() {
       },
     },
   };
+}
+
+function trustedTransition(
+  decisionStatus: string | null,
+  reasonCode: string,
+  sourceEventRef: string,
+) {
+  if (decisionStatus === "tutor-proposed") {
+    return { state: "TUTOR_PROPOSED", proposalEventRef: sourceEventRef };
+  }
+  if (decisionStatus === "study-approved") {
+    return {
+      state: "STUDY_APPROVED",
+      proposalEventRef: `${sourceEventRef}-proposal`,
+      approvalEventRef: sourceEventRef,
+    };
+  }
+  if (decisionStatus === "study-applied") {
+    return {
+      state: "STUDY_APPLIED",
+      proposalEventRef: `${sourceEventRef}-proposal`,
+      approvalEventRef: `${sourceEventRef}-approval`,
+      appliedEventRef: sourceEventRef,
+    };
+  }
+  if (reasonCode === "practice-completed") {
+    return { state: "STUDY_COMPLETED", completionEventRef: sourceEventRef };
+  }
+  return { state: "STUDY_RECORDED", observationEventRef: sourceEventRef };
+}
+
+function trustedAuthorityFor(value: unknown) {
+  const request = value as ReturnType<typeof sessionRequest>;
+  const authorization =
+    typeof request?.guardianAuthorization === "object" &&
+    request.guardianAuthorization !== null
+      ? structuredClone(request.guardianAuthorization)
+      : sessionAuthorization();
+  const consent = (authorization as ReturnType<typeof sessionAuthorization>)
+    .consent;
+  return {
+    authorityKind: "study-parent-report-trusted-authority",
+    issuer: "study",
+    reportRef: request?.reportRef ?? "report:report-a",
+    policy: {
+      authorityKind: "study-parent-report-policy-authority",
+      issuer: "study-policy",
+      policyRef: request?.policyRef ?? "policy:parent-reporting-v1",
+      policyRevisionRef:
+        request?.policyRevisionRef ??
+        "policy-revision:parent-reporting-v1-r4",
+      currentPolicyRevisionRef:
+        request?.policyRevisionRef ??
+        "policy-revision:parent-reporting-v1-r4",
+      policyRevisionStatus: "current",
+      policyIssuedEventRef: "event:parent-reporting-policy-r4",
+      consentRequirement:
+        consent?.policyRequirement === "required" ? "required" : "not-required",
+    },
+    guardianAuthorization: authorization,
+    evidenceReceipts: Array.isArray(request?.evidence)
+      ? request.evidence.map((candidate) => {
+          const evidence = candidate as ReturnType<typeof sessionEvidence>;
+          return {
+            receiptKind: "study-parent-report-evidence-receipt",
+            issuer: "study",
+            evidenceRef: evidence.evidenceRef,
+            learnerRef: evidence.learnerRef,
+            reasonCode: evidence.reasonCode,
+            sourceEventRef: evidence.provenance.sourceEventRef,
+            policyRef: evidence.provenance.policyRef,
+            policyRevisionRef: evidence.provenance.policyRevisionRef,
+            recordedAt: evidence.provenance.recordedAt,
+            scope: structuredClone(evidence.provenance.scope),
+            transition: trustedTransition(
+              evidence.decisionStatus,
+              evidence.reasonCode,
+              evidence.provenance.sourceEventRef,
+            ),
+          };
+        })
+      : [],
+  };
+}
+
+function buildMinimizedParentHubReport(
+  value: unknown,
+  trustedAuthority: unknown = trustedAuthorityFor(value),
+) {
+  return buildReportWithTrustedAuthority(value, trustedAuthority);
 }
 
 function accepted(value: unknown = sessionRequest()) {
@@ -668,11 +799,14 @@ test("accepted report is minimized and explanatory only", () => {
     "summaries",
   ]);
   assert.deepEqual(Object.keys(report.provenance).sort(), [
+    "authorizationIssuedEventRef",
     "authorizationRef",
     "authorizationRevisionRef",
     "consentRef",
+    "consentRevisionRef",
     "generatedAt",
     "policyRef",
+    "policyRevisionRef",
     "producer",
     "reportRef",
     "sourceEvidenceCount",
