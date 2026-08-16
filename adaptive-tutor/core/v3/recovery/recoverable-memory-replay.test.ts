@@ -2,6 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { validateExact } from "../../v2/contracts/validation.js";
 import {
+  COMMERCIAL_EXECUTION_SCOPE_VERSION,
+  type CommercialExecutionScope,
+} from "../commercial-operation/index.js";
+import {
   InstructionalMemoryDeltaSchema,
   InstructionalMemoryProjectionStore,
   createInstructionalMemoryDelta,
@@ -30,6 +34,34 @@ const scope = {
   opportunityRef: "opportunity:practice-a",
 } as const satisfies InstructionalMemoryScope;
 
+const commercialScope = {
+  scopeVersion: COMMERCIAL_EXECUTION_SCOPE_VERSION,
+  scopeKind: "trusted-study-commercial-execution-scope",
+  issuedBy: "study-engine",
+  scopeRef: "commercial-scope:hint-a",
+  householdScopeRef: "household-scope:family-a",
+  learnerScopeRef: scope.learnerScopeRef,
+  sessionRef: scope.sessionRef,
+  interactionRef: scope.contextRef,
+  logicalOperationRef: "logical-operation:hint-a",
+  curriculumReleaseRef: "family-pilot-r1",
+  curriculumPackageRef: "curriculum-package:family-pilot-r1",
+  curriculumCourseRef: "ma-g5-mathematics",
+  curriculumSubjectRef: "mathematics",
+  curriculumUnitRef: "ma-g5-mathematics-u01",
+  curriculumLessonRef: "ma-g5-mathematics-u01-l01",
+  conceptRef: "concept:fractions",
+  opportunityRef: scope.opportunityRef,
+  learnerStageRef: "learner-stage:middle-grades",
+  presentationRef: "presentation:hint-a",
+  routingRequestRef: "routing-request:hint-a",
+  routePlanRef: "route-plan:hint-a",
+  reservationRef: "reservation:hint-a",
+  physicalAttemptRefs: ["physical-attempt:hint-a"],
+  allowedRouteRefs: ["route:hint-a"],
+  telemetryEventRefs: ["telemetry-event:hint-a"],
+} as const satisfies CommercialExecutionScope;
+
 const effectDigest = `sha256:${"a".repeat(64)}`;
 
 function makeOperation(options: {
@@ -40,13 +72,27 @@ function makeOperation(options: {
   operationScope?: InstructionalMemoryScope;
   prior?: InstructionalMemoryProjection | null;
   operations?: Parameters<typeof createInstructionalMemoryDelta>[0]["operations"];
+  commercialExecutionScopeRef?: string;
+  householdScopeRef?: string;
+  conceptRef?: string;
 } = {}): RecoverableInstructionalOperation {
   const operationScope = options.operationScope ?? scope;
   const logicalOperationRef = options.logicalOperationRef ?? "logical-operation:hint-a";
   const sourceEventRef = options.sourceEventRef ?? "study-event:hint-a-accepted";
+  const conceptRef = options.conceptRef ?? commercialScope.conceptRef;
   const memoryDelta = createInstructionalMemoryDelta({
+    commercialExecutionScopeRef:
+      options.commercialExecutionScopeRef ?? commercialScope.scopeRef,
+    householdScopeRef: options.householdScopeRef ?? commercialScope.householdScopeRef,
     logicalOperationRef,
     sourceEventRef,
+    conceptRef,
+    curriculumReleaseRef: commercialScope.curriculumReleaseRef,
+    curriculumPackageRef: commercialScope.curriculumPackageRef,
+    curriculumCourseRef: commercialScope.curriculumCourseRef,
+    curriculumSubjectRef: commercialScope.curriculumSubjectRef,
+    curriculumUnitRef: commercialScope.curriculumUnitRef,
+    curriculumLessonRef: commercialScope.curriculumLessonRef,
     memoryDeltaRef: options.memoryDeltaRef ?? "memory-delta:hint-a",
     memoryRef: options.memoryRef ?? "memory:fractions-a",
     scope: operationScope,
@@ -68,10 +114,19 @@ function makeOperation(options: {
   });
   return {
     recoveryKind: "recoverable-instructional-operation",
+    commercialExecutionScopeRef: memoryDelta.commercialExecutionScopeRef,
+    householdScopeRef: memoryDelta.householdScopeRef,
     logicalOperationRef,
     sourceEventRef,
     effectRef: "study-effect:show-hint-a",
     effectDigest,
+    conceptRef,
+    curriculumReleaseRef: memoryDelta.curriculumReleaseRef,
+    curriculumPackageRef: memoryDelta.curriculumPackageRef,
+    curriculumCourseRef: memoryDelta.curriculumCourseRef,
+    curriculumSubjectRef: memoryDelta.curriculumSubjectRef,
+    curriculumUnitRef: memoryDelta.curriculumUnitRef,
+    curriculumLessonRef: memoryDelta.curriculumLessonRef,
     scope: operationScope,
     memoryDelta,
   };
@@ -82,10 +137,19 @@ function acceptedEvent(
 ): MinimizedAcceptedStudyEffectEvent {
   return {
     eventKind: "minimized-study-effect-accepted",
+    commercialExecutionScopeRef: operation.commercialExecutionScopeRef,
+    householdScopeRef: operation.householdScopeRef,
     logicalOperationRef: operation.logicalOperationRef,
     sourceEventRef: operation.sourceEventRef,
     effectRef: operation.effectRef,
     effectDigest: operation.effectDigest,
+    conceptRef: operation.conceptRef,
+    curriculumReleaseRef: operation.curriculumReleaseRef,
+    curriculumPackageRef: operation.curriculumPackageRef,
+    curriculumCourseRef: operation.curriculumCourseRef,
+    curriculumSubjectRef: operation.curriculumSubjectRef,
+    curriculumUnitRef: operation.curriculumUnitRef,
+    curriculumLessonRef: operation.curriculumLessonRef,
     scope: structuredClone(operation.scope),
     memoryDelta: structuredClone(operation.memoryDelta),
     rawTranscriptIncluded: false,
@@ -168,7 +232,7 @@ test("normal operation accepts one logical effect and applies one deterministic 
   const coordinator = new RecoverableInstructionalOperationCoordinator(gateway, memory);
   const operation = makeOperation();
 
-  const result = coordinator.replay(scope, operation);
+  const result = coordinator.replay(commercialScope, operation);
   assert.equal(result.status, "complete");
   if (result.status !== "complete") return;
   assert.equal(result.effectDisposition, "executed");
@@ -192,8 +256,8 @@ test("duplicate exact retry reuses the effect and the same memory entry", () => 
   const memory = new InstructionalMemoryProjectionStore();
   const coordinator = new RecoverableInstructionalOperationCoordinator(gateway, memory);
   const operation = makeOperation();
-  const first = coordinator.replay(scope, operation);
-  const second = coordinator.replay(scope, structuredClone(operation));
+  const first = coordinator.replay(commercialScope, operation);
+  const second = coordinator.replay(commercialScope, structuredClone(operation));
 
   assert.equal(first.status, "complete");
   assert.equal(second.status, "complete");
@@ -213,14 +277,14 @@ test("memory failure after effect acceptance remains memory-pending and retry re
   const coordinator = new RecoverableInstructionalOperationCoordinator(gateway, memory);
   const operation = makeOperation();
 
-  const failed = coordinator.replay(scope, operation);
+  const failed = coordinator.replay(commercialScope, operation);
   assert.equal(failed.status, "pending");
   if (failed.status !== "pending") return;
   assert.equal(failed.record.state, "memory-pending");
   assert.equal(gateway.acceptCommands.length, 1);
   assert.equal(store.projectionCount, 0);
 
-  const repaired = coordinator.replay(scope, operation);
+  const repaired = coordinator.replay(commercialScope, operation);
   assert.equal(repaired.status, "complete");
   if (repaired.status !== "complete") return;
   assert.equal(repaired.effectDisposition, "reused");
@@ -237,7 +301,7 @@ test("a fresh coordinator reconstructs missing memory from the accepted minimize
   const recovered = new RecoverableInstructionalOperationCoordinator(
     gateway,
     memory,
-  ).replay(scope, operation);
+  ).replay(commercialScope, operation);
 
   assert.equal(recovered.status, "complete");
   if (recovered.status !== "complete") return;
@@ -254,13 +318,13 @@ test("crash before effect acceptance permits a new distinct physical attempt", (
   const coordinator = new RecoverableInstructionalOperationCoordinator(gateway, memory);
   const operation = makeOperation();
 
-  const crashed = coordinator.replay(scope, operation);
+  const crashed = coordinator.replay(commercialScope, operation);
   assert.equal(crashed.status, "pending");
   if (crashed.status !== "pending") return;
   assert.equal(crashed.record.state, "effect-pending");
   assert.equal(memory.projectionCount, 0);
 
-  const retried = coordinator.replay(scope, operation);
+  const retried = coordinator.replay(commercialScope, operation);
   assert.equal(retried.status, "complete");
   if (retried.status !== "complete") return;
   assert.equal(gateway.acceptCommands.length, 2);
@@ -277,13 +341,13 @@ test("crash after effect acceptance is resolved before memory without a second e
   const coordinator = new RecoverableInstructionalOperationCoordinator(gateway, memory);
   const operation = makeOperation();
 
-  const crashed = coordinator.replay(scope, operation);
+  const crashed = coordinator.replay(commercialScope, operation);
   assert.equal(crashed.status, "pending");
   if (crashed.status !== "pending") return;
   assert.equal(crashed.record.state, "effect-pending");
   assert.equal(memory.applyCount, 0);
 
-  const retried = coordinator.replay(scope, operation);
+  const retried = coordinator.replay(commercialScope, operation);
   assert.equal(retried.status, "complete");
   if (retried.status !== "complete") return;
   assert.equal(retried.effectDisposition, "reused");
@@ -291,12 +355,12 @@ test("crash after effect acceptance is resolved before memory without a second e
   assert.equal(memory.applyCount, 1);
 });
 
-test("foreign learner, session, context, and opportunity are quarantined before effects", () => {
+test("foreign learner, session, interaction, and opportunity are quarantined before effects", () => {
   const foreignScopes = [
-    { ...scope, learnerScopeRef: "learner:child-b" },
-    { ...scope, sessionRef: "session:math-b" },
-    { ...scope, contextRef: "context:fractions-b" },
-    { ...scope, opportunityRef: "opportunity:practice-b" },
+    { ...commercialScope, learnerScopeRef: "learner:child-b" },
+    { ...commercialScope, sessionRef: "session:math-b" },
+    { ...commercialScope, interactionRef: "context:fractions-b" },
+    { ...commercialScope, opportunityRef: "opportunity:practice-b" },
   ] as const;
 
   for (const trustedScope of foreignScopes) {
@@ -334,6 +398,7 @@ test("bounded add, remove, and replace operations advance one expected revision"
     logicalOperationRef: "logical-operation:hint-b",
     sourceEventRef: "study-event:hint-b-accepted",
     memoryDeltaRef: "memory-delta:hint-b",
+    conceptRef: "concept:equivalence",
     prior: applied.projection,
     operations: [
       { operationKind: "remove", field: "conceptRefs", value: "concept:fractions" },
@@ -363,6 +428,7 @@ test("conflicting delta for the same logical operation is rejected", () => {
   const conflicting = makeOperation({
     sourceEventRef: "study-event:hint-a-conflict",
     memoryDeltaRef: "memory-delta:hint-a-conflict",
+    conceptRef: "concept:decimals",
     operations: [
       { operationKind: "add", field: "conceptRefs", value: "concept:decimals" },
     ],
@@ -421,7 +487,7 @@ test("raw transcript and unknown prose carriers are rejected by delta and event 
     new FakeEffectGateway(),
     new InstructionalMemoryProjectionStore(),
   );
-  assert.deepEqual(coordinator.replay(scope, { ...operation, rawTutorText: "hidden" }), {
+  assert.deepEqual(coordinator.replay(commercialScope, { ...operation, rawTutorText: "hidden" }), {
     status: "rejected",
     code: "INVALID_RECOVERY_REQUEST",
   });
@@ -468,7 +534,7 @@ test("accepted event and retry payload disagreement quarantines the logical oper
     gateway,
     new InstructionalMemoryProjectionStore(),
   );
-  const result = coordinator.replay(scope, operation);
+  const result = coordinator.replay(commercialScope, operation);
   assert.equal(result.status, "quarantined");
   if (result.status === "quarantined") assert.equal(result.code, "INVALID_ACCEPTED_EVENT");
   assert.equal(gateway.acceptCommands.length, 0);

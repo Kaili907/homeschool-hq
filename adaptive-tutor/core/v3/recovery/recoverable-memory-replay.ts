@@ -5,6 +5,10 @@ import {
 } from "../../v2/contracts/primitives.js";
 import { validateExact } from "../../v2/contracts/validation.js";
 import {
+  CommercialExecutionScopeSchema,
+  type CommercialExecutionScope,
+} from "../commercial-operation/index.js";
+import {
   InstructionalMemoryDeltaSchema,
   InstructionalMemoryScopeSchema,
   type ApplyInstructionalMemoryDeltaResult,
@@ -12,6 +16,12 @@ import {
   type InstructionalMemoryProjection,
   type InstructionalMemoryScope,
 } from "../memory/index.js";
+
+const BoundedLineageIdentifierSchema = Type.String({
+  minLength: 1,
+  maxLength: 160,
+  pattern: "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+});
 
 export const RECOVERABLE_MEMORY_PROTOCOL_STATES = [
   "unclaimed",
@@ -27,10 +37,19 @@ export type RecoverableMemoryProtocolState =
 export const MinimizedAcceptedStudyEffectEventSchema = Type.Object(
   {
     eventKind: Type.Literal("minimized-study-effect-accepted"),
+    commercialExecutionScopeRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     sourceEventRef: OpaqueReferenceSchema,
     effectRef: OpaqueReferenceSchema,
     effectDigest: ContentDigestSchema,
+    conceptRef: OpaqueReferenceSchema,
+    curriculumReleaseRef: BoundedLineageIdentifierSchema,
+    curriculumPackageRef: OpaqueReferenceSchema,
+    curriculumCourseRef: BoundedLineageIdentifierSchema,
+    curriculumSubjectRef: BoundedLineageIdentifierSchema,
+    curriculumUnitRef: BoundedLineageIdentifierSchema,
+    curriculumLessonRef: BoundedLineageIdentifierSchema,
     scope: InstructionalMemoryScopeSchema,
     memoryDelta: InstructionalMemoryDeltaSchema,
     rawTranscriptIncluded: Type.Literal(false),
@@ -48,10 +67,19 @@ export type MinimizedAcceptedStudyEffectEvent = Static<
 export const RecoverableInstructionalOperationSchema = Type.Object(
   {
     recoveryKind: Type.Literal("recoverable-instructional-operation"),
+    commercialExecutionScopeRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     sourceEventRef: OpaqueReferenceSchema,
     effectRef: OpaqueReferenceSchema,
     effectDigest: ContentDigestSchema,
+    conceptRef: OpaqueReferenceSchema,
+    curriculumReleaseRef: BoundedLineageIdentifierSchema,
+    curriculumPackageRef: OpaqueReferenceSchema,
+    curriculumCourseRef: BoundedLineageIdentifierSchema,
+    curriculumSubjectRef: BoundedLineageIdentifierSchema,
+    curriculumUnitRef: BoundedLineageIdentifierSchema,
+    curriculumLessonRef: BoundedLineageIdentifierSchema,
     scope: InstructionalMemoryScopeSchema,
     memoryDelta: InstructionalMemoryDeltaSchema,
   },
@@ -62,10 +90,19 @@ export type RecoverableInstructionalOperation = Static<
 >;
 
 export interface CanonicalStudyEffectIdentity {
+  readonly commercialExecutionScopeRef: string;
+  readonly householdScopeRef: string;
   readonly logicalOperationRef: string;
   readonly sourceEventRef: string;
   readonly effectRef: string;
   readonly effectDigest: string;
+  readonly conceptRef: string;
+  readonly curriculumReleaseRef: string;
+  readonly curriculumPackageRef: string;
+  readonly curriculumCourseRef: string;
+  readonly curriculumSubjectRef: string;
+  readonly curriculumUnitRef: string;
+  readonly curriculumLessonRef: string;
   readonly scope: InstructionalMemoryScope;
 }
 
@@ -178,13 +215,44 @@ function scopesMatch(left: InstructionalMemoryScope, right: InstructionalMemoryS
   );
 }
 
+function commercialScopeBindingsMatch(
+  commercialScope: CommercialExecutionScope,
+  operation: RecoverableInstructionalOperation,
+): boolean {
+  return (
+    operation.commercialExecutionScopeRef === commercialScope.scopeRef &&
+    operation.householdScopeRef === commercialScope.householdScopeRef &&
+    operation.logicalOperationRef === commercialScope.logicalOperationRef &&
+    operation.scope.learnerScopeRef === commercialScope.learnerScopeRef &&
+    operation.scope.sessionRef === commercialScope.sessionRef &&
+    operation.scope.contextRef === commercialScope.interactionRef &&
+    operation.conceptRef === commercialScope.conceptRef &&
+    operation.scope.opportunityRef === commercialScope.opportunityRef &&
+    operation.curriculumReleaseRef === commercialScope.curriculumReleaseRef &&
+    operation.curriculumPackageRef === commercialScope.curriculumPackageRef &&
+    operation.curriculumCourseRef === commercialScope.curriculumCourseRef &&
+    operation.curriculumSubjectRef === commercialScope.curriculumSubjectRef &&
+    operation.curriculumUnitRef === commercialScope.curriculumUnitRef &&
+    operation.curriculumLessonRef === commercialScope.curriculumLessonRef
+  );
+}
+
 function deltaBindingsMatch(
   operation: RecoverableInstructionalOperation,
   delta: InstructionalMemoryDelta,
 ): boolean {
   return (
+    delta.commercialExecutionScopeRef === operation.commercialExecutionScopeRef &&
+    delta.householdScopeRef === operation.householdScopeRef &&
     delta.logicalOperationRef === operation.logicalOperationRef &&
     delta.sourceEventRef === operation.sourceEventRef &&
+    delta.conceptRef === operation.conceptRef &&
+    delta.curriculumReleaseRef === operation.curriculumReleaseRef &&
+    delta.curriculumPackageRef === operation.curriculumPackageRef &&
+    delta.curriculumCourseRef === operation.curriculumCourseRef &&
+    delta.curriculumSubjectRef === operation.curriculumSubjectRef &&
+    delta.curriculumUnitRef === operation.curriculumUnitRef &&
+    delta.curriculumLessonRef === operation.curriculumLessonRef &&
     scopesMatch(delta.scope, operation.scope)
   );
 }
@@ -194,10 +262,19 @@ function eventBindingsMatch(
   event: MinimizedAcceptedStudyEffectEvent,
 ): boolean {
   return (
+    event.commercialExecutionScopeRef === operation.commercialExecutionScopeRef &&
+    event.householdScopeRef === operation.householdScopeRef &&
     event.logicalOperationRef === operation.logicalOperationRef &&
     event.sourceEventRef === operation.sourceEventRef &&
     event.effectRef === operation.effectRef &&
     event.effectDigest === operation.effectDigest &&
+    event.conceptRef === operation.conceptRef &&
+    event.curriculumReleaseRef === operation.curriculumReleaseRef &&
+    event.curriculumPackageRef === operation.curriculumPackageRef &&
+    event.curriculumCourseRef === operation.curriculumCourseRef &&
+    event.curriculumSubjectRef === operation.curriculumSubjectRef &&
+    event.curriculumUnitRef === operation.curriculumUnitRef &&
+    event.curriculumLessonRef === operation.curriculumLessonRef &&
     scopesMatch(event.scope, operation.scope) &&
     operationFingerprint(event.memoryDelta) === operationFingerprint(operation.memoryDelta)
   );
@@ -223,12 +300,12 @@ export class RecoverableInstructionalOperationCoordinator {
   }
 
   replay(
-    trustedScopeCandidate: unknown,
+    trustedCommercialScopeCandidate: unknown,
     operationCandidate: unknown,
   ): RecoverableInstructionalOperationResult {
     const trustedScopeValidation = validateExact(
-      InstructionalMemoryScopeSchema,
-      trustedScopeCandidate,
+      CommercialExecutionScopeSchema,
+      trustedCommercialScopeCandidate,
     );
     if (trustedScopeValidation.status === "rejected") {
       return { status: "rejected", code: "INVALID_TRUSTED_SCOPE" };
@@ -259,7 +336,7 @@ export class RecoverableInstructionalOperationCoordinator {
         code: record.quarantineCode ?? "CONFLICTING_LOGICAL_OPERATION",
       };
     }
-    if (!scopesMatch(trustedScopeValidation.value, operation.scope)) {
+    if (!commercialScopeBindingsMatch(trustedScopeValidation.value, operation)) {
       return this.#quarantine(record, "FOREIGN_SCOPE");
     }
     if (!deltaBindingsMatch(operation, operation.memoryDelta)) {
@@ -407,10 +484,19 @@ export class RecoverableInstructionalOperationCoordinator {
 
   #identity(operation: RecoverableInstructionalOperation): CanonicalStudyEffectIdentity {
     return {
+      commercialExecutionScopeRef: operation.commercialExecutionScopeRef,
+      householdScopeRef: operation.householdScopeRef,
       logicalOperationRef: operation.logicalOperationRef,
       sourceEventRef: operation.sourceEventRef,
       effectRef: operation.effectRef,
       effectDigest: operation.effectDigest,
+      conceptRef: operation.conceptRef,
+      curriculumReleaseRef: operation.curriculumReleaseRef,
+      curriculumPackageRef: operation.curriculumPackageRef,
+      curriculumCourseRef: operation.curriculumCourseRef,
+      curriculumSubjectRef: operation.curriculumSubjectRef,
+      curriculumUnitRef: operation.curriculumUnitRef,
+      curriculumLessonRef: operation.curriculumLessonRef,
       scope: structuredClone(operation.scope),
     };
   }
@@ -420,10 +506,19 @@ export class RecoverableInstructionalOperationCoordinator {
   ): MinimizedAcceptedStudyEffectEvent {
     return {
       eventKind: "minimized-study-effect-accepted",
+      commercialExecutionScopeRef: operation.commercialExecutionScopeRef,
+      householdScopeRef: operation.householdScopeRef,
       logicalOperationRef: operation.logicalOperationRef,
       sourceEventRef: operation.sourceEventRef,
       effectRef: operation.effectRef,
       effectDigest: operation.effectDigest,
+      conceptRef: operation.conceptRef,
+      curriculumReleaseRef: operation.curriculumReleaseRef,
+      curriculumPackageRef: operation.curriculumPackageRef,
+      curriculumCourseRef: operation.curriculumCourseRef,
+      curriculumSubjectRef: operation.curriculumSubjectRef,
+      curriculumUnitRef: operation.curriculumUnitRef,
+      curriculumLessonRef: operation.curriculumLessonRef,
       scope: structuredClone(operation.scope),
       memoryDelta: structuredClone(operation.memoryDelta),
       rawTranscriptIncluded: false,
