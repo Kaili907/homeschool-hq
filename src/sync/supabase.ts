@@ -321,13 +321,46 @@ export async function verifyPinnedAuthContext(
   }
 }
 
+/**
+ * Terminal session teardown must not depend on a subscriber. A throwing
+ * listener is reported and contained; the returned unsubscribe is idempotent
+ * and swallows SDK errors; and a late fire from the SDK after unsubscribe is
+ * ignored so an async race cannot restore ended session state.
+ */
 export function onAuthSessionChange(
   callback: (event: AuthChangeEvent, session: Session | null) => void,
   client = getSupabaseClient(),
 ): () => void {
   if (!client) return () => undefined
-  const { data } = client.auth.onAuthStateChange(callback)
-  return () => data.subscription.unsubscribe()
+  let terminated = false
+  const shielded = (event: AuthChangeEvent, session: Session | null): void => {
+    if (terminated) return
+    try {
+      callback(event, session)
+    } catch (cause) {
+      reportAuthListenerFailure(event, cause)
+    }
+  }
+  const { data } = client.auth.onAuthStateChange(shielded)
+  return () => {
+    if (terminated) return
+    terminated = true
+    try {
+      data.subscription.unsubscribe()
+    } catch (cause) {
+      reportAuthListenerFailure('unsubscribe', cause)
+    }
+  }
+}
+
+function reportAuthListenerFailure(context: unknown, cause: unknown): void {
+  try {
+    // Reporting must never itself block session teardown.
+    // eslint-disable-next-line no-console
+    console.error('[sync/auth-session] listener failed for', context, cause)
+  } catch {
+    // ignored
+  }
 }
 
 function parseServerRevision(value: unknown): string | null {
