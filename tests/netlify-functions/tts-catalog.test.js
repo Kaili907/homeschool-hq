@@ -60,7 +60,7 @@ function access() {
 function authFetch() {
   return vi.fn(async (url) => {
     if (url === 'https://academy.supabase.co/auth/v1/user') {
-      return new Response(JSON.stringify({ id: 'account-1' }), { status: 200 })
+      return new Response(JSON.stringify({ id: '00000000-0000-4000-8000-000000000701' }), { status: 200 })
     }
     return new Response(new Uint8Array([1]), {
       status: 200, headers: { 'content-type': 'audio/mpeg' },
