@@ -1,0 +1,197 @@
+{
+  "$schema": "../science-director-sample.schema.json",
+  "schemaVersion": "1.0",
+  "sampleRevision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "grade": 3,
+  "courseId": "ma-g3-science",
+  "lessonRef": "ma-g3-science-u02-l03",
+  "title": "Guided practice A: patterns in motion",
+  "subject": "science",
+  "format": "structured",
+  "standards": ["3-PS2-1", "3-PS2-2"],
+  "phenomenonOrContext": "A toy car travels nearly the same distance on three unchanged ramp trials, then the ramp height changes.",
+  "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
+  "lessonGoal": "Use repeated observations to find a motion pattern and make a careful prediction.",
+  "successCriteria": [
+    "I use more than one observation to describe a pattern.",
+    "I keep the conditions the same when I use a pattern to predict.",
+    "I name evidence from the data table."
+  ],
+  "vocabulary": [
+    { "term": "pattern", "definition": "something that repeats in a way we can notice" },
+    { "term": "trial", "definition": "one time a test is carried out" },
+    { "term": "condition", "definition": "a part of a test that can stay the same or change" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "g3-motion:notice-data",
+      "sectionKind": "data-table",
+      "title": "NOTICE — Three rolls from the same ramp",
+      "body": "A student releases the same toy car from the same mark. The student does not push it. The distance is measured from the end of the ramp.",
+      "data": {
+        "tableLabel": "Toy-car distance for three unchanged trials",
+        "columns": ["Trial", "Distance traveled (cm)"],
+        "rows": ["1 | 82", "2 | 80", "3 | 81"],
+        "note": "All three trials used the same car, ramp height, release mark, and floor."
+      }
+    },
+    {
+      "sectionRef": "g3-motion:notice-response",
+      "sectionKind": "guided-practice",
+      "title": "NOTICE — Name what the data show",
+      "directions": "Choose the statement that uses all three observations.",
+      "items": [
+        {
+          "itemRef": "g3-motion:notice-response:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which statement best describes the three distances?",
+          "choices": [
+            { "id": "g3-motion:notice-response:1:a", "label": "The car traveled about 80 cm each time." },
+            { "id": "g3-motion:notice-response:1:b", "label": "The car traveled exactly 82 cm every time." },
+            { "id": "g3-motion:notice-response:1:c", "label": "The car had no motion pattern." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g3-motion:feedback-notice",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Check the evidence you used",
+      "body": "A strong answer uses all three rows and says about 80 cm. Saying exactly 82 cm ignores two trials. Saying there is no pattern ignores how close the three distances are.",
+      "feedbackFor": "g3-motion:notice-response:1"
+    },
+    {
+      "sectionRef": "g3-motion:learn",
+      "sectionKind": "teaching",
+      "title": "LEARN — When a pattern supports a prediction",
+      "body": "One roll is one observation. Repeated rolls can show a pattern. A pattern can support a prediction when the important conditions stay the same. Small differences can happen because measurements are not perfectly exact. If the ramp height, car, floor, or release changes, use new observations before trusting the old pattern."
+    },
+    {
+      "sectionRef": "g3-motion:model",
+      "sectionKind": "worked-example",
+      "title": "MODEL — Think like a scientist",
+      "body": "A second car traveled 46 cm, 48 cm, and 47 cm in three unchanged trials.",
+      "items": [
+        {
+          "itemRef": "g3-motion:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Model task: predict a fourth unchanged trial.",
+          "workedSolution": {
+            "steps": [
+              "Notice that all three distances are close to 47 cm.",
+              "Check that the car, ramp, release mark, and floor stay the same.",
+              "Predict about 47 cm, not one exact guaranteed distance.",
+              "Explain that the repeated observations support the prediction only under the same conditions."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "g3-motion:your-turn",
+      "sectionKind": "guided-practice",
+      "title": "YOUR TURN — Make a prediction",
+      "directions": "Use the 82 cm, 80 cm, and 81 cm observations. The same setup will be used again.",
+      "items": [
+        {
+          "itemRef": "g3-motion:your-turn:1",
+          "itemKind": "short-answer",
+          "responseKind": "TEXT",
+          "prompt": "About how far do you predict the car will travel, and which trials support your prediction?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "g3-motion:feedback-turn",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Make the prediction careful",
+      "body": "Look for a prediction near the repeated distances and evidence from more than one trial. If your answer promises one exact distance, change it to about and explain that measurements can differ a little.",
+      "feedbackFor": "g3-motion:your-turn:1"
+    },
+    {
+      "sectionRef": "g3-motion:apply",
+      "sectionKind": "independent-practice",
+      "title": "APPLY — A changed ramp",
+      "body": "Before a fourth roll, the student raises the top of the ramp. The car, release mark, and floor stay the same.",
+      "items": [
+        {
+          "itemRef": "g3-motion:apply:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "What is the most scientific next step?",
+          "choices": [
+            { "id": "g3-motion:apply:1:a", "label": "Promise that the distance will still be 80–82 cm." },
+            { "id": "g3-motion:apply:1:b", "label": "Run repeated trials at the new height before naming a new pattern." },
+            { "id": "g3-motion:apply:1:c", "label": "Use only the longest old distance as the new pattern." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g3-motion:feedback-apply",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Conditions matter",
+      "body": "The ramp height changed, so the old pattern cannot settle the new result. A strong plan gathers repeated observations under the new condition before making a new prediction.",
+      "feedbackFor": "g3-motion:apply:1"
+    },
+    {
+      "sectionRef": "g3-motion:what-learned",
+      "sectionKind": "reflection",
+      "title": "WHAT YOU LEARNED",
+      "body": "Repeated observations can show a motion pattern. The pattern supports a prediction only while the important conditions stay the same."
+    },
+    {
+      "sectionRef": "g3-motion:evidence-used",
+      "sectionKind": "reflection",
+      "title": "EVIDENCE YOU USED",
+      "body": "You used three measured distances, their units, and the note that the car and ramp setup stayed the same."
+    },
+    {
+      "sectionRef": "g3-motion:how-you-did",
+      "sectionKind": "reflection",
+      "title": "HOW YOU DID",
+      "body": "Your saved responses show your observation and prediction. They remain pending assessment; reading the explanation alone does not show mastery."
+    },
+    {
+      "sectionRef": "g3-motion:what-to-practice",
+      "sectionKind": "reflection",
+      "title": "WHAT TO PRACTICE",
+      "body": "Practice naming the condition that must stay the same before you use a pattern to predict."
+    },
+    {
+      "sectionRef": "g3-motion:review",
+      "sectionKind": "mastery-check",
+      "title": "REVIEW THIS LESSON",
+      "items": [
+        {
+          "itemRef": "g3-motion:review:1",
+          "itemKind": "short-answer",
+          "responseKind": "TEXT",
+          "prompt": "In one sentence, explain why three similar trials support a prediction better than one trial."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g3-motion:course-progress",
+      "sectionKind": "reflection",
+      "title": "COURSE PROGRESS",
+      "body": "This isolated sample does not change your course record. In a released lesson, required saved evidence goes to assessment before progress or mastery changes."
+    },
+    {
+      "sectionRef": "g3-motion:next-action",
+      "sectionKind": "reflection",
+      "title": "NEXT ACTION",
+      "body": "Save your final response. Then continue to the next assigned Forces and Motion lesson or return to your course page."
+    }
+  ],
+  "lessonReview": {
+    "whatYouLearned": "present",
+    "evidenceYouUsed": "present",
+    "howYouDid": "present",
+    "whatToPractice": "present",
+    "reviewThisLesson": "present-with-response",
+    "courseProgress": "present",
+    "nextAction": "present"
+  }
+}

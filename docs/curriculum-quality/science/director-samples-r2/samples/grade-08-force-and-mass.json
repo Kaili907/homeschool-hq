@@ -1,0 +1,211 @@
+{
+  "$schema": "../science-director-sample.schema.json",
+  "schemaVersion": "1.0",
+  "sampleRevision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "grade": 8,
+  "courseId": "ma-g8-science",
+  "lessonRef": "ma-g8-science-u01-l02",
+  "title": "Concept model A: force and mass",
+  "subject": "science",
+  "format": "structured",
+  "standards": ["MS-PS2-1", "MS-PS2-2", "MS-PS2-4", "MS-PS2-5"],
+  "phenomenonOrContext": "The same fan pushes two carts of different mass; the lighter cart changes speed more each second.",
+  "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
+  "lessonGoal": "Use controlled data and a force model to explain how net force and mass affect acceleration.",
+  "successCriteria": [
+    "I reason from net force, not from one force by itself.",
+    "I use evidence to compare acceleration when one variable changes.",
+    "I distinguish mass from weight.",
+    "I apply the relationship to a new case."
+  ],
+  "vocabulary": [
+    { "term": "net force", "definition": "the vector sum of all forces acting on an object" },
+    { "term": "acceleration", "definition": "the rate at which velocity changes" },
+    { "term": "mass", "definition": "a measure of matter and inertia that does not change with location" },
+    { "term": "weight", "definition": "the gravitational force acting on an object" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "g8-force:notice-data",
+      "sectionKind": "data-table",
+      "title": "NOTICE — Same fan setting, different carts",
+      "body": "A simplified cart model uses a level track with friction treated as negligible. The fan provides the stated net horizontal force.",
+      "data": {
+        "tableLabel": "Modeled cart trials",
+        "columns": ["Trial", "Net force (N)", "Cart mass (kg)", "Acceleration (m/s²)"],
+        "rows": ["A | 4 | 1 | 4", "B | 4 | 2 | 2", "C | 8 | 2 | 4"],
+        "provenance": "Manuel Academy instructional model using a = Fnet / m. Values are model outputs, not experimental measurements."
+      }
+    },
+    {
+      "sectionRef": "g8-force:notice-response",
+      "sectionKind": "guided-practice",
+      "title": "NOTICE — Hold one variable constant",
+      "items": [
+        {
+          "itemRef": "g8-force:notice-response:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which pair best isolates the effect of mass on acceleration?",
+          "choices": [
+            { "id": "g8-force:notice-response:1:a", "label": "Trials A and B" },
+            { "id": "g8-force:notice-response:1:b", "label": "Trials B and C" },
+            { "id": "g8-force:notice-response:1:c", "label": "Trials A and C" }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g8-force:feedback-notice",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Compare like with like",
+      "body": "To isolate mass, choose trials with the same net force and different masses. If both net force and mass change, the data cannot show which change produced the acceleration difference.",
+      "feedbackFor": "g8-force:notice-response:1"
+    },
+    {
+      "sectionRef": "g8-force:learn",
+      "sectionKind": "teaching",
+      "title": "LEARN — Two linked patterns",
+      "body": "For a fixed mass, greater net force produces greater acceleration. For a fixed net force, greater mass produces less acceleration. Acceleration points in the direction of the net force. Net force matters because forces in opposite directions can partially or completely cancel. Mass stays the same when location changes; weight can change when gravitational field strength changes."
+    },
+    {
+      "sectionRef": "g8-force:model-reference",
+      "sectionKind": "reference",
+      "title": "MODEL — A labeled force description",
+      "reference": {
+        "modelLabel": "Cart B horizontal force model",
+        "rightArrow": "6 N fan force to the right",
+        "leftArrow": "2 N friction force to the left",
+        "net": "4 N to the right",
+        "vertical": "Upward support force and downward weight balance; they do not create horizontal acceleration.",
+        "readingRule": "Arrow direction and written magnitudes carry the meaning; no color is required."
+      }
+    },
+    {
+      "sectionRef": "g8-force:model",
+      "sectionKind": "worked-example",
+      "title": "MODEL — Explain Trial B",
+      "items": [
+        {
+          "itemRef": "g8-force:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Model task: connect forces, mass, and acceleration.",
+          "workedSolution": {
+            "steps": [
+              "Combine horizontal forces: 6 N right minus 2 N left gives 4 N net right.",
+              "Use the 2 kg mass from Trial B.",
+              "Calculate acceleration: 4 N / 2 kg = 2 m/s² right.",
+              "Check the direction: acceleration is right because net force is right.",
+              "State the model limit: treating friction as a steady 2 N and the cart as one object simplifies the real system."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "g8-force:your-turn",
+      "sectionKind": "guided-practice",
+      "title": "YOUR TURN — Calculate from net force",
+      "body": "A 3 kg cart has 10 N right and 4 N left acting horizontally. Vertical forces balance.",
+      "items": [
+        {
+          "itemRef": "g8-force:your-turn:1",
+          "itemKind": "numeric-entry",
+          "responseKind": "NUMERIC",
+          "prompt": "What is the cart's acceleration magnitude in m/s²?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "g8-force:feedback-turn",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Do not use one force alone",
+      "body": "First combine the opposing horizontal forces to find net force. Then divide that net force by mass. If you divided 10 N by 3 kg, your calculation used the applied force rather than the net force.",
+      "feedbackFor": "g8-force:your-turn:1"
+    },
+    {
+      "sectionRef": "g8-force:apply",
+      "sectionKind": "independent-practice",
+      "title": "APPLY — Loading a delivery robot",
+      "body": "A delivery robot experiences the same 12 N forward net force before and after a package is added. Its total mass changes from 6 kg to 9 kg.",
+      "items": [
+        {
+          "itemRef": "g8-force:apply:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Compare the two accelerations, cite calculated values, and explain why the package changes acceleration but does not change the direction."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g8-force:feedback-apply",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Connect the ratio to the mechanism",
+      "body": "A strong response calculates each acceleration from the same net force and shows that the larger mass accelerates less. The direction remains forward because the net force direction did not change.",
+      "feedbackFor": "g8-force:apply:1"
+    },
+    {
+      "sectionRef": "g8-force:what-learned",
+      "sectionKind": "reflection",
+      "title": "WHAT YOU LEARNED",
+      "body": "Acceleration increases with net force and decreases with mass. It points in the net-force direction."
+    },
+    {
+      "sectionRef": "g8-force:evidence-used",
+      "sectionKind": "reflection",
+      "title": "EVIDENCE YOU USED",
+      "body": "You used controlled cart trials, a labeled force model, units, and calculated acceleration ratios."
+    },
+    {
+      "sectionRef": "g8-force:how-you-did",
+      "sectionKind": "reflection",
+      "title": "HOW YOU DID",
+      "body": "Your saved numeric and written responses show whether you used net force and controlled variables. They remain pending assessment; the worked example alone is not mastery."
+    },
+    {
+      "sectionRef": "g8-force:what-to-practice",
+      "sectionKind": "reflection",
+      "title": "WHAT TO PRACTICE",
+      "body": "Practice combining force vectors before using the force-mass-acceleration relationship."
+    },
+    {
+      "sectionRef": "g8-force:review",
+      "sectionKind": "mastery-check",
+      "title": "REVIEW THIS LESSON",
+      "items": [
+        {
+          "itemRef": "g8-force:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "A cart's mass doubles while its net force stays constant. Which change is predicted?",
+          "choices": [
+            { "id": "g8-force:review:1:a", "label": "Its acceleration doubles." },
+            { "id": "g8-force:review:1:b", "label": "Its acceleration is cut in half." },
+            { "id": "g8-force:review:1:c", "label": "Its mass becomes weight and acceleration is unchanged." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g8-force:course-progress",
+      "sectionKind": "reflection",
+      "title": "COURSE PROGRESS",
+      "body": "This isolated sample does not change your course record. In a released lesson, assessed independent evidence is required before progress or mastery changes."
+    },
+    {
+      "sectionRef": "g8-force:next-action",
+      "sectionKind": "reflection",
+      "title": "NEXT ACTION",
+      "body": "Save the review response. Then continue to the next assigned Forces and Motion lesson or return to your course page."
+    }
+  ],
+  "lessonReview": {
+    "whatYouLearned": "present",
+    "evidenceYouUsed": "present",
+    "howYouDid": "present",
+    "whatToPractice": "present",
+    "reviewThisLesson": "present-with-response",
+    "courseProgress": "present",
+    "nextAction": "present"
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "$schema": "../science-director-sample.schema.json",
+  "schemaVersion": "1.0",
+  "sampleRevision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "grade": 4,
+  "courseId": "ma-g4-science",
+  "lessonRef": "ma-g4-science-u03-l06",
+  "title": "Guided practice B: tracing energy paths",
+  "subject": "science",
+  "format": "structured",
+  "standards": ["4-PS3-2"],
+  "phenomenonOrContext": "A hand-crank flashlight lights a bulb and becomes slightly warm.",
+  "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
+  "lessonGoal": "Trace energy from a source, through transfers, to light and warming in the surroundings.",
+  "successCriteria": [
+    "I name the energy source.",
+    "I use arrows to show the direction of transfer.",
+    "I include light and warming instead of saying energy disappeared."
+  ],
+  "vocabulary": [
+    { "term": "source", "definition": "where the energy in a trace starts" },
+    { "term": "transfer", "definition": "energy moving from one object or place to another" },
+    { "term": "surroundings", "definition": "the nearby air and objects outside the part being studied" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "g4-energy:notice-model",
+      "sectionKind": "reference",
+      "title": "NOTICE — A flashlight with no battery",
+      "body": "A learner turns the crank on a hand-crank flashlight. The bulb shines. After a minute, the flashlight case is slightly warmer.",
+      "reference": {
+        "modelLabel": "Observed sequence",
+        "sequence": ["moving hand", "turning crank", "flashlight mechanism", "light from bulb and warming of device plus nearby air"],
+        "readingOrder": "Read the sequence from left to right. Each arrow means energy is transferred onward."
+      }
+    },
+    {
+      "sectionRef": "g4-energy:notice-response",
+      "sectionKind": "guided-practice",
+      "title": "NOTICE — Find the source",
+      "items": [
+        {
+          "itemRef": "g4-energy:notice-response:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Where does the flashlight's energy trace begin in this observation?",
+          "choices": [
+            { "id": "g4-energy:notice-response:1:a", "label": "The learner's moving hand" },
+            { "id": "g4-energy:notice-response:1:b", "label": "The light after it leaves the bulb" },
+            { "id": "g4-energy:notice-response:1:c", "label": "The warmer air after the flashlight runs" }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g4-energy:feedback-notice",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Start before the transfers",
+      "body": "A complete trace starts with the action that supplies energy, then follows each transfer. Light and warming are later outcomes, so starting there leaves out part of the path.",
+      "feedbackFor": "g4-energy:notice-response:1"
+    },
+    {
+      "sectionRef": "g4-energy:learn",
+      "sectionKind": "teaching",
+      "title": "LEARN — Energy does not vanish",
+      "body": "Energy can change form and move between objects. A device rarely sends all transferred energy into the result we want. Some energy reaches the surroundings, often by warming them. A useful trace names the source, each transfer, and where the energy ends up."
+    },
+    {
+      "sectionRef": "g4-energy:model",
+      "sectionKind": "worked-example",
+      "title": "MODEL — Trace a wind-up toy",
+      "body": "A learner winds a toy car, releases it, and hears a faint sound while the car moves.",
+      "items": [
+        {
+          "itemRef": "g4-energy:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Model task: build the energy trace.",
+          "workedSolution": {
+            "steps": [
+              "Name the source: the learner's hand transfers energy while winding the spring.",
+              "Trace the stored energy in the wound spring.",
+              "Trace the transfer from the spring to the wheels and moving car.",
+              "Include sound and warming of the toy, floor, and air as energy transferred to the surroundings.",
+              "Check that no step says the energy was used up or disappeared."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "g4-energy:your-turn",
+      "sectionKind": "guided-practice",
+      "title": "YOUR TURN — Complete the flashlight trace",
+      "directions": "Use the words hand, crank, mechanism, bulb, light, and surroundings. Arrows may be typed as ->.",
+      "items": [
+        {
+          "itemRef": "g4-energy:your-turn:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Write an arrow trace and explain why warming belongs in it."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g4-energy:feedback-turn",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Check every destination",
+      "body": "Your trace should begin with the moving hand and follow transfers through the device. If it ends only with light, add the device and nearby air warming. That warming is evidence that some energy reached the surroundings.",
+      "feedbackFor": "g4-energy:your-turn:1"
+    },
+    {
+      "sectionRef": "g4-energy:apply",
+      "sectionKind": "independent-practice",
+      "title": "APPLY — A solar garden light",
+      "body": "Sunlight reaches a solar panel. The panel charges a battery during the day. At night the battery powers a small lamp, and the lamp becomes slightly warm.",
+      "items": [
+        {
+          "itemRef": "g4-energy:apply:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Trace the energy through this new system and include one transfer to the surroundings."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g4-energy:feedback-apply",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Keep the source and storage distinct",
+      "body": "A strong trace begins with sunlight, treats the battery as stored energy rather than the original source, and follows the transfer to both light and warming. If your trace begins at the battery, add the daytime charging step.",
+      "feedbackFor": "g4-energy:apply:1"
+    },
+    {
+      "sectionRef": "g4-energy:what-learned",
+      "sectionKind": "reflection",
+      "title": "WHAT YOU LEARNED",
+      "body": "Energy can be traced from a source through a series of transfers. A complete trace includes energy that reaches the surroundings."
+    },
+    {
+      "sectionRef": "g4-energy:evidence-used",
+      "sectionKind": "reflection",
+      "title": "EVIDENCE YOU USED",
+      "body": "You used the crank's motion, the bulb's light, and the observed warming of the device as evidence for the energy path."
+    },
+    {
+      "sectionRef": "g4-energy:how-you-did",
+      "sectionKind": "reflection",
+      "title": "HOW YOU DID",
+      "body": "Your saved traces show where you placed the source, transfers, and surroundings. They remain pending assessment; viewing the model is not mastery evidence."
+    },
+    {
+      "sectionRef": "g4-energy:what-to-practice",
+      "sectionKind": "reflection",
+      "title": "WHAT TO PRACTICE",
+      "body": "Practice adding the surroundings to traces that end too early at the useful output."
+    },
+    {
+      "sectionRef": "g4-energy:review",
+      "sectionKind": "mastery-check",
+      "title": "REVIEW THIS LESSON",
+      "items": [
+        {
+          "itemRef": "g4-energy:review:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which check makes an energy trace more complete?",
+          "choices": [
+            { "id": "g4-energy:review:1:a", "label": "It names only the result people wanted." },
+            { "id": "g4-energy:review:1:b", "label": "It names the source, transfers, useful result, and energy reaching the surroundings." },
+            { "id": "g4-energy:review:1:c", "label": "It says energy disappears when a device warms." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g4-energy:course-progress",
+      "sectionKind": "reflection",
+      "title": "COURSE PROGRESS",
+      "body": "This isolated sample does not change your course record. In a released lesson, required response evidence must be assessed before progress or mastery changes."
+    },
+    {
+      "sectionRef": "g4-energy:next-action",
+      "sectionKind": "reflection",
+      "title": "NEXT ACTION",
+      "body": "Save the review response. Then continue to the next assigned Energy Transfer lesson or return to your course page."
+    }
+  ],
+  "lessonReview": {
+    "whatYouLearned": "present",
+    "evidenceYouUsed": "present",
+    "howYouDid": "present",
+    "whatToPractice": "present",
+    "reviewThisLesson": "present-with-response",
+    "courseProgress": "present",
+    "nextAction": "present"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "science-director-sample-r2",
+  "title": "Science Director learner sample R2",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "sampleRevision",
+    "grade",
+    "courseId",
+    "lessonRef",
+    "title",
+    "subject",
+    "format",
+    "standards",
+    "phenomenonOrContext",
+    "lessonGoal",
+    "successCriteria",
+    "vocabulary",
+    "sections",
+    "lessonReview"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "sampleRevision": { "const": "SCIENCE_DIRECTOR_SAMPLES_R2" },
+    "grade": { "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12] },
+    "courseId": { "type": "string", "minLength": 1 },
+    "lessonRef": { "type": "string", "pattern": "^ma-" },
+    "title": { "type": "string", "minLength": 1 },
+    "subject": { "const": "science" },
+    "format": { "const": "structured" },
+    "standards": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "phenomenonOrContext": { "type": "string", "minLength": 1 },
+    "lessonGoal": { "type": "string", "minLength": 1 },
+    "successCriteria": { "type": "array", "minItems": 2, "items": { "type": "string", "minLength": 1 } },
+    "vocabulary": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["term", "definition"],
+        "properties": {
+          "term": { "type": "string", "minLength": 1 },
+          "definition": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "sections": { "type": "array", "minItems": 10 },
+    "lessonReview": {
+      "type": "object",
+      "required": [
+        "whatYouLearned",
+        "evidenceYouUsed",
+        "howYouDid",
+        "whatToPractice",
+        "reviewThisLesson",
+        "courseProgress",
+        "nextAction"
+      ]
+    }
+  }
+}

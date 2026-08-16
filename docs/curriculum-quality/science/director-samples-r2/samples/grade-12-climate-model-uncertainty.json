@@ -1,0 +1,225 @@
+{
+  "$schema": "../science-director-sample.schema.json",
+  "schemaVersion": "1.0",
+  "sampleRevision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "grade": 12,
+  "courseId": "ma-hs12-earth-space-environmental",
+  "lessonRef": "ma-hs12-earth-space-environmental-u07-l05",
+  "title": "Concept model B: climate models and their uncertainty",
+  "subject": "science",
+  "format": "structured",
+  "standards": ["HS-ESS2-4", "HS-ESS2-6", "HS-ESS3-5"],
+  "phenomenonOrContext": "A climate model reproduces an observed warming trend within a stated uncertainty range, then produces different future ranges under different emissions scenarios.",
+  "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
+  "lessonGoal": "Evaluate climate-model evidence by separating validation, physical uncertainty, scenario assumptions, and unsupported certainty.",
+  "successCriteria": [
+    "I compare observations with a modeled range rather than one exact line.",
+    "I distinguish uncertainty in the physical response from uncertainty in future human choices.",
+    "I make a bounded claim supported by data and model structure.",
+    "I identify a limitation and evidence that would strengthen the evaluation."
+  ],
+  "vocabulary": [
+    { "term": "hindcast", "definition": "a model run for a past period that can be compared with observations" },
+    { "term": "scenario", "definition": "a stated set of possible future conditions or choices used as model input" },
+    { "term": "uncertainty range", "definition": "an interval representing quantified limits from data, parameters, model structure, or variability" },
+    { "term": "projection", "definition": "a conditional model result under stated assumptions, not an unconditional prediction" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "g12-climate:notice-data",
+      "sectionKind": "data-table",
+      "title": "NOTICE — Test the model on past conditions",
+      "body": "A fictional climate-model evaluation uses temperature anomaly relative to its own baseline. The model was run without fitting to the final three evaluation points.",
+      "data": {
+        "tableLabel": "Fictional hindcast evaluation",
+        "columns": ["Evaluation period", "Observed anomaly (°C)", "Modeled ensemble central 90% range (°C)"],
+        "rows": ["P1 | 0.42 | 0.30–0.55", "P2 | 0.58 | 0.41–0.66", "P3 | 0.73 | 0.55–0.81"],
+        "provenance": "Manuel Academy fictional evaluation dataset constructed to teach model validation. Values are not historical climate observations or a published projection.",
+        "limit": "Three aggregate points cannot evaluate regional extremes, ocean heat, precipitation, or every feedback."
+      }
+    },
+    {
+      "sectionRef": "g12-climate:notice-response",
+      "sectionKind": "guided-practice",
+      "title": "NOTICE — Interpret agreement carefully",
+      "items": [
+        {
+          "itemRef": "g12-climate:notice-response:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which conclusion is best supported by this evaluation table?",
+          "choices": [
+            { "id": "g12-climate:notice-response:1:a", "label": "The observations fall within the modeled ranges for these three aggregate periods." },
+            { "id": "g12-climate:notice-response:1:b", "label": "The model has proved every regional climate outcome exactly." },
+            { "id": "g12-climate:notice-response:1:c", "label": "Any uncertainty range means the model provides no information." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g12-climate:feedback-notice",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Match claim scale to evidence scale",
+      "body": "Agreement at three aggregate points is evidence that the model captures the tested trend within its stated range. It does not validate every variable, region, feedback, or future scenario. A quantified range still carries information and should not be treated as ignorance.",
+      "feedbackFor": "g12-climate:notice-response:1"
+    },
+    {
+      "sectionRef": "g12-climate:learn",
+      "sectionKind": "teaching",
+      "title": "LEARN — Three sources of spread",
+      "body": "Climate models encode physical laws and are evaluated against past and present observations. Internal variability creates different short-term paths even with the same forcing. Parameter and structural uncertainty create a range of physical responses. Scenario uncertainty comes from conditional future choices such as emissions. These sources should be separated because better observations can narrow some ranges, while a future human choice is not a measurement error."
+    },
+    {
+      "sectionRef": "g12-climate:model-reference",
+      "sectionKind": "reference",
+      "title": "MODEL — Evidence-to-future-range workflow",
+      "reference": {
+        "diagramLabel": "Climate-model evaluation sequence",
+        "sequence": [
+          "physical laws plus boundary conditions plus forcing inputs",
+          "hindcast ensemble",
+          "comparison with observations across multiple variables and scales",
+          "diagnose bias and quantify uncertainty",
+          "future scenario inputs",
+          "conditional projection ranges"
+        ],
+        "feedbackLoop": "Evaluation can revise model structure or parameter estimates before projection.",
+        "readingRule": "The sequence and labels carry meaning without color."
+      }
+    },
+    {
+      "sectionRef": "g12-climate:model",
+      "sectionKind": "worked-example",
+      "title": "MODEL — Compare scenario ranges without false precision",
+      "body": "The fictional model projects a 2081–2100 anomaly of 1.1–1.6 °C under Scenario L and 2.0–2.9 °C under Scenario H, relative to its baseline.",
+      "items": [
+        {
+          "itemRef": "g12-climate:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Model task: state a defensible comparison.",
+          "workedSolution": {
+            "steps": [
+              "Identify the conditional inputs: Scenario L and Scenario H are different assumed futures.",
+              "Compare intervals, not just midpoints: the entire H range is above the entire L range in this fictional run.",
+              "Claim that higher forcing in Scenario H produces a higher projected anomaly range in this model.",
+              "Do not claim an exact 2100 temperature or assign a probability to the human choice of scenario unless the source provides one.",
+              "Limit the result to the stated model, variable, period, baseline, and scenario definitions."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "g12-climate:your-turn",
+      "sectionKind": "guided-practice",
+      "title": "YOUR TURN — Separate uncertainty types",
+      "body": "A report says: The model range is wide because scientists do not know whether society will follow Scenario L or H, and because clouds respond identically in every model.",
+      "items": [
+        {
+          "itemRef": "g12-climate:your-turn:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Revise the report to distinguish scenario uncertainty from uncertainty in the physical climate response."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g12-climate:feedback-turn",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Do not collapse unlike uncertainties",
+      "body": "A sound revision treats Scenario L versus H as conditional human-choice inputs and treats cloud response as part of physical or structural model uncertainty. Neither source of spread means the projections carry no information.",
+      "feedbackFor": "g12-climate:your-turn:1"
+    },
+    {
+      "sectionRef": "g12-climate:apply-data",
+      "sectionKind": "data-table",
+      "title": "APPLY — A model that passes one test and misses another",
+      "body": "A fictional regional model is evaluated on held-out data. Lower absolute error indicates closer agreement.",
+      "data": {
+        "tableLabel": "Fictional held-out evaluation metrics",
+        "columns": ["Variable", "Mean absolute error", "Predeclared acceptable error"],
+        "rows": ["Annual mean temperature | 0.4 °C | ≤ 0.6 °C", "Summer precipitation | 28 mm/month | ≤ 15 mm/month", "Sea-level pressure | 1.1 hPa | ≤ 1.5 hPa"],
+        "provenance": "Manuel Academy fictional evaluation dataset constructed for model-critique practice.",
+        "limit": "Aggregate error does not show spatial bias, extremes, trend timing, or causal correctness."
+      }
+    },
+    {
+      "sectionRef": "g12-climate:apply",
+      "sectionKind": "independent-practice",
+      "title": "APPLY — Write a calibrated model evaluation",
+      "items": [
+        {
+          "itemRef": "g12-climate:apply:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Evaluate whether this model is fit for a summer-water-planning decision. Use all three metrics, identify the decision-relevant weakness, and name one additional evaluation needed."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g12-climate:feedback-apply",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Fitness depends on the decision",
+      "body": "Temperature and pressure meet their predeclared thresholds, but summer precipitation misses the threshold and is directly relevant to water planning. A calibrated conclusion can reject this use without claiming the model is useless for every purpose. Spatial bias, extremes, and independent precipitation tests would strengthen the evaluation.",
+      "feedbackFor": "g12-climate:apply:1"
+    },
+    {
+      "sectionRef": "g12-climate:what-learned",
+      "sectionKind": "reflection",
+      "title": "WHAT YOU LEARNED",
+      "body": "Climate projections are conditional ranges from evaluated physical models. Uncertainty has identifiable sources and does not erase evidence."
+    },
+    {
+      "sectionRef": "g12-climate:evidence-used",
+      "sectionKind": "reflection",
+      "title": "EVIDENCE YOU USED",
+      "body": "You used hindcast ranges, held-out evaluation metrics, scenario intervals, model structure, and stated limitations."
+    },
+    {
+      "sectionRef": "g12-climate:how-you-did",
+      "sectionKind": "reflection",
+      "title": "HOW YOU DID",
+      "body": "Your saved uncertainty revision and fit-for-purpose evaluation provide disciplinary evidence. They remain pending assessment; viewing a projection is not mastery."
+    },
+    {
+      "sectionRef": "g12-climate:what-to-practice",
+      "sectionKind": "reflection",
+      "title": "WHAT TO PRACTICE",
+      "body": "Practice matching model-validation evidence to the variable, scale, and decision being evaluated."
+    },
+    {
+      "sectionRef": "g12-climate:review",
+      "sectionKind": "mastery-check",
+      "title": "REVIEW THIS LESSON",
+      "items": [
+        {
+          "itemRef": "g12-climate:review:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Explain why a validated hindcast and a quantified projection range strengthen a climate claim without proving one exact future outcome."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g12-climate:course-progress",
+      "sectionKind": "reflection",
+      "title": "COURSE PROGRESS",
+      "body": "This isolated sample does not change your course record. In a released lesson, assessed independent evidence is required before progress or mastery changes."
+    },
+    {
+      "sectionRef": "g12-climate:next-action",
+      "sectionKind": "reflection",
+      "title": "NEXT ACTION",
+      "body": "Save the review explanation. Then continue to the next assigned Climate and Carbon Cycle lesson or return to your course page."
+    }
+  ],
+  "lessonReview": {
+    "whatYouLearned": "present",
+    "evidenceYouUsed": "present",
+    "howYouDid": "present",
+    "whatToPractice": "present",
+    "reviewThisLesson": "present-with-response",
+    "courseProgress": "present",
+    "nextAction": "present"
+  }
+}

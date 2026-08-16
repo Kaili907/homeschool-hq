@@ -1,0 +1,203 @@
+{
+  "$schema": "../science-director-sample.schema.json",
+  "schemaVersion": "1.0",
+  "sampleRevision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "grade": 5,
+  "courseId": "ma-g5-science",
+  "lessonRef": "ma-g5-science-u07-l03",
+  "title": "Guided practice A: daily shadow patterns",
+  "subject": "science",
+  "format": "structured",
+  "standards": ["5-ESS1-1", "5-ESS1-2"],
+  "phenomenonOrContext": "A fixed post casts long shadows in the morning and late afternoon but a short shadow near midday.",
+  "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
+  "lessonGoal": "Use shadow data and an Earth-rotation model to explain a repeating daily pattern.",
+  "successCriteria": [
+    "I describe the shadow pattern with times and measurements.",
+    "I explain that Earth's rotation causes the Sun's apparent daily movement.",
+    "I keep the observation separate from the model-based explanation."
+  ],
+  "vocabulary": [
+    { "term": "apparent", "definition": "how something seems to move from a particular viewpoint" },
+    { "term": "rotation", "definition": "the spinning of an object around its axis" },
+    { "term": "axis", "definition": "an imaginary line through an object that it spins around" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "g5-shadow:notice-data",
+      "sectionKind": "data-table",
+      "title": "NOTICE — One post through one clear day",
+      "body": "The post stayed in one place on level ground. A student measured from the post to the tip of its shadow. The listed directions show where the shadow pointed.",
+      "data": {
+        "tableLabel": "Shadow length and direction",
+        "columns": ["Time", "Shadow length (cm)", "Shadow direction"],
+        "rows": ["9:00 a.m. | 180 | west", "12:00 noon | 70 | north", "3:00 p.m. | 165 | east"],
+        "accessibilityNote": "Length is written as a number and direction is written as a word; no meaning depends on color."
+      }
+    },
+    {
+      "sectionRef": "g5-shadow:notice-response",
+      "sectionKind": "guided-practice",
+      "title": "NOTICE — Read one exact value",
+      "items": [
+        {
+          "itemRef": "g5-shadow:notice-response:1",
+          "itemKind": "numeric-entry",
+          "responseKind": "NUMERIC",
+          "prompt": "How many centimeters shorter was the noon shadow than the 9:00 a.m. shadow?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "g5-shadow:feedback-notice",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Compare with units",
+      "body": "Use the two lengths from the table and subtract the smaller from the larger. Keep centimeters attached to the difference. If you used the 3:00 p.m. row, return to the two named times.",
+      "feedbackFor": "g5-shadow:notice-response:1"
+    },
+    {
+      "sectionRef": "g5-shadow:learn",
+      "sectionKind": "teaching",
+      "title": "LEARN — Observation and cause",
+      "body": "The table shows an observation: shadows changed length and direction. A shadow points away from its light source. When the Sun appears low in the sky, the shadow is long. When the Sun appears higher, the shadow is shorter. Earth rotates once each day, making the Sun appear to move across our sky. The Sun does not travel around Earth each day."
+    },
+    {
+      "sectionRef": "g5-shadow:model-reference",
+      "sectionKind": "reference",
+      "title": "MODEL — A text diagram of the daily cycle",
+      "reference": {
+        "diagramLabel": "Earth-rotation model and observed shadow",
+        "sequence": [
+          "Morning: Sun appears low in the east -> post shadow points west and is long",
+          "Near midday: Sun appears higher -> post shadow is shorter",
+          "Afternoon: Sun appears lower in the west -> post shadow points east and grows longer"
+        ],
+        "modelLimit": "The arrows summarize light direction and shadow response. Sizes and angles are not drawn to scale."
+      }
+    },
+    {
+      "sectionRef": "g5-shadow:model",
+      "sectionKind": "worked-example",
+      "title": "MODEL — Build an explanation from evidence",
+      "items": [
+        {
+          "itemRef": "g5-shadow:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Model task: explain the shorter noon shadow.",
+          "workedSolution": {
+            "steps": [
+              "Claim: the shadow was shorter near noon because sunlight reached the post from a higher apparent position.",
+              "Evidence: the shadow measured 180 cm at 9:00 a.m. and 70 cm at noon.",
+              "Reasoning: Earth rotated, so the Sun appeared higher; a higher light angle makes a shorter shadow for the same post.",
+              "Limit: one clear day shows a daily example but not every season or every place."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "g5-shadow:your-turn",
+      "sectionKind": "guided-practice",
+      "title": "YOUR TURN — Connect direction to light",
+      "items": [
+        {
+          "itemRef": "g5-shadow:your-turn:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "At 3:00 p.m. the shadow pointed east. Which light position fits that observation?",
+          "choices": [
+            { "id": "g5-shadow:your-turn:1:a", "label": "The Sun appeared west of the post." },
+            { "id": "g5-shadow:your-turn:1:b", "label": "The Sun appeared east of the post." },
+            { "id": "g5-shadow:your-turn:1:c", "label": "There was no light source." }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g5-shadow:feedback-turn",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Point away from the source",
+      "body": "A shadow points away from the light source. Use the written directions rather than a color cue. If your Sun and shadow are on the same side, reverse the light position in your model.",
+      "feedbackFor": "g5-shadow:your-turn:1"
+    },
+    {
+      "sectionRef": "g5-shadow:apply",
+      "sectionKind": "independent-practice",
+      "title": "APPLY — A new object and a data limit",
+      "body": "A flagpole shadow measures 14 m at 8:30 a.m., 5 m at 12:30 p.m., and 12 m at 4:30 p.m. on one clear day.",
+      "items": [
+        {
+          "itemRef": "g5-shadow:apply:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Describe the pattern, explain it with Earth's rotation, and state one thing this one-day record cannot establish."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g5-shadow:feedback-apply",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Separate three parts",
+      "body": "Check for an observed pattern with measurements, a model-based cause involving Earth's rotation, and a limit. A one-day record cannot establish seasonal shadow patterns or the usual pattern in every location.",
+      "feedbackFor": "g5-shadow:apply:1"
+    },
+    {
+      "sectionRef": "g5-shadow:what-learned",
+      "sectionKind": "reflection",
+      "title": "WHAT YOU LEARNED",
+      "body": "Shadow length and direction change in a daily pattern as Earth rotates and the Sun appears to move across the sky."
+    },
+    {
+      "sectionRef": "g5-shadow:evidence-used",
+      "sectionKind": "reflection",
+      "title": "EVIDENCE YOU USED",
+      "body": "You used times, shadow lengths in centimeters, written directions, and an Earth-rotation model."
+    },
+    {
+      "sectionRef": "g5-shadow:how-you-did",
+      "sectionKind": "reflection",
+      "title": "HOW YOU DID",
+      "body": "Your saved calculation and explanation show how you used data and a model. They remain pending assessment; reading the model alone does not demonstrate understanding."
+    },
+    {
+      "sectionRef": "g5-shadow:what-to-practice",
+      "sectionKind": "reflection",
+      "title": "WHAT TO PRACTICE",
+      "body": "Practice keeping the observed shadow change separate from the explanation based on Earth's rotation."
+    },
+    {
+      "sectionRef": "g5-shadow:review",
+      "sectionKind": "mastery-check",
+      "title": "REVIEW THIS LESSON",
+      "items": [
+        {
+          "itemRef": "g5-shadow:review:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Use one table value to explain why noon is part of the pattern rather than a separate event."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g5-shadow:course-progress",
+      "sectionKind": "reflection",
+      "title": "COURSE PROGRESS",
+      "body": "This isolated sample does not change your course record. In a released lesson, assessed response evidence is required before progress or mastery changes."
+    },
+    {
+      "sectionRef": "g5-shadow:next-action",
+      "sectionKind": "reflection",
+      "title": "NEXT ACTION",
+      "body": "Save the review explanation. Then continue to the next assigned Patterns in the Sky lesson or return to your course page."
+    }
+  ],
+  "lessonReview": {
+    "whatYouLearned": "present",
+    "evidenceYouUsed": "present",
+    "howYouDid": "present",
+    "whatToPractice": "present",
+    "reviewThisLesson": "present-with-response",
+    "courseProgress": "present",
+    "nextAction": "present"
+  }
+}

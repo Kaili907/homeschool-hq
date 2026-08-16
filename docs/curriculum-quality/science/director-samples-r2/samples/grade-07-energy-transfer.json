@@ -1,0 +1,206 @@
+{
+  "$schema": "../science-director-sample.schema.json",
+  "schemaVersion": "1.0",
+  "sampleRevision": "SCIENCE_DIRECTOR_SAMPLES_R2",
+  "grade": 7,
+  "courseId": "ma-g7-science",
+  "lessonRef": "ma-g7-science-u03-l09",
+  "title": "Performance task build: energy transfer",
+  "subject": "science",
+  "format": "structured",
+  "standards": ["MS-PS3-3", "MS-PS3-4", "MS-PS3-5"],
+  "phenomenonOrContext": "Warm water and cool water move toward a shared temperature when separated only by a conducting wall.",
+  "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
+  "lessonGoal": "Use temperature data and a system model to explain the direction and conservation of energy transfer.",
+  "successCriteria": [
+    "I identify the direction of spontaneous energy transfer from the temperature evidence.",
+    "I distinguish temperature from total thermal energy.",
+    "I account for the system and surroundings before making a conservation claim.",
+    "I state a limitation of the model or data."
+  ],
+  "vocabulary": [
+    { "term": "thermal energy", "definition": "energy associated with the motion and interactions of particles in a system" },
+    { "term": "temperature", "definition": "a measure related to the average kinetic energy of particles" },
+    { "term": "system boundary", "definition": "the line that separates the objects being studied from the surroundings" },
+    { "term": "equilibrium", "definition": "a state in which interacting objects have no net thermal energy transfer between them" }
+  ],
+  "sections": [
+    {
+      "sectionRef": "g7-transfer:notice-data",
+      "sectionKind": "data-table",
+      "title": "NOTICE — Two equal water samples",
+      "body": "Two equal masses of water are in an idealized, insulated model. A conducting wall separates them but allows energy transfer. No water mixes across the wall.",
+      "data": {
+        "tableLabel": "Modeled temperature record",
+        "columns": ["Time (min)", "Sample A temperature (°C)", "Sample B temperature (°C)"],
+        "rows": ["0 | 60 | 20", "2 | 52 | 28", "4 | 46 | 34", "6 | 42 | 38"],
+        "provenance": "Manuel Academy instructional model calculated for equal water masses with an ideal insulated boundary. These are model outputs, not learner observations.",
+        "limitations": "Real containers transfer some energy to the surroundings and may not mix evenly."
+      }
+    },
+    {
+      "sectionRef": "g7-transfer:notice-response",
+      "sectionKind": "guided-practice",
+      "title": "NOTICE — Infer the transfer direction",
+      "items": [
+        {
+          "itemRef": "g7-transfer:notice-response:1",
+          "itemKind": "multiple-choice",
+          "responseKind": "CHOICE",
+          "prompt": "Which direction of net thermal energy transfer is supported from 0 to 6 minutes?",
+          "choices": [
+            { "id": "g7-transfer:notice-response:1:a", "label": "From Sample A to Sample B" },
+            { "id": "g7-transfer:notice-response:1:b", "label": "From Sample B to Sample A" },
+            { "id": "g7-transfer:notice-response:1:c", "label": "There is no transfer because the water does not mix" }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionRef": "g7-transfer:feedback-notice",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Use both columns",
+      "body": "The warmer sample cools while the cooler sample warms, so the evidence supports transfer from the higher-temperature sample toward the lower-temperature sample. Mixing matter is not required for energy transfer through a conducting wall.",
+      "feedbackFor": "g7-transfer:notice-response:1"
+    },
+    {
+      "sectionRef": "g7-transfer:learn",
+      "sectionKind": "teaching",
+      "title": "LEARN — Temperature is not an energy total",
+      "body": "Temperature describes an average at the particle level. Total thermal energy also depends on how much matter is present and what the material is. Energy transfers spontaneously from higher temperature to lower temperature until equilibrium. Conservation means energy lost by one part appears in another part of the chosen system or in its surroundings. It does not mean every object's temperature stays constant."
+    },
+    {
+      "sectionRef": "g7-transfer:model-reference",
+      "sectionKind": "reference",
+      "title": "MODEL — Energy-accounting diagram",
+      "reference": {
+        "diagramLabel": "Ideal insulated two-sample system",
+        "nodes": ["Sample A: warmer, loses thermal energy", "conducting wall: transfer pathway", "Sample B: cooler, gains thermal energy"],
+        "arrow": "Sample A -> conducting wall -> Sample B",
+        "boundary": "The system includes both water samples and the wall. The ideal model permits no transfer across the outside boundary.",
+        "noColorRule": "Words and arrow direction carry all meaning."
+      }
+    },
+    {
+      "sectionRef": "g7-transfer:model",
+      "sectionKind": "worked-example",
+      "title": "MODEL — Interpret a conserved change",
+      "items": [
+        {
+          "itemRef": "g7-transfer:model:1",
+          "itemKind": "worked-example",
+          "prompt": "Model task: explain the first two minutes.",
+          "workedSolution": {
+            "steps": [
+              "Compare initial temperatures: A is 60 °C and B is 20 °C.",
+              "Track changes: A decreases by 8 °C while B increases by 8 °C.",
+              "Use the stated equal masses and same material; equal-size opposite temperature changes fit the ideal transfer model.",
+              "Claim that thermal energy moved from A to B, not that A's energy vanished.",
+              "Limit the claim to the ideal insulated model; temperature change alone would not prove equal energy changes for unequal masses or different materials."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sectionRef": "g7-transfer:your-turn",
+      "sectionKind": "guided-practice",
+      "title": "YOUR TURN — Calculate one temperature change",
+      "directions": "Enter the magnitude of Sample B's temperature change from 2 to 6 minutes. Use the table; the response field records the number.",
+      "items": [
+        {
+          "itemRef": "g7-transfer:your-turn:1",
+          "itemKind": "numeric-entry",
+          "responseKind": "NUMERIC",
+          "prompt": "What is the magnitude of Sample B's temperature change in degrees Celsius?"
+        }
+      ]
+    },
+    {
+      "sectionRef": "g7-transfer:feedback-turn",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Keep direction and magnitude distinct",
+      "body": "Subtract the earlier value from the later value. The magnitude is positive; the explanation can separately state that Sample B warmed. If you used Sample A's values, return to the named column.",
+      "feedbackFor": "g7-transfer:your-turn:1"
+    },
+    {
+      "sectionRef": "g7-transfer:apply",
+      "sectionKind": "independent-practice",
+      "title": "APPLY — A metal block in water",
+      "body": "A 100 g metal block at 80 °C is placed in 200 g of water at 20 °C inside a real cup. Later, the block is 35 °C and the water is 30 °C. The cup and air were not measured.",
+      "items": [
+        {
+          "itemRef": "g7-transfer:apply:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "Explain the transfer direction and why the temperature changes alone do not prove that the block's energy loss equals the water's energy gain."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g7-transfer:feedback-apply",
+      "sectionKind": "remediation",
+      "title": "FEEDBACK — Audit the system boundary",
+      "body": "The temperatures support transfer from the hotter block toward the cooler water. Equal temperature changes are not required, because the masses and materials differ. A complete energy account must also consider energy transferred to the cup and air.",
+      "feedbackFor": "g7-transfer:apply:1"
+    },
+    {
+      "sectionRef": "g7-transfer:what-learned",
+      "sectionKind": "reflection",
+      "title": "WHAT YOU LEARNED",
+      "body": "Thermal energy transfers spontaneously from higher temperature to lower temperature. Conservation claims depend on a clearly named system and its surroundings."
+    },
+    {
+      "sectionRef": "g7-transfer:evidence-used",
+      "sectionKind": "reflection",
+      "title": "EVIDENCE YOU USED",
+      "body": "You used a time-series temperature table, equal-mass model conditions, and a system-boundary diagram."
+    },
+    {
+      "sectionRef": "g7-transfer:how-you-did",
+      "sectionKind": "reflection",
+      "title": "HOW YOU DID",
+      "body": "Your saved calculation and system explanation provide response evidence. They remain pending assessment; the displayed model is supported practice, not mastery."
+    },
+    {
+      "sectionRef": "g7-transfer:what-to-practice",
+      "sectionKind": "reflection",
+      "title": "WHAT TO PRACTICE",
+      "body": "Practice checking mass, material, and surroundings before treating temperature changes as equal energy changes."
+    },
+    {
+      "sectionRef": "g7-transfer:review",
+      "sectionKind": "mastery-check",
+      "title": "REVIEW THIS LESSON",
+      "items": [
+        {
+          "itemRef": "g7-transfer:review:1",
+          "itemKind": "constructed-response",
+          "responseKind": "CONSTRUCTED_RESPONSE",
+          "prompt": "A warm object cools in a room. Name the transfer direction, define a system boundary, and identify one measurement needed for a stronger energy account."
+        }
+      ]
+    },
+    {
+      "sectionRef": "g7-transfer:course-progress",
+      "sectionKind": "reflection",
+      "title": "COURSE PROGRESS",
+      "body": "This isolated sample does not change your course record. In a released lesson, assessed independent evidence is required before progress or mastery changes."
+    },
+    {
+      "sectionRef": "g7-transfer:next-action",
+      "sectionKind": "reflection",
+      "title": "NEXT ACTION",
+      "body": "Save the review explanation. Then continue to the next assigned Thermal Energy lesson or return to your course page."
+    }
+  ],
+  "lessonReview": {
+    "whatYouLearned": "present",
+    "evidenceYouUsed": "present",
+    "howYouDid": "present",
+    "whatToPractice": "present",
+    "reviewThisLesson": "present-with-response",
+    "courseProgress": "present",
+    "nextAction": "present"
+  }
+}
