@@ -22,7 +22,7 @@
     "test:academy-foundation-integration": "vitest run supabase/academy-foundation-integration.db.test.ts",
     "test:sync-db": "vitest run supabase/academy-cas.db.test.ts",
     "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts",
-    "test:admin-auth": "vitest run src/admin/authorization.test.ts netlify/functions/_shared/admin-authorization.test.js netlify/functions/admin-authorization.test.js supabase/academy-admin-authorization.db.test.ts",
+    "test:admin-auth": "vitest run src/admin/authorization.test.ts netlify/functions/_shared/admin-authorization.test.js netlify/functions/_shared/admin-step-up-assurance.test.js netlify/functions/admin-authorization.test.js supabase/academy-admin-authorization.db.test.ts",
     "test:admin-browser": "playwright test --config playwright.admin.config.ts",
     "audit:family-pilot-launch": "npm run audit:learner-release && node scripts/audit-final-family-pilot-launch.mjs",
     "audit:learner-release": "node scripts/audit-learner-release/audit.mjs",

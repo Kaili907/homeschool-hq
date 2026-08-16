@@ -1,5 +1,6 @@
 export * from './contracts'
 export * from './authorization'
+export * from './stepUpAssurance'
 export * from './systemHealth'
 export * from './safetyOperationsModel'
 export * from './safetyOperationsHttpSource'
