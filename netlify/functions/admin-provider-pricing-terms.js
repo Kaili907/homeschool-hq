@@ -1,6 +1,10 @@
 import { createHash, randomBytes } from 'node:crypto'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import {
+  ADMIN_CRITICAL_ACTIONS,
+  createAdminCriticalActionEnforcer,
+} from './_shared/admin-critical-actions.js'
+import {
   AdminProviderPricingSourceError,
   createAdminProviderPricingSource,
 } from './_shared/admin-provider-pricing-source.js'
@@ -188,6 +192,11 @@ export function createAdminProviderPricingTermsHandler(overrides = {}) {
     mutationClientFactory: overrides.mutationClientFactory,
   })
   const tokenFactory = overrides.tokenFactory ?? (() => randomBytes(32).toString('base64url'))
+  const criticalActions = overrides.criticalActions ?? createAdminCriticalActionEnforcer({
+    stepUpAssurance: overrides.stepUpAssurance,
+    audit: overrides.criticalActionAudit,
+    now: overrides.criticalActionNow,
+  })
 
   return async (event) => {
     const path = event?.path ?? ''
@@ -224,6 +233,20 @@ export function createAdminProviderPricingTermsHandler(overrides = {}) {
       }
       if (isCommit) {
         const request = parseProviderPricingCommitRequest(event)
+        const resourceId = [
+          request.provider,
+          request.providerProductId,
+          request.providerModelId,
+          request.logicalModelTier ?? 'none',
+          request.usageUnit,
+          request.effectiveFrom,
+        ].map(encodeURIComponent).join('/')
+        const assured = await criticalActions.enforce(event, {
+          actorId: authorized.principal.userId,
+          action: ADMIN_CRITICAL_ACTIONS.COMMIT_PROVIDER_PRICING,
+          resource: { type: 'provider-pricing-dimension', id: resourceId },
+        })
+        if (!assured.ok) return assured.response
         const { confirmationToken, ...immutableRequest } = request
         return jsonResponse(200, await source.commit(
           authorized.accessToken,
@@ -231,10 +254,14 @@ export function createAdminProviderPricingTermsHandler(overrides = {}) {
           digest(confirmationToken),
         ))
       }
-      return jsonResponse(200, await source.end(
-        authorized.accessToken,
-        parseProviderPricingEndRequest(event),
-      ))
+      const request = parseProviderPricingEndRequest(event)
+      const assured = await criticalActions.enforce(event, {
+        actorId: authorized.principal.userId,
+        action: ADMIN_CRITICAL_ACTIONS.END_PROVIDER_PRICING,
+        resource: { type: 'provider-pricing-term', id: request.termId },
+      })
+      if (!assured.ok) return assured.response
+      return jsonResponse(200, await source.end(authorized.accessToken, request))
     } catch (error) {
       return errorForSource(error)
     }
