@@ -82,8 +82,11 @@ function harness(options = {}) {
   const rpcCalls = []
   const fetchImpl = options.fetchImpl ?? (async (url, init) => {
     rpcCalls.push({ url, init })
-    return new Response(JSON.stringify(options.rpcBody ?? verifiedGrant()), {
-      status: options.rpcStatus ?? 200,
+    const actorAuthorization = url.endsWith('/rpc/academy_study_authorize_guardian_session_v1')
+    return new Response(JSON.stringify(actorAuthorization
+      ? (options.actorRpcBody ?? { schemaVersion: 1, status: 'authorized' })
+      : (options.rpcBody ?? verifiedGrant())), {
+      status: actorAuthorization ? (options.actorRpcStatus ?? 200) : (options.rpcStatus ?? 200),
       headers: { 'content-type': 'application/json' },
     })
   })
@@ -113,7 +116,7 @@ function harness(options = {}) {
     authVerifier: async () => ({
       ok: true,
       user: { id: options.actorUserId ?? IDS.actor },
-      accessToken: 'adult.access.token',
+      accessToken: options.accessToken ?? 'adult.access.token',
     }),
     now: () => Date.parse('2026-08-05T12:00:00.000Z'),
   })
@@ -224,14 +227,24 @@ describe('A6-3 durable Study-session authorization in the default composition', 
     })
     expect(proposal.sessionId).not.toBe(IDS.callerSession)
 
+    const actorCall = rpcCalls.find(({ url }) =>
+      url.endsWith('/rpc/academy_study_authorize_guardian_session_v1'))
+    expect(actorCall).toBeDefined()
+    expect(actorCall.init.headers.Authorization).toBe('Bearer adult.access.token')
+    expect(JSON.parse(actorCall.init.body)).toEqual({
+      p_required_capability: 'student:attempts:create',
+      p_token_digest: expect.stringMatching(/^[0-9a-f]{64}$/),
+    })
+
     const verifyCall = rpcCalls.find(({ url }) => url.endsWith('/rpc/academy_study_verify_session_v1'))
     expect(verifyCall).toBeDefined()
     const parameters = JSON.parse(verifyCall.init.body)
     expect(parameters.p_required_capability).toBe('student:attempts:create')
     expect(parameters.p_token_digest).toMatch(/^[0-9a-f]{64}$/)
-    expect(parameters.p_actor_user_id).toBe(IDS.actor)
+    expect(parameters).not.toHaveProperty('p_actor_user_id')
+    expect(verifyCall.init.headers.Authorization).toBe(`Bearer ${SERVICE_KEY}`)
     // The opaque reference itself never leaves this process.
-    expect(JSON.stringify(verifyCall.init)).not.toContain(SESSION_REFERENCE)
+    expect(JSON.stringify(rpcCalls)).not.toContain(SESSION_REFERENCE)
   })
 
   it.each([
@@ -265,12 +278,15 @@ describe('A6-3 durable Study-session authorization in the default composition', 
   it('refuses a verified session whose learner contradicts the caller-supplied reference', async () => {
     const port = createVerifiedStudySessionAuthorizationPort({
       env: ENV,
-      fetchImpl: async () => new Response(JSON.stringify(verifiedGrant()), {
-        headers: { 'content-type': 'application/json' },
-      }),
+      fetchImpl: async (url) => new Response(JSON.stringify(
+        url.endsWith('/rpc/academy_study_authorize_guardian_session_v1')
+          ? { schemaVersion: 1, status: 'authorized' }
+          : verifiedGrant(),
+      ), { headers: { 'content-type': 'application/json' } }),
     })
     const denied = await port.resolve({
       actorUserId: IDS.actor,
+      accessToken: 'adult.access.token',
       sessionReference: SESSION_REFERENCE,
       studentRef: { kind: 'academy-student-id', value: '88888888-8888-4888-8888-888888888888' },
     })
@@ -278,6 +294,7 @@ describe('A6-3 durable Study-session authorization in the default composition', 
 
     const authorized = await port.resolve({
       actorUserId: IDS.actor,
+      accessToken: 'adult.access.token',
       sessionReference: SESSION_REFERENCE,
       studentRef: { kind: 'academy-student-id', value: IDS.student.toUpperCase() },
     })
@@ -286,16 +303,9 @@ describe('A6-3 durable Study-session authorization in the default composition', 
   })
 
   it('denies a copied valid bearer under a different authenticated actor with the same opaque 403', async () => {
-    const bindToGrantOwner = async (_url, init) => {
-      const parameters = JSON.parse(init.body)
-      const body = parameters.p_actor_user_id === IDS.actor
-        ? verifiedGrant()
-        : { schemaVersion: 1, status: 'denied', code: 'student-session-invalid' }
-      return new Response(JSON.stringify(body), { headers: { 'content-type': 'application/json' } })
-    }
     const copied = harness({
-      fetchImpl: bindToGrantOwner,
       actorUserId: IDS.otherActor,
+      actorRpcBody: { schemaVersion: 1, status: 'denied' },
     })
     const forged = harness({
       rpcBody: { schemaVersion: 1, status: 'denied', code: 'student-session-invalid' },
@@ -319,6 +329,7 @@ describe('A6-3 durable Study-session authorization in the default composition', 
     ['an unreachable verification store', { fetchImpl: async () => { throw new Error('network') } }],
     ['a failing verification store', { rpcStatus: 503, rpcBody: {} }],
     ['a malformed verification result', { rpcBody: { schemaVersion: 1, status: 'verified' } }],
+    ['an unavailable actor authorization check', { actorRpcStatus: 503, actorRpcBody: {} }],
   ])('fails closed for %s with no privileged effect and no secret exposure', async (_label, options) => {
     const { handler, proposals, classifier } = harness(options)
     const spy = vi.spyOn(classifier, 'classify')

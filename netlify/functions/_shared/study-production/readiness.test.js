@@ -190,10 +190,13 @@ describe('Study production readiness endpoint', () => {
       expiresAtMs: Date.parse('2026-08-01T16:00:05.000Z'),
       registrations: [{ dependency: 'delivery-provider', status: 'not-ready', secret: 'hidden' }],
     }))
-    const authVerifier = vi.fn(async () => ({ ok: true, user: { id: 'synthetic-user' } }))
+    const requireAuthorization = vi.fn(async () => ({
+      ok: true,
+      principal: { userId: 'synthetic-user' },
+    }))
     const handler = createStudyProductionReadinessHandler({
       readiness: { check },
-      authVerifier,
+      authorization: { require: requireAuthorization },
     })
 
     const response = await handler({
@@ -208,7 +211,10 @@ describe('Study production readiness endpoint', () => {
       expiresAt: '2026-08-01T16:00:05.000Z',
     })
     expect(response.body).not.toMatch(/dependency|provider|recipient|secret|hidden/i)
-    expect(authVerifier).toHaveBeenCalledTimes(1)
+    expect(requireAuthorization).toHaveBeenCalledWith(
+      expect.anything(),
+      'study:production-readiness:read',
+    )
     expect(check).toHaveBeenCalledTimes(1)
 
     expect((await handler({ httpMethod: 'POST', path: '/api/study/production/readiness' })).statusCode).toBe(405)
@@ -221,7 +227,9 @@ describe('Study production readiness endpoint', () => {
     const check = vi.fn()
     const handler = createStudyProductionReadinessHandler({
       readiness: { check },
-      authVerifier: async () => ({ ok: false, response: { statusCode: 401, body: '{}' } }),
+      authorization: {
+        require: async () => ({ ok: false, response: { statusCode: 401, body: '{}' } }),
+      },
     })
     const response = await handler({ httpMethod: 'GET', path: '/api/study/production/readiness' })
     expect(response.statusCode).toBe(401)
