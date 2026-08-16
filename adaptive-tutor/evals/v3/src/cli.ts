@@ -1,13 +1,13 @@
-import { decideCertification } from "./certification.ts";
-import { runDeterministicFixtures } from "./runner.ts";
+import { decideCertification } from "./certification.js";
+import { runDeterministicFixtures } from "./runner.js";
 import {
   DETERMINISTIC_FIXTURES,
   MOCK_PROVENANCE,
-} from "../fixtures/certification-fixtures.ts";
+} from "../fixtures/certification-fixtures.js";
 
-const { run, adapter } = await runDeterministicFixtures({
+const { run, adapter, grader } = await runDeterministicFixtures({
   runId: "deterministic-commercial-fixtures-r1",
-  harnessRevision: "tutor-v2-eval-harness:v3-r1",
+  harnessRevision: "tutor-v2-eval-harness:v3-composed-r1",
   provenance: MOCK_PROVENANCE,
   fixtures: DETERMINISTIC_FIXTURES,
 });
@@ -19,6 +19,7 @@ process.stdout.write(`${JSON.stringify({
   cases: run.cases.length,
   attempts: run.attempts.length,
   mockProviderCalls: adapter.requests.length,
+  graderCalls: grader.invocations.length,
   containmentPassed: decision.containmentPassed,
   commercialClassification: decision.classification,
   reasonCodes: decision.reasonCodes,

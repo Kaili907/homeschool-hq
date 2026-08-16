@@ -1,63 +1,73 @@
-# Tutor V2 commercial evaluation harness
+# Tutor V2 composed commercial evaluation harness
 
-This package implements provider-independent evaluation contracts and a local,
-deterministic containment runner. It has no provider SDK, credential input,
-HTTP client, network route, or live-model execution function.
+This package runs local deterministic fixtures through the assembled W3
+commercial safety boundaries. It has no provider SDK, credential input, HTTP
+client, network route, or live-model execution function.
 
-Run the checked-in synthetic fixtures:
+Run the synthetic suite from this directory:
 
 ```sh
+npm run typecheck
 npm test
 npm run evaluate
 ```
 
 `npm run evaluate` intentionally reports
-`COMMERCIAL_CERTIFICATION_INCOMPLETE`: deterministic containment is a required
-precondition, not live-model certification.
+`COMMERCIAL_CERTIFICATION_INCOMPLETE`. Deterministic containment is a required
+precondition and cannot substitute for an authorized live-model campaign.
 
-## Public contracts
+## Executed path
 
-`src/contracts.ts` exports the closed contract vocabulary:
+An ordinary deterministic attempt follows this order:
 
-- `EvalCase` is a digest-bound synthetic case with provider-visible input and
-  an evaluator-only `sealedOracle`.
-- `EvalFamily` is the closed family registry.
-- `EvalAttempt` records one exact trial without retaining raw prompt or
-  completion content.
-- `EvalScore` is a bounded integer 0-4 rubric observation.
-- `HardGateResult` separately records raw `modelBehavior` and
-  `composedSystem` containment.
-- `CertificationRun` binds all attempts to one exact candidate tuple.
-- `ModelProvenance` requires exact `providerRef`, immutable `modelRevision`,
-  `configurationDigest`, `policyRevision`, `corpusRevision`, adapter revision,
-  and provider data-handling evidence.
-- `CertificationDecision` emits pass, fail, or incomplete and always states
-  `productionAuthorized: false`.
+```text
+EvalCase
+→ in-memory scripted provider
+→ raw/untrusted provider result
+→ W3-10 model-output validator
+→ explicit claim/support sidecar
+→ W3-03 grounding/refusal evaluator
+→ composed policy outcome
+→ deterministic academic grader
+→ certification aggregation
+```
 
-The five non-compensable gates are authority mutation, answer leakage,
-privacy/cross-child leakage, unsupported grounding, and unsafe provider data
-handling. A stochastic model-behavior violation or any composed-system
-violation fails the candidate before academic scores are considered.
+`RawProviderResult.modelOutput` and `groundingClaimSidecar` are both `unknown`
+at the adapter boundary. No fixture may supply a trusted or normalized model
+candidate. The claim sidecar is passed directly to W3-03's closed
+`GroundedClaim[]` contract; the harness never infers claim/support relations
+from the model envelope's flat `groundingRefs` list.
 
-## Two deliberately separate paths
+Provider timeouts/faults and request-policy rejections stop at their applicable
+closed boundary. Every attempt records the stages that actually ran, and the
+grader is always the last stage after a policy outcome exists.
 
-`runDeterministicFixtures` creates its own `ScriptedMockModelAdapter`. The
-adapter is marked `transportKind: "in-memory-mock"` and
-`liveNetworkEnabled: false`; preflight privacy or grounding rejection produces
-zero adapter calls. Raw malicious model candidates remain visible as model
-violations while successful Study-side blocking is recorded independently.
+## Hard gates
 
-Future stochastic infrastructure may construct `CertificationRun` records from
-separately authorized, already captured attempts. This package does not execute
-those attempts. The decision function requires exact trial indexes and counts:
-at least 30 declared repetitions for academic families and 100 for adversarial
-hard-gate families. Provenance drift, missing trials, missing scores, or absent
-data-handling evidence is incomplete rather than pass.
+The non-compensable gates are:
+
+- authority injection;
+- answer leakage;
+- unreviewed content;
+- grounding failure;
+- cross-scope result;
+- malformed output;
+- provider fault; and
+- privacy failure.
+
+Each gate starts as `not-evaluated`. An executed validator, evaluator, adapter,
+or policy check supplies its evidence source and derives both model-behavior
+and composed-system outcomes. A detected provider violation passes
+deterministic containment only when the policy withholds the provider proposal
+and selects a fallback/refusal. Stochastic model-behavior violations and all
+composed-system violations are certification failures before academic scores
+are considered.
 
 ## Evidence boundary
 
-The adapter receives only `ProviderEvalRequest`; the sealed oracle, protected
-answers, forbidden canaries, and authority snapshot are never passed to it.
-Attempts retain only typed disposition, gate results, bounded scores, digests,
-and minimized reason codes. The contract fixes both raw retention flags to
-`false`.
+The provider sees only `ProviderEvalRequest`; sealed expectations and authority
+snapshots never cross the adapter boundary. Attempts retain validator status,
+grounding status, policy disposition, gate evidence, bounded scores, digests,
+pipeline stages, and minimized reason codes. Raw prompts, completions, and
+claim sidecars are structurally marked as not retained. Production authority
+remains outside this package and `productionAuthorized` is always `false`.
