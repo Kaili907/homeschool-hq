@@ -1,0 +1,62 @@
+.director-review {
+  min-height: 100vh;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  background: #f3f6f8;
+  color: #16202d;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.director-review *, .director-review *::before, .director-review *::after { box-sizing: border-box; }
+.director-review button, .director-review select, .director-review textarea { font: inherit; }
+.director-review button { min-height: 2.8rem; padding: .65rem .9rem; border: 1px solid #8da1ae; border-radius: .65rem; background: #fff; color: #15384b; font-weight: 750; cursor: pointer; }
+.director-review button:disabled { cursor: not-allowed; opacity: .45; }
+.director-review button:focus-visible, .director-review select:focus-visible, .director-review textarea:focus-visible { outline: 3px solid #e9a23b; outline-offset: 2px; }
+
+.director-review__hero, .director-review__lesson-header { max-width: 88rem; margin: 0 auto 1.25rem; }
+.director-review__hero { padding: clamp(1.25rem, 4vw, 3rem); border-radius: 1.4rem; background: #173b4d; color: #fff; }
+.director-review__hero h1, .director-review__lesson-header h1 { margin: .25rem 0 .75rem; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.05; }
+.director-review__hero > p:last-of-type { max-width: 72ch; font-size: 1.05rem; line-height: 1.65; }
+.director-review__kicker { margin: 0; color: #68d0d5; font-size: .78rem; font-weight: 850; letter-spacing: .11em; text-transform: uppercase; }
+.director-review__summary { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.4rem; }
+.director-review__summary span { padding: .55rem .8rem; border: 1px solid rgb(255 255 255 / 28%); border-radius: 99rem; background: rgb(255 255 255 / 8%); }
+
+.director-review__filters { display: flex; max-width: 88rem; flex-wrap: wrap; gap: 1rem; align-items: end; margin: 0 auto; padding: 1rem; border: 1px solid #cad5dc; border-radius: 1rem; background: #fff; }
+.director-review__filters > label, .director-review__notes label { display: grid; gap: .35rem; min-width: 12rem; font-weight: 750; }
+.director-review__filters select, .director-review__notes select, .director-review__notes textarea { width: 100%; min-height: 2.8rem; padding: .6rem .7rem; border: 1px solid #8da1ae; border-radius: .6rem; background: #fff; color: #16202d; }
+.director-review__filters fieldset { display: flex; min-width: 0; flex-wrap: wrap; gap: .75rem; padding: .35rem .7rem .65rem; border: 1px solid #cad5dc; border-radius: .6rem; }
+.director-review__filters legend { padding: 0 .3rem; font-size: .85rem; font-weight: 750; }
+.director-review__results { max-width: 88rem; margin: 1rem auto; color: #4d5d69; font-weight: 700; }
+.director-review__grid { display: grid; max-width: 88rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1rem; margin: 0 auto; }
+.director-review__tile { display: flex; min-width: 0; flex-direction: column; padding: 1.15rem; border: 1px solid #cad5dc; border-radius: 1rem; background: #fff; box-shadow: 0 .35rem 1.2rem rgb(17 36 48 / 7%); }
+.director-review__tile-top { display: flex; justify-content: space-between; gap: .75rem; color: #17666f; font-size: .8rem; font-weight: 850; letter-spacing: .05em; text-transform: uppercase; }
+.director-review__tile h2 { margin: .8rem 0 .4rem; font-size: 1.2rem; line-height: 1.25; }
+.director-review__tile p { margin: .35rem 0; line-height: 1.45; }
+.director-review__tile button { width: 100%; margin-top: auto; border-color: #17666f; background: #17666f; color: #fff; }
+.director-review__status { align-self: start; margin: .75rem 0 1rem !important; padding: .3rem .55rem; border-radius: 99rem; background: #eef1f3; font-size: .76rem; font-weight: 850; text-transform: uppercase; }
+.director-review__status--approved { background: #dff7ea; color: #17603a; }
+.director-review__status--needs_changes { background: #fee7e5; color: #922a24; }
+
+.director-review--lesson { background: #e8eef1; }
+.director-review__lesson-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.director-review__lesson-header h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.director-review__lesson-header p:last-child { margin-bottom: 0; color: #4d5d69; }
+.director-review__navigator { display: grid; max-width: 64rem; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .65rem; margin: 0 auto 1rem; }
+.director-review__boundary { max-width: 64rem; margin: 0 auto 1rem; padding: .75rem 1rem; border: 1px solid #d29b49; border-radius: .7rem; background: #fff9e9; color: #674314; font-size: .9rem; font-weight: 650; }
+.director-review__player { max-width: 64rem; margin: 0 auto; padding: clamp(.75rem, 2vw, 1.5rem); border-radius: 1.4rem; background: #f8fafc; box-shadow: 0 .75rem 2.5rem rgb(17 36 48 / 11%); }
+.director-review__notes { display: grid; max-width: 64rem; grid-template-columns: minmax(14rem, 1.1fr) minmax(12rem, .7fr) minmax(16rem, 1.5fr); gap: 1rem; margin: 1.25rem auto 0; padding: 1rem; border: 1px solid #a9bac4; border-radius: 1rem; background: #fff; }
+.director-review__notes h2 { margin: .2rem 0; }
+.director-review__notes p { margin: .3rem 0; color: #53636d; font-size: .9rem; }
+.director-review__notes code { display: inline-block; max-width: 100%; overflow-wrap: anywhere; font-size: .78rem; }
+.director-review__notes .director-review__kicker { color: #17666f; }
+.director-review__notes textarea { resize: vertical; }
+
+@media (max-width: 48rem) {
+  .director-review__navigator { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .director-review__notes { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 28rem) {
+  .director-review { padding: .65rem; }
+  .director-review__navigator { grid-template-columns: 1fr; }
+  .director-review__filters > label, .director-review__filters fieldset { width: 100%; }
+}

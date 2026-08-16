@@ -5,6 +5,8 @@ import { isFamilyCloudBrowserEnabledFromHost } from './study/family-pilot/cloud-
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
 
+const DirectorReviewGallery = lazy(() => import('./study/director-review/DirectorReviewGallery'))
+
 // Family Pilot is a separate root composition. Keeping both roots behind dynamic
 // imports means selecting this route cannot evaluate legacy sync, scoring, Tutor
 // transcript persistence, or profile-upload modules before route selection.
@@ -25,6 +27,17 @@ function familyPilotSelectedAtBoot(): boolean {
 }
 
 export default function App() {
+  if (window.location.pathname === '/director-review/curriculum-r2') {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the Director Review Gallery.</main>}>
+        <DirectorReviewGallery />
+      </Suspense>
+    )
+  }
+  return <AcademyApp />
+}
+
+function AcademyApp() {
   const [familyPilotSelected, setFamilyPilotSelected] = useState(familyPilotSelectedAtBoot)
   const [returnToLegacyHome, setReturnToLegacyHome] = useState(false)
 
