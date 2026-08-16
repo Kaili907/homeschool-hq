@@ -84,8 +84,6 @@ export interface FinalProductionBinding {
   readonly courseRef: string
   readonly grade: number
   readonly subject: SupportedSubject
-  readonly productionPackageRef: string
-  readonly productionSourceCommit: string
   readonly completionAuthority: FinalFamilyPilotCompletionAuthority
   readonly sourceReadinessKind: 'STATIC_READY' | 'STATIC_VERIFIED_SOURCE' | 'DYNAMIC_SOURCE_REQUIRED'
   readonly sourceRuntimeState: 'READY' | 'PENDING_SOURCE_ATTACHMENT'

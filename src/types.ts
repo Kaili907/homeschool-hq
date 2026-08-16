@@ -388,7 +388,7 @@ export interface Profile {
   id: string
   name: string
   grade: Grade
-  /** 4-digit, kid-chosen. '' = not set yet (first sign-in creates it). */
+  /** Local verifier for a 4-digit kid-chosen PIN. '' = not set yet. */
   pin: string
   theme: ThemeId
   skills: Partial<Record<SkillId, SkillState>>
@@ -795,7 +795,7 @@ export interface AppState {
   schemaVersion: 2
   profiles: Record<string, Profile>
   activeProfileId: string | null
-  /** gates the Grown-Ups panel. '' = not set yet. */
+  /** Local verifier for the PIN that gates the Grown-Ups panel. '' = not set yet. */
   parentPin: string
   /** MT-1: family-wide tutor voice mute (additive, optional; undefined = not muted). */
   tutorMuted?: boolean

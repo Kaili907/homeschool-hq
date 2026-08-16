@@ -11,6 +11,7 @@ import {
   supabaseUrl,
 } from './config'
 import { validateRemoteProfileRows } from './provenance'
+import { sanitizeProfileForSync } from './privacy'
 import type {
   CloudPullResult,
   CloudPushResult,
@@ -548,7 +549,7 @@ export async function pushProfiles(
 export function profileRowsForMutation(rows: RemoteProfileRow[]) {
   return rows.map((row) => ({
     profile_id: row.profile_id,
-    data: row.data,
+    data: sanitizeProfileForSync(row.data),
     updated_at: row.updated_at,
   }))
 }

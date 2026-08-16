@@ -4,7 +4,6 @@ import {
   STRUCTURED_PROJECTION_VERSION,
   assertLearnerSafeMaterial,
   createProjectionStats,
-  isLearnerSafeResourceRef,
   mergeProjectionStats,
   projectJsonLearnerMaterial,
   projectMarkdownLearnerMaterial,
@@ -92,13 +91,17 @@ for (const course of runtimeManifest.courses) {
   }
   const rowByLesson = new Map(rows.map((row) => [row.lessonRef, row]))
   const safeRows = rows.map((row) => {
-    const safeResourceRefs = row.resourceRefs.filter(isLearnerSafeResourceRef)
-    projectionStats.adultResourceLocatorsRemoved += row.resourceRefs.length - safeResourceRefs.length
+    projectionStats.adultResourceLocatorsRemoved += row.resourceRefs.length
     return {
       ...row,
-      // Adult answer/scoring resource locators are not needed to render or start
-      // the learner lesson and therefore never enter its lazy browser payload.
-      resourceRefs: [...new Set(safeResourceRefs)],
+      // Source/package locators are build-time provenance. Even learner-safe
+      // locators expose server-only repository structure and are unnecessary at
+      // runtime, so only readiness state crosses the browser boundary.
+      resourceRefs: [],
+      sourceReadiness: {
+        ...row.sourceReadiness,
+        sourceRefs: [],
+      },
     }
   })
   const safeBindings = {}
@@ -121,8 +124,6 @@ for (const course of runtimeManifest.courses) {
       courseRef: binding.courseRef,
       grade: binding.grade,
       subject: binding.subject,
-      productionPackageRef: binding.productionPackageRef,
-      productionSourceCommit: binding.productionSourceCommit,
       completionAuthority: binding.completionAuthority,
       sourceReadinessKind: binding.sourceReadinessKind,
       sourceRuntimeState: binding.sourceRuntimeState,
