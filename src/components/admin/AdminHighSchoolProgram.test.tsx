@@ -1,6 +1,10 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { HIGH_SCHOOL_PROGRAM_SNAPSHOT, type HighSchoolProgramSnapshot } from '../../admin/high-school-program'
+import {
+  HIGH_SCHOOL_PROGRAM_RELEASE_SNAPSHOT,
+  HIGH_SCHOOL_PROGRAM_SNAPSHOT,
+  type HighSchoolProgramSnapshot,
+} from '../../admin/high-school-program'
 import { AdminHighSchoolProgram } from './AdminHighSchoolProgram'
 
 function render(snapshot?: HighSchoolProgramSnapshot) {
@@ -8,11 +12,13 @@ function render(snapshot?: HighSchoolProgramSnapshot) {
 }
 
 describe('AdminHighSchoolProgram — independent render', () => {
-  it('renders without props, using the frozen snapshot', () => {
+  it('renders without props, using the admitted release binding', () => {
     const html = renderToStaticMarkup(<AdminHighSchoolProgram />)
     expect(html).toContain('Manuel Academy Grades 8')
     expect(html).toContain(HIGH_SCHOOL_PROGRAM_SNAPSHOT.contractId)
     expect(html).toContain(HIGH_SCHOOL_PROGRAM_SNAPSHOT.sourceRef)
+    expect(html).toContain('2.0.0 · ADMITTED')
+    expect(html).toContain('90 courses · 698 units · 8,292 lessons · 699 assessments')
   })
 
   it('renders each Grade 9 → 12 column', () => {
@@ -24,7 +30,7 @@ describe('AdminHighSchoolProgram — independent render', () => {
 
   it('names every high-school course from the snapshot', () => {
     const html = render()
-    for (const course of HIGH_SCHOOL_PROGRAM_SNAPSHOT.courses) {
+    for (const course of HIGH_SCHOOL_PROGRAM_RELEASE_SNAPSHOT.courses) {
       if (course.grade === 8) continue
       expect(html).toContain(course.courseName)
     }
@@ -70,7 +76,7 @@ describe('AdminHighSchoolProgram — independent render', () => {
     expect(html).toContain('CONTRACTED / RECOMMENDED')
     expect(html).toContain('CONTRACTED credits G9-G12')
     // The old blanket footer must not survive: check the corrected wording.
-    expect(html).toContain('Subject-branch title')
+    expect(html).toContain('Release title')
     expect(html).toContain('Programme/planning contract embedded from')
   })
 
@@ -91,31 +97,25 @@ describe('AdminHighSchoolProgram — independent render', () => {
     expect(html).toContain('SUPERSEDED')
   })
 
-  it('renders the reconciliation table with divergence badges', () => {
+  it('renders the reconciliation table against the admitted release', () => {
     const html = render()
-    expect(html).toContain('Contract ↔ subject-branch reconciliation')
-    expect(html).toContain('DIVERGES · id scheme')
-    expect(html).toContain('DIVERGES · title + sessions')
-    expect(html).toContain('DIVERGES · title')
-    // Every reconciliation must show a subject SHA
-    for (const r of HIGH_SCHOOL_PROGRAM_SNAPSHOT.reconciliations) {
-      if (r.subjectSha) expect(html).toContain(r.subjectSha)
-    }
+    expect(html).toContain('Contract ↔ admitted release reconciliation')
+    expect(html).toContain('MATCHES CONTRACT')
+    expect(html).toContain('DIVERGES · sessions')
+    expect(html).toContain('family-pilot-r1')
   })
 
-  it('surfaces the science id-scheme divergence explicitly', () => {
+  it('shows the normalized admitted science ids instead of superseded subject-branch ids', () => {
     const html = render()
-    expect(html).toContain('ma-hs9-biology')
-    expect(html).toContain('ma-hs10-chemistry')
-    expect(html).toContain('ma-hs11-physics')
-    expect(html).toContain('ma-hs12-earth-space-environmental')
+    for (const id of ['ma-g9-science', 'ma-g10-science', 'ma-g11-science', 'ma-g12-science']) expect(html).toContain(id)
+    expect(html).not.toContain('ma-hs10-chemistry')
   })
 
-  it('renders the delivery / integration section with a NOT_COVERED verdict', () => {
+  it('renders the delivery / integration section from admitted release evidence', () => {
     const html = render()
     expect(html).toContain('Delivery / integration status')
-    expect(html).toContain('NOT SERVED')
-    expect(html).toContain('scripts/build-curriculum.mjs')
+    expect(html).toContain('SERVED')
+    expect(html).toContain('Every recorded delivery fact reports the programme as served')
   })
 
   it('flips delivery status to COVERED when every fact is marked served', () => {

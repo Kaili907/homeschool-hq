@@ -20,6 +20,11 @@ import {
   type Profile,
 } from '../types'
 import type { AdminCapability } from './contracts'
+import {
+  ADMIN_EXPANDED_RELEASE,
+  type AdminReleaseCourse,
+  type AdminReleaseReadModel,
+} from './releaseDataModel'
 
 export const LEARNERS_READ_CAPABILITY = 'learners:read' as const
 export const ADMIN_LEARNER_REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/
@@ -305,28 +310,36 @@ export interface BuildLearnerAnalyticsInput {
   readonly today: ISODate
   readonly observedAt: string
   readonly academyCatalogs?: readonly AcademyCatalog[]
+  readonly release?: AdminReleaseReadModel
   readonly studyByProfile?: Readonly<Record<string, StudyLearnerEvidenceState>>
 }
 
 interface CatalogIndex {
   readonly courseById: ReadonlyMap<string, AcademyCatalog['courses'][number]>
   readonly gradeByCourseId: ReadonlyMap<string, AcademyCatalog['grade']>
+  readonly releaseCourseById: ReadonlyMap<string, AdminReleaseCourse>
   readonly lessonLabelById: ReadonlyMap<string, string>
   readonly assessmentLabelById: ReadonlyMap<string, string>
   readonly releaseVersions: ReadonlySet<string>
 }
 
-function indexCatalogs(catalogs: readonly AcademyCatalog[]): CatalogIndex {
+function releaseCourseKey(releaseVersion: string, courseId: string): string {
+  return `${releaseVersion}\u0000${courseId}`
+}
+
+function indexCatalogs(catalogs: readonly AcademyCatalog[], release: AdminReleaseReadModel): CatalogIndex {
   const courseById = new Map<string, AcademyCatalog['courses'][number]>()
   const gradeByCourseId = new Map<string, AcademyCatalog['grade']>()
+  const releaseCourseById = new Map<string, AdminReleaseCourse>()
   const lessonLabelById = new Map<string, string>()
   const assessmentLabelById = new Map<string, string>()
   const releaseVersions = new Set<string>()
   for (const catalog of catalogs) {
     releaseVersions.add(catalog.releaseVersion)
     for (const course of catalog.courses) {
-      courseById.set(course.courseId, course)
-      gradeByCourseId.set(course.courseId, catalog.grade)
+      const key = releaseCourseKey(catalog.releaseVersion, course.courseId)
+      courseById.set(key, course)
+      gradeByCourseId.set(key, catalog.grade)
       const subject = ACADEMY_SUBJECT_LABELS[course.subject] ?? course.subject
       for (const unit of course.units) {
         for (const lessonId of unit.lessonIds) {
@@ -339,14 +352,21 @@ function indexCatalogs(catalogs: readonly AcademyCatalog[]): CatalogIndex {
       }
     }
   }
-  return { courseById, gradeByCourseId, lessonLabelById, assessmentLabelById, releaseVersions }
+  releaseVersions.add(release.releaseVersion)
+  for (const course of release.courses) {
+    releaseCourseById.set(releaseCourseKey(release.releaseVersion, course.courseRef), course)
+  }
+  return { courseById, gradeByCourseId, releaseCourseById, lessonLabelById, assessmentLabelById, releaseVersions }
 }
 
 function curriculumEnrollment(profile: Profile, index: CatalogIndex): CurriculumEnrollmentEvidence {
   if (!profile.academy) return { status: 'not-configured' }
   const releaseAvailable = index.releaseVersions.has(profile.academy.releaseVersion)
   const matchedCourseCount = releaseAvailable
-    ? profile.academy.courseIds.filter((courseId) => index.courseById.has(courseId)).length
+    ? profile.academy.courseIds.filter((courseId) => {
+        const key = releaseCourseKey(profile.academy!.releaseVersion, courseId)
+        return index.courseById.has(key) || index.releaseCourseById.has(key)
+      }).length
     : 0
   const completeCatalogMatch = profile.academy.courseIds.length > 0
     && matchedCourseCount === profile.academy.courseIds.length
@@ -390,7 +410,7 @@ function masterySummary(profile: Profile, index: CatalogIndex): LearnerEvidenceV
   const mathSkills = skillsForGrade(profile.grade)
   const states = mathSkills.map((skill) => statusOf(profile.skills[skill.id]))
   const academyLessonIds = (profile.academy?.courseIds ?? []).flatMap((courseId) =>
-    index.courseById.get(courseId)?.units.flatMap((unit) => unit.lessonIds) ?? [],
+    index.courseById.get(releaseCourseKey(profile.academy!.releaseVersion, courseId))?.units.flatMap((unit) => unit.lessonIds) ?? [],
   )
   const academyStates = academyLessonIds.map((lessonId) => masteryOf(profile.academy?.lessons[lessonId]))
   if (states.length === 0 && academyStates.length === 0) {
@@ -434,22 +454,30 @@ function coursesFor(profile: Profile, catalogs: readonly AcademyCatalog[], index
   }))
 
   const enrolled = profile.academy?.courseIds ?? []
+  const releaseVersion = profile.academy?.releaseVersion ?? ''
   const releaseAvailable = profile.academy
     ? index.releaseVersions.has(profile.academy.releaseVersion)
     : true
   const knownCourses = releaseAvailable
-    ? enrolled.map((courseId) => index.courseById.get(courseId)).filter((course): course is AcademyCatalog['courses'][number] => !!course)
+    ? enrolled.map((courseId) => index.courseById.get(releaseCourseKey(releaseVersion, courseId))).filter((course): course is AcademyCatalog['courses'][number] => !!course)
+    : []
+  const knownCourseIds = new Set(knownCourses.map((course) => course.courseId))
+  const releaseCourses = releaseAvailable
+    ? enrolled
+        .filter((courseId) => !knownCourseIds.has(courseId))
+        .map((courseId) => index.releaseCourseById.get(releaseCourseKey(releaseVersion, courseId)))
+        .filter((course): course is AdminReleaseCourse => !!course)
     : []
   if (knownCourses.length > 0) {
     const catalog: AcademyCatalog = {
-      releaseVersion: profile.academy?.releaseVersion ?? catalogs[0]?.releaseVersion ?? '',
-      grade: index.gradeByCourseId.get(knownCourses[0].courseId) ?? catalogs[0]?.grade ?? '5',
+      releaseVersion,
+      grade: index.gradeByCourseId.get(releaseCourseKey(releaseVersion, knownCourses[0].courseId)) ?? catalogs[0]?.grade ?? '5',
       courses: knownCourses,
     }
     const progress = courseProgress(profile, catalog)
     for (const course of knownCourses) {
       const summary = progress.find((item) => item.courseId === course.courseId)!
-      const level = index.gradeByCourseId.get(course.courseId) ?? workingLevelFor(profile, course.subject as AcademySubject)
+      const level = index.gradeByCourseId.get(releaseCourseKey(releaseVersion, course.courseId)) ?? workingLevelFor(profile, course.subject as AcademySubject)
       const subjectLabel = ACADEMY_SUBJECT_LABELS[course.subject] ?? safeLabel(course.subject, 'Academy course')
       courses.push({
         courseRef: course.courseId,
@@ -465,7 +493,24 @@ function coursesFor(profile: Profile, catalogs: readonly AcademyCatalog[], index
     }
   }
 
-  if (enrolled.length > knownCourses.length) {
+  for (const course of releaseCourses) {
+    const lessonStates = Object.entries(profile.academy?.lessons ?? {})
+      .filter(([lessonRef, state]) => state.releaseVersion === releaseVersion && lessonRef.startsWith(`${course.courseRef}-`))
+      .map(([, state]) => masteryOf(state))
+    courses.push({
+      courseRef: course.courseRef,
+      title: course.title,
+      subject: course.subject,
+      workingLevel: String(course.grade) as AdminDisplayedWorkingGrade,
+      completed: lessonStates.filter((state) => state === 'mastered').length,
+      total: course.lessonCount,
+      mastered: lessonStates.filter((state) => state === 'mastered').length,
+      reteach: lessonStates.filter((state) => state === 'developing').length,
+      source: 'academy',
+    })
+  }
+
+  if (enrolled.length > knownCourses.length + releaseCourses.length) {
     return { status: 'partial', value: courses.slice(0, LEARNER_ANALYTICS_LIMITS.courses), reason: 'catalog-partially-integrated' }
   }
   if (courses.length === 0) return { status: 'not-configured', reason: 'not-configured' }
@@ -513,7 +558,7 @@ function academyAssessments(profile: Profile, index: CatalogIndex): AssessmentEv
   const recorded = profile.academy?.assessments ?? {}
   const ids = new Set<string>(Object.keys(recorded).slice(0, LEARNER_ANALYTICS_LIMITS.assessments))
   for (const courseId of profile.academy?.courseIds ?? []) {
-    const course = index.courseById.get(courseId)
+    const course = index.courseById.get(releaseCourseKey(profile.academy!.releaseVersion, courseId))
     for (const unit of course?.units ?? []) {
       if (unit.hasAssessment) ids.add(`${courseId}-u${String(unit.unitNumber).padStart(2, '0')}-assessment`)
     }
@@ -693,7 +738,7 @@ function detailFor(profile: Profile, input: BuildLearnerAnalyticsInput, index: C
  * assistant.sessions, assessment answers, audio, or free-text flag reasons.
  */
 export function buildLearnerAnalyticsSnapshot(input: BuildLearnerAnalyticsInput): LearnerAnalyticsSnapshot {
-  const index = indexCatalogs(input.academyCatalogs ?? [])
+  const index = indexCatalogs(input.academyCatalogs ?? [], input.release ?? ADMIN_EXPANDED_RELEASE)
   const profiles = input.profiles.slice(0, LEARNER_ANALYTICS_LIMITS.learners)
   const details = Object.fromEntries(profiles.map((profile) => [profile.id, detailFor(profile, input, index)]))
   const learners = profiles.map((profile): LearnerListItem => {

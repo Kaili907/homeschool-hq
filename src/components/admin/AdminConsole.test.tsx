@@ -447,6 +447,16 @@ describe('AdminConsole canonical overview presentation', () => {
     expect(markup).toContain('Overview does not establish aggregate query coverage')
     expect(markup).toContain('provider-traffic coverage, or accounting-gap evidence')
     expect(markup).toContain('AI &amp; Costs')
+    for (const [label, value] of [
+      ['Admitted release', '2.0.0'],
+      ['Release courses', '90'],
+      ['Release units', '698'],
+      ['Release lessons', '8,292'],
+      ['Release assessments', '699'],
+    ]) {
+      expect(markup).toContain(label)
+      expect(markup).toContain(value)
+    }
   })
 
   it('labels reconciled cost explicitly', () => {

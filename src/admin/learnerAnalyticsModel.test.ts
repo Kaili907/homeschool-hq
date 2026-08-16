@@ -216,6 +216,33 @@ describe('learner analytics projection', () => {
     expect(snapshot.details['learner-1'].availability).toMatchObject({ curriculum: 'partial', progress: 'partial', study: 'unavailable' })
   })
 
+  it('resolves learner assignments against the admitted expanded release refs and names', () => {
+    const profile = emptyProfile('high-school-learner', 'High School Learner', '10')
+    profile.academy = {
+      releaseVersion: '2.0.0',
+      grade: '10',
+      enrolledAt: '2026-09-01T12:00:00.000Z',
+      courseIds: ['ma-g10-science', 'ma-g10-technology'],
+      lessons: {},
+      assessments: {},
+    }
+
+    const snapshot = buildLearnerAnalyticsSnapshot({
+      profiles: [profile], today: TODAY, observedAt: `${TODAY}T12:00:00.000Z`,
+    })
+
+    expect(snapshot.learners[0].curriculum).toMatchObject({
+      status: 'available', releaseVersion: '2.0.0', matchedCourseCount: 2,
+    })
+    expect(snapshot.details['high-school-learner'].courses).toEqual({
+      status: 'available',
+      value: [
+        expect.objectContaining({ courseRef: 'ma-g10-science', title: 'Chemistry', workingLevel: '10', total: 108 }),
+        expect.objectContaining({ courseRef: 'ma-g10-technology', title: 'Programming I', workingLevel: '10', total: 36 }),
+      ],
+    })
+  })
+
   it('does not calculate Academy progress against a different curriculum release', () => {
     const profile = populated()
     profile.academy!.releaseVersion = '0.9.0'

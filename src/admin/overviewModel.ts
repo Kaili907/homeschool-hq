@@ -10,6 +10,7 @@ import type {
   IntegerMicros,
 } from './admin0Vocabulary'
 import type { AdminMonthlyCostAlert, AdminProviderAccountingCoverage } from './costsModel'
+import type { AdminReleaseReadModel } from './releaseDataModel'
 
 export const ADMIN_SECTIONS = [
   'attention',
@@ -116,6 +117,8 @@ export interface AdminOverviewModel {
     readonly curriculumVersion: ApplicableMetric<string>
     readonly overallHealth: Metric<AdminHealthState>
     readonly lastSuccessfulDataRefresh: Metric<string>
+    /** Admitted curriculum population, derived from the release source files. */
+    readonly release?: AdminReleaseReadModel
   }
   readonly learners: {
     readonly activeLearners: Metric<number>
