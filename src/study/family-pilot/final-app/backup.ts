@@ -21,10 +21,11 @@ import {
 } from '../auto-planner/indexedDbStore'
 import type { FamilyAutoPlannerScope } from '../auto-planner/types'
 import {
-  digestLocalPin,
+  createFamilyPilotPinVerifier,
   loadFinalFamilyPilotAppState,
   parseFinalFamilyPilotAppState,
   saveFinalFamilyPilotAppState,
+  verifyFamilyPilotPin,
   type FinalFamilyPilotAppStateV1,
   type FinalFamilyPilotAppStoreOptions,
 } from './state'
@@ -564,7 +565,7 @@ function mergeCore(current: FamilyPilotStateV1, backup: FinalFamilyPilotPortable
 function mergeApp(
   current: FinalFamilyPilotAppStateV1,
   backup: FinalFamilyPilotPortableBackupV2,
-  newParentPin?: string,
+  replacementParentVerifier?: string,
 ): FinalFamilyPilotAppStateV1 {
   if (backup.scope.kind === 'family') {
     const studentAccessVerifiers: Record<string, string> = {}
@@ -582,7 +583,7 @@ function mergeApp(
         }))),
       }),
       studentAccessVerifiers: Object.freeze(studentAccessVerifiers),
-      parentAccessVerifier: newParentPin ? digestLocalPin(newParentPin) : current.parentAccessVerifier,
+      parentAccessVerifier: replacementParentVerifier ?? current.parentAccessVerifier,
     })
   }
   const learnerRef = backup.scope.learnerRefs[0] as string
@@ -608,16 +609,35 @@ function mergeApp(
   })
 }
 
-function authorized(
+async function authorized(
   preview: FinalFamilyPilotRestorePreview,
   current: FinalFamilyPilotAppStateV1,
-  authority: { readonly parentAuthorized?: boolean; readonly parentPin?: string; readonly newParentPin?: string } | undefined,
-): boolean {
-  if (preview.requiresNewParentPin) return Boolean(authority?.newParentPin && /^\d{4}$/.test(authority.newParentPin))
-  if (authority?.parentAuthorized === true) return true
-  if (!authority?.parentPin || !/^\d{4}$/.test(authority.parentPin)) return false
+  authority: { readonly parentPin?: string; readonly newParentPin?: string } | undefined,
+): Promise<{ readonly ok: boolean; readonly replacementParentVerifier?: string }> {
+  if (preview.requiresNewParentPin) {
+    if (!authority?.newParentPin || !/^\d{4}$/.test(authority.newParentPin)) return { ok: false }
+    return {
+      ok: true,
+      replacementParentVerifier: await createFamilyPilotPinVerifier(
+        authority.newParentPin,
+        preview.backup.scope.householdRef,
+        'parent',
+      ),
+    }
+  }
+  if (!authority?.parentPin || !/^\d{4}$/.test(authority.parentPin)) return { ok: false }
   const verifier = current.parentAccessVerifier
-  return Boolean(verifier && digestLocalPin(authority.parentPin) === verifier)
+  if (!verifier) return { ok: false }
+  const result = await verifyFamilyPilotPin(
+    authority.parentPin,
+    verifier,
+    current.householdRef,
+    'parent',
+  )
+  return {
+    ok: result.verified,
+    ...(result.migratedVerifier ? { replacementParentVerifier: result.migratedVerifier } : {}),
+  }
 }
 
 async function writeSnapshot(store: IndexedDbRecordStore, current: CurrentRestoreImage, createdAt: string): Promise<string | null> {
@@ -636,7 +656,7 @@ export async function restoreFinalFamilyPilotBackup(
   input: unknown,
   options: Pick<FinalFamilyPilotBackupOptions, 'coreStore' | 'appStore' | 'indexedDb' | 'now'> & {
     readonly preview?: FinalFamilyPilotRestorePreview
-    readonly authority?: { readonly parentAuthorized?: boolean; readonly parentPin?: string; readonly newParentPin?: string }
+    readonly authority?: { readonly parentPin?: string; readonly newParentPin?: string }
   } = {},
 ): Promise<
   | { readonly status: 'restored'; readonly studentCount: number; readonly preRestoreSnapshotKey: string }
@@ -659,13 +679,18 @@ export async function restoreFinalFamilyPilotBackup(
   try { current = await currentImage(validated.backup, store, options) } catch { /* rejected below */ }
   if (!current) { store.close(); return { status: 'rejected', reasonCode: 'current-state-unavailable' } }
   if (current.fingerprint !== options.preview.currentFingerprint) { store.close(); return { status: 'rejected', reasonCode: 'preview-stale' } }
-  if (!authorized(authoritativePreview, current.appState, options.authority)) { store.close(); return { status: 'rejected', reasonCode: 'parent-authorization-required' } }
+  const authorization = await authorized(authoritativePreview, current.appState, options.authority)
+  if (!authorization.ok) { store.close(); return { status: 'rejected', reasonCode: 'parent-authorization-required' } }
 
   const now = options.now ?? (() => new Date().toISOString())
   const snapshotKey = await writeSnapshot(store, current, now())
   if (!snapshotKey) { store.close(); return { status: 'rejected', reasonCode: 'pre-restore-snapshot-failed' } }
   const nextCore = mergeCore(current.coreState, validated.backup)
-  const nextApp = mergeApp(current.appState, validated.backup, options.authority?.newParentPin)
+  const nextApp = mergeApp(
+    current.appState,
+    validated.backup,
+    authorization.replacementParentVerifier,
+  )
   const targetRecords = new Map<string, unknown>()
   for (const item of validated.backup.studyDocuments) if (item.record) targetRecords.set(item.documentKey, item.record)
   for (const item of validated.backup.plannerDocuments) if (item.record) targetRecords.set(item.documentKey, item.record)

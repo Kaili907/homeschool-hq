@@ -57,6 +57,7 @@ function setup(authorizationResult = {
     authorization,
     publishing,
     stepUpAssurance,
+    requestSourceGuard: () => ({ ok: true }),
     criticalActionAudit: { record: vi.fn(async () => {}) },
     studio: {}, authoring, approval: {}, staging: {}, registry: {}, source: {},
   })

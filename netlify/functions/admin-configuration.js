@@ -129,6 +129,10 @@ export function createAdminConfigurationHandler(overrides = {}) {
   const tokenFactory = overrides.tokenFactory ?? (() => randomBytes(32).toString('base64url'))
   const criticalActions = overrides.criticalActions ?? createAdminCriticalActionEnforcer({
     stepUpAssurance: overrides.stepUpAssurance,
+    env,
+    fetchImpl,
+    authVerifier: overrides.authVerifier,
+    requestSourceGuard: overrides.requestSourceGuard,
     audit: overrides.criticalActionAudit,
     now: overrides.criticalActionNow,
   })
@@ -179,7 +183,12 @@ export function createAdminConfigurationHandler(overrides = {}) {
       const request = parseConfigurationCommitRequest(event)
       const assured = await criticalActions.enforce(event, {
         actorId: authorized.principal.userId,
-        action: ADMIN_CRITICAL_ACTIONS.COMMIT_CONFIGURATION,
+        action: request.newValue === true && [
+          'runtime.ai.enabled',
+          'runtime.tts.enabled',
+        ].includes(request.settingKey)
+          ? ADMIN_CRITICAL_ACTIONS.ENABLE_PRODUCTION
+          : ADMIN_CRITICAL_ACTIONS.COMMIT_CONFIGURATION,
         resource: { type: 'admin-configuration', id: request.settingKey },
       })
       if (!assured.ok) return assured.response

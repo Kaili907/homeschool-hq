@@ -185,6 +185,7 @@ function setup({ auth = AUTHORIZED, sourceError, resolverError } = {}) {
       tokenFactory: () => TOKEN,
       effectiveResolver,
       stepUpAssurance,
+      requestSourceGuard: () => ({ ok: true }),
       criticalActionAudit: { record: vi.fn(async () => {}) },
     }),
     authorization,
@@ -249,7 +250,7 @@ describe('Admin configuration API', () => {
       event: expect.anything(),
       binding: {
         actorId: 'owner',
-        action: 'admin.configuration.commit',
+        action: 'admin.production.enable',
         resource: { type: 'admin-configuration', id: 'runtime.ai.enabled' },
       },
     })

@@ -81,6 +81,7 @@ function handler(overrides = {}) {
     source,
     registry,
     stepUpAssurance: { consume: vi.fn(async ({ binding }) => ({ ok: true, binding })) },
+    requestSourceGuard: () => ({ ok: true }),
     criticalActionAudit: { record: vi.fn(async () => {}) },
     ...overrides,
   })

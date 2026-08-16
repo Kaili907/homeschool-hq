@@ -55,6 +55,7 @@ function setup(authorizationResult = {
   const handler = createAdminCurriculumHandler({
     authorization, activation,
     stepUpAssurance,
+    requestSourceGuard: () => ({ ok: true }),
     criticalActionAudit: { record: vi.fn(async () => {}) },
     studio: {}, authoring: {}, approval: {}, staging: {}, registry: {}, source: {},
   })

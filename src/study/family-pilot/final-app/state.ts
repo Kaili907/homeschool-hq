@@ -9,6 +9,13 @@ import {
 import type { FamilySetupState, FamilySetupStudent } from '../setup'
 import type { FamilyPilotStudySession } from '../study'
 import { validateDynamicSocialSourceBundle } from './dynamicSource'
+import {
+  base64ToBytes,
+  createBoundPinVerifier,
+  isFourDigitPin,
+  verifyBoundPinVerifier,
+  type PinVerifierMaterial,
+} from '../../../security/credentials/pinVerifier'
 
 export const FINAL_FAMILY_PILOT_APP_STATE_KEY =
   'manuel-academy.study.final-family-pilot-app.v1' as const
@@ -19,6 +26,10 @@ export const FINAL_FAMILY_PILOT_APP_SCHEMA_VERSION = 1 as const
 const GRADES: readonly Grade[] = ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,191}$/
 const MAX_TEXT = 160
+const LEGACY_PIN_VERIFIER = /^[a-f0-9]{8}$/
+const PIN_VERIFIER_PREFIX = 'family-pilot-pin:v2:'
+const PIN_VERIFIER_DOMAIN = 'manuel-academy:family-pilot-pin:v2'
+const BASE64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/
 
 export interface FinalFamilyPilotSavedSession {
   readonly studentRef: string
@@ -120,6 +131,78 @@ function isText(value: unknown): value is string {
 
 function isInstant(value: unknown): value is string {
   return typeof value === 'string' && value.length <= 40 && Number.isFinite(Date.parse(value))
+}
+function parsePinVerifier(value: unknown): PinVerifierMaterial | null {
+  if (typeof value !== 'string' || !value.startsWith(PIN_VERIFIER_PREFIX)) return null
+  const parts = value.slice(PIN_VERIFIER_PREFIX.length).split(':')
+  if (parts.length !== 4 || parts[0] !== '1' || parts[1] !== '600000') return null
+  const saltBase64 = parts[2] as string
+  const verifierBase64 = parts[3] as string
+  if (!BASE64.test(saltBase64) || !BASE64.test(verifierBase64)) return null
+  try {
+    base64ToBytes(saltBase64, 16)
+    base64ToBytes(verifierBase64, 32)
+  } catch {
+    return null
+  }
+  return {
+    costParametersVersion: 1,
+    costParameters: { iterations: 600_000, derivedKeyBytes: 32 },
+    saltBase64,
+    verifierBase64,
+  }
+}
+
+function serializePinVerifier(material: PinVerifierMaterial): string {
+  return `${PIN_VERIFIER_PREFIX}${material.costParametersVersion}:${material.costParameters.iterations}:${material.saltBase64}:${material.verifierBase64}`
+}
+
+function pinBinding(householdRef: string, subjectRef: string) {
+  return { domain: PIN_VERIFIER_DOMAIN, bindingParts: [householdRef, subjectRef] }
+}
+
+function legacyDigestLocalPin(pin: string): string {
+  let hash = 0x811c9dc5
+  for (const character of pin) {
+    hash ^= character.charCodeAt(0)
+    hash = Math.imul(hash, 0x01000193)
+  }
+  return (hash >>> 0).toString(16).padStart(8, '0')
+}
+
+export function isFamilyPilotPinVerifier(value: unknown): value is string {
+  return typeof value === 'string' && (LEGACY_PIN_VERIFIER.test(value) || parsePinVerifier(value) !== null)
+}
+
+export async function createFamilyPilotPinVerifier(
+  pin: string,
+  householdRef: string,
+  subjectRef: string,
+): Promise<string> {
+  if (!isFourDigitPin(pin)) throw new Error('A local PIN must contain exactly four digits.')
+  return serializePinVerifier(await createBoundPinVerifier(pinBinding(householdRef, subjectRef), pin))
+}
+
+export async function verifyFamilyPilotPin(
+  pin: string,
+  verifier: string,
+  householdRef: string,
+  subjectRef: string,
+): Promise<{ readonly verified: boolean; readonly migratedVerifier?: string }> {
+  if (!isFourDigitPin(pin)) return { verified: false }
+  const material = parsePinVerifier(verifier)
+  if (material) {
+    return {
+      verified: await verifyBoundPinVerifier(pinBinding(householdRef, subjectRef), pin, material),
+    }
+  }
+  if (!LEGACY_PIN_VERIFIER.test(verifier) || legacyDigestLocalPin(pin) !== verifier) {
+    return { verified: false }
+  }
+  return {
+    verified: true,
+    migratedVerifier: await createFamilyPilotPinVerifier(pin, householdRef, subjectRef),
+  }
 }
 
 function defaultHouseholdRef(): string {
@@ -274,7 +357,7 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
     !(value.activeStudentRef === null || isRef(value.activeStudentRef)) ||
     !Array.isArray(value.sessions) || !Array.isArray(value.sourceAttachments) || !Array.isArray(value.attestations) ||
     !(value.assessmentAssignments === undefined || Array.isArray(value.assessmentAssignments)) ||
-    !isRecord(studentAccessVerifiers) || !(parentAccessVerifier === null || isText(parentAccessVerifier))
+    !isRecord(studentAccessVerifiers) || !(parentAccessVerifier === null || isFamilyPilotPinVerifier(parentAccessVerifier))
   ) return { state: null, safetyRecovery: safety.recoveryState }
   const sessions = value.sessions.map(parseSession)
   const sources = value.sourceAttachments.map(parseSource)
@@ -285,7 +368,7 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
   }
   const verifiedStudents: Record<string, string> = {}
   for (const [studentRef, verifier] of Object.entries(studentAccessVerifiers)) {
-    if (!isRef(studentRef) || typeof verifier !== 'string' || !/^[a-f0-9]{8}$/.test(verifier)) return { state: null, safetyRecovery: safety.recoveryState }
+    if (!isRef(studentRef) || !isFamilyPilotPinVerifier(verifier)) return { state: null, safetyRecovery: safety.recoveryState }
     verifiedStudents[studentRef] = verifier
   }
   const studentRefs = new Set(setup.students.map((item) => item.studentRef))
@@ -369,13 +452,4 @@ export function saveFinalFamilyPilotAppState(
   } catch {
     return { status: 'rejected', reasonCode: 'storage-write-failed' }
   }
-}
-
-export function digestLocalPin(pin: string): string {
-  let hash = 0x811c9dc5
-  for (const character of pin) {
-    hash ^= character.charCodeAt(0)
-    hash = Math.imul(hash, 0x01000193)
-  }
-  return (hash >>> 0).toString(16).padStart(8, '0')
 }

@@ -194,6 +194,10 @@ export function createAdminProviderPricingTermsHandler(overrides = {}) {
   const tokenFactory = overrides.tokenFactory ?? (() => randomBytes(32).toString('base64url'))
   const criticalActions = overrides.criticalActions ?? createAdminCriticalActionEnforcer({
     stepUpAssurance: overrides.stepUpAssurance,
+    env,
+    fetchImpl,
+    authVerifier: overrides.authVerifier,
+    requestSourceGuard: overrides.requestSourceGuard,
     audit: overrides.criticalActionAudit,
     now: overrides.criticalActionNow,
   })

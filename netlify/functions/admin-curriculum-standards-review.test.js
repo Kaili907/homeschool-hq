@@ -31,6 +31,9 @@ function handler(overrides = {}) {
     source: { loadCatalog: vi.fn(), loadLesson: vi.fn(), loadValidationEvidence: vi.fn() },
     registry: { list: vi.fn(), details: vi.fn(), productionPointer: vi.fn() },
     authoring: {},
+    stepUpAssurance: { consume: vi.fn(async ({ binding }) => ({ ok: true, binding })) },
+    requestSourceGuard: () => ({ ok: true }),
+    criticalActionAudit: { record: vi.fn(async () => {}) },
     ...overrides,
   })
 }

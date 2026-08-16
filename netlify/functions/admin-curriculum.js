@@ -515,9 +515,11 @@ async function requireDraftEditor(authoring, actorUserRef, draftId) {
 }
 
 export function createAdminCurriculumHandler(overrides = {}) {
+  const env = overrides.env ?? process.env
+  const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
   const authorization = overrides.authorization ?? createAdminAuthorization({
-    env: overrides.env ?? process.env,
-    fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
+    env,
+    fetchImpl,
     client: overrides.client,
     authVerifier: overrides.authVerifier,
   })
@@ -578,6 +580,10 @@ export function createAdminCurriculumHandler(overrides = {}) {
   })
   const criticalActions = overrides.criticalActions ?? createAdminCriticalActionEnforcer({
     stepUpAssurance: overrides.stepUpAssurance,
+    env,
+    fetchImpl,
+    authVerifier: overrides.authVerifier,
+    requestSourceGuard: overrides.requestSourceGuard,
     audit: overrides.criticalActionAudit,
     now: overrides.criticalActionNow,
   })
@@ -622,6 +628,17 @@ export function createAdminCurriculumHandler(overrides = {}) {
       )
       if (!authorized.ok) return authorized.response
       try {
+        if (input.status === 'approved_mapping') {
+          const assured = await criticalActions.enforce(event, {
+            actorId: authorized.principal.userId,
+            action: ADMIN_CRITICAL_ACTIONS.APPROVE_CURRICULUM,
+            resource: {
+              type: 'curriculum-standards-mapping',
+              id: `${input.contextKind}:${input.contextRef}`,
+            },
+          })
+          if (!assured.ok) return assured.response
+        }
         if (input.contextKind === 'draft') {
           await authoring.read(authorized.principal.userId, input.contextRef)
           await requireDraftEditor(authoring, authorized.principal.userId, input.contextRef)
@@ -696,7 +713,14 @@ export function createAdminCurriculumHandler(overrides = {}) {
         } else if (route.kind === 'draft-approval' && event.httpMethod === 'GET') {
           value = await approval.read(actor, route.draftId)
         } else if (route.kind === 'draft-approval') {
-          value = await approval.decide(actor, parseApprovalDecision(event, route.draftId))
+          const input = parseApprovalDecision(event, route.draftId)
+          const assured = await criticalActions.enforce(event, {
+            actorId: actor,
+            action: ADMIN_CRITICAL_ACTIONS.APPROVE_CURRICULUM,
+            resource: { type: 'curriculum-draft-approval', id: input.draftId },
+          })
+          if (!assured.ok) return assured.response
+          value = await approval.decide(actor, input)
         } else if (route.kind === 'draft-staging' && event.httpMethod === 'GET') {
           value = await studio.readStaging(actor, route.draftId)
         } else if (route.kind === 'draft-staging') {

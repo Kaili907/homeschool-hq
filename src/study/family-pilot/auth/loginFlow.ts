@@ -32,7 +32,7 @@ export function pickStudent(
 
 export function studentRequiresPin(
   student: FamilyPilotStudentProfile,
-  onVerifyPin: ((studentRef: FamilyPilotStudentRef, pin: string) => boolean) | undefined,
+  onVerifyPin: ((studentRef: FamilyPilotStudentRef, pin: string) => Promise<boolean>) | undefined,
 ): boolean {
   return Boolean(student.pinRequired && onVerifyPin)
 }
@@ -42,12 +42,12 @@ export type PinCheckResult =
   | { readonly accepted: false; readonly message: string }
 
 /** Wrong PIN never destroys the pending selection — the caller just re-prompts. */
-export function checkPin(
-  onVerifyPin: (studentRef: FamilyPilotStudentRef, pin: string) => boolean,
+export async function checkPin(
+  onVerifyPin: (studentRef: FamilyPilotStudentRef, pin: string) => Promise<boolean>,
   studentRef: FamilyPilotStudentRef,
   pin: string,
-): PinCheckResult {
-  return onVerifyPin(studentRef, pin)
+): Promise<PinCheckResult> {
+  return await onVerifyPin(studentRef, pin)
     ? { accepted: true }
     : { accepted: false, message: 'That PIN is not right. Try again.' }
 }

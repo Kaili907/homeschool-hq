@@ -121,8 +121,7 @@ export function createAdminStepUpAssurance({ env, fetchImpl, authVerifier, clock
   const verify = authVerifier ?? verifySupabaseBearer
   const now = clock ?? (() => new Date())
 
-  return Object.freeze({
-    async check(event) {
+  async function check(event) {
       let auth
       try {
         auth = await verify(event, { env, fetchImpl })
@@ -160,9 +159,9 @@ export function createAdminStepUpAssurance({ env, fetchImpl, authVerifier, clock
         expiresAt,
       }))
       return { status: 'assured', assurance }
-    },
+  }
 
-    consume(assurance, { actorUserId, accessToken } = {}) {
+  function consume(assurance, { actorUserId, accessToken } = {}) {
       if (!assurance || typeof assurance !== 'object') return { ok: false, reason: 'invalid' }
       if (CONSUMED_ASSURANCES.has(assurance)) return { ok: false, reason: 'replayed' }
       const binding = ISSUED_BINDINGS.get(assurance)
@@ -182,6 +181,29 @@ export function createAdminStepUpAssurance({ env, fetchImpl, authVerifier, clock
         return { ok: false, reason: 'session_mismatch' }
       }
       return { ok: true, assurance }
+  }
+
+  return Object.freeze({
+    check,
+    consume,
+
+    /** SEC-5 adapter: verify and consume the same request's fresh assurance. */
+    async consumeCriticalAction({ event, binding } = {}) {
+      const checked = await check(event)
+      if (checked.status !== 'assured') {
+        return {
+          ok: false,
+          reason: checked.status === 'unavailable' ? 'unavailable' : 'required',
+        }
+      }
+      const issued = ISSUED_BINDINGS.get(checked.assurance)
+      if (!issued) return { ok: false, reason: 'unavailable' }
+      const consumed = consume(checked.assurance, {
+        actorUserId: binding?.actorId,
+        accessToken: issued.accessToken,
+      })
+      if (!consumed.ok) return consumed
+      return { ok: true, binding }
     },
   })
 }

@@ -1,6 +1,6 @@
 # Admin request-source guard contract
 
-`netlify/functions/_shared/admin-request-source.js` is a defense-in-depth browser provenance check for future sensitive Admin mutation routes. It is not wired into a product route by this card.
+`netlify/functions/_shared/admin-request-source.js` is the defense-in-depth browser provenance check used by mounted critical Admin mutations.
 
 ## Configuration
 
@@ -24,11 +24,9 @@ A pass grants no bearer authentication, Admin role/capability, session, AAL/MFA 
 
 This helper does not emit CORS headers and does not implement preflight handling. Any later preflight contract must use exact origins and must not introduce wildcard CORS.
 
-## Scope of this card vs. product-route adoption
+## Mounted adoption
 
-This card owns the shared guard module, its documentation, and its focused tests only. Wiring the guard into product routes is the responsibility of a separately owned boundary (the Admin mutation router, or the individual Admin function handlers) and is deliberately out of scope here because it necessarily touches business endpoint code that this card must not redesign.
-
-"Consistent on mutation boundaries" is therefore preserved as a property of the guard itself: one canonical decision procedure, one bounded failure shape, no per-call configuration surface, and no relaxed variant. When a future adopter opts in on a mutation route, that route inherits the same rule the guard would give any other adopter — which is what makes adoption consistent.
+`admin-critical-actions.js` invokes this guard before fresh step-up consumption. Role changes/revocations, configuration commits and production enablement, provider-pricing changes, curriculum approval/publication/tombstones, and release activation/rollback therefore share one canonical request-source decision. Read-only and preview routes do not invoke it.
 
 ## Canonical adoption pattern
 

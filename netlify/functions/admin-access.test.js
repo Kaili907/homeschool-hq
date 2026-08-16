@@ -49,6 +49,7 @@ function assuredDependencies() {
       consume: vi.fn(async ({ binding }) => ({ ok: true, binding })),
     },
     criticalActionAudit: { record: vi.fn(async () => {}) },
+    requestSourceGuard: () => ({ ok: true }),
   }
 }
 
@@ -128,6 +129,7 @@ describe('Admin access endpoint', () => {
     const response = await createAdminAccessHandler({
       authorization: { require: vi.fn(async () => authorized()) },
       source,
+      requestSourceGuard: () => ({ ok: true }),
       criticalActionAudit: { record: vi.fn(async () => {}) },
     })(mutationEvent('/api/admin/v1/access/revoke'))
     expect(response.statusCode).toBe(503)

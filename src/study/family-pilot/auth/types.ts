@@ -16,7 +16,7 @@ export interface FamilyPilotStudentLoginCallbacks {
   /** Fired when a student card is picked, before any PIN check or confirmation. */
   readonly onSelectStudent: (studentRef: FamilyPilotStudentRef) => void
   /** Validate a PIN for the given student. Return true to accept, false to reject. Omit if no student requires a PIN. */
-  readonly onVerifyPin?: (studentRef: FamilyPilotStudentRef, pin: string) => boolean
+  readonly onVerifyPin?: (studentRef: FamilyPilotStudentRef, pin: string) => Promise<boolean>
   /** Fired once the student is confirmed active (no PIN required, or PIN accepted). */
   readonly onAuthenticated: (studentRef: FamilyPilotStudentRef) => void
   readonly onLogout: () => void

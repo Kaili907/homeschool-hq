@@ -1,4 +1,9 @@
 import { errorResponse } from './http.js'
+import {
+  ADMIN_REQUEST_SOURCE_FAILURE_CODE,
+  guardAdminRequestSource,
+} from './admin-request-source.js'
+import { createAdminStepUpAssurance } from './admin-step-up-assurance.js'
 
 export const ADMIN_CRITICAL_ACTIONS = Object.freeze({
   CHANGE_ADMIN_ROLE: 'admin.role.change',
@@ -6,6 +11,7 @@ export const ADMIN_CRITICAL_ACTIONS = Object.freeze({
   COMMIT_CONFIGURATION: 'admin.configuration.commit',
   COMMIT_PROVIDER_PRICING: 'admin.provider-pricing.commit',
   END_PROVIDER_PRICING: 'admin.provider-pricing.end',
+  APPROVE_CURRICULUM: 'admin.curriculum.approve',
   PUBLISH_CURRICULUM: 'admin.curriculum.publish',
   TOMBSTONE_CURRICULUM_ENTITY: 'admin.curriculum.entity.tombstone',
   ACTIVATE_RELEASE: 'admin.release.activate',
@@ -21,7 +27,9 @@ export const ADMIN_CRITICAL_ACTIONS = Object.freeze({
 })
 
 const CRITICAL_ACTIONS = new Set(Object.values(ADMIN_CRITICAL_ACTIONS))
-const DENIAL_REASONS = new Set(['required', 'invalid', 'expired', 'replayed'])
+const DENIAL_REASONS = new Set([
+  'required', 'invalid', 'expired', 'replayed', 'actor_mismatch', 'session_mismatch',
+])
 const SAFE_VALUE = /^[^\u0000-\u001f\u007f]{1,512}$/u
 
 /**
@@ -101,15 +109,31 @@ async function record(audit, event) {
  * the supplied actor/action/resource tuple, and consume it so the same proof
  * cannot be replayed. The port receives the raw server event only so a future
  * SEC-4 adapter can locate its credential; this module never reads, stores, or
- * audits that credential.
+ * audits that credential. The default authority is SEC-4's canonical
+ * server-side verifier; injected ports exist only for isolated tests.
  */
 export function createAdminCriticalActionEnforcer({
   stepUpAssurance,
+  env = process.env,
+  fetchImpl = globalThis.fetch,
+  authVerifier,
+  requestSourceGuard = guardAdminRequestSource,
   audit = defaultAudit(),
   now = () => new Date(),
 } = {}) {
+  const assuranceAuthority = stepUpAssurance ?? createAdminStepUpAssurance({
+    env,
+    fetchImpl,
+    authVerifier,
+    clock: now,
+  })
+
   return Object.freeze({
     async enforce(event, binding) {
+      const requestSource = requestSourceGuard(event, { env })
+      if (!requestSource?.ok) {
+        return { ok: false, response: errorResponse(403, ADMIN_REQUEST_SOURCE_FAILURE_CODE) }
+      }
       if (!validBinding(binding)) {
         return { ok: false, response: errorResponse(503, 'step_up_unavailable') }
       }
@@ -121,14 +145,19 @@ export function createAdminCriticalActionEnforcer({
       })
       const occurredAt = now().toISOString()
 
-      if (!stepUpAssurance || typeof stepUpAssurance.consume !== 'function') {
+      const consume = typeof assuranceAuthority?.consumeCriticalAction === 'function'
+        ? (input) => assuranceAuthority.consumeCriticalAction(input)
+        : typeof assuranceAuthority?.consume === 'function'
+          ? (input) => assuranceAuthority.consume(input)
+          : null
+      if (!consume) {
         await record(audit, auditEvent(canonicalBinding, 'denied', 'unavailable', occurredAt))
         return { ok: false, response: errorResponse(503, 'step_up_unavailable') }
       }
 
       let assurance
       try {
-        assurance = await stepUpAssurance.consume(Object.freeze({
+        assurance = await consume(Object.freeze({
           event,
           binding: canonicalBinding,
         }))

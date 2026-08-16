@@ -209,7 +209,7 @@ export function FamilyOnboarding({
     setSavedMessage('')
   }
 
-  function saveLearner() {
+  async function saveLearner() {
     if (draft.pinRequired) {
       const mayKeepExisting = Boolean(selectedStudent && existingLearnerVerifier && learnerPin === '')
       if (!mayKeepExisting && (!/^\d{4}$/.test(learnerPin) || learnerPin !== confirmLearnerPin)) {
@@ -234,8 +234,8 @@ export function FamilyOnboarding({
 
     try {
       controller.saveSetup(result.state)
-      if (!draft.pinRequired) controller.setStudentPin(saved.studentRef, null)
-      else if (learnerPin) controller.setStudentPin(saved.studentRef, learnerPin)
+      if (!draft.pinRequired) await controller.setStudentPin(saved.studentRef, null)
+      else if (learnerPin) await controller.setStudentPin(saved.studentRef, learnerPin)
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'The learner profile could not be saved.')
       return
@@ -249,7 +249,7 @@ export function FamilyOnboarding({
     setSavedMessage(`${saved.displayName} is saved. Add another learner or continue when the family is ready.`)
   }
 
-  function finishFamily() {
+  async function finishFamily() {
     if (!/^\d{4}$/.test(parentPin) || parentPin !== confirmParentPin) {
       setError('Set and confirm a matching 4-digit Parent PIN.')
       return
@@ -260,7 +260,7 @@ export function FamilyOnboarding({
       return
     }
     try {
-      controller.setParentPin(parentPin)
+      await controller.setParentPin(parentPin)
       controller.saveSetup(result.state)
       setSetup(result.state)
       setParentPin('')
@@ -346,7 +346,7 @@ export function FamilyOnboarding({
 
         <form
           className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
-          onSubmit={(event) => { event.preventDefault(); saveLearner() }}
+          onSubmit={(event) => { event.preventDefault(); void saveLearner() }}
         >
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>

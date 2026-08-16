@@ -56,9 +56,10 @@ import type { FamilySetupStudent } from '../setup'
 import type { FamilyPilotStudySession, FamilyPilotStudySnapshot } from '../study'
 import { validateDynamicSocialSourceBundle } from './dynamicSource'
 import {
-  digestLocalPin,
+  createFamilyPilotPinVerifier,
   loadFinalFamilyPilotAppState,
   saveFinalFamilyPilotAppState,
+  verifyFamilyPilotPin,
   type FinalFamilyPilotAppSnapshot,
   type FinalFamilyPilotAppStateV1,
   type FinalFamilyPilotAppStoreOptions,
@@ -229,28 +230,73 @@ export class FinalFamilyPilotController {
     this.#writeCore((state) => setActiveFamilyPilotStudent(state, studentRef))
   }
 
-  setStudentPin(studentRef: string, pin: string | null): void {
+  async setStudentPin(studentRef: string, pin: string | null): Promise<void> {
     if (!this.#studentSetup(studentRef)) throw new Error('Student configuration is unavailable.')
     if (pin !== null && !/^\d{4}$/.test(pin)) throw new Error('A local student PIN must contain exactly four digits.')
+    const verifier = pin === null
+      ? null
+      : await createFamilyPilotPinVerifier(
+          pin,
+          this.#appSnapshot.state.householdRef,
+          `student:${studentRef}`,
+        )
     this.#commitApp((state) => {
       const studentAccessVerifiers = { ...state.studentAccessVerifiers }
-      if (pin === null) delete studentAccessVerifiers[studentRef]
-      else studentAccessVerifiers[studentRef] = digestLocalPin(pin)
+      if (verifier === null) delete studentAccessVerifiers[studentRef]
+      else studentAccessVerifiers[studentRef] = verifier
       return { ...state, studentAccessVerifiers: Object.freeze(studentAccessVerifiers) }
     })
   }
 
-  setParentPin(pin: string): void {
+  async setParentPin(pin: string): Promise<void> {
     if (!/^\d{4}$/.test(pin)) throw new Error('A local parent PIN must contain exactly four digits.')
-    this.#commitApp((state) => ({ ...state, parentAccessVerifier: digestLocalPin(pin) }))
+    const verifier = await createFamilyPilotPinVerifier(
+      pin,
+      this.#appSnapshot.state.householdRef,
+      'parent',
+    )
+    this.#commitApp((state) => ({ ...state, parentAccessVerifier: verifier }))
     this.#parentSessionAuthorized = true
   }
 
-  verifyParentPin(pin: string): boolean {
+  async verifyParentPin(pin: string): Promise<boolean> {
     const verifier = this.#appSnapshot.state.parentAccessVerifier
-    const authorized = Boolean(verifier && /^\d{4}$/.test(pin) && verifier === digestLocalPin(pin))
-    this.#parentSessionAuthorized = authorized
-    return authorized
+    if (!verifier) {
+      this.#parentSessionAuthorized = false
+      return false
+    }
+    const result = await verifyFamilyPilotPin(
+      pin,
+      verifier,
+      this.#appSnapshot.state.householdRef,
+      'parent',
+    )
+    if (result.verified && result.migratedVerifier) {
+      this.#commitApp((state) => ({ ...state, parentAccessVerifier: result.migratedVerifier! }))
+    }
+    this.#parentSessionAuthorized = result.verified
+    return result.verified
+  }
+
+  async verifyStudentPin(studentRef: string, pin: string): Promise<boolean> {
+    const verifier = this.#appSnapshot.state.studentAccessVerifiers[studentRef]
+    if (!verifier) return false
+    const result = await verifyFamilyPilotPin(
+      pin,
+      verifier,
+      this.#appSnapshot.state.householdRef,
+      `student:${studentRef}`,
+    )
+    if (result.verified && result.migratedVerifier) {
+      this.#commitApp((state) => ({
+        ...state,
+        studentAccessVerifiers: Object.freeze({
+          ...state.studentAccessVerifiers,
+          [studentRef]: result.migratedVerifier!,
+        }),
+      }))
+    }
+    return result.verified
   }
 
   lockParentSession(): void {

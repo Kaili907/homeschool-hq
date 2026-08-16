@@ -54,6 +54,10 @@ const transport = vi.hoisted(() => {
   }
 })
 
+const voiceCache = vi.hoisted(() => ({ purge: vi.fn(async () => undefined) }))
+
+vi.mock('../tutor/voice', () => ({ purgeVoiceCache: voiceCache.purge }))
+
 vi.mock('./supabase', async (importOriginal) => {
   const actual = await importOriginal<typeof import('./supabase')>()
   const session = () =>
@@ -353,6 +357,8 @@ describe('mounted useSync lifecycle and import safety', () => {
     transport.pull.mockResolvedValue({ ok: true, rows: [], revision: '0' })
     transport.push.mockReset()
     transport.push.mockResolvedValue({ ok: true, revision: '1' })
+    voiceCache.purge.mockReset()
+    voiceCache.purge.mockResolvedValue(undefined)
     latestApi = null
     updateHostState = null
     root = null
@@ -1217,6 +1223,23 @@ describe('mounted useSync lifecycle and import safety', () => {
     expect(latestApi?.status.user).toBeNull()
     expect(latestApi?.status.decision).toBeNull()
     expect(latestApi?.status.error).toBeNull()
+    expect(transport.sessionUser).toBeNull()
+  })
+
+  it('still performs remote sign-out when cache cleanup rejects', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const { signOutRemote } = await import('./supabase')
+    const remote = signOutRemote as ReturnType<typeof vi.fn>
+    const callsBefore = remote.mock.calls.length
+    voiceCache.purge.mockRejectedValueOnce(new Error('cache purge failed'))
+
+    await act(async () => {
+      await expect(latestApi!.signOut()).resolves.toBeUndefined()
+    })
+
+    expect(remote.mock.calls.length).toBe(callsBefore + 1)
+    expect(latestApi?.status.user).toBeNull()
     expect(transport.sessionUser).toBeNull()
   })
 

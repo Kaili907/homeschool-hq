@@ -42,7 +42,6 @@ import {
   type LearnerResponseAssessor,
   type LearnerResponsePresentation,
 } from './learner-response'
-import { digestLocalPin } from './state'
 import {
   BrowserAssessmentRuntime,
   type FinalAssessmentAttemptV1,
@@ -205,7 +204,7 @@ function MountedFinalFamilyPilot({
       'A local safety snapshot will be created first. Continue?',
     ].join('\n'))
     if (!confirmed) return
-    const parentPin = !parentAuthorized && !preview.requiresNewParentPin
+    const parentPin = !preview.requiresNewParentPin
       ? window.prompt(
         'Enter the current Parent PIN to authorize restore.') ?? undefined
       : undefined
@@ -223,7 +222,7 @@ function MountedFinalFamilyPilot({
       preview,
       authority: preview.requiresNewParentPin
         ? { newParentPin }
-        : parentAuthorized ? { parentAuthorized: true } : { parentPin },
+        : { parentPin },
     })
     if (restored.status === 'rejected') window.alert(`Backup was not restored. ${parentBackupMessage(restored.reasonCode)}`)
     else {
@@ -390,7 +389,7 @@ function ParentPinGate({ controller, onAuthorized }: { readonly controller: Fina
     <p className="font-bold text-cyan-700">Authorized adult only</p>
     <h2 className="mt-1 text-3xl font-extrabold">Unlock the Parent Hub</h2>
     <label className="mt-6 block font-bold">Parent PIN<input aria-label="Unlock parent PIN" autoFocus inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" value={pin} onChange={(event) => setPin(event.target.value.replace(/\D/g, '').slice(0, 4))} /></label>
-    <button type="button" className="mt-4 rounded-lg bg-slate-900 px-5 py-3 font-extrabold text-white" onClick={() => { if (controller.verifyParentPin(pin)) { setError(''); setPin(''); onAuthorized() } else setError('Parent authorization failed.') }}>Unlock Parent Hub</button>
+    <button type="button" className="mt-4 rounded-lg bg-slate-900 px-5 py-3 font-extrabold text-white" onClick={() => { void controller.verifyParentPin(pin).then((verified) => { if (verified) { setError(''); setPin(''); onAuthorized() } else setError('Parent authorization failed.') }).catch(() => setError('Parent authorization is unavailable.')) }}>Unlock Parent Hub</button>
     {error ? <p className="mt-3 rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
   </main>
 }
@@ -416,7 +415,7 @@ function StudentSurface({ controller, autoPlannerHost, onOpen, onLock, onSwitchL
         activeStudentRef={null}
         onSelectStudent={() => undefined}
         onAuthenticated={(selector) => { controller.selectStudent(fromStudentSelector(selector)); refresh() }}
-        onVerifyPin={(selector, pin) => controller.appSnapshot.state.studentAccessVerifiers[fromStudentSelector(selector)] === digestLocalPin(pin)}
+        onVerifyPin={(selector, pin) => controller.verifyStudentPin(fromStudentSelector(selector), pin)}
         onLogout={() => undefined}
         onSwitchStudent={() => undefined}
       />

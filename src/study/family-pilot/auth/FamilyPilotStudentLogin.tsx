@@ -71,7 +71,7 @@ function StudentPicker({
   loading: boolean
   error: string | null
   onSelectStudent: (studentRef: FamilyPilotStudentRef) => void
-  onVerifyPin?: (studentRef: FamilyPilotStudentRef, pin: string) => boolean
+  onVerifyPin?: (studentRef: FamilyPilotStudentRef, pin: string) => Promise<boolean>
   onAuthenticated: (studentRef: FamilyPilotStudentRef) => void
   onParentRecover?: (studentRef: FamilyPilotStudentRef) => void
 }) {
@@ -153,7 +153,7 @@ function StudentConfirm({
   student: FamilyPilotStudentProfile
   studentRef: FamilyPilotStudentRef
   onBack: () => void
-  onVerifyPin?: (studentRef: FamilyPilotStudentRef, pin: string) => boolean
+  onVerifyPin?: (studentRef: FamilyPilotStudentRef, pin: string) => Promise<boolean>
   onAuthenticated: (studentRef: FamilyPilotStudentRef) => void
   onParentRecover?: (studentRef: FamilyPilotStudentRef) => void
 }) {
@@ -182,7 +182,7 @@ function StudentConfirm({
       {requiresPin ? (
         <PinEntry
           studentRef={studentRef}
-          onVerifyPin={onVerifyPin as (studentRef: FamilyPilotStudentRef, pin: string) => boolean}
+          onVerifyPin={onVerifyPin as (studentRef: FamilyPilotStudentRef, pin: string) => Promise<boolean>}
           onAuthenticated={onAuthenticated}
           onParentRecover={onParentRecover}
         />
@@ -206,26 +206,31 @@ function PinEntry({
   onParentRecover,
 }: {
   studentRef: FamilyPilotStudentRef
-  onVerifyPin: (studentRef: FamilyPilotStudentRef, pin: string) => boolean
+  onVerifyPin: (studentRef: FamilyPilotStudentRef, pin: string) => Promise<boolean>
   onAuthenticated: (studentRef: FamilyPilotStudentRef) => void
   onParentRecover?: (studentRef: FamilyPilotStudentRef) => void
 }) {
   const [digits, setDigits] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [checking, setChecking] = useState(false)
 
   function press(digit: string) {
-    if (digits.length >= PIN_LENGTH) return
+    if (checking || digits.length >= PIN_LENGTH) return
     const next = digits + digit
     setDigits(next)
     setError(null)
     if (next.length === PIN_LENGTH) {
-      const result = checkPin(onVerifyPin, studentRef, next)
-      if (result.accepted) {
-        onAuthenticated(studentRef)
-      } else {
-        setError(result.message)
+      setChecking(true)
+      void checkPin(onVerifyPin, studentRef, next).then((result) => {
+        if (result.accepted) onAuthenticated(studentRef)
+        else {
+          setError(result.message)
+          setDigits('')
+        }
+      }).catch(() => {
+        setError('PIN verification is unavailable. Try again.')
         setDigits('')
-      }
+      }).finally(() => setChecking(false))
     }
   }
 

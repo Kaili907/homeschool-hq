@@ -105,6 +105,7 @@ function setup({ authorizationResult = AUTHORIZED, sourceError } = {}) {
       source,
       tokenFactory: () => TOKEN,
       stepUpAssurance,
+      requestSourceGuard: () => ({ ok: true }),
       criticalActionAudit: { record: vi.fn(async () => {}) },
     }),
   }
