@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import {
-  HIGH_SCHOOL_PROGRAM_SNAPSHOT,
+  HIGH_SCHOOL_PROGRAM_RELEASE_SNAPSHOT,
   deriveHighSchoolProgramView,
   divergentReconciliations,
   knownGapSummaries,
@@ -20,9 +20,9 @@ import {
 /**
  * Admin surface for the Grades 8-12 programme.
  *
- * Takes an optional `snapshot` override for tests and defaults to the frozen
- * snapshot derived from `origin/mac/hs912-release-r1`. The final Admin route
- * mounts this component without replacing its evidence with shell-owned data.
+  * Takes an optional `snapshot` override for tests and defaults to the admitted
+  * release binding. Planning requirements remain in the snapshot so credit and
+  * graduation rulings stay distinct from delivered catalog facts.
  */
 export interface AdminHighSchoolProgramProps {
   readonly snapshot?: HighSchoolProgramSnapshot
@@ -104,14 +104,16 @@ function GradeColumn({ grade, view }: { readonly grade: HighSchoolGrade; readonl
                   <span className="ml-1 text-[0.6rem] uppercase text-slate-500">contracted</span>
                 </span>
               </div>
-              <p className="text-xs text-slate-600">{c.sessions} sessions{c.cadence ? ` · ${c.cadence}` : ''} · {c.authoringStatus === 'FROZEN_DO_NOT_MODIFY' ? 'frozen anchor' : 'contract: to be authored'}</p>
+              <p className="text-xs text-slate-600">
+                {c.sessions} sessions{c.unitCount === undefined ? '' : ` · ${c.unitCount} units`}{c.lessonCount === undefined ? '' : ` · ${c.lessonCount} lessons`}{c.cadence ? ` · ${c.cadence}` : ''} · {c.authoringStatus === 'ADMITTED_RELEASE' ? 'admitted release' : c.authoringStatus === 'FROZEN_DO_NOT_MODIFY' ? 'frozen anchor' : 'contract: to be authored'}
+              </p>
               {c.satisfiesStateRequirements.length > 0 && (
                 <p className="text-xs text-slate-500"><span className="font-semibold text-slate-700">Satisfies:</span> {c.satisfiesStateRequirements.join(', ')}</p>
               )}
               {reconciliation && badge && (
                 <p className="flex flex-wrap items-center gap-1 text-xs text-slate-600">
                   <span className={`inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide ${badge.className}`}>{badge.label}</span>
-                  <span>subject evidence: <span className="font-mono">{reconciliation.subjectRef}</span> @ <span className="font-mono">{reconciliation.subjectSha}</span></span>
+                  <span>{view.snapshot.release ? 'release evidence' : 'subject evidence'}: <span className="font-mono">{reconciliation.subjectRef}</span>{reconciliation.subjectSha && <> @ <span className="font-mono">{reconciliation.subjectSha}</span></>}</span>
                 </p>
               )}
             </li>
@@ -307,7 +309,7 @@ function ReconciliationSection({ view }: { readonly view: HighSchoolProgramView 
   return (
     <section aria-labelledby="hs-reconciliation-heading" className="rounded-lg border border-slate-300 bg-white">
       <header className="border-b border-slate-200 bg-slate-50 px-4 py-3">
-        <h3 id="hs-reconciliation-heading" className="font-semibold text-slate-800">Contract ↔ subject-branch reconciliation</h3>
+        <h3 id="hs-reconciliation-heading" className="font-semibold text-slate-800">Contract ↔ {view.snapshot.release ? 'admitted release' : 'subject-branch'} reconciliation</h3>
         <p className="text-xs text-slate-600">
           {counts.MATCHES_CONTRACT} of {view.reconciliations.length} courses match the contract. {divergent.length} diverge on title, session count, and/or id scheme.
           Divergences are open items for the release integration owner; the release matrix remains the authoritative planning contract.
@@ -315,14 +317,14 @@ function ReconciliationSection({ view }: { readonly view: HighSchoolProgramView 
       </header>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[900px] border-collapse text-sm">
-          <caption className="sr-only">Per-course reconciliation between the release contract and subject-branch authored evidence</caption>
+          <caption className="sr-only">Per-course reconciliation between the programme contract and {view.snapshot.release ? 'admitted release' : 'subject-branch authored evidence'}</caption>
           <thead className="bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-600">
             <tr>
               <th scope="col" className="border-b border-slate-200 px-3 py-2">Course</th>
               <th scope="col" className="border-b border-slate-200 px-3 py-2">Contract title</th>
-              <th scope="col" className="border-b border-slate-200 px-3 py-2">Subject-branch title</th>
-              <th scope="col" className="border-b border-slate-200 px-3 py-2">Sessions (contract → subject)</th>
-              <th scope="col" className="border-b border-slate-200 px-3 py-2">Subject ref @ SHA</th>
+              <th scope="col" className="border-b border-slate-200 px-3 py-2">{view.snapshot.release ? 'Release title' : 'Subject-branch title'}</th>
+              <th scope="col" className="border-b border-slate-200 px-3 py-2">Sessions (contract → {view.snapshot.release ? 'release' : 'subject'})</th>
+              <th scope="col" className="border-b border-slate-200 px-3 py-2">Evidence ref</th>
               <th scope="col" className="border-b border-slate-200 px-3 py-2">Verdict</th>
             </tr>
           </thead>
@@ -409,7 +411,7 @@ function GraduationBanner({ view }: { readonly view: HighSchoolProgramView }) {
   )
 }
 
-export function AdminHighSchoolProgram({ snapshot = HIGH_SCHOOL_PROGRAM_SNAPSHOT }: AdminHighSchoolProgramProps = {}) {
+export function AdminHighSchoolProgram({ snapshot = HIGH_SCHOOL_PROGRAM_RELEASE_SNAPSHOT }: AdminHighSchoolProgramProps = {}) {
   const view = useMemo(() => deriveHighSchoolProgramView(snapshot), [snapshot])
   const gaps = useMemo(() => knownGapSummaries(view), [view])
   const totalCredits = totalHighSchoolCredits(view)
@@ -425,7 +427,7 @@ export function AdminHighSchoolProgram({ snapshot = HIGH_SCHOOL_PROGRAM_SNAPSHOT
           Manuel Academy Grades 8 → 12
         </h2>
         <p className="text-sm text-slate-600">
-          Credit and session values shown are <strong>CONTRACTED / RECOMMENDED</strong> by the release matrix. Subject-branch authored content may diverge from the contract and, per the release contract's own §5, is <strong>not yet served</strong> by the runtime.
+          Course refs, names, sessions, units, and lessons come from the admitted release. Credit values and graduation requirements remain <strong>CONTRACTED / RECOMMENDED</strong> evidence from the programme matrix.
         </p>
         <dl className="grid grid-cols-2 gap-2 rounded-md border border-slate-200 bg-slate-50 p-3 text-xs sm:grid-cols-4">
           <div>
@@ -444,12 +446,20 @@ export function AdminHighSchoolProgram({ snapshot = HIGH_SCHOOL_PROGRAM_SNAPSHOT
             <dt className="font-semibold uppercase tracking-wide text-slate-500">CONTRACTED credits G9-G12</dt>
             <dd className="text-slate-700">{formatCredit(totalCredits)}</dd>
           </div>
+          {view.snapshot.release && <div>
+            <dt className="font-semibold uppercase tracking-wide text-slate-500">Admitted release</dt>
+            <dd className="text-slate-700">{view.snapshot.release.releaseVersion} · {view.snapshot.release.admissionStatus} · <span className="font-mono">{view.snapshot.release.sourceCommit.slice(0, 12)}</span></dd>
+          </div>}
+          {view.snapshot.release && <div>
+            <dt className="font-semibold uppercase tracking-wide text-slate-500">Release population</dt>
+            <dd className="text-slate-700">{view.snapshot.release.counts.courses.toLocaleString()} courses · {view.snapshot.release.counts.units.toLocaleString()} units · {view.snapshot.release.counts.lessons.toLocaleString()} lessons · {view.snapshot.release.counts.assessments.toLocaleString()} assessments</dd>
+          </div>}
           <div>
             <dt className="font-semibold uppercase tracking-wide text-slate-500">Sources catalogued</dt>
             <dd className="text-slate-700">{view.sources.length} (1 planning contract, {authoredSourceCount} authored, {supersededSourceCount} superseded)</dd>
           </div>
           <div>
-            <dt className="font-semibold uppercase tracking-wide text-slate-500">Courses matching subject evidence</dt>
+            <dt className="font-semibold uppercase tracking-wide text-slate-500">Courses matching {view.snapshot.release ? 'release' : 'subject'} evidence</dt>
             <dd className="text-slate-700">{reconciliationCounts.MATCHES_CONTRACT} / {view.reconciliations.length}</dd>
           </div>
           <div>
@@ -472,14 +482,14 @@ export function AdminHighSchoolProgram({ snapshot = HIGH_SCHOOL_PROGRAM_SNAPSHOT
       <GraduationBanner view={view} />
 
       <section aria-labelledby="hs-progression-heading" className="grid gap-3">
-        <h3 id="hs-progression-heading" className="font-semibold text-slate-800">Progression Grade 9 → 10 → 11 → 12 (contracted)</h3>
+        <h3 id="hs-progression-heading" className="font-semibold text-slate-800">Progression Grade 9 → 10 → 11 → 12 (admitted release)</h3>
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           {(view.snapshot.gradeSpan.filter((g) => g !== 8)).map((g) => <GradeColumn key={g} grade={g} view={view} />)}
         </div>
       </section>
 
       <section aria-labelledby="hs-family-progression-heading" className="grid gap-3">
-        <h3 id="hs-family-progression-heading" className="font-semibold text-slate-800">Subject-family continuity (contracted)</h3>
+        <h3 id="hs-family-progression-heading" className="font-semibold text-slate-800">Subject-family continuity (admitted release)</h3>
         <FamilyProgressionTable view={view} />
       </section>
 
@@ -500,7 +510,10 @@ export function AdminHighSchoolProgram({ snapshot = HIGH_SCHOOL_PROGRAM_SNAPSHOT
           ))}
         </ul>
         <p className="mt-2">
-          Programme/planning contract embedded from <span className="font-mono">{view.snapshot.sourceRef} @ {view.snapshot.sourceSha}</span>. Subject branches (<span className="font-mono">mac/hs912-*-r1</span>, plus the science h2/h3/h4 fix chain) hold authored content that carries independent validation and, in several families, diverges from the contract on title and/or session count. Nothing on this view is served by the runtime today — see the delivery section for evidence.
+          Programme/planning contract embedded from <span className="font-mono">{view.snapshot.sourceRef} @ {view.snapshot.sourceSha}</span>.{' '}
+          {view.snapshot.release
+            ? <>Course delivery facts are bound to admitted release <span className="font-mono">{view.snapshot.release.releaseVersion}</span> from its tracked manifest and browser catalog projection. Credit and graduation coverage remain governed by the planning evidence above.</>
+            : <>Subject branches (<span className="font-mono">mac/hs912-*-r1</span>, plus the science h2/h3/h4 fix chain) hold authored content that carries independent validation and may diverge from the contract.</>}
         </p>
       </footer>
     </section>

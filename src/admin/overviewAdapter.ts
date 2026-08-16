@@ -22,6 +22,7 @@ import type {
   OverviewStaleReasonCode,
   PresentedSpend,
 } from './overviewModel'
+import { ADMIN_EXPANDED_RELEASE, type AdminReleaseReadModel } from './releaseDataModel'
 
 export type EvidenceCountSource =
   | { readonly evidence: 'complete'; readonly value: number }
@@ -226,7 +227,10 @@ export function formatUsdMicros(value: IntegerMicros, currency: AdminCurrency): 
   return `$${groupedDollars}.${cents}`
 }
 
-export function adaptAdminOverview(source: AdminOverviewSource): AdminOverviewModel {
+export function adaptAdminOverview(
+  source: AdminOverviewSource,
+  release: AdminReleaseReadModel = ADMIN_EXPANDED_RELEASE,
+): AdminOverviewModel {
   return {
     contractVersion: source.contractVersion,
     range: source.range,
@@ -241,6 +245,7 @@ export function adaptAdminOverview(source: AdminOverviewSource): AdminOverviewMo
         ? { status: 'unknown' }
         : { status: 'available', value: source.academy.overallHealth },
       lastSuccessfulDataRefresh: adaptLastSuccessfulRefresh(source.academy.lastSuccessfulDataRefresh),
+      release,
     },
     learners: {
       activeLearners: adaptLearnerMetric(source.learners.activeLearners),

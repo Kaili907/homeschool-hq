@@ -79,7 +79,7 @@ export type GraduationVerdict = (typeof GRADUATION_VERDICTS)[number]
 export const COURSE_ORIGINS = ['EXISTING_GRADE_8_ANCHOR', 'NEW_HIGH_SCHOOL_COURSE'] as const
 export type CourseOrigin = (typeof COURSE_ORIGINS)[number]
 
-export const COURSE_AUTHORING_STATUSES = ['FROZEN_DO_NOT_MODIFY', 'TO_BE_AUTHORED'] as const
+export const COURSE_AUTHORING_STATUSES = ['FROZEN_DO_NOT_MODIFY', 'TO_BE_AUTHORED', 'ADMITTED_RELEASE'] as const
 export type CourseAuthoringStatus = (typeof COURSE_AUTHORING_STATUSES)[number]
 
 /** A single course in the programme, as stated by the contract matrix. */
@@ -93,6 +93,8 @@ export interface HighSchoolCourse {
   /** null when the source records no credit (grade 8 anchor courses). */
   readonly creditRecommendation: number | null
   readonly sessions: number
+  readonly unitCount?: number
+  readonly lessonCount?: number
   readonly cadence: string | null
   readonly prerequisiteCourseIds: readonly string[]
   readonly satisfiesStateRequirements: readonly string[]
@@ -262,4 +264,18 @@ export interface HighSchoolProgramSnapshot {
   readonly sources: readonly SubjectEvidenceSource[]
   readonly reconciliations: readonly CourseReconciliation[]
   readonly delivery: readonly DeliveryFact[]
+  readonly release?: {
+    readonly releaseId: string
+    readonly releaseVersion: string
+    readonly admissionStatus: string
+    readonly sourceCommit: string
+    readonly sourcePaths: readonly string[]
+    readonly counts: {
+      readonly grades: number
+      readonly courses: number
+      readonly units: number
+      readonly lessons: number
+      readonly assessments: number
+    }
+  }
 }

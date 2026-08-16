@@ -79,6 +79,9 @@ describe('field-aware v2 adaptation', () => {
   it('keeps cached reads and writes separate, exact, and non-negative', () => {
     const model = adaptAdminOverview(minimalSource())
     expect(model.contractVersion).toBe(2)
+    expect(model.academy.release?.counts).toEqual({
+      grades: 9, courses: 90, units: 698, lessons: 8_292, assessments: 699,
+    })
     expect(model.ai.cachedInputReadTokens).toEqual({ status: 'available', value: 7 })
     expect(model.ai.cachedInputWriteTokens).toEqual({ status: 'available', value: 3 })
     expect(adaptUsageMetric(-1)).toEqual({ status: 'unknown' })

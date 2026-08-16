@@ -1,0 +1,832 @@
+{
+  "sourceCommit": "3b89a20234d2e8a2ddfa11f9de27bd8d10a82fa4",
+  "manifestSourcePath": "curriculum-release-admitted/family-pilot-r1/MANIFEST.json",
+  "catalogSourcePath": "curriculum-release-admitted/family-pilot-r1/admission/browser-catalog-projection.json",
+  "releaseId": "family-pilot-r1",
+  "releaseVersion": "2.0.0",
+  "classification": "ADMITTED_PRODUCTION_BOUND_FAMILY_PILOT_R1",
+  "admissionStatus": "ADMITTED",
+  "supportedGrades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "counts": {
+    "grades": 9,
+    "courses": 90,
+    "units": 698,
+    "lessons": 8292,
+    "assessments": 699
+  },
+  "assessmentBindings": {
+    "total": 699
+  },
+  "courses": [
+    {
+      "courseRef": "ma-g3-arts-music",
+      "grade": "3",
+      "subject": "arts-and-music",
+      "title": "Grade 3 Arts And Music",
+      "days": 72,
+      "unitCount": 6,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g3-english-language-arts",
+      "grade": "3",
+      "subject": "english-language-arts",
+      "title": "Grade 3 English Language Arts",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g3-financial-literacy",
+      "grade": "3",
+      "subject": "financial-literacy",
+      "title": "Grade 3 Financial Literacy",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g3-health",
+      "grade": "3",
+      "subject": "health",
+      "title": "Grade 3 Health",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g3-mathematics",
+      "grade": "3",
+      "subject": "mathematics",
+      "title": "Grade 3 Mathematics",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g3-physical-education",
+      "grade": "3",
+      "subject": "physical-education",
+      "title": "Grade 3 Physical Education",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g3-ready-for-life",
+      "grade": "3",
+      "subject": "ready-for-life",
+      "title": "Grade 3 Ready For Life",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g3-science",
+      "grade": "3",
+      "subject": "science",
+      "title": "Grade 3 Science",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g3-social-studies",
+      "grade": "3",
+      "subject": "social-studies",
+      "title": "Grade 3 Social Studies",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g3-tech-cs",
+      "grade": "3",
+      "subject": "technology",
+      "title": "Grade 3 Technology",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g4-arts-music",
+      "grade": "4",
+      "subject": "arts-and-music",
+      "title": "Grade 4 Arts And Music",
+      "days": 72,
+      "unitCount": 6,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g4-english-language-arts",
+      "grade": "4",
+      "subject": "english-language-arts",
+      "title": "Grade 4 English Language Arts",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g4-financial-literacy",
+      "grade": "4",
+      "subject": "financial-literacy",
+      "title": "Grade 4 Financial Literacy",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g4-health",
+      "grade": "4",
+      "subject": "health",
+      "title": "Grade 4 Health",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g4-mathematics",
+      "grade": "4",
+      "subject": "mathematics",
+      "title": "Grade 4 Mathematics",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g4-physical-education",
+      "grade": "4",
+      "subject": "physical-education",
+      "title": "Grade 4 Physical Education",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g4-ready-for-life",
+      "grade": "4",
+      "subject": "ready-for-life",
+      "title": "Grade 4 Ready For Life",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g4-science",
+      "grade": "4",
+      "subject": "science",
+      "title": "Grade 4 Science",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g4-social-studies",
+      "grade": "4",
+      "subject": "social-studies",
+      "title": "Grade 4 Social Studies",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g4-tech-cs",
+      "grade": "4",
+      "subject": "technology",
+      "title": "Grade 4 Technology",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g5-arts-and-music",
+      "grade": "5",
+      "subject": "arts-and-music",
+      "title": "Grade 5 Arts and Music",
+      "days": 72,
+      "unitCount": 6,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g5-english-language-arts",
+      "grade": "5",
+      "subject": "english-language-arts",
+      "title": "Grade 5 English Language Arts",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g5-financial-literacy",
+      "grade": "5",
+      "subject": "financial-literacy",
+      "title": "Grade 5 Financial Literacy",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g5-health",
+      "grade": "5",
+      "subject": "health",
+      "title": "Grade 5 Health",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g5-mathematics",
+      "grade": "5",
+      "subject": "mathematics",
+      "title": "Grade 5 Mathematics",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g5-physical-education",
+      "grade": "5",
+      "subject": "physical-education",
+      "title": "Grade 5 Physical Education",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g5-ready-for-life",
+      "grade": "5",
+      "subject": "ready-for-life",
+      "title": "Grade 5 Ready for Life",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g5-science",
+      "grade": "5",
+      "subject": "science",
+      "title": "Grade 5 Science",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g5-social-studies",
+      "grade": "5",
+      "subject": "social-studies",
+      "title": "Grade 5 Social Studies",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g5-technology",
+      "grade": "5",
+      "subject": "technology",
+      "title": "Grade 5 Technology and Computer Science",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g7-arts-and-music",
+      "grade": "7",
+      "subject": "arts-and-music",
+      "title": "Grade 7 Arts and Music",
+      "days": 72,
+      "unitCount": 6,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g7-english-language-arts",
+      "grade": "7",
+      "subject": "english-language-arts",
+      "title": "Grade 7 English Language Arts",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g7-financial-literacy",
+      "grade": "7",
+      "subject": "financial-literacy",
+      "title": "Grade 7 Financial Literacy",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g7-health",
+      "grade": "7",
+      "subject": "health",
+      "title": "Grade 7 Health",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g7-mathematics",
+      "grade": "7",
+      "subject": "mathematics",
+      "title": "Grade 7 Mathematics",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g7-physical-education",
+      "grade": "7",
+      "subject": "physical-education",
+      "title": "Grade 7 Physical Education",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g7-ready-for-life",
+      "grade": "7",
+      "subject": "ready-for-life",
+      "title": "Grade 7 Ready for Life",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g7-science",
+      "grade": "7",
+      "subject": "science",
+      "title": "Grade 7 Science",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g7-social-studies",
+      "grade": "7",
+      "subject": "social-studies",
+      "title": "Grade 7 Social Studies",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g7-technology",
+      "grade": "7",
+      "subject": "technology",
+      "title": "Grade 7 Technology and Computer Science",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g8-arts-and-music",
+      "grade": "8",
+      "subject": "arts-and-music",
+      "title": "Grade 8 Arts and Music",
+      "days": 72,
+      "unitCount": 6,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g8-english-language-arts",
+      "grade": "8",
+      "subject": "english-language-arts",
+      "title": "Grade 8 English Language Arts",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g8-financial-literacy",
+      "grade": "8",
+      "subject": "financial-literacy",
+      "title": "Grade 8 Financial Literacy",
+      "days": 72,
+      "unitCount": 7,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g8-health",
+      "grade": "8",
+      "subject": "health",
+      "title": "Grade 8 Health",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g8-mathematics",
+      "grade": "8",
+      "subject": "mathematics",
+      "title": "Grade 8 Mathematics",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g8-physical-education",
+      "grade": "8",
+      "subject": "physical-education",
+      "title": "Grade 8 Physical Education",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g8-ready-for-life",
+      "grade": "8",
+      "subject": "ready-for-life",
+      "title": "Grade 8 Ready for Life",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g8-science",
+      "grade": "8",
+      "subject": "science",
+      "title": "Grade 8 Science",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g8-social-studies",
+      "grade": "8",
+      "subject": "social-studies",
+      "title": "Grade 8 Social Studies",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g8-technology",
+      "grade": "8",
+      "subject": "technology",
+      "title": "Grade 8 Technology and Computer Science",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g9-arts-and-music",
+      "grade": "9",
+      "subject": "arts-and-music",
+      "title": "Foundations of Visual and Media Arts",
+      "days": 72,
+      "unitCount": 6,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g9-english-language-arts",
+      "grade": "9",
+      "subject": "english-language-arts",
+      "title": "English 9: Foundations of Literary Analysis and Argument",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g9-financial-literacy",
+      "grade": "9",
+      "subject": "financial-literacy",
+      "title": "Personal Finance",
+      "days": 72,
+      "unitCount": 7,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g9-health",
+      "grade": "9",
+      "subject": "health",
+      "title": "Health and Wellness I",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g9-mathematics",
+      "grade": "9",
+      "subject": "mathematics",
+      "title": "Algebra I",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g9-physical-education",
+      "grade": "9",
+      "subject": "physical-education",
+      "title": "Personal Fitness and Lifetime Activity",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g9-ready-for-life",
+      "grade": "9",
+      "subject": "ready-for-life",
+      "title": "Ready for Life 9: Personal Management and Learning Systems",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g9-science",
+      "grade": "9",
+      "subject": "science",
+      "title": "Biology",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g9-social-studies",
+      "grade": "9",
+      "subject": "social-studies",
+      "title": "United States History and Geography (1870 to the Present)",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g9-technology",
+      "grade": "9",
+      "subject": "technology",
+      "title": "Computer Science Principles and Digital Citizenship",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g10-arts-and-music",
+      "grade": "10",
+      "subject": "arts-and-music",
+      "title": "Music, Theatre, and Performance Foundations",
+      "days": 72,
+      "unitCount": 6,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g10-english-language-arts",
+      "grade": "10",
+      "subject": "english-language-arts",
+      "title": "English 10: World Literature and Rhetoric",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g10-financial-literacy",
+      "grade": "10",
+      "subject": "financial-literacy",
+      "title": "Consumer Economics and Credit",
+      "days": 72,
+      "unitCount": 7,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g10-health",
+      "grade": "10",
+      "subject": "health",
+      "title": "Health II: Mental Health and Community Wellness",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g10-mathematics",
+      "grade": "10",
+      "subject": "mathematics",
+      "title": "Geometry",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g10-physical-education",
+      "grade": "10",
+      "subject": "physical-education",
+      "title": "Team, Individual, and Dual Activities",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g10-ready-for-life",
+      "grade": "10",
+      "subject": "ready-for-life",
+      "title": "Ready for Life 10: Career Exploration and Workplace Communication",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g10-science",
+      "grade": "10",
+      "subject": "science",
+      "title": "Chemistry",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g10-social-studies",
+      "grade": "10",
+      "subject": "social-studies",
+      "title": "World History and Geography",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g10-technology",
+      "grade": "10",
+      "subject": "technology",
+      "title": "Programming I",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g11-arts-and-music",
+      "grade": "11",
+      "subject": "arts-and-music",
+      "title": "Studio Art, Composition, and Applied Design",
+      "days": 72,
+      "unitCount": 6,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g11-english-language-arts",
+      "grade": "11",
+      "subject": "english-language-arts",
+      "title": "English 11: American Literature, Research, and Synthesis",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g11-financial-literacy",
+      "grade": "11",
+      "subject": "financial-literacy",
+      "title": "Investing, Insurance, and Risk Management",
+      "days": 72,
+      "unitCount": 7,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g11-health",
+      "grade": "11",
+      "subject": "health",
+      "title": "Health III: Consumer Health, Safety, and Emergency Response",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g11-mathematics",
+      "grade": "11",
+      "subject": "mathematics",
+      "title": "Algebra II",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g11-physical-education",
+      "grade": "11",
+      "subject": "physical-education",
+      "title": "Strength, Conditioning, and Training Design",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g11-ready-for-life",
+      "grade": "11",
+      "subject": "ready-for-life",
+      "title": "Ready for Life 11: Postsecondary Planning and Portfolio",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g11-science",
+      "grade": "11",
+      "subject": "science",
+      "title": "Physics",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g11-social-studies",
+      "grade": "11",
+      "subject": "social-studies",
+      "title": "Civics and Economics",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g11-technology",
+      "grade": "11",
+      "subject": "technology",
+      "title": "Data, Systems, and Applied Computing",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g12-arts-and-music",
+      "grade": "12",
+      "subject": "arts-and-music",
+      "title": "Arts Capstone: Portfolio and Exhibition",
+      "days": 72,
+      "unitCount": 6,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g12-english-language-arts",
+      "grade": "12",
+      "subject": "english-language-arts",
+      "title": "English 12: Global Literature, Composition, and Portfolio Capstone",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g12-financial-literacy",
+      "grade": "12",
+      "subject": "financial-literacy",
+      "title": "Financial Transition to Adulthood",
+      "days": 72,
+      "unitCount": 7,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g12-health",
+      "grade": "12",
+      "subject": "health",
+      "title": "Health IV: Adult Health Transition",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g12-mathematics",
+      "grade": "12",
+      "subject": "mathematics",
+      "title": "Precalculus with Statistics",
+      "days": 180,
+      "unitCount": 10,
+      "lessonCount": 180
+    },
+    {
+      "courseRef": "ma-g12-physical-education",
+      "grade": "12",
+      "subject": "physical-education",
+      "title": "Lifelong Wellness and Independent Training Capstone",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g12-ready-for-life",
+      "grade": "12",
+      "subject": "ready-for-life",
+      "title": "Ready for Life 12: Independent Adult Living Capstone",
+      "days": 36,
+      "unitCount": 6,
+      "lessonCount": 36
+    },
+    {
+      "courseRef": "ma-g12-science",
+      "grade": "12",
+      "subject": "science",
+      "title": "Earth, Space, and Environmental Systems",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g12-social-studies",
+      "grade": "12",
+      "subject": "social-studies",
+      "title": "Contemporary Global Issues and Civic Capstone",
+      "days": 108,
+      "unitCount": 9,
+      "lessonCount": 108
+    },
+    {
+      "courseRef": "ma-g12-technology",
+      "grade": "12",
+      "subject": "technology",
+      "title": "Cybersecurity, AI Literacy, and Computing Capstone",
+      "days": 48,
+      "unitCount": 6,
+      "lessonCount": 48
+    }
+  ]
+}

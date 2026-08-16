@@ -401,6 +401,11 @@ function Overview({ model }: { model: AdminOverviewModel }) {
           <StatusItem label="Overall health" metric={model.academy.overallHealth} health />
           <StatusItem label="Observed at" metric={model.observedAt === null ? { status: 'unknown' } : { status: 'available', value: model.observedAt }} />
           <StatusItem label="Last successful refresh" metric={model.academy.lastSuccessfulDataRefresh} />
+          {model.academy.release && <StatusItem label="Admitted release" metric={{ status: 'available', value: model.academy.release.releaseVersion }} />}
+          {model.academy.release && <StatusItem label="Release courses" metric={{ status: 'available', value: model.academy.release.counts.courses }} />}
+          {model.academy.release && <StatusItem label="Release units" metric={{ status: 'available', value: model.academy.release.counts.units }} />}
+          {model.academy.release && <StatusItem label="Release lessons" metric={{ status: 'available', value: model.academy.release.counts.lessons }} />}
+          {model.academy.release && <StatusItem label="Release assessments" metric={{ status: 'available', value: model.academy.release.counts.assessments }} />}
         </dl>
         <DomainStatus status={model.domainStatuses?.academy} />
       </section>
