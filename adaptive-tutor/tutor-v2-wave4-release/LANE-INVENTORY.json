@@ -21,7 +21,7 @@
       "lane": "W4-03"
     },
     {
-      "current": "PASS",
+      "current": "FAIL",
       "family": "REPLAY_CRASH_IDEMPOTENCY",
       "historical": "READY_FOR_CONVERGENCE",
       "lane": "W4-04"
@@ -39,7 +39,7 @@
       "lane": "W4-06"
     },
     {
-      "current": "PASS",
+      "current": "FAIL",
       "family": "PRIVACY_RETENTION_MINIMIZATION",
       "historical": "READY_FOR_CONVERGENCE",
       "lane": "W4-07"

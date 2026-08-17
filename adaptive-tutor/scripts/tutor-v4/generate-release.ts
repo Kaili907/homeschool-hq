@@ -2,11 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import {
-  CURRENT_WAVE4_GATE_EVIDENCE,
-  HARD_GATE_DETECTORS,
   POST_REPAIR_BLOCKER_CLOSURES,
-  evaluateWave4HardGates,
-  negativeControlEvidence,
 } from "./evidence.js";
 
 const outputDirectory = resolve("tutor-v2-wave4-release");
@@ -49,32 +45,70 @@ const imported = {
   R5: { sourceSha: "7bc73bfb48ce5c485c2225ac0e13cce3cc15eb83", sourcePatchId: "be9538f29c95961d2ce759ff609903e5df7fb607", resultingSha: "6cea138eb284c8cc651f885472da206d68faa0ee", resultingPatchId: "be9538f29c95961d2ce759ff609903e5df7fb607" },
 } as const;
 
-const hardGateResults = evaluateWave4HardGates(CURRENT_WAVE4_GATE_EVIDENCE);
-const hardGatePassed = hardGateResults.filter((result) => result.status === "PASS").length;
-const hardGate = {
-  resultVersion: 1,
-  aggregateStatus: hardGatePassed === 13 ? "PASS" : "FAIL",
-  nonCompensable: true,
-  academicQualityCompensationAllowed: false,
-  hardGateFamilyCount: hardGateResults.length,
-  hardGateFamiliesPassed: hardGatePassed,
-  wave3HardGatesRemainMandatory: true,
-  requiredWave3HardGateFamilyCount: 18,
-  results: hardGateResults.map((result) => ({ ...result, detector: HARD_GATE_DETECTORS[result.name] })),
-};
-const controls = negativeControlEvidence();
-const controlsDetected = controls.filter((control) => control.status === "DETECTED").length;
-const negativeControls = {
-  evidenceVersion: 1,
-  aggregateStatus: controlsDetected === 13 ? "PASS" : "FAIL",
-  requiredControlCount: 13,
-  controlCount: controls.length,
-  detected: controlsDetected,
-  survived: controls.length - controlsDetected,
-  disposableSemanticMutationsOnly: true,
-  compilerFailureAloneCountsAsDetection: false,
-  controls,
-};
+interface ExecutableHardGateEvidence {
+  readonly resultVersion: number;
+  readonly evidenceKind: string;
+  readonly aggregateStatus: string;
+  readonly hardGateFamilyCount: number;
+  readonly hardGateFamiliesPassed: number;
+  readonly booleanEvidenceAccepted: boolean;
+  readonly results: readonly {
+    readonly family: string;
+    readonly status: string;
+    readonly detectorId: string;
+  }[];
+}
+interface ImplementationMutationEvidence {
+  readonly evidenceVersion: number;
+  readonly mutationKind: string;
+  readonly booleanEvidenceFlipOnly: boolean;
+  readonly aggregateStatus: string;
+  readonly killed: number;
+  readonly survived: number;
+  readonly invalid: number;
+  readonly baselineBlocked: number;
+  readonly results: readonly unknown[];
+}
+const hardGate = JSON.parse(await readFile(
+  resolve(outputDirectory, "HARD-GATE-RESULT.json"),
+  "utf8",
+)) as ExecutableHardGateEvidence;
+const negativeControls = JSON.parse(await readFile(
+  resolve(outputDirectory, "NEGATIVE-CONTROL-EVIDENCE.json"),
+  "utf8",
+)) as ImplementationMutationEvidence;
+if (
+  hardGate.resultVersion < 2
+  || hardGate.evidenceKind !== "EXECUTABLE_DETECTOR_RESULTS"
+  || hardGate.booleanEvidenceAccepted !== false
+  || hardGate.hardGateFamilyCount !== 13
+) {
+  throw new Error("Wave 4 hard-gate evidence is not executable v2 evidence");
+}
+if (
+  negativeControls.evidenceVersion < 2
+  || negativeControls.mutationKind !== "implementation"
+  || negativeControls.booleanEvidenceFlipOnly !== false
+  || negativeControls.results.length !== 13
+) {
+  throw new Error("Wave 4 negative-control evidence is not implementation-mutation v2 evidence");
+}
+const familyStatus = (family: string): string =>
+  hardGate.results.find((result) => result.family === family)?.status ?? "FAIL";
+const allowedExternalBlockers = [
+  "REPLAY_CRASH_IDEMPOTENCY",
+  "PRIVACY_RETENTION_MINIMIZATION",
+] as const;
+const failedFamilies = hardGate.results
+  .filter((result) => result.status !== "PASS")
+  .map((result) => result.family);
+const frameworkReadyForReconvergence = hardGate.hardGateFamiliesPassed === 11
+  && failedFamilies.length === 2
+  && allowedExternalBlockers.every((family) => failedFamilies.includes(family))
+  && negativeControls.killed === 11
+  && negativeControls.survived === 0
+  && negativeControls.invalid === 0
+  && negativeControls.baselineBlocked === 2;
 const closuresByLane = Object.fromEntries(["W4-03", "W4-05", "W4-06", "W4-08", "W4-10"].map((lane) => {
   const assertions = POST_REPAIR_BLOCKER_CLOSURES.filter((item) => item.lane === lane);
   return [lane, {
@@ -115,7 +149,11 @@ const status = {
   LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED: true,
   PRODUCTION_PERSISTENCE_REMAINS_SEPARATE: true,
   COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE: true,
-  FINAL_CLASSIFICATION: "WAVE4_RECONVERGED_CANDIDATE_READY_FOR_FINAL_INDEPENDENT_REREVIEW",
+  FINAL_CLASSIFICATION: hardGate.aggregateStatus === "PASS" && negativeControls.aggregateStatus === "PASS"
+    ? "WAVE4_RECONVERGED_CANDIDATE_READY_FOR_FINAL_INDEPENDENT_REREVIEW"
+    : frameworkReadyForReconvergence
+      ? "W4_GATE_INTEGRITY_REPAIR_READY_FOR_RECONVERGENCE"
+      : "W4_GATE_INTEGRITY_REPAIR_INCOMPLETE",
 };
 const provenance = {
   provenanceVersion: 1,
@@ -149,13 +187,13 @@ const laneInventory = {
   inventoryVersion: 1,
   laneCount: 13,
   lanes: [
-    { lane: "W4-01", family: "PROMPT_INJECTION_AUTHORITY_CONTAINMENT", historical: "READY_FOR_CONVERGENCE", current: "PASS" },
-    { lane: "W4-02", family: "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE", historical: "READY_FOR_CONVERGENCE", current: "PASS" },
+    { lane: "W4-01", family: "PROMPT_INJECTION_AUTHORITY_CONTAINMENT", historical: "READY_FOR_CONVERGENCE", current: familyStatus("PROMPT_INJECTION_AUTHORITY_CONTAINMENT") },
+    { lane: "W4-02", family: "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE", historical: "READY_FOR_CONVERGENCE", current: familyStatus("ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE") },
     { lane: "W4-03", family: "CROSS_SCOPE_COMMERCIAL_ISOLATION", historical: "BASELINE_ADVERSARIAL_FINDING_19", current: "PASS_19_OF_19_CLOSED" },
-    { lane: "W4-04", family: "REPLAY_CRASH_IDEMPOTENCY", historical: "READY_FOR_CONVERGENCE", current: "PASS" },
+    { lane: "W4-04", family: "REPLAY_CRASH_IDEMPOTENCY", historical: "READY_FOR_CONVERGENCE", current: familyStatus("REPLAY_CRASH_IDEMPOTENCY") },
     { lane: "W4-05", family: "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION", historical: "BASELINE_ADVERSARIAL_FINDING_5", current: "PASS_5_OF_5_CLOSED" },
     { lane: "W4-06", family: "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH", historical: "BASELINE_ADVERSARIAL_FINDING_2", current: "PASS_2_OF_2_CLOSED" },
-    { lane: "W4-07", family: "PRIVACY_RETENTION_MINIMIZATION", historical: "READY_FOR_CONVERGENCE", current: "PASS" },
+    { lane: "W4-07", family: "PRIVACY_RETENTION_MINIMIZATION", historical: "READY_FOR_CONVERGENCE", current: familyStatus("PRIVACY_RETENTION_MINIMIZATION") },
     { lane: "W4-08", family: "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING", historical: "BASELINE_ADVERSARIAL_FINDING_7", current: "PASS_7_OF_7_CLOSED" },
     { lane: "W4-09", family: "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION", historical: "EVALUATION_ONLY_READY_FOR_CONVERGENCE", current: "PASS_EVALUATION_ONLY" },
     { lane: "W4-10", family: "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS", historical: "BASELINE_ADVERSARIAL_FINDING_5", current: "PASS_5_OF_5_CLOSED" },
@@ -210,8 +248,8 @@ const testEvidence = {
   repairs: { R1: "27/27", R2: "30/30 combined", R3: "22/22", R4: "9/9", R5: "20/20" },
   convergenceRepairReplay: "86/86 TAP assertions",
   historicalBlockerClosure: "38/38",
-  wave4HardGates: "13/13",
-  wave4NegativeControls: "13/13 detected",
+  wave4HardGates: `${hardGate.hardGateFamiliesPassed}/13 executable detectors passed`,
+  wave4NegativeControls: `${negativeControls.killed}/13 killed; ${negativeControls.baselineBlocked} external baseline blocked`,
   wave3HardGates: "18/18",
   wave3Convergence: "33/33",
   wave2Convergence: "288/288",
@@ -224,10 +262,14 @@ const testEvidence = {
     W4_01: "40/40; 6/6 controls",
     W4_02: "66/66; 4/4 controls",
     W4_03: "historical RED reproduced: 36 pass, 22 fail across 58 tests; 19 recorded blockers",
-    W4_04: "28/28 historical source replay; current replay covered by repaired convergence",
+    W4_04: familyStatus("REPLAY_CRASH_IDEMPOTENCY") === "PASS"
+      ? "current executable replay/crash detector PASS"
+      : "current executable replay/crash detector FAIL; historical results do not certify current state",
     W4_05: "historical finding preserved: 16/21 matrix, 5 blockers",
     W4_06: "historical finding preserved: 2 explicit blocker cases",
-    W4_07: "14-category canary scan PASS; 18/18 Wave 3 gates",
+    W4_07: familyStatus("PRIVACY_RETENTION_MINIMIZATION") === "PASS"
+      ? "current executable privacy-retention detector PASS"
+      : "current executable privacy-retention detector FAIL; historical results do not certify current state",
     W4_08: "historical RED reproduced: 5 pass, 10 fail across 15 tests; 7 blocker categories",
     W4_09: "10/10; evaluation only",
     W4_10: "historical RED reproduced: 25 pass, 5 fail across 30 tests",
@@ -240,7 +282,8 @@ const testEvidence = {
 };
 const certificationStatus = {
   certificationVersion: 1,
-  deterministicOfflineWave4Certification: "PASS",
+  deterministicOfflineWave4Certification: hardGate.aggregateStatus === "PASS"
+    && negativeControls.aggregateStatus === "PASS" ? "PASS" : "FAIL",
   finalIndependentRereview: "REQUIRED",
   liveModelCommercialCertification: "NOT_PERFORMED",
   multilingualCurriculumAvailabilityClaimed: false,
