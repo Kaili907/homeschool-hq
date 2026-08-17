@@ -1,8 +1,21 @@
 import {
   InstructionalMemoryProjectionStore,
+  InstructionalMemoryDeltaSchema,
   type ApplyInstructionalMemoryDeltaResult,
   type InstructionalMemoryDelta,
 } from "../../../core/v3/memory/index.js";
+import {
+  CommercialExecutionScopeSchema,
+  CommercialRouteAttemptPlanSchema,
+  type CommercialAttempt,
+  type CommercialExecutionScope,
+  type CommercialRouteAttemptPlan,
+} from "../../../core/v3/commercial-operation/index.js";
+import {
+  StudyCommercialEffectReceiptSchema,
+  type StudyCommercialEffectReceipt,
+} from "../../../core/v3/contracts/index.js";
+import { validateExact } from "../../../core/v2/contracts/validation.js";
 
 export const REPLAY_CRASH_BOUNDARIES = [
   "before-routing",
@@ -43,24 +56,17 @@ export type ReplayCrashPipelineState =
   | "complete"
   | "quarantined";
 
-export interface CertificationRouteAttempt {
-  readonly physicalAttemptRef: string;
-  readonly attemptIndex: number;
-  readonly role: "primary" | "failover";
-  readonly routeRef: string;
-  readonly providerRef: string;
-  readonly modelRef: string;
-  readonly reservedCostMicros: string;
-}
+export type CertificationRouteAttempt = CommercialAttempt;
+export type CertificationRoutePlan = CommercialRouteAttemptPlan;
 
-export interface CertificationRoutePlan {
-  readonly routePlanRef: string;
-  readonly logicalOperationRef: string;
-  readonly attempts: readonly CertificationRouteAttempt[];
-}
+export type StudyEffectReceipt = StudyCommercialEffectReceipt & {
+  readonly decision: "accepted";
+  readonly studyProgressCommitted: true;
+};
 
 export interface ReplayCrashRequest {
   readonly logicalOperationRef: string;
+  readonly commercialScope: CommercialExecutionScope;
   readonly payload: {
     readonly learnerScopeRef: string;
     readonly sessionRef: string;
@@ -69,12 +75,10 @@ export interface ReplayCrashRequest {
     readonly contentRef: string;
     readonly requestedAction: "hint" | "guided-question";
   };
-  readonly routePlan: CertificationRoutePlan;
+  readonly routePlan: CommercialRouteAttemptPlan;
   readonly reservationRef: string;
   readonly advisoryRef: string;
-  readonly effectRef: string;
-  readonly effectDigest: string;
-  readonly studyReceiptRef: string;
+  readonly studyEffectReceipt: StudyEffectReceipt;
   readonly memoryDelta: InstructionalMemoryDelta;
   readonly telemetryEventRef: string;
   readonly parentProjectionRef: string;
@@ -133,15 +137,26 @@ function deepFreeze<T>(value: T): T {
   return value;
 }
 
-function plansAreValid(plan: CertificationRoutePlan, logicalOperationRef: string): boolean {
+function plansAreValid(
+  plan: CommercialRouteAttemptPlan,
+  commercialScope: CommercialExecutionScope,
+): boolean {
   return (
-    plan.logicalOperationRef === logicalOperationRef &&
+    validateExact(CommercialRouteAttemptPlanSchema, plan).status === "accepted" &&
+    plan.routePlanRef === commercialScope.routePlanRef &&
+    plan.commercialScopeRef === commercialScope.scopeRef &&
+    plan.logicalOperationRef === commercialScope.logicalOperationRef &&
     plan.attempts.length >= 1 &&
     plan.attempts.length <= 2 &&
+    commercialScope.physicalAttemptRefs.length === plan.attempts.length &&
     new Set(plan.attempts.map((attempt) => attempt.physicalAttemptRef)).size ===
       plan.attempts.length &&
     plan.attempts.every(
       (attempt, index) =>
+        attempt.commercialScopeRef === commercialScope.scopeRef &&
+        attempt.logicalOperationRef === commercialScope.logicalOperationRef &&
+        commercialScope.physicalAttemptRefs[index] === attempt.physicalAttemptRef &&
+        commercialScope.allowedRouteRefs.includes(attempt.routeRef) &&
         attempt.attemptIndex === index &&
         attempt.role === (index === 0 ? "primary" : "failover") &&
         /^(0|[1-9][0-9]*)$/.test(attempt.reservedCostMicros),
@@ -162,7 +177,7 @@ export class DeterministicProvider {
     this.#behaviors.set(physicalAttemptRef, behavior);
   }
 
-  dispatch(attempt: CertificationRouteAttempt, payloadDigest: string): ProviderDispatchResult {
+  dispatch(attempt: CommercialAttempt, payloadDigest: string): ProviderDispatchResult {
     this.dispatchLog.push(attempt.physicalAttemptRef);
     const existing = this.#dispatches.get(attempt.physicalAttemptRef);
     if (existing) {
@@ -225,28 +240,22 @@ export class DeterministicProvider {
   }
 }
 
-export interface StudyEffectReceipt {
-  readonly receiptRef: string;
-  readonly logicalOperationRef: string;
-  readonly advisoryDigest: string;
-  readonly effectRef: string;
-  readonly effectDigest: string;
-  readonly decision: "accepted";
-  readonly studyProgressCommitted: true;
-}
-
 export class IdempotentStudyEffectLedger {
   readonly #accepted = new Map<string, StudyEffectReceipt>();
   #executionCount = 0;
 
-  accept(input: Omit<StudyEffectReceipt, "decision" | "studyProgressCommitted">):
+  accept(input: StudyEffectReceipt):
     | { readonly status: "accepted" | "duplicate"; readonly receipt: StudyEffectReceipt }
     | { readonly status: "conflict" } {
-    const candidate = deepFreeze({
-      ...structuredClone(input),
-      decision: "accepted" as const,
-      studyProgressCommitted: true as const,
-    });
+    const validation = validateExact(StudyCommercialEffectReceiptSchema, input);
+    if (
+      validation.status === "rejected" ||
+      validation.value.decision !== "accepted" ||
+      validation.value.studyProgressCommitted !== true
+    ) {
+      return { status: "conflict" };
+    }
+    const candidate = deepFreeze(structuredClone(input));
     const existing = this.#accepted.get(input.logicalOperationRef);
     if (existing) {
       return canonicalize(existing) === canonicalize(candidate)
@@ -578,13 +587,9 @@ export class ReplayCrashCertificationMachine {
           case "study-pending": {
             const advisoryDigest = record.advisoryDigest;
             if (!advisoryDigest) return this.#quarantine(record, "STUDY_EFFECT_CONFLICT");
-            const accepted = this.certificationState.study.accept({
-              receiptRef: record.request.studyReceiptRef,
-              logicalOperationRef: record.logicalOperationRef,
-              advisoryDigest,
-              effectRef: record.request.effectRef,
-              effectDigest: record.request.effectDigest,
-            });
+            const accepted = this.certificationState.study.accept(
+              record.request.studyEffectReceipt,
+            );
             if (accepted.status === "conflict") {
               return this.#quarantine(record, "STUDY_EFFECT_CONFLICT");
             }
@@ -727,14 +732,7 @@ export class ReplayCrashCertificationMachine {
   replayStudyEffectReceipt(logicalOperationRef: string): "duplicate" | "conflict" {
     const record = this.certificationState.records.get(logicalOperationRef);
     if (!record?.studyReceipt) return "conflict";
-    const receipt = record.studyReceipt;
-    const result = this.certificationState.study.accept({
-      receiptRef: receipt.receiptRef,
-      logicalOperationRef: receipt.logicalOperationRef,
-      advisoryDigest: receipt.advisoryDigest,
-      effectRef: receipt.effectRef,
-      effectDigest: receipt.effectDigest,
-    });
+    const result = this.certificationState.study.accept(record.studyReceipt);
     if (result.status === "duplicate") {
       this.#event(record, "idempotent-reuse", "duplicate Study effect receipt ignored");
       return "duplicate";
@@ -767,13 +765,33 @@ export class ReplayCrashCertificationMachine {
     | { readonly record: ReplayCrashOperationRecord }
     | { readonly result: ReplayCrashRunResult } {
     const existing = this.certificationState.records.get(request.logicalOperationRef);
+    const scope = request.commercialScope;
     const payloadFingerprint = digest({
       logicalOperationRef: request.logicalOperationRef,
+      commercialLineage: {
+        scopeVersion: scope.scopeVersion,
+        scopeKind: scope.scopeKind,
+        issuedBy: scope.issuedBy,
+        scopeRef: scope.scopeRef,
+        householdScopeRef: scope.householdScopeRef,
+        learnerScopeRef: scope.learnerScopeRef,
+        sessionRef: scope.sessionRef,
+        interactionRef: scope.interactionRef,
+        logicalOperationRef: scope.logicalOperationRef,
+        curriculumReleaseRef: scope.curriculumReleaseRef,
+        curriculumPackageRef: scope.curriculumPackageRef,
+        curriculumCourseRef: scope.curriculumCourseRef,
+        curriculumSubjectRef: scope.curriculumSubjectRef,
+        curriculumUnitRef: scope.curriculumUnitRef,
+        curriculumLessonRef: scope.curriculumLessonRef,
+        conceptRef: scope.conceptRef,
+        opportunityRef: scope.opportunityRef,
+        learnerStageRef: scope.learnerStageRef,
+        presentationRef: scope.presentationRef,
+      },
       payload: request.payload,
       advisoryRef: request.advisoryRef,
-      effectRef: request.effectRef,
-      effectDigest: request.effectDigest,
-      studyReceiptRef: request.studyReceiptRef,
+      studyEffectReceipt: request.studyEffectReceipt,
       memoryDelta: request.memoryDelta,
       telemetryEventRef: request.telemetryEventRef,
       parentProjectionRef: request.parentProjectionRef,
@@ -781,6 +799,10 @@ export class ReplayCrashCertificationMachine {
     const planFingerprint = digest({
       routePlan: request.routePlan,
       reservationRef: request.reservationRef,
+      routingRequestRef: scope.routingRequestRef,
+      physicalAttemptRefs: scope.physicalAttemptRefs,
+      allowedRouteRefs: scope.allowedRouteRefs,
+      telemetryEventRefs: scope.telemetryEventRefs,
     });
     const requestFingerprint = digest(request);
     if (existing) {
@@ -826,13 +848,65 @@ export class ReplayCrashCertificationMachine {
     this.certificationState.records.set(request.logicalOperationRef, record);
     this.#event(record, "record-created", "logical operation claimed");
     if (
-      !plansAreValid(request.routePlan, request.logicalOperationRef) ||
-      request.memoryDelta.logicalOperationRef !== request.logicalOperationRef ||
-      request.memoryDelta.sourceEventRef !== request.studyReceiptRef
+      validateExact(CommercialExecutionScopeSchema, request.commercialScope).status === "rejected" ||
+      validateExact(StudyCommercialEffectReceiptSchema, request.studyEffectReceipt).status ===
+        "rejected" ||
+      validateExact(InstructionalMemoryDeltaSchema, request.memoryDelta).status === "rejected" ||
+      !plansAreValid(request.routePlan, request.commercialScope) ||
+      !this.#lineageBindingsMatch(request)
     ) {
       return { result: this.#quarantine(record, "INVALID_ROUTE_PLAN") };
     }
     return { record };
+  }
+
+  #lineageBindingsMatch(request: ReplayCrashRequest): boolean {
+    const scope = request.commercialScope;
+    const receipt = request.studyEffectReceipt;
+    const delta = request.memoryDelta;
+    return (
+      request.logicalOperationRef === scope.logicalOperationRef &&
+      request.reservationRef === scope.reservationRef &&
+      request.advisoryRef === receipt.invocationRef &&
+      receipt.invocationRef === scope.interactionRef &&
+      scope.telemetryEventRefs.includes(request.telemetryEventRef) &&
+      request.payload.learnerScopeRef === scope.learnerScopeRef &&
+      request.payload.sessionRef === scope.sessionRef &&
+      request.payload.interactionRef === scope.interactionRef &&
+      request.payload.opportunityRef === scope.opportunityRef &&
+      receipt.decision === "accepted" &&
+      receipt.studyProgressCommitted === true &&
+      receipt.tutorMutationAuthorityGranted === false &&
+      receipt.commercialExecutionScopeRef === scope.scopeRef &&
+      receipt.householdScopeRef === scope.householdScopeRef &&
+      receipt.logicalOperationRef === scope.logicalOperationRef &&
+      receipt.learnerScopeRef === scope.learnerScopeRef &&
+      receipt.sessionRef === scope.sessionRef &&
+      receipt.interactionRef === scope.interactionRef &&
+      receipt.conceptRef === scope.conceptRef &&
+      receipt.opportunityRef === scope.opportunityRef &&
+      receipt.curriculumReleaseRef === scope.curriculumReleaseRef &&
+      receipt.curriculumPackageRef === scope.curriculumPackageRef &&
+      receipt.curriculumCourseRef === scope.curriculumCourseRef &&
+      receipt.curriculumSubjectRef === scope.curriculumSubjectRef &&
+      receipt.curriculumUnitRef === scope.curriculumUnitRef &&
+      receipt.curriculumLessonRef === scope.curriculumLessonRef &&
+      delta.commercialExecutionScopeRef === scope.scopeRef &&
+      delta.householdScopeRef === scope.householdScopeRef &&
+      delta.logicalOperationRef === scope.logicalOperationRef &&
+      delta.sourceEventRef === receipt.receiptRef &&
+      delta.conceptRef === scope.conceptRef &&
+      delta.curriculumReleaseRef === scope.curriculumReleaseRef &&
+      delta.curriculumPackageRef === scope.curriculumPackageRef &&
+      delta.curriculumCourseRef === scope.curriculumCourseRef &&
+      delta.curriculumSubjectRef === scope.curriculumSubjectRef &&
+      delta.curriculumUnitRef === scope.curriculumUnitRef &&
+      delta.curriculumLessonRef === scope.curriculumLessonRef &&
+      delta.scope.learnerScopeRef === scope.learnerScopeRef &&
+      delta.scope.sessionRef === scope.sessionRef &&
+      delta.scope.contextRef === scope.interactionRef &&
+      delta.scope.opportunityRef === scope.opportunityRef
+    );
   }
 
   #telemetryEvent(record: ReplayCrashOperationRecord): AuthorityFreeTelemetryEvent {
