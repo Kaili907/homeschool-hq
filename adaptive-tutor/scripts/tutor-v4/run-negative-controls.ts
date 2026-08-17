@@ -5,6 +5,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   rmSync,
   symlinkSync,
   writeFileSync,
@@ -25,13 +26,17 @@ import {
   WAVE4_IMPLEMENTATION_MUTATIONS,
   type Wave4MutationDefinition,
 } from "./mutations/catalog.js";
+import {
+  classifyMutation,
+  type MutationClassification,
+} from "./mutation-classification.js";
 
-type Classification =
-  | "KILLED"
-  | "SURVIVED"
-  | "INVALID_MUTANT"
-  | "BASELINE_BLOCKED"
-  | "EXTERNAL_BASELINE_BLOCKED";
+interface CompileCoverageProof {
+  readonly sourcePath: string;
+  readonly validationKind: "TYPESCRIPT_PROJECT_MEMBERSHIP" | "JAVASCRIPT_MODULE_SYNTAX";
+  readonly sourceIncluded: boolean;
+  readonly membershipEvidence: string;
+}
 
 interface MutationResult {
   readonly mutationId: string;
@@ -39,6 +44,7 @@ interface MutationResult {
   readonly description: string;
   readonly semanticShape: string;
   readonly mutationKind: "implementation";
+  readonly evidenceExecutionSha: string;
   readonly sourcePaths: readonly string[];
   readonly beforeSha256: Readonly<Record<string, string>>;
   readonly afterSha256: Readonly<Record<string, string>>;
@@ -49,8 +55,11 @@ interface MutationResult {
   readonly detectorOutcome: DetectorExecutionResult | null;
   readonly compileCommand: readonly string[];
   readonly compileExitCode: number;
+  readonly compileOutputSha256: string;
+  readonly compileCoverageProof: readonly CompileCoverageProof[];
+  readonly allMutatedSourcesCompiled: boolean;
   readonly rewriteApplied: boolean;
-  readonly classification: Classification;
+  readonly classification: MutationClassification;
   readonly compilerFailureUsedAsDetection: false;
   readonly cleanup: {
     readonly worktreeRemoved: boolean;
@@ -151,16 +160,77 @@ function validateCatalog(): void {
   }
 }
 
+function compileMutation(
+  mutantRoot: string,
+  mutation: Wave4MutationDefinition,
+  sourcePaths: readonly string[],
+): {
+  readonly command: readonly string[];
+  readonly exitCode: number;
+  readonly output: string;
+  readonly coverageProof: readonly CompileCoverageProof[];
+} {
+  const mutantTutorRoot = resolve(mutantRoot, "adaptive-tutor");
+  const compileDefinition = mutation.compile;
+  if (compileDefinition.kind === "javascript-module") {
+    const source = resolve(mutantRoot, compileDefinition.sourcePath);
+    const result = run(process.execPath, ["--check", source], mutantTutorRoot);
+    return {
+      command: [`node --check ${compileDefinition.sourcePath}`],
+      exitCode: result.status,
+      output: `${result.stdout}${result.stderr}`,
+      coverageProof: sourcePaths.map((sourcePath) => ({
+        sourcePath,
+        validationKind: "JAVASCRIPT_MODULE_SYNTAX",
+        sourceIncluded: sourcePath === compileDefinition.sourcePath,
+        membershipEvidence: sourcePath === compileDefinition.sourcePath
+          ? `direct node --check target: ${sourcePath}`
+          : "source was not the direct node --check target",
+      })),
+    };
+  }
+
+  const args = [
+    "node_modules/typescript/bin/tsc",
+    "-p",
+    compileDefinition.projectPath,
+    "--listFiles",
+    "--pretty",
+    "false",
+  ];
+  const result = run(process.execPath, args, mutantTutorRoot);
+  const listedFiles = new Set(result.stdout.split(/\r?\n/u)
+    .filter((line) => line.startsWith("/"))
+    .map((line) => realpathSync(line)));
+  return {
+    command: [`node ${args.join(" ")}`],
+    exitCode: result.status,
+    output: `${result.stdout}${result.stderr}`,
+    coverageProof: sourcePaths.map((sourcePath) => {
+      const absoluteSourcePath = realpathSync(resolve(mutantRoot, sourcePath));
+      const sourceIncluded = listedFiles.has(absoluteSourcePath);
+      return {
+        sourcePath,
+        validationKind: "TYPESCRIPT_PROJECT_MEMBERSHIP",
+        sourceIncluded,
+        membershipEvidence: sourceIncluded
+          ? `${compileDefinition.projectPath} --listFiles included ${sourcePath}`
+          : `${compileDefinition.projectPath} --listFiles omitted ${sourcePath}`,
+      };
+    }),
+  };
+}
+
 const tutorRoot = process.cwd().endsWith("adaptive-tutor")
   ? process.cwd()
   : resolve("adaptive-tutor");
 const repoRoot = resolve(tutorRoot, "..");
-const candidateSha = gitText(repoRoot, ["rev-parse", "HEAD"]);
+const evidenceExecutionSha = gitText(repoRoot, ["rev-parse", "HEAD"]);
 const dependencyRoot = resolve(tutorRoot, "node_modules");
 const outputPath = resolve(tutorRoot, "tutor-v2-wave4-release/NEGATIVE-CONTROL-EVIDENCE.json");
 const documentationPath = resolve(
   repoRoot,
-  "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json",
+  "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json",
 );
 
 validateCatalog();
@@ -182,7 +252,7 @@ try {
     const baselineDetectorOutcome = baselineByFamily.get(mutation.family);
     if (baselineDetectorOutcome === undefined) throw new Error(`Missing baseline: ${mutation.family}`);
     const mutantRoot = resolve(temporaryRoot, mutation.mutationId.toLowerCase());
-    const add = git(repoRoot, ["worktree", "add", "--detach", mutantRoot, candidateSha]);
+    const add = git(repoRoot, ["worktree", "add", "--detach", mutantRoot, evidenceExecutionSha]);
     if (add.status !== 0) throw new Error(`Unable to create ${mutation.mutationId}: ${add.stderr}`);
 
     let result: MutationResult | null = null;
@@ -197,12 +267,12 @@ try {
       let afterSha256: Readonly<Record<string, string>> = {};
       let exactSourceDiff = "";
       let compileExitCode = 125;
+      let compileOutputSha256 = sha256("");
+      let compileCoverageProof: readonly CompileCoverageProof[] = [];
+      let allMutatedSourcesCompiled = false;
       let detectorOutcome: DetectorExecutionResult | null = null;
-      let classification: Classification = "INVALID_MUTANT";
-      const compileCommand = [
-        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json",
-        ...(mutation.javascriptSyntaxChecks ?? []).map((path) => `node --check ${path}`),
-      ];
+      let classification: MutationClassification = "INVALID_MUTANT";
+      let compileCommand: readonly string[] = [];
 
       try {
         const applied = applyMutation(mutantRoot, mutation);
@@ -216,38 +286,30 @@ try {
         }
         exactSourceDiff = diff.stdout;
 
-        const mutantTutorRoot = resolve(mutantRoot, "adaptive-tutor");
-        const compile = run(
-          process.execPath,
-          ["node_modules/typescript/bin/tsc", "-p", "scripts/tutor-v4/tsconfig.json"],
-          mutantTutorRoot,
-        );
-        compileExitCode = compile.status;
-        if (compileExitCode === 0) {
-          for (const syntaxPath of mutation.javascriptSyntaxChecks ?? []) {
-            const syntax = run(process.execPath, ["--check", resolve(mutantRoot, syntaxPath)], mutantTutorRoot);
-            if (syntax.status !== 0) {
-              compileExitCode = syntax.status;
-              break;
-            }
-          }
-        }
-        if (compileExitCode !== 0) {
-          classification = "INVALID_MUTANT";
-        } else {
+        const compile = compileMutation(mutantRoot, mutation, sourcePaths);
+        compileCommand = compile.command;
+        compileExitCode = compile.exitCode;
+        compileOutputSha256 = sha256(compile.output
+          .replaceAll(realpathSync(mutantRoot), "$MUTANT_ROOT")
+          .replaceAll(mutantRoot, "$MUTANT_ROOT")
+          .replaceAll(realpathSync(dependencyRoot), "$DEPENDENCY_ROOT")
+          .replaceAll(dependencyRoot, "$DEPENDENCY_ROOT"));
+        compileCoverageProof = compile.coverageProof;
+        allMutatedSourcesCompiled = compileCoverageProof.length === sourcePaths.length
+          && compileCoverageProof.every((proof) => proof.sourceIncluded);
+        if (compileExitCode === 0 && allMutatedSourcesCompiled) {
+          const mutantTutorRoot = resolve(mutantRoot, "adaptive-tutor");
           detectorOutcome = executeDetector(detector, mutantTutorRoot);
-          if (baselineDetectorOutcome.status !== "PASS") {
-            classification = detector.externalBaselineOwner === undefined
-              ? "BASELINE_BLOCKED"
-              : "EXTERNAL_BASELINE_BLOCKED";
-          } else if (detectorOutcome.status === "FAIL") {
-            classification = "KILLED";
-          } else if (detectorOutcome.status === "PASS") {
-            classification = "SURVIVED";
-          } else {
-            classification = "INVALID_MUTANT";
-          }
         }
+        classification = classifyMutation({
+          rewriteApplied,
+          nonEmptySourceDiff: exactSourceDiff.trim().length > 0,
+          compileExitCode,
+          allMutatedSourcesCompiled,
+          baselineDetectorOutcome,
+          detectorOutcome,
+          externalBaseline: detector.externalBaselineOwner !== undefined,
+        });
       } catch {
         classification = "INVALID_MUTANT";
       }
@@ -258,16 +320,20 @@ try {
         description: mutation.description,
         semanticShape: mutation.semanticShape,
         mutationKind: "implementation",
+        evidenceExecutionSha,
         sourcePaths,
         beforeSha256,
         afterSha256,
         exactSourceDiff,
-        diffReference: `docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#${mutation.mutationId}`,
+        diffReference: `docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#${mutation.mutationId}`,
         detectorId: detector.detectorId,
         baselineDetectorOutcome,
         detectorOutcome,
         compileCommand,
         compileExitCode,
+        compileOutputSha256,
+        compileCoverageProof,
+        allMutatedSourcesCompiled,
         rewriteApplied,
         classification,
         compilerFailureUsedAsDetection: false,
@@ -295,11 +361,19 @@ try {
   rmSync(temporaryRoot, { recursive: true, force: true });
 }
 
-const qualifying = results.filter((result) => result.classification !== "INVALID_MUTANT").length;
+const qualifying = results.filter((result) =>
+  result.rewriteApplied
+  && result.exactSourceDiff.trim().length > 0
+  && result.compileExitCode === 0
+  && result.allMutatedSourcesCompiled
+).length;
 const compileValid = results.filter((result) => result.compileExitCode === 0).length;
 const killed = results.filter((result) => result.classification === "KILLED").length;
 const survived = results.filter((result) => result.classification === "SURVIVED").length;
 const invalid = results.filter((result) => result.classification === "INVALID_MUTANT").length;
+const validationInconclusive = results.filter((result) =>
+  result.classification === "VALIDATION_INCONCLUSIVE"
+).length;
 const baselineBlocked = results.filter((result) =>
   result.classification === "BASELINE_BLOCKED"
   || result.classification === "EXTERNAL_BASELINE_BLOCKED"
@@ -308,16 +382,22 @@ const cleanupComplete = results.every((result) =>
   result.cleanup.worktreeRemoved && result.cleanup.worktreePruned
 );
 const aggregateStatus = killed === 13 && survived === 0 && invalid === 0
+  && validationInconclusive === 0
   && baselineBlocked === 0 && cleanupComplete
   ? "PASS"
   : invalid > 0 || !cleanupComplete
     ? "FAIL"
-    : "EXTERNAL_BASELINE_BLOCKED";
+    : validationInconclusive > 0
+      ? "VALIDATION_INCONCLUSIVE"
+      : baselineBlocked > 0
+        ? "EXTERNAL_BASELINE_BLOCKED"
+        : "FAIL";
 const output = {
-  evidenceVersion: 2,
-  session: "STUDY-TUTOR-V2-W4-16",
-  frameworkSourceSession: "STUDY-TUTOR-V2-W4-R6",
-  candidateSha,
+  evidenceVersion: 3,
+  frameworkVersion: 3,
+  session: "STUDY-TUTOR-V2-W4-R9",
+  frameworkSourceSession: "STUDY-TUTOR-V2-W4-R9",
+  evidenceExecutionSha,
   aggregateStatus,
   mutationKind: "implementation",
   booleanEvidenceFlipOnly: false,
@@ -335,6 +415,7 @@ const output = {
   killed,
   survived,
   invalid,
+  validationInconclusive,
   baselineBlocked,
   cleanupComplete,
   results,

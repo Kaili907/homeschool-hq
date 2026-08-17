@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import {
@@ -17,14 +18,24 @@ function canonicalize(value: unknown): unknown {
 const tutorRoot = process.cwd().endsWith("adaptive-tutor")
   ? process.cwd()
   : resolve("adaptive-tutor");
+const repoRoot = resolve(tutorRoot, "..");
+const revision = spawnSync("git", ["rev-parse", "HEAD"], {
+  cwd: repoRoot,
+  encoding: "utf8",
+  shell: false,
+});
+if (revision.status !== 0) throw new Error(`Unable to resolve evidence execution SHA: ${revision.stderr}`);
+const evidenceExecutionSha = revision.stdout.trim();
 validateDetectorCatalog();
 const results = WAVE4_EXECUTABLE_DETECTORS.map((detector) =>
-  executeDetector(detector, tutorRoot)
+  ({ ...executeDetector(detector, tutorRoot), evidenceExecutionSha })
 );
 const passed = results.filter((result) => result.status === "PASS").length;
 const inconclusive = results.filter((result) => result.status === "VALIDATION_INCONCLUSIVE").length;
 const output = {
-  resultVersion: 2,
+  resultVersion: 3,
+  frameworkVersion: 3,
+  evidenceExecutionSha,
   evidenceKind: "EXECUTABLE_DETECTOR_RESULTS",
   aggregateStatus: inconclusive > 0
     ? "VALIDATION_INCONCLUSIVE"

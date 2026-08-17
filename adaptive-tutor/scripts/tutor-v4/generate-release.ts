@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -7,6 +8,53 @@ import {
 
 const outputDirectory = resolve("tutor-v2-wave4-release");
 const checkOnly = process.argv.includes("--check");
+const repoRoot = resolve("..");
+
+function git(args: readonly string[]): string {
+  const result = spawnSync("git", args, {
+    cwd: repoRoot,
+    encoding: "utf8",
+    shell: false,
+  });
+  if (result.status !== 0) {
+    throw new Error(`git ${args.join(" ")} failed: ${result.stderr}`);
+  }
+  return result.stdout.trim();
+}
+
+function assertEvidenceSubjectBinding(evidenceExecutionSha: string): void {
+  git(["cat-file", "-e", `${evidenceExecutionSha}^{commit}`]);
+  const currentHead = git(["rev-parse", "HEAD"]);
+  if (!checkOnly) {
+    if (currentHead !== evidenceExecutionSha) {
+      throw new Error("Release evidence must be generated at the exact evidence execution subject");
+    }
+    return;
+  }
+
+  const parentLine = git(["rev-list", "--parents", "-n", "1", currentHead]).split(/\s+/u);
+  if (parentLine.length !== 2 || parentLine[1] !== evidenceExecutionSha) {
+    throw new Error("evidenceExecutionSha must be the sole exact parent of the final evidence commit");
+  }
+  const allowed = [
+    "adaptive-tutor/tutor-v2-wave4-release/",
+    "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/",
+  ];
+  const allowedExact = new Set([
+    "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json",
+  ]);
+  const changedPaths = git(["diff", "--name-only", evidenceExecutionSha, currentHead])
+    .split(/\r?\n/u)
+    .filter((path) => path.length > 0);
+  if (
+    changedPaths.length === 0
+    || changedPaths.some((path) =>
+      !allowed.some((prefix) => path.startsWith(prefix)) && !allowedExact.has(path)
+    )
+  ) {
+    throw new Error(`Parent-to-HEAD diff is not evidence-only: ${changedPaths.join(", ")}`);
+  }
+}
 
 function canonicalize(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonicalize);
@@ -50,6 +98,8 @@ const imported = {
 
 interface ExecutableHardGateEvidence {
   readonly resultVersion: number;
+  readonly frameworkVersion: number;
+  readonly evidenceExecutionSha: string;
   readonly evidenceKind: string;
   readonly aggregateStatus: string;
   readonly hardGateFamilyCount: number;
@@ -59,18 +109,36 @@ interface ExecutableHardGateEvidence {
     readonly family: string;
     readonly status: string;
     readonly detectorId: string;
+    readonly evidenceExecutionSha: string;
   }[];
 }
 interface ImplementationMutationEvidence {
   readonly evidenceVersion: number;
+  readonly frameworkVersion: number;
+  readonly evidenceExecutionSha: string;
   readonly mutationKind: string;
   readonly booleanEvidenceFlipOnly: boolean;
   readonly aggregateStatus: string;
   readonly killed: number;
+  readonly qualifying: number;
+  readonly compileValid: number;
   readonly survived: number;
   readonly invalid: number;
   readonly baselineBlocked: number;
-  readonly results: readonly unknown[];
+  readonly cleanupComplete: boolean;
+  readonly results: readonly {
+    readonly mutationId: string;
+    readonly evidenceExecutionSha: string;
+    readonly compileExitCode: number;
+    readonly allMutatedSourcesCompiled: boolean;
+    readonly classification: string;
+    readonly detectorOutcome: {
+      readonly invocationStatus: string;
+      readonly semanticExecutionReached: boolean;
+      readonly assertionCount: number;
+      readonly semanticResult: string;
+    } | null;
+  }[];
 }
 const hardGate = JSON.parse(await readFile(
   resolve(outputDirectory, "HARD-GATE-RESULT.json"),
@@ -81,37 +149,61 @@ const negativeControls = JSON.parse(await readFile(
   "utf8",
 )) as ImplementationMutationEvidence;
 if (
-  hardGate.resultVersion < 2
+  hardGate.resultVersion < 3
+  || hardGate.frameworkVersion !== 3
   || hardGate.evidenceKind !== "EXECUTABLE_DETECTOR_RESULTS"
   || hardGate.booleanEvidenceAccepted !== false
   || hardGate.hardGateFamilyCount !== 13
 ) {
-  throw new Error("Wave 4 hard-gate evidence is not executable v2 evidence");
+  throw new Error("Wave 4 hard-gate evidence is not executable v3 evidence");
 }
 if (
-  negativeControls.evidenceVersion < 2
+  negativeControls.evidenceVersion < 3
+  || negativeControls.frameworkVersion !== 3
   || negativeControls.mutationKind !== "implementation"
   || negativeControls.booleanEvidenceFlipOnly !== false
   || negativeControls.results.length !== 13
 ) {
-  throw new Error("Wave 4 negative-control evidence is not implementation-mutation v2 evidence");
+  throw new Error("Wave 4 negative-control evidence is not implementation-mutation v3 evidence");
 }
+if (
+  hardGate.evidenceExecutionSha.length !== 40
+  || hardGate.evidenceExecutionSha !== negativeControls.evidenceExecutionSha
+  || hardGate.results.some((result) => result.evidenceExecutionSha !== hardGate.evidenceExecutionSha)
+  || negativeControls.results.some((result) =>
+    result.evidenceExecutionSha !== negativeControls.evidenceExecutionSha
+  )
+) {
+  throw new Error("Wave 4 evidence artifacts do not agree on evidenceExecutionSha");
+}
+if (
+  hardGate.aggregateStatus !== "PASS"
+  || hardGate.hardGateFamiliesPassed !== 13
+  || hardGate.results.length !== 13
+  || negativeControls.aggregateStatus !== "PASS"
+  || negativeControls.qualifying !== 13
+  || negativeControls.compileValid !== 13
+  || negativeControls.killed !== 13
+  || negativeControls.survived !== 0
+  || negativeControls.invalid !== 0
+  || negativeControls.baselineBlocked !== 0
+  || !negativeControls.cleanupComplete
+  || negativeControls.results.some((result) =>
+    result.compileExitCode !== 0
+    || !result.allMutatedSourcesCompiled
+    || result.classification !== "KILLED"
+    || result.detectorOutcome === null
+    || result.detectorOutcome.invocationStatus !== "EXECUTED"
+    || !result.detectorOutcome.semanticExecutionReached
+    || result.detectorOutcome.assertionCount <= 0
+    || result.detectorOutcome.semanticResult !== "FAIL"
+  )
+) {
+  throw new Error("Wave 4 evidence does not certify 13 baseline detectors and 13 semantic mutation kills");
+}
+assertEvidenceSubjectBinding(hardGate.evidenceExecutionSha);
 const familyStatus = (family: string): string =>
   hardGate.results.find((result) => result.family === family)?.status ?? "FAIL";
-const allowedExternalBlockers = [
-  "REPLAY_CRASH_IDEMPOTENCY",
-  "PRIVACY_RETENTION_MINIMIZATION",
-] as const;
-const failedFamilies = hardGate.results
-  .filter((result) => result.status !== "PASS")
-  .map((result) => result.family);
-const frameworkReadyForReconvergence = hardGate.hardGateFamiliesPassed === 11
-  && failedFamilies.length === 2
-  && allowedExternalBlockers.every((family) => failedFamilies.includes(family))
-  && negativeControls.killed === 11
-  && negativeControls.survived === 0
-  && negativeControls.invalid === 0
-  && negativeControls.baselineBlocked === 2;
 const closuresByLane = Object.fromEntries(["W4-03", "W4-05", "W4-06", "W4-08", "W4-10"].map((lane) => {
   const assertions = POST_REPAIR_BLOCKER_CLOSURES.filter((item) => item.lane === lane);
   return [lane, {
@@ -153,16 +245,13 @@ const status = {
   LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED: true,
   PRODUCTION_PERSISTENCE_REMAINS_SEPARATE: true,
   COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE: true,
-  FINAL_CLASSIFICATION: hardGate.aggregateStatus === "PASS" && negativeControls.aggregateStatus === "PASS"
-    ? "WAVE4_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
-    : frameworkReadyForReconvergence
-      ? "W4_GATE_INTEGRITY_REPAIR_READY_FOR_RECONVERGENCE"
-      : "W4_GATE_INTEGRITY_REPAIR_INCOMPLETE",
+  FINAL_CLASSIFICATION: "W4_MUTATION_EVIDENCE_REPAIR_READY_FOR_FINAL_REREVIEW",
 };
 const provenance = {
-  provenanceVersion: 2,
-  session: "STUDY-TUTOR-V2-W4-16 Final Post-W4-15 Repair Reconvergence",
-  branch: "mac/tutor-v2-w4-reconvergence-r2",
+  provenanceVersion: 3,
+  session: "STUDY-TUTOR-V2-W4-R9 Compile-Valid M04 + Exact Mutation Evidence Binding Repair",
+  branch: "mac/tutor-v2-w4-mutation-evidence-binding-repair-r1",
+  evidenceExecutionSha: hardGate.evidenceExecutionSha,
   startingFailedCandidateSha: "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
   startingWave3Sha: "a2fdf1858cd50c998f5da53970d36ee6c90ff31a",
   wave3AcceptanceRuling: "WAVE3_ACCEPTED_FOR_WAVE4",
@@ -190,10 +279,12 @@ const provenance = {
     containedInTutorCandidate: false,
     ruling: "SEPARATE_VERIFIED_STUDY_AUTHORITY_ARTIFACT_NOT_MERGED",
   },
-  finalCandidate: {
+  evidenceAttestation: {
     repairedFromFailedCandidateSha: "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
-    exactShaRecordedAfterCommitInSessionReturn: true,
-    selfReferencedInsideChecksummedArtifacts: false,
+    executionSubjectSha: hardGate.evidenceExecutionSha,
+    finalEvidenceCommitIsDirectChild: true,
+    evidenceOnlyChildDiffRequired: true,
+    selfReferencedFinalCommitShaInsideChecksummedArtifacts: false,
   },
 };
 const laneInventory = {
@@ -289,7 +380,7 @@ const testEvidence = {
   convergenceRepairReplay: "86/86 TAP assertions",
   historicalBlockerClosure: "38/38",
   wave4HardGates: `${hardGate.hardGateFamiliesPassed}/13 executable detectors passed`,
-  wave4NegativeControls: `${negativeControls.killed}/13 killed; ${negativeControls.baselineBlocked} external baseline blocked`,
+  wave4NegativeControls: `${negativeControls.killed}/13 compile-valid semantic kills at ${negativeControls.evidenceExecutionSha}`,
   wave3HardGates: "18/18",
   wave3Convergence: "33/33",
   wave2Convergence: "288/288",
@@ -432,7 +523,9 @@ if (checkOnly) {
     const actual = await readFile(resolve(outputDirectory, file), "utf8");
     if (actual !== expected) throw new Error(`Wave 4 release drift detected: ${file}`);
   }
-  process.stdout.write(`PASS wave4-release-check ${outputs.size} artifacts\n`);
+  process.stdout.write(
+    `PASS wave4-release-check ${outputs.size} artifacts; exact-parent subject binding; evidence-only diff\n`,
+  );
 } else {
   await mkdir(outputDirectory, { recursive: true });
   for (const [file, content] of outputs) {

@@ -10,6 +10,7 @@ import {
 export interface DetectorCommand {
   readonly args: readonly string[];
   readonly display: string;
+  readonly phase: "SETUP" | "SEMANTIC";
 }
 
 export interface ExecutableDetectorDefinition {
@@ -31,6 +32,7 @@ export interface DetectorExecutionResult {
   readonly status: DetectorStatus;
   readonly exitCode: number;
   readonly assertionCount: number;
+  readonly minimumAssertionCount: number;
   readonly sourceInvariant: string;
   readonly evidenceRef: string;
   readonly nonCompensable: true;
@@ -38,18 +40,29 @@ export interface DetectorExecutionResult {
   readonly outputSha256: string;
   readonly missingPaths: readonly string[];
   readonly detectorOutcome: "EXECUTED" | "MISSING_DETECTOR" | "INVOCATION_ERROR";
+  readonly invocationStatus: "EXECUTED" | "MISSING_DETECTOR" | "INVOCATION_ERROR";
+  readonly compileSetupStatus: "PASS" | "FAIL" | "NOT_APPLICABLE" | "NOT_RUN";
+  readonly semanticExecutionReached: boolean;
+  readonly semanticResult: DetectorStatus;
+  readonly output: string;
   readonly externalBaselineOwner?: "W4-R7" | "W4-R8";
 }
 
 const repairDist = "scripts/tutor-v4/.dist/tests/wave4-repairs";
+const tutorV4CompileCommand: DetectorCommand = {
+  args: ["node_modules/typescript/bin/tsc", "-p", "scripts/tutor-v4/tsconfig.json"],
+  display: "node $TSC -p scripts/tutor-v4/tsconfig.json",
+  phase: "SETUP",
+};
 
 export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[] = [
   {
     family: "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
     detectorId: "W4-D01-PROMPT-INJECTION-FOCUSED",
-    commands: [{
+    commands: [tutorV4CompileCommand, {
       args: ["adversarial/v4/prompt-injection/run-focused.mjs", "test"],
       display: "node adversarial/v4/prompt-injection/run-focused.mjs test",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: [
       "adversarial/v4/prompt-injection/run-focused.mjs",
@@ -62,9 +75,10 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
   {
     family: "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
     detectorId: "W4-D02-ANSWER-EXTRACTION-CERTIFICATION",
-    commands: [{
+    commands: [tutorV4CompileCommand, {
       args: ["adversarial/v4/answer-extraction/run-certification.mjs"],
       display: "node adversarial/v4/answer-extraction/run-certification.mjs",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: [
       "adversarial/v4/answer-extraction/run-certification.mjs",
@@ -77,7 +91,7 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
   {
     family: "CROSS_SCOPE_COMMERCIAL_ISOLATION",
     detectorId: "W4-D03-R1-R4-R5-SCOPE-LINEAGE",
-    commands: [{
+    commands: [tutorV4CompileCommand, {
       args: [
         "--test",
         `${repairDist}/commercial-integrity/commercial-integrity.test.js`,
@@ -85,6 +99,7 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
         `${repairDist}/presentation-lineage/presentation-lineage.test.js`,
       ],
       display: "node --test R1-commercial-integrity R4-study-lineage R5-presentation-lineage",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: [
       "tests/wave4-repairs/commercial-integrity/commercial-integrity.test.ts",
@@ -102,10 +117,12 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
       {
         args: ["node_modules/typescript/bin/tsc", "-p", "adversarial/v4/replay-crash/tsconfig.json"],
         display: "node $TSC -p adversarial/v4/replay-crash/tsconfig.json",
+        phase: "SETUP",
       },
       {
         args: ["--test", "adversarial/v4/replay-crash/.test-dist/adversarial/v4/replay-crash/state-machine.test.js"],
         display: "node --test adversarial/v4/replay-crash/.test-dist/adversarial/v4/replay-crash/state-machine.test.js",
+        phase: "SEMANTIC",
       },
     ],
     requiredSourcePaths: [
@@ -120,9 +137,10 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
   {
     family: "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
     detectorId: "W4-D05-R1-CURRENT-PROVIDER-STATE",
-    commands: [{
+    commands: [tutorV4CompileCommand, {
       args: ["--test", `${repairDist}/commercial-integrity/commercial-integrity.test.js`],
       display: "node --test R1-commercial-integrity",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: ["tests/wave4-repairs/commercial-integrity/commercial-integrity.test.ts"],
     sourceInvariant: "Dispatch and response acceptance revalidate exact trusted current provider state.",
@@ -132,9 +150,10 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
   {
     family: "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
     detectorId: "W4-D06-R1-BOUNDS-SINGLE-USE",
-    commands: [{
+    commands: [tutorV4CompileCommand, {
       args: ["--test", `${repairDist}/commercial-integrity/commercial-integrity.test.js`],
       display: "node --test R1-commercial-integrity",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: ["tests/wave4-repairs/commercial-integrity/commercial-integrity.test.ts"],
     sourceInvariant: "Policy collections are bounded and ALREADY_CLAIMED physical attempts never dispatch again.",
@@ -148,10 +167,12 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
       {
         args: ["node_modules/typescript/bin/tsc", "-p", "adversarial/v4/privacy-retention/tsconfig.json"],
         display: "node $TSC -p adversarial/v4/privacy-retention/tsconfig.json",
+        phase: "SETUP",
       },
       {
         args: ["adversarial/v4/privacy-retention/.dist/adversarial/v4/privacy-retention/certify.js"],
         display: "node adversarial/v4/privacy-retention/.dist/adversarial/v4/privacy-retention/certify.js",
+        phase: "SEMANTIC",
       },
     ],
     requiredSourcePaths: ["adversarial/v4/privacy-retention/certify.ts"],
@@ -163,13 +184,14 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
   {
     family: "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
     detectorId: "W4-D08-R2-R5-MULTIMODAL-LINEAGE",
-    commands: [{
+    commands: [tutorV4CompileCommand, {
       args: [
         "--test",
         `${repairDist}/multimodal-boundary/seeded-adversarial.test.js`,
         `${repairDist}/presentation-lineage/presentation-lineage.test.js`,
       ],
       display: "node --test R2-multimodal-boundary R5-presentation-lineage",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: [
       "tests/wave4-repairs/multimodal-boundary/seeded-adversarial.test.ts",
@@ -185,6 +207,7 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
     commands: [{
       args: ["--test", "adversarial/v4/multilingual-eval/tests/certification.test.mjs"],
       display: "node --test adversarial/v4/multilingual-eval/tests/certification.test.mjs",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: [
       "adversarial/v4/multilingual-eval/src/scorer.mjs",
@@ -197,9 +220,10 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
   {
     family: "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
     detectorId: "W4-D10-R3-PARENT-GUARDIAN",
-    commands: [{
+    commands: [tutorV4CompileCommand, {
       args: ["--test", `${repairDist}/parent-guardian/parent-guardian.repair.test.js`],
       display: "node --test R3-parent-guardian",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: ["tests/wave4-repairs/parent-guardian/parent-guardian.repair.test.ts"],
     sourceInvariant: "Reports require exact guardian/consent scope and retain truthful Study transition state.",
@@ -212,6 +236,7 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
     commands: [{
       args: ["certification/v4/model-drift/scripts/run-compiled.mjs"],
       display: "node certification/v4/model-drift/scripts/run-compiled.mjs",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: [
       "certification/v4/model-drift/src/identity.ts",
@@ -232,6 +257,7 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
         "certification/v4/live-runner/tests/live-runner.test.ts",
       ],
       display: "node --experimental-strip-types --test certification/v4/live-runner/tests/live-runner.test.ts",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: [
       "certification/v4/live-runner/src/runner.ts",
@@ -244,9 +270,10 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
   {
     family: "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
     detectorId: "W4-D13-PRODUCTION-SCOPED-SCANNER",
-    commands: [{
+    commands: [tutorV4CompileCommand, {
       args: ["scripts/tutor-v4/.dist/scripts/tutor-v4/certify-supply-chain.js"],
       display: "node scripts/tutor-v4/.dist/scripts/tutor-v4/certify-supply-chain.js",
+      phase: "SEMANTIC",
     }],
     requiredSourcePaths: [
       "scripts/tutor-v4/certify-supply-chain.ts",
@@ -258,10 +285,14 @@ export const WAVE4_EXECUTABLE_DETECTORS: readonly ExecutableDetectorDefinition[]
   },
 ] as const;
 
-function normalized(value: string, tutorRoot: string): string {
+export function normalizeDetectorOutput(value: string, tutorRoot: string): string {
   return value
     .replaceAll("\r\n", "\n")
     .replaceAll(tutorRoot, "$TUTOR_ROOT")
+    .replace(
+      /(?:\/private)?\/(?:var\/folders\/[^/\s]+\/[^/\s]+\/T|tmp)\/w4-answer-extraction-[A-Za-z0-9]+/g,
+      "$DETECTOR_TEMP",
+    )
     .replace(/duration_ms: [0-9.]+/g, "duration_ms: <duration>")
     .replace(/# duration_ms [0-9.]+/g, "# duration_ms <duration>");
 }
@@ -275,8 +306,9 @@ function assertionCount(output: string): number {
     .map((match) => Number(match[1] ?? 0));
   const answer = [...output.matchAll(/BASELINE_PASS (\d+)\/(\d+)/g)]
     .map((match) => Number(match[2] ?? 0));
-  if (tap.length > 0 || answer.length > 0) {
-    return [...tap, ...answer].reduce((sum, count) => sum + count, 0);
+  const failedAssertions = [...output.matchAll(/AssertionError \[ERR_ASSERTION\]/g)].length;
+  if (tap.length > 0 || answer.length > 0 || failedAssertions > 0) {
+    return [...tap, ...answer, failedAssertions].reduce((sum, count) => sum + count, 0);
   }
   try {
     const parsed = JSON.parse(output) as {
@@ -327,9 +359,10 @@ export function executeDetector(
     return {
       family: detector.family,
       detectorId: detector.detectorId,
-      status: "FAIL",
+      status: "VALIDATION_INCONCLUSIVE",
       exitCode: 127,
       assertionCount: 0,
+      minimumAssertionCount: detector.minimumAssertionCount,
       sourceInvariant: detector.sourceInvariant,
       evidenceRef: detector.evidenceRef,
       nonCompensable: true,
@@ -337,6 +370,11 @@ export function executeDetector(
       outputSha256: sha256(""),
       missingPaths,
       detectorOutcome: "MISSING_DETECTOR",
+      invocationStatus: "MISSING_DETECTOR",
+      compileSetupStatus: "NOT_RUN",
+      semanticExecutionReached: false,
+      semanticResult: "VALIDATION_INCONCLUSIVE",
+      output: "",
       ...(detector.externalBaselineOwner === undefined
         ? {}
         : { externalBaselineOwner: detector.externalBaselineOwner }),
@@ -345,8 +383,11 @@ export function executeDetector(
 
   let exitCode = 0;
   let invocationError = false;
+  let setupFailed = false;
+  let semanticCommandInvoked = false;
   let output = "";
   for (const command of detector.commands) {
+    if (command.phase === "SEMANTIC") semanticCommandInvoked = true;
     const result = spawnSync(process.execPath, command.args, {
       cwd: tutorRoot,
       encoding: "utf8",
@@ -362,31 +403,54 @@ export function executeDetector(
       break;
     }
     exitCode = result.status ?? 127;
-    if (exitCode !== 0) break;
+    if (exitCode !== 0) {
+      if (command.phase === "SETUP") setupFailed = true;
+      break;
+    }
   }
-  const stableOutput = normalized(output, tutorRoot);
+  const stableOutput = normalizeDetectorOutput(output, tutorRoot);
   const assertions = assertionCount(stableOutput);
-  const status: DetectorStatus = invocationError
+  const hasSetup = detector.commands.some((command) => command.phase === "SETUP");
+  const compileSetupStatus = !hasSetup
+    ? "NOT_APPLICABLE"
+    : setupFailed
+      ? "FAIL"
+      : invocationError && !semanticCommandInvoked
+        ? "NOT_RUN"
+        : "PASS";
+  const semanticExecutionReached = semanticCommandInvoked
+    && !setupFailed
+    && !invocationError
+    && assertions > 0;
+  const semanticResult: DetectorStatus = !semanticExecutionReached
     ? "VALIDATION_INCONCLUSIVE"
-    : exitCode === 0 && assertions >= detector.minimumAssertionCount
-      ? "PASS"
-      : "FAIL";
+    : exitCode === 0 ? "PASS" : "FAIL";
+  const status: DetectorStatus = semanticResult === "PASS"
+    && assertions < detector.minimumAssertionCount
+    ? "VALIDATION_INCONCLUSIVE"
+    : semanticResult;
+  const invocationStatus = invocationError ? "INVOCATION_ERROR" : "EXECUTED";
   return {
     family: detector.family,
     detectorId: detector.detectorId,
     status,
     exitCode,
     assertionCount: assertions,
+    minimumAssertionCount: detector.minimumAssertionCount,
     sourceInvariant: detector.sourceInvariant,
     evidenceRef: detector.evidenceRef,
     nonCompensable: true,
     invocation,
     outputSha256: sha256(stableOutput),
     missingPaths,
-    detectorOutcome: invocationError ? "INVOCATION_ERROR" : "EXECUTED",
+    detectorOutcome: invocationStatus,
+    invocationStatus,
+    compileSetupStatus,
+    semanticExecutionReached,
+    semanticResult,
+    output: stableOutput,
     ...(detector.externalBaselineOwner === undefined
       ? {}
       : { externalBaselineOwner: detector.externalBaselineOwner }),
   };
 }
-

@@ -12,7 +12,15 @@ export interface Wave4MutationDefinition {
   readonly description: string;
   readonly semanticShape: string;
   readonly rewrites: readonly GuardedRewrite[];
-  readonly javascriptSyntaxChecks?: readonly string[];
+  readonly compile:
+    | {
+      readonly kind: "typescript-project";
+      readonly projectPath: string;
+    }
+    | {
+      readonly kind: "javascript-module";
+      readonly sourcePath: string;
+    };
 }
 
 export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] = [
@@ -26,6 +34,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `    presentationIntent: proposal ? response.presentationIntent : null,\n    studyDecisionRequired: true,\n    studyMutationAllowed: false,\n`,
       after: `    presentationIntent: proposal ? response.presentationIntent : null,\n    studyDecisionRequired: true,\n    studyMutationAllowed: true as false,\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "adversarial/v4/provider-chaos/tsconfig.json" },
   },
   {
     mutationId: "W4-M02-REMOVE-ASK-CHECK-PROTECTION",
@@ -37,6 +46,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `    "ask-check",\n`,
       after: "",
     }],
+    compile: { kind: "typescript-project", projectPath: "adversarial/v4/answer-extraction/tsconfig.json" },
   },
   {
     mutationId: "W4-M03-REMOVE-CANONICAL-LEARNER-SCOPE",
@@ -48,6 +58,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `    invocation.householdScopeRef !== input.trustedScope.householdScopeRef ||\n    invocation.learnerScopeRef !== input.trustedScope.learnerScopeRef ||\n    invocation.sessionRef !== input.trustedScope.sessionRef ||\n`,
       after: `    invocation.householdScopeRef !== input.trustedScope.householdScopeRef ||\n    invocation.sessionRef !== input.trustedScope.sessionRef ||\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "adversarial/v4/provider-chaos/tsconfig.json" },
   },
   {
     mutationId: "W4-M04-REDISPATCH-EXISTING-ATTEMPT",
@@ -56,9 +67,10 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
     semanticShape: "M04 accepted-effect/provider replay idempotency weakening",
     rewrites: [{
       sourcePath: "adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts",
-      before: `    const existing = this.#dispatches.get(attempt.physicalAttemptRef);\n    if (existing) {\n`,
-      after: `    const existing = this.#dispatches.get(attempt.physicalAttemptRef);\n    if (existing && false) {\n`,
+      before: `      return { ...structuredClone(existing.result), disposition: "reused" };\n`,
+      after: `      this.#dispatches.delete(attempt.physicalAttemptRef);\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "adversarial/v4/replay-crash/tsconfig.json" },
   },
   {
     mutationId: "W4-M05-BYPASS-RESPONSE-STATE-REVALIDATION",
@@ -70,6 +82,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `      if (\n        validateCurrentCommercialExecutionEligibility(\n          responseEligibility,\n          responseEligibilityRequest,\n        ) === null\n      ) {\n        return {\n          status: "static-fallback",\n          advisory: staticAdvisory(invocation, "NO_ELIGIBLE_PROVIDER_ROUTE"),\n          providerCalls,\n          telemetry,\n        };\n      }\n`,
       after: `      if (\n        validateCurrentCommercialExecutionEligibility(\n          responseEligibility,\n          responseEligibilityRequest,\n        ) === null && false\n      ) {\n        return {\n          status: "static-fallback",\n          advisory: staticAdvisory(invocation, "NO_ELIGIBLE_PROVIDER_ROUTE"),\n          providerCalls,\n          telemetry,\n        };\n      }\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "adversarial/v4/provider-chaos/tsconfig.json" },
   },
   {
     mutationId: "W4-M06-ALLOW-ALREADY-CLAIMED-DISPATCH",
@@ -81,6 +94,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `    if (dispatchClaim !== "CLAIMED") break;\n    providerCalls += 1;\n`,
       after: `    if (dispatchClaim === "CONFLICT") break;\n    providerCalls += 1;\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "adversarial/v4/provider-chaos/tsconfig.json" },
   },
   {
     mutationId: "W4-M07-PERSIST-RAW-TRANSCRIPT",
@@ -92,6 +106,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `    captionRef: source.presentation.caption.captionRef,\n`,
       after: `    captionRef: source.transient?.transcriptText === undefined\n      ? source.presentation.caption.captionRef\n      : \`transcript:\${source.transient.transcriptText}\`,\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "adversarial/v4/privacy-retention/tsconfig.json" },
   },
   {
     mutationId: "W4-M08-REMOVE-VISUAL-DIGEST-BINDING",
@@ -103,6 +118,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `    && left.visualKind === right.visualKind\n    && left.contentDigest === right.contentDigest\n    && left.mimeType === right.mimeType\n`,
       after: `    && left.visualKind === right.visualKind\n    && left.mimeType === right.mimeType\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "core/v3/multimodal/tsconfig.json" },
   },
   {
     mutationId: "W4-M09-COMPENSATE-HARD-MULTILINGUAL-FAILURE",
@@ -114,7 +130,10 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `    decision: hardFailures.length > 0\n      ? "FAIL_HARD_GATE"\n`,
       after: `    decision: hardFailures.length > 0 && total < 0\n      ? "FAIL_HARD_GATE"\n`,
     }],
-    javascriptSyntaxChecks: ["adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs"],
+    compile: {
+      kind: "javascript-module",
+      sourcePath: "adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs",
+    },
   },
   {
     mutationId: "W4-M10-REMOVE-GUARDIAN-LEARNER-BINDING",
@@ -130,6 +149,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `    submitted.guardianRef === trusted.guardianRef &&\n    submitted.householdScopeRef === trusted.householdScopeRef &&\n    submitted.learnerScopeRef === trusted.learnerScopeRef &&\n    submitted.authorizationRevisionRef === trusted.authorizationRevisionRef &&\n`,
       after: `    submitted.guardianRef === trusted.guardianRef &&\n    submitted.householdScopeRef === trusted.householdScopeRef &&\n    submitted.authorizationRevisionRef === trusted.authorizationRevisionRef &&\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "adversarial/v4/parent-guardian/tsconfig.json" },
   },
   {
     mutationId: "W4-M11-IGNORE-MODEL-CONFIG-DRIFT",
@@ -141,6 +161,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `  return CERTIFICATION_IDENTITY_FIELDS.filter((field) => certified[field] !== observed[field]);\n`,
       after: `  return CERTIFICATION_IDENTITY_FIELDS.filter((field) =>\n    field !== "modelRevisionRef"\n    && field !== "configurationDigest"\n    && certified[field] !== observed[field]\n  );\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "certification/v4/model-drift/tsconfig.json" },
   },
   {
     mutationId: "W4-M12-CONTINUE-AFTER-HARD-VIOLATION",
@@ -152,6 +173,7 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `        haltReason = "hard-violation";\n        break campaignLoop;\n      }\n`,
       after: `        haltReason = "hard-violation";\n      }\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "certification/v4/live-runner/tsconfig.json" },
   },
   {
     mutationId: "W4-M13-ADD-LIVE-VENDOR-ENDPOINT",
@@ -163,5 +185,6 @@ export const WAVE4_IMPLEMENTATION_MUTATIONS: readonly Wave4MutationDefinition[] 
       before: `export * from "./commercial-operation/index.js";\n`,
       after: `export const W4_MUTANT_LIVE_ENDPOINT = "https://api.openai.com/v1/responses";\n\nexport * from "./commercial-operation/index.js";\n`,
     }],
+    compile: { kind: "typescript-project", projectPath: "adversarial/v4/provider-chaos/tsconfig.json" },
   },
 ] as const;
