@@ -9,7 +9,9 @@
     "../../core/v2/contracts/**/*.ts",
     "../../core/v3/**/*.ts",
     "../../study-engine/tutor-v2/parent-reporting/**/*.ts",
-    "../../tests/wave4-convergence/**/*.ts",
+    "../../study-engine/tutor-v2/wave3/**/*.ts",
+    "../../tests/wave4-gates/**/*.ts",
+    "../../tests/wave4-repairs/**/*.ts",
     "./**/*.ts"
   ]
 }

@@ -1,90 +1,227 @@
 {
   "academicQualityCompensationAllowed": false,
-  "aggregateStatus": "PASS",
-  "hardGateFamiliesPassed": 13,
+  "aggregateStatus": "FAIL",
+  "booleanEvidenceAccepted": false,
+  "evidenceKind": "EXECUTABLE_DETECTOR_RESULTS",
+  "hardGateFamiliesFailed": 2,
+  "hardGateFamiliesPassed": 11,
   "hardGateFamilyCount": 13,
   "nonCompensable": true,
   "requiredWave3HardGateFamilyCount": 18,
   "results": [
     {
-      "detector": "adversarial/v4/prompt-injection: 40/40 and 6/6 controls",
-      "name": "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
+      "assertionCount": 40,
+      "detectorId": "W4-D01-PROMPT-INJECTION-FOCUSED",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-01-prompt-injection",
+      "exitCode": 0,
+      "family": "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
+      "invocation": [
+        "node adversarial/v4/prompt-injection/run-focused.mjs test"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "5b4fdadf729ff6fd475871cf190b891dd4ae7f5c23e5931646f8ada1f042c9a7",
+      "sourceInvariant": "Untrusted instructions cannot widen Study authority or advisory authority fields.",
       "status": "PASS"
     },
     {
-      "detector": "adversarial/v4/answer-extraction: 66/66 and 4/4 controls",
-      "name": "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
+      "assertionCount": 66,
+      "detectorId": "W4-D02-ANSWER-EXTRACTION-CERTIFICATION",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-02-answer-extraction",
+      "exitCode": 0,
+      "family": "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
+      "invocation": [
+        "node adversarial/v4/answer-extraction/run-certification.mjs"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "6815595eed453da94a5ea2aebe552a58382f30be6e8d9b9fa2676871091becb5",
+      "sourceInvariant": "Active assessments structurally reject unrestricted answer-bearing actions.",
       "status": "PASS"
     },
     {
-      "detector": "R1 + R4 + R5 post-repair lineage replay",
-      "name": "CROSS_SCOPE_COMMERCIAL_ISOLATION",
+      "assertionCount": 56,
+      "detectorId": "W4-D03-R1-R4-R5-SCOPE-LINEAGE",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r1-commercial-integrity;w4-r4-study-lineage;w4-r5-presentation-lineage",
+      "exitCode": 0,
+      "family": "CROSS_SCOPE_COMMERCIAL_ISOLATION",
+      "invocation": [
+        "node --test R1-commercial-integrity R4-study-lineage R5-presentation-lineage"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "da62098cf708fd98c1c2b3154ef164d792f5765876a90589b2f44a5d661df09c",
+      "sourceInvariant": "Every commercial, accepted-effect, memory, and presentation boundary reconciles the canonical Study scope.",
       "status": "PASS"
     },
     {
-      "detector": "adversarial/v4/replay-crash: 28/28",
-      "name": "REPLAY_CRASH_IDEMPOTENCY",
+      "assertionCount": 0,
+      "detectorId": "W4-D04-REPLAY-CRASH-CURRENT",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-04-replay-crash",
+      "exitCode": 2,
+      "externalBaselineOwner": "W4-R7",
+      "family": "REPLAY_CRASH_IDEMPOTENCY",
+      "invocation": [
+        "node $TSC -p adversarial/v4/replay-crash/tsconfig.json",
+        "node --test adversarial/v4/replay-crash/.test-dist/adversarial/v4/replay-crash/state-machine.test.js"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "9fd6216bef6e025ce90edaedbc910ca424b5e6fbd6d8f3b1f1ed9fd96a7cf19c",
+      "sourceInvariant": "Crash recovery reuses accepted effects and physical attempts at most once under current contracts.",
+      "status": "FAIL"
+    },
+    {
+      "assertionCount": 27,
+      "detectorId": "W4-D05-R1-CURRENT-PROVIDER-STATE",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r1-commercial-integrity",
+      "exitCode": 0,
+      "family": "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
+      "invocation": [
+        "node --test R1-commercial-integrity"
+      ],
+      "missingPaths": [],
+      "nonCompensable": true,
+      "outputSha256": "0c1f7669967ad2919e2872b4259d979d4790b18f13a31b4f986ea69804c9341b",
+      "sourceInvariant": "Dispatch and response acceptance revalidate exact trusted current provider state.",
       "status": "PASS"
     },
     {
-      "detector": "R1 forged identity and current-state replay",
-      "name": "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
+      "assertionCount": 27,
+      "detectorId": "W4-D06-R1-BOUNDS-SINGLE-USE",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r1-commercial-integrity",
+      "exitCode": 0,
+      "family": "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
+      "invocation": [
+        "node --test R1-commercial-integrity"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "0c1f7669967ad2919e2872b4259d979d4790b18f13a31b4f986ea69804c9341b",
+      "sourceInvariant": "Policy collections are bounded and ALREADY_CLAIMED physical attempts never dispatch again.",
       "status": "PASS"
     },
     {
-      "detector": "R1 bounded collections and caller-owned claim replay",
-      "name": "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
+      "assertionCount": 0,
+      "detectorId": "W4-D07-PRIVACY-CURRENT-CANARY",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-07-privacy-retention",
+      "exitCode": 1,
+      "externalBaselineOwner": "W4-R8",
+      "family": "PRIVACY_RETENTION_MINIMIZATION",
+      "invocation": [
+        "node $TSC -p adversarial/v4/privacy-retention/tsconfig.json",
+        "node adversarial/v4/privacy-retention/.dist/adversarial/v4/privacy-retention/certify.js"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "2fcc46e460ddb0a21a8bae0afeb09da9e0d8d5da69fc0d4c0817ce46e1e2d52d",
+      "sourceInvariant": "Forbidden raw fields and synthetic canaries cannot enter any durable projection.",
+      "status": "FAIL"
+    },
+    {
+      "assertionCount": 28,
+      "detectorId": "W4-D08-R2-R5-MULTIMODAL-LINEAGE",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r2-multimodal-boundary;w4-r5-presentation-lineage",
+      "exitCode": 0,
+      "family": "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
+      "invocation": [
+        "node --test R2-multimodal-boundary R5-presentation-lineage"
+      ],
+      "missingPaths": [],
+      "nonCompensable": true,
+      "outputSha256": "afce6efa1dd69c8d7158b2f7d251616b67fd9ea2dbb1136f0dc5495e8a41992f",
+      "sourceInvariant": "Caption, digest, provenance, capability, and commercial scope must match before presentation acceptance.",
       "status": "PASS"
     },
     {
-      "detector": "adversarial/v4/privacy-retention canary and schema campaign",
-      "name": "PRIVACY_RETENTION_MINIMIZATION",
+      "assertionCount": 10,
+      "detectorId": "W4-D09-MULTILINGUAL-HARD-RUBRIC",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-09-multilingual-eval",
+      "exitCode": 0,
+      "family": "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION",
+      "invocation": [
+        "node --test adversarial/v4/multilingual-eval/tests/certification.test.mjs"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "cedd78fe749f6642ef768cd5570cff530a474ce03d9fcda64c31d8cce063c218",
+      "sourceInvariant": "Answer, authority, and safety failures are hard failures that aggregate quality cannot compensate.",
       "status": "PASS"
     },
     {
-      "detector": "R2 seeded boundary replay and R5 presentation lineage",
-      "name": "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
+      "assertionCount": 22,
+      "detectorId": "W4-D10-R3-PARENT-GUARDIAN",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r3-parent-guardian",
+      "exitCode": 0,
+      "family": "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
+      "invocation": [
+        "node --test R3-parent-guardian"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "60495deca49fd3a5793bc8e9b6637dc1a5660c523206d5c7b34fc8303354af1a",
+      "sourceInvariant": "Reports require exact guardian/consent scope and retain truthful Study transition state.",
       "status": "PASS"
     },
     {
-      "detector": "adversarial/v4/multilingual-eval deterministic corpus",
-      "name": "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION",
+      "assertionCount": 21,
+      "detectorId": "W4-D11-MODEL-DRIFT-IDENTITY",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-11-model-drift",
+      "exitCode": 0,
+      "family": "MODEL_DRIFT_CERTIFICATION_IDENTITY",
+      "invocation": [
+        "node certification/v4/model-drift/scripts/run-compiled.mjs"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "ea74e0c74110a650a1b0794b839323e905edd51b068d4d282a80ad19a4c54bf7",
+      "sourceInvariant": "Any model revision or configuration identity drift invalidates certification.",
       "status": "PASS"
     },
     {
-      "detector": "R3 Parent/guardian 22/22 replay",
-      "name": "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
+      "assertionCount": 11,
+      "detectorId": "W4-D12-OFFLINE-CAMPAIGN-HARD-FAIL",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-12-live-cert-runner",
+      "exitCode": 0,
+      "family": "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL",
+      "invocation": [
+        "node --experimental-strip-types --test certification/v4/live-runner/tests/live-runner.test.ts"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
+      "outputSha256": "0a879eda587c7830d39afdd16ab674f7dc97bd5bf97237f245ed7791f16f0dbf",
+      "sourceInvariant": "The first hard violation fails and halts the offline campaign before further dispatch.",
       "status": "PASS"
     },
     {
-      "detector": "certification/v4/model-drift exact identity policy",
-      "name": "MODEL_DRIFT_CERTIFICATION_IDENTITY",
+      "assertionCount": 9,
+      "detectorId": "W4-D13-PRODUCTION-SCOPED-SCANNER",
+      "detectorOutcome": "EXECUTED",
+      "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-13-supply-chain",
+      "exitCode": 0,
+      "family": "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
+      "invocation": [
+        "node scripts/tutor-v4/.dist/scripts/tutor-v4/certify-supply-chain.js"
+      ],
+      "missingPaths": [],
       "nonCompensable": true,
-      "status": "PASS"
-    },
-    {
-      "detector": "certification/v4/live-runner six immediate hard violations",
-      "name": "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL",
-      "nonCompensable": true,
-      "status": "PASS"
-    },
-    {
-      "detector": "adversarial/v4/supply-chain provider-neutral scanner",
-      "name": "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
-      "nonCompensable": true,
+      "outputSha256": "e1814e2eb5fa4071b664a1fe5a304e3fccd96e9991670ff5cc7e2f6ad4bfb73c",
+      "sourceInvariant": "Production Tutor foundation source contains no vendor, credential, endpoint, or deployment seam.",
       "status": "PASS"
     }
   ],
-  "resultVersion": 1,
+  "resultVersion": 2,
   "wave3HardGatesRemainMandatory": true
 }

@@ -11,10 +11,10 @@
     "W4_01": "40/40; 6/6 controls",
     "W4_02": "66/66; 4/4 controls",
     "W4_03": "historical RED reproduced: 36 pass, 22 fail across 58 tests; 19 recorded blockers",
-    "W4_04": "28/28 historical source replay; current replay covered by repaired convergence",
+    "W4_04": "current executable replay/crash detector FAIL; historical results do not certify current state",
     "W4_05": "historical finding preserved: 16/21 matrix, 5 blockers",
     "W4_06": "historical finding preserved: 2 explicit blocker cases",
-    "W4_07": "14-category canary scan PASS; 18/18 Wave 3 gates",
+    "W4_07": "current executable privacy-retention detector FAIL; historical results do not certify current state",
     "W4_08": "historical RED reproduced: 5 pass, 10 fail across 15 tests; 7 blocker categories",
     "W4_09": "10/10; evaluation only",
     "W4_10": "historical RED reproduced: 25 pass, 5 fail across 30 tests",
@@ -36,6 +36,6 @@
   "wave2Convergence": "288/288",
   "wave3Convergence": "33/33",
   "wave3HardGates": "18/18",
-  "wave4HardGates": "13/13",
-  "wave4NegativeControls": "13/13 detected"
+  "wave4HardGates": "11/13 executable detectors passed",
+  "wave4NegativeControls": "11/13 killed; 2 external baseline blocked"
 }

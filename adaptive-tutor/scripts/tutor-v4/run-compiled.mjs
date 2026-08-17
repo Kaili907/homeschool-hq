@@ -21,7 +21,7 @@ run(process.execPath, [tsc, "-p", "scripts/tutor-v4/tsconfig.json"]);
 const [target, ...args] = process.argv.slice(2);
 const compiledRoot = "scripts/tutor-v4/.dist";
 if (target === "test") {
-  run(process.execPath, ["--test", `${compiledRoot}/tests/wave4-convergence/*.test.js`, ...args]);
+  run(process.execPath, ["--test", `${compiledRoot}/tests/wave4-gates/*.test.js`, ...args]);
 } else if (target === "closure") {
   run(process.execPath, [`${compiledRoot}/scripts/tutor-v4/run-blocker-closure.js`, ...args]);
 } else if (target === "gate") {
