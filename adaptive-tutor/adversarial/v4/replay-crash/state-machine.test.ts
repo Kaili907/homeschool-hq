@@ -1,5 +1,27 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { InMemoryPhysicalAttemptDispatchClaimStore } from "../../../core/v3/commercial-operation/index.js";
+import { executeCommercialTutorInvocation } from "../../../core/v3/commercial-operation/orchestrate.js";
+import {
+  InstructionalMemoryProjectionStore,
+  type ApplyInstructionalMemoryDeltaResult,
+} from "../../../core/v3/memory/index.js";
+import {
+  RecoverableInstructionalOperationCoordinator,
+  type CanonicalStudyEffectAcceptCommand,
+  type CanonicalStudyEffectAcceptResult,
+  type CanonicalStudyEffectGateway,
+  type CanonicalStudyEffectIdentity,
+  type CanonicalStudyEffectLookupResult,
+  type InstructionalMemoryDeltaPort,
+  type MinimizedAcceptedStudyEffectEvent,
+  type RecoverableInstructionalOperation,
+} from "../../../core/v3/recovery/index.js";
+import {
+  ScriptedCommercialTransport,
+  executionInput,
+  successfulProviderResponse,
+} from "../../../tests/tutor-v3-convergence/fixtures.js";
 import {
   DeterministicFailureInjector,
   EphemeralReplayCrashCertificationState,
@@ -99,6 +121,30 @@ test("exact replay is a no-op over all accepted commercial side effects", () => 
   assertFullyRecorded(replayed.record);
 });
 
+test("actual R1 dispatch claim prevents exact replay from executing a provider twice", () => {
+  const claims = new InMemoryPhysicalAttemptDispatchClaimStore();
+  const firstTransport = new ScriptedCommercialTransport([
+    { status: "response", response: successfulProviderResponse() },
+  ]);
+  const replayTransport = new ScriptedCommercialTransport([
+    { status: "response", response: successfulProviderResponse() },
+  ]);
+
+  const first = executeCommercialTutorInvocation(executionInput(firstTransport, {
+    dispatchClaims: claims,
+  }));
+  const replay = executeCommercialTutorInvocation(executionInput(replayTransport, {
+    dispatchClaims: claims,
+  }));
+
+  assert.equal(first.status, "advisory");
+  assert.equal(first.providerCalls, 1);
+  assert.equal(firstTransport.requests.length, 1);
+  assert.equal(replay.status, "static-fallback");
+  assert.equal(replay.providerCalls, 0);
+  assert.equal(replayTransport.requests.length, 0);
+});
+
 test("changed payload under the same logical operation fails closed", () => {
   const { state, machine } = completeWithoutFailure();
   const conflicting = makeReplayCrashRequest({ contentRef: "content:decimal-fractions" });
@@ -107,6 +153,21 @@ test("changed payload under the same logical operation fails closed", () => {
   if (result.status !== "quarantined") return;
   assert.equal(result.code, "CONFLICTING_REPLAY");
   assert.equal(state.study.executionCount, 1);
+  assert.equal(state.parent.projectionCount, 1);
+});
+
+test("the same logical operation in a different commercial scope is a conflict", () => {
+  const { state, machine } = completeWithoutFailure();
+  const conflicting = makeReplayCrashRequest({
+    commercialScopeRef: "commercial-scope:replay-001-sibling",
+  });
+  const result = machine.run(conflicting);
+  assert.equal(result.status, "quarantined");
+  if (result.status !== "quarantined") return;
+  assert.equal(result.code, "CONFLICTING_REPLAY");
+  assert.equal(state.provider.physicalExecutionCount(), 1);
+  assert.equal(state.study.executionCount, 1);
+  assert.equal(state.memory.projectionCount, 1);
   assert.equal(state.parent.projectionCount, 1);
 });
 
@@ -234,6 +295,89 @@ test("a crash after accepted Study effect repairs memory without repeating the e
   assert.equal(state.memory.projectionCount, 1);
 });
 
+class TestStudyEffectGateway implements CanonicalStudyEffectGateway {
+  acceptCount = 0;
+  accepted: MinimizedAcceptedStudyEffectEvent | null = null;
+
+  lookup(_identity: CanonicalStudyEffectIdentity): CanonicalStudyEffectLookupResult {
+    return this.accepted
+      ? { status: "accepted", event: structuredClone(this.accepted) }
+      : { status: "missing" };
+  }
+
+  accept(command: CanonicalStudyEffectAcceptCommand): CanonicalStudyEffectAcceptResult {
+    this.acceptCount += 1;
+    this.accepted = structuredClone(command.acceptedEvent);
+    return { status: "accepted", event: structuredClone(command.acceptedEvent) };
+  }
+}
+
+class FailOnceMemoryPort implements InstructionalMemoryDeltaPort {
+  applyCount = 0;
+
+  constructor(
+    readonly store: InstructionalMemoryProjectionStore,
+    private failuresRemaining = 1,
+  ) {}
+
+  apply(candidate: unknown): ApplyInstructionalMemoryDeltaResult {
+    this.applyCount += 1;
+    if (this.failuresRemaining > 0) {
+      this.failuresRemaining -= 1;
+      throw new Error("disposable memory write failure");
+    }
+    return this.store.apply(candidate);
+  }
+}
+
+test("actual R4 recovery reuses the accepted Study effect and repairs exact-replay memory", () => {
+  const request = makeReplayCrashRequest();
+  const receipt = request.studyEffectReceipt;
+  const delta = request.memoryDelta;
+  const operation: RecoverableInstructionalOperation = {
+    recoveryKind: "recoverable-instructional-operation",
+    commercialExecutionScopeRef: receipt.commercialExecutionScopeRef,
+    householdScopeRef: receipt.householdScopeRef,
+    logicalOperationRef: receipt.logicalOperationRef,
+    sourceEventRef: receipt.receiptRef,
+    effectRef: receipt.effectRef,
+    effectDigest: receipt.effectDigest,
+    conceptRef: receipt.conceptRef,
+    curriculumReleaseRef: receipt.curriculumReleaseRef,
+    curriculumPackageRef: receipt.curriculumPackageRef,
+    curriculumCourseRef: receipt.curriculumCourseRef,
+    curriculumSubjectRef: receipt.curriculumSubjectRef,
+    curriculumUnitRef: receipt.curriculumUnitRef,
+    curriculumLessonRef: receipt.curriculumLessonRef,
+    scope: structuredClone(delta.scope),
+    memoryDelta: structuredClone(delta),
+  };
+  const gateway = new TestStudyEffectGateway();
+  const store = new InstructionalMemoryProjectionStore();
+  const memory = new FailOnceMemoryPort(store);
+  const coordinator = new RecoverableInstructionalOperationCoordinator(gateway, memory);
+
+  const failed = coordinator.replay(request.commercialScope, operation);
+  assert.equal(failed.status, "pending");
+  assert.equal(gateway.acceptCount, 1);
+  assert.equal(store.projectionCount, 0);
+
+  const repaired = coordinator.replay(request.commercialScope, operation);
+  assert.equal(repaired.status, "complete");
+  if (repaired.status !== "complete") return;
+  assert.equal(repaired.effectDisposition, "reused");
+  assert.equal(repaired.memoryDisposition, "applied");
+  assert.equal(repaired.recoveredMemory, true);
+  assert.equal(gateway.acceptCount, 1);
+  assert.equal(store.projectionCount, 1);
+
+  const duplicate = coordinator.replay(request.commercialScope, operation);
+  assert.equal(duplicate.status, "complete");
+  if (duplicate.status === "complete") assert.equal(duplicate.memoryDisposition, "duplicate");
+  assert.equal(gateway.acceptCount, 1);
+  assert.equal(store.projectionCount, 1);
+});
+
 test("a crash during memory apply observes duplicate delta on repair", () => {
   const state = new EphemeralReplayCrashCertificationState();
   const request = makeReplayCrashRequest();
@@ -293,8 +437,8 @@ test("Parent projection is absent before its boundary and derived only from acce
   assert.deepEqual(completed.record.parentProjection, {
     projectionRef: request.parentProjectionRef,
     logicalOperationRef: request.logicalOperationRef,
-    acceptedStudyReceiptRef: request.studyReceiptRef,
-    effectRef: request.effectRef,
+    acceptedStudyReceiptRef: request.studyEffectReceipt.receiptRef,
+    effectRef: request.studyEffectReceipt.effectRef,
     memoryRevisionRef: request.memoryDelta.resultingRevisionRef,
     status: "accepted-state",
   });
