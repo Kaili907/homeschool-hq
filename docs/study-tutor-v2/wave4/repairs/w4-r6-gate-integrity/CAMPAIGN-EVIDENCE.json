@@ -1,8 +1,11 @@
 {
   "aggregateStatus": "PASS",
+  "artifactStatus": "HISTORICAL_R6_FRAMEWORK_RUN",
   "baselineBlocked": 0,
   "booleanEvidenceFlipOnly": false,
-  "candidateSha": "57cae2722632fbf2a6318a1c7744a6126d6a69c3",
+  "currentExactCandidateCertification": false,
+  "historicalExecutionSubjectSha": "57cae2722632fbf2a6318a1c7744a6126d6a69c3",
+  "supersededBy": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json",
   "cleanupComplete": true,
   "compilerFailureAloneCountsAsDetection": false,
   "compileValid": 13,
