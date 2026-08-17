@@ -1,5 +1,29 @@
 {
   "convergenceRepairReplay": "86/86 TAP assertions",
+  "currentPrivacyRetentionCertification": {
+    "canaryCategories": 14,
+    "directLeaks": 0,
+    "encodedLeaks": 0,
+    "legitimateDurableProjection": "accepted",
+    "negativeControl": "raw transcript retention detected",
+    "normalizedLeaks": 0,
+    "providerPolicyAttacks": "6/6 fail closed",
+    "rawMediaPersisted": false,
+    "rawTranscriptPersisted": false,
+    "result": "PASS",
+    "scannedSurfaces": 41,
+    "schemaAttacks": "9/9 rejected"
+  },
+  "currentReplayCrashCertification": {
+    "crashWindows": "15/15 PASS",
+    "crossScopeConflict": "PASS",
+    "memoryExactReplay": "PASS",
+    "negativeControl": "weakened R1 dispatch guard detected",
+    "originalSemanticAssertionsPreserved": "28/28",
+    "r1SingleUseDispatchIntegration": "PASS",
+    "result": "31/31 PASS",
+    "studyEffectAtMostOnce": "PASS"
+  },
   "evidenceVersion": 1,
   "foundationCorpus": "128/128; FOUNDATION_GATE_PASS; releaseReady=false",
   "fullValidationRecordedInSessionReturn": true,
@@ -11,10 +35,10 @@
     "W4_01": "40/40; 6/6 controls",
     "W4_02": "66/66; 4/4 controls",
     "W4_03": "historical RED reproduced: 36 pass, 22 fail across 58 tests; 19 recorded blockers",
-    "W4_04": "current executable replay/crash detector FAIL; historical results do not certify current state",
+    "W4_04": "current executable replay/crash detector PASS",
     "W4_05": "historical finding preserved: 16/21 matrix, 5 blockers",
     "W4_06": "historical finding preserved: 2 explicit blocker cases",
-    "W4_07": "current executable privacy-retention detector FAIL; historical results do not certify current state",
+    "W4_07": "current executable privacy-retention detector PASS",
     "W4_08": "historical RED reproduced: 5 pass, 10 fail across 15 tests; 7 blocker categories",
     "W4_09": "10/10; evaluation only",
     "W4_10": "historical RED reproduced: 25 pass, 5 fail across 30 tests",
@@ -27,7 +51,10 @@
     "R2": "30/30 combined",
     "R3": "22/22",
     "R4": "9/9",
-    "R5": "20/20"
+    "R5": "20/20",
+    "R6": "13/13 executable gates and 13/13 mutations",
+    "R7": "31/31",
+    "R8": "current privacy certification PASS"
   },
   "repositoryRoot": "typecheck PASS; production build PASS",
   "studyCoreBridge": "35/36 pass; 1 skipped for unavailable external archives",
@@ -36,6 +63,6 @@
   "wave2Convergence": "288/288",
   "wave3Convergence": "33/33",
   "wave3HardGates": "18/18",
-  "wave4HardGates": "11/13 executable detectors passed",
-  "wave4NegativeControls": "11/13 killed; 2 external baseline blocked"
+  "wave4HardGates": "13/13 executable detectors passed",
+  "wave4NegativeControls": "13/13 killed; 0 external baseline blocked"
 }

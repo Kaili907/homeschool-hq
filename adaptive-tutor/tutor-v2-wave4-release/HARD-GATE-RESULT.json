@@ -1,10 +1,10 @@
 {
   "academicQualityCompensationAllowed": false,
-  "aggregateStatus": "FAIL",
+  "aggregateStatus": "PASS",
   "booleanEvidenceAccepted": false,
   "evidenceKind": "EXECUTABLE_DETECTOR_RESULTS",
-  "hardGateFamiliesFailed": 2,
-  "hardGateFamiliesPassed": 11,
+  "hardGateFamiliesFailed": 0,
+  "hardGateFamiliesPassed": 13,
   "hardGateFamilyCount": 13,
   "nonCompensable": true,
   "requiredWave3HardGateFamilyCount": 18,
@@ -58,11 +58,11 @@
       "status": "PASS"
     },
     {
-      "assertionCount": 0,
+      "assertionCount": 31,
       "detectorId": "W4-D04-REPLAY-CRASH-CURRENT",
       "detectorOutcome": "EXECUTED",
       "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-04-replay-crash",
-      "exitCode": 2,
+      "exitCode": 0,
       "externalBaselineOwner": "W4-R7",
       "family": "REPLAY_CRASH_IDEMPOTENCY",
       "invocation": [
@@ -71,9 +71,9 @@
       ],
       "missingPaths": [],
       "nonCompensable": true,
-      "outputSha256": "9fd6216bef6e025ce90edaedbc910ca424b5e6fbd6d8f3b1f1ed9fd96a7cf19c",
+      "outputSha256": "a515d34ddd16663187d8f2d174d1dc332b43bceaaecd425c9e88f9aa2aa86ca2",
       "sourceInvariant": "Crash recovery reuses accepted effects and physical attempts at most once under current contracts.",
-      "status": "FAIL"
+      "status": "PASS"
     },
     {
       "assertionCount": 27,
@@ -108,11 +108,11 @@
       "status": "PASS"
     },
     {
-      "assertionCount": 0,
+      "assertionCount": 74,
       "detectorId": "W4-D07-PRIVACY-CURRENT-CANARY",
       "detectorOutcome": "EXECUTED",
       "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-07-privacy-retention",
-      "exitCode": 1,
+      "exitCode": 0,
       "externalBaselineOwner": "W4-R8",
       "family": "PRIVACY_RETENTION_MINIMIZATION",
       "invocation": [
@@ -121,9 +121,9 @@
       ],
       "missingPaths": [],
       "nonCompensable": true,
-      "outputSha256": "2fcc46e460ddb0a21a8bae0afeb09da9e0d8d5da69fc0d4c0817ce46e1e2d52d",
+      "outputSha256": "da411e48aa7fe2000625858ba70351e172b2fd8cb00f2966c5369a5e3b50c83c",
       "sourceInvariant": "Forbidden raw fields and synthetic canaries cannot enter any durable projection.",
-      "status": "FAIL"
+      "status": "PASS"
     },
     {
       "assertionCount": 28,

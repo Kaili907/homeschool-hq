@@ -1,6 +1,6 @@
 {
-  "inventoryVersion": 1,
-  "repairCount": 5,
+  "inventoryVersion": 2,
+  "repairCount": 8,
   "repairs": [
     {
       "invariants": [
@@ -63,6 +63,45 @@
       "repair": "R5",
       "result": "PASS_20_OF_20",
       "sourceSha": "7bc73bfb48ce5c485c2225ac0e13cce3cc15eb83"
+    },
+    {
+      "invariants": [
+        "permanent-detector-execution",
+        "implementation-mutations",
+        "boolean-evidence-rejected",
+        "compiler-failure-not-a-kill"
+      ],
+      "name": "Executable Gate Integrity",
+      "repair": "R6",
+      "result": "PASS_13_OF_13_EXECUTABLE_GATES_AND_MUTATIONS",
+      "sourceSha": "43106f3f92c17af8bd5aa404ed49c935bdf72631"
+    },
+    {
+      "invariants": [
+        "15-crash-windows",
+        "r1-single-use-dispatch",
+        "study-effect-at-most-once",
+        "exact-memory-replay",
+        "cross-scope-conflict"
+      ],
+      "name": "Current Replay Crash Certification",
+      "repair": "R7",
+      "result": "PASS_31_OF_31",
+      "sourceSha": "bc706aa6f77b53191830db432b568f3f0f36a54e"
+    },
+    {
+      "invariants": [
+        "current-legitimate-projection",
+        "14-canary-categories",
+        "41-scanned-surfaces",
+        "zero-leaks",
+        "raw-transcript-negative-control",
+        "closed-provider-and-schema-policy"
+      ],
+      "name": "Current Privacy Retention Certification",
+      "repair": "R8",
+      "result": "PASS_CURRENT_PRIVACY_CERTIFICATION",
+      "sourceSha": "4bae0522e15c130493c110a181d8d0ae0e57a14a"
     }
   ]
 }

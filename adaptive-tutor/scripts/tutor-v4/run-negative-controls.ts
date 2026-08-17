@@ -315,7 +315,8 @@ const aggregateStatus = killed === 13 && survived === 0 && invalid === 0
     : "EXTERNAL_BASELINE_BLOCKED";
 const output = {
   evidenceVersion: 2,
-  session: "STUDY-TUTOR-V2-W4-R6",
+  session: "STUDY-TUTOR-V2-W4-16",
+  frameworkSourceSession: "STUDY-TUTOR-V2-W4-R6",
   candidateSha,
   aggregateStatus,
   mutationKind: "implementation",

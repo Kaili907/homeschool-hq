@@ -43,6 +43,9 @@ const imported = {
   R3: { sourceSha: "bb8d4f5a9f02561e480daaa87cb00ab2f6e323b5", sourcePatchId: "b394be4028febb0fbdd6013652deeff0d83db277", resultingSha: "a1e26f1d16f99bdc1a39cbcdc0af934457a6f2f4", resultingPatchId: "b394be4028febb0fbdd6013652deeff0d83db277" },
   R4: { sourceSha: "84ed21176e1c7d5a667b39b012f1a0747358b737", sourcePatchId: "8a3a0f1799b34aca539859d0e711febaf091bbc2", resultingSha: "36fece86e80d646e21a8d3328227feeadebc18ce", resultingPatchId: "8a3a0f1799b34aca539859d0e711febaf091bbc2" },
   R5: { sourceSha: "7bc73bfb48ce5c485c2225ac0e13cce3cc15eb83", sourcePatchId: "be9538f29c95961d2ce759ff609903e5df7fb607", resultingSha: "6cea138eb284c8cc651f885472da206d68faa0ee", resultingPatchId: "be9538f29c95961d2ce759ff609903e5df7fb607" },
+  R6: { sourceSha: "43106f3f92c17af8bd5aa404ed49c935bdf72631", sourcePatchId: "05f4075d166158c60546de702424f65aec940569", resultingSha: "5ff0ca3ef65df9cda703d74ed3ec11d8a0a9ba6f", resultingPatchId: "05f4075d166158c60546de702424f65aec940569" },
+  R7: { sourceSha: "bc706aa6f77b53191830db432b568f3f0f36a54e", sourcePatchId: "393e29308c60b046c55789a4617f5f5de12bcced", resultingSha: "049511fe09e787c0072638ac329c8b980278aaf0", resultingPatchId: "393e29308c60b046c55789a4617f5f5de12bcced" },
+  R8: { sourceSha: "4bae0522e15c130493c110a181d8d0ae0e57a14a", sourcePatchId: "b0c882d68326bcc8267333aa5e5cc4226c094d06", resultingSha: "57cae2722632fbf2a6318a1c7744a6126d6a69c3", resultingPatchId: "b0c882d68326bcc8267333aa5e5cc4226c094d06" },
 } as const;
 
 interface ExecutableHardGateEvidence {
@@ -133,8 +136,9 @@ const blockerClosure = {
 const schemaInventoryText = await readFile(resolve("json-schema/v4/wave4/SCHEMA-INVENTORY.json"), "utf8");
 const schemaInventory = JSON.parse(schemaInventoryText) as Record<string, unknown>;
 const status = {
-  statusVersion: 1,
+  statusVersion: 2,
   WAVE_4_COMPLETE: false,
+  TUTOR_V2_TECHNICAL_WAVES_COMPLETE: false,
   FINAL_WAVE4_INDEPENDENT_REREVIEW_REQUIRED: true,
   WAVE_4_HARD_GATES_PASS: hardGate.aggregateStatus === "PASS",
   HISTORICAL_BLOCKERS_CLOSED: blockerClosure.closedCount === 38,
@@ -150,20 +154,21 @@ const status = {
   PRODUCTION_PERSISTENCE_REMAINS_SEPARATE: true,
   COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE: true,
   FINAL_CLASSIFICATION: hardGate.aggregateStatus === "PASS" && negativeControls.aggregateStatus === "PASS"
-    ? "WAVE4_RECONVERGED_CANDIDATE_READY_FOR_FINAL_INDEPENDENT_REREVIEW"
+    ? "WAVE4_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
     : frameworkReadyForReconvergence
       ? "W4_GATE_INTEGRITY_REPAIR_READY_FOR_RECONVERGENCE"
       : "W4_GATE_INTEGRITY_REPAIR_INCOMPLETE",
 };
 const provenance = {
-  provenanceVersion: 1,
-  session: "STUDY-TUTOR-V2-W4-14 Wave 4 Adversarial Certification + Repair Reconvergence",
-  branch: "mac/tutor-v2-w4-convergence-r1",
+  provenanceVersion: 2,
+  session: "STUDY-TUTOR-V2-W4-16 Final Post-W4-15 Repair Reconvergence",
+  branch: "mac/tutor-v2-w4-reconvergence-r2",
+  startingFailedCandidateSha: "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
   startingWave3Sha: "a2fdf1858cd50c998f5da53970d36ee6c90ff31a",
   wave3AcceptanceRuling: "WAVE3_ACCEPTED_FOR_WAVE4",
   importOrder: Object.keys(imported),
   imports: imported,
-  duplicateImportRuling: "PASS_13_LANES_AND_R1_R5_IMPORTED_EXACTLY_ONCE_R1_R2_NOT_DUPLICATED",
+  duplicateImportRuling: "PASS_13_LANES_AND_R1_R8_IMPORTED_EXACTLY_ONCE_R1_R2_NOT_DUPLICATED",
   prohibitedAssembledR2Cherry: {
     sha: "b0720b1d3243f6587a6538c7225849ce88d953ef",
     imported: false,
@@ -171,7 +176,14 @@ const provenance = {
     matchesR2PatchId: true,
   },
   semanticCherryPickAdaptations: [],
-  semanticConflictRuling: "NO_TEXT_CONFLICTS_R4_AND_R5_INVARIANTS_COEXIST",
+  semanticConflictRuling: "NO_TEXT_CONFLICTS_OR_SEMANTIC_ADAPTATIONS_R6_R7_R8_INVARIANTS_COEXIST",
+  failedW415AcceptanceReview: {
+    candidateSha: "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
+    accepted: false,
+    historicalRuling: "WAVE4_HOLD",
+    historyRewritten: false,
+    repairedCandidateKind: "POST_REVIEW_REPAIRED_CANDIDATE",
+  },
   externalStudyAuthorityDependency: {
     branch: "mac/study-runtime-tutor-authority-port-r2",
     repairSha: "527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4",
@@ -179,6 +191,7 @@ const provenance = {
     ruling: "SEPARATE_VERIFIED_STUDY_AUTHORITY_ARTIFACT_NOT_MERGED",
   },
   finalCandidate: {
+    repairedFromFailedCandidateSha: "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
     exactShaRecordedAfterCommitInSessionReturn: true,
     selfReferencedInsideChecksummedArtifacts: false,
   },
@@ -214,14 +227,17 @@ const baselineFindings = {
   ],
 };
 const repairInventory = {
-  inventoryVersion: 1,
-  repairCount: 5,
+  inventoryVersion: 2,
+  repairCount: 8,
   repairs: [
     { repair: "R1", name: "Commercial Integrity", sourceSha: imported.R1.sourceSha, result: "PASS_27_OF_27", invariants: ["canonical-commercial-scope", "current-provider-state", "bounded-policy-collections", "single-use-dispatch"] },
     { repair: "R2", name: "Multimodal Boundary", sourceSha: imported.R2.sourceSha, result: "PASS", invariants: ["hostile-object-rejection", "caption-anti-answer", "scope-lineage", "digest", "audio-capability", "media-kind", "fallback-uniqueness", "raw-media-minimization"] },
     { repair: "R3", name: "Parent Guardian", sourceSha: imported.R3.sourceSha, result: "PASS_22_OF_22", invariants: ["exact-guardian-authorization", "consent-revision", "truthful-study-state"] },
     { repair: "R4", name: "Study Accepted-Effect / Memory Lineage", sourceSha: imported.R4.sourceSha, result: "PASS_9_OF_9", invariants: ["accepted-effect-scope", "memory-scope", "same-scope-idempotency", "changed-scope-conflict"] },
     { repair: "R5", name: "Presentation Acceptance Lineage", sourceSha: imported.R5.sourceSha, result: "PASS_20_OF_20", invariants: ["canonical-scope", "study-advisory", "reviewed-content-provenance"] },
+    { repair: "R6", name: "Executable Gate Integrity", sourceSha: imported.R6.sourceSha, result: "PASS_13_OF_13_EXECUTABLE_GATES_AND_MUTATIONS", invariants: ["permanent-detector-execution", "implementation-mutations", "boolean-evidence-rejected", "compiler-failure-not-a-kill"] },
+    { repair: "R7", name: "Current Replay Crash Certification", sourceSha: imported.R7.sourceSha, result: "PASS_31_OF_31", invariants: ["15-crash-windows", "r1-single-use-dispatch", "study-effect-at-most-once", "exact-memory-replay", "cross-scope-conflict"] },
+    { repair: "R8", name: "Current Privacy Retention Certification", sourceSha: imported.R8.sourceSha, result: "PASS_CURRENT_PRIVACY_CERTIFICATION", invariants: ["current-legitimate-projection", "14-canary-categories", "41-scanned-surfaces", "zero-leaks", "raw-transcript-negative-control", "closed-provider-and-schema-policy"] },
   ],
 };
 const serializedBoundaryInventory = {
@@ -245,7 +261,31 @@ const testEvidence = {
   evidenceVersion: 1,
   nodeVersion: "22.23.2",
   importedLaneSuites: 13,
-  repairs: { R1: "27/27", R2: "30/30 combined", R3: "22/22", R4: "9/9", R5: "20/20" },
+  repairs: { R1: "27/27", R2: "30/30 combined", R3: "22/22", R4: "9/9", R5: "20/20", R6: "13/13 executable gates and 13/13 mutations", R7: "31/31", R8: "current privacy certification PASS" },
+  currentReplayCrashCertification: {
+    result: "31/31 PASS",
+    crashWindows: "15/15 PASS",
+    originalSemanticAssertionsPreserved: "28/28",
+    r1SingleUseDispatchIntegration: "PASS",
+    studyEffectAtMostOnce: "PASS",
+    memoryExactReplay: "PASS",
+    crossScopeConflict: "PASS",
+    negativeControl: "weakened R1 dispatch guard detected",
+  },
+  currentPrivacyRetentionCertification: {
+    result: "PASS",
+    legitimateDurableProjection: "accepted",
+    canaryCategories: 14,
+    scannedSurfaces: 41,
+    directLeaks: 0,
+    normalizedLeaks: 0,
+    encodedLeaks: 0,
+    rawMediaPersisted: false,
+    rawTranscriptPersisted: false,
+    providerPolicyAttacks: "6/6 fail closed",
+    schemaAttacks: "9/9 rejected",
+    negativeControl: "raw transcript retention detected",
+  },
   convergenceRepairReplay: "86/86 TAP assertions",
   historicalBlockerClosure: "38/38",
   wave4HardGates: `${hardGate.hardGateFamiliesPassed}/13 executable detectors passed`,

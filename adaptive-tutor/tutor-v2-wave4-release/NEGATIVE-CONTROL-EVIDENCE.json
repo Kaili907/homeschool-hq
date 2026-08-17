@@ -1,8 +1,8 @@
 {
-  "aggregateStatus": "EXTERNAL_BASELINE_BLOCKED",
-  "baselineBlocked": 2,
+  "aggregateStatus": "PASS",
+  "baselineBlocked": 0,
   "booleanEvidenceFlipOnly": false,
-  "candidateSha": "f466d5090230a0198a4a44937dcaf850259e860f",
+  "candidateSha": "57cae2722632fbf2a6318a1c7744a6126d6a69c3",
   "cleanupComplete": true,
   "compilerFailureAloneCountsAsDetection": false,
   "compileValid": 13,
@@ -10,8 +10,9 @@
   "disposableDetachedWorktreesOnly": true,
   "evidenceVersion": 2,
   "expectedOutputMutationUsed": false,
+  "frameworkSourceSession": "STUDY-TUTOR-V2-W4-R6",
   "invalid": 0,
-  "killed": 11,
+  "killed": 13,
   "mutationKind": "implementation",
   "permanentDetectorAssertionsChanged": false,
   "qualifying": 13,
@@ -128,7 +129,7 @@
         ],
         "missingPaths": [],
         "nonCompensable": true,
-        "outputSha256": "d8370d302d6a1fe7461dbc5d12b34c2cbb5468bc54c04bee218f1dcc289f1164",
+        "outputSha256": "62ccbb3cb55b6e9288a03ac9311de6a941bd966f6e7222d96b51951a5ef3fb52",
         "sourceInvariant": "Active assessments structurally reject unrestricted answer-bearing actions.",
         "status": "FAIL"
       },
@@ -207,14 +208,14 @@
     },
     {
       "afterSha256": {
-        "adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts": "11b841b81c631083c7f6fac92cdf29535dcda19caa4b0f486a290f8359bf3f83"
+        "adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts": "e45b9c22274967630dff0d3de17f510a43cf9b30c5e1673b85546215744d7d2b"
       },
       "baselineDetectorOutcome": {
-        "assertionCount": 0,
+        "assertionCount": 31,
         "detectorId": "W4-D04-REPLAY-CRASH-CURRENT",
         "detectorOutcome": "EXECUTED",
         "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-04-replay-crash",
-        "exitCode": 2,
+        "exitCode": 0,
         "externalBaselineOwner": "W4-R7",
         "family": "REPLAY_CRASH_IDEMPOTENCY",
         "invocation": [
@@ -223,14 +224,14 @@
         ],
         "missingPaths": [],
         "nonCompensable": true,
-        "outputSha256": "9fd6216bef6e025ce90edaedbc910ca424b5e6fbd6d8f3b1f1ed9fd96a7cf19c",
+        "outputSha256": "a515d34ddd16663187d8f2d174d1dc332b43bceaaecd425c9e88f9aa2aa86ca2",
         "sourceInvariant": "Crash recovery reuses accepted effects and physical attempts at most once under current contracts.",
-        "status": "FAIL"
+        "status": "PASS"
       },
       "beforeSha256": {
-        "adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts": "66015b6b0df18c83922d82961b59b4ae1925e5c39828dbac5ea14eae0579a783"
+        "adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts": "0273f5c6cbd7c2d5051b3058ec73aaa6cdf8e3b2b2893217448a83c5b33065e8"
       },
-      "classification": "EXTERNAL_BASELINE_BLOCKED",
+      "classification": "KILLED",
       "cleanup": {
         "worktreePruned": true,
         "worktreeRemoved": true
@@ -256,12 +257,12 @@
         ],
         "missingPaths": [],
         "nonCompensable": true,
-        "outputSha256": "aa5dc04aa207bd62242187b3836f4a5422a79e7b988d61b43a9497a9398159fb",
+        "outputSha256": "d3450b6c199ddda116d8095d3a28292c687ff18c757e7f79d1f5d3419e38cccc",
         "sourceInvariant": "Crash recovery reuses accepted effects and physical attempts at most once under current contracts.",
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M04-REDISPATCH-EXISTING-ATTEMPT",
-      "exactSourceDiff": "diff --git a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\nindex 12d4fd58..9acd9af0 100644\n--- a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n+++ b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n@@ -165,7 +165,7 @@ export class DeterministicProvider {\n   dispatch(attempt: CertificationRouteAttempt, payloadDigest: string): ProviderDispatchResult {\n     this.dispatchLog.push(attempt.physicalAttemptRef);\n     const existing = this.#dispatches.get(attempt.physicalAttemptRef);\n-    if (existing) {\n+    if (existing && false) {\n       if (existing.payloadDigest !== payloadDigest) {\n         throw new Error(\"physical attempt reference was rebound to a different payload\");\n       }\n",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\nindex 7cb41d44..da80bf8f 100644\n--- a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n+++ b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n@@ -180,7 +180,7 @@ export class DeterministicProvider {\n   dispatch(attempt: CommercialAttempt, payloadDigest: string): ProviderDispatchResult {\n     this.dispatchLog.push(attempt.physicalAttemptRef);\n     const existing = this.#dispatches.get(attempt.physicalAttemptRef);\n-    if (existing) {\n+    if (existing && false) {\n       if (existing.payloadDigest !== payloadDigest) {\n         throw new Error(\"physical attempt reference was rebound to a different payload\");\n       }\n",
       "family": "REPLAY_CRASH_IDEMPOTENCY",
       "mutationId": "W4-M04-REDISPATCH-EXISTING-ATTEMPT",
       "mutationKind": "implementation",
@@ -400,11 +401,11 @@
         "adaptive-tutor/core/v3/multimodal/projection.ts": "c1528bbdb5f60671aab126d81d4a8f72acfa08c14c59502def895b81ea018b3b"
       },
       "baselineDetectorOutcome": {
-        "assertionCount": 0,
+        "assertionCount": 74,
         "detectorId": "W4-D07-PRIVACY-CURRENT-CANARY",
         "detectorOutcome": "EXECUTED",
         "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-07-privacy-retention",
-        "exitCode": 1,
+        "exitCode": 0,
         "externalBaselineOwner": "W4-R8",
         "family": "PRIVACY_RETENTION_MINIMIZATION",
         "invocation": [
@@ -413,14 +414,14 @@
         ],
         "missingPaths": [],
         "nonCompensable": true,
-        "outputSha256": "2fcc46e460ddb0a21a8bae0afeb09da9e0d8d5da69fc0d4c0817ce46e1e2d52d",
+        "outputSha256": "da411e48aa7fe2000625858ba70351e172b2fd8cb00f2966c5369a5e3b50c83c",
         "sourceInvariant": "Forbidden raw fields and synthetic canaries cannot enter any durable projection.",
-        "status": "FAIL"
+        "status": "PASS"
       },
       "beforeSha256": {
         "adaptive-tutor/core/v3/multimodal/projection.ts": "e5a8c626caf1554c6696023fa722dc70dad5282f28233e5b24f7c05a053c9500"
       },
-      "classification": "EXTERNAL_BASELINE_BLOCKED",
+      "classification": "KILLED",
       "cleanup": {
         "worktreePruned": true,
         "worktreeRemoved": true
@@ -446,7 +447,7 @@
         ],
         "missingPaths": [],
         "nonCompensable": true,
-        "outputSha256": "40ae291802cb797e656ec00d4e6b14588b3d816b530bd909f95cfc403831bcd1",
+        "outputSha256": "6d8d7a1aba1e12c951a519087aa699d1f1581b9d85f23034da70a48a788585a0",
         "sourceInvariant": "Forbidden raw fields and synthetic canaries cannot enter any durable projection.",
         "status": "FAIL"
       },
@@ -836,6 +837,6 @@
     }
   ],
   "serialExecution": true,
-  "session": "STUDY-TUTOR-V2-W4-R6",
+  "session": "STUDY-TUTOR-V2-W4-16",
   "survived": 0
 }

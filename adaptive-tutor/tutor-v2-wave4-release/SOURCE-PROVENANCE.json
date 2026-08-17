@@ -1,14 +1,22 @@
 {
-  "branch": "mac/tutor-v2-w4-convergence-r1",
-  "duplicateImportRuling": "PASS_13_LANES_AND_R1_R5_IMPORTED_EXACTLY_ONCE_R1_R2_NOT_DUPLICATED",
+  "branch": "mac/tutor-v2-w4-reconvergence-r2",
+  "duplicateImportRuling": "PASS_13_LANES_AND_R1_R8_IMPORTED_EXACTLY_ONCE_R1_R2_NOT_DUPLICATED",
   "externalStudyAuthorityDependency": {
     "branch": "mac/study-runtime-tutor-authority-port-r2",
     "containedInTutorCandidate": false,
     "repairSha": "527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4",
     "ruling": "SEPARATE_VERIFIED_STUDY_AUTHORITY_ARTIFACT_NOT_MERGED"
   },
+  "failedW415AcceptanceReview": {
+    "accepted": false,
+    "candidateSha": "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
+    "historicalRuling": "WAVE4_HOLD",
+    "historyRewritten": false,
+    "repairedCandidateKind": "POST_REVIEW_REPAIRED_CANDIDATE"
+  },
   "finalCandidate": {
     "exactShaRecordedAfterCommitInSessionReturn": true,
+    "repairedFromFailedCandidateSha": "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
     "selfReferencedInsideChecksummedArtifacts": false
   },
   "importOrder": [
@@ -29,7 +37,10 @@
     "R2",
     "R3",
     "R4",
-    "R5"
+    "R5",
+    "R6",
+    "R7",
+    "R8"
   ],
   "imports": {
     "R1": {
@@ -61,6 +72,24 @@
       "resultingSha": "6cea138eb284c8cc651f885472da206d68faa0ee",
       "sourcePatchId": "be9538f29c95961d2ce759ff609903e5df7fb607",
       "sourceSha": "7bc73bfb48ce5c485c2225ac0e13cce3cc15eb83"
+    },
+    "R6": {
+      "resultingPatchId": "05f4075d166158c60546de702424f65aec940569",
+      "resultingSha": "5ff0ca3ef65df9cda703d74ed3ec11d8a0a9ba6f",
+      "sourcePatchId": "05f4075d166158c60546de702424f65aec940569",
+      "sourceSha": "43106f3f92c17af8bd5aa404ed49c935bdf72631"
+    },
+    "R7": {
+      "resultingPatchId": "393e29308c60b046c55789a4617f5f5de12bcced",
+      "resultingSha": "049511fe09e787c0072638ac329c8b980278aaf0",
+      "sourcePatchId": "393e29308c60b046c55789a4617f5f5de12bcced",
+      "sourceSha": "bc706aa6f77b53191830db432b568f3f0f36a54e"
+    },
+    "R8": {
+      "resultingPatchId": "b0c882d68326bcc8267333aa5e5cc4226c094d06",
+      "resultingSha": "57cae2722632fbf2a6318a1c7744a6126d6a69c3",
+      "sourcePatchId": "b0c882d68326bcc8267333aa5e5cc4226c094d06",
+      "sourceSha": "4bae0522e15c130493c110a181d8d0ae0e57a14a"
     },
     "W4_01": {
       "resultingPatchId": "e3e986665cd710d0bd1b7af040b706afee5a9f9c",
@@ -147,10 +176,11 @@
     "sha": "b0720b1d3243f6587a6538c7225849ce88d953ef",
     "stablePatchId": "82073e8be1e81a530c0cbb69f9f476c4486ab25e"
   },
-  "provenanceVersion": 1,
+  "provenanceVersion": 2,
   "semanticCherryPickAdaptations": [],
-  "semanticConflictRuling": "NO_TEXT_CONFLICTS_R4_AND_R5_INVARIANTS_COEXIST",
-  "session": "STUDY-TUTOR-V2-W4-14 Wave 4 Adversarial Certification + Repair Reconvergence",
+  "semanticConflictRuling": "NO_TEXT_CONFLICTS_OR_SEMANTIC_ADAPTATIONS_R6_R7_R8_INVARIANTS_COEXIST",
+  "session": "STUDY-TUTOR-V2-W4-16 Final Post-W4-15 Repair Reconvergence",
+  "startingFailedCandidateSha": "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
   "startingWave3Sha": "a2fdf1858cd50c998f5da53970d36ee6c90ff31a",
   "wave3AcceptanceRuling": "WAVE3_ACCEPTED_FOR_WAVE4"
 }
