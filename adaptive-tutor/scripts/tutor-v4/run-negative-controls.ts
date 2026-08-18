@@ -30,6 +30,15 @@ import {
   classifyMutation,
   type MutationClassification,
 } from "./mutation-classification.js";
+import {
+  COMPILER_EVIDENCE_VERSION,
+  NORMALIZATION_RULES,
+  NORMALIZATION_VERSION,
+  applyRootNormalization,
+  normalizeCompilerOutput,
+  sealCompilerEvidence,
+  type CompilerEvidence,
+} from "./compiler-evidence.js";
 
 interface CompileCoverageProof {
   readonly sourcePath: string;
@@ -55,7 +64,7 @@ interface MutationResult {
   readonly detectorOutcome: DetectorExecutionResult | null;
   readonly compileCommand: readonly string[];
   readonly compileExitCode: number;
-  readonly compileOutputSha256: string;
+  readonly compilerEvidence: CompilerEvidence | null;
   readonly compileCoverageProof: readonly CompileCoverageProof[];
   readonly allMutatedSourcesCompiled: boolean;
   readonly rewriteApplied: boolean;
@@ -167,7 +176,14 @@ function compileMutation(
 ): {
   readonly command: readonly string[];
   readonly exitCode: number;
-  readonly output: string;
+  readonly rawOutput: string;
+  readonly compilerName: string;
+  readonly compilerVersion: string;
+  readonly resolvedBinaryRelPath: string;
+  readonly project: {
+    readonly tsconfigRelPath: string;
+    readonly tsconfigSha256: string;
+  } | null;
   readonly coverageProof: readonly CompileCoverageProof[];
 } {
   const mutantTutorRoot = resolve(mutantRoot, "adaptive-tutor");
@@ -176,9 +192,13 @@ function compileMutation(
     const source = resolve(mutantRoot, compileDefinition.sourcePath);
     const result = run(process.execPath, ["--check", source], mutantTutorRoot);
     return {
-      command: [`node --check ${compileDefinition.sourcePath}`],
+      command: ["node", "--check", compileDefinition.sourcePath],
       exitCode: result.status,
-      output: `${result.stdout}${result.stderr}`,
+      rawOutput: `${result.stdout}${result.stderr}`,
+      compilerName: "node",
+      compilerVersion: process.version,
+      resolvedBinaryRelPath: "node",
+      project: null,
       coverageProof: sourcePaths.map((sourcePath) => ({
         sourcePath,
         validationKind: "JAVASCRIPT_MODULE_SYNTAX",
@@ -199,13 +219,31 @@ function compileMutation(
     "false",
   ];
   const result = run(process.execPath, args, mutantTutorRoot);
-  const listedFiles = new Set(result.stdout.split(/\r?\n/u)
-    .filter((line) => line.startsWith("/"))
-    .map((line) => realpathSync(line)));
+  // Only absolute paths that actually resolve are listing entries. Diagnostics
+  // may also begin with "/", so resolution failure means "not a listing entry".
+  const listedFiles = new Set<string>();
+  for (const line of result.stdout.split(/\r?\n/u)) {
+    if (!line.startsWith("/")) continue;
+    try {
+      listedFiles.add(realpathSync(line));
+    } catch {
+      continue;
+    }
+  }
+  const tsconfigAbsolutePath = resolve(mutantTutorRoot, compileDefinition.projectPath);
   return {
-    command: [`node ${args.join(" ")}`],
+    command: ["node", ...args],
     exitCode: result.status,
-    output: `${result.stdout}${result.stderr}`,
+    rawOutput: `${result.stdout}${result.stderr}`,
+    compilerName: "typescript",
+    compilerVersion: String(JSON.parse(
+      readFileSync(resolve(dependencyRoot, "typescript/package.json"), "utf8"),
+    ).version),
+    resolvedBinaryRelPath: "adaptive-tutor/node_modules/typescript/bin/tsc",
+    project: {
+      tsconfigRelPath: `adaptive-tutor/${compileDefinition.projectPath}`,
+      tsconfigSha256: sha256(readFileSync(tsconfigAbsolutePath)),
+    },
     coverageProof: sourcePaths.map((sourcePath) => {
       const absoluteSourcePath = realpathSync(resolve(mutantRoot, sourcePath));
       const sourceIncluded = listedFiles.has(absoluteSourcePath);
@@ -230,7 +268,7 @@ const dependencyRoot = resolve(tutorRoot, "node_modules");
 const outputPath = resolve(tutorRoot, "tutor-v2-wave4-release/NEGATIVE-CONTROL-EVIDENCE.json");
 const documentationPath = resolve(
   repoRoot,
-  "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json",
+  "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json",
 );
 
 validateCatalog();
@@ -267,7 +305,7 @@ try {
       let afterSha256: Readonly<Record<string, string>> = {};
       let exactSourceDiff = "";
       let compileExitCode = 125;
-      let compileOutputSha256 = sha256("");
+      let compilerEvidence: CompilerEvidence | null = null;
       let compileCoverageProof: readonly CompileCoverageProof[] = [];
       let allMutatedSourcesCompiled = false;
       let detectorOutcome: DetectorExecutionResult | null = null;
@@ -289,12 +327,48 @@ try {
         const compile = compileMutation(mutantRoot, mutation, sourcePaths);
         compileCommand = compile.command;
         compileExitCode = compile.exitCode;
-        compileOutputSha256 = sha256(compile.output
-          .replaceAll(realpathSync(mutantRoot), "$MUTANT_ROOT")
-          .replaceAll(mutantRoot, "$MUTANT_ROOT")
-          .replaceAll(realpathSync(dependencyRoot), "$DEPENDENCY_ROOT")
-          .replaceAll(dependencyRoot, "$DEPENDENCY_ROOT"));
         compileCoverageProof = compile.coverageProof;
+        if (sourcePaths.length !== 1) {
+          throw new Error(`${mutation.mutationId}: expected exactly one mutated source`);
+        }
+        const normalizationRoots = [
+          realpathSync(mutantRoot),
+          mutantRoot,
+          realpathSync(repoRoot),
+          repoRoot,
+        ];
+        const normalized = normalizeCompilerOutput(compile.rawOutput, normalizationRoots);
+        const mutatedRelPath = sourcePaths[0]!;
+        const listedRelPath = applyRootNormalization(
+          realpathSync(resolve(mutantRoot, mutatedRelPath)),
+          normalizationRoots,
+        );
+        compilerEvidence = sealCompilerEvidence({
+          compilerEvidenceVersion: COMPILER_EVIDENCE_VERSION,
+          compiler: {
+            name: compile.compilerName,
+            version: compile.compilerVersion,
+            resolvedBinaryRelPath: compile.resolvedBinaryRelPath,
+          },
+          node: { version: process.version },
+          command: compile.command,
+          project: compile.project,
+          mutatedSource: {
+            relPath: mutatedRelPath,
+            sha256: afterSha256[mutatedRelPath]!,
+          },
+          sourceMembershipProof: {
+            includedInCompile: compile.coverageProof.every((proof) => proof.sourceIncluded),
+            listFilesRelPath: listedRelPath.value,
+          },
+          exitCode: compile.exitCode,
+          diagnostics: normalized.diagnostics,
+          normalization: {
+            version: NORMALIZATION_VERSION,
+            rules: NORMALIZATION_RULES,
+            appliedRewrites: normalized.appliedRewrites + listedRelPath.rewrites,
+          },
+        });
         allMutatedSourcesCompiled = compileCoverageProof.length === sourcePaths.length
           && compileCoverageProof.every((proof) => proof.sourceIncluded);
         if (compileExitCode === 0 && allMutatedSourcesCompiled) {
@@ -325,13 +399,13 @@ try {
         beforeSha256,
         afterSha256,
         exactSourceDiff,
-        diffReference: `docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#${mutation.mutationId}`,
+        diffReference: `docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#${mutation.mutationId}`,
         detectorId: detector.detectorId,
         baselineDetectorOutcome,
         detectorOutcome,
         compileCommand,
         compileExitCode,
-        compileOutputSha256,
+        compilerEvidence,
         compileCoverageProof,
         allMutatedSourcesCompiled,
         rewriteApplied,
@@ -393,10 +467,10 @@ const aggregateStatus = killed === 13 && survived === 0 && invalid === 0
         ? "EXTERNAL_BASELINE_BLOCKED"
         : "FAIL";
 const output = {
-  evidenceVersion: 3,
-  frameworkVersion: 3,
-  session: "STUDY-TUTOR-V2-W4-R9",
-  frameworkSourceSession: "STUDY-TUTOR-V2-W4-R9",
+  evidenceVersion: 4,
+  frameworkVersion: 4,
+  session: "STUDY-TUTOR-V2-W4-R10",
+  frameworkSourceSession: "STUDY-TUTOR-V2-W4-R10",
   evidenceExecutionSha,
   aggregateStatus,
   mutationKind: "implementation",

@@ -1,5 +1,6 @@
 {
   "aggregateStatus": "PASS",
+  "artifactStatus": "HISTORICAL_R9_FRAMEWORK_RUN",
   "baselineBlocked": 0,
   "booleanEvidenceFlipOnly": false,
   "cleanupComplete": true,
@@ -7,11 +8,12 @@
   "compileValid": 13,
   "controlCount": 13,
   "disposableDetachedWorktreesOnly": true,
-  "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
   "evidenceVersion": 3,
   "expectedOutputMutationUsed": false,
   "frameworkSourceSession": "STUDY-TUTOR-V2-W4-R9",
   "frameworkVersion": 3,
+  "historicalCompileOutputNote": "Preserved verbatim as historicalCompileOutputSha256. These digests hashed the full tsc --listFiles listing, which was 93-96% dependency file paths, so they track the installed dependency closure rather than the mutation and are not reproducible from repository contents. Superseded by the deterministic compilerEvidence record (compilerEvidenceVersion 1). See docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/AUDIT.md.",
+  "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
   "invalid": 0,
   "killed": 13,
   "mutationKind": "implementation",
@@ -69,7 +71,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
       "compilerFailureUsedAsDetection": false,
       "description": "Widen the executable successful advisory's Study mutation authority field.",
       "detectorId": "W4-D01-PROMPT-INJECTION-FOCUSED",
@@ -97,9 +98,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M01-AUTHORITY-FIELD-WIDENING",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2..3f21d292 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -261,7 +261,7 @@ function finalizedAdvisory(\n     assistanceEvidenceRef: proposal ? invocation.curriculum.opportunityRef : null,\n     presentationIntent: proposal ? response.presentationIntent : null,\n     studyDecisionRequired: true,\n-    studyMutationAllowed: false,\n+    studyMutationAllowed: true as false,\n     officialMasteryAuthority: false,\n     officialWorkingLevelAuthority: false,\n     nominalGradeAuthority: false,\n",
       "family": "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
+      "historicalCompileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M01-AUTHORITY-FIELD-WIDENING",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -156,7 +158,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "c2d7f43da2f7a07fddf88a7fc0e369a9046f594435c2b4c9c3fa91f13b995ad5",
       "compilerFailureUsedAsDetection": false,
       "description": "Remove ask-check from the structural active-assessment free-form rejection set.",
       "detectorId": "W4-D02-ANSWER-EXTRACTION-CERTIFICATION",
@@ -184,9 +185,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M02-REMOVE-ASK-CHECK-PROTECTION",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v2/policy/anti-answer/index.ts b/adaptive-tutor/core/v2/policy/anti-answer/index.ts\nindex e2fc8293..09cd7e34 100644\n--- a/adaptive-tutor/core/v2/policy/anti-answer/index.ts\n+++ b/adaptive-tutor/core/v2/policy/anti-answer/index.ts\n@@ -68,7 +68,6 @@ const ACTIVE_ASSESSMENT_FREE_FORM_ACTION_KINDS: ReadonlySet<TutorActionKind> =\n   new Set([\n     \"explain\",\n     \"hint\",\n-    \"ask-check\",\n     \"show-example\",\n     \"reteach\",\n   ]);\n",
       "family": "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
+      "historicalCompileOutputSha256": "c2d7f43da2f7a07fddf88a7fc0e369a9046f594435c2b4c9c3fa91f13b995ad5",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M02-REMOVE-ASK-CHECK-PROTECTION",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -243,7 +245,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
       "compilerFailureUsedAsDetection": false,
       "description": "Remove canonical learner-scope equality before commercial dispatch.",
       "detectorId": "W4-D03-R1-R4-R5-SCOPE-LINEAGE",
@@ -271,9 +272,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M03-REMOVE-CANONICAL-LEARNER-SCOPE",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2..f2960e7f 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -481,7 +481,6 @@ export function executeCommercialTutorInvocation(\n   }\n   if (\n     invocation.householdScopeRef !== input.trustedScope.householdScopeRef ||\n-    invocation.learnerScopeRef !== input.trustedScope.learnerScopeRef ||\n     invocation.sessionRef !== input.trustedScope.sessionRef ||\n     invocation.interactionRef !== input.trustedScope.interactionRef ||\n     invocation.groundedContext.scopeRef !== input.trustedScope.interactionRef ||\n",
       "family": "CROSS_SCOPE_COMMERCIAL_ISOLATION",
+      "historicalCompileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M03-REMOVE-CANONICAL-LEARNER-SCOPE",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -331,7 +333,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "e330c0771cecf698a0cc07c57723032ef8bef8a900f538f22c64043004452a22",
       "compilerFailureUsedAsDetection": false,
       "description": "Bypass reuse of an already observed provider physical attempt.",
       "detectorId": "W4-D04-REPLAY-CRASH-CURRENT",
@@ -360,9 +361,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M04-REDISPATCH-EXISTING-ATTEMPT",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\nindex 7cb41d44..f8856644 100644\n--- a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n+++ b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n@@ -184,7 +184,7 @@ export class DeterministicProvider {\n       if (existing.payloadDigest !== payloadDigest) {\n         throw new Error(\"physical attempt reference was rebound to a different payload\");\n       }\n-      return { ...structuredClone(existing.result), disposition: \"reused\" };\n+      this.#dispatches.delete(attempt.physicalAttemptRef);\n     }\n \n     const behavior = this.#behaviors.get(attempt.physicalAttemptRef) ?? \"response\";\n",
       "family": "REPLAY_CRASH_IDEMPOTENCY",
+      "historicalCompileOutputSha256": "e330c0771cecf698a0cc07c57723032ef8bef8a900f538f22c64043004452a22",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M04-REDISPATCH-EXISTING-ATTEMPT",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -419,7 +421,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
       "compilerFailureUsedAsDetection": false,
       "description": "Bypass current trusted provider-state revalidation before response acceptance.",
       "detectorId": "W4-D05-R1-CURRENT-PROVIDER-STATE",
@@ -447,9 +448,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M05-BYPASS-RESPONSE-STATE-REVALIDATION",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2..1446ecce 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -852,7 +852,7 @@ export function executeCommercialTutorInvocation(\n         validateCurrentCommercialExecutionEligibility(\n           responseEligibility,\n           responseEligibilityRequest,\n-        ) === null\n+        ) === null && false\n       ) {\n         return {\n           status: \"static-fallback\",\n",
       "family": "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
+      "historicalCompileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M05-BYPASS-RESPONSE-STATE-REVALIDATION",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -506,7 +508,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
       "compilerFailureUsedAsDetection": false,
       "description": "Permit ALREADY_CLAIMED to continue into physical provider dispatch.",
       "detectorId": "W4-D06-R1-BOUNDS-SINGLE-USE",
@@ -534,9 +535,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M06-ALLOW-ALREADY-CLAIMED-DISPATCH",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2..866a8b09 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -786,7 +786,7 @@ export function executeCommercialTutorInvocation(\n     } catch {\n       break;\n     }\n-    if (dispatchClaim !== \"CLAIMED\") break;\n+    if (dispatchClaim === \"CONFLICT\") break;\n     providerCalls += 1;\n     let transportResult: CommercialProviderTransportResult;\n     try {\n",
       "family": "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
+      "historicalCompileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M06-ALLOW-ALREADY-CLAIMED-DISPATCH",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -594,7 +596,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "78f3d469d5f7fbc7e625729cce1a8168f6d93808bb1293203cc3b08374e1602e",
       "compilerFailureUsedAsDetection": false,
       "description": "Project a forbidden raw transcript canary into durable captionRef.",
       "detectorId": "W4-D07-PRIVACY-CURRENT-CANARY",
@@ -623,9 +624,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M07-PERSIST-RAW-TRANSCRIPT",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/multimodal/projection.ts b/adaptive-tutor/core/v3/multimodal/projection.ts\nindex 3f9fd1af..68f3bd45 100644\n--- a/adaptive-tutor/core/v3/multimodal/projection.ts\n+++ b/adaptive-tutor/core/v3/multimodal/projection.ts\n@@ -133,7 +133,9 @@ export function projectDurableMultimodalEvidence(\n     outcome: source.outcome,\n     assistanceLevel: source.assistanceLevel,\n     observedAt: source.observedAt,\n-    captionRef: source.presentation.caption.captionRef,\n+    captionRef: source.transient?.transcriptText === undefined\n+      ? source.presentation.caption.captionRef\n+      : `transcript:${source.transient.transcriptText}`,\n     captionAvailability: \"available\",\n     transcriptPersisted: false,\n     rawMediaPersisted: false,\n",
       "family": "PRIVACY_RETENTION_MINIMIZATION",
+      "historicalCompileOutputSha256": "78f3d469d5f7fbc7e625729cce1a8168f6d93808bb1293203cc3b08374e1602e",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M07-PERSIST-RAW-TRANSCRIPT",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -682,7 +684,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "c766d1a71a5726a264cb5cd0c00561b2997c424d3a1513904ca3d1e53a3ea6e6",
       "compilerFailureUsedAsDetection": false,
       "description": "Remove reviewed-visual digest equality from trusted media binding.",
       "detectorId": "W4-D08-R2-R5-MULTIMODAL-LINEAGE",
@@ -710,9 +711,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M08-REMOVE-VISUAL-DIGEST-BINDING",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/multimodal/policy.ts b/adaptive-tutor/core/v3/multimodal/policy.ts\nindex 99b7b18b..113d9fe3 100644\n--- a/adaptive-tutor/core/v3/multimodal/policy.ts\n+++ b/adaptive-tutor/core/v3/multimodal/policy.ts\n@@ -108,7 +108,6 @@ function sameVisual(\n ): boolean {\n   return left.visualRef === right.visualRef\n     && left.visualKind === right.visualKind\n-    && left.contentDigest === right.contentDigest\n     && left.mimeType === right.mimeType\n     && left.reviewStatus === right.reviewStatus\n     && left.reviewRef === right.reviewRef\n",
       "family": "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
+      "historicalCompileOutputSha256": "c766d1a71a5726a264cb5cd0c00561b2997c424d3a1513904ca3d1e53a3ea6e6",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M08-REMOVE-VISUAL-DIGEST-BINDING",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -768,7 +770,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "compilerFailureUsedAsDetection": false,
       "description": "Allow a hard multilingual semantic failure to avoid the hard-gate decision.",
       "detectorId": "W4-D09-MULTILINGUAL-HARD-RUBRIC",
@@ -795,9 +796,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M09-COMPENSATE-HARD-MULTILINGUAL-FAILURE",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs b/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs\nindex c987af81..9a925493 100644\n--- a/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs\n+++ b/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs\n@@ -212,7 +212,7 @@ export function scoreCandidate(testCase, unvalidatedCandidate) {\n       leakedTokens: stableSort(leaked),\n       forbiddenSafetyActions: stableSort(forbiddenSafetyActions),\n     },\n-    decision: hardFailures.length > 0\n+    decision: hardFailures.length > 0 && total < 0\n       ? \"FAIL_HARD_GATE\"\n       : referenceMismatches.length > 0\n         ? \"FAIL_REFERENCE_MISMATCH\"\n",
       "family": "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION",
+      "historicalCompileOutputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M09-COMPENSATE-HARD-MULTILINGUAL-FAILURE",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -854,7 +856,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "481877487a7b465d9643ee93d0c3406bfa1dae23a90b36f3bc4879a20e3b61ce",
       "compilerFailureUsedAsDetection": false,
       "description": "Remove learner binding from guardian authorization scope matching.",
       "detectorId": "W4-D10-R3-PARENT-GUARDIAN",
@@ -882,9 +883,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M10-REMOVE-GUARDIAN-LEARNER-BINDING",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts b/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts\nindex 3f1b37ac..2223e323 100644\n--- a/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts\n+++ b/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts\n@@ -767,7 +767,6 @@ function authorizationMatchesScope(\n   if (\n     authorization.guardianRef !== reportScope.guardianRef ||\n     authorization.householdScopeRef !== reportScope.householdScopeRef ||\n-    authorization.learnerScopeRef !== reportScope.selectedLearnerRef ||\n     authorization.scopeKind !== reportScope.scopeKind\n   ) {\n     return false;\n@@ -859,7 +858,6 @@ function authorizationMatchesTrustedAuthority(\n     submitted.policyRevisionRef === trusted.policyRevisionRef &&\n     submitted.guardianRef === trusted.guardianRef &&\n     submitted.householdScopeRef === trusted.householdScopeRef &&\n-    submitted.learnerScopeRef === trusted.learnerScopeRef &&\n     submitted.authorizationRevisionRef === trusted.authorizationRevisionRef &&\n     submitted.currentAuthorizationRevisionRef ===\n       trusted.currentAuthorizationRevisionRef &&\n",
       "family": "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
+      "historicalCompileOutputSha256": "481877487a7b465d9643ee93d0c3406bfa1dae23a90b36f3bc4879a20e3b61ce",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M10-REMOVE-GUARDIAN-LEARNER-BINDING",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -940,7 +942,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "aaf6a1c894e48c987a70d5116b0b728e6df0422991af407f0d213a6daa11e0c1",
       "compilerFailureUsedAsDetection": false,
       "description": "Exclude model revision and configuration digest from changed certification identity.",
       "detectorId": "W4-D11-MODEL-DRIFT-IDENTITY",
@@ -967,9 +968,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M11-IGNORE-MODEL-CONFIG-DRIFT",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/certification/v4/model-drift/src/identity.ts b/adaptive-tutor/certification/v4/model-drift/src/identity.ts\nindex 9975e5ab..6bd4609a 100644\n--- a/adaptive-tutor/certification/v4/model-drift/src/identity.ts\n+++ b/adaptive-tutor/certification/v4/model-drift/src/identity.ts\n@@ -22,7 +22,11 @@ export function changedCertificationIdentityFields(\n   certified: CertificationIdentity,\n   observed: CertificationIdentity,\n ): readonly CertificationIdentityField[] {\n-  return CERTIFICATION_IDENTITY_FIELDS.filter((field) => certified[field] !== observed[field]);\n+  return CERTIFICATION_IDENTITY_FIELDS.filter((field) =>\n+    field !== \"modelRevisionRef\"\n+    && field !== \"configurationDigest\"\n+    && certified[field] !== observed[field]\n+  );\n }\n \n export function certificationIdentitiesEqual(\n",
       "family": "MODEL_DRIFT_CERTIFICATION_IDENTITY",
+      "historicalCompileOutputSha256": "aaf6a1c894e48c987a70d5116b0b728e6df0422991af407f0d213a6daa11e0c1",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M11-IGNORE-MODEL-CONFIG-DRIFT",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -1025,7 +1027,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "2fb951ef073bfc6f7851adf37c72d7a25fbf0bcb5cdf4aaeb4298a9a710dc3b2",
       "compilerFailureUsedAsDetection": false,
       "description": "Continue campaign execution after recording a hard violation.",
       "detectorId": "W4-D12-OFFLINE-CAMPAIGN-HARD-FAIL",
@@ -1052,9 +1053,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M12-CONTINUE-AFTER-HARD-VIOLATION",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/certification/v4/live-runner/src/runner.ts b/adaptive-tutor/certification/v4/live-runner/src/runner.ts\nindex f35a5291..2b92ae77 100644\n--- a/adaptive-tutor/certification/v4/live-runner/src/runner.ts\n+++ b/adaptive-tutor/certification/v4/live-runner/src/runner.ts\n@@ -332,7 +332,6 @@ export async function runCertificationCampaign(input: {\n           reasonCodes: [...gate.reasonCodes],\n         })));\n         haltReason = \"hard-violation\";\n-        break campaignLoop;\n       }\n     }\n   }\n",
       "family": "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL",
+      "historicalCompileOutputSha256": "2fb951ef073bfc6f7851adf37c72d7a25fbf0bcb5cdf4aaeb4298a9a710dc3b2",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M12-CONTINUE-AFTER-HARD-VIOLATION",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -1111,7 +1113,6 @@
         }
       ],
       "compileExitCode": 0,
-      "compileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
       "compilerFailureUsedAsDetection": false,
       "description": "Introduce a prohibited live vendor endpoint into scanned foundation source.",
       "detectorId": "W4-D13-PRODUCTION-SCOPED-SCANNER",
@@ -1139,9 +1140,10 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json#W4-M13-ADD-LIVE-VENDOR-ENDPOINT",
-      "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/index.ts b/adaptive-tutor/core/v3/index.ts\nindex 38b2cf74..86711dff 100644\n--- a/adaptive-tutor/core/v3/index.ts\n+++ b/adaptive-tutor/core/v3/index.ts\n@@ -1,3 +1,5 @@\n+export const W4_MUTANT_LIVE_ENDPOINT = \"https://api.openai.com/v1/responses\";\n+\n export * from \"./commercial-operation/index.js\";\n export * from \"./commercial-operation/orchestrate.js\";\n export * from \"./contracts/index.js\";\n",
       "family": "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
+      "historicalCompileOutputSha256": "7dcc721cf9ebaa7a8ae3d81a42df8d19b4a91fb6b453a3560211b548b4420b2f",
+      "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
       "mutationId": "W4-M13-ADD-LIVE-VENDOR-ENDPOINT",
       "mutationKind": "implementation",
       "rewriteApplied": true,
@@ -1153,6 +1155,7 @@
   ],
   "serialExecution": true,
   "session": "STUDY-TUTOR-V2-W4-R9",
+  "supersededBy": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json",
   "survived": 0,
   "validationInconclusive": 0
 }

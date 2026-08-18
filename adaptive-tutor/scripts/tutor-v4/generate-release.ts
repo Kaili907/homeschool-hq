@@ -5,6 +5,11 @@ import { resolve } from "node:path";
 import {
   POST_REPAIR_BLOCKER_CLOSURES,
 } from "./evidence.js";
+import {
+  COMPILER_EVIDENCE_VERSION,
+  verifyCompilerEvidence,
+  type CompilerEvidence,
+} from "./compiler-evidence.js";
 
 const outputDirectory = resolve("tutor-v2-wave4-release");
 const checkOnly = process.argv.includes("--check");
@@ -132,6 +137,7 @@ interface ImplementationMutationEvidence {
     readonly compileExitCode: number;
     readonly allMutatedSourcesCompiled: boolean;
     readonly classification: string;
+    readonly compilerEvidence: CompilerEvidence | null;
     readonly detectorOutcome: {
       readonly invocationStatus: string;
       readonly semanticExecutionReached: boolean;
@@ -158,13 +164,13 @@ if (
   throw new Error("Wave 4 hard-gate evidence is not executable v3 evidence");
 }
 if (
-  negativeControls.evidenceVersion < 3
-  || negativeControls.frameworkVersion !== 3
+  negativeControls.evidenceVersion < 4
+  || negativeControls.frameworkVersion !== 4
   || negativeControls.mutationKind !== "implementation"
   || negativeControls.booleanEvidenceFlipOnly !== false
   || negativeControls.results.length !== 13
 ) {
-  throw new Error("Wave 4 negative-control evidence is not implementation-mutation v3 evidence");
+  throw new Error("Wave 4 negative-control evidence is not implementation-mutation v4 evidence");
 }
 if (
   hardGate.evidenceExecutionSha.length !== 40
@@ -200,6 +206,39 @@ if (
   )
 ) {
   throw new Error("Wave 4 evidence does not certify 13 baseline detectors and 13 semantic mutation kills");
+}
+// W4-R10: every mutation must carry sealed, self-consistent compiler evidence
+// that proves the mutated source was a member of the compile.
+if (
+  negativeControls.results.some((result) => {
+    const evidence = result.compilerEvidence;
+    return evidence === null
+      || evidence === undefined
+      || evidence.compilerEvidenceVersion !== COMPILER_EVIDENCE_VERSION
+      || evidence.exitCode !== 0
+      || !evidence.sourceMembershipProof.includedInCompile
+      || evidence.sourceMembershipProof.listFilesRelPath.length === 0
+      || evidence.mutatedSource.sha256.length !== 64
+      || evidence.compiler.version.length === 0
+      || evidence.node.version.length === 0
+      || evidence.command.length === 0
+      || !verifyCompilerEvidence(evidence);
+  })
+) {
+  throw new Error("Wave 4 mutation evidence lacks verifiable deterministic compiler evidence");
+}
+// W4-R10: the non-reproducible raw digest must not survive anywhere in the
+// evidence that release verification consumes.
+for (const evidencePath of [
+  resolve(outputDirectory, "NEGATIVE-CONTROL-EVIDENCE.json"),
+  resolve(
+    repoRoot,
+    "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json",
+  ),
+]) {
+  if ((await readFile(evidencePath, "utf8")).includes("\"compileOutputSha256\"")) {
+    throw new Error(`Wave 4 evidence still contains a raw compileOutputSha256: ${evidencePath}`);
+  }
 }
 assertEvidenceSubjectBinding(hardGate.evidenceExecutionSha);
 const familyStatus = (family: string): string =>
