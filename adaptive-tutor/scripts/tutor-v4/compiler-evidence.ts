@@ -5,9 +5,10 @@ import { createHash } from "node:crypto";
  * implementation-mutation campaign.
  *
  * W4-R10 replaces the raw `compileOutputSha256`, which hashed the entire
- * `tsc --listFiles` listing. That listing was 93-96% dependency file paths
- * (typescript/lib, @types/node, undici-types), so the digest tracked the
- * installed dependency closure rather than the mutation. See
+ * `tsc --listFiles` listing. Across the eight mutation compile projects that
+ * listing is 50.6%-96.0% dependency file paths (typescript/lib, @types/node,
+ * undici-types), so the digest tracked the installed dependency closure rather
+ * than the mutation. See
  * docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/AUDIT.md
  *
  * This record proves the mutated source compiled and was a member of the
@@ -29,11 +30,23 @@ export const NORMALIZATION_RULES: readonly string[] = [
 ];
 
 /**
- * A tsc diagnostic line. Continuation lines (indented) belong to the preceding
- * primary line and are never separated from it.
+ * A tsc diagnostic line. The match anchors on the diagnostic shape
+ * `(line,column): category TScode:`, never on which characters a path may
+ * contain, so a file path containing parentheses still parses. The file group
+ * is lazy so the leftmost location wins when a message quotes another one.
+ * Continuation lines (indented) belong to the preceding primary line and are
+ * never separated from it.
  */
-const PRIMARY_DIAGNOSTIC = /^(?<file>[^()]*?)\((?<line>\d+),(?<column>\d+)\): (?<category>error|warning|message) (?<code>TS\d+): (?<message>.*)$/u;
+const PRIMARY_DIAGNOSTIC = /^(?<file>.*?)\((?<line>\d+),(?<column>\d+)\): (?<category>error|warning|message) (?<code>TS\d+): (?<message>.*)$/u;
 const GLOBAL_DIAGNOSTIC = /^(?<category>error|warning|message) (?<code>TS\d+): (?<message>.*)$/u;
+
+/**
+ * The diagnostic shape on its own, independent of any surrounding parse. A line
+ * carrying this signature is a diagnostic even when the precise parse fails --
+ * a truncated or malformed one included -- so an ambiguous line is retained
+ * rather than bucketed into the file listing.
+ */
+const DIAGNOSTIC_SIGNATURE = /\(\d+,\d+\): (?:error|warning|message) TS\d+:|^(?:error|warning|message) TS\d+:/u;
 
 export interface CompilerDiagnostic {
   readonly file: string;
@@ -51,9 +64,27 @@ export interface NormalizedCompilerOutput {
 }
 
 /**
+ * Characters that can continue a path segment. A root occurrence that begins
+ * immediately after one of these is inside a longer segment, not a prefix.
+ */
+const PATH_SEGMENT_CHARACTER = /[A-Za-z0-9._-]/u;
+
+/**
+ * True when `root` occurs at `index` as a whole path prefix: it must end at a
+ * path boundary (a following "/" or the end of the string) and must not begin
+ * inside a longer segment. `<root>X` is a sibling, not the root.
+ */
+function isRootPrefixAt(value: string, index: number, root: string): boolean {
+  const after = value[index + root.length];
+  if (after !== undefined && after !== "/") return false;
+  const before = value[index - 1];
+  return before === undefined || !PATH_SEGMENT_CHARACTER.test(before);
+}
+
+/**
  * Apply R1 to a single string. Longest roots first so that a nested root
  * (for example <repo>/adaptive-tutor/node_modules) cannot be partially
- * rewritten by a shorter ancestor.
+ * rewritten by a shorter ancestor. Only true path prefixes are rewritten.
  */
 export function applyRootNormalization(
   value: string,
@@ -66,6 +97,10 @@ export function applyRootNormalization(
   for (const root of ordered) {
     let index = output.indexOf(root);
     while (index >= 0) {
+      if (!isRootPrefixAt(output, index, root)) {
+        index = output.indexOf(root, index + 1);
+        continue;
+      }
       rewrites += 1;
       output = `${output.slice(0, index)}${REPO_ROOT_TOKEN}${output.slice(index + root.length)}`;
       index = output.indexOf(root, index + REPO_ROOT_TOKEN.length);
@@ -78,8 +113,9 @@ export function applyRootNormalization(
  * Split raw compiler output into the `--listFiles` listing and the diagnostics.
  *
  * A line is only treated as a listing entry when it is an absolute path that
- * does not parse as a diagnostic. Anything else is retained as a diagnostic, so
- * normalization can never silently discard compiler output.
+ * neither parses as a diagnostic nor carries a diagnostic signature. Anything
+ * else is retained as a diagnostic, so normalization can never silently discard
+ * compiler output: an ambiguous line always resolves toward retention.
  */
 export function normalizeCompilerOutput(
   rawOutput: string,
@@ -100,7 +136,12 @@ export function normalizeCompilerOutput(
     }
     const primary = PRIMARY_DIAGNOSTIC.exec(line);
     const global = primary === null ? GLOBAL_DIAGNOSTIC.exec(line) : null;
-    if (primary === null && global === null && line.startsWith("/")) {
+    if (
+      primary === null
+      && global === null
+      && line.startsWith("/")
+      && !DIAGNOSTIC_SIGNATURE.test(line)
+    ) {
       listedFilePaths.push(line);
       continue;
     }

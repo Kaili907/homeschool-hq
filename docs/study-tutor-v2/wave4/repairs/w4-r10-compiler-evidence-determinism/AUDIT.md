@@ -98,10 +98,29 @@ Both normalize to `$DEPENDENCY_ROOT/typescript/lib/lib.es5.d.ts`.
 `$MUTANT_ROOT`.
 
 ### Class V3 — dependency file-set membership lines — **THE UNHANDLED CAUSE**
-93–96% of the hashed bytes are dependency file paths, not project files. For W4-M01
-(248 lines): 58 `typescript/lib`, 68 `@types/node`, 37 `undici-types` = 163 dependency
-lines vs 85 project lines. The hash therefore tracks the **installed dependency closure**,
-which is unpinned.
+Most of the hashed listing is dependency file paths, not project files. Measured across the
+eight mutation compile projects, dependency paths are **50.6%–96.0%** of the listed files,
+and 52.7%–95.9% of the hashed bytes:
+
+| compile project | listed files | dependency files | dependency share |
+| --- | --- | --- | --- |
+| `adversarial/v4/replay-crash` | 324 | 164 | 50.6% |
+| `adversarial/v4/provider-chaos` | 248 | 163 | 65.7% |
+| `adversarial/v4/privacy-retention` | 239 | 163 | 68.2% |
+| `adversarial/v4/answer-extraction` | 226 | 163 | 72.1% |
+| `core/v3/multimodal` | 208 | 163 | 78.4% |
+| `adversarial/v4/parent-guardian` | 177 | 162 | 91.5% |
+| `certification/v4/model-drift` | 175 | 168 | 96.0% |
+| `certification/v4/live-runner` | 175 | 168 | 96.0% |
+
+For W4-M01 on `provider-chaos` (248 lines): 58 `typescript/lib`, 68 `@types/node`,
+37 `undici-types` = 163 dependency lines vs 85 project lines. The hash therefore tracks the
+**installed dependency closure**, which is unpinned.
+
+> **Corrected in W4-R11.** This section previously claimed "93–96% of the hashed bytes".
+> That band is wrong: only 3 of the 8 mutation compile projects fall inside it. The
+> measured range is stated above. The defect this section proves is unchanged — the digest
+> tracks the unpinned dependency closure — only its magnitude was misstated.
 
 Proven by sweeping ~60 (`typescript` × `@types/node`) combinations against W4-M11, which
 produced **10 distinct hashes**, e.g.:

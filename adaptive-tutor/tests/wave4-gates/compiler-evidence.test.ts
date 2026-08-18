@@ -187,3 +187,94 @@ test("the dependency file listing is not part of the sealed digest", () => {
     sealCompilerEvidence(evidenceFixture({ diagnostics: long.diagnostics })).compilerEvidenceSha256,
   );
 });
+
+const PAREN_ROOT = "/private/tmp/my (copy)/repo";
+
+test("T3: an absolute diagnostic whose path contains parentheses is retained", () => {
+  const raw = `${PAREN_ROOT}/a.ts(4,2): error TS2322: Type 'string' is not assignable to type 'number'.`;
+  const normalized = normalizeCompilerOutput(raw, [PAREN_ROOT]);
+  assert.equal(normalized.listedFilePaths.length, 0);
+  assert.equal(normalized.diagnostics.length, 1);
+  const [diagnostic] = normalized.diagnostics;
+  assert.equal(diagnostic!.code, "TS2322");
+  assert.equal(diagnostic!.category, "error");
+  assert.equal(diagnostic!.line, 4);
+  assert.equal(diagnostic!.column, 2);
+  assert.equal(diagnostic!.file, "<REPO_ROOT>/a.ts");
+  assert.match(diagnostic!.text, /Type 'string' is not assignable to type 'number'\./u);
+});
+
+test("T3: a parenthesised-path diagnostic moves the sealed digest", () => {
+  const raw = `${PAREN_ROOT}/a.ts(4,2): error TS2322: Type 'string' is not assignable to type 'number'.`;
+  const clean = sealCompilerEvidence(evidenceFixture());
+  const withDiagnostic = sealCompilerEvidence(evidenceFixture({
+    diagnostics: normalizeCompilerOutput(raw, [PAREN_ROOT]).diagnostics,
+  }));
+  assert.notEqual(withDiagnostic.compilerEvidenceSha256, clean.compilerEvidenceSha256);
+  assert.equal(verifyCompilerEvidence(withDiagnostic), true);
+});
+
+test("T3: parentheses in the message alone still parse the real file", () => {
+  const raw = `${ALPHA}/a.ts(4,2): error TS2345: Argument of type 'f(x)' is not assignable.`;
+  const normalized = normalizeCompilerOutput(raw, [ALPHA]);
+  assert.equal(normalized.diagnostics.length, 1);
+  assert.equal(normalized.diagnostics[0]!.file, "<REPO_ROOT>/a.ts");
+  assert.equal(normalized.diagnostics[0]!.code, "TS2345");
+});
+
+test("T3: the leftmost location wins when a message quotes another one", () => {
+  const raw = "a.ts(4,2): error TS2322: see b.ts(9,9): error TS1005: x";
+  const normalized = normalizeCompilerOutput(raw, [ALPHA]);
+  assert.equal(normalized.diagnostics.length, 1);
+  assert.equal(normalized.diagnostics[0]!.file, "a.ts");
+  assert.equal(normalized.diagnostics[0]!.line, 4);
+  assert.equal(normalized.diagnostics[0]!.code, "TS2322");
+});
+
+test("T4: a truncated absolute diagnostic is retained, not bucketed as a listing entry", () => {
+  const normalized = normalizeCompilerOutput(`${ALPHA}/a.ts(4,2): error TS2322:`, [ALPHA]);
+  assert.equal(normalized.listedFilePaths.length, 0);
+  assert.equal(normalized.diagnostics.length, 1);
+  assert.equal(normalized.diagnostics[0]!.category, "unparsed");
+  assert.equal(normalized.diagnostics[0]!.text, "<REPO_ROOT>/a.ts(4,2): error TS2322:");
+});
+
+test("T4: no diagnostic-shaped line is ever dropped", () => {
+  const lines = [
+    `${PAREN_ROOT}/a.ts(4,2): error TS2322: bad.`,
+    `${ALPHA}/b.ts(1,1): warning TS6133: unused.`,
+    `${ALPHA}/c.ts(7,3): message TS0000: note.`,
+    `${ALPHA}/d.ts(9,9): error TS1005:`,
+  ];
+  const normalized = normalizeCompilerOutput(lines.join("\n"), [ALPHA, PAREN_ROOT]);
+  assert.equal(normalized.listedFilePaths.length, 0);
+  assert.equal(normalized.diagnostics.length, lines.length);
+});
+
+test("T5: a root lookalike that is not a true prefix is not rewritten", () => {
+  const root = "/private/tmp/lab";
+  const sibling = applyRootNormalization(`${root}X/adaptive-tutor/a.ts`, [root]);
+  assert.equal(sibling.value, `${root}X/adaptive-tutor/a.ts`);
+  assert.equal(sibling.rewrites, 0);
+
+  const genuine = applyRootNormalization(`${root}/adaptive-tutor/a.ts`, [root]);
+  assert.equal(genuine.value, "<REPO_ROOT>/adaptive-tutor/a.ts");
+  assert.equal(genuine.rewrites, 1);
+
+  const exact = applyRootNormalization(root, [root]);
+  assert.equal(exact.value, "<REPO_ROOT>");
+  assert.equal(exact.rewrites, 1);
+});
+
+test("T5: a root occurring inside a longer path segment is not rewritten", () => {
+  const root = "/var/folders/ab/T/mutants";
+  const inner = applyRootNormalization(`/private${root}/a.ts`, [root]);
+  assert.equal(inner.value, `/private${root}/a.ts`);
+  assert.equal(inner.rewrites, 0);
+});
+
+test("T5: a root quoted inside a diagnostic message is still rewritten", () => {
+  const quoted = applyRootNormalization(`Cannot find module '${ALPHA}/a.ts'.`, [ALPHA]);
+  assert.equal(quoted.value, "Cannot find module '<REPO_ROOT>/a.ts'.");
+  assert.equal(quoted.rewrites, 1);
+});

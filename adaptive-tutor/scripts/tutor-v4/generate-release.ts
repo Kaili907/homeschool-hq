@@ -10,6 +10,10 @@ import {
   verifyCompilerEvidence,
   type CompilerEvidence,
 } from "./compiler-evidence.js";
+import {
+  REQUIRED_EVIDENCE_INPUT_PATHS,
+  assertEvidenceOnlyDiff,
+} from "./evidence-subject-binding.js";
 
 const outputDirectory = resolve("tutor-v2-wave4-release");
 const checkOnly = process.argv.includes("--check");
@@ -41,24 +45,10 @@ function assertEvidenceSubjectBinding(evidenceExecutionSha: string): void {
   if (parentLine.length !== 2 || parentLine[1] !== evidenceExecutionSha) {
     throw new Error("evidenceExecutionSha must be the sole exact parent of the final evidence commit");
   }
-  const allowed = [
-    "adaptive-tutor/tutor-v2-wave4-release/",
-    "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/",
-  ];
-  const allowedExact = new Set([
-    "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json",
-  ]);
   const changedPaths = git(["diff", "--name-only", evidenceExecutionSha, currentHead])
     .split(/\r?\n/u)
     .filter((path) => path.length > 0);
-  if (
-    changedPaths.length === 0
-    || changedPaths.some((path) =>
-      !allowed.some((prefix) => path.startsWith(prefix)) && !allowedExact.has(path)
-    )
-  ) {
-    throw new Error(`Parent-to-HEAD diff is not evidence-only: ${changedPaths.join(", ")}`);
-  }
+  assertEvidenceOnlyDiff(changedPaths);
 }
 
 function canonicalize(value: unknown): unknown {
@@ -229,13 +219,8 @@ if (
 }
 // W4-R10: the non-reproducible raw digest must not survive anywhere in the
 // evidence that release verification consumes.
-for (const evidencePath of [
-  resolve(outputDirectory, "NEGATIVE-CONTROL-EVIDENCE.json"),
-  resolve(
-    repoRoot,
-    "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json",
-  ),
-]) {
+for (const relativePath of REQUIRED_EVIDENCE_INPUT_PATHS) {
+  const evidencePath = resolve(repoRoot, relativePath);
   if ((await readFile(evidencePath, "utf8")).includes("\"compileOutputSha256\"")) {
     throw new Error(`Wave 4 evidence still contains a raw compileOutputSha256: ${evidencePath}`);
   }

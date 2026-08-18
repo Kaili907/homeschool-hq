@@ -12,7 +12,7 @@
   "expectedOutputMutationUsed": false,
   "frameworkSourceSession": "STUDY-TUTOR-V2-W4-R9",
   "frameworkVersion": 3,
-  "historicalCompileOutputNote": "Preserved verbatim as historicalCompileOutputSha256. These digests hashed the full tsc --listFiles listing, which was 93-96% dependency file paths, so they track the installed dependency closure rather than the mutation and are not reproducible from repository contents. Superseded by the deterministic compilerEvidence record (compilerEvidenceVersion 1). See docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/AUDIT.md.",
+  "historicalCompileOutputNote": "Preserved verbatim as historicalCompileOutputSha256. These digests hashed the full tsc --listFiles listing, which is dominated by dependency file paths, so they track the installed dependency closure rather than the mutation and are not reproducible from repository contents. Superseded by the deterministic compilerEvidence record (compilerEvidenceVersion 1). See docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/AUDIT.md.",
   "historicalExecutionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
   "invalid": 0,
   "killed": 13,

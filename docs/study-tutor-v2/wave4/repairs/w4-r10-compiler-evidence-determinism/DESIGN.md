@@ -4,8 +4,9 @@ Companion to `AUDIT.md`, which proves the defect. This document specifies the re
 
 ## Problem restated
 
-`compileOutputSha256` hashed the whole `tsc --listFiles` listing. 93–96% of those bytes were
-dependency file paths (`typescript/lib`, `@types/node`, `undici-types`). The digest therefore
+`compileOutputSha256` hashed the whole `tsc --listFiles` listing. Across the eight mutation
+compile projects, 50.6%–96.0% of the listed files were dependency file paths (`typescript/lib`,
+`@types/node`, `undici-types`) — 52.7%–95.9% of the hashed bytes. The digest therefore
 tracked the installed dependency closure — which is unpinned — instead of the mutation. It
 proved almost nothing about the mutation while guaranteeing eventual irreproducibility.
 
