@@ -9,6 +9,44 @@ const FORBIDDEN_KEY = /^(?:answer|answerKey|correctAnswer|scoring|scoringRule|ac
 const GENERIC_FEEDBACK = /^(?:\s*(?:try again|incorrect|wrong|nope|not quite|good job|great work|correct|nice work)[.!]*\s*)+$/i
 const MIN_INCORRECT_FEEDBACK = 40
 
+// Director ruling (learner-facing copy): course progress states the learner's position and
+// nothing else, and build-system vocabulary never reaches the learner.
+const COURSE_PROGRESS_SHAPE = /^Unit \d+, Lesson \d+ of \d+ in .+\.$/
+const MID_UNIT_NEXT_ACTION = 'Continue required work'
+// Phrases, not bare words. "sample" is real Grade 7 statistics vocabulary and "wave" is real
+// science vocabulary, so neither may be denied outright without breaking later subjects.
+const BUILD_SYSTEM_COPY = [
+  /\bdirector\b/i,
+  /\breference lesson\b/i,
+  /\b(?:in|part of|during|for) wave \d+\b/i,
+  /\bwave \d+ (?:scope|rewrite|course|lesson)\b/i,
+  /\bthis sample\b/i,
+  /\bsample lesson\b/i,
+  /\bproduction[- ](?:status|course|model|curriculum)\b/i,
+  /\bfor production\b/i,
+  /\bapproved for production\b/i,
+  /\bassessment authority\b/i,
+  /\bassessors?\b/i,
+  /\bschema ?version\b/i,
+  /\bnamespace\b/i,
+  /\bmanifest\.json\b/i,
+  /\bthe manifest\b/i,
+  /\brich study player\b/i,
+  /\brender model\b/i,
+  /\b(?:nothing|response|answer)s? (?:is|are) (?:not )?saved\b/i,
+  /\bnot saved\b/i,
+  /\bonly in memory\b/i,
+  /\brecord is written\b/i,
+  /\bpersisted to\b/i,
+]
+
+function learnerStrings(value, path) {
+  if (typeof value === 'string') return [[path, value]]
+  if (Array.isArray(value)) return value.flatMap((item, index) => learnerStrings(item, `${path}[${index}]`))
+  if (value && typeof value === 'object') return Object.entries(value).flatMap(([key, item]) => learnerStrings(item, `${path}.${key}`))
+  return []
+}
+
 const failures = []
 function check(condition, message) {
   if (!condition) failures.push(message)
@@ -126,6 +164,16 @@ for (const row of manifest.lessons) {
   check(review.courseProgress?.trim(), `${id}: C8 lessonReview.courseProgress is empty`)
   check(['Done for today', 'Continue required work', 'Keep learning / Work ahead', 'Waiting for Parent'].includes(review.nextAction), `${id}: C8 lessonReview.nextAction is outside the DTO enum`)
   check(/review this lesson/i.test(review.reviewActionLabel ?? ''), `${id}: C8 lessonReview.reviewActionLabel is missing`)
+
+  // L1 / L2 / L3: Director ruling on learner-facing copy.
+  check(COURSE_PROGRESS_SHAPE.test(review.courseProgress ?? ''), `${id}: L1 courseProgress must read "Unit N, Lesson N of N in <unit title>." and state nothing else`)
+  check(review.courseProgress?.includes(meta.unitTitle ?? ''), `${id}: L1 courseProgress does not name the canonical unit title`)
+  const midUnit = meta.dayInUnit < (meta.lessonsInUnit ?? 18)
+  if (midUnit) check(review.nextAction === MID_UNIT_NEXT_ACTION, `${id}: L2 a mid-unit lesson must use nextAction "${MID_UNIT_NEXT_ACTION}"`)
+  for (const [where, text] of learnerStrings(material, 'learnerMaterial')) {
+    const pattern = BUILD_SYSTEM_COPY.find((candidate) => candidate.test(text))
+    check(!pattern, `${id}: L3 build-system copy reached the learner at ${where} (matched ${pattern}): ${JSON.stringify(text.slice(0, 90))}`)
+  }
 
   // P1 / P2
   const leaked = forbiddenAnswerPaths(material, 'learnerMaterial')

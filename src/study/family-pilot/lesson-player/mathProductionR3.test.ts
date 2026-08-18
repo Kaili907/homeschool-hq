@@ -110,6 +110,20 @@ describe('Mathematics Production R3', () => {
         expect(required.every((item) => item.feedback!.incorrect.length >= 40)).toBe(true)
       })
 
+      it('follows the Director ruling on learner-facing copy', () => {
+        const review = material.lessonReview!
+        expect(review.courseProgress).toMatch(/^Unit \d+, Lesson \d+ of \d+ in .+\.$/)
+        expect(review.nextAction).toBe('Continue required work')
+        // Build-system status is not learner content. A Grade 3 child reads these strings.
+        const learnerText = JSON.stringify(material)
+        for (const pattern of [
+          /\bdirector\b/i, /\breference lesson\b/i, /\b(?:in|part of|during|for) wave \d+\b/i,
+          /\bthis sample\b/i, /\bsample lesson\b/i, /\bproduction[- ](?:status|course|model|curriculum)\b/i,
+          /\bassessment authority\b/i, /\bassessors?\b/i, /\bthe manifest\b/i,
+          /\brich study player\b/i, /\brender model\b/i, /\bnot saved\b/i, /\bonly in memory\b/i,
+        ]) expect(learnerText).not.toMatch(pattern)
+      })
+
       it('keeps a real review and holds answer authority outside the learner material', () => {
         expect(material.lessonReview?.whatYouLearned.length).toBeGreaterThanOrEqual(2)
         expect(material.lessonReview?.courseProgress.trim()).toBeTruthy()

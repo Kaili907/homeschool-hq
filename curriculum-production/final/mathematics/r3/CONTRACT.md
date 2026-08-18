@@ -9,6 +9,8 @@ checked mechanically against R3 production lessons. The binding sources are, in 
 2. `docs/curriculum-quality/APPROVED-LESSON-CONTRACTS-R2.md` — the approved contracts (FROZEN)
 3. `curriculum-review-samples/director/mathematics-r2/samples/grade-3.json` — the controlling
    Mathematics example, sample id `director-math-r2-g3-place-value` (FROZEN)
+4. **Director ruling, learner-facing copy (2026-08-18)** — binding, and stated to apply to every
+   R3 lesson in every subject. Recorded verbatim under **Director rulings** below.
 
 Where this document and a frozen source disagree, the frozen source wins. Nothing here may be
 used to extend, narrow, or reinterpret the approved contracts. Matters the R2 contracts do not
@@ -50,6 +52,9 @@ Each row restates one clause of the frozen contracts and names the check that en
 | M8 | The controlling Grade 3 example shows the contrast concretely, then provides a separate YOUR TURN with a real response control. The example and the learner response must remain distinct. | the worked example and the guided item use different numbers; the guided item is required and the worked item is not |
 | P1 | Learner material carries no answer or scoring authority. | no `answer`, `answerKey`, `correctAnswer`, `scoring`, or `scoringRule` key anywhere in `learnerMaterial`; no accepted-choice field reaches the render model |
 | P2 | Protected criteria live outside browser-imported material. | `restricted/assessment-authority.json` has `browserImportAllowed: false` and holds exactly one entry per required item |
+| L1 | COURSE PROGRESS states the learner's position in the course and nothing else. | `lessonReview.courseProgress` matches `Unit N, Lesson N of N in <unit title>.` and names the canonical unit title |
+| L2 | NEXT ACTION for a mid-unit lesson is "Continue required work". | for `dayInUnit < lessonsInUnit`, `lessonReview.nextAction === 'Continue required work'` |
+| L3 | Learner-facing text never mentions samples, waves, reference lessons, Director approval, production status, assessment authority, assessors, or whether a record is written. | every string in `learnerMaterial` is checked against the build-system copy denylist |
 
 ## Provenance
 
@@ -57,44 +62,69 @@ R3 lessons are rewrites of existing canonical production lessons. Each R3 lesson
 canonical package and answer key it derives from, and its grade, course, unit, and standards
 mapping must equal the canonical source. The canonical corpus is not modified by R3.
 
+## Director rulings
+
+Rulings are binding and outrank anything this document infers. They are recorded here as issued.
+
+### 2026-08-18 — learner-facing copy
+
+> COURSE PROGRESS states the learner's position in the course and nothing else.
+> Standard shape: "Unit 1, Lesson 2 of 18 in \<unit title\>."
+> NEXT ACTION for a mid-unit lesson: "Continue required work."
+>
+> Learner-facing text must NEVER mention: samples, waves, reference lessons, Director approval,
+> production status, assessment authority, assessors, or whether a record is written. A Grade 3
+> child reads this text. Build-system status is not learner content.
+
+Applied as rows L1, L2, and L3. Two consequences worth stating:
+
+- `nextAction` is stored as the exact DTO enum member `Continue required work`, without the
+  sentence-final period the ruling uses in prose. The enum is fixed by the frozen runtime.
+- The denylist matches phrases, not bare words. `sample`, `wave`, `manifest`, `production`, and
+  `persisted` are all legitimate subject vocabulary — random *sample* in Grade 7 statistics,
+  a *wave* in physics, *Manifest Destiny* in United States history, factory *production* in
+  economics, a myth that *persisted* in world history. Denying them outright would block correct
+  lessons in the other subjects this ruling covers. Each is denied only in its build-system
+  phrasing, and both directions are proven by probes in the validator's mutation checks.
+
+This ruling closes the questions previously logged here as `courseProgress` and `nextAction`
+wording. The ruling covers all subjects; this document and its validator apply it to Mathematics
+only, because this session writes no other subject. The other subjects need the same rule applied
+in their own sessions.
+
 ## Open questions
 
 The R2 contracts do not settle these. They are recorded, not decided. The reference lesson makes
 a provisional choice where it had to in order to exist; each provisional choice is named below and
 is subject to Director direction.
 
-1. **`courseProgress` wording for production.** All nine approved Math samples say the lesson
-   "does not change your production-course progress", which is true of a review sample and false
-   of a production lesson. The contracts do not state what a production lesson should say.
-   *Provisional choice in this lesson:* `"Unit 1, Lesson 2 of 18 in Mathematical Habits, Place
-   Value, and Rounding."`
-2. **`nextAction` for a mid-unit production lesson.** The approved samples use `Done for today`.
-   The DTO enum also allows `Continue required work`, `Keep learning / Work ahead`, and
-   `Waiting for Parent`. The contracts do not say which applies mid-unit.
-   *Provisional choice in this lesson:* `Continue required work`.
-3. **Relationship between the R3 restricted authority and the canonical answer key.** The
+1. **Relationship between the R3 restricted authority and the canonical answer key.** The
    canonical `.key.json` already holds answers, `solutionReasoning`, and `commonErrors`. R2
    introduced a separate restricted authority file for review samples. Whether production R3
    should carry its own authority file, defer entirely to the canonical key, or generate one from
    the key is not covered. *Provisional choice in this lesson:* a separate R3 authority file whose
    entries record `sourceAnswer` back to the canonical key.
-4. **Whether an R3 lesson must use every canonical source item.** This lesson uses 7 of the 8
+2. **Whether an R3 lesson must use every canonical source item.** This lesson uses 7 of the 8
    canonical items. Canonical `#gp-03` (round 424 to the nearest 10) is omitted as duplicative of
    `#ip-03` (round 653 to the nearest 10) — both are three-digit round-down cases — and one item,
    `#rt-01`, is newly authored for the reteach section, which the canonical package has no
    section for. The contracts do not state whether canonical item coverage must be total.
-5. **Learner-facing title divergence.** The canonical package title is
+3. **Learner-facing title divergence.** The canonical package title is
    `"Concept build A: the place-value structure of three-digit numbers"`, which is internal phase
    language. All nine approved samples retitled their source lesson for the learner, but the
    contracts do not state a rule. *Provisional choice in this lesson:*
    `"Rounding to the Nearest Ten"`.
-6. **Item-ref namespacing.** Approved samples use `<sampleId>:<section>:<n>`. This lesson uses the
+4. **Item-ref namespacing.** Approved samples use `<sampleId>:<section>:<n>`. This lesson uses the
    canonical `<lessonId>#<sectionId>-<nn>` refs so responses trace to the canonical answer key.
    The contracts do not state which form production must use.
-7. **Numeric thresholds.** The R2 validation suite asserted at least five required response items
+5. **Numeric thresholds.** The R2 validation suite asserted at least five required response items
    and at least ten render-model pages. Those are properties of the approved samples, not clauses
    of the contracts. R3 records them as observations rather than gates.
-8. **Canonical content mismatch in this source lesson (not an R3 decision).** The canonical
+6. **`nextAction` for the last lesson of a unit.** The 2026-08-18 ruling specifies mid-unit only.
+   What the final lesson of a unit should use — `Done for today`, `Continue required work`, or
+   something else at a unit boundary — is still open, so L2 constrains mid-unit lessons only and
+   leaves the final lesson unchecked. This lesson is mid-unit (day 2 of 18) and is unaffected.
+7. **Canonical content mismatch in this source lesson (not an R3 decision).** The canonical
    package for `ma-g3-mathematics-u01-l02` states focus "the place-value structure of three-digit
    numbers", but all eight of its items assess rounding under `3.NBT.1`, three of them on
    two-digit numbers, and its single worked example rounds to the nearest 100 while every

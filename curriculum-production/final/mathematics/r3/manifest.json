@@ -11,8 +11,20 @@
   },
   "playerContract": "LearnerMaterialDto -> createRichLessonRenderModel -> RichLessonPresentation",
   "restrictedAssessmentAuthority": "restricted/assessment-authority.json",
-  "supportedGrades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
-  "intentionallyUnsupportedGrades": [6],
+  "supportedGrades": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "intentionallyUnsupportedGrades": [
+    6
+  ],
   "wave1": {
     "courseRef": "ma-g3-mathematics",
     "grade": 3,
@@ -36,9 +48,37 @@
       "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u01-l02.package.json",
       "sourceAnswerKey": "curriculum-production/final/mathematics/active/answer-keys/grade-03/ma-g3-mathematics-u01-l02.key.json",
       "learnerTitle": "Rounding to the Nearest Ten",
-      "standards": ["3.NBT.1", "MP.6", "MP.7"],
+      "standards": [
+        "3.NBT.1",
+        "MP.6",
+        "MP.7"
+      ],
       "role": "REFERENCE_LESSON",
-      "status": "PENDING_DIRECTOR_REVIEW"
+      "status": "DIRECTOR_APPROVED_HOUSE_STYLE"
+    }
+  ],
+  "houseStyle": {
+    "lessonRef": "ma-g3-mathematics-u01-l02",
+    "file": "lessons/grade-03/ma-g3-mathematics-u01-l02.lesson.json",
+    "approvedCommit": "e57ba1de0c50060032061dc75c2ae3586cf705a2",
+    "approvedDate": "2026-08-18",
+    "matchOn": [
+      "Grade 3 voice",
+      "section density",
+      "feedback specificity"
+    ]
+  },
+  "directorRulings": [
+    {
+      "date": "2026-08-18",
+      "subject": "learner-facing copy",
+      "scope": "every R3 lesson, all subjects",
+      "appliedHereTo": "Mathematics only; this session writes no other subject",
+      "contractRows": [
+        "L1",
+        "L2",
+        "L3"
+      ]
     }
   ]
 }

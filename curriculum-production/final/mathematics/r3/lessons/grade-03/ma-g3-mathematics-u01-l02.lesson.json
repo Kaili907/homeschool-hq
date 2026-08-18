@@ -9,14 +9,26 @@
     "unitNumber": 1,
     "unitTitle": "Mathematical Habits, Place Value, and Rounding",
     "dayInUnit": 2,
+    "lessonsInUnit": 18,
     "courseDay": 2,
     "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u01-l02.package.json",
     "sourceAnswerKey": "curriculum-production/final/mathematics/active/answer-keys/grade-03/ma-g3-mathematics-u01-l02.key.json",
-    "standards": ["3.NBT.1", "MP.6", "MP.7"],
+    "standards": [
+      "3.NBT.1",
+      "MP.6",
+      "MP.7"
+    ],
     "normalInstructionalLesson": true,
     "modelledOn": "curriculum-review-samples/director/mathematics-r2/samples/grade-3.json",
     "restrictedAssessmentAuthority": "restricted/assessment-authority.json",
-    "status": "PENDING_DIRECTOR_REVIEW"
+    "status": "DIRECTOR_APPROVED_HOUSE_STYLE",
+    "approval": {
+      "ruling": "Director approval, Mathematics R3 reference lesson",
+      "date": "2026-08-18",
+      "branch": "mac/curriculum-math-production-r3",
+      "commit": "e57ba1de0c50060032061dc75c2ae3586cf705a2",
+      "effect": "This lesson is the R3 house style for Grade 3 voice, section density, and feedback specificity."
+    }
   },
   "learnerMaterial": {
     "lessonRef": "ma-g3-mathematics-u01-l02",
@@ -35,9 +47,18 @@
       "When a number is exactly halfway between two tens, round up."
     ],
     "vocabulary": [
-      {"term": "round", "definition": "to replace a number with a nearby number that is easier to work with"},
-      {"term": "multiple of ten", "definition": "a number you say when you count by tens, such as 40, 50, or 60"},
-      {"term": "nearest", "definition": "the closest one, found by counting the steps to each choice"}
+      {
+        "term": "round",
+        "definition": "to replace a number with a nearby number that is easier to work with"
+      },
+      {
+        "term": "multiple of ten",
+        "definition": "a number you say when you count by tens, such as 40, 50, or 60"
+      },
+      {
+        "term": "nearest",
+        "definition": "the closest one, found by counting the steps to each choice"
+      }
     ],
     "sections": [
       {
@@ -46,7 +67,13 @@
         "title": "Every number sits between two tens",
         "body": "Pick any number. There is a ten just below it and a ten just above it. Rounding asks one question: which of those two tens is nearer? Count the steps back and the steps forward, then choose the smaller count. Look at 85 in the table. It is 5 steps from 80 and 5 steps from 90, so it is exactly halfway. When that happens, the rule is to round up, so 85 rounds to 90.",
         "data": {
-          "columns": ["Number", "Ten below", "Ten above", "Steps back", "Steps forward"],
+          "columns": [
+            "Number",
+            "Ten below",
+            "Ten above",
+            "Steps back",
+            "Steps forward"
+          ],
           "rows": [
             "47 | 40 | 50 | 7 | 3",
             "62 | 60 | 70 | 2 | 8",
@@ -98,7 +125,12 @@
             "itemKind": "multiple-choice",
             "prompt": "Round 89 to the nearest 10.",
             "responseKind": "CHOICE",
-            "choices": ["80", "89", "90", "91"],
+            "choices": [
+              "80",
+              "89",
+              "90",
+              "91"
+            ],
             "feedback": {
               "correct": "Yes. You found the ten below and the ten above 89, counted the steps to each, and chose the ten you reached in fewer steps.",
               "incorrect": "Check two things. First, an answer for the nearest ten has to be a ten, so it ends in 0 — that rules out 89 and 91. Second, count from 80 up to 89 and from 89 up to the next ten, then compare those two counts. Do not round down out of habit; let the step count decide."
@@ -127,7 +159,12 @@
             "itemKind": "multiple-choice",
             "prompt": "Round 57 to the nearest 10.",
             "responseKind": "CHOICE",
-            "choices": ["61", "50", "60", "57"],
+            "choices": [
+              "61",
+              "50",
+              "60",
+              "57"
+            ],
             "feedback": {
               "correct": "Yes. 57 is 7 steps past 50 and only 3 steps from the next ten, so the next ten is nearer.",
               "incorrect": "Start by throwing out any choice that is not a ten — 61 and 57 do not end in 0. Then count from 50 up to 57, and from 57 up to the next ten. The shorter count wins."
@@ -148,7 +185,12 @@
             "itemKind": "multiple-choice",
             "prompt": "Round 653 to the nearest 10.",
             "responseKind": "CHOICE",
-            "choices": ["650", "651", "660", "653"],
+            "choices": [
+              "650",
+              "651",
+              "660",
+              "653"
+            ],
             "feedback": {
               "correct": "Yes. 653 is 3 steps past 650 and 7 steps from 660, so 650 is nearer.",
               "incorrect": "Rounding to the nearest ten always lands on a ten, so 651 and 653 cannot be right. Find the ten just below 653 and the ten just above it, then compare the two step counts."
