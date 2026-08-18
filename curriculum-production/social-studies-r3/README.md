@@ -1,10 +1,11 @@
 # Social Studies Production R3 — framework
 
-Status: `FRAMEWORK_ONLY`
+Status: `REFERENCE_LESSON`
 
 R3 is the step from *an approved model* to *production learner-facing lessons*.
-This round builds the contract, the promotion gate, and the validator. **No R3
-lesson has been authored, and this framework admits nothing.**
+The contract, the promotion gate, and the validator are in place, and **one Grade 3
+reference lesson is authored**. It sits at `READY_FOR_GATE`. **Nothing is admitted:**
+admission requires a named human source review.
 
 The nine Director-approved Social Studies R2 samples are the model. They are
 read-only inputs here: R3 never edits, moves, or re-statuses them.
@@ -41,7 +42,51 @@ review carrying all seven required fields.
 | `VALIDATION.md` | What was actually run and what it reported. |
 | `tools/schema-validator.mjs` | Minimal JSON Schema subset validator; the repository has no JSON Schema runtime dependency. |
 | `tools/rhythm.mjs` | The ordered rhythm check, driven by `promotion-rules.json`. |
-| `lessons/` | Where authored R3 lessons will land. Currently empty. |
+| `lessons/grade-03/ma-g3-social-studies-u08-l07.lesson.json` | The Grade 3 reference lesson. |
+
+## The reference lesson
+
+`ma-g3-social-studies-u08-l07` — *Investigation or close reading: the purpose of the
+Michigan Constitution*. Unit 8, day 7, course day 91 of 108.
+
+It was chosen because its canonical phase is *Investigation or close reading*, whose
+task shape is "work with at least one primary source and one secondary source" — the
+evidence spine the Social Studies rhythm is built on. It is already bound to three
+`VERIFIED` records in the repository source registry: two 1835 Library of Congress
+records of President Jackson transmitting Michigan's proposed constitution to the
+House and the Senate, and the National Archives record for the U.S. Constitution,
+which supplies the worked example's *different* case.
+
+The registry stores metadata and links only (`quotationStored: false`), so the lesson
+reproduces catalog titles — labeled as catalog titles, never as words spoken by a
+person — and labels every plain-language restatement as a paraphrase. No document
+text is reproduced and nothing is invented.
+
+The learner work is reading a record like a historian: what it states, what it does
+not state, and the difference between a fact and a guess.
+
+## House style
+
+The Director-approved Mathematics R3 reference lesson
+(`mac/curriculum-math-production-r3` @ `e57ba1de`) is the R3 house style, and this
+lesson matches its Grade 3 voice and section density: two worked-example items that
+are never required, six required learner items, and hand-authored `feedback.correct`
+and `feedback.incorrect` on every one.
+
+Two places where the frozen Social Studies sources govern instead, per the Math
+`CONTRACT.md` precedence rule that a frozen source wins:
+
+- **Envelope shape.** The Math samples nest learner content under `learnerMaterial`;
+  the frozen Social Studies R2 samples are flat, and this lesson stays flat.
+- **Review model.** Math carries only the four-field DTO `lessonReview`. The frozen
+  Social Studies samples carry the seven-field review the Common Lesson Contract
+  requires. This lesson carries **both**: the seven-field review on the final
+  `reflection` section, and the DTO `lessonReview` the render model surfaces.
+
+The **COURSE PROGRESS / NEXT ACTION ruling** (Math `CONTRACT.md`, open questions 1
+and 2) is applied to both surfaces: real course position instead of the review
+samples' no-credit wording, and `nextAction: "Continue required work"` for a mid-unit
+production lesson.
 
 ## Two schemas, deliberately
 
@@ -55,10 +100,10 @@ as production content by accident.
 
 A complete R3 production lesson satisfies **both** schemas **and** the ordered
 rhythm rule. Each of the nine frozen samples satisfies the model schema and the
-rhythm rule, and fails the envelope for exactly six reasons: five missing
-production fields and one `sampleStatus` marker that promotion must remove. That
+rhythm rule, and fails the envelope. That
 gap is the gate, and the verifier asserts it is exactly that — no wider, no
-narrower.
+narrower. There are seven findings: six missing production fields and one
+`sampleStatus` marker that promotion must remove.
 
 ## Source and neutrality boundary
 
@@ -93,3 +138,9 @@ it against; the schema cannot verify a citation, so it records who did.
 node scripts/curriculum/verify-social-studies-r3-framework.mjs
 npx vitest run --project root-app src/study/family-pilot/lesson-player/socialStudiesProductionR3.test.ts
 ```
+
+## Preview
+
+`npm run dev`, then open `/curriculum-preview/social-studies-r3`. The route mounts the
+real `FamilyPilotLessonPlayer` over a throwaway in-memory session. It writes no learner
+progress, assignment, or cloud data, and it does not touch the frozen R2 gallery.

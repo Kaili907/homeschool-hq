@@ -9,7 +9,8 @@
     "provenance",
     "runtimeReadiness",
     "sourceReview",
-    "courseProgress"
+    "courseProgress",
+    "lessonReview"
   ],
   "properties": {
     "sampleStatus": {
@@ -59,7 +60,10 @@
       "additionalProperties": false,
       "description": "A recorded human source review. The R2 bar was every excerpt, title, date, and repository checked against the real record; production cannot rely on that being done informally.",
       "properties": {
-        "reviewedByRole": { "enum": ["CURRICULUM_DIRECTOR", "SUBJECT_REVIEWER"] },
+        "reviewedByRole": {
+          "enum": ["CURRICULUM_DIRECTOR", "SUBJECT_REVIEWER", "PENDING_HUMAN_SOURCE_REVIEW"],
+          "description": "PENDING_HUMAN_SOURCE_REVIEW is honest for a lesson whose sources are carried by the repository's verified registry but which no human has yet signed off. The verifier rejects it for PRODUCTION_ADMITTED."
+        },
         "reviewedOn": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
         "verifiedAgainst": {
           "type": "array",
@@ -77,6 +81,10 @@
           "description": "Every simulated dossier, fictional dataset, or paraphrase is labeled as such in the learner-visible text."
         }
       }
+    },
+    "lessonReview": {
+      "type": "object",
+      "description": "Presence is required for production; the shape is validated by the model schema. A Director sample may omit it, which is one of the documented gate findings."
     },
     "courseProgress": {
       "type": "object",

@@ -1,12 +1,22 @@
 {
   "schemaVersion": 1,
   "manifestId": "SOCIAL_STUDIES_PRODUCTION_R3",
-  "status": "FRAMEWORK_ONLY",
-  "statusMeaning": "The production contract, promotion gate, and validator exist and are proven against the frozen model. No R3 lesson has been authored. This manifest admits nothing.",
+  "status": "REFERENCE_LESSON",
+  "statusMeaning": "The production contract, promotion gate, and validator are proven against the frozen model, and one Grade 3 reference lesson is authored and held at READY_FOR_GATE. Nothing is admitted: admission requires a named human source review.",
   "subject": "social-studies",
   "branch": "mac/curriculum-social-production-r3",
   "baseSha": "e9b9d723ed4b447f9de97aa5d7de26ac1dfd1f9a",
-  "supportedGrades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "supportedGrades": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
   "grade6Present": false,
   "grade6Excluded": true,
   "storageBoundary": {
@@ -29,27 +39,51 @@
   "contract": {
     "lessonModelSchema": {
       "path": "curriculum-production/social-studies-r3/schema/social-studies-lesson-model.schema.json",
-      "sha256": "b73d6c940e20c31f98903c31524de657934df91a018833b4258c9d7e4159ab23"
+      "sha256": "afcdaf0f281578025cb786263ec5ccaadba427823b9944664e6044959a29a107"
     },
     "productionEnvelopeSchema": {
       "path": "curriculum-production/social-studies-r3/schema/social-studies-r3-production-envelope.schema.json",
-      "sha256": "f1b2c8168932d46f0182028b604ba6a506f24e46ab86e91545e29d42bc26c655"
+      "sha256": "0b2202e5b1f0c481da74ed054fdf18cf88cfe29452c7b5ef158fcce85a7583c5"
     },
     "promotionRules": {
       "path": "curriculum-production/social-studies-r3/promotion-rules.json",
-      "sha256": "66431e8cea20dea422a463dc4c0892243d62ec11537d63373187516eca960b93"
+      "sha256": "0936578cc0474fbf0255230da65a1eb9e20f985bdc068583b799c8f89f095686"
     },
     "lessonSchemaVersion": "manuel-academy.rich-study-lesson.v1",
     "renderer": "createRichLessonRenderModel",
-    "responseTypesUsed": ["CHOICE", "CONSTRUCTED_RESPONSE"],
+    "responseTypesUsed": [
+      "CHOICE",
+      "CONSTRUCTED_RESPONSE"
+    ],
     "legacyFallbackRequired": false,
     "parallelEngineOrRuntimeIntroduced": false
   },
   "lessons": {
-    "authored": 0,
+    "authored": 1,
     "admitted": 0,
-    "byGrade": {},
-    "note": "Zero lessons authored in this round by explicit instruction. The framework is proven against the nine frozen Director-approved Social Studies samples instead."
+    "byGrade": {
+      "3": 1
+    },
+    "note": "One Grade 3 reference lesson, ma-g3-social-studies-u08-l07, authored against the approved model and the Mathematics R3 house style. It sits at READY_FOR_GATE with sourceReview.reviewedByRole PENDING_HUMAN_SOURCE_REVIEW, so it is not admitted.",
+    "rows": [
+      {
+        "lessonRef": "ma-g3-social-studies-u08-l07",
+        "grade": 3,
+        "unit": 8,
+        "dayInUnit": 7,
+        "courseDay": 91,
+        "file": "lessons/grade-03/ma-g3-social-studies-u08-l07.lesson.json",
+        "canonicalLessonPath": "curriculum-production/student-work/social-studies/grade-3/ma-g3-social-studies/ma-g3-social-studies-u08-l07.md",
+        "modelledOn": "curriculum-production/director-samples/social-studies-r2/grade-03/ma-g3-social-studies-u06-l03.lesson.json",
+        "houseStyleReference": "curriculum-production/final/mathematics/r3/lessons/grade-03/ma-g3-mathematics-u01-l02.lesson.json @ e57ba1de0c50060032061dc75c2ae3586cf705a2",
+        "verifiedSourceKeys": [
+          "loc-2022688639",
+          "loc-2022697426",
+          "nara-constitution"
+        ],
+        "productionStatus": "READY_FOR_GATE"
+      }
+    ]
   },
   "humanAuthority": {
     "promotionIsAutomatic": false,
@@ -60,6 +94,7 @@
     "script": "scripts/curriculum/verify-social-studies-r3-framework.mjs",
     "command": "node scripts/curriculum/verify-social-studies-r3-framework.mjs",
     "test": "src/study/family-pilot/lesson-player/socialStudiesProductionR3.test.ts",
-    "testCommand": "npx vitest run --project root-app src/study/family-pilot/lesson-player/socialStudiesProductionR3.test.ts"
+    "testCommand": "npx vitest run --project root-app src/study/family-pilot/lesson-player/socialStudiesProductionR3.test.ts",
+    "previewRoute": "/curriculum-preview/social-studies-r3"
   }
 }

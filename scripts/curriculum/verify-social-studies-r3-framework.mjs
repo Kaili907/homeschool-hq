@@ -148,6 +148,9 @@ const frozenStrings = new Set(
     .map((value) => value.toLowerCase().replaceAll(/\s+/g, ' ').trim()),
 )
 
+const feedbackRule = rules.preconditions.find((rule) => rule.id === 'instructional-feedback')
+const genericFeedback = new RegExp(feedbackRule.genericFeedbackDenylistPattern, 'i')
+const nextActionRule = rules.preconditions.find((rule) => rule.id === 'next-action-ruling')
 const duplicationRule = rules.preconditions.find((rule) => rule.id === 'no-substantive-duplication')
 const dayRule = rules.preconditions.find((rule) => rule.id === 'course-progress-day')
 const rewriteRule = rules.transform.rewrite.find((entry) => entry.field.endsWith('course_progress'))
@@ -179,9 +182,42 @@ for (const relative of lessonFiles) {
   assert(lesson.courseProgress.day === expectedDay, `${label} states course day ${lesson.courseProgress.day}; the lesson reference gives ${expectedDay}.`)
   assert(lesson.courseProgress.totalDays === dayRule.lessonsPerUnit * dayRule.unitsPerCourse, `${label} states the wrong course length.`)
 
-  const progress = lesson.sections.at(-1).reference.course_progress
-  assert(!forbiddenProgressPhrase.test(progress), `${label} still carries Director-sample no-credit language in course_progress.`)
-  assert(progress.includes(`day ${expectedDay} of ${lesson.courseProgress.totalDays}`), `${label} review does not state its real course position.`)
+  // The COURSE PROGRESS ruling binds both review surfaces: the seven-field Social Studies
+  // review and the runtime LearnerLessonReview the render model actually shows.
+  for (const [surface, progress] of [
+    ['review reference', lesson.sections.at(-1).reference.course_progress],
+    ['lessonReview', lesson.lessonReview.courseProgress],
+  ]) {
+    assert(!forbiddenProgressPhrase.test(progress), `${label} still carries Director-sample no-credit language in ${surface} course progress.`)
+    assert(progress.includes(`day ${expectedDay} of ${lesson.courseProgress.totalDays}`), `${label} ${surface} does not state its real course position.`)
+  }
+  assert(
+    lesson.lessonReview.nextAction === nextActionRule.midUnitValue,
+    `${label} states nextAction "${lesson.lessonReview.nextAction}"; the mid-unit ruling is "${nextActionRule.midUnitValue}".`,
+  )
+
+  // Instructional feedback on every learner-response item; none on worked examples.
+  for (const section of lesson.sections ?? []) {
+    for (const item of itemsOf(section)) {
+      if (!item.responseKind) {
+        assert(item.feedback === undefined, `${label} attaches feedback to worked example ${item.itemRef}; looking at an example is not a response.`)
+        continue
+      }
+      assert(item.feedback, `${label} item ${item.itemRef} has no instructional feedback.`)
+      assert(
+        item.feedback.incorrect.length >= feedbackRule.minimumIncorrectFeedbackLength,
+        `${label} item ${item.itemRef} incorrect feedback is shorter than ${feedbackRule.minimumIncorrectFeedbackLength} characters.`,
+      )
+      for (const branch of ['correct', 'incorrect']) {
+        assert(!genericFeedback.test(item.feedback[branch]), `${label} item ${item.itemRef} ${branch} feedback is a generic verdict.`)
+      }
+    }
+  }
+
+  assert(
+    lesson.productionStatus !== 'PRODUCTION_ADMITTED' || lesson.sourceReview.reviewedByRole !== 'PENDING_HUMAN_SOURCE_REVIEW',
+    `${label} is marked PRODUCTION_ADMITTED without a named human source review.`,
+  )
 
   assert(
     lesson.provenance.approvalManifestSha256 === manifest.modelInput.sha256,
@@ -210,7 +246,7 @@ console.log(`frozen Social Studies model samples: ${frozen.length} unchanged`)
 console.log(`model schema: ${frozen.length}/${frozen.length} frozen samples validate`)
 console.log(`rhythm rule (${rules.rhythm.orderedRule.length} steps): ${frozen.length}/${frozen.length} frozen samples satisfy`)
 console.log(`promotion gap: ${expectedGap.length} findings per frozen sample, exactly as documented`)
-console.log(`authored R3 lessons: ${lessonFiles.length}`)
+console.log(`authored R3 lessons: ${lessonFiles.length}${lessonFiles.length ? ` (${lessonFiles.join(', ')})` : ''}`)
 console.log(`admitted R3 lessons: ${manifest.lessons.admitted}`)
 console.log('automatic promotion: disabled')
 console.log('SOCIAL_STUDIES_R3_FRAMEWORK_VERIFIED')

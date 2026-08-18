@@ -85,6 +85,9 @@
     "sourceIntegrity": {
       "$ref": "#/$defs/sourceIntegrity"
     },
+    "lessonReview": {
+      "$ref": "#/$defs/dtoLessonReview"
+    },
     "sections": {
       "type": "array",
       "minItems": 9,
@@ -153,6 +156,24 @@
           "minItems": 1,
           "items": { "$ref": "#/$defs/item" }
         }
+      }
+    },
+    "dtoLessonReview": {
+      "type": "object",
+      "required": ["whatYouLearned", "courseProgress", "nextAction", "reviewActionLabel"],
+      "additionalProperties": false,
+      "description": "The runtime LearnerLessonReview the render model surfaces. Optional on a Director sample, required on a production lesson by the envelope. courseProgress states real course position; nextAction is a DTO enum value.",
+      "properties": {
+        "whatYouLearned": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "minLength": 12 }
+        },
+        "courseProgress": { "type": "string", "minLength": 20 },
+        "nextAction": {
+          "enum": ["Done for today", "Continue required work", "Keep learning / Work ahead", "Waiting for Parent"]
+        },
+        "reviewActionLabel": { "type": "string", "minLength": 4 }
       }
     },
     "referenceTable": {
@@ -225,6 +246,16 @@
             }
           },
           "description": "Complete modeled reasoning on a different case than the learner's own task."
+        },
+        "feedback": {
+          "type": "object",
+          "required": ["correct", "incorrect"],
+          "additionalProperties": false,
+          "description": "Instructional feedback, required on every learner-response item. The incorrect branch explains the reasoning and names the next move; it is never a bare verdict. Worked examples carry none.",
+          "properties": {
+            "correct": { "type": "string", "minLength": 20 },
+            "incorrect": { "type": "string", "minLength": 40 }
+          }
         }
       }
     }

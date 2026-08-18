@@ -15,7 +15,7 @@ A complete R3 production lesson satisfies all three:
 3. `rhythm.orderedRule` in `promotion-rules.json` — the ordered teaching rhythm.
 
 Each of the nine frozen R2 samples satisfies (1) and (3) and fails (2) for
-exactly six reasons. That is the whole gap between an approved sample and a
+exactly seven reasons. That is the whole gap between an approved sample and a
 production lesson, and the verifier asserts it is exactly that:
 
 | Gap | Why it exists |
@@ -26,6 +26,7 @@ production lesson, and the verifier asserts it is exactly that:
 | `runtimeReadiness` missing | Reuses the existing final-package vocabulary. `PENDING_SOURCE_ATTACHMENT` keeps launch and scoring disabled without making the course unready. |
 | `sourceReview` missing | Records the human source verification the R2 bar assumed but never wrote down. |
 | `courseProgress` missing | A sample states it awards no course credit. A production lesson states its real course day. |
+| `lessonReview` missing | The runtime `LearnerLessonReview` the render model surfaces. It carries the COURSE PROGRESS and NEXT ACTION ruling. |
 
 ## Preconditions
 
@@ -50,16 +51,29 @@ Checked per lesson before promotion:
   `(unit - 1) * 12 + lesson` derived from `lessonRef`, out of 108.
 - **no-substantive-duplication** — no substantive learner-facing string is copied
   from a frozen sample or another R3 lesson. A shared rhythm is not shared copy.
-- **recorded-source-review** — `sourceReview` names a human role, a date, and the
-  records each excerpt, title, date, and citation was checked against.
+- **recorded-source-review** — `sourceReview` names a role, a date, and the records
+  each excerpt, title, date, and citation was checked against.
+- **instructional-feedback** — every learner-response item carries
+  `feedback.correct` and `feedback.incorrect`. The incorrect branch explains the
+  reasoning and names the next move; it is never a bare verdict. Worked-example
+  items carry none, because looking at an example is not a response.
+- **next-action-ruling** — `lessonReview.nextAction` is a DTO enum value, and a
+  mid-unit production lesson uses `Continue required work`.
 
 ## The transform
 
 Remove `sampleStatus`. Add `productionStatus`, `provenance`, `runtimeReadiness`,
-`sourceReview`, and `courseProgress`. Rewrite the final review's
+`sourceReview`, `courseProgress`, and `lessonReview`. Rewrite the final review's
 `course_progress` so it states the lesson's real course position instead of the
 sample's no-credit notice; the verifier rejects the sample phrasing and requires
 `day N of 108`.
+
+## Answer keys
+
+Social Studies has no answer keys. Scoring authority lives in each canonical
+package's rubric and acceptable-answer criteria, not in a `.key.json`. Every
+feedback string is therefore hand-authored per item; there is no key to derive
+from, and no shared `commonErrors` boilerplate to inherit.
 
 ## What the machine cannot decide
 
@@ -79,7 +93,13 @@ marked in `promotion-rules.json`.
 ## Human authority
 
 Promotion is not automatic. The verifier reports; it never admits. Admission
-requires a recorded human source review on each lesson. Any change to the model
+requires a recorded human source review on each lesson.
+
+A lesson may reach `READY_FOR_GATE` on the repository's verified source registry
+alone, recording `reviewedByRole: PENDING_HUMAN_SOURCE_REVIEW`. That is the honest
+state for a lesson whose sources are registry-verified but which no person has yet
+signed off. The verifier rejects that role for `PRODUCTION_ADMITTED`, so the pending
+marker cannot quietly become an admission. Any change to the model
 itself requires Director re-approval — the R2 freeze is the model authority until
 then.
 

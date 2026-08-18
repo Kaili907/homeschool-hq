@@ -2,10 +2,13 @@ import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
 import { isFamilyCloudBrowserEnabledFromHost } from './study/family-pilot/cloud-auth/browserConfiguration'
+import { isSocialStudiesR3PreviewPath } from './study/social-studies-r3-preview/route'
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
 
 const DirectorReviewGallery = lazy(() => import('./study/director-review/DirectorReviewGallery'))
+
+const SocialStudiesR3PreviewRoute = lazy(() => import('./study/social-studies-r3-preview/SocialStudiesR3PreviewRoute'))
 
 // Family Pilot is a separate root composition. Keeping both roots behind dynamic
 // imports means selecting this route cannot evaluate legacy sync, scoring, Tutor
@@ -31,6 +34,13 @@ export default function App() {
     return (
       <Suspense fallback={<main aria-busy="true">Loading the Director Review Gallery.</main>}>
         <DirectorReviewGallery />
+      </Suspense>
+    )
+  }
+  if (isSocialStudiesR3PreviewPath(window.location.pathname)) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the Social Studies R3 preview.</main>}>
+        <SocialStudiesR3PreviewRoute />
       </Suspense>
     )
   }

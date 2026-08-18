@@ -131,13 +131,28 @@
     {
       "id": "no-browser-answer-authority",
       "statement": "No key anywhere in the lesson names an answer, correctness flag, solution, score, scoring rule, or rubric answer. Correctness is a trusted-assessment decision.",
-      "forbiddenKeyPattern": "^(?:answer|answerKey|correct|correctAnswer|solution|score|scoring|rubricAnswer)$"
+      "forbiddenKeyPattern": "^(?:answer|answerKey|correctAnswer|solution|score|scoring|scoringRule|rubricAnswer|accepted|acceptedChoiceOrdinal)$",
+      "patternNote": "Bare `correct` is excluded deliberately: it is the runtime LearnerItemFeedback branch name and carries instructional text, not an answer. `correctAnswer`, `accepted`, and `acceptedChoiceOrdinal` remain forbidden, matching the Mathematics R3 validator."
     },
     {
       "id": "course-progress-day",
-      "statement": "courseProgress.day equals (unitNumber - 1) * 12 + lessonNumber derived from lessonRef, and courseProgress.totalDays is 108.",
+      "statement": "courseProgress.day equals (unitNumber - 1) * 12 + lessonNumber derived from lessonRef, and courseProgress.totalDays is 108. Both the seven-field review and lessonReview.courseProgress state that real position; neither may carry the review samples' no-credit wording.",
+      "rulingSource": "curriculum-production/final/mathematics/r3/CONTRACT.md, Open questions #1, on branch mac/curriculum-math-production-r3 at e57ba1de0c50060032061dc75c2ae3586cf705a2",
       "lessonsPerUnit": 12,
       "unitsPerCourse": 9
+    },
+    {
+      "id": "instructional-feedback",
+      "statement": "Every learner-response item carries feedback.correct and feedback.incorrect. The incorrect branch explains the reasoning and names the next move; it is never a bare verdict. Worked-example items carry no feedback.",
+      "restatesContractClause": "FEEDBACK is instructional: it explains the reasoning, names the next move, and supports correction or reteaching.",
+      "minimumIncorrectFeedbackLength": 40,
+      "genericFeedbackDenylistPattern": "^(?:\\s*(?:try again|incorrect|wrong|nope|not quite|good job|great work|correct|nice work|well done)[.!]*\\s*)+$"
+    },
+    {
+      "id": "next-action-ruling",
+      "statement": "lessonReview.nextAction is a LearnerLessonReview enum value. A mid-unit production lesson uses 'Continue required work' rather than the review samples' 'Done for today'.",
+      "rulingSource": "curriculum-production/final/mathematics/r3/CONTRACT.md, Open questions #2, on branch mac/curriculum-math-production-r3 at e57ba1de0c50060032061dc75c2ae3586cf705a2",
+      "midUnitValue": "Continue required work"
     },
     {
       "id": "no-substantive-duplication",
@@ -162,7 +177,8 @@
       { "field": "provenance", "reason": "Pins the approved model and the frozen approval manifest so a later change is detectable." },
       { "field": "runtimeReadiness", "reason": "Reuses the existing final-package readiness vocabulary." },
       { "field": "sourceReview", "reason": "Records the human source verification the R2 bar assumed." },
-      { "field": "courseProgress", "reason": "States real course position instead of a no-credit sample notice." }
+      { "field": "courseProgress", "reason": "States real course position instead of a no-credit sample notice." },
+      { "field": "lessonReview", "reason": "The runtime LearnerLessonReview the render model surfaces, carrying the COURSE PROGRESS and NEXT ACTION ruling." }
     ],
     "rewrite": [
       {
@@ -176,6 +192,7 @@
     "promotionIsAutomatic": false,
     "statement": "The verifier reports; it never admits. Admission requires a named human decision recorded in the manifest.",
     "requiredForPromotion": ["recorded source review by CURRICULUM_DIRECTOR or SUBJECT_REVIEWER"],
+    "admissionBlockedWhile": "sourceReview.reviewedByRole is PENDING_HUMAN_SOURCE_REVIEW; a lesson may reach READY_FOR_GATE on the repository's verified source registry alone, but PRODUCTION_ADMITTED requires a named human",
     "requiredForModelChange": ["Director re-approval; the R2 freeze is the model authority until then"]
   },
   "forbidden": [
@@ -196,7 +213,8 @@
       "provenance",
       "runtimeReadiness",
       "sourceReview",
-      "courseProgress"
+      "courseProgress",
+      "lessonReview"
     ],
     "forbiddenCarryForward": ["sampleStatus"]
   }
