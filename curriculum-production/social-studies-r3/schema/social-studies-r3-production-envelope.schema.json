@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/social-studies/r3-production-envelope-v1.json",
+  "title": "Manuel Academy Social Studies R3 production envelope",
+  "description": "The production-only fields an R3 lesson carries in addition to the shared lesson model. A complete R3 production lesson satisfies social-studies-lesson-model.schema.json AND this schema AND the rhythm rule in promotion-rules.json. The envelope is deliberately separate: the model is shared with the frozen Director-approved R2 samples and must not acquire production fields, and the samples must not silently pass as production content.",
+  "type": "object",
+  "required": [
+    "productionStatus",
+    "provenance",
+    "runtimeReadiness",
+    "sourceReview",
+    "courseProgress"
+  ],
+  "properties": {
+    "sampleStatus": {
+      "not": {},
+      "description": "A production lesson is not a Director sample. The sample marker must be removed by promotion, never carried forward."
+    },
+    "productionStatus": {
+      "enum": ["DRAFT", "READY_FOR_GATE", "PRODUCTION_ADMITTED"],
+      "description": "Lifecycle state. Only PRODUCTION_ADMITTED may be referenced by an admission manifest."
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "modelAuthority",
+        "modelSampleId",
+        "approvalManifestPath",
+        "approvalManifestSha256",
+        "approvalFreezeSha"
+      ],
+      "additionalProperties": false,
+      "description": "Pins the approved model this lesson was built against, so a later change to the frozen approval is detectable rather than silent.",
+      "properties": {
+        "modelAuthority": { "const": "DIRECTOR_SAMPLES_R2_APPROVED" },
+        "modelSampleId": {
+          "type": "string",
+          "pattern": "^ma-g(?:3|4|5|7|8|9|10|11|12)-social-studies-u[0-9]{2}-l[0-9]{2}$",
+          "description": "The Social Studies R2 sample whose grade band and rhythm this lesson follows."
+        },
+        "approvalManifestPath": { "const": "curriculum/approvals/director-samples-r2-approved.json" },
+        "approvalManifestSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "approvalFreezeSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      }
+    },
+    "runtimeReadiness": {
+      "enum": ["RUNTIME_READY", "PENDING_SOURCE_ATTACHMENT"],
+      "description": "Reuses the existing final Social Studies package vocabulary. PENDING_SOURCE_ATTACHMENT keeps launch and scoring disabled until an adult attaches qualifying evidence; it does not make the course unready."
+    },
+    "sourceReview": {
+      "type": "object",
+      "required": [
+        "reviewedByRole",
+        "reviewedOn",
+        "verifiedAgainst",
+        "noInventedQuoteTitleOrUrl",
+        "simulatedEvidenceLabeled"
+      ],
+      "additionalProperties": false,
+      "description": "A recorded human source review. The R2 bar was every excerpt, title, date, and repository checked against the real record; production cannot rely on that being done informally.",
+      "properties": {
+        "reviewedByRole": { "enum": ["CURRICULUM_DIRECTOR", "SUBJECT_REVIEWER"] },
+        "reviewedOn": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "verifiedAgainst": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 8 },
+          "description": "The repositories or official records each excerpt, title, date, and citation was checked against."
+        },
+        "noInventedQuoteTitleOrUrl": {
+          "const": true,
+          "description": "No quotation, title, creator, date, or URL in this lesson was invented, and no words are attributed to a real person they did not say."
+        },
+        "simulatedEvidenceLabeled": {
+          "const": true,
+          "description": "Every simulated dossier, fictional dataset, or paraphrase is labeled as such in the learner-visible text."
+        }
+      }
+    },
+    "courseProgress": {
+      "type": "object",
+      "required": ["day", "totalDays"],
+      "additionalProperties": false,
+      "description": "Real course position. Director samples state that they award no course credit; a production lesson states its actual day, and the rhythm rule checks it against the lesson reference.",
+      "properties": {
+        "day": { "type": "integer", "minimum": 1, "maximum": 108 },
+        "totalDays": { "const": 108 }
+      }
+    }
+  }
+}

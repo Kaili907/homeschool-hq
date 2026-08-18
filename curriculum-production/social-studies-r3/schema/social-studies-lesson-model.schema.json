@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/social-studies/lesson-model-v1.json",
+  "title": "Manuel Academy Social Studies lesson model",
+  "description": "Structural contract for one learner-facing Social Studies lesson. This describes the existing rich-study lesson model consumed by createRichLessonRenderModel and mapLearnerMaterialToStudySegments; it does not define a second lesson model, engine, or runtime. The nine Director-approved R2 samples satisfy this schema unchanged, and every R3 production lesson inherits it.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "lessonRef",
+    "title",
+    "subject",
+    "format",
+    "grade",
+    "courseRef",
+    "unitRef",
+    "canonicalLessonPath",
+    "standards",
+    "successCriteria",
+    "vocabulary",
+    "sourceIntegrity",
+    "sections"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "manuel-academy.rich-study-lesson.v1",
+      "description": "The one canonical lesson model version. A new value here would be a second lesson model and is out of contract."
+    },
+    "lessonRef": {
+      "type": "string",
+      "pattern": "^ma-g(?:3|4|5|7|8|9|10|11|12)-social-studies-u[0-9]{2}-l[0-9]{2}$",
+      "description": "Canonical lesson identifier. Grade 6 is not a supported grade and cannot appear."
+    },
+    "title": { "type": "string", "minLength": 8 },
+    "subject": { "const": "social-studies" },
+    "format": { "const": "structured" },
+    "markdown": {
+      "not": {},
+      "description": "Social Studies lessons project through the Rich Study Player. A markdown body would require the legacy fallback path."
+    },
+    "grade": {
+      "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+      "description": "Supported grades only. Grade 6 does not exist in this curriculum."
+    },
+    "courseRef": {
+      "type": "string",
+      "pattern": "^ma-g(?:3|4|5|7|8|9|10|11|12)-social-studies$"
+    },
+    "unitRef": {
+      "type": "string",
+      "pattern": "^ma-g(?:3|4|5|7|8|9|10|11|12)-social-studies-u[0-9]{2}$"
+    },
+    "canonicalLessonPath": {
+      "type": "string",
+      "pattern": "^curriculum-production/student-work/social-studies/grade-(?:3|4|5|7|8|9|10|11|12)/ma-g(?:3|4|5|7|8|9|10|11|12)-social-studies/ma-g(?:3|4|5|7|8|9|10|11|12)-social-studies-u[0-9]{2}-l[0-9]{2}\\.md$",
+      "description": "Read-only mapping authority. The canonical student-work package is never edited by lesson authoring."
+    },
+    "standards": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 2 },
+      "description": "Must reproduce the canonical package standards line exactly."
+    },
+    "essentialQuestion": { "type": "string", "minLength": 20 },
+    "lessonGoal": { "type": "string", "minLength": 20 },
+    "successCriteria": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 12 }
+    },
+    "vocabulary": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["term", "definition"],
+        "additionalProperties": false,
+        "properties": {
+          "term": { "type": "string", "minLength": 2 },
+          "definition": { "type": "string", "minLength": 8 }
+        }
+      }
+    },
+    "sourceIntegrity": {
+      "$ref": "#/$defs/sourceIntegrity"
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 9,
+      "items": { "$ref": "#/$defs/section" },
+      "description": "Ordering is a separate rule: see rhythm.orderedRule in promotion-rules.json."
+    }
+  },
+  "$defs": {
+    "sourceIntegrity": {
+      "type": "object",
+      "required": ["policy", "sources"],
+      "additionalProperties": false,
+      "description": "Every lesson states, in the lesson file itself, what its evidence is and how it may be used. Simulated or fictional practice evidence must say so here.",
+      "properties": {
+        "policy": { "type": "string", "minLength": 40 },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 8 }
+        }
+      }
+    },
+    "evidenceDisplay": {
+      "type": "object",
+      "minProperties": 2,
+      "description": "Authored evidence: source excerpt and citation fields, map legends and locations, or table columns and rows. Values are text or lists of text so every display has a text route.",
+      "additionalProperties": {
+        "type": ["string", "array"],
+        "items": { "type": "string", "minLength": 1 }
+      }
+    },
+    "section": {
+      "type": "object",
+      "required": ["sectionRef", "sectionKind", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "sectionRef": {
+          "type": "string",
+          "pattern": "^ma-g(?:3|4|5|7|8|9|10|11|12)-social-studies-u[0-9]{2}-l[0-9]{2}:[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "sectionKind": {
+          "enum": [
+            "teaching",
+            "reference",
+            "source",
+            "primary-source",
+            "map-reference",
+            "data-table",
+            "worked-example",
+            "guided-practice",
+            "remediation",
+            "independent-practice",
+            "reflection"
+          ],
+          "description": "Authored kinds only. Each value must classify into the canonical RichLessonSectionKind union through classifyRichLessonSection; the R3 validator test proves it does."
+        },
+        "title": { "type": "string", "minLength": 3 },
+        "body": { "type": "string", "minLength": 40 },
+        "directions": { "type": "string", "minLength": 10 },
+        "source": { "$ref": "#/$defs/evidenceDisplay" },
+        "map": { "$ref": "#/$defs/evidenceDisplay" },
+        "data": { "$ref": "#/$defs/evidenceDisplay" },
+        "reference": { "$ref": "#/$defs/referenceTable" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/item" }
+        }
+      }
+    },
+    "referenceTable": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Authored reference values displayed to the learner: a background table, an indicator list, or the final lesson review. All values are text.",
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "lessonReview": {
+      "type": "object",
+      "required": [
+        "what_you_learned",
+        "evidence_you_used",
+        "how_you_did",
+        "what_to_review",
+        "review_this_lesson",
+        "course_progress",
+        "next_action"
+      ],
+      "description": "The seven required review fields. Applied by the rhythm rule to the reference table on the final reflection section; additional authored keys may carry lesson-specific values.",
+      "additionalProperties": { "type": "string", "minLength": 1 },
+      "properties": {
+        "what_you_learned": { "type": "string", "minLength": 20 },
+        "evidence_you_used": { "type": "string", "minLength": 20 },
+        "how_you_did": { "type": "string", "minLength": 20 },
+        "what_to_review": { "type": "string", "minLength": 20 },
+        "review_this_lesson": { "type": "string", "minLength": 20 },
+        "course_progress": { "type": "string", "minLength": 20 },
+        "next_action": { "type": "string", "minLength": 20 }
+      }
+    },
+    "item": {
+      "type": "object",
+      "required": ["itemRef", "itemKind"],
+      "additionalProperties": false,
+      "properties": {
+        "itemRef": {
+          "type": "string",
+          "pattern": "^ma-g(?:3|4|5|7|8|9|10|11|12)-social-studies-u[0-9]{2}-l[0-9]{2}:[a-z0-9-]+:[0-9]+$"
+        },
+        "itemKind": { "enum": ["worked-example", "multiple-choice", "constructed-response"] },
+        "prompt": { "type": "string", "minLength": 10 },
+        "responseKind": {
+          "enum": ["CHOICE", "CONSTRUCTED_RESPONSE"],
+          "description": "A subset of the existing LEARNER_RESPONSE_TYPES contract. Worked examples carry no responseKind and project as READ."
+        },
+        "choices": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["id", "label"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:#-]{0,255}$" },
+              "label": { "type": "string", "minLength": 4 }
+            }
+          },
+          "description": "Choice labels only. No choice is marked correct: correctness is a trusted-assessment decision, never learner-material content."
+        },
+        "workedSolution": {
+          "type": "object",
+          "required": ["steps"],
+          "additionalProperties": false,
+          "properties": {
+            "steps": {
+              "type": "array",
+              "minItems": 5,
+              "items": { "type": "string", "minLength": 20 }
+            }
+          },
+          "description": "Complete modeled reasoning on a different case than the learner's own task."
+        }
+      }
+    }
+  }
+}

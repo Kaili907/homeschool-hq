@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "manifestId": "SOCIAL_STUDIES_PRODUCTION_R3",
+  "status": "FRAMEWORK_ONLY",
+  "statusMeaning": "The production contract, promotion gate, and validator exist and are proven against the frozen model. No R3 lesson has been authored. This manifest admits nothing.",
+  "subject": "social-studies",
+  "branch": "mac/curriculum-social-production-r3",
+  "baseSha": "e9b9d723ed4b447f9de97aa5d7de26ac1dfd1f9a",
+  "supportedGrades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "grade6Present": false,
+  "grade6Excluded": true,
+  "storageBoundary": {
+    "root": "curriculum-production/social-studies-r3",
+    "lessonRoot": "curriculum-production/social-studies-r3/lessons",
+    "frozenModelRoot": "curriculum-production/director-samples/social-studies-r2",
+    "canonicalPackageRoot": "curriculum-production/student-work/social-studies",
+    "frozenModelChanged": false,
+    "canonicalPackagesChanged": false,
+    "note": "The frozen model and the canonical student-work packages are read-only inputs. All R3 output is written under this root."
+  },
+  "modelInput": {
+    "manifestId": "DIRECTOR_SAMPLES_R2_APPROVED",
+    "path": "curriculum/approvals/director-samples-r2-approved.json",
+    "sha256": "b4a9b2101874ddfe1b438e815a59f2c6a241bf6bd60ed7a9fc8f185d84475229",
+    "approvalStatus": "DIRECTOR_APPROVED_FOR_PRODUCTION",
+    "gallerySha": "416664e1656c6eb21517249d3a8cfbc616d35eee",
+    "socialStudiesSampleCount": 9
+  },
+  "contract": {
+    "lessonModelSchema": {
+      "path": "curriculum-production/social-studies-r3/schema/social-studies-lesson-model.schema.json",
+      "sha256": "b73d6c940e20c31f98903c31524de657934df91a018833b4258c9d7e4159ab23"
+    },
+    "productionEnvelopeSchema": {
+      "path": "curriculum-production/social-studies-r3/schema/social-studies-r3-production-envelope.schema.json",
+      "sha256": "f1b2c8168932d46f0182028b604ba6a506f24e46ab86e91545e29d42bc26c655"
+    },
+    "promotionRules": {
+      "path": "curriculum-production/social-studies-r3/promotion-rules.json",
+      "sha256": "66431e8cea20dea422a463dc4c0892243d62ec11537d63373187516eca960b93"
+    },
+    "lessonSchemaVersion": "manuel-academy.rich-study-lesson.v1",
+    "renderer": "createRichLessonRenderModel",
+    "responseTypesUsed": ["CHOICE", "CONSTRUCTED_RESPONSE"],
+    "legacyFallbackRequired": false,
+    "parallelEngineOrRuntimeIntroduced": false
+  },
+  "lessons": {
+    "authored": 0,
+    "admitted": 0,
+    "byGrade": {},
+    "note": "Zero lessons authored in this round by explicit instruction. The framework is proven against the nine frozen Director-approved Social Studies samples instead."
+  },
+  "humanAuthority": {
+    "promotionIsAutomatic": false,
+    "admissionRequires": "a named human source review recorded on each lesson, plus Director approval for any change to the model itself",
+    "verifierAdmitsNothing": true
+  },
+  "verification": {
+    "script": "scripts/curriculum/verify-social-studies-r3-framework.mjs",
+    "command": "node scripts/curriculum/verify-social-studies-r3-framework.mjs",
+    "test": "src/study/family-pilot/lesson-player/socialStudiesProductionR3.test.ts",
+    "testCommand": "npx vitest run --project root-app src/study/family-pilot/lesson-player/socialStudiesProductionR3.test.ts"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "rulesId": "SOCIAL_STUDIES_PRODUCTION_R3_PROMOTION_RULES",
+  "subject": "social-studies",
+  "supportedGrades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "grade6Supported": false,
+  "modelAuthority": {
+    "manifest": "curriculum/approvals/director-samples-r2-approved.json",
+    "manifestId": "DIRECTOR_SAMPLES_R2_APPROVED",
+    "approvalStatus": "DIRECTOR_APPROVED_FOR_PRODUCTION",
+    "socialStudiesSampleCount": 9,
+    "note": "The nine Social Studies R2 samples are the frozen model. They are read-only inputs to R3 and are never edited, moved, or re-statused by promotion."
+  },
+  "contract": {
+    "modelSchema": "curriculum-production/social-studies-r3/schema/social-studies-lesson-model.schema.json",
+    "productionEnvelopeSchema": "curriculum-production/social-studies-r3/schema/social-studies-r3-production-envelope.schema.json",
+    "lessonReviewDefinition": "#/$defs/lessonReview",
+    "rule": "A complete R3 production lesson satisfies the model schema AND the production envelope schema AND the ordered rhythm rule below. The frozen R2 samples satisfy the model schema only; that difference is the promotion gate."
+  },
+  "rhythm": {
+    "model": "QUESTION/CONTEXT -> BACKGROUND -> EVIDENCE -> MODEL THINKING -> YOUR TURN -> FEEDBACK -> REVIEW",
+    "note": "Ordered rule. Sections must appear in this order; evidence steps admit more than one section. Verified to hold for all nine frozen R2 samples.",
+    "evidenceSectionKinds": ["source", "primary-source", "map-reference", "data-table"],
+    "orderedRule": [
+      {
+        "id": "question-context",
+        "label": "Question and context",
+        "sectionKinds": ["teaching"],
+        "occurrences": "exactly-one",
+        "mustBeFirstSection": true
+      },
+      {
+        "id": "background",
+        "label": "Necessary background",
+        "sectionKinds": ["teaching", "reference"],
+        "occurrences": "exactly-one"
+      },
+      {
+        "id": "example-evidence",
+        "label": "Readable evidence for the worked example",
+        "sectionKinds": ["source", "primary-source", "map-reference", "data-table"],
+        "occurrences": "one-or-more"
+      },
+      {
+        "id": "model-thinking",
+        "label": "Labeled EXAMPLE with complete modeled reasoning",
+        "sectionKinds": ["worked-example"],
+        "occurrences": "exactly-one",
+        "titleMustContain": "EXAMPLE",
+        "minWorkedSolutionSteps": 5,
+        "workedPromptMustDifferFromLearnerPrompts": true,
+        "humanReviewNote": "The automated check proves the modeled prompt is not a copy of the learner's own prompts. Whether the modeled case is genuinely a different case, clause, dataset, or network stays a human review judgment."
+      },
+      {
+        "id": "learner-evidence",
+        "label": "Evidence the learner reasons from",
+        "sectionKinds": ["source", "primary-source", "map-reference", "data-table"],
+        "occurrences": "one-or-more"
+      },
+      {
+        "id": "your-turn-guided",
+        "label": "Your turn, with support",
+        "sectionKinds": ["guided-practice"],
+        "occurrences": "exactly-one",
+        "requiresResponseKind": "CHOICE"
+      },
+      {
+        "id": "feedback",
+        "label": "Evidence- and reasoning-specific feedback",
+        "sectionKinds": ["remediation"],
+        "occurrences": "exactly-one",
+        "minBodyLength": 60,
+        "rejectsBareVerdictBody": true
+      },
+      {
+        "id": "your-turn-independent",
+        "label": "Fresh independent response with less support",
+        "sectionKinds": ["independent-practice"],
+        "occurrences": "exactly-one",
+        "requiresResponseKind": "CONSTRUCTED_RESPONSE"
+      },
+      {
+        "id": "review",
+        "label": "Final lesson review",
+        "sectionKinds": ["reflection"],
+        "occurrences": "exactly-one",
+        "mustBeFinalSection": true,
+        "requiresResponseKind": "CHOICE",
+        "referenceMustSatisfy": "#/$defs/lessonReview"
+      }
+    ],
+    "lessonReviewFields": [
+      "what_you_learned",
+      "evidence_you_used",
+      "how_you_did",
+      "what_to_review",
+      "review_this_lesson",
+      "course_progress",
+      "next_action"
+    ]
+  },
+  "preconditions": [
+    {
+      "id": "model-schema",
+      "statement": "The lesson validates against the model schema with no violations."
+    },
+    {
+      "id": "rhythm-order",
+      "statement": "The lesson satisfies rhythm.orderedRule in order."
+    },
+    {
+      "id": "canonical-mapping-agreement",
+      "statement": "lessonRef, title, and standards reproduce the canonical student-work package at canonicalLessonPath exactly. The canonical package is a read-only mapping authority.",
+      "canonicalRoot": "curriculum-production/student-work/social-studies"
+    },
+    {
+      "id": "response-type-subset",
+      "statement": "Every responseKind is one of the existing LearnerResponseRuntime types. No new response type is introduced.",
+      "usedByThisSubject": ["CHOICE", "CONSTRUCTED_RESPONSE"],
+      "runtimeContract": "src/study/family-pilot/final-app/learner-response (LEARNER_RESPONSE_TYPES)"
+    },
+    {
+      "id": "rich-player-projection",
+      "statement": "createRichLessonRenderModel returns mode 'rich' and no legacy fallback is required.",
+      "renderer": "src/study/family-pilot/lesson-player/renderModel.ts"
+    },
+    {
+      "id": "section-kind-classifies",
+      "statement": "Every authored sectionKind classifies into the canonical RichLessonSectionKind union through classifyRichLessonSection. The authored vocabulary never outruns what the player can render."
+    },
+    {
+      "id": "no-browser-answer-authority",
+      "statement": "No key anywhere in the lesson names an answer, correctness flag, solution, score, scoring rule, or rubric answer. Correctness is a trusted-assessment decision.",
+      "forbiddenKeyPattern": "^(?:answer|answerKey|correct|correctAnswer|solution|score|scoring|rubricAnswer)$"
+    },
+    {
+      "id": "course-progress-day",
+      "statement": "courseProgress.day equals (unitNumber - 1) * 12 + lessonNumber derived from lessonRef, and courseProgress.totalDays is 108.",
+      "lessonsPerUnit": 12,
+      "unitsPerCourse": 9
+    },
+    {
+      "id": "no-substantive-duplication",
+      "statement": "No substantive learner-facing string is copied from a frozen R2 sample or from another R3 lesson. Shared rhythm is not shared copy.",
+      "minimumComparedStringLength": 60
+    },
+    {
+      "id": "recorded-source-review",
+      "statement": "sourceReview names a human role, a date, and the records each excerpt, title, date, and citation was checked against."
+    }
+  ],
+  "transform": {
+    "note": "Promotion is authoring work against the approved model, not a mechanical copy of a sample. These are the field-level changes a promoted lesson must show.",
+    "remove": [
+      {
+        "field": "sampleStatus",
+        "reason": "DIRECTOR_REVIEW_ONLY is a review marker. A production lesson is not a Director sample."
+      }
+    ],
+    "add": [
+      { "field": "productionStatus", "reason": "Lifecycle state for the admission manifest." },
+      { "field": "provenance", "reason": "Pins the approved model and the frozen approval manifest so a later change is detectable." },
+      { "field": "runtimeReadiness", "reason": "Reuses the existing final-package readiness vocabulary." },
+      { "field": "sourceReview", "reason": "Records the human source verification the R2 bar assumed." },
+      { "field": "courseProgress", "reason": "States real course position instead of a no-credit sample notice." }
+    ],
+    "rewrite": [
+      {
+        "field": "sections[last].reference.course_progress",
+        "reason": "The R2 samples state that review work awards no course credit and stays outside production progress. A production lesson states its actual course day.",
+        "forbiddenPhrasePattern": "(?:no course credit|outside production|does not change production|records no production|creates no production|cannot affect live|does not update the live|remains isolated|remains outside production)"
+      }
+    ]
+  },
+  "humanAuthority": {
+    "promotionIsAutomatic": false,
+    "statement": "The verifier reports; it never admits. Admission requires a named human decision recorded in the manifest.",
+    "requiredForPromotion": ["recorded source review by CURRICULUM_DIRECTOR or SUBJECT_REVIEWER"],
+    "requiredForModelChange": ["Director re-approval; the R2 freeze is the model authority until then"]
+  },
+  "forbidden": [
+    "Editing, moving, or re-statusing any of the 36 frozen Director samples.",
+    "Editing curriculum/approvals/, docs/curriculum-quality/, src/study/director-review/, or scripts/curriculum/verify-director-r2-freeze.mjs.",
+    "Editing the canonical student-work packages under curriculum-production/student-work/social-studies.",
+    "Writing R3 content anywhere outside curriculum-production/social-studies-r3.",
+    "Introducing a second lesson model, Study Engine, LearnerResponseRuntime, or local learner-response authority; schemaVersion stays manuel-academy.rich-study-lesson.v1.",
+    "Placing an answer key, correctness flag, score, scoring rule, or rubric answer in learner material.",
+    "Inventing a quotation, title, creator, date, or URL, or attributing words to a real person they did not say.",
+    "Presenting simulated or fictional practice evidence as a real event or source.",
+    "Authoring any grade 6 content."
+  ],
+  "approvedSampleGap": {
+    "note": "What the nine frozen R2 samples lack for production. Verified: each sample validates against the model schema and fails the production envelope for exactly these reasons.",
+    "missingProductionFields": [
+      "productionStatus",
+      "provenance",
+      "runtimeReadiness",
+      "sourceReview",
+      "courseProgress"
+    ],
+    "forbiddenCarryForward": ["sampleStatus"]
+  }
+}
