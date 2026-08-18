@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 
 async function loadBrowserRoot(): Promise<ComponentType> {
+  if (window.location.pathname === '/curriculum-preview/science-r3') {
+    return (await import('./study/curriculum-preview-r3/ScienceR3Preview')).default
+  }
   if (window.location.pathname === '/director-review/curriculum-r2') {
     return (await import('./study/director-review/DirectorReviewGallery')).default
   }

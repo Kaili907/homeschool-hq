@@ -1,0 +1,2491 @@
+{
+  "schemaVersion": "1.0",
+  "revision": "SCIENCE_R3_WAVE_1",
+  "status": "READY_FOR_DIRECTOR_REVIEW",
+  "subject": "science",
+  "grade": 3,
+  "courseId": "ma-g3-science",
+  "course": "Grade 3 Science",
+  "controllingModel": {
+    "approvalManifest": "curriculum/approvals/director-samples-r2-approved.json",
+    "contracts": "docs/curriculum-quality/APPROVED-LESSON-CONTRACTS-R2.md",
+    "approvalRecord": "docs/curriculum-quality/DIRECTOR-SAMPLES-R2-APPROVED.md",
+    "r3Contract": "curriculum-production/wave-1/science/SCIENCE-R3-CONTRACT.md",
+    "frozenScienceSampleDir": "docs/curriculum-quality/science/director-samples-r2/samples",
+    "lessonSchema": "docs/curriculum-quality/science/director-samples-r2/science-director-sample.schema.json",
+    "baseCommit": "e9b9d723ed4b447f9de97aa5d7de26ac1dfd1f9a"
+  },
+  "canonicalSequence": {
+    "path": "curriculum-production/final/science/packages/ma-g3-science/work-packages.jsonl",
+    "lessonCount": 108,
+    "unitCount": 9,
+    "sourceCommit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+    "sourceLineage": "g34-committed"
+  },
+  "storageBoundary": "curriculum-production/wave-1/science/grade-03",
+  "productionCurriculumChanged": false,
+  "frozenArtifactsChanged": false,
+  "legacyFallbackRequired": false,
+  "lessonCount": 108,
+  "authoredLessonCount": 1,
+  "notAuthoredLessonCount": 107,
+  "authoredLessonRefs": [
+    "ma-g3-science-u08-l03"
+  ],
+  "playerContract": {
+    "richPlayerCompatible": true,
+    "legacyFallbackRequired": false,
+    "renderModel": "src/study/family-pilot/lesson-player/renderModel.ts",
+    "responseRuntime": "src/study/family-pilot/final-app/learner-response/runtime.ts",
+    "player": "src/study/family-pilot/lesson-player/FamilyPilotLessonPlayer.tsx",
+    "previewRoute": "/curriculum-preview/science-r3",
+    "previewWritesLearnerProgress": false
+  },
+  "lessonReviewModel": [
+    "WHAT YOU LEARNED",
+    "EVIDENCE YOU USED",
+    "HOW YOU DID",
+    "WHAT TO PRACTICE",
+    "REVIEW THIS LESSON",
+    "COURSE PROGRESS",
+    "NEXT ACTION"
+  ],
+  "units": [
+    {
+      "unitNumber": 1,
+      "unitId": "ma-g3-science-u01",
+      "unitTitle": "Science and Engineering Practices",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "lessonCount": 12,
+      "authoredLessonCount": 0
+    },
+    {
+      "unitNumber": 2,
+      "unitId": "ma-g3-science-u02",
+      "unitTitle": "Forces and Motion",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "lessonCount": 12,
+      "authoredLessonCount": 0
+    },
+    {
+      "unitNumber": 3,
+      "unitId": "ma-g3-science-u03",
+      "unitTitle": "Magnetic and Electric Interactions",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "lessonCount": 12,
+      "authoredLessonCount": 0
+    },
+    {
+      "unitNumber": 4,
+      "unitId": "ma-g3-science-u04",
+      "unitTitle": "Life Cycles of Organisms",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "lessonCount": 12,
+      "authoredLessonCount": 0
+    },
+    {
+      "unitNumber": 5,
+      "unitId": "ma-g3-science-u05",
+      "unitTitle": "Inherited Traits and Variation",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "lessonCount": 12,
+      "authoredLessonCount": 0
+    },
+    {
+      "unitNumber": 6,
+      "unitId": "ma-g3-science-u06",
+      "unitTitle": "Living in Groups and Surviving in Habitats",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "lessonCount": 12,
+      "authoredLessonCount": 0
+    },
+    {
+      "unitNumber": 7,
+      "unitId": "ma-g3-science-u07",
+      "unitTitle": "Fossils and Environments Long Ago",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "lessonCount": 12,
+      "authoredLessonCount": 0
+    },
+    {
+      "unitNumber": 8,
+      "unitId": "ma-g3-science-u08",
+      "unitTitle": "Weather Patterns and World Climates",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "lessonCount": 12,
+      "authoredLessonCount": 1
+    },
+    {
+      "unitNumber": 9,
+      "unitId": "ma-g3-science-u09",
+      "unitTitle": "Capstone: Weather Hazards and Changing Habitats",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "lessonCount": 12,
+      "authoredLessonCount": 0
+    }
+  ],
+  "lessons": [
+    {
+      "lessonRef": "ma-g3-science-u01-l01",
+      "unitNumber": 1,
+      "dayInUnit": 1,
+      "courseDay": 1,
+      "title": "Launch and diagnostic: careful observations",
+      "phase": "Launch and diagnostic",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l01"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l02",
+      "unitNumber": 1,
+      "dayInUnit": 2,
+      "courseDay": 2,
+      "title": "Concept model A: testable questions",
+      "phase": "Concept model A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l02"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l03",
+      "unitNumber": 1,
+      "dayInUnit": 3,
+      "courseDay": 3,
+      "title": "Guided practice A: models and drawings",
+      "phase": "Guided practice A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l03"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l04",
+      "unitNumber": 1,
+      "dayInUnit": 4,
+      "courseDay": 4,
+      "title": "Independent application A: fair tests",
+      "phase": "Independent application A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l04"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l05",
+      "unitNumber": 1,
+      "dayInUnit": 5,
+      "courseDay": 5,
+      "title": "Concept model B: measuring and recording data",
+      "phase": "Concept model B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l05"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l06",
+      "unitNumber": 1,
+      "dayInUnit": 6,
+      "courseDay": 6,
+      "title": "Guided practice B: criteria and constraints",
+      "phase": "Guided practice B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l06"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l07",
+      "unitNumber": 1,
+      "dayInUnit": 7,
+      "courseDay": 7,
+      "title": "Investigation or close reading: careful observations",
+      "phase": "Investigation or close reading",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l07"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l08",
+      "unitNumber": 1,
+      "dayInUnit": 8,
+      "courseDay": 8,
+      "title": "Reteach and varied practice: testable questions",
+      "phase": "Reteach and varied practice",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l08"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l09",
+      "unitNumber": 1,
+      "dayInUnit": 9,
+      "courseDay": 9,
+      "title": "Performance task build: models and drawings",
+      "phase": "Performance task build",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l09"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l10",
+      "unitNumber": 1,
+      "dayInUnit": 10,
+      "courseDay": 10,
+      "title": "Synthesis and review: fair tests",
+      "phase": "Synthesis and review",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l10"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l11",
+      "unitNumber": 1,
+      "dayInUnit": 11,
+      "courseDay": 11,
+      "title": "Unit assessment: measuring and recording data",
+      "phase": "Unit assessment",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l11"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u01-l12",
+      "unitNumber": 1,
+      "dayInUnit": 12,
+      "courseDay": 12,
+      "title": "Correction and reflection: criteria and constraints",
+      "phase": "Correction and reflection",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u01-l12"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l01",
+      "unitNumber": 2,
+      "dayInUnit": 1,
+      "courseDay": 13,
+      "title": "Launch and diagnostic: pushes and pulls",
+      "phase": "Launch and diagnostic",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l01"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l02",
+      "unitNumber": 2,
+      "dayInUnit": 2,
+      "courseDay": 14,
+      "title": "Concept model A: balanced and unbalanced forces",
+      "phase": "Concept model A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l02"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l03",
+      "unitNumber": 2,
+      "dayInUnit": 3,
+      "courseDay": 15,
+      "title": "Guided practice A: patterns in motion",
+      "phase": "Guided practice A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l03"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l04",
+      "unitNumber": 2,
+      "dayInUnit": 4,
+      "courseDay": 16,
+      "title": "Independent application A: predicting motion",
+      "phase": "Independent application A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l04"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l05",
+      "unitNumber": 2,
+      "dayInUnit": 5,
+      "courseDay": 17,
+      "title": "Concept model B: measuring distance and time",
+      "phase": "Concept model B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l05"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l06",
+      "unitNumber": 2,
+      "dayInUnit": 6,
+      "courseDay": 18,
+      "title": "Guided practice B: friction and surfaces",
+      "phase": "Guided practice B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l06"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l07",
+      "unitNumber": 2,
+      "dayInUnit": 7,
+      "courseDay": 19,
+      "title": "Investigation or close reading: pushes and pulls",
+      "phase": "Investigation or close reading",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l07"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l08",
+      "unitNumber": 2,
+      "dayInUnit": 8,
+      "courseDay": 20,
+      "title": "Reteach and varied practice: balanced and unbalanced forces",
+      "phase": "Reteach and varied practice",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l08"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l09",
+      "unitNumber": 2,
+      "dayInUnit": 9,
+      "courseDay": 21,
+      "title": "Performance task build: patterns in motion",
+      "phase": "Performance task build",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l09"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l10",
+      "unitNumber": 2,
+      "dayInUnit": 10,
+      "courseDay": 22,
+      "title": "Synthesis and review: predicting motion",
+      "phase": "Synthesis and review",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l10"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l11",
+      "unitNumber": 2,
+      "dayInUnit": 11,
+      "courseDay": 23,
+      "title": "Unit assessment: measuring distance and time",
+      "phase": "Unit assessment",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l11"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u02-l12",
+      "unitNumber": 2,
+      "dayInUnit": 12,
+      "courseDay": 24,
+      "title": "Correction and reflection: friction and surfaces",
+      "phase": "Correction and reflection",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-1",
+        "3-PS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u02-l12"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l01",
+      "unitNumber": 3,
+      "dayInUnit": 1,
+      "courseDay": 25,
+      "title": "Launch and diagnostic: magnetic attraction and repulsion",
+      "phase": "Launch and diagnostic",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l01"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l02",
+      "unitNumber": 3,
+      "dayInUnit": 2,
+      "courseDay": 26,
+      "title": "Concept model A: magnet poles",
+      "phase": "Concept model A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l02"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l03",
+      "unitNumber": 3,
+      "dayInUnit": 3,
+      "courseDay": 27,
+      "title": "Guided practice A: forces without contact",
+      "phase": "Guided practice A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l03"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l04",
+      "unitNumber": 3,
+      "dayInUnit": 4,
+      "courseDay": 28,
+      "title": "Independent application A: static electric interactions",
+      "phase": "Independent application A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l04"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l05",
+      "unitNumber": 3,
+      "dayInUnit": 5,
+      "courseDay": 29,
+      "title": "Concept model B: cause and effect",
+      "phase": "Concept model B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l05"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l06",
+      "unitNumber": 3,
+      "dayInUnit": 6,
+      "courseDay": 30,
+      "title": "Guided practice B: solving a problem with magnets",
+      "phase": "Guided practice B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l06"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l07",
+      "unitNumber": 3,
+      "dayInUnit": 7,
+      "courseDay": 31,
+      "title": "Investigation or close reading: magnetic attraction and repulsion",
+      "phase": "Investigation or close reading",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l07"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l08",
+      "unitNumber": 3,
+      "dayInUnit": 8,
+      "courseDay": 32,
+      "title": "Reteach and varied practice: magnet poles",
+      "phase": "Reteach and varied practice",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l08"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l09",
+      "unitNumber": 3,
+      "dayInUnit": 9,
+      "courseDay": 33,
+      "title": "Performance task build: forces without contact",
+      "phase": "Performance task build",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l09"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l10",
+      "unitNumber": 3,
+      "dayInUnit": 10,
+      "courseDay": 34,
+      "title": "Synthesis and review: static electric interactions",
+      "phase": "Synthesis and review",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l10"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l11",
+      "unitNumber": 3,
+      "dayInUnit": 11,
+      "courseDay": 35,
+      "title": "Unit assessment: cause and effect",
+      "phase": "Unit assessment",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l11"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u03-l12",
+      "unitNumber": 3,
+      "dayInUnit": 12,
+      "courseDay": 36,
+      "title": "Correction and reflection: solving a problem with magnets",
+      "phase": "Correction and reflection",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-PS2-3",
+        "3-PS2-4"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u03-l12"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l01",
+      "unitNumber": 4,
+      "dayInUnit": 1,
+      "courseDay": 37,
+      "title": "Launch and diagnostic: birth, growth, reproduction, and death",
+      "phase": "Launch and diagnostic",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l01"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l02",
+      "unitNumber": 4,
+      "dayInUnit": 2,
+      "courseDay": 38,
+      "title": "Concept model A: plant life cycles",
+      "phase": "Concept model A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l02"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l03",
+      "unitNumber": 4,
+      "dayInUnit": 3,
+      "courseDay": 39,
+      "title": "Guided practice A: insect life cycles",
+      "phase": "Guided practice A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l03"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l04",
+      "unitNumber": 4,
+      "dayInUnit": 4,
+      "courseDay": 40,
+      "title": "Independent application A: comparing life cycles",
+      "phase": "Independent application A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l04"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l05",
+      "unitNumber": 4,
+      "dayInUnit": 5,
+      "courseDay": 41,
+      "title": "Concept model B: modeling a life cycle",
+      "phase": "Concept model B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l05"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l06",
+      "unitNumber": 4,
+      "dayInUnit": 6,
+      "courseDay": 42,
+      "title": "Guided practice B: diverse but shared patterns",
+      "phase": "Guided practice B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l06"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l07",
+      "unitNumber": 4,
+      "dayInUnit": 7,
+      "courseDay": 43,
+      "title": "Investigation or close reading: birth, growth, reproduction, and death",
+      "phase": "Investigation or close reading",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l07"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l08",
+      "unitNumber": 4,
+      "dayInUnit": 8,
+      "courseDay": 44,
+      "title": "Reteach and varied practice: plant life cycles",
+      "phase": "Reteach and varied practice",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l08"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l09",
+      "unitNumber": 4,
+      "dayInUnit": 9,
+      "courseDay": 45,
+      "title": "Performance task build: insect life cycles",
+      "phase": "Performance task build",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l09"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l10",
+      "unitNumber": 4,
+      "dayInUnit": 10,
+      "courseDay": 46,
+      "title": "Synthesis and review: comparing life cycles",
+      "phase": "Synthesis and review",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l10"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l11",
+      "unitNumber": 4,
+      "dayInUnit": 11,
+      "courseDay": 47,
+      "title": "Unit assessment: modeling a life cycle",
+      "phase": "Unit assessment",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l11"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u04-l12",
+      "unitNumber": 4,
+      "dayInUnit": 12,
+      "courseDay": 48,
+      "title": "Correction and reflection: diverse but shared patterns",
+      "phase": "Correction and reflection",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS1-1"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u04-l12"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l01",
+      "unitNumber": 5,
+      "dayInUnit": 1,
+      "courseDay": 49,
+      "title": "Launch and diagnostic: inherited traits",
+      "phase": "Launch and diagnostic",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l01"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l02",
+      "unitNumber": 5,
+      "dayInUnit": 2,
+      "courseDay": 50,
+      "title": "Concept model A: variation within a group",
+      "phase": "Concept model A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l02"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l03",
+      "unitNumber": 5,
+      "dayInUnit": 3,
+      "courseDay": 51,
+      "title": "Guided practice A: comparing parents and offspring",
+      "phase": "Guided practice A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l03"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l04",
+      "unitNumber": 5,
+      "dayInUnit": 4,
+      "courseDay": 52,
+      "title": "Independent application A: traits influenced by environment",
+      "phase": "Independent application A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l04"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l05",
+      "unitNumber": 5,
+      "dayInUnit": 5,
+      "courseDay": 53,
+      "title": "Concept model B: reading trait data",
+      "phase": "Concept model B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l05"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l06",
+      "unitNumber": 5,
+      "dayInUnit": 6,
+      "courseDay": 54,
+      "title": "Guided practice B: evidence from observation",
+      "phase": "Guided practice B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l06"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l07",
+      "unitNumber": 5,
+      "dayInUnit": 7,
+      "courseDay": 55,
+      "title": "Investigation or close reading: inherited traits",
+      "phase": "Investigation or close reading",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l07"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l08",
+      "unitNumber": 5,
+      "dayInUnit": 8,
+      "courseDay": 56,
+      "title": "Reteach and varied practice: variation within a group",
+      "phase": "Reteach and varied practice",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l08"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l09",
+      "unitNumber": 5,
+      "dayInUnit": 9,
+      "courseDay": 57,
+      "title": "Performance task build: comparing parents and offspring",
+      "phase": "Performance task build",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l09"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l10",
+      "unitNumber": 5,
+      "dayInUnit": 10,
+      "courseDay": 58,
+      "title": "Synthesis and review: traits influenced by environment",
+      "phase": "Synthesis and review",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l10"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l11",
+      "unitNumber": 5,
+      "dayInUnit": 11,
+      "courseDay": 59,
+      "title": "Unit assessment: reading trait data",
+      "phase": "Unit assessment",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l11"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u05-l12",
+      "unitNumber": 5,
+      "dayInUnit": 12,
+      "courseDay": 60,
+      "title": "Correction and reflection: evidence from observation",
+      "phase": "Correction and reflection",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS3-1",
+        "3-LS3-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u05-l12"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l01",
+      "unitNumber": 6,
+      "dayInUnit": 1,
+      "courseDay": 61,
+      "title": "Launch and diagnostic: animal groups",
+      "phase": "Launch and diagnostic",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l01"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l02",
+      "unitNumber": 6,
+      "dayInUnit": 2,
+      "courseDay": 62,
+      "title": "Concept model A: benefits of living in groups",
+      "phase": "Concept model A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l02"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l03",
+      "unitNumber": 6,
+      "dayInUnit": 3,
+      "courseDay": 63,
+      "title": "Guided practice A: habitat needs",
+      "phase": "Guided practice A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l03"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l04",
+      "unitNumber": 6,
+      "dayInUnit": 4,
+      "courseDay": 64,
+      "title": "Independent application A: surviving well or less well",
+      "phase": "Independent application A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l04"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l05",
+      "unitNumber": 6,
+      "dayInUnit": 5,
+      "courseDay": 65,
+      "title": "Concept model B: constructing an argument",
+      "phase": "Concept model B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l05"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l06",
+      "unitNumber": 6,
+      "dayInUnit": 6,
+      "courseDay": 66,
+      "title": "Guided practice B: evidence for a survival claim",
+      "phase": "Guided practice B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l06"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l07",
+      "unitNumber": 6,
+      "dayInUnit": 7,
+      "courseDay": 67,
+      "title": "Investigation or close reading: animal groups",
+      "phase": "Investigation or close reading",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l07"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l08",
+      "unitNumber": 6,
+      "dayInUnit": 8,
+      "courseDay": 68,
+      "title": "Reteach and varied practice: benefits of living in groups",
+      "phase": "Reteach and varied practice",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l08"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l09",
+      "unitNumber": 6,
+      "dayInUnit": 9,
+      "courseDay": 69,
+      "title": "Performance task build: habitat needs",
+      "phase": "Performance task build",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l09"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l10",
+      "unitNumber": 6,
+      "dayInUnit": 10,
+      "courseDay": 70,
+      "title": "Synthesis and review: surviving well or less well",
+      "phase": "Synthesis and review",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l10"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l11",
+      "unitNumber": 6,
+      "dayInUnit": 11,
+      "courseDay": 71,
+      "title": "Unit assessment: constructing an argument",
+      "phase": "Unit assessment",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l11"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u06-l12",
+      "unitNumber": 6,
+      "dayInUnit": 12,
+      "courseDay": 72,
+      "title": "Correction and reflection: evidence for a survival claim",
+      "phase": "Correction and reflection",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS2-1",
+        "3-LS4-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u06-l12"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l01",
+      "unitNumber": 7,
+      "dayInUnit": 1,
+      "courseDay": 73,
+      "title": "Launch and diagnostic: what fossils are",
+      "phase": "Launch and diagnostic",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l01"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l02",
+      "unitNumber": 7,
+      "dayInUnit": 2,
+      "courseDay": 74,
+      "title": "Concept model A: reading rock layers",
+      "phase": "Concept model A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l02"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l03",
+      "unitNumber": 7,
+      "dayInUnit": 3,
+      "courseDay": 75,
+      "title": "Guided practice A: fossil evidence",
+      "phase": "Guided practice A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l03"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l04",
+      "unitNumber": 7,
+      "dayInUnit": 4,
+      "courseDay": 76,
+      "title": "Independent application A: environments long ago",
+      "phase": "Independent application A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l04"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l05",
+      "unitNumber": 7,
+      "dayInUnit": 5,
+      "courseDay": 77,
+      "title": "Concept model B: comparing past and present",
+      "phase": "Concept model B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l05"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l06",
+      "unitNumber": 7,
+      "dayInUnit": 6,
+      "courseDay": 78,
+      "title": "Guided practice B: variation and advantage",
+      "phase": "Guided practice B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l06"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l07",
+      "unitNumber": 7,
+      "dayInUnit": 7,
+      "courseDay": 79,
+      "title": "Investigation or close reading: what fossils are",
+      "phase": "Investigation or close reading",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l07"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l08",
+      "unitNumber": 7,
+      "dayInUnit": 8,
+      "courseDay": 80,
+      "title": "Reteach and varied practice: reading rock layers",
+      "phase": "Reteach and varied practice",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l08"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l09",
+      "unitNumber": 7,
+      "dayInUnit": 9,
+      "courseDay": 81,
+      "title": "Performance task build: fossil evidence",
+      "phase": "Performance task build",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l09"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l10",
+      "unitNumber": 7,
+      "dayInUnit": 10,
+      "courseDay": 82,
+      "title": "Synthesis and review: environments long ago",
+      "phase": "Synthesis and review",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l10"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l11",
+      "unitNumber": 7,
+      "dayInUnit": 11,
+      "courseDay": 83,
+      "title": "Unit assessment: comparing past and present",
+      "phase": "Unit assessment",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l11"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u07-l12",
+      "unitNumber": 7,
+      "dayInUnit": 12,
+      "courseDay": 84,
+      "title": "Correction and reflection: variation and advantage",
+      "phase": "Correction and reflection",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-LS4-1",
+        "3-LS4-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u07-l12"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l01",
+      "unitNumber": 8,
+      "dayInUnit": 1,
+      "courseDay": 85,
+      "title": "Launch and diagnostic: daily weather data",
+      "phase": "Launch and diagnostic",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l01"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l02",
+      "unitNumber": 8,
+      "dayInUnit": 2,
+      "courseDay": 86,
+      "title": "Concept model A: tables and graphs",
+      "phase": "Concept model A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l02"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l03",
+      "unitNumber": 8,
+      "dayInUnit": 3,
+      "courseDay": 87,
+      "title": "Guided practice A: seasonal patterns",
+      "phase": "Guided practice A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l03"
+      },
+      "authoringStatus": "AUTHORED_PENDING_DIRECTOR_APPROVAL",
+      "lessonPath": "curriculum-production/wave-1/science/grade-03/lessons/ma-g3-science-u08-l03.lesson.json",
+      "instructionalRhythm": [
+        "NOTICE",
+        "LEARN",
+        "MODEL",
+        "YOUR TURN",
+        "FEEDBACK",
+        "APPLY",
+        "REVIEW"
+      ],
+      "responseTypes": [
+        "CHOICE",
+        "NUMERIC",
+        "TEXT"
+      ],
+      "requiredResponseCount": 6,
+      "feedbackSectionCount": 4,
+      "sectionCount": 17,
+      "phenomenonOrContext": "Three years of monthly high temperatures at one town repeat the same yearly shape without repeating exactly, and a town in the southern half of Earth records the opposite pattern in the very same months.",
+      "readabilityNotes": "Short declarative sentences, one table read at a time, Fahrenheit values kept positive for Grade 3 number sense, and every question carried on an item with a real response control.",
+      "selectionReason": "Chosen as the Wave 1 reference lesson because 3-ESS2-1 supplies genuine multi-year tabular data for NOTICE, the typical-versus-single-year idea gives LEARN a real conceptual move, the canonical correctness authority names three Grade 3 misconceptions that key FEEDBACK, and the Northern and Southern hemisphere record gives APPLY a transfer context rather than another repeated trial.",
+      "canonicalCorrectnessAuthority": {
+        "topicKey": "ma-g3-science-u08::seasonal patterns",
+        "policyFile": "policy/correctness/ma-g3-science.correctness.json",
+        "relationshipCount": 3,
+        "disqualifyingErrorCount": 3,
+        "outOfScope": "The tilt of Earth's axis as the mechanism is Grade 5 and Grade 8 work and is not required here; a learner who states it correctly is right."
+      }
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l04",
+      "unitNumber": 8,
+      "dayInUnit": 4,
+      "courseDay": 88,
+      "title": "Independent application A: weather compared with climate",
+      "phase": "Independent application A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l04"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l05",
+      "unitNumber": 8,
+      "dayInUnit": 5,
+      "courseDay": 89,
+      "title": "Concept model B: climates in different regions",
+      "phase": "Concept model B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l05"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l06",
+      "unitNumber": 8,
+      "dayInUnit": 6,
+      "courseDay": 90,
+      "title": "Guided practice B: combining information sources",
+      "phase": "Guided practice B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l06"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l07",
+      "unitNumber": 8,
+      "dayInUnit": 7,
+      "courseDay": 91,
+      "title": "Investigation or close reading: daily weather data",
+      "phase": "Investigation or close reading",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l07"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l08",
+      "unitNumber": 8,
+      "dayInUnit": 8,
+      "courseDay": 92,
+      "title": "Reteach and varied practice: tables and graphs",
+      "phase": "Reteach and varied practice",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l08"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l09",
+      "unitNumber": 8,
+      "dayInUnit": 9,
+      "courseDay": 93,
+      "title": "Performance task build: seasonal patterns",
+      "phase": "Performance task build",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l09"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l10",
+      "unitNumber": 8,
+      "dayInUnit": 10,
+      "courseDay": 94,
+      "title": "Synthesis and review: weather compared with climate",
+      "phase": "Synthesis and review",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l10"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l11",
+      "unitNumber": 8,
+      "dayInUnit": 11,
+      "courseDay": 95,
+      "title": "Unit assessment: climates in different regions",
+      "phase": "Unit assessment",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l11"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u08-l12",
+      "unitNumber": 8,
+      "dayInUnit": 12,
+      "courseDay": 96,
+      "title": "Correction and reflection: combining information sources",
+      "phase": "Correction and reflection",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS2-1",
+        "3-ESS2-2"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u08-l12"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l01",
+      "unitNumber": 9,
+      "dayInUnit": 1,
+      "courseDay": 97,
+      "title": "Launch and diagnostic: weather-related hazards",
+      "phase": "Launch and diagnostic",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l01"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l02",
+      "unitNumber": 9,
+      "dayInUnit": 2,
+      "courseDay": 98,
+      "title": "Concept model A: habitat change",
+      "phase": "Concept model A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l02"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l03",
+      "unitNumber": 9,
+      "dayInUnit": 3,
+      "courseDay": 99,
+      "title": "Guided practice A: design criteria and constraints",
+      "phase": "Guided practice A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l03"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l04",
+      "unitNumber": 9,
+      "dayInUnit": 4,
+      "courseDay": 100,
+      "title": "Independent application A: comparing solutions",
+      "phase": "Independent application A",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l04"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l05",
+      "unitNumber": 9,
+      "dayInUnit": 5,
+      "courseDay": 101,
+      "title": "Concept model B: fair-testing a design",
+      "phase": "Concept model B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l05"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l06",
+      "unitNumber": 9,
+      "dayInUnit": 6,
+      "courseDay": 102,
+      "title": "Guided practice B: evidence-based claims",
+      "phase": "Guided practice B",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l06"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l07",
+      "unitNumber": 9,
+      "dayInUnit": 7,
+      "courseDay": 103,
+      "title": "Investigation or close reading: weather-related hazards",
+      "phase": "Investigation or close reading",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l07"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l08",
+      "unitNumber": 9,
+      "dayInUnit": 8,
+      "courseDay": 104,
+      "title": "Reteach and varied practice: habitat change",
+      "phase": "Reteach and varied practice",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l08"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l09",
+      "unitNumber": 9,
+      "dayInUnit": 9,
+      "courseDay": 105,
+      "title": "Performance task build: design criteria and constraints",
+      "phase": "Performance task build",
+      "workType": "INVESTIGATION_DATA_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l09"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l10",
+      "unitNumber": 9,
+      "dayInUnit": 10,
+      "courseDay": 106,
+      "title": "Synthesis and review: comparing solutions",
+      "phase": "Synthesis and review",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l10"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l11",
+      "unitNumber": 9,
+      "dayInUnit": 11,
+      "courseDay": 107,
+      "title": "Unit assessment: fair-testing a design",
+      "phase": "Unit assessment",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l11"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    },
+    {
+      "lessonRef": "ma-g3-science-u09-l12",
+      "unitNumber": 9,
+      "dayInUnit": 12,
+      "courseDay": 108,
+      "title": "Correction and reflection: evidence-based claims",
+      "phase": "Correction and reflection",
+      "workType": "STUDENT_WORK_SHEET",
+      "standards": [
+        "3-ESS3-1",
+        "3-LS4-4",
+        "3-5-ETS1-1",
+        "3-5-ETS1-2",
+        "3-5-ETS1-3"
+      ],
+      "estimatedMinutes": "40–55",
+      "canonicalSource": {
+        "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+        "lineage": "g34-committed",
+        "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+        "recordId": "ma-g3-science-u09-l12"
+      },
+      "authoringStatus": "NOT_AUTHORED"
+    }
+  ]
+}

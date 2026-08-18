@@ -7,6 +7,8 @@ const LegacyApp = lazy(() => import('./LegacyApp'))
 
 const DirectorReviewGallery = lazy(() => import('./study/director-review/DirectorReviewGallery'))
 
+const ScienceR3Preview = lazy(() => import('./study/curriculum-preview-r3/ScienceR3Preview'))
+
 // Family Pilot is a separate root composition. Keeping both roots behind dynamic
 // imports means selecting this route cannot evaluate legacy sync, scoring, Tutor
 // transcript persistence, or profile-upload modules before route selection.
@@ -27,6 +29,13 @@ function familyPilotSelectedAtBoot(): boolean {
 }
 
 export default function App() {
+  if (window.location.pathname === '/curriculum-preview/science-r3') {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the Science R3 lesson preview.</main>}>
+        <ScienceR3Preview />
+      </Suspense>
+    )
+  }
   if (window.location.pathname === '/director-review/curriculum-r2') {
     return (
       <Suspense fallback={<main aria-busy="true">Loading the Director Review Gallery.</main>}>
