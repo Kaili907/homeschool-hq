@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0",
+  "manifestId": "ELA_PRODUCTION_R3_HARNESS",
+  "namespace": "src/study/family-pilot/ela-production-r3",
+  "status": "HARNESS_READY_AWAITING_AUTHORING",
+  "subject": "english-language-arts",
+  "contentModel": "LearnerMaterialDto structured lesson",
+  "richPlayerCompatible": true,
+  "legacyFallbackRequired": false,
+  "authoredLessonCount": 0,
+  "productionCurriculumChanged": false,
+  "frozenArtifactsModified": false,
+  "grades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "grade6Present": false,
+  "sectionCount": 18,
+  "requiredResponseSequence": ["CHOICE", "CONSTRUCTED_RESPONSE", "CONSTRUCTED_RESPONSE"],
+  "rubricReviewItemCount": 1,
+  "reviewTitles": [
+    "WHAT YOU LEARNED",
+    "HOW YOU DID",
+    "WHAT YOU DID WELL",
+    "WHAT TO PRACTICE",
+    "REVIEW THIS LESSON",
+    "COURSE PROGRESS",
+    "NEXT ACTION"
+  ],
+  "derivedFrom": {
+    "approvalManifest": "curriculum/approvals/director-samples-r2-approved.json",
+    "manifestId": "DIRECTOR_SAMPLES_R2_APPROVED",
+    "proseContract": "docs/curriculum-quality/APPROVED-LESSON-CONTRACTS-R2.md",
+    "frozenSampleNamespace": "src/study/family-pilot/ela-director-samples-r2",
+    "gallerySha": "416664e1656c6eb21517249d3a8cfbc616d35eee",
+    "freezeDate": "2026-08-18"
+  },
+  "authoringBlockedBy": "Mathematics reference lesson awaiting Director review in the real player; ELA house style unconfirmed.",
+  "openQuestionsDocument": "src/study/family-pilot/ela-production-r3/OPEN-QUESTIONS.md",
+  "contractDocument": "src/study/family-pilot/ela-production-r3/CONTRACT.md",
+  "gate": "src/study/family-pilot/ela-production-r3/elaProductionR3.test.ts"
+}
