@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "namespace": "production:mathematics:r3",
+  "status": "WAVE_1_IN_PROGRESS",
+  "purpose": "Mathematics Production R3 rewrites production Mathematics lessons to the Director-approved R2 lesson model. Wave 1 scope is the Grade 3 Mathematics course.",
+  "approvalBasis": {
+    "manifest": "curriculum/approvals/director-samples-r2-approved.json",
+    "contracts": "docs/curriculum-quality/APPROVED-LESSON-CONTRACTS-R2.md",
+    "controllingMathSample": "curriculum-review-samples/director/mathematics-r2/samples/grade-3.json",
+    "controllingMathSampleId": "director-math-r2-g3-place-value"
+  },
+  "playerContract": "LearnerMaterialDto -> createRichLessonRenderModel -> RichLessonPresentation",
+  "restrictedAssessmentAuthority": "restricted/assessment-authority.json",
+  "supportedGrades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "intentionallyUnsupportedGrades": [6],
+  "wave1": {
+    "courseRef": "ma-g3-mathematics",
+    "grade": 3,
+    "courseTitle": "Grade 3 Mathematics",
+    "totalLessonsInCourse": 180,
+    "unitCount": 10,
+    "lessonsPerUnit": 18,
+    "sourcePackageDirectory": "curriculum-production/final/mathematics/active/packages/grade-03",
+    "sourceAnswerKeyDirectory": "curriculum-production/final/mathematics/active/answer-keys/grade-03",
+    "authoredLessonCount": 1,
+    "remainingLessonCount": 179
+  },
+  "lessons": [
+    {
+      "grade": 3,
+      "courseRef": "ma-g3-mathematics",
+      "lessonRef": "ma-g3-mathematics-u01-l02",
+      "unitNumber": 1,
+      "dayInUnit": 2,
+      "file": "lessons/grade-03/ma-g3-mathematics-u01-l02.lesson.json",
+      "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u01-l02.package.json",
+      "sourceAnswerKey": "curriculum-production/final/mathematics/active/answer-keys/grade-03/ma-g3-mathematics-u01-l02.key.json",
+      "learnerTitle": "Rounding to the Nearest Ten",
+      "standards": ["3.NBT.1", "MP.6", "MP.7"],
+      "role": "REFERENCE_LESSON",
+      "status": "PENDING_DIRECTOR_REVIEW"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "kind": "production-restricted-assessment-authority",
+  "browserImportAllowed": false,
+  "namespace": "production:mathematics:r3:restricted",
+  "lessons": {
+    "ma-g3-mathematics-u01-l02": [
+      {"itemRef": "ma-g3-mathematics-u01-l02#gp-01", "kind": "choice", "acceptedChoiceOrdinal": 3, "sourceAnswer": "90"},
+      {"itemRef": "ma-g3-mathematics-u01-l02#gp-02", "kind": "numeric", "accepted": ["50"], "sourceAnswer": "50"},
+      {"itemRef": "ma-g3-mathematics-u01-l02#ip-01", "kind": "choice", "acceptedChoiceOrdinal": 3, "sourceAnswer": "60"},
+      {"itemRef": "ma-g3-mathematics-u01-l02#ip-02", "kind": "numeric", "accepted": ["950"], "sourceAnswer": "950"},
+      {"itemRef": "ma-g3-mathematics-u01-l02#ip-03", "kind": "choice", "acceptedChoiceOrdinal": 1, "sourceAnswer": "650"},
+      {"itemRef": "ma-g3-mathematics-u01-l02#rt-01", "kind": "numeric", "accepted": ["20"], "authoredForReteach": true},
+      {"itemRef": "ma-g3-mathematics-u01-l02#mc-02", "kind": "numeric", "accepted": ["190"], "sourceAnswer": "190"},
+      {"itemRef": "ma-g3-mathematics-u01-l02#mc-01", "kind": "rubric", "criteria": ["rounds 11 to 10", "names 10 as the ten below and 20 as the ten above", "counts 1 step to 10 and 9 steps to 20, or equivalent distance reasoning", "states that the smaller step count decides the answer"], "sourceAnswer": "10"}
+    ]
+  }
+}

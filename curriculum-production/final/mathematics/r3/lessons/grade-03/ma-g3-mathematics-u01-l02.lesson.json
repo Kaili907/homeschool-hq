@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "namespace": "production:mathematics:r3",
+  "productionMetadata": {
+    "wave": 1,
+    "grade": 3,
+    "courseRef": "ma-g3-mathematics",
+    "lessonRef": "ma-g3-mathematics-u01-l02",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits, Place Value, and Rounding",
+    "dayInUnit": 2,
+    "courseDay": 2,
+    "sourcePackage": "curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u01-l02.package.json",
+    "sourceAnswerKey": "curriculum-production/final/mathematics/active/answer-keys/grade-03/ma-g3-mathematics-u01-l02.key.json",
+    "standards": ["3.NBT.1", "MP.6", "MP.7"],
+    "normalInstructionalLesson": true,
+    "modelledOn": "curriculum-review-samples/director/mathematics-r2/samples/grade-3.json",
+    "restrictedAssessmentAuthority": "restricted/assessment-authority.json",
+    "status": "PENDING_DIRECTOR_REVIEW"
+  },
+  "learnerMaterial": {
+    "lessonRef": "ma-g3-mathematics-u01-l02",
+    "title": "Rounding to the Nearest Ten",
+    "subject": "mathematics",
+    "format": "structured",
+    "lessonGoal": "Today you will round a number to the nearest ten. Rounding helps you estimate quickly and check whether an answer is reasonable.",
+    "successCriteria": [
+      "I can name the ten below a number and the ten above it.",
+      "I can count the steps to each ten and choose the nearer one.",
+      "I can explain my choice using the steps I counted."
+    ],
+    "keyPoints": [
+      "Rounding to the nearest ten means choosing the closer multiple of ten.",
+      "Find the ten below and the ten above, then count the steps to each.",
+      "When a number is exactly halfway between two tens, round up."
+    ],
+    "vocabulary": [
+      {"term": "round", "definition": "to replace a number with a nearby number that is easier to work with"},
+      {"term": "multiple of ten", "definition": "a number you say when you count by tens, such as 40, 50, or 60"},
+      {"term": "nearest", "definition": "the closest one, found by counting the steps to each choice"}
+    ],
+    "sections": [
+      {
+        "sectionRef": "ma-g3-mathematics-u01-l02:teach",
+        "sectionKind": "teaching",
+        "title": "Every number sits between two tens",
+        "body": "Pick any number. There is a ten just below it and a ten just above it. Rounding asks one question: which of those two tens is nearer? Count the steps back and the steps forward, then choose the smaller count. Look at 85 in the table. It is 5 steps from 80 and 5 steps from 90, so it is exactly halfway. When that happens, the rule is to round up, so 85 rounds to 90.",
+        "data": {
+          "columns": ["Number", "Ten below", "Ten above", "Steps back", "Steps forward"],
+          "rows": [
+            "47 | 40 | 50 | 7 | 3",
+            "62 | 60 | 70 | 2 | 8",
+            "85 | 80 | 90 | 5 | 5"
+          ]
+        }
+      },
+      {
+        "sectionRef": "ma-g3-mathematics-u01-l02:example",
+        "sectionKind": "worked-example",
+        "title": "Worked examples: watch the counting",
+        "directions": "These are examples. The answer and the thinking are shown. You do not type anything here.",
+        "items": [
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#ex-01",
+            "itemKind": "worked-example",
+            "prompt": "Round 647 to the nearest 100.",
+            "workedSolution": {
+              "steps": [
+                "The nearest multiples of 100 are 600 and 700.",
+                "647 is 47 away from 600 and 53 away from 700.",
+                "600 is nearer, so 647 rounds to 600."
+              ]
+            }
+          },
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#ex-02",
+            "itemKind": "worked-example",
+            "prompt": "Round 73 to the nearest 10.",
+            "workedSolution": {
+              "steps": [
+                "The ten below 73 is 70. The ten above 73 is 80.",
+                "From 70 to 73 is 3 steps. From 73 to 80 is 7 steps.",
+                "3 is smaller than 7, so 70 is nearer.",
+                "So 73 rounds to 70."
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-mathematics-u01-l02:guided",
+        "sectionKind": "guided-practice",
+        "title": "Your turn: find the nearer ten",
+        "directions": "Now you answer. Count the steps both ways before you choose.",
+        "items": [
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#gp-01",
+            "itemKind": "multiple-choice",
+            "prompt": "Round 89 to the nearest 10.",
+            "responseKind": "CHOICE",
+            "choices": ["80", "89", "90", "91"],
+            "feedback": {
+              "correct": "Yes. You found the ten below and the ten above 89, counted the steps to each, and chose the ten you reached in fewer steps.",
+              "incorrect": "Check two things. First, an answer for the nearest ten has to be a ten, so it ends in 0 — that rules out 89 and 91. Second, count from 80 up to 89 and from 89 up to the next ten, then compare those two counts. Do not round down out of habit; let the step count decide."
+            }
+          },
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#gp-02",
+            "itemKind": "numeric-entry",
+            "prompt": "Round 45 to the nearest 10. Type the ten you land on.",
+            "responseKind": "NUMERIC",
+            "feedback": {
+              "correct": "Right. 45 is 5 steps from 40 and 5 steps from 50. That is a tie, and the rule for a tie is to round up.",
+              "incorrect": "Count the steps from 45 down to 40, then from 45 up to 50. You get the same count both ways, so this is the halfway case. Reread the tie rule in Key ideas, then answer with a ten."
+            }
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-mathematics-u01-l02:practice",
+        "sectionKind": "independent-practice",
+        "title": "Practice: round on your own",
+        "directions": "Answer each one on your own. Count the steps before you decide.",
+        "items": [
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#ip-01",
+            "itemKind": "multiple-choice",
+            "prompt": "Round 57 to the nearest 10.",
+            "responseKind": "CHOICE",
+            "choices": ["61", "50", "60", "57"],
+            "feedback": {
+              "correct": "Yes. 57 is 7 steps past 50 and only 3 steps from the next ten, so the next ten is nearer.",
+              "incorrect": "Start by throwing out any choice that is not a ten — 61 and 57 do not end in 0. Then count from 50 up to 57, and from 57 up to the next ten. The shorter count wins."
+            }
+          },
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#ip-02",
+            "itemKind": "numeric-entry",
+            "prompt": "Round 953 to the nearest 10. Type the ten you land on.",
+            "responseKind": "NUMERIC",
+            "feedback": {
+              "correct": "Yes. The tens on either side of 953 are 950 and 960, and 953 is only 3 steps past 950.",
+              "incorrect": "You are rounding to the nearest ten, not the nearest hundred, so the 9 hundreds stay exactly where they are. Find the ten just below 953 and the ten just above it, count the steps to each, and choose the nearer one."
+            }
+          },
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#ip-03",
+            "itemKind": "multiple-choice",
+            "prompt": "Round 653 to the nearest 10.",
+            "responseKind": "CHOICE",
+            "choices": ["650", "651", "660", "653"],
+            "feedback": {
+              "correct": "Yes. 653 is 3 steps past 650 and 7 steps from 660, so 650 is nearer.",
+              "incorrect": "Rounding to the nearest ten always lands on a ten, so 651 and 653 cannot be right. Find the ten just below 653 and the ten just above it, then compare the two step counts."
+            }
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-mathematics-u01-l02:reteach",
+        "sectionKind": "remediation",
+        "title": "Reteach: count the tens out loud",
+        "body": "Try a smaller number first. Count out loud by tens: 10, 20, 30. Now find where 23 sits. You pass 20, and 30 is still ahead of you. So the ten below is 20 and the ten above is 30. Count the steps to each one before you answer.",
+        "items": [
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#rt-01",
+            "itemKind": "numeric-entry",
+            "prompt": "Round 23 to the nearest 10. Type the ten you land on.",
+            "responseKind": "NUMERIC",
+            "feedback": {
+              "correct": "You used the step count instead of guessing. 23 is 3 steps past 20 and 7 steps from 30.",
+              "incorrect": "Say the tens out loud: 10, 20, 30. Stop at the last ten you reach before 23. Count forward from that ten to 23, then from 23 up to the next ten. The smaller count points to your answer."
+            }
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-mathematics-u01-l02:check",
+        "sectionKind": "mastery-check",
+        "title": "Mastery check: show it and explain it",
+        "directions": "Work without looking back at the worked examples.",
+        "items": [
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#mc-02",
+            "itemKind": "numeric-entry",
+            "prompt": "Round 192 to the nearest 10. Type the ten you land on.",
+            "responseKind": "NUMERIC",
+            "feedback": {
+              "correct": "Yes. 192 is 2 steps past 190, and the next ten is 8 steps away.",
+              "incorrect": "This asks for the nearest ten, not the nearest hundred, so 200 is not the comparison you need. Find the ten just below 192 and the ten just above it, then compare the step counts."
+            }
+          },
+          {
+            "itemRef": "ma-g3-mathematics-u01-l02#mc-01",
+            "itemKind": "constructed-response",
+            "prompt": "Round 11 to the nearest 10. Then explain how you knew, using the two tens on either side of 11 and the steps you counted to each one.",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "feedback": {
+              "correct": "Your explanation names both tens and uses the step counts to justify the choice. That is rounding reasoning, not guessing.",
+              "incorrect": "Name the ten below 11 and the ten above it. Then tell how many steps 11 is from each one. Finish by saying which count was smaller and why that decides your answer."
+            }
+          }
+        ]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": [
+        "Every number sits between a ten below it and a ten above it.",
+        "Rounding to the nearest ten means counting the steps to each ten and choosing the smaller count.",
+        "A number exactly halfway between two tens rounds up.",
+        "Rounding to the nearest ten does not change the hundreds."
+      ],
+      "courseProgress": "Unit 1, Lesson 2 of 18 in Mathematical Habits, Place Value, and Rounding.",
+      "nextAction": "Continue required work",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}
