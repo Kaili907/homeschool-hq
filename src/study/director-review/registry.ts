@@ -31,7 +31,7 @@ import social10 from '../../../curriculum-production/director-samples/social-stu
 import social11 from '../../../curriculum-production/director-samples/social-studies-r2/grade-11/ma-g11-social-studies-u08-l06.lesson.json'
 import social12 from '../../../curriculum-production/director-samples/social-studies-r2/grade-12/ma-g12-social-studies-u03-l03.lesson.json'
 
-import convergenceManifest from '../../../curriculum-review-samples/director/r2-convergence/manifest.json'
+import convergenceManifest from '../../../curriculum/approvals/director-samples-r2-approved.json'
 
 export const DIRECTOR_REVIEW_PATH = '/director-review/curriculum-r2'
 export const DIRECTOR_REVIEW_GRADES = Object.freeze([3, 4, 5, 7, 8, 9, 10, 11, 12] as const)
@@ -53,7 +53,12 @@ interface ManifestEntry {
   readonly samplePath: string
   readonly richPlayerCompatible: true
   readonly legacyFallbackRequired: false
-  readonly directorStatus: 'PENDING_DIRECTOR_REVIEW'
+  readonly directorStatus: 'APPROVED'
+  readonly approvalStatus: 'DIRECTOR_APPROVED_FOR_PRODUCTION'
+  readonly approvalSource: string
+  readonly gallerySha: string
+  readonly galleryTree: string
+  readonly freezeDate: string
 }
 
 export interface DirectorReviewSample extends ManifestEntry {

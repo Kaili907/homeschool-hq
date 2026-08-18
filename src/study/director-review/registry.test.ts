@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { mapLearnerMaterialToStudySegments } from '../family-pilot/final-app/learner-response'
 import { createRichLessonRenderModel } from '../family-pilot/lesson-player'
-import convergenceManifest from '../../../curriculum-review-samples/director/r2-convergence/manifest.json'
+import convergenceManifest from '../../../curriculum/approvals/director-samples-r2-approved.json'
 import {
   DIRECTOR_REVIEW_GRADES,
   DIRECTOR_REVIEW_SAMPLES,
@@ -26,7 +26,8 @@ describe('Director Sample R2 convergence gallery', () => {
     expect(new Set(DIRECTOR_REVIEW_SAMPLES.map((sample) => sample.grade))).toEqual(new Set(DIRECTOR_REVIEW_GRADES))
     expect(DIRECTOR_REVIEW_SAMPLES.some((sample) => Number(sample.grade) === 6)).toBe(false)
     expect(DIRECTOR_REVIEW_SAMPLES.slice(0, 4).map((sample) => sample.subject)).toEqual(DIRECTOR_REVIEW_SUBJECTS)
-    expect(DIRECTOR_REVIEW_SAMPLES.every((sample) => sample.directorStatus === 'PENDING_DIRECTOR_REVIEW')).toBe(true)
+    expect(DIRECTOR_REVIEW_SAMPLES.every((sample) => sample.directorStatus === 'APPROVED')).toBe(true)
+    expect(DIRECTOR_REVIEW_SAMPLES.every((sample) => sample.approvalStatus === 'DIRECTOR_APPROVED_FOR_PRODUCTION')).toBe(true)
   })
 
   it.each(DIRECTOR_REVIEW_SAMPLES.map((sample) => [sample.sampleId, sample] as const))(
