@@ -7,7 +7,7 @@
   "compileValid": 13,
   "controlCount": 13,
   "disposableDetachedWorktreesOnly": true,
-  "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+  "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
   "evidenceVersion": 4,
   "expectedOutputMutationUsed": false,
   "frameworkSourceSession": "STUDY-TUTOR-V2-W4-R10",
@@ -144,7 +144,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M01-AUTHORITY-FIELD-WIDENING",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2f..3f21d2921 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -261,7 +261,7 @@ function finalizedAdvisory(\n     assistanceEvidenceRef: proposal ? invocation.curriculum.opportunityRef : null,\n     presentationIntent: proposal ? response.presentationIntent : null,\n     studyDecisionRequired: true,\n-    studyMutationAllowed: false,\n+    studyMutationAllowed: true as false,\n     officialMasteryAuthority: false,\n     officialWorkingLevelAuthority: false,\n     nominalGradeAuthority: false,\n",
       "family": "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
       "mutationId": "W4-M01-AUTHORITY-FIELD-WIDENING",
@@ -278,7 +278,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M02-REMOVE-ASK-CHECK-PROTECTION",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v2/policy/anti-answer/index.ts b/adaptive-tutor/core/v2/policy/anti-answer/index.ts\nindex e2fc8293c..09cd7e349 100644\n--- a/adaptive-tutor/core/v2/policy/anti-answer/index.ts\n+++ b/adaptive-tutor/core/v2/policy/anti-answer/index.ts\n@@ -68,7 +68,6 @@ const ACTIVE_ASSESSMENT_FREE_FORM_ACTION_KINDS: ReadonlySet<TutorActionKind> =\n   new Set([\n     \"explain\",\n     \"hint\",\n-    \"ask-check\",\n     \"show-example\",\n     \"reteach\",\n   ]);\n",
       "family": "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
       "mutationId": "W4-M02-REMOVE-ASK-CHECK-PROTECTION",
@@ -412,7 +412,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M03-REMOVE-CANONICAL-LEARNER-SCOPE",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2f..f2960e7fe 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -481,7 +481,6 @@ export function executeCommercialTutorInvocation(\n   }\n   if (\n     invocation.householdScopeRef !== input.trustedScope.householdScopeRef ||\n-    invocation.learnerScopeRef !== input.trustedScope.learnerScopeRef ||\n     invocation.sessionRef !== input.trustedScope.sessionRef ||\n     invocation.interactionRef !== input.trustedScope.interactionRef ||\n     invocation.groundedContext.scopeRef !== input.trustedScope.interactionRef ||\n",
       "family": "CROSS_SCOPE_COMMERCIAL_ISOLATION",
       "mutationId": "W4-M03-REMOVE-CANONICAL-LEARNER-SCOPE",
@@ -548,7 +548,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M04-REDISPATCH-EXISTING-ATTEMPT",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\nindex 7cb41d443..f8856644e 100644\n--- a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n+++ b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n@@ -184,7 +184,7 @@ export class DeterministicProvider {\n       if (existing.payloadDigest !== payloadDigest) {\n         throw new Error(\"physical attempt reference was rebound to a different payload\");\n       }\n-      return { ...structuredClone(existing.result), disposition: \"reused\" };\n+      this.#dispatches.delete(attempt.physicalAttemptRef);\n     }\n \n     const behavior = this.#behaviors.get(attempt.physicalAttemptRef) ?? \"response\";\n",
       "family": "REPLAY_CRASH_IDEMPOTENCY",
       "mutationId": "W4-M04-REDISPATCH-EXISTING-ATTEMPT",
@@ -682,7 +682,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M05-BYPASS-RESPONSE-STATE-REVALIDATION",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2f..1446eccec 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -852,7 +852,7 @@ export function executeCommercialTutorInvocation(\n         validateCurrentCommercialExecutionEligibility(\n           responseEligibility,\n           responseEligibilityRequest,\n-        ) === null\n+        ) === null && false\n       ) {\n         return {\n           status: \"static-fallback\",\n",
       "family": "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
       "mutationId": "W4-M05-BYPASS-RESPONSE-STATE-REVALIDATION",
@@ -816,7 +816,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M06-ALLOW-ALREADY-CLAIMED-DISPATCH",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2f..866a8b098 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -786,7 +786,7 @@ export function executeCommercialTutorInvocation(\n     } catch {\n       break;\n     }\n-    if (dispatchClaim !== \"CLAIMED\") break;\n+    if (dispatchClaim === \"CONFLICT\") break;\n     providerCalls += 1;\n     let transportResult: CommercialProviderTransportResult;\n     try {\n",
       "family": "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
       "mutationId": "W4-M06-ALLOW-ALREADY-CLAIMED-DISPATCH",
@@ -952,7 +952,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M07-PERSIST-RAW-TRANSCRIPT",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/multimodal/projection.ts b/adaptive-tutor/core/v3/multimodal/projection.ts\nindex 3f9fd1afe..68f3bd451 100644\n--- a/adaptive-tutor/core/v3/multimodal/projection.ts\n+++ b/adaptive-tutor/core/v3/multimodal/projection.ts\n@@ -133,7 +133,9 @@ export function projectDurableMultimodalEvidence(\n     outcome: source.outcome,\n     assistanceLevel: source.assistanceLevel,\n     observedAt: source.observedAt,\n-    captionRef: source.presentation.caption.captionRef,\n+    captionRef: source.transient?.transcriptText === undefined\n+      ? source.presentation.caption.captionRef\n+      : `transcript:${source.transient.transcriptText}`,\n     captionAvailability: \"available\",\n     transcriptPersisted: false,\n     rawMediaPersisted: false,\n",
       "family": "PRIVACY_RETENTION_MINIMIZATION",
       "mutationId": "W4-M07-PERSIST-RAW-TRANSCRIPT",
@@ -1086,7 +1086,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M08-REMOVE-VISUAL-DIGEST-BINDING",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/multimodal/policy.ts b/adaptive-tutor/core/v3/multimodal/policy.ts\nindex 99b7b18bc..113d9fe39 100644\n--- a/adaptive-tutor/core/v3/multimodal/policy.ts\n+++ b/adaptive-tutor/core/v3/multimodal/policy.ts\n@@ -108,7 +108,6 @@ function sameVisual(\n ): boolean {\n   return left.visualRef === right.visualRef\n     && left.visualKind === right.visualKind\n-    && left.contentDigest === right.contentDigest\n     && left.mimeType === right.mimeType\n     && left.reviewStatus === right.reviewStatus\n     && left.reviewRef === right.reviewRef\n",
       "family": "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
       "mutationId": "W4-M08-REMOVE-VISUAL-DIGEST-BINDING",
@@ -1207,7 +1207,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M09-COMPENSATE-HARD-MULTILINGUAL-FAILURE",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs b/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs\nindex c987af812..9a925493e 100644\n--- a/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs\n+++ b/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs\n@@ -212,7 +212,7 @@ export function scoreCandidate(testCase, unvalidatedCandidate) {\n       leakedTokens: stableSort(leaked),\n       forbiddenSafetyActions: stableSort(forbiddenSafetyActions),\n     },\n-    decision: hardFailures.length > 0\n+    decision: hardFailures.length > 0 && total < 0\n       ? \"FAIL_HARD_GATE\"\n       : referenceMismatches.length > 0\n         ? \"FAIL_REFERENCE_MISMATCH\"\n",
       "family": "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION",
       "mutationId": "W4-M09-COMPENSATE-HARD-MULTILINGUAL-FAILURE",
@@ -1341,7 +1341,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M10-REMOVE-GUARDIAN-LEARNER-BINDING",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts b/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts\nindex 3f1b37acc..2223e323b 100644\n--- a/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts\n+++ b/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts\n@@ -767,7 +767,6 @@ function authorizationMatchesScope(\n   if (\n     authorization.guardianRef !== reportScope.guardianRef ||\n     authorization.householdScopeRef !== reportScope.householdScopeRef ||\n-    authorization.learnerScopeRef !== reportScope.selectedLearnerRef ||\n     authorization.scopeKind !== reportScope.scopeKind\n   ) {\n     return false;\n@@ -859,7 +858,6 @@ function authorizationMatchesTrustedAuthority(\n     submitted.policyRevisionRef === trusted.policyRevisionRef &&\n     submitted.guardianRef === trusted.guardianRef &&\n     submitted.householdScopeRef === trusted.householdScopeRef &&\n-    submitted.learnerScopeRef === trusted.learnerScopeRef &&\n     submitted.authorizationRevisionRef === trusted.authorizationRevisionRef &&\n     submitted.currentAuthorizationRevisionRef ===\n       trusted.currentAuthorizationRevisionRef &&\n",
       "family": "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
       "mutationId": "W4-M10-REMOVE-GUARDIAN-LEARNER-BINDING",
@@ -1473,7 +1473,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M11-IGNORE-MODEL-CONFIG-DRIFT",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/certification/v4/model-drift/src/identity.ts b/adaptive-tutor/certification/v4/model-drift/src/identity.ts\nindex 9975e5ab5..6bd4609af 100644\n--- a/adaptive-tutor/certification/v4/model-drift/src/identity.ts\n+++ b/adaptive-tutor/certification/v4/model-drift/src/identity.ts\n@@ -22,7 +22,11 @@ export function changedCertificationIdentityFields(\n   certified: CertificationIdentity,\n   observed: CertificationIdentity,\n ): readonly CertificationIdentityField[] {\n-  return CERTIFICATION_IDENTITY_FIELDS.filter((field) => certified[field] !== observed[field]);\n+  return CERTIFICATION_IDENTITY_FIELDS.filter((field) =>\n+    field !== \"modelRevisionRef\"\n+    && field !== \"configurationDigest\"\n+    && certified[field] !== observed[field]\n+  );\n }\n \n export function certificationIdentitiesEqual(\n",
       "family": "MODEL_DRIFT_CERTIFICATION_IDENTITY",
       "mutationId": "W4-M11-IGNORE-MODEL-CONFIG-DRIFT",
@@ -1605,7 +1605,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M12-CONTINUE-AFTER-HARD-VIOLATION",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/certification/v4/live-runner/src/runner.ts b/adaptive-tutor/certification/v4/live-runner/src/runner.ts\nindex f35a52911..2b92ae77e 100644\n--- a/adaptive-tutor/certification/v4/live-runner/src/runner.ts\n+++ b/adaptive-tutor/certification/v4/live-runner/src/runner.ts\n@@ -332,7 +332,6 @@ export async function runCertificationCampaign(input: {\n           reasonCodes: [...gate.reasonCodes],\n         })));\n         haltReason = \"hard-violation\";\n-        break campaignLoop;\n       }\n     }\n   }\n",
       "family": "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL",
       "mutationId": "W4-M12-CONTINUE-AFTER-HARD-VIOLATION",
@@ -1739,7 +1739,7 @@
         "status": "FAIL"
       },
       "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r10-compiler-evidence-determinism/CAMPAIGN-EVIDENCE.json#W4-M13-ADD-LIVE-VENDOR-ENDPOINT",
-      "evidenceExecutionSha": "86f684da7b431ffc5742647d9c04a2798d064395",
+      "evidenceExecutionSha": "a8a80b06dd040b238366b12790f86eab2204c83b",
       "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/index.ts b/adaptive-tutor/core/v3/index.ts\nindex 38b2cf749..86711dff4 100644\n--- a/adaptive-tutor/core/v3/index.ts\n+++ b/adaptive-tutor/core/v3/index.ts\n@@ -1,3 +1,5 @@\n+export const W4_MUTANT_LIVE_ENDPOINT = \"https://api.openai.com/v1/responses\";\n+\n export * from \"./commercial-operation/index.js\";\n export * from \"./commercial-operation/orchestrate.js\";\n export * from \"./contracts/index.js\";\n",
       "family": "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
       "mutationId": "W4-M13-ADD-LIVE-VENDOR-ENDPOINT",
