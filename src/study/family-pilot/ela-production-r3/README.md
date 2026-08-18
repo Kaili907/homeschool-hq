@@ -3,11 +3,15 @@
 Build harness for the English Language Arts production rewrite, derived from the
 Director-approved R2 freeze.
 
-**This harness contains zero authored lesson content, by instruction.** Authoring
-is deliberately blocked until the Mathematics reference lesson has been reviewed
-in the real player and the house style is confirmed; writing ELA lessons before
-that risks a whole grade band in a style that is then rejected.
-`registry.ts` is empty and the gate asserts it.
+**Wave 1 is exactly one authored reference lesson**, awaiting Director review:
+`ma-g3-english-language-arts-u07-l08`. Lesson content ships as `.lesson.json`
+documents under `curriculum-production/final/english-language-arts/r3/lessons/`,
+not as TypeScript. `registry.ts` stays empty and the gate asserts it; documents
+are validated through `lessonDocument.ts`, which lifts them into the same
+`ElaProductionLesson` record the validator checks.
+
+Preview the reference lesson in the real player at
+`/curriculum-preview/english-language-arts-r3`.
 
 ## What is here
 
@@ -20,6 +24,7 @@ that risks a whole grade band in a style that is then rejected.
 | `validateElaProductionLesson.ts` | The gate. `error` = frozen contract requires it. `observation` = the approved samples happen to do it, but no frozen artifact rules it. |
 | `registry.ts` | Authored lessons (currently none) plus the cross-lesson checks. |
 | `manifest.json` | Machine-readable harness state. |
+| `lessonDocument.ts` | Adapts an authored `.lesson.json` document into the record the validator checks, so the gate runs against the shipped artifact. |
 | `harnessFixture.ts` | Structural test fixture. Contains no curriculum, is not exported from `index.ts`, and its lesson id cannot match a canonical corpus id. |
 | `elaProductionR3.test.ts` | Derivation proof, harness behaviour, and authoring state. |
 
@@ -37,14 +42,26 @@ the harness will not quietly promote an observation into a rule.
 ## Run the gate
 
 ```bash
-npx vitest run --project root-app src/study/family-pilot/ela-production-r3
+node scripts/curriculum/verify-ela-r3.mjs && npx vitest run --project root-app src/study/family-pilot/ela-production-r3 src/study/family-pilot/lesson-player/elaProductionR3.test.ts
 ```
 
-## Adding the first authored lesson
+## Questions answered by the approved Math R3 reference lesson
 
-1. Answer the open questions that block it — at minimum Q1 (where lessons live)
-   and Q10 (COURSE PROGRESS copy).
-2. Build the lesson with `buildElaProductionLesson`.
-3. Add it to `ELA_PRODUCTION_R3_LESSONS` in `registry.ts`.
-4. Update `authoredLessonCount` in `manifest.json`.
-5. Run the gate. It validates the new lesson automatically.
+- **Q1** (where lessons live): `.lesson.json` documents under
+  `curriculum-production/final/<subject>/r3/lessons/`, with a `productionMetadata`
+  envelope around `learnerMaterial`.
+- **Q10** (COURSE PROGRESS copy): a factual position statement,
+  `Unit N, Lesson M of T in <unit title>.`, mirrored into
+  `lessonReview.courseProgress`, with `lessonReview.nextAction` set to one of the
+  four runtime enum values. Director-sample copy is forbidden and the verifier
+  rejects it.
+
+The remaining open questions stay UNDECIDED.
+
+## Adding the next authored lesson
+
+1. Write the `.lesson.json` document under the lesson document root.
+2. Update `curriculum-production/final/english-language-arts/r3/manifest.json`
+   and `authoredLessonDocuments` here.
+3. Add a static import to the preview route so the Director can open it.
+4. Run `node scripts/curriculum/verify-ela-r3.mjs` and the vitest gates.

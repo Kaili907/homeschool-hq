@@ -12,7 +12,8 @@
  *  3. AUTHORING STATE. Prove the registry is empty, the manifest agrees, and no
  *     frozen artifact was touched.
  */
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ELA_DIRECTOR_SAMPLES_R2 } from '../ela-director-samples-r2'
 import { mapLearnerMaterialToStudySegments } from '../final-app/learner-response'
@@ -270,9 +271,21 @@ describe('ELA Production R3 — validator rejects contract violations', () => {
 })
 
 describe('ELA Production R3 — authoring state', () => {
-  it('registers zero authored lessons and reports no registry findings', () => {
+  it('keeps the TypeScript registry empty: lesson content ships as documents', () => {
     expect(ELA_PRODUCTION_R3_LESSONS).toEqual([])
     expect(validateElaProductionR3Registry()).toEqual([])
+  })
+
+  it('counts every authored lesson document in the harness manifest', () => {
+    const manifest = JSON.parse(readFileSync(new URL('./manifest.json', import.meta.url), 'utf8')) as {
+      readonly authoredLessonDocuments: number
+      readonly lessonDocumentRoot: string
+    }
+    const documents = readdirSync(manifest.lessonDocumentRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .flatMap((dir) => readdirSync(join(manifest.lessonDocumentRoot, dir.name)))
+      .filter((name) => name.endsWith('.lesson.json'))
+    expect(documents.length).toBe(manifest.authoredLessonDocuments)
   })
 
   it('keeps the structural fixture out of the public surface and out of the corpus id space', () => {
@@ -284,7 +297,8 @@ describe('ELA Production R3 — authoring state', () => {
 
   it('keeps the harness manifest synchronized with the executable harness', () => {
     const manifest = JSON.parse(readFileSync(new URL('./manifest.json', import.meta.url), 'utf8')) as {
-      readonly authoredLessonCount: number
+      readonly registryLessonCount: number
+      readonly authoredLessonDocuments: number
       readonly grades: readonly number[]
       readonly sectionCount: number
       readonly reviewTitles: readonly string[]
@@ -294,7 +308,7 @@ describe('ELA Production R3 — authoring state', () => {
       readonly derivedFrom: { readonly gallerySha: string }
     }
     expect(manifest).toMatchObject({
-      authoredLessonCount: ELA_PRODUCTION_R3_LESSONS.length,
+      registryLessonCount: ELA_PRODUCTION_R3_LESSONS.length,
       sectionCount: ELA_R3_SECTION_PLAN.length,
       productionCurriculumChanged: false,
       frozenArtifactsModified: false,

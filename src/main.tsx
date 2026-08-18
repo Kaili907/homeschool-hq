@@ -1,10 +1,14 @@
 import { StrictMode, type ComponentType } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import { isElaR3PreviewPath } from './study/ela-r3-preview/route'
 
 async function loadBrowserRoot(): Promise<ComponentType> {
   if (window.location.pathname === '/director-review/curriculum-r2') {
     return (await import('./study/director-review/DirectorReviewGallery')).default
+  }
+  if (isElaR3PreviewPath(window.location.pathname)) {
+    return (await import('./study/ela-r3-preview/ElaR3PreviewRoute')).default
   }
   if (import.meta.env.VITE_FAMILY_PILOT_ENABLED === 'true') {
     return (await import('./study/family-pilot/web/FamilyPilotWebApp')).default

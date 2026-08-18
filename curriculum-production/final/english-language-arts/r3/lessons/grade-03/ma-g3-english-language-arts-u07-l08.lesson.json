@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "namespace": "production:english-language-arts:r3",
+  "productionMetadata": {
+    "wave": 1,
+    "grade": 3,
+    "courseRef": "ma-g3-english-language-arts",
+    "lessonRef": "ma-g3-english-language-arts-u07-l08",
+    "unitNumber": 7,
+    "unitTitle": "Opinion Writing: Reasons That Convince",
+    "dayInUnit": 8,
+    "courseDay": 116,
+    "phase": "Guided practice B",
+    "focus": "sorting strong reasons from restatements of the opinion",
+    "sourcePackage": "curriculum-production/student-work/english-language-arts/packages/grade-03/ma-g3-english-language-arts-u07-l08.package.json",
+    "canonicalAdultGuide": "curriculum-production/student-work/english-language-arts/scoring-guides/grade-03/ma-g3-english-language-arts-u07-l08.scoring.json",
+    "standards": [
+      "3.W.1",
+      "3.RI.8"
+    ],
+    "textType": "Informational process article",
+    "topic": "sorting strong reasons from restatements of the opinion",
+    "normalInstructionalLesson": true,
+    "modelledOn": "src/study/family-pilot/ela-director-samples-r2/grade3.ts",
+    "reading": {
+      "textId": "g3-text-09",
+      "title": "How a Footbridge Gets Built",
+      "rightsCategory": "original",
+      "origin": "academy_original_bank",
+      "wordCount": 234,
+      "sha256": "aff9e4535edd0f9a134c96c949fab9b8871255a878577e22a89271ac77bd65d1",
+      "reusedFromCanonicalCorpus": true,
+      "ledger": "curriculum-production/student-work/english-language-arts/source-ledger.jsonl"
+    },
+    "rubricCriteria": [
+      "a reason, not a restatement",
+      "one fact from the article",
+      "a clear why",
+      "complete sentences"
+    ],
+    "feedbackAuthoring": "hand-authored; the canonical scoring guide's guidance string is byte-identical across all 180 Grade 3 guides and was not usable as instructional feedback",
+    "readability": {
+      "instructionLength": "Two short teaching paragraphs and one named test; one move per screen",
+      "sentenceComplexity": "Mostly simple and compound sentences with one idea per sentence",
+      "vocabularyLoad": "Two defined academic words used repeatedly in context",
+      "passageLength": "234 words in eight short paragraphs",
+      "expectedWrittenResponse": "3–4 complete sentences giving one reason with a fact and a why",
+      "scaffolding": "Named test, sentence frame, modelled reasoning on a separate microtext, three-option check with per-option feedback, three-part revision checklist"
+    },
+    "status": "PENDING_DIRECTOR_REVIEW"
+  },
+  "learnerMaterial": {
+    "lessonRef": "ma-g3-english-language-arts-u07-l08",
+    "title": "A Reason Adds Something New",
+    "subject": "english-language-arts",
+    "format": "structured",
+    "sections": [
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:welcome",
+        "sectionKind": "teaching",
+        "title": "WELCOME / PURPOSE",
+        "body": "Today you will learn to tell a real reason apart from a sentence that only says your opinion again. You will read about how a footbridge gets built, and then you will write one reason of your own.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:welcome:read",
+            "responseKind": "READ",
+            "prompt": "Read the lesson purpose and choose Continue when you are ready."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:instruction",
+        "sectionKind": "teaching",
+        "title": "SHORT INSTRUCTION",
+        "body": "An opinion says what you think. A reason says why anyone should agree with you.\nSome sentences look like reasons but are not. They say the opinion over again in different words. That is a restatement, and it does not help anyone agree with you.\nUse the Adds-Something test. Read your sentence and ask: does this add news, or does it only repeat what I already said? A reason adds news. A restatement adds nothing.\nSay it this way: I think ____ because ____. The part after because has to be news.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:instruction:read",
+            "responseKind": "READ",
+            "prompt": "Study the reading move you will use in this lesson."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:vocabulary",
+        "sectionKind": "vocabulary",
+        "title": "WORDS TO KNOW",
+        "vocabulary": [
+          {
+            "term": "reason",
+            "definition": "a sentence that tells why someone should agree with your opinion"
+          },
+          {
+            "term": "restatement",
+            "definition": "a sentence that only says your opinion again in different words"
+          }
+        ],
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:vocabulary:read",
+            "responseKind": "READ",
+            "prompt": "Use these definitions while you read and write."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:model",
+        "sectionKind": "worked-example",
+        "title": "EXAMPLE / LET'S LOOK AT ONE",
+        "body": "Mini-text: The class voted about where to keep the fish tank. Right now it sits by the window. Sunlight helps the water plants grow, but on hot days it also warms the water.\nOpinion: The fish tank should be moved away from the window.\nSentence A: The fish tank should not stay by the window.\nSentence B: On hot days the sunlight warms the water too much.\nThinking: Sentence A says the opinion over again with the word not. It adds nothing new, so it is a restatement. Sentence B adds news from the text: the water gets too warm. That is why someone should agree.\nModel response: Sentence B is the reason. It tells something new — on hot days the sunlight warms the water too much.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:model:read",
+            "responseKind": "READ",
+            "prompt": "Notice how the example tests each sentence for news before calling it a reason."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:passage",
+        "sectionKind": "source",
+        "title": "READ: How a Footbridge Gets Built",
+        "directions": "Read the whole article once. Then go back and reread the parts about waiting and curing. Look for facts you could use as reasons later.",
+        "body": "Building a footbridge over a creek looks simple from the outside. The work happens in a fixed order, and skipping a step causes problems later.\n\nFirst, workers study the ground on both banks. Soft soil cannot hold weight. If the soil is soft, crews dig down until they reach firmer material, because everything above depends on what is below.\n\nSecond, they build the foundations, called abutments, one on each bank. Concrete is poured into forms and left to cure. Curing takes days, and hurrying it produces weak concrete. This is why a bridge site often looks abandoned for a week.\n\nThird, the beams are set. Beams span from one abutment to the other and carry the load across the gap. They are usually placed by crane in a single morning, which is the part people stop to watch.\n\nFourth, the decking goes down across the beams. Deck boards give walkers a surface and are fastened so they cannot shift.\n\nFifth, railings are attached. Railings are added last because workers need open edges while they fasten the deck.\n\nFinally, the bridge is loaded and tested before anyone is allowed to cross.\n\nThe order matters because each step depends on the one before it. Railings cannot be attached to decking that is not yet down, decking cannot rest on beams that are not yet set, and beams cannot sit on concrete that has not yet cured.",
+        "reference": {
+          "creator": "Manuel Academy",
+          "rightsCategory": "original",
+          "deliveryMode": "inline full text",
+          "rightsStatement": "Original Manuel Academy instructional text delivered in full for enrolled learner course use.",
+          "textId": "g3-text-09",
+          "form": "informational"
+        },
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:passage:read",
+            "responseKind": "READ",
+            "prompt": "Read “How a Footbridge Gets Built” in full before responding."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:guided",
+        "sectionKind": "guided-practice",
+        "title": "YOUR TURN — GUIDED PRACTICE",
+        "directions": "Read the opinion, then choose the sentence that is a real reason for it. Save one answer before you see the feedback.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:guided:response",
+            "itemKind": "multiple-choice",
+            "responseKind": "CHOICE",
+            "prompt": "Opinion: Workers should not hurry when they build a footbridge.\nWhich sentence is a real reason for that opinion?",
+            "choices": [
+              "Workers should take their time when they build a footbridge.",
+              "Concrete needs days to cure, and hurrying it makes the concrete weak.",
+              "A crane sets the beams in a single morning."
+            ]
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:guided:feedback",
+        "sectionKind": "remediation feedback-after-response",
+        "title": "FEEDBACK — CHECK THE REASONING",
+        "body": "The second sentence is the reason. It adds news from the article: concrete needs days to cure, and hurrying it makes the concrete weak. That tells why hurrying is a bad idea.\nThe first sentence only says the opinion over again. “Should not hurry” and “should take their time” mean the same thing, so nothing new was added. That is a restatement.\nThe third sentence is true. The article really does say a crane sets the beams in one morning. But it does not tell why hurrying is bad, and a sentence can be true and still not be a reason.\nIf you chose the first or the third, run the Adds-Something test on all three sentences before you decide.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:guided:feedback:read",
+            "responseKind": "READ",
+            "prompt": "Use this feedback to check the response you just saved."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:independent",
+        "sectionKind": "independent-practice",
+        "title": "YOUR TURN — INDEPENDENT RESPONSE",
+        "directions": "Now write your own reason. The box below is where you write.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:independent:response",
+            "itemKind": "constructed-response",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "prompt": "Opinion: People should be patient when a bridge site looks empty for a week.\nWrite one reason for this opinion. Use one fact from “How a Footbridge Gets Built,” then tell why that fact should convince someone. Write 3–4 complete sentences. Do not just say the opinion again."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:independent:feedback",
+        "sectionKind": "remediation feedback-after-response",
+        "title": "FEEDBACK — PREPARE TO REVISE",
+        "body": "Your writing is saved. The computer has not graded it and will not give it a score.\nCheck three things yourself. First, did you use a fact from the article instead of only a feeling? Second, does your sentence add news, or does it repeat the opinion? Third, did you tell why that fact should convince someone?\nA parent will read your reason and decide whether it does the job.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:independent:feedback:read",
+            "responseKind": "READ",
+            "prompt": "Apply this process guidance to the response you just saved."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:revision",
+        "sectionKind": "independent-practice additional-practice revision",
+        "title": "YOUR TURN — REVISE",
+        "directions": "Write a stronger version. Repair whichever part was missing.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:revision:response",
+            "itemKind": "constructed-response",
+            "responseKind": "CONSTRUCTED_RESPONSE",
+            "prompt": "Rewrite your reason in 3–4 complete sentences. Make sure the part after because adds news from the article instead of saying the opinion a second time."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:parent-review",
+        "sectionKind": "rubric-review-pending",
+        "title": "PARENT REVIEW",
+        "body": "Your independent response and revision are saved for Parent Review. No automatic essay score is produced. The reviewer will use these dimensions: a reason, not a restatement; one fact from the article; a clear why; complete sentences.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:parent-review:pending",
+            "responseKind": "RUBRIC_REVIEW_PENDING",
+            "prompt": "Continue to the lesson review while your constructed response remains pending human judgment."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:review:learned",
+        "sectionKind": "reflection",
+        "title": "WHAT YOU LEARNED",
+        "body": "A reason answers why someone should agree. A restatement only says the opinion again in different words. The Adds-Something test tells them apart: a reason adds news, and a restatement adds nothing.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:review:learned:read",
+            "responseKind": "READ",
+            "prompt": "Read this what you learned note, then continue."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:review:how",
+        "sectionKind": "reflection",
+        "title": "HOW YOU DID",
+        "body": "Your choice answer received feedback that explained all three sentences, not just the one you picked. Your written reason and your revision are saved for Parent Review. No score was invented for your writing, because deciding whether a reason really convinces is a judgment a person makes.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:review:how:read",
+            "responseKind": "READ",
+            "prompt": "Read this how you did note, then continue."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:review:well",
+        "sectionKind": "reflection",
+        "title": "WHAT YOU DID WELL",
+        "body": "You read a full article about how a footbridge is built, you sorted a real reason from a restatement, and you put a reason into your own words.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:review:well:read",
+            "responseKind": "READ",
+            "prompt": "Read this what you did well note, then continue."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:review:practice",
+        "sectionKind": "reflection",
+        "title": "WHAT TO PRACTICE",
+        "body": "Practice the word because. Say your opinion, say because, and then check that what comes next is news from the text.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:review:practice:read",
+            "responseKind": "READ",
+            "prompt": "Read this what to practice note, then continue."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:review:lesson",
+        "sectionKind": "reflection",
+        "title": "REVIEW THIS LESSON",
+        "body": "Remember the three moves: state the opinion, give a fact from the text, then tell why that fact should convince someone.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:review:lesson:read",
+            "responseKind": "READ",
+            "prompt": "Read this review this lesson note, then continue."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:review:progress",
+        "sectionKind": "reflection",
+        "title": "COURSE PROGRESS",
+        "body": "Unit 7, Lesson 8 of 18 in Opinion Writing: Reasons That Convince.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:review:progress:read",
+            "responseKind": "READ",
+            "prompt": "Read this course progress note, then continue."
+          }
+        ]
+      },
+      {
+        "sectionRef": "ma-g3-english-language-arts-u07-l08:review:next",
+        "sectionKind": "reflection",
+        "title": "NEXT ACTION",
+        "body": "Ask a parent to review your reason. While you wait, try the Adds-Something test on this opinion: railings should go on last.",
+        "items": [
+          {
+            "itemRef": "ma-g3-english-language-arts-u07-l08:review:next:read",
+            "responseKind": "READ",
+            "prompt": "Read this next action note, then continue."
+          }
+        ]
+      }
+    ],
+    "lessonReview": {
+      "whatYouLearned": [
+        "An opinion says what you think; a reason says why anyone should agree.",
+        "A restatement says the opinion again in different words and adds nothing.",
+        "The Adds-Something test sorts them: a reason adds news from the text.",
+        "A sentence can be true and still not be a reason for the opinion."
+      ],
+      "courseProgress": "Unit 7, Lesson 8 of 18 in Opinion Writing: Reasons That Convince.",
+      "nextAction": "Waiting for Parent",
+      "reviewActionLabel": "Review this lesson"
+    }
+  }
+}

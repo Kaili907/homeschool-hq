@@ -2,18 +2,36 @@
   "schemaVersion": "1.0",
   "manifestId": "ELA_PRODUCTION_R3_HARNESS",
   "namespace": "src/study/family-pilot/ela-production-r3",
-  "status": "HARNESS_READY_AWAITING_AUTHORING",
+  "status": "REFERENCE_LESSON_AUTHORED_PENDING_DIRECTOR_REVIEW",
   "subject": "english-language-arts",
   "contentModel": "LearnerMaterialDto structured lesson",
   "richPlayerCompatible": true,
   "legacyFallbackRequired": false,
-  "authoredLessonCount": 0,
+  "registryLessonCount": 0,
+  "registryNote": "Lesson content ships as .lesson.json documents; the TypeScript registry stays empty and is validated through lessonDocument.ts.",
+  "authoredLessonDocuments": 1,
+  "lessonDocumentRoot": "curriculum-production/final/english-language-arts/r3/lessons",
+  "productionManifest": "curriculum-production/final/english-language-arts/r3/manifest.json",
   "productionCurriculumChanged": false,
   "frozenArtifactsModified": false,
-  "grades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "grades": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
   "grade6Present": false,
   "sectionCount": 18,
-  "requiredResponseSequence": ["CHOICE", "CONSTRUCTED_RESPONSE", "CONSTRUCTED_RESPONSE"],
+  "requiredResponseSequence": [
+    "CHOICE",
+    "CONSTRUCTED_RESPONSE",
+    "CONSTRUCTED_RESPONSE"
+  ],
   "rubricReviewItemCount": 1,
   "reviewTitles": [
     "WHAT YOU LEARNED",
@@ -32,8 +50,10 @@
     "gallerySha": "416664e1656c6eb21517249d3a8cfbc616d35eee",
     "freezeDate": "2026-08-18"
   },
-  "authoringBlockedBy": "Mathematics reference lesson awaiting Director review in the real player; ELA house style unconfirmed.",
   "openQuestionsDocument": "src/study/family-pilot/ela-production-r3/OPEN-QUESTIONS.md",
   "contractDocument": "src/study/family-pilot/ela-production-r3/CONTRACT.md",
-  "gate": "src/study/family-pilot/ela-production-r3/elaProductionR3.test.ts"
+  "gate": "src/study/family-pilot/ela-production-r3/elaProductionR3.test.ts",
+  "verifier": "scripts/curriculum/verify-ela-r3.mjs",
+  "runtimeTest": "src/study/family-pilot/lesson-player/elaProductionR3.test.ts",
+  "previewRoute": "/curriculum-preview/english-language-arts-r3"
 }

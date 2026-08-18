@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "manifestId": "ELA_PRODUCTION_R3",
+  "namespace": "production:english-language-arts:r3",
+  "subject": "english-language-arts",
+  "wave": 1,
+  "status": "REFERENCE_LESSON_PENDING_DIRECTOR_REVIEW",
+  "authoredLessonCount": 1,
+  "grades": [3],
+  "supportedGrades": [3, 4, 5, 7, 8, 9, 10, 11, 12],
+  "grade6Present": false,
+  "canonicalCorpusModified": false,
+  "frozenArtifactsModified": false,
+  "lessons": [
+    {
+      "lessonRef": "ma-g3-english-language-arts-u07-l08",
+      "grade": 3,
+      "courseRef": "ma-g3-english-language-arts",
+      "unitNumber": 7,
+      "unitTitle": "Opinion Writing: Reasons That Convince",
+      "dayInUnit": 8,
+      "courseDay": 116,
+      "focus": "sorting strong reasons from restatements of the opinion",
+      "standards": ["3.W.1", "3.RI.8"],
+      "path": "lessons/grade-03/ma-g3-english-language-arts-u07-l08.lesson.json",
+      "reading": {
+        "title": "How a Footbridge Gets Built",
+        "textId": "g3-text-09",
+        "rightsCategory": "original",
+        "wordCount": 234,
+        "sha256": "aff9e4535edd0f9a134c96c949fab9b8871255a878577e22a89271ac77bd65d1",
+        "reusedFromCanonicalCorpus": true
+      },
+      "status": "PENDING_DIRECTOR_REVIEW"
+    }
+  ],
+  "contract": "src/study/family-pilot/ela-production-r3/CONTRACT.md",
+  "openQuestions": "src/study/family-pilot/ela-production-r3/OPEN-QUESTIONS.md",
+  "verifier": "scripts/curriculum/verify-ela-r3.mjs",
+  "runtimeTest": "src/study/family-pilot/lesson-player/elaProductionR3.test.ts",
+  "previewRoute": "/curriculum-preview/english-language-arts-r3",
+  "houseStyleSource": {
+    "branch": "mac/curriculum-math-production-r3",
+    "commit": "e57ba1de0c50060032061dc75c2ae3586cf705a2",
+    "lesson": "curriculum-production/final/mathematics/r3/lessons/grade-03/ma-g3-mathematics-u01-l02.lesson.json"
+  },
+  "derivedFrom": {
+    "approvalManifest": "curriculum/approvals/director-samples-r2-approved.json",
+    "manifestId": "DIRECTOR_SAMPLES_R2_APPROVED",
+    "elaModel": "src/study/family-pilot/ela-director-samples-r2/grade3.ts",
+    "gallerySha": "416664e1656c6eb21517249d3a8cfbc616d35eee",
+    "freezeDate": "2026-08-18"
+  }
+}

@@ -2,10 +2,13 @@ import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
 import { isFamilyCloudBrowserEnabledFromHost } from './study/family-pilot/cloud-auth/browserConfiguration'
+import { isElaR3PreviewPath } from './study/ela-r3-preview/route'
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
 
 const DirectorReviewGallery = lazy(() => import('./study/director-review/DirectorReviewGallery'))
+
+const ElaR3PreviewRoute = lazy(() => import('./study/ela-r3-preview/ElaR3PreviewRoute'))
 
 // Family Pilot is a separate root composition. Keeping both roots behind dynamic
 // imports means selecting this route cannot evaluate legacy sync, scoring, Tutor
@@ -31,6 +34,13 @@ export default function App() {
     return (
       <Suspense fallback={<main aria-busy="true">Loading the Director Review Gallery.</main>}>
         <DirectorReviewGallery />
+      </Suspense>
+    )
+  }
+  if (isElaR3PreviewPath(window.location.pathname)) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the English Language Arts R3 preview.</main>}>
+        <ElaR3PreviewRoute />
       </Suspense>
     )
   }
