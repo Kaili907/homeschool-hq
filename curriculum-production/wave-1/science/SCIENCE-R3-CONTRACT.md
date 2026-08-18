@@ -95,7 +95,34 @@ This is mechanized: no body, directions, prompt, or worked-example step of 80 ch
 more may repeat, normalized, either across R3 lessons or from any of the nine frozen Science
 samples.
 
-## 5. Validation
+## 5. Learner-facing voice
+
+**Provenance:** this section is not derived from the R2 contracts. It records the Director's
+stated grounds for rejecting the first Wave 1 lesson draft (2026-08-18), applied as a
+requirement to Wave 1 onward.
+
+It diverges from the frozen model in one place worth naming: the frozen Grade 3 sample's HOW YOU
+DID says "They remain pending assessment", and the Director ruled that a Grade 3 learner must
+not read that phrase. Wave 1 therefore carries the same guarantee in child-facing words
+("saved and waiting to be checked"), which makes Wave 1 stricter than the approved sample on
+this point rather than looser. The validator accepts either wording and additionally fails any
+HOW YOU DID that claims the learner was correct.
+
+Learner-facing prose speaks to the learner. It never names the Director, an approval state, a
+wave, a manifest, a schema, or a release process, and it never describes constructed data as
+anything a learner has to decode. Constructed numbers are labelled as an example made up for
+the lesson.
+
+Density is measured against the frozen sample of the same grade, not judged by eye. The frozen
+Grade 3 sample runs 32.6 words per section on average, a maximum body of 51 words, and feedback
+bodies of 28 to 34 words. A Grade 3 R3 lesson holds to that band; the validator fails a body
+over 55 words or a feedback body over 40.
+
+Any question a learner is asked must be answerable with a step the learner has been taught and
+can carry out. Where a numeric answer could reasonably vary, the feedback states the accepted
+range, because the lesson file may not carry one.
+
+## 6. Validation
 
 ```bash
 node --disable-warning=ExperimentalWarning --experimental-transform-types --experimental-loader ./docs/curriculum-quality/science/director-samples-r2/ts-loader-hook.mjs ./scripts/curriculum/validate-science-r3-wave1.mjs
@@ -106,7 +133,8 @@ course, canonical mapping and correctness authority, the approved rhythm in orde
 control behind every question, response-gated instructional feedback, the seven-part review,
 TAUGHT distinct from PRACTICED, rich (not legacy) presentation, real persistence through the
 real `LearnerResponseRuntime` with every response `PENDING_ASSESSMENT`, labelled instructional
-data, and no copy reused from the freeze.
+data, no learner-facing build or approval language, grade-appropriate density, and no copy
+reused from the freeze.
 
 `src/study/curriculum-preview-r3/scienceR3ReferenceLesson.test.ts` proves the same lesson
 through the real render model and the real canonical in-memory learner-response store under
@@ -179,8 +207,11 @@ The frozen Grade 3 Science sample uses `CHOICE` and `TEXT`. Grades 4 and up use
 
 Undecided: which response kinds are permitted at Grade 3.
 
-*Wave 1 disclosure:* the lesson uses `CHOICE`, `NUMERIC`, and `TEXT`. `NUMERIC` carries a
-single typical-temperature estimate; `CONSTRUCTED_RESPONSE` was not used at Grade 3.
+*Wave 1 disclosure:* the lesson uses `CHOICE`, `NUMERIC`, and `TEXT`. `CONSTRUCTED_RESPONSE`
+was not used at Grade 3. The `NUMERIC` item asks the learner to order three values and enter
+the middle one, which is a step a Grade 3 can execute; its feedback names the accepted range
+in prose, because an accepted range in the lesson file would be answer authority in
+browser-reachable content.
 
 ### 7. Assessment authority for Science
 

@@ -11,28 +11,27 @@
   "subject": "science",
   "format": "structured",
   "standards": ["3-ESS2-1", "3-ESS2-2"],
-  "phenomenonOrContext": "Three years of monthly high temperatures at one town repeat the same yearly shape without repeating exactly, and a town in the southern half of Earth records the opposite pattern in the very same months.",
+  "phenomenonOrContext": "Three years of monthly high temperatures at one town repeat the same yearly shape without repeating exactly, and a town in the south half of Earth records the opposite pattern in the same months.",
   "instructionalRhythm": ["NOTICE", "LEARN", "MODEL", "YOUR TURN", "FEEDBACK", "APPLY", "REVIEW"],
-  "lessonGoal": "Use several years of weather records to describe a typical season, and name the place that pattern belongs to.",
+  "lessonGoal": "Use several years of weather records to find a typical season, and name the place it belongs to.",
   "successCriteria": [
-    "I read every year in the table before I describe a typical season.",
-    "I use the word about with a typical temperature, because the years are not identical.",
-    "I name the place a seasonal pattern came from instead of claiming it fits everywhere."
+    "I use every year in the table, not just one.",
+    "I put the years in order, take the middle one, and say about.",
+    "I name the place a pattern came from."
   ],
   "vocabulary": [
-    { "term": "season", "definition": "a part of the year that has its own usual weather" },
-    { "term": "typical", "definition": "what usually happens, found by looking at many records" },
-    { "term": "record", "definition": "weather that someone measured and wrote down" },
-    { "term": "hemisphere", "definition": "one half of Earth, either the north half or the south half" }
+    { "term": "season", "definition": "a part of the year with its own usual weather" },
+    { "term": "typical", "definition": "what usually happens" },
+    { "term": "record", "definition": "weather someone measured and wrote down" }
   ],
   "sections": [
     {
       "sectionRef": "g3-seasons:notice-data",
       "sectionKind": "data-table",
-      "title": "NOTICE — Three years of highs at Riverbend",
-      "body": "Riverbend is an example town. Someone there wrote down the average high temperature for four months, three years in a row. Read down a year column first. Then read across a month row and compare the three numbers.",
+      "title": "NOTICE — Three years at Riverbend",
+      "body": "Riverbend is an example town. Someone there wrote down the average high temperature for four months. They did it for three years. Read across one row at a time.",
       "data": {
-        "tableLabel": "Average monthly high temperature at Riverbend, three years of instructional records",
+        "tableLabel": "Riverbend average monthly high temperature, three years",
         "columns": ["Month", "2023 high (°F)", "2024 high (°F)", "2025 high (°F)"],
         "rows": [
           "January | 31 | 28 | 34",
@@ -40,14 +39,14 @@
           "July | 83 | 86 | 81",
           "October | 59 | 56 | 62"
         ],
-        "note": "Each number is the average high for that whole month. These records are an instructional example written for this lesson, not published measurements."
+        "note": "Each number is the average high for that whole month. These numbers are an example made up for this lesson."
       }
     },
     {
       "sectionRef": "g3-seasons:notice-response",
       "sectionKind": "guided-practice",
       "title": "NOTICE — What repeats and what changes",
-      "directions": "Use all three year columns. Choose the statement that is true for every row in the table.",
+      "directions": "Use all three year columns. Pick the statement that fits every row.",
       "items": [
         {
           "itemRef": "g3-seasons:notice-response:1",
@@ -55,9 +54,9 @@
           "responseKind": "CHOICE",
           "prompt": "Which statement describes the Riverbend records best?",
           "choices": [
-            { "id": "g3-seasons:notice-response:1:a", "label": "July is the warmest month in all three years, and the three July numbers are close but not the same." },
-            { "id": "g3-seasons:notice-response:1:b", "label": "July is exactly 83 degrees at Riverbend every year." },
-            { "id": "g3-seasons:notice-response:1:c", "label": "The numbers change from year to year, so Riverbend has no yearly pattern." }
+            { "id": "g3-seasons:notice-response:1:a", "label": "July is warmest all three years, and the July numbers are close." },
+            { "id": "g3-seasons:notice-response:1:b", "label": "July is exactly 83 degrees every year." },
+            { "id": "g3-seasons:notice-response:1:c", "label": "The numbers change, so there is no yearly pattern." }
           ]
         }
       ]
@@ -65,34 +64,33 @@
     {
       "sectionRef": "g3-seasons:feedback-notice",
       "sectionKind": "remediation",
-      "title": "FEEDBACK — A pattern can repeat without repeating exactly",
-      "body": "Look straight across the July row: 83, then 86, then 81. Those numbers are close to each other, and July is the warmest month in every one of the three years. That is a repeating pattern. Answering exactly 83 every year throws away the 86 and the 81. Answering that there is no pattern throws away the part that did repeat, which is that July was warmest all three times. Weather patterns repeat closely, not perfectly.",
+      "title": "FEEDBACK — Close is still a pattern",
+      "body": "Read the July row: 83, 86, 81. Those are close, and July is warmest all three years. That is a pattern. Exactly 83 ignores two years. No pattern ignores all three.",
       "feedbackFor": "g3-seasons:notice-response:1"
     },
     {
       "sectionRef": "g3-seasons:learn",
       "sectionKind": "teaching",
-      "title": "LEARN — What the word typical means",
-      "body": "A season is a part of the year with its own usual weather. To describe a season, you need more than one year of records. Any single year can be strange. One hot July on its own does not tell you much. Three hot Julys in a row tell you that hot Julys are typical at that place. Typical means what usually happens, not what happens every single time. That is exactly why scientists put the word about in front of a typical temperature. The word about is honest. It says the years were close to this number without promising that the next year will land on it."
+      "title": "LEARN — Finding a typical number",
+      "body": "One year can be strange. Several years show what is typical. Typical means what usually happens. To find a typical number, put the years in order and take the middle one. Then say about, because the years are not all the same."
     },
     {
       "sectionRef": "g3-seasons:model",
       "sectionKind": "worked-example",
-      "title": "MODEL — How I describe a typical July",
-      "body": "Watch every step I take with the Riverbend table. I am describing a typical July. You will use these same steps on a different month in a moment.",
+      "title": "MODEL — A typical July",
+      "body": "Watch how I find a typical July high at Riverbend.",
       "items": [
         {
           "itemRef": "g3-seasons:model:1",
           "itemKind": "worked-example",
-          "prompt": "Model task: describe a typical July high at Riverbend.",
+          "prompt": "Model task: find a typical July high at Riverbend.",
           "workedSolution": {
             "steps": [
-              "I find the July row and I read all three numbers, not just one: 83, 86, and 81.",
-              "I check whether they are close. The lowest is 81 and the highest is 86, so all three sit within 5 degrees of each other. They are close.",
-              "I choose a number near the middle of the three. About 83 degrees is near all three of them.",
-              "I write the answer with the word about: a typical July high at Riverbend is about 83 degrees.",
-              "I name my evidence out loud: three Julys, 2023, 2024, and 2025, all in the low to middle 80s.",
-              "I stop short of promising 83 degrees next July, because not one of these years matched another year exactly."
+              "I read the whole July row: 83, 86, 81.",
+              "I put the three numbers in order: 81, 83, 86.",
+              "I take the middle one. It is 83.",
+              "I say about 83 degrees, because the years are not all the same.",
+              "My evidence is three Julys, not one."
             ]
           }
         }
@@ -101,101 +99,101 @@
     {
       "sectionRef": "g3-seasons:your-turn",
       "sectionKind": "guided-practice",
-      "title": "YOUR TURN — A typical January at Riverbend",
-      "directions": "Use the January row of the Riverbend table: 31, 28, and 34. Take the same steps I took for July.",
+      "title": "YOUR TURN — A typical January",
+      "directions": "Use the January row: 31, 28, and 34. Take the same steps I took.",
       "items": [
         {
           "itemRef": "g3-seasons:your-turn:1",
           "itemKind": "numeric-entry",
           "responseKind": "NUMERIC",
-          "prompt": "About what temperature is a typical January high at Riverbend? Enter one number of degrees Fahrenheit."
+          "prompt": "Put the three Januarys in order. Enter the middle number in degrees Fahrenheit."
         },
         {
           "itemRef": "g3-seasons:your-turn:2",
           "itemKind": "short-answer",
           "responseKind": "TEXT",
-          "prompt": "Which years did you use to get that number, and why is about the right word to put in front of it?"
+          "prompt": "Which years did you use, and why do you say about instead of an exact number?"
         }
       ]
     },
     {
       "sectionRef": "g3-seasons:feedback-turn-typical",
       "sectionKind": "remediation",
-      "title": "FEEDBACK — Check your typical number",
-      "body": "A good number sits near the middle of 31, 28, and 34. About 31 degrees is near all three. If you wrote 34, you used the warmest January and left the other two out. If you wrote 28, you used the coldest January and left the other two out. One January is not the typical January. The middle of the three is much closer to what usually happens there.",
+      "title": "FEEDBACK — Take the middle one",
+      "body": "In order, the Januarys are 28, 31, 34. The middle one is 31. Anything from 30 to 32 is close. Picking 34 or 28 uses one year instead of the middle.",
       "feedbackFor": "g3-seasons:your-turn:1"
     },
     {
       "sectionRef": "g3-seasons:feedback-turn-evidence",
       "sectionKind": "remediation",
-      "title": "FEEDBACK — Name your years and keep the word about",
-      "body": "A strong answer names all three Januarys, 2023, 2024, and 2025, and says that they came out close but not the same. If your answer leaned on one year, go back and add the other two. If your answer promised an exact temperature for next January, change it to about. You are not being vague when you say about. You are saying exactly as much as three years of records let you say.",
+      "title": "FEEDBACK — Name your years",
+      "body": "A strong answer names all three Januarys: 2023, 2024, and 2025. They came out close but not the same. That is why you say about instead of one exact number.",
       "feedbackFor": "g3-seasons:your-turn:2"
     },
     {
       "sectionRef": "g3-seasons:apply",
       "sectionKind": "independent-practice",
       "title": "APPLY — The same July in two places",
-      "body": "Southpoint is an example town in the southern half of Earth. Riverbend is in the northern half. Both towns measured the same two months of the same year. Riverbend's numbers here are the ones you already used from the 2025 column.",
+      "body": "Southpoint is an example town in the south half of Earth. Riverbend is in the north half. Both towns measured the same two months.",
       "data": {
-        "tableLabel": "Average monthly high temperature at Riverbend and Southpoint in 2025, instructional records",
+        "tableLabel": "Riverbend and Southpoint monthly high temperature, 2025",
         "columns": ["Month", "Riverbend high (°F)", "Southpoint high (°F)"],
         "rows": [
           "January | 34 | 79",
           "July | 81 | 48"
         ],
-        "note": "Both towns recorded the same two months in the same year. These records are an instructional example written for this lesson, not published measurements."
+        "note": "Example numbers made up for this lesson."
       },
       "items": [
         {
           "itemRef": "g3-seasons:apply:1",
           "itemKind": "multiple-choice",
           "responseKind": "CHOICE",
-          "prompt": "The two towns measured the same two months. What do these records show?",
+          "prompt": "What do these two records show?",
           "choices": [
-            { "id": "g3-seasons:apply:1:a", "label": "When Riverbend is in its warm season, Southpoint is in its cool season." },
-            { "id": "g3-seasons:apply:1:b", "label": "Both towns are warm in July, because July is summer everywhere on Earth." },
-            { "id": "g3-seasons:apply:1:c", "label": "Southpoint recorded its months wrong, because July has to be the warmest month." }
+            { "id": "g3-seasons:apply:1:a", "label": "When Riverbend is warm, Southpoint is cool." },
+            { "id": "g3-seasons:apply:1:b", "label": "Both towns are warm in July." },
+            { "id": "g3-seasons:apply:1:c", "label": "Southpoint wrote its months down wrong." }
           ]
         },
         {
           "itemRef": "g3-seasons:apply:2",
           "itemKind": "short-answer",
           "responseKind": "TEXT",
-          "prompt": "A student says seasons happen because Earth moves closer to the Sun in summer. Riverbend and Southpoint were both on Earth in the same July. Use the two July numbers to explain why that student's reason cannot be right."
+          "prompt": "A student says summer happens because Earth moves closer to the Sun. Use the two July numbers to show that cannot be right."
         }
       ]
     },
     {
       "sectionRef": "g3-seasons:feedback-apply",
       "sectionKind": "remediation",
-      "title": "FEEDBACK — One Earth, two seasons, the same month",
-      "body": "In that July, Riverbend was 81 degrees and Southpoint was 48 degrees. Both towns sat on the same Earth in the same month, so Earth was one single distance from the Sun the whole time. One distance cannot make one town warm and the other town cool at once. That rules the student's reason out. Notice what you just did: you did not need to already know the real cause of seasons to show that this cause does not work. Ruling an idea out with evidence is real science, and you will meet the actual cause in a later grade.",
+      "title": "FEEDBACK — One Earth, two seasons",
+      "body": "In July, Riverbend was 81 and Southpoint was 48. Both towns sat on one Earth, one distance from the Sun. One distance cannot make one town warm and one cool. You will learn why later.",
       "feedbackFor": "g3-seasons:apply:2"
     },
     {
       "sectionRef": "g3-seasons:what-learned",
       "sectionKind": "reflection",
       "title": "WHAT YOU LEARNED",
-      "body": "A season has typical weather, and you find it by comparing several years of records instead of trusting one year. Typical means what usually happens, which is why a careful answer says about. A seasonal pattern also belongs to a place. In the very same month, the northern half and the southern half of Earth are in opposite seasons."
+      "body": "Several years of records show a typical season, so you say about. In the same month, the north half and the south half of Earth have opposite seasons."
     },
     {
       "sectionRef": "g3-seasons:evidence-used",
       "sectionKind": "reflection",
       "title": "EVIDENCE YOU USED",
-      "body": "You used three years of monthly highs at Riverbend, leaning on the July row and the January row. You used a second table that set Riverbend beside Southpoint in the same two months of 2025. You used the units, degrees Fahrenheit, and the note that both towns recorded the same months."
+      "body": "You used three years of Riverbend highs, the July and January rows, and the table that put Riverbend next to Southpoint."
     },
     {
       "sectionRef": "g3-seasons:how-you-did",
       "sectionKind": "reflection",
       "title": "HOW YOU DID",
-      "body": "Your saved responses hold the typical January number you chose, the years you named as evidence, and your explanation of the two-town record. They stay pending assessment until an approved assessor reviews them. Watching the model July worked out for you does not by itself show that you can do it."
+      "body": "Your answers are saved and waiting to be checked. Watching me work out July does not show that you can do it."
     },
     {
       "sectionRef": "g3-seasons:what-to-practice",
       "sectionKind": "reflection",
       "title": "WHAT TO PRACTICE",
-      "body": "Practice two moves. First, read every year in a table before you give a typical value, and keep the word about attached to it. Second, before you use a seasonal pattern anywhere, name the place the records came from."
+      "body": "Practice two moves. Put the years in order and take the middle one. Name the place your pattern came from."
     },
     {
       "sectionRef": "g3-seasons:review",
@@ -206,7 +204,7 @@
           "itemRef": "g3-seasons:review:1",
           "itemKind": "short-answer",
           "responseKind": "TEXT",
-          "prompt": "In one or two sentences, why do three years of January records describe a typical January better than one year of records does?"
+          "prompt": "Why do three years of January records tell you more than one year does?"
         }
       ]
     },
@@ -214,13 +212,13 @@
       "sectionRef": "g3-seasons:course-progress",
       "sectionKind": "reflection",
       "title": "COURSE PROGRESS",
-      "body": "This is day 3 of Unit 8, Weather Patterns and World Climates, in Grade 3 Science. It is a Wave 1 reference lesson waiting on Director approval, so it does not move a course record yet. In a released lesson, required saved evidence goes to assessment before progress or mastery changes."
+      "body": "You finished day 3 of Weather Patterns and World Climates. Your saved work is checked before this lesson counts as done."
     },
     {
       "sectionRef": "g3-seasons:next-action",
       "sectionKind": "reflection",
       "title": "NEXT ACTION",
-      "body": "Save your final response. Then continue to the next assigned Weather Patterns and World Climates lesson, or return to your course page."
+      "body": "Save your last answer. Then continue to the next Weather Patterns and World Climates lesson, or go back to your course page."
     }
   ],
   "lessonReview": {

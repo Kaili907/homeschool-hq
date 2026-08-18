@@ -289,7 +289,7 @@ for (const entry of authoredEntries) {
   for (const feedback of feedbackSections) {
     assert.equal(feedback.sectionKind, 'remediation', `${feedback.sectionRef} must map to read-only Practice feedback`)
     assert(!feedback.items?.length, `${feedback.sectionRef} feedback must not request another response`)
-    assert(feedback.body.length >= 120, `${feedback.sectionRef} feedback must be instructional, not a verdict`)
+    assert(feedback.body.split(/\s+/).length >= 20, `${feedback.sectionRef} feedback must be instructional, not a verdict`)
     const targetIndex = lesson.sections.findIndex((section) => section.items?.some((item) => item.itemRef === feedback.feedbackFor))
     assert(targetIndex >= 0, `${feedback.sectionRef} has an unresolved feedback target`)
     assert(lesson.sections.indexOf(feedback) > targetIndex, `${feedback.sectionRef} leaks before its learner response`)
@@ -299,8 +299,34 @@ for (const entry of authoredEntries) {
   assert.deepEqual(lesson.sections.slice(-REVIEW_TITLES.length).map((section) => section.title), REVIEW_TITLES,
     `${lesson.lessonRef} lesson review is incomplete or out of order`)
   assert(lesson.sections.at(-3).items?.some((item) => INTERACTIVE.has(item.responseKind)), `${lesson.lessonRef} review lacks response evidence`)
-  assert(/pending assessment/i.test(lesson.sections.at(-5).body), `${lesson.lessonRef} how-you-did overclaims mastery`)
+  // HOW YOU DID must say the work is waiting to be checked, in words a learner of that grade
+  // reads, and must never claim the learner got it right.
+  const howYouDid = lesson.sections.at(-5).body
+  assert(/pending assessment|waiting to be checked|checked/i.test(howYouDid), `${lesson.lessonRef} how-you-did does not say the work is still to be checked`)
+  assert(!/(correct|you got it|well done|great work|mastered)/i.test(howYouDid), `${lesson.lessonRef} how-you-did overclaims mastery`)
   for (const key of Object.keys(lesson.lessonReview)) assert(lesson.lessonReview[key], `${lesson.lessonRef} lesson review key ${key} is empty`)
+
+  // Learner-facing prose talks to the learner, never to the Director or the build system.
+  const learnerProse = lesson.sections.flatMap((section) => [
+    section.title, section.body, section.directions,
+    ...(section.items ?? []).flatMap((item) => [item.prompt, ...(item.choices ?? []).map((choice) => choice.label), ...(item.workedSolution?.steps ?? [])]),
+    ...(section.data ? [section.data.tableLabel, section.data.note] : []),
+  ]).filter(Boolean).join(' ')
+  const BUILD_LANGUAGE = /wave 1|wave one|director|approval|approved assessor|reference lesson|production|manifest|schema|released lesson|not published measurements|R2|R3/i
+  const buildLeak = BUILD_LANGUAGE.exec(learnerProse)
+  assert(!buildLeak, `${lesson.lessonRef} shows the learner build or approval language: "${buildLeak?.[0]}"`)
+
+  // Grade 3 density, measured against the frozen Grade 3 sample (avg 32.6, max body 51,
+  // feedback bodies 28-34 words).
+  if (lesson.grade === 3) {
+    const wordCount = (text) => (text ?? '').match(/[A-Za-z0-9°']+/g)?.length ?? 0
+    for (const section of lesson.sections) {
+      assert(wordCount(section.body) <= 55, `${section.sectionRef} body runs long for Grade 3`)
+    }
+    for (const feedback of lesson.sections.filter((section) => section.feedbackFor)) {
+      assert(wordCount(feedback.body) <= 40, `${feedback.sectionRef} feedback runs long for Grade 3`)
+    }
+  }
 
   // No answer authority, no legacy path, no physical-activity requirement.
   const serialized = JSON.stringify(lesson)
@@ -392,6 +418,8 @@ console.log(JSON.stringify({
     noLegacyFallback: true,
     labelledInstructionalData: true,
     noCopyReusedFromFreeze: true,
+    noLearnerFacingBuildLanguage: true,
+    gradeAppropriateDensity: true,
   },
   lessons: results,
 }, null, 2))

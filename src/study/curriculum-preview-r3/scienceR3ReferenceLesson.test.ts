@@ -93,7 +93,7 @@ describe('Science R3 Wave 1 reference lesson', () => {
     // It names "closer to the Sun in summer" as a disqualifying error, so the lesson may
     // only carry that idea as a claim the learner rules out with evidence.
     expect(text).toMatch(/closer to the sun/)
-    expect(text).toMatch(/one distance cannot make one town warm and the other town cool/)
+    expect(text).toMatch(/one distance cannot make one town warm and one cool/)
     // Opposite hemispheres at the same time is a canonical fixed fact.
     expect(authority.scientific_correctness_authority.fixed_facts.join(' ')).toMatch(/northern hemisphere it is winter/i)
     expect(text).toMatch(/opposite seasons/)
@@ -219,13 +219,59 @@ describe('Science R3 Wave 1 reference lesson', () => {
   it('gives the player a real seven-part review rather than a completion message', () => {
     const review = createRichLessonRenderModel(material).review!
     expect(review.whatYouLearned.length).toBeGreaterThan(1)
-    expect(review.whatYouLearned.join(' ')).toMatch(/several years of records/)
-    expect(review.courseProgress).toMatch(/does not move a course record/)
+    expect(review.whatYouLearned.join(' ')).toMatch(/several years of records/i)
+    expect(review.courseProgress).toMatch(/checked before this lesson counts as done/)
     expect(review.nextAction).toBe('Continue required work')
     expect(review.reviewActionLabel).toBe('Review this lesson')
     for (const title of REVIEW_TITLES) {
       expect(raw.sections.some((section) => section.title === title)).toBe(true)
     }
+  })
+
+  it('speaks only to the learner, never to the Director or the build system', () => {
+    const learnerProse = raw.sections.flatMap((section) => [
+      section.title, section.body, section.directions,
+      ...(section.items ?? []).flatMap((item) => [item.prompt, ...(item.choices ?? []).map((choice) => typeof choice === 'string' ? choice : choice.label), ...(item.workedSolution?.steps ?? [])]),
+      ...(section.data ? [section.data.tableLabel, (section.data as { note?: string }).note] : []),
+    ]).filter(Boolean).join(' ')
+    for (const phrase of [/wave 1/i, /director/i, /approval/i, /approved assessor/i, /reference lesson/i, /released lesson/i, /not published measurements/i, /pending assessment/i]) {
+      expect(learnerProse, `learner prose contains ${phrase}`).not.toMatch(phrase)
+    }
+    // The mastery boundary survives the rewrite in child-facing words.
+    const howYouDid = raw.sections.at(-5)!.body!
+    expect(howYouDid).toMatch(/waiting to be checked/)
+    expect(howYouDid).toMatch(/does not show that you can do it/)
+  })
+
+  it('matches the frozen Grade 3 sample for density', () => {
+    const count = (text?: string) => text?.match(/[A-Za-z0-9°']+/g)?.length ?? 0
+    const frozen = JSON.parse(readFileSync(resolve(process.cwd(), 'docs/curriculum-quality/science/director-samples-r2/samples/grade-03-patterns-in-motion.json'), 'utf8')) as RawLesson
+    const bodyWords = (lesson: RawLesson) => lesson.sections.map((section) => count(section.body))
+    const feedbackWords = (lesson: RawLesson) => lesson.sections.filter((section) => section.feedbackFor).map((section) => count(section.body))
+    const mean = (values: readonly number[]) => values.reduce((total, value) => total + value, 0) / values.length
+
+    // Frozen Grade 3: avg body 20.4, max body 51, feedback bodies 28-34 words.
+    expect(mean(bodyWords(raw))).toBeLessThanOrEqual(mean(bodyWords(frozen)) * 1.25)
+    expect(Math.max(...bodyWords(raw))).toBeLessThanOrEqual(Math.max(...bodyWords(frozen)))
+    expect(Math.max(...feedbackWords(raw))).toBeLessThanOrEqual(Math.max(...feedbackWords(frozen)) + 2)
+    expect(mean(feedbackWords(raw))).toBeLessThanOrEqual(mean(feedbackWords(frozen)) * 1.15)
+  })
+
+  it('gives the numeric item a step a Grade 3 can execute, and a tolerance in the feedback', () => {
+    const yourTurn = raw.sections.find((section) => section.sectionRef === 'g3-seasons:your-turn')!
+    const numeric = yourTurn.items!.find((item) => item.responseKind === 'NUMERIC')!
+    // The prompt names the procedure, not a judgement call about what is "near the middle".
+    expect(numeric.prompt).toMatch(/in order/i)
+    expect(numeric.prompt).toMatch(/middle/i)
+    // The same procedure is taught in LEARN and shown end to end in MODEL.
+    expect(raw.sections.find((section) => section.sectionRef === 'g3-seasons:learn')!.body).toMatch(/in order and take the middle one/i)
+    const steps = raw.sections.find((section) => section.sectionRef === 'g3-seasons:model')!.items![0]!.workedSolution!.steps!
+    expect(steps.join(' ')).toMatch(/in order: 81, 83, 86/)
+    expect(steps.join(' ')).toMatch(/middle/i)
+    // The feedback states the accepted range instead of leaving a near-miss unscored.
+    const feedback = raw.sections.find((section) => section.feedbackFor === numeric.itemRef)!.body!
+    expect(feedback).toMatch(/28, 31, 34/)
+    expect(feedback).toMatch(/from 30 to 32/)
   })
 
   it('exposes no answer authority to the browser', () => {
