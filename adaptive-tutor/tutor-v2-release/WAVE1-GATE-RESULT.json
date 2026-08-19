@@ -2,8 +2,8 @@
   "resultVersion": 1,
   "product": "Manuel Academy Study Tutor V2",
   "wave": "Wave 1 Foundation",
-  "foundationGate": "PASS",
-  "finalClassification": "WAVE1_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "foundationGate": "FAIL",
+  "finalClassification": "WAVE1_HOLD",
   "releaseReady": false,
   "wave1Complete": false,
   "finalIndependentRereviewRequired": true,
@@ -104,7 +104,7 @@
       "compensableByQualityScore": false,
       "blocker": "W1-10R3 HOLD #3: privacy relied on lexical phrases",
       "repair": "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
-      "status": "PASS",
+      "status": "FAIL",
       "memberChecks": [
         {
           "name": "reviewed-content-privacy-provenance-hard-gate",
@@ -132,7 +132,7 @@
         },
         {
           "name": "regex-neutralized-privacy-provenance-hard-gate",
-          "status": "PASS"
+          "status": "MISSING"
         },
         {
           "name": "w1-b3-reviewed-content-privacy-bridge",
@@ -143,7 +143,9 @@
           "status": "PASS"
         }
       ],
-      "failingChecks": []
+      "failingChecks": [
+        "regex-neutralized-privacy-provenance-hard-gate:MISSING"
+      ]
     },
     {
       "name": "APPROVAL_DECISION_STRUCTURAL_VALIDATION",
@@ -322,13 +324,13 @@
       "name": "v2-typecheck",
       "status": "PASS",
       "detail": "strict TypeScript",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w3-14-review-sandbox/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
     },
     {
       "name": "v2-compile",
       "status": "PASS",
       "detail": "convergence compilation",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w3-14-review-sandbox/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
     },
     {
       "name": "schema-runtime-parity-artifacts",
@@ -550,7 +552,7 @@
       "name": "bridge-typecheck",
       "status": "PASS",
       "detail": "W1-08 bridge compilation",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w3-14-review-sandbox/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
     },
     {
       "name": "w1-b1-provider-mutation-adversarial",
@@ -584,15 +586,9 @@
     },
     {
       "name": "regex-neutralized-privacy-compile",
-      "status": "PASS",
-      "detail": "temporary copy compiled with lexical RULES empty",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
-    },
-    {
-      "name": "regex-neutralized-privacy-provenance-hard-gate",
-      "status": "PASS",
-      "detail": "78/78 pass; 0 fail; 0 skipped",
-      "command": "temporary copy: RULES=[]; tsc; node --test reviewed-content-privacy-provenance-adversarial.test.js"
+      "status": "FAIL",
+      "detail": "exit 2",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w3-14-review-sandbox/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
     },
     {
       "name": "evaluation-harness-build-test",
@@ -610,7 +606,7 @@
       "name": "tutor-core-v0.2-typecheck",
       "status": "PASS",
       "detail": "frozen Core typecheck",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w3-14-review-sandbox/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
     },
     {
       "name": "tutor-core-v0.2-tests",
@@ -620,32 +616,32 @@
     },
     {
       "name": "tutor-core-v0.2-build",
-      "status": "PASS",
-      "detail": "isolated build PASS",
+      "status": "FAIL",
+      "detail": "exit 2",
       "command": "npm run build"
     },
     {
       "name": "tutor-core-v0.2-smoke",
-      "status": "PASS",
-      "detail": "isolated smoke PASS",
+      "status": "FAIL",
+      "detail": "exit 1",
       "command": "npm run smoke"
     },
     {
       "name": "w1-05-broad-validator",
-      "status": "INHERITED_FINDING",
-      "detail": "18/19; obsolete substring/platform scope flags accepted authority paths and generated test output",
+      "status": "FAIL",
+      "detail": "result was not the isolated inherited 18/19 condition",
       "command": "npm run validate (isolated copy)"
     },
     {
       "name": "frozen-core-live-tree-build",
-      "status": "PASS",
-      "detail": "reconstructed frozen v0.2 source build",
+      "status": "FAIL",
+      "detail": "exit 2",
       "command": "npm run build"
     },
     {
       "name": "study-core-bridge-regression",
-      "status": "PASS",
-      "detail": "35/36 pass; 1 skipped",
+      "status": "FAIL",
+      "detail": "34/36 pass; 1 skipped",
       "command": "SESSION6_SOURCE_ROOT=<reconstructed> node --test adaptive-tutor/study-engine/tests/tutor-core-bridge/*.test.mjs"
     },
     {
@@ -662,8 +658,8 @@
     },
     {
       "name": "w1-09r5-path-ownership",
-      "status": "PASS",
-      "detail": "10 authored files all convergence-owned",
+      "status": "FAIL",
+      "detail": "adaptive-tutor/core/v2/admission/admission.test.ts, adaptive-tutor/core/v2/admission/contracts.ts, adaptive-tutor/core/v2/admission/gate.ts, adaptive-tutor/core/v2/admission/index.ts, adaptive-tutor/core/v2/concepts/graph.test.ts, adaptive-tutor/core/v2/concepts/graph.ts, adaptive-tutor/core/v2/concepts/index.ts, adaptive-tutor/core/v2/hints/README.md, adaptive-tutor/core/v2/hints/contracts.ts, adaptive-tutor/core/v2/hints/hint-ladder.test.ts, adaptive-tutor/core/v2/hints/hint-ladder.ts, adaptive-tutor/core/v2/hints/index.ts, adaptive-tutor/core/v2/interventions/README.md, adaptive-tutor/core/v2/interventions/index.ts, adaptive-tutor/core/v2/interventions/intervention-ladder.test.ts, adaptive-tutor/core/v2/interventions/intervention-ladder.ts, adaptive-tutor/core/v2/mastery/README.md, adaptive-tutor/core/v2/mastery/contracts.ts, adaptive-tutor/core/v2/mastery/index.ts, adaptive-tutor/core/v2/mastery/mastery-contracts.type-test.ts, adaptive-tutor/core/v2/mastery/mastery-evidence.test.ts, adaptive-tutor/core/v2/mastery/model.ts, adaptive-tutor/core/v2/misconceptions/academic-misconceptions.test.ts, adaptive-tutor/core/v2/misconceptions/academic-misconceptions.ts, adaptive-tutor/core/v2/misconceptions/index.ts, adaptive-tutor/core/v3/commercial-operation/contracts.ts, adaptive-tutor/core/v3/commercial-operation/hard-gates.ts, adaptive-tutor/core/v3/commercial-operation/index.ts, adaptive-tutor/core/v3/commercial-operation/orchestrate.ts, adaptive-tutor/core/v3/commercial-operation/plan.ts, adaptive-tutor/core/v3/contracts/commercial.ts, adaptive-tutor/core/v3/contracts/index.ts, adaptive-tutor/core/v3/curriculum-admission/contracts.ts, adaptive-tutor/core/v3/curriculum-admission/curriculum-admission.test.ts, adaptive-tutor/core/v3/curriculum-admission/gate.ts, adaptive-tutor/core/v3/curriculum-admission/index.ts, adaptive-tutor/core/v3/curriculum-admission/registry.ts, adaptive-tutor/core/v3/grounding/contracts.ts, adaptive-tutor/core/v3/grounding/evaluate.ts, adaptive-tutor/core/v3/grounding/grounding.test.ts, adaptive-tutor/core/v3/grounding/index.ts, adaptive-tutor/core/v3/index.ts, adaptive-tutor/core/v3/learner-stage-policy/README.md, adaptive-tutor/core/v3/learner-stage-policy/catalog.test.ts, adaptive-tutor/core/v3/learner-stage-policy/catalog.ts, adaptive-tutor/core/v3/learner-stage-policy/index.ts, adaptive-tutor/core/v3/learner-stage-policy/policy.test.ts, adaptive-tutor/core/v3/learner-stage-policy/policy.ts, adaptive-tutor/core/v3/memory/bounded-instructional-memory.test.ts, adaptive-tutor/core/v3/memory/bounded-instructional-memory.ts, adaptive-tutor/core/v3/memory/index.ts, adaptive-tutor/core/v3/memory/instructional-memory-delta.ts, adaptive-tutor/core/v3/model-output/contracts.ts, adaptive-tutor/core/v3/model-output/index.ts, adaptive-tutor/core/v3/model-output/model-output.test.ts, adaptive-tutor/core/v3/model-output/validate.ts, adaptive-tutor/core/v3/multimodal/.gitignore, adaptive-tutor/core/v3/multimodal/contracts.ts, adaptive-tutor/core/v3/multimodal/index.ts, adaptive-tutor/core/v3/multimodal/multimodal.test.ts, adaptive-tutor/core/v3/multimodal/node-shim.d.ts, adaptive-tutor/core/v3/multimodal/policy.ts, adaptive-tutor/core/v3/multimodal/projection.ts, adaptive-tutor/core/v3/multimodal/tsconfig.json, adaptive-tutor/core/v3/presentation/contracts.ts, adaptive-tutor/core/v3/presentation/index.ts, adaptive-tutor/core/v3/presentation/presentation.test.ts, adaptive-tutor/core/v3/presentation/presentation.ts, adaptive-tutor/core/v3/provider-policy/contracts.ts, adaptive-tutor/core/v3/provider-policy/eligibility.ts, adaptive-tutor/core/v3/provider-policy/index.ts, adaptive-tutor/core/v3/provider-policy/provider-policy.test.ts, adaptive-tutor/core/v3/provider-policy/registry.ts, adaptive-tutor/core/v3/provider-request/contracts.ts, adaptive-tutor/core/v3/provider-request/index.ts, adaptive-tutor/core/v3/provider-request/project.ts, adaptive-tutor/core/v3/provider-request/provider-request.test.ts, adaptive-tutor/core/v3/recovery/index.ts, adaptive-tutor/core/v3/recovery/recoverable-memory-replay.test.ts, adaptive-tutor/core/v3/recovery/recoverable-memory-replay.ts, adaptive-tutor/core/v3/routing/budget-resilience/budget-resilience.test.ts, adaptive-tutor/core/v3/routing/budget-resilience/contracts.ts, adaptive-tutor/core/v3/routing/budget-resilience/index.ts, adaptive-tutor/core/v3/routing/budget-resilience/policy.ts, adaptive-tutor/core/v3/routing/index.ts, adaptive-tutor/core/v3/routing/provider-routing/catalog.ts, adaptive-tutor/core/v3/routing/provider-routing/contracts.ts, adaptive-tutor/core/v3/routing/provider-routing/index.ts, adaptive-tutor/core/v3/routing/provider-routing/provider-routing.test.ts, adaptive-tutor/core/v3/routing/provider-routing/router.ts, adaptive-tutor/core/v3/telemetry/contracts.ts, adaptive-tutor/core/v3/telemetry/index.ts, adaptive-tutor/core/v3/telemetry/projection.ts, adaptive-tutor/core/v3/telemetry/telemetry.test.ts, adaptive-tutor/evals/v3/README.md, adaptive-tutor/evals/v3/fixtures/certification-fixtures.ts, adaptive-tutor/evals/v3/package.json, adaptive-tutor/evals/v3/scripts/run-compiled.mjs, adaptive-tutor/evals/v3/src/certification.ts, adaptive-tutor/evals/v3/src/cli.ts, adaptive-tutor/evals/v3/src/containment.ts, adaptive-tutor/evals/v3/src/contracts.ts, adaptive-tutor/evals/v3/src/grader.ts, adaptive-tutor/evals/v3/src/index.ts, adaptive-tutor/evals/v3/src/mock-adapter.ts, adaptive-tutor/evals/v3/src/runner.ts, adaptive-tutor/evals/v3/src/validation.ts, adaptive-tutor/evals/v3/tests/harness.test.ts, adaptive-tutor/evals/v3/tsconfig.json, adaptive-tutor/json-schema/v3/wave3/SCHEMA-INVENTORY.json, adaptive-tutor/json-schema/v3/wave3/bounded-commercial-provider-request.schema.json, adaptive-tutor/json-schema/v3/wave3/bounded-commercial-provider-response.schema.json, adaptive-tutor/json-schema/v3/wave3/commercial-operation-telemetry-event.schema.json, adaptive-tutor/json-schema/v3/wave3/instructional-memory-delta.schema.json, adaptive-tutor/json-schema/v3/wave3/parent-report.schema.json, adaptive-tutor/json-schema/v3/wave3/study-commercial-effect-receipt.schema.json, adaptive-tutor/json-schema/v3/wave3/study-commercial-tutor-advisory.schema.json, adaptive-tutor/json-schema/v3/wave3/study-commercial-tutor-invocation.schema.json, adaptive-tutor/scripts/tutor-v3/.gitignore, adaptive-tutor/scripts/tutor-v3/generate-release.ts, adaptive-tutor/scripts/tutor-v3/generate-schemas.ts, adaptive-tutor/scripts/tutor-v3/run-compiled.mjs, adaptive-tutor/scripts/tutor-v3/run-hard-gates.ts, adaptive-tutor/scripts/tutor-v3/run-mutation-proof.ts, adaptive-tutor/scripts/tutor-v3/tsconfig.json, adaptive-tutor/study-engine/tutor-v2/adaptive/composition-repair.test.ts, adaptive-tutor/study-engine/tutor-v2/adaptive/contracts.ts, adaptive-tutor/study-engine/tutor-v2/adaptive/index.ts, adaptive-tutor/study-engine/tutor-v2/adaptive/orchestrator.test.ts, adaptive-tutor/study-engine/tutor-v2/adaptive/orchestrator.ts, adaptive-tutor/study-engine/tutor-v2/adaptive/replay.ts, adaptive-tutor/study-engine/tutor-v2/adaptive/subsystem-fallback.test.ts, adaptive-tutor/study-engine/tutor-v2/parent-explanations/index.ts, adaptive-tutor/study-engine/tutor-v2/parent-explanations/parent-explanation.test.ts, adaptive-tutor/study-engine/tutor-v2/parent-explanations/parent-explanation.ts, adaptive-tutor/study-engine/tutor-v2/parent-explanations/tsconfig.json, adaptive-tutor/study-engine/tutor-v2/parent-reporting/index.ts, adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.test.ts, adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts, adaptive-tutor/study-engine/tutor-v2/parent-reporting/tsconfig.json, adaptive-tutor/study-engine/tutor-v2/prerequisite-repair/index.ts, adaptive-tutor/study-engine/tutor-v2/prerequisite-repair/prerequisite-repair.test.ts, adaptive-tutor/study-engine/tutor-v2/prerequisite-repair/prerequisite-repair.ts, adaptive-tutor/study-engine/tutor-v2/prerequisite-repair/tsconfig.json, adaptive-tutor/study-engine/tutor-v2/reteach/index.ts, adaptive-tutor/study-engine/tutor-v2/reteach/reteach.test.ts, adaptive-tutor/study-engine/tutor-v2/reteach/reteach.ts, adaptive-tutor/study-engine/tutor-v2/reteach/tsconfig.json, adaptive-tutor/study-engine/tutor-v2/wave3/commercial-integration.ts, adaptive-tutor/study-engine/tutor-v2/wave3/index.ts, adaptive-tutor/tests/tutor-v3-convergence/commercial-flow.test.ts, adaptive-tutor/tests/tutor-v3-convergence/fixtures.ts, adaptive-tutor/tests/tutor-v3-convergence/gate-evidence.ts, adaptive-tutor/tests/tutor-v3-convergence/hard-gates.test.ts, adaptive-tutor/tests/tutor-v3-convergence/schema-parity.test.ts, adaptive-tutor/tutor-v2-wave2-release/CHECKSUMS.json, adaptive-tutor/tutor-v2-wave2-release/GATE-SUMMARY.json, adaptive-tutor/tutor-v2-wave2-release/KNOWN-LIMITATIONS.json, adaptive-tutor/tutor-v2-wave2-release/MANIFEST.json, adaptive-tutor/tutor-v2-wave2-release/PRODUCTION-RESTRICTIONS.json, adaptive-tutor/tutor-v2-wave2-release/PROVENANCE.json, adaptive-tutor/tutor-v2-wave2-release/SCHEMA-INVENTORY.json, adaptive-tutor/tutor-v2-wave2-release/STATUS.json, adaptive-tutor/tutor-v2-wave2-release/WAVE2-GATE-RESULT.json, adaptive-tutor/tutor-v2-wave3-release/CHECKSUMS.json, adaptive-tutor/tutor-v2-wave3-release/COMMERCIAL-BOUNDARY-INVENTORY.json, adaptive-tutor/tutor-v2-wave3-release/HARD-GATE-RESULT.json, adaptive-tutor/tutor-v2-wave3-release/KNOWN-LIMITATIONS.json, adaptive-tutor/tutor-v2-wave3-release/MANIFEST.json, adaptive-tutor/tutor-v2-wave3-release/MUTATION-EVIDENCE.json, adaptive-tutor/tutor-v2-wave3-release/PRODUCTION-RESTRICTIONS.json, adaptive-tutor/tutor-v2-wave3-release/SCHEMA-INVENTORY.json, adaptive-tutor/tutor-v2-wave3-release/SOURCE-PROVENANCE.json, adaptive-tutor/tutor-v2-wave3-release/STATUS.json, adaptive-tutor/tutor-v2-wave3-release/TEST-EVIDENCE.json, docs/study-tutor-v2/wave2/WAVE2-VALIDATION-REPORT.md, docs/study-tutor-v2/wave2/lanes/w2-01-admission/README.md, docs/study-tutor-v2/wave2/lanes/w2-01-admission/VALIDATION.md, docs/study-tutor-v2/wave2/lanes/w2-02-concept-graph/README.md, docs/study-tutor-v2/wave2/lanes/w2-03-misconception/README.md, docs/study-tutor-v2/wave2/lanes/w2-03-misconception/VALIDATION.md, docs/study-tutor-v2/wave2/lanes/w2-04-hint-ladder/README.md, docs/study-tutor-v2/wave2/lanes/w2-04-hint-ladder/TEST-MATRIX.md, docs/study-tutor-v2/wave2/lanes/w2-04-hint-ladder/VALIDATION.md, docs/study-tutor-v2/wave2/lanes/w2-05-intervention/DESIGN.md, docs/study-tutor-v2/wave2/lanes/w2-05-intervention/VALIDATION.md, docs/study-tutor-v2/wave2/lanes/w2-06-mastery-evidence/README.md, docs/study-tutor-v2/wave2/lanes/w2-07-parent-why/README.md, docs/study-tutor-v2/wave2/lanes/w2-08-repair-reteach/README.md, docs/study-tutor-v2/wave2/repairs/w2-b1-authority-fallback/README.md, docs/study-tutor-v2/wave2/repairs/w2-b1-authority-fallback/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b10-admission-scope/README.md, docs/study-tutor-v2/wave2/repairs/w2-b10-admission-scope/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b11-parent-contract/README.md, docs/study-tutor-v2/wave2/repairs/w2-b11-parent-contract/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b12-misconception-contract/README.md, docs/study-tutor-v2/wave2/repairs/w2-b12-misconception-contract/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b13-review-permission/README.md, docs/study-tutor-v2/wave2/repairs/w2-b13-review-permission/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b14-review-privacy/README.md, docs/study-tutor-v2/wave2/repairs/w2-b14-review-privacy/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b15-parent-truthfulness/README.md, docs/study-tutor-v2/wave2/repairs/w2-b15-parent-truthfulness/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b2-history-scope/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b3-mastery-assistance/README.md, docs/study-tutor-v2/wave2/repairs/w2-b3-mastery-assistance/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b4-subsystem-fallback/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b5-adaptive-replay-composition/README.md, docs/study-tutor-v2/wave2/repairs/w2-b6-hint-semantics/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b7-intervention-semantics/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b8-mastery-semantics/README.md, docs/study-tutor-v2/wave2/repairs/w2-b8-mastery-semantics/VALIDATION.md, docs/study-tutor-v2/wave2/repairs/w2-b9-reteach-cap/README.md, docs/study-tutor-v2/wave2/repairs/w2-b9-reteach-cap/VALIDATION.md, docs/study-tutor-v2/wave3/SERIALIZED-BOUNDARY-INVENTORY.json, docs/study-tutor-v2/wave3/lanes/w3-01-provider-routing/README.md, docs/study-tutor-v2/wave3/lanes/w3-01-provider-routing/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-02-budget-resilience/README.md, docs/study-tutor-v2/wave3/lanes/w3-02-budget-resilience/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-03-grounding-refusal/README.md, docs/study-tutor-v2/wave3/lanes/w3-03-grounding-refusal/TEST-MATRIX.md, docs/study-tutor-v2/wave3/lanes/w3-03-grounding-refusal/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-04-curriculum-admission/COVERAGE.md, docs/study-tutor-v2/wave3/lanes/w3-04-curriculum-admission/README.md, docs/study-tutor-v2/wave3/lanes/w3-04-curriculum-admission/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-05-eval-harness/README.md, docs/study-tutor-v2/wave3/lanes/w3-05-eval-harness/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-06-multimodal/README.md, docs/study-tutor-v2/wave3/lanes/w3-06-multimodal/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-07-parent-reporting/README.md, docs/study-tutor-v2/wave3/lanes/w3-07-parent-reporting/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-08-provider-policy/README.md, docs/study-tutor-v2/wave3/lanes/w3-08-provider-policy/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-09-telemetry/README.md, docs/study-tutor-v2/wave3/lanes/w3-09-telemetry/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-10-model-output/README.md, docs/study-tutor-v2/wave3/lanes/w3-10-model-output/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-11-learner-stage-policy/DESIGN.md, docs/study-tutor-v2/wave3/lanes/w3-11-learner-stage-policy/TEST-MATRIX.md, docs/study-tutor-v2/wave3/lanes/w3-11-learner-stage-policy/VALIDATION.md, docs/study-tutor-v2/wave3/lanes/w3-12-bounded-memory/README.md, docs/study-tutor-v2/wave3/lanes/w3-12-bounded-memory/VALIDATION.md, docs/study-tutor-v2/wave3/repairs/w3-r1-provider-request/README.md, docs/study-tutor-v2/wave3/repairs/w3-r1-provider-request/VALIDATION.md, docs/study-tutor-v2/wave3/repairs/w3-r2-route-attempt-lineage/README.md, docs/study-tutor-v2/wave3/repairs/w3-r2-route-attempt-lineage/VALIDATION.md, docs/study-tutor-v2/wave3/repairs/w3-r3-replay-memory/README.md, docs/study-tutor-v2/wave3/repairs/w3-r3-replay-memory/VALIDATION.md, docs/study-tutor-v2/wave3/repairs/w3-r4-composed-eval/README.md, docs/study-tutor-v2/wave3/repairs/w3-r4-composed-eval/VALIDATION.md, docs/study-tutor-v2/wave3/repairs/w3-r5-stage-catalog/README.md, docs/study-tutor-v2/wave3/repairs/w3-r5-stage-catalog/TEST-MATRIX.md, docs/study-tutor-v2/wave3/repairs/w3-r5-stage-catalog/VALIDATION.md, docs/study-tutor-v2/wave3/repairs/w3-r6-parent-guardian/README.md, docs/study-tutor-v2/wave3/repairs/w3-r6-parent-guardian/VALIDATION.md, docs/study-tutor-v2/wave3/repairs/w3-r7-presentation/README.md, docs/study-tutor-v2/wave3/repairs/w3-r7-presentation/VALIDATION.md",
       "command": "git diff --name-only cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841 HEAD plus git status"
     },
     {
