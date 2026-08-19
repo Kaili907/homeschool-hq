@@ -126,6 +126,10 @@ export type FamilyCloudSessionState =
 export interface FamilyCloudAuthRuntime {
   snapshot(): FamilyCloudSessionState
   bootstrap(signal?: AbortSignal): Promise<FamilyCloudSessionState>
+  /** Revalidates provider authority without unmounting an already-authorized household. */
+  refreshProviderSession(signal?: AbortSignal): Promise<FamilyCloudSessionState>
+  /** Accepts a provider-confirmed sign-out without initiating another logout request. */
+  providerSignedOut(): FamilyCloudSessionState
   signIn(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudSessionState>
   createAccount(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudAccountCreationResult>
   requestPasswordRecovery(email: string, signal?: AbortSignal): Promise<FamilyCloudEmailRequestResult>

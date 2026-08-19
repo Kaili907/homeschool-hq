@@ -20,7 +20,7 @@ export function FamilyCloudAuthBoundary({ runtime, children }: {
   }, [runtime])
 
   useEffect(() => {
-    const refresh = () => { void runtime.bootstrap() }
+    const refresh = () => { void runtime.refreshProviderSession() }
     window.addEventListener('online', refresh)
     window.addEventListener('offline', refresh)
     return () => {
@@ -32,7 +32,7 @@ export function FamilyCloudAuthBoundary({ runtime, children }: {
   useEffect(() => {
     if (state.status !== 'READY') return
     const remaining = Date.parse(state.expiresAt) - Date.now()
-    const timer = window.setTimeout(() => { void runtime.bootstrap() }, Math.max(0, remaining) + 50)
+    const timer = window.setTimeout(() => { void runtime.refreshProviderSession() }, Math.max(0, remaining) + 50)
     return () => window.clearTimeout(timer)
   }, [runtime, state])
 

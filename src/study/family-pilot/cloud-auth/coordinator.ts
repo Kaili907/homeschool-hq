@@ -69,6 +69,60 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
     return this.#establish(context, generation, signal)
   }
 
+  async refreshProviderSession(signal?: AbortSignal): Promise<FamilyCloudSessionState> {
+    const previous = this.#state
+    if (previous.status !== 'READY') return this.bootstrap(signal)
+    const generation = ++this.#generation
+    let context
+    try { context = await this.#identity.current(signal) } catch { context = null }
+    if (generation !== this.#generation || signal?.aborted) return this.#state
+    if (!context) {
+      // Visibility recovery can race a provider read or a transient network
+      // failure. A failed revalidation is not a provider-confirmed logout.
+      return Date.parse(previous.expiresAt) <= this.#now().getTime()
+        ? this.providerSignedOut()
+        : previous
+    }
+    const expiry = Date.parse(context.expiresAt)
+    if (!Number.isFinite(expiry) || expiry <= this.#now().getTime()) return this.providerSignedOut()
+
+    const link = this.#device.load()
+    if (
+      !link || link.accountRef !== context.authorization.user.id ||
+      link.householdRef !== previous.householdRef
+    ) {
+      this.#dropCloudAuthority()
+      this.#publish(AUTHENTICATING)
+      return this.#establish(context, generation, signal)
+    }
+
+    let resolved
+    try { resolved = await this.#authority.resolve(context.authorization, signal) } catch { resolved = { status: 'UNAVAILABLE' as const } }
+    if (generation !== this.#generation || signal?.aborted) return this.#state
+    if (resolved.status === 'UNAVAILABLE') return previous
+    if (resolved.status !== 'RESOLVED') {
+      this.#dropCloudAuthority()
+      return this.#publish(Object.freeze({
+        status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'NONE', localData: 'UNAVAILABLE',
+        reason: resolved.status,
+      }))
+    }
+    if (resolved.householdRef !== previous.householdRef) {
+      this.#dropCloudAuthority()
+      this.#publish(AUTHENTICATING)
+      return this.#establish(context, generation, signal)
+    }
+
+    this.#context = context
+    return this.#publish(Object.freeze({ ...previous, expiresAt: context.expiresAt }))
+  }
+
+  providerSignedOut(): FamilyCloudSessionState {
+    ++this.#generation
+    this.#dropCloudAuthority()
+    return this.#withoutCurrentSession()
+  }
+
   async signIn(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudSessionState> {
     const generation = ++this.#generation
     this.#dropCloudAuthority()

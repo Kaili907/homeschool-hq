@@ -11,7 +11,7 @@ export default defineConfig({
   reporter: [['list']],
   use: { baseURL: `http://127.0.0.1:${port}`, headless: true, trace: 'retain-on-failure' },
   webServer: {
-    command: `VITE_FAMILY_PILOT_ENABLED=true VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED=true VITE_SUPABASE_URL=https://fqzcxrkvpaivpnzdbuol.supabase.co VITE_SUPABASE_ANON_KEY=sb_publishable_family_cloud_auth_e2e npm run build && npm run preview -- --host 127.0.0.1 --port ${port}`,
+    command: `npm run curriculum:build && VITE_FAMILY_PILOT_ENABLED=true VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED=true VITE_SUPABASE_URL=https://fqzcxrkvpaivpnzdbuol.supabase.co VITE_SUPABASE_ANON_KEY=sb_publishable_family_cloud_auth_e2e node node_modules/vite/bin/vite.js build && node scripts/audit-browser-answer-authority.mjs && node scripts/stamp-sw.mjs && node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port ${port}`,
     url: `http://127.0.0.1:${port}/family-pilot`,
     reuseExistingServer: false,
     timeout: 300_000,

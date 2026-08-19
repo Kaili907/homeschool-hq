@@ -9,6 +9,8 @@ describe('Family Cloud account gateway', () => {
       snapshot: () => ({ status: 'SIGNED_OUT' as const }),
       subscribe: () => () => undefined,
       bootstrap: vi.fn(),
+      refreshProviderSession: vi.fn(),
+      providerSignedOut: vi.fn(),
       createAccount: vi.fn(),
       requestPasswordRecovery: vi.fn(),
       requestMagicLink: vi.fn(),
