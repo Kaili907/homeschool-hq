@@ -2,7 +2,7 @@
   "aggregateStatus": "PASS",
   "baselineBlocked": 0,
   "booleanEvidenceFlipOnly": false,
-  "candidateSha": "57cae2722632fbf2a6318a1c7744a6126d6a69c3",
+  "candidateSha": "97d6f0e91df256eff6d2391fa079627aa1d2d05d",
   "cleanupComplete": true,
   "compilerFailureAloneCountsAsDetection": false,
   "compileValid": 13,
@@ -129,7 +129,7 @@
         ],
         "missingPaths": [],
         "nonCompensable": true,
-        "outputSha256": "62ccbb3cb55b6e9288a03ac9311de6a941bd966f6e7222d96b51951a5ef3fb52",
+        "outputSha256": "19c095c3e6395007c61a40c66edd13c8c5b71eed4794609738f4b4acf96910cb",
         "sourceInvariant": "Active assessments structurally reject unrestricted answer-bearing actions.",
         "status": "FAIL"
       },
