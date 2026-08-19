@@ -1,6 +1,14 @@
 {
-  "branch": "mac/tutor-v2-w4-reconvergence-r2",
+  "branch": "mac/tutor-v2-w4-mutation-evidence-binding-repair-r1",
   "duplicateImportRuling": "PASS_13_LANES_AND_R1_R8_IMPORTED_EXACTLY_ONCE_R1_R2_NOT_DUPLICATED",
+  "evidenceAttestation": {
+    "evidenceOnlyChildDiffRequired": true,
+    "executionSubjectSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
+    "finalEvidenceCommitIsDirectChild": true,
+    "repairedFromFailedCandidateSha": "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
+    "selfReferencedFinalCommitShaInsideChecksummedArtifacts": false
+  },
+  "evidenceExecutionSha": "875f53ce3d7a38bafa25233cabde0f18a67bbf90",
   "externalStudyAuthorityDependency": {
     "branch": "mac/study-runtime-tutor-authority-port-r2",
     "containedInTutorCandidate": false,
@@ -13,11 +21,6 @@
     "historicalRuling": "WAVE4_HOLD",
     "historyRewritten": false,
     "repairedCandidateKind": "POST_REVIEW_REPAIRED_CANDIDATE"
-  },
-  "finalCandidate": {
-    "exactShaRecordedAfterCommitInSessionReturn": true,
-    "repairedFromFailedCandidateSha": "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
-    "selfReferencedInsideChecksummedArtifacts": false
   },
   "importOrder": [
     "W4_01",
@@ -176,10 +179,10 @@
     "sha": "b0720b1d3243f6587a6538c7225849ce88d953ef",
     "stablePatchId": "82073e8be1e81a530c0cbb69f9f476c4486ab25e"
   },
-  "provenanceVersion": 2,
+  "provenanceVersion": 3,
   "semanticCherryPickAdaptations": [],
   "semanticConflictRuling": "NO_TEXT_CONFLICTS_OR_SEMANTIC_ADAPTATIONS_R6_R7_R8_INVARIANTS_COEXIST",
-  "session": "STUDY-TUTOR-V2-W4-16 Final Post-W4-15 Repair Reconvergence",
+  "session": "STUDY-TUTOR-V2-W4-R9 Compile-Valid M04 + Exact Mutation Evidence Binding Repair",
   "startingFailedCandidateSha": "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
   "startingWave3Sha": "a2fdf1858cd50c998f5da53970d36ee6c90ff31a",
   "wave3AcceptanceRuling": "WAVE3_ACCEPTED_FOR_WAVE4"
