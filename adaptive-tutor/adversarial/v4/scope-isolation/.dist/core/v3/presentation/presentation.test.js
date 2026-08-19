@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { COMMERCIAL_EXECUTION_SCOPE_VERSION, } from "../commercial-operation/index.js";
+import { STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION, } from "../contracts/index.js";
 import { MODEL_CAPABILITY_PROFILE_VERSION, PROVIDER_AVAILABILITY_STATE_VERSION, PROVIDER_CAPABILITY_PROFILE_VERSION, ROUTING_REQUEST_VERSION, createEligibleRouteCatalog, routeProviderModel, } from "../routing/provider-routing/index.js";
 import { createTrustedProviderProfileRegistry, } from "../provider-policy/index.js";
 import { validateProviderModelOutput, } from "../model-output/index.js";
@@ -9,6 +11,44 @@ const visualRef = "reviewed-content:visual-one";
 const checkRef = "reviewed-content:check-one";
 const groundingRef = "grounding:lesson-one";
 const digest = `sha256:${"a".repeat(64)}`;
+const presentationScope = {
+    commercialExecutionScopeRef: "commercial-scope:presentation-one",
+    householdScopeRef: "household:family-one",
+    learnerScopeRef: "learner:learner-one",
+    sessionRef: "session:lesson-one",
+    interactionRef: "interaction:turn-one",
+    logicalOperationRef: "logical-operation:presentation-one",
+    conceptRef: "concept:lesson-one",
+    opportunityRef: "opportunity:lesson-one",
+    presentationRef: "presentation-fallback:lesson-one",
+};
+const commercialExecutionScope = {
+    scopeVersion: COMMERCIAL_EXECUTION_SCOPE_VERSION,
+    scopeKind: "trusted-study-commercial-execution-scope",
+    issuedBy: "study-engine",
+    scopeRef: presentationScope.commercialExecutionScopeRef,
+    householdScopeRef: presentationScope.householdScopeRef,
+    learnerScopeRef: presentationScope.learnerScopeRef,
+    sessionRef: presentationScope.sessionRef,
+    interactionRef: presentationScope.interactionRef,
+    logicalOperationRef: presentationScope.logicalOperationRef,
+    curriculumReleaseRef: "release-presentation-one",
+    curriculumPackageRef: "package:presentation-one",
+    curriculumCourseRef: "course-presentation-one",
+    curriculumSubjectRef: "subject-presentation-one",
+    curriculumUnitRef: "unit-presentation-one",
+    curriculumLessonRef: "lesson-presentation-one",
+    conceptRef: presentationScope.conceptRef,
+    opportunityRef: presentationScope.opportunityRef,
+    learnerStageRef: "learner-stage:presentation-one",
+    presentationRef: presentationScope.presentationRef,
+    routingRequestRef: "routing-request:presentation-one",
+    routePlanRef: "route-plan:presentation-one",
+    reservationRef: "reservation:presentation-one",
+    physicalAttemptRefs: ["physical-attempt:presentation-one"],
+    allowedRouteRefs: ["route:presentation-one"],
+    telemetryEventRefs: ["telemetry:presentation-one"],
+};
 const reviewedImage = {
     kind: "image",
     contentRef: visualRef,
@@ -58,7 +98,91 @@ function acceptance(intent) {
     return {
         acceptanceKind: "trusted-study-provider-output-acceptance",
         acceptanceRef: "presentation-acceptance:turn-one",
+        scope: presentationScope,
         presentationIntent: intent,
+    };
+}
+function studyAdvisory(intent) {
+    return {
+        contractVersion: STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION,
+        advisoryKind: "study-commercial-tutor-advisory",
+        invocationRef: commercialExecutionScope.interactionRef,
+        commercialScopeRef: commercialExecutionScope.scopeRef,
+        householdScopeRef: commercialExecutionScope.householdScopeRef,
+        learnerScopeRef: commercialExecutionScope.learnerScopeRef,
+        sessionRef: commercialExecutionScope.sessionRef,
+        interactionRef: commercialExecutionScope.interactionRef,
+        logicalOperationRef: commercialExecutionScope.logicalOperationRef,
+        opportunityRef: commercialExecutionScope.opportunityRef,
+        conceptRef: commercialExecutionScope.conceptRef,
+        learnerStageRef: commercialExecutionScope.learnerStageRef,
+        status: "proposed",
+        proposedTutorAction: "hint",
+        reasonCodes: ["COMMERCIAL_PROPOSAL_READY"],
+        reviewedContentRefs: [
+            ...(intent.reviewedTextRef === undefined ? [] : [intent.reviewedTextRef]),
+            ...(intent.reviewedVisual === undefined ? [] : [intent.reviewedVisual.contentRef]),
+            ...(intent.structuredCheckRef === undefined ? [] : [intent.structuredCheckRef]),
+        ],
+        groundingDecision: "sufficient",
+        assistanceEvidenceRef: commercialExecutionScope.opportunityRef,
+        presentationIntent: intent,
+        studyDecisionRequired: true,
+        studyMutationAllowed: false,
+        officialMasteryAuthority: false,
+        officialWorkingLevelAuthority: false,
+        nominalGradeAuthority: false,
+        curriculumAuthority: false,
+        segmentCompletionAuthority: false,
+    };
+}
+function boundaryFor(intent) {
+    const referenceBindings = [];
+    if (intent.reviewedTextRef !== undefined) {
+        referenceBindings.push({
+            scope: presentationScope,
+            referenceKind: "reviewed-text",
+            referenceRef: intent.reviewedTextRef,
+            referenceUse: "approved-instructional-reference",
+        });
+    }
+    if (intent.structuredCheckRef !== undefined) {
+        referenceBindings.push({
+            scope: presentationScope,
+            referenceKind: "structured-check",
+            referenceRef: intent.structuredCheckRef,
+            referenceUse: "approved-instructional-reference",
+        });
+    }
+    if (intent.accessibilityCaptionRef !== undefined) {
+        referenceBindings.push({
+            scope: presentationScope,
+            referenceKind: "accessibility-caption",
+            referenceRef: intent.accessibilityCaptionRef,
+            referenceUse: "neutral-accessibility-metadata",
+        });
+    }
+    if (intent.fallbackPresentation !== undefined) {
+        referenceBindings.push({
+            scope: presentationScope,
+            referenceKind: "fallback-presentation",
+            referenceRef: intent.fallbackPresentation.presentationRef,
+            referenceUse: "approved-fallback-reference",
+        });
+    }
+    return {
+        boundaryKind: "trusted-study-presentation-boundary",
+        acceptanceRef: "presentation-acceptance:turn-one",
+        scope: presentationScope,
+        assessmentPhase: "not-active-protected-assessment",
+        referenceBindings,
+        reviewedVisualBindings: intent.reviewedVisual === undefined
+            ? []
+            : [{
+                    scope: presentationScope,
+                    reviewedVisual: intent.reviewedVisual,
+                    approvalStatus: "approved-content",
+                }],
     };
 }
 test("maps reviewed-text to text-only presentation intent", () => {
@@ -79,7 +203,7 @@ test("maps reviewed-visual without manufacturing instructional text", () => {
 });
 test("preserves distinct text and visual pieces for reviewed-text-and-visual", () => {
     const response = mappedProposal("reviewed-text-and-visual", [textRef, visualRef]);
-    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent));
+    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent), boundaryFor(response.presentationIntent), commercialExecutionScope, studyAdvisory(response.presentationIntent));
     assert.equal(result.status, "accepted");
     if (result.status !== "accepted")
         return;
@@ -102,9 +226,13 @@ test("keeps diagram kind through the W3-06 adapter", () => {
                 provenanceRef: "visual-review:diagram-one",
             }],
         requestSpeechAfterAcceptance: false,
+        fallbackPresentation: {
+            presentationRef: presentationScope.presentationRef,
+            requestedDeliveryChannels: ["text"],
+        },
     };
     const response = mappedProposal("reviewed-visual", [visualRef], diagramContext);
-    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent));
+    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent), boundaryFor(response.presentationIntent), commercialExecutionScope, studyAdvisory(response.presentationIntent));
     assert.equal(result.status, "accepted");
     if (result.status !== "accepted")
         return;
@@ -114,7 +242,7 @@ test("maps structured-check to its own reference slot", () => {
     const response = mappedProposal("structured-check", [checkRef]);
     assert.equal(response.presentationIntent.structuredCheckRef, checkRef);
     assert.equal(response.presentationIntent.reviewedTextRef, undefined);
-    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent));
+    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent), boundaryFor(response.presentationIntent), commercialExecutionScope, studyAdvisory(response.presentationIntent));
     assert.equal(result.status, "accepted");
     if (result.status !== "accepted")
         return;
@@ -122,7 +250,7 @@ test("maps structured-check to its own reference slot", () => {
 });
 test("caption remains accessibility metadata and cannot become instructional text", () => {
     const response = mappedProposal("reviewed-visual", [visualRef]);
-    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent));
+    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent), boundaryFor(response.presentationIntent), commercialExecutionScope, studyAdvisory(response.presentationIntent));
     assert.equal(result.status, "accepted");
     if (result.status !== "accepted")
         return;
@@ -144,6 +272,10 @@ test("speech is emitted only as a post-acceptance delivery piece", () => {
     const response = mappedProposal("reviewed-text", [textRef], {
         reviewedVisuals: [],
         requestSpeechAfterAcceptance: true,
+        fallbackPresentation: {
+            presentationRef: presentationScope.presentationRef,
+            requestedDeliveryChannels: ["text"],
+        },
     });
     const allowed = constrainPresentationByLearnerStageAllowance(response.presentationIntent, { allowedModalities: ["text", "audio"], maximumModalitiesPerResponse: 2 });
     assert.equal(allowed.status, "allowed");
@@ -152,7 +284,7 @@ test("speech is emitted only as a post-acceptance delivery piece", () => {
         status: "rejected",
         code: "TRUSTED_ACCEPTANCE_REQUIRED",
     });
-    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent));
+    const result = mapTrustedAcceptedIntentToW306PresentationPieces(acceptance(response.presentationIntent), boundaryFor(response.presentationIntent), commercialExecutionScope, studyAdvisory(response.presentationIntent));
     assert.equal(result.status, "accepted");
     if (result.status !== "accepted")
         return;
@@ -223,6 +355,7 @@ test("routing receives only the derived requirement and fails when modality is a
         requestVersion: ROUTING_REQUEST_VERSION,
         requestRef: "routing-request:presentation-one",
         routePlanRef: "route-plan:presentation-one",
+        commercialScopeRef: "commercial-scope:presentation-one",
         logicalOperationRef: "logical-operation:presentation-one",
         physicalAttemptRefs: ["physical-attempt:presentation-one"],
         actionFamily: "HINT",

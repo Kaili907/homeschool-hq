@@ -1,3 +1,4 @@
+import { MAXIMUM_APPROVED_PROVIDER_REGIONS, MAXIMUM_TRUSTED_PROVIDER_PROFILES, } from "./contracts.js";
 const TRUSTED_REGISTRIES = new WeakSet();
 function freezeProfile(profile) {
     return Object.freeze({
@@ -22,6 +23,10 @@ export class TrustedProviderProfileRegistry {
         TRUSTED_REGISTRIES.add(this);
     }
     static fromTrustedProfiles(profiles) {
+        if (!Array.isArray(profiles) ||
+            profiles.length > MAXIMUM_TRUSTED_PROVIDER_PROFILES) {
+            throw new RangeError(`Trusted provider profiles allow at most ${MAXIMUM_TRUSTED_PROVIDER_PROFILES} entries.`);
+        }
         const byProviderRef = new Map();
         for (const profile of profiles) {
             if (profile.providerRef.trim().length === 0) {
@@ -29,6 +34,12 @@ export class TrustedProviderProfileRegistry {
             }
             if (byProviderRef.has(profile.providerRef)) {
                 throw new Error(`Duplicate trusted provider profile: ${profile.providerRef}`);
+            }
+            const regions = profile.dataResidency.approvedRegions;
+            if (regions !== null &&
+                (regions.length > MAXIMUM_APPROVED_PROVIDER_REGIONS ||
+                    new Set(regions).size !== regions.length)) {
+                throw new RangeError(`Trusted provider profile regions are invalid: ${profile.providerRef}`);
             }
             byProviderRef.set(profile.providerRef, freezeProfile(profile));
         }

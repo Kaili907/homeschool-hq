@@ -50,13 +50,19 @@ export function projectTutorCommercialTelemetry(executionResult, lineageInput) {
     if (lineageValidation.status === "rejected") {
         return rejected("INVALID_COMMERCIAL_LINEAGE");
     }
-    const { attempt, reservation } = lineageValidation.value;
+    const { commercialScope, attempt, reservation } = lineageValidation.value;
     if (validateBudgetReservationSnapshot(reservation) === null) {
         return rejected("INVALID_COMMERCIAL_LINEAGE");
     }
     const reservedAttempt = reservation.attempts.find((candidate) => candidate.physicalAttemptRef === attempt.physicalAttemptRef);
     if (!isCanonicalCommercialAttempt(attempt) ||
+        attempt.commercialScopeRef !== commercialScope.scopeRef ||
+        reservation.commercialScopeRef !== commercialScope.scopeRef ||
+        reservation.reservationRef !== commercialScope.reservationRef ||
         reservation.logicalOperationRef !== attempt.logicalOperationRef ||
+        attempt.logicalOperationRef !== commercialScope.logicalOperationRef ||
+        !commercialScope.physicalAttemptRefs.includes(attempt.physicalAttemptRef) ||
+        !commercialScope.allowedRouteRefs.includes(attempt.routeRef) ||
         !reservedAttempt ||
         !commercialAttemptsEqual(reservedAttempt, attempt)) {
         return rejected("INVALID_COMMERCIAL_LINEAGE");
@@ -69,8 +75,10 @@ export function projectTutorCommercialTelemetry(executionResult, lineageInput) {
         return rejected("INVALID_EXECUTION_RESULT");
     }
     const eventRef = ownDataProperty(executionResult, "eventRef");
-    if (!isOpaqueReference(eventRef))
+    if (!isOpaqueReference(eventRef) ||
+        commercialScope.telemetryEventRefs[attempt.attemptIndex] !== eventRef) {
         return rejected("INVALID_OPERATIONAL_REFERENCE");
+    }
     const inputTokenCount = safeCounter(ownDataProperty(metrics, "inputTokenCount"));
     const outputTokenCount = safeCounter(ownDataProperty(metrics, "outputTokenCount"));
     const latencyMs = safeCounter(ownDataProperty(metrics, "latencyMs"));
@@ -94,6 +102,13 @@ export function projectTutorCommercialTelemetry(executionResult, lineageInput) {
         contractVersion: TUTOR_COMMERCIAL_TELEMETRY_CONTRACT_VERSION,
         eventKind: "tutor-commercial-operation",
         eventRef,
+        commercialScopeRef: commercialScope.scopeRef,
+        householdScopeRef: commercialScope.householdScopeRef,
+        learnerScopeRef: commercialScope.learnerScopeRef,
+        sessionRef: commercialScope.sessionRef,
+        interactionRef: commercialScope.interactionRef,
+        conceptRef: commercialScope.conceptRef,
+        opportunityRef: commercialScope.opportunityRef,
         logicalOperationRef: attempt.logicalOperationRef,
         physicalAttemptRef: attempt.physicalAttemptRef,
         reservationRef: reservation.reservationRef,

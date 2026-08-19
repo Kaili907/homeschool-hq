@@ -1,5 +1,5 @@
 import { Type } from "../../schema/typebox.js";
-import { CanonicalIntegerMicrosSchema, CommercialAttemptSchema, ImmutableDigestSchema, } from "../commercial-operation/index.js";
+import { CanonicalIntegerMicrosSchema, CommercialExecutionScopeSchema, CommercialAttemptSchema, ImmutableDigestSchema, } from "../commercial-operation/index.js";
 import { BudgetReservationSchema, } from "../routing/budget-resilience/index.js";
 export const TUTOR_COMMERCIAL_TELEMETRY_CONTRACT_VERSION = "3.1.0";
 export const TELEMETRY_ACTION_FAMILIES = [
@@ -109,6 +109,13 @@ export const TutorCommercialTelemetryEventSchema = Type.Object({
     contractVersion: Type.Literal(TUTOR_COMMERCIAL_TELEMETRY_CONTRACT_VERSION),
     eventKind: Type.Literal("tutor-commercial-operation"),
     eventRef: OpaqueReferenceSchema,
+    commercialScopeRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    interactionRef: OpaqueReferenceSchema,
+    conceptRef: OpaqueReferenceSchema,
+    opportunityRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     physicalAttemptRef: OpaqueReferenceSchema,
     reservationRef: OpaqueReferenceSchema,
@@ -139,6 +146,7 @@ export const TutorCommercialTelemetryEventSchema = Type.Object({
     studyMutationAllowed: Type.Literal(false),
 }, { additionalProperties: false, $id: "TutorCommercialTelemetryEventV3" });
 export const CommercialTelemetryLineageSchema = Type.Object({
+    commercialScope: CommercialExecutionScopeSchema,
     attempt: CommercialAttemptSchema,
     reservation: BudgetReservationSchema,
 }, { additionalProperties: false, $id: "TutorCommercialTelemetryLineageV3" });

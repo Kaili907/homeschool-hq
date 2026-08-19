@@ -1,11 +1,11 @@
 # Adaptive Tutor Core v0.2 — Generated Validation Report
 
-**Overall result:** PASS
+**Overall result:** FAIL
 
 - Checks: 19
-- Passed: 19
-- Failed: 0
-- Generated: 2026-07-28T02:01:38.087Z
+- Passed: 18
+- Failed: 1
+- Generated: 2026-08-16T23:12:50.048Z
 
 | Check | Result | Details |
 |---|---|---|
@@ -16,8 +16,8 @@
 | diagnostic-transition | PASS | assessment |
 | identify-transition | PASS | identify-missing-concept |
 | parent-teacher-review-contract | PASS | Empty-evidence review remains explicit about uncertainty. |
-| platform-boundary | PASS | No GitHub, Supabase, Netlify, database, authentication, or progress-sync files. |
-| no-final-subject-packages | PASS | Only demonstration fixtures exist under examples/. |
+| platform-boundary | FAIL | .test-dist/core/v2/policy/authority/authority.test.js, .test-dist/core/v2/policy/authority/index.js, .test-dist/tests/tutor-v2-convergence/global-adaptive-safety-authority.test.js, adversarial/v4/replay-crash/.test-dist/core/v2/policy/authority/authority.test.js, adversarial/v4/replay-crash/.test-dist/core/v2/policy/authority/index.js, core/v2/policy/authority/authority.test.ts, core/v2/policy/authority/index.ts, json-schema/v2/study-authority-context.schema.json, scripts/tutor-v2/.dist/core/v2/policy/authority/authority.test.js, scripts/tutor-v2/.dist/core/v2/policy/authority/index.js, scripts/tutor-v2/.dist/tests/tutor-v2-convergence/global-adaptive-safety-authority.test.js, study-engine/docs/final-assembly/authority-matrix.md, study-engine/docs/tutor-core-bridge/authority-boundary-matrix.md, study-engine/tests/tutor-v2-bridge/.test-dist/core/v2/policy/authority/index.js, tests/tutor-v2-convergence/global-adaptive-safety-authority.test.ts |
+| no-unauthorized-subject-packages | PASS | Only demonstration fixtures under examples/ and the authorized subjects/math package exist. |
 | required-file:core/contracts/index.ts | PASS | core/contracts/index.ts |
 | required-file:core/engine/adaptive-tutor-engine.ts | PASS | core/engine/adaptive-tutor-engine.ts |
 | required-file:core/prompts/templates.ts | PASS | core/prompts/templates.ts |
@@ -33,5 +33,5 @@
 
 - No GitHub repository was modified.
 - No Supabase, Netlify, Lovable, database, storage, identity, authentication, or progress-synchronization integration was created.
-- Math and English materials are demonstration fixtures only, not final subject packages.
+- English materials are demonstration fixtures only; the Math R1 package under subjects/math is the sole authorized final subject package.
 - The prototype is local-first and remains usable without audio or external media.

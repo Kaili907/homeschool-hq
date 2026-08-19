@@ -1,5 +1,5 @@
 import { validateExact } from "../../../v2/contracts/validation.js";
-import { evaluateProviderEligibility, isTrustedProviderProfileRegistry, } from "../../provider-policy/index.js";
+import { evaluateProviderEligibility, isTrustedProviderProfileRegistry, providerEligibilityRequirementsAreBounded, } from "../../provider-policy/index.js";
 import { MODEL_CAPABILITY_PROFILE_VERSION, ModelCapabilityProfileSchema, PROVIDER_CAPABILITY_PROFILE_VERSION, ProviderCapabilityProfileSchema, } from "./contracts.js";
 export const ELIGIBLE_ROUTE_CATALOG_VERSION = "study-tutor-v3.eligible-route-catalog.v1";
 const TRUSTED_CATALOGS = new WeakMap();
@@ -38,6 +38,8 @@ function unique(values) {
  */
 export function createEligibleRouteCatalog(input) {
     if (!isTrustedProviderProfileRegistry(input.providerPolicyRegistry))
+        return null;
+    if (!providerEligibilityRequirementsAreBounded(input.providerPolicyRequirements))
         return null;
     const providers = validatedProfiles(input.providerProfiles, ProviderCapabilityProfileSchema, PROVIDER_CAPABILITY_PROFILE_VERSION);
     const models = validatedProfiles(input.modelProfiles, ModelCapabilityProfileSchema, MODEL_CAPABILITY_PROFILE_VERSION);

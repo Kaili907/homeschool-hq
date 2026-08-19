@@ -30,6 +30,7 @@ export const ReviewedStaticFallbackSchema = Type.Object({
 }, { additionalProperties: false });
 export const ExecutionBudgetSchema = Type.Object({
     contractVersion: Type.Literal(BUDGET_RESILIENCE_VERSION),
+    commercialScopeRef: ReferenceSchema,
     logicalOperationRef: ReferenceSchema,
     currency: Type.Literal("USD"),
     operationMaximumMicros: CanonicalIntegerMicrosSchema,
@@ -51,6 +52,7 @@ export const AttemptBudgetSchema = Type.Composite([
 export const BudgetReservationSchema = Type.Object({
     contractVersion: Type.Literal(BUDGET_RESILIENCE_VERSION),
     reservationRef: ReferenceSchema,
+    commercialScopeRef: ReferenceSchema,
     logicalOperationRef: ReferenceSchema,
     status: Type.Literal("reserved"),
     totalReservedMicros: CanonicalIntegerMicrosSchema,

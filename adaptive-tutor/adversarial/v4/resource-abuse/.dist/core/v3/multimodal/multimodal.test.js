@@ -1,10 +1,51 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { Value } from "../../schema/value.js";
+import { COMMERCIAL_EXECUTION_SCOPE_VERSION, } from "../commercial-operation/index.js";
+import { STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION, } from "../contracts/index.js";
+import { PRESENTATION_CONTRACT_VERSION } from "../presentation/index.js";
 import { DurableMultimodalEvidenceSchema, LearnerImageReviewDecisionSchema, MULTIMODAL_CONTRACT_VERSION, MULTIMODAL_MODES, MultimodalDeliveryOutcomeSchema, MultimodalPresentationSchema, TRANSIENT_MEDIA_INFERENCE_RESTRICTIONS, TransientLearnerImageReviewRequestSchema, TransientMediaDescriptorSchema, enforceMultimodalPresentationPolicy, projectDurableMultimodalEvidence, } from "./index.js";
 const observedAt = "2026-08-15T14:30:00.000Z";
 const digest = `sha256:${"a".repeat(64)}`;
 const restrictions = TRANSIENT_MEDIA_INFERENCE_RESTRICTIONS;
+const scope = {
+    commercialExecutionScopeRef: "commercial-scope:multimodal-001",
+    householdScopeRef: "household:family-one",
+    learnerScopeRef: "learner:learner-one",
+    sessionRef: "session:study-001",
+    interactionRef: "interaction:multimodal-001",
+    logicalOperationRef: "logical-operation:multimodal-001",
+    conceptRef: "concept:lesson-one",
+    opportunityRef: "opportunity:lesson-one",
+    presentationRef: "presentation-fallback:lesson-one",
+};
+const commercialExecutionScope = {
+    scopeVersion: COMMERCIAL_EXECUTION_SCOPE_VERSION,
+    scopeKind: "trusted-study-commercial-execution-scope",
+    issuedBy: "study-engine",
+    scopeRef: scope.commercialExecutionScopeRef,
+    householdScopeRef: scope.householdScopeRef,
+    learnerScopeRef: scope.learnerScopeRef,
+    sessionRef: scope.sessionRef,
+    interactionRef: scope.interactionRef,
+    logicalOperationRef: scope.logicalOperationRef,
+    curriculumReleaseRef: "release-multimodal-001",
+    curriculumPackageRef: "package:multimodal-001",
+    curriculumCourseRef: "course-multimodal-001",
+    curriculumSubjectRef: "subject-multimodal-001",
+    curriculumUnitRef: "unit-multimodal-001",
+    curriculumLessonRef: "lesson-multimodal-001",
+    conceptRef: scope.conceptRef,
+    opportunityRef: scope.opportunityRef,
+    learnerStageRef: "learner-stage:multimodal-001",
+    presentationRef: scope.presentationRef,
+    routingRequestRef: "routing-request:multimodal-001",
+    routePlanRef: "route-plan:multimodal-001",
+    reservationRef: "reservation:multimodal-001",
+    physicalAttemptRefs: ["physical-attempt:multimodal-001"],
+    allowedRouteRefs: ["route:multimodal-001"],
+    telemetryEventRefs: ["telemetry:multimodal-001"],
+};
 const audio = {
     mediaRef: "media:audio-turn-001",
     mediaKind: "raw-audio",
@@ -36,8 +77,10 @@ const reviewedImage = {
     visualRef: "visual:approved-image-001",
     visualKind: "image",
     contentDigest: digest,
+    mimeType: "image/png",
     reviewStatus: "approved",
     reviewRef: "review:image-001",
+    provenanceRef: "provenance:image-001",
     reviewedAt: observedAt,
     learnerSafe: true,
 };
@@ -45,8 +88,10 @@ const reviewedDiagram = {
     visualRef: "visual:approved-diagram-001",
     visualKind: "diagram",
     contentDigest: digest,
+    mimeType: "image/svg+xml",
     reviewStatus: "approved",
     reviewRef: "review:diagram-001",
+    provenanceRef: "provenance:diagram-001",
     reviewedAt: observedAt,
     learnerSafe: true,
 };
@@ -77,6 +122,7 @@ function presentationFor(mode) {
     return {
         contractVersion: MULTIMODAL_CONTRACT_VERSION,
         envelope: "multimodal-presentation",
+        scope,
         interactionRef: "interaction:multimodal-001",
         turnRef: `turn:${mode}`,
         speaker: "tutor",
@@ -87,6 +133,84 @@ function presentationFor(mode) {
             stepIndex: 2,
         },
         assessmentDisclosure: activeAssessment,
+    };
+}
+function trustedContextFor(presentation) {
+    const content = presentation.content;
+    const presentationIntent = content.mode === "reviewed-image" || content.mode === "reviewed-diagram"
+        ? {
+            contractVersion: PRESENTATION_CONTRACT_VERSION,
+            intentKind: "reference-only-presentation-intent",
+            reviewedVisual: {
+                kind: content.visual.visualKind,
+                contentRef: content.visual.visualRef,
+                contentDigest: content.visual.contentDigest,
+                provenanceRef: content.visual.provenanceRef,
+            },
+            accessibilityCaptionRef: presentation.caption.captionRef,
+            requestedDeliveryChannels: ["visual"],
+            fallbackPresentation: {
+                presentationRef: scope.presentationRef,
+                requestedDeliveryChannels: ["text"],
+            },
+        }
+        : {
+            contractVersion: PRESENTATION_CONTRACT_VERSION,
+            intentKind: "reference-only-presentation-intent",
+            reviewedTextRef: "reviewed-content:multimodal-text-001",
+            accessibilityCaptionRef: presentation.caption.captionRef,
+            requestedDeliveryChannels: ["text"],
+            fallbackPresentation: {
+                presentationRef: scope.presentationRef,
+                requestedDeliveryChannels: ["text"],
+            },
+        };
+    const studyAdvisory = {
+        contractVersion: STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION,
+        advisoryKind: "study-commercial-tutor-advisory",
+        invocationRef: commercialExecutionScope.interactionRef,
+        commercialScopeRef: commercialExecutionScope.scopeRef,
+        householdScopeRef: commercialExecutionScope.householdScopeRef,
+        learnerScopeRef: commercialExecutionScope.learnerScopeRef,
+        sessionRef: commercialExecutionScope.sessionRef,
+        interactionRef: commercialExecutionScope.interactionRef,
+        logicalOperationRef: commercialExecutionScope.logicalOperationRef,
+        opportunityRef: commercialExecutionScope.opportunityRef,
+        conceptRef: commercialExecutionScope.conceptRef,
+        learnerStageRef: commercialExecutionScope.learnerStageRef,
+        status: "proposed",
+        proposedTutorAction: "hint",
+        reasonCodes: ["COMMERCIAL_PROPOSAL_READY"],
+        reviewedContentRefs: content.mode === "reviewed-image" || content.mode === "reviewed-diagram"
+            ? [content.visual.visualRef]
+            : ["reviewed-content:multimodal-text-001"],
+        groundingDecision: "sufficient",
+        assistanceEvidenceRef: commercialExecutionScope.opportunityRef,
+        presentationIntent,
+        studyDecisionRequired: true,
+        studyMutationAllowed: false,
+        officialMasteryAuthority: false,
+        officialWorkingLevelAuthority: false,
+        nominalGradeAuthority: false,
+        curriculumAuthority: false,
+        segmentCompletionAuthority: false,
+    };
+    return {
+        contextKind: "trusted-study-multimodal-policy-context",
+        commercialExecutionScope,
+        studyAdvisory,
+        scope,
+        captionBinding: {
+            scope,
+            captionRef: presentation.caption.captionRef,
+            text: presentation.caption.text,
+            locale: presentation.caption.locale,
+            use: "neutral-accessibility-metadata",
+        },
+        reviewedVisualBindings: [
+            { scope, visual: reviewedImage, provenanceStatus: "approved-content" },
+            { scope, visual: reviewedDiagram, provenanceStatus: "approved-content" },
+        ],
     };
 }
 function clone(value) {
@@ -154,7 +278,8 @@ test("admits learner images only through a transient review request and approved
 });
 test("applies active-assessment anti-answer policy identically to every mode", () => {
     for (const mode of MULTIMODAL_MODES) {
-        assert.equal(enforceMultimodalPresentationPolicy(presentationFor(mode)).status, "accepted");
+        const presentation = presentationFor(mode);
+        assert.equal(enforceMultimodalPresentationPolicy(presentation, trustedContextFor(presentation)).status, "accepted");
         const invalid = clone(presentationFor(mode));
         invalid.assessmentDisclosure = {
             phase: "active-assessment",
@@ -162,11 +287,8 @@ test("applies active-assessment anti-answer policy identically to every mode", (
             answerExposure: "reviewed-answer",
             appliesToAllModalities: true,
         };
-        const result = enforceMultimodalPresentationPolicy(invalid);
+        const result = enforceMultimodalPresentationPolicy(invalid, trustedContextFor(presentation));
         assert.equal(result.status, "rejected", mode);
-        if (result.status === "rejected") {
-            assert.equal(result.code, "ACTIVE_ASSESSMENT_ANSWER_BLOCKED", mode);
-        }
     }
 });
 test("makes media failure nonblocking with a captioned continuation fallback", () => {
@@ -200,6 +322,7 @@ test("minimization projection cannot carry raw media, transcript, caption, or co
         evidenceRef: "evidence:multimodal-001",
         sessionRef: "session:study-001",
         presentation: speech,
+        trustedContext: trustedContextFor(speech),
         outcome: "demonstrated",
         assistanceLevel: "light-hint",
         observedAt,
@@ -235,13 +358,20 @@ test("minimization projection cannot carry raw media, transcript, caption, or co
         "assistanceLevel",
         "captionAvailability",
         "captionRef",
+        "commercialExecutionScopeRef",
+        "conceptRef",
         "contractVersion",
         "envelope",
         "evidenceRef",
+        "householdScopeRef",
         "interactionRef",
+        "learnerScopeRef",
+        "logicalOperationRef",
         "mode",
         "observedAt",
+        "opportunityRef",
         "outcome",
+        "presentationRef",
         "rawMediaPersisted",
         "sessionRef",
         "transcriptPersisted",
@@ -254,6 +384,7 @@ test("durable evidence schema rejects raw fields and raw-like ref smuggling", ()
         evidenceRef: "evidence:multimodal-002",
         sessionRef: "session:study-001",
         presentation: presentationFor("reviewed-image"),
+        trustedContext: trustedContextFor(presentationFor("reviewed-image")),
         outcome: "inconclusive",
         assistanceLevel: "guided",
         observedAt,

@@ -185,21 +185,74 @@ const ParentReportConsentStateSchema = Type.Union([
     Type.Literal("withdrawn"),
     Type.Literal("expired"),
 ]);
-const ParentReportConsentNotRequiredSchema = Type.Object({
-    policyRequirement: Type.Literal("not-required"),
-    consentState: Type.Literal("not-required"),
-}, { additionalProperties: false });
-const ParentReportRequiredConsentSchema = Type.Object({
+const ConsentBindingCommonProperties = {
+    policyRef: OpaqueReferenceSchema,
+    policyRevisionRef: OpaqueReferenceSchema,
+    guardianRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
+    learnerScopeRef: OpaqueReferenceSchema,
+    authorizationRef: OpaqueReferenceSchema,
+    authorizationRevisionRef: OpaqueReferenceSchema,
+    visibility: Type.Literal("parent-report"),
+};
+const RequiredConsentProperties = {
     policyRequirement: Type.Literal("required"),
     consentRef: OpaqueReferenceSchema,
+    consentRevisionRef: OpaqueReferenceSchema,
+    currentConsentRevisionRef: OpaqueReferenceSchema,
+    consentRevisionStatus: Type.Union([
+        Type.Literal("current"),
+        Type.Literal("consumed"),
+        Type.Literal("superseded"),
+        Type.Literal("revoked"),
+    ]),
     consentState: ParentReportConsentStateSchema,
+};
+const NotRequiredConsentProperties = {
+    policyRequirement: Type.Literal("not-required"),
+    consentState: Type.Literal("not-required"),
+};
+const SessionRequiredConsentSchema = Type.Object({
+    ...ConsentBindingCommonProperties,
+    ...RequiredConsentProperties,
+    scopeKind: Type.Literal("session"),
+    sessionRef: OpaqueReferenceSchema,
 }, { additionalProperties: false });
-export const ParentReportConsentSchema = Type.Union([ParentReportConsentNotRequiredSchema, ParentReportRequiredConsentSchema], { $id: "TutorV2ParentReportConsent" });
+const ReportingPeriodRequiredConsentSchema = Type.Object({
+    ...ConsentBindingCommonProperties,
+    ...RequiredConsentProperties,
+    scopeKind: Type.Literal("reporting-period"),
+    reportingPeriodRef: OpaqueReferenceSchema,
+    startsAt: ISODateTimeSchema,
+    endsAt: ISODateTimeSchema,
+}, { additionalProperties: false });
+const SessionConsentNotRequiredSchema = Type.Object({
+    ...ConsentBindingCommonProperties,
+    ...NotRequiredConsentProperties,
+    scopeKind: Type.Literal("session"),
+    sessionRef: OpaqueReferenceSchema,
+}, { additionalProperties: false });
+const ReportingPeriodConsentNotRequiredSchema = Type.Object({
+    ...ConsentBindingCommonProperties,
+    ...NotRequiredConsentProperties,
+    scopeKind: Type.Literal("reporting-period"),
+    reportingPeriodRef: OpaqueReferenceSchema,
+    startsAt: ISODateTimeSchema,
+    endsAt: ISODateTimeSchema,
+}, { additionalProperties: false });
+export const ParentReportConsentSchema = Type.Union([
+    SessionConsentNotRequiredSchema,
+    ReportingPeriodConsentNotRequiredSchema,
+    SessionRequiredConsentSchema,
+    ReportingPeriodRequiredConsentSchema,
+], { $id: "TutorV2ParentReportConsent" });
 const GuardianAuthorizationCommonProperties = {
     guardianAuthorizationKind: Type.Literal("study-parent-report-guardian-authorization"),
     issuer: Type.Literal("study"),
     authorizationRef: OpaqueReferenceSchema,
+    reportRef: OpaqueReferenceSchema,
     policyRef: OpaqueReferenceSchema,
+    policyRevisionRef: OpaqueReferenceSchema,
     guardianRef: OpaqueReferenceSchema,
     householdScopeRef: OpaqueReferenceSchema,
     learnerScopeRef: OpaqueReferenceSchema,
@@ -207,9 +260,13 @@ const GuardianAuthorizationCommonProperties = {
     currentAuthorizationRevisionRef: OpaqueReferenceSchema,
     authorizationRevisionStatus: Type.Union([
         Type.Literal("current"),
+        Type.Literal("consumed"),
         Type.Literal("superseded"),
         Type.Literal("revoked"),
     ]),
+    authorizationIssuedEventRef: OpaqueReferenceSchema,
+    authorizationIssuedAt: ISODateTimeSchema,
+    authorizationExpiresAt: ISODateTimeSchema,
     visibility: Type.Literal("parent-report"),
     consent: ParentReportConsentSchema,
 };
@@ -222,6 +279,8 @@ const ReportingPeriodGuardianAuthorizationSchema = Type.Object({
     ...GuardianAuthorizationCommonProperties,
     scopeKind: Type.Literal("reporting-period"),
     reportingPeriodRef: OpaqueReferenceSchema,
+    startsAt: ISODateTimeSchema,
+    endsAt: ISODateTimeSchema,
 }, { additionalProperties: false });
 /**
  * Closed authorization evidence issued by Study. Request scope equality alone
@@ -263,14 +322,95 @@ export const ParentReportEvidenceSchema = Type.Object({
         reportingApproval: Type.Literal("study-approved-for-parent-reporting"),
         sourceEventRef: OpaqueReferenceSchema,
         policyRef: OpaqueReferenceSchema,
+        policyRevisionRef: OpaqueReferenceSchema,
         recordedAt: ISODateTimeSchema,
         scope: ParentReportEvidenceScopeSchema,
     }, { additionalProperties: false }),
 }, { additionalProperties: false, $id: "TutorV2ParentReportEvidence" });
+export const PARENT_REPORT_STUDY_EVIDENCE_STATES = [
+    "TUTOR_PROPOSED",
+    "STUDY_APPROVED",
+    "STUDY_APPLIED",
+    "STUDY_COMPLETED",
+    "STUDY_RECORDED",
+];
+const ParentReportStudyEvidenceTransitionSchema = Type.Union([
+    Type.Object({
+        state: Type.Literal("TUTOR_PROPOSED"),
+        proposalEventRef: OpaqueReferenceSchema,
+    }, { additionalProperties: false }),
+    Type.Object({
+        state: Type.Literal("STUDY_APPROVED"),
+        proposalEventRef: OpaqueReferenceSchema,
+        approvalEventRef: OpaqueReferenceSchema,
+    }, { additionalProperties: false }),
+    Type.Object({
+        state: Type.Literal("STUDY_APPLIED"),
+        proposalEventRef: OpaqueReferenceSchema,
+        approvalEventRef: OpaqueReferenceSchema,
+        appliedEventRef: OpaqueReferenceSchema,
+    }, { additionalProperties: false }),
+    Type.Object({
+        state: Type.Literal("STUDY_COMPLETED"),
+        completionEventRef: OpaqueReferenceSchema,
+    }, { additionalProperties: false }),
+    Type.Object({
+        state: Type.Literal("STUDY_RECORDED"),
+        observationEventRef: OpaqueReferenceSchema,
+    }, { additionalProperties: false }),
+]);
+export const ParentReportTrustedEvidenceReceiptSchema = Type.Object({
+    receiptKind: Type.Literal("study-parent-report-evidence-receipt"),
+    issuer: Type.Literal("study"),
+    evidenceRef: OpaqueReferenceSchema,
+    learnerRef: OpaqueReferenceSchema,
+    reasonCode: PolicyCodeSchema,
+    sourceEventRef: OpaqueReferenceSchema,
+    policyRef: OpaqueReferenceSchema,
+    policyRevisionRef: OpaqueReferenceSchema,
+    recordedAt: ISODateTimeSchema,
+    scope: ParentReportEvidenceScopeSchema,
+    transition: ParentReportStudyEvidenceTransitionSchema,
+}, {
+    additionalProperties: false,
+    $id: "TutorV2ParentReportTrustedEvidenceReceipt",
+});
+const ParentReportPolicyAuthoritySchema = Type.Object({
+    authorityKind: Type.Literal("study-parent-report-policy-authority"),
+    issuer: Type.Literal("study-policy"),
+    policyRef: OpaqueReferenceSchema,
+    policyRevisionRef: OpaqueReferenceSchema,
+    currentPolicyRevisionRef: OpaqueReferenceSchema,
+    policyRevisionStatus: Type.Union([
+        Type.Literal("current"),
+        Type.Literal("superseded"),
+        Type.Literal("revoked"),
+    ]),
+    policyIssuedEventRef: OpaqueReferenceSchema,
+    consentRequirement: Type.Union([
+        Type.Literal("required"),
+        Type.Literal("not-required"),
+    ]),
+}, { additionalProperties: false });
+/**
+ * Detached, trusted Study input. It must come from the Study/policy authority,
+ * never from the report caller, Tutor, provider, telemetry, or memory.
+ */
+export const ParentReportTrustedAuthoritySchema = Type.Object({
+    authorityKind: Type.Literal("study-parent-report-trusted-authority"),
+    issuer: Type.Literal("study"),
+    reportRef: OpaqueReferenceSchema,
+    policy: ParentReportPolicyAuthoritySchema,
+    guardianAuthorization: ParentReportGuardianAuthorizationSchema,
+    evidenceReceipts: Type.Array(ParentReportTrustedEvidenceReceiptSchema, {
+        maxItems: 1_000,
+    }),
+}, { additionalProperties: false, $id: "TutorV2ParentReportTrustedAuthority" });
 export const ParentReportRequestSchema = Type.Object({
     requestKind: Type.Literal("parent-hub-report"),
     reportRef: OpaqueReferenceSchema,
     policyRef: OpaqueReferenceSchema,
+    policyRevisionRef: OpaqueReferenceSchema,
     generatedAt: ISODateTimeSchema,
     scope: ParentReportRequestScopeSchema,
     guardianAuthorization: ParentReportGuardianAuthorizationSchema,
@@ -315,10 +455,16 @@ export const ParentReportSchema = Type.Object({
         producer: Type.Literal("study-engine"),
         reportRef: OpaqueReferenceSchema,
         policyRef: OpaqueReferenceSchema,
+        policyRevisionRef: OpaqueReferenceSchema,
         generatedAt: ISODateTimeSchema,
         authorizationRef: OpaqueReferenceSchema,
         authorizationRevisionRef: OpaqueReferenceSchema,
+        authorizationIssuedEventRef: OpaqueReferenceSchema,
         consentRef: Type.Union([OpaqueReferenceSchema, Type.Null()]),
+        consentRevisionRef: Type.Union([
+            OpaqueReferenceSchema,
+            Type.Null(),
+        ]),
         sourceEvidenceCount: Type.Integer({ minimum: 0, maximum: 1_000 }),
     }, { additionalProperties: false }),
 }, { additionalProperties: false, $id: "TutorV2ParentReport" });
@@ -381,6 +527,24 @@ function evidenceMatchesScope(reportScope, evidence) {
 function isRecord(value) {
     return typeof value === "object" && value !== null && !Array.isArray(value);
 }
+function consentMatchesScope(reportScope, consent) {
+    if (consent.guardianRef !== reportScope.guardianRef ||
+        consent.householdScopeRef !== reportScope.householdScopeRef ||
+        consent.learnerScopeRef !== reportScope.selectedLearnerRef ||
+        consent.scopeKind !== reportScope.scopeKind) {
+        return false;
+    }
+    if (reportScope.scopeKind === "session" && consent.scopeKind === "session") {
+        return consent.sessionRef === reportScope.sessionRef;
+    }
+    if (reportScope.scopeKind === "reporting-period" &&
+        consent.scopeKind === "reporting-period") {
+        return (consent.reportingPeriodRef === reportScope.reportingPeriodRef &&
+            consent.startsAt === reportScope.startsAt &&
+            consent.endsAt === reportScope.endsAt);
+    }
+    return false;
+}
 function authorizationMatchesScope(reportScope, authorization) {
     if (authorization.guardianRef !== reportScope.guardianRef ||
         authorization.householdScopeRef !== reportScope.householdScopeRef ||
@@ -394,9 +558,151 @@ function authorizationMatchesScope(reportScope, authorization) {
     }
     if (reportScope.scopeKind === "reporting-period" &&
         authorization.scopeKind === "reporting-period") {
-        return (authorization.reportingPeriodRef === reportScope.reportingPeriodRef);
+        return (authorization.reportingPeriodRef === reportScope.reportingPeriodRef &&
+            authorization.startsAt === reportScope.startsAt &&
+            authorization.endsAt === reportScope.endsAt);
     }
     return false;
+}
+function consentMatchesTrustedAuthority(submitted, trusted) {
+    if (submitted.policyRequirement !== trusted.policyRequirement ||
+        submitted.consentState !== trusted.consentState ||
+        submitted.policyRef !== trusted.policyRef ||
+        submitted.policyRevisionRef !== trusted.policyRevisionRef ||
+        submitted.guardianRef !== trusted.guardianRef ||
+        submitted.householdScopeRef !== trusted.householdScopeRef ||
+        submitted.learnerScopeRef !== trusted.learnerScopeRef ||
+        submitted.authorizationRef !== trusted.authorizationRef ||
+        submitted.authorizationRevisionRef !== trusted.authorizationRevisionRef ||
+        submitted.visibility !== trusted.visibility ||
+        submitted.scopeKind !== trusted.scopeKind) {
+        return false;
+    }
+    if (submitted.policyRequirement === "required" &&
+        trusted.policyRequirement === "required" &&
+        (submitted.consentRef !== trusted.consentRef ||
+            submitted.consentRevisionRef !== trusted.consentRevisionRef ||
+            submitted.currentConsentRevisionRef !==
+                trusted.currentConsentRevisionRef ||
+            submitted.consentRevisionStatus !== trusted.consentRevisionStatus)) {
+        return false;
+    }
+    if (submitted.scopeKind === "session" && trusted.scopeKind === "session") {
+        return submitted.sessionRef === trusted.sessionRef;
+    }
+    if (submitted.scopeKind === "reporting-period" &&
+        trusted.scopeKind === "reporting-period") {
+        return (submitted.reportingPeriodRef === trusted.reportingPeriodRef &&
+            submitted.startsAt === trusted.startsAt &&
+            submitted.endsAt === trusted.endsAt);
+    }
+    return false;
+}
+function authorizationMatchesTrustedAuthority(submitted, trusted) {
+    const scopeMatches = submitted.scopeKind === "session" && trusted.scopeKind === "session"
+        ? submitted.sessionRef === trusted.sessionRef
+        : submitted.scopeKind === "reporting-period" &&
+            trusted.scopeKind === "reporting-period"
+            ? submitted.reportingPeriodRef === trusted.reportingPeriodRef &&
+                submitted.startsAt === trusted.startsAt &&
+                submitted.endsAt === trusted.endsAt
+            : false;
+    return (submitted.guardianAuthorizationKind === trusted.guardianAuthorizationKind &&
+        submitted.issuer === trusted.issuer &&
+        submitted.authorizationRef === trusted.authorizationRef &&
+        submitted.reportRef === trusted.reportRef &&
+        submitted.policyRef === trusted.policyRef &&
+        submitted.policyRevisionRef === trusted.policyRevisionRef &&
+        submitted.guardianRef === trusted.guardianRef &&
+        submitted.householdScopeRef === trusted.householdScopeRef &&
+        submitted.learnerScopeRef === trusted.learnerScopeRef &&
+        submitted.authorizationRevisionRef === trusted.authorizationRevisionRef &&
+        submitted.currentAuthorizationRevisionRef ===
+            trusted.currentAuthorizationRevisionRef &&
+        submitted.authorizationRevisionStatus ===
+            trusted.authorizationRevisionStatus &&
+        submitted.authorizationIssuedEventRef ===
+            trusted.authorizationIssuedEventRef &&
+        submitted.authorizationIssuedAt === trusted.authorizationIssuedAt &&
+        submitted.authorizationExpiresAt === trusted.authorizationExpiresAt &&
+        submitted.visibility === trusted.visibility &&
+        scopeMatches);
+}
+function terminalTransitionEventRef(receipt) {
+    switch (receipt.transition.state) {
+        case "TUTOR_PROPOSED":
+            return receipt.transition.proposalEventRef;
+        case "STUDY_APPROVED":
+            return receipt.transition.approvalEventRef;
+        case "STUDY_APPLIED":
+            return receipt.transition.appliedEventRef;
+        case "STUDY_COMPLETED":
+            return receipt.transition.completionEventRef;
+        case "STUDY_RECORDED":
+            return receipt.transition.observationEventRef;
+    }
+}
+function hasValidTransitionChain(receipt) {
+    switch (receipt.transition.state) {
+        case "TUTOR_PROPOSED":
+        case "STUDY_COMPLETED":
+        case "STUDY_RECORDED":
+            return true;
+        case "STUDY_APPROVED":
+            return (receipt.transition.proposalEventRef !==
+                receipt.transition.approvalEventRef);
+        case "STUDY_APPLIED":
+            return new Set([
+                receipt.transition.proposalEventRef,
+                receipt.transition.approvalEventRef,
+                receipt.transition.appliedEventRef,
+            ]).size === 3;
+    }
+}
+function transitionMatchesClaim(receipt, evidence) {
+    const decisionReason = evidence.reasonCode === "review-requested" ||
+        evidence.reasonCode === "prerequisite-review" ||
+        evidence.reasonCode === "reteach" ||
+        evidence.reasonCode === "study-decision";
+    if (decisionReason) {
+        return ((receipt.transition.state === "TUTOR_PROPOSED" &&
+            evidence.decisionStatus === "tutor-proposed") ||
+            (receipt.transition.state === "STUDY_APPROVED" &&
+                evidence.decisionStatus === "study-approved") ||
+            (receipt.transition.state === "STUDY_APPLIED" &&
+                evidence.decisionStatus === "study-applied"));
+    }
+    if (evidence.reasonCode === "practice-completed") {
+        return (receipt.transition.state === "STUDY_COMPLETED" &&
+            evidence.decisionStatus === null);
+    }
+    return (receipt.transition.state === "STUDY_RECORDED" &&
+        evidence.decisionStatus === null);
+}
+function evidenceMatchesTrustedReceipt(evidence, receipt) {
+    const evidenceScope = evidence.provenance.scope;
+    const receiptScope = receipt.scope;
+    const scopeMatches = evidenceScope.householdScopeRef === receiptScope.householdScopeRef &&
+        evidenceScope.learnerScopeRef === receiptScope.learnerScopeRef &&
+        (evidenceScope.scopeKind === "session" && receiptScope.scopeKind === "session"
+            ? evidenceScope.sessionRef === receiptScope.sessionRef
+            : evidenceScope.scopeKind === "reporting-period" &&
+                receiptScope.scopeKind === "reporting-period"
+                ? evidenceScope.reportingPeriodRef === receiptScope.reportingPeriodRef &&
+                    evidenceScope.startsAt === receiptScope.startsAt &&
+                    evidenceScope.endsAt === receiptScope.endsAt
+                : false);
+    return (evidence.evidenceRef === receipt.evidenceRef &&
+        evidence.learnerRef === receipt.learnerRef &&
+        evidence.reasonCode === receipt.reasonCode &&
+        evidence.provenance.sourceEventRef === receipt.sourceEventRef &&
+        evidence.provenance.policyRef === receipt.policyRef &&
+        evidence.provenance.policyRevisionRef === receipt.policyRevisionRef &&
+        evidence.provenance.recordedAt === receipt.recordedAt &&
+        scopeMatches &&
+        hasValidTransitionChain(receipt) &&
+        terminalTransitionEventRef(receipt) === receipt.sourceEventRef &&
+        transitionMatchesClaim(receipt, evidence));
 }
 function outputScope(scope) {
     if (scope.scopeKind === "session") {
@@ -422,7 +728,7 @@ function outputScope(scope) {
  * Aggregates only exact, Study-approved-for-reporting evidence. It does not
  * query Study, approve a proposal, apply a decision, or deliver a notification.
  */
-export function buildMinimizedParentHubReport(value) {
+export function buildMinimizedParentHubReport(value, trustedAuthorityValue) {
     if (!isRecord(value) || !isRecord(value.guardianAuthorization)) {
         return {
             status: "rejected",
@@ -444,8 +750,16 @@ export function buildMinimizedParentHubReport(value) {
     if (requestResult.status === "rejected") {
         return { status: "rejected", code: "PARENT_REPORT_REQUEST_REJECTED" };
     }
+    const trustedAuthorityResult = validateExact(ParentReportTrustedAuthoritySchema, trustedAuthorityValue);
+    if (trustedAuthorityResult.status === "rejected") {
+        return {
+            status: "rejected",
+            code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+        };
+    }
     const request = requestResult.value;
     const authorization = authorizationResult.value;
+    const trustedAuthority = trustedAuthorityResult.value;
     if (!isValidDateTime(request.generatedAt)) {
         return { status: "rejected", code: "PARENT_REPORT_REQUEST_REJECTED" };
     }
@@ -456,19 +770,74 @@ export function buildMinimizedParentHubReport(value) {
     if (authorization.authorizationRevisionStatus !== "current" ||
         authorization.authorizationRevisionRef !==
             authorization.currentAuthorizationRevisionRef ||
+        authorization.reportRef !== request.reportRef ||
         authorization.policyRef !== request.policyRef ||
+        authorization.policyRevisionRef !== request.policyRevisionRef ||
+        !isValidDateTime(authorization.authorizationIssuedAt) ||
+        !isValidDateTime(authorization.authorizationExpiresAt) ||
+        Date.parse(authorization.authorizationIssuedAt) >
+            Date.parse(request.generatedAt) ||
+        Date.parse(request.generatedAt) >
+            Date.parse(authorization.authorizationExpiresAt) ||
+        Date.parse(authorization.authorizationIssuedAt) >
+            Date.parse(authorization.authorizationExpiresAt) ||
         !authorizationMatchesScope(request.scope, authorization)) {
         return {
             status: "rejected",
             code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
         };
     }
+    if (trustedAuthority.reportRef !== request.reportRef ||
+        trustedAuthority.policy.policyRevisionStatus !== "current" ||
+        trustedAuthority.policy.policyRevisionRef !==
+            trustedAuthority.policy.currentPolicyRevisionRef ||
+        trustedAuthority.policy.policyRef !== request.policyRef ||
+        trustedAuthority.policy.policyRevisionRef !== request.policyRevisionRef ||
+        !authorizationMatchesTrustedAuthority(authorization, trustedAuthority.guardianAuthorization)) {
+        return {
+            status: "rejected",
+            code: "PARENT_REPORT_AUTHORIZATION_REJECTED",
+        };
+    }
+    if (authorization.consent.policyRequirement !==
+        trustedAuthority.policy.consentRequirement ||
+        authorization.consent.policyRef !== request.policyRef ||
+        authorization.consent.policyRevisionRef !== request.policyRevisionRef ||
+        authorization.consent.authorizationRef !==
+            authorization.authorizationRef ||
+        authorization.consent.authorizationRevisionRef !==
+            authorization.authorizationRevisionRef ||
+        !consentMatchesScope(request.scope, authorization.consent) ||
+        !consentMatchesTrustedAuthority(authorization.consent, trustedAuthority.guardianAuthorization.consent)) {
+        return { status: "rejected", code: "PARENT_REPORT_CONSENT_REJECTED" };
+    }
     if (authorization.consent.policyRequirement === "required" &&
-        authorization.consent.consentState !== "granted") {
+        (authorization.consent.consentState !== "granted" ||
+            authorization.consent.consentRevisionStatus !== "current" ||
+            authorization.consent.consentRevisionRef !==
+                authorization.consent.currentConsentRevisionRef)) {
         return { status: "rejected", code: "PARENT_REPORT_CONSENT_REJECTED" };
     }
     const evidenceRefs = new Set();
     const sourceEventRefs = new Set();
+    const trustedEvidenceRefs = new Set();
+    const trustedSourceEventRefs = new Set();
+    const trustedReceiptsByEvidenceRef = new Map();
+    for (const receipt of trustedAuthority.evidenceReceipts) {
+        if (trustedEvidenceRefs.has(receipt.evidenceRef) ||
+            trustedSourceEventRefs.has(receipt.sourceEventRef)) {
+            return {
+                status: "rejected",
+                code: "PARENT_REPORT_DUPLICATE_EVIDENCE",
+            };
+        }
+        trustedEvidenceRefs.add(receipt.evidenceRef);
+        trustedSourceEventRefs.add(receipt.sourceEventRef);
+        trustedReceiptsByEvidenceRef.set(receipt.evidenceRef, receipt);
+    }
+    if (trustedAuthority.evidenceReceipts.length !== request.evidence.length) {
+        return { status: "rejected", code: "PARENT_REPORT_STATUS_MISMATCH" };
+    }
     const counts = new Map();
     for (const evidence of request.evidence) {
         if (evidenceRefs.has(evidence.evidenceRef) ||
@@ -486,6 +855,9 @@ export function buildMinimizedParentHubReport(value) {
         if (evidence.provenance.policyRef !== request.policyRef) {
             return { status: "rejected", code: "PARENT_REPORT_POLICY_MISMATCH" };
         }
+        if (evidence.provenance.policyRevisionRef !== request.policyRevisionRef) {
+            return { status: "rejected", code: "PARENT_REPORT_POLICY_MISMATCH" };
+        }
         if (!evidenceMatchesScope(request.scope, evidence)) {
             return { status: "rejected", code: "PARENT_REPORT_SCOPE_MISMATCH" };
         }
@@ -495,6 +867,11 @@ export function buildMinimizedParentHubReport(value) {
                 status: "rejected",
                 code: "PARENT_REPORT_CHRONOLOGY_MISMATCH",
             };
+        }
+        const trustedReceipt = trustedReceiptsByEvidenceRef.get(evidence.evidenceRef);
+        if (trustedReceipt === undefined ||
+            !evidenceMatchesTrustedReceipt(evidence, trustedReceipt)) {
+            return { status: "rejected", code: "PARENT_REPORT_STATUS_MISMATCH" };
         }
         const reasonExists = REVIEWED_PARENT_REPORT_COPY.some((copy) => copy.reasonCode === evidence.reasonCode);
         if (!reasonExists) {
@@ -524,11 +901,16 @@ export function buildMinimizedParentHubReport(value) {
             producer: "study-engine",
             reportRef: request.reportRef,
             policyRef: request.policyRef,
+            policyRevisionRef: request.policyRevisionRef,
             generatedAt: request.generatedAt,
             authorizationRef: authorization.authorizationRef,
             authorizationRevisionRef: authorization.authorizationRevisionRef,
+            authorizationIssuedEventRef: authorization.authorizationIssuedEventRef,
             consentRef: authorization.consent.policyRequirement === "required"
                 ? authorization.consent.consentRef
+                : null,
+            consentRevisionRef: authorization.consent.policyRequirement === "required"
+                ? authorization.consent.consentRevisionRef
                 : null,
             sourceEvidenceCount: request.evidence.length,
         },

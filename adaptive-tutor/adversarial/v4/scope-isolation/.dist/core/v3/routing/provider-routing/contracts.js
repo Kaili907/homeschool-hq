@@ -155,6 +155,7 @@ export const RoutingRequestSchema = Type.Object({
     requestVersion: Type.Literal(ROUTING_REQUEST_VERSION),
     requestRef: OpaqueReferenceSchema,
     routePlanRef: OpaqueReferenceSchema,
+    commercialScopeRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     physicalAttemptRefs: Type.Array(OpaqueReferenceSchema, { minItems: 1, maxItems: 2 }),
     actionFamily: ActionFamilySchema,

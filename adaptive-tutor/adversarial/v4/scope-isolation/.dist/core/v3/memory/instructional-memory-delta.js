@@ -45,10 +45,24 @@ export const InstructionalMemoryDeltaOperationSchema = Type.Union([
 ]);
 const NullableOpaqueReferenceSchema = Type.Union([OpaqueReferenceSchema, Type.Null()]);
 const MemoryDigestSchema = Type.String({ pattern: "^memory-digest:[a-f0-9]{64}$" });
+const BoundedLineageIdentifierSchema = Type.String({
+    minLength: 1,
+    maxLength: 160,
+    pattern: "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+});
 export const InstructionalMemoryDeltaSchema = Type.Object({
     deltaKind: Type.Literal("bounded-instructional-memory-delta"),
+    commercialExecutionScopeRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     sourceEventRef: OpaqueReferenceSchema,
+    conceptRef: OpaqueReferenceSchema,
+    curriculumReleaseRef: BoundedLineageIdentifierSchema,
+    curriculumPackageRef: OpaqueReferenceSchema,
+    curriculumCourseRef: BoundedLineageIdentifierSchema,
+    curriculumSubjectRef: BoundedLineageIdentifierSchema,
+    curriculumUnitRef: BoundedLineageIdentifierSchema,
+    curriculumLessonRef: BoundedLineageIdentifierSchema,
     memoryDeltaRef: OpaqueReferenceSchema,
     memoryRef: OpaqueReferenceSchema,
     scope: InstructionalMemoryScopeSchema,
@@ -198,6 +212,19 @@ function applyOperations(prior, operations) {
     }
     return validContent(state) ? state : null;
 }
+function operationsMatchConcept(conceptRef, operations) {
+    return operations.every((operation) => {
+        if (operation.field !== "conceptRefs")
+            return true;
+        if (operation.operationKind === "replace") {
+            return (Array.isArray(operation.value) &&
+                operation.value.every((value) => value === conceptRef));
+        }
+        if (operation.operationKind === "remove")
+            return true;
+        return operation.value === conceptRef;
+    });
+}
 function deriveResult(input) {
     const state = applyOperations(input.priorState, input.operations);
     if (!state)
@@ -206,6 +233,15 @@ function deriveResult(input) {
     const revision = `memory-revision:${fingerprint({
         logicalOperationRef: input.logicalOperationRef,
         sourceEventRef: input.sourceEventRef,
+        commercialExecutionScopeRef: input.commercialExecutionScopeRef,
+        householdScopeRef: input.householdScopeRef,
+        conceptRef: input.conceptRef,
+        curriculumReleaseRef: input.curriculumReleaseRef,
+        curriculumPackageRef: input.curriculumPackageRef,
+        curriculumCourseRef: input.curriculumCourseRef,
+        curriculumSubjectRef: input.curriculumSubjectRef,
+        curriculumUnitRef: input.curriculumUnitRef,
+        curriculumLessonRef: input.curriculumLessonRef,
         memoryDeltaRef: input.memoryDeltaRef,
         memoryRef: input.memoryRef,
         scope: input.scope,
@@ -220,6 +256,9 @@ export function createInstructionalMemoryDelta(input) {
     if (input.prior && !scopesMatch(input.prior.scope, input.scope)) {
         throw new RangeError("prior memory projection scope does not match delta scope");
     }
+    if (!operationsMatchConcept(input.conceptRef, input.operations)) {
+        throw new RangeError("memory delta concept operations do not match accepted concept");
+    }
     const result = deriveResult({
         ...input,
         priorRevisionRef: input.prior?.revisionRef ?? null,
@@ -230,8 +269,17 @@ export function createInstructionalMemoryDelta(input) {
         throw new RangeError("memory delta operations do not produce valid bounded state");
     return {
         deltaKind: "bounded-instructional-memory-delta",
+        commercialExecutionScopeRef: input.commercialExecutionScopeRef,
+        householdScopeRef: input.householdScopeRef,
         logicalOperationRef: input.logicalOperationRef,
         sourceEventRef: input.sourceEventRef,
+        conceptRef: input.conceptRef,
+        curriculumReleaseRef: input.curriculumReleaseRef,
+        curriculumPackageRef: input.curriculumPackageRef,
+        curriculumCourseRef: input.curriculumCourseRef,
+        curriculumSubjectRef: input.curriculumSubjectRef,
+        curriculumUnitRef: input.curriculumUnitRef,
+        curriculumLessonRef: input.curriculumLessonRef,
         memoryDeltaRef: input.memoryDeltaRef,
         memoryRef: input.memoryRef,
         scope: structuredClone(input.scope),
@@ -269,6 +317,9 @@ export class InstructionalMemoryProjectionStore {
         if (validation.status === "rejected")
             return rejected("INVALID_MEMORY_DELTA");
         const delta = validation.value;
+        if (!operationsMatchConcept(delta.conceptRef, delta.operations)) {
+            return rejected("MEMORY_LINEAGE_MISMATCH");
+        }
         const deltaFingerprint = canonicalize(delta);
         const logicalIdentity = this.#logicalOperations.get(delta.logicalOperationRef);
         if (logicalIdentity) {
@@ -295,8 +346,17 @@ export class InstructionalMemoryProjectionStore {
             return rejected("STALE_MEMORY_REVISION");
         }
         const result = deriveResult({
+            commercialExecutionScopeRef: delta.commercialExecutionScopeRef,
+            householdScopeRef: delta.householdScopeRef,
             logicalOperationRef: delta.logicalOperationRef,
             sourceEventRef: delta.sourceEventRef,
+            conceptRef: delta.conceptRef,
+            curriculumReleaseRef: delta.curriculumReleaseRef,
+            curriculumPackageRef: delta.curriculumPackageRef,
+            curriculumCourseRef: delta.curriculumCourseRef,
+            curriculumSubjectRef: delta.curriculumSubjectRef,
+            curriculumUnitRef: delta.curriculumUnitRef,
+            curriculumLessonRef: delta.curriculumLessonRef,
             memoryDeltaRef: delta.memoryDeltaRef,
             memoryRef: delta.memoryRef,
             scope: delta.scope,

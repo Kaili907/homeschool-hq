@@ -4,7 +4,8 @@ import { MODEL_CAPABILITY_PROFILE_VERSION, PROVIDER_AVAILABILITY_STATE_VERSION, 
 import { createTrustedProviderProfileRegistry, } from "../../core/v3/provider-policy/index.js";
 import { CURRICULUM_METADATA_VERSION, } from "../../core/v3/curriculum-admission/index.js";
 import {} from "../../core/v3/commercial-operation/orchestrate.js";
-import { COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION, } from "../../core/v3/commercial-operation/contracts.js";
+import { COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION, COMMERCIAL_EXECUTION_SCOPE_VERSION, } from "../../core/v3/commercial-operation/contracts.js";
+import { COMMERCIAL_EXECUTION_ELIGIBILITY_VERSION, InMemoryPhysicalAttemptDispatchClaimStore, } from "../../core/v3/commercial-operation/execution-integrity.js";
 import { GROUNDING_CONTRACT_VERSION, } from "../../core/v3/grounding/index.js";
 import { LEARNER_STAGE_CATALOG_VERSION, LEARNER_STAGE_POLICY_REVISION_REF, } from "../../core/v3/learner-stage-policy/index.js";
 const DIGEST_A = `sha256:${"a".repeat(64)}`;
@@ -21,6 +22,51 @@ export class ManualCommercialOperationClock {
         this.#nowMs += milliseconds;
     }
 }
+export class MutableCommercialExecutionEligibilityResolver {
+    #states = new Map();
+    setProviderState(providerRef, state) {
+        const current = this.#states.get(providerRef) ?? {
+            availabilityState: "AVAILABLE",
+            circuitState: "closed",
+            providerPolicyState: "active",
+        };
+        this.#states.set(providerRef, { ...current, ...state });
+    }
+    resolve(request) {
+        const state = this.#states.get(request.attempt.providerRef) ?? {
+            availabilityState: "AVAILABLE",
+            circuitState: "closed",
+            providerPolicyState: "active",
+        };
+        const suffix = request.attempt.providerRef.split(":").at(-1) ?? "unknown";
+        return {
+            contractVersion: COMMERCIAL_EXECUTION_ELIGIBILITY_VERSION,
+            evidenceKind: "trusted-current-commercial-execution-eligibility",
+            issuedBy: "study-runtime",
+            phase: request.phase,
+            commercialScopeRef: request.commercialScopeRef,
+            reservationRef: request.reservationRef,
+            logicalOperationRef: request.attempt.logicalOperationRef,
+            physicalAttemptRef: request.attempt.physicalAttemptRef,
+            routeRef: request.attempt.routeRef,
+            providerRef: request.attempt.providerRef,
+            modelRef: request.attempt.modelRef,
+            modelRevisionRef: request.attempt.modelRevisionRef,
+            configurationDigest: request.attempt.configurationDigest,
+            capabilityProfileRevisionRef: request.attempt.capabilityProfileRevisionRef,
+            capabilityProfileDigest: request.attempt.capabilityProfileDigest,
+            providerPolicyRevisionRef: request.attempt.providerPolicyRevisionRef,
+            providerPolicyEvidenceRef: request.attempt.providerPolicyEvidenceRef,
+            providerPolicyState: state.providerPolicyState,
+            availabilityRef: `availability:${suffix}`,
+            availabilityState: state.availabilityState,
+            circuitState: state.circuitState,
+            actionFamily: request.actionFamily,
+            modalityRequirement: request.modalityRequirement,
+            eligibilityEvidenceRef: `execution-eligibility:${suffix}-${request.phase}`,
+        };
+    }
+}
 function scriptedCostMicros(result) {
     if (result.status === "failure")
         return result.metrics.costMicros;
@@ -33,10 +79,19 @@ export function commercialUsageReceipt(attempt, reservationRef, actualCostMicros
     return {
         contractVersion: COMMERCIAL_ATTEMPT_USAGE_RECEIPT_VERSION,
         receiptKind: "commercial-attempt-usage-receipt",
+        commercialScopeRef: attempt.commercialScopeRef,
         logicalOperationRef: attempt.logicalOperationRef,
         physicalAttemptRef: attempt.physicalAttemptRef,
         reservationRef,
         routeRef: attempt.routeRef,
+        providerRef: attempt.providerRef,
+        modelRef: attempt.modelRef,
+        modelRevisionRef: attempt.modelRevisionRef,
+        configurationDigest: attempt.configurationDigest,
+        capabilityProfileRevisionRef: attempt.capabilityProfileRevisionRef,
+        capabilityProfileDigest: attempt.capabilityProfileDigest,
+        providerPolicyRevisionRef: attempt.providerPolicyRevisionRef,
+        providerPolicyEvidenceRef: attempt.providerPolicyEvidenceRef,
         attemptIndex: attempt.attemptIndex,
         role: attempt.role,
         reservedCostMicros: attempt.reservedCostMicros,
@@ -321,6 +376,7 @@ export function capabilityDeclaration() {
 export function executionBudget() {
     return {
         contractVersion: BUDGET_RESILIENCE_VERSION,
+        commercialScopeRef: "commercial-scope:commercial-one",
         logicalOperationRef: "logical-operation:commercial-one",
         currency: "USD",
         operationMaximumMicros: "200",
@@ -338,7 +394,7 @@ export function executionBudget() {
 }
 export function executionInput(transport = new ScriptedCommercialTransport([
     { status: "response", response: successfulProviderResponse() },
-])) {
+]), options = {}) {
     const providers = [providerProfile("alpha"), providerProfile("beta")];
     const models = [modelProfile("alpha"), modelProfile("beta")];
     const availability = models.map((model) => ({
@@ -353,14 +409,43 @@ export function executionInput(transport = new ScriptedCommercialTransport([
     return {
         invocation: validInvocation(),
         trustedScope: {
+            scopeVersion: COMMERCIAL_EXECUTION_SCOPE_VERSION,
+            scopeKind: "trusted-study-commercial-execution-scope",
+            issuedBy: "study-engine",
+            scopeRef: "commercial-scope:commercial-one",
             householdScopeRef: "household-scope:family-one",
             learnerScopeRef: "learner-scope:learner-a",
             sessionRef: "session:commercial-one",
             interactionRef: "interaction:commercial-one",
+            logicalOperationRef: "logical-operation:commercial-one",
+            curriculumReleaseRef: "family-pilot-r1",
+            curriculumPackageRef: "curriculum-package:family-pilot-r1",
+            curriculumCourseRef: "ma-g5-mathematics",
+            curriculumSubjectRef: "mathematics",
+            curriculumUnitRef: "ma-g5-mathematics-u01",
+            curriculumLessonRef: "ma-g5-mathematics-u01-l01",
+            conceptRef: "concept:fractions-one",
+            opportunityRef: "opportunity:fractions-one",
+            learnerStageRef: "learner-stage:middle-grades",
+            presentationRef: "presentation-fallback:commercial-one",
+            routingRequestRef: "routing-request:commercial-one",
+            routePlanRef: "route-plan:commercial-one",
+            reservationRef: "reservation:commercial-one",
+            physicalAttemptRefs: [
+                "physical-attempt:commercial-primary",
+                "physical-attempt:commercial-failover",
+            ],
+            allowedRouteRefs: ["route-profile:alpha", "route-profile:beta"],
+            telemetryEventRefs: [
+                "telemetry-event:commercial-primary",
+                "telemetry-event:commercial-failover",
+            ],
         },
         curriculumMetadata: curriculumMetadata(),
         capabilityDeclaration: capabilityDeclaration(),
         clock: transport.clock,
+        executionEligibilityResolver: options.executionEligibilityResolver ?? new MutableCommercialExecutionEligibilityResolver(),
+        dispatchClaims: options.dispatchClaims ?? new InMemoryPhysicalAttemptDispatchClaimStore(),
         routing: {
             requestRef: "routing-request:commercial-one",
             routePlanRef: "route-plan:commercial-one",

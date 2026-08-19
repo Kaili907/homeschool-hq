@@ -1,5 +1,7 @@
 import { Type } from "../../schema/typebox.js";
-export const MULTIMODAL_CONTRACT_VERSION = "3.0.0-foundation.1";
+import { StudyCommercialTutorAdvisorySchema } from "../contracts/commercial.js";
+import { CommercialExecutionScopeSchema } from "../commercial-operation/contracts.js";
+export const MULTIMODAL_CONTRACT_VERSION = "3.0.0-foundation.3";
 export const MultimodalReferenceSchema = Type.String({
     minLength: 3,
     maxLength: 160,
@@ -11,6 +13,17 @@ export const MultimodalDigestSchema = Type.String({
 export const MultimodalISODateTimeSchema = Type.String({
     pattern: "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
 });
+export const MultimodalScopeLineageSchema = Type.Object({
+    commercialExecutionScopeRef: MultimodalReferenceSchema,
+    householdScopeRef: MultimodalReferenceSchema,
+    learnerScopeRef: MultimodalReferenceSchema,
+    sessionRef: MultimodalReferenceSchema,
+    interactionRef: MultimodalReferenceSchema,
+    logicalOperationRef: MultimodalReferenceSchema,
+    conceptRef: MultimodalReferenceSchema,
+    opportunityRef: MultimodalReferenceSchema,
+    presentationRef: MultimodalReferenceSchema,
+}, { additionalProperties: false, $id: "TutorV3MultimodalScopeLineage" });
 export const MultimodalModeSchema = Type.Union([
     Type.Literal("text"),
     Type.Literal("speech"),
@@ -39,20 +52,37 @@ export const TRANSIENT_MEDIA_INFERENCE_RESTRICTIONS = Object.freeze({
     personalityClassificationAllowed: false,
     diagnosticClassificationAllowed: false,
 });
-export const TransientMediaDescriptorSchema = Type.Object({
+const TransientMediaDescriptorBaseSchema = Type.Object({
     mediaRef: MultimodalReferenceSchema,
-    mediaKind: Type.Union([Type.Literal("raw-audio"), Type.Literal("raw-learner-image")]),
-    mimeType: Type.String({
-        minLength: 7,
-        maxLength: 96,
-        pattern: "^(?:audio|image)/[a-z0-9][a-z0-9.+-]*$",
-    }),
     byteLength: Type.Integer({ minimum: 1, maximum: 52_428_800 }),
     capturedAt: MultimodalISODateTimeSchema,
     disposition: Type.Literal("transient-memory-only"),
     persistenceAllowed: Type.Literal(false),
     inferenceRestrictions: MediaInferenceRestrictionsSchema,
-}, { additionalProperties: false, $id: "TutorV3TransientMediaDescriptor" });
+}, { additionalProperties: false });
+export const TransientAudioMediaDescriptorSchema = Type.Composite([
+    TransientMediaDescriptorBaseSchema,
+    Type.Object({
+        mediaKind: Type.Literal("raw-audio"),
+        mimeType: Type.String({
+            minLength: 7,
+            maxLength: 96,
+            pattern: "^audio/[a-z0-9][a-z0-9.+-]*$",
+        }),
+    }, { additionalProperties: false }),
+], { additionalProperties: false, $id: "TutorV3TransientAudioMediaDescriptor" });
+export const TransientLearnerImageMediaDescriptorSchema = Type.Composite([
+    TransientMediaDescriptorBaseSchema,
+    Type.Object({
+        mediaKind: Type.Literal("raw-learner-image"),
+        mimeType: Type.String({
+            minLength: 7,
+            maxLength: 96,
+            pattern: "^image/[a-z0-9][a-z0-9.+-]*$",
+        }),
+    }, { additionalProperties: false }),
+], { additionalProperties: false, $id: "TutorV3TransientLearnerImageMediaDescriptor" });
+export const TransientMediaDescriptorSchema = Type.Union([TransientAudioMediaDescriptorSchema, TransientLearnerImageMediaDescriptorSchema], { $id: "TutorV3TransientMediaDescriptor" });
 export const TransientTranscriptSchema = Type.Object({
     transcriptRef: MultimodalReferenceSchema,
     text: Type.String({ minLength: 1, maxLength: 8_000 }),
@@ -75,17 +105,22 @@ export const ReviewedVisualReferenceSchema = Type.Object({
     visualRef: MultimodalReferenceSchema,
     visualKind: Type.Union([Type.Literal("image"), Type.Literal("diagram")]),
     contentDigest: MultimodalDigestSchema,
+    mimeType: Type.Union([
+        Type.Literal("image/png"),
+        Type.Literal("image/jpeg"),
+        Type.Literal("image/webp"),
+        Type.Literal("image/gif"),
+        Type.Literal("image/svg+xml"),
+    ]),
     reviewStatus: Type.Literal("approved"),
     reviewRef: MultimodalReferenceSchema,
+    provenanceRef: MultimodalReferenceSchema,
     reviewedAt: MultimodalISODateTimeSchema,
     learnerSafe: Type.Literal(true),
 }, { additionalProperties: false, $id: "TutorV3ReviewedVisualReference" });
 export const TransientLearnerImageReviewRequestSchema = Type.Object({
     requestRef: MultimodalReferenceSchema,
-    image: Type.Composite([
-        TransientMediaDescriptorSchema,
-        Type.Object({ mediaKind: Type.Literal("raw-learner-image") }, { additionalProperties: false }),
-    ]),
+    image: TransientLearnerImageMediaDescriptorSchema,
     reviewPurpose: Type.Literal("learner-safe-curricular-content"),
     outputMayContainRawImage: Type.Literal(false),
 }, { additionalProperties: false, $id: "TutorV3TransientLearnerImageReviewRequest" });
@@ -112,24 +147,32 @@ const TextContentSchema = Type.Object({
 }, { additionalProperties: false });
 const SpeechContentSchema = Type.Object({
     mode: Type.Literal("speech"),
-    audio: Type.Composite([
-        TransientMediaDescriptorSchema,
-        Type.Object({ mediaKind: Type.Literal("raw-audio") }, { additionalProperties: false }),
-    ]),
+    audio: TransientAudioMediaDescriptorSchema,
     transcript: TransientTranscriptSchema,
 }, { additionalProperties: false });
 const ReviewedImageContentSchema = Type.Object({
     mode: Type.Literal("reviewed-image"),
     visual: Type.Composite([
         ReviewedVisualReferenceSchema,
-        Type.Object({ visualKind: Type.Literal("image") }, { additionalProperties: false }),
+        Type.Object({
+            visualKind: Type.Literal("image"),
+            mimeType: Type.Union([
+                Type.Literal("image/png"),
+                Type.Literal("image/jpeg"),
+                Type.Literal("image/webp"),
+                Type.Literal("image/gif"),
+            ]),
+        }, { additionalProperties: false }),
     ]),
 }, { additionalProperties: false });
 const ReviewedDiagramContentSchema = Type.Object({
     mode: Type.Literal("reviewed-diagram"),
     visual: Type.Composite([
         ReviewedVisualReferenceSchema,
-        Type.Object({ visualKind: Type.Literal("diagram") }, { additionalProperties: false }),
+        Type.Object({
+            visualKind: Type.Literal("diagram"),
+            mimeType: Type.Literal("image/svg+xml"),
+        }, { additionalProperties: false }),
     ]),
 }, { additionalProperties: false });
 const CaptionContentSchema = Type.Object({
@@ -168,6 +211,7 @@ export const AssessmentDisclosurePolicySchema = Type.Union([
 export const MultimodalPresentationSchema = Type.Object({
     contractVersion: Type.Literal(MULTIMODAL_CONTRACT_VERSION),
     envelope: Type.Literal("multimodal-presentation"),
+    scope: MultimodalScopeLineageSchema,
     interactionRef: MultimodalReferenceSchema,
     turnRef: MultimodalReferenceSchema,
     speaker: Type.Union([Type.Literal("learner"), Type.Literal("tutor")]),
@@ -176,6 +220,37 @@ export const MultimodalPresentationSchema = Type.Object({
     visualStep: Type.Optional(VisualStepReferenceSchema),
     assessmentDisclosure: AssessmentDisclosurePolicySchema,
 }, { additionalProperties: false, $id: "TutorV3MultimodalPresentation" });
+export const TrustedMultimodalCaptionBindingSchema = Type.Object({
+    scope: MultimodalScopeLineageSchema,
+    captionRef: MultimodalReferenceSchema,
+    text: Type.String({ minLength: 1, maxLength: 8_000 }),
+    locale: Type.String({ minLength: 2, maxLength: 35, pattern: "^[A-Za-z0-9-]+$" }),
+    use: Type.Literal("neutral-accessibility-metadata"),
+}, { additionalProperties: false, $id: "TutorV3TrustedMultimodalCaptionBinding" });
+export const TrustedReviewedVisualBindingSchema = Type.Object({
+    scope: MultimodalScopeLineageSchema,
+    visual: ReviewedVisualReferenceSchema,
+    provenanceStatus: Type.Literal("approved-content"),
+}, { additionalProperties: false, $id: "TutorV3TrustedReviewedVisualBinding" });
+export const TrustedLearnerAudioInputCapabilitySchema = Type.Object({
+    capabilityKind: Type.Literal("trusted-learner-audio-input-capability"),
+    capabilityRef: MultimodalReferenceSchema,
+    scope: MultimodalScopeLineageSchema,
+    inputMode: Type.Literal("raw-audio"),
+    mediaRef: MultimodalReferenceSchema,
+    status: Type.Literal("permitted"),
+}, { additionalProperties: false, $id: "TutorV3TrustedLearnerAudioInputCapability" });
+export const TrustedMultimodalPolicyContextSchema = Type.Object({
+    contextKind: Type.Literal("trusted-study-multimodal-policy-context"),
+    commercialExecutionScope: CommercialExecutionScopeSchema,
+    studyAdvisory: StudyCommercialTutorAdvisorySchema,
+    scope: MultimodalScopeLineageSchema,
+    captionBinding: TrustedMultimodalCaptionBindingSchema,
+    reviewedVisualBindings: Type.Array(TrustedReviewedVisualBindingSchema, {
+        maxItems: 12,
+    }),
+    learnerAudioInputCapability: Type.Optional(TrustedLearnerAudioInputCapabilitySchema),
+}, { additionalProperties: false, $id: "TutorV3TrustedMultimodalPolicyContext" });
 export const ContinuationFallbackSchema = Type.Object({
     mode: Type.Union([Type.Literal("text"), Type.Literal("caption")]),
     contentRef: MultimodalReferenceSchema,
@@ -223,15 +298,30 @@ const ReviewedVisualEvidenceMetadataSchema = Type.Object({
     visualRef: MultimodalReferenceSchema,
     reviewRef: MultimodalReferenceSchema,
     contentDigest: MultimodalDigestSchema,
+    mimeType: Type.Union([
+        Type.Literal("image/png"),
+        Type.Literal("image/jpeg"),
+        Type.Literal("image/webp"),
+        Type.Literal("image/gif"),
+        Type.Literal("image/svg+xml"),
+    ]),
     visualKind: Type.Union([Type.Literal("image"), Type.Literal("diagram")]),
     reviewStatus: Type.Literal("approved"),
+    provenanceRef: MultimodalReferenceSchema,
 }, { additionalProperties: false });
 export const DurableMultimodalEvidenceSchema = Type.Object({
     contractVersion: Type.Literal(MULTIMODAL_CONTRACT_VERSION),
     envelope: Type.Literal("durable-multimodal-evidence"),
     evidenceRef: MultimodalReferenceSchema,
+    commercialExecutionScopeRef: MultimodalReferenceSchema,
+    householdScopeRef: MultimodalReferenceSchema,
+    learnerScopeRef: MultimodalReferenceSchema,
     sessionRef: MultimodalReferenceSchema,
     interactionRef: MultimodalReferenceSchema,
+    logicalOperationRef: MultimodalReferenceSchema,
+    conceptRef: MultimodalReferenceSchema,
+    opportunityRef: MultimodalReferenceSchema,
+    presentationRef: MultimodalReferenceSchema,
     turnRef: MultimodalReferenceSchema,
     mode: MultimodalModeSchema,
     outcome: MultimodalObservationOutcomeSchema,

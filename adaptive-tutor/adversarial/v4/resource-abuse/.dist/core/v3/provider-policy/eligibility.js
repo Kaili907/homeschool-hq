@@ -1,3 +1,4 @@
+import { MAXIMUM_ALLOWED_RETENTION_CLASSES, MAXIMUM_PROVIDER_POLICY_REQUIREMENTS, } from "./contracts.js";
 const CANONICAL_INSTANT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
 const OPAQUE_REFERENCE = /^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$/;
 function instantMilliseconds(value) {
@@ -16,14 +17,40 @@ function validRetentionClass(value) {
 }
 function requirementsAreValid(requirements) {
     return nonEmpty(requirements.providerRef)
+        && requirements.providerRef.length <= 160
         && nonEmpty(requirements.requiredRegion)
+        && requirements.requiredRegion.length <= 80
         && nonEmpty(requirements.requiredContractPolicyRevision)
+        && requirements.requiredContractPolicyRevision.length <= 160
         && (requirements.modality === "text" || requirements.modality === "multimodal")
         && instantMilliseconds(requirements.evaluatedAt) !== null
         && Number.isSafeInteger(requirements.maximumRetentionHours)
         && requirements.maximumRetentionHours >= 0
         && requirements.allowedRetentionClasses.length > 0
+        && requirements.allowedRetentionClasses.length <= MAXIMUM_ALLOWED_RETENTION_CLASSES
+        && new Set(requirements.allowedRetentionClasses).size ===
+            requirements.allowedRetentionClasses.length
         && requirements.allowedRetentionClasses.every(validRetentionClass);
+}
+/** Cheap cardinality gate that runs before any map/filter traversal. */
+export function providerEligibilityRequirementsAreBounded(candidate) {
+    if (!Array.isArray(candidate) ||
+        candidate.length > MAXIMUM_PROVIDER_POLICY_REQUIREMENTS) {
+        return false;
+    }
+    const providerRefs = new Set();
+    for (const value of candidate) {
+        if (typeof value !== "object" || value === null)
+            return false;
+        const requirement = value;
+        if (!Array.isArray(requirement.allowedRetentionClasses))
+            return false;
+        if (!requirementsAreValid(requirement) || providerRefs.has(requirement.providerRef)) {
+            return false;
+        }
+        providerRefs.add(requirement.providerRef);
+    }
+    return true;
 }
 function decision(kind, providerRef, reasons, profile, evaluatedAt) {
     return Object.freeze({

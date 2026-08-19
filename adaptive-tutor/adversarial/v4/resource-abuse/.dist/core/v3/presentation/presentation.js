@@ -1,6 +1,9 @@
 import { validateExact } from "../../v2/contracts/validation.js";
+import { CommercialExecutionScopeSchema, } from "../commercial-operation/contracts.js";
+import { StudyCommercialTutorAdvisorySchema, } from "../contracts/commercial.js";
+import { validateExactSnapshot } from "../multimodal/runtime-snapshot.js";
 import { MultimodalAllowanceSchema, } from "../learner-stage-policy/policy.js";
-import { COMMERCIAL_RESPONSE_CONTRACT_VERSION, CommercialModelResponseSchema, PRESENTATION_CONTRACT_VERSION, PresentationIntentSchema, PresentationMappingContextSchema, TrustedPresentationAcceptanceSchema, W306PresentationPiecesSchema, } from "./contracts.js";
+import { COMMERCIAL_RESPONSE_CONTRACT_VERSION, CommercialModelResponseSchema, PRESENTATION_CONTRACT_VERSION, PresentationIntentSchema, PresentationMappingContextSchema, TrustedPresentationAcceptanceSchema, TrustedPresentationBoundarySchema, W306PresentationPiecesSchema, } from "./contracts.js";
 function equalStringArrays(left, right) {
     return left.length === right.length && left.every((value, index) => value === right[index]);
 }
@@ -51,7 +54,7 @@ function normalizedIntent(intent) {
     return Object.freeze(normalized);
 }
 export function validatePresentationIntent(candidate) {
-    const validation = validateExact(PresentationIntentSchema, candidate);
+    const validation = validateExactSnapshot(PresentationIntentSchema, candidate);
     if (validation.status === "rejected") {
         return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
     }
@@ -63,6 +66,13 @@ export function validatePresentationIntent(candidate) {
         return { status: "rejected", code: "PRESENTATION_CONTENT_REQUIRED" };
     }
     const channels = intent.requestedDeliveryChannels;
+    const fallbackChannels = intent.fallbackPresentation?.requestedDeliveryChannels;
+    if (fallbackChannels !== undefined
+        && !(equalStringArrays(fallbackChannels, ["text"])
+            || equalStringArrays(fallbackChannels, ["visual"])
+            || equalStringArrays(fallbackChannels, ["text", "visual"]))) {
+        return { status: "rejected", code: "PRESENTATION_CHANNEL_MISMATCH" };
+    }
     const speechRequested = channels.includes("speech-after-acceptance");
     if (speechRequested
         && intent.reviewedTextRef === undefined
@@ -181,7 +191,7 @@ export function mapValidatedModelOutputToCommercialResponse(result, contextCandi
     if (result.status !== "accepted-proposal") {
         return { status: "rejected", code: "VALIDATED_OUTPUT_REQUIRED" };
     }
-    const contextValidation = validateExact(PresentationMappingContextSchema, contextCandidate);
+    const contextValidation = validateExactSnapshot(PresentationMappingContextSchema, contextCandidate);
     if (contextValidation.status === "rejected") {
         return { status: "rejected", code: "INVALID_PRESENTATION_MAPPING_CONTEXT" };
     }
@@ -269,7 +279,7 @@ function proposalMatchesIntent(response) {
     }
 }
 export function validateCommercialModelResponse(candidate) {
-    const validation = validateExact(CommercialModelResponseSchema, candidate);
+    const validation = validateExactSnapshot(CommercialModelResponseSchema, candidate);
     if (validation.status === "rejected") {
         return { status: "rejected", code: "INVALID_COMMERCIAL_MODEL_RESPONSE" };
     }
@@ -337,21 +347,158 @@ export function constrainPresentationByLearnerStageAllowance(intentCandidate, al
         routingCapabilityRequirement: intentValidation.intent.reviewedVisual === undefined ? "TEXT_ONLY" : "REVIEWED_IMAGE",
     };
 }
+function samePresentationScope(left, right) {
+    return left.householdScopeRef === right.householdScopeRef
+        && left.commercialExecutionScopeRef === right.commercialExecutionScopeRef
+        && left.learnerScopeRef === right.learnerScopeRef
+        && left.sessionRef === right.sessionRef
+        && left.interactionRef === right.interactionRef
+        && left.logicalOperationRef === right.logicalOperationRef
+        && left.conceptRef === right.conceptRef
+        && left.opportunityRef === right.opportunityRef
+        && left.presentationRef === right.presentationRef;
+}
+function scopeMatchesCommercialExecution(scope, commercialScope) {
+    return scope.commercialExecutionScopeRef === commercialScope.scopeRef
+        && scope.householdScopeRef === commercialScope.householdScopeRef
+        && scope.learnerScopeRef === commercialScope.learnerScopeRef
+        && scope.sessionRef === commercialScope.sessionRef
+        && scope.interactionRef === commercialScope.interactionRef
+        && scope.logicalOperationRef === commercialScope.logicalOperationRef
+        && scope.conceptRef === commercialScope.conceptRef
+        && scope.opportunityRef === commercialScope.opportunityRef
+        && scope.presentationRef === commercialScope.presentationRef;
+}
+function sameReviewedVisual(left, right) {
+    if (left === undefined || right === undefined)
+        return left === right;
+    return left.kind === right.kind
+        && left.contentRef === right.contentRef
+        && left.contentDigest === right.contentDigest
+        && left.provenanceRef === right.provenanceRef;
+}
+function samePresentationIntent(left, right) {
+    const leftFallback = left.fallbackPresentation;
+    const rightFallback = right.fallbackPresentation;
+    return left.contractVersion === right.contractVersion
+        && left.intentKind === right.intentKind
+        && left.reviewedTextRef === right.reviewedTextRef
+        && sameReviewedVisual(left.reviewedVisual, right.reviewedVisual)
+        && left.structuredCheckRef === right.structuredCheckRef
+        && left.accessibilityCaptionRef === right.accessibilityCaptionRef
+        && equalStringArrays(left.requestedDeliveryChannels, right.requestedDeliveryChannels)
+        && (leftFallback === undefined || rightFallback === undefined
+            ? leftFallback === rightFallback
+            : leftFallback.presentationRef === rightFallback.presentationRef
+                && equalStringArrays(leftFallback.requestedDeliveryChannels, rightFallback.requestedDeliveryChannels));
+}
+function reviewedContentRefsFor(intent) {
+    return [
+        ...(intent.reviewedTextRef === undefined ? [] : [intent.reviewedTextRef]),
+        ...(intent.reviewedVisual === undefined ? [] : [intent.reviewedVisual.contentRef]),
+        ...(intent.structuredCheckRef === undefined ? [] : [intent.structuredCheckRef]),
+    ];
+}
+function advisoryMatchesCommercialExecution(advisory, commercialScope) {
+    return advisory.commercialScopeRef === commercialScope.scopeRef
+        && advisory.invocationRef === commercialScope.interactionRef
+        && advisory.householdScopeRef === commercialScope.householdScopeRef
+        && advisory.learnerScopeRef === commercialScope.learnerScopeRef
+        && advisory.sessionRef === commercialScope.sessionRef
+        && advisory.interactionRef === commercialScope.interactionRef
+        && advisory.logicalOperationRef === commercialScope.logicalOperationRef
+        && advisory.conceptRef === commercialScope.conceptRef
+        && advisory.opportunityRef === commercialScope.opportunityRef
+        && advisory.learnerStageRef === commercialScope.learnerStageRef;
+}
+function hasTrustedReference(boundary, scope, referenceKind, referenceRef) {
+    const expectedUse = referenceKind === "accessibility-caption"
+        ? "neutral-accessibility-metadata"
+        : referenceKind === "fallback-presentation"
+            ? "approved-fallback-reference"
+            : "approved-instructional-reference";
+    return boundary.referenceBindings.some((binding) => binding.referenceKind === referenceKind
+        && binding.referenceRef === referenceRef
+        && binding.referenceUse === expectedUse
+        && samePresentationScope(binding.scope, scope));
+}
+function hasTrustedVisual(boundary, scope, visual) {
+    return boundary.reviewedVisualBindings.some((binding) => binding.approvalStatus === "approved-content"
+        && samePresentationScope(binding.scope, scope)
+        && binding.reviewedVisual.kind === visual.kind
+        && binding.reviewedVisual.contentRef === visual.contentRef
+        && binding.reviewedVisual.contentDigest === visual.contentDigest
+        && binding.reviewedVisual.provenanceRef === visual.provenanceRef);
+}
 /**
  * Produces reference-only pieces for the W3-06 presentation layer. Resolution
  * into text, pixels, or synthesized speech stays behind Study-owned renderers.
  */
-export function mapTrustedAcceptedIntentToW306PresentationPieces(acceptanceCandidate) {
-    const acceptanceValidation = validateExact(TrustedPresentationAcceptanceSchema, acceptanceCandidate);
+export function mapTrustedAcceptedIntentToW306PresentationPieces(acceptanceCandidate, trustedBoundaryCandidate, trustedCommercialExecutionScopeCandidate, trustedStudyAdvisoryCandidate) {
+    const acceptanceValidation = validateExactSnapshot(TrustedPresentationAcceptanceSchema, acceptanceCandidate);
     if (acceptanceValidation.status === "rejected") {
         return { status: "rejected", code: "TRUSTED_ACCEPTANCE_REQUIRED" };
     }
     const acceptance = acceptanceValidation.value;
+    const boundaryValidation = validateExactSnapshot(TrustedPresentationBoundarySchema, trustedBoundaryCandidate);
+    if (boundaryValidation.status === "rejected") {
+        return { status: "rejected", code: "TRUSTED_PRESENTATION_BOUNDARY_REQUIRED" };
+    }
+    const boundary = boundaryValidation.value;
+    const commercialScopeValidation = validateExactSnapshot(CommercialExecutionScopeSchema, trustedCommercialExecutionScopeCandidate);
+    if (commercialScopeValidation.status === "rejected") {
+        return { status: "rejected", code: "TRUSTED_COMMERCIAL_EXECUTION_SCOPE_REQUIRED" };
+    }
+    const commercialScope = commercialScopeValidation.value;
+    const advisoryValidation = validateExactSnapshot(StudyCommercialTutorAdvisorySchema, trustedStudyAdvisoryCandidate);
+    if (advisoryValidation.status === "rejected") {
+        return { status: "rejected", code: "TRUSTED_STUDY_ADVISORY_REQUIRED" };
+    }
+    const advisory = advisoryValidation.value;
+    if (acceptance.acceptanceRef !== boundary.acceptanceRef
+        || !samePresentationScope(acceptance.scope, boundary.scope)) {
+        return { status: "rejected", code: "PRESENTATION_SCOPE_MISMATCH" };
+    }
+    if (!scopeMatchesCommercialExecution(acceptance.scope, commercialScope)
+        || !scopeMatchesCommercialExecution(boundary.scope, commercialScope)) {
+        return { status: "rejected", code: "PRESENTATION_COMMERCIAL_SCOPE_MISMATCH" };
+    }
+    if (!advisoryMatchesCommercialExecution(advisory, commercialScope)) {
+        return { status: "rejected", code: "STUDY_ADVISORY_SCOPE_MISMATCH" };
+    }
     const intentValidation = validatePresentationIntent(acceptance.presentationIntent);
     if (intentValidation.status === "rejected") {
         return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
     }
     const intent = intentValidation.intent;
+    if (advisory.status !== "proposed"
+        || advisory.presentationIntent === null
+        || !samePresentationIntent(advisory.presentationIntent, intent)
+        || !equalStringArrays(advisory.reviewedContentRefs, reviewedContentRefsFor(intent))
+        || intent.fallbackPresentation?.presentationRef !== commercialScope.presentationRef) {
+        return { status: "rejected", code: "STUDY_ADVISORY_PRESENTATION_MISMATCH" };
+    }
+    if ((intent.reviewedTextRef !== undefined
+        && !hasTrustedReference(boundary, acceptance.scope, "reviewed-text", intent.reviewedTextRef))
+        || (intent.structuredCheckRef !== undefined
+            && !hasTrustedReference(boundary, acceptance.scope, "structured-check", intent.structuredCheckRef))
+        || (intent.fallbackPresentation !== undefined
+            && !hasTrustedReference(boundary, acceptance.scope, "fallback-presentation", intent.fallbackPresentation.presentationRef))) {
+        return { status: "rejected", code: "UNTRUSTED_PRESENTATION_REFERENCE" };
+    }
+    if (intent.reviewedVisual !== undefined
+        && !hasTrustedVisual(boundary, acceptance.scope, intent.reviewedVisual)) {
+        return { status: "rejected", code: "UNTRUSTED_REVIEWED_VISUAL" };
+    }
+    if (intent.accessibilityCaptionRef !== undefined
+        && !hasTrustedReference(boundary, acceptance.scope, "accessibility-caption", intent.accessibilityCaptionRef)) {
+        return {
+            status: "rejected",
+            code: boundary.assessmentPhase === "active-protected-assessment"
+                ? "ACTIVE_ASSESSMENT_CAPTION_BLOCKED"
+                : "UNTRUSTED_PRESENTATION_REFERENCE",
+        };
+    }
     const pieces = [];
     if (intent.reviewedTextRef !== undefined) {
         pieces.push({ pieceKind: "reviewed-text-reference", contentRef: intent.reviewedTextRef });
@@ -402,6 +549,7 @@ export function mapTrustedAcceptedIntentToW306PresentationPieces(acceptanceCandi
     const presentation = {
         adapterKind: "w3-06-reference-presentation-pieces",
         acceptanceRef: acceptance.acceptanceRef,
+        scope: acceptance.scope,
         pieces,
         rawAudioAccepted: false,
         rawImageBytesAccepted: false,

@@ -2,14 +2,14 @@ import { Type } from "../../schema/typebox.js";
 import { AssessmentPhaseSchema, ContentDigestSchema, OpaqueReferenceSchema, TutorActionKindSchema, } from "../../v2/contracts/primitives.js";
 import { GroundedClaimsSchema, GroundedContextBundleSchema, GroundingRequirementsSchema, } from "../grounding/index.js";
 import { ProviderModelOutputEnvelopeSchema } from "../model-output/index.js";
-import { PresentationIntentSchema, PresentationMappingContextSchema } from "../presentation/index.js";
+import { PresentationIntentSchema, PresentationMappingContextSchema, } from "../presentation/contracts.js";
 import { CommercialReviewedContentEvidenceSchema, } from "../provider-request/index.js";
 import { CanonicalIntegerMicrosSchema } from "../commercial-operation/contracts.js";
 import { TutorCommercialTelemetryEventSchema } from "../telemetry/index.js";
 export const STUDY_COMMERCIAL_TUTOR_INVOCATION_VERSION = "study-tutor-v3.commercial-invocation.v1";
 export const BOUNDED_COMMERCIAL_PROVIDER_RESPONSE_VERSION = "study-tutor-v3.bounded-provider-response.v1";
 export const STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION = "study-tutor-v3.commercial-advisory.v1";
-export const STUDY_COMMERCIAL_EFFECT_RECEIPT_VERSION = "study-tutor-v3.commercial-effect-receipt.v1";
+export const STUDY_COMMERCIAL_EFFECT_RECEIPT_VERSION = "study-tutor-v3.commercial-effect-receipt.v2";
 const CurriculumIdentifierSchema = Type.String({
     minLength: 2,
     maxLength: 160,
@@ -147,12 +147,15 @@ export const StudyCommercialTutorAdvisorySchema = Type.Object({
     contractVersion: Type.Literal(STUDY_COMMERCIAL_TUTOR_ADVISORY_VERSION),
     advisoryKind: Type.Literal("study-commercial-tutor-advisory"),
     invocationRef: OpaqueReferenceSchema,
+    commercialScopeRef: OpaqueReferenceSchema,
     householdScopeRef: OpaqueReferenceSchema,
     learnerScopeRef: OpaqueReferenceSchema,
     sessionRef: OpaqueReferenceSchema,
     interactionRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     opportunityRef: OpaqueReferenceSchema,
+    conceptRef: OpaqueReferenceSchema,
+    learnerStageRef: OpaqueReferenceSchema,
     status: Type.Union([
         Type.Literal("proposed"),
         Type.Literal("refused"),
@@ -186,11 +189,20 @@ export const StudyCommercialEffectReceiptSchema = Type.Object({
     issuedBy: Type.Literal("study-engine"),
     receiptRef: OpaqueReferenceSchema,
     invocationRef: OpaqueReferenceSchema,
+    commercialExecutionScopeRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
     logicalOperationRef: OpaqueReferenceSchema,
     learnerScopeRef: OpaqueReferenceSchema,
     sessionRef: OpaqueReferenceSchema,
     interactionRef: OpaqueReferenceSchema,
+    conceptRef: OpaqueReferenceSchema,
     opportunityRef: OpaqueReferenceSchema,
+    curriculumReleaseRef: CurriculumIdentifierSchema,
+    curriculumPackageRef: OpaqueReferenceSchema,
+    curriculumCourseRef: CurriculumIdentifierSchema,
+    curriculumSubjectRef: CurriculumIdentifierSchema,
+    curriculumUnitRef: CurriculumIdentifierSchema,
+    curriculumLessonRef: CurriculumIdentifierSchema,
     decision: Type.Union([Type.Literal("accepted"), Type.Literal("rejected")]),
     effectRef: OpaqueReferenceSchema,
     effectDigest: ContentDigestSchema,
