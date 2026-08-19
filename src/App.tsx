@@ -583,7 +583,10 @@ export default function App() {
                   description: studyPreviewReady
                     ? 'Launch the explicit local Study preview'
                     : 'Check whether Study is available',
-                  onOpen: () => openStudentScreen({ kind: 'studyDashboard' }),
+                  onOpen: () => {
+                    enterStudyEnginePath()
+                    setScreen({ kind: 'studyDashboard' })
+                  },
                 },
               ]
             : []),

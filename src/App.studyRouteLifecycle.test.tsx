@@ -313,6 +313,47 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     expect(pathname).toBe('/study-engine')
   })
 
+  // The Student Dashboard is the default home, so its Study tool is the primary
+  // in-app entry. It must write the URL like every other entry (classic Home,
+  // the academy mount), otherwise the refresh-re-entry invariant above holds
+  // only for deep links.
+  it('writes the study pathname when Study is opened from the Student Dashboard tool', async () => {
+    pathname = '/'
+    await mountApp(seeded('p1'))
+    expect(harness.picker).not.toBeNull()
+    await act(async () => harness.picker?.onPick('p1'))
+    await act(async () => { harness.pin?.onComplete('1234') })
+    await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
+    expect(pathname).toBe('/')
+
+    await press(findButton('Today’s Study plan'))
+    await reachStudySurface()
+    expect(pathname).toBe('/study-engine')
+    expect(window.location.pathname).toBe('/study-engine')
+  })
+
+  it('re-enters Study on a refresh-equivalent remount after opening it from the dashboard tool', async () => {
+    pathname = '/'
+    await mountApp(seeded('p1'))
+    await act(async () => harness.picker?.onPick('p1'))
+    await act(async () => { harness.pin?.onComplete('1234') })
+    await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
+    await press(findButton('Today’s Study plan'))
+    await reachStudySurface()
+
+    const launchesBeforeRefresh = harness.launches.length
+    await act(async () => root?.unmount())
+    root = null
+    container = documentTarget.createElement('div')
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.activeProfileId).toBe('p1')
+    await mountApp(persisted)
+    await waitFor(() => harness.launches.length > launchesBeforeRefresh)
+    await waitFor(() => hasText(container, 'Verified Study workspace'))
+    expect(harness.picker).toBeNull()
+    expect(pathname).toBe('/study-engine')
+  })
+
   it('cancels the study runtime and lands the next learner on the dashboard after a profile switch', async () => {
     await mountApp(seeded('p1'))
     await reachStudySurface()
