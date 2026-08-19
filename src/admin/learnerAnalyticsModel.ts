@@ -14,10 +14,12 @@ import type {
 } from '../study/types'
 import {
   ACADEMY_SUBJECTS,
+  type AcademyGrade,
   type AcademySubject,
   type Grade,
   type ISODate,
   type Profile,
+  type WorkingGrade,
 } from '../types'
 import type { AdminCapability } from './contracts'
 
@@ -109,7 +111,7 @@ export type CurriculumEnrollmentEvidence =
   | {
       readonly status: 'available' | 'partial'
       readonly releaseVersion: string
-      readonly grade: Grade
+      readonly grade: AcademyGrade
       readonly enrolledAt: string
       readonly enrolledCourseCount: number
       readonly matchedCourseCount: number
@@ -128,7 +130,7 @@ export type StudyLearnerEvidenceState =
 export interface WorkingLevelEvidence {
   readonly subject: AcademySubject
   readonly subjectLabel: string
-  readonly level: Grade
+  readonly level: WorkingGrade
   readonly source: 'explicit' | 'nominal-grade'
 }
 
@@ -176,7 +178,7 @@ export interface CourseEvidence {
   readonly courseRef: string
   readonly title: string
   readonly subject: string
-  readonly workingLevel: Grade | null
+  readonly workingLevel: WorkingGrade | null
   readonly completed: number
   readonly total: number
   readonly mastered: number | null

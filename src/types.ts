@@ -40,8 +40,11 @@ export type Grade = '3' | '4' | '5' | '6' | '7' | '8' | '10' | '12'
 
 // ---------- CURR-1 Manuel Academy curriculum (additive, all OPTIONAL; no schemaVersion bump) ----------
 
-/** Grades served by the imported Manuel Academy curriculum release. */
-export type AcademyGrade = '5' | '7' | '8'
+/** Grades served by the imported Manuel Academy curriculum release. Grades 5, 7,
+ * and 8 publish all ten courses; grades 9-12 publish Ready for Life and Financial
+ * Literacy only (release 1.1.0), with the other eight high-school courses authored
+ * in separate lanes. */
+export type AcademyGrade = '5' | '7' | '8' | '9' | '10' | '11' | '12'
 
 /** The ten subjects the curriculum release publishes (see academy/contentTypes). */
 export const ACADEMY_SUBJECTS = [
@@ -67,11 +70,17 @@ export type AcademySubject = (typeof ACADEMY_SUBJECTS)[number]
  * before. Levels are per subject because a sixth grader can genuinely need
  * Grade 5 mathematics and Grade 7 ELA in the same term.
  *
- * An explicit level is an AcademyGrade, not any Grade: only 5/7/8 have
- * published content, so assigning '10' would be an inert value nothing can
- * serve. Sync validation enforces the same restriction on untrusted payloads.
+ * An explicit level is an AcademyGrade, not any Grade: only grades with
+ * published content are assignable, so assigning '6' would be an inert value
+ * nothing can serve. Sync validation enforces the same restriction on untrusted
+ * payloads.
  */
 export type WorkingLevels = Partial<Record<AcademySubject, AcademyGrade>>
+
+/** A level a subject may be worked at: the profile's nominal grade, or an
+ * assigned academy level. These overlap for 5/7/8 but not for 9-12, which the
+ * curriculum publishes and the nominal Grade union does not carry. */
+export type WorkingGrade = Grade | AcademyGrade
 
 /** Where an academy lesson stands. 'reteach' = the check was not met; the lesson
  * re-opens on the reteach path instead of counting as complete. */

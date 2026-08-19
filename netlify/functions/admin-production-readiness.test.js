@@ -336,7 +336,9 @@ describe('Admin Production Readiness evidence composition', () => {
     const evidence = await createRepositoryProductionReadinessSource().read()
     expect(evidence.migrations).toMatchObject({ state: 'ready', collisionVersions: [] })
     expect(evidence.curriculum).toEqual({
-      state: 'ready', activeVersion: '1.0.0', registeredReleaseCount: 1,
+      // 2 registered releases: 1.0.0 (active) and the inactive 1.1.0 release
+      // carrying the Grades 9-12 Ready for Life + Financial Literacy courses.
+      state: 'ready', activeVersion: '1.0.0', registeredReleaseCount: 2,
       validationState: 'passed',
     })
     expect(evidence.releaseControls).toEqual({

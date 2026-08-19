@@ -1,4 +1,4 @@
-import { ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade, type Profile } from '../types'
+import { ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Profile, type WorkingGrade } from '../types'
 import { academyGradeOf, isAcademyGradeEnabledFromHost } from './featureFlag'
 
 /**
@@ -26,8 +26,10 @@ export interface AcademyProgramEntry {
   level: AcademyGrade
 }
 
-/** The level whose content this subject serves her. Unset = her nominal grade. */
-export function workingLevelFor(p: Profile, subject: AcademySubject): Grade {
+/** The level whose content this subject serves her. Unset = her nominal grade.
+ * Returns a WorkingGrade, not a Grade: an assigned academy level may be 9-12,
+ * which the curriculum publishes but the nominal Grade union does not carry. */
+export function workingLevelFor(p: Profile, subject: AcademySubject): WorkingGrade {
   return p.workingLevels?.[subject] ?? p.grade
 }
 
