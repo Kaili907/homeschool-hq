@@ -2,6 +2,7 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { APP_STATE_STORAGE_KEY } from './sync/provenance'
+import { isoToday } from './appState'
 import { defaultAppState } from './migration'
 import type { AppState } from './types'
 
@@ -13,6 +14,11 @@ import type { AppState } from './types'
 const harness = vi.hoisted(() => ({
   picker: null as null | { onPick: (id: string) => void; onGrownUps: () => void },
   pin: null as null | { title: string; onComplete: (pin: string) => string | null; onCancel: () => void },
+  dashboard: null as null | {
+    profileId: string
+    tools: readonly { id: string; title: string; description: string; onOpen: () => void }[]
+    onSignOut: () => void
+  },
 }))
 
 vi.mock('./sync/useSync', () => ({
@@ -36,6 +42,36 @@ vi.mock('./components/PinPad', () => ({
 }))
 vi.mock('./components/hub/ParentHub', () => ({
   ParentHub: () => <main data-surface="parent-hub">Parent Hub</main>,
+}))
+vi.mock('./components/academy/AcademyRouter', () => ({
+  AcademyRouter: (props: {
+    profile: { id: string; name: string }
+    dashboard?: {
+      tools?: readonly { id: string; title: string; description: string; onOpen: () => void }[]
+      onSignOut: () => void
+    }
+  }) => {
+    if (!props.dashboard) {
+      return <main data-surface="student-dashboard">Student Dashboard unavailable</main>
+    }
+    const tools = props.dashboard.tools ?? []
+    harness.dashboard = {
+      profileId: props.profile.id,
+      tools,
+      onSignOut: props.dashboard.onSignOut,
+    }
+    return (
+      <main data-surface="student-dashboard">
+        Student Dashboard for {props.profile.name}
+        {tools.map((tool) => (
+          <button key={tool.id} onClick={tool.onOpen}>
+            {tool.title} {tool.description}
+          </button>
+        ))}
+        <button onClick={props.dashboard.onSignOut}>Sign out</button>
+      </main>
+    )
+  },
 }))
 vi.mock('./tutor/voice', async (importOriginal) => ({
   ...(await importOriginal<typeof import('./tutor/voice')>()),
@@ -118,7 +154,6 @@ function hasText(node: FakeElement, needle: string): boolean {
 
 /** The exact copy a fifth grader sees on the practice surface. */
 const SURFACE_MARKER = 'Pick the unit you want to practice.'
-const HOME_CARD_MARKER = 'Practice a unit — 10 questions, with a worked example when you miss one'
 
 describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
   let root: Root | null
@@ -129,6 +164,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
   beforeEach(() => {
     harness.picker = null
     harness.pin = null
+    harness.dashboard = null
     root = null
     pathname = '/practice/grade-5-math'
     vi.stubEnv('VITE_GRADE5_MATH_PRACTICE_ENABLED', 'true')
@@ -227,6 +263,8 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await waitForSurface()
     expect(harness.picker).toBeNull()
     expect(hasText(container, 'Unit 10')).toBe(true)
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p2.missions[isoToday()]).toBeUndefined()
     // entry never writes the URL (A4-X: exit normalizes, entry leaves it alone)
     expect(pathname).toBe('/practice/grade-5-math')
   })
@@ -242,12 +280,13 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await waitForSurface()
   })
 
-  it('opens from her home card and answers one question with feedback', async () => {
+  it('opens from her dashboard tool and answers one question with feedback', async () => {
     pathname = '/'
     await mountApp(seeded(null))
     await signIn('p2', '2222')
-    expect(hasText(container, 'Hi, Riley!')).toBe(true)
-    expect(hasText(container, HOME_CARD_MARKER)).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Riley')).toBe(true)
+    expect(harness.dashboard?.profileId).toBe('p2')
+    expect(harness.dashboard?.tools.some((tool) => tool.id === 'grade-5-math')).toBe(true)
 
     await press(findButton('Grade 5 Math'))
     await waitForSurface()
@@ -273,7 +312,10 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await mountApp(seeded('p2'))
     await waitForSurface()
     await press(findButton('Back home'))
-    expect(hasText(container, 'Hi, Riley!')).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Riley')).toBe(true)
+    await settle()
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p2.missions[isoToday()]).toBeDefined()
     expect(pathname).toBe('/')
   })
 
@@ -281,7 +323,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await mountApp(seeded('p2'))
     await waitForSurface()
     await press(findButton('Back home'))
-    expect(hasText(container, 'Hi, Riley!')).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Riley')).toBe(true)
     pathname = '/practice/grade-5-math'
     await press(findButton('Sign out'))
     expect(harness.picker).not.toBeNull()
@@ -293,7 +335,8 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     expect(harness.picker).not.toBeNull()
     await expectSurfaceUnreachable()
     await signIn('p1', '1234')
-    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Sam')).toBe(true)
+    expect(harness.dashboard?.profileId).toBe('p1')
     await expectSurfaceUnreachable()
     expect(findButton('Grade 5 Math')).toBeNull()
   })
@@ -313,16 +356,13 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await expectSurfaceUnreachable()
   })
 
-  it('a flag-off grade-5 profile signing in gets her unchanged home, with no entry point', async () => {
+  it('a flag-off grade-5 profile signing in gets her dashboard with no entry point', async () => {
     vi.stubEnv('VITE_GRADE5_MATH_PRACTICE_ENABLED', '')
     await mountApp(seeded('p2'))
     await signIn('p2', '2222')
-    expect(hasText(container, 'Hi, Riley!')).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Riley')).toBe(true)
     expect(findButton('Grade 5 Math')).toBeNull()
-    expect(hasText(container, HOME_CARD_MARKER)).toBe(false)
     await expectSurfaceUnreachable()
-    // the pre-existing grade-5 home copy is untouched when the flag is off
-    expect(hasText(container, 'In-app math practice for grade 5 arrives in a later update')).toBe(true)
   })
 
   it('an absent flag never reaches the surface', async () => {

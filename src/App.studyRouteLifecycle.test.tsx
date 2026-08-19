@@ -2,6 +2,7 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { APP_STATE_STORAGE_KEY } from './sync/provenance'
+import { isoToday } from './appState'
 import { defaultAppState } from './migration'
 import type { AppState } from './types'
 
@@ -13,6 +14,11 @@ import type { AppState } from './types'
 const harness = vi.hoisted(() => ({
   picker: null as null | { onPick: (id: string) => void; onGrownUps: () => void },
   pin: null as null | { title: string; onComplete: (pin: string) => string | null; onCancel: () => void },
+  dashboard: null as null | {
+    profileId: string
+    tools: readonly { id: string; title: string; onOpen: () => void }[]
+    onSignOut: () => void
+  },
   syncUser: null as null | { id: string; email: string },
   launches: [] as Array<{ student: string; host: string }>,
   cancels: [] as string[],
@@ -53,6 +59,34 @@ vi.mock('./components/study/StudyProductionRoute', () => ({
       <button type="button" onClick={onExit}>Back home</button>
     </main>
   ),
+}))
+vi.mock('./components/academy/AcademyRouter', () => ({
+  AcademyRouter: (props: {
+    profile: { id: string; name: string }
+    dashboard?: {
+      tools?: readonly { id: string; title: string; onOpen: () => void }[]
+      onSignOut: () => void
+    }
+  }) => {
+    if (!props.dashboard) {
+      return <main data-surface="student-dashboard">Student Dashboard unavailable</main>
+    }
+    const tools = props.dashboard.tools ?? []
+    harness.dashboard = {
+      profileId: props.profile.id,
+      tools,
+      onSignOut: props.dashboard.onSignOut,
+    }
+    return (
+      <main data-surface="student-dashboard">
+        Student Dashboard for {props.profile.name}
+        {tools.map((tool) => (
+          <button key={tool.id} onClick={tool.onOpen}>{tool.title}</button>
+        ))}
+        <button onClick={props.dashboard.onSignOut}>Sign out</button>
+      </main>
+    )
+  },
 }))
 vi.mock('./study/client/studyProductionReadinessClient', () => ({
   createStudyProductionReadinessClient: () => ({
@@ -165,6 +199,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
   beforeEach(() => {
     harness.picker = null
     harness.pin = null
+    harness.dashboard = null
     harness.syncUser = { id: 'household-a', email: 'household-a@example.com' }
     harness.launches = []
     harness.cancels = []
@@ -256,6 +291,8 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await reachStudySurface()
     expect(harness.picker).toBeNull()
     expect(harness.launches[0]).toEqual({ student: 'p1', host: 'household-a' })
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p1.missions[isoToday()]).toBeUndefined()
     // A4-X: entry never writes the URL — deep-link pathname is left untouched.
     expect(pathname).toBe('/study-engine')
   })
@@ -276,11 +313,12 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     expect(pathname).toBe('/study-engine')
   })
 
-  it('cancels the study runtime and lands the next learner on home after a profile switch', async () => {
+  it('cancels the study runtime and lands the next learner on the dashboard after a profile switch', async () => {
     await mountApp(seeded('p1'))
     await reachStudySurface()
     await press(findButton('Back home'))
-    await waitFor(() => hasText(container, 'Hi, Sam!'))
+    await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
+    expect(harness.dashboard?.profileId).toBe('p1')
     expect(harness.cancels).toContain('navigation-away')
     await press(findButton('Sign out'))
     expect(harness.picker).not.toBeNull()
@@ -289,7 +327,8 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await act(async () => harness.picker?.onPick('p2'))
     expect(harness.pin?.title).toBe('Hi, Riley!')
     await act(async () => { harness.pin?.onComplete('2222') })
-    await waitFor(() => hasText(container, 'Hi, Riley!'))
+    await waitFor(() => hasText(container, 'Student Dashboard for Riley'))
+    expect(harness.dashboard?.profileId).toBe('p2')
     expect(hasText(container, 'Verified Study workspace')).toBe(false)
     const afterSwitch = harness.launches.slice(launchesBeforeSwitch)
     expect(afterSwitch.every((launch) => launch.student === 'p2')).toBe(true)
@@ -318,7 +357,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     expect(harness.picker).not.toBeNull()
     await act(async () => harness.picker?.onPick('p1'))
     await act(async () => { harness.pin?.onComplete('1234') })
-    await waitFor(() => hasText(container, 'Hi, Sam!'))
+    await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
     expect(hasText(container, 'Verified Study workspace')).toBe(false)
     expect(hasText(container, 'Study is not available')).toBe(false)
     expect(hasText(container, 'Today’s Study plan')).toBe(false)
@@ -334,7 +373,10 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await mountApp(seeded('p1'))
     await reachStudySurface()
     await press(findButton('Back home'))
-    await waitFor(() => hasText(container, 'Hi, Sam!'))
+    await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
+    await settle()
+    const homeState = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(homeState.profiles.p1.missions[isoToday()]).toBeDefined()
     expect(pathname).toBe('/')
     await act(async () => root?.unmount())
     root = null
@@ -352,7 +394,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await mountApp(seeded('p1'))
     await reachStudySurface()
     await press(findButton('Back home'))
-    await waitFor(() => hasText(container, 'Hi, Sam!'))
+    await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
     // Simulate the URL lingering at sign-out time (e.g. restored by browser
     // Back after exit — the accepted residual) so signOut's coverage is real.
     pathname = '/study-engine'
@@ -365,12 +407,12 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await mountApp(seeded('p1'))
     await reachStudySurface()
     await press(findButton('Back home'))
-    await waitFor(() => hasText(container, 'Hi, Sam!'))
+    await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
     await press(findButton('Sign out'))
     expect(harness.picker).not.toBeNull()
     await act(async () => harness.picker?.onPick('p2'))
     await act(async () => { harness.pin?.onComplete('2222') })
-    await waitFor(() => hasText(container, 'Hi, Riley!'))
+    await waitFor(() => hasText(container, 'Student Dashboard for Riley'))
     await act(async () => root?.unmount())
     root = null
     container = documentTarget.createElement('div')

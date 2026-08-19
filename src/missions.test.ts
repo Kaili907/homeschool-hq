@@ -167,6 +167,22 @@ describe('cadence', () => {
 })
 
 describe('auto-check by kind', () => {
+  it.each([
+    { label: 'practice', complete: autoCompletePractice, profile: kid('3'), day: MON, itemId: 'math-practice' },
+    { label: 'typing', complete: autoCompleteTyping, profile: kid('3'), day: MON, itemId: 'typing' },
+    { label: 'reading', complete: autoCompleteReading, profile: kid('3'), day: MON, itemId: 'reading-session' },
+    { label: 'mindset', complete: autoCompleteMindset, profile: kid('6'), day: WED, itemId: 'mindset-lesson' },
+  ])('$label completion materialises the canonical day from empty missions', ({ complete, profile, day, itemId }) => {
+    const empty = { ...profile, missions: {} }
+    const canonical = ensureToday(empty, day).missions[day]
+    const completed = complete(empty, day).missions[day]
+
+    expect(completed.items.map(({ done: _done, ...item }) => item)).toEqual(
+      canonical.items.map(({ done: _done, ...item }) => item),
+    )
+    expect(completed.items.filter((item) => item.done).map((item) => item.id)).toEqual([itemId])
+  })
+
   it('math practice flips only the math auto item, leaving typing open', () => {
     const p = autoCompletePractice(kid('3'), MON)
     const day = p.missions[MON]

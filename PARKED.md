@@ -1,23 +1,34 @@
-# PARKED.md — Workstream Ledger for Manuel Academy (v1.6)
+# PARKED.md — Workstream Ledger for Manuel Academy (v1.7)
 
-Authoritative reconciliation of every known workstream. v1.6,
-August 4, 2026 (late evening): records the first production
-publish since v2.2; closes WT-INSPECT and WT-INSPECT-2; corrects
-the earlier estate-GC and enrichment-stub records; preserves
-two sole-copy student-serving WIP lines; voids stale A2 merge
-authorization; records the post-Study validator drift; records
-the SYNC-1 merge at b954833 with condition C1 open and a hard
-deploy gate; and resolves Khayyam custody with its originating
-session ID still open.
+Authoritative reconciliation of every known workstream. v1.7,
+August 9, 2026: records the verified Default Student Home
+production release and current production custody. The dated
+v1.6 records below remain historical evidence unless a newer
+dated record explicitly supersedes them.
 
-Canonical master at time of writing: b954833 (SYNC-1 merge;
-pushed and terminal-witnessed on origin; C1 remains open;
-production-publish parent line e66f436). Published production
-remains e66f436 via Netlify deploy
-6a7271618d91438523f4dd82, published 7:10 PM ET,
-August 4, 2026. The published deploy is LOCKED; Netlify
-auto-publishing is OFF. This is the first production publish
-since v2.2 (5be50ff).
+VERIFIED CURRENT FACT (August 9, 2026): GitHub master and
+origin/master are both
+19e8faa4cf3421789b917f4835ecf684f64c654d. Integration was
+fast-forward only, with no merge commit and no force push.
+
+VERIFIED CURRENT PRODUCTION CUSTODY (August 9, 2026):
+- Netlify site: manuel-academy
+- Production URL: https://manuel-academy.netlify.app
+- Published deploy: 6a78541815f8970008d50928
+- Source SHA: 19e8faa4cf3421789b917f4835ecf684f64c654d
+- Published: 2026-08-09 06:32:50 EDT
+- State: Published & locked
+- Auto Publishing: OFF / Locked
+- Previous production: 6a77c3a206f077000873ecbf
+
+RECONCILIATION NOTICE (August 9, 2026): older sections concerning
+prior canonical master, production custody, SYNC-1-C1, A6
+implementation detail, CURR-1-F, dashboard history, or worktree
+estate may predate current evidence. Interpret those sections
+through newer dated records until each is separately reconciled.
+This notice does not silently reopen or close any other
+workstream; historical SHAs and deploy IDs remain historical
+evidence rather than current-custody claims.
 
 Rules of this file:
 - No session re-investigates anything listed CLOSED or DEAD.
@@ -48,6 +59,89 @@ Rules of this file:
   delegations. Those substitutions are logged as substitutions;
   the packet evidence stands, but the named addressee is not
   rewritten as the executor.
+
+---
+
+## DEFAULT STUDENT HOME — PRODUCTION CLOSED
+
+VERIFIED CURRENT FACT (August 9, 2026): the Default Student Home
+release is closed in production at deploy
+6a78541815f8970008d50928 from exact master SHA
+19e8faa4cf3421789b917f4835ecf684f64c654d.
+
+Verified product behavior:
+- The new Manuel Academy Student Dashboard is the normal signed-in
+  learner home; the old legacy full-screen Homeschool HQ / Today's
+  Mission home did not appear.
+- Learners with zero Academy programs still receive the dashboard
+  shell; Grade 6 zero-course production behavior was verified.
+- Working levels govern Academy content, not dashboard access; no
+  working-level or Academy-course assignment was required.
+- Authenticated `/academy` renders the same Student Dashboard shell,
+  while signed-out `/academy` remains protected and returns to the
+  profile picker.
+- Today's Mission remains separate from Academy lesson progress;
+  legacy mission authority remains `Profile.missions`.
+- Mindset availability continues to use the existing unlock authority.
+- Mission initialization is limited to legitimate home/dashboard
+  surfaces.
+- `HighSchoolHome` no longer mounts `AssistantOrb`.
+- Dashboard Jarvis is visual-only: no chat, prompt field, Send, Talk,
+  microphone, or active assistant control.
+- Study remained unchanged.
+
+Authenticated production smoke:
+- Final classification:
+  DEFAULT_HOME_AUTHENTICATED_PRODUCTION_SMOKE_VERIFIED_WITH_CONDITIONS.
+- A real production 6th Grade learner, already past first sign-in,
+  authenticated with an existing PIN. PIN privacy was preserved; no
+  PIN value is recorded here.
+- Normal sign-in automatically landed on the new dashboard. The old
+  legacy home did not appear.
+- The learner had zero Academy courses. The dashboard rendered
+  successfully without a forced working-level assignment, Academy
+  course assignment, or Parent Hub setup.
+- Today's Mission was visible at 0 of 9 complete; no mission item or
+  other learner state beyond normal authentication was changed.
+- Sign-out and signed-out `/academy` protection passed.
+- The application console had 0 application errors and 0 application
+  warnings. Two observed MetaMask/extension MaxListeners warnings were
+  extension output, not application warnings.
+- The authenticated production landing behavior is verified using an
+  existing-PIN learner. Brand-new first-PIN creation was not exercised
+  during this final production smoke. This condition does not keep the
+  Default Home release open.
+
+Final integrated validation evidence:
+- Focused/default-home: 154 tests passed.
+- Academy regression: 160 tests passed.
+- Full root application: 168 files / 1,950 tests passed.
+- Typecheck: PASS.
+- Production build: PASS (240 Vite modules).
+- Curriculum validation: 30 courses / 232 units / 2,736 lessons.
+- Independent code/safety ruling: SAFE;
+  DEFAULT_HOME_FINAL_READY_FOR_INTEGRATION.
+- Visual ruling: DEFAULT_HOME_FINAL_VISUAL_PASS_WITH_CONDITIONS.
+
+Separate non-blocking accessibility follow-up:
+- HIGH_SCHOOL_A11Y_DEBT_MAPPED.
+- The mapped high-school accessibility debt is pre-existing and is not
+  a blocker for this Default Home release.
+- The legacy high-school workspace must not be described as fully
+  WCAG-conformant. A separate remediation card is required; no
+  accessibility issue is fixed or closed by this documentation card.
+
+Study boundary — OPEN / INDEPENDENT:
+- This release does not close or modify Study A4-B, overall A6 /
+  student-use readiness, actor-to-grant hosted execution, Study
+  production composition, hosted-project verification,
+  provider/delivery readiness, staff authorization, authenticated
+  Study assistive-technology validation, or any other Study
+  safety/readiness gate.
+- Study is not marked ready. Unrelated curriculum gates, hosted
+  migrations, placement assessment work, Tutor-host gates,
+  onboarding/enrichment work, frozen artifact custody work, and
+  unrelated deployment gates also remain outside this release.
 
 ---
 
@@ -872,4 +966,4 @@ as-built confirmed.
 2. Year scopes for four students — gated on 1.
 3. Household onboarding to hosted sync — after 1.
 
-Last updated: August 4, 2026 (late evening, v1.6 final draft) by Dad + dispatch desk.
+Last updated: August 9, 2026 (v1.7 Default Student Home production closeout).
