@@ -396,7 +396,11 @@ test("attempt expansion, duplicate references, and same-route failover are rejec
     const thirdAttempt = reserveExecutionBudget({
         executionBudget: executionBudget(),
         reservationRef: "reservation:third-attempt",
-        attempts: [attempt(0), attempt(1), { ...attempt(1), physicalAttemptRef: "physical-attempt:third" }],
+        attempts: [
+            attempt(0),
+            attempt(1),
+            { ...attempt(1), physicalAttemptRef: "physical-attempt:third" },
+        ],
     });
     assert.equal("decision" in thirdAttempt ? thirdAttempt.decision : null, "fixed-stop");
     const sameRoute = fallbackInput();
