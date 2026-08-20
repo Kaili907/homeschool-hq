@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u01-l06",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Whole-Number Reasoning",
+    "dayInUnit": 6,
+    "courseDay": 6,
+    "phase": "Guided practice B",
+    "focus": "analyzing errors",
+    "title": "Guided practice B: analyzing errors"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.OA.2",
+    "5.NBT.1",
+    "MP.1",
+    "MP.3",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "expression-error-analysis",
+          "standard": "MP.3",
+          "difficulty": 1,
+          "prompt": "A student adds 9 and 4 before multiplying when evaluating 9 + (4 × 6). Identify and correct the error.",
+          "workedSolution": {
+            "steps": [
+              "Name the error: the student ignored the grouped multiplication.",
+              "Evaluate the parentheses first: 4 × 6 = 24.",
+              "Then add 9: 9 + 24 = 33, which corrects both the reasoning and result."
+            ],
+            "answer": "The student added before multiplying; 4 × 6 should be evaluated first, giving 33."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "place-value-error-analysis",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "A student says, “In 715571, the value of the 5 in the hundreds place is 10 times as much as the value of the 5 in the thousands place.” Which statement best analyzes the error?",
+          "choices": [
+            "Both digits have value 5; repeated digits always have the same value.",
+            "The values are 500 and 5000; 500 is 10 times as much as 5000.",
+            "The values are 500 and 5000; 500 is 1/10 as much as 5000, so the student's comparison is incorrect.",
+            "The places are adjacent, so 500 is 100 times as much as 5000."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-numerical-expression",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "Evaluate [21 + (6 × 3)] - 4.",
+          "choices": [
+            "35",
+            "77",
+            "43",
+            "45"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "words-to-expression",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Which expression means: “Subtract 7 from 13, multiply the difference by 7, then add 45.”",
+          "choices": [
+            "45 + 7 × 13 + 7",
+            "[45 + (7 × 13)] - 7",
+            "45 + [7 × (13 - 7)]",
+            "(45 + 7) × (13 - 7)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "expression-to-words",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Which phrase describes 39 + [5 × (23 - 8)] without evaluating it?",
+          "choices": [
+            "Multiply 5 by 23, add 39, then subtract 8.",
+            "Subtract 8 from 23, multiply the difference by 5, then add 39.",
+            "Subtract 8 from 23, add 5, then multiply the sum by 39.",
+            "Add 23 and 8, multiply the sum by 5, then add 39."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "expression-relationship",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Let E represent 3964 + 381. Without evaluating, how does (3964 + 381) + 662 compare with E?",
+          "choices": [
+            "663 greater than E",
+            "662 times as large as E",
+            "662 greater than E",
+            "661 greater than E"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "choose-expression-for-situation",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "A supply cart has 54 boxes with 27 markers in each box and 22 loose markers. Which expression represents the total number of markers?",
+          "choices": [
+            "54 × (27 + 22)",
+            "(54 + 27) × 22",
+            "54 × 27 + 22",
+            "(54 + 22) × 27"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-multistep-problem",
+          "standard": "MP.1",
+          "difficulty": 3,
+          "prompt": "A team packs 59 crates with 65 bottles in each crate, adds 76 loose bottles, and then uses 52 bottles. How many bottles remain?",
+          "choices": [
+            "148",
+            "3859",
+            "3860",
+            "3783"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-whole-number-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "In 3331827, how does the value of the 3 in the ten-thousands place compare with the value of the 3 in the hundred-thousands place?",
+          "choices": [
+            "the same value",
+            "10 times as much",
+            "1/10 as much",
+            "100 times as much"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "estimate-sum-difference",
+          "standard": "MP.6",
+          "difficulty": 3,
+          "prompt": "Round each number to the nearest thousand to estimate 92500 + 273500.",
+          "choices": [
+            "366998",
+            "368000",
+            "367000",
+            "367002"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "MP.6",
+          "difficulty": 3,
+          "prompt": "Round 350 to the nearest hundred and 85 to the nearest ten, then multiply to estimate the product.",
+          "choices": [
+            "36000",
+            "29750",
+            "27000",
+            "45000"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u01-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u01-l06"
+  }
+}

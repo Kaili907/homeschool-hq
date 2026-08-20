@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l03",
+  "lessonId": "ma-g4-ready-for-life-u05-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "System execution",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or both packing systems are not actually applied as described (items are not truly grouped by category, or not truly ordered by use)."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both the category system and the order-of-use system are applied correctly and distinctly to the same set of real items."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner notices and names an item that was easy to forget during the initial lay-out step."
+          }
+        ]
+      },
+      {
+        "dimension": "Comparison and reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The comparison between systems is vague or unsupported ('one was better') with no specific evidence."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The comparison names a specific item and a real difference in how quickly or easily it was found under each system."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection correctly reasons about why the chosen system fits this trip and names a different trip type where the other system would work better."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The bag and items are real and tied to an actual upcoming trip or outing, not invented for the assignment.",
+      "The learner actually unpacks fully between the two packing attempts rather than only rearranging."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

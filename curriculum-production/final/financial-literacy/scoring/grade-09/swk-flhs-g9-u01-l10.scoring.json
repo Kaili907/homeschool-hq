@@ -1,0 +1,358 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l10",
+  "lessonId": "ma-g9-financial-literacy-u01-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$43,828.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$19.10 x 2,080 hours is $39,728 in wages, plus $4,100 of benefits."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$49,762.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$21.40 x 2,080 hours is $44,512 in wages, plus $5,250 of benefits."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$64,312.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$27.65 x 2,080 hours is $57,512 in wages, plus $6,800 of benefits."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Role 2 gains $5,934 a year over Role 1; $3,900 / $5,934 of a year is 7.89 months, which rounds to 8."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "11",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Role 3 gains $20,484 a year over Role 1; $18,400 / $20,484 of a year is 10.78 months, which rounds to 11."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "35",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "24 months of training with no gain, then the 11 months of higher pay that repay the cost."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "rate1 * hoursYear + benefits1",
+        "substituted": "19.1 * 2080 + 4100",
+        "result": "$43,828.00",
+        "why": "$19.10 x 2,080 hours is $39,728 in wages, plus $4,100 of benefits."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "rate2 * hoursYear2 + benefits2",
+        "substituted": "21.4 * 2080 + 5250",
+        "result": "$49,762.00",
+        "why": "$21.40 x 2,080 hours is $44,512 in wages, plus $5,250 of benefits."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "rate3 * hoursYear3 + benefits3",
+        "substituted": "27.65 * 2080 + 6800",
+        "result": "$64,312.00",
+        "why": "$27.65 x 2,080 hours is $57,512 in wages, plus $6,800 of benefits."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(cost2 / (#t1-p2 - #t1-p1) * 12, 0)",
+        "substituted": "round(3900 / (#t1-p2 - #t1-p1) * 12, 0)",
+        "result": "8",
+        "why": "Role 2 gains $5,934 a year over Role 1; $3,900 / $5,934 of a year is 7.89 months, which rounds to 8."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(cost3 / (#t1-p3 - #t1-p1) * 12, 0)",
+        "substituted": "round(18400 / (#t1-p3 - #t1-p1) * 12, 0)",
+        "result": "11",
+        "why": "Role 3 gains $20,484 a year over Role 1; $18,400 / $20,484 of a year is 10.78 months, which rounds to 11."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "programMonths3 + #t2-p2",
+        "substituted": "24 + #t2-p2",
+        "result": "35",
+        "why": "24 months of training with no gain, then the 11 months of higher pay that repay the cost."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Recommend one of the three fictional roles for someone who needs steady income within six months, and defend it against the role with the highest total compensation.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Recommends a role and grounds it in the six-month constraint, not only in total compensation.",
+          "Faces the strongest counter-argument directly: Role 3 pays $20,484 a year more than Role 1 but cannot deliver any income for 24 months.",
+          "Uses the recoup figures — 8 months for Role 2, 35 months from enrolment for Role 3 — rather than comparing program costs alone."
+        ],
+        "evidenceRequirements": [
+          "Cites at least one total-compensation figure and at least one recoup figure computed in this lesson."
+        ],
+        "lookFors": [
+          "The response treats the six-month constraint as binding rather than mentioning it and then choosing on pay.",
+          "A recommendation of Role 2 must acknowledge that its 9-month program also breaks the six-month constraint; only Role 1 satisfies it outright."
+        ],
+        "commonMisconception": "Ranking career paths by their eventual pay while ignoring how long the person has to survive on nothing.",
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "State one figure in your three income profiles that you are least confident in, and say what would change your recommendation if it were wrong.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names a specific figure from the profiles rather than expressing general uncertainty.",
+          "Says concretely how the recommendation would change if that figure were different, including the direction and rough size of change that would matter."
+        ],
+        "evidenceRequirements": [
+          "Refers to a specific computed figure from this lesson by value."
+        ],
+        "lookFors": [
+          "The response identifies an assumption that is actually load-bearing, such as the 2,080-hour full-time year or the benefit valuations.",
+          "The response does not simply say all the numbers are made up."
+        ],
+        "dimensions": [
+          "communication-of-uncertainty",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Role 1’s total annual compensation, counting wages and benefits?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is Role 2’s total annual compensation?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Role 3’s total annual compensation?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many months does Role 2’s gain over Role 1 take to repay its $3,900 program cost? Round to the nearest month."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many months does Role 3’s gain over Role 1 take to repay its $18,400 program cost? Round to the nearest month."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Counting the 24 months of Role 3’s program before any of that pay begins, how long from starting the program until the $18,400 is repaid?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Recommend one of the three fictional roles for someone who needs steady income within six months, and defend it against the role with the highest total compensation."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "State one figure in your three income profiles that you are least confident in, and say what would change your recommendation if it were wrong."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is Role 1’s total annual compensation, counting wages and benefits? Answer: $43,828.00. Verification: $19.10 x 2,080 hours is $39,728 in wages, plus $4,100 of benefits. t1-p2: What is Role 2’s total annual compensation? Answer: $49,762.00. Verification: $21.40 x 2,080 hours is $44,512 in wages, plus $5,250 of benefits. t1-p3: What is Role 3’s total annual compensation? Answer: $64,312.00. Verification: $27.65 x 2,080 hours is $57,512 in wages, plus $6,800 of benefits. t2-p1: How many months does Role 2’s gain over Role 1 take to repay its $3,900 program cost? Round to the nearest month. Answer: 8. Verification: Role 2 gains $5,934 a year over Role 1; $3,900 / $5,934 of a year is 7.89 months, which rounds to 8. t2-p2: How many months does Role 3’s gain over Role 1 take to repay its $18,400 program cost? Round to the nearest month. Answer: 11. Verification: Role 3 gains $20,484 a year over Role 1; $18,400 / $20,484 of a year is 10.78 months, which rounds to 11. t2-p3: Counting the 24 months of Role 3’s program before any of that pay begins, how long from starting the program until the $18,400 is repaid? Answer: 35. Verification: 24 months of training with no gain, then the 11 months of higher pay that repay the cost."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Recommend one of the three fictional roles for someone who needs steady income within six months, and defend it against the role with the highest total compensation. Recommends a role and grounds it in the six-month constraint, not only in total compensation. Faces the strongest counter-argument directly: Role 3 pays $20,484 a year more than Role 1 but cannot deliver any income for 24 months. Uses the recoup figures — 8 months for Role 2, 35 months from enrolment for Role 3 — rather than comparing program costs alone. Cites at least one total-compensation figure and at least one recoup figure computed in this lesson. The response treats the six-month constraint as binding rather than mentioning it and then choosing on pay. A recommendation of Role 2 must acknowledge that its 9-month program also breaks the six-month constraint; only Role 1 satisfies it outright. t3-p2: State one figure in your three income profiles that you are least confident in, and say what would change your recommendation if it were wrong. Names a specific figure from the profiles rather than expressing general uncertainty. Says concretely how the recommendation would change if that figure were different, including the direction and rough size of change that would matter. Refers to a specific computed figure from this lesson by value. The response identifies an assumption that is actually load-bearing, such as the 2,080-hour full-time year or the benefit valuations. The response does not simply say all the numbers are made up."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Recommends a role and grounds it in the six-month constraint, not only in total compensation. Faces the strongest counter-argument directly: Role 3 pays $20,484 a year more than Role 1 but cannot deliver any income for 24 months. Uses the recoup figures — 8 months for Role 2, 35 months from enrolment for Role 3 — rather than comparing program costs alone. Names a specific figure from the profiles rather than expressing general uncertainty. Says concretely how the recommendation would change if that figure were different, including the direction and rough size of change that would matter."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u01-l10.scoring.json",
+    "sourceScoringSha256": "9ba5c29bec4d9009fc787d638e58a374acfec87c1630c55171bfac7a3a1d8126",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l03",
+  "lessonId": "ma-g10-financial-literacy-u07-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$43,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $34,000 of wages plus the $9,600 reported on the 1099. Both are income; the forms differ in who reports them and whether anything was withheld, not in whether they are taxed."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$32,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $43,600.00 of total income less the $11,200 standard deduction. The deduction is applied once, to the combined income, not once per form."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$980.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10% of the first $9,800 of taxable income."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,164.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "14% of the taxable income above $9,800, which is $22,600 here. The filer’s taxable income does not reach $42,000, so the third bracket is not used."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$4,144.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$980.00 from the first bracket plus $3,164.00 from the second. This is the tax on both forms of income together."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,044.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,144.00 of tax against $2,100 already paid in. The gap exists because the employer withheld against the $34,000 it paid and knew nothing about the $9,600 on the 1099."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The W-4",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The W-4 is completed by the worker and instructs the employer’s withholding going forward. The W-2 reports afterwards what was paid and withheld, the 1099 reports non-employee payments, and the 1040 is the return that reconciles everything at the end of the year."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "w2Wages + form1099",
+        "substituted": "34000 + 9600",
+        "result": "$43,600.00",
+        "why": "The $34,000 of wages plus the $9,600 reported on the 1099. Both are income; the forms differ in who reports them and whether anything was withheld, not in whether they are taxed."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - stdDed",
+        "substituted": "#t1-p1 - 11200",
+        "result": "$32,400.00",
+        "why": "The $43,600.00 of total income less the $11,200 standard deduction. The deduction is applied once, to the combined income, not once per form."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "b1 * r1",
+        "substituted": "9800 * 0.1",
+        "result": "$980.00",
+        "why": "10% of the first $9,800 of taxable income."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "(#t1-p2 - b1b) * r2",
+        "substituted": "(#t1-p2 - 9800) * 0.14",
+        "result": "$3,164.00",
+        "why": "14% of the taxable income above $9,800, which is $22,600 here. The filer’s taxable income does not reach $42,000, so the third bracket is not used."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 + #t2-p1",
+        "substituted": "#t1-p3 + #t2-p1",
+        "result": "$4,144.00",
+        "why": "$980.00 from the first bracket plus $3,164.00 from the second. This is the tax on both forms of income together."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - withheld",
+        "substituted": "#t2-p2 - 2100",
+        "result": "$2,044.00",
+        "why": "$4,144.00 of tax against $2,100 already paid in. The gap exists because the employer withheld against the $34,000 it paid and knew nothing about the $9,600 on the 1099."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The filer did nothing wrong and still owes $2,044.00 at filing. Explain how that happens, and describe two different things the filer could have done during the year to avoid being surprised by it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that withholding is set per employer against that employer’s payments, so income reported on a 1099 has nothing withheld and the shortfall only appears when the 1040 combines both.",
+          "Gives two distinct actions — adjusting the W-4 so the employer withholds more, or setting money aside from each 1099 payment as it arrives — and connects each to the $2,044.00 figure.",
+          "Notes that this is a timing and cash-planning problem rather than an extra tax: the same $4,144.00 was owed either way."
+        ],
+        "evidenceRequirements": [
+          "Uses the $4,144.00 total tax, the $2,100 withheld, and the $2,044.00 owed."
+        ],
+        "lookFors": [
+          "The response distinguishes owing tax from owing a penalty; nothing here says the filer was penalised.",
+          "The response recognises that the employer had no way to know about the 1099 income."
+        ],
+        "commonMisconception": "Assuming that because tax is withheld from a paycheck, all tax for the year has been paid.",
+        "dimensions": [
+          "plan-coherence",
+          "error-diagnosis",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the filer’s total income for the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the filer’s taxable income?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much tax is charged on the first bracket?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much tax is charged on the second bracket?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total income tax for the year?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "The employer withheld $2,100. What does the filer owe when the return is filed?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Which document tells an employer how much income tax to withhold from a paycheck?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The filer did nothing wrong and still owes $2,044.00 at filing. Explain how that happens, and describe two different things the filer could have done during the year to avoid being surprised by it."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the filer’s total income for the year? Answer: $43,600.00. Verification: The $34,000 of wages plus the $9,600 reported on the 1099. Both are income; the forms differ in who reports them and whether anything was withheld, not in whether they are taxed. t1-p2: What is the filer’s taxable income? Answer: $32,400.00. Verification: The $43,600.00 of total income less the $11,200 standard deduction. The deduction is applied once, to the combined income, not once per form. t1-p3: How much tax is charged on the first bracket? Answer: $980.00. Verification: 10% of the first $9,800 of taxable income. t2-p1: How much tax is charged on the second bracket? Answer: $3,164.00. Verification: 14% of the taxable income above $9,800, which is $22,600 here. The filer’s taxable income does not reach $42,000, so the third bracket is not used. t2-p2: What is the total income tax for the year? Answer: $4,144.00. Verification: $980.00 from the first bracket plus $3,164.00 from the second. This is the tax on both forms of income together. t2-p3: The employer withheld $2,100. What does the filer owe when the return is filed? Answer: $2,044.00. Verification: $4,144.00 of tax against $2,100 already paid in. The gap exists because the employer withheld against the $34,000 it paid and knew nothing about the $9,600 on the 1099. t2-p4: Which document tells an employer how much income tax to withhold from a paycheck? Answer: The W-4. Verification: The W-4 is completed by the worker and instructs the employer’s withholding going forward. The W-2 reports afterwards what was paid and withheld, the 1099 reports non-employee payments, and the 1040 is the return that reconciles everything at the end of the year."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The filer did nothing wrong and still owes $2,044.00 at filing. Explain how that happens, and describe two different things the filer could have done during the year to avoid being surprised by it. Explains that withholding is set per employer against that employer’s payments, so income reported on a 1099 has nothing withheld and the shortfall only appears when the 1040 combines both. Gives two distinct actions — adjusting the W-4 so the employer withholds more, or setting money aside from each 1099 payment as it arrives — and connects each to the $2,044.00 figure. Notes that this is a timing and cash-planning problem rather than an extra tax: the same $4,144.00 was owed either way. Uses the $4,144.00 total tax, the $2,100 withheld, and the $2,044.00 owed. The response distinguishes owing tax from owing a penalty; nothing here says the filer was penalised. The response recognises that the employer had no way to know about the 1099 income."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that withholding is set per employer against that employer’s payments, so income reported on a 1099 has nothing withheld and the shortfall only appears when the 1040 combines both. Gives two distinct actions — adjusting the W-4 so the employer withholds more, or setting money aside from each 1099 payment as it arrives — and connects each to the $2,044.00 figure. Notes that this is a timing and cash-planning problem rather than an extra tax: the same $4,144.00 was owed either way."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u07-l03.scoring.json",
+    "sourceScoringSha256": "495ca6d9bbed27476862f38a8c0731a085cb77ae9b8912a4570df9fbde3309aa",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g3-tech-cs-u02-l06",
+  "unit_id": "ma-g3-tech-cs-u02",
+  "subject": "technology",
+  "band": "g3-4",
+  "grade": 3,
+  "grade_dir": "grade-03",
+  "unit_title": "Computers Around Us",
+  "lesson_title": "Correction and reflection: following multi-step directions",
+  "phase": "Correction and reflection",
+  "work_mode": "CORRECT",
+  "focus": "following multi-step directions",
+  "scoring_authority_kind": "RUBRIC",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "rubric": [
+    {
+      "dimension": "revision and correction",
+      "exceeds": "A documented revision traces symptom to cause to fix to passing check, and a pattern across errors is named with a countermeasure.",
+      "meets": "At least one real revision is documented with what changed and how improvement can be told.",
+      "developing": "A change was made but the cause or the evidence of improvement is missing.",
+      "beginning": "No evidence the work was revisited or corrected."
+    },
+    {
+      "dimension": "evidence and reasoning",
+      "exceeds": "Every claim or choice is backed by specific evidence or clearly explained reasoning a reader can follow unaided.",
+      "meets": "Most claims or choices are backed by evidence or reasoning, with only small gaps.",
+      "developing": "Some claims are supported but several are asserted without support.",
+      "beginning": "Claims are asserted with little or no supporting evidence or reasoning."
+    },
+    {
+      "dimension": "process documentation",
+      "exceeds": "The record shows the actual working order, including abandoned attempts and dead ends, in enough detail to reconstruct the session.",
+      "meets": "The required log, trace, or notes are present and record what was done and why.",
+      "developing": "Documentation exists but is thin, out of order, or written after the fact from memory.",
+      "beginning": "Little or no record of the process was kept."
+    }
+  ],
+  "scoring_judgment_guidance": "Score this session with the rubric below, not against a fixed answer key — a design, code, or debugging task legitimately has more than one valid solution. Score only what a correction and reflection on following multi-step directions can show: this is one increment of progress, so score the increment and its documentation rather than the unfinished whole. Record the level reached on each dimension with one specific reason drawn from the actual submission. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "lesson_success_criteria": [
+    "The learner completes the central task about following multi-step directions.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "formative_check": "In one concise response, show or explain the most important idea about following multi-step directions; then identify one check that would catch an error or weak claim.",
+  "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER",
+    "review_timing": "TRUSTED_ADULT_REVIEW_AFTER_REQUIRED_INDEPENDENT_EVIDENCE_IS_SAVED",
+    "lesson_type": "debugging_revision",
+    "protected_task": {
+      "task_ref": "ma-g3-tech-cs-u02-l06#protected-independent",
+      "authority": "ADULT_TRUSTED_AUTHORITY",
+      "learner_visibility": "NEVER",
+      "task_kind": "ANALYSIS_OR_DESIGN",
+      "accepted_evidence_model": [
+        "The response accurately links at least three printed details to following multi-step directions.",
+        "The proposed revision or decision is feasible within the supplied fictional case and does not invent missing facts.",
+        "The pass condition is observable, specific, and tests the proposed revision rather than restating a preference.",
+        "The limitation or trade-off correctly identifies what the supplied evidence cannot establish."
+      ],
+      "decisive_resolution": "Accept multiple defensible responses. A passing response has three traceable evidence links, one feasible revision or decision, one observable check, and one honest limitation; reject claims that require facts outside the package.",
+      "prohibited_shortcut": "Do not give the learner a completed evidence map, selected decision, or finished design before independent evidence is submitted."
+    },
+    "fresh_mastery_check": {
+      "task_ref": "ma-g3-tech-cs-u02-l06#fresh-northstar-case",
+      "accepted_evidence_model": [
+        "Each claim cites N1–N5 and stays within what that label supports.",
+        "The revision addresses N5 while continuing to respect N1 and N2.",
+        "The pass condition is observable and could disconfirm the learner’s preferred revision.",
+        "The limitation names an unresolved question rather than inventing an answer."
+      ],
+      "decisive_resolution": "Accept multiple responses that satisfy all four evidence conditions; no single wording, layout, or decision is required."
+    },
+    "remediation_authority": {
+      "selection_rule": "Choose the smallest alternate route from observable evidence; do not repeat the original task or expose its protected resolution.",
+      "mastery_reconsideration": "Reconsider mastery only from the fresh independent record under the same criteria. A worked or guided response is instruction, not mastery evidence."
+    }
+  },
+  "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
+  "unit_assessment_reference": {
+    "assessment_id": "ma-g3-tech-cs-u02-assessment",
+    "total_points": 38,
+    "unit_rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "note": "This lesson is one session inside the unit; the unit assessment record above is the summative instrument, and this lesson rubric scores only this session's evidence."
+  },
+  "remediation_plan": "Reteaching for following multi-step directions follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for following multi-step directions, model it with a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the process for following multi-step directions works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of following multi-step directions, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking following multi-step directions mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension_plan": "Apply following multi-step directions under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work. Treat this as optional depth on following multi-step directions rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+  ],
+  "task_accessibility_provisions": [
+    "You can do this with the keyboard only, no mouse needed. Text can be made bigger, and you may do it on paper instead of a screen.",
+    "You can take a break, stretch, or come back to this later. That does not lower your score."
+  ],
+  "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, voice recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.",
+  "source_integrity": {
+    "requires_review": false,
+    "status": "NOT_APPLICABLE"
+  },
+  "safety_and_privacy": {
+    "requires_review": true,
+    "status": "VERIFIED",
+    "note": "No real credential, live external system, production account, or real personal data is used anywhere in this session; all values are fictional or sandboxed and no live system may be probed or accessed."
+  },
+  "standards": [
+    "Michigan Computer Science: Computing Systems"
+  ]
+}

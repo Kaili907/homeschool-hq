@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u03-l03",
+  "lessonId": "ma-g7-financial-literacy-u03-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the three-month target?",
+        "answer": "$3,450.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,150.00 x 3) = 3,450.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 115000
+            },
+            "times": 3
+          },
+          "trace": "(1,150.00 x 3) = 3,450.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How many whole months to reach the target at $200.00 a month?",
+        "answer": "18",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "whole periods to reach (1,150.00 x 3) at 200.00 per period = 18. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "periodsToReach",
+            "target": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 115000
+              },
+              "times": 3
+            },
+            "perPeriod": {
+              "op": "money",
+              "cents": 20000
+            }
+          },
+          "trace": "whole periods to reach (1,150.00 x 3) at 200.00 per period = 18"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much is in the fund after 12 months?",
+        "answer": "$2,400.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(200.00 x 12) = 2,400.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 20000
+            },
+            "times": 12
+          },
+          "trace": "(200.00 x 12) = 2,400.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is in the fund immediately after the emergency?",
+        "answer": "$1,500.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((200.00 x 12) - 900.00) = 1,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 20000
+              },
+              "times": 12
+            },
+            "less": {
+              "op": "money",
+              "cents": 90000
+            }
+          },
+          "trace": "((200.00 x 12) - 900.00) = 1,500.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How many more whole months to reach the $3,450.00 target?",
+        "answer": "10",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "whole periods to reach ((1,150.00 x 3) - ((200.00 x 12) - 900.00)) at 200.00 per period = 10. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "periodsToReach",
+            "target": {
+              "op": "diff",
+              "from": {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 115000
+                },
+                "times": 3
+              },
+              "less": {
+                "op": "diff",
+                "from": {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 20000
+                  },
+                  "times": 12
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 90000
+                }
+              }
+            },
+            "perPeriod": {
+              "op": "money",
+              "cents": 20000
+            }
+          },
+          "trace": "whole periods to reach ((1,150.00 x 3) - ((200.00 x 12) - 900.00)) at 200.00 per period = 10"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Understanding the purpose of an emergency fund",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Toma's withdrawal as a failure of the plan."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The purpose is stated for Toma but no rebuilding step is described."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Toma's fund absorbed a shock that would otherwise have become debt, and specifies resuming contributions to rebuild it."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the three-month target?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many whole months to reach the target at $200.00 a month?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much is in the fund after 12 months?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is in the fund immediately after the emergency?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many more whole months to reach the $3,450.00 target?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Using Toma's figures, explain why an emergency fund that gets used is working rather than failing, and what should happen next."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the three-month target? Answer: $3,450.00. Verification: (1,150.00 x 3) = 3,450.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How many whole months to reach the target at $200.00 a month? Answer: 18. Verification: whole periods to reach (1,150.00 x 3) at 200.00 per period = 18. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How much is in the fund after 12 months? Answer: $2,400.00. Verification: (200.00 x 12) = 2,400.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What is in the fund immediately after the emergency? Answer: $1,500.00. Verification: ((200.00 x 12) - 900.00) = 1,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How many more whole months to reach the $3,450.00 target? Answer: 10. Verification: whole periods to reach ((1,150.00 x 3) - ((200.00 x 12) - 900.00)) at 200.00 per period = 10. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Understanding the purpose of an emergency fund — Not yet: The response treats Toma's withdrawal as a failure of the plan. Approaching: The purpose is stated for Toma but no rebuilding step is described. Meets: The response explains that Toma's fund absorbed a shock that would otherwise have become debt, and specifies resuming contributions to rebuild it. The response explains that Toma's fund absorbed a shock that would otherwise have become debt, and specifies resuming contributions to rebuild it."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Toma's fund absorbed a shock that would otherwise have become debt, and specifies resuming contributions to rebuild it."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-07/swk-fl-g7-u03-l03.scoring.json",
+    "sourceScoringSha256": "3c3c865850fafafd14d0f514856f44c0bc468f9c5dee4b8a0863d88892c2542f",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

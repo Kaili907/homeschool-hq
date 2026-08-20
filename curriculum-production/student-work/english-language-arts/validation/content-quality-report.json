@@ -1,0 +1,99 @@
+{
+  "classification": "ELA_CONTENT_READY_FOR_CONVERGENCE",
+  "generatedBy": "tools/generate.mjs",
+  "lessonsAudited": 1620,
+  "readingSourceModel": "academy-original-inline",
+  "sourceCounts": {
+    "academy_original_bank": 320,
+    "academy_original_generated": 1300
+  },
+  "findings": {
+    "zeroActionable": 0,
+    "emptyRequiredWriting": 0,
+    "placeholders": 0,
+    "crossGradeDuplicatedTasks": 0,
+    "crossGradeDuplicatedReadings": 0,
+    "missingOrUnresolvableReading": 0,
+    "falseSourceClaims": 0,
+    "learnerAdultLeaks": 0,
+    "learnerModelAnswers": 0,
+    "scoringGuideCountMismatch": 0
+  },
+  "copyrightProof": {
+    "modernCopyrightedWorksCopied": 0,
+    "rightsRequiredWorksCopied": 0,
+    "publicDomainWorksCopied": 0,
+    "academyOriginalInline": 1620,
+    "textHashesVerified": 1620,
+    "statement": "Every delivered reading is an Academy-owned original included inline. No modern copyrighted, rights-required, or third-party text is copied by this corpus."
+  },
+  "scoringGuideProof": {
+    "separateAdultGuideFiles": 1620,
+    "learnerPackagesWithAdultScoringKeys": 0,
+    "learnerPackagesWithModelAnswers": 0
+  },
+  "progressionProof": {
+    "3": {
+      "averageReadingWords": 227,
+      "assessmentDeliverable": "Grade 3: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write one organized paragraph.",
+      "assessmentSuccessCriteria": 3
+    },
+    "4": {
+      "averageReadingWords": 289,
+      "assessmentDeliverable": "Grade 4: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write two connected paragraphs.",
+      "assessmentSuccessCriteria": 3
+    },
+    "5": {
+      "averageReadingWords": 280,
+      "assessmentDeliverable": "Grade 5: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write two or three organized paragraphs.",
+      "assessmentSuccessCriteria": 3
+    },
+    "7": {
+      "averageReadingWords": 280,
+      "assessmentDeliverable": "Grade 7: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write three or four developed paragraphs.",
+      "assessmentSuccessCriteria": 3
+    },
+    "8": {
+      "averageReadingWords": 280,
+      "assessmentDeliverable": "Grade 8: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write four developed paragraphs.",
+      "assessmentSuccessCriteria": 4
+    },
+    "9": {
+      "averageReadingWords": 340,
+      "assessmentDeliverable": "English 9: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write a structured response of 500–700 words.",
+      "assessmentSuccessCriteria": 4
+    },
+    "10": {
+      "averageReadingWords": 345,
+      "assessmentDeliverable": "English 10: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write a structured response of 650–900 words.",
+      "assessmentSuccessCriteria": 4
+    },
+    "11": {
+      "averageReadingWords": 398,
+      "assessmentDeliverable": "English 11: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write a sustained response of 800–1,100 words.",
+      "assessmentSuccessCriteria": 5
+    },
+    "12": {
+      "averageReadingWords": 398,
+      "assessmentDeliverable": "English 12: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write an independent response of 1,000–1,400 words.",
+      "assessmentSuccessCriteria": 5
+    }
+  },
+  "sourceDiversityProof": {
+    "uniqueReadingBodies": 1333,
+    "crossGradeDuplicatedReadingBodies": 0,
+    "repeatedBodiesArePinnedGrade3Or4UnitAnchors": true
+  },
+  "courseCounts": {
+    "3": 180,
+    "4": 180,
+    "5": 180,
+    "7": 180,
+    "8": 180,
+    "9": 180,
+    "10": 180,
+    "11": 180,
+    "12": 180
+  },
+  "crossGradeGroups": []
+}

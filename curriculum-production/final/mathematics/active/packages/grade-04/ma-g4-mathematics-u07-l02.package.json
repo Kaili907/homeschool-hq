@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u07-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u07-l02",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Adding, Subtracting, and Multiplying Fractions",
+    "dayInUnit": 2,
+    "courseDay": 110,
+    "phase": "Concept build A",
+    "focus": "decomposing a fraction into a sum of unit fractions",
+    "title": "Concept build A: decomposing a fraction into a sum of unit fractions"
+  },
+  "standards": [
+    "4.NF.3"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 1,
+          "prompt": "Find 5/8 − 2/8.",
+          "workedSolution": {
+            "steps": [
+              "Denominators match, subtract numerators: 5 − 2 = 3.",
+              "3/8 is already in lowest terms."
+            ],
+            "answer": "3/8"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "decompose-fraction-as-sum",
+          "standard": "4.NF.3",
+          "difficulty": 2,
+          "prompt": "Write 7/3 as a whole number plus a fraction less than 1.",
+          "workedSolution": {
+            "steps": [
+              "3/3 makes one whole. 7 ÷ 3 = 2 remainder 1.",
+              "7/3 = 2 and 1/3."
+            ],
+            "answer": "2 1/3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 1,
+          "prompt": "Find 3/5 − 1/5. Give the answer in lowest terms.",
+          "choices": [
+            "2/5",
+            "3/5",
+            "3/10",
+            "1/5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "decompose-fraction-as-sum",
+          "standard": "4.NF.3",
+          "difficulty": 1,
+          "prompt": "Write 5/3 as a whole number plus a fraction less than 1.",
+          "choices": [
+            "1 2/3",
+            "1 3/3",
+            "0 2/3",
+            "2 2/3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 2,
+          "prompt": "Find 5/6 − 3/6. Give the answer in lowest terms.",
+          "choices": [
+            "1/3",
+            "1/6",
+            "3/6",
+            "5/12"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decompose-fraction-as-sum",
+          "standard": "4.NF.3",
+          "difficulty": 1,
+          "prompt": "Write 4/3 as a whole number plus a fraction less than 1.",
+          "choices": [
+            "2 1/3",
+            "1 2/3",
+            "0 1/3",
+            "1 1/3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 2,
+          "prompt": "Find 2/8 + 2/8. Give the answer in lowest terms.",
+          "choices": [
+            "2/16",
+            "5/8",
+            "3/8",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "decompose-fraction-as-sum",
+          "standard": "4.NF.3",
+          "difficulty": 2,
+          "prompt": "Write 9/6 as a whole number plus a fraction less than 1.",
+          "choices": [
+            "1 4/6",
+            "2 3/6",
+            "1 3/6",
+            "0 3/6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "add-subtract-fractions-same-denominator",
+          "standard": "4.NF.3",
+          "difficulty": 1,
+          "prompt": "Find 4/5 − 1/5. Give the answer in lowest terms.",
+          "choices": [
+            "4/10",
+            "3/5",
+            "2/5",
+            "4/5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "decompose-fraction-as-sum",
+          "standard": "4.NF.3",
+          "difficulty": 2,
+          "prompt": "Write 8/5 as a whole number plus a fraction less than 1.",
+          "choices": [
+            "2 3/5",
+            "1 4/5",
+            "0 3/5",
+            "1 3/5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u07-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u07-l02"
+  }
+}

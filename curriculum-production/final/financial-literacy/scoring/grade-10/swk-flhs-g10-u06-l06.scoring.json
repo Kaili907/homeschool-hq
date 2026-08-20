@@ -1,0 +1,350 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l06",
+  "lessonId": "ma-g10-financial-literacy-u06-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,680.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,180 premium plus the $500 deductible borne on the claim."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,390.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $890 premium plus the $1,500 deductible. In a claim year the cheaper premium loses by $710.00."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$290.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Only the premiums are paid, so the $290.00 premium gap is the whole difference. Every claim-free year banks this amount for Policy Y."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$6,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five annual premiums of $1,180 plus one $500 deductible."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$5,950.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five annual premiums of $890 plus one $1,500 deductible."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,400.00 against $5,950.00, so Policy Y is cheaper by $450.00. Four claim-free years at $290.00 each more than covered the extra $1,000 borne on the single claim."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$6,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five premiums of $1,180 plus two $500 deductibles."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$7,450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five premiums of $890 plus two $1,500 deductibles."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "$550.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,450.00 against $6,900.00. The ranking reversed between one claim and two, so the number of claims decides which policy is cheaper."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "premX + dedX",
+        "substituted": "1180 + 500",
+        "result": "$1,680.00",
+        "why": "The $1,180 premium plus the $500 deductible borne on the claim."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "premY + dedY",
+        "substituted": "890 + 1500",
+        "result": "$2,390.00",
+        "why": "The $890 premium plus the $1,500 deductible. In a claim year the cheaper premium loses by $710.00."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "premX2 - premY2",
+        "substituted": "1180 - 890",
+        "result": "$290.00",
+        "why": "Only the premiums are paid, so the $290.00 premium gap is the whole difference. Every claim-free year banks this amount for Policy Y."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "premX3 * 5 + dedX2",
+        "substituted": "1180 * 5 + 500",
+        "result": "$6,400.00",
+        "why": "Five annual premiums of $1,180 plus one $500 deductible."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "premY3 * 5 + dedY2",
+        "substituted": "890 * 5 + 1500",
+        "result": "$5,950.00",
+        "why": "Five annual premiums of $890 plus one $1,500 deductible."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t2-p2",
+        "substituted": "#t2-p1 - #t2-p2",
+        "result": "$450.00",
+        "why": "$6,400.00 against $5,950.00, so Policy Y is cheaper by $450.00. Four claim-free years at $290.00 each more than covered the extra $1,000 borne on the single claim."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "premX4 * 5 + dedX3 * 2",
+        "substituted": "1180 * 5 + 500 * 2",
+        "result": "$6,900.00",
+        "why": "Five premiums of $1,180 plus two $500 deductibles."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "premY4 * 5 + dedY3 * 2",
+        "substituted": "890 * 5 + 1500 * 2",
+        "result": "$7,450.00",
+        "why": "Five premiums of $890 plus two $1,500 deductibles."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t2-p5 - #t2-p4",
+        "substituted": "#t2-p5 - #t2-p4",
+        "result": "$550.00",
+        "why": "$7,450.00 against $6,900.00. The ranking reversed between one claim and two, so the number of claims decides which policy is cheaper."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Policy Y is cheaper with one claim in five years and more expensive with two. Explain what a shopper actually has to estimate to choose between them, and say why a policy with a higher deductible can be the wrong choice even for someone who expects few claims.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the quantity to estimate: how many claims are likely over the period, since the $290.00 annual premium saving is traded against $1,000 of extra cost on each claim.",
+          "Explains that a higher deductible can still be wrong for a low-claim household if it could not readily produce the $1,500 on the day a claim happens, so affordability at the moment of loss matters as well as the multi-year total.",
+          "Notes that the comparison assumes every claim is large enough to use the full deductible, and that small claims change the arithmetic."
+        ],
+        "evidenceRequirements": [
+          "Uses the $450.00 one-claim difference and the $550.00 two-claim difference."
+        ],
+        "lookFors": [
+          "The response separates the expected total cost from the ability to pay the deductible when a claim occurs.",
+          "The response identifies the claim count as the variable rather than declaring one policy better."
+        ],
+        "commonMisconception": "Choosing a policy on the premium alone, without asking how many claims the period is likely to bring.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "In a single year with one claim, what does Policy X cost in total?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "In the same year, what does Policy Y cost in total?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "In a year with no claim, how much cheaper is Policy Y?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "Over 5 years with one claim, what does Policy X cost?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Over the same 5 years with one claim, what does Policy Y cost?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Which is cheaper over that period, and by how much?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Over 5 years with two claims, what does Policy X cost?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "Over 5 years with two claims, what does Policy Y cost?"
+        },
+        {
+          "ref": "t2-p6",
+          "responseMode": "FIXED",
+          "promptText": "With two claims, how much more does Policy Y cost?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Policy Y is cheaper with one claim in five years and more expensive with two. Explain what a shopper actually has to estimate to choose between them, and say why a policy with a higher deductible can be the wrong choice even for someone who expects few claims."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: In a single year with one claim, what does Policy X cost in total? Answer: $1,680.00. Verification: The $1,180 premium plus the $500 deductible borne on the claim. t1-p2: In the same year, what does Policy Y cost in total? Answer: $2,390.00. Verification: The $890 premium plus the $1,500 deductible. In a claim year the cheaper premium loses by $710.00. t1-p3: In a year with no claim, how much cheaper is Policy Y? Answer: $290.00. Verification: Only the premiums are paid, so the $290.00 premium gap is the whole difference. Every claim-free year banks this amount for Policy Y. t2-p1: Over 5 years with one claim, what does Policy X cost? Answer: $6,400.00. Verification: Five annual premiums of $1,180 plus one $500 deductible. t2-p2: Over the same 5 years with one claim, what does Policy Y cost? Answer: $5,950.00. Verification: Five annual premiums of $890 plus one $1,500 deductible. t2-p3: Which is cheaper over that period, and by how much? Answer: $450.00. Verification: $6,400.00 against $5,950.00, so Policy Y is cheaper by $450.00. Four claim-free years at $290.00 each more than covered the extra $1,000 borne on the single claim. t2-p4: Over 5 years with two claims, what does Policy X cost? Answer: $6,900.00. Verification: Five premiums of $1,180 plus two $500 deductibles. t2-p5: Over 5 years with two claims, what does Policy Y cost? Answer: $7,450.00. Verification: Five premiums of $890 plus two $1,500 deductibles. t2-p6: With two claims, how much more does Policy Y cost? Answer: $550.00. Verification: $7,450.00 against $6,900.00. The ranking reversed between one claim and two, so the number of claims decides which policy is cheaper."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Policy Y is cheaper with one claim in five years and more expensive with two. Explain what a shopper actually has to estimate to choose between them, and say why a policy with a higher deductible can be the wrong choice even for someone who expects few claims. Identifies the quantity to estimate: how many claims are likely over the period, since the $290.00 annual premium saving is traded against $1,000 of extra cost on each claim. Explains that a higher deductible can still be wrong for a low-claim household if it could not readily produce the $1,500 on the day a claim happens, so affordability at the moment of loss matters as well as the multi-year total. Notes that the comparison assumes every claim is large enough to use the full deductible, and that small claims change the arithmetic. Uses the $450.00 one-claim difference and the $550.00 two-claim difference. The response separates the expected total cost from the ability to pay the deductible when a claim occurs. The response identifies the claim count as the variable rather than declaring one policy better."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the quantity to estimate: how many claims are likely over the period, since the $290.00 annual premium saving is traded against $1,000 of extra cost on each claim. Explains that a higher deductible can still be wrong for a low-claim household if it could not readily produce the $1,500 on the day a claim happens, so affordability at the moment of loss matters as well as the multi-year total. Notes that the comparison assumes every claim is large enough to use the full deductible, and that small claims change the arithmetic."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u06-l06.scoring.json",
+    "sourceScoringSha256": "3b68b85dbe3630ceff2006aceaef8d1ba773caf629a610bad66c8c6c59156fcb",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

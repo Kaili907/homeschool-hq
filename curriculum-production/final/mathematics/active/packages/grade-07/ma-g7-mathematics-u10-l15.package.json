@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u10-l15",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u10-l15",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 15,
+    "courseDay": 177,
+    "phase": "Assessment preparation",
+    "focus": "proportional and algebraic models",
+    "title": "Assessment preparation: proportional and algebraic models"
+  },
+  "standards": [
+    "7.RP.3",
+    "7.NS.3",
+    "7.EE.4",
+    "7.G.6",
+    "7.SP.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "data-and-uncertainty",
+          "standard": "7.SP.4",
+          "difficulty": 1,
+          "prompt": "A data set has the values 25, 30, 35, 40, 45. The mean is 35. What is the mean absolute deviation (MAD), a measure of the data's uncertainty or spread?",
+          "choices": [
+            "6",
+            "10",
+            "1",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "argument-and-presentation",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A student claims a box that is 5 by 3 by 7 units has a volume of 115 cubic units. Evaluate the claim.",
+          "choices": [
+            "No; the volume is 116 cubic units, not 115.",
+            "Cannot be determined from the given information.",
+            "No; the volume is 117 cubic units, not 115.",
+            "No; the volume is 105 cubic units, not 115."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "problem-formulation",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "A rental company charges a $5 base fee plus $2 per hour. A customer's total bill was $29. Which equation models this situation, and how many hours were rented?",
+          "choices": [
+            "2x + 5 = 29; x = 11",
+            "5x + 2 = 29; x = 14",
+            "2x + 5 = 29; x = 13",
+            "2x + 5 = 29; x = 12"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "assumptions-and-constraints",
+          "standard": "7.NS.3",
+          "difficulty": 2,
+          "prompt": "A diver starts at the surface (0 m) and descends 21 m, then descends another 13 m, then ascends 7 m. The dive plan assumes a depth limit of 40 m below the surface. What is the diver's final position, as a signed number of meters?",
+          "choices": [
+            "15",
+            "-20",
+            "41",
+            "-27"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "proportional-and-algebraic-models",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "A model predicts a $860 rate will decrease by 10%. What does the model predict as the new rate?",
+          "choices": [
+            "$774",
+            "$860",
+            "$86",
+            "$870"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "geometry-and-measurement",
+          "standard": "7.G.6",
+          "difficulty": 3,
+          "prompt": "A storage container is designed as a rectangular prism 10 ft long, 5 ft wide, and 2 ft high. What is its volume in cubic feet?",
+          "choices": [
+            "160",
+            "100",
+            "98",
+            "50"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "data-and-uncertainty",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "A data set has the values 9, 24, 39, 54, 69. The mean is 39. What is the mean absolute deviation (MAD), a measure of the data's uncertainty or spread?",
+          "choices": [
+            "21",
+            "18",
+            "3",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "argument-and-presentation",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A student claims a box that is 4 by 5 by 2 units has a volume of 49 cubic units. Evaluate the claim.",
+          "choices": [
+            "Cannot be determined from the given information.",
+            "Yes; the volume is 49 cubic units.",
+            "No; the volume is 40 cubic units, not 49.",
+            "No; the volume is 51 cubic units, not 49."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "problem-formulation",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "A rental company charges a $5 base fee plus $5 per hour. A customer's total bill was $25. Which equation models this situation, and how many hours were rented?",
+          "choices": [
+            "5x + 5 = 25; x = 5",
+            "5x + 5 = 25; x = 4",
+            "5x + 5 = 25; x = 3",
+            "5x + 5 = 25; x = 6"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "assumptions-and-constraints",
+          "standard": "7.NS.3",
+          "difficulty": 2,
+          "prompt": "A diver starts at the surface (0 m) and descends 20 m, then descends another 17 m, then ascends 13 m. The dive plan assumes a depth limit of 56 m below the surface. What is the diver's final position, as a signed number of meters?",
+          "choices": [
+            "50",
+            "-24",
+            "-11",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "proportional-and-algebraic-models",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "A model predicts a $320 rate will increase by 5%. What does the model predict as the new rate?",
+          "choices": [
+            "$16",
+            "$320",
+            "$325",
+            "$336"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "geometry-and-measurement",
+          "standard": "7.G.6",
+          "difficulty": 3,
+          "prompt": "A storage container is designed as a rectangular prism 5 ft long, 12 ft wide, and 10 ft high. What is its volume in cubic feet?",
+          "choices": [
+            "600",
+            "590",
+            "460",
+            "605"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u10-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u10-l15"
+  }
+}

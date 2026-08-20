@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l06",
+  "lessonId": "ma-g5-ready-for-life-u04-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Diagnosing the break point",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Names only a vague cause."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names the exact step where the loop broke."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names the step and a specific, plausible reason unique to that step."
+          }
+        ]
+      },
+      {
+        "dimension": "Completing and synthesizing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Completes the loop but the unit-wide reflection is generic."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Completes the loop and names a specific hardest step across the unit."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Completes the loop, names the hardest step, and proposes a specific forward plan tied to that step."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Named step matches what actually happened.",
+      "Unit-wide reflection references specific earlier lessons, not a vague summary.",
+      "No weight or calorie language anywhere in the reflection."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

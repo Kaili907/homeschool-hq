@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u08-l12",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u08-l12",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Pythagorean Theorem and Coordinate Geometry",
+    "dayInUnit": 12,
+    "courseDay": 142,
+    "phase": "Performance task build",
+    "focus": "reasonableness and units",
+    "title": "Performance task build: reasonableness and units"
+  },
+  "standards": [
+    "8.G.6",
+    "8.G.7",
+    "8.G.8"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u08-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-right-triangle-distances",
+          "standard": "8.G.8",
+          "difficulty": 2,
+          "prompt": "Which is longer: a 3-by-4 rectangle diagonal or a 5-by-12 rectangle diagonal?",
+          "choices": [
+            "they are equal",
+            "the 5-by-12 diagonal",
+            "cannot be determined",
+            "the 3-by-4 diagonal"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "explain-pythagorean-theorem",
+          "standard": "8.G.6",
+          "difficulty": 3,
+          "prompt": "What does a² + b² = c² describe?",
+          "choices": [
+            "the perimeter of every triangle",
+            "the side lengths of a right triangle",
+            "the area of every rectangle",
+            "the angle sum of a triangle"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u08-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-hypotenuse",
+          "standard": "8.G.6",
+          "difficulty": 2,
+          "prompt": "In a right triangle, which side is the hypotenuse?",
+          "choices": [
+            "the side next to the right angle",
+            "the side opposite the right angle",
+            "the shortest side",
+            "either leg"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "find-hypotenuse",
+          "standard": "8.G.6",
+          "difficulty": 3,
+          "prompt": "A right triangle has legs 8 and 9. What is its hypotenuse in simplest radical form?",
+          "choices": [
+            "17",
+            "145",
+            "sqrt(145)",
+            "sqrt(146)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "find-hypotenuse",
+          "standard": "8.G.6",
+          "difficulty": 3,
+          "prompt": "A right triangle has legs 11 and 9. What is its hypotenuse in simplest radical form?",
+          "choices": [
+            "sqrt(203)",
+            "202",
+            "sqrt(202)",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "verify-pythagorean-theorem",
+          "standard": "8.G.6",
+          "difficulty": 3,
+          "prompt": "Do side lengths 5, 12, and 14 satisfy the Pythagorean theorem?",
+          "choices": [
+            "yes",
+            "no",
+            "only if the triangle is acute",
+            "only if both legs are equal"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "converse-classification",
+          "standard": "8.G.7",
+          "difficulty": 3,
+          "prompt": "Classify a triangle with side lengths 8, 15, and 18 using the converse of the Pythagorean theorem.",
+          "choices": [
+            "not a right triangle",
+            "equilateral triangle",
+            "right triangle",
+            "isosceles triangle"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "distance-on-coordinate-plane",
+          "standard": "8.G.8",
+          "difficulty": 3,
+          "prompt": "What is the distance between (0, 0) and (12, 2) in simplest radical form?",
+          "choices": [
+            "148",
+            "14",
+            "sqrt(148)",
+            "sqrt(149)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u08-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "right-triangle-from-coordinates",
+          "standard": "8.G.8",
+          "difficulty": 3,
+          "prompt": "Do the points (0, 0), (7, 0), and (0, 24) form a right triangle?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "rectangle-diagonal",
+          "standard": "8.G.8",
+          "difficulty": 3,
+          "prompt": "A rectangle is 9 units by 8 units. What is the length of its diagonal in simplest radical form?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u08-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u08-l12"
+  }
+}

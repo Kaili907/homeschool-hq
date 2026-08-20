@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u07-l11",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Measurement: Time, Liquid Volume, and Mass",
+    "dayInUnit": 11,
+    "courseDay": 119,
+    "phase": "Concept extension",
+    "focus": "choosing a unit and estimating before measuring",
+    "title": "Concept extension: choosing a unit and estimating before measuring"
+  },
+  "standards": [
+    "3.MD.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 1,
+          "prompt": "A jug has 350 milliliters. Another 120 milliliters are poured in. How much is in the jug now?",
+          "workedSolution": {
+            "steps": [
+              "350 + 120 = 470."
+            ],
+            "answer": "470"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 138 milliliters. 101 milliliters are removed. How many milliliters are left?",
+          "choices": [
+            "239",
+            "101",
+            "138",
+            "37"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 374 grams. Another 285 grams are poured in. How many grams are in the container now?",
+          "choices": [
+            "374",
+            "659",
+            "660",
+            "285"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 89 liters. Another 137 liters are poured in. How many liters are in the container now?",
+          "choices": [
+            "227",
+            "89",
+            "137",
+            "226"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 295 kilograms. 95 kilograms are removed. How many kilograms are left?",
+          "choices": [
+            "390",
+            "95",
+            "200",
+            "295"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 314 liters. 99 liters are removed. How many liters are left?",
+          "choices": [
+            "413",
+            "314",
+            "99",
+            "215"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 569 grams. Another 141 grams are poured in. How many grams are in the container now?",
+          "choices": [
+            "569",
+            "141",
+            "711",
+            "710"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 274 milliliters. 61 milliliters are removed. How many milliliters are left?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 588 milliliters. Another 211 milliliters are poured in. How many milliliters are in the container now?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u07-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u07-l11"
+  }
+}

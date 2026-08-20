@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u08-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u08-l02",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Probability, Independence, and Conditional Reasoning",
+    "dayInUnit": 2,
+    "courseDay": 128,
+    "phase": "Concept model A",
+    "focus": "independence and the product rule",
+    "title": "Concept model A: independence and the product rule"
+  },
+  "standards": [
+    "S-CP.1",
+    "S-CP.2",
+    "S-CP.3",
+    "S-CP.4",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u08-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "union-and-intersection-probability",
+          "standard": "S-CP.1",
+          "difficulty": 1,
+          "prompt": "30 people; 18 do A, 14 do B, 7 do both. Find P(A or B).",
+          "workedSolution": {
+            "steps": [
+              "18 + 14 − 7 = 25.",
+              "25/30 = 5/6."
+            ],
+            "answer": "5/6"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "complement-and-at-least-one",
+          "standard": "S-CP.3",
+          "difficulty": 2,
+          "prompt": "P(success) = 1/3 per trial, two trials. P(at least one)?",
+          "workedSolution": {
+            "steps": [
+              "P(no success) = (2/3)² = 4/9.",
+              "1 − 4/9 = 5/9."
+            ],
+            "answer": "5/9"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u08-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-from-table",
+          "standard": "S-CP.4",
+          "difficulty": 1,
+          "prompt": "A survey table records: group X with 17 successes and 19 failures; group Y with 5 successes and 20 failures. Find P(success | group X) as a fraction in lowest terms.",
+          "choices": [
+            "19/36",
+            "17/22",
+            "17/36",
+            "17/61"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "test-for-independence",
+          "standard": "S-CP.2",
+          "difficulty": 1,
+          "prompt": "Two events have P(A) = 7/10, P(B) = 1/10, and P(A and B) = 7/100. Are A and B independent?",
+          "choices": [
+            "No; P(A and B) differs from P(A)·P(B).",
+            "Yes; the two events cannot occur together.",
+            "Yes; P(A and B) equals P(A)·P(B).",
+            "No; the two events are mutually exclusive."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "union-and-intersection-probability",
+          "standard": "S-CP.1",
+          "difficulty": 2,
+          "prompt": "In a group of 35, 22 do activity A, 18 do activity B, and 10 do both. Find P(A or B) as a fraction in lowest terms.",
+          "choices": [
+            "4/7",
+            "8/7",
+            "2/7",
+            "6/7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u08-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "complement-and-at-least-one",
+          "standard": "S-CP.3",
+          "difficulty": 1,
+          "prompt": "An event has probability 4/6 on a single trial. Two independent trials are run. Find the probability of at least one success, as a fraction in lowest terms.",
+          "choices": [
+            "4/3",
+            "1/9",
+            "8/9",
+            "4/9"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-from-table",
+          "standard": "S-CP.4",
+          "difficulty": 2,
+          "prompt": "A survey table records: group X with 25 successes and 11 failures; group Y with 14 successes and 4 failures. Find P(success | group X) as a fraction in lowest terms.",
+          "choices": [
+            "25/39",
+            "11/36",
+            "25/36",
+            "25/54"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "test-for-independence",
+          "standard": "S-CP.2",
+          "difficulty": 2,
+          "prompt": "Two events have P(A) = 5/10, P(B) = 9/10, and P(A and B) = 48/100. Are A and B independent?",
+          "choices": [
+            "No; the two events are mutually exclusive.",
+            "No; P(A and B) differs from P(A)·P(B).",
+            "Yes; P(A and B) equals P(A)·P(B).",
+            "Yes; the two events cannot occur together."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "union-and-intersection-probability",
+          "standard": "S-CP.1",
+          "difficulty": 3,
+          "prompt": "In a group of 22, 7 do activity A, 11 do activity B, and 2 do both. Find P(A or B) as a fraction in lowest terms.",
+          "choices": [
+            "9/11",
+            "7/11",
+            "8/11",
+            "1/11"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u08-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "complement-and-at-least-one",
+          "standard": "S-CP.3",
+          "difficulty": 2,
+          "prompt": "An event has probability 4/8 on a single trial. Two independent trials are run. Find the probability of at least one success, as a fraction in lowest terms.",
+          "choices": [
+            "1",
+            "1/4",
+            "3/4",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-from-table",
+          "standard": "S-CP.4",
+          "difficulty": 2,
+          "prompt": "A survey table records: group X with 22 successes and 15 failures; group Y with 6 successes and 10 failures. Find P(success | group X) as a fraction in lowest terms.",
+          "choices": [
+            "22/37",
+            "22/53",
+            "11/14",
+            "15/37"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u08-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u08-l02"
+  }
+}

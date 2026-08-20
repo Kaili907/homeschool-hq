@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l03",
+  "lessonId": "ma-g3-ready-for-life-u04-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Checkpoint completion",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than two of the four checkpoints included a water break."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All four checkpoints included a water break."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All four checkpoints are completed, and an extra checkpoint is added on a more active day."
+          }
+        ]
+      },
+      {
+        "dimension": "Thirst noting",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No thirst note is recorded before drinking, or every note is identical without checking."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A distinct thirst note is recorded before drinking at each of the four checkpoints."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Thirst notes are recorded, and the learner identifies a specific pattern across the day, such as the least thirsty checkpoint."
+          }
+        ]
+      },
+      {
+        "dimension": "Connecting signal to response",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No connection is made between drinking water and how the learner felt afterward."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names one checkpoint where drinking changed how they felt."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner names the checkpoint, describes the specific change, and explains why that checkpoint likely showed the biggest change."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Thirst notes use the three given labels (not thirsty, a little thirsty, very thirsty) rather than unrelated mood words.",
+      "The comparison in the independent task references actual notes written that day, not a guess made afterward."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

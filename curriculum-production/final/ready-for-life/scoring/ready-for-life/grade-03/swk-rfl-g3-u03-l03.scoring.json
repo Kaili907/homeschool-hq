@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l03",
+  "lessonId": "ma-g3-ready-for-life-u03-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Sorting accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Sorts fewer than half of the eight cards into the correct pile."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Sorts all eight cards into the correct raw or ready-to-eat pile."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Sorts all eight cards correctly and also sorts the three new named foods correctly in the independent task."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Sorts by an unrelated feature, like food type or color, instead of raw versus ready-to-eat."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Gives a reason grounded in whether the food is safe to eat right now for at least three cards."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Gives a grounded reason for every card and correctly handles a same-food exception, such as raw egg versus cooked egg, if it comes up."
+          }
+        ]
+      },
+      {
+        "dimension": "Separation rule",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cannot explain why raw and ready-to-eat foods should not share a cutting board or plate."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Explains that raw and ready-to-eat foods should not touch or share a surface."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Explains the touching-and-surface rule and adds washing hands after touching raw food."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner uses 'raw' and 'ready-to-eat' vocabulary rather than vague terms like 'gross' or 'clean.'",
+      "The reflection response names a specific real scenario, like dripping juices or a reused plate, not a vague answer."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

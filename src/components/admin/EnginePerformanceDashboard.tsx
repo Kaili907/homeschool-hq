@@ -24,6 +24,43 @@ function metricValue(metric: EnginePerformanceMetric): string {
   return 'Unavailable'
 }
 
+function evidenceLabel(value: 'available' | 'partial' | 'insufficient_evidence' | 'unavailable' | 'not_applicable'): string {
+  if (value === 'insufficient_evidence') return 'Insufficient evidence'
+  if (value === 'not_applicable') return 'Not applicable'
+  return value[0].toUpperCase() + value.slice(1)
+}
+
+function EvidenceBadge({ value }: { readonly value: 'available' | 'partial' | 'insufficient_evidence' | 'unavailable' | 'not_applicable' }) {
+  return <span className={`engine-performance__badge is-${value}`}>{evidenceLabel(value)}</span>
+}
+
+function EnginePerformanceState({
+  busy = false,
+  title,
+  message,
+  onRetry,
+  backToAcademy = false,
+}: {
+  readonly busy?: boolean
+  readonly title: string
+  readonly message: React.ReactNode
+  readonly onRetry?: () => void
+  readonly backToAcademy?: boolean
+}) {
+  return (
+    <section className="engine-performance__state" aria-busy={busy} aria-live="polite" role={busy ? 'status' : 'alert'}>
+      <span className={`engine-performance__state-glyph ${busy ? 'is-loading' : ''}`} aria-hidden="true">{busy ? '' : '!'}</span>
+      <p className="engine-performance__eyebrow">Engine operations</p>
+      <h2>{title}</h2>
+      <p>{message}</p>
+      <div className="engine-performance__state-actions">
+        {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
+        {backToAcademy && <a href="/academy">Back to Academy</a>}
+      </div>
+    </section>
+  )
+}
+
 export function EnginePerformanceDashboard({
   state,
   selectedEngine,
@@ -44,10 +81,10 @@ export function EnginePerformanceDashboard({
   readonly onRetry?: () => void
 }) {
   if (state.status === 'loading') {
-    return <div className="engine-performance" aria-busy="true"><p role="status">Loading engine performance evidence…</p></div>
+    return <EnginePerformanceState busy title="Loading engine performance" message="Reading bounded performance evidence for the canonical engines." />
   }
   if (state.status === 'unauthorized') {
-    return <div className="engine-performance"><section role="alert"><h2>Engine analytics unavailable</h2><p>Your verified Admin assignment does not include <code>engines:read</code>.</p><a href="/academy">Back to Academy</a></section></div>
+    return <EnginePerformanceState title="Engine analytics unavailable" message={<>Your verified Admin assignment does not include <code>engines:read</code>.</>} backToAcademy />
   }
   if (state.status === 'error') {
     const message = state.code === 'timeout'
@@ -57,7 +94,7 @@ export function EnginePerformanceDashboard({
         : state.code === 'malformed' || state.code === 'invalid_response'
           ? 'The authorized aggregate response was malformed.'
           : 'The authorized performance projection could not be loaded.'
-    return <div className="engine-performance"><section role="alert"><h2>Engine analytics unavailable</h2><p>{message} No substitute data is shown.</p>{onRetry && <button type="button" onClick={onRetry}>Try again</button>}</section></div>
+    return <EnginePerformanceState title="Engine analytics unavailable" message={<>{message} No substitute data is shown.</>} onRetry={onRetry} />
   }
 
   const selected = state.model.engines.find((engine) => engine.engineId === selectedEngine) ?? state.model.engines[0]
@@ -73,29 +110,32 @@ export function EnginePerformanceDashboard({
         <a href={selected.technicalHealthReference.path}>{selected.technicalHealthReference.label}</a>
       </header>
 
-      {'limitReached' in state.model.source && state.model.source.limitReached && (
-        <p className="engine-performance__notice" role="status">The canonical {state.model.source.limit.toLocaleString()}-event read limit was reached. Results describe the bounded returned evidence, not an assumed complete history.</p>
-      )}
-      {'rejectedRowCount' in state.model.source && state.model.source.rejectedRowCount > 0 && (
-        <p className="engine-performance__notice" role="status">Some malformed stored evidence was rejected and is not represented.</p>
-      )}
-      {'mode' in state.model.source && state.model.source.grouping === 'partial' && (
-        <p className="engine-performance__notice" role="status">The aggregate evidence is incomplete. Metrics describe only the represented groups and every affected engine remains qualified as partial.</p>
-      )}
-      {'mode' in state.model.source && state.model.source.retention.status === 'retention_limited' && (
-        <p className="engine-performance__notice" role="status">Retention does not fully cover this evidence window. Metrics remain retention-limited and are not presented as complete history.</p>
-      )}
+      <div className="engine-performance__notices">
+        {'limitReached' in state.model.source && state.model.source.limitReached && (
+          <p className="engine-performance__notice" role="status">The canonical {state.model.source.limit.toLocaleString()}-event read limit was reached. Results describe the bounded returned evidence, not an assumed complete history.</p>
+        )}
+        {'rejectedRowCount' in state.model.source && state.model.source.rejectedRowCount > 0 && (
+          <p className="engine-performance__notice" role="status">Some malformed stored evidence was rejected and is not represented.</p>
+        )}
+        {'mode' in state.model.source && state.model.source.grouping === 'partial' && (
+          <p className="engine-performance__notice" role="status">The aggregate evidence is incomplete. Metrics describe only the represented groups and every affected engine remains qualified as partial.</p>
+        )}
+        {'mode' in state.model.source && state.model.source.retention.status === 'retention_limited' && (
+          <p className="engine-performance__notice" role="status">Retention does not fully cover this evidence window. Metrics remain retention-limited and are not presented as complete history.</p>
+        )}
+      </div>
 
       <section className="engine-performance__filters" aria-label="Performance filters">
-        <label>Time range<select value={selectedWindow} onChange={(event) => onWindowChange?.(event.target.value as EnginePerformanceWindowPreset)}>{Object.entries(WINDOW_LABELS).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
-        <label>Engine<select value={selectedEngine} aria-controls="selected-engine-panel" onChange={(event) => onEngineChange?.(event.target.value as AdminEngineId)}>{state.model.engines.map((engine) => <option key={engine.engineId} value={engine.engineId}>{ENGINE_LABELS[engine.engineId]}</option>)}</select></label>
-        <label>Engine version<select value={selectedVersion ?? ''} onChange={(event) => onVersionChange?.(event.target.value || null)}><option value="">All recorded versions</option>{availableVersions.map((version) => <option key={version} value={version}>{version}</option>)}</select></label>
+        <label><span>Time range</span><select value={selectedWindow} onChange={(event) => onWindowChange?.(event.target.value as EnginePerformanceWindowPreset)}>{Object.entries(WINDOW_LABELS).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+        <label><span>Engine</span><select value={selectedEngine} aria-controls="selected-engine-panel" onChange={(event) => onEngineChange?.(event.target.value as AdminEngineId)}>{state.model.engines.map((engine) => <option key={engine.engineId} value={engine.engineId}>{ENGINE_LABELS[engine.engineId]}</option>)}</select></label>
+        <label><span>Engine version</span><select value={selectedVersion ?? ''} onChange={(event) => onVersionChange?.(event.target.value || null)}><option value="">All recorded versions</option>{availableVersions.map((version) => <option key={version} value={version}>{version}</option>)}</select></label>
       </section>
 
       <nav aria-label="Canonical engines" className="engine-performance__engine-list">
         {state.model.engines.map((engine) => (
           <button key={engine.engineId} type="button" aria-controls="selected-engine-panel" aria-current={engine.engineId === selectedEngine ? 'page' : undefined} onClick={() => onEngineChange?.(engine.engineId)}>
-            <strong>{ENGINE_LABELS[engine.engineId]}</strong><span>{engine.evidenceState.replaceAll('_', ' ')} · {engine.sampleCount.toLocaleString()} samples</span>
+            <span className="engine-performance__engine-name"><strong>{ENGINE_LABELS[engine.engineId]}</strong><EvidenceBadge value={engine.evidenceState} /></span>
+            <small>{engine.sampleCount.toLocaleString()} samples</small>
           </button>
         ))}
       </nav>
@@ -109,7 +149,7 @@ export function EnginePerformanceDashboard({
         <div className="engine-performance__metrics">
           {selected.metrics.map((metric) => (
             <article key={metric.id} className={`engine-performance__metric is-${metric.availability}`}>
-              <h3>{metric.label}</h3>
+              <div className="engine-performance__metric-heading"><h3>{metric.label}</h3><EvidenceBadge value={metric.availability} /></div>
               <strong>{metricValue(metric)}</strong>
               <dl>
                 <div><dt>Numerator</dt><dd>{metric.numerator ?? 'Not available'}</dd></div>
@@ -127,7 +167,7 @@ export function EnginePerformanceDashboard({
         {selected.versionComparison.previousVersion && selected.versionComparison.currentVersion ? (
           <>
             <p>Comparing {selected.versionComparison.previousVersion} with {selected.versionComparison.currentVersion}. Values are descriptive; no version is declared “better.”</p>
-            <div className="engine-performance__table-wrap"><table><caption>Metrics supported by both version cohorts</caption><thead><tr><th scope="col">Metric</th><th scope="col">Previous</th><th scope="col">Current</th><th scope="col">Evidence</th></tr></thead><tbody>{selected.versionComparison.metrics.map((comparison) => <tr key={comparison.metricId}><th scope="row">{comparison.label}</th><td>{comparison.previous.value === null ? '—' : `${comparison.previous.value.toFixed(1)}%`} ({comparison.previous.sampleCount} samples)</td><td>{comparison.current.value === null ? '—' : `${comparison.current.value.toFixed(1)}%`} ({comparison.current.sampleCount} samples)</td><td>{comparison.availability.replaceAll('_', ' ')}</td></tr>)}</tbody></table></div>
+            <div className="engine-performance__table-wrap" tabIndex={0}><table><caption>Metrics supported by both version cohorts</caption><thead><tr><th scope="col">Metric</th><th scope="col">Previous</th><th scope="col">Current</th><th scope="col">Evidence</th></tr></thead><tbody>{selected.versionComparison.metrics.map((comparison) => <tr key={comparison.metricId}><th scope="row">{comparison.label}</th><td>{comparison.previous.value === null ? '—' : `${comparison.previous.value.toFixed(1)}%`} ({comparison.previous.sampleCount} samples)</td><td>{comparison.current.value === null ? '—' : `${comparison.current.value.toFixed(1)}%`} ({comparison.current.sampleCount} samples)</td><td><EvidenceBadge value={comparison.availability} /></td></tr>)}</tbody></table></div>
           </>
         ) : <p>Version comparison is unavailable until two versions have supported evidence in the selected window.</p>}
       </section>

@@ -25,7 +25,6 @@ import {
   type AdminConfigurationDraft,
   type AdminConfigurationReasonCode,
 } from '../../admin/configurationUiModel'
-import type { PublicVoiceCatalog, PublicVoiceCatalogEntry } from '../../tutor/voiceCatalog'
 import './admin-configuration.css'
 
 export type AdminConfigurationReadState =
@@ -33,11 +32,6 @@ export type AdminConfigurationReadState =
   | { readonly status: 'unauthorized' }
   | { readonly status: 'ready'; readonly projection: AdminRuntimeConfigurationProjection }
   | { readonly status: 'error'; readonly code: 'configuration_timeout' | 'configuration_unavailable' }
-
-export type AdminVoiceCatalogReadState =
-  | { readonly status: 'loading' }
-  | { readonly status: 'unavailable' }
-  | { readonly status: 'ready'; readonly catalog: PublicVoiceCatalog }
 
 type EditingState = {
   readonly status: 'editing'
@@ -195,7 +189,6 @@ const GROUPS = [
 export interface AdminConfigurationProps {
   readonly authorization: { readonly capabilities: readonly AdminCapability[] }
   readonly state: AdminConfigurationReadState
-  readonly voiceCatalog: AdminVoiceCatalogReadState
   readonly source: AdminConfigurationSource
   readonly onCommitted: (result: AdminConfigurationCommitResult) => void
   readonly onRetry: () => void
@@ -205,7 +198,6 @@ export interface AdminConfigurationProps {
 export function AdminConfiguration({
   authorization,
   state,
-  voiceCatalog,
   source,
   onCommitted,
   onRetry,
@@ -377,8 +369,6 @@ export function AdminConfiguration({
           </div>
         </section>
       ))}
-
-      <UnsupportedConfigurationAreas voiceCatalog={voiceCatalog} />
     </div>
   )
 }
@@ -612,92 +602,6 @@ function DraftControl({
   )
 }
 
-function UnsupportedConfigurationAreas({ voiceCatalog }: { readonly voiceCatalog: AdminVoiceCatalogReadState }) {
-  return (
-    <section className="admin-config-unsupported" aria-labelledby="unsupported-configuration-title">
-      <div className="admin-config-group__heading">
-        <div><p>Unavailable authorities</p><h2 id="unsupported-configuration-title">Not yet operational</h2></div>
-        <span>No substitute persistence or client-only authority is used.</span>
-      </div>
-      <div className="admin-config-grid">
-        <article className="admin-config-card">
-          <div className="admin-config-card__heading"><div>
-            <h3>Study defaults</h3>
-            <p>No Admin Study effective-settings V2 authority is present.</p>
-          </div><span className="admin-config-severity">unavailable</span></div>
-          <p className="admin-config-unavailable-copy">Not editable. Guardian choices and safety authority are not read, written, or overridden by this page.</p>
-        </article>
-        <VoiceCatalogCard state={voiceCatalog} />
-      </div>
-    </section>
-  )
-}
-
-function VoiceCatalogCard({ state }: { readonly state: AdminVoiceCatalogReadState }) {
-  if (state.status === 'loading') {
-    return (
-      <article className="admin-config-card" aria-busy="true">
-        <div className="admin-config-card__heading"><div><h3>TTS voice defaults</h3><p>Loading the sanitized logical-voice catalog.</p></div></div>
-      </article>
-    )
-  }
-  if (state.status === 'unavailable') {
-    return (
-      <article className="admin-config-card" role="status">
-        <div className="admin-config-card__heading"><div>
-          <h3>TTS voice defaults</h3>
-          <p>The sanitized logical-voice catalog is unavailable.</p>
-        </div><span className="admin-config-severity">unavailable</span></div>
-        <p className="admin-config-unavailable-copy">No catalog default is inferred or replaced with cached provider authority.</p>
-      </article>
-    )
-  }
-  const { catalog } = state
-  const operationalDefault = catalog.voices.find((voice) => (
-    voice.voiceRef === catalog.defaultVoiceRef
-    && voice.status === 'active'
-    && voice.deploymentAvailable
-  )) ?? null
-  return (
-    <article className="admin-config-card">
-      <div className="admin-config-card__heading"><div>
-        <h3>TTS voice defaults</h3>
-        <p>Logical catalog visibility only; no Admin voice-default setting is registered.</p>
-      </div><span className="admin-config-severity">unavailable</span></div>
-      <label className="admin-config-field">
-        <span>Current catalog default (read only)</span>
-        <select disabled value={operationalDefault?.voiceRef ?? ''}>
-          <option value="">No operational logical default</option>
-          {catalog.voices.map((voice) => (
-            <option
-              key={`${voice.voiceRef}:${voice.voiceVersion}`}
-              value={voice.voiceRef}
-              disabled={!voiceIsOperational(voice)}
-            >{voice.displayLabel} ({voice.voiceVersion}) — {voiceStatusLabel(voice)}</option>
-          ))}
-        </select>
-      </label>
-      {catalog.voices.length > 0 ? (
-        <ul className="admin-config-voice-list" aria-label="Logical TTS voice status">
-          {catalog.voices.map((voice) => (
-            <li key={`${voice.voiceRef}:${voice.voiceVersion}`}>
-              <div><strong>{voice.displayLabel}</strong><code>{voice.voiceRef} · {voice.voiceVersion}</code></div>
-              <span>{voiceStatusLabel(voice)}</span>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="admin-config-unavailable-copy">No approved premium logical voices are available. Browser-native speech remains the safe production fallback. Provider identifiers and credentials are never exposed.</p>
-      )}
-      <p className="admin-config-unavailable-copy">Not editable until an authoritative Admin logical-voice setting exists.</p>
-    </article>
-  )
-}
-
-function voiceIsOperational(voice: PublicVoiceCatalogEntry): boolean {
-  return voice.status === 'active' && voice.deploymentAvailable
-}
-
 function runtimeEnforcementLabel(setting: AdminRuntimeConfigurationSetting): string {
   if (setting.runtime.enforcement === 'enforced') {
     return setting.key.startsWith('cost.') ? 'Effective — cost alert threshold' : 'Enforced'
@@ -739,13 +643,6 @@ function studyStatusLabel(setting: AdminRuntimeConfigurationSetting): string {
   return setting.runtime.studyStatus === 'unavailable'
     ? 'Unavailable — no Study effective-settings authority'
     : 'Not applicable — runtime enforcement unavailable'
-}
-
-function voiceStatusLabel(voice: PublicVoiceCatalogEntry): string {
-  if (voice.status === 'revoked') return 'Revoked · unavailable'
-  if (voice.status === 'disabled') return 'Disabled · unavailable'
-  if (voice.status === 'legacy') return 'Legacy · unavailable'
-  return voice.deploymentAvailable ? 'Active · deployment available' : 'Active · deployment unavailable'
 }
 
 function ConfigurationState({

@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u03-l14",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u03-l14",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Linear Equations",
+    "dayInUnit": 14,
+    "courseDay": 54,
+    "phase": "Transfer challenge",
+    "focus": "distributive property and combining terms",
+    "title": "Transfer challenge: distributive property and combining terms"
+  },
+  "standards": [
+    "8.EE.7"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-with-distributive-property",
+          "standard": "8.EE.7",
+          "difficulty": 1,
+          "prompt": "Solve for x: 3(x + 4) = 21.",
+          "workedSolution": {
+            "steps": [
+              "Distribute: 3x + 12 = 21.",
+              "Subtract 12: 3x = 9.",
+              "Divide by 3: x = 3."
+            ],
+            "answer": "3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-combining-like-terms",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Solve for x: 7x + 4x + 11 = -27.",
+          "choices": [
+            "-38/11",
+            "-27/11",
+            "-16/11",
+            "-49/11"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-variables-both-sides",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Solve for x: 3x + 10 = -9x + 4.",
+          "choices": [
+            "-3/2",
+            "-5/2",
+            "3/2",
+            "-1/2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-solution-type",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "How many solutions does -11x + 15 = 4x + 26 have?",
+          "choices": [
+            "no solution",
+            "one solution",
+            "infinitely many solutions"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "check-a-solution",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Is x = -11 a solution to 3x - 10 = -40?",
+          "choices": [
+            "no",
+            "yes"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-solution-from-choices",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Which value of x solves -12x - 4 = -10?",
+          "choices": [
+            "-3/2",
+            "1/2",
+            "-1/2",
+            "5/2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "write-equation-from-context",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A phone plan costs $28 plus $4 per gigabyte of data. The bill was $76. Which equation represents the number of gigabytes, x?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-word-problem",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A bike rental costs $19 plus $22 per hour. If the total cost was $162, how many hours, x, were rented?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "equation-error-analysis",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A student solves 9x + 14 = -103. They write 9x = -117, then say x = -117. Which statement best analyzes the error?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u03-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u03-l14"
+  }
+}

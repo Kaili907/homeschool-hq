@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l06",
+  "lessonId": "ma-g3-ready-for-life-u03-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Cleanup sequence",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Wipes the counter before moving dishes off it, or skips one of the four steps."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Completes all four steps (dishes near sink, wipe, tools returned, final look-over) in a working order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Completes all four steps in order and explains why dishes should move off the counter before it gets wiped."
+          }
+        ]
+      },
+      {
+        "dimension": "Specificity of correction",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Names only a vague problem, like 'it was messy,' with no specific object or spot."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names a specific item or spot that was left out or undone."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names the specific item and explains specifically how the four-step routine would have prevented it."
+          }
+        ]
+      },
+      {
+        "dimension": "Tool return accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Leaves small tools out, or returns them to the wrong drawer or shelf."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Returns each small tool to its correct drawer or shelf."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Returns each tool correctly and, unprompted, asks when a tool's home spot is not obvious."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The final look-over happens as a distinct last step, not skipped or folded into wiping.",
+      "The learner distinguishes non-sharp items, like cups and spoons, that they handle from knives that they leave for an adult."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

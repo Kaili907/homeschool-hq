@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-financial-literacy-u03-assessment",
+  "courseRef": "ma-g3-financial-literacy",
+  "grade": 3,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g3-financial-literacy-u03",
+    "unitNumber": 3,
+    "unitTitle": "Spending and Comparing",
+    "courseTitle": "Grade 3 Financial Literacy",
+    "assessmentLessonRef": "ma-g3-financial-literacy-u03-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 3 — spending and comparing"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u03-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Add Talia's three pretend prices yourself before comparing with what she recorded.",
+      "prompt": "What is the correct total of Talia's three items?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Talia recorded $9.30. Put your total beside hers and measure the gap, then check the corrected total against her $10.00.",
+      "prompt": "By how much is Talia's recorded total off?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-choice",
+      "directions": "Talia recorded $9.30. Put your total beside hers and measure the gap, then check the corrected total against her $10.00.",
+      "prompt": "Does the corrected total fit inside Talia's $10.00?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "Talia adds an $0.85 glue stick to the corrected list, not to her old recorded total.",
+      "prompt": "What is Talia's new corrected total with the glue stick?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "Talia adds an $0.85 glue stick to the corrected list, not to her old recorded total.",
+      "prompt": "How far past her $10.00 does that go?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "A ten-cent error looked harmless at first.",
+      "prompt": "Talia's error was only $0.10. Explain why checking a total still matters when the mistake is small."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/financial-literacy/ma-g3-financial-literacy-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Valuing the check criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-financial-literacy-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u03-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Spending and Comparing?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

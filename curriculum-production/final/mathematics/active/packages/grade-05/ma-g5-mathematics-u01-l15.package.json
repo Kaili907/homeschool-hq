@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u01-l15",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u01-l15",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Whole-Number Reasoning",
+    "dayInUnit": 15,
+    "courseDay": 15,
+    "phase": "Assessment preparation",
+    "focus": "place-value language",
+    "title": "Assessment preparation: place-value language"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.OA.2",
+    "5.NBT.1",
+    "MP.1",
+    "MP.3",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "choose-expression-for-situation",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "A supply cart has 5 boxes with 4 markers in each box and 2 loose markers. Which expression represents the total number of markers?",
+          "choices": [
+            "(5 + 4) × 2",
+            "(5 + 2) × 4",
+            "5 × (4 + 2)",
+            "5 × 4 + 2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-multistep-problem",
+          "standard": "MP.1",
+          "difficulty": 2,
+          "prompt": "A library has 8 shelves with 13 books on each shelf. Then 36 books are loaned out. How many books remain?",
+          "choices": [
+            "68",
+            "104",
+            "69",
+            "70"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-whole-number-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "In 463544, how does the value of the 4 in the ones place compare with the value of the 4 in the tens place?",
+          "choices": [
+            "10 times as much",
+            "the same value",
+            "100 times as much",
+            "1/10 as much"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "estimate-sum-difference",
+          "standard": "MP.6",
+          "difficulty": 2,
+          "prompt": "Round each number to the nearest hundred to estimate 5111 - 1874.",
+          "choices": [
+            "3200",
+            "3237",
+            "3300",
+            "3100"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "MP.6",
+          "difficulty": 3,
+          "prompt": "Round 150 to the nearest hundred and 85 to the nearest ten, then multiply to estimate the product.",
+          "choices": [
+            "13500",
+            "27000",
+            "18000",
+            "12750"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "reasonableness-check",
+          "standard": "MP.6",
+          "difficulty": 3,
+          "prompt": "A student says 98 × 42 = 4116. Round each number to the nearest ten. Which choice correctly checks the claim?",
+          "choices": [
+            "The claim is exact; the rounded estimate is 3990.",
+            "The claim is exact; the rounded estimate is 4010.",
+            "The claim is not exact; the exact result is 4116 and the rounded estimate is 4000.",
+            "The claim is exact; the rounded estimate is 4000."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "expression-error-analysis",
+          "standard": "MP.3",
+          "difficulty": 3,
+          "prompt": "A student evaluates 6 × [12 + (15 - 6)] + 8: “They multiply 6 by 12 first, then finish the calculation, so the value is 89.” Which statement best identifies the error?",
+          "choices": [
+            "The student multiplied before evaluating (15 - 6); the innermost difference is 9, giving 134.",
+            "The student used the right first step but made an arithmetic slip; the value should be 136.",
+            "The first error is in the final addition or subtraction; the value should be 135.",
+            "The work is correct; 89 is the value."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "place-value-error-analysis",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "A student says, “In 6914439, the value of the 4 in the hundreds place is the same value as the value of the 4 in the thousands place.” Which statement best analyzes the error?",
+          "choices": [
+            "The values are 400 and 4000; 400 is 1/10 as much as 4000, so the student's comparison is incorrect.",
+            "The values are 400 and 4000; 400 is 10 times as much as 4000.",
+            "The values are 400 and 4000; 400 is the same value as 4000, so the student's comparison is correct.",
+            "The places are adjacent, so 400 is 100 times as much as 4000."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-numerical-expression",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "Evaluate [65 + (6 × 8)] - 25.",
+          "choices": [
+            "88",
+            "138",
+            "90",
+            "98"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "words-to-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Which expression means: “Multiply 3 by 2, then subtract the product from 50.”",
+          "choices": [
+            "50 - (3 + 2)",
+            "50 - (3 × 2)",
+            "50 - 3 + 2",
+            "50 + (3 × 2)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "expression-to-words",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Which phrase describes 62 + [8 × (14 - 10)] without evaluating it?",
+          "choices": [
+            "Subtract 10 from 14, multiply the difference by 8, then add 62.",
+            "Add 14 and 10, multiply the sum by 8, then add 62.",
+            "Multiply 8 by 14, add 62, then subtract 10.",
+            "Subtract 10 from 14, add 8, then multiply the sum by 62."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "expression-relationship",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Let E represent 2059 + 8865. Without evaluating, how does 5 × (2059 + 8865) compare with E?",
+          "choices": [
+            "4 times as large as E",
+            "5 times as large as E",
+            "5 greater than E",
+            "6 times as large as E"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u01-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u01-l15"
+  }
+}

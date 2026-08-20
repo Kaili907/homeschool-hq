@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l04",
+  "lessonId": "ma-g10-financial-literacy-u07-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$20,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$31,500 of gross less the $11,200 standard deduction."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10% of the first $9,800 is $980, and 14% of the remaining $10,500 of taxable income is $1,470. This is the figure the credits act on."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$0.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,800 credit exceeds the $2,450.00 of tax, so the tax falls to zero and stops there. The credit could not reduce the liability below zero."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$350.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,800 credit against $2,450.00 of tax. The excess is paid out rather than discarded, so the filer ends with $350.00 in hand and no tax owed."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$350.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The refundable version delivered $350.00 that the nonrefundable version did not, because there was only $2,450.00 of tax for it to erase. That unused portion is what \"nonrefundable\" costs this filer."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$392.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The deduction removes $2,800 from taxable income, all of it from the band charged at 14%, so it saves 14% of $2,800. A deduction is worth the marginal rate times the amount, not the amount."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$2,408.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The refundable credit is worth its full $2,800 — $2,450.00 of tax erased plus $350.00 paid out — against $392.00 for the deduction. Identical face amounts, very different value."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "gross - stdDed",
+        "substituted": "31500 - 11200",
+        "result": "$20,300.00",
+        "why": "$31,500 of gross less the $11,200 standard deduction."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "b1 * r1 + (#t1-p1 - b1) * r2",
+        "substituted": "9800 * 0.1 + (#t1-p1 - 9800) * 0.14",
+        "result": "$2,450.00",
+        "why": "10% of the first $9,800 is $980, and 14% of the remaining $10,500 of taxable income is $1,470. This is the figure the credits act on."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "max(#t1-p2 - nonrefundable, 0)",
+        "substituted": "max(#t1-p2 - 2800, 0)",
+        "result": "$0.00",
+        "why": "The $2,800 credit exceeds the $2,450.00 of tax, so the tax falls to zero and stops there. The credit could not reduce the liability below zero."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "refundable - #t1-p2",
+        "substituted": "2800 - #t1-p2",
+        "result": "$350.00",
+        "why": "The $2,800 credit against $2,450.00 of tax. The excess is paid out rather than discarded, so the filer ends with $350.00 in hand and no tax owed."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p3",
+        "substituted": "#t2-p1 - #t1-p3",
+        "result": "$350.00",
+        "why": "The refundable version delivered $350.00 that the nonrefundable version did not, because there was only $2,450.00 of tax for it to erase. That unused portion is what \"nonrefundable\" costs this filer."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "extraDeduction * r2b",
+        "substituted": "2800 * 0.14",
+        "result": "$392.00",
+        "why": "The deduction removes $2,800 from taxable income, all of it from the band charged at 14%, so it saves 14% of $2,800. A deduction is worth the marginal rate times the amount, not the amount."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "refundable2 - #t2-p3",
+        "substituted": "2800 - #t2-p3",
+        "result": "$2,408.00",
+        "why": "The refundable credit is worth its full $2,800 — $2,450.00 of tax erased plus $350.00 paid out — against $392.00 for the deduction. Identical face amounts, very different value."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Rank the three provisions by what they are worth to this filer, then explain how the ranking would change for a filer whose tax owed was $9,000 instead of $2,450.00. State the rule each provision follows in one sentence apiece.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Ranks them correctly for this filer — refundable credit $2,800, nonrefundable credit $2,450.00, deduction $392.00 — and reports each value.",
+          "Explains that with $9,000 of tax owed the two credits become equal in value at $2,800 each, because the nonrefundable one is no longer capped by too little tax, while the deduction stays worth the marginal rate times $2,800.",
+          "States the three rules cleanly: a deduction reduces taxable income and is worth the marginal rate times its amount; a credit reduces tax dollar for dollar; refundability decides whether the unused part is paid out or lost."
+        ],
+        "evidenceRequirements": [
+          "Uses the $2,450.00 tax before provisions, the $350.00 unused portion, and the $392.00 deduction value."
+        ],
+        "lookFors": [
+          "The response notices that the ranking depends on how much tax the filer owes, which is what makes refundability matter most at low incomes.",
+          "The response does not treat the deduction as worthless; $392.00 is a real saving, just a much smaller one."
+        ],
+        "commonMisconception": "Reading a deduction and a credit of the same stated amount as being worth the same.",
+        "dimensions": [
+          "criteria-application",
+          "reasoning-from-figures",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the filer’s taxable income before any of the three provisions?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the tax owed before any of the three provisions?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "With the $2,800 nonrefundable credit applied, what tax is owed?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "If the $2,800 credit were refundable instead, what would the filer receive back?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of the $2,800 does the nonrefundable version leave unused?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "If the $2,800 were an additional deduction rather than a credit, how much tax would it save?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much more is the refundable credit worth to this filer than the deduction?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Rank the three provisions by what they are worth to this filer, then explain how the ranking would change for a filer whose tax owed was $9,000 instead of $2,450.00. State the rule each provision follows in one sentence apiece."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the filer’s taxable income before any of the three provisions? Answer: $20,300.00. Verification: $31,500 of gross less the $11,200 standard deduction. t1-p2: What is the tax owed before any of the three provisions? Answer: $2,450.00. Verification: 10% of the first $9,800 is $980, and 14% of the remaining $10,500 of taxable income is $1,470. This is the figure the credits act on. t1-p3: With the $2,800 nonrefundable credit applied, what tax is owed? Answer: $0.00. Verification: The $2,800 credit exceeds the $2,450.00 of tax, so the tax falls to zero and stops there. The credit could not reduce the liability below zero. t2-p1: If the $2,800 credit were refundable instead, what would the filer receive back? Answer: $350.00. Verification: The $2,800 credit against $2,450.00 of tax. The excess is paid out rather than discarded, so the filer ends with $350.00 in hand and no tax owed. t2-p2: How much of the $2,800 does the nonrefundable version leave unused? Answer: $350.00. Verification: The refundable version delivered $350.00 that the nonrefundable version did not, because there was only $2,450.00 of tax for it to erase. That unused portion is what \"nonrefundable\" costs this filer. t2-p3: If the $2,800 were an additional deduction rather than a credit, how much tax would it save? Answer: $392.00. Verification: The deduction removes $2,800 from taxable income, all of it from the band charged at 14%, so it saves 14% of $2,800. A deduction is worth the marginal rate times the amount, not the amount. t2-p4: How much more is the refundable credit worth to this filer than the deduction? Answer: $2,408.00. Verification: The refundable credit is worth its full $2,800 — $2,450.00 of tax erased plus $350.00 paid out — against $392.00 for the deduction. Identical face amounts, very different value."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Rank the three provisions by what they are worth to this filer, then explain how the ranking would change for a filer whose tax owed was $9,000 instead of $2,450.00. State the rule each provision follows in one sentence apiece. Ranks them correctly for this filer — refundable credit $2,800, nonrefundable credit $2,450.00, deduction $392.00 — and reports each value. Explains that with $9,000 of tax owed the two credits become equal in value at $2,800 each, because the nonrefundable one is no longer capped by too little tax, while the deduction stays worth the marginal rate times $2,800. States the three rules cleanly: a deduction reduces taxable income and is worth the marginal rate times its amount; a credit reduces tax dollar for dollar; refundability decides whether the unused part is paid out or lost. Uses the $2,450.00 tax before provisions, the $350.00 unused portion, and the $392.00 deduction value. The response notices that the ranking depends on how much tax the filer owes, which is what makes refundability matter most at low incomes. The response does not treat the deduction as worthless; $392.00 is a real saving, just a much smaller one."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Ranks them correctly for this filer — refundable credit $2,800, nonrefundable credit $2,450.00, deduction $392.00 — and reports each value. Explains that with $9,000 of tax owed the two credits become equal in value at $2,800 each, because the nonrefundable one is no longer capped by too little tax, while the deduction stays worth the marginal rate times $2,800. States the three rules cleanly: a deduction reduces taxable income and is worth the marginal rate times its amount; a credit reduces tax dollar for dollar; refundability decides whether the unused part is paid out or lost."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u07-l04.scoring.json",
+    "sourceScoringSha256": "e1eed807e862fb37617fc313feb338eb03b62e75b53230509284ba7c3ac9c24b",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

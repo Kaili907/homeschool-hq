@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l06",
+  "lessonId": "ma-g4-ready-for-life-u03-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Mistake identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than three mistakes are found, or a found mistake is not actually labeled as storage or surfaces-and-trash."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three mistakes are found and correctly labeled by type."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner accurately names which single mistake would cause the biggest problem by the next day, with a reasonable explanation."
+          }
+        ]
+      },
+      {
+        "dimension": "Correction specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Corrections are vague, such as 'clean it up,' without naming a specific food, location, or step."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three corrections name a specific food, location, or step, and the rewritten ending reads as a coherent finished cleanup."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the self-reflection response names a real, specific reminder tied to the learner's own likely mistake."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The three found mistakes match the three actually written into the scenario, not extra ones invented by the learner.",
+      "The self-reflection response is honest and specific rather than a restatement of one of the scenario's mistakes."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

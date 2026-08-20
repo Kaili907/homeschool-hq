@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u01-l04",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Advanced Trigonometry: Unit Circle and Identities",
+    "dayInUnit": 4,
+    "courseDay": 4,
+    "phase": "Independent application A",
+    "focus": "odd and even trigonometric behavior",
+    "title": "Independent application A: odd and even trigonometric behavior"
+  },
+  "standards": [
+    "F-TF.3",
+    "F-TF.4",
+    "F-TF.9",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "apply-addition-formula",
+          "standard": "F-TF.9",
+          "difficulty": 1,
+          "prompt": "Find sin(75°) exactly.",
+          "workedSolution": {
+            "steps": [
+              "sin(45° + 30°) = sin45cos30 + cos45sin30.",
+              "= (√6 + √2)/4."
+            ],
+            "answer": "(√6 + √2)/4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "periodicity-and-coterminal-angles",
+          "standard": "F-TF.4",
+          "difficulty": 2,
+          "prompt": "Evaluate sin(480°) exactly, using the periodicity of sine.",
+          "choices": [
+            "−1/2",
+            "1/2",
+            "√2/2",
+            "√3/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "exact-value-beyond-first-quadrant",
+          "standard": "F-TF.3",
+          "difficulty": 2,
+          "prompt": "Give the exact value of cos(4π/3), which is 240°.",
+          "choices": [
+            "√2/2",
+            "−√2/2",
+            "1/2",
+            "−1/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "reference-angle-identification",
+          "standard": "F-TF.4",
+          "difficulty": 2,
+          "prompt": "Find the reference angle for 135°, and name the quadrant it lies in.",
+          "choices": [
+            "45°, quadrant 2",
+            "45°, quadrant 3",
+            "225°, quadrant 2",
+            "135°, quadrant 2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "apply-addition-formula",
+          "standard": "F-TF.9",
+          "difficulty": 3,
+          "prompt": "Find the exact value of sin(75°) using sin(45° + 30°).",
+          "choices": [
+            "(√2 − √6)/4",
+            "(√6 − √2)/4",
+            "(√6 + √2)/4",
+            "√6/4"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "periodicity-and-coterminal-angles",
+          "standard": "F-TF.4",
+          "difficulty": 3,
+          "prompt": "Evaluate sin(855°) exactly, using the periodicity of sine.",
+          "choices": [
+            "1/2",
+            "√2/2",
+            "−√2/2",
+            "−1/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "exact-value-beyond-first-quadrant",
+          "standard": "F-TF.3",
+          "difficulty": 3,
+          "prompt": "Give the exact value of sin(5π/6), which is 150°.",
+          "choices": [
+            "1/2",
+            "−√2/2",
+            "√2/2",
+            "−1/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "reference-angle-identification",
+          "standard": "F-TF.4",
+          "difficulty": 3,
+          "prompt": "Find the reference angle for 300°, and name the quadrant it lies in.",
+          "choices": [
+            "-120°, quadrant 4",
+            "300°, quadrant 4",
+            "60°, quadrant 1",
+            "60°, quadrant 4"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "apply-addition-formula",
+          "standard": "F-TF.9",
+          "difficulty": 3,
+          "prompt": "Find the exact value of cos(75°) using cos(45° + 30°).",
+          "choices": [
+            "(√2 − √6)/4",
+            "(√6 + √2)/4",
+            "(√6 − √2)/4",
+            "√6/4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "periodicity-and-coterminal-angles",
+          "standard": "F-TF.4",
+          "difficulty": 2,
+          "prompt": "Evaluate sin(585°) exactly, using the periodicity of sine.",
+          "choices": [
+            "1/2",
+            "−√2/2",
+            "√2/2",
+            "−1/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "exact-value-beyond-first-quadrant",
+          "standard": "F-TF.3",
+          "difficulty": 3,
+          "prompt": "Give the exact value of cos(2π/3), which is 120°.",
+          "choices": [
+            "√2/2",
+            "1/2",
+            "−1/2",
+            "−√2/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "reference-angle-identification",
+          "standard": "F-TF.4",
+          "difficulty": 3,
+          "prompt": "Find the reference angle for 225°, and name the quadrant it lies in.",
+          "choices": [
+            "45°, quadrant 3",
+            "135°, quadrant 3",
+            "45°, quadrant 4",
+            "225°, quadrant 3"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u01-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u01-l04"
+  }
+}

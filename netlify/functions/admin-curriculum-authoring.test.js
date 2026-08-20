@@ -77,7 +77,14 @@ function authoring() {
 function handler(overrides = {}) {
   const source = { loadCatalog: vi.fn(), loadLesson: vi.fn(), loadValidationEvidence: vi.fn() }
   const registry = { list: vi.fn(), details: vi.fn(), productionPointer: vi.fn() }
-  return createAdminCurriculumHandler({ source, registry, ...overrides })
+  return createAdminCurriculumHandler({
+    source,
+    registry,
+    stepUpAssurance: { consume: vi.fn(async ({ binding }) => ({ ok: true, binding })) },
+    requestSourceGuard: () => ({ ok: true }),
+    criticalActionAudit: { record: vi.fn(async () => {}) },
+    ...overrides,
+  })
 }
 
 describe('ADMIN-16B curriculum authoring API', () => {
@@ -232,9 +239,13 @@ describe('ADMIN-16B curriculum authoring API', () => {
 
   it('rejects protected entity classes and supports explicit CAS tombstone operations', async () => {
     const service = authoring()
+    const stepUpAssurance = {
+      consume: vi.fn(async ({ binding }) => ({ ok: true, binding })),
+    }
     const handle = handler({
       authoring: service,
       authorization: { require: vi.fn().mockResolvedValue({ ok: true, principal }) },
+      stepUpAssurance,
     })
     const protectedResponse = await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/entities`, 'POST', {
       entityType: 'policy_set', entityRef: 'policy:global', origin: 'draft_created', position: 1,
@@ -252,6 +263,17 @@ describe('ADMIN-16B curriculum authoring API', () => {
     expect(service.tombstoneEntity).toHaveBeenCalledWith(principal.userId, expect.objectContaining({
       expectedRevision: 2, expectedDraftRevision: 3,
     }))
+    expect(stepUpAssurance.consume).toHaveBeenCalledWith({
+      event: expect.anything(),
+      binding: {
+        actorId: principal.userId,
+        action: 'admin.curriculum.entity.tombstone',
+        resource: {
+          type: 'curriculum-draft-entity',
+          id: `${DRAFT_ID}/course/course%3Amath-5`,
+        },
+      },
+    })
   })
 
   it('lists, adds, and revokes bounded collaborators with per-request capability checks', async () => {

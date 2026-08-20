@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u06-l05",
+  "lessonId": "ma-g7-ready-for-life-u06-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Plan adherence and safety",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are completed out of order, key steps are skipped, or physically risky steps are not clearly supervised by a trusted adult."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Steps are completed in the planned order, and every physically risky step is documented as directly supervised by a trusted adult."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner correctly identifies and stays within the exact scope agreed to in the permission conversation, without adding tasks."
+          }
+        ]
+      },
+      {
+        "dimension": "Real-time problem handling",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No specific deviation from the plan is described, or a deviation is described with no account of how it was handled."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific step that went differently than planned is described along with how the learner and trusted adult handled it."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains what the deviation reveals about a gap in the original plan."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The record shows a trusted adult was actually present for physically risky steps, not just informed the project happened.",
+      "The described deviation is a real, specific event, not a generic 'everything went fine.'",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

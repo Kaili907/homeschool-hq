@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l12",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l12",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 12,
+    "courseDay": 30,
+    "phase": "Applied problem solving",
+    "focus": "multiplication and division as inverse operations",
+    "title": "Applied problem solving: multiplication and division as inverse operations"
+  },
+  "standards": [
+    "3.OA.6"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 1,
+          "prompt": "Find 35 ÷ 5 by thinking: 5 × ? = 35.",
+          "workedSolution": {
+            "steps": [
+              "5 × 7 = 35.",
+              "So 35 ÷ 5 = 7."
+            ],
+            "answer": "7"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "Find 49 ÷ 7 by thinking: 7 × ? = 49.",
+          "choices": [
+            "7",
+            "8",
+            "42",
+            "49"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "Find 18 ÷ 9 by thinking: 9 × ? = 18.",
+          "choices": [
+            "2",
+            "9",
+            "3",
+            "18"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "Find 30 ÷ 5 by thinking: 5 × ? = 30.",
+          "choices": [
+            "5",
+            "30",
+            "25",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "Find 8 ÷ 4 by thinking: 4 × ? = 8.",
+          "choices": [
+            "4",
+            "2",
+            "3",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "Find 18 ÷ 3 by thinking: 3 × ? = 18.",
+          "choices": [
+            "6",
+            "18",
+            "3",
+            "15"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "Find 32 ÷ 8 by thinking: 8 × ? = 32.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "Find 40 ÷ 5 by thinking: 5 × ? = 40.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l12"
+  }
+}

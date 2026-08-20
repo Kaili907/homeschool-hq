@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u10-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u10-l10",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Statistical Inference Capstone",
+    "dayInUnit": 10,
+    "courseDay": 172,
+    "phase": "Discussion or problem seminar",
+    "focus": "survey, experiment, and observational study design",
+    "title": "Discussion or problem seminar: survey, experiment, and observational study design"
+  },
+  "standards": [
+    "S-ID.4",
+    "S-IC.1",
+    "S-IC.2",
+    "S-IC.3",
+    "S-IC.4",
+    "S-IC.5",
+    "S-IC.6",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u10-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "margin-of-error-interpretation",
+          "standard": "S-IC.4",
+          "difficulty": 1,
+          "prompt": "n = 400, sample proportion 55%. Margin and interval?",
+          "workedSolution": {
+            "steps": [
+              "1/√400 = 0.05 = 5%.",
+              "55% ± 5% gives 50% to 60%."
+            ],
+            "answer": "±5%, giving 50% to 60%"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u10-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "simulation-based-significance",
+          "standard": "S-IC.5",
+          "difficulty": 2,
+          "prompt": "In 1000 simulations under the assumption of no difference, 24 produced a result at least as extreme as the one observed. What should be concluded?",
+          "choices": [
+            "The observed result is statistically significant: it occurred in only 2.4% of simulations, below the usual 5% threshold.",
+            "The simulation proves that there is no difference.",
+            "The simulation proves that the observed difference is real.",
+            "The observed result is not statistically significant: it occurred in 2.4% of simulations, which is not unusual."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "normal-empirical-rule",
+          "standard": "S-ID.4",
+          "difficulty": 3,
+          "prompt": "A quantity is approximately normal with mean 64 and standard deviation 3. Approximately what percentage of values lie between 58 and 70?",
+          "choices": [
+            "about 99.7%",
+            "about 95%",
+            "about 50%",
+            "about 68%"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "study-design-and-inference",
+          "standard": "S-IC.3",
+          "difficulty": 3,
+          "prompt": "A researcher runs an observational study of volunteers who chose their own group. What kind of conclusion does this design support?",
+          "choices": [
+            "It supports a causal conclusion about the treatment, within the population studied.",
+            "It supports generalising from the sample to the population, but not a causal claim.",
+            "It supports neither generalisation nor causation, because self-selection can bias both.",
+            "It supports both generalisation and causation, provided the sample is large."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u10-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "margin-of-error-interpretation",
+          "standard": "S-IC.4",
+          "difficulty": 3,
+          "prompt": "A random sample of 625 people gives a sample proportion of 74%. Using the conservative margin of error 1/√n, give the approximate margin of error and the resulting interval.",
+          "choices": [
+            "±0.2%, giving 73.8% to 74.2%",
+            "±8%, giving 66% to 82%",
+            "±4%, giving 70% to 78%",
+            "±74%, giving 0% to 148%"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "simulation-based-significance",
+          "standard": "S-IC.5",
+          "difficulty": 3,
+          "prompt": "In 100 simulations under the assumption of no difference, 3 produced a result at least as extreme as the one observed. What should be concluded?",
+          "choices": [
+            "The observed result is statistically significant: it occurred in only 3% of simulations, below the usual 5% threshold.",
+            "The simulation proves that the observed difference is real.",
+            "The simulation proves that there is no difference.",
+            "The observed result is not statistically significant: it occurred in 3% of simulations, which is not unusual."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "normal-empirical-rule",
+          "standard": "S-ID.4",
+          "difficulty": 3,
+          "prompt": "A quantity is approximately normal with mean 125 and standard deviation 10. Approximately what percentage of values lie between 115 and 135?",
+          "choices": [
+            "about 95%",
+            "about 99.7%",
+            "about 68%",
+            "about 50%"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u10-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "study-design-and-inference",
+          "standard": "S-IC.3",
+          "difficulty": 3,
+          "prompt": "A researcher runs a randomised controlled experiment with participants randomly assigned to treatments. What kind of conclusion does this design support?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "margin-of-error-interpretation",
+          "standard": "S-IC.4",
+          "difficulty": 3,
+          "prompt": "A random sample of 625 people gives a sample proportion of 49%. Using the conservative margin of error 1/√n, give the approximate margin of error and the resulting interval.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u10-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u10-l10"
+  }
+}

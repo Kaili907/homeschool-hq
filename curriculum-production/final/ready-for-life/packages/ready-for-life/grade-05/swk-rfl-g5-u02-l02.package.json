@@ -1,0 +1,375 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u02-l02",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: labels and care symbols"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 04–06",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can practice labels and care symbols. I will do one step at a time and check one result.",
+  "scenario": "An adult first shows the learner five real or printed care-symbol examples and explains what each one means and why it matters, then the learner finds and interprets three more labels — from their own clothes or a provided sheet — without being told the answer first.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No bleach or other laundry chemical is handled in this lesson — symbols are studied on labels only."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If fewer than three additional real labels are available at home, the learner instead interprets three labels from a printed reference sheet of common care symbols, using the same explain-in-your-own-words method."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g5-u02-l02-model-card",
+    "Embedded resource: swk-rfl-g5-u02-l02-step-card",
+    "Embedded resource: swk-rfl-g5-u02-l02-guided-card",
+    "Embedded resource: swk-rfl-g5-u02-l02-independent-card",
+    "Embedded resource: swk-rfl-g5-u02-l02-evidence-record",
+    "Embedded resource: swk-rfl-g5-u02-l02-retry-pair",
+    "Embedded resource: swk-rfl-g5-u02-l02-delivered-example",
+    "learner-local: three additional clothing labels"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Open swk-rfl-g5-u02-l02-model-card. Watch one complete example.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g5-u02-l02-guided-card. Do the coached move.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u02-l02-independent-card. Choose one complete route. Follow its steps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g5-u02-l02-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which of your three independent labels was hardest to interpret, and how did you figure it out (or who or what did you check with)?"
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u02-l02-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u02-l02-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u02-l02-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Symbol recognition accuracy: Correctly restates at least four of the five symbols. | Independent label interpretation: Correctly interprets at least two of the three new labels. Resume at the next unfinished step on swk-rfl-g5-u02-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Research (with an adult, from a reliable source) one care symbol not covered in this lesson and teach it back, in the learner's own words.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u02-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u02-l02",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "clothing-laundry",
+    "practicalGoal": "I can practice labels and care symbols. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u02-l02-model-card",
+        "swk-rfl-g5-u02-l02-step-card",
+        "swk-rfl-g5-u02-l02-guided-card",
+        "swk-rfl-g5-u02-l02-independent-card",
+        "swk-rfl-g5-u02-l02-evidence-record",
+        "swk-rfl-g5-u02-l02-retry-pair",
+        "swk-rfl-g5-u02-l02-delivered-example"
+      ],
+      "referencedArtifactWords": [
+        "example"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g5-u02-l02-delivered-example"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g5-u02-l02-local-1",
+          "label": "three additional clothing labels",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u02-l02-model-card",
+        "kind": "model",
+        "title": "labels and care symbols worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: An adult first shows the learner five real or printed care-symbol examples and explains what each one means and why it matters, then the learner finds and interprets three more labels — from their own clothes or a provided sheet — without being told the answer first.",
+          "Model move 1: Read the condition and name the exact labels and care symbols decision or action.",
+          "Model move 2: Before the model, look at one clothing label you already own.",
+          "Model move 3: With your adult, go through the five common symbols (machine wash, hand wash only, no bleach, tumble dry, dry-clean only) one at a time.",
+          "Model check: Symbol recognition accuracy: Correctly restates at least four of the five symbols. | Independent label interpretation: Correctly interprets at least two of the three new labels."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l02-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "labels and care symbols action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for labels and care symbols.",
+          "2. Watch the worked move on swk-rfl-g5-u02-l02-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u02-l02-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u02-l02-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u02-l02-evidence-record; use swk-rfl-g5-u02-l02-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l02-guided-card",
+        "kind": "guided-practice",
+        "title": "labels and care symbols coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: An adult first shows the learner five real or printed care-symbol examples and explains what each one means and why it matters, then the learner finds and interprets three more labels — from their own clothes or a provided sheet — without being told the answer first.",
+          "Coach direction: Before the model, look at one clothing label you already own.",
+          "Learner prompt: Describe what you recognize and what is unfamiliar.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l02-independent-card",
+        "kind": "independent-task",
+        "title": "labels and care symbols complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult, go through the five common symbols (machine wash, hand wash only, no bleach, tumble dry, dry-clean only) one at a time.",
+          "Response 1 (t2-p1): I could restate what each of the five symbols means in my own words.",
+          "Response 2 (t2-p2): I named one real consequence of ignoring a specific symbol (like bleach damaging a dark item).",
+          "Response 3 (t2-p3): I asked about any symbol I still wasn't sure of.",
+          "Equal-access rule: If fewer than three additional real labels are available at home, the learner instead interprets three labels from a printed reference sheet of common care symbols, using the same explain-in-your-own-words method."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l02-evidence-record",
+        "kind": "evidence-record",
+        "title": "labels and care symbols minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Which of your three independent labels was hardest to interpret, and how did you figure it out (or who or what did you check with)?",
+          "Success checks: Symbol recognition accuracy: Correctly restates at least four of the five symbols. | Independent label interpretation: Correctly interprets at least two of the three new labels.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l02-retry-pair",
+        "kind": "retry",
+        "title": "labels and care symbols supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u02-l02-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u02-l02-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional labels and care symbols condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Symbol recognition accuracy: Correctly restates at least four of the five symbols. | Independent label interpretation: Correctly interprets at least two of the three new labels..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u02-l02-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l02-delivered-example",
+        "kind": "model",
+        "title": "labels and care symbols delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: An adult first shows the learner five real or printed care-symbol examples and explains what each one means and why it matters, then the learner finds and interprets three more labels — from their own clothes or a provided sheet — without being told the answer first.",
+          "Use steps: With your adult, go through the five common symbols (machine wash, hand wash only, no bleach, tumble dry, dry-clean only) one at a time.",
+          "Field 1 (t2-p1): I could restate what each of the five symbols means in my own words.",
+          "Field 2 (t2-p2): I named one real consequence of ignoring a specific symbol (like bleach damaging a dark item).",
+          "Field 3 (t2-p3): I asked about any symbol I still wasn't sure of.",
+          "Check against: Symbol recognition accuracy: Correctly restates at least four of the five symbols. | Independent label interpretation: Correctly interprets at least two of the three new labels."
+        ]
+      }
+    ],
+    "model": {
+      "title": "labels and care symbols worked model",
+      "startingCondition": "An adult first shows the learner five real or printed care-symbol examples and explains what each one means and why it matters, then the learner finds and interprets three more labels — from their own clothes or a provided sheet — without being told the answer first.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact labels and care symbols decision or action.",
+        "Model move 2: Before the model, look at one clothing label you already own.",
+        "Model move 3: With your adult, go through the five common symbols (machine wash, hand wash only, no bleach, tumble dry, dry-clean only) one at a time."
+      ],
+      "reasoning": "The model names the condition, follows the ordered labels and care symbols process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Symbol recognition accuracy: Correctly restates at least four of the five symbols.",
+        "Independent label interpretation: Correctly interprets at least two of the three new labels."
+      ],
+      "resourceRef": "swk-rfl-g5-u02-l02-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for labels and care symbols.",
+        "2. Watch the worked move on swk-rfl-g5-u02-l02-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u02-l02-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u02-l02-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u02-l02-evidence-record; use swk-rfl-g5-u02-l02-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u02-l02-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "An adult first shows the learner five real or printed care-symbol examples and explains what each one means and why it matters, then the learner finds and interprets three more labels — from their own clothes or a provided sheet — without being told the answer first.",
+      "prompt": "Describe what you recognize and what is unfamiliar.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Symbol recognition accuracy: Correctly restates at least four of the five symbols.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u02-l02-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u02-l02-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "labels and care symbols — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g5-u02-l02-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult, go through the five common symbols (machine wash, hand wash only, no bleach, tumble dry, dry-clean only) one at a time.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "labels and care symbols — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u02-l02-independent-card",
+        "directions": "If fewer than three additional real labels are available at home, the learner instead interprets three labels from a printed reference sheet of common care symbols, using the same explain-in-your-own-words method.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u02-l02-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Which of your three independent labels was hardest to interpret, and how did you figure it out (or who or what did you check with)?",
+      "observableCriteria": [
+        "Symbol recognition accuracy: Correctly restates at least four of the five symbols.",
+        "Independent label interpretation: Correctly interprets at least two of the three new labels."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u02-l02-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u02-l02-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u02-l02-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u02-l02-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Symbol recognition accuracy: Correctly restates at least four of the five symbols. | Independent label interpretation: Correctly interprets at least two of the three new labels.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u02-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u02-l02-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

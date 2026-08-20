@@ -1,0 +1,424 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u01-l10",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Income, Benefits, and the Cost of Getting Qualified",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: cost and time of required education or technical skills"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "cost and time of required education or technical skills",
+  "objective": "Build an income profile for three fictional entry-level roles — total compensation, cost to qualify, and months to recoup that cost — and defend a recommendation from the profiles.",
+  "scenario": "A fictional regional job board lists the three invented entry-level roles below. No employer, wage, or program named here is real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional role listings in these directions",
+    "a blank three-column table for the income profiles"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "All three fictional roles are full time at 2,080 hours a year. Role 1, warehouse operations associate: $19.10 an hour, benefits worth $4,100 a year, 3 weeks of on-the-job training at no cost. Role 2, pharmacy technician: $21.40 an hour, benefits worth $5,250, a 9-month program costing $3,900. Role 3, wind turbine technician: $27.65 an hour, benefits worth $6,800, a 24-month program costing $18,400.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Role 1’s total annual compensation, counting wages and benefits?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Role 2’s total annual compensation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Role 3’s total annual compensation?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Role 1 requires no paid training, so use it as the baseline. For each of the other two roles, find the annual gain over Role 1 and how many months of that gain repay the program cost.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many months does Role 2’s gain over Role 1 take to repay its $3,900 program cost? Round to the nearest month.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many months does Role 3’s gain over Role 1 take to repay its $18,400 program cost? Round to the nearest month.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Counting the 24 months of Role 3’s program before any of that pay begins, how long from starting the program until the $18,400 is repaid?",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the recommendation. Use your three completed income profiles.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Recommend one of the three fictional roles for someone who needs steady income within six months, and defend it against the role with the highest total compensation."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "State one figure in your three income profiles that you are least confident in, and say what would change your recommendation if it were wrong."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the recoup months are coming out implausibly small or large, check that the divisor is the gain over Role 1 and not the role’s whole compensation. Write the subtraction explicitly first ($49,762 - $43,828 = $5,934) before dividing the program cost by it.",
+  "extension": "Add a fourth fictional role paying $24.00 an hour with $5,000 of benefits and a 6-month, $2,200 program, and place it in the ranking by recoup time from enrolment.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u01-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Role 1’s total annual compensation, counting wages and benefits?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is Role 2’s total annual compensation?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Role 3’s total annual compensation?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many months does Role 2’s gain over Role 1 take to repay its $3,900 program cost? Round to the nearest month."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How many months does Role 3’s gain over Role 1 take to repay its $18,400 program cost? Round to the nearest month."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Counting the 24 months of Role 3’s program before any of that pay begins, how long from starting the program until the $18,400 is repaid?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Recommend one of the three fictional roles for someone who needs steady income within six months, and defend it against the role with the highest total compensation."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "State one figure in your three income profiles that you are least confident in, and say what would change your recommendation if it were wrong."
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "EDUCATION_CAREER_FINANCE",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "PROJECT",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.education_career_finance.1",
+      "meaning": "Education and career choices combine direct cost, time, funding, work conditions, and uncertain earnings."
+    },
+    {
+      "conceptId": "finlit.education_career_finance.2",
+      "meaning": "An estimate or average does not guarantee one person’s outcome."
+    },
+    {
+      "conceptId": "finlit.education_career_finance.3",
+      "meaning": "A sound comparison uses the same time horizon and states assumptions and opportunity costs."
+    }
+  ],
+  "evidencePurpose": "Develop and apply education, career, cost, and uncertain outcomes through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "title": "Understand education, career, cost, and uncertain outcomes",
+    "paragraphs": [
+      "Education and career choices combine direct cost, time, funding, work conditions, and uncertain earnings.",
+      "An estimate or average does not guarantee one person’s outcome. In this lesson, the learner uses the provided fictional facts about cost and time of required education or technical skills; no real household information belongs in the work.",
+      "A sound comparison uses the same time horizon and states assumptions and opportunity costs. The usable process is: Name the fictional goal and time horizon. Compare direct and recurring costs on the same basis. Include time, funding terms, and uncertain outcomes. Defend a conditional choice and test one changed assumption."
+    ],
+    "relationship": [
+      "Name the fictional goal and time horizon.",
+      "Compare direct and recurring costs on the same basis.",
+      "Include time, funding terms, and uncertain outcomes.",
+      "Defend a conditional choice and test one changed assumption."
+    ],
+    "commonConfusion": "The option with the highest stated earnings is not automatically best after cost, time, risk, and fit are considered.",
+    "conditionsAndLimits": "Use only the stated fictional facts, time period, rate meaning, fees, taxes, timing, rounding, goals, and constraints. The result is education for this scenario, not individualized advice."
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "EDUCATION_CAREER_FINANCE",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "separationRule": "The model uses different fictional people, amounts, wording, and decision conditions from protected independent and mastery work."
+  },
+  "workedExamples": [
+    {
+      "exampleRef": "pd-r1-education_career_finance-g9",
+      "title": "Worked example — education, career, cost, and uncertain outcomes",
+      "fictionCue": "Every person, amount, product, institution, and rule in this example is invented for instruction.",
+      "facts": [
+        "Program A has an invented $1,200.00 cost and takes six months.",
+        "Program B costs $600.00 and takes three months.",
+        "Both meet the fictional job requirement; earnings after completion are unknown."
+      ],
+      "goal": "Choose for a fictional learner whose constraint is completing within four months.",
+      "relevantInformation": "Use only the listed fictional facts and conditions; do not substitute real household information.",
+      "method": "Name the fictional goal and time horizon. Compare direct and recurring costs on the same basis. Include time, funding terms, and uncertain outcomes. Defend a conditional choice and test one changed assumption.",
+      "steps": [
+        "State the decisive constraint: completion within four months.",
+        "Program A fails that constraint at six months; Program B meets it at three months.",
+        "Cost difference: 120,000 − 60,000 = 60,000 cents, or $600.00.",
+        "Choose Program B under these facts, while noting that quality, funding terms, or verified outcomes could change the choice."
+      ],
+      "interpretation": "The choice is conditional on the time constraint and equal qualification assumption.",
+      "reasonablenessCheck": "Choose Program B under these facts, while noting that quality, funding terms, or verified outcomes could change the choice.",
+      "tradeoff": "A longer program could be reasonable if it produced a verified benefit worth the extra time and cost.",
+      "limits": "The conclusion applies only to the stated fictional facts. A changed rate, fee, time, rule, goal, constraint, or risk can change it.",
+      "calculationAuthority": "All USD calculations shown here are written as integer cents. Percent rates, when used, are integer basis points divided by 10,000; stated rounding is half up at the declared line only."
+    }
+  ],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g9-financial-literacy-u01-l10",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: The option with the highest stated earnings is not automatically best after cost, time, risk, and fit are considered.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t3-p1",
+      "t3-p2"
+    ],
+    "gradeBandDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.education_career_finance.1",
+      "finlit.education_career_finance.2",
+      "finlit.education_career_finance.3"
+    ],
+    "evidenceLessonId": "ma-g9-financial-literacy-u01-l09",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.education_career_finance.core-confusion",
+      "observableSignal": "The option with the highest stated earnings is not automatically best after cost, time, risk, and fit are considered.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-education_career_finance-g9",
+        "title": "Alternate model — education, career, cost, and uncertain outcomes",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "Two fictional courses both qualify a learner; one costs 45,000 cents and takes eight weeks, the other costs 30,000 cents and takes twelve weeks."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Compare the 15,000-cent cost difference.",
+          "Compare the four-week time difference.",
+          "Choose based on the stated fictional priority rather than price alone.",
+          "Name a changed funding or schedule fact that could reverse the choice."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g9-financial-literacy-u01-l07",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g9-financial-literacy-u01-l09",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.education_career_finance.1",
+      "finlit.education_career_finance.2",
+      "finlit.education_career_finance.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g9-financial-literacy-u01-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.education_career_finance.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "EDUCATION_CAREER_FINANCE",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g9-financial-literacy-u01-l10:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "HIGH_SCHOOL_9_12",
+      "scaffolding": "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+      "reasoningDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u01-l10.package.json",
+    "sourcePackageSha256": "372f0163675b343217c34fbe30588a527589a17063ba1d83562773f53358a729",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u01-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

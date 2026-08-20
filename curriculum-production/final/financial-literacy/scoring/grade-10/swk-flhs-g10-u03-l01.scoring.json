@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l01",
+  "lessonId": "ma-g10-financial-literacy-u03-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$96.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $410 balance is below the $500 waiver threshold in every month, so the $8 fee is charged all twelve times. The waiver is a condition, not a discount."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$19.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.75% of the $2,600 held for the full year. The balance is above every minimum the account states, so no fee reduces it."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$15.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "9 withdrawals against a 6-withdrawal free allowance leaves 3 charged at $5 each. Note that this single month costs most of the $19.50 the account pays for the whole year."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$83.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3.20% of $2,600 held for the full term."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$48.53",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Seven of the twelve months of the $83.20 full-year interest. The certificate pays for time held; the penalty is charged separately below."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$20.52",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "90 days out of 365 of the $83.20 annual interest. The penalty is priced in interest, not in a flat fee, so it scales with the deposit."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$28.01",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$48.53 credited less the $20.52 penalty. The penalty consumes a large share of what was earned but does not reach the deposit itself."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "The Term Certificate, even after the penalty",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The certificate keeps $28.01 after the penalty, while Basic Savings credits interest only at year end and therefore pays nothing on money withdrawn in month 7. Having no penalty is not the same as paying more."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "fee * 12",
+        "substituted": "8 * 12",
+        "result": "$96.00",
+        "why": "The $410 balance is below the $500 waiver threshold in every month, so the $8 fee is charged all twelve times. The waiver is a condition, not a discount."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "balance * rate",
+        "substituted": "2600 * 0.0075",
+        "result": "$19.50",
+        "why": "0.75% of the $2,600 held for the full year. The balance is above every minimum the account states, so no fee reduces it."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "(withdrawals - free) * perExcess",
+        "substituted": "(9 - 6) * 5",
+        "result": "$15.00",
+        "why": "9 withdrawals against a 6-withdrawal free allowance leaves 3 charged at $5 each. Note that this single month costs most of the $19.50 the account pays for the whole year."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "balance2 * cdRate",
+        "substituted": "2600 * 0.032",
+        "result": "$83.20",
+        "why": "3.20% of $2,600 held for the full term."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 * held / 12, 2)",
+        "substituted": "round(#t2-p1 * 7 / 12, 2)",
+        "result": "$48.53",
+        "why": "Seven of the twelve months of the $83.20 full-year interest. The certificate pays for time held; the penalty is charged separately below."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 * penaltyDays / 365, 2)",
+        "substituted": "round(#t2-p1 * 90 / 365, 2)",
+        "result": "$20.52",
+        "why": "90 days out of 365 of the $83.20 annual interest. The penalty is priced in interest, not in a flat fee, so it scales with the deposit."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p2 - #t2-p3",
+        "substituted": "#t2-p2 - #t2-p3",
+        "result": "$28.01",
+        "why": "$48.53 credited less the $20.52 penalty. The penalty consumes a large share of what was earned but does not reach the deposit itself."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p4 > 0",
+        "substituted": "#t2-p4 > 0",
+        "result": "The Term Certificate, even after the penalty",
+        "why": "The certificate keeps $28.01 after the penalty, while Basic Savings credits interest only at year end and therefore pays nothing on money withdrawn in month 7. Having no penalty is not the same as paying more."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Rank the three fictional accounts for money that will definitely not be touched for a year, then rank them again for money that might be needed in any month. Say which single term changes the ranking, and why the headline interest rate is not that term.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Ranks the certificate first for untouched money on the strength of the $83.20 it earns, and identifies the withdrawal terms rather than the rate as what changes the second ranking.",
+          "Recognises that Basic Savings loses its whole year of interest on an early withdrawal because crediting happens once at year end, so \"no penalty\" does not mean \"no cost\".",
+          "Notes that Everyday Checking pays nothing and can still cost $96.00 a year, so the account with the lowest rate is not automatically the cheapest."
+        ],
+        "evidenceRequirements": [
+          "Uses the $96.00 fee total, the $19.50 savings interest, and the $28.01 kept after the certificate penalty."
+        ],
+        "lookFors": [
+          "The response separates what an account pays from what it costs to reach the money in it.",
+          "A response that ranks the certificate first in both cases is defensible if it argues from the $28.01 figure, since the penalty still left more than either alternative."
+        ],
+        "commonMisconception": "Choosing an account by comparing interest rates alone, without reading when interest is credited or what reaching the money costs.",
+        "dimensions": [
+          "criteria-application",
+          "reasoning-from-figures",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "A fictional saver holds $410 in Everyday Checking in every month of the year. What do the monthly fees cost over the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "The same saver instead holds $2,600 in Basic Savings for the whole year. What interest is credited at year end?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "In one month the saver makes 9 withdrawals from Basic Savings. What do the withdrawals past the free allowance cost that month?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "The saver puts the $2,600 into the 12-month Term Certificate instead. What interest does a full year earn?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "The saver instead needs the money in month 7. What interest has the certificate credited for the months actually held?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the early-withdrawal penalty, at 90 days of interest?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What interest does the saver actually keep after withdrawing in month 7?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "For money that turns out to be needed in month 7, which account left the saver with more interest?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Rank the three fictional accounts for money that will definitely not be touched for a year, then rank them again for money that might be needed in any month. Say which single term changes the ranking, and why the headline interest rate is not that term."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: A fictional saver holds $410 in Everyday Checking in every month of the year. What do the monthly fees cost over the year? Answer: $96.00. Verification: The $410 balance is below the $500 waiver threshold in every month, so the $8 fee is charged all twelve times. The waiver is a condition, not a discount. t1-p2: The same saver instead holds $2,600 in Basic Savings for the whole year. What interest is credited at year end? Answer: $19.50. Verification: 0.75% of the $2,600 held for the full year. The balance is above every minimum the account states, so no fee reduces it. t1-p3: In one month the saver makes 9 withdrawals from Basic Savings. What do the withdrawals past the free allowance cost that month? Answer: $15.00. Verification: 9 withdrawals against a 6-withdrawal free allowance leaves 3 charged at $5 each. Note that this single month costs most of the $19.50 the account pays for the whole year. t2-p1: The saver puts the $2,600 into the 12-month Term Certificate instead. What interest does a full year earn? Answer: $83.20. Verification: 3.20% of $2,600 held for the full term. t2-p2: The saver instead needs the money in month 7. What interest has the certificate credited for the months actually held? Answer: $48.53. Verification: Seven of the twelve months of the $83.20 full-year interest. The certificate pays for time held; the penalty is charged separately below. t2-p3: What is the early-withdrawal penalty, at 90 days of interest? Answer: $20.52. Verification: 90 days out of 365 of the $83.20 annual interest. The penalty is priced in interest, not in a flat fee, so it scales with the deposit. t2-p4: What interest does the saver actually keep after withdrawing in month 7? Answer: $28.01. Verification: $48.53 credited less the $20.52 penalty. The penalty consumes a large share of what was earned but does not reach the deposit itself. t2-p5: For money that turns out to be needed in month 7, which account left the saver with more interest? Answer: The Term Certificate, even after the penalty. Verification: The certificate keeps $28.01 after the penalty, while Basic Savings credits interest only at year end and therefore pays nothing on money withdrawn in month 7. Having no penalty is not the same as paying more."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Rank the three fictional accounts for money that will definitely not be touched for a year, then rank them again for money that might be needed in any month. Say which single term changes the ranking, and why the headline interest rate is not that term. Ranks the certificate first for untouched money on the strength of the $83.20 it earns, and identifies the withdrawal terms rather than the rate as what changes the second ranking. Recognises that Basic Savings loses its whole year of interest on an early withdrawal because crediting happens once at year end, so \"no penalty\" does not mean \"no cost\". Notes that Everyday Checking pays nothing and can still cost $96.00 a year, so the account with the lowest rate is not automatically the cheapest. Uses the $96.00 fee total, the $19.50 savings interest, and the $28.01 kept after the certificate penalty. The response separates what an account pays from what it costs to reach the money in it. A response that ranks the certificate first in both cases is defensible if it argues from the $28.01 figure, since the penalty still left more than either alternative."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Ranks the certificate first for untouched money on the strength of the $83.20 it earns, and identifies the withdrawal terms rather than the rate as what changes the second ranking. Recognises that Basic Savings loses its whole year of interest on an early withdrawal because crediting happens once at year end, so \"no penalty\" does not mean \"no cost\". Notes that Everyday Checking pays nothing and can still cost $96.00 a year, so the account with the lowest rate is not automatically the cheapest."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u03-l01.scoring.json",
+    "sourceScoringSha256": "d5c1e1b2d6dfc1ba20cfff2535b7049f3f80e3b2294264d9d19109b2c6b97b93",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

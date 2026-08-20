@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l02",
+  "lessonId": "ma-g9-financial-literacy-u07-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,604.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,100 less 16% withheld, which is $496.00."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,728.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,100 less 12% withheld, which is $372.00."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$124.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Setting B’s $2,728.00 take-home against Setting A’s $2,604.00, a difference of exactly the 4% not withheld."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$5,952.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$496.00 a month for twelve months."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,052.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,952.00 withheld against $4,900 owed leaves a $1,052.00 refund."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$436.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,464.00 withheld against $4,900 owed leaves $436.00 still to pay at filing."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "gross - gross * rateA",
+        "substituted": "3100 - 3100 * 0.16",
+        "result": "$2,604.00",
+        "why": "$3,100 less 16% withheld, which is $496.00."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "gross2 - gross2 * rateB",
+        "substituted": "3100 - 3100 * 0.12",
+        "result": "$2,728.00",
+        "why": "$3,100 less 12% withheld, which is $372.00."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - #t1-p1",
+        "substituted": "#t1-p2 - #t1-p1",
+        "result": "$124.00",
+        "why": "Setting B’s $2,728.00 take-home against Setting A’s $2,604.00, a difference of exactly the 4% not withheld."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "gross3 * rateA2 * 12",
+        "substituted": "3100 * 0.16 * 12",
+        "result": "$5,952.00",
+        "why": "$496.00 a month for twelve months."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - owed",
+        "substituted": "#t2-p1 - 4900",
+        "result": "$1,052.00",
+        "why": "$5,952.00 withheld against $4,900 owed leaves a $1,052.00 refund."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "owed2 - gross4 * rateB2 * 12",
+        "substituted": "4900 - 3100 * 0.12 * 12",
+        "result": "$436.00",
+        "why": "$4,464.00 withheld against $4,900 owed leaves $436.00 still to pay at filing."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The two settings produce a $1,052 refund and a $436 bill, and the tax owed is $4,900 either way. Explain what withholding actually changes, and say which setting you would argue for and on what grounds.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that withholding changes only the timing of payment, not the amount owed, which stays at $4,900.",
+          "Describes the tradeoff concretely: Setting A gives $1,052 back once a year, Setting B gives $124 a month during the year but requires $436 available at filing.",
+          "Argues for one setting on stated grounds — the value of money during the year against the risk of not having the $436 ready — rather than calling a refund good or bad in itself."
+        ],
+        "evidenceRequirements": [
+          "Uses the $124 monthly difference, the $1,052 refund, and the $436 bill."
+        ],
+        "lookFors": [
+          "The response does not describe the refund as money gained.",
+          "The response treats having $436 available at filing as a real requirement of Setting B."
+        ],
+        "commonMisconception": "Treating a tax refund as a bonus rather than as the return of money withheld in excess.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "tradeoff-defense",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is monthly take-home pay under Setting A?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is monthly take-home pay under Setting B?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much more does Setting B put in the worker’s hands each month?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld over the year under Setting A?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What refund or bill does Setting A produce against the $4,900 owed?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld over the year under Setting B, and how does it compare with the $4,900 owed? Give the shortfall."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The two settings produce a $1,052 refund and a $436 bill, and the tax owed is $4,900 either way. Explain what withholding actually changes, and say which setting you would argue for and on what grounds."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is monthly take-home pay under Setting A? Answer: $2,604.00. Verification: $3,100 less 16% withheld, which is $496.00. t1-p2: What is monthly take-home pay under Setting B? Answer: $2,728.00. Verification: $3,100 less 12% withheld, which is $372.00. t1-p3: How much more does Setting B put in the worker’s hands each month? Answer: $124.00. Verification: Setting B’s $2,728.00 take-home against Setting A’s $2,604.00, a difference of exactly the 4% not withheld. t2-p1: How much is withheld over the year under Setting A? Answer: $5,952.00. Verification: $496.00 a month for twelve months. t2-p2: What refund or bill does Setting A produce against the $4,900 owed? Answer: $1,052.00. Verification: $5,952.00 withheld against $4,900 owed leaves a $1,052.00 refund. t2-p3: How much is withheld over the year under Setting B, and how does it compare with the $4,900 owed? Give the shortfall. Answer: $436.00. Verification: $4,464.00 withheld against $4,900 owed leaves $436.00 still to pay at filing."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The two settings produce a $1,052 refund and a $436 bill, and the tax owed is $4,900 either way. Explain what withholding actually changes, and say which setting you would argue for and on what grounds. States that withholding changes only the timing of payment, not the amount owed, which stays at $4,900. Describes the tradeoff concretely: Setting A gives $1,052 back once a year, Setting B gives $124 a month during the year but requires $436 available at filing. Argues for one setting on stated grounds — the value of money during the year against the risk of not having the $436 ready — rather than calling a refund good or bad in itself. Uses the $124 monthly difference, the $1,052 refund, and the $436 bill. The response does not describe the refund as money gained. The response treats having $436 available at filing as a real requirement of Setting B."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States that withholding changes only the timing of payment, not the amount owed, which stays at $4,900. Describes the tradeoff concretely: Setting A gives $1,052 back once a year, Setting B gives $124 a month during the year but requires $436 available at filing. Argues for one setting on stated grounds — the value of money during the year against the risk of not having the $436 ready — rather than calling a refund good or bad in itself."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u07-l02.scoring.json",
+    "sourceScoringSha256": "8e0973f2fb01448ea1085b83e3b466439277cf922ae974729568173029143899",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

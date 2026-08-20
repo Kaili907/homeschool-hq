@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l04",
+  "lessonId": "ma-g8-ready-for-life-u02-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Specificity of problem description",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The description leaves out two or more of the following: what's wrong, its exact location, when it started, or how it has changed."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The description includes what's wrong, its exact location, when it started, and how it has changed, with no missing detail."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Includes all four details plus enough descriptive specificity (the exact sound, the exact change in airflow) that a technician could anticipate likely causes before arriving."
+          }
+        ]
+      },
+      {
+        "dimension": "Tone and structure",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Tone is demanding or overly casual, or the message lacks a greeting or closing."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Tone is consistently polite and professional, with a greeting, clear body, and closing."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Tone is polite and professional throughout, and the message anticipates the reader's needs (proposes a timeframe, offers access availability, or similar)."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The message stays addressed to the fictional Ridgeview Property Management and is clearly framed as a draft, never as something actually sent.",
+      "The revision in the reflection task fixes a real gap identified by rereading, not a cosmetic wording change."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

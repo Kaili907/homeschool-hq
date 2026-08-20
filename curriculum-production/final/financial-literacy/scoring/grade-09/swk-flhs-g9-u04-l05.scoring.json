@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l05",
+  "lessonId": "ma-g9-financial-literacy-u04-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,558.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "120 monthly payments of $37.99."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,058.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,558.80 repaid against $3,500 received."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "1.30",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,558.80 repaid for every $3,500 received is $1.30 repaid per dollar borrowed."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "160",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,200 at $13.75 an hour is exactly 160 hours of work."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "A loan dollar",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "A grant dollar costs nothing to keep, a work-study dollar costs about four and a half minutes of work, and a loan dollar costs $1.30 repaid — the only one that costs more than a dollar."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "payment * months",
+        "substituted": "37.99 * 120",
+        "result": "$4,558.80",
+        "why": "120 monthly payments of $37.99."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - borrowed",
+        "substituted": "#t1-p1 - 3500",
+        "result": "$1,058.80",
+        "why": "$4,558.80 repaid against $3,500 received."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p1 / borrowed2, 2)",
+        "substituted": "round(#t1-p1 / 3500, 2)",
+        "result": "1.30",
+        "why": "$4,558.80 repaid for every $3,500 received is $1.30 repaid per dollar borrowed."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(award / wage, 0)",
+        "substituted": "round(2200 / 13.75, 0)",
+        "result": "160",
+        "why": "$2,200 at $13.75 an hour is exactly 160 hours of work."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 > 1",
+        "substituted": "#t1-p3 > 1",
+        "result": "A loan dollar",
+        "why": "A grant dollar costs nothing to keep, a work-study dollar costs about four and a half minutes of work, and a loan dollar costs $1.30 repaid — the only one that costs more than a dollar."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Work study costs 160 hours and the loan costs $1,058.80. Explain why these two costs cannot simply be added or compared as numbers, and describe what an applicant would have to know about themselves to weigh them.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that one cost is paid in time during the study year and the other in money over ten years afterwards, so they fall on different resources at different times.",
+          "Identifies what the applicant would need to know: whether 160 hours can be spared without harming study or other earnings, and what $37.99 a month will mean against a future income they cannot yet see.",
+          "Avoids converting the hours into dollars at the work-study wage and calling that a comparison, or explains why that conversion is not the whole answer."
+        ],
+        "evidenceRequirements": [
+          "Uses the 160-hour figure and at least one loan figure ($1,058.80 interest, $37.99 a month, or $1.30 per dollar)."
+        ],
+        "lookFors": [
+          "The response treats the ten-year repayment horizon as a source of genuine uncertainty.",
+          "The response does not conclude that work study is always better, nor that borrowing should always be avoided."
+        ],
+        "commonMisconception": "Treating aid of different kinds as interchangeable because they appear on the same offer at the same face value.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total repaid on the $3,500 loan over the 10 years?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the loan cost in interest?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does each borrowed dollar end up costing? Give the answer to two decimal places."
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many hours must be worked to earn the full $2,200 work-study award at $13.75 an hour?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Ranking a grant dollar, a work-study dollar, and a loan dollar by what each costs the recipient, which costs the most?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Work study costs 160 hours and the loan costs $1,058.80. Explain why these two costs cannot simply be added or compared as numbers, and describe what an applicant would have to know about themselves to weigh them."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the total repaid on the $3,500 loan over the 10 years? Answer: $4,558.80. Verification: 120 monthly payments of $37.99. t1-p2: What does the loan cost in interest? Answer: $1,058.80. Verification: $4,558.80 repaid against $3,500 received. t1-p3: What does each borrowed dollar end up costing? Give the answer to two decimal places. Answer: 1.30. Verification: $4,558.80 repaid for every $3,500 received is $1.30 repaid per dollar borrowed. t2-p1: How many hours must be worked to earn the full $2,200 work-study award at $13.75 an hour? Answer: 160. Verification: $2,200 at $13.75 an hour is exactly 160 hours of work. t2-p2: Ranking a grant dollar, a work-study dollar, and a loan dollar by what each costs the recipient, which costs the most? Answer: A loan dollar. Verification: A grant dollar costs nothing to keep, a work-study dollar costs about four and a half minutes of work, and a loan dollar costs $1.30 repaid — the only one that costs more than a dollar."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Work study costs 160 hours and the loan costs $1,058.80. Explain why these two costs cannot simply be added or compared as numbers, and describe what an applicant would have to know about themselves to weigh them. States that one cost is paid in time during the study year and the other in money over ten years afterwards, so they fall on different resources at different times. Identifies what the applicant would need to know: whether 160 hours can be spared without harming study or other earnings, and what $37.99 a month will mean against a future income they cannot yet see. Avoids converting the hours into dollars at the work-study wage and calling that a comparison, or explains why that conversion is not the whole answer. Uses the 160-hour figure and at least one loan figure ($1,058.80 interest, $37.99 a month, or $1.30 per dollar). The response treats the ten-year repayment horizon as a source of genuine uncertainty. The response does not conclude that work study is always better, nor that borrowing should always be avoided."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States that one cost is paid in time during the study year and the other in money over ten years afterwards, so they fall on different resources at different times. Identifies what the applicant would need to know: whether 160 hours can be spared without harming study or other earnings, and what $37.99 a month will mean against a future income they cannot yet see. Avoids converting the hours into dollars at the work-study wage and calling that a comparison, or explains why that conversion is not the whole answer."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u04-l05.scoring.json",
+    "sourceScoringSha256": "e9270c5692cfcbf56fd080539d020b884f7df8550490d781fe6b86bfdeb290ee",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

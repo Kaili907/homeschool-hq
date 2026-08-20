@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l18",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l18",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 18,
+    "courseDay": 180,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "the correlation coefficient, slope and intercept in context, and correlation versus causation",
+    "title": "Publication, presentation, or reflection: the correlation coefficient, slope and intercept in context, and correlation versus causation"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 1,
+          "prompt": "Ice cream sales correlate with drowning rates. Does ice cream cause drowning?",
+          "workedSolution": {
+            "steps": [
+              "Both rise in hot weather.",
+              "A lurking variable explains the association."
+            ],
+            "answer": "No; a third variable explains it"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 2,
+          "prompt": "A data set records 19, 6, 16, 12, 6. Give the mean and the median.",
+          "choices": [
+            "mean 11.8, median 16",
+            "mean 12, median 11.8",
+            "mean 12, median 12",
+            "mean 11.8, median 12"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 2,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 183 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Both the mean and the median rise sharply.",
+            "The median rises sharply while the mean changes little.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Neither statistic changes, because one value cannot affect a summary."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 3,
+          "prompt": "A two-way table has row 1: 33 yes, 58 no; row 2: 40 yes, 10 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "11/47",
+            "33/73",
+            "33/91",
+            "58/91"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 16x + 58, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "Each additional hour studied is associated with an increase of about 16 test points.",
+            "Each additional test points is associated with 16 more hour studieds.",
+            "Each additional hour studied causes an increase of exactly 16 test points.",
+            "The predicted value is 16 test points when x is 0."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 3,
+          "prompt": "Ice cream sales and swimming-pool admissions are strongly positively correlated across a year. What conclusion is justified?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 4, 3, 20, 16, 17, 40, 24. Give the mean and the median.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l18"
+  }
+}

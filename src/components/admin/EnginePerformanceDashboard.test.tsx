@@ -1,8 +1,11 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { buildEnginePerformanceProjection } from '../../admin/enginePerformanceModel'
 import type { AdminOperationalEvent } from '../../telemetry/operationalTelemetry'
 import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
+
+const ENGINE_STYLES = readFileSync(new URL('./engine-performance-dashboard.css', import.meta.url), 'utf8')
 
 function event(number: number, operation: string, result: AdminOperationalEvent['result'] = 'success', version = 'study-v1'): AdminOperationalEvent {
   return {
@@ -50,6 +53,8 @@ describe('EnginePerformanceDashboard', () => {
     expect(html).toContain('Sample count')
     expect(html).toContain('Time range')
     expect(html).toContain('Engine version')
+    expect(html).toContain('engine-performance__badge')
+    expect(html).toContain('>Available<')
   })
 
   it('renders supported Study outcomes, a legitimate zero, and safety stops separately', () => {
@@ -134,6 +139,18 @@ describe('EnginePerformanceDashboard', () => {
     expect(error).toContain('role="alert"')
     expect(error).toContain('No substitute data is shown')
     expect(error).toContain('Try again')
+    expect(loading).toContain('engine-performance__state')
+    expect(error).toContain('aria-live="polite"')
+  })
+
+  it('keeps filters, engine cards, metrics, tables, and motion responsive', () => {
+    expect(ENGINE_STYLES).toContain('@media (max-width: 980px)')
+    expect(ENGINE_STYLES).toContain('@media (max-width: 760px)')
+    expect(ENGINE_STYLES).toContain('@media (max-width: 640px)')
+    expect(ENGINE_STYLES).toContain('.engine-performance__filters { grid-template-columns: 1fr; }')
+    expect(ENGINE_STYLES).toContain('overflow-x: auto')
+    expect(ENGINE_STYLES).toContain('min-height: 2.75rem')
+    expect(ENGINE_STYLES).toContain('@media (prefers-reduced-motion: reduce)')
   })
 
   it('renders no raw telemetry or private learner content', () => {

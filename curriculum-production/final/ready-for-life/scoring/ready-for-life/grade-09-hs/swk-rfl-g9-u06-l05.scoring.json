@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l05",
+  "lessonId": "ma-g9-ready-for-life-u06-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Role-based network coverage and privacy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fewer than four kinds of need have a named role, or one or more entries use a real name or contact detail instead of a role." },
+          { "label": "Proficient", "descriptor": "All four kinds of need from the guided task are named by role with a brief specific reason, and no real name or contact detail appears anywhere." },
+          { "label": "Advanced", "descriptor": "All four kinds of need are named with specific reasons, no real name or contact detail appears anywhere, and the learner adds a second-choice person for at least one role." }
+        ]
+      },
+      {
+        "dimension": "Gap identification and next step",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No gap is identified, or an absence of gaps is asserted with no explanation of how it was checked." },
+          { "label": "Proficient", "descriptor": "A genuine gap is identified with a specific next step to fill it, or the absence of gaps is explained with real reasoning." },
+          { "label": "Advanced", "descriptor": "A genuine gap is identified with a specific, actionable next step, and the learner connects the gap to a particular kind of real need it would affect." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Every network entry uses a role or relationship description only, never a real name, address, phone number, or email address.",
+      "A gap-closing step specific enough to actually act on, not a vague 'try to find someone.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

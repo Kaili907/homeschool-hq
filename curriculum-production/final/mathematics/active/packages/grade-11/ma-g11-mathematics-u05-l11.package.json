@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u05-l11",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u05-l11",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Trigonometric Functions and Periodic Models",
+    "dayInUnit": 11,
+    "courseDay": 83,
+    "phase": "Performance task planning",
+    "focus": "choosing a trigonometric function to model periodic phenomena",
+    "title": "Performance task planning: choosing a trigonometric function to model periodic phenomena"
+  },
+  "standards": [
+    "F-TF.1",
+    "F-TF.2",
+    "F-TF.5",
+    "F-TF.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 1,
+          "prompt": "Convert 60° to radians.",
+          "workedSolution": {
+            "steps": [
+              "60 × π/180.",
+              "Simplifies to π/3."
+            ],
+            "answer": "π/3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 2,
+          "prompt": "Give the exact value of sin(0).",
+          "choices": [
+            "0",
+            "√2/2",
+            "√3/2",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 2,
+          "prompt": "A model is f(t) = 7·sin(4t) + 3. State the amplitude, period, and midline.",
+          "choices": [
+            "amplitude 3; period 2π/4; midline y = 7",
+            "amplitude 7; period 4·2π; midline y = 3",
+            "amplitude 7; period 2π/4; midline y = 3",
+            "amplitude 14; period 2π/4; midline y = 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 3,
+          "prompt": "Given sin θ = 3/5 and θ is in the first quadrant, find cos θ exactly.",
+          "choices": [
+            "3/5",
+            "4/5",
+            "5/4",
+            "−4/5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 3,
+          "prompt": "Convert 45° to radian measure, in terms of π.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 3,
+          "prompt": "Give the exact value of sin(π/3).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 3,
+          "prompt": "A model is f(t) = 11·sin(t) + 3. State the amplitude, period, and midline.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u05-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u05-l11"
+  }
+}

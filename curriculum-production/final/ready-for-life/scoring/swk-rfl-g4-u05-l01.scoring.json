@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l01",
+  "lessonId": "ma-g4-ready-for-life-u05-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Calendar completeness and accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than four commitments are entered, or commitments are missing a day or a rough time."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least four real commitments are entered on the correct day, each with a rough time."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the warm-up response accurately describes the learner's prior, calendar-free tracking method."
+          }
+        ]
+      },
+      {
+        "dimension": "Self-directed planning choice",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No open block is identified, or the chosen block actually overlaps a fixed commitment."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A genuinely open block is correctly identified and filled with a specific learner-chosen use of that time."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names a specific alternative block considered and gives a real reason for choosing one over the other."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Commitments entered are real and specific to the learner's actual coming week, not invented examples.",
+      "The chosen open block does not double-book a time already used by a fixed commitment."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u10-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u10-l06",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 6,
+    "courseDay": 168,
+    "phase": "Guided practice B",
+    "focus": "argument and presentation",
+    "title": "Guided practice B: argument and presentation"
+  },
+  "standards": [
+    "7.RP.3",
+    "7.NS.3",
+    "7.EE.4",
+    "7.G.6",
+    "7.SP.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "data-and-uncertainty",
+          "standard": "7.SP.4",
+          "difficulty": 1,
+          "prompt": "A data set is 10, 15, 20, 25, 30. The mean is 20. What is the mean absolute deviation?",
+          "workedSolution": {
+            "steps": [
+              "Identify what the problem is asking and which quantities, assumptions, or constraints matter.",
+              "Build and solve a model, then check the result against the context."
+            ],
+            "answer": "6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "argument-and-presentation",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A student claims a box that is 3 by 4 by 6 units has a volume of 13 cubic units. Evaluate the claim.",
+          "choices": [
+            "No; the volume is 14 cubic units, not 13.",
+            "Yes; the volume is 13 cubic units.",
+            "No; the volume is 15 cubic units, not 13.",
+            "No; the volume is 72 cubic units, not 13."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "problem-formulation",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "A rental company charges a $12 base fee plus $7 per hour. A customer's total bill was $61. Which equation models this situation, and how many hours were rented?",
+          "choices": [
+            "12x + 7 = 61; x = 9",
+            "7x + 12 = 61; x = 7",
+            "7x - 12 = 61; x = 8",
+            "7x + 12 = 61; x = 8"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "assumptions-and-constraints",
+          "standard": "7.NS.3",
+          "difficulty": 3,
+          "prompt": "A diver starts at the surface (0 m) and descends 3 m, then descends another 10 m, then ascends 18 m. The dive plan assumes a depth limit of 33 m below the surface. What is the diver's final position, as a signed number of meters?",
+          "choices": [
+            "23",
+            "31",
+            "5",
+            "11"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "proportional-and-algebraic-models",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "A model predicts a $1000 rate will increase by 20%. What does the model predict as the new rate?",
+          "choices": [
+            "$800",
+            "$1020",
+            "$1200",
+            "$200"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "geometry-and-measurement",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A storage container is designed as a rectangular prism 3 ft long, 3 ft wide, and 5 ft high. What is its volume in cubic feet?",
+          "choices": [
+            "9",
+            "45",
+            "40",
+            "78"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "data-and-uncertainty",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "A data set has the values 27, 32, 37, 42, 47. The mean is 37. What is the mean absolute deviation (MAD), a measure of the data's uncertainty or spread?",
+          "choices": [
+            "5",
+            "10",
+            "6",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "argument-and-presentation",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A student claims a box that is 4 by 3 by 2 units has a volume of 28 cubic units. Evaluate the claim.",
+          "choices": [
+            "No; the volume is 24 cubic units, not 28.",
+            "No; the volume is 29 cubic units, not 28.",
+            "Yes; the volume is 28 cubic units.",
+            "No; the volume is 30 cubic units, not 28."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "problem-formulation",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "A rental company charges a $18 base fee plus $3 per hour. A customer's total bill was $51. Which equation models this situation, and how many hours were rented?",
+          "choices": [
+            "3x + 18 = 51; x = 10",
+            "18x + 3 = 51; x = 13",
+            "3x + 18 = 51; x = 12",
+            "3x + 18 = 51; x = 11"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "assumptions-and-constraints",
+          "standard": "7.NS.3",
+          "difficulty": 3,
+          "prompt": "A diver starts at the surface (0 m) and descends 25 m, then descends another 22 m, then ascends 8 m. The dive plan assumes a depth limit of 53 m below the surface. What is the diver's final position, as a signed number of meters?",
+          "choices": [
+            "-31",
+            "55",
+            "-39",
+            "11"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "proportional-and-algebraic-models",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "A model predicts a $80 rate will decrease by 10%. What does the model predict as the new rate?",
+          "choices": [
+            "$88",
+            "$80",
+            "$72",
+            "$90"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u10-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u10-l06"
+  }
+}

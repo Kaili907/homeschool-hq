@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u05-l03",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Division with Remainders",
+    "dayInUnit": 3,
+    "courseDay": 75,
+    "phase": "Concept build B",
+    "focus": "area and array models for division",
+    "title": "Concept build B: area and array models for division"
+  },
+  "standards": [
+    "4.NBT.6"
+  ],
+  "blueprint": {
+    "phase": "Concept build B",
+    "profile": "concept-build-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 53 ÷ 6.",
+          "workedSolution": {
+            "steps": [
+              "6 × 8 = 48.",
+              "53 − 48 = 5, and 5 is less than 6.",
+              "53 ÷ 6 = 8 remainder 5."
+            ],
+            "answer": "8 r5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 245 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "61 r1",
+            "61 r2",
+            "62 r1",
+            "60 r1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 411 ÷ 5. Write the answer as a quotient and remainder.",
+          "choices": [
+            "83 r1",
+            "82 r2",
+            "81 r1",
+            "82 r1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 118 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "29 r2",
+            "30 r2",
+            "28 r2",
+            "29 r3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 73 ÷ 3. Write the answer as a quotient and remainder.",
+          "choices": [
+            "25 r1",
+            "24 r1",
+            "23 r1",
+            "24 r2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 381 ÷ 5. Write the answer as a quotient and remainder.",
+          "choices": [
+            "76 r1",
+            "75 r1",
+            "77 r1",
+            "76 r2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 159 ÷ 7. Write the answer as a quotient and remainder.",
+          "choices": [
+            "22 r5",
+            "21 r5",
+            "22 r6",
+            "23 r5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l03#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 145 ÷ 7. Write the answer as a quotient and remainder.",
+          "choices": [
+            "19 r5",
+            "21 r5",
+            "20 r6",
+            "20 r5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 241 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "60 r1",
+            "59 r1",
+            "60 r2",
+            "61 r1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 182 ÷ 5. Write the answer as a quotient and remainder.",
+          "choices": [
+            "36 r3",
+            "35 r2",
+            "37 r2",
+            "36 r2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u05-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u05-l03"
+  }
+}

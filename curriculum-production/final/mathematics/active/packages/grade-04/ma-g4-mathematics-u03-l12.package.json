@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l12",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l12",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 12,
+    "courseDay": 48,
+    "phase": "Applied problem solving",
+    "focus": "prime and composite numbers, and extending a rule-based pattern",
+    "title": "Applied problem solving: prime and composite numbers, and extending a rule-based pattern"
+  },
+  "standards": [
+    "4.OA.4",
+    "4.OA.5"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 1,
+          "prompt": "What is the 4th multiple of 6?",
+          "workedSolution": {
+            "steps": [
+              "Multiples of 6: 6, 12, 18, 24.",
+              "The 4th multiple is 24."
+            ],
+            "answer": "24"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 2,
+          "prompt": "The pattern 8, 24, 72, 216, ... follows the rule \"multiply by 3 each time.\" What is the 6th term?",
+          "choices": [
+            "5832",
+            "648",
+            "1944",
+            "48"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 36 have?",
+          "choices": [
+            "4",
+            "9",
+            "8",
+            "10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 6th multiple of 5?",
+          "choices": [
+            "25",
+            "30",
+            "11",
+            "35"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 3,
+          "prompt": "The pattern 1, 3, 9, 27, ... follows the rule \"multiply by 3 each time.\" What is the 5th term?",
+          "choices": [
+            "27",
+            "243",
+            "81",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "How many whole-number factors does 63 have?",
+          "choices": [
+            "6",
+            "5",
+            "3",
+            "7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "What is the 8th multiple of 6?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 3,
+          "prompt": "The pattern 7, 11, 15, 19, ... follows the rule \"add 4 each time.\" What is the 5th term?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l12"
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l08",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 8,
+    "courseDay": 98,
+    "phase": "Reteach and varied practice",
+    "focus": "creating inequalities in one variable",
+    "title": "Reteach and varied practice: creating inequalities in one variable"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 1,
+          "prompt": "A model needs 3.2 vans. How many are required?",
+          "workedSolution": {
+            "steps": [
+              "Vans are whole objects.",
+              "Three vans leave some load uncarried, so four are needed."
+            ],
+            "answer": "4 vans"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A $40 fee plus $15 per hour totals $115. Write the equation.",
+          "workedSolution": {
+            "steps": [
+              "Fee is constant; hourly rate multiplies h.",
+              "40 + 15h = 115."
+            ],
+            "answer": "40 + 15h = 115"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 1,
+          "prompt": "The formula A = -5bh + 5 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = (A − 5) / (-5b)",
+            "h = A / (-5b) − 5",
+            "h = -5b(A − 5)",
+            "h = (A + 5) / (-5b)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 1,
+          "prompt": "Item A costs $5 each and item B costs $3 each. You may spend at most $370 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "a + b ≤ 370",
+            "5a + 3b ≥ 370",
+            "5a + 3b ≤ 370",
+            "5a + 3b = 370"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A tank holds 180 litres and is filling at 4 litres per minute. After how many minutes does it hold 248 litres?",
+          "choices": [
+            "62 minutes",
+            "17 minutes",
+            "68 minutes",
+            "107 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "A budget model allows 12.7 units of a product sold individually. How should this solution be interpreted?",
+          "choices": [
+            "Round up to 13, because 12.7 is closer to 13.",
+            "Split the order so the fractional unit is shared.",
+            "Report 12.7, because the constraint is satisfied.",
+            "Round down to 12; buying a partial unit is not possible and 13 would exceed the budget."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 1,
+          "prompt": "A repair service charges a $10 call-out fee plus $5 per hour. A job cost $30 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "10 + 5h = 30",
+            "10h + 5 = 30",
+            "10 + 5 + h = 30",
+            "5 + 10h = 30"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 2,
+          "prompt": "The formula A = 3bh − 1 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = A / (3b) + 1",
+            "h = (A + 1) / (3b)",
+            "h = (A − 1) / (3b)",
+            "h = 3b(A + 1)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "Item A costs $4 each and item B costs $10 each. You may spend at most $90 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "4a + 10b = 90",
+            "a + b ≤ 90",
+            "4a + 10b ≥ 90",
+            "4a + 10b ≤ 90"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 225 litres and is filling at 12 litres per minute. After how many minutes does it hold 501 litres?",
+          "choices": [
+            "276 minutes",
+            "61 minutes",
+            "23 minutes",
+            "42 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives the number of buses needed as 4.3. How should this solution be interpreted?",
+          "choices": [
+            "Round up to 5; a fractional bus is not viable and rounding down leaves people behind.",
+            "The model must be wrong, because the answer is not a whole number.",
+            "Round down to 4, because 4.3 is closer to 4.",
+            "Report 4.3, because the model is exact."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l08"
+  }
+}

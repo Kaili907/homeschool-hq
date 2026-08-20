@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { validateAppStateForSync } from './provenance'
 import { defaultAppState, emptyProfile } from '../migration'
 import { setWorkingLevel } from '../academy/workingLevel'
-import type { AcademyState, AppState, Profile } from '../types'
+import type { AcademyGrade, AcademyState, AppState, Profile } from '../types'
 
 /**
  * ACADEMY-LEVEL-DECOUPLE — the canonical persistence model must be able to
@@ -13,7 +13,7 @@ import type { AcademyState, AppState, Profile } from '../types'
  */
 
 const academyAt = (
-  grade: '5' | '7' | '8',
+  grade: AcademyGrade,
   courseIds: string[] = [`ma-g${grade}-mathematics`],
 ): AcademyState => ({
   releaseVersion: '1.0.0',
@@ -80,7 +80,7 @@ describe('the tamper boundary survives the decoupling', () => {
   it('rejects unknown subjects and non-grade levels in the working-level record', () => {
     const cases: Record<string, unknown>[] = [
       { 'mind-control': '5' },
-      { mathematics: '9' },
+      { mathematics: '6' },
       { mathematics: 5 },
       { mathematics: null },
       { mathematics: { level: '5' } },
@@ -104,9 +104,9 @@ describe('the tamper boundary survives the decoupling', () => {
 
 // ---------- ACADEMY-LEVEL-DECOUPLE-C fix 1 ----------
 
-describe('a working level must be a level the release actually publishes', () => {
-  it.each(['3', '4', '6', '10', '12'])(
-    'rejects the nominal-only grade %s as a working level',
+describe('a working level must be curriculum-supported', () => {
+  it.each(['1', '2', '6', '13'])(
+    'rejects unsupported grade %s as a working level',
     (level) => {
       const candidate = stateWith(
         sixthGrader({ workingLevels: { mathematics: level } as Profile['workingLevels'] }),
@@ -115,12 +115,15 @@ describe('a working level must be a level the release actually publishes', () =>
     },
   )
 
-  it.each(['5', '7', '8'])('accepts the academy level %s', (level) => {
-    const candidate = stateWith(
-      sixthGrader({ workingLevels: { mathematics: level } as Profile['workingLevels'] }),
-    )
-    expect(validateAppStateForSync(candidate).ok).toBe(true)
-  })
+  it.each(['3', '4', '5', '7', '8', '9', '10', '11', '12'])(
+    'accepts the academy level %s',
+    (level) => {
+      const candidate = stateWith(
+        sixthGrader({ workingLevels: { mathematics: level } as Profile['workingLevels'] }),
+      )
+      expect(validateAppStateForSync(candidate).ok).toBe(true)
+    },
+  )
 })
 
 // ---------- ACADEMY-LEVEL-DECOUPLE-C fix 2 ----------
@@ -247,7 +250,7 @@ describe('enumerated academy fields refuse non-string values', () => {
     expect(validateAppStateForSync(enrolled(() => {})).ok).toBe(true)
   })
 
-  it.each([5, 7, 8])('rejects the numeric academy grade %s', (grade) => {
+  it.each([3, 4, 5, 7, 8, 9, 10, 11, 12])('rejects the numeric academy grade %s', (grade) => {
     expect(validateAppStateForSync(enrolled((a) => { a.grade = grade })).ok).toBe(false)
   })
 
@@ -260,15 +263,18 @@ describe('enumerated academy fields refuse non-string values', () => {
     expect(validateAppStateForSync(enrolled((a) => { a.grade = grade })).ok).toBe(false)
   })
 
-  it.each(['5', '7', '8'])('still accepts the string academy grade %s', (grade) => {
-    // All three pass: `grade` is shape-checked only. Authorization lives on
-    // courseIds (still ma-g5-mathematics here), which is the C-round design —
-    // a stale label cannot block a save, and it grants nothing on its own.
-    expect(validateAppStateForSync(enrolled((a) => { a.grade = grade })).ok).toBe(true)
-  })
+  it.each(['3', '4', '5', '7', '8', '9', '10', '11', '12'])(
+    'still accepts the string academy grade %s',
+    (grade) => {
+      // Every supported label passes: authorization lives on courseIds (still
+      // ma-g5-mathematics here), so a stale label cannot grant content or block
+      // a save by itself.
+      expect(validateAppStateForSync(enrolled((a) => { a.grade = grade })).ok).toBe(true)
+    },
+  )
 
   it('accepts every string academy grade once the profile is authorized for it', () => {
-    for (const grade of ['5', '7', '8'] as const) {
+    for (const grade of ['3', '4', '5', '7', '8', '9', '10', '11', '12'] as const) {
       const candidate = stateWith(
         sixthGrader({
           workingLevels: { mathematics: grade },
@@ -296,7 +302,7 @@ describe('enumerated academy fields refuse non-string values', () => {
     }
   })
 
-  it.each([5, 7, 8])('rejects the numeric working level %s', (level) => {
+  it.each([3, 4, 5, 7, 8, 9, 10, 11, 12])('rejects the numeric working level %s', (level) => {
     const candidate = stateWith(
       sixthGrader({ workingLevels: { mathematics: level } as unknown as Profile['workingLevels'] }),
     )

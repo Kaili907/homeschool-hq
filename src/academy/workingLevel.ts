@@ -1,5 +1,18 @@
-import { ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade, type Profile } from '../types'
-import { academyGradeOf, isAcademyGradeEnabledFromHost } from './featureFlag'
+import {
+  ACADEMY_GRADES,
+  ACADEMY_SUBJECTS,
+  type AcademyGrade,
+  type AcademySubject,
+  type Grade,
+  type Profile,
+} from '../types'
+import {
+  parseAcademyCourseId,
+  parseSupportedAcademyGrade,
+  resolveWorkingAcademyGrade,
+  type NominalStudentGrade,
+} from '../curriculum/grade-authority'
+import { isAcademyGradeEnabledFromHost } from './featureFlag'
 
 /**
  * ACADEMY-LEVEL-DECOUPLE — the one place a "which content does she receive?"
@@ -26,9 +39,28 @@ export interface AcademyProgramEntry {
   level: AcademyGrade
 }
 
-/** The level whose content this subject serves her. Unset = her nominal grade. */
+/** Effective display/configuration level. This preserves the nominal Grade 6
+ * candidate; use resolvedWorkingAcademyGradeFor before serving curriculum. */
 export function workingLevelFor(p: Profile, subject: AcademySubject): Grade {
   return p.workingLevels?.[subject] ?? p.grade
+}
+
+/** Curriculum grade actually serveable for this subject. Unsupported nominal
+ * or forced explicit values fail closed as null, never another grade. */
+export function resolvedWorkingAcademyGradeFor(
+  p: Profile,
+  subject: AcademySubject,
+): AcademyGrade | null {
+  const explicitToken = p.workingLevels?.[subject]
+  const explicit = explicitToken === undefined
+    ? undefined
+    : parseSupportedAcademyGrade(explicitToken)
+  if (explicitToken !== undefined && explicit === null) return null
+  const resolved = resolveWorkingAcademyGrade(
+    Number(p.grade) as NominalStudentGrade,
+    explicit,
+  )
+  return resolved === null ? null : (String(resolved) as AcademyGrade)
 }
 
 /** True when the parent has explicitly assigned this subject a level. */
@@ -41,14 +73,17 @@ export function hasExplicitWorkingLevel(p: Profile, subject: AcademySubject): bo
  * profile; `grade` is never touched. Clearing the last entry drops the whole
  * record so an untouched-again profile is indistinguishable from a fresh one.
  *
- * `level` is an AcademyGrade: only 5/7/8 have published content, and sync
- * validation refuses anything else, so the type refuses it here first.
+ * `level` is an AcademyGrade. The runtime check makes a forced invalid call fail
+ * visibly rather than storing an inert unsupported level.
  */
 export function setWorkingLevel(
   p: Profile,
   subject: AcademySubject,
   level: AcademyGrade | null,
 ): Profile {
+  if (level !== null && parseSupportedAcademyGrade(level) === null) {
+    throw new RangeError(`Unsupported Academy working level: ${String(level)}`)
+  }
   const next: Record<string, AcademyGrade> = { ...(p.workingLevels ?? {}) }
   if (level === null) delete next[subject]
   else next[subject] = level
@@ -58,15 +93,11 @@ export function setWorkingLevel(
   return reconcileEnrollment(moved)
 }
 
-/** Course ids encode their level and subject; mirrors COURSE_ID in
- * academyRoute.ts and ACADEMY_COURSE_ID in sync/provenance.ts. */
-const COURSE_ID = /^ma-g(5|7|8)-([a-z-]+)$/
-
 /** The level this subject's content may come from, ignoring feature flags —
  * the authorization the profile carries, not what the build currently serves. */
 function authorizedLevel(p: Profile, subject: string): AcademyGrade | null {
   return ACADEMY_SUBJECTS.includes(subject as AcademySubject)
-    ? academyGradeOf(workingLevelFor(p, subject as AcademySubject))
+    ? resolvedWorkingAcademyGradeFor(p, subject as AcademySubject)
     : null
 }
 
@@ -85,8 +116,8 @@ function authorizedLevel(p: Profile, subject: string): AcademyGrade | null {
 export function reconcileEnrollment(p: Profile): Profile {
   if (!p.academy) return p
   const kept = p.academy.courseIds.filter((id) => {
-    const parsed = COURSE_ID.exec(id)
-    return parsed !== null && authorizedLevel(p, parsed[2]) === parsed[1]
+    const parsed = parseAcademyCourseId(id)
+    return parsed !== null && authorizedLevel(p, parsed.subject) === String(parsed.grade)
   })
   if (kept.length === p.academy.courseIds.length) return p
   return { ...p, academy: { ...p.academy, courseIds: kept } }
@@ -100,7 +131,7 @@ export function reconcileEnrollment(p: Profile): Profile {
 export function enabledAcademyEntries(p: Profile): AcademyProgramEntry[] {
   const entries: AcademyProgramEntry[] = []
   for (const subject of ACADEMY_SUBJECTS) {
-    const level = academyGradeOf(workingLevelFor(p, subject))
+    const level = resolvedWorkingAcademyGradeFor(p, subject)
     if (level && isAcademyGradeEnabledFromHost(level)) entries.push({ subject, level })
   }
   return entries
@@ -125,5 +156,5 @@ export function levelsOf(entries: readonly AcademyProgramEntry[]): AcademyGrade[
  * which must stay reachable even when no profile currently resolves into one —
  * otherwise the level that would grant access could never be assigned. */
 export function isAnyAcademyLevelEnabled(): boolean {
-  return (['5', '7', '8'] as const).some(isAcademyGradeEnabledFromHost)
+  return ACADEMY_GRADES.some(isAcademyGradeEnabledFromHost)
 }

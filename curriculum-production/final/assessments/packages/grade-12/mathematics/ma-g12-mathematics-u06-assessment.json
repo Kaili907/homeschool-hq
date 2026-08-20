@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-mathematics-u06-assessment",
+  "courseRef": "ma-g12-mathematics",
+  "grade": 12,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g12-mathematics-u06",
+    "unitNumber": 6,
+    "unitTitle": "Vectors",
+    "courseTitle": "Precalculus with Statistics",
+    "assessmentLessonRef": "ma-g12-mathematics-u06-l16"
+  },
+  "standards": [
+    "N-VM.1",
+    "N-VM.2",
+    "N-VM.3",
+    "N-VM.4",
+    "N-VM.5",
+    "MP.4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u06-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Let v = ⟨6, 8⟩, which has magnitude 10. Find 2v and its magnitude, and say how the direction changes.",
+      "choices": [
+        "⟨12, 16⟩, magnitude 20, direction reversed",
+        "⟨12, 16⟩, magnitude 20, direction unchanged",
+        "⟨12, 16⟩, magnitude 10, direction unchanged",
+        "⟨8, 10⟩, magnitude 20, direction unchanged"
+      ],
+      "standardRef": "N-VM.5"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Find the unit vector in the direction of ⟨-6, -8⟩.",
+      "choices": [
+        "⟨-6, -8⟩",
+        "⟨-6/10, -8/10⟩",
+        "⟨-6/100, -8/100⟩",
+        "⟨10/-6, 10/-8⟩"
+      ],
+      "standardRef": "N-VM.3"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "A vector has components ⟨-5, 12⟩. Find its magnitude.",
+      "choices": [
+        "7",
+        "17",
+        "13",
+        "169"
+      ],
+      "standardRef": "N-VM.1"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Given u = ⟨-7, -2⟩ and v = ⟨-6, 7⟩, find u − v.",
+      "choices": [
+        "⟨-13, 5⟩",
+        "⟨-1, 5⟩",
+        "⟨-1, -9⟩",
+        "⟨1, 9⟩"
+      ],
+      "standardRef": "N-VM.4"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Let v = ⟨3, 4⟩, which has magnitude 5. Find -2v and its magnitude, and say how the direction changes.",
+      "choices": [
+        "⟨1, 2⟩, magnitude 10, direction unchanged",
+        "⟨-6, -8⟩, magnitude 10, direction reversed",
+        "⟨-6, -8⟩, magnitude 5, direction reversed",
+        "⟨-6, -8⟩, magnitude 10, direction unchanged"
+      ],
+      "standardRef": "N-VM.5"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Find the unit vector in the direction of ⟨-8, -15⟩.",
+      "choices": [
+        "⟨17/-8, 17/-15⟩",
+        "⟨-8/289, -15/289⟩",
+        "⟨-8, -15⟩",
+        "⟨-8/17, -15/17⟩"
+      ],
+      "standardRef": "N-VM.3"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "A vector has components ⟨-3, -4⟩. Find its magnitude.",
+      "choices": [
+        "1",
+        "7",
+        "5",
+        "25"
+      ],
+      "standardRef": "N-VM.1"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Given u = ⟨8, -3⟩ and v = ⟨10, 3⟩, find u − v.",
+      "choices": [
+        "⟨18, 0⟩",
+        "⟨-2, -6⟩",
+        "⟨-2, 0⟩",
+        "⟨2, 6⟩"
+      ],
+      "standardRef": "N-VM.4"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Let v = ⟨5, 12⟩, which has magnitude 13. Find -2v and its magnitude, and say how the direction changes.",
+      "choices": [
+        "⟨-10, -24⟩, magnitude 26, direction unchanged",
+        "⟨3, 10⟩, magnitude 26, direction unchanged",
+        "⟨-10, -24⟩, magnitude 26, direction reversed",
+        "⟨-10, -24⟩, magnitude 13, direction reversed"
+      ],
+      "standardRef": "N-VM.5"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Find the unit vector in the direction of ⟨-5, 12⟩.",
+      "choices": [
+        "⟨13/-5, 13/12⟩",
+        "⟨-5/13, 12/13⟩",
+        "⟨-5/169, 12/169⟩",
+        "⟨-5, 12⟩"
+      ],
+      "standardRef": "N-VM.3"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "A vector has components ⟨7, -24⟩. Find its magnitude.",
+      "choices": [
+        "25",
+        "17",
+        "31",
+        "625"
+      ],
+      "standardRef": "N-VM.1"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u06-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Given u = ⟨-5, -7⟩ and v = ⟨-12, 3⟩, find u − v.",
+      "choices": [
+        "⟨-17, -4⟩",
+        "⟨-7, 10⟩",
+        "⟨7, -10⟩",
+        "⟨7, -4⟩"
+      ],
+      "standardRef": "N-VM.4"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/mathematics/ma-g12-mathematics-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-mathematics-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u06-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Vectors?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

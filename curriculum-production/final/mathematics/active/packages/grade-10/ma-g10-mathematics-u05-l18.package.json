@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u05-l18",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u05-l18",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Dilations and Similarity",
+    "dayInUnit": 18,
+    "courseDay": 90,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "distinguishing similarity from congruence",
+    "title": "Publication, presentation, or reflection: distinguishing similarity from congruence"
+  },
+  "standards": [
+    "G-SRT.1",
+    "G-SRT.2",
+    "G-SRT.3",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "aa-similarity-criterion",
+          "standard": "G-SRT.3",
+          "difficulty": 1,
+          "prompt": "Two triangles share two pairs of equal angles. Similar?",
+          "workedSolution": {
+            "steps": [
+              "The third angles must match too.",
+              "AA similarity applies."
+            ],
+            "answer": "Yes, by AA"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "dilation-effect-on-line",
+          "standard": "G-SRT.1",
+          "difficulty": 2,
+          "prompt": "Under a dilation, a line that does not pass through the centre of dilation …",
+          "choices": [
+            "is mapped to a line with slope multiplied by the scale factor",
+            "is mapped onto itself",
+            "is mapped to a perpendicular line",
+            "is mapped to a parallel line"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 2,
+          "prompt": "Dilate the point (-2, -5) about the origin with scale factor 3. Give the image.",
+          "choices": [
+            "(-2, -15)",
+            "(-6, -5)",
+            "(1, -2)",
+            "(-6, -15)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scale-factor-from-lengths",
+          "standard": "G-SRT.2",
+          "difficulty": 3,
+          "prompt": "A figure is dilated so that a side of length 21 becomes a side of length 42. What is the scale factor, and what happens to the figure's area?",
+          "choices": [
+            "scale factor 1/2; the area is multiplied by 4",
+            "scale factor 21; the area is multiplied by 4",
+            "scale factor 2; the area is multiplied by 2",
+            "scale factor 2; the area is multiplied by 4"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "aa-similarity-criterion",
+          "standard": "G-SRT.3",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has ∠A = 44° and ∠B = 28°. Triangle DEF has ∠D = 44° and ∠E = 28°. Are the triangles similar, and on what grounds?",
+          "choices": [
+            "Yes, by SSS similarity.",
+            "Yes, by AA similarity: two pairs of congruent angles force the third pair to be congruent as well.",
+            "Yes, but only if a pair of corresponding sides is also known to be congruent.",
+            "No; angle information alone never establishes similarity."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "dilation-effect-on-line",
+          "standard": "G-SRT.1",
+          "difficulty": 3,
+          "prompt": "Under a dilation, a line that passes through the centre of dilation …",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 3,
+          "prompt": "Dilate the point (3, 7) about the origin with scale factor 3. Give the image.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u05-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u05-l18"
+  }
+}

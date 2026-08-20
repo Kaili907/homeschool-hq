@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u04-l11",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u04-l11",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Slope, Lines, and Proportional Connections",
+    "dayInUnit": 11,
+    "courseDay": 69,
+    "phase": "Performance task planning",
+    "focus": "parallel-line reasoning",
+    "title": "Performance task planning: parallel-line reasoning"
+  },
+  "standards": [
+    "8.EE.5",
+    "8.EE.6"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-parallel-lines",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "A line has equation y = 2x - 1. Which of these equations represents a line parallel to it?",
+          "workedSolution": {
+            "steps": [
+              "Parallel lines have the same slope but different y-intercepts.",
+              "y = 2x + 4 has slope 2, the same as y = 2x - 1, but a different intercept.",
+              "So y = 2x + 4 is parallel to the given line."
+            ],
+            "answer": "y = 2x + 4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "parallel-line-through-point",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has equation y = -6x + 11. Write the equation of the line through (-5, 42) that is parallel to this line.",
+          "choices": [
+            "y = 6x + 12",
+            "y = -6x + 72",
+            "y = -6x + 11",
+            "y = -6x + 12"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-slope-in-context",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "A plant's height is given by H = 3w + 8, where H is the height in centimeters and w is the number of weeks since it was measured. What does the slope represent in this context?",
+          "choices": [
+            "The plant was 8 centimeters tall when it was first measured.",
+            "The plant grows 3 centimeters per week.",
+            "The plant grows 8 centimeters per week.",
+            "The plant was 3 centimeters tall when it was first measured."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-y-intercept-in-context",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "The amount of water in a tank is given by G = 1t + 4, where G is the number of gallons in the tank and t is the number of minutes since filling started. What does the y-intercept represent in this context?",
+          "choices": [
+            "The tank fills at a rate of 4 gallons per minute.",
+            "The tank already had 1 gallons of water before filling started.",
+            "The tank fills at a rate of 1 gallons per minute.",
+            "The tank already had 4 gallons of water before filling started."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "slope-from-two-points",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "Find the slope of the line through (-13, -6) and (-16, -18).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "slope-from-table",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "A line passes through these points:\nx: 16, 19, 22\ny: -12, -2, 8\nWhat is the slope (rate of change) of the line?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "similar-triangle-point-on-line",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A line passes through (10, 10). A slope triangle on the line has a horizontal leg (run) of 4 and a vertical leg (rise) of -3. A similar slope triangle further along the same line is 4 times as large. Which point also lies on the line?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u04-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u04-l11"
+  }
+}

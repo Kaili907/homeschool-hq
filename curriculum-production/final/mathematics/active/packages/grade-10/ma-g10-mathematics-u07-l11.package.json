@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u07-l11",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Right Triangle Trigonometry",
+    "dayInUnit": 11,
+    "courseDay": 119,
+    "phase": "Performance task planning",
+    "focus": "angles of elevation and depression",
+    "title": "Performance task planning: angles of elevation and depression"
+  },
+  "standards": [
+    "G-SRT.6",
+    "G-SRT.7",
+    "G-SRT.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 1,
+          "prompt": "A 3-4-5 triangle, θ opposite the side 3. Find sin θ.",
+          "workedSolution": {
+            "steps": [
+              "Opposite 3, hypotenuse 5.",
+              "sin θ = 3/5."
+            ],
+            "answer": "3/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 2,
+          "prompt": "A right triangle has legs 24 and 45. Find the hypotenuse.",
+          "choices": [
+            "54",
+            "69",
+            "24",
+            "51"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 2,
+          "prompt": "Express sin 66° as a cosine of another angle, and explain why the two are equal.",
+          "choices": [
+            "cos 66°, because sine and cosine are always equal",
+            "cos 114°, because the angles are supplementary",
+            "cos 156°, because the angles differ by a right angle",
+            "cos 24°, because the two angles are complementary and swap the roles of opposite and adjacent"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "From a point 45 m from the base of a tower, the angle of elevation to the top is θ, and the tower is 24 m tall. Which equation correctly determines θ?",
+          "choices": [
+            "cos θ = 24/45",
+            "tan θ = 24/45",
+            "tan θ = 45/24",
+            "sin θ = 24/45"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 3,
+          "prompt": "A right triangle has legs 10 and 24 and hypotenuse 26. Angle θ is opposite the leg of length 10. Find cos θ as an exact fraction in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "A right triangle has hypotenuse 20 and one leg 12. Find the other leg.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 3,
+          "prompt": "Express sin 14° as a cosine of another angle, and explain why the two are equal.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u07-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u07-l11"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-physical-education-u08-assessment",
+  "courseRef": "ma-g12-physical-education",
+  "grade": 12,
+  "subject": "physical-education",
+  "location": {
+    "unitRef": "ma-g12-physical-education-u08",
+    "unitNumber": 8,
+    "unitTitle": "Safety, Self-Care, and Knowing When to Stop",
+    "courseTitle": "Lifelong Wellness and Independent Training Capstone",
+    "assessmentLessonRef": "ma-g12-physical-education-u08-l11"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-12/unit-assessments/ma-g12-physical-education-u08-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the safe activity or accessible equivalent and document the requested performance evidence.",
+    "Stop for pain, dizziness, breathing trouble, unsafe conditions, or missing adult supervision."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and cues",
+      "prompt": "Explain the critical features or key principle of the stop rule as an adult habit rather than a class instruction in your own words."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "demonstration or description",
+      "prompt": "Demonstrate or fully describe distinguishing training discomfort from warning pain using a version your body and setting allow. A described or adapted version earns full credit."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply illness, injury, and graded return without a coach in a new situation and explain the decision or adjustment you made."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving sleep, fuel, and recovery as the base of any plan; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect when to see a clinician and how to describe a problem with building self-care into a plan instead of bolting it on and explain how one affects the other."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Write the self-care and stop-rule protocol the learner will actually run as an adult, including the specific conditions under which they will stop, rest, or seek professional care."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself."
+    }
+  ],
+  "responseMode": "performance-log-or-accessible-equivalent",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/physical-education/ma-g12-physical-education-u08-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated safe participation and self-management criterion.",
+    "Provide evidence that meets the stated skill cues or movement quality criterion.",
+    "Provide evidence that meets the stated tactical or training reasoning criterion.",
+    "Provide evidence that meets the stated self-assessment and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-physical-education-u08-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-12/unit-assessments/ma-g12-physical-education-u08-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Safety, Self-Care, and Knowing When to Stop?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

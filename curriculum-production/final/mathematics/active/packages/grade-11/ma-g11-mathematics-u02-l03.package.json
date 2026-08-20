@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u02-l03",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rational and Radical Expressions and Equations",
+    "dayInUnit": 3,
+    "courseDay": 21,
+    "phase": "Guided practice A",
+    "focus": "simplifying and operating on rational expressions",
+    "title": "Guided practice A: simplifying and operating on rational expressions"
+  },
+  "standards": [
+    "A-APR.6",
+    "A-REI.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "simplify-rational-expression",
+          "standard": "A-APR.6",
+          "difficulty": 1,
+          "prompt": "Simplify (x² − 5x + 6)/(x − 2).",
+          "workedSolution": {
+            "steps": [
+              "Numerator factors as (x − 2)(x − 3).",
+              "Cancel (x − 2): x − 3, x ≠ 2."
+            ],
+            "answer": "x − 3, x ≠ 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-radical-equation-with-check",
+          "standard": "A-REI.2",
+          "difficulty": 1,
+          "prompt": "Solve √(1x + 2) = 2, then verify the solution.",
+          "choices": [
+            "x = 1",
+            "x = 4",
+            "x = 2",
+            "x = 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 1,
+          "prompt": "Write as a single fraction: 2/(x − 1) + 2/(x + 1).",
+          "choices": [
+            "(4x + 0) / ((x − 1)(x + 1))",
+            "(5x + 0) / ((x − 1)(x + 1))",
+            "(4x + 0) / (x − 1 + 1)",
+            "(4) / ((x − 1)(x + 1))"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-extraneous-solution",
+          "standard": "A-REI.2",
+          "difficulty": 2,
+          "prompt": "Solving a rational equation with denominator (x − 4) yields the candidate solutions x = 4 and x = 4. Which are genuine solutions?",
+          "choices": [
+            "Only x = 4; x = 4 makes the original denominator zero, so it is extraneous.",
+            "Both x = 4 and x = 4 are solutions.",
+            "Neither is a solution, because the equation has a restricted domain.",
+            "Only x = 4; x = 4 must be rejected."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "simplify-rational-expression",
+          "standard": "A-APR.6",
+          "difficulty": 2,
+          "prompt": "Simplify (x^2 + 2x - 8) / (x + 4), and state the restriction on x.",
+          "choices": [
+            "x − 2, x ≠ -4",
+            "x + 4, x ≠ -4",
+            "x + 2, x ≠ -4",
+            "x − 2, x ≠ 2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-radical-equation-with-check",
+          "standard": "A-REI.2",
+          "difficulty": 2,
+          "prompt": "Solve √(2x + 13) = 5, then verify the solution.",
+          "choices": [
+            "x = 5",
+            "x = 25",
+            "x = 11",
+            "x = 6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 2,
+          "prompt": "Write as a single fraction: -1/(x − 3) + -3/(x + 2).",
+          "choices": [
+            "(-4x + 7) / ((x − 3)(x + 2))",
+            "(-4x − 7) / ((x − 3)(x + 2))",
+            "(-4) / ((x − 3)(x + 2))",
+            "(3x + 7) / ((x − 3)(x + 2))"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-extraneous-solution",
+          "standard": "A-REI.2",
+          "difficulty": 2,
+          "prompt": "Solving a rational equation with denominator (x − 2) yields the candidate solutions x = 2 and x = 3. Which are genuine solutions?",
+          "choices": [
+            "Neither is a solution, because the equation has a restricted domain.",
+            "Only x = 3; x = 2 makes the original denominator zero, so it is extraneous.",
+            "Only x = 2; x = 3 must be rejected.",
+            "Both x = 2 and x = 3 are solutions."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "simplify-rational-expression",
+          "standard": "A-APR.6",
+          "difficulty": 3,
+          "prompt": "Simplify (x^2 - x - 20) / (x + 4), and state the restriction on x.",
+          "choices": [
+            "x − 5, x ≠ 5",
+            "x + 4, x ≠ -4",
+            "x − 5, x ≠ -4",
+            "x + 5, x ≠ -4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-radical-equation-with-check",
+          "standard": "A-REI.2",
+          "difficulty": 2,
+          "prompt": "Solve √(3x − 2) = 4, then verify the solution.",
+          "choices": [
+            "x = 6",
+            "x = 10",
+            "x = 16",
+            "x = 5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 2,
+          "prompt": "Write as a single fraction: 2/(x + 2) + 2/(x + 1).",
+          "choices": [
+            "(4x − 6) / ((x + 2)(x + 1))",
+            "(4x + 6) / ((x + 2)(x + 1))",
+            "(4) / ((x + 2)(x + 1))",
+            "(4x + 6) / (x + 2 + 1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u02-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u02-l03"
+  }
+}

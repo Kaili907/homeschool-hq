@@ -1,0 +1,286 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l03",
+  "lessonId": "ma-g9-financial-literacy-u01-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$37.94",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6.2% of $612.00 is $37.944, which rounds to $37.94."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$8.87",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1.45% of $612.00 is $8.874, which rounds to $8.87."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$26.01",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4.25% of $612.00 is exactly $26.01."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$6.12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1% of $612.00 is exactly $6.12."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$117.44",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$37.94 + $8.87 + $26.01 + $6.12 + $38.50, the five withheld lines added."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$494.56",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Net pay is gross less total deductions: $612.00 - $117.44."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "19.2%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$117.44 of $612.00 is 0.19189..., or 19.2% to one decimal place."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(gross * ssRate, 2)",
+        "substituted": "round(612 * 0.062, 2)",
+        "result": "$37.94",
+        "why": "6.2% of $612.00 is $37.944, which rounds to $37.94."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(gross2 * medRate, 2)",
+        "substituted": "round(612 * 0.0145, 2)",
+        "result": "$8.87",
+        "why": "1.45% of $612.00 is $8.874, which rounds to $8.87."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(gross3 * stateRate, 2)",
+        "substituted": "round(612 * 0.0425, 2)",
+        "result": "$26.01",
+        "why": "4.25% of $612.00 is exactly $26.01."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(gross4 * cityRate, 2)",
+        "substituted": "round(612 * 0.01, 2)",
+        "result": "$6.12",
+        "why": "1% of $612.00 is exactly $6.12."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t1-p1 + #t1-p2 + #t2-p1 + #t2-p2 + federal",
+        "substituted": "#t1-p1 + #t1-p2 + #t2-p1 + #t2-p2 + 38.5",
+        "result": "$117.44",
+        "why": "$37.94 + $8.87 + $26.01 + $6.12 + $38.50, the five withheld lines added."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "gross5 - #t3-p1",
+        "substituted": "612 - #t3-p1",
+        "result": "$494.56",
+        "why": "Net pay is gross less total deductions: $612.00 - $117.44."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "round(#t3-p1 / gross6 * 100, 1)",
+        "substituted": "round(#t3-p1 / 612 * 100, 1)",
+        "result": "19.2%",
+        "why": "$117.44 of $612.00 is 0.19189..., or 19.2% to one decimal place."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Two of the five deductions on Marcus’s stub are not income tax at all. Name them and say what they pay for.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names Social Security ($37.94) and Medicare ($8.87) as the two non-income-tax lines, together called FICA.",
+          "States that these fund social insurance programs — retirement, disability, and survivor benefits, and hospital insurance — rather than general government spending assessed on income."
+        ],
+        "evidenceRequirements": [
+          "Quotes the two amounts, $37.94 and $8.87, from the fictional stub rather than describing them generally."
+        ],
+        "lookFors": [
+          "The response distinguishes the flat-rate payroll lines from the three income-tax lines, which are federal, state, and city.",
+          "The response does not claim Marcus can opt out of them."
+        ],
+        "dimensions": [
+          "evidence-use",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld for Social Security?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld for Medicare?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld for state income tax?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld for city income tax?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total of all five deductions on the stub?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is Marcus’s net pay for the period?"
+        },
+        {
+          "ref": "t3-p3",
+          "responseMode": "FIXED",
+          "promptText": "What percentage of gross pay was withheld in total? Round to one decimal place."
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Two of the five deductions on Marcus’s stub are not income tax at all. Name them and say what they pay for."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much is withheld for Social Security? Answer: $37.94. Verification: 6.2% of $612.00 is $37.944, which rounds to $37.94. t1-p2: How much is withheld for Medicare? Answer: $8.87. Verification: 1.45% of $612.00 is $8.874, which rounds to $8.87. t2-p1: How much is withheld for state income tax? Answer: $26.01. Verification: 4.25% of $612.00 is exactly $26.01. t2-p2: How much is withheld for city income tax? Answer: $6.12. Verification: 1% of $612.00 is exactly $6.12. t3-p1: What is the total of all five deductions on the stub? Answer: $117.44. Verification: $37.94 + $8.87 + $26.01 + $6.12 + $38.50, the five withheld lines added. t3-p2: What is Marcus’s net pay for the period? Answer: $494.56. Verification: Net pay is gross less total deductions: $612.00 - $117.44. t3-p3: What percentage of gross pay was withheld in total? Round to one decimal place. Answer: 19.2%. Verification: $117.44 of $612.00 is 0.19189..., or 19.2% to one decimal place."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. t4-p1: Two of the five deductions on Marcus’s stub are not income tax at all. Name them and say what they pay for. Names Social Security ($37.94) and Medicare ($8.87) as the two non-income-tax lines, together called FICA. States that these fund social insurance programs — retirement, disability, and survivor benefits, and hospital insurance — rather than general government spending assessed on income. Quotes the two amounts, $37.94 and $8.87, from the fictional stub rather than describing them generally. The response distinguishes the flat-rate payroll lines from the three income-tax lines, which are federal, state, and city. The response does not claim Marcus can opt out of them."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names Social Security ($37.94) and Medicare ($8.87) as the two non-income-tax lines, together called FICA. States that these fund social insurance programs — retirement, disability, and survivor benefits, and hospital insurance — rather than general government spending assessed on income."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 3,
+      "acceptableAnswerCriteriaCount": 2
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u01-l03.scoring.json",
+    "sourceScoringSha256": "4f3e17f874ef9ef8fcb2efba6ce268bd363a043b0eb912e50653575c0183f5e8",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

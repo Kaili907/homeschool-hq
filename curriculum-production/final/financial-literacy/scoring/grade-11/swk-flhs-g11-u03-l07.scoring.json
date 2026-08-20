@@ -1,0 +1,432 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l07",
+  "lessonId": "ma-g11-financial-literacy-u03-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "6.0",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,100 at $520 a month. It is the smallest goal and the only one with no deadline, and the plan funds it first."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "10.0",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,200 at $520 a month — exactly the 10 months its deadline allows, and only if nothing is funded ahead of it."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "5.2",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,700 at $520 a month — the smallest of the three goals, and the one whose deadline the plan misses by the least."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "16.0",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6.0 months of holiday fund followed by 10.0 months of roof — against a month-10 deadline."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "21.2",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "All three in the stated sequence: 6.0, then 10.0, then 5.2 months."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "6.0",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Month 16.0 against a month-10 deadline — the roof waits exactly as long as the holiday fund took."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "3.2",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Month 21.2 against a month-18 deadline. Both dated goals are late, and the plan reported neither."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "15.2",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10.0 months of roof followed by 5.2 months of tuition — both now inside their deadlines, with the holiday fund pushed to last."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "2.8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Month 15.2 against a month-18 deadline. The same money and the same capacity, reordered, turns a 3.2-month miss into 2.8 months of margin."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "It funded an undated goal ahead of two dated ones",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Each goal’s own duration was computed correctly and the same $520 funds all three within 21.2 months, so neither the capacity nor the individual arithmetic was wrong; the defect is placing the goal with no deadline first."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(holiday / capacity, 1)",
+        "substituted": "round(3100 / 520, 1)",
+        "result": "6.0",
+        "why": "$3,100 at $520 a month. It is the smallest goal and the only one with no deadline, and the plan funds it first."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(roof / capacity2, 1)",
+        "substituted": "round(5200 / 520, 1)",
+        "result": "10.0",
+        "why": "$5,200 at $520 a month — exactly the 10 months its deadline allows, and only if nothing is funded ahead of it."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(tuition / capacity3, 1)",
+        "substituted": "round(2700 / 520, 1)",
+        "result": "5.2",
+        "why": "$2,700 at $520 a month — the smallest of the three goals, and the one whose deadline the plan misses by the least."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "16.0",
+        "why": "6.0 months of holiday fund followed by 10.0 months of roof — against a month-10 deadline."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 + #t1-p2 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p2 + #t1-p3",
+        "result": "21.2",
+        "why": "All three in the stated sequence: 6.0, then 10.0, then 5.2 months."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - roofDeadline",
+        "substituted": "#t2-p1 - 10",
+        "result": "6.0",
+        "why": "Month 16.0 against a month-10 deadline — the roof waits exactly as long as the holiday fund took."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p2 - tuitionDeadline",
+        "substituted": "#t2-p2 - 18",
+        "result": "3.2",
+        "why": "Month 21.2 against a month-18 deadline. Both dated goals are late, and the plan reported neither."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t1-p2 + #t1-p3",
+        "substituted": "#t1-p2 + #t1-p3",
+        "result": "15.2",
+        "why": "10.0 months of roof followed by 5.2 months of tuition — both now inside their deadlines, with the holiday fund pushed to last."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "tuitionDeadline2 - #t3-p1",
+        "substituted": "18 - #t3-p1",
+        "result": "2.8",
+        "why": "Month 15.2 against a month-18 deadline. The same money and the same capacity, reordered, turns a 3.2-month miss into 2.8 months of margin."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "The plan said all three goals were affordable within 18 months, and every figure behind that claim was correct. Explain what the claim was actually about, what it was read as, and give a rule that would prevent the error.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Distinguishes affordability — the $520 a month covers all three goals — from schedulability, which is whether each is funded before its own deadline.",
+          "Points out that under the stated order the roof is 6.0 months late and the tuition 3.2 months late, so the claim was true about the money and false about the dates.",
+          "States a rule that would prevent it, most directly funding goals in deadline order, or checking every dated goal against its own date rather than checking the plan as a whole."
+        ],
+        "evidenceRequirements": [
+          "Cites the month-16.0 roof date and the month-10 deadline as the clearest instance of the gap."
+        ],
+        "lookFors": [
+          "The response identifies the ambiguity in \"affordable within 18 months\" rather than calling the plan miscalculated.",
+          "The rule proposed would actually have caught this, and is stated as a check rather than as a resolution to be careful.",
+          "A response noting the roof takes exactly its full 10 months, so it can tolerate no delay at all, is reading the figures closely."
+        ],
+        "commonMisconception": "Reading \"we can afford all of this\" as \"each of these will arrive on time\".",
+        "dimensions": [
+          "error-diagnosis",
+          "criteria-application",
+          "plan-coherence"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "Under the corrected order the holiday fund is last and finishes in month 21.2. Say whether that is a real cost of the correction, and what would have to be true for the original order to have been defensible.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Acknowledges that delaying the holiday fund to month 21.2 is a genuine cost, not a free improvement, since something the household wanted is deferred by over a year.",
+          "States what would justify the original order, such as the holiday having an unstated fixed date, or the roof deadline being softer than the plan claimed."
+        ],
+        "evidenceRequirements": [
+          "Refers to the month-6.0 completion under the original order against month 21.2 under the corrected one."
+        ],
+        "lookFors": [
+          "The response treats the reordering as a tradeoff rather than as an unambiguous fix.",
+          "The condition named is one the plan could actually have stated."
+        ],
+        "dimensions": [
+          "tradeoff-defense",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How long does the $3,100 holiday fund take at $520 a month?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How long does the $5,200 roof repair take on its own?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How long does the $2,700 tuition deposit take on its own?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "Under the plan’s order, in which month is the roof repair funded?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Under the plan’s order, in which month is the tuition deposit funded?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "By how many months does the roof repair miss its month-10 deadline?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "By how many months does the tuition deposit miss its month-18 deadline?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "Funding the roof first, in which month is the tuition deposit funded?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "Under the corrected order, by how many months does the tuition deposit now beat its deadline?"
+        },
+        {
+          "ref": "t3-p3",
+          "responseMode": "FIXED",
+          "promptText": "What was actually wrong with the original plan?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "The plan said all three goals were affordable within 18 months, and every figure behind that claim was correct. Explain what the claim was actually about, what it was read as, and give a rule that would prevent the error."
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "Under the corrected order the holiday fund is last and finishes in month 21.2. Say whether that is a real cost of the correction, and what would have to be true for the original order to have been defensible."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How long does the $3,100 holiday fund take at $520 a month? Answer: 6.0. Verification: $3,100 at $520 a month. It is the smallest goal and the only one with no deadline, and the plan funds it first. t1-p2: How long does the $5,200 roof repair take on its own? Answer: 10.0. Verification: $5,200 at $520 a month — exactly the 10 months its deadline allows, and only if nothing is funded ahead of it. t1-p3: How long does the $2,700 tuition deposit take on its own? Answer: 5.2. Verification: $2,700 at $520 a month — the smallest of the three goals, and the one whose deadline the plan misses by the least. t2-p1: Under the plan’s order, in which month is the roof repair funded? Answer: 16.0. Verification: 6.0 months of holiday fund followed by 10.0 months of roof — against a month-10 deadline. t2-p2: Under the plan’s order, in which month is the tuition deposit funded? Answer: 21.2. Verification: All three in the stated sequence: 6.0, then 10.0, then 5.2 months. t2-p3: By how many months does the roof repair miss its month-10 deadline? Answer: 6.0. Verification: Month 16.0 against a month-10 deadline — the roof waits exactly as long as the holiday fund took. t2-p4: By how many months does the tuition deposit miss its month-18 deadline? Answer: 3.2. Verification: Month 21.2 against a month-18 deadline. Both dated goals are late, and the plan reported neither. t3-p1: Funding the roof first, in which month is the tuition deposit funded? Answer: 15.2. Verification: 10.0 months of roof followed by 5.2 months of tuition — both now inside their deadlines, with the holiday fund pushed to last. t3-p2: Under the corrected order, by how many months does the tuition deposit now beat its deadline? Answer: 2.8. Verification: Month 15.2 against a month-18 deadline. The same money and the same capacity, reordered, turns a 3.2-month miss into 2.8 months of margin. t3-p3: What was actually wrong with the original plan? Answer: It funded an undated goal ahead of two dated ones. Verification: Each goal’s own duration was computed correctly and the same $520 funds all three within 21.2 months, so neither the capacity nor the individual arithmetic was wrong; the defect is placing the goal with no deadline first."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t4-p1: The plan said all three goals were affordable within 18 months, and every figure behind that claim was correct. Explain what the claim was actually about, what it was read as, and give a rule that would prevent the error. Distinguishes affordability — the $520 a month covers all three goals — from schedulability, which is whether each is funded before its own deadline. Points out that under the stated order the roof is 6.0 months late and the tuition 3.2 months late, so the claim was true about the money and false about the dates. States a rule that would prevent it, most directly funding goals in deadline order, or checking every dated goal against its own date rather than checking the plan as a whole. Cites the month-16.0 roof date and the month-10 deadline as the clearest instance of the gap. The response identifies the ambiguity in \"affordable within 18 months\" rather than calling the plan miscalculated. The rule proposed would actually have caught this, and is stated as a check rather than as a resolution to be careful. A response noting the roof takes exactly its full 10 months, so it can tolerate no delay at all, is reading the figures closely. t4-p2: Under the corrected order the holiday fund is last and finishes in month 21.2. Say whether that is a real cost of the correction, and what would have to be true for the original order to have been defensible. Acknowledges that delaying the holiday fund to month 21.2 is a genuine cost, not a free improvement, since something the household wanted is deferred by over a year. States what would justify the original order, such as the holiday having an unstated fixed date, or the roof deadline being softer than the plan claimed. Refers to the month-6.0 completion under the original order against month 21.2 under the corrected one. The response treats the reordering as a tradeoff rather than as an unambiguous fix. The condition named is one the plan could actually have stated."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Distinguishes affordability — the $520 a month covers all three goals — from schedulability, which is whether each is funded before its own deadline. Points out that under the stated order the roof is 6.0 months late and the tuition 3.2 months late, so the claim was true about the money and false about the dates. States a rule that would prevent it, most directly funding goals in deadline order, or checking every dated goal against its own date rather than checking the plan as a whole. Acknowledges that delaying the holiday fund to month 21.2 is a genuine cost, not a free improvement, since something the household wanted is deferred by over a year. States what would justify the original order, such as the holiday having an unstated fixed date, or the roof deadline being softer than the plan claimed."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 10,
+      "contractFixedItemCount": 10,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u03-l07.scoring.json",
+    "sourceScoringSha256": "eaf3ead4c444512a923cd3d6049a831ea7d025e6b30e6cf95fde9fee8caf6a9f",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

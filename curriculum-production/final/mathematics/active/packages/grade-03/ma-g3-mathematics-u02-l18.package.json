@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l18",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l18",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 18,
+    "courseDay": 36,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "choosing an operation for a new situation",
+    "title": "Transfer, reflection, and publication: choosing an operation for a new situation"
+  },
+  "standards": [
+    "3.OA.3",
+    "MP.1",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 1,
+          "prompt": "A van has 5 rows with 4 seats in each row. How many seats are there?",
+          "workedSolution": {
+            "steps": [
+              "5 rows of 4 is 5 × 4.",
+              "5 × 4 = 20."
+            ],
+            "answer": "20"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 2,
+          "prompt": "A classroom has 5 rows of desks with 2 desks in each row. How many desks are there?",
+          "choices": [
+            "11",
+            "10",
+            "7",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 3,
+          "prompt": "A classroom has 8 rows of desks with 9 desks in each row. How many desks are there?",
+          "choices": [
+            "8",
+            "64",
+            "17",
+            "72"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 3,
+          "prompt": "A classroom has 3 rows of desks with 9 desks in each row. How many desks are there?",
+          "choices": [
+            "27",
+            "3",
+            "12",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 3,
+          "prompt": "A classroom has 3 rows of desks with 2 desks in each row. How many desks are there?",
+          "choices": [
+            "6",
+            "7",
+            "3",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 3,
+          "prompt": "A teacher has 56 pencils and gives the same number to each of 7 students. How many pencils does each student get?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 3,
+          "prompt": "A teacher has 32 pencils and gives the same number to each of 4 students. How many pencils does each student get?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l18"
+  }
+}

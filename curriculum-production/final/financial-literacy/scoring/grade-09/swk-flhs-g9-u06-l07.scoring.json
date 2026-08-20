@@ -1,0 +1,263 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l07",
+  "lessonId": "ma-g9-financial-literacy-u06-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,075.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The seven listed items added at replacement cost."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,175.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,075 of replacement cost against a $900 guess."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$156.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$13 a month for twelve months."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "The estimate; an unlisted guess at total value was far below the itemised total",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The renter never wrote the items down, and estimating a total without listing it produced a figure less than a third of the real one."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "19.7",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,075 of possessions against $156 a year of premium."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "laptop + phone + bike + clothes + kitchen + books + furniture",
+        "substituted": "640 + 410 + 285 + 700 + 240 + 320 + 480",
+        "result": "$3,075.00",
+        "why": "The seven listed items added at replacement cost."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - estimate",
+        "substituted": "#t1-p1 - 900",
+        "result": "$2,175.00",
+        "why": "$3,075 of replacement cost against a $900 guess."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "premium * 12",
+        "substituted": "13 * 12",
+        "result": "$156.00",
+        "why": "$13 a month for twelve months."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p1 / #t1-p3, 1)",
+        "substituted": "round(#t1-p1 / #t1-p3, 1)",
+        "result": "19.7",
+        "why": "$3,075 of possessions against $156 a year of premium."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain why estimating a total without listing the items produced such a large error, and say what the corrected figures do and do not settle about whether to buy the policy.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that an unlisted estimate recalls a few large items and omits the many small ones, and here the clothes and furniture alone come to $1,180 — more than the whole guess.",
+          "States that the corrected $3,075 changes the size of the risk but does not by itself decide the purchase.",
+          "Names what is still needed: the chance of a loss, whether the policy covers these items at replacement cost, and what deductible applies."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3,075 total, the $900 estimate, and the $156 annual premium."
+        ],
+        "lookFors": [
+          "The response does not conclude the policy is obviously worth buying from the inventory alone.",
+          "The response identifies listing as the fix, not simply guessing higher."
+        ],
+        "commonMisconception": "Judging the value of what you own by what comes to mind rather than by an itemised list.",
+        "dimensions": [
+          "error-diagnosis",
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total replacement cost of the inventory?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "By how much did the renter’s estimate of $900 understate the total?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the fictional policy cost for a year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What was wrong with the renter’s reasoning?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many years of premiums would it take to equal the replacement cost of the inventory? Round to one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain why estimating a total without listing the items produced such a large error, and say what the corrected figures do and do not settle about whether to buy the policy."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the total replacement cost of the inventory? Answer: $3,075.00. Verification: The seven listed items added at replacement cost. t1-p2: By how much did the renter’s estimate of $900 understate the total? Answer: $2,175.00. Verification: $3,075 of replacement cost against a $900 guess. t1-p3: What does the fictional policy cost for a year? Answer: $156.00. Verification: $13 a month for twelve months. t2-p1: What was wrong with the renter’s reasoning? Answer: The estimate; an unlisted guess at total value was far below the itemised total. Verification: The renter never wrote the items down, and estimating a total without listing it produced a figure less than a third of the real one. t2-p2: How many years of premiums would it take to equal the replacement cost of the inventory? Round to one decimal place. Answer: 19.7. Verification: $3,075 of possessions against $156 a year of premium."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. t3-p1: Explain why estimating a total without listing the items produced such a large error, and say what the corrected figures do and do not settle about whether to buy the policy. Explains that an unlisted estimate recalls a few large items and omits the many small ones, and here the clothes and furniture alone come to $1,180 — more than the whole guess. States that the corrected $3,075 changes the size of the risk but does not by itself decide the purchase. Names what is still needed: the chance of a loss, whether the policy covers these items at replacement cost, and what deductible applies. Uses the $3,075 total, the $900 estimate, and the $156 annual premium. The response does not conclude the policy is obviously worth buying from the inventory alone. The response identifies listing as the fix, not simply guessing higher."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that an unlisted estimate recalls a few large items and omits the many small ones, and here the clothes and furniture alone come to $1,180 — more than the whole guess. States that the corrected $3,075 changes the size of the risk but does not by itself decide the purchase. Names what is still needed: the chance of a loss, whether the policy covers these items at replacement cost, and what deductible applies."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 4 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u06-l07.scoring.json",
+    "sourceScoringSha256": "ca4f0200103aaa1b0d2cb8da5be9e6bc042e87b69e313669eb57ad58a2c3db63",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

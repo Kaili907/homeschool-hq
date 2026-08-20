@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l04",
+  "lessonId": "ma-g9-ready-for-life-u04-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Question and information list quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "List has fewer than three questions or three information items, or the questions are too vague to produce a useful answer (such as 'is everything okay?')." },
+          { "label": "Proficient", "descriptor": "List includes at least three specific information items and three specific questions relevant to the named appointment type." },
+          { "label": "Advanced", "descriptor": "List includes specific, well-ordered information items and questions, and the learner's final list shows a clear revision based on the adult's review." }
+        ]
+      },
+      {
+        "dimension": "Guardian review completion",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Guardian confirmation is missing, or the reported addition/change from the review is vague or does not describe a real detail." },
+          { "label": "Proficient", "descriptor": "Guardian confirms the review took place, and the learner names one specific, real detail the adult added or changed." },
+          { "label": "Advanced", "descriptor": "Guardian confirms the review took place, the learner names a specific detail the adult added or changed, and the final list reflects that change." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Questions are specific enough that a real answer could be recorded at the appointment, not yes/no vague phrasing.",
+      "Guardian confirmation and the learner's account both name an actual detail added or changed during the review, not a blanket 'we talked about it.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

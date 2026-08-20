@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l02",
+  "lessonId": "ma-g8-ready-for-life-u01-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Backward-planning technique",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are listed in forward order from the start, or the last step does not clearly describe what 'done' looks like."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The last step is written first and at least four steps are correctly sequenced backward to a genuine first action."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The backward sequence is correct, and the learner explains in their own words why working backward surfaces steps a forward list would miss."
+          }
+        ]
+      },
+      {
+        "dimension": "Time estimation reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No time estimates are given, or all steps are given the same generic estimate without reasoning."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each step has a distinct, realistic time estimate."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Estimates are realistic, and the learner identifies the specific step most likely to run long with a concrete reason tied to that step's content."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The chosen project is real, not a restatement of the closet example.",
+      "The warm-up explanation names an actual reason (e.g. catching missed steps, avoiding forgotten prerequisites), not just 'it's easier.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

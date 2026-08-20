@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l13",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l13",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 13,
+    "courseDay": 139,
+    "phase": "Performance task: plan",
+    "focus": "the conversion board",
+    "title": "Performance task: plan: the conversion board"
+  },
+  "standards": [
+    "4.NF.6",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 7/100 using decimal notation.",
+          "workedSolution": {
+            "steps": [
+              "A denominator of 100 means two decimal places.",
+              "7/100 = 0.07."
+            ],
+            "answer": "0.07"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 1/100 using decimal notation.",
+          "choices": [
+            "0.02",
+            "0.01",
+            "0.00",
+            "0.04"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 14/100 using decimal notation.",
+          "choices": [
+            "0.15",
+            "0.13",
+            "0.17",
+            "0.14"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 63/100 using decimal notation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 56/100 using decimal notation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l13"
+  }
+}

@@ -49,6 +49,9 @@ function createHandler(overrides = {}) {
       read: vi.fn().mockResolvedValue({ draftId: DRAFT, revision: 3 }),
       listCollaborators: vi.fn().mockResolvedValue({ currentResponsibility: 'editor' }),
     },
+    stepUpAssurance: { consume: vi.fn(async ({ binding }) => ({ ok: true, binding })) },
+    requestSourceGuard: () => ({ ok: true }),
+    criticalActionAudit: { record: vi.fn(async () => {}) },
     ...overrides,
   })
 }

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l02",
+  "lessonId": "ma-g4-ready-for-life-u04-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Judgment-to-noticing conversion",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more rewritten statements still contain judging words or opinions dressed as description."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three rewritten statements are neutral and describe only physical sensations."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner precisely identifies the exact word or phrase that made the original version a judgment."
+          }
+        ]
+      },
+      {
+        "dimension": "Reflection on noticing vs. judging",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The reflection does not explain any difference between how the judging and noticing versions felt to read."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The reflection names a specific difference between reading the judging version and the noticing version."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner gives a reasoned case for why noticing without judging is useful even when a signal is uncomfortable."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No rewritten 'noticing' statement contains a judging word like should, lazy, bad, or good.",
+      "The original judging thought sounds like something the learner would plausibly actually think, not an invented worst-case example."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

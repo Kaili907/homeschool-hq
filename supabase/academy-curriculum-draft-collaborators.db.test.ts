@@ -295,7 +295,7 @@ describe('curriculum draft collaborator database boundary', () => {
       )
       expect(privilege.rows[0].allowed, role).toBe(false)
     }
-    const migrationBytes = await readFile(migrationUrls.at(-1)!)
+    const migrationBytes = (await readFile(migrationUrls.at(-1)!, 'utf8')).replace(/\r\n/gu, '\n')
     const custody = JSON.parse(await readFile(
       new URL('../docs/admin-console/curriculum-draft-collaborators-migration.json', import.meta.url),
       'utf8',

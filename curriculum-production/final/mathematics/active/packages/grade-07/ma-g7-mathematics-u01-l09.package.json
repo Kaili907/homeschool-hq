@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u01-l09",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u01-l09",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Reasoning and Proportional Thinking",
+    "dayInUnit": 9,
+    "courseDay": 9,
+    "phase": "Concept model C",
+    "focus": "tables graphs and equations",
+    "title": "Concept model C: tables graphs and equations"
+  },
+  "standards": [
+    "7.RP.1",
+    "7.RP.2",
+    "MP.1",
+    "MP.3",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u01-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "proportional-or-not",
+          "standard": "7.RP.2",
+          "difficulty": 1,
+          "prompt": "3/4 mile in 1/2 hour: unit rate?",
+          "workedSolution": {
+            "steps": [
+              "Divide by the number of hours.",
+              "Reduce the resulting fraction."
+            ],
+            "answer": "3/2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u01-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "reasonableness",
+          "standard": "7.RP.1",
+          "difficulty": 2,
+          "prompt": "A price is 6 dollars per item. Is 40 dollars the exact total for 6 items?",
+          "choices": [
+            "no",
+            "yes",
+            "approximately",
+            "only if discounted"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-fraction",
+          "standard": "7.RP.1",
+          "difficulty": 3,
+          "prompt": "7 units for 3 items. What is the unit rate?",
+          "choices": [
+            "10/3 units per item",
+            "8/3 units per item",
+            "3 units per item",
+            "7/3 units per item"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "proportional-table",
+          "standard": "7.RP.2",
+          "difficulty": 3,
+          "prompt": "A proportional table has 3 per item. What is the output for 8 items?",
+          "choices": [
+            "24",
+            "26",
+            "23",
+            "25"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u01-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "constant-of-proportionality",
+          "standard": "7.RP.2",
+          "difficulty": 2,
+          "prompt": "For y = kx, y = 4 when x = 8. What is k?",
+          "choices": [
+            "3/2",
+            "5/8",
+            "4/9",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "equation-from-rate",
+          "standard": "7.RP.2",
+          "difficulty": 2,
+          "prompt": "A relationship has 2 output units for each input unit. Write its equation.",
+          "choices": [
+            "y = 4x",
+            "y = 2x",
+            "y = x + 2",
+            "y = 3x"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "proportional-or-not",
+          "standard": "7.RP.2",
+          "difficulty": 3,
+          "prompt": "Are (1, 8), (2, 16), and (3, 24) proportional?",
+          "choices": [
+            "both",
+            "neither",
+            "cannot tell",
+            "proportional"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "reasonableness",
+          "standard": "7.RP.1",
+          "difficulty": 3,
+          "prompt": "A price is 5 dollars per item. Is 42 dollars the exact total for 8 items?",
+          "choices": [
+            "no",
+            "approximately",
+            "cannot tell",
+            "only if discounted"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-fraction",
+          "standard": "7.RP.1",
+          "difficulty": 3,
+          "prompt": "9 units for 5 items. What is the unit rate?",
+          "choices": [
+            "14/5 units per item",
+            "9/5 units per item",
+            "2 units per item",
+            "11/5 units per item"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u01-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "proportional-table",
+          "standard": "7.RP.2",
+          "difficulty": 3,
+          "prompt": "A proportional table has 9 per item. What is the output for 2 items?",
+          "choices": [
+            "18",
+            "17",
+            "11",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u01-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "constant-of-proportionality",
+          "standard": "7.RP.2",
+          "difficulty": 3,
+          "prompt": "For y = kx, y = 3 when x = 6. What is k?",
+          "choices": [
+            "1/2",
+            "3/7",
+            "5/6",
+            "3/2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u01-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u01-l09"
+  }
+}

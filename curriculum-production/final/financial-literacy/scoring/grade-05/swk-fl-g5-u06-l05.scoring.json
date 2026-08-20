@@ -1,0 +1,269 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u06-l05",
+  "lessonId": "ma-g5-financial-literacy-u06-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What were the actual total sales?",
+        "answer": "$144.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(8.00 x 18) = 144.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 800
+            },
+            "times": 18
+          },
+          "trace": "(8.00 x 18) = 144.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "By how much is the record off?",
+        "answer": "$1.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((8.00 x 18) - 142.50) = 1.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 800
+              },
+              "times": 18
+            },
+            "less": {
+              "op": "money",
+              "cents": 14250
+            }
+          },
+          "trace": "((8.00 x 18) - 142.50) = 1.50"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What remains after costs, using the correct sales figure?",
+        "answer": "$52.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((8.00 x 18) - 92.00) = 52.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 800
+              },
+              "times": 18
+            },
+            "less": {
+              "op": "money",
+              "cents": 9200
+            }
+          },
+          "trace": "((8.00 x 18) - 92.00) = 52.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What are total sales across both days?",
+        "answer": "$216.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((8.00 x 18) + (8.00 x 9)) = 216.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 800
+                },
+                "times": 18
+              },
+              {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 800
+                },
+                "times": 9
+              }
+            ]
+          },
+          "trace": "((8.00 x 18) + (8.00 x 9)) = 216.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What remains after all costs across both days?",
+        "answer": "$94.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(((8.00 x 18) + (8.00 x 9)) - (92.00 + 30.00)) = 94.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 800
+                  },
+                  "times": 18
+                },
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 800
+                  },
+                  "times": 9
+                }
+              ]
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 9200
+                },
+                {
+                  "op": "money",
+                  "cents": 3000
+                }
+              ]
+            }
+          },
+          "trace": "(((8.00 x 18) + (8.00 x 9)) - (92.00 + 30.00)) = 94.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Designing a record check",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response says Idris should be careful without describing a routine."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A routine is described for Idris but it would not detect a mismatch between units and money."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response describes a routine for Idris that cross-checks units sold against cash taken, such as counting stock at close and comparing it with the recorded total."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What were the actual total sales?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "By how much is the record off?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What remains after costs, using the correct sales figure?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What are total sales across both days?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What remains after all costs across both days?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Design a record-keeping routine for Idris that would catch this kind of drift on the day, and explain why it works."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What were the actual total sales? Answer: $144.00. Verification: (8.00 x 18) = 144.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: By how much is the record off? Answer: $1.50. Verification: ((8.00 x 18) - 142.50) = 1.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What remains after costs, using the correct sales figure? Answer: $52.00. Verification: ((8.00 x 18) - 92.00) = 52.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What are total sales across both days? Answer: $216.00. Verification: ((8.00 x 18) + (8.00 x 9)) = 216.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What remains after all costs across both days? Answer: $94.00. Verification: (((8.00 x 18) + (8.00 x 9)) - (92.00 + 30.00)) = 94.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Designing a record check — Not yet: The response says Idris should be careful without describing a routine. Approaching: A routine is described for Idris but it would not detect a mismatch between units and money. Meets: The response describes a routine for Idris that cross-checks units sold against cash taken, such as counting stock at close and comparing it with the recorded total. The response describes a routine for Idris that cross-checks units sold against cash taken, such as counting stock at close and comparing it with the recorded total."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response describes a routine for Idris that cross-checks units sold against cash taken, such as counting stock at close and comparing it with the recorded total."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u06-l05.scoring.json",
+    "sourceScoringSha256": "ac9b61ab13337d5af62c0afb3778da951b9b97a02325299000f249c12e113268",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -323,6 +323,11 @@ function SourceBadge({ source }: { readonly source: AdminIncidentSource }) {
 
 function CopyCorrelation({ value }: { readonly value: string }) {
   const [status, setStatus] = useState<'idle' | 'copied' | 'failed'>('idle')
+  useEffect(() => {
+    if (status === 'idle') return
+    const timer = globalThis.setTimeout(() => setStatus('idle'), 2000)
+    return () => globalThis.clearTimeout(timer)
+  }, [status])
   return (
     <button type="button" onClick={async () => {
       try {

@@ -1,0 +1,318 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l09",
+  "lessonId": "ma-g12-financial-literacy-u06-l09",
+  "integratedDomains": [
+    "insurance-risk",
+    "saving-investing",
+    "income",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,350.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three deductibles added — the cash the household must produce before any policy pays anything."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$9,360.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,120 a month for the 3 months before any benefit begins. The policy exists and still pays nothing in this window, which is the part of a disability policy most easily overlooked."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$13,710.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,350.00 of deductibles plus $9,360.00 of essential costs during the wait. Both are cash requirements the policies create rather than remove."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,640.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60% of $4,400 of monthly income."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$480.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,120 of essential costs against a $2,640.00 benefit. The policy narrows the gap sharply but does not close it, because it replaces a fraction of income rather than covering costs."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,880.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$480.00 a month for a further 6 months. The shortfall continues for as long as the interruption does, so this component grows with the length of the event rather than being fixed by a policy term."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$16,590.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$13,710.00 for the deductibles and the waiting period, plus $2,880.00 for the shortfall that continues afterwards."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "healthDed + autoDed + homeDed",
+        "substituted": "2400 + 750 + 1200",
+        "result": "$4,350.00",
+        "why": "The three deductibles added — the cash the household must produce before any policy pays anything."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "essential * 3",
+        "substituted": "3120 * 3",
+        "result": "$9,360.00",
+        "why": "$3,120 a month for the 3 months before any benefit begins. The policy exists and still pays nothing in this window, which is the part of a disability policy most easily overlooked."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$13,710.00",
+        "why": "$4,350.00 of deductibles plus $9,360.00 of essential costs during the wait. Both are cash requirements the policies create rather than remove."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(income * replaceRate, 2)",
+        "substituted": "round(4400 * 0.6, 2)",
+        "result": "$2,640.00",
+        "why": "60% of $4,400 of monthly income."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "essential2 - #t2-p1",
+        "substituted": "3120 - #t2-p1",
+        "result": "$480.00",
+        "why": "$3,120 of essential costs against a $2,640.00 benefit. The policy narrows the gap sharply but does not close it, because it replaces a fraction of income rather than covering costs."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 * furtherMonths",
+        "substituted": "#t2-p2 * 6",
+        "result": "$2,880.00",
+        "why": "$480.00 a month for a further 6 months. The shortfall continues for as long as the interruption does, so this component grows with the length of the event rather than being fixed by a policy term."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p3 + #t2-p3",
+        "substituted": "#t1-p3 + #t2-p3",
+        "result": "$16,590.00",
+        "why": "$13,710.00 for the deductibles and the waiting period, plus $2,880.00 for the shortfall that continues afterwards."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This household holds insurance and still needs $16,590.00 in reserve. Explain why cover and reserves are not substitutes for one another, and identify which single change to the policy terms would reduce the reserve target most, saying what it would cost.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the relationship: policies pay only after deductibles are met and, in the disability case, only after a waiting period, so a reserve is what carries the household through the periods and amounts the policies deliberately exclude.",
+          "Uses the figures to show it: $4,350.00 of deductibles and $9,360.00 of waiting-period costs are both created by the structure of the cover, not by its absence.",
+          "Identifies the highest-impact change and prices it: shortening the 3-month waiting period would remove $9,360.00 from the waiting-period component, though the $480.00 monthly shortfall would then run for longer, so the net reduction in the target is about $7,920.00 — still more than any deductible change could achieve, and paid for with a higher premium."
+        ],
+        "evidenceRequirements": [
+          "Uses the $9,360.00 waiting-period figure, the $4,350.00 of deductibles, and the $16,590.00 total target."
+        ],
+        "lookFors": [
+          "The response identifies the waiting period as the largest single component of the target.",
+          "The response recognises the $480.00 continuing shortfall rather than treating the benefit as sufficient."
+        ],
+        "commonMisconception": "Assuming that holding insurance removes the need for a reserve, when deductibles and waiting periods are precisely the gaps a reserve exists to fill.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the three deductibles come to?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do essential costs come to across the 3-month waiting period, when the disability policy pays nothing?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What reserve covers both the deductibles and the waiting period?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly disability benefit?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What monthly shortfall remains once the benefit is being paid?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What reserve covers that shortfall for a further 6 months?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the full reserve target?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "This household holds insurance and still needs $16,590.00 in reserve. Explain why cover and reserves are not substitutes for one another, and identify which single change to the policy terms would reduce the reserve target most, saying what it would cost."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the three deductibles come to? Answer: $4,350.00. Verification: The three deductibles added — the cash the household must produce before any policy pays anything. t1-p2: What do essential costs come to across the 3-month waiting period, when the disability policy pays nothing? Answer: $9,360.00. Verification: $3,120 a month for the 3 months before any benefit begins. The policy exists and still pays nothing in this window, which is the part of a disability policy most easily overlooked. t1-p3: What reserve covers both the deductibles and the waiting period? Answer: $13,710.00. Verification: $4,350.00 of deductibles plus $9,360.00 of essential costs during the wait. Both are cash requirements the policies create rather than remove. t2-p1: What is the monthly disability benefit? Answer: $2,640.00. Verification: 60% of $4,400 of monthly income. t2-p2: What monthly shortfall remains once the benefit is being paid? Answer: $480.00. Verification: $3,120 of essential costs against a $2,640.00 benefit. The policy narrows the gap sharply but does not close it, because it replaces a fraction of income rather than covering costs. t2-p3: What reserve covers that shortfall for a further 6 months? Answer: $2,880.00. Verification: $480.00 a month for a further 6 months. The shortfall continues for as long as the interruption does, so this component grows with the length of the event rather than being fixed by a policy term. t2-p4: What is the full reserve target? Answer: $16,590.00. Verification: $13,710.00 for the deductibles and the waiting period, plus $2,880.00 for the shortfall that continues afterwards."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: This household holds insurance and still needs $16,590.00 in reserve. Explain why cover and reserves are not substitutes for one another, and identify which single change to the policy terms would reduce the reserve target most, saying what it would cost. Explains the relationship: policies pay only after deductibles are met and, in the disability case, only after a waiting period, so a reserve is what carries the household through the periods and amounts the policies deliberately exclude. Uses the figures to show it: $4,350.00 of deductibles and $9,360.00 of waiting-period costs are both created by the structure of the cover, not by its absence. Identifies the highest-impact change and prices it: shortening the 3-month waiting period would remove $9,360.00 from the waiting-period component, though the $480.00 monthly shortfall would then run for longer, so the net reduction in the target is about $7,920.00 — still more than any deductible change could achieve, and paid for with a higher premium. Uses the $9,360.00 waiting-period figure, the $4,350.00 of deductibles, and the $16,590.00 total target. The response identifies the waiting period as the largest single component of the target. The response recognises the $480.00 continuing shortfall rather than treating the benefit as sufficient."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the relationship: policies pay only after deductibles are met and, in the disability case, only after a waiting period, so a reserve is what carries the household through the periods and amounts the policies deliberately exclude. Uses the figures to show it: $4,350.00 of deductibles and $9,360.00 of waiting-period costs are both created by the structure of the cover, not by its absence. Identifies the highest-impact change and prices it: shortening the 3-month waiting period would remove $9,360.00 from the waiting-period component, though the $480.00 monthly shortfall would then run for longer, so the net reduction in the target is about $7,920.00 — still more than any deductible change could achieve, and paid for with a higher premium."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u06-l09.scoring.json",
+    "sourceScoringSha256": "3b2c4cfaebc364d4f01d93209d813ecd5bd99bf7c830679892733995cf5ee9c5",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

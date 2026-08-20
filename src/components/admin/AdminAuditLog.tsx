@@ -100,7 +100,10 @@ export function AdminAuditLog({
 
   function closeDetails() {
     setSelectedEventId(null)
-    globalThis.setTimeout(() => detailOpenerRef.current?.focus(), 0)
+    globalThis.setTimeout(() => {
+      const opener = detailOpenerRef.current
+      if (opener?.isConnected) opener.focus()
+    }, 0)
   }
 
   function resetFilters() {

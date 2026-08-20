@@ -1,0 +1,413 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u03-l04",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Meal Planning, Cooking, and Food Management",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: knife heat and appliance safety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic knife heat and appliance safety task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "An adult stays in the kitchen for the whole activity.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation",
+      "planning page"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The adult stays in the kitchen and watches every cut, every oven-to-rack transfer, and every appliance step; the learner never carries a hot dish or handles the knife alone.",
+    "The adult chooses and hands over the knife; the learner does not open a drawer or block to select one.",
+    "If the baking dish feels unstable, the oven mitt slips, or the mixer makes an unusual sound, the learner stops immediately and the adult takes over."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult, oven, or stand mixer is available right now, the learner instead watches a video or in-person demonstration of all three steps once, then talks through each one from memory, describing exactly what the demonstrator's hands did and what mistake each step is designed to avoid."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g8-u03-l04-model-card",
+    "Embedded resource: swk-rfl-g8-u03-l04-step-card",
+    "Embedded resource: swk-rfl-g8-u03-l04-guided-card",
+    "Embedded resource: swk-rfl-g8-u03-l04-independent-card",
+    "Embedded resource: swk-rfl-g8-u03-l04-evidence-record",
+    "Embedded resource: swk-rfl-g8-u03-l04-retry-pair",
+    "learner-local: a cutting board",
+    "adult-or-local: an age-appropriate kitchen knife chosen by the adult",
+    "learner-local: one cucumber",
+    "learner-local: a baking dish that can go in the oven",
+    "learner-local: oven mitts",
+    "learner-local: a cooling rack or heat-safe surface",
+    "learner-local: a stand mixer or hand mixer"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Analyze the complete worked example on swk-rfl-g8-u03-l04-model-card before beginning.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g8-u03-l04-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g8-u03-l04-independent-card; follow every step and retain only the named minimal evidence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Complete the minimal evidence record on swk-rfl-g8-u03-l04-evidence-record; omit or fictionalize private details.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "For each of the three steps, describe one specific thing that could go wrong if it were skipped or rushed, and explain how the correct technique prevents that specific problem."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g8-u03-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g8-u03-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g8-u03-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Technique execution: All three steps are performed correctly with the adult present the whole time. | Hazard reasoning: Describes a correct, specific hazard for each of the three steps and how the technique prevents it. Resume at the next unfinished step on swk-rfl-g8-u03-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner repeat all three steps using a different vegetable and a different small appliance, then write about whether the technique for each step stayed the same or had to change.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can complete a realistic knife heat and appliance safety task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g8-u03-l04-model-card",
+        "swk-rfl-g8-u03-l04-step-card",
+        "swk-rfl-g8-u03-l04-guided-card",
+        "swk-rfl-g8-u03-l04-independent-card",
+        "swk-rfl-g8-u03-l04-evidence-record",
+        "swk-rfl-g8-u03-l04-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g8-u03-l04-local-1",
+          "label": "a cutting board",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u03-l04-local-2",
+          "label": "an age-appropriate kitchen knife chosen by the adult",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u03-l04-local-3",
+          "label": "one cucumber",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u03-l04-local-4",
+          "label": "a baking dish that can go in the oven",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u03-l04-local-5",
+          "label": "oven mitts",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u03-l04-local-6",
+          "label": "a cooling rack or heat-safe surface",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u03-l04-local-7",
+          "label": "a stand mixer or hand mixer",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g8-u03-l04-model-card",
+        "kind": "model",
+        "title": "knife heat and appliance safety worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: An adult stays in the kitchen for the whole activity.",
+          "Model move 1: Read the condition and name the exact knife heat and appliance safety decision or action.",
+          "Model move 2: Before touching the knife, oven, or mixer, watch your adult demonstrate all three steps one time.",
+          "Model move 3: With your adult present the whole time, complete all three steps: slice the cucumber using the bridge grip, help move the hot baking dish from the oven to the cooling rack with oven mitts, and shut down the mixer in the correct order.",
+          "Model check: Technique execution: All three steps are performed correctly with the adult present the whole time. | Hazard reasoning: Describes a correct, specific hazard for each of the three steps and how the technique prevents it."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u03-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "knife heat and appliance safety action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for knife heat and appliance safety.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u03-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "knife heat and appliance safety coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: An adult stays in the kitchen for the whole activity.",
+          "Coach direction: Before touching the knife, oven, or mixer, watch your adult demonstrate all three steps one time.",
+          "Learner prompt: Describe the bridge grip in your own words: where do the thumb and fingers go, and what shape do they make over the cucumber?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u03-l04-independent-card",
+        "kind": "independent-task",
+        "title": "knife heat and appliance safety complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult present the whole time, complete all three steps: slice the cucumber using the bridge grip, help move the hot baking dish from the oven to the cooling rack with oven mitts, and shut down the mixer in the correct order.",
+          "Response 1 (t2-p1): I formed a bridge with my thumb and fingers over the cucumber and kept the blade below the bridge the whole cut.",
+          "Response 2 (t2-p2): I wore oven mitts on both hands and did not touch any part of the hot dish or the oven rack with bare skin.",
+          "Response 3 (t2-p3): I turned the mixer dial to off and waited for the beaters to stop completely before unplugging the cord.",
+          "Equal-access rule: If no adult, oven, or stand mixer is available right now, the learner instead watches a video or in-person demonstration of all three steps once, then talks through each one from memory, describing exactly what the demonstrator's hands did and what mistake each step is designed to avoid."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u03-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "knife heat and appliance safety minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: For each of the three steps, describe one specific thing that could go wrong if it were skipped or rushed, and explain how the correct technique prevents that specific problem.",
+          "Success checks: Technique execution: All three steps are performed correctly with the adult present the whole time. | Hazard reasoning: Describes a correct, specific hazard for each of the three steps and how the technique prevents it.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u03-l04-retry-pair",
+        "kind": "retry",
+        "title": "knife heat and appliance safety supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g8-u03-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g8-u03-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional knife heat and appliance safety condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Technique execution: All three steps are performed correctly with the adult present the whole time. | Hazard reasoning: Describes a correct, specific hazard for each of the three steps and how the technique prevents it..",
+          "Return: resume at the next unfinished step on swk-rfl-g8-u03-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "knife heat and appliance safety worked model",
+      "startingCondition": "An adult stays in the kitchen for the whole activity.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact knife heat and appliance safety decision or action.",
+        "Model move 2: Before touching the knife, oven, or mixer, watch your adult demonstrate all three steps one time.",
+        "Model move 3: With your adult present the whole time, complete all three steps: slice the cucumber using the bridge grip, help move the hot baking dish from the oven to the cooling rack with oven mitts, and shut down the mixer in the correct order."
+      ],
+      "reasoning": "The model names the condition, follows the ordered knife heat and appliance safety process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Technique execution: All three steps are performed correctly with the adult present the whole time.",
+        "Hazard reasoning: Describes a correct, specific hazard for each of the three steps and how the technique prevents it."
+      ],
+      "resourceRef": "swk-rfl-g8-u03-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for knife heat and appliance safety.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g8-u03-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "An adult stays in the kitchen for the whole activity.",
+      "prompt": "Describe the bridge grip in your own words: where do the thumb and fingers go, and what shape do they make over the cucumber?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Technique execution: All three steps are performed correctly with the adult present the whole time.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g8-u03-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g8-u03-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "knife heat and appliance safety — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g8-u03-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult present the whole time, complete all three steps: slice the cucumber using the bridge grip, help move the hot baking dish from the oven to the cooling rack with oven mitts, and shut down the mixer in the correct order.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "knife heat and appliance safety — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g8-u03-l04-independent-card",
+        "directions": "If no adult, oven, or stand mixer is available right now, the learner instead watches a video or in-person demonstration of all three steps once, then talks through each one from memory, describing exactly what the demonstrator's hands did and what mistake each step is designed to avoid.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g8-u03-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "For each of the three steps, describe one specific thing that could go wrong if it were skipped or rushed, and explain how the correct technique prevents that specific problem.",
+      "observableCriteria": [
+        "Technique execution: All three steps are performed correctly with the adult present the whole time.",
+        "Hazard reasoning: Describes a correct, specific hazard for each of the three steps and how the technique prevents it."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g8-u03-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g8-u03-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g8-u03-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g8-u03-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Technique execution: All three steps are performed correctly with the adult present the whole time. | Hazard reasoning: Describes a correct, specific hazard for each of the three steps and how the technique prevents it.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g8-u03-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g8-u03-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

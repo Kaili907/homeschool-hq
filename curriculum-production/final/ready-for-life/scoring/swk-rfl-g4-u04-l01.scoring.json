@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l01",
+  "lessonId": "ma-g4-ready-for-life-u04-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Signal-clue specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more check-in entries use a vague label like 'felt weird' without naming a specific physical clue."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three check-ins name a specific physical clue tied to the signal identified."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names which two signals were hardest to tell apart with a clear reason."
+          }
+        ]
+      },
+      {
+        "dimension": "Comparison reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The easiest/hardest comparison is missing or restates the check-ins without identifying an overlap."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names which two signals were hardest to distinguish and identifies the clue that helped decide."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the stress-signal reflection connects a specific clue from an actual check-in to why stress signals can be easy to miss."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The stress check-in is treated as a real signal, not dismissed or skipped.",
+      "No check-in entry moralizes a signal, such as writing that a signal shouldn't be happening."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import type {
@@ -6,6 +7,8 @@ import type {
 } from '../../admin/productionReadinessModel'
 import { parseProductionReadinessProjection } from '../../admin/productionReadinessModel'
 import { ProductionReadinessCenter } from './ProductionReadinessCenter'
+
+const READINESS_STYLES = readFileSync(new URL('./production-readiness-center.css', import.meta.url), 'utf8')
 
 const check = (
   id: string,
@@ -70,6 +73,15 @@ describe('Production Readiness Center presentation', () => {
     expect(error).toContain('type="button"')
     expect(renderToStaticMarkup(<ProductionReadinessCenter state={{ status: 'ready', projection }} />))
       .toContain('aria-label="Overall readiness: Blocked"')
+  })
+
+  it('uses consistent status pills and responsive domain/state layouts', () => {
+    expect(READINESS_STYLES).toContain('border-radius: 999px')
+    expect(READINESS_STYLES).toContain('min-height: 2.75rem')
+    expect(READINESS_STYLES).toContain('@media (max-width: 900px)')
+    expect(READINESS_STYLES).toContain('@media (max-width: 640px)')
+    expect(READINESS_STYLES).toContain('.readiness-domain-grid { grid-template-columns: 1fr; }')
+    expect(READINESS_STYLES).toContain('@media (prefers-reduced-motion: reduce)')
   })
 
   it('rejects malformed or internally inconsistent wire evidence', () => {

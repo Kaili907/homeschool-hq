@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u02-l13",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u02-l13",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Expression Structure and Equivalence",
+    "dayInUnit": 13,
+    "courseDay": 31,
+    "phase": "Skill consolidation",
+    "focus": "interpreting parts of an expression in context",
+    "title": "Skill consolidation: interpreting parts of an expression in context"
+  },
+  "standards": [
+    "A-SSE.1",
+    "A-SSE.2",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 1,
+          "prompt": "An investment is modelled by 3500(1 + 0.05)^t. In this expression, what does t represent?",
+          "choices": [
+            "the amount invested before any interest is added",
+            "the number of years the investment grows",
+            "the growth factor applied once per year",
+            "the total interest earned over the whole period"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "factor-difference-of-squares",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor completely: 9x² − 64.",
+          "choices": [
+            "(3x − 64)(3x + 1)",
+            "(3x + 8)²",
+            "(3x − 8)(3x + 8)",
+            "(3x − 8)²"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor completely: x^2 - x - 12.",
+          "choices": [
+            "(x − 3)(x − 4)",
+            "(x + 3)(x − 4)",
+            "(x − 3)(x + 4)",
+            "(x + 12)(x + 1)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "factor-greatest-common-factor",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor out the greatest common factor: 45x^2 + 20x.",
+          "choices": [
+            "5(9x² + 4x)",
+            "45x(x + 4)",
+            "5x(9x + 4)",
+            "x(45x + 20)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-expression-check",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "A student claims that 6(x² − 5x + 7) expands to 6x² − 30x + 42. Is the claim correct?",
+          "choices": [
+            "No; the constant term should be 44.",
+            "No; the x term should be -5x.",
+            "Yes, the expansion is correct.",
+            "No; the leading term should be x²."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "recognize-substitution-structure",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "The expression (x + 3)^4 − 9 can be treated as a difference of squares. Which substitution makes that structure visible?",
+          "choices": [
+            "u = x + 3",
+            "u = x^2",
+            "u = (x + 3)^2",
+            "u = (x + 3)^4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "An investment is modelled by 2000(1 + 0.05)^t. In this expression, what does t represent?",
+          "choices": [
+            "the growth factor applied once per year",
+            "the total interest earned over the whole period",
+            "the number of years the investment grows",
+            "the amount invested before any interest is added"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "factor-difference-of-squares",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor completely: 36x² − 121.",
+          "choices": [
+            "(6x + 11)²",
+            "(6x − 11)(6x + 11)",
+            "(6x − 11)²",
+            "(6x − 121)(6x + 1)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor completely: x^2 + 4x - 60.",
+          "choices": [
+            "(x + 10)(x − 6)",
+            "(x − 10)(x + 6)",
+            "(x + 60)(x − 4)",
+            "(x − 10)(x − 6)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "factor-greatest-common-factor",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor out the greatest common factor: 24x^2 + 16x.",
+          "choices": [
+            "4x(6x + 4)",
+            "x(24x + 16)",
+            "4(6x² + 4x)",
+            "24x(x + 4)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-expression-check",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "A student claims that 4(x² − 3x − 5) expands to 4x² − 12x − 20. Is the claim correct?",
+          "choices": [
+            "Yes, the expansion is correct.",
+            "No; the constant term should be -18.",
+            "No; the leading term should be x².",
+            "No; the x term should be -3x."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "recognize-substitution-structure",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "The expression (x + 9)^4 − 81 can be treated as a difference of squares. Which substitution makes that structure visible?",
+          "choices": [
+            "u = (x + 9)^2",
+            "u = x + 9",
+            "u = (x + 9)^4",
+            "u = x^2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u02-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u02-l13"
+  }
+}

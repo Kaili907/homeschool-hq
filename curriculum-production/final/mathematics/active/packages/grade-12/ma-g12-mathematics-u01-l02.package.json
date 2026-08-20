@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u01-l02",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Advanced Trigonometry: Unit Circle and Identities",
+    "dayInUnit": 2,
+    "courseDay": 2,
+    "phase": "Concept model A",
+    "focus": "expressing values for pi minus x, pi plus x, and 2pi minus x",
+    "title": "Concept model A: expressing values for pi minus x, pi plus x, and 2pi minus x"
+  },
+  "standards": [
+    "F-TF.3",
+    "F-TF.4",
+    "F-TF.9",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "apply-addition-formula",
+          "standard": "F-TF.9",
+          "difficulty": 1,
+          "prompt": "Find sin(75°) exactly.",
+          "workedSolution": {
+            "steps": [
+              "sin(45° + 30°) = sin45cos30 + cos45sin30.",
+              "= (√6 + √2)/4."
+            ],
+            "answer": "(√6 + √2)/4"
+          }
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "periodicity-and-coterminal-angles",
+          "standard": "F-TF.4",
+          "difficulty": 2,
+          "prompt": "Evaluate sin(480°).",
+          "workedSolution": {
+            "steps": [
+              "480 − 360 = 120°.",
+              "sin 120° = √3/2."
+            ],
+            "answer": "√3/2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "exact-value-beyond-first-quadrant",
+          "standard": "F-TF.3",
+          "difficulty": 1,
+          "prompt": "Give the exact value of sin(3π/4), which is 135°.",
+          "choices": [
+            "1/2",
+            "√2/2",
+            "−1/2",
+            "−√2/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "reference-angle-identification",
+          "standard": "F-TF.4",
+          "difficulty": 1,
+          "prompt": "Find the reference angle for 330°, and name the quadrant it lies in.",
+          "choices": [
+            "330°, quadrant 4",
+            "-150°, quadrant 4",
+            "30°, quadrant 4",
+            "30°, quadrant 1"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "apply-addition-formula",
+          "standard": "F-TF.9",
+          "difficulty": 2,
+          "prompt": "Find the exact value of sin(75°) using sin(45° + 30°).",
+          "choices": [
+            "√6/4",
+            "(√6 − √2)/4",
+            "(√6 + √2)/4",
+            "(√2 − √6)/4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "periodicity-and-coterminal-angles",
+          "standard": "F-TF.4",
+          "difficulty": 1,
+          "prompt": "Evaluate sin(570°) exactly, using the periodicity of sine.",
+          "choices": [
+            "√2/2",
+            "−√2/2",
+            "1/2",
+            "−1/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "exact-value-beyond-first-quadrant",
+          "standard": "F-TF.3",
+          "difficulty": 2,
+          "prompt": "Give the exact value of cos(4π/3), which is 240°.",
+          "choices": [
+            "√2/2",
+            "−√2/2",
+            "1/2",
+            "−1/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "reference-angle-identification",
+          "standard": "F-TF.4",
+          "difficulty": 2,
+          "prompt": "Find the reference angle for 240°, and name the quadrant it lies in.",
+          "choices": [
+            "60°, quadrant 3",
+            "60°, quadrant 4",
+            "240°, quadrant 3",
+            "120°, quadrant 3"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "apply-addition-formula",
+          "standard": "F-TF.9",
+          "difficulty": 3,
+          "prompt": "Find the exact value of cos(75°) using cos(45° + 30°).",
+          "choices": [
+            "√6/4",
+            "(√6 + √2)/4",
+            "(√6 − √2)/4",
+            "(√2 − √6)/4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "periodicity-and-coterminal-angles",
+          "standard": "F-TF.4",
+          "difficulty": 2,
+          "prompt": "Evaluate sin(480°) exactly, using the periodicity of sine.",
+          "choices": [
+            "−1/2",
+            "1/2",
+            "√3/2",
+            "√2/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "exact-value-beyond-first-quadrant",
+          "standard": "F-TF.3",
+          "difficulty": 2,
+          "prompt": "Give the exact value of sin(2π/3), which is 120°.",
+          "choices": [
+            "−1/2",
+            "√3/2",
+            "√2/2",
+            "1/2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u01-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u01-l02"
+  }
+}

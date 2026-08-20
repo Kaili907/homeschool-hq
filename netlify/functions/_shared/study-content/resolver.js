@@ -3,9 +3,12 @@ import {
   StudyBoundContentAuthorityDeniedError,
 } from './authority.js'
 import { createFilesystemBoundCurriculumPackageSource } from './filesystem-source.js'
+import { SUPPORTED_GRADE_ALTERNATION } from '../../../../src/curriculum/grade-authority/tokens.ts'
 
 const SAFE_REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/
-const LESSON_CONTEXT = /^grade-(5|7|8):academy-week-([1-9]|[12][0-9]|3[0-6])-day-([1-5])$/
+const LESSON_CONTEXT = new RegExp(
+  `^grade-(${SUPPORTED_GRADE_ALTERNATION}):academy-week-([1-9]|[12][0-9]|3[0-6])-day-([1-5])$`,
+)
 
 export { StudyBoundContentAuthorityDeniedError }
 

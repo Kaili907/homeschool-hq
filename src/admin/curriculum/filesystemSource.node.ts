@@ -3,15 +3,18 @@ import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
 import {
   CurriculumSourceError,
+  isCurriculumGrade,
   type CurriculumBrowserSource,
   type CurriculumCatalog,
+  type CurriculumGrade,
   type CurriculumLessonDetail,
 } from './contracts'
 import { buildCurriculumCatalog, parseCurriculumLesson } from './readModel'
 
-const DEFAULT_SOURCE_ROOT = fileURLToPath(
-  new URL('../../../curriculum-content/manuel-academy/1.0.0/', import.meta.url),
+const DEFAULT_ACADEMY_ROOT = fileURLToPath(
+  new URL('../../../curriculum-content/manuel-academy/', import.meta.url),
 )
+const RELEASE_VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?$/
 
 async function readText(path: string, label: string): Promise<string> {
   try {
@@ -21,22 +24,66 @@ async function readText(path: string, label: string): Promise<string> {
   }
 }
 
+export async function resolveFilesystemCurriculumReleaseRoot(
+  academyRoot = DEFAULT_ACADEMY_ROOT,
+): Promise<string> {
+  const raw = await readText(
+    join(academyRoot, 'production-release-registry.json'),
+    'curriculum release registry',
+  )
+  let value: unknown
+  try {
+    value = JSON.parse(raw) as unknown
+  } catch {
+    throw new CurriculumSourceError('malformed', 'curriculum release registry is not valid JSON')
+  }
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw new CurriculumSourceError('malformed', 'curriculum release registry must be an object')
+  }
+  const registry = value as Record<string, unknown>
+  if (
+    registry.schemaVersion !== 1
+    || typeof registry.currentRelease !== 'string'
+    || !RELEASE_VERSION.test(registry.currentRelease)
+    || !Array.isArray(registry.releases)
+  ) {
+    throw new CurriculumSourceError('malformed', 'curriculum release registry has an invalid identity')
+  }
+  const active = registry.releases.filter((entry) => {
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return false
+    return (entry as Record<string, unknown>).status === 'active'
+  })
+  const selected = active[0] as Record<string, unknown> | undefined
+  if (
+    active.length !== 1
+    || selected?.version !== registry.currentRelease
+    || selected.sourceDirectory !== registry.currentRelease
+  ) {
+    throw new CurriculumSourceError('inconsistent', 'curriculum release registry has no unique current release')
+  }
+  return join(academyRoot, registry.currentRelease)
+}
+
 export function createFilesystemCurriculumSource(
-  sourceRoot = DEFAULT_SOURCE_ROOT,
+  sourceRoot?: string,
 ): CurriculumBrowserSource {
   let catalogPromise: Promise<CurriculumCatalog> | undefined
   const courseLessons = new Map<string, Promise<Map<string, string>>>()
+  const releaseRoot = sourceRoot
+    ? Promise.resolve(sourceRoot)
+    : resolveFilesystemCurriculumReleaseRoot()
 
   const loadCatalog = (): Promise<CurriculumCatalog> => {
     if (catalogPromise) return catalogPromise
     catalogPromise = (async () => {
+      const resolvedSourceRoot = await releaseRoot
       const [manifestJson, courseIndexJson, unitIndexJson, lessonIndexCsv, validationJson] =
         await Promise.all([
-          readText(join(sourceRoot, 'curriculum-manifest.json'), 'curriculum manifest'),
-          readText(join(sourceRoot, 'course-index.json'), 'course index'),
-          readText(join(sourceRoot, 'unit-index.json'), 'unit index'),
-          readText(join(sourceRoot, 'lesson-index.csv'), 'lesson index'),
-          readText(join(sourceRoot, 'validation', 'validation.json'), 'validation report'),
+          readText(join(resolvedSourceRoot, 'curriculum-manifest.json'), 'curriculum manifest'),
+          readText(join(resolvedSourceRoot, 'course-index.json'), 'course index'),
+          readText(join(resolvedSourceRoot, 'unit-index.json'), 'unit index'),
+          readText(join(resolvedSourceRoot, 'lesson-index.csv'), 'lesson index'),
+          readText(join(resolvedSourceRoot, 'validation', 'validation.json'), 'validation report'),
         ])
       let validationPassed = false
       try {
@@ -56,11 +103,11 @@ export function createFilesystemCurriculumSource(
       await Promise.all(courseRows.map(async (value) => {
         if (!value || typeof value !== 'object') throw new CurriculumSourceError('malformed', 'course index row must be an object')
         const row = value as Record<string, unknown>
-        if (typeof row.course_id !== 'string' || typeof row.grade !== 'number' || typeof row.subject !== 'string') {
+        if (typeof row.course_id !== 'string' || !isCurriculumGrade(row.grade) || typeof row.subject !== 'string') {
           throw new CurriculumSourceError('malformed', 'course index row has invalid identifiers')
         }
         assessmentJsonByCourse[row.course_id] = await readText(
-          join(sourceRoot, 'grades', `grade-${row.grade}`, 'courses', row.subject, 'assessments.json'),
+          join(resolvedSourceRoot, 'grades', `grade-${row.grade}`, 'courses', row.subject, 'assessments.json'),
           `${row.course_id} assessments`,
         )
       }))
@@ -81,15 +128,15 @@ export function createFilesystemCurriculumSource(
 
   const loadLessonLines = (
     courseId: string,
-    grade: number,
+    grade: CurriculumGrade,
     subject: string,
   ): Promise<Map<string, string>> => {
     const cached = courseLessons.get(courseId)
     if (cached) return cached
-    const request = readText(
-      join(sourceRoot, 'grades', `grade-${grade}`, 'courses', subject, 'lessons.jsonl'),
+    const request = releaseRoot.then((resolvedSourceRoot) => readText(
+      join(resolvedSourceRoot, 'grades', `grade-${grade}`, 'courses', subject, 'lessons.jsonl'),
       `${courseId} lessons`,
-    ).then((raw) => {
+    )).then((raw) => {
       const lines = new Map<string, string>()
       for (const line of raw.split(/\r?\n/).filter((value) => value.trim())) {
         let value: unknown

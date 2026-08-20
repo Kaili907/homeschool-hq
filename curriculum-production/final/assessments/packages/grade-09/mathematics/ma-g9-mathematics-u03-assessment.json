@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-mathematics-u03-assessment",
+  "courseRef": "ma-g9-mathematics",
+  "grade": 9,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g9-mathematics-u03",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "courseTitle": "Algebra I",
+    "assessmentLessonRef": "ma-g9-mathematics-u03-l16"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u03-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Solve for x: 4x − 1 = 5x − 6.",
+      "choices": [
+        "x = 7",
+        "x = 5",
+        "x = -5",
+        "x = -5/9"
+      ],
+      "standardRef": "A-REI.3"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Solve for x and state the solution set: 5x − 4 < -13.",
+      "choices": [
+        "x < -17/5",
+        "x < 9/5",
+        "x < -9/5",
+        "x > -9/5"
+      ],
+      "standardRef": "A-REI.3"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "In a solution, one line reads: From 3x + 12 = 21 to 3x = 9. Which property justifies that step?",
+      "choices": [
+        "dividing both sides by 3",
+        "the distributive property",
+        "subtracting 12 from both sides (subtraction property of equality)",
+        "the commutative property"
+      ],
+      "standardRef": "A-REI.1"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Does the point (4, 17) lie on the graph of y = 3x + 7?",
+      "choices": [
+        "Only if the graph is extended beyond the plotted window.",
+        "No; substituting x = 4 gives y = 19, not 17.",
+        "It cannot be determined without graphing the line.",
+        "Yes; the coordinates satisfy the equation."
+      ],
+      "standardRef": "A-REI.10"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "The graphs of f(x) = 1x − 8 and g(x) = 5x − 4 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+      "choices": [
+        "x = 3",
+        "x = 1",
+        "x = 2/3",
+        "x = -1"
+      ],
+      "standardRef": "A-REI.11"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Solve -5x + 2y = 1 for y.",
+      "choices": [
+        "y = (1 + -5x)/2",
+        "y = 1 − -5x",
+        "y = (1 − -5x)/2",
+        "y = (-5x − 1)/2"
+      ],
+      "standardRef": "A-REI.3"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Solve for x: 4x − 7 = 6x − 19.",
+      "choices": [
+        "x = 13",
+        "x = 6",
+        "x = -6",
+        "x = -6/5"
+      ],
+      "standardRef": "A-REI.3"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Solve for x and state the solution set: 9x + 10 < -22.",
+      "choices": [
+        "x > -32/9",
+        "x < -32/9",
+        "x < -4/3",
+        "x < 32/9"
+      ],
+      "standardRef": "A-REI.3"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "In a solution, one line reads: From 3x = 9 to x = 3. Which property justifies that step?",
+      "choices": [
+        "dividing both sides by 3 (division property of equality)",
+        "the distributive property",
+        "subtracting 3 from both sides",
+        "the associative property"
+      ],
+      "standardRef": "A-REI.1"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Does the point (5, 44) lie on the graph of y = 9x − 2?",
+      "choices": [
+        "Yes; the coordinates satisfy the equation.",
+        "No; substituting x = 5 gives y = 43, not 44.",
+        "It cannot be determined without graphing the line.",
+        "Only if the graph is extended beyond the plotted window."
+      ],
+      "standardRef": "A-REI.10"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "The graphs of f(x) = 8x + 2 and g(x) = 1x − 54 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+      "choices": [
+        "x = -8",
+        "x = -56/9",
+        "x = -52/7",
+        "x = 8"
+      ],
+      "standardRef": "A-REI.11"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u03-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Solve 2x + 6y = -8 for y.",
+      "choices": [
+        "y = (2x − -8)/6",
+        "y = (-8 + 2x)/6",
+        "y = -8 − 2x",
+        "y = (-8 − 2x)/6"
+      ],
+      "standardRef": "A-REI.3"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/mathematics/ma-g9-mathematics-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-mathematics-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u03-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Reasoning with Linear Equations and Inequalities?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u02-l14",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u02-l14",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Place Value, Powers of Ten, and Decimals",
+    "dayInUnit": 14,
+    "courseDay": 32,
+    "phase": "Transfer challenge",
+    "focus": "reading decimals through thousandths",
+    "title": "Transfer challenge: reading decimals through thousandths"
+  },
+  "standards": [
+    "5.NBT.1",
+    "5.NBT.2",
+    "5.NBT.3",
+    "5.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 1,
+          "prompt": "What is 0.47 × 10^2?",
+          "workedSolution": {
+            "steps": [
+              "10^2 is 100.",
+              "Multiplying by 100 makes each digit worth 100 times as much.",
+              "0.47 × 100 = 47."
+            ],
+            "answer": "47"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "divide-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "7.70 ÷ 10^3 = ?",
+          "choices": [
+            "0.077",
+            "0.0077",
+            "0.00077",
+            "7.7"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-number-name",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "How is 436.099 written in words?",
+          "choices": [
+            "four hundred thirty-six and one hundred thousandths",
+            "four hundred thirty-six and ninety-eight thousandths",
+            "four hundred thirty-six and ninety-nine hundredths",
+            "four hundred thirty-six and ninety-nine thousandths"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "number-name-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write “nine hundred ninety-three and five hundred eighteen thousandths” as a decimal.",
+          "choices": [
+            "993.519",
+            "993.518",
+            "994.518",
+            "998.18"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-expanded-form",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write 50.036 in expanded form.",
+          "choices": [
+            "50 + 0.03 + 0.007",
+            "500 + 0.3 + 0.06",
+            "50 + 0.03 + 0.006",
+            "50 + 0.1 + 0.03 + 0.006"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "expanded-form-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write 700 + 70 + 7 + 0.3 + 0.03 + 0.006 in standard form.",
+          "choices": [
+            "777.336",
+            "777.436",
+            "777.337",
+            "7773.36"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "compare-decimals",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Compare 9.3 and 2.5 using <, >, or =.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "round-decimal",
+          "standard": "5.NBT.4",
+          "difficulty": 3,
+          "prompt": "Round 9750.000 to the nearest hundred.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "decimal-number-line",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "A number line from 6.890 to 6.900 has 10 equal intervals. Point P is 3 intervals after 6.890. What number is P?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u02-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u02-l14"
+  }
+}

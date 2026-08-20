@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-financial-literacy-u03-assessment",
+  "courseRef": "ma-g10-financial-literacy",
+  "grade": 10,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g10-financial-literacy-u03",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation",
+    "courseTitle": "Consumer Economics and Credit",
+    "assessmentLessonRef": "ma-g10-financial-literacy-u03-l10"
+  },
+  "standards": [
+    "PF3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u03-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "A fictional household takes home $2,450 a month. Fixed costs come to $1,780 a month. An automatic transfer moves 15% of take-home into savings on payday, before anything is spent. The savings account credits 3.9% annual interest once at year end, calculated on the average of the twelve month-end balances; for a level monthly deposit that average is 6.5 times the deposit.",
+      "prompt": "How much moves into savings each month?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "A fictional household takes home $2,450 a month. Fixed costs come to $1,780 a month. An automatic transfer moves 15% of take-home into savings on payday, before anything is spent. The savings account credits 3.9% annual interest once at year end, calculated on the average of the twelve month-end balances; for a level monthly deposit that average is 6.5 times the deposit.",
+      "prompt": "What is left in checking each month after fixed costs and the transfer?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "A fictional household takes home $2,450 a month. Fixed costs come to $1,780 a month. An automatic transfer moves 15% of take-home into savings on payday, before anything is spent. The savings account credits 3.9% annual interest once at year end, calculated on the average of the twelve month-end balances; for a level monthly deposit that average is 6.5 times the deposit.",
+      "prompt": "What do the twelve transfers deposit into savings over the year, before interest?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now finish the year: credit the interest on the stated basis, then convert the result into the purchasing power it represents at the start of the year, when prices in the simulated economy rise 3.4% over the twelve months.",
+      "prompt": "What interest is credited at year end? Round to the nearest cent.",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now finish the year: credit the interest on the stated basis, then convert the result into the purchasing power it represents at the start of the year, when prices in the simulated economy rise 3.4% over the twelve months.",
+      "prompt": "What is the savings balance at the end of the year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now finish the year: credit the interest on the stated basis, then convert the result into the purchasing power it represents at the start of the year, when prices in the simulated economy rise 3.4% over the twelve months.",
+      "prompt": "What is that ending balance worth in start-of-year dollars? Round to the nearest cent.",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Now finish the year: credit the interest on the stated basis, then convert the result into the purchasing power it represents at the start of the year, when prices in the simulated economy rise 3.4% over the twelve months.",
+      "prompt": "How much purchasing power did the year’s price rise take out of the ending balance?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Answer in a few sentences, using the figures you computed.",
+      "prompt": "Report this budget year to the fictional household in three sentences: what was saved, what it is worth, and what the household should change first if the $302.50 monthly remainder is not enough to live on. Justify the change you recommend with a figure from this lesson."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/financial-literacy/ma-g10-financial-literacy-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Reasoning from the figures criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-financial-literacy-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u03-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

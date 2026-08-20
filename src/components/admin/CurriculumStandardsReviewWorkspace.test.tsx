@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { buildCurriculumStandardsReviewQueue } from '../../admin/curriculum-standards-review/model'
+import { createHumanStandardsReviewFinding } from '../../admin/curriculum-validation/engine'
 import {
   KNOWN_STANDARDS_REVIEW_CONTEXT,
   knownCurriculumStandardsReviewOccurrences,
@@ -51,6 +52,29 @@ describe('CurriculumStandardsReviewWorkspace', () => {
     }
     expect(html).toContain('Enter only facts verified by a human')
     expect(html).toContain('does not rewrite the published release or apply changes to a draft')
+  })
+
+  it('derives grade filter options from current unresolved evidence, including two-digit grades', () => {
+    const occurrences = [3, 10, 12].map((grade) => ({
+      sourceLabel: 'UNVERIFIED-LOCAL',
+      grade,
+      courseRef: `ma-g${grade}-science`,
+      finding: createHumanStandardsReviewFinding({
+        entity: { type: 'lesson', id: `ma-g${grade}-science-u10-l12` },
+        path: `lessons[${grade}].standards[0]`,
+        legacyLabel: 'UNVERIFIED-LOCAL',
+      }),
+    }))
+    const html = renderToStaticMarkup(<CurriculumStandardsReviewWorkspace
+      readState={{ status: 'ready', decisions: [], occurrences, context: { kind: 'draft', ref: 'draft:grades' } }}
+      canManage canApprove
+    />)
+
+    expect(html).toContain('<option value="3">Grade 3</option>')
+    expect(html).toContain('<option value="10">Grade 10</option>')
+    expect(html).toContain('<option value="12">Grade 12</option>')
+    expect(html).not.toContain('<option value="5">Grade 5</option>')
+    expect(html).toContain('UNVERIFIED-LOCAL')
   })
 
   it('withholds approval when the presentation lacks curriculum approval capability', () => {

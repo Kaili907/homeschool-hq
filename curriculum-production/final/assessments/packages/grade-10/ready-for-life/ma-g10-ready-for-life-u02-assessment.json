@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-ready-for-life-u02-assessment",
+  "courseRef": "ma-g10-ready-for-life",
+  "grade": 10,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g10-ready-for-life-u02",
+    "unitNumber": 2,
+    "unitTitle": "Job Readiness: Applications, Resumes, and Interviews",
+    "courseTitle": "Ready for Life 10: Career Exploration and Workplace Communication",
+    "assessmentLessonRef": "ma-g10-ready-for-life-u02-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u02-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before researching, write your current guess at the minimum working age where you live.",
+      "prompt": "Write your current guess, and whether you think there are any permit or hour-limit rules."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Compile your resume bullet points, application message, and reference plan into one portfolio document.",
+      "prompt": "My portfolio includes my resume bullet points from earlier this unit."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Compile your resume bullet points, application message, and reference plan into one portfolio document.",
+      "prompt": "My portfolio includes my application message from earlier this unit."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Compile your resume bullet points, application message, and reference plan into one portfolio document.",
+      "prompt": "My portfolio includes my two-person reference plan from earlier this unit."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Research the actual minimum working age, permit requirement, and any hour limits that apply where you live, using a current source.",
+      "prompt": "Record what you found: the minimum working age, whether a permit is required, and any hour limits, and name the source you checked."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Compare what you found to your warm-up guess and reflect on the unit.",
+      "prompt": "How close was your guess, and what is the one piece of this unit's portfolio you feel most confident about right now?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/ready-for-life/ma-g10-ready-for-life-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Portfolio completeness criterion.",
+    "Provide evidence that meets the stated Local rule research accuracy and sourcing criterion.",
+    "Provide evidence that meets the stated Reflection on the unit criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-ready-for-life-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u02-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Job Readiness: Applications, Resumes, and Interviews?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

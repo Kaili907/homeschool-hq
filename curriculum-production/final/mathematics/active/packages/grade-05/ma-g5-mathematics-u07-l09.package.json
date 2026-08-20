@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u07-l09",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u07-l09",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Decimal Operations",
+    "dayInUnit": 9,
+    "courseDay": 117,
+    "phase": "Concept model C",
+    "focus": "decimal multiplication",
+    "title": "Concept model C: decimal multiplication"
+  },
+  "standards": [
+    "5.NBT.3",
+    "5.NBT.4",
+    "5.NBT.7"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 1,
+          "prompt": "3 tickets cost $1.25 each. What is the total cost?",
+          "workedSolution": {
+            "steps": [
+              "Every ticket costs the same, so the total is 3 × $1.25, not $1.25 + 3.",
+              "Work in whole cents to avoid a misplaced point: $1.25 is 125 cents, and 3 × 125 = 375 cents.",
+              "375 cents is 3 whole dollars and 75 cents left over, so the total cost is $3.75."
+            ],
+            "answer": "$3.75"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-estimation-check",
+          "standard": "5.NBT.4",
+          "difficulty": 2,
+          "prompt": "Round each number to the nearest whole number to estimate 74.45 + 23.59.",
+          "choices": [
+            "98.04",
+            "99",
+            "98",
+            "9.800"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-addition",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 8.25 + 20.18.",
+          "choices": [
+            "2843",
+            "284.3",
+            "10.26",
+            "28.43"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-subtraction",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 49.38 - 9.27.",
+          "choices": [
+            "40.11",
+            "401.1",
+            "0.4011",
+            "4.011"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 8.2 × 2.",
+          "choices": [
+            "164",
+            "16.4",
+            "10.2",
+            "1.64"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-division",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 40.8 ÷ 6.",
+          "choices": [
+            "244.8",
+            "34.8",
+            "68",
+            "6.8"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "6 tickets cost $3.15 each. What is the total cost?",
+          "choices": [
+            "$1.890",
+            "$0.1890",
+            "$18.90",
+            "$1890"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-estimation-check",
+          "standard": "5.NBT.4",
+          "difficulty": 3,
+          "prompt": "Round each number to the nearest whole number to estimate 90.08 + 14.45.",
+          "choices": [
+            "10400",
+            "104.53",
+            "104",
+            "1.0400"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "decimal-addition",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 38.90 + 6.33.",
+          "choices": [
+            "452.3",
+            "10.22",
+            "39.53",
+            "45.23"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-subtraction",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 93.95 - 12.38.",
+          "choices": [
+            "815.7",
+            "8.157",
+            "81.57",
+            "93.83"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 2.4 × 4.",
+          "choices": [
+            "9.6",
+            "0.096",
+            "8",
+            "96"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u07-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u07-l09"
+  }
+}

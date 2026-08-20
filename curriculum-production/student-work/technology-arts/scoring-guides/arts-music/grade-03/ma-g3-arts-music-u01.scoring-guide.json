@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "unit_id": "ma-g3-arts-music-u01",
+  "subject": "arts-music",
+  "band": "g3-4",
+  "grade": 3,
+  "grade_dir": "grade-03",
+  "unit_title": "Looking and Listening: Elements of Art and Sound",
+  "scoring_authority_kind": "RUBRIC",
+  "rubric": [
+    {
+      "dimension": "accuracy or fidelity",
+      "exceeds": "Every claim, calculation, artifact, or performance choice is accurate and faithful to the stated criteria, with no notable errors.",
+      "meets": "The work is accurate and faithful to the stated criteria, with at most one minor, self-correctable error.",
+      "developing": "The work is mostly accurate but has one or more errors that affect the result or the intended effect.",
+      "beginning": "The work has multiple accuracy or fidelity errors that prevent it from meeting the stated criteria."
+    },
+    {
+      "dimension": "evidence and reasoning",
+      "exceeds": "Every choice is backed by specific, cited evidence or clearly explained reasoning that a reader/viewer/listener can follow without help.",
+      "meets": "Most choices are backed by evidence or reasoning, with only small gaps.",
+      "developing": "Some choices are backed by evidence or reasoning, but several are asserted without support.",
+      "beginning": "Choices are asserted with little or no supporting evidence or reasoning."
+    },
+    {
+      "dimension": "application or performance",
+      "exceeds": "The finished task, program, or piece fully meets the performance task as written and demonstrates independent transfer to a new example.",
+      "meets": "The finished task, program, or piece meets the performance task as written.",
+      "developing": "The finished task, program, or piece partially meets the performance task, with a named gap.",
+      "beginning": "The finished task, program, or piece does not yet meet the performance task as written."
+    },
+    {
+      "dimension": "checking and revision",
+      "exceeds": "There is clear evidence of testing, critique, or self-checking that produced a real, documented revision improving the work.",
+      "meets": "There is evidence of at least one checking or revision step.",
+      "developing": "There is little evidence of checking or revision beyond a first attempt.",
+      "beginning": "There is no evidence the work was checked or revised at all."
+    }
+  ],
+  "points_reference": {
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain line and shape in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, quotation, data display, map, demonstration, or worked process to show understanding of color.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply texture in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving steady beat; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect line and shape with high and low. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Create a small artwork and a short rhythm pattern that each use two elements explored this unit.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ]
+  },
+  "mastery_interpretation": {
+    "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+    "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+    "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+  },
+  "scoring_judgment_guidance": "Score with the rubric below, not a single fixed answer key — a creative or performance piece legitimately has more than one valid solution. Compare the submission against each rubric dimension using the \"performance evidence\" prompt in the linked assessment record for Looking and Listening: Elements of Art and Sound, and record which level the student reached for each dimension along with one specific reason drawn from the actual submission.",
+  "remediation_plan": "If the piece isn't coming together, return to a single, smaller exercise focused only on line and shape, revisit one worked example or model from this unit, and rebuild your confidence with that one element before returning to the full project.",
+  "extension_plan": "Once the core piece is finished, create a second short variation that explores color from a different angle, or write a short artist's statement comparing your original intent with what the finished work actually communicates.",
+  "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "source_integrity": {
+    "requires_review": true,
+    "status": "VERIFIED",
+    "note": "Unit draws on public-domain, historical, or original source material; only public-domain, properly licensed, or student-original material may be used, with a citation for anything not the student's own."
+  },
+  "safety_and_privacy": {
+    "requires_review": true,
+    "status": "VERIFIED",
+    "note": "No performance, recording, or media submission is required to be public; a private or text/no-audio alternative is stated in the task package."
+  },
+  "standards": [
+    "Michigan Arts: Visual Arts – Creating",
+    "Michigan Arts: Music – Responding"
+  ]
+}

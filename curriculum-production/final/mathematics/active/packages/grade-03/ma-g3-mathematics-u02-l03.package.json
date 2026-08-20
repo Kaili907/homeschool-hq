@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l03",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 3,
+    "courseDay": 21,
+    "phase": "Concept build B",
+    "focus": "arrays, rows, and columns as multiplication models",
+    "title": "Concept build B: arrays, rows, and columns as multiplication models"
+  },
+  "standards": [
+    "3.OA.1",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Concept build B",
+    "profile": "concept-build-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 1,
+          "prompt": "There are 4 boxes with 6 pencils in each box. How many pencils in all?",
+          "workedSolution": {
+            "steps": [
+              "4 equal groups of 6 is 4 × 6.",
+              "4 × 6 = 24."
+            ],
+            "answer": "24"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 1,
+          "prompt": "There are 2 bags with 3 cookies in each bag. How many cookies are there in all?",
+          "choices": [
+            "8",
+            "6",
+            "5",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 7 bags with 4 stickers in each bag. How many stickers are there in all?",
+          "choices": [
+            "11",
+            "35",
+            "21",
+            "28"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 2 bags with 4 marbles in each bag. How many marbles are there in all?",
+          "choices": [
+            "9",
+            "10",
+            "8",
+            "6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 2 bags with 4 stickers in each bag. How many stickers are there in all?",
+          "choices": [
+            "10",
+            "9",
+            "8",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 4 bags with 4 cookies in each bag. How many cookies are there in all?",
+          "choices": [
+            "8",
+            "20",
+            "16",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 3 bags with 9 marbles in each bag. How many marbles are there in all?",
+          "choices": [
+            "12",
+            "30",
+            "24",
+            "27"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l03#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 2 bags with 2 cookies in each bag. How many cookies are there in all?",
+          "choices": [
+            "4",
+            "6",
+            "5",
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 2 bags with 3 crayons in each bag. How many crayons are there in all?",
+          "choices": [
+            "5",
+            "6",
+            "4",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 5 bags with 6 crayons in each bag. How many crayons are there in all?",
+          "choices": [
+            "30",
+            "35",
+            "25",
+            "11"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l03"
+  }
+}

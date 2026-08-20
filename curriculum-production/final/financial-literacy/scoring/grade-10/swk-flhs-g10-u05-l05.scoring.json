@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l05",
+  "lessonId": "ma-g10-financial-literacy-u05-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$17,167.48",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The whole $4,000 compounding at 6% for 25 years, with no tax taken along the way."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$13,390.64",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The full balance less 22% taken at withdrawal. Tax was deferred, not avoided."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,120.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,000 less 22% paid up front. Less money starts working, which is the cost of paying tax now."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$13,390.64",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,120.00 compounding at 6% for 25 years. This is exactly what the pre-tax account left after tax — when the rate is the same at both ends, the two are identical, and both come to $13,390.64 from the unrounded chain. A learner who rounds the $17,167.48 first and then takes 78% of it lands a cent low, which is why the directions say to round only at the end."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$15,107.38",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same balance taxed at 12% rather than 22% at withdrawal."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,716.74",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$15,107.38 against $13,390.64. The whole advantage comes from the rate being lower at withdrawal than at contribution."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$9,789.21",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same $3,120.00 start, but compounding at 4.68% instead of 6% because tax removes part of each year’s return before it can compound."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$3,601.43",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$13,390.64 against $9,789.21, from identical starting amounts and an identical gross growth rate. The whole gap is the compounding lost to tax paid each year."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "contrib * pow(1 + growth, 25)",
+        "substituted": "4000 * pow(1 + 0.06, 25)",
+        "result": "$17,167.48",
+        "why": "The whole $4,000 compounding at 6% for 25 years, with no tax taken along the way."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * (1 - taxRate), 2)",
+        "substituted": "round(#t1-p1 * (1 - 0.22), 2)",
+        "result": "$13,390.64",
+        "why": "The full balance less 22% taken at withdrawal. Tax was deferred, not avoided."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "contrib2 * (1 - taxRate2)",
+        "substituted": "4000 * (1 - 0.22)",
+        "result": "$3,120.00",
+        "why": "$4,000 less 22% paid up front. Less money starts working, which is the cost of paying tax now."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 * pow(1 + growth2, 25), 2)",
+        "substituted": "round(#t1-p3 * pow(1 + 0.06, 25), 2)",
+        "result": "$13,390.64",
+        "why": "$3,120.00 compounding at 6% for 25 years. This is exactly what the pre-tax account left after tax — when the rate is the same at both ends, the two are identical, and both come to $13,390.64 from the unrounded chain. A learner who rounds the $17,167.48 first and then takes 78% of it lands a cent low, which is why the directions say to round only at the end."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p1 * (1 - laterRate), 2)",
+        "substituted": "round(#t1-p1 * (1 - 0.12), 2)",
+        "result": "$15,107.38",
+        "why": "The same balance taxed at 12% rather than 22% at withdrawal."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - #t2-p1",
+        "substituted": "#t2-p2 - #t2-p1",
+        "result": "$1,716.74",
+        "why": "$15,107.38 against $13,390.64. The whole advantage comes from the rate being lower at withdrawal than at contribution."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t1-p3 * pow(1 + growth3 * (1 - taxRate3), 25), 2)",
+        "substituted": "round(#t1-p3 * pow(1 + 0.06 * (1 - 0.22), 25), 2)",
+        "result": "$9,789.21",
+        "why": "The same $3,120.00 start, but compounding at 4.68% instead of 6% because tax removes part of each year’s return before it can compound."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p1 - #t2-p4",
+        "substituted": "#t2-p1 - #t2-p4",
+        "result": "$3,601.43",
+        "why": "$13,390.64 against $9,789.21, from identical starting amounts and an identical gross growth rate. The whole gap is the compounding lost to tax paid each year."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Under this model the pre-tax and after-tax accounts finished exactly level at $13,390.64. State the single condition that made them equal, say which one wins if that condition breaks in each direction, and name one thing this simplified model leaves out.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the condition precisely: the tax rate at contribution and the rate at withdrawal are the same, which is why $4,000 taxed at the end and $3,120.00 taxed at the start produce the same result.",
+          "States both directions: a lower rate at withdrawal favours the pre-tax account, as the $15,107.38 case shows, and a higher rate at withdrawal favours the after-tax account.",
+          "Names something the model omits — contribution limits, penalties for early withdrawal, employer contributions, changes in tax law, or required distributions."
+        ],
+        "evidenceRequirements": [
+          "Uses the $13,390.64 figure common to both accounts and the $15,107.38 lower-rate case."
+        ],
+        "lookFors": [
+          "The response treats the equality as a consequence of the equal rates, not as a coincidence of these numbers.",
+          "The response does not recommend an account to any real person; the question is about what decides between them."
+        ],
+        "commonMisconception": "Believing a pre-tax account is always better because the contribution is untaxed, without asking what rate applies at withdrawal.",
+        "dimensions": [
+          "assumption-identification",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the pre-tax account hold after 25 years, before any withdrawal tax?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the withdrawal is taxed at 22%, what does the saver keep from the pre-tax account? Round to the nearest cent."
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much actually goes into the after-tax account, once 22% tax is paid on the $4,000 first?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the after-tax account hold after 25 years, with no tax due on withdrawal? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Suppose the saver’s rate at withdrawal is 12% instead. What does the pre-tax account leave then? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much better off is the pre-tax account in that case?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What does the ordinary taxable account hold after 25 years, with each year’s 6% growth taxed at 22% as it is earned? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "How much does the annual taxing of growth cost against the after-tax account?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Under this model the pre-tax and after-tax accounts finished exactly level at $13,390.64. State the single condition that made them equal, say which one wins if that condition breaks in each direction, and name one thing this simplified model leaves out."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the pre-tax account hold after 25 years, before any withdrawal tax? Answer: $17,167.48. Verification: The whole $4,000 compounding at 6% for 25 years, with no tax taken along the way. t1-p2: If the withdrawal is taxed at 22%, what does the saver keep from the pre-tax account? Round to the nearest cent. Answer: $13,390.64. Verification: The full balance less 22% taken at withdrawal. Tax was deferred, not avoided. t1-p3: How much actually goes into the after-tax account, once 22% tax is paid on the $4,000 first? Answer: $3,120.00. Verification: $4,000 less 22% paid up front. Less money starts working, which is the cost of paying tax now. t2-p1: What does the after-tax account hold after 25 years, with no tax due on withdrawal? Round to the nearest cent. Answer: $13,390.64. Verification: $3,120.00 compounding at 6% for 25 years. This is exactly what the pre-tax account left after tax — when the rate is the same at both ends, the two are identical, and both come to $13,390.64 from the unrounded chain. A learner who rounds the $17,167.48 first and then takes 78% of it lands a cent low, which is why the directions say to round only at the end. t2-p2: Suppose the saver’s rate at withdrawal is 12% instead. What does the pre-tax account leave then? Round to the nearest cent. Answer: $15,107.38. Verification: The same balance taxed at 12% rather than 22% at withdrawal. t2-p3: How much better off is the pre-tax account in that case? Answer: $1,716.74. Verification: $15,107.38 against $13,390.64. The whole advantage comes from the rate being lower at withdrawal than at contribution. t2-p4: What does the ordinary taxable account hold after 25 years, with each year’s 6% growth taxed at 22% as it is earned? Round to the nearest cent. Answer: $9,789.21. Verification: The same $3,120.00 start, but compounding at 4.68% instead of 6% because tax removes part of each year’s return before it can compound. t2-p5: How much does the annual taxing of growth cost against the after-tax account? Answer: $3,601.43. Verification: $13,390.64 against $9,789.21, from identical starting amounts and an identical gross growth rate. The whole gap is the compounding lost to tax paid each year."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Under this model the pre-tax and after-tax accounts finished exactly level at $13,390.64. State the single condition that made them equal, say which one wins if that condition breaks in each direction, and name one thing this simplified model leaves out. Identifies the condition precisely: the tax rate at contribution and the rate at withdrawal are the same, which is why $4,000 taxed at the end and $3,120.00 taxed at the start produce the same result. States both directions: a lower rate at withdrawal favours the pre-tax account, as the $15,107.38 case shows, and a higher rate at withdrawal favours the after-tax account. Names something the model omits — contribution limits, penalties for early withdrawal, employer contributions, changes in tax law, or required distributions. Uses the $13,390.64 figure common to both accounts and the $15,107.38 lower-rate case. The response treats the equality as a consequence of the equal rates, not as a coincidence of these numbers. The response does not recommend an account to any real person; the question is about what decides between them."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the condition precisely: the tax rate at contribution and the rate at withdrawal are the same, which is why $4,000 taxed at the end and $3,120.00 taxed at the start produce the same result. States both directions: a lower rate at withdrawal favours the pre-tax account, as the $15,107.38 case shows, and a higher rate at withdrawal favours the after-tax account. Names something the model omits — contribution limits, penalties for early withdrawal, employer contributions, changes in tax law, or required distributions."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u05-l05.scoring.json",
+    "sourceScoringSha256": "09f55c6f49ca04e6d4402752168983b55d22a04192cade15d06020db6968c45e",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

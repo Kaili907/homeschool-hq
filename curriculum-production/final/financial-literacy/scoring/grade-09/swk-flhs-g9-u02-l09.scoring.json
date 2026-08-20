@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l09",
+  "lessonId": "ma-g9-financial-literacy-u02-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$89.09",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "512 kWh at $0.174 each is $89.088, which rounds to $89.09."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$67.69",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "389 kWh at $0.174 each is $67.686, which rounds to $67.69."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$21.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The 123 kWh difference at $0.174 is $21.402, which rounds to $21.40 a year."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Model B’s price of $1,199 less Model A’s $1,049, the extra paid upfront for the lower running cost."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "7.0",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$150 divided by the unrounded annual saving of $21.402 is 7.0087 years, which rounds to 7.0."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,011.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,199 to buy plus twelve years at $67.69, which is $812.28 of electricity."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(kwhA * rate, 2)",
+        "substituted": "round(512 * 0.174, 2)",
+        "result": "$89.09",
+        "why": "512 kWh at $0.174 each is $89.088, which rounds to $89.09."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(kwhB * rate2, 2)",
+        "substituted": "round(389 * 0.174, 2)",
+        "result": "$67.69",
+        "why": "389 kWh at $0.174 each is $67.686, which rounds to $67.69."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round((kwhA2 - kwhB2) * rate3, 2)",
+        "substituted": "round((512 - 389) * 0.174, 2)",
+        "result": "$21.40",
+        "why": "The 123 kWh difference at $0.174 is $21.402, which rounds to $21.40 a year."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "priceB - priceA",
+        "substituted": "1199 - 1049",
+        "result": "$150.00",
+        "why": "Model B’s price of $1,199 less Model A’s $1,049, the extra paid upfront for the lower running cost."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / ((kwhA3 - kwhB3) * rate4), 1)",
+        "substituted": "round(#t2-p1 / ((512 - 389) * 0.174), 1)",
+        "result": "7.0",
+        "why": "$150 divided by the unrounded annual saving of $21.402 is 7.0087 years, which rounds to 7.0."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(priceB2 + #t1-p2 * years, 2)",
+        "substituted": "round(1199 + #t1-p2 * 12, 2)",
+        "result": "$2,011.28",
+        "why": "$1,199 to buy plus twelve years at $67.69, which is $812.28 of electricity."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This fictional label gives an estimated yearly kWh figure and nothing about price. Explain why a label might stop there, and what a buyer must supply to turn it into a decision. (Real energy labels usually do print an estimated yearly dollar cost, computed at one national electricity rate.)",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that electricity prices differ by place and change over time, so a dollar figure printed on the label would be wrong for most buyers, while a kWh figure stays true.",
+          "Identifies what the buyer supplies: their own electricity rate, how long they expect to keep the appliance, and the purchase prices.",
+          "Connects this to the 7.0-year payback, noting that the answer depends entirely on the buyer’s own horizon."
+        ],
+        "evidenceRequirements": [
+          "Uses the $0.174 rate and the 7.0-year payback figure in the explanation."
+        ],
+        "lookFors": [
+          "The response treats the kWh figure as the disclosure and the dollar figure as a local calculation.",
+          "The response does not conclude that Model B is simply better without reference to how long it is kept."
+        ],
+        "commonMisconception": "Reading an efficiency label as a verdict on which product to buy rather than as one input.",
+        "dimensions": [
+          "assumption-identification",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does Model A cost to run for a year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does Model B cost to run for a year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much does Model B save in running cost each year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much more does Model B cost to buy?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many years of running-cost savings does it take to repay that difference? Round to one decimal place."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Over 12 years of ownership, what is the total cost — purchase plus running — of Model B?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "This fictional label gives an estimated yearly kWh figure and nothing about price. Explain why a label might stop there, and what a buyer must supply to turn it into a decision. (Real energy labels usually do print an estimated yearly dollar cost, computed at one national electricity rate.)"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does Model A cost to run for a year? Answer: $89.09. Verification: 512 kWh at $0.174 each is $89.088, which rounds to $89.09. t1-p2: What does Model B cost to run for a year? Answer: $67.69. Verification: 389 kWh at $0.174 each is $67.686, which rounds to $67.69. t1-p3: How much does Model B save in running cost each year? Answer: $21.40. Verification: The 123 kWh difference at $0.174 is $21.402, which rounds to $21.40 a year. t2-p1: How much more does Model B cost to buy? Answer: $150.00. Verification: Model B’s price of $1,199 less Model A’s $1,049, the extra paid upfront for the lower running cost. t2-p2: How many years of running-cost savings does it take to repay that difference? Round to one decimal place. Answer: 7.0. Verification: $150 divided by the unrounded annual saving of $21.402 is 7.0087 years, which rounds to 7.0. t2-p3: Over 12 years of ownership, what is the total cost — purchase plus running — of Model B? Answer: $2,011.28. Verification: $1,199 to buy plus twelve years at $67.69, which is $812.28 of electricity."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. t3-p1: This fictional label gives an estimated yearly kWh figure and nothing about price. Explain why a label might stop there, and what a buyer must supply to turn it into a decision. (Real energy labels usually do print an estimated yearly dollar cost, computed at one national electricity rate.) States that electricity prices differ by place and change over time, so a dollar figure printed on the label would be wrong for most buyers, while a kWh figure stays true. Identifies what the buyer supplies: their own electricity rate, how long they expect to keep the appliance, and the purchase prices. Connects this to the 7.0-year payback, noting that the answer depends entirely on the buyer’s own horizon. Uses the $0.174 rate and the 7.0-year payback figure in the explanation. The response treats the kWh figure as the disclosure and the dollar figure as a local calculation. The response does not conclude that Model B is simply better without reference to how long it is kept."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States that electricity prices differ by place and change over time, so a dollar figure printed on the label would be wrong for most buyers, while a kWh figure stays true. Identifies what the buyer supplies: their own electricity rate, how long they expect to keep the appliance, and the purchase prices. Connects this to the 7.0-year payback, noting that the answer depends entirely on the buyer’s own horizon."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u02-l09.scoring.json",
+    "sourceScoringSha256": "604086ab1061f60f3b0716a858d0c0009bd10480180a0092570a3453f994b851",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

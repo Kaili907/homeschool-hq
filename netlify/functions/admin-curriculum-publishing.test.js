@@ -50,17 +50,23 @@ function setup(authorizationResult = {
   const authoring = {
     listCollaborators: vi.fn(async () => ({ currentResponsibility: 'editor' })),
   }
+  const stepUpAssurance = {
+    consume: vi.fn(async ({ binding }) => ({ ok: true, binding })),
+  }
   const handler = createAdminCurriculumHandler({
     authorization,
     publishing,
+    stepUpAssurance,
+    requestSourceGuard: () => ({ ok: true }),
+    criticalActionAudit: { record: vi.fn(async () => {}) },
     studio: {}, authoring, approval: {}, staging: {}, registry: {}, source: {},
   })
-  return { authorization, authoring, publishing, handler }
+  return { authorization, authoring, publishing, stepUpAssurance, handler }
 }
 
 describe('Admin curriculum publishing HTTP boundary', () => {
   it('reads with curriculum:read and publishes with curriculum:publish', async () => {
-    const { authorization, authoring, publishing, handler } = setup()
+    const { authorization, authoring, publishing, stepUpAssurance, handler } = setup()
     const read = await handler(event('GET', `/api/admin/curriculum/drafts/${DRAFT}/publishing`))
     const publish = await handler(event('POST', `/api/admin/curriculum/drafts/${DRAFT}/publishing`, {
       stagingId: STAGING,
@@ -74,6 +80,14 @@ describe('Admin curriculum publishing HTTP boundary', () => {
     expect(publishing.read).toHaveBeenCalledWith(ACTOR, DRAFT)
     expect(authoring.listCollaborators).toHaveBeenCalledWith(ACTOR, DRAFT)
     expect(publishing.publish).toHaveBeenCalledWith(ACTOR, STAGING, REQUEST)
+    expect(stepUpAssurance.consume).toHaveBeenCalledWith({
+      event: expect.anything(),
+      binding: {
+        actorId: ACTOR,
+        action: 'admin.curriculum.publish',
+        resource: { type: 'curriculum-publication', id: `${DRAFT}:${STAGING}` },
+      },
+    })
     expect(JSON.parse(publish.body).published.activationStatus).toBe('not_active')
   })
 

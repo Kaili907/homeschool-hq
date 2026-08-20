@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u07-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u07-l05",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Circles, Angles, Area, and Surface Area",
+    "dayInUnit": 5,
+    "courseDay": 113,
+    "phase": "Concept model B",
+    "focus": "area of composite figures",
+    "title": "Concept model B: area of composite figures"
+  },
+  "standards": [
+    "7.G.4",
+    "7.G.5",
+    "7.G.6"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-of-composite-figure",
+          "standard": "7.G.6",
+          "difficulty": 1,
+          "prompt": "A room shaped like an L is made from a 10-by-8 rectangle with a 3-by-2 rectangular corner cut out. What is the area of the room, in square units?",
+          "workedSolution": {
+            "steps": [
+              "Find the area of the full rectangle: 10 × 8 = 80.",
+              "Find the area of the removed corner: 3 × 2 = 6.",
+              "Subtract the corner from the rectangle: 80 − 6 = 74 square units."
+            ],
+            "answer": "74"
+          }
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "missing-dimension-from-area",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangle has an area of 51 square units and a width of 6 units. What is its exact length?",
+          "workedSolution": {
+            "steps": [
+              "Length equals area divided by width: 51 ÷ 6.",
+              "Write the exact quotient as a fraction: 51/6 = 17/2.",
+              "Rewrite as a mixed number: 17/2 = 8 1/2."
+            ],
+            "answer": "8 1/2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "surface-area-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangular prism has length 12, width 11, and height 7 (all in units). What is its exact surface area, in square units?",
+          "choices": [
+            "586",
+            "293",
+            "924",
+            "588"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "What is the exact volume of a rectangular prism with length 14, width 4, and height 9 (units)? Give your answer in cubic units.",
+          "choices": [
+            "503 cubic units",
+            "56 cubic units",
+            "504 cubic units",
+            "505 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "circumference-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a diameter of 20 m. What is its exact circumference? Express your answer as a multiple of π.",
+          "choices": [
+            "21π m",
+            "20π m",
+            "23π m",
+            "40π m"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "find-radius-or-diameter-from-circumference",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a circumference of 27π m. What is its exact radius?",
+          "choices": [
+            "13 1/2 m",
+            "6 3/4 m",
+            "15 1/2 m",
+            "16 1/2 m"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "area-of-circle-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a radius of 9 m. What is its exact area? Express your answer as a multiple of π (use a fraction for the coefficient if it is not a whole number).",
+          "choices": [
+            "324π m²",
+            "82π m²",
+            "81π m²",
+            "18π m²"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "circumference-area-relationship",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle's radius equals its circumference divided by 2π. A circle has a circumference of 15π cm. Use this relationship to find the circle's exact area, as a multiple of π.",
+          "choices": [
+            "225/4π cm²",
+            "221/4π cm²",
+            "229/4π cm²",
+            "225/2π cm²"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "complementary-supplementary-angle",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two angles are complementary. One angle measures 18°. What is the measure of the other angle?",
+          "choices": [
+            "71°",
+            "72°",
+            "74°",
+            "62°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "vertical-angles-with-expressions",
+          "standard": "7.G.5",
+          "difficulty": 2,
+          "prompt": "Two lines intersect, forming vertical angles that measure (3x + 5)° and (6x - 40)°. Vertical angles are congruent. Find the value of x and the measure of the angles.",
+          "choices": [
+            "x = 15, each angle measures 50°",
+            "x = 16, each angle measures 53°",
+            "x = 15, each angle measures 60°",
+            "x = 15, each angle measures 40°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "angle-equation-multistep",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two angles are supplementary. Their measures are (6x + 3)° and (6x - 63)°. Find the value of x and the measure of each angle.",
+          "choices": [
+            "x = 20, angles measure 123° and 57°",
+            "x = 19, angles measure 117° and 63°",
+            "x = 20, angles measure 57° and 123°",
+            "x = 22, angles measure 135° and 45°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u07-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u07-l05"
+  }
+}

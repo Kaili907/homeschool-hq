@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u06-l16",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u06-l16",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Multiplying Fractions and Scaling",
+    "dayInUnit": 16,
+    "courseDay": 106,
+    "phase": "Unit assessment",
+    "focus": "scaling and magnitude",
+    "title": "Unit assessment: scaling and magnitude"
+  },
+  "standards": [
+    "5.NF.3",
+    "5.NF.4",
+    "5.NF.5",
+    "5.NF.6",
+    "5.NF.7"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "fraction-as-division",
+          "standard": "5.NF.3",
+          "difficulty": 1,
+          "prompt": "Write 3 ÷ 4 as a fraction in simplest form.",
+          "choices": [
+            "4/7",
+            "3/4",
+            "3/7",
+            "1/4"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole",
+          "standard": "5.NF.4",
+          "difficulty": 1,
+          "prompt": "Find 4 × 2/3. Write the answer in simplest form.",
+          "choices": [
+            "2/3",
+            "8/3",
+            "2 2/3",
+            "4 2/3"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fractions",
+          "standard": "5.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 2/7 × 3/7. Write the answer in simplest form.",
+          "choices": [
+            "2/3",
+            "6/49",
+            "3/7",
+            "6/7"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "scaling-magnitude",
+          "standard": "5.NF.5",
+          "difficulty": 2,
+          "prompt": "Compared with 4, 10/11 × 4 is __ 4.",
+          "choices": [
+            "less than",
+            "equal to",
+            "greater than"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "fraction-word-problem",
+          "standard": "5.NF.6",
+          "difficulty": 2,
+          "prompt": "3 identical ribbon pieces are 1/7 meter each. What is their total length in meters?",
+          "choices": [
+            "3 1/7",
+            "1/7",
+            "1/21",
+            "3/7"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "divide-unit-fraction",
+          "standard": "5.NF.7",
+          "difficulty": 2,
+          "prompt": "Find 1/11 ÷ 6. Write the answer in simplest form.",
+          "choices": [
+            "1/11",
+            "1/17",
+            "1/66",
+            "1 5/6"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "fraction-as-division",
+          "standard": "5.NF.3",
+          "difficulty": 3,
+          "prompt": "Write 3 ÷ 12 as a fraction in simplest form.",
+          "choices": [
+            "1/5",
+            "1/4",
+            "3/4",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole",
+          "standard": "5.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 7 × 4/10. Write the answer in simplest form.",
+          "choices": [
+            "7 2/5",
+            "2/35",
+            "2 4/5",
+            "2/5"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fractions",
+          "standard": "5.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 2/7 × 2/7. Write the answer in simplest form.",
+          "choices": [
+            "2/7",
+            "1",
+            "4/7",
+            "4/49"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "scaling-magnitude",
+          "standard": "5.NF.5",
+          "difficulty": 3,
+          "prompt": "Compared with 16, 2/4 × 16 is __ 16.",
+          "choices": [
+            "equal to",
+            "greater than",
+            "less than"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "fraction-word-problem",
+          "standard": "5.NF.6",
+          "difficulty": 3,
+          "prompt": "2 identical ribbon pieces are 4/7 meter each. What is their total length in meters?",
+          "choices": [
+            "2/7",
+            "1 1/7",
+            "4/7",
+            "2 4/7"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u06-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "divide-unit-fraction",
+          "standard": "5.NF.7",
+          "difficulty": 3,
+          "prompt": "Find 1/11 ÷ 4. Write the answer in simplest form.",
+          "choices": [
+            "1/11",
+            "4/11",
+            "2 3/4",
+            "1/44"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u06-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u06-l16"
+  }
+}

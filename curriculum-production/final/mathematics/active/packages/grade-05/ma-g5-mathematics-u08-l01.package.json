@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u08-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u08-l01",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Measurement, Data, and Volume",
+    "dayInUnit": 1,
+    "courseDay": 127,
+    "phase": "Launch and diagnostic",
+    "focus": "measurement conversions",
+    "title": "Launch and diagnostic: measurement conversions"
+  },
+  "standards": [
+    "5.MD.1",
+    "5.MD.2",
+    "5.MD.3",
+    "5.MD.4",
+    "5.MD.5"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u08-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "measurement-conversion",
+          "standard": "5.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 3 feet to inches.",
+          "workedSolution": {
+            "steps": [
+              "1 foot equals 12 inches, so each of the 3 feet contributes 12 inches.",
+              "Multiply by the conversion factor: 3 × 12 = 36.",
+              "An inch is smaller than a foot, so the count must grow, not shrink: 3 feet = 36 inches."
+            ],
+            "answer": "36 inches"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u08-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-fraction-data",
+          "standard": "5.MD.2",
+          "difficulty": 1,
+          "prompt": "A line plot has 2 marks at 1/4 meter, 1 mark at 1/2 meter, and 3 marks at 3/4 meter. What total length do the marks represent?",
+          "choices": [
+            "3 1/4 meters",
+            "4 1/4 meters",
+            "2 1/4 meters",
+            "6 meters"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "volume-unit-cubes",
+          "standard": "5.MD.3",
+          "difficulty": 1,
+          "prompt": "A rectangular prism is 3 unit cubes long, 3 wide, and 6 high. How many unit cubes fill it?",
+          "choices": [
+            "54 cubic units",
+            "90 cubic units",
+            "12 cubic units",
+            "15 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "volume-formula",
+          "standard": "5.MD.5",
+          "difficulty": 2,
+          "prompt": "Find the volume of a rectangular prism with length 2, width 6, and height 3 units.",
+          "choices": [
+            "15 cubic units",
+            "72 cubic units",
+            "36 cubic units",
+            "6 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "additive-volume",
+          "standard": "5.MD.5",
+          "difficulty": 2,
+          "prompt": "An L-shaped solid is decomposed into two non-congruent rectangular prisms sharing a base of 2 by 4 units and having heights 7 and 3 units. What is its combined volume?",
+          "choices": [
+            "16 cubic units",
+            "18 cubic units",
+            "80 cubic units",
+            "56 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "measurement-design",
+          "standard": "5.MD.4",
+          "difficulty": 3,
+          "prompt": "A storage box is 4 inches by 6 inches by 8 inches. What is its capacity?",
+          "choices": [
+            "192 cubic inches",
+            "32 cubic inches",
+            "208 cubic inches",
+            "24 cubic inches"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u08-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "measurement-conversion",
+          "standard": "5.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 4 feet to inches.",
+          "choices": [
+            "576 inches",
+            "16 inches",
+            "12 inches",
+            "48 inches"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-fraction-data",
+          "standard": "5.MD.2",
+          "difficulty": 2,
+          "prompt": "A line plot has 3 marks at 1/4 meter, 2 marks at 1/2 meter, and 2 marks at 3/4 meter. What total length do the marks represent?",
+          "choices": [
+            "4 1/4 meters",
+            "7 meters",
+            "1 3/4 meters",
+            "3 1/4 meters"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u08-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u08-l01"
+  }
+}

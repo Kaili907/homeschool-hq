@@ -1,0 +1,319 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l08",
+  "lessonId": "ma-g12-financial-literacy-u07-l08",
+  "integratedDomains": [
+    "taxes",
+    "income",
+    "budgeting",
+    "banking",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$39,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Both incomes added, less one $9,000 standard deduction. Independent income is taxed alongside wages, not separately."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,472.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,040.00 on the first $10,400 plus 12% of the remaining $28,600.00."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,468.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15.3% of $9,600. This levy applies only to the independent income, and it is charged in addition to income tax rather than instead of it."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$5,940.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,472.00 of income tax plus $1,468.80 of self-employment levy."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$3,160.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,940.80 owed against $2,780 withheld. The employer withheld against the wages alone and had no knowledge of the independent income, so the gap is structural rather than an error."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$790.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,160.80 across 4 quarters. Setting money aside on the same rhythm the liability accrues is what keeps a filing deadline from arriving as a surprise."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$2,620.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The independent income sits entirely above the standard deduction and the 10% band, which the wages already used, so every dollar of it is taxed at 12% and carries the full 15.3% levy — together 27.30% of $9,600. The remaining $540.00 of the $3,160.80 is not caused by the side work at all: it is wage income tax the employer under-withheld, and it would be owed even if the independent work had never happened."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "wages + sideIncome - deduction",
+        "substituted": "38400 + 9600 - 9000",
+        "result": "$39,000.00",
+        "why": "Both incomes added, less one $9,000 standard deduction. Independent income is taxed alongside wages, not separately."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "band1 * lowRate + (#t1-p1 - band1) * midRate",
+        "substituted": "10400 * 0.1 + (#t1-p1 - 10400) * 0.12",
+        "result": "$4,472.00",
+        "why": "$1,040.00 on the first $10,400 plus 12% of the remaining $28,600.00."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "sideIncome2 * seLevy",
+        "substituted": "9600 * 0.153",
+        "result": "$1,468.80",
+        "why": "15.3% of $9,600. This levy applies only to the independent income, and it is charged in addition to income tax rather than instead of it."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 + #t1-p3",
+        "substituted": "#t1-p2 + #t1-p3",
+        "result": "$5,940.80",
+        "why": "$4,472.00 of income tax plus $1,468.80 of self-employment levy."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - withheld",
+        "substituted": "#t2-p1 - 2780",
+        "result": "$3,160.80",
+        "why": "$5,940.80 owed against $2,780 withheld. The employer withheld against the wages alone and had no knowledge of the independent income, so the gap is structural rather than an error."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / 4, 2)",
+        "substituted": "round(#t2-p2 / 4, 2)",
+        "result": "$790.20",
+        "why": "$3,160.80 across 4 quarters. Setting money aside on the same rhythm the liability accrues is what keeps a filing deadline from arriving as a surprise."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "sideIncome3 * (midRate3 + seLevy2)",
+        "substituted": "9600 * (0.12 + 0.153)",
+        "result": "$2,620.80",
+        "why": "The independent income sits entirely above the standard deduction and the 10% band, which the wages already used, so every dollar of it is taxed at 12% and carries the full 15.3% levy — together 27.30% of $9,600. The remaining $540.00 of the $3,160.80 is not caused by the side work at all: it is wage income tax the employer under-withheld, and it would be owed even if the independent work had never happened."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Someone earning $9,600 from independent work might reasonably plan around having $9,600. Explain what is wrong with that, describe the practice you would recommend for a fictional person in this position, and say what makes the 32.93% figure specific to this case rather than a general rule.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the error: $2,620.80 of the $9,600 — 27.30% of it — is already committed to tax, so treating the whole amount as available overstates spendable income by more than a quarter and produces a bill with nothing set aside for it.",
+          "Describes a workable practice: move a fixed proportion of every payment received into a separate account on receipt, rather than computing the liability once a year, and set aside $790.20 each quarter.",
+          "Separates the two causes: $2,620.80 of the bill follows from the independent income at 12% plus the 15.3% levy, and the remaining $540.00 is wage income tax the employer under-withheld, which would have been owed regardless.",
+          "Explains what makes the 27.30% share case-specific: the wages already used the standard deduction and the 10% band, so every dollar of independent income falls in the 12% band — a person with lower wages would face a lower share."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3,160.80 still owed, the $790.20 quarterly figure, and the $2,620.80 attributable to the independent income."
+        ],
+        "lookFors": [
+          "The response explains why the share is not a general rule of thumb.",
+          "The response names where the set-aside money is held between quarters."
+        ],
+        "commonMisconception": "Assuming that income arriving without withholding carries no tax, when it carries both income tax and, in this fictional schedule, a levy the employer would otherwise have shared.",
+        "dimensions": [
+          "transfer",
+          "plan-coherence",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is taxable income for the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the federal income tax?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the self-employment levy on the independent income?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is owed in total for the year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What remains owed after the wages withholding is credited?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Spread across 4 quarterly set-asides, how much is that each time?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much of the amount still owed is attributable to the independent income itself — income tax on it at the 12% band plus the 15.3% levy?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Someone earning $9,600 from independent work might reasonably plan around having $9,600. Explain what is wrong with that, describe the practice you would recommend for a fictional person in this position, and say what makes the 32.93% figure specific to this case rather than a general rule."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is taxable income for the year? Answer: $39,000.00. Verification: Both incomes added, less one $9,000 standard deduction. Independent income is taxed alongside wages, not separately. t1-p2: What is the federal income tax? Answer: $4,472.00. Verification: $1,040.00 on the first $10,400 plus 12% of the remaining $28,600.00. t1-p3: What is the self-employment levy on the independent income? Answer: $1,468.80. Verification: 15.3% of $9,600. This levy applies only to the independent income, and it is charged in addition to income tax rather than instead of it. t2-p1: What is owed in total for the year? Answer: $5,940.80. Verification: $4,472.00 of income tax plus $1,468.80 of self-employment levy. t2-p2: What remains owed after the wages withholding is credited? Answer: $3,160.80. Verification: $5,940.80 owed against $2,780 withheld. The employer withheld against the wages alone and had no knowledge of the independent income, so the gap is structural rather than an error. t2-p3: Spread across 4 quarterly set-asides, how much is that each time? Answer: $790.20. Verification: $3,160.80 across 4 quarters. Setting money aside on the same rhythm the liability accrues is what keeps a filing deadline from arriving as a surprise. t2-p4: How much of the amount still owed is attributable to the independent income itself — income tax on it at the 12% band plus the 15.3% levy? Answer: $2,620.80. Verification: The independent income sits entirely above the standard deduction and the 10% band, which the wages already used, so every dollar of it is taxed at 12% and carries the full 15.3% levy — together 27.30% of $9,600. The remaining $540.00 of the $3,160.80 is not caused by the side work at all: it is wage income tax the employer under-withheld, and it would be owed even if the independent work had never happened."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Someone earning $9,600 from independent work might reasonably plan around having $9,600. Explain what is wrong with that, describe the practice you would recommend for a fictional person in this position, and say what makes the 32.93% figure specific to this case rather than a general rule. Explains the error: $2,620.80 of the $9,600 — 27.30% of it — is already committed to tax, so treating the whole amount as available overstates spendable income by more than a quarter and produces a bill with nothing set aside for it. Describes a workable practice: move a fixed proportion of every payment received into a separate account on receipt, rather than computing the liability once a year, and set aside $790.20 each quarter. Separates the two causes: $2,620.80 of the bill follows from the independent income at 12% plus the 15.3% levy, and the remaining $540.00 is wage income tax the employer under-withheld, which would have been owed regardless. Explains what makes the 27.30% share case-specific: the wages already used the standard deduction and the 10% band, so every dollar of independent income falls in the 12% band — a person with lower wages would face a lower share. Uses the $3,160.80 still owed, the $790.20 quarterly figure, and the $2,620.80 attributable to the independent income. The response explains why the share is not a general rule of thumb. The response names where the set-aside money is held between quarters."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the error: $2,620.80 of the $9,600 — 27.30% of it — is already committed to tax, so treating the whole amount as available overstates spendable income by more than a quarter and produces a bill with nothing set aside for it. Describes a workable practice: move a fixed proportion of every payment received into a separate account on receipt, rather than computing the liability once a year, and set aside $790.20 each quarter. Separates the two causes: $2,620.80 of the bill follows from the independent income at 12% plus the 15.3% levy, and the remaining $540.00 is wage income tax the employer under-withheld, which would have been owed regardless. Explains what makes the 27.30% share case-specific: the wages already used the standard deduction and the 10% band, so every dollar of independent income falls in the 12% band — a person with lower wages would face a lower share."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u07-l08.scoring.json",
+    "sourceScoringSha256": "373ba2fdca58ef24a33159ea879dc74666a65d90768a000d9fb02054a7fece02",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

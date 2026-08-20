@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l06",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 6,
+    "courseDay": 150,
+    "phase": "Concept build C",
+    "focus": "measurement word problems including money and time",
+    "title": "Concept build C: measurement word problems including money and time"
+  },
+  "standards": [
+    "4.MD.2"
+  ],
+  "blueprint": {
+    "phase": "Concept build C",
+    "profile": "concept-build-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 1,
+          "prompt": "A runner covers 200 meters, then runs 4 more laps of 50 meters each. How many meters total?",
+          "workedSolution": {
+            "steps": [
+              "4 × 50 = 200.",
+              "200 + 200 = 400."
+            ],
+            "answer": "400"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A tank has 213 liters of water. 2 containers of 37 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "213",
+            "74",
+            "139",
+            "287"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A hiker walks 138 meters, then walks 2 more trips of 34 meters each. How many meters total?",
+          "choices": [
+            "138",
+            "206",
+            "68",
+            "207"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 251 meters, then walks 2 more trips of 94 meters each. How many meters total?",
+          "choices": [
+            "439",
+            "440",
+            "188",
+            "251"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A tank has 230 liters of water. 2 containers of 89 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "178",
+            "408",
+            "52",
+            "230"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 775 meters, then walks 8 more trips of 134 meters each. How many meters total?",
+          "choices": [
+            "1848",
+            "1072",
+            "775",
+            "1847"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A tank has 1567 liters of water. 7 containers of 185 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "1567",
+            "272",
+            "1295",
+            "2862"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 650 meters, then walks 4 more trips of 89 meters each. How many meters total?",
+          "choices": [
+            "1006",
+            "1007",
+            "650",
+            "356"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A tank has 182 liters of water. 4 containers of 18 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "110",
+            "182",
+            "72",
+            "254"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 528 meters, then walks 10 more trips of 99 meters each. How many meters total?",
+          "choices": [
+            "1519",
+            "990",
+            "528",
+            "1518"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l06"
+  }
+}

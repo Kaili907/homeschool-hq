@@ -1,0 +1,545 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel-academy.local/schema/rfl-production-depth-r1-task-sheet.schema.json",
+  "title": "Ready for Life production-depth R1 student task sheet",
+  "description": "Learner-facing material for one Ready for Life lesson, grades 3-12. Carries no rubric criterion or sign-off certification field — those live in the sibling scoring record referenced by scoringRef. Every package also carries the complete Manuel Academy local production-depth composition used for learner delivery.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "packageId",
+    "lessonRef",
+    "subjectFamily",
+    "objective",
+    "scenario",
+    "isFictionalSimulation",
+    "completionAuthority",
+    "realWorldAction",
+    "tasks",
+    "remediation",
+    "extension",
+    "scoringRef",
+    "integrity",
+    "productionDepth"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "packageId": {
+      "type": "string",
+      "pattern": "^swk-rfl-"
+    },
+    "lessonRef": {
+      "type": "object",
+      "required": [
+        "lessonId",
+        "courseId",
+        "grade",
+        "subject",
+        "unitNumber",
+        "unitTitle",
+        "dayInUnit",
+        "phase",
+        "title"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "lessonId": {
+          "type": "string"
+        },
+        "courseId": {
+          "type": "string"
+        },
+        "grade": {
+          "type": "integer",
+          "enum": [
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "subject": {
+          "const": "ready-for-life"
+        },
+        "unitNumber": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unitTitle": {
+          "type": "string"
+        },
+        "dayInUnit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "phase": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "subjectFamily": {
+      "const": "ARTS_RFL_PE_PROJECT"
+    },
+    "standardsRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scenario": {
+      "type": "string",
+      "minLength": 1
+    },
+    "isFictionalSimulation": {
+      "type": "boolean"
+    },
+    "completionAuthority": {
+      "enum": [
+        "learner",
+        "guardian"
+      ],
+      "description": "'guardian' means a household-authorized guardian action certifies the task; a learner's own completion click is recorded but never certifying. Reserved for lessons with a genuine real-world, adult-observed component."
+    },
+    "realWorldAction": {
+      "type": "boolean"
+    },
+    "signOff": {
+      "description": "Required and non-null when completionAuthority is 'guardian'; must be null when completionAuthority is 'learner'.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "requiresGuardianPermissionBeforeStart",
+            "requiresTrustedAdultSupervision",
+            "certifyingActor",
+            "studentSelfReport",
+            "evidenceTypes",
+            "identifiablePhotoRequired"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "requiresGuardianPermissionBeforeStart": {
+              "const": true
+            },
+            "requiresTrustedAdultSupervision": {
+              "type": "boolean"
+            },
+            "certifyingActor": {
+              "const": "household-authorized guardian"
+            },
+            "studentSelfReport": {
+              "const": "recorded-but-not-certifying"
+            },
+            "evidenceTypes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "identifiablePhotoRequired": {
+              "const": false
+            }
+          }
+        }
+      ]
+    },
+    "safetyNotes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "simulationAlternative": {
+      "description": "Required and present:true whenever realWorldAction is true, so a learner without safe access to the real materials, adult supervision, transportation, or setting still has an equal-credit way to complete the lesson.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "present",
+            "description"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "present": {
+              "const": true
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "taskId",
+          "kind",
+          "directions",
+          "prompts"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "warm-up",
+              "guided",
+              "independent",
+              "performance-task",
+              "reflection"
+            ]
+          },
+          "directions": {
+            "type": "string",
+            "minLength": 1
+          },
+          "prompts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "ref",
+                "promptType",
+                "text"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "ref": {
+                  "type": "string"
+                },
+                "promptType": {
+                  "enum": [
+                    "short-response",
+                    "extended-response",
+                    "checklist-item",
+                    "fixed-choice"
+                  ]
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "choices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 2,
+                  "uniqueItems": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "remediation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extension": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scoringRef": {
+      "type": "string",
+      "pattern": "^scoring/"
+    },
+    "integrity": {
+      "type": "object",
+      "required": [
+        "sourceStage",
+        "sourceCorpusRef",
+        "sourceLessonId",
+        "authoredBy"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sourceStage": {
+          "enum": [
+            "released",
+            "authoring"
+          ]
+        },
+        "sourceCorpusRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceLessonId": {
+          "type": "string"
+        },
+        "authoredBy": {
+          "const": "manual"
+        }
+      }
+    },
+    "productionDepth": {
+      "type": "object",
+      "required": [
+        "version",
+        "authorityBasis",
+        "lessonFamily",
+        "practicalGoal",
+        "duration",
+        "materials",
+        "resources",
+        "model",
+        "instruction",
+        "guidedFirstAttempt",
+        "independentTask",
+        "evidence",
+        "retry",
+        "guardianInvolvement",
+        "safety",
+        "privacy",
+        "tutorBoundary"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": "ready-for-life-production-depth-r1"
+        },
+        "authorityBasis": {
+          "const": "MANUEL_ACADEMY_LOCAL_COMPOSITION"
+        },
+        "approvedAnchor": {
+          "type": "object"
+        },
+        "lessonFamily": {
+          "type": "string",
+          "minLength": 1
+        },
+        "practicalGoal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "duration": {
+          "type": "object",
+          "required": [
+            "activeLearnerTime",
+            "elapsedWindow",
+            "sessionPattern",
+            "adultTime"
+          ]
+        },
+        "materials": {
+          "type": "object",
+          "required": [
+            "providedResourceRefs",
+            "referencedArtifactWords",
+            "artifactResolutionRefs",
+            "localMaterials",
+            "noPurchaseRule"
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "minItems": 6,
+          "items": {
+            "type": "object",
+            "required": [
+              "resourceId",
+              "kind",
+              "title",
+              "purpose",
+              "content"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "resourceId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "reference",
+                  "model",
+                  "step-by-step-instruction",
+                  "guided-practice",
+                  "independent-task",
+                  "evidence-record",
+                  "retry"
+                ]
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "purpose": {
+                "type": "string",
+                "minLength": 1
+              },
+              "content": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "model": {
+          "type": "object"
+        },
+        "instruction": {
+          "type": "object",
+          "required": [
+            "presentationRule",
+            "steps",
+            "resourceRef"
+          ]
+        },
+        "guidedFirstAttempt": {
+          "type": "object"
+        },
+        "independentTask": {
+          "type": "object",
+          "required": [
+            "realLifeAppropriate",
+            "realRoute",
+            "simulationRoute",
+            "privacyAlternative",
+            "resourceRef"
+          ]
+        },
+        "evidence": {
+          "type": "object"
+        },
+        "retry": {
+          "type": "object",
+          "required": [
+            "trigger",
+            "targetedReteach",
+            "supportedReattempt",
+            "feedback",
+            "parallelReattempt",
+            "exitCriterion",
+            "returnPath",
+            "resourceRef"
+          ]
+        },
+        "guardianInvolvement": {
+          "type": "object",
+          "required": [
+            "requiredForPhysicalRoute",
+            "requiredForSimulationRoute",
+            "role",
+            "learnerSelfReport",
+            "signOffBoundary"
+          ]
+        },
+        "safety": {
+          "type": "object",
+          "required": [
+            "stopRule",
+            "noShameRule"
+          ]
+        },
+        "privacy": {
+          "type": "object",
+          "required": [
+            "rule",
+            "doNotCollect"
+          ]
+        },
+        "tutorBoundary": {
+          "type": "object",
+          "required": [
+            "may",
+            "mayNot",
+            "physicalCompletionRule",
+            "missingResourceAction"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "completionAuthority": {
+            "const": "guardian"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "signOff": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "completionAuthority": {
+            "const": "learner"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "signOff": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "realWorldAction": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "simulationAlternative": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ]
+}

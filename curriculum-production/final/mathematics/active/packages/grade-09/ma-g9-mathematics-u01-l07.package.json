@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l07",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 7,
+    "courseDay": 7,
+    "phase": "Investigation or close reading",
+    "focus": "quantities, units, and derived rates in context",
+    "title": "Investigation or close reading: quantities, units, and derived rates in context"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 1,
+          "prompt": "Is 5 + √3 rational or irrational?",
+          "workedSolution": {
+            "steps": [
+              "Suppose 5 + √3 were rational.",
+              "Subtracting the rational number 5 would leave √3 rational, but √3 is irrational.",
+              "The assumption fails, so 5 + √3 is irrational."
+            ],
+            "answer": "irrational"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 2,
+          "prompt": "Option A delivers 33 units of output over 3 hours. Option B delivers 32 units over 4 hours. Which has the greater output per hour?",
+          "choices": [
+            "The two rates are equal.",
+            "Option A",
+            "Option B",
+            "There is not enough information without knowing the total hours available."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 3,
+          "prompt": "A rectangular plot measures 85.3 m by 10.8 m, each measured to the nearest tenth of a metre. Report the area to 2 decimal places.",
+          "choices": [
+            "921.2400 m²",
+            "921.24 m²",
+            "96.10 m²",
+            "192.20 m²"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 2,
+          "prompt": "You are building a model of the rate at which a reservoir is draining. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "metres per hour",
+            "cubic metres per hour",
+            "cubic metres",
+            "hours per cubic metre"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "A delivery drone operates at 73 kilometers per hour. Express this rate in meters per minute.",
+          "choices": [
+            "73 meters per minute",
+            "12166.67 meters per minute",
+            "1216.67 meters per minute",
+            "4.38 meters per minute"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 3,
+          "prompt": "Rewrite the index-4 radical expression 4√(x^3) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(3/4)",
+            "x^(12)",
+            "x^(4/3)",
+            "x^(-1)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 3,
+          "prompt": "Evaluate 8^(4/3) exactly.",
+          "choices": [
+            "12",
+            "11",
+            "16",
+            "32"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 3,
+          "prompt": "Write √208 in simplest radical form.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 3,
+          "prompt": "Classify the sum of the rational number 3 and the irrational number √10 as rational or irrational, and be ready to justify it.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l07"
+  }
+}

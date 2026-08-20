@@ -27,7 +27,7 @@ function testAccess({
   memberships = [
     {
       id: 'active-membership',
-      user_id: 'household-user',
+      user_id: '00000000-0000-4000-8000-000000000701',
       status: 'active',
       revoked_at: null,
       household_id: 'household-1',
@@ -153,7 +153,7 @@ function installFakeAbortTimeout() {
 
 function fetchRouter({
   authStatus = 200,
-  authBody = { id: 'household-user', email: 'dad@example.test' },
+  authBody = { id: '00000000-0000-4000-8000-000000000701', email: 'dad@example.test' },
   providerStatus = 200,
   providerBody = {
     id: 'provider-id',
@@ -532,7 +532,7 @@ describe('authenticated Anthropic gateway', () => {
       memberships: [
         {
           id: 'revoked-membership',
-          user_id: 'household-user',
+          user_id: '00000000-0000-4000-8000-000000000701',
           status: 'revoked',
           revoked_at: '2026-07-31T18:00:00.000Z',
         },
@@ -556,8 +556,8 @@ describe('authenticated Anthropic gateway', () => {
       gatewayAccess: access,
     })(event())
     expect(result.statusCode).toBe(200)
-    expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
-    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 50)
+    expect(access.requireEntitlement).toHaveBeenCalledWith('00000000-0000-4000-8000-000000000701')
+    expect(access.consumeUsage).toHaveBeenCalledWith('00000000-0000-4000-8000-000000000701', 'anthropic', 50)
   })
 
   it.each([
@@ -607,7 +607,7 @@ describe('authenticated Anthropic gateway', () => {
     expect(JSON.parse(selectedFetch.mock.calls.find(
       ([url]) => url === 'https://api.anthropic.com/v1/messages',
     )[1].body).model).toBe('claude-haiku-4-5')
-    expect(selectedAccess.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 17)
+    expect(selectedAccess.consumeUsage).toHaveBeenCalledWith('00000000-0000-4000-8000-000000000701', 'anthropic', 17)
     expect(selectedAccess.recordProviderUsage).toHaveBeenCalledWith(
       expect.objectContaining({ logicalModelTier: 'haiku' }),
     )
@@ -649,7 +649,7 @@ describe('authenticated Anthropic gateway', () => {
       effectiveConfigurationReader: runtimeResolver({ aiDailyLimit: 17 }),
     })(event())
     expect(enabled.statusCode).toBe(200)
-    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 17)
+    expect(access.consumeUsage).toHaveBeenCalledWith('00000000-0000-4000-8000-000000000701', 'anthropic', 17)
   })
 
   it('rejects an unapproved browser tier and uses the trusted default when omitted', async () => {
@@ -740,7 +740,7 @@ describe('authenticated Anthropic gateway', () => {
     const access = testAccess()
     const fetchImpl = vi.fn(async (url, init) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '00000000-0000-4000-8000-000000000701' }), { status: 200 })
       }
       return new Promise((_resolve, reject) => {
         init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
@@ -760,7 +760,7 @@ describe('authenticated Anthropic gateway', () => {
     const declaredFetch = fetchRouter()
     declaredFetch.mockImplementation(async (url) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '00000000-0000-4000-8000-000000000701' }), { status: 200 })
       }
       return new Response('{}', {
         status: 200,
@@ -772,7 +772,7 @@ describe('authenticated Anthropic gateway', () => {
 
     declaredFetch.mockImplementation(async (url) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '00000000-0000-4000-8000-000000000701' }), { status: 200 })
       }
       return new Response('{}', {
         status: 200,
@@ -784,7 +784,7 @@ describe('authenticated Anthropic gateway', () => {
 
     const streamedFetch = vi.fn(async (url) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '00000000-0000-4000-8000-000000000701' }), { status: 200 })
       }
       return new Response(new Uint8Array(256 * 1024 + 1), {
         status: 200,
@@ -820,7 +820,7 @@ describe('authenticated Anthropic gateway', () => {
     expect(access.recordProviderUsage).toHaveBeenCalledWith({
       requestKey: 'anthropic-ledger-test',
       occurredAt: expect.any(String),
-      accountRef: 'household-user',
+      accountRef: '00000000-0000-4000-8000-000000000701',
       householdRef: 'household-1',
       householdAttribution: 'resolved',
       appVersion: 'academy-test-build',

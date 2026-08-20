@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-mathematics-u02-assessment",
+  "courseRef": "ma-g12-mathematics",
+  "grade": 12,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g12-mathematics-u02",
+    "unitNumber": 2,
+    "unitTitle": "Inverse Trigonometric Functions and Composition",
+    "courseTitle": "Precalculus with Statistics",
+    "assessmentLessonRef": "ma-g12-mathematics-u02-l16"
+  },
+  "standards": [
+    "F-TF.6",
+    "F-TF.7",
+    "F-BF.5",
+    "MP.2"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u02-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Why does sine on all real numbers not have an inverse function without further restriction?",
+      "choices": [
+        "It repeats with period π, so the domain is restricted to (−π/2, π/2) to make an inverse possible.",
+        "Because its outputs are not all positive.",
+        "It is not one-to-one — infinitely many inputs give the same output — so it has no inverse until the domain is restricted to [−π/2, π/2].",
+        "It is not one-to-one, so the domain is restricted to [0, π] to make an inverse possible."
+      ],
+      "standardRef": "F-BF.5"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Find all solutions of sin θ = √3/2 for 0° ≤ θ < 360°.",
+      "choices": [
+        "θ = 60° only",
+        "θ = 60° or θ = 120°",
+        "θ = 60° or θ = 240°",
+        "θ = 60° or θ = 300°"
+      ],
+      "standardRef": "F-TF.7"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate arcsin(0) in radians, giving the principal value.",
+      "choices": [
+        "π/3",
+        "π/6",
+        "0",
+        "π/4"
+      ],
+      "standardRef": "F-TF.6"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate cos(arcsin(√2/2)) exactly.",
+      "choices": [
+        "√2/2",
+        "√3/2",
+        "0",
+        "1/2"
+      ],
+      "standardRef": "F-TF.7"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Why does cosine on all real numbers not have an inverse function without further restriction?",
+      "choices": [
+        "It is not one-to-one, so the domain is restricted to [0, π] to make an inverse possible.",
+        "Because its outputs are not all positive.",
+        "It repeats with period π, so the domain is restricted to (−π/2, π/2) to make an inverse possible.",
+        "It is not one-to-one — infinitely many inputs give the same output — so it has no inverse until the domain is restricted to [−π/2, π/2]."
+      ],
+      "standardRef": "F-BF.5"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Find all solutions of sin θ = 1/2 for 0° ≤ θ < 360°.",
+      "choices": [
+        "θ = 30° or θ = 150°",
+        "θ = 30° only",
+        "θ = 30° or θ = 330°",
+        "θ = 30° or θ = 210°"
+      ],
+      "standardRef": "F-TF.7"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate arcsin(1) in radians, giving the principal value.",
+      "choices": [
+        "π/4",
+        "π/6",
+        "π/2",
+        "0"
+      ],
+      "standardRef": "F-TF.6"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate cos(arcsin(√3/2)) exactly.",
+      "choices": [
+        "1/2",
+        "√3/2",
+        "√2/2",
+        "0"
+      ],
+      "standardRef": "F-TF.7"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Why does tangent on all real numbers where it is defined not have an inverse function without further restriction?",
+      "choices": [
+        "It is not one-to-one, so the domain is restricted to [0, π] to make an inverse possible.",
+        "Because its outputs are not all positive.",
+        "It repeats with period π, so the domain is restricted to (−π/2, π/2) to make an inverse possible.",
+        "It is not one-to-one — infinitely many inputs give the same output — so it has no inverse until the domain is restricted to [−π/2, π/2]."
+      ],
+      "standardRef": "F-BF.5"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Find all solutions of sin θ = √2/2 for 0° ≤ θ < 360°.",
+      "choices": [
+        "θ = 45° or θ = 135°",
+        "θ = 45° or θ = 315°",
+        "θ = 45° only",
+        "θ = 45° or θ = 225°"
+      ],
+      "standardRef": "F-TF.7"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate arcsin(√2/2) in radians, giving the principal value.",
+      "choices": [
+        "π/4",
+        "π/6",
+        "π/3",
+        "0"
+      ],
+      "standardRef": "F-TF.6"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u02-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Evaluate cos(arcsin(1/2)) exactly.",
+      "choices": [
+        "1/2",
+        "0",
+        "√3/2",
+        "√2/2"
+      ],
+      "standardRef": "F-TF.7"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/mathematics/ma-g12-mathematics-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-mathematics-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u02-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Inverse Trigonometric Functions and Composition?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

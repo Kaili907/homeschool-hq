@@ -1,0 +1,199 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l12",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l12",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 12,
+    "courseDay": 174,
+    "phase": "Performance task build",
+    "focus": "the correlation coefficient, slope and intercept in context, and correlation versus causation",
+    "title": "Performance task build: the correlation coefficient, slope and intercept in context, and correlation versus causation"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 2,
+          "prompt": "A two-way table has row 1: 24 yes, 9 no; row 2: 25 yes, 25 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "24/49",
+            "24/83",
+            "3/11",
+            "8/11"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 4x + 11, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "Each additional hour studied is associated with an increase of about 4 test points.",
+            "Each additional test points is associated with 4 more hour studieds.",
+            "The predicted value is 4 test points when x is 0.",
+            "Each additional hour studied causes an increase of exactly 4 test points."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 2,
+          "prompt": "Towns with more fire engines report more fire damage. What conclusion is justified?",
+          "choices": [
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "A strong correlation always establishes causation when the sample is large."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 39, 21, 14, 36, 39, 21, 30. Give the mean and the median.",
+          "choices": [
+            "mean 28.57, median 29",
+            "mean 28.57, median 30",
+            "mean 30, median 28.57",
+            "mean 29, median 30"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 3,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 297 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "The median rises sharply while the mean changes little.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Both the mean and the median rise sharply."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 3,
+          "prompt": "A two-way table has row 1: 28 yes, 22 no; row 2: 42 yes, 33 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "2/5",
+            "28/125",
+            "14/25",
+            "11/25"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 5x + 24, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "The predicted value is 5 test points when x is 0.",
+            "Each additional test points is associated with 5 more hour studieds.",
+            "Each additional hour studied causes an increase of exactly 5 test points.",
+            "Each additional hour studied is associated with an increase of about 5 test points."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 3,
+          "prompt": "In a randomised trial, one group received a tutoring programme and scored higher on average than the control group. What conclusion is justified?",
+          "choices": [
+            "A strong correlation always establishes causation when the sample is large.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 21, 4, 36, 5, 37, 34, 19. Give the mean and the median.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 3,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 234 appended. Which statement best describes the effect on the mean and the median?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l12"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l02",
+  "lessonId": "ma-g9-ready-for-life-u03-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Unit price calculation accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or both unit price calculations are missing, use the wrong operation, or arrive at an incorrect value."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both unit prices are calculated correctly with the division work shown."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner correctly identifies the exact dollar-per-unit gap between the two products."
+          }
+        ]
+      },
+      {
+        "dimension": "Substitution reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The choice is stated without reference to the calculated unit price or the scenario's tradeoff factor."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The choice names the correct unit price difference and at least one specific non-price factor from the scenario."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reasoning weighs the price difference against the non-price factor explicitly rather than listing them separately."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Division work for both products is shown step by step, not just a final number.",
+      "The substitution reasoning names a specific dollar amount and a specific named factor from the scenario, not a vague statement like 'it depends.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

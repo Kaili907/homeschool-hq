@@ -1,5 +1,6 @@
 import { useEffect, useState, type KeyboardEvent } from 'react'
 import type {
+  AdminWorkingGrade,
   AssessmentEvidence,
   CurriculumEnrollmentEvidence,
   LearnerAnalyticsViewState,
@@ -10,8 +11,32 @@ import type {
   LearnerOperationalAvailability,
   StudySummary,
 } from '../../admin/learnerAnalyticsModel'
+import { ADMIN_WORKING_GRADE_CHOICES, isAdminWorkingGrade } from '../../admin/learnerAnalyticsModel'
+import { ACADEMY_SUBJECT_LABELS } from '../../academy/contentTypes'
 
 export type LearnerOperationsFilter = 'all' | 'needs-attention' | 'enrolled' | 'not-configured'
+
+export interface LearnerWorkingGradeChange {
+  readonly learnerRef: string
+  readonly subject: LearnerDetail['workingLevels'][number]['subject']
+  readonly workingGrade: AdminWorkingGrade | null
+  /** A persistence adapter must reject the change if nominal grade moved. */
+  readonly expectedNominalGrade: LearnerDetail['nominalGrade']
+}
+
+export function learnerWorkingGradeChange(
+  detail: Pick<LearnerDetail, 'learnerRef' | 'nominalGrade'>,
+  subject: LearnerWorkingGradeChange['subject'],
+  value: string,
+): LearnerWorkingGradeChange {
+  if (value !== '' && !isAdminWorkingGrade(value)) throw new Error('Unsupported Academy working grade')
+  return {
+    learnerRef: detail.learnerRef,
+    subject,
+    workingGrade: value === '' ? null : value,
+    expectedNominalGrade: detail.nominalGrade,
+  }
+}
 
 export function moveLearnerSelection(
   refs: readonly string[],
@@ -52,12 +77,14 @@ export function LearnerAnalytics({
   initialLearnerRef,
   selectedLearnerRef,
   onLearnerSelect,
+  onWorkingGradeChange,
   onRetry,
 }: {
   state: LearnerAnalyticsViewState
   initialLearnerRef?: string
   selectedLearnerRef?: string | null
   onLearnerSelect?: (learnerRef: string | null) => void
+  onWorkingGradeChange?: (change: LearnerWorkingGradeChange) => void
   onRetry?: () => void
 }) {
   const [localSelectedRef, setLocalSelectedRef] = useState(initialLearnerRef ?? '')
@@ -198,7 +225,7 @@ export function LearnerAnalytics({
           <p className="mt-2 text-slate-600">The learner detail remains closed until an authorized record is selected.</p>
         </section>
       ) : selected ? (
-        <LearnerDetailView detail={selected} onBack={controlledSelection ? () => selectLearner(null) : undefined} />
+        <LearnerDetailView detail={selected} onBack={controlledSelection ? () => selectLearner(null) : undefined} onWorkingGradeChange={onWorkingGradeChange} />
       ) : (
         <section id="learner-detail" className="rounded-2xl border border-amber-200 bg-amber-50 p-6" role="status" aria-labelledby="learner-unavailable-title">
           <StatusBadge status="unavailable" />
@@ -315,7 +342,7 @@ function EvidenceLabel({ evidence }: { evidence: Exclude<LearnerEvidenceValue<un
   return <span className="font-semibold text-slate-500">{reasonLabel(evidence.reason)}</span>
 }
 
-function LearnerDetailView({ detail, onBack }: { detail: LearnerDetail; onBack?: () => void }) {
+function LearnerDetailView({ detail, onBack, onWorkingGradeChange }: { detail: LearnerDetail; onBack?: () => void; onWorkingGradeChange?: (change: LearnerWorkingGradeChange) => void }) {
   useEffect(() => {
     document.getElementById('learner-detail-title')?.focus()
   }, [detail.learnerRef])
@@ -335,13 +362,10 @@ function LearnerDetailView({ detail, onBack }: { detail: LearnerDetail; onBack?:
       <DetailSection id="learner-overview-title" title="Overview" status={detail.availability.overview}>
         <dl className="grid gap-3 sm:grid-cols-3">
           <Stat label="Operational reference" value={detail.learnerRef} />
-          <Stat label="Assigned grade" value={`Grade ${detail.nominalGrade}`} />
-          <Stat label="Enrollment" value={detail.curriculum.status === 'not-configured' ? 'Not configured' : `Grade ${detail.curriculum.grade}`} />
+          <Stat label="Nominal grade" value={`Grade ${detail.nominalGrade}`} />
+          <Stat label="Academy enrollment" value={detail.curriculum.status === 'not-configured' ? 'Not configured' : `Grade ${detail.curriculum.grade} release`} />
         </dl>
-        <h4 className="mt-5 font-bold text-slate-900">Official working levels</h4>
-        <dl className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {detail.workingLevels.map((level) => <div key={level.subject} className="rounded-lg bg-slate-50 p-3"><dt className="text-xs font-bold uppercase tracking-wide text-slate-500">{level.subjectLabel}</dt><dd className="mt-1 font-semibold text-slate-900">Grade {level.level}<span className="ml-1 text-xs font-normal text-slate-500">({level.source === 'explicit' ? 'assigned' : 'nominal default'})</span></dd></div>)}
-        </dl>
+        <WorkingGradeOperations detail={detail} onWorkingGradeChange={onWorkingGradeChange} />
       </DetailSection>
 
       <DetailSection id="learner-curriculum-title" title="Curriculum" status={detail.availability.curriculum} action={<a href="/academy/admin/curriculum" className="font-bold text-sky-800 underline-offset-4 hover:underline">Open curriculum</a>}>
@@ -434,9 +458,33 @@ function CourseProgress({ evidence }: { evidence: LearnerDetail['courses'] }) {
   return (
     <>
       {evidence.status === 'partial' && <p className="mt-2 rounded-lg bg-amber-50 p-3 text-sm font-semibold text-amber-900">Only catalog-matched course progress is shown. Unknown course references are not inferred.</p>}
-      {evidence.value.length === 0 ? <EmptyEvidence>No catalog-matched course progress is recorded.</EmptyEvidence> : <ul className="mt-2 grid gap-3 md:grid-cols-2">{evidence.value.map((course) => <li key={`${course.source}-${course.courseRef}`} className="rounded-xl border border-slate-200 p-4"><p className="font-bold text-slate-900">{course.title}{course.workingLevel && <span className="ml-2 text-xs text-slate-500">Grade {course.workingLevel}</span>}</p><p className="mt-1 text-sm text-slate-600">{course.completed}/{course.total} complete{course.mastered !== null ? ` · ${course.mastered} mastered` : ''}{course.reteach ? ` · ${course.reteach} reteach` : ''}</p><Progress completed={course.completed} total={course.total} /></li>)}</ul>}
+      {evidence.value.length === 0 ? <EmptyEvidence>No catalog-matched course progress is recorded.</EmptyEvidence> : <ul className="mt-2 grid gap-3 md:grid-cols-2">{evidence.value.map((course) => {
+        const percent = course.total === 0 ? 0 : Math.round((course.completed / course.total) * 100)
+        return <li key={`${course.source}-${course.courseRef}`} className="rounded-xl border border-slate-200 p-4"><h5 className="font-bold text-slate-900">{course.title}</h5><dl className="mt-3 grid grid-cols-2 gap-3 text-sm"><div><dt className="text-slate-500">Subject</dt><dd className="font-semibold">{ACADEMY_SUBJECT_LABELS[course.subject] ?? course.subject}</dd></div><div><dt className="text-slate-500">Working grade</dt><dd className="font-semibold">{course.workingLevel ? `Grade ${course.workingLevel}` : 'Not applicable'}</dd></div><div><dt className="text-slate-500">Assignment</dt><dd className="font-semibold">{course.source === 'academy' ? 'Academy course assigned' : 'Manual course assigned'}</dd></div><div><dt className="text-slate-500">Progress</dt><dd className="font-semibold">{course.completed} of {course.total} complete ({percent}%)</dd></div></dl>{course.mastered !== null && <p className="mt-3 text-sm text-slate-600">{course.mastered} mastered{course.reteach ? ` · ${course.reteach} reteach` : ''}</p>}<Progress completed={course.completed} total={course.total} /></li>
+      })}</ul>}
     </>
   )
+}
+
+function WorkingGradeOperations({ detail, onWorkingGradeChange }: { detail: LearnerDetail; onWorkingGradeChange?: (change: LearnerWorkingGradeChange) => void }) {
+  const academyCourses = detail.courses.status === 'available' || detail.courses.status === 'partial'
+    ? detail.courses.value.filter((course) => course.source === 'academy')
+    : []
+  return <section className="mt-5" aria-labelledby="working-grade-operations-title">
+    <div className="flex flex-wrap items-end justify-between gap-2"><div><h4 id="working-grade-operations-title" className="font-bold text-slate-900">Course assignments &amp; working grades</h4><p className="mt-1 text-sm text-slate-600">Nominal Grade {detail.nominalGrade} remains reporting truth. Working-grade changes affect Academy content only.</p></div>{!onWorkingGradeChange && <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Read only</span>}</div>
+    <ul className="mt-3 grid gap-3 md:grid-cols-2">
+      {detail.workingLevels.map((level) => {
+        const course = academyCourses.find((candidate) => candidate.subject === level.subject)
+        const explicitValue = level.source === 'explicit' && isAdminWorkingGrade(level.level) ? level.level : ''
+        const nominalUnsupported = level.source === 'nominal-grade' && !isAdminWorkingGrade(detail.nominalGrade)
+        return <li key={level.subject} className="rounded-xl border border-slate-200 p-4">
+          <label className="block text-sm font-bold text-slate-800">{level.subjectLabel} working grade<select aria-label={`${level.subjectLabel} working grade`} value={explicitValue} disabled={!onWorkingGradeChange} onChange={(event) => onWorkingGradeChange?.(learnerWorkingGradeChange(detail, level.subject, event.target.value))} className="mt-1 block min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 font-semibold disabled:bg-slate-100 disabled:text-slate-600"><option value="">Use nominal Grade {detail.nominalGrade}</option>{ADMIN_WORKING_GRADE_CHOICES.map((grade) => <option key={grade} value={grade}>Grade {grade}</option>)}</select></label>
+          <dl className="mt-3 grid gap-2 text-sm"><div><dt className="text-slate-500">Current working grade</dt><dd className="font-semibold">Grade {level.level} · {level.source === 'explicit' ? 'explicit assignment' : 'nominal default'}</dd></div><div><dt className="text-slate-500">Current course</dt><dd className="font-semibold">{course?.title ?? 'No Academy course assigned'}</dd></div><div><dt className="text-slate-500">Assignment</dt><dd className={`font-semibold ${nominalUnsupported ? 'text-amber-800' : ''}`}>{course ? 'Assigned' : nominalUnsupported ? `Not assignable at nominal Grade ${detail.nominalGrade}` : 'Awaiting Academy course assignment'}</dd></div></dl>
+        </li>
+      })}
+    </ul>
+    <p className="mt-3 rounded-lg bg-amber-50 p-3 text-sm text-amber-900"><strong>Grade 6 rule:</strong> Grade 6 may remain the nominal grade, but it is not an assignable Academy working grade. Choose a supported subject working grade to assign Academy content.</p>
+  </section>
 }
 
 function AssessmentCard({ assessment }: { assessment: AssessmentEvidence }) {

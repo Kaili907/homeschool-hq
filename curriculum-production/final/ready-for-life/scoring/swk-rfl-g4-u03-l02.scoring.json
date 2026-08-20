@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l02",
+  "lessonId": "ma-g4-ready-for-life-u03-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Handwashing and wiping technique",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The wash is shorter than 20 seconds or skips fingers and thumbs, or the counter wipe misses visible spots."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner self-corrects a missed spot without being told."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about germs and time",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The explanation of why the quick rinse fails does not mention germs, soap, or scrub time specifically."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The explanation correctly connects soap and full scrub time to removing germs that a brief water-only rinse leaves behind."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names a real, specific moment when a shortcut wash would have mattered."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner actually times the wash rather than estimating afterward.",
+      "The counter-wipe comparison in the reflection names a real similarity and a real difference, not two restatements of the same idea."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

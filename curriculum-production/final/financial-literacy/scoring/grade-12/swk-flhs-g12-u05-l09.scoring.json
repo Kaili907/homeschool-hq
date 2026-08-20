@@ -1,0 +1,337 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l09",
+  "lessonId": "ma-g12-financial-literacy-u05-l09",
+  "integratedDomains": [
+    "saving-investing",
+    "insurance-risk",
+    "multi-variable-decision",
+    "budgeting"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$71,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "85% of the $84,000 balance. This is the exposure the original allocation carried when the money was not needed for decades."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$12,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15% of $84,000, which with the growth portion accounts for the whole balance."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$37,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "45% of the $84,000 balance — the growth exposure the shorter horizon proposes, on the same total."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$46,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "55% of the $84,000 balance, which together with the growth portion accounts for the whole amount."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$33,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$71,400.00 currently in growth against $37,800.00 proposed. The balance itself does not change; only where it sits does."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$21,420.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "30% of the $71,400.00 held in growth. The stable portion is unaffected in this scenario, which is why the exposure follows the allocation."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$11,340.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "30% of the $37,800.00 that would be held in growth."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$10,080.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$21,420.00 against $11,340.00. This is what the reallocation buys, and it is the same figure whether or not the fall happens — which is the point of deciding before rather than after."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "portfolio * growthLong",
+        "substituted": "84000 * 0.85",
+        "result": "$71,400.00",
+        "why": "85% of the $84,000 balance. This is the exposure the original allocation carried when the money was not needed for decades."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "portfolio2 * stableLong",
+        "substituted": "84000 * 0.15",
+        "result": "$12,600.00",
+        "why": "15% of $84,000, which with the growth portion accounts for the whole balance."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "portfolio3 * growthShort",
+        "substituted": "84000 * 0.45",
+        "result": "$37,800.00",
+        "why": "45% of the $84,000 balance — the growth exposure the shorter horizon proposes, on the same total."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "portfolio4 * stableShort",
+        "substituted": "84000 * 0.55",
+        "result": "$46,200.00",
+        "why": "55% of the $84,000 balance, which together with the growth portion accounts for the whole amount."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 - #t1-p3",
+        "substituted": "#t1-p1 - #t1-p3",
+        "result": "$33,600.00",
+        "why": "$71,400.00 currently in growth against $37,800.00 proposed. The balance itself does not change; only where it sits does."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p1 * fall, 2)",
+        "substituted": "round(#t1-p1 * 0.3, 2)",
+        "result": "$21,420.00",
+        "why": "30% of the $71,400.00 held in growth. The stable portion is unaffected in this scenario, which is why the exposure follows the allocation."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t1-p3 * fall2, 2)",
+        "substituted": "round(#t1-p3 * 0.3, 2)",
+        "result": "$11,340.00",
+        "why": "30% of the $37,800.00 that would be held in growth."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p3 - #t2-p4",
+        "substituted": "#t2-p3 - #t2-p4",
+        "result": "$10,080.00",
+        "why": "$21,420.00 against $11,340.00. This is what the reallocation buys, and it is the same figure whether or not the fall happens — which is the point of deciding before rather than after."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain why a shortening horizon changes the right allocation even though nothing about the categories themselves has changed, and say what the reallocation costs the fictional investor that the loss figures do not show.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the horizon argument: an investor with decades can wait out a fall, while one who must spend the money in about five years may have to sell during it, so the same exposure carries a different consequence.",
+          "Uses the exposure figures: the reallocation reduces the cost of a 30% fall from $21,420.00 to $11,340.00, a difference of $10,080.00, without any prediction about whether such a fall occurs.",
+          "Names what the loss figures omit: moving $33,600.00 out of growth also gives up whatever that portion would have gained, so the reallocation reduces the range of outcomes in both directions rather than only the bad one."
+        ],
+        "evidenceRequirements": [
+          "Uses the $33,600.00 that must move and both loss figures, $21,420.00 and $11,340.00."
+        ],
+        "lookFors": [
+          "The response ties allocation to when the money is needed rather than to a view about what markets will do.",
+          "The response acknowledges the forgone upside as a real cost, not only a theoretical one."
+        ],
+        "commonMisconception": "Treating a reallocation toward stability as pure protection, when it also removes the growth exposure that made the original allocation worth holding.",
+        "dimensions": [
+          "tradeoff-defense",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is in the growth category under the current allocation?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much is in the stable category under the current allocation?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much would be in the growth category under the proposed allocation?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much would be in the stable category under the proposed allocation?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much would have to move from growth to stable?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "If the growth category fell 30%, what would that cost under the current allocation?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What would the same fall cost under the proposed allocation?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "How much smaller is the loss under the proposed allocation?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain why a shortening horizon changes the right allocation even though nothing about the categories themselves has changed, and say what the reallocation costs the fictional investor that the loss figures do not show."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much is in the growth category under the current allocation? Answer: $71,400.00. Verification: 85% of the $84,000 balance. This is the exposure the original allocation carried when the money was not needed for decades. t1-p2: How much is in the stable category under the current allocation? Answer: $12,600.00. Verification: 15% of $84,000, which with the growth portion accounts for the whole balance. t1-p3: How much would be in the growth category under the proposed allocation? Answer: $37,800.00. Verification: 45% of the $84,000 balance — the growth exposure the shorter horizon proposes, on the same total. t2-p1: How much would be in the stable category under the proposed allocation? Answer: $46,200.00. Verification: 55% of the $84,000 balance, which together with the growth portion accounts for the whole amount. t2-p2: How much would have to move from growth to stable? Answer: $33,600.00. Verification: $71,400.00 currently in growth against $37,800.00 proposed. The balance itself does not change; only where it sits does. t2-p3: If the growth category fell 30%, what would that cost under the current allocation? Answer: $21,420.00. Verification: 30% of the $71,400.00 held in growth. The stable portion is unaffected in this scenario, which is why the exposure follows the allocation. t2-p4: What would the same fall cost under the proposed allocation? Answer: $11,340.00. Verification: 30% of the $37,800.00 that would be held in growth. t2-p5: How much smaller is the loss under the proposed allocation? Answer: $10,080.00. Verification: $21,420.00 against $11,340.00. This is what the reallocation buys, and it is the same figure whether or not the fall happens — which is the point of deciding before rather than after."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Explain why a shortening horizon changes the right allocation even though nothing about the categories themselves has changed, and say what the reallocation costs the fictional investor that the loss figures do not show. Explains the horizon argument: an investor with decades can wait out a fall, while one who must spend the money in about five years may have to sell during it, so the same exposure carries a different consequence. Uses the exposure figures: the reallocation reduces the cost of a 30% fall from $21,420.00 to $11,340.00, a difference of $10,080.00, without any prediction about whether such a fall occurs. Names what the loss figures omit: moving $33,600.00 out of growth also gives up whatever that portion would have gained, so the reallocation reduces the range of outcomes in both directions rather than only the bad one. Uses the $33,600.00 that must move and both loss figures, $21,420.00 and $11,340.00. The response ties allocation to when the money is needed rather than to a view about what markets will do. The response acknowledges the forgone upside as a real cost, not only a theoretical one."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the horizon argument: an investor with decades can wait out a fall, while one who must spend the money in about five years may have to sell during it, so the same exposure carries a different consequence. Uses the exposure figures: the reallocation reduces the cost of a 30% fall from $21,420.00 to $11,340.00, a difference of $10,080.00, without any prediction about whether such a fall occurs. Names what the loss figures omit: moving $33,600.00 out of growth also gives up whatever that portion would have gained, so the reallocation reduces the range of outcomes in both directions rather than only the bad one."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u05-l09.scoring.json",
+    "sourceScoringSha256": "ee87b96071d6868ca0a129447981dd6dcad56770eb1ba907ea24f4ebf4624f0b",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l09",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l09",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 9,
+    "courseDay": 99,
+    "phase": "Concept model C",
+    "focus": "two-variable relationships and their graphs",
+    "title": "Concept model C: two-variable relationships and their graphs"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 1,
+          "prompt": "Solve A = 2bh + 5 for h.",
+          "workedSolution": {
+            "steps": [
+              "2bh = A − 5.",
+              "Divide by the whole coefficient 2b.",
+              "h = (A − 5)/(2b)."
+            ],
+            "answer": "h = (A − 5)/(2b)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "Item A costs $8 each and item B costs $9 each. You may spend at most $90 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "8a + 9b ≤ 90",
+            "8a + 9b = 90",
+            "8a + 9b ≥ 90",
+            "a + b ≤ 90"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 105 litres and is filling at 6 litres per minute. After how many minutes does it hold 243 litres?",
+          "choices": [
+            "23 minutes",
+            "138 minutes",
+            "41 minutes",
+            "58 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives the number of buses needed as 4.3. How should this solution be interpreted?",
+          "choices": [
+            "Round up to 5; a fractional bus is not viable and rounding down leaves people behind.",
+            "Round down to 4, because 4.3 is closer to 4.",
+            "The model must be wrong, because the answer is not a whole number.",
+            "Report 4.3, because the model is exact."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A repair service charges a $70 call-out fee plus $12 per hour. A job cost $262 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "70h + 12 = 262",
+            "12 + 70h = 262",
+            "70 + 12h = 262",
+            "70 + 12 + h = 262"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 2,
+          "prompt": "The formula A = -3bh + 5 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = A / (-3b) − 5",
+            "h = (A − 5) / (-3b)",
+            "h = (A + 5) / (-3b)",
+            "h = -3b(A − 5)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "Item A costs $18 each and item B costs $24 each. You may spend at most $230 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "18a + 24b ≥ 230",
+            "a + b ≤ 230",
+            "18a + 24b = 230",
+            "18a + 24b ≤ 230"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 40 litres and is filling at 16 litres per minute. After how many minutes does it hold 200 litres?",
+          "choices": [
+            "13 minutes",
+            "160 minutes",
+            "15 minutes",
+            "10 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives a required side length of −6 metres. How should this solution be interpreted?",
+          "choices": [
+            "Report −6 metres, because the algebra is correct.",
+            "Add 6 to every measurement to correct the model.",
+            "Reject the solution; a length cannot be negative, so it lies outside the model’s domain.",
+            "Use 6 metres, taking the absolute value."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $75 call-out fee plus $11 per hour. A job cost $240 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "11 + 75h = 240",
+            "75 + 11h = 240",
+            "75 + 11 + h = 240",
+            "75h + 11 = 240"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = 6bh − 3 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = (A − 3) / (6b)",
+            "h = 6b(A + 3)",
+            "h = (A + 3) / (6b)",
+            "h = A / (6b) + 3"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l09"
+  }
+}

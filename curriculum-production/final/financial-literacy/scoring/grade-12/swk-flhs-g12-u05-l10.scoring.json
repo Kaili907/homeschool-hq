@@ -1,0 +1,365 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l10",
+  "lessonId": "ma-g12-financial-literacy-u05-l10",
+  "integratedDomains": [
+    "saving-investing",
+    "insurance-risk",
+    "consumer-protection",
+    "budgeting",
+    "fraud",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$22,680.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$31,500 reduced by 28%, leaving 72% of the balance."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "38.89%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $8,820.00 lost measured against the $22,680.00 remaining. The required gain always exceeds the fall, because it is calculated on the smaller base."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$49.90",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.22% of $22,680.00. The fee falls with the balance but does not stop; it is charged during the decline as well as after it."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$6,120.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$340 in each of the 18 months. The contributions continue at the same rate whatever the balance is doing, which is what a decline policy has to decide in advance."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$28,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$22,680.00 plus $6,120.00 contributed. Holding the market flat is a stated simplification so the effect of contributions alone can be seen."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$63.36",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.22% of the $28,800.00 balance. The fee is charged on the balance however it was built, so contributions raise it just as returns would."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$13.46",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$63.36 against $49.90. A percentage fee rises with the balance whether the balance grew from contributions or from returns."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "1.04%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$63.36 measured against the $6,120.00 contributed. Setting a certain cost against money the investor actually put in is a way to judge whether the fee is worth what the account provides."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(portfolio * (1 - decline), 2)",
+        "substituted": "round(31500 * (1 - 0.28), 2)",
+        "result": "$22,680.00",
+        "why": "$31,500 reduced by 28%, leaving 72% of the balance."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round((portfolio2 - #t1-p1) / #t1-p1 * 100, 2)",
+        "substituted": "round((31500 - #t1-p1) / #t1-p1 * 100, 2)",
+        "result": "38.89%",
+        "why": "The $8,820.00 lost measured against the $22,680.00 remaining. The required gain always exceeds the fall, because it is calculated on the smaller base."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p1 * feeRate, 2)",
+        "substituted": "round(#t1-p1 * 0.0022, 2)",
+        "result": "$49.90",
+        "why": "0.22% of $22,680.00. The fee falls with the balance but does not stop; it is charged during the decline as well as after it."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "monthly * months",
+        "substituted": "340 * 18",
+        "result": "$6,120.00",
+        "why": "$340 in each of the 18 months. The contributions continue at the same rate whatever the balance is doing, which is what a decline policy has to decide in advance."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 + #t2-p1",
+        "substituted": "#t1-p1 + #t2-p1",
+        "result": "$28,800.00",
+        "why": "$22,680.00 plus $6,120.00 contributed. Holding the market flat is a stated simplification so the effect of contributions alone can be seen."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 * feeRate2, 2)",
+        "substituted": "round(#t2-p2 * 0.0022, 2)",
+        "result": "$63.36",
+        "why": "0.22% of the $28,800.00 balance. The fee is charged on the balance however it was built, so contributions raise it just as returns would."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 - #t1-p3",
+        "substituted": "#t2-p3 - #t1-p3",
+        "result": "$13.46",
+        "why": "$63.36 against $49.90. A percentage fee rises with the balance whether the balance grew from contributions or from returns."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(#t2-p3 / #t2-p1 * 100, 2)",
+        "substituted": "round(#t2-p3 / #t2-p1 * 100, 2)",
+        "result": "1.04%",
+        "why": "$63.36 measured against the $6,120.00 contributed. Setting a certain cost against money the investor actually put in is a way to judge whether the fee is worth what the account provides."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Write the decline policy this fictional investor should set down now, before any fall occurs. Cover what happens to contributions, what would and would not count as a reason to sell, and how the policy handles anyone who contacts the investor during a decline offering to help. State plainly what your policy cannot guarantee.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States what happens to contributions during a decline and justifies it with a figure — for example continuing $340 a month, so that 18 months adds $6,120.00 regardless of the level.",
+          "Separates reasons to sell from reactions to a fall: names a legitimate trigger such as needing the money at a known date or a change in circumstances, and states that a fall alone is not one.",
+          "Addresses unsolicited contact during a decline: an offer arriving at the moment of a fall is a pressure situation, no account details or identifying information should be given to anyone who makes contact unprompted, and any offer should be verified independently before anything moves.",
+          "Uses the fee figures to show what continues regardless: 0.22% is charged whether the balance rises or falls, amounting to $49.90 at the reduced balance and $63.36 once contributions have rebuilt it — which is 1.04% of the 18 months of contributions.",
+          "States the limit honestly: the policy cannot guarantee a recovery, and the 38.89% gain needed to restore $31,500 is what is required rather than what is expected."
+        ],
+        "evidenceRequirements": [
+          "Uses the $22,680.00 post-decline balance and the 38.89% gain required, and at least one of the fee figures.",
+          "States what the policy cannot promise."
+        ],
+        "lookFors": [
+          "The policy is written in advance and in terms that could be followed without further judgement during a fall.",
+          "A policy that continues contributions and one that pauses them are both credited, provided the reason is stated and the cost is named.",
+          "The response does not assert that the balance will recover, and does not name any real product or provider."
+        ],
+        "commonMisconception": "Writing a decline policy that consists only of \"do not panic\", which gives no instruction about contributions, no test for when selling is legitimate, and no protection against offers that arrive precisely when judgement is worst.",
+        "dimensions": [
+          "plan-coherence",
+          "communication-of-uncertainty",
+          "criteria-application",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance after a 28% fall?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What gain on the reduced balance would restore $31,500, to two decimal places?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the annual fee at the reduced balance?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is contributed over 18 months?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Ignoring any further movement in the balance, what does the account hold after those contributions?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the annual fee at that balance?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "By how much has the annual fee risen?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What proportion of the 18 months of contributions does one year of the fee represent, to two decimal places?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write the decline policy this fictional investor should set down now, before any fall occurs. Cover what happens to contributions, what would and would not count as a reason to sell, and how the policy handles anyone who contacts the investor during a decline offering to help. State plainly what your policy cannot guarantee."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the balance after a 28% fall? Answer: $22,680.00. Verification: $31,500 reduced by 28%, leaving 72% of the balance. t1-p2: What gain on the reduced balance would restore $31,500, to two decimal places? Answer: 38.89%. Verification: The $8,820.00 lost measured against the $22,680.00 remaining. The required gain always exceeds the fall, because it is calculated on the smaller base. t1-p3: What is the annual fee at the reduced balance? Answer: $49.90. Verification: 0.22% of $22,680.00. The fee falls with the balance but does not stop; it is charged during the decline as well as after it. t2-p1: What is contributed over 18 months? Answer: $6,120.00. Verification: $340 in each of the 18 months. The contributions continue at the same rate whatever the balance is doing, which is what a decline policy has to decide in advance. t2-p2: Ignoring any further movement in the balance, what does the account hold after those contributions? Answer: $28,800.00. Verification: $22,680.00 plus $6,120.00 contributed. Holding the market flat is a stated simplification so the effect of contributions alone can be seen. t2-p3: What is the annual fee at that balance? Answer: $63.36. Verification: 0.22% of the $28,800.00 balance. The fee is charged on the balance however it was built, so contributions raise it just as returns would. t2-p4: By how much has the annual fee risen? Answer: $13.46. Verification: $63.36 against $49.90. A percentage fee rises with the balance whether the balance grew from contributions or from returns. t3-p1: What proportion of the 18 months of contributions does one year of the fee represent, to two decimal places? Answer: 1.04%. Verification: $63.36 measured against the $6,120.00 contributed. Setting a certain cost against money the investor actually put in is a way to judge whether the fee is worth what the account provides."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. t4-p1: Write the decline policy this fictional investor should set down now, before any fall occurs. Cover what happens to contributions, what would and would not count as a reason to sell, and how the policy handles anyone who contacts the investor during a decline offering to help. State plainly what your policy cannot guarantee. States what happens to contributions during a decline and justifies it with a figure — for example continuing $340 a month, so that 18 months adds $6,120.00 regardless of the level. Separates reasons to sell from reactions to a fall: names a legitimate trigger such as needing the money at a known date or a change in circumstances, and states that a fall alone is not one. Addresses unsolicited contact during a decline: an offer arriving at the moment of a fall is a pressure situation, no account details or identifying information should be given to anyone who makes contact unprompted, and any offer should be verified independently before anything moves. Uses the fee figures to show what continues regardless: 0.22% is charged whether the balance rises or falls, amounting to $49.90 at the reduced balance and $63.36 once contributions have rebuilt it — which is 1.04% of the 18 months of contributions. States the limit honestly: the policy cannot guarantee a recovery, and the 38.89% gain needed to restore $31,500 is what is required rather than what is expected. Uses the $22,680.00 post-decline balance and the 38.89% gain required, and at least one of the fee figures. States what the policy cannot promise. The policy is written in advance and in terms that could be followed without further judgement during a fall. A policy that continues contributions and one that pauses them are both credited, provided the reason is stated and the cost is named. The response does not assert that the balance will recover, and does not name any real product or provider."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States what happens to contributions during a decline and justifies it with a figure — for example continuing $340 a month, so that 18 months adds $6,120.00 regardless of the level. Separates reasons to sell from reactions to a fall: names a legitimate trigger such as needing the money at a known date or a change in circumstances, and states that a fall alone is not one. Addresses unsolicited contact during a decline: an offer arriving at the moment of a fall is a pressure situation, no account details or identifying information should be given to anyone who makes contact unprompted, and any offer should be verified independently before anything moves. Uses the fee figures to show what continues regardless: 0.22% is charged whether the balance rises or falls, amounting to $49.90 at the reduced balance and $63.36 once contributions have rebuilt it — which is 1.04% of the 18 months of contributions. States the limit honestly: the policy cannot guarantee a recovery, and the 38.89% gain needed to restore $31,500 is what is required rather than what is expected."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u05-l10.scoring.json",
+    "sourceScoringSha256": "8e7acf09bcd207f067bd38839d29b3cbf78f4d31832c0230abf802c6dc9c4cdc",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

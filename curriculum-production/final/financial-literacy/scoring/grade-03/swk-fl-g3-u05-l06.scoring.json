@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u05-l06",
+  "lessonId": "ma-g3-financial-literacy-u05-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Reporting to a trusted adult",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response tells Ines to keep it quiet or to handle the website herself."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says Ines should tell someone but names no particular kind of person."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names a trusted adult for Ines, such as a parent, guardian, or teacher, and gives words she could actually say."
+          }
+        ]
+      },
+      {
+        "dimension": "Responding without blame",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response blames Ines for nearly falling for the invented trick."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response reassures Ines but does not credit what she did well."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response tells Ines that noticing and stopping was the right move, and that telling an adult is not an admission of doing something wrong."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names a trusted adult rather than a friend or a website.",
+      "Supplies words short enough for a third grader to say aloud.",
+      "Credits Ines for stopping instead of focusing on the near-miss.",
+      "Does not suggest confronting or replying to the invented website."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What did Ines actually do right in this story?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "Who should Ines tell, and what words could she use?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "What would you say to Ines about feeling embarrassed?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Reporting to a trusted adult — Not yet: The response tells Ines to keep it quiet or to handle the website herself. Approaching: The response says Ines should tell someone but names no particular kind of person. Meets: The response names a trusted adult for Ines, such as a parent, guardian, or teacher, and gives words she could actually say. Responding without blame — Not yet: The response blames Ines for nearly falling for the invented trick. Approaching: The response reassures Ines but does not credit what she did well. Meets: The response tells Ines that noticing and stopping was the right move, and that telling an adult is not an admission of doing something wrong. Names a trusted adult rather than a friend or a website. Supplies words short enough for a third grader to say aloud. Credits Ines for stopping instead of focusing on the near-miss. Does not suggest confronting or replying to the invented website."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names a trusted adult rather than a friend or a website. Supplies words short enough for a third grader to say aloud. Credits Ines for stopping instead of focusing on the near-miss. Does not suggest confronting or replying to the invented website."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u05-l06.scoring.json",
+    "sourceScoringSha256": "a40c53b791d50cb921dccbc500af5c87d1608db22acb593fe582e84763f7f6f7",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

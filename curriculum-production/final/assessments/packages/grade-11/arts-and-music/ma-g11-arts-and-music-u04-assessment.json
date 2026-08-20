@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-arts-and-music-u04-assessment",
+  "courseRef": "ma-g11-arts-and-music",
+  "grade": 11,
+  "subject": "arts-and-music",
+  "location": {
+    "unitRef": "ma-g11-arts-and-music-u04",
+    "unitNumber": 4,
+    "unitTitle": "Advanced Performance, Direction, and Production",
+    "courseTitle": "Studio Art, Composition, and Applied Design",
+    "assessmentLessonRef": "ma-g11-arts-and-music-u04-l11"
+  },
+  "standards": [
+    "Michigan Arts Education Standards: Theatre — Performing",
+    "Music — Performing"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/arts-music/grade-11/ma-g11-arts-and-music-u04-l11.task-package.json",
+  "instructions": [
+    "Create, perform privately, analyze, or critique as directed. A written, no-audio alternative receives equal credit.",
+    "Submit original work plus process evidence and a specific revision or critique."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Complete the unit assessment task for advanced performance, direction, and production independently and under the unit's stated conditions. Produce the required piece or analysis, show the process or reasoning behind it, and check it against the stated criteria before submitting. Include your own judgement: what you intended, what the work actually achieves, and where the gap is. Everything submitted must be your own authorship. Presentation stays private or written; no public performance, camera, voice recording, or photograph is required to complete or pass this task. Anchor today's work inside its unit: this session's evidence is about advanced performance, direction, and production, and it belongs to \"Advanced Performance, Direction, and Production\", which also covers separate topics such as advanced interpretation and stylistic fluency. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Completed assessment piece or analysis, visible process, and a self-judgement naming intent, achievement, and gap."
+    }
+  ],
+  "responseMode": "project-performance-analysis-or-critique",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/arts-and-music/ma-g11-arts-and-music-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task on advanced performance, direction, and production.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-arts-and-music-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/arts-music/grade-11/ma-g11-arts-and-music-u04-l11.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Advanced Performance, Direction, and Production?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,328 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l06",
+  "lessonId": "ma-g9-financial-literacy-u04-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$24.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The card applies 2% of the balance each month, and 2% of $1,200 is $24.00."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$30.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The statement balance after interest is $1,224.00, and 2.5% of that is $30.60, which is greater than the $25 floor."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,193.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,200 plus $24.00 of interest less the $30.60 paid, so only $6.60 of the payment reduced the balance."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$23.87",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same 2% monthly rate, now applied to the $1,193.40 carried into month 2."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$30.43",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2.5% of the $1,217.27 statement balance, still above the $25 floor."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,186.84",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,193.40 plus $23.87 of interest less the $30.43 paid."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$1,180.32",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,186.84 plus $23.74 of interest less the $30.26 minimum payment."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$91.29",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$30.60 plus $30.43 plus $30.26."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "$19.68",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,200 at the start against $1,180.32 at the end."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(balance * monthlyRate, 2)",
+        "substituted": "round(1200 * 0.02, 2)",
+        "result": "$24.00",
+        "why": "The card applies 2% of the balance each month, and 2% of $1,200 is $24.00."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "max(round((balance2 + #t1-p1) * minRate, 2), minFloor)",
+        "substituted": "max(round((1200 + #t1-p1) * 0.025, 2), 25)",
+        "result": "$30.60",
+        "why": "The statement balance after interest is $1,224.00, and 2.5% of that is $30.60, which is greater than the $25 floor."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "balance3 + #t1-p1 - #t1-p2",
+        "substituted": "1200 + #t1-p1 - #t1-p2",
+        "result": "$1,193.40",
+        "why": "$1,200 plus $24.00 of interest less the $30.60 paid, so only $6.60 of the payment reduced the balance."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 * monthlyRate2, 2)",
+        "substituted": "round(#t1-p3 * 0.02, 2)",
+        "result": "$23.87",
+        "why": "The same 2% monthly rate, now applied to the $1,193.40 carried into month 2."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "max(round((#t1-p3 + #t2-p1) * minRate2, 2), minFloor2)",
+        "substituted": "max(round((#t1-p3 + #t2-p1) * 0.025, 2), 25)",
+        "result": "$30.43",
+        "why": "2.5% of the $1,217.27 statement balance, still above the $25 floor."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 + #t2-p1 - #t2-p2",
+        "substituted": "#t1-p3 + #t2-p1 - #t2-p2",
+        "result": "$1,186.84",
+        "why": "$1,193.40 plus $23.87 of interest less the $30.43 paid."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t2-p3 + round(#t2-p3 * monthlyRate3, 2) - max(round((#t2-p3 + round(#t2-p3 * monthlyRate3, 2)) * minRate3, 2), minFloor3)",
+        "substituted": "#t2-p3 + round(#t2-p3 * 0.02, 2) - max(round((#t2-p3 + round(#t2-p3 * 0.02, 2)) * 0.025, 2), 25)",
+        "result": "$1,180.32",
+        "why": "$1,186.84 plus $23.74 of interest less the $30.26 minimum payment."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t1-p2 + #t2-p2 + max(round((#t2-p3 + round(#t2-p3 * monthlyRate4, 2)) * minRate4, 2), minFloor4)",
+        "substituted": "#t1-p2 + #t2-p2 + max(round((#t2-p3 + round(#t2-p3 * 0.02, 2)) * 0.025, 2), 25)",
+        "result": "$91.29",
+        "why": "$30.60 plus $30.43 plus $30.26."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "start - #t3-p1",
+        "substituted": "1200 - #t3-p1",
+        "result": "$19.68",
+        "why": "$1,200 at the start against $1,180.32 at the end."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Of the $91.29 paid, only $19.68 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that $71.61 of the $91.29 paid went to interest, and shows this as the difference between the two figures.",
+          "Explains that the minimum is a percentage of the balance, so it shrinks as the balance shrinks, which slows repayment further.",
+          "Notes that the $25 floor eventually takes over, and that until then each month repeats the same pattern at a slightly smaller scale."
+        ],
+        "evidenceRequirements": [
+          "Uses the $91.29 total paid and the $19.68 reduction in balance."
+        ],
+        "lookFors": [
+          "The response identifies the shrinking minimum as a mechanism rather than describing minimum payments as merely \"bad\".",
+          "The response does not claim the interest was hidden; it was charged at the stated rate."
+        ],
+        "commonMisconception": "Assuming a payment reduces the balance by the amount paid.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What interest is charged in month 1 on the $1,200 balance?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the month 1 minimum payment?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance at the end of month 1?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What interest is charged in month 2?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the month 2 minimum payment?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance at the end of month 2?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance at the end of month 3?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What was paid in total across the three months?"
+        },
+        {
+          "ref": "t3-p3",
+          "responseMode": "FIXED",
+          "promptText": "By how much did the balance actually fall over the three months?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Of the $91.29 paid, only $19.68 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What interest is charged in month 1 on the $1,200 balance? Answer: $24.00. Verification: The card applies 2% of the balance each month, and 2% of $1,200 is $24.00. t1-p2: What is the month 1 minimum payment? Answer: $30.60. Verification: The statement balance after interest is $1,224.00, and 2.5% of that is $30.60, which is greater than the $25 floor. t1-p3: What is the balance at the end of month 1? Answer: $1,193.40. Verification: $1,200 plus $24.00 of interest less the $30.60 paid, so only $6.60 of the payment reduced the balance. t2-p1: What interest is charged in month 2? Answer: $23.87. Verification: The same 2% monthly rate, now applied to the $1,193.40 carried into month 2. t2-p2: What is the month 2 minimum payment? Answer: $30.43. Verification: 2.5% of the $1,217.27 statement balance, still above the $25 floor. t2-p3: What is the balance at the end of month 2? Answer: $1,186.84. Verification: $1,193.40 plus $23.87 of interest less the $30.43 paid. t3-p1: What is the balance at the end of month 3? Answer: $1,180.32. Verification: $1,186.84 plus $23.74 of interest less the $30.26 minimum payment. t3-p2: What was paid in total across the three months? Answer: $91.29. Verification: $30.60 plus $30.43 plus $30.26. t3-p3: By how much did the balance actually fall over the three months? Answer: $19.68. Verification: $1,200 at the start against $1,180.32 at the end."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t4-p1: Of the $91.29 paid, only $19.68 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls. States that $71.61 of the $91.29 paid went to interest, and shows this as the difference between the two figures. Explains that the minimum is a percentage of the balance, so it shrinks as the balance shrinks, which slows repayment further. Notes that the $25 floor eventually takes over, and that until then each month repeats the same pattern at a slightly smaller scale. Uses the $91.29 total paid and the $19.68 reduction in balance. The response identifies the shrinking minimum as a mechanism rather than describing minimum payments as merely \"bad\". The response does not claim the interest was hidden; it was charged at the stated rate."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States that $71.61 of the $91.29 paid went to interest, and shows this as the difference between the two figures. Explains that the minimum is a percentage of the balance, so it shrinks as the balance shrinks, which slows repayment further. Notes that the $25 floor eventually takes over, and that until then each month repeats the same pattern at a slightly smaller scale."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 3,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u04-l06.scoring.json",
+    "sourceScoringSha256": "4cbe7ceb56ecf0a612421a4b334f2682bf91ff252b234fee8d14af5513e88504",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

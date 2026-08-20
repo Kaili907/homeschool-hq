@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l02",
+  "lessonId": "ma-g7-ready-for-life-u01-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Priority sorting",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Tasks are listed but not sorted into tiers, or tiers are assigned with no reasoning connecting urgency and importance."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every task is sorted into one of the three tiers, and each Do First task is correctly justified as both urgent and important."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner also explains why at least one Schedule or Do Later task does not belong in a higher tier."
+          }
+        ]
+      },
+      {
+        "dimension": "Time estimation and time-budget check",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Time estimates are missing for some tasks, or the total estimated time is never compared to actual available time."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every task has a specific minute estimate, and the total is compared against real available time with a clear over-or-under result."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names a specific, reasoned task to cut, shorten, or move when the total goes over budget."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The tasks sorted and estimated are the learner's own real current list, not an invented example.",
+      "The time-budget comparison uses an actual available-time figure, not a vague statement like 'not enough time.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

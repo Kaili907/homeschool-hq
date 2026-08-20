@@ -127,7 +127,8 @@ export function SystemHealthDashboard(props: SystemHealthDashboardProps) {
 
 function HealthAccessState({ busy = false, title, message, onRetry }: { busy?: boolean; title: string; message: string; onRetry?: () => void }) {
   return (
-    <div className="health-state" aria-busy={busy} aria-live="polite">
+    <div className="health-state" aria-busy={busy} aria-live="polite" role={busy ? 'status' : 'alert'}>
+      <p className="health-state__eyebrow">System operations</p>
       <span className={`health-state__glyph ${busy ? 'is-loading' : ''}`} aria-hidden="true">{busy ? '' : '!'}</span>
       <h2>{title}</h2><p>{message}</p>
       {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
@@ -158,9 +159,9 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
     : EVIDENCE_MESSAGES[projection.evidenceCompleteness]
 
   return (
-    <div className="health-dashboard">
+    <div className="health-dashboard" aria-labelledby="system-health-title">
       <header className="health-heading">
-        <div><p>Read-only operations</p><h2>System Health</h2><span>Deterministic status from bounded trusted telemetry.</span></div>
+        <div><p>Read-only operations</p><h2 id="system-health-title">System Health</h2><span>Deterministic status from bounded trusted telemetry.</span></div>
         <div className="health-window" role="group" aria-label="System Health history window">
           {SYSTEM_HEALTH_WINDOWS.map((window) => <button key={window} type="button" aria-pressed={selectedWindow === window} className={selectedWindow === window ? 'is-active' : ''} onClick={() => onWindowChange(window)}>{WINDOW_LABELS[window]}</button>)}
         </div>

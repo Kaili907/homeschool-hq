@@ -71,6 +71,19 @@ describe('curriculum integrity HTTP source', () => {
     expect(report?.subjects[0].evidenceGaps[0].code).toBe('package_hash_unavailable')
   })
 
+  it('accepts old and expanded governed-grade package identities and rejects unsupported grades', () => {
+    const report = incompleteReport()
+    const subject = report.subjects[0]
+    const expanded = 'manuel-academy-grades-3-4-5-7-8-9-10-11-12-curriculum-v1'
+
+    expect(parseCurriculumIntegrityReport({
+      ...report, subjects: [{ ...subject, packageId: expanded }],
+    })?.subjects[0].packageId).toBe(expanded)
+    expect(parseCurriculumIntegrityReport({
+      ...report, subjects: [{ ...subject, packageId: 'manuel-academy-grades-5-6-7-curriculum-v1' }],
+    })).toBeNull()
+  })
+
   it('maps malformed 200 responses to bounded unavailability', async () => {
     const source = createCurriculumIntegrityHttpSource(
       vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ status: 'VERIFIED' }) })),

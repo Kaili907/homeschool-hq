@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u04-l02",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Exponential, Logarithmic, and Series Models",
+    "dayInUnit": 2,
+    "courseDay": 56,
+    "phase": "Concept model A",
+    "focus": "solving exponential equations with logarithms",
+    "title": "Concept model A: solving exponential equations with logarithms"
+  },
+  "standards": [
+    "F-LE.4",
+    "A-SSE.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 1,
+          "prompt": "Sum the first 4 terms with a = 3, r = 2.",
+          "workedSolution": {
+            "steps": [
+              "3 + 6 + 12 + 24.",
+              "Total 45."
+            ],
+            "answer": "45"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "At 10% per year, when does an amount double?",
+          "workedSolution": {
+            "steps": [
+              "1.1^t ≥ 2.",
+              "t ≥ log2/log1.1 ≈ 7.27.",
+              "So 8 years."
+            ],
+            "answer": "8 years"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 1,
+          "prompt": "Evaluate log_3(27).",
+          "choices": [
+            "3",
+            "4",
+            "27",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 1,
+          "prompt": "Solve 3^x = 27 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = log_3(27) = 4",
+            "x = 27/3 = 9",
+            "x = log_27(3) = 1/3",
+            "x = log_3(27) = 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 2,
+          "prompt": "Find the sum of the first 4 terms of the geometric series with first term 4 and common ratio 2.",
+          "choices": [
+            "32",
+            "16",
+            "60",
+            "64"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 1,
+          "prompt": "An investment of $1300 grows by 9% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "8 years",
+            "10 years",
+            "11 years",
+            "9 years"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "Evaluate log_10(100).",
+          "choices": [
+            "20",
+            "10",
+            "2",
+            "100"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "Solve 5^x = 125 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = log_125(5) = 1/3",
+            "x = log_5(125) = 3",
+            "x = log_5(125) = 4",
+            "x = 125/5 = 25"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 3,
+          "prompt": "Find the sum of the first 5 terms of the geometric series with first term 7 and common ratio 2.",
+          "choices": [
+            "224",
+            "35",
+            "112",
+            "217"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "An investment of $500 grows by 4% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "18 years",
+            "20 years",
+            "25 years",
+            "21 years"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "Evaluate log_2(16).",
+          "choices": [
+            "8",
+            "2",
+            "4",
+            "16"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u04-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u04-l02"
+  }
+}

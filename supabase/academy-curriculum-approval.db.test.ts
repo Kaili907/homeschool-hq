@@ -351,7 +351,7 @@ describe('curriculum human approval database boundary', () => {
     await expect(database.exec('delete from public.academy_curriculum_draft_approval_decisions'))
       .rejects.toThrow('append-only')
 
-    const migrationBytes = await readFile(migrations.at(-1)!)
+    const migrationBytes = (await readFile(migrations.at(-1)!, 'utf8')).replace(/\r\n/gu, '\n')
     const custody = JSON.parse(await readFile(
       new URL('../docs/admin-console/curriculum-human-approval-migration.json', import.meta.url),
       'utf8',

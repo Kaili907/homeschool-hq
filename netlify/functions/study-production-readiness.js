@@ -4,7 +4,7 @@ import {
   hasQuery,
   jsonResponse,
 } from './_shared/http.js'
-import { verifySupabaseBearer } from './_shared/supabase-auth.js'
+import { createStudyGuardianAuthorization } from './_shared/study-guardian-authorization.js'
 import {
   createStudyProductionReadinessService,
   readinessWireResult,
@@ -18,7 +18,11 @@ const READINESS_PATHS = new Set([
 export function createStudyProductionReadinessHandler(overrides = {}) {
   const env = overrides.env ?? process.env
   const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
-  const authVerifier = overrides.authVerifier ?? verifySupabaseBearer
+  const authorization = overrides.authorization ?? createStudyGuardianAuthorization({
+    env,
+    fetchImpl,
+    authVerifier: overrides.authVerifier,
+  })
   const readiness = overrides.readiness ?? createStudyProductionReadinessService({
     env,
     fetchImpl,
@@ -40,8 +44,13 @@ export function createStudyProductionReadinessHandler(overrides = {}) {
     if (!READINESS_PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
 
-    const auth = await authVerifier(event, { fetchImpl, env, timeoutMs: 3_000 })
-    if (!auth.ok) return auth.response
+    let authorized
+    try {
+      authorized = await authorization.require(event, 'study:production-readiness:read')
+    } catch {
+      return errorResponse(503, 'authorization_unavailable')
+    }
+    if (!authorized.ok) return authorized.response
 
     const snapshot = await readiness.check()
     const wire = readinessWireResult(snapshot)

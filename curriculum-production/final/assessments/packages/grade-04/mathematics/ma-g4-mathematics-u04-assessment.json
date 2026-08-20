@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-mathematics-u04-assessment",
+  "courseRef": "ma-g4-mathematics",
+  "grade": 4,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g4-mathematics-u04",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "courseTitle": "Grade 4 Mathematics",
+    "assessmentLessonRef": "ma-g4-mathematics-u04-l16"
+  },
+  "standards": [
+    "4.OA.2",
+    "4.OA.3",
+    "4.NBT.5"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u04-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Ben read 7 books this year. Priya read 5 times as many books as Ben. How many books did Priya read?",
+      "choices": [
+        "35",
+        "28",
+        "42",
+        "12"
+      ],
+      "standardRef": "4.OA.2"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A theater has 4 sections with 18 seats each, plus 6 extra folding chairs. How many total seats are there?",
+      "choices": [
+        "28",
+        "72",
+        "78",
+        "66"
+      ],
+      "standardRef": "4.OA.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Use an area model to find 7 × 11. Split 11 into 10 and 1.",
+      "choices": [
+        "77",
+        "71",
+        "70",
+        "7"
+      ],
+      "standardRef": "4.NBT.5"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Find 5 × 379 using partial products.",
+      "choices": [
+        "1890",
+        "1895",
+        "1500",
+        "1850"
+      ],
+      "standardRef": "4.NBT.5"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Carlos read 11 books this year. Emma read 6 times as many books as Carlos. How many books did Emma read?",
+      "choices": [
+        "77",
+        "66",
+        "17",
+        "55"
+      ],
+      "standardRef": "4.OA.2"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A theater has 9 sections with 32 seats each, plus 25 extra folding chairs. How many total seats are there?",
+      "choices": [
+        "313",
+        "288",
+        "66",
+        "263"
+      ],
+      "standardRef": "4.OA.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Use an area model to find 5 × 32. Split 32 into 30 and 2.",
+      "choices": [
+        "160",
+        "150",
+        "10",
+        "152"
+      ],
+      "standardRef": "4.NBT.5"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Find 7 × 315 using partial products.",
+      "choices": [
+        "2170",
+        "2198",
+        "2100",
+        "2205"
+      ],
+      "standardRef": "4.NBT.5"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Ben read 3 books this year. Priya read 8 times as many books as Ben. How many books did Priya read?",
+      "choices": [
+        "11",
+        "21",
+        "27",
+        "24"
+      ],
+      "standardRef": "4.OA.2"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u04-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "A theater has 3 sections with 51 seats each, plus 33 extra folding chairs. How many total seats are there?",
+      "choices": [
+        "186",
+        "87",
+        "120",
+        "153"
+      ],
+      "standardRef": "4.OA.3"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/mathematics/ma-g4-mathematics-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-mathematics-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u04-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Multi-Digit Multiplication with Area Models and Partial Products?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

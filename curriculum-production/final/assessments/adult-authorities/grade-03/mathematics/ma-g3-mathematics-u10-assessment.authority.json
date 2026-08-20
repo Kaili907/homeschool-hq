@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g3-mathematics-u10-assessment",
+  "courseRef": "ma-g3-mathematics",
+  "grade": 3,
+  "subject": "mathematics",
+  "authorityClass": "AUTO_SCOREABLE",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/mathematics/active/answer-keys/grade-03/ma-g3-mathematics-u10-l16.key.json",
+  "scoringSourceAuthority": {
+    "input": "g34_normalization",
+    "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+    "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/mathematics/assessments.json"
+  },
+  "answerAuthorityRef": "repo:curriculum-production/final/mathematics/active/answer-keys/grade-03/ma-g3-mathematics-u10-l16.key.json",
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

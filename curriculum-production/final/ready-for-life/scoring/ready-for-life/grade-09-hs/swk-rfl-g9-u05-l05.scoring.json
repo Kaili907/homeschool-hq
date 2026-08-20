@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l05",
+  "lessonId": "ma-g9-ready-for-life-u05-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Conversation planning and follow-through",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Plan names only the other person's behavior, skips a specific next step, or the learner does not complete the real conversation or the role-play alternative." },
+          { "label": "Proficient", "descriptor": "Plan names the disagreement without blame, includes the learner's own part, proposes one specific next step, and the learner completes either the real conversation or the role-play alternative." },
+          { "label": "Advanced", "descriptor": "Meets the Proficient bar and the learner's account shows they adapted to something unplanned in the actual conversation rather than reciting the plan word for word." }
+        ]
+      },
+      {
+        "dimension": "Repair quality as confirmed by the trusted adult",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The trusted adult cannot confirm the conversation happened respectfully, or reports it became heated or unresolved." },
+          { "label": "Proficient", "descriptor": "The trusted adult confirms the conversation (or role-play) happened and stayed respectful on both sides." },
+          { "label": "Advanced", "descriptor": "The trusted adult confirms the conversation happened respectfully and reports the learner's own part and proposed next step were both stated clearly during the actual conversation, not just in the written plan." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A written plan that names a specific, doable next step rather than a vague promise like 'I'll try to be better.'",
+      "A trusted adult confirmation that speaks to the conversation's actual tone, not just that it occurred."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

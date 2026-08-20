@@ -1,0 +1,375 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u06-l06",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: reflecting and setting a next step"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can practice reflecting and setting a next step. I will do one step at a time and check one result.",
+  "scenario": "Using your results from checking your contribution in the previous lesson, you now look back across the whole project, choosing, planning, safety-checking, carrying out, and checking, and decide on one specific next step: fixing a partly-met or missed criterion, extending the contribution further, or starting a new one using what you learned.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "If your next step involves a tool, appliance, or cleaning product, note that it will need the same adult check-in as your original plan before you act on it.",
+    "Keep your reflection focused on the task and the process, not on sharing private details about yourself or your household.",
+    "If setting your next step means re-observing your contribution one more time, only do so in spaces you already have permission to be in."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a trusted adult is not available today to confirm the reflection and next step, the learner completes the full written reflection and next-step plan independently and reviews it with that adult at the next available opportunity, earning full credit once the adult confirms it."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g4-u06-l06-model-card",
+    "Embedded resource: swk-rfl-g4-u06-l06-step-card",
+    "Embedded resource: swk-rfl-g4-u06-l06-guided-card",
+    "Embedded resource: swk-rfl-g4-u06-l06-independent-card",
+    "Embedded resource: swk-rfl-g4-u06-l06-evidence-record",
+    "Embedded resource: swk-rfl-g4-u06-l06-retry-pair",
+    "learner-local: notes and results from every earlier lesson in this project",
+    "learner-local: paper or a notes app for the written reflection"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Open swk-rfl-g4-u06-l06-model-card. Watch one complete example.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g4-u06-l06-guided-card. Do the coached move.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g4-u06-l06-independent-card. Choose one complete route. Follow its steps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g4-u06-l06-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what you learned about your own planning or follow-through from doing this whole project, separate from how the contribution itself turned out."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g4-u06-l06-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g4-u06-l06-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g4-u06-l06-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Stage-by-stage reflection specificity: All five earlier stages are covered, each with a specific strength and a specific thing the learner would do differently. | Next-step concreteness and connection to evidence: The next step is specific, connects directly to the weakest criterion or a specific stage note, and includes a rough timeframe. Resume at the next unfinished step on swk-rfl-g4-u06-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner write a one-paragraph plan for how they would teach the same choose-plan-check-reflect process to someone else taking on a household contribution for the first time.",
+  "scoringRef": "scoring/swk-rfl-g4-u06-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u06-l06",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can practice reflecting and setting a next step. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "Up to seven days; use only the check-ins explicitly named in the task",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g4-u06-l06-model-card",
+        "swk-rfl-g4-u06-l06-step-card",
+        "swk-rfl-g4-u06-l06-guided-card",
+        "swk-rfl-g4-u06-l06-independent-card",
+        "swk-rfl-g4-u06-l06-evidence-record",
+        "swk-rfl-g4-u06-l06-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g4-u06-l06-local-1",
+          "label": "notes and results from every earlier lesson in this project",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u06-l06-local-2",
+          "label": "paper or a notes app for the written reflection",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g4-u06-l06-model-card",
+        "kind": "model",
+        "title": "reflecting and setting a next step worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Using your results from checking your contribution in the previous lesson, you now look back across the whole project, choosing, planning, safety-checking, carrying out, and checking, and decide on one specific next step: fixing a partly-met or missed criterion, extending the contribution further, or starting a new one using what you learned.",
+          "Model move 1: Read the condition and name the exact reflecting and setting a next step decision or action.",
+          "Model move 2: Before writing your reflection, reread your day-five check results.",
+          "Model move 3: Walk back through each stage of the project, choosing, planning, safety-checking, carrying out, and checking, and note one specific thing that went well and one specific thing you would do differently at each stage.",
+          "Model check: Stage-by-stage reflection specificity: All five earlier stages are covered, each with a specific strength and a specific thing the learner would do differently. | Next-step concreteness and connection to evidence: The next step is specific, connects directly to the weakest criterion or a specific stage note, and includes a rough timeframe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l06-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "reflecting and setting a next step action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for reflecting and setting a next step.",
+          "2. Watch the worked move on swk-rfl-g4-u06-l06-model-card.",
+          "3. Do one coached move on swk-rfl-g4-u06-l06-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g4-u06-l06-independent-card.",
+          "5. Save the small record on swk-rfl-g4-u06-l06-evidence-record; use swk-rfl-g4-u06-l06-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l06-guided-card",
+        "kind": "guided-practice",
+        "title": "reflecting and setting a next step coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Using your results from checking your contribution in the previous lesson, you now look back across the whole project, choosing, planning, safety-checking, carrying out, and checking, and decide on one specific next step: fixing a partly-met or missed criterion, extending the contribution further, or starting a new one using what you learned.",
+          "Coach direction: Before writing your reflection, reread your day-five check results.",
+          "Learner prompt: Name the one criterion from your check that came out best and the one that came out weakest.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l06-independent-card",
+        "kind": "independent-task",
+        "title": "reflecting and setting a next step complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Walk back through each stage of the project, choosing, planning, safety-checking, carrying out, and checking, and note one specific thing that went well and one specific thing you would do differently at each stage.",
+          "Response 1 (t2-p1): I covered all five earlier stages, not just the carrying-out day.",
+          "Response 2 (t2-p2): Each note is a specific detail from what actually happened, not a general 'it was fine.'",
+          "Response 3 (t2-p3): I identified at least one thing I would genuinely do differently next time.",
+          "Equal-access rule: If a trusted adult is not available today to confirm the reflection and next step, the learner completes the full written reflection and next-step plan independently and reviews it with that adult at the next available opportunity, earning full credit once the adult confirms it."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l06-evidence-record",
+        "kind": "evidence-record",
+        "title": "reflecting and setting a next step minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain what you learned about your own planning or follow-through from doing this whole project, separate from how the contribution itself turned out.",
+          "Success checks: Stage-by-stage reflection specificity: All five earlier stages are covered, each with a specific strength and a specific thing the learner would do differently. | Next-step concreteness and connection to evidence: The next step is specific, connects directly to the weakest criterion or a specific stage note, and includes a rough timeframe.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l06-retry-pair",
+        "kind": "retry",
+        "title": "reflecting and setting a next step supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g4-u06-l06-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g4-u06-l06-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional reflecting and setting a next step condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Stage-by-stage reflection specificity: All five earlier stages are covered, each with a specific strength and a specific thing the learner would do differently. | Next-step concreteness and connection to evidence: The next step is specific, connects directly to the weakest criterion or a specific stage note, and includes a rough timeframe..",
+          "Return: resume at the next unfinished step on swk-rfl-g4-u06-l06-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "reflecting and setting a next step worked model",
+      "startingCondition": "Using your results from checking your contribution in the previous lesson, you now look back across the whole project, choosing, planning, safety-checking, carrying out, and checking, and decide on one specific next step: fixing a partly-met or missed criterion, extending the contribution further, or starting a new one using what you learned.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact reflecting and setting a next step decision or action.",
+        "Model move 2: Before writing your reflection, reread your day-five check results.",
+        "Model move 3: Walk back through each stage of the project, choosing, planning, safety-checking, carrying out, and checking, and note one specific thing that went well and one specific thing you would do differently at each stage."
+      ],
+      "reasoning": "The model names the condition, follows the ordered reflecting and setting a next step process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Stage-by-stage reflection specificity: All five earlier stages are covered, each with a specific strength and a specific thing the learner would do differently.",
+        "Next-step concreteness and connection to evidence: The next step is specific, connects directly to the weakest criterion or a specific stage note, and includes a rough timeframe."
+      ],
+      "resourceRef": "swk-rfl-g4-u06-l06-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for reflecting and setting a next step.",
+        "2. Watch the worked move on swk-rfl-g4-u06-l06-model-card.",
+        "3. Do one coached move on swk-rfl-g4-u06-l06-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g4-u06-l06-independent-card.",
+        "5. Save the small record on swk-rfl-g4-u06-l06-evidence-record; use swk-rfl-g4-u06-l06-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g4-u06-l06-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Using your results from checking your contribution in the previous lesson, you now look back across the whole project, choosing, planning, safety-checking, carrying out, and checking, and decide on one specific next step: fixing a partly-met or missed criterion, extending the contribution further, or starting a new one using what you learned.",
+      "prompt": "Name the one criterion from your check that came out best and the one that came out weakest.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Stage-by-stage reflection specificity: All five earlier stages are covered, each with a specific strength and a specific thing the learner would do differently.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g4-u06-l06-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g4-u06-l06-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "reflecting and setting a next step — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g4-u06-l06-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Walk back through each stage of the project, choosing, planning, safety-checking, carrying out, and checking, and note one specific thing that went well and one specific thing you would do differently at each stage.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "reflecting and setting a next step — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g4-u06-l06-independent-card",
+        "directions": "If a trusted adult is not available today to confirm the reflection and next step, the learner completes the full written reflection and next-step plan independently and reviews it with that adult at the next available opportunity, earning full credit once the adult confirms it.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g4-u06-l06-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain what you learned about your own planning or follow-through from doing this whole project, separate from how the contribution itself turned out.",
+      "observableCriteria": [
+        "Stage-by-stage reflection specificity: All five earlier stages are covered, each with a specific strength and a specific thing the learner would do differently.",
+        "Next-step concreteness and connection to evidence: The next step is specific, connects directly to the weakest criterion or a specific stage note, and includes a rough timeframe."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g4-u06-l06-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g4-u06-l06-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g4-u06-l06-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g4-u06-l06-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Stage-by-stage reflection specificity: All five earlier stages are covered, each with a specific strength and a specific thing the learner would do differently. | Next-step concreteness and connection to evidence: The next step is specific, connects directly to the weakest criterion or a specific stage note, and includes a rough timeframe.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g4-u06-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g4-u06-l06-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

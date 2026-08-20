@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u08-l11",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u08-l11",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Conic Sections and Volume Arguments",
+    "dayInUnit": 11,
+    "courseDay": 137,
+    "phase": "Performance task planning",
+    "focus": "Cavalieri's principle",
+    "title": "Performance task planning: Cavalieri's principle"
+  },
+  "standards": [
+    "G-C.4",
+    "G-GPE.3",
+    "G-GMD.2",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u08-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "ellipse-from-foci-and-sum",
+          "standard": "G-GPE.3",
+          "difficulty": 1,
+          "prompt": "Foci (±3, 0), distance sum 10. Equation?",
+          "workedSolution": {
+            "steps": [
+              "a = 5, c = 3.",
+              "b² = 25 − 9 = 16.",
+              "x²/25 + y²/16 = 1."
+            ],
+            "answer": "x²/25 + y²/16 = 1"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u08-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "hyperbola-from-foci-and-difference",
+          "standard": "G-GPE.3",
+          "difficulty": 2,
+          "prompt": "A hyperbola centred at the origin has foci at (±5, 0) and the absolute difference of distances to the foci equal to 8. Write its equation.",
+          "choices": [
+            "x²/16 − y²/9 = 1",
+            "x²/9 − y²/16 = 1",
+            "x²/16 + y²/9 = 1",
+            "y²/16 − x²/9 = 1"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "cavalieri-volume-argument",
+          "standard": "G-GMD.2",
+          "difficulty": 2,
+          "prompt": "Compare a sphere of radius r and a cylinder of radius r and height 2r with two cones removed. What does Cavalieri’s principle tell us?",
+          "choices": [
+            "They have equal volumes, because every horizontal cross-section has the same area at the same height.",
+            "They have equal volumes, and matching cross-sections is exactly how the sphere volume formula is derived.",
+            "The cone has one third the volume, which Cavalieri’s principle establishes by comparing cross-sections against a reference solid.",
+            "Nothing, because Cavalieri’s principle applies only to prisms."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "tangent-construction-from-external-point",
+          "standard": "G-C.4",
+          "difficulty": 3,
+          "prompt": "A circle has radius 8 and centre O. A point P lies 17 from O. Explain the construction of a tangent from P and give the tangent length.",
+          "choices": [
+            "Draw the perpendicular bisector of OP; the tangent length is 15.",
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 15.",
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 9.",
+            "Draw the circle centred at P with radius 8; the tangent length is 15."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u08-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "ellipse-from-foci-and-sum",
+          "standard": "G-GPE.3",
+          "difficulty": 3,
+          "prompt": "An ellipse centred at the origin has foci at (±3, 0) and the sum of distances to the foci equal to 10. Write its equation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "hyperbola-from-foci-and-difference",
+          "standard": "G-GPE.3",
+          "difficulty": 3,
+          "prompt": "A hyperbola centred at the origin has foci at (±5, 0) and the absolute difference of distances to the foci equal to 6. Write its equation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "cavalieri-volume-argument",
+          "standard": "G-GMD.2",
+          "difficulty": 3,
+          "prompt": "Compare a cone and a cylinder with the same base and height. What does Cavalieri’s principle tell us?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u08-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u08-l11"
+  }
+}

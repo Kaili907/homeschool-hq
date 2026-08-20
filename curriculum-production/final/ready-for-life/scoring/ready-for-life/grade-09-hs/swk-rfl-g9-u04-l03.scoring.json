@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l03",
+  "lessonId": "ma-g9-ready-for-life-u04-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Research accuracy across contexts",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Summary sentences are missing for one or more of the three contexts, or confuse what is required in one context with another (for example, mixing up field trip and air travel requirements)." },
+          { "label": "Proficient", "descriptor": "Summary sentences correctly and specifically describe what is typically required for each of the three contexts." },
+          { "label": "Advanced", "descriptor": "Summary sentences correctly describe each context and distinguish clearly between domestic and international air travel requirements." }
+        ]
+      },
+      {
+        "dimension": "Checklist completeness and personal accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Checklist has fewer than five items, or items are marked with one blanket answer instead of individually as have/don't have/not sure." },
+          { "label": "Proficient", "descriptor": "Checklist includes at least five specific documents, each individually marked have/don't have/not sure, with a named trusted adult for each gap." },
+          { "label": "Advanced", "descriptor": "Checklist includes at least five specific documents individually marked, each gap names a specific trusted adult, and the learner identifies which gap is most time-sensitive with a reason." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Summary sentences name the actual document or form for each context (a signed permission form, a passport) rather than a vague phrase like 'the right papers.'",
+      "Checklist entries are marked individually per item rather than one blanket answer for the whole list."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

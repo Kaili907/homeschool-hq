@@ -1,0 +1,373 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l10",
+  "lessonId": "ma-g10-financial-literacy-u06-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$8,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,000 deductible off the $9,800 of damage leaves $8,800.00, below the $14,000 limit, so the limit does not bind."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$5,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "This coverage carries no deductible, so nothing is subtracted from the $6,200. The $5,000 limit binds and caps the payment."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$25,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "No deductible applies, and the $31,400 of damage exceeds the $25,000 limit, so the limit binds and the coverage pays $25,000.00."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$38,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,800.00 of collision plus $5,000.00 of medical payments plus $25,000.00 of property damage liability."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The deductible only, since the collision limit did not bind."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $6,200 of bills less the $5,000.00 the limit allowed. There was no deductible here, so this whole amount comes from the limit binding."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$6,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $31,400 of damage less the $25,000.00 the liability limit allowed. Liability that exceeds a limit does not disappear; it remains the policyholder’s."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$8,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,000.00 plus $1,200.00 plus $6,400.00. Only $1,000.00 of this is a deductible; the other $7,600.00 comes from limits binding."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "$47,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$38,800.00 plus $8,600.00, which must equal the total loss of $9,800 plus $6,200 plus $31,400. If the two sides do not reconcile, a deductible or a limit has been applied twice or not at all."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "min(carDamage - collDed, collLimit)",
+        "substituted": "min(9800 - 1000, 14000)",
+        "result": "$8,800.00",
+        "why": "The $1,000 deductible off the $9,800 of damage leaves $8,800.00, below the $14,000 limit, so the limit does not bind."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "min(medBills, medLimit)",
+        "substituted": "min(6200, 5000)",
+        "result": "$5,000.00",
+        "why": "This coverage carries no deductible, so nothing is subtracted from the $6,200. The $5,000 limit binds and caps the payment."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "min(otherProp, pdLimit)",
+        "substituted": "min(31400, 25000)",
+        "result": "$25,000.00",
+        "why": "No deductible applies, and the $31,400 of damage exceeds the $25,000 limit, so the limit binds and the coverage pays $25,000.00."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 + #t1-p2 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p2 + #t1-p3",
+        "result": "$38,800.00",
+        "why": "$8,800.00 of collision plus $5,000.00 of medical payments plus $25,000.00 of property damage liability."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "carDamage2 - #t1-p1",
+        "substituted": "9800 - #t1-p1",
+        "result": "$1,000.00",
+        "why": "The deductible only, since the collision limit did not bind."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "medBills2 - #t1-p2",
+        "substituted": "6200 - #t1-p2",
+        "result": "$1,200.00",
+        "why": "The $6,200 of bills less the $5,000.00 the limit allowed. There was no deductible here, so this whole amount comes from the limit binding."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "otherProp2 - #t1-p3",
+        "substituted": "31400 - #t1-p3",
+        "result": "$6,400.00",
+        "why": "The $31,400 of damage less the $25,000.00 the liability limit allowed. Liability that exceeds a limit does not disappear; it remains the policyholder’s."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p2 + #t2-p3 + #t2-p4",
+        "substituted": "#t2-p2 + #t2-p3 + #t2-p4",
+        "result": "$8,600.00",
+        "why": "$1,000.00 plus $1,200.00 plus $6,400.00. Only $1,000.00 of this is a deductible; the other $7,600.00 comes from limits binding."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t2-p1 + #t2-p5",
+        "substituted": "#t2-p1 + #t2-p5",
+        "result": "$47,400.00",
+        "why": "$38,800.00 plus $8,600.00, which must equal the total loss of $9,800 plus $6,200 plus $31,400. If the two sides do not reconcile, a deductible or a limit has been applied twice or not at all."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Report this claim to the fictional policyholder: what the policy paid, what they owe, and which single coverage limit was most costly to have set where it was. Then say which limit you would raise first and what raising it would not fix.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Reports both sides accurately — $38,800.00 paid by the insurer and $8,600.00 borne by the policyholder — and notes that the two reconcile to the $47,400.00 total loss.",
+          "Identifies property damage liability as the costliest limit, since its binding produced $6,400.00 of the $8,600.00, and recommends raising it first.",
+          "States what raising it would not fix: the $1,000.00 collision deductible would remain, and the $1,200.00 medical shortfall would need a different limit raised.",
+          "Recognises that the $6,400.00 of liability remains legally owed to the other party rather than being written off."
+        ],
+        "evidenceRequirements": [
+          "Uses the $38,800.00 insurer total, the $8,600.00 policyholder total, and the $6,400.00 liability shortfall."
+        ],
+        "lookFors": [
+          "The response distinguishes the one deductible from the two limits that bound.",
+          "The response recognises that liability above a limit is still owed, which is what makes a liability limit different from a limit on one’s own property."
+        ],
+        "commonMisconception": "Assuming a policy’s deductible is the whole of what a claim costs the policyholder, when limits binding can cost far more.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does collision pay for the policyholder’s car?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does medical payments coverage pay?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does property damage liability pay for the other party’s property?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the insurer pay in total across the three coverages?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the policyholder bear on their own car?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the policyholder bear on their own medical bills?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the policyholder responsible for on the other party’s property?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What does the policyholder bear in total?"
+        },
+        {
+          "ref": "t2-p6",
+          "responseMode": "FIXED",
+          "promptText": "Check the work: what do the insurer’s payments and the policyholder’s costs come to together?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Report this claim to the fictional policyholder: what the policy paid, what they owe, and which single coverage limit was most costly to have set where it was. Then say which limit you would raise first and what raising it would not fix."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does collision pay for the policyholder’s car? Answer: $8,800.00. Verification: The $1,000 deductible off the $9,800 of damage leaves $8,800.00, below the $14,000 limit, so the limit does not bind. t1-p2: What does medical payments coverage pay? Answer: $5,000.00. Verification: This coverage carries no deductible, so nothing is subtracted from the $6,200. The $5,000 limit binds and caps the payment. t1-p3: What does property damage liability pay for the other party’s property? Answer: $25,000.00. Verification: No deductible applies, and the $31,400 of damage exceeds the $25,000 limit, so the limit binds and the coverage pays $25,000.00. t2-p1: What does the insurer pay in total across the three coverages? Answer: $38,800.00. Verification: $8,800.00 of collision plus $5,000.00 of medical payments plus $25,000.00 of property damage liability. t2-p2: What does the policyholder bear on their own car? Answer: $1,000.00. Verification: The deductible only, since the collision limit did not bind. t2-p3: What does the policyholder bear on their own medical bills? Answer: $1,200.00. Verification: The $6,200 of bills less the $5,000.00 the limit allowed. There was no deductible here, so this whole amount comes from the limit binding. t2-p4: What is the policyholder responsible for on the other party’s property? Answer: $6,400.00. Verification: The $31,400 of damage less the $25,000.00 the liability limit allowed. Liability that exceeds a limit does not disappear; it remains the policyholder’s. t2-p5: What does the policyholder bear in total? Answer: $8,600.00. Verification: $1,000.00 plus $1,200.00 plus $6,400.00. Only $1,000.00 of this is a deductible; the other $7,600.00 comes from limits binding. t2-p6: Check the work: what do the insurer’s payments and the policyholder’s costs come to together? Answer: $47,400.00. Verification: $38,800.00 plus $8,600.00, which must equal the total loss of $9,800 plus $6,200 plus $31,400. If the two sides do not reconcile, a deductible or a limit has been applied twice or not at all."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Report this claim to the fictional policyholder: what the policy paid, what they owe, and which single coverage limit was most costly to have set where it was. Then say which limit you would raise first and what raising it would not fix. Reports both sides accurately — $38,800.00 paid by the insurer and $8,600.00 borne by the policyholder — and notes that the two reconcile to the $47,400.00 total loss. Identifies property damage liability as the costliest limit, since its binding produced $6,400.00 of the $8,600.00, and recommends raising it first. States what raising it would not fix: the $1,000.00 collision deductible would remain, and the $1,200.00 medical shortfall would need a different limit raised. Recognises that the $6,400.00 of liability remains legally owed to the other party rather than being written off. Uses the $38,800.00 insurer total, the $8,600.00 policyholder total, and the $6,400.00 liability shortfall. The response distinguishes the one deductible from the two limits that bound. The response recognises that liability above a limit is still owed, which is what makes a liability limit different from a limit on one’s own property."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Reports both sides accurately — $38,800.00 paid by the insurer and $8,600.00 borne by the policyholder — and notes that the two reconcile to the $47,400.00 total loss. Identifies property damage liability as the costliest limit, since its binding produced $6,400.00 of the $8,600.00, and recommends raising it first. States what raising it would not fix: the $1,000.00 collision deductible would remain, and the $1,200.00 medical shortfall would need a different limit raised. Recognises that the $6,400.00 of liability remains legally owed to the other party rather than being written off."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u06-l10.scoring.json",
+    "sourceScoringSha256": "682079f8b5c43e9ded6a97fb970005e9b99e8760b282c4a1f2a5fac53d7ab5e7",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-financial-literacy-u04-assessment",
+  "courseRef": "ma-g9-financial-literacy",
+  "grade": 9,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g9-financial-literacy-u04",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "courseTitle": "Personal Finance",
+    "assessmentLessonRef": "ma-g9-financial-literacy-u04-l11"
+  },
+  "standards": [
+    "PF4",
+    "PF4.1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u04-l11.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "If the whole $5,700 gap is borrowed, the fictional terms are 6.8% over 10 years — 120 monthly payments — at a disclosed $65.58 a month. Additional work at the fictional campus wage pays $13.75 an hour.",
+      "prompt": "What is the total repaid if the full gap is borrowed?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "If the whole $5,700 gap is borrowed, the fictional terms are 6.8% over 10 years — 120 monthly payments — at a disclosed $65.58 a month. Additional work at the fictional campus wage pays $13.75 an hour.",
+      "prompt": "What does borrowing the gap cost in interest?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "If the whole $5,700 gap is borrowed, the fictional terms are 6.8% over 10 years — 120 monthly payments — at a disclosed $65.58 a month. Additional work at the fictional campus wage pays $13.75 an hour.",
+      "prompt": "What does each dollar of this gap cost if it is borrowed? Give the answer to two decimal places."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now price a mixed plan: borrow $3,500, earn $1,400 through extra work, and save the rest before the year begins.",
+      "prompt": "How many hours of work at $13.75 an hour produce $1,400? Round to the nearest hour.",
+      "responseUnit": "hours"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now price a mixed plan: borrow $3,500, earn $1,400 through extra work, and save the rest before the year begins.",
+      "prompt": "How much must be saved in advance to complete the mixed plan?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now price a mixed plan: borrow $3,500, earn $1,400 through extra work, and save the rest before the year begins.",
+      "prompt": "Borrowing $3,500 rather than $5,700 at the same $1.38 per dollar saves how much in eventual repayment? Round to the nearest cent.",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Defend the plan.",
+      "prompt": "Defend the mixed plan against the simpler alternative of borrowing the whole $5,700. Say what the mixed plan costs that the simple one does not, and name the condition under which borrowing the whole gap would be the better choice."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Defend the plan.",
+      "prompt": "The $1.38 per borrowed dollar assumes the loan runs its full 10 years. Say how paying it off in 5 years instead would change that figure, and why the direction of the change is certain even without the new payment amount."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/financial-literacy/ma-g9-financial-literacy-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Reasoning from the figures criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion.",
+    "Provide evidence that meets the stated Transfer to the new case criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-financial-literacy-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u04-l11.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF4 — Using Credit: What Credit Costs and What Aid Is?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -2,6 +2,10 @@ import { ADMIN_ROLES } from '../../src/admin/contracts.ts'
 import { ADMIN_ACCESS_REASON_CODES } from '../../src/admin/accessModel.ts'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import {
+  ADMIN_CRITICAL_ACTIONS,
+  createAdminCriticalActionEnforcer,
+} from './_shared/admin-critical-actions.js'
+import {
   AdminAccessSourceError,
   createAdminAccessSource,
 } from './_shared/admin-access-source.js'
@@ -93,6 +97,15 @@ export function createAdminAccessHandler(overrides = {}) {
     fetchImpl,
     clientFactory: overrides.clientFactory,
   })
+  const criticalActions = overrides.criticalActions ?? createAdminCriticalActionEnforcer({
+    stepUpAssurance: overrides.stepUpAssurance,
+    env,
+    fetchImpl,
+    authVerifier: overrides.authVerifier,
+    requestSourceGuard: overrides.requestSourceGuard,
+    audit: overrides.criticalActionAudit,
+    now: overrides.criticalActionNow,
+  })
 
   return async (event) => {
     const path = event?.path ?? ''
@@ -115,6 +128,14 @@ export function createAdminAccessHandler(overrides = {}) {
     try {
       if (isRead) return jsonResponse(200, await source.read(authorized.accessToken))
       const request = parseAccessMutationRequest(event, isChange ? 'change-role' : 'revoke')
+      const assured = await criticalActions.enforce(event, {
+        actorId: authorized.principal.userId,
+        action: isChange
+          ? ADMIN_CRITICAL_ACTIONS.CHANGE_ADMIN_ROLE
+          : ADMIN_CRITICAL_ACTIONS.REVOKE_ADMIN_ROLE,
+        resource: { type: 'admin-role-assignment', id: request.assignmentRef },
+      })
+      if (!assured.ok) return assured.response
       return jsonResponse(200, await source.mutate(authorized.accessToken, request))
     } catch (error) {
       return errorForSource(error)

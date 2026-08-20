@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l07",
+  "lessonId": "ma-g10-financial-literacy-u05-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "-50.00%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $25 fall measured against the $50 it started from. The first half of the student’s claim is correct."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "100.00%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same $25 move, but now measured against the $25 it starts from. A percentage is always relative to its base, and the base changed."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$30.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3% of the $1,000 face value, fixed when the bond was issued and unchanged by anything the market does."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$980.95",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,030.00 the bond will pay in a year, discounted at the 5% a buyer can now get elsewhere. A buyer will not pay face value for a 3% coupon when 5% is available."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$19.05",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,000 against $980.95. The issuer has not missed anything and will still repay in full at maturity, but selling today would realise a loss."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "Rates available on new bonds rose above this bond’s coupon",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Nothing about the issuer or the coupon changed; both are fixed in the scenario. The bond became less attractive only because a buyer can now get 5% elsewhere, so its price adjusted until its return matched."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "(low - high) / high * 100",
+        "substituted": "(25 - 50) / 50 * 100",
+        "result": "-50.00%",
+        "why": "The $25 fall measured against the $50 it started from. The first half of the student’s claim is correct."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "(high2 - low2) / low2 * 100",
+        "substituted": "(50 - 25) / 25 * 100",
+        "result": "100.00%",
+        "why": "The same $25 move, but now measured against the $25 it starts from. A percentage is always relative to its base, and the base changed."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "face * coupon",
+        "substituted": "1000 * 0.03",
+        "result": "$30.00",
+        "why": "3% of the $1,000 face value, fixed when the bond was issued and unchanged by anything the market does."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round((face2 + #t2-p1) / (1 + newRate), 2)",
+        "substituted": "round((1000 + #t2-p1) / (1 + 0.05), 2)",
+        "result": "$980.95",
+        "why": "The $1,030.00 the bond will pay in a year, discounted at the 5% a buyer can now get elsewhere. A buyer will not pay face value for a 3% coupon when 5% is available."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "face3 - #t2-p2",
+        "substituted": "1000 - #t2-p2",
+        "result": "$19.05",
+        "why": "$1,000 against $980.95. The issuer has not missed anything and will still repay in full at maturity, but selling today would realise a loss."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Correct each of the three claims, and explain what the first two have in common as reasoning errors. For the third claim, say what actually determines a fund’s expense ratio.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Corrects the first claim by identifying the changed base: a 50% fall needs a 100% rise to reverse, because the second percentage is taken on the smaller figure.",
+          "Corrects the second claim by distinguishing credit risk from interest-rate risk — the issuer is still good for the money, and the $19.05 loss came from rates rising.",
+          "Corrects the third claim by stating that an expense ratio is set by how the fund is managed and priced, not by how many holdings it has, so a fund with more companies can charge more or less.",
+          "Identifies the shared error in the first two: assuming a single word — \"50%\" or \"safe\" — carries the same meaning in both directions or in every context."
+        ],
+        "evidenceRequirements": [
+          "Uses the -50.00% and 100.00% figures and the $980.95 bond price."
+        ],
+        "lookFors": [
+          "The response names the base of the percentage as what changed, rather than calling the arithmetic careless.",
+          "The response recognises that \"safe\" is true of this bond in one sense — it will repay at maturity — and false in another."
+        ],
+        "commonMisconception": "Reading a percentage move as reversible by the same percentage in the opposite direction.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What was the percentage change on the way down, from $50 to $25?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What percentage rise is needed to get from $25 back to $50?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the fictional bond pay in coupon for its final year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "With new bonds now paying 5%, what is this bond worth today? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much has the bondholder lost on paper?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Under this model, what caused the bond’s price to fall?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Correct each of the three claims, and explain what the first two have in common as reasoning errors. For the third claim, say what actually determines a fund’s expense ratio."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What was the percentage change on the way down, from $50 to $25? Answer: -50.00%. Verification: The $25 fall measured against the $50 it started from. The first half of the student’s claim is correct. t1-p2: What percentage rise is needed to get from $25 back to $50? Answer: 100.00%. Verification: The same $25 move, but now measured against the $25 it starts from. A percentage is always relative to its base, and the base changed. t2-p1: What does the fictional bond pay in coupon for its final year? Answer: $30.00. Verification: 3% of the $1,000 face value, fixed when the bond was issued and unchanged by anything the market does. t2-p2: With new bonds now paying 5%, what is this bond worth today? Round to the nearest cent. Answer: $980.95. Verification: The $1,030.00 the bond will pay in a year, discounted at the 5% a buyer can now get elsewhere. A buyer will not pay face value for a 3% coupon when 5% is available. t2-p3: How much has the bondholder lost on paper? Answer: $19.05. Verification: $1,000 against $980.95. The issuer has not missed anything and will still repay in full at maturity, but selling today would realise a loss. t2-p4: Under this model, what caused the bond’s price to fall? Answer: Rates available on new bonds rose above this bond’s coupon. Verification: Nothing about the issuer or the coupon changed; both are fixed in the scenario. The bond became less attractive only because a buyer can now get 5% elsewhere, so its price adjusted until its return matched."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Correct each of the three claims, and explain what the first two have in common as reasoning errors. For the third claim, say what actually determines a fund’s expense ratio. Corrects the first claim by identifying the changed base: a 50% fall needs a 100% rise to reverse, because the second percentage is taken on the smaller figure. Corrects the second claim by distinguishing credit risk from interest-rate risk — the issuer is still good for the money, and the $19.05 loss came from rates rising. Corrects the third claim by stating that an expense ratio is set by how the fund is managed and priced, not by how many holdings it has, so a fund with more companies can charge more or less. Identifies the shared error in the first two: assuming a single word — \"50%\" or \"safe\" — carries the same meaning in both directions or in every context. Uses the -50.00% and 100.00% figures and the $980.95 bond price. The response names the base of the percentage as what changed, rather than calling the arithmetic careless. The response recognises that \"safe\" is true of this bond in one sense — it will repay at maturity — and false in another."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Corrects the first claim by identifying the changed base: a 50% fall needs a 100% rise to reverse, because the second percentage is taken on the smaller figure. Corrects the second claim by distinguishing credit risk from interest-rate risk — the issuer is still good for the money, and the $19.05 loss came from rates rising. Corrects the third claim by stating that an expense ratio is set by how the fund is managed and priced, not by how many holdings it has, so a fund with more companies can charge more or less. Identifies the shared error in the first two: assuming a single word — \"50%\" or \"safe\" — carries the same meaning in both directions or in every context."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u05-l07.scoring.json",
+    "sourceScoringSha256": "f1223d57bad91eea468ee50fc4d2017db510c90197022f6b7360a015053ad876",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

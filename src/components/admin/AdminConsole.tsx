@@ -16,7 +16,7 @@ import {
   validateCustomRange,
   type AdminConsoleProps,
   type AdminOverviewModel,
-  type AdminSection,
+  type AdminShellMount,
   type ApplicableMetric,
   type Metric,
   type OverviewPreset,
@@ -25,21 +25,65 @@ import {
 } from '../../admin/overviewModel'
 import './admin-console.css'
 
-const NAVIGATION: readonly { id: AdminSection; label: string; capabilities: readonly AdminCapability[] }[] = [
-  { id: 'attention', label: 'Attention Center', capabilities: ['overview:read'] },
-  { id: 'overview', label: 'Overview', capabilities: ['overview:read'] },
-  { id: 'learners', label: 'Learners', capabilities: ['learners:read'] },
-  { id: 'engines', label: 'Engine Performance', capabilities: ['engines:read'] },
-  { id: 'costs', label: 'AI & Costs', capabilities: ['costs:read'] },
-  { id: 'system-health', label: 'System Health', capabilities: ['health:read'] },
-  { id: 'study-operations', label: 'Study Operations', capabilities: ['health:read'] },
-  { id: 'incidents', label: 'Incident Explorer', capabilities: ['engines:read', 'audit:read', 'costs:read'] },
-  { id: 'safety', label: 'Safety', capabilities: ['safety:read'] },
-  { id: 'curriculum', label: 'Curriculum', capabilities: ['curriculum:read'] },
-  { id: 'configuration', label: 'Configuration', capabilities: ['configuration:read'] },
-  { id: 'audit-log', label: 'Audit Log', capabilities: ['audit:read'] },
-  { id: 'access', label: 'Access & Permissions', capabilities: ['overview:read'] },
-  { id: 'releases', label: 'Production Readiness', capabilities: ['releases:read'] },
+// The vocabulary lives on AdminShellMount so shell types stay aligned across
+// AdminConsole, AdminShell, and the integration route.
+export type AdminNavId = AdminShellMount
+
+interface AdminNavItem {
+  readonly id: AdminNavId
+  readonly label: string
+  readonly capabilities: readonly AdminCapability[]
+}
+
+interface AdminNavGroup {
+  readonly id: string
+  readonly label: string
+  readonly items: readonly AdminNavItem[]
+}
+
+// DASH-7 information hierarchy: grouping the 15 destinations under four short
+// headers keeps scanning cheap at full width and in the compact top navigation.
+// Group headers hide entirely when no member is capability-visible.
+const NAV_GROUPS: readonly AdminNavGroup[] = [
+  {
+    id: 'home',
+    label: 'Home',
+    items: [
+      { id: 'attention', label: 'Attention Center', capabilities: ['overview:read'] },
+      { id: 'overview', label: 'Overview', capabilities: ['overview:read'] },
+    ],
+  },
+  {
+    id: 'programs',
+    label: 'Programs',
+    items: [
+      { id: 'learners', label: 'Learners', capabilities: ['learners:read'] },
+      { id: 'curriculum', label: 'Published Curriculum', capabilities: ['curriculum:read'] },
+      { id: 'high-school-program', label: 'High School Program', capabilities: ['overview:read'] },
+    ],
+  },
+  {
+    id: 'operations',
+    label: 'Operations',
+    items: [
+      { id: 'engines', label: 'Engine Performance', capabilities: ['engines:read'] },
+      { id: 'costs', label: 'AI & Costs', capabilities: ['costs:read'] },
+      { id: 'safety', label: 'Safety', capabilities: ['safety:read'] },
+      { id: 'study-operations', label: 'Study Operations', capabilities: ['health:read'] },
+      { id: 'system-health', label: 'System Health', capabilities: ['health:read'] },
+      { id: 'incidents', label: 'Incident Explorer', capabilities: ['engines:read', 'audit:read', 'costs:read'] },
+    ],
+  },
+  {
+    id: 'governance',
+    label: 'Governance',
+    items: [
+      { id: 'configuration', label: 'Configuration', capabilities: ['configuration:read'] },
+      { id: 'audit-log', label: 'Audit Log', capabilities: ['audit:read'] },
+      { id: 'access', label: 'Access & Permissions', capabilities: ['overview:read'] },
+      { id: 'releases', label: 'Production Readiness', capabilities: ['releases:read'] },
+    ],
+  },
 ]
 
 const PRESET_LABELS: Record<OverviewPreset, string> = {
@@ -140,35 +184,56 @@ export function AdminShell({
   children,
 }: {
   readonly authorization: AuthorizedAdmin
-  readonly activeSection: AdminSection
+  readonly activeSection: AdminNavId
   readonly title: string
   readonly toolbar?: ReactNode
-  readonly onNavigate?: (section: AdminSection) => void
+  readonly onNavigate?: (section: AdminNavId) => void
   readonly children: ReactNode
 }) {
   const headingRef = useRef<HTMLHeadingElement>(null)
   const previousTitle = useRef<string | null>(null)
   const activeNavigationRef = useRef<HTMLButtonElement>(null)
-  const navigationListRef = useRef<HTMLUListElement>(null)
-  const activeLabel = NAVIGATION.find((item) => item.id === activeSection)?.label ?? title
-  const visibleNavigation = NAVIGATION.filter((item) =>
-    item.capabilities.some((capability) => authorization.capabilities.includes(capability)))
+  const navigationRegionRef = useRef<HTMLElement>(null)
+  const visibleGroups = NAV_GROUPS
+    .map((group) => ({
+      ...group,
+      items: group.items.filter((item) =>
+        item.capabilities.some((capability) => authorization.capabilities.includes(capability))),
+    }))
+    .filter((group) => group.items.length > 0)
+  const activeItem = visibleGroups.flatMap((group) => group.items).find((item) => item.id === activeSection)
+  const activeLabel = activeItem?.label ?? title
   useEffect(() => {
     applyAdminRoutePresentation(title, document, headingRef.current, previousTitle.current !== null)
     previousTitle.current = title
   }, [title])
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
-      const navigation = navigationListRef.current
+      const region = navigationRegionRef.current
       const active = activeNavigationRef.current
-      if (!navigation || !active || navigation.scrollWidth <= navigation.clientWidth) return
-      const navigationRect = navigation.getBoundingClientRect()
+      if (!region || !active) return
+      const regionRect = region.getBoundingClientRect()
       const activeRect = active.getBoundingClientRect()
       const focusOutlineClearance = 4
-      if (activeRect.left < navigationRect.left + focusOutlineClearance) {
-        navigation.scrollLeft -= navigationRect.left - activeRect.left + focusOutlineClearance
-      } else if (activeRect.right > navigationRect.right - focusOutlineClearance) {
-        navigation.scrollLeft += activeRect.right - navigationRect.right + focusOutlineClearance
+      if (region.scrollHeight > region.clientHeight) {
+        if (activeRect.top < regionRect.top + focusOutlineClearance) {
+          region.scrollTop -= regionRect.top - activeRect.top + focusOutlineClearance
+        } else if (activeRect.bottom > regionRect.bottom - focusOutlineClearance) {
+          region.scrollTop += activeRect.bottom - regionRect.bottom + focusOutlineClearance
+        }
+      }
+      // At compact widths the full nav region becomes one horizontal scroller.
+      // Keep the active destination in view without widening the document.
+      const localList = active.closest('ul')
+      const scroller = localList && localList.scrollWidth > localList.clientWidth
+        ? localList
+        : region.scrollWidth > region.clientWidth ? region : null
+      if (!scroller) return
+      const scrollerRect = scroller.getBoundingClientRect()
+      if (activeRect.left < scrollerRect.left + focusOutlineClearance) {
+        scroller.scrollLeft -= scrollerRect.left - activeRect.left + focusOutlineClearance
+      } else if (activeRect.right > scrollerRect.right - focusOutlineClearance) {
+        scroller.scrollLeft += activeRect.right - scrollerRect.right + focusOutlineClearance
       }
     })
     return () => window.cancelAnimationFrame(frame)
@@ -181,25 +246,33 @@ export function AdminShell({
           <BrandMark />
           <div><strong>Manuel Academy</strong><span>Admin console</span></div>
         </div>
-        <nav aria-label="Admin sections">
-          <p className="admin-nav-label">Workspace</p>
-          <ul ref={navigationListRef}>
-            {visibleNavigation.map((item) => (
-              <li key={item.id}>
-                <button
-                  type="button"
-                  ref={item.id === activeSection ? activeNavigationRef : undefined}
-                  className={item.id === activeSection ? 'is-active' : ''}
-                  aria-label={item.label}
-                  aria-current={item.id === activeSection ? 'page' : undefined}
-                  onClick={() => onNavigate?.(item.id)}
-                >
-                  <NavIcon section={item.id} />
-                  <span className="admin-nav-text">{item.label}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
+        <nav aria-label="Admin sections" ref={navigationRegionRef}>
+          {visibleGroups.map((group) => {
+            const headingId = `admin-nav-group-${group.id}`
+            return (
+              <div className="admin-nav-group" key={group.id}>
+                <p className="admin-nav-label" id={headingId}>{group.label}</p>
+                <ul aria-labelledby={headingId}>
+                  {group.items.map((item) => (
+                    <li key={item.id}>
+                      <button
+                        type="button"
+                        ref={item.id === activeSection ? activeNavigationRef : undefined}
+                        className={item.id === activeSection ? 'is-active' : ''}
+                        aria-label={item.label}
+                        aria-current={item.id === activeSection ? 'page' : undefined}
+                        title={item.label}
+                        onClick={() => onNavigate?.(item.id)}
+                      >
+                        <NavIcon section={item.id} />
+                        <span className="admin-nav-text">{item.label}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })}
         </nav>
         <div className="admin-sidebar__footer">
           <span className="admin-secure-dot" aria-hidden="true" />
@@ -328,6 +401,11 @@ function Overview({ model }: { model: AdminOverviewModel }) {
           <StatusItem label="Overall health" metric={model.academy.overallHealth} health />
           <StatusItem label="Observed at" metric={model.observedAt === null ? { status: 'unknown' } : { status: 'available', value: model.observedAt }} />
           <StatusItem label="Last successful refresh" metric={model.academy.lastSuccessfulDataRefresh} />
+          {model.academy.release && <StatusItem label="Admitted release" metric={{ status: 'available', value: model.academy.release.releaseVersion }} />}
+          {model.academy.release && <StatusItem label="Release courses" metric={{ status: 'available', value: model.academy.release.counts.courses }} />}
+          {model.academy.release && <StatusItem label="Release units" metric={{ status: 'available', value: model.academy.release.counts.units }} />}
+          {model.academy.release && <StatusItem label="Release lessons" metric={{ status: 'available', value: model.academy.release.counts.lessons }} />}
+          {model.academy.release && <StatusItem label="Release assessments" metric={{ status: 'available', value: model.academy.release.counts.assessments }} />}
         </dl>
         <DomainStatus status={model.domainStatuses?.academy} />
       </section>
@@ -554,11 +632,11 @@ function BrandMark() {
   return <span className="admin-brand-mark" aria-hidden="true"><span>MA</span></span>
 }
 
-function NavIcon({ section }: { section: AdminSection }) {
-  const icons: Record<AdminSection, string> = {
+function NavIcon({ section }: { section: AdminNavId }) {
+  const icons: Record<AdminNavId, string> = {
     attention: '!', overview: '⌂', learners: '◉', engines: '◇', costs: '✦', curriculum: '▤',
     safety: '◆', 'system-health': '⌁', incidents: '◎', configuration: '⚙', 'audit-log': '≡', access: '⌘', releases: '↑',
-    'study-operations': 'S',
+    'study-operations': 'S', 'high-school-program': '⏢',
   }
   return <span className="admin-nav-icon" aria-hidden="true">{icons[section]}</span>
 }

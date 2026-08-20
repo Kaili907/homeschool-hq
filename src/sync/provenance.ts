@@ -1,6 +1,14 @@
 import { SCHEMA_VERSION } from '../migration'
-import type { AppState, Profile } from '../types'
+import {
+  ACADEMY_GRADES as ACADEMY_GRADE_VALUES,
+  NOMINAL_GRADES,
+  type AppState,
+  type Profile,
+} from '../types'
+import { parseAcademyCourseId } from '../curriculum/grade-authority'
+import { normalizeAppStatePinVerifiers } from '../localPin'
 import type { HouseholdSyncMeta, RemoteProfileRow } from './types'
+import { sanitizeProfileForSync } from './privacy'
 
 export const APP_STATE_STORAGE_KEY = 'homeschool-hq:app:v2'
 export const DATASET_WRITE_LOCK_NAME = 'academy-sync-persisted-dataset'
@@ -19,8 +27,8 @@ const MAX_SYNC_PAYLOAD_BYTES = 10_000_000
 const MAX_SYNC_PROFILES = 5
 const PROFILE_ID = /^p[1-5]$/
 const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
-const GRADES = new Set(['3', '4', '5', '6', '7', '8', '10', '12'])
-const ACADEMY_GRADES = new Set(['5', '7', '8'])
+const GRADES = new Set<string>(NOMINAL_GRADES)
+const ACADEMY_GRADES = new Set<string>(ACADEMY_GRADE_VALUES)
 // mirrors ACADEMY_SUBJECTS (src/types.ts), the working-level record's key domain
 const ACADEMY_SUBJECTS = new Set([
   'mathematics',
@@ -645,10 +653,8 @@ function academyAuthorization(
 }
 
 /**
- * ACADEMY-LEVEL-DECOUPLE: subject → academy level. Levels are restricted to the
- * ones the release publishes content for (5/7/8) — the same set the parent UI
- * offers. A nominal-only grade such as '10' is rejected rather than stored as an
- * inert value nothing can serve.
+ * ACADEMY-LEVEL-DECOUPLE: subject → curriculum-supported Academy grade. Grade 6
+ * is a valid nominal grade but is rejected here rather than stored as inert.
  */
 function validateWorkingLevels(value: unknown): boolean {
   return boundedRecord(
@@ -656,10 +662,6 @@ function validateWorkingLevels(value: unknown): boolean {
     (level, subject) => ACADEMY_SUBJECTS.has(subject) && memberOf(ACADEMY_GRADES, level),
   )
 }
-
-/** Course ids encode their level and subject (`ma-g5-mathematics`); mirrors
- * COURSE_ID in academy/academyRoute.ts. Every id in the shipped release parses. */
-const ACADEMY_COURSE_ID = /^ma-g(5|7|8)-([a-z-]+)$/
 
 /**
  * A course record is admissible only if the profile is authorized for that
@@ -674,8 +676,8 @@ const ACADEMY_COURSE_ID = /^ma-g(5|7|8)-([a-z-]+)$/
 function validateAcademyCourseIds(value: unknown, authorized: Map<string, string>): boolean {
   return boundedArray(value, (candidate) => {
     if (!identifier(candidate)) return false
-    const parsed = ACADEMY_COURSE_ID.exec(candidate)
-    return parsed !== null && authorized.get(parsed[2]) === parsed[1]
+    const parsed = parseAcademyCourseId(candidate)
+    return parsed !== null && authorized.get(parsed.subject) === String(parsed.grade)
   })
 }
 
@@ -834,9 +836,26 @@ export function validateProfileForSync(
   key: string,
   value: unknown,
 ): value is Profile {
+  return PROFILE_ID.test(key) && validateProfileForIdentity(key, value)
+}
+
+const ADMIN_PROFILE_ID = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/
+
+/** Admin projections can represent future learner identifiers without widening
+ * the household sync keyspace, which remains the canonical p1-p5 set. */
+export function validateProfileForAdminProjection(
+  key: string,
+  value: unknown,
+): value is Profile {
+  return ADMIN_PROFILE_ID.test(key) && validateProfileForIdentity(key, value)
+}
+
+function validateProfileForIdentity(
+  key: string,
+  value: unknown,
+): value is Profile {
   if (!plainRecord(value)) return false
   return (
-    PROFILE_ID.test(key) &&
     value.id === key &&
     key.length > 0 &&
     text(value.name) &&
@@ -996,7 +1015,13 @@ export function validateRemoteProfileRows(value: unknown): RemoteRowsValidation 
       }
       ids.add(id)
     }
-    return { ok: true, rows: value as RemoteProfileRow[] }
+    return {
+      ok: true,
+      rows: (value as RemoteProfileRow[]).map((row) => ({
+        ...row,
+        data: sanitizeProfileForSync(row.data),
+      })),
+    }
   } catch {
     return {
       ok: false,
@@ -1178,10 +1203,11 @@ export async function persistDatasetVerified(
       wrote: false,
     }
   }
-  const validation = validateAppStateForSync(state)
+  const durableState = normalizeAppStatePinVerifiers(state)
+  const validation = validateAppStateForSync(durableState)
   if (!validation.ok) return { ...validation, wrote: false }
   try {
-    storage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(state))
+    storage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(durableState))
   } catch {
     return {
       ok: false,
@@ -1191,7 +1217,7 @@ export async function persistDatasetVerified(
   }
   const persisted = await readPersistedDataset(storage)
   if (!persisted.ok) return { ...persisted, wrote: true }
-  const expected = await datasetFingerprint(state)
+  const expected = await datasetFingerprint(durableState)
   return persisted.fingerprint === expected
     ? persisted
     : {

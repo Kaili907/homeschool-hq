@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l07",
+  "lessonId": "ma-g12-financial-literacy-u01-l07",
+  "integratedDomains": [
+    "income",
+    "taxes",
+    "insurance-risk",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$610.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1% of the $61,000 salary. Offer Q is not in the city and pays none of this, so it is a difference between the offers rather than a cost both carry."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$57,990.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$61,000 less the $2,400 premium and the $610.00 city tax. Both are annual, and both are charged to the worker."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,776.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3% of $59,200, paid into a retirement account rather than as pay."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$58,240.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$59,200 less the $960 premium. There is no city tax to subtract under Offer Q."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Offer Q",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$58,240.00 under Q against $57,990.00 under P. The $1,800 salary advantage P appeared to hold is more than consumed by $610.00 of city tax and $1,440 more in premiums."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$60,016.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$58,240.00 of spendable pay plus the $1,776.00 employer retirement contribution. Q therefore leads on both measures once the ranking is done properly, so the two do not conflict here."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "salaryP * cityRate",
+        "substituted": "61000 * 0.01",
+        "result": "$610.00",
+        "why": "1% of the $61,000 salary. Offer Q is not in the city and pays none of this, so it is a difference between the offers rather than a cost both carry."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "salaryP2 - premiumP - #t1-p1",
+        "substituted": "61000 - 2400 - #t1-p1",
+        "result": "$57,990.00",
+        "why": "$61,000 less the $2,400 premium and the $610.00 city tax. Both are annual, and both are charged to the worker."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "salaryQ * matchRate",
+        "substituted": "59200 * 0.03",
+        "result": "$1,776.00",
+        "why": "3% of $59,200, paid into a retirement account rather than as pay."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "salaryQ2 - premiumQ",
+        "substituted": "59200 - 960",
+        "result": "$58,240.00",
+        "why": "$59,200 less the $960 premium. There is no city tax to subtract under Offer Q."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 > #t1-p2",
+        "substituted": "#t2-p1 > #t1-p2",
+        "result": "Offer Q",
+        "why": "$58,240.00 under Q against $57,990.00 under P. The $1,800 salary advantage P appeared to hold is more than consumed by $610.00 of city tax and $1,440 more in premiums."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 + #t1-p3",
+        "substituted": "#t2-p1 + #t1-p3",
+        "result": "$60,016.00",
+        "why": "$58,240.00 of spendable pay plus the $1,776.00 employer retirement contribution. Q therefore leads on both measures once the ranking is done properly, so the two do not conflict here."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Name the first step at which the fictional candidate’s comparison went wrong, state the misconception behind it, and give one check that would have exposed the error before a decision was made.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Locates the first wrong step precisely: the comparison stopped at the two salary figures, $61,000 against $59,200, and never brought the city tax or either premium into the calculation.",
+          "Names the misconception: treating the salary line as the offer, when the offer is the whole set of terms attached to it — including where the job is located and what the worker pays for benefits.",
+          "Gives a workable check: compute a single spendable figure for each offer with every annual charge subtracted, and only compare figures built the same way."
+        ],
+        "evidenceRequirements": [
+          "Uses the $57,990.00 and $58,240.00 spendable figures to show that the original ranking reversed."
+        ],
+        "lookFors": [
+          "The response identifies the omission as the first error rather than describing the conclusion as wrong.",
+          "The response notes that the $250.00 spendable-pay difference is small, so the ranking would be sensitive to any further term the comparison still omits."
+        ],
+        "commonMisconception": "Comparing two salaries directly when the offers carry different local taxes and different benefit costs, so the two numbers are not measuring the same thing.",
+        "dimensions": [
+          "error-diagnosis",
+          "criteria-application",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the 1% city income tax cost under Offer P?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does Offer P leave after the city tax and the employee’s health premium?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the employer contribute to retirement under Offer Q?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does Offer Q leave after the employee’s health premium?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "On spendable pay after the city tax and the health premium, which offer pays more?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Adding the employer retirement contribution, what is Offer Q worth in total?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Name the first step at which the fictional candidate’s comparison went wrong, state the misconception behind it, and give one check that would have exposed the error before a decision was made."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the 1% city income tax cost under Offer P? Answer: $610.00. Verification: 1% of the $61,000 salary. Offer Q is not in the city and pays none of this, so it is a difference between the offers rather than a cost both carry. t1-p2: What does Offer P leave after the city tax and the employee’s health premium? Answer: $57,990.00. Verification: $61,000 less the $2,400 premium and the $610.00 city tax. Both are annual, and both are charged to the worker. t1-p3: What does the employer contribute to retirement under Offer Q? Answer: $1,776.00. Verification: 3% of $59,200, paid into a retirement account rather than as pay. t2-p1: What does Offer Q leave after the employee’s health premium? Answer: $58,240.00. Verification: $59,200 less the $960 premium. There is no city tax to subtract under Offer Q. t2-p2: On spendable pay after the city tax and the health premium, which offer pays more? Answer: Offer Q. Verification: $58,240.00 under Q against $57,990.00 under P. The $1,800 salary advantage P appeared to hold is more than consumed by $610.00 of city tax and $1,440 more in premiums. t2-p3: Adding the employer retirement contribution, what is Offer Q worth in total? Answer: $60,016.00. Verification: $58,240.00 of spendable pay plus the $1,776.00 employer retirement contribution. Q therefore leads on both measures once the ranking is done properly, so the two do not conflict here."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Name the first step at which the fictional candidate’s comparison went wrong, state the misconception behind it, and give one check that would have exposed the error before a decision was made. Locates the first wrong step precisely: the comparison stopped at the two salary figures, $61,000 against $59,200, and never brought the city tax or either premium into the calculation. Names the misconception: treating the salary line as the offer, when the offer is the whole set of terms attached to it — including where the job is located and what the worker pays for benefits. Gives a workable check: compute a single spendable figure for each offer with every annual charge subtracted, and only compare figures built the same way. Uses the $57,990.00 and $58,240.00 spendable figures to show that the original ranking reversed. The response identifies the omission as the first error rather than describing the conclusion as wrong. The response notes that the $250.00 spendable-pay difference is small, so the ranking would be sensitive to any further term the comparison still omits."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Locates the first wrong step precisely: the comparison stopped at the two salary figures, $61,000 against $59,200, and never brought the city tax or either premium into the calculation. Names the misconception: treating the salary line as the offer, when the offer is the whole set of terms attached to it — including where the job is located and what the worker pays for benefits. Gives a workable check: compute a single spendable figure for each offer with every annual charge subtracted, and only compare figures built the same way."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u01-l07.scoring.json",
+    "sourceScoringSha256": "810d46ae6925d3f6e9bd9b8b90d14d9ca774e9a1c7967aea7379235507b2b982",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

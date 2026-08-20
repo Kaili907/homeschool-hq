@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l02",
+  "lessonId": "ma-g11-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Genuine distinctness of new options",
+        "levels": [
+          { "label": "Emerging", "descriptor": "New options are the same kind of change as the original two (e.g., a bigger, smaller, or rescheduled version)." },
+          { "label": "Proficient", "descriptor": "At least two new options change a different dimension of the plan than the original two did." },
+          { "label": "Advanced", "descriptor": "New options each change a different dimension from each other, as well as from the originals." }
+        ]
+      },
+      {
+        "dimension": "Explaining what makes an option distinct",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Explanation restates the option without saying what makes it different." },
+          { "label": "Proficient", "descriptor": "Explanation names the specific dimension that changed." },
+          { "label": "Advanced", "descriptor": "Explanation compares the new option directly to both originals, not just one." }
+        ]
+      },
+      {
+        "dimension": "Reflective awareness of narrow framing",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection doesn't identify what a two-option frame would miss." },
+          { "label": "Proficient", "descriptor": "Reflection names a plausible thing the character would have missed." },
+          { "label": "Advanced", "descriptor": "Reflection connects the missed thing to a specific option that was later generated." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "At least two new options are present and are not resized or rescheduled versions of the original two.",
+      "The fixed-choice self-check on 'genuinely distinct vs. variation' is answered consistently with the actual option written.",
+      "The reflection ties the risk of narrow framing to something concrete from this scenario."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

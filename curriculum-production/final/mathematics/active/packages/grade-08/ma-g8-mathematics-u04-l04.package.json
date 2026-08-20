@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u04-l04",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Slope, Lines, and Proportional Connections",
+    "dayInUnit": 4,
+    "courseDay": 62,
+    "phase": "Independent application A",
+    "focus": "graphs tables and equations",
+    "title": "Independent application A: graphs tables and equations"
+  },
+  "standards": [
+    "8.EE.5",
+    "8.EE.6"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "compare-proportional-relationships",
+          "standard": "8.EE.5",
+          "difficulty": 1,
+          "prompt": "Relationship A: y = (2/3)x\nRelationship B (proportional):\nx: 4, 8, 12\ny: 5, 10, 15\nWhich relationship has the greater rate of change (unit rate)?",
+          "workedSolution": {
+            "steps": [
+              "Relationship A has a rate of change of 2/3.",
+              "Relationship B has a rate of change of 5/4 (since 5 ÷ 4 = 5/4).",
+              "5/4 is greater than 2/3, so Relationship B has the greater rate."
+            ],
+            "answer": "Relationship B"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-linear-equation-at-x",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "For the line y = x + 14, find y when x = -2.",
+          "choices": [
+            "-16",
+            "-2",
+            "12",
+            "-12"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-parallel-lines",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has equation y = (9/4)x - 2. Which of these equations represents a line parallel to it?",
+          "choices": [
+            "y = (9/4)x - 12",
+            "y = 9x - 10",
+            "y = -8x + 12",
+            "y = (9/4)x - 2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "parallel-line-through-point",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has equation y = (-1/4)x + 8. Write the equation of the line through (-24, -5) that is parallel to this line.",
+          "choices": [
+            "y = (1/4)x - 11",
+            "y = (-1/4)x - 11",
+            "y = (-1/4)x + 1",
+            "y = (-1/4)x + 8"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-slope-in-context",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "A taxi fare is given by F = 25m + 23, where F is the total fare in dollars and m is the number of miles traveled. What does the slope represent in this context?",
+          "choices": [
+            "There is a base fare of $23 before any miles are traveled.",
+            "There is a base fare of $25 before any miles are traveled.",
+            "The fare increases by $25 for each additional mile traveled.",
+            "The fare increases by $23 for each additional mile traveled."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-y-intercept-in-context",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "The amount of water in a tank is given by G = 8t + 23, where G is the number of gallons in the tank and t is the number of minutes since filling started. What does the y-intercept represent in this context?",
+          "choices": [
+            "The tank already had 23 gallons of water before filling started.",
+            "The tank fills at a rate of 8 gallons per minute.",
+            "The tank fills at a rate of 23 gallons per minute.",
+            "The tank already had 8 gallons of water before filling started."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-two-points",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "Find the slope of the line through (-24, -18) and (-15, -11).",
+          "choices": [
+            "8/9",
+            "7/10",
+            "9/7",
+            "7/9"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-table",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "A line passes through these points:\nx: 17, 22, 27, 32\ny: -5, 1, 7, 13\nWhat is the slope (rate of change) of the line?",
+          "choices": [
+            "-6/5",
+            "18/5",
+            "2",
+            "6/5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "similar-triangle-point-on-line",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A line passes through (-15, 2). A slope triangle on the line has a horizontal leg (run) of 4 and a vertical leg (rise) of 5. A similar slope triangle further along the same line is 2 times as large. Which point also lies on the line?",
+          "choices": [
+            "(-7, 12)",
+            "(-7, 11)",
+            "(-7, 13)",
+            "(-6, 12)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "slope-triangle-legs",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has a slope of 4/3. A right triangle drawn along the line has a vertical leg (rise) of 13 units. What is the length of the other leg?",
+          "choices": [
+            "39/5",
+            "21/2",
+            "39/4",
+            "52/3"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "write-slope-intercept-equation",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "Write the equation, in slope-intercept form, of the line through (5, 50) and (6, 58).",
+          "choices": [
+            "y = 8x + 10",
+            "y = -8x + 10",
+            "y = 8x + 11",
+            "y = 8x + 9"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-slope-and-intercept",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "Identify the slope and y-intercept of the line y = (-12/5)x.",
+          "choices": [
+            "slope = 12/5, y-intercept = 0",
+            "slope = 0, y-intercept = -12/5",
+            "slope = -11/5, y-intercept = 0",
+            "slope = -12/5, y-intercept = 0"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u04-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u04-l04"
+  }
+}

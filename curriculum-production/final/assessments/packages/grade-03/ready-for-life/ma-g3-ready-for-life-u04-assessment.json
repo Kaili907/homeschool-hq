@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-ready-for-life-u04-assessment",
+  "courseRef": "ma-g3-ready-for-life",
+  "grade": 3,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g3-ready-for-life-u04",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Fueling My Day",
+    "courseTitle": "Grade 3 Ready For Life",
+    "assessmentLessonRef": "ma-g3-ready-for-life-u04-l05"
+  },
+  "standards": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u04-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before bedtime, think about what you already do most nights.",
+      "prompt": "Name one step you already do most nights before sleeping, such as brushing teeth, reading, or turning off lights."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Walk through your bedtime routine tonight, naming each step out loud as you do it, with your guardian nearby to confirm.",
+      "prompt": "I named each step of my bedtime routine out loud as I did it."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Walk through your bedtime routine tonight, naming each step out loud as you do it, with your guardian nearby to confirm.",
+      "prompt": "I named one signal that told me my body was ready for rest, such as heavy eyelids, yawning, or feeling still."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Walk through your bedtime routine tonight, naming each step out loud as you do it, with your guardian nearby to confirm.",
+      "prompt": "I did not compare my bedtime or wake-up time to anyone else's schedule."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "checklist-item",
+      "directions": "Walk through your bedtime routine tonight, naming each step out loud as you do it, with your guardian nearby to confirm.",
+      "prompt": "My guardian confirmed the routine happened."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "The next morning, think about how your body felt as you woke up.",
+      "prompt": "Describe one specific way you could tell your body had rested, such as waking up without being shaken awake, feeling ready to get up, or not feeling foggy, without naming a number of hours."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Think back over the steps of your bedtime routine from last night.",
+      "prompt": "Think about one step in your bedtime routine that seemed to help your body settle down the most. Describe that step and why you think it helped."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/ready-for-life/ma-g3-ready-for-life-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Routine awareness criterion.",
+    "Provide evidence that meets the stated Signal recognition criterion.",
+    "Provide evidence that meets the stated Morning connection criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-ready-for-life-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u04-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Body Signals and Fueling My Day?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

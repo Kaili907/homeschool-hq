@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "unit_id": "ma-g10-technology-u03",
+  "source_course_id": "ma-g10-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 10,
+  "grade_dir": "grade-10",
+  "unit_number": 3,
+  "unit_title": "Databases and Data Modeling",
+  "task_type": "programming_and_logic",
+  "task_label": "Programming and logic task",
+  "essential_question": "How do we structure data so that questions we have not thought of yet can still be answered?",
+  "standards": [
+    "Michigan Computer Science: Data and Analysis"
+  ],
+  "estimated_days": 6,
+  "project_brief": "Model and query a synthetic dataset, documenting schema decisions, data-quality checks, and retention limits. This is the grade 10 culminating project for \"Databases and Data Modeling\" (ma-g10-technology-u03, unit 3), built around entities attributes and relationships, schema design and normalization, query logic and filtering, aggregation and grouping, and data quality and validation. Model and query a synthetic dataset, documenting schema decisions, data-quality checks, and retention limits. As you build this, trace through your logic by hand for at least one representative input or scenario before you run or finalize it, so you can compare your prediction with the actual result.",
+  "requirements": [
+    "Address every topic listed for this unit: entities attributes and relationships, schema design and normalization, query logic and filtering, aggregation and grouping, data quality and validation, and retention and data minimization.",
+    "Meet the performance task as written: Model and query a synthetic dataset, documenting schema decisions, data-quality checks, and retention limits.",
+    "Show your work or process, not just a final result — a process note, sketch log, commit history, or draft trail.",
+    "Complete the checklist in this package before submitting."
+  ],
+  "primary_task": "Model and query a synthetic dataset, documenting schema decisions, data-quality checks, and retention limits. As you build this, trace through your logic by hand for at least one representative input or scenario before you run or finalize it, so you can compare your prediction with the actual result.",
+  "test_or_check_criteria": [
+    "Every claim or design choice in the submission can be traced to entities attributes and relationships or another named topic from this unit — nothing is left unexplained.",
+    "The submission runs, displays, or demonstrates correctly on at least two different sample inputs or scenarios the student chooses.",
+    "No real password, API key, account credential, precise location, or other real personal/system data appears anywhere in the submission — fictional or sandbox examples only.",
+    "The student can explain, in their own words, why each step or decision was made, not just that it works.",
+    "The algorithm or program handles at least one edge case (empty input, zero, an unexpected choice) without crashing or giving a wrong answer silently."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "This project never touches a real account, a real password or API key, a live production system, or another person's real data. Use fictional names, sandbox environments, local files, or already-approved sample data throughout. Submit code, screenshots of your own sandbox, diagrams, or a written walkthrough — a live public deployment is never required."
+  },
+  "copyright_and_authorship": "The final submitted work must remain your own authorship. A parent, tutor, or AI assistant may help you plan, explain a concept, demonstrate a technique, or give feedback on a draft, but may not produce the graded work itself. Never request, store, or submit a real password, API key, access token, or other real credential; use only fictional accounts and sandboxed or offline systems.",
+  "remediation": "If the project stalls, step back to the smallest version of the task: rebuild just the part covering entities attributes and relationships in isolation, using a worked example from this unit as a model, then re-attach it to the full project once that smaller piece works and you can explain why.",
+  "extension": "Once the core project is working, extend it to handle a new constraint or edge case related to schema design and normalization, or compare two different approaches to the same problem and explain the real tradeoff between them in your own words."
+}

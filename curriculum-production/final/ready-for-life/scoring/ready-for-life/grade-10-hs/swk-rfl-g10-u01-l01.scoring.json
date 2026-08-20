@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l01",
+  "lessonId": "ma-g10-ready-for-life-u01-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Specificity of interests",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Activities are listed with no explanation of what draws the learner to them." },
+          { "label": "Proficient", "descriptor": "Most activities include a specific half-sentence reason." },
+          { "label": "Advanced", "descriptor": "All five activities include a specific, personal reason that goes beyond 'it's fun.'" }
+        ]
+      },
+      {
+        "dimension": "Evidence-based strengths",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Strengths are stated as unsupported claims with no remembered moment." },
+          { "label": "Proficient", "descriptor": "At least two of three strengths are backed by a specific remembered moment." },
+          { "label": "Advanced", "descriptor": "All three strengths are backed by a specific, concrete moment that clearly demonstrates the strength." }
+        ]
+      },
+      {
+        "dimension": "Honesty about constraints",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Constraints are vague ('I'm busy') with no concrete number or specific transportation option." },
+          { "label": "Proficient", "descriptor": "States a realistic weekly time estimate and names at least one real transportation option." },
+          { "label": "Advanced", "descriptor": "States a realistic weekly time estimate, names available transportation options, and the reflection connects the biggest constraint to its effect on realistic options." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each of the three strengths ties to a distinct, specific remembered moment, not a repeated generic claim.",
+      "The constraint response gives an actual number of hours, not a vague phrase like 'not much time.'",
+      "The reflection names one specific constraint rather than restating all of them."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

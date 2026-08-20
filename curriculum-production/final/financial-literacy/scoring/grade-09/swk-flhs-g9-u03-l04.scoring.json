@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l04",
+  "lessonId": "ma-g9-financial-literacy-u03-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,676.45",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,000 x 1.06 to the fifth power is $2,676.4512, which rounds to $2,676.45."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,793.12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,000 x 1.06 to the fifteenth power is $4,793.1164, which rounds to $4,793.12."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$11,486.98",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,000 x 1.06 to the thirtieth power is $11,486.9825, which rounds to $11,486.98."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,793.12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The 15-year balance of $4,793.12 less the original $2,000."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$6,693.86",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The 30-year balance of $11,486.98 less the 15-year balance of $4,793.12 — more than twice the growth of the first half."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$9,486.98",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,486.98 less the $2,000 deposited, none of it from further contributions."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(deposit * pow(growth, y5), 2)",
+        "substituted": "round(2000 * pow(1.06, 5), 2)",
+        "result": "$2,676.45",
+        "why": "$2,000 x 1.06 to the fifth power is $2,676.4512, which rounds to $2,676.45."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(deposit2 * pow(growth2, y15), 2)",
+        "substituted": "round(2000 * pow(1.06, 15), 2)",
+        "result": "$4,793.12",
+        "why": "$2,000 x 1.06 to the fifteenth power is $4,793.1164, which rounds to $4,793.12."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(deposit3 * pow(growth3, y30), 2)",
+        "substituted": "round(2000 * pow(1.06, 30), 2)",
+        "result": "$11,486.98",
+        "why": "$2,000 x 1.06 to the thirtieth power is $11,486.9825, which rounds to $11,486.98."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - deposit4",
+        "substituted": "#t1-p2 - 2000",
+        "result": "$2,793.12",
+        "why": "The 15-year balance of $4,793.12 less the original $2,000."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$6,693.86",
+        "why": "The 30-year balance of $11,486.98 less the 15-year balance of $4,793.12 — more than twice the growth of the first half."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 - deposit5",
+        "substituted": "#t1-p3 - 2000",
+        "result": "$9,486.98",
+        "why": "$11,486.98 less the $2,000 deposited, none of it from further contributions."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The second 15 years produced more than twice the growth of the first 15, at the same rate and with no further deposits. Explain why, and say what that implies for someone deciding whether to start saving now or in ten years.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the rate applies to a balance that has already grown, so the same 6% moves a larger amount in later years.",
+          "Uses the $2,793.12 and $6,693.86 figures to show the effect rather than asserting it.",
+          "Draws the implication that delaying removes the years that carry the largest absolute growth, so the cost of waiting is larger than the delay looks."
+        ],
+        "evidenceRequirements": [
+          "Cites at least two of the three balances ($2,676.45, $4,793.12, $11,486.98)."
+        ],
+        "lookFors": [
+          "The response recognises the rate did not change; only the base did.",
+          "A strong response notes that the 6% is assumed steady, which no real account guarantees, without abandoning the point."
+        ],
+        "commonMisconception": "Expecting growth to be spread evenly across the years because the rate is constant.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "transfer",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance after 5 years?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance after 15 years?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance after 30 years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much did the balance grow during the first 15 years?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much did it grow during the second 15 years?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the total growth over the full 30 years?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The second 15 years produced more than twice the growth of the first 15, at the same rate and with no further deposits. Explain why, and say what that implies for someone deciding whether to start saving now or in ten years."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the balance after 5 years? Answer: $2,676.45. Verification: $2,000 x 1.06 to the fifth power is $2,676.4512, which rounds to $2,676.45. t1-p2: What is the balance after 15 years? Answer: $4,793.12. Verification: $2,000 x 1.06 to the fifteenth power is $4,793.1164, which rounds to $4,793.12. t1-p3: What is the balance after 30 years? Answer: $11,486.98. Verification: $2,000 x 1.06 to the thirtieth power is $11,486.9825, which rounds to $11,486.98. t2-p1: How much did the balance grow during the first 15 years? Answer: $2,793.12. Verification: The 15-year balance of $4,793.12 less the original $2,000. t2-p2: How much did it grow during the second 15 years? Answer: $6,693.86. Verification: The 30-year balance of $11,486.98 less the 15-year balance of $4,793.12 — more than twice the growth of the first half. t2-p3: What is the total growth over the full 30 years? Answer: $9,486.98. Verification: $11,486.98 less the $2,000 deposited, none of it from further contributions."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The second 15 years produced more than twice the growth of the first 15, at the same rate and with no further deposits. Explain why, and say what that implies for someone deciding whether to start saving now or in ten years. Explains that the rate applies to a balance that has already grown, so the same 6% moves a larger amount in later years. Uses the $2,793.12 and $6,693.86 figures to show the effect rather than asserting it. Draws the implication that delaying removes the years that carry the largest absolute growth, so the cost of waiting is larger than the delay looks. Cites at least two of the three balances ($2,676.45, $4,793.12, $11,486.98). The response recognises the rate did not change; only the base did. A strong response notes that the 6% is assumed steady, which no real account guarantees, without abandoning the point."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the rate applies to a balance that has already grown, so the same 6% moves a larger amount in later years. Uses the $2,793.12 and $6,693.86 figures to show the effect rather than asserting it. Draws the implication that delaying removes the years that carry the largest absolute growth, so the cost of waiting is larger than the delay looks."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u03-l04.scoring.json",
+    "sourceScoringSha256": "57de1ac7202d88e13b30ba21102963356fd3150f063a46ae972d62e31fc2da1a",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-ready-for-life-u06-assessment",
+  "courseRef": "ma-g4-ready-for-life",
+  "grade": 4,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g4-ready-for-life-u06",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "courseTitle": "Grade 4 Ready For Life",
+    "assessmentLessonRef": "ma-g4-ready-for-life-u06-l05"
+  },
+  "standards": [
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u06-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before checking, reread the criteria you set on day one and the plan you followed on the carry-out day.",
+      "prompt": "List the criteria you originally set for this contribution, in your own words."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "With your adult, observe your contribution in actual use, checking whether the chart is being followed, the space is staying organized, the taught skill is being used, or whatever your specific contribution was meant to do, and note what you both see.",
+      "prompt": "I checked my contribution against every criterion I originally set, not just the easiest one."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "With your adult, observe your contribution in actual use, checking whether the chart is being followed, the space is staying organized, the taught skill is being used, or whatever your specific contribution was meant to do, and note what you both see.",
+      "prompt": "I looked for real evidence of how it is working, not just how it looked right when I finished it."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "With your adult, observe your contribution in actual use, checking whether the chart is being followed, the space is staying organized, the taught skill is being used, or whatever your specific contribution was meant to do, and note what you both see.",
+      "prompt": "My adult observed the same result and confirmed what I noted."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "For each of your original criteria, decide whether your contribution met it, partly met it, or missed it, and back up each rating with one specific piece of evidence you or your adult actually observed rather than a guess about how it is probably going.",
+      "prompt": "Rate your contribution against each criterion (met, partly met, missed) and give the specific observed evidence for each rating."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "For each of your original criteria, decide whether your contribution met it, partly met it, or missed it, and back up each rating with one specific piece of evidence you or your adult actually observed rather than a guess about how it is probably going.",
+      "prompt": "Which criterion was hardest to judge fairly, and why?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Step back from the specific ratings.",
+      "prompt": "Explain whether your contribution turned out the way you expected when you chose it on day one, and what that tells you about how you pick projects."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/ready-for-life/ma-g4-ready-for-life-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Criteria-based evaluation accuracy criterion.",
+    "Provide evidence that meets the stated Evidence use criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-ready-for-life-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u06-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Family Contribution Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

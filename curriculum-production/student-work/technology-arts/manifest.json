@@ -1,0 +1,60 @@
+{
+  "corpusVersion": "1.0.0",
+  "subjects": ["technology", "arts-music"],
+  "scope": "curriculum-production/student-work/technology-arts/** only",
+  "generatedFrom": {
+    "g3-4": {
+      "worktree": "mac-worktrees/mac-g34-tech-arts-r1",
+      "branch": "mac/g34-tech-arts-r1",
+      "commit": "a3a9d336a3033c9650b1f9fb81a7f043d7386600",
+      "technologyPath": "curriculum-authoring/full-family-grade34/subjects/technology-computer-science/grade-{3,4}",
+      "artsPath": "curriculum-authoring/full-family-grade34/subjects/arts-music/grade-{3,4}"
+    },
+    "canonical-5-7-8": {
+      "worktree": "mac-worktrees/mac-tech-arts-production-r1",
+      "branch": "mac/tech-arts-production-r1",
+      "commit": "aee3e510542a83ca864e6c624817f899736252cb",
+      "technologyPath": "curriculum-content/manuel-academy/1.0.0/grades/grade-{5,7,8}/courses/technology",
+      "artsPath": "curriculum-content/manuel-academy/1.0.0/grades/grade-{5,7,8}/courses/arts-and-music"
+    },
+    "hs-9-12": {
+      "worktree": "mac-worktrees/mac-hs912-tech-arts-r1",
+      "branch": "mac/hs912-tech-arts-r1",
+      "commit": "627b41c0e794ce31bc5ab7501aec1015930ccbf3",
+      "technologyPath": "curriculum-authoring/full-family-highschool-9-12/subjects/technology-computer-science/grade-{09,10,11,12}",
+      "artsPath": "curriculum-authoring/full-family-highschool-9-12/subjects/arts-music/grade-{09,10,11,12}"
+    },
+    "note": "G3-4 and HS 9-12 sources live in sibling worktrees of the same repository, not merged into this branch. Regenerating requires those worktrees checked out locally at the paths above (or TECH_ARTS_G34_ROOT / TECH_ARTS_HS_ROOT env overrides in src/courses.mjs)."
+  },
+  "productionQualityGate": {
+    "source": "src/curriculum/production-quality (this branch, commit aee3e510542a83ca864e6c624817f899736252cb)",
+    "subjectFamily": "ARTS_RFL_PE_PROJECT",
+    "rationale": "Both technology/CS and arts/music materials here are project- and rubric-scored, not fixed-answer-key items — the gate's own type contract treats ARTS_RFL_PE_PROJECT as not requiring instruction/workedExample/guidedPractice blocks, since the activity itself carries the instructional load, and accepts RUBRIC or SCORING_JUDGMENT in place of a fixed ANSWER_KEY."
+  },
+  "totals": {
+    "courses": 18,
+    "units": 108,
+    "taskPackages": 108,
+    "scoringGuides": 108,
+    "byBand": {
+      "g3-4": { "grades": [3, 4], "unitsPerSubject": 12, "totalUnits": 24 },
+      "canonical-5-7-8": { "grades": [5, 7, 8], "unitsPerSubject": 18, "totalUnits": 36 },
+      "hs-9-12": { "grades": [9, 10, 11, 12], "unitsPerSubject": 24, "totalUnits": 48 }
+    },
+    "bySubject": {
+      "technology": 54,
+      "arts-music": 54
+    }
+  },
+  "gateResult": {
+    "ready": 108,
+    "needsHumanReview": 0,
+    "notReady": 0,
+    "reportFiles": ["gate-report.json", "gate-report.md"]
+  },
+  "privacyAndCopyrightPolicy": {
+    "technology": "Every unit's project task and privacy note (presentation_and_privacy.sandbox_and_credentials_note) explicitly prohibits real accounts, real passwords/API keys/credentials, live production systems, and any real external person's data. All examples are fictional or sandboxed.",
+    "artsMusic": "No unit requires public performance, a voice recording, a camera, or a photo. Every unit states a private/small-audience option (presentation_and_privacy.presentation_options) and a text/no-audio alternative (presentation_and_privacy.text_or_no_audio_alternative). Only original student work, public-domain material, or properly licensed/cited excerpts may be used — no unit asks a student to reproduce unlicensed lyrics or sheet music in full.",
+    "authorship": "Every task package's copyright_and_authorship field states the graded submission must remain the student's own authorship; adult/AI assistance may support planning, technique, or feedback but must not produce the graded work."
+  }
+}

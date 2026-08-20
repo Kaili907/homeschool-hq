@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l01",
+  "lessonId": "ma-g7-ready-for-life-u02-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "System design specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Items are grouped vaguely or into one catch-all category, and no specific storage spot or reset rule is written."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least three specific categories are named, each with its own storage spot and a written reset rule."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the system is physically installed and tested, not only planned on paper."
+          }
+        ]
+      },
+      {
+        "dimension": "Real-world test and follow-through",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The one-day test is not actually run, or the report only gives a general impression rather than specific items checked."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least three specific items are checked against their assigned spot at the end of the day, with a clear result for each."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names a specific, reasoned change to the system based on what the test revealed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The chosen space and items are real and specific to the learner's actual household, not an invented example.",
+      "The one-day test report names actual items, not a general description of how organized the space feels.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

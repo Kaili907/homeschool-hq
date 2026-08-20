@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u07-l15",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u07-l15",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Functions: Concept, Notation, and Interpretation",
+    "dayInUnit": 15,
+    "courseDay": 123,
+    "phase": "Assessment preparation",
+    "focus": "evaluating and interpreting statements in function notation",
+    "title": "Assessment preparation: evaluating and interpreting statements in function notation"
+  },
+  "standards": [
+    "F-IF.1",
+    "F-IF.2",
+    "F-IF.3",
+    "F-IF.4",
+    "F-IF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 1,
+          "prompt": "A sequence is defined by a(1) = -5 and a(n) = a(n − 1) + 1 for n > 1. Find a(12).",
+          "choices": [
+            "7",
+            "6",
+            "-16",
+            "-60"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 2,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time reaches its highest point. Which feature is this, and what does it mean?",
+          "choices": [
+            "the maximum, giving the greatest height and the time it occurs",
+            "the x-intercept, giving the landing time",
+            "an interval of decrease",
+            "the y-intercept, giving the launch height"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 2,
+          "prompt": "Given f(x) = -3x² − 5x + 3, find f(1).",
+          "choices": [
+            "7",
+            "5",
+            "-5",
+            "-8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 2,
+          "prompt": "Does the relation x = y², for real y define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "Yes; each input appears once, so each has exactly one output.",
+            "No; the input 1 is paired with both 3 and 8."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 3,
+          "prompt": "A machine starts with 120 components and consumes 14 per hour. It can run for at most 22 hours. What is the domain of C(h) = 120 − 14h in this context?",
+          "choices": [
+            "0 ≤ h ≤ 120",
+            "all real numbers",
+            "0 ≤ h ≤ 22",
+            "0 ≤ h ≤ 8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = -4 and a(n) = a(n − 1) + 9 for n > 1. Find a(8).",
+          "choices": [
+            "-288",
+            "68",
+            "59",
+            "-67"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time crosses the horizontal axis. Which feature is this, and what does it mean?",
+          "choices": [
+            "the average rate of change over the flight",
+            "the maximum, giving the greatest height",
+            "a zero, giving the time the projectile returns to ground level",
+            "the y-intercept, giving the launch height"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = -1x² + 3x + 7, find f(-6).",
+          "choices": [
+            "-54",
+            "-47",
+            "-5",
+            "25"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 2,
+          "prompt": "Does the set {(1, 3), (2, 5), (3, 7), (4, 9)} define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; each input appears once, so each has exactly one output.",
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 1 is paired with both 3 and 8."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 2,
+          "prompt": "A machine starts with 10 components and consumes 2 per hour. It can run for at most 14 hours. What is the domain of C(h) = 10 − 2h in this context?",
+          "choices": [
+            "0 ≤ h ≤ 14",
+            "all real numbers",
+            "0 ≤ h ≤ 10",
+            "0 ≤ h ≤ 5"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = -15 and a(n) = a(n − 1) − 1 for n > 1. Find a(20).",
+          "choices": [
+            "-34",
+            "300",
+            "-35",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a cooling object’s temperature flattens out towards a horizontal line. Which feature is this, and what does it mean?",
+          "choices": [
+            "a maximum, giving the hottest temperature",
+            "an interval of increase",
+            "a zero, giving the time the object freezes",
+            "an end behaviour approaching the surrounding temperature"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u07-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u07-l15"
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l08",
+  "lessonId": "ma-g12-financial-literacy-u02-l08",
+  "integratedDomains": [
+    "credit",
+    "debt",
+    "budgeting",
+    "insurance-risk",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$9,408.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "48 payments of $196. The term is long enough that the monthly figure and the total tell very different stories."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$11,008.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,408.00 of payments plus the $1,600 paid at the start. The down payment is part of the price, not separate from it."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,408.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,008.00 against the $9,600 price. This is the cost of borrowing, and it is close to the whole down payment."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$388.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $196 payment, the $47 by which insurance rises, and $145 of fuel and maintenance. Only the insurance increase counts, because $71 was already being paid."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$132.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$520 of surplus less $388.00 of new outgoings."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "74.62%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$388.00 measured against $520. The payment alone would have looked like 37.69% of surplus, which is why the payment alone is the wrong test."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "Yes — but with $132.00 a month to spare",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$388.00 against $520 of surplus. It fits arithmetically; whether $132.00 is an adequate margin for 48 months is a separate judgement the arithmetic cannot settle."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "payment * term",
+        "substituted": "196 * 48",
+        "result": "$9,408.00",
+        "why": "48 payments of $196. The term is long enough that the monthly figure and the total tell very different stories."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 + down",
+        "substituted": "#t1-p1 + 1600",
+        "result": "$11,008.00",
+        "why": "$9,408.00 of payments plus the $1,600 paid at the start. The down payment is part of the price, not separate from it."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - price",
+        "substituted": "#t1-p2 - 9600",
+        "result": "$1,408.00",
+        "why": "$11,008.00 against the $9,600 price. This is the cost of borrowing, and it is close to the whole down payment."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "payment2 + (insuranceNew - insuranceOld) + running",
+        "substituted": "196 + (118 - 71) + 145",
+        "result": "$388.00",
+        "why": "The $196 payment, the $47 by which insurance rises, and $145 of fuel and maintenance. Only the insurance increase counts, because $71 was already being paid."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "surplus - #t2-p1",
+        "substituted": "520 - #t2-p1",
+        "result": "$132.00",
+        "why": "$520 of surplus less $388.00 of new outgoings."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 / surplus2 * 100, 2)",
+        "substituted": "round(#t2-p1 / 520 * 100, 2)",
+        "result": "74.62%",
+        "why": "$388.00 measured against $520. The payment alone would have looked like 37.69% of surplus, which is why the payment alone is the wrong test."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p1 < surplus3",
+        "substituted": "#t2-p1 < 520",
+        "result": "Yes — but with $132.00 a month to spare",
+        "why": "$388.00 against $520 of surplus. It fits arithmetically; whether $132.00 is an adequate margin for 48 months is a separate judgement the arithmetic cannot settle."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The purchase fits the surplus and consumes 74.62% of it for 48 months. Argue either that this household should proceed or that it should not, using the figures, and state the single fact about the household you would most want to know before backing your own argument.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Argues one side on the figures — for instance that $132.00 of remaining surplus is a thin margin to hold for 48 months, or that $388.00 buys transport the household may need and still leaves a positive margin every month.",
+          "Uses the term length as part of the argument: the commitment is 48 months long, so the question is whether the margin survives four years rather than whether it works next month.",
+          "Names the decisive unknown and says why it matters — for example how stable the income behind the $520 surplus is, whether an emergency reserve exists separately, or what the household would do about the $196 payment in a month with no surplus at all."
+        ],
+        "evidenceRequirements": [
+          "Uses the $388.00 monthly cost, the $132.00 remaining surplus, and the 48-month term."
+        ],
+        "lookFors": [
+          "The response counts all three cost lines rather than the loan payment alone.",
+          "Either conclusion is credited when it is argued from the figures and names what would change it."
+        ],
+        "commonMisconception": "Testing affordability against the loan payment alone, when insurance and running costs arrive with the vehicle and are more than half as large again.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the loan payments come to over the full term?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is handed over in total, including the down payment?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much more than the vehicle’s price is that?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the vehicle add to monthly outgoings, counting the payment, the insurance increase, and running costs?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What surplus is left each month once the vehicle is in the budget?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What share of the surplus does the vehicle consume, to two decimal places?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Does the full monthly cost of the vehicle fit inside the household’s surplus?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The purchase fits the surplus and consumes 74.62% of it for 48 months. Argue either that this household should proceed or that it should not, using the figures, and state the single fact about the household you would most want to know before backing your own argument."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the loan payments come to over the full term? Answer: $9,408.00. Verification: 48 payments of $196. The term is long enough that the monthly figure and the total tell very different stories. t1-p2: What is handed over in total, including the down payment? Answer: $11,008.00. Verification: $9,408.00 of payments plus the $1,600 paid at the start. The down payment is part of the price, not separate from it. t1-p3: How much more than the vehicle’s price is that? Answer: $1,408.00. Verification: $11,008.00 against the $9,600 price. This is the cost of borrowing, and it is close to the whole down payment. t2-p1: What does the vehicle add to monthly outgoings, counting the payment, the insurance increase, and running costs? Answer: $388.00. Verification: The $196 payment, the $47 by which insurance rises, and $145 of fuel and maintenance. Only the insurance increase counts, because $71 was already being paid. t2-p2: What surplus is left each month once the vehicle is in the budget? Answer: $132.00. Verification: $520 of surplus less $388.00 of new outgoings. t2-p3: What share of the surplus does the vehicle consume, to two decimal places? Answer: 74.62%. Verification: $388.00 measured against $520. The payment alone would have looked like 37.69% of surplus, which is why the payment alone is the wrong test. t2-p4: Does the full monthly cost of the vehicle fit inside the household’s surplus? Answer: Yes — but with $132.00 a month to spare. Verification: $388.00 against $520 of surplus. It fits arithmetically; whether $132.00 is an adequate margin for 48 months is a separate judgement the arithmetic cannot settle."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The purchase fits the surplus and consumes 74.62% of it for 48 months. Argue either that this household should proceed or that it should not, using the figures, and state the single fact about the household you would most want to know before backing your own argument. Argues one side on the figures — for instance that $132.00 of remaining surplus is a thin margin to hold for 48 months, or that $388.00 buys transport the household may need and still leaves a positive margin every month. Uses the term length as part of the argument: the commitment is 48 months long, so the question is whether the margin survives four years rather than whether it works next month. Names the decisive unknown and says why it matters — for example how stable the income behind the $520 surplus is, whether an emergency reserve exists separately, or what the household would do about the $196 payment in a month with no surplus at all. Uses the $388.00 monthly cost, the $132.00 remaining surplus, and the 48-month term. The response counts all three cost lines rather than the loan payment alone. Either conclusion is credited when it is argued from the figures and names what would change it."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Argues one side on the figures — for instance that $132.00 of remaining surplus is a thin margin to hold for 48 months, or that $388.00 buys transport the household may need and still leaves a positive margin every month. Uses the term length as part of the argument: the commitment is 48 months long, so the question is whether the margin survives four years rather than whether it works next month. Names the decisive unknown and says why it matters — for example how stable the income behind the $520 surplus is, whether an emergency reserve exists separately, or what the household would do about the $196 payment in a month with no surplus at all."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u02-l08.scoring.json",
+    "sourceScoringSha256": "b79c6876425a86c29cad6a8813b89842fae95d41b820e68148b1c696ad14131e",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

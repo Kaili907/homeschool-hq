@@ -7,7 +7,6 @@ import {
   type AdminConfigurationKey,
   type AdminRuntimeConfigurationProjection,
 } from '../../admin/configurationModel'
-import type { PublicVoiceCatalog } from '../../tutor/voiceCatalog'
 import {
   AdminConfiguration,
   adminConfigurationEditorReducer,
@@ -70,25 +69,14 @@ const PROJECTION: AdminRuntimeConfigurationProjection = {
   settings: ADMIN_CONFIGURATION_KEYS.map(setting),
 }
 
-const VOICES = {
-  catalogVersion: 'catalog-v1', synthesisEnabled: true,
-  defaultVoiceRef: 'academy.tts.clear',
-  voices: [
-    { voiceRef: 'academy.tts.clear', voiceVersion: 'v1', displayLabel: 'Clear Guide', providerClass: 'premium', status: 'active', deploymentAvailable: true, cachedPlaybackAllowed: true, providerVoiceId: 'RAW_PROVIDER_123' },
-    { voiceRef: 'academy.tts.retired', voiceVersion: 'v2', displayLabel: 'Retired Guide', providerClass: 'premium', status: 'revoked', deploymentAvailable: false, cachedPlaybackAllowed: false, providerVoiceId: 'RAW_PROVIDER_456' },
-    { voiceRef: 'academy.tts.paused', voiceVersion: 'v1', displayLabel: 'Paused Guide', providerClass: 'premium', status: 'disabled', deploymentAvailable: false, cachedPlaybackAllowed: true, providerVoiceId: 'RAW_PROVIDER_789' },
-  ],
-} as unknown as PublicVoiceCatalog
-
 const SOURCE: AdminConfigurationSource = {
   read: vi.fn(), preview: vi.fn(), commit: vi.fn(),
 }
 
-function render(capabilities: readonly ('configuration:read' | 'configuration:manage')[], voices = VOICES) {
+function render(capabilities: readonly ('configuration:read' | 'configuration:manage')[]) {
   return renderToStaticMarkup(<AdminConfiguration
     authorization={{ capabilities }}
     state={{ status: 'ready', projection: PROJECTION }}
-    voiceCatalog={{ status: 'ready', catalog: voices }}
     source={SOURCE}
     onCommitted={() => {}}
     onRetry={() => {}}
@@ -129,23 +117,12 @@ describe('Admin Configuration page', () => {
     expect(markup).not.toContain('generic JSON')
   })
 
-  it('renders Study and TTS voice authority as unavailable without guardian writes', () => {
+  it('does not render unsupported Study or voice-default controls', () => {
     const markup = render(['configuration:read', 'configuration:manage'])
-    expect(markup).toContain('No Admin Study effective-settings V2 authority is present')
-    expect(markup).toContain('Guardian choices and safety authority are not read, written, or overridden')
-    expect(markup).toContain('no Admin voice-default setting is registered')
-    expect(markup).toContain('Not editable until an authoritative Admin logical-voice setting exists')
-  })
-
-  it('uses only logical voice references and marks revoked/disabled voices unavailable', () => {
-    const markup = render(['configuration:read'])
-    expect(markup).toContain('academy.tts.clear')
-    expect(markup).toContain('academy.tts.retired')
-    expect(markup).toContain('academy.tts.retired · v2')
-    expect(markup).toContain('Revoked · unavailable')
-    expect(markup).toContain('Disabled · unavailable')
-    expect(markup).toMatch(/value="academy\.tts\.retired" disabled=""/)
-    expect(markup).not.toMatch(/RAW_PROVIDER_123|RAW_PROVIDER_456|RAW_PROVIDER_789/)
+    expect(markup).not.toContain('Not yet operational')
+    expect(markup).not.toContain('Study defaults')
+    expect(markup).not.toContain('TTS voice defaults')
+    expect(markup).not.toContain('Current catalog default')
   })
 
   it('does not render injected secrets or private payload fields', () => {
@@ -159,27 +136,15 @@ describe('Admin Configuration page', () => {
     const markup = renderToStaticMarkup(<AdminConfiguration
       authorization={{ capabilities: ['configuration:read'] }}
       state={{ status: 'ready', projection: unsafeProjection }}
-      voiceCatalog={{ status: 'ready', catalog: VOICES }}
       source={SOURCE} onCommitted={() => {}} onRetry={() => {}}
     />)
     expect(markup).not.toMatch(/SECRET_API_KEY|SECRET_TOKEN|PRIVATE_TUTOR_CONVERSATION|rawProviderObject/)
   })
 
-  it('renders honest loading, failure, retry, and catalog-empty states', () => {
-    const common = { authorization: { capabilities: ['configuration:read'] as const }, source: SOURCE, onCommitted: () => {}, onRetry: () => {}, voiceCatalog: { status: 'loading' as const } }
+  it('renders honest loading, failure, and retry states', () => {
+    const common = { authorization: { capabilities: ['configuration:read'] as const }, source: SOURCE, onCommitted: () => {}, onRetry: () => {} }
     expect(renderToStaticMarkup(<AdminConfiguration {...common} state={{ status: 'loading' }} />)).toContain('Loading configuration')
     expect(renderToStaticMarkup(<AdminConfiguration {...common} state={{ status: 'error', code: 'configuration_unavailable' }} />)).toContain('Try again')
-    const empty = { catalogVersion: 'catalog-v2', synthesisEnabled: false, defaultVoiceRef: null, voices: [] }
-    const markup = render(['configuration:read'], empty)
-    expect(markup).toContain('No approved premium logical voices are available')
-    expect(markup).toContain('Browser-native speech remains the safe production fallback')
-    const unavailableCatalog = renderToStaticMarkup(<AdminConfiguration
-      {...common}
-      state={{ status: 'ready', projection: PROJECTION }}
-      voiceCatalog={{ status: 'unavailable' }}
-    />)
-    expect(unavailableCatalog).toContain('sanitized logical-voice catalog is unavailable')
-    expect(unavailableCatalog).toContain('No catalog default is inferred')
   })
 
   it('has responsive reflow and visible keyboard focus rules', () => {

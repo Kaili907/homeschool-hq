@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-tech-cs-u05-assessment",
+  "courseRef": "ma-g3-tech-cs",
+  "grade": 3,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g3-tech-cs-u05",
+    "unitNumber": 5,
+    "unitTitle": "Pictures, Sounds, and Simple Data",
+    "courseTitle": "Grade 3 Technology",
+    "assessmentLessonRef": "ma-g3-tech-cs-u05-l05"
+  },
+  "standards": [
+    "Michigan Computer Science: Data and Analysis",
+    "Michigan Computer Science: Impacts of Computing"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-03/ma-g3-tech-cs-u05-l05.task-package.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Show that you can do this on your own: who made this: source basics. Put away the help sheet and the examples. Solve a new problem all the way. First write what answer you expect. Then test it two ways. Include one tricky case. Show what you expected and what you got. Then explain your thinking. Write it so someone new to who made this: source basics could follow it. Keep today's work tied to your unit. Today is about who made this: source basics. It is part of \"Pictures, Sounds, and Simple Data\". Later days in this unit cover other things, like sorting and counting objects. Before you stop, do this check: Rate confidence in who made this: source basics, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Your solution done alone, a two-way check with expected and actual, and an explanation someone new could follow."
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/technology/ma-g3-tech-cs-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task about who made this: source basics.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-tech-cs-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-03/ma-g3-tech-cs-u05-l05.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Pictures, Sounds, and Simple Data?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

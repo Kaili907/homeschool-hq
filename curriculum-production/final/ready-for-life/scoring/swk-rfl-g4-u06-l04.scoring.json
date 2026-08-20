@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l04",
+  "lessonId": "ma-g4-ready-for-life-u06-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Plan fidelity and supervision follow-through",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are done out of order, or a supervision-flagged step is completed without the adult involvement the safety plan specified."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner correctly recognizes and pauses on an unplanned situation not covered by the original plan, checking with the adult before proceeding."
+          }
+        ]
+      },
+      {
+        "dimension": "Accuracy of the completion record",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The step-by-step account is too vague for someone else to follow, or no deviation from the plan is noted even though the contribution clearly differs from what was planned."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner's reflection accurately explains how the finished result compares to the original plan."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The guardian directly confirms that supervision-flagged steps were handled or overseen by an adult as planned.",
+      "The completion record names specific details (what, where, how) rather than a one-line summary like 'I did it.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

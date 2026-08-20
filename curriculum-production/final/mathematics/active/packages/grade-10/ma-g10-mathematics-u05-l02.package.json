@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u05-l02",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Dilations and Similarity",
+    "dayInUnit": 2,
+    "courseDay": 74,
+    "phase": "Concept model A",
+    "focus": "the effect of dilation on lines through and off the center",
+    "title": "Concept model A: the effect of dilation on lines through and off the center"
+  },
+  "standards": [
+    "G-SRT.1",
+    "G-SRT.2",
+    "G-SRT.3",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "aa-similarity-criterion",
+          "standard": "G-SRT.3",
+          "difficulty": 1,
+          "prompt": "Two triangles share two pairs of equal angles. Similar?",
+          "workedSolution": {
+            "steps": [
+              "The third angles must match too.",
+              "AA similarity applies."
+            ],
+            "answer": "Yes, by AA"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "dilation-effect-on-line",
+          "standard": "G-SRT.1",
+          "difficulty": 2,
+          "prompt": "What happens to a line through the centre of dilation?",
+          "workedSolution": {
+            "steps": [
+              "Every point stays on the ray from the centre.",
+              "The line maps onto itself."
+            ],
+            "answer": "onto itself"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 1,
+          "prompt": "Dilate the point (4, -6) about the origin with scale factor 3. Give the image.",
+          "choices": [
+            "(7, -3)",
+            "(12, -18)",
+            "(12, -6)",
+            "(4, -18)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "scale-factor-from-lengths",
+          "standard": "G-SRT.2",
+          "difficulty": 1,
+          "prompt": "A figure is dilated so that a side of length 12 becomes a side of length 24. What is the scale factor, and what happens to the figure's area?",
+          "choices": [
+            "scale factor 2; the area is multiplied by 2",
+            "scale factor 1/2; the area is multiplied by 4",
+            "scale factor 12; the area is multiplied by 4",
+            "scale factor 2; the area is multiplied by 4"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "aa-similarity-criterion",
+          "standard": "G-SRT.3",
+          "difficulty": 2,
+          "prompt": "Triangle ABC has ∠A = 40° and ∠B = 105°. Triangle DEF has ∠D = 40° and ∠E = 105°. Are the triangles similar, and on what grounds?",
+          "choices": [
+            "Yes, but only if a pair of corresponding sides is also known to be congruent.",
+            "No; angle information alone never establishes similarity.",
+            "Yes, by SSS similarity.",
+            "Yes, by AA similarity: two pairs of congruent angles force the third pair to be congruent as well."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "dilation-effect-on-line",
+          "standard": "G-SRT.1",
+          "difficulty": 1,
+          "prompt": "Under a dilation, a line that passes through the centre of dilation …",
+          "choices": [
+            "is mapped to a perpendicular line",
+            "is mapped to a parallel line a fixed distance away",
+            "is mapped to a line through the origin with a different slope",
+            "is mapped onto itself"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 2,
+          "prompt": "Dilate the point (-3, -3) about the origin with scale factor 2. Give the image.",
+          "choices": [
+            "(-6, -6)",
+            "(-3, -6)",
+            "(-6, -3)",
+            "(-1, -1)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scale-factor-from-lengths",
+          "standard": "G-SRT.2",
+          "difficulty": 2,
+          "prompt": "A figure is dilated so that a side of length 7 becomes a side of length 28. What is the scale factor, and what happens to the figure's area?",
+          "choices": [
+            "scale factor 4; the area is multiplied by 16",
+            "scale factor 21; the area is multiplied by 16",
+            "scale factor 1/4; the area is multiplied by 16",
+            "scale factor 4; the area is multiplied by 4"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "aa-similarity-criterion",
+          "standard": "G-SRT.3",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has ∠A = 68° and ∠B = 50°. Triangle DEF has ∠D = 68° and ∠E = 50°. Are the triangles similar, and on what grounds?",
+          "choices": [
+            "Yes, but only if a pair of corresponding sides is also known to be congruent.",
+            "Yes, by SSS similarity.",
+            "Yes, by AA similarity: two pairs of congruent angles force the third pair to be congruent as well.",
+            "No; angle information alone never establishes similarity."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "dilation-effect-on-line",
+          "standard": "G-SRT.1",
+          "difficulty": 2,
+          "prompt": "Under a dilation, a line that does not pass through the centre of dilation …",
+          "choices": [
+            "is mapped to a line with slope multiplied by the scale factor",
+            "is mapped to a parallel line",
+            "is mapped to a perpendicular line",
+            "is mapped onto itself"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 2,
+          "prompt": "Dilate the point (3, -6) about the origin with scale factor 3. Give the image.",
+          "choices": [
+            "(9, -6)",
+            "(6, -3)",
+            "(9, -18)",
+            "(3, -18)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u05-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u05-l02"
+  }
+}

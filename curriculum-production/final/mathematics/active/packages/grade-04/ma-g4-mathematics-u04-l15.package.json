@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l15",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l15",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 15,
+    "courseDay": 69,
+    "phase": "Synthesis and review",
+    "focus": "models, partial products, and estimation",
+    "title": "Synthesis and review: models, partial products, and estimation"
+  },
+  "standards": [
+    "4.OA.2",
+    "4.OA.3",
+    "4.NBT.5"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use an area model to find 3 × 27. Split 27 into 20 and 7.",
+          "choices": [
+            "21",
+            "81",
+            "67",
+            "60"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 5 × 192 using partial products.",
+          "choices": [
+            "950",
+            "960",
+            "955",
+            "500"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Ben read 2 books this year. Priya read 5 times as many books as Ben. How many books did Priya read?",
+          "choices": [
+            "10",
+            "12",
+            "8",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 8 sections with 20 seats each, plus 42 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "118",
+            "160",
+            "202",
+            "70"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 4 × 37. Split 37 into 30 and 7.",
+          "choices": [
+            "148",
+            "120",
+            "28",
+            "127"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 8 × 214 using partial products.",
+          "choices": [
+            "1680",
+            "1704",
+            "1712",
+            "1600"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Carlos read 6 books this year. Emma read 3 times as many books as Carlos. How many books did Emma read?",
+          "choices": [
+            "24",
+            "18",
+            "9",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A theater has 9 sections with 34 seats each, but 35 seats are roped off for repairs. How many usable seats remain?",
+          "choices": [
+            "271",
+            "306",
+            "78",
+            "341"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 3 × 62. Split 62 into 60 and 2.",
+          "choices": [
+            "6",
+            "182",
+            "180",
+            "186"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l15"
+  }
+}

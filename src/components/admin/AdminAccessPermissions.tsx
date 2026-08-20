@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ADMIN_ACCESS_REASON_CODES,
+  shortPrincipalRef,
   type AdminAccessMutationRequest,
   type AdminAccessPrincipal,
   type AdminAccessReadState,
@@ -54,12 +55,16 @@ interface PendingConfirmation {
 export function AdminAccessPermissions({
   authorization,
   state,
+  principalLabels = {},
   source,
+  onRetry,
   onMutated,
 }: {
   readonly authorization: AuthorizedAdmin
   readonly state: AdminAccessReadState
+  readonly principalLabels?: Readonly<Record<string, string>>
   readonly source: AdminAccessHttpSource
+  readonly onRetry: () => void
   readonly onMutated: () => void
 }) {
   const canManage = authorization.capabilities.includes('admin_roles:manage')
@@ -177,10 +182,12 @@ export function AdminAccessPermissions({
         {state.status === 'unauthorized' && <AccessState title="Access view unavailable" message="The current server-resolved assignment does not include access to this view." />}
         {state.status === 'error' && (
           <AccessState
+            role="alert"
             title={state.code === 'access_timeout' ? 'Access read timed out' : state.code === 'access_malformed' ? 'Access response rejected' : 'Access view unavailable'}
             message={state.code === 'access_malformed'
               ? 'The response did not match the minimized access contract. No partial or raw data was shown.'
               : 'The authorized access source could not be read. No cached principal data is shown.'}
+            onRetry={onRetry}
           />
         )}
         {state.status === 'ready' && state.projection.principals.length === 0 && (
@@ -193,11 +200,12 @@ export function AdminAccessPermissions({
               const reason = reasons[principal.assignmentRef] ?? 'operator.request'
               const soleOwner = principal.role === 'owner' && activeOwnerCount === 1
               const busy = mutationState.status === 'saving'
+              const identityLabel = safePrincipalLabel(principalLabels[principal.principalRef], principal.principalRef)
               return (
                 <article className="admin-access__principal" key={principal.assignmentRef}>
                   <div className="admin-access__principal-identity">
                     <div>
-                      <strong>Admin principal</strong>
+                      <strong>{identityLabel}</strong>
                       {principal.isCurrent && <span className="admin-access__you">Current session</span>}
                       {soleOwner && <span className="admin-access__protected">Sole owner protected</span>}
                     </div>
@@ -209,7 +217,7 @@ export function AdminAccessPermissions({
                     <div><dt>Effective access</dt><dd>{summaryLabel(principal.role)}</dd></div>
                   </dl>
                   {canManage && (
-                    <div className="admin-access__controls" aria-label={`Manage ${principal.principalRef}`}>
+                    <div className="admin-access__controls" aria-label={`Manage ${identityLabel}`}>
                       <label>
                         Canonical role
                         <select
@@ -361,13 +369,35 @@ function RoleBadge({ role }: { role: AdminRole }) {
   return <span className={`admin-access__role is-${role}`}>{ROLE_DETAILS[role].title}</span>
 }
 
-function AccessState({ busy = false, title, message }: { busy?: boolean; title: string; message: string }) {
+function AccessState({
+  busy = false,
+  role = 'status',
+  title,
+  message,
+  onRetry,
+}: {
+  busy?: boolean
+  role?: 'status' | 'alert'
+  title: string
+  message: string
+  onRetry?: () => void
+}) {
   return (
-    <div className="admin-access__state" aria-busy={busy} role="status">
+    <div className="admin-access__state" aria-busy={busy} role={role}>
       {busy && <span className="admin-access__spinner" aria-hidden="true" />}
       <div><strong>{title}</strong><span>{message}</span></div>
+      {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
     </div>
   )
+}
+
+function safePrincipalLabel(label: string | undefined, principalRef: string): string {
+  const normalized = label
+    ?.replace(/[\u0000-\u001f\u007f]/gu, ' ')
+    .replace(/\s+/gu, ' ')
+    .trim()
+    .slice(0, 120)
+  return normalized || shortPrincipalRef(principalRef)
 }
 
 function safeMutationMessage(error: unknown): string {

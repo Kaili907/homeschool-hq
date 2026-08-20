@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-social-studies-u08-assessment",
+  "courseRef": "ma-g11-social-studies",
+  "grade": 11,
+  "subject": "social-studies",
+  "location": {
+    "unitRef": "ma-g11-social-studies-u08",
+    "unitNumber": 8,
+    "unitTitle": "The National Economy",
+    "courseTitle": "Civics and Economics",
+    "assessmentLessonRef": "ma-g11-social-studies-u08-l11"
+  },
+  "standards": [
+    "Economics E2.1.1",
+    "Economics E2.1.2",
+    "Economics E2.2.1",
+    "Economics E2.2.2",
+    "Economics E2.2.3",
+    "Economics E2.2.4",
+    "P2"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/social-studies/grade-11/ma-g11-social-studies/ma-g11-social-studies-u08-l11.md",
+  "instructions": [
+    "Use only the attached, real, dated sources. Identify each source and cite specific evidence for claims.",
+    "Explain source limits or perspective. If a required source is not attached, stop and request it."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "source-evidence-task",
+      "prompt": "**Task shape for this phase (Unit assessment):** work with the sources required by the unit assessment prompts.\n\nThis unit's named, real anchor sources (attach the actual text/map/data retrieved from the named repository -- do not quote from memory):\n- Gross domestic product and national accounts (Bureau of Economic Analysis, bea.gov)\n- Employment situation and price index releases (bls.gov)\n- Federal Open Market Committee statements (federalreserve.gov)\n\n**Primary vs. secondary:** Identify each source as primary or secondary, state who produced it and when, and note what perspective it represents and what it omits."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "map-data-document-analysis",
+      "prompt": "Using the Source Record below, log every source consulted for \"money, banking, and monetary policy\" (unit: The National Economy).\n\n- Creator or organization\n- Title\n- Date\n- Where it was found\n- Original source or repost?\n- Evidence used\n- Reason to trust, question, or limit it\n- How it was quoted, paraphrased, or represented\n\nThen apply the Claim–Evidence–Reasoning frame: state a claim about money, banking, and monetary policy, cite the specific evidence from the logged source(s), explain the reasoning that connects them, and name one limit -- what the evidence does not show or where it might be biased or incomplete.\n\nTie the analysis back to the unit's essential question: \"What do national economic indicators actually tell us, and what do they hide?\""
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "independent-response",
+      "prompt": "Complete the unit assessment prompts independently, in the order given, showing sourced evidence for every prompt that asks for it:\n\n- **concept and vocabulary** (4 pts): Explain national markets and aggregate measures in your own words and give or identify a valid example.\n- **representation or source** (5 pts): Use a map, data display, timeline, document analysis, or worked process to show understanding of economic indicators.\n- **application** (6 pts): Apply unemployment and inflation in a new realistic situation. Show the reasoning and cite the evidence.\n- **error or claim analysis** (6 pts): Analyze a plausible error, unsupported claim, or misuse of a source involving fiscal policy; correct it and explain why.\n- **connection** (5 pts): Connect national markets and aggregate measures with evaluating national economic conditions. Explain how the ideas support, constrain, contrast with, or build on one another.\n- **source provenance and citation** (5 pts): For one source you used, identify it as primary or secondary, state who produced it and when, explain what perspective it represents, name one thing it does not show, and cite it so another reader could find it.\n- **performance evidence** (8 pts): Present the strongest evidence from the unit project: Interpret a set of real economic indicators and defend a claim about national economic conditions, naming the limits of each measure.\n- **reflection and transfer** (4 pts): Identify one skill you can now transfer, one check that improves accuracy or source reliability, and one next question.\n\nTotal: 43 points. Rubric dimensions: accuracy and historical or economic context, evidence, reasoning, and citation, source use, provenance, and perspective, application or performance, checking and revision.\n\nMastery interpretation -- Secure: At least 85% with accurate independent application, cited evidence, and fair treatment of perspectives. Developing: 70–84% or inconsistent explanation or citation; assign targeted review and a fresh transfer check. Not yet: Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "evidence-requirements",
+      "prompt": "- Cite the sources required by the unit assessment prompts, each logged with the Source Record fields above.\n- Every claim is backed by a specific, cited piece of evidence -- not an unsupported opinion.\n- Identify each source as primary or secondary, state who produced it and when, and note what perspective it represents and what it omits.\n- Every claim offered as evidence names its source with enough detail for another reader to locate it. Quotations must be transcribed by the learner from the retrieved source; this package supplies no quoted text."
+    }
+  ],
+  "responseMode": "source-based-claim-evidence-reasoning",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/social-studies/ma-g11-social-studies-u08-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-social-studies-u08-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/social-studies/grade-11/ma-g11-social-studies/ma-g11-social-studies-u08-l11.md",
+    "unitObjective": "How can the learner demonstrate the goals of The National Economy?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

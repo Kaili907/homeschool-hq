@@ -1,0 +1,426 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l02",
+  "lessonId": "ma-g11-financial-literacy-u01-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$32,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The first year is the wage he already has, before any raise has been applied."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$32,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One year of 2.5% growth applied to $32,000, which is the wage he is giving up in the second study year."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$33,620.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Two years of compounding: the second raise is applied to $32,800, not to the original $32,000."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$34,460.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three years of compounding on $32,000. Compounding is why the forgone amount is larger than four times the starting wage."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$132,880.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The four forgone years added: $32,000.00 + $32,800.00 + $33,620.00 + $34,460.50."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$51,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Tuition of $12,750 charged in each of the 4 study years."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$183,880.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The economic cost is the cash paid out plus the income never received: $132,880.50 forgone plus $51,000.00 of tuition."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "9.5",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$183,880.50 divided by the $19,400 annual advantage. Recovery is measured against the true cost, not against tuition alone."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "The earnings he gives up",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$132,880.50 of forgone earnings against $51,000.00 of tuition — the invisible half of the cost is more than twice the half that arrives as a bill."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "wage",
+        "substituted": "32000",
+        "result": "$32,000.00",
+        "why": "The first year is the wage he already has, before any raise has been applied."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(wage2 * pow(1 + growth, 1), 2)",
+        "substituted": "round(32000 * pow(1 + 0.025, 1), 2)",
+        "result": "$32,800.00",
+        "why": "One year of 2.5% growth applied to $32,000, which is the wage he is giving up in the second study year."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(wage3 * pow(1 + growth3, 2), 2)",
+        "substituted": "round(32000 * pow(1 + 0.025, 2), 2)",
+        "result": "$33,620.00",
+        "why": "Two years of compounding: the second raise is applied to $32,800, not to the original $32,000."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(wage4 * pow(1 + growth4, 3), 2)",
+        "substituted": "round(32000 * pow(1 + 0.025, 3), 2)",
+        "result": "$34,460.50",
+        "why": "Three years of compounding on $32,000. Compounding is why the forgone amount is larger than four times the starting wage."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 + #t1-p2 + #t1-p3 + #t1-p4",
+        "substituted": "#t1-p1 + #t1-p2 + #t1-p3 + #t1-p4",
+        "result": "$132,880.50",
+        "why": "The four forgone years added: $32,000.00 + $32,800.00 + $33,620.00 + $34,460.50."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "tuition * 4",
+        "substituted": "12750 * 4",
+        "result": "$51,000.00",
+        "why": "Tuition of $12,750 charged in each of the 4 study years."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 + #t2-p2",
+        "substituted": "#t2-p1 + #t2-p2",
+        "result": "$183,880.50",
+        "why": "The economic cost is the cash paid out plus the income never received: $132,880.50 forgone plus $51,000.00 of tuition."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p3 / advantage, 1)",
+        "substituted": "round(#t2-p3 / 19400, 1)",
+        "result": "9.5",
+        "why": "$183,880.50 divided by the $19,400 annual advantage. Recovery is measured against the true cost, not against tuition alone."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p1 > #t2-p2",
+        "substituted": "#t2-p1 > #t2-p2",
+        "result": "The earnings he gives up",
+        "why": "$132,880.50 of forgone earnings against $51,000.00 of tuition — the invisible half of the cost is more than twice the half that arrives as a bill."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A friend tells Marcus the programme \"costs $51,000\". Explain what that figure leaves out, why the omitted part is easy to miss, and what it does to the recovery period.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the $132,880.50 of forgone earnings as the omission, and explains that it never appears as a bill because it is income that simply never arrives.",
+          "States that counting tuition alone would give a recovery period of about 2.6 years against the 9.5 years the full cost produces.",
+          "Explains that the forgone side compounds, so it grows with the length of the programme rather than staying fixed."
+        ],
+        "evidenceRequirements": [
+          "Cites the $51,000.00 tuition figure and the $132,880.50 forgone-earnings figure side by side."
+        ],
+        "lookFors": [
+          "The response explains why an opportunity cost is invisible, not merely that it was forgotten.",
+          "The response connects the omission to a specific consequence for the recovery period.",
+          "A response that computes the tuition-only recovery period itself is stronger than one that only says it would be shorter."
+        ],
+        "commonMisconception": "Treating the cost of a programme as the amount that appears on the invoice.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "error-diagnosis",
+          "evidence-use"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The model gives Marcus a raise of 2.5% in each year he is not studying. Say what would happen to the true cost if that raise pattern were smaller, and name one thing about his job that would make the 2.5% assumption unsafe.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that a smaller raise pattern lowers the forgone earnings, lowering the true cost below $183,880.50 and shortening the 9.5-year recovery.",
+          "Names a specific reason the assumption could fail, such as raises being tied to a role he would leave anyway, or the wage in that job having a ceiling."
+        ],
+        "evidenceRequirements": [
+          "Refers to the compounded fourth-year figure of $34,460.50 or to the $132,880.50 total when describing what the raise assumption controls."
+        ],
+        "lookFors": [
+          "The response identifies the raise pattern as an assumption about the alternative, not about the programme.",
+          "The response gives a mechanism for the assumption failing rather than saying only that it \"might not happen\"."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What would Marcus earn in the first of the four years if he kept working?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would he earn in the second year, after one raise of 2.5%?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What would he earn in the third year, after two raises of 2.5%?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "What would he earn in the fourth year, after three raises of 2.5%?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What are the total earnings Marcus gives up across all four study years?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total tuition across the 4 study years?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the true cost of the four years, counting both the tuition and the earnings given up?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "At an advantage of $19,400 a year, how many years of work does it take to recover the true cost? Give one decimal place."
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "Which of the two parts of the true cost is larger for Marcus?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "A friend tells Marcus the programme \"costs $51,000\". Explain what that figure leaves out, why the omitted part is easy to miss, and what it does to the recovery period."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "The model gives Marcus a raise of 2.5% in each year he is not studying. Say what would happen to the true cost if that raise pattern were smaller, and name one thing about his job that would make the 2.5% assumption unsafe."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What would Marcus earn in the first of the four years if he kept working? Answer: $32,000.00. Verification: The first year is the wage he already has, before any raise has been applied. t1-p2: What would he earn in the second year, after one raise of 2.5%? Answer: $32,800.00. Verification: One year of 2.5% growth applied to $32,000, which is the wage he is giving up in the second study year. t1-p3: What would he earn in the third year, after two raises of 2.5%? Answer: $33,620.00. Verification: Two years of compounding: the second raise is applied to $32,800, not to the original $32,000. t1-p4: What would he earn in the fourth year, after three raises of 2.5%? Answer: $34,460.50. Verification: Three years of compounding on $32,000. Compounding is why the forgone amount is larger than four times the starting wage. t2-p1: What are the total earnings Marcus gives up across all four study years? Answer: $132,880.50. Verification: The four forgone years added: $32,000.00 + $32,800.00 + $33,620.00 + $34,460.50. t2-p2: What is the total tuition across the 4 study years? Answer: $51,000.00. Verification: Tuition of $12,750 charged in each of the 4 study years. t2-p3: What is the true cost of the four years, counting both the tuition and the earnings given up? Answer: $183,880.50. Verification: The economic cost is the cash paid out plus the income never received: $132,880.50 forgone plus $51,000.00 of tuition. t2-p4: At an advantage of $19,400 a year, how many years of work does it take to recover the true cost? Give one decimal place. Answer: 9.5. Verification: $183,880.50 divided by the $19,400 annual advantage. Recovery is measured against the true cost, not against tuition alone. t2-p5: Which of the two parts of the true cost is larger for Marcus? Answer: The earnings he gives up. Verification: $132,880.50 of forgone earnings against $51,000.00 of tuition — the invisible half of the cost is more than twice the half that arrives as a bill."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: A friend tells Marcus the programme \"costs $51,000\". Explain what that figure leaves out, why the omitted part is easy to miss, and what it does to the recovery period. Identifies the $132,880.50 of forgone earnings as the omission, and explains that it never appears as a bill because it is income that simply never arrives. States that counting tuition alone would give a recovery period of about 2.6 years against the 9.5 years the full cost produces. Explains that the forgone side compounds, so it grows with the length of the programme rather than staying fixed. Cites the $51,000.00 tuition figure and the $132,880.50 forgone-earnings figure side by side. The response explains why an opportunity cost is invisible, not merely that it was forgotten. The response connects the omission to a specific consequence for the recovery period. A response that computes the tuition-only recovery period itself is stronger than one that only says it would be shorter. t3-p2: The model gives Marcus a raise of 2.5% in each year he is not studying. Say what would happen to the true cost if that raise pattern were smaller, and name one thing about his job that would make the 2.5% assumption unsafe. States that a smaller raise pattern lowers the forgone earnings, lowering the true cost below $183,880.50 and shortening the 9.5-year recovery. Names a specific reason the assumption could fail, such as raises being tied to a role he would leave anyway, or the wage in that job having a ceiling. Refers to the compounded fourth-year figure of $34,460.50 or to the $132,880.50 total when describing what the raise assumption controls. The response identifies the raise pattern as an assumption about the alternative, not about the programme. The response gives a mechanism for the assumption failing rather than saying only that it \"might not happen\"."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the $132,880.50 of forgone earnings as the omission, and explains that it never appears as a bill because it is income that simply never arrives. States that counting tuition alone would give a recovery period of about 2.6 years against the 9.5 years the full cost produces. Explains that the forgone side compounds, so it grows with the length of the programme rather than staying fixed. States that a smaller raise pattern lowers the forgone earnings, lowering the true cost below $183,880.50 and shortening the 9.5-year recovery. Names a specific reason the assumption could fail, such as raises being tied to a role he would leave anyway, or the wage in that job having a ceiling."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": [
+      {
+        "itemRef": "t3-p2",
+        "promptText": "The model gives Marcus a raise of 2.5% in each year he is not studying. Say what would happen to the true cost if that raise pattern were smaller, and name one thing about his job that would make the 2.5% assumption unsafe.",
+        "resolution": "CONFIRMED_OPEN_JUDGMENT",
+        "rationale": "The response must explain the direction of a changed raise assumption and identify why that assumption may fail. No single numeric raise path is requested; source criteria require causal and uncertainty reasoning."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u01-l02.scoring.json",
+    "sourceScoringSha256": "185c67149b1cec27b6050a2fa40760b7ed2c86ab0fec42403454509d122665a6",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -5,6 +5,7 @@ import type { StudyCalendarEntry, StudyParentSettings, StudyReviewRecommendation
 import type { Profile } from '../types'
 import {
   buildLearnerAnalyticsSnapshot,
+  LEARNER_ANALYTICS_LIMITS,
   loadLearnerAnalytics,
   type LearnerAnalyticsReadSource,
   type StudyLearnerEvidenceState,
@@ -179,7 +180,7 @@ describe('learner analytics projection', () => {
       overview: 'available', curriculum: 'available', progress: 'available',
       assessments: 'available', study: 'available', operationalStatus: 'partial',
     })
-    expect(detail.courses).toMatchObject({ status: 'available', value: [{ completed: 1, total: 2, mastered: 1, reteach: 1 }] })
+    expect(detail.courses).toMatchObject({ status: 'available', value: [{ title: 'Grade 5 Mathematics', subject: 'mathematics', workingLevel: '5', completed: 1, total: 2, mastered: 1, reteach: 1 }] })
     expect(detail.mathMastery.find((skill) => skill.skillRef === 'ratio6')).toMatchObject({ mastery: 82, status: 'mastered' })
     expect(detail.attendance.recentDays).toHaveLength(2)
     expect(detail.interventions.needsDad[0]).toMatchObject({ skillName: 'Ratios & Rates', supportSignal: 'repeated-walkthroughs' })
@@ -213,6 +214,33 @@ describe('learner analytics projection', () => {
       status: 'partial', reason: 'catalog-partially-integrated', value: [expect.objectContaining({ courseRef: 'ma-g5-mathematics' })],
     })
     expect(snapshot.details['learner-1'].availability).toMatchObject({ curriculum: 'partial', progress: 'partial', study: 'unavailable' })
+  })
+
+  it('resolves learner assignments against the admitted expanded release refs and names', () => {
+    const profile = emptyProfile('high-school-learner', 'High School Learner', '10')
+    profile.academy = {
+      releaseVersion: '2.0.0',
+      grade: '10',
+      enrolledAt: '2026-09-01T12:00:00.000Z',
+      courseIds: ['ma-g10-science', 'ma-g10-technology'],
+      lessons: {},
+      assessments: {},
+    }
+
+    const snapshot = buildLearnerAnalyticsSnapshot({
+      profiles: [profile], today: TODAY, observedAt: `${TODAY}T12:00:00.000Z`,
+    })
+
+    expect(snapshot.learners[0].curriculum).toMatchObject({
+      status: 'available', releaseVersion: '2.0.0', matchedCourseCount: 2,
+    })
+    expect(snapshot.details['high-school-learner'].courses).toEqual({
+      status: 'available',
+      value: [
+        expect.objectContaining({ courseRef: 'ma-g10-science', title: 'Chemistry', workingLevel: '10', total: 108 }),
+        expect.objectContaining({ courseRef: 'ma-g10-technology', title: 'Programming I', workingLevel: '10', total: 36 }),
+      ],
+    })
   })
 
   it('does not calculate Academy progress against a different curriculum release', () => {
@@ -311,9 +339,15 @@ describe('learner analytics projection', () => {
       })),
       attempts: [],
     }
-    const profiles = [profile, ...Array.from({ length: 6 }, (_, index) => emptyProfile(`extra-${index}`, `Extra ${index}`, '6'))]
+    const profiles = [
+      profile,
+      ...Array.from(
+        { length: LEARNER_ANALYTICS_LIMITS.learners + 5 },
+        (_, index) => emptyProfile(`extra-${index}`, `Extra ${index}`, '6'),
+      ),
+    ]
     const snapshot = buildLearnerAnalyticsSnapshot({ profiles, today: TODAY, observedAt: `${TODAY}T12:00:00.000Z` })
-    expect(snapshot.learners).toHaveLength(5)
+    expect(snapshot.learners).toHaveLength(LEARNER_ANALYTICS_LIMITS.learners)
     expect(snapshot.learners[0].displayName).not.toMatch(/[\u0000-\u001f\u007f]/u)
     expect(snapshot.learners[0].displayName.length).toBeLessThanOrEqual(120)
     expect(snapshot.details.p1.courses).toMatchObject({ status: 'available', value: expect.any(Array) })

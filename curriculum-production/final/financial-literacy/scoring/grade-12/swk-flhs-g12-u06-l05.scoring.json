@@ -1,0 +1,293 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l05",
+  "lessonId": "ma-g12-financial-literacy-u06-l05",
+  "integratedDomains": [
+    "fraud",
+    "consumer-protection",
+    "credit",
+    "banking",
+    "insurance-risk"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,735.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three charges added. This is the amount in dispute, not the amount the person is liable for, and keeping those two separate is the first thing the arithmetic has to do."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$50 on each of the 3 accounts under the stated rule. The cap applies per account, so the number of accounts matters as much as the size of the charges."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,380.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The cap is $500 per account, but liability on an account cannot exceed what that account was charged. Two accounts reach the $500 cap; the third was only charged $380, so that is the ceiling there. $500 + $380 + $500 = $1,380.00. Multiplying $500 by 3 would make the holder liable for more than an account was ever billed."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,230.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,380.00 against $150.00. The saving comes from acting on a date, not from anything else the person does."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$335.76",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$13.99 in each of 24 months. It is a cost that follows the incident rather than part of it, because the underlying exposure does not end when the three accounts are closed."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Report the accounts as not theirs and have the fraud recorded",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Reporting starts the process that limits liability under the stated window and creates the record every later step depends on. Paying a charge would concede a debt the person does not owe, and waiting risks passing the window, which the figures show costs $1,230.00."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "c1 + c2 + c3",
+        "substituted": "1240 + 380 + 2115",
+        "result": "$3,735.00",
+        "why": "The three charges added. This is the amount in dispute, not the amount the person is liable for, and keeping those two separate is the first thing the arithmetic has to do."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "promptCap * accounts",
+        "substituted": "50 * 3",
+        "result": "$150.00",
+        "why": "$50 on each of the 3 accounts under the stated rule. The cap applies per account, so the number of accounts matters as much as the size of the charges."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "min(lateCap, c1b) + min(lateCap, c2b) + min(lateCap, c3b)",
+        "substituted": "min(500, 1240) + min(500, 380) + min(500, 2115)",
+        "result": "$1,380.00",
+        "why": "The cap is $500 per account, but liability on an account cannot exceed what that account was charged. Two accounts reach the $500 cap; the third was only charged $380, so that is the ceiling there. $500 + $380 + $500 = $1,380.00. Multiplying $500 by 3 would make the holder liable for more than an account was ever billed."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$1,230.00",
+        "why": "$1,380.00 against $150.00. The saving comes from acting on a date, not from anything else the person does."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "monitoring * monitorMonths",
+        "substituted": "13.99 * 24",
+        "result": "$335.76",
+        "why": "$13.99 in each of 24 months. It is a cost that follows the incident rather than part of it, because the underlying exposure does not end when the three accounts are closed."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Set out the response to this incident in order, with a reason for the position of each step. Explain why the $3,735.00 is not the right measure of what the person stands to lose, and say what they should refuse to do even if someone contacting them about the incident asks.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Gives an ordered response with reasons: report the accounts and have the fraud recorded first because the window governs liability, then have the accounts frozen or closed, then obtain and check the full record for anything further, then keep written copies of everything reported and when.",
+          "Explains the measure: liability is capped per account, so the exposure is $150.00 reported promptly or $1,380.00 reported late, not the $3,735.00 charged — although the $3,735.00 is what must be disputed and removed.",
+          "Names what to refuse: no one contacting the person about the incident should be given account numbers, passwords, security answers, or identifying documents, since a call or message about fraud is itself a common way of obtaining exactly those details.",
+          "Notes the continuing exposure and its cost, such as the $335.76 of monitoring, because the details used to open three accounts can be used again."
+        ],
+        "evidenceRequirements": [
+          "Uses the $150.00 and $1,380.00 liability figures and the $1,230.00 that promptness saves."
+        ],
+        "lookFors": [
+          "The order is justified by what each step makes possible, not by convenience.",
+          "The response never suggests paying a fraudulent charge.",
+          "The response treats unsolicited contact about the incident as a risk in itself."
+        ],
+        "commonMisconception": "Reading the total fraudulent charges as the amount at stake, when a per-account liability cap, the amount each account was actually charged, and the reporting date are what determine the loss.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the fraudulent charges come to in total?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the most the person is liable for if all three are reported inside the window?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the most they are liable for if all three are reported after the window?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does reporting inside the window save?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would 24 months of the monitoring service cost?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What should the person do first on discovering the accounts?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Set out the response to this incident in order, with a reason for the position of each step. Explain why the $3,735.00 is not the right measure of what the person stands to lose, and say what they should refuse to do even if someone contacting them about the incident asks."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the fraudulent charges come to in total? Answer: $3,735.00. Verification: The three charges added. This is the amount in dispute, not the amount the person is liable for, and keeping those two separate is the first thing the arithmetic has to do. t1-p2: What is the most the person is liable for if all three are reported inside the window? Answer: $150.00. Verification: $50 on each of the 3 accounts under the stated rule. The cap applies per account, so the number of accounts matters as much as the size of the charges. t1-p3: What is the most they are liable for if all three are reported after the window? Answer: $1,380.00. Verification: The cap is $500 per account, but liability on an account cannot exceed what that account was charged. Two accounts reach the $500 cap; the third was only charged $380, so that is the ceiling there. $500 + $380 + $500 = $1,380.00. Multiplying $500 by 3 would make the holder liable for more than an account was ever billed. t2-p1: What does reporting inside the window save? Answer: $1,230.00. Verification: $1,380.00 against $150.00. The saving comes from acting on a date, not from anything else the person does. t2-p2: What would 24 months of the monitoring service cost? Answer: $335.76. Verification: $13.99 in each of 24 months. It is a cost that follows the incident rather than part of it, because the underlying exposure does not end when the three accounts are closed. t2-p3: What should the person do first on discovering the accounts? Answer: Report the accounts as not theirs and have the fraud recorded. Verification: Reporting starts the process that limits liability under the stated window and creates the record every later step depends on. Paying a charge would concede a debt the person does not owe, and waiting risks passing the window, which the figures show costs $1,230.00."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. t3-p1: Set out the response to this incident in order, with a reason for the position of each step. Explain why the $3,735.00 is not the right measure of what the person stands to lose, and say what they should refuse to do even if someone contacting them about the incident asks. Gives an ordered response with reasons: report the accounts and have the fraud recorded first because the window governs liability, then have the accounts frozen or closed, then obtain and check the full record for anything further, then keep written copies of everything reported and when. Explains the measure: liability is capped per account, so the exposure is $150.00 reported promptly or $1,380.00 reported late, not the $3,735.00 charged — although the $3,735.00 is what must be disputed and removed. Names what to refuse: no one contacting the person about the incident should be given account numbers, passwords, security answers, or identifying documents, since a call or message about fraud is itself a common way of obtaining exactly those details. Notes the continuing exposure and its cost, such as the $335.76 of monitoring, because the details used to open three accounts can be used again. Uses the $150.00 and $1,380.00 liability figures and the $1,230.00 that promptness saves. The order is justified by what each step makes possible, not by convenience. The response never suggests paying a fraudulent charge. The response treats unsolicited contact about the incident as a risk in itself."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Gives an ordered response with reasons: report the accounts and have the fraud recorded first because the window governs liability, then have the accounts frozen or closed, then obtain and check the full record for anything further, then keep written copies of everything reported and when. Explains the measure: liability is capped per account, so the exposure is $150.00 reported promptly or $1,380.00 reported late, not the $3,735.00 charged — although the $3,735.00 is what must be disputed and removed. Names what to refuse: no one contacting the person about the incident should be given account numbers, passwords, security answers, or identifying documents, since a call or message about fraud is itself a common way of obtaining exactly those details. Notes the continuing exposure and its cost, such as the $335.76 of monitoring, because the details used to open three accounts can be used again."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u06-l05.scoring.json",
+    "sourceScoringSha256": "461cf24295b3a317db35c0626fb836da049567d4bc773c8b2f1b1466ed28c080",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

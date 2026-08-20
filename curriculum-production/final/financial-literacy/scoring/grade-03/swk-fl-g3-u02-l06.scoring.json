@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u02-l06",
+  "lessonId": "ma-g3-financial-literacy-u02-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Reasoning about fairness",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "Priya's decision is stated with no reason, or punishes the classmate without reference to the agreement."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A workable split is proposed for Priya's sale but the reason does not connect to what each classmate actually did."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response ties Priya's split to the work each classmate really did against what was agreed, and stays respectful toward the classmate who left early."
+          }
+        ]
+      },
+      {
+        "dimension": "Thanking for unpaid help",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The thank-you Priya offers is missing or names nothing the neighbour did."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Priya's thank-you is polite but generic, and could be addressed to anyone."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Priya's thank-you names the donated flour specifically and recognises that the neighbour gave something of value without being paid."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Refers to the agreement the three invented classmates made, not only to the outcome.",
+      "Proposes a split and gives a reason for it that a classmate could hear without being shamed.",
+      "Names the donated flour in the thank-you rather than thanking in general.",
+      "Does not suggest telling other people that a classmate is lazy or bad."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What did the three invented classmates agree to, and what actually happened?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What is a fair way to handle the split, and what makes it fair?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write the thank-you Priya could say to the neighbour, naming what the neighbour actually gave."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Reasoning about fairness — Not yet: Priya's decision is stated with no reason, or punishes the classmate without reference to the agreement. Approaching: A workable split is proposed for Priya's sale but the reason does not connect to what each classmate actually did. Meets: The response ties Priya's split to the work each classmate really did against what was agreed, and stays respectful toward the classmate who left early. Thanking for unpaid help — Not yet: The thank-you Priya offers is missing or names nothing the neighbour did. Approaching: Priya's thank-you is polite but generic, and could be addressed to anyone. Meets: Priya's thank-you names the donated flour specifically and recognises that the neighbour gave something of value without being paid. Refers to the agreement the three invented classmates made, not only to the outcome. Proposes a split and gives a reason for it that a classmate could hear without being shamed. Names the donated flour in the thank-you rather than thanking in general. Does not suggest telling other people that a classmate is lazy or bad."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Refers to the agreement the three invented classmates made, not only to the outcome. Proposes a split and gives a reason for it that a classmate could hear without being shamed. Names the donated flour in the thank-you rather than thanking in general. Does not suggest telling other people that a classmate is lazy or bad."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u02-l06.scoring.json",
+    "sourceScoringSha256": "117577b3182bde242feb47b7714237270c6d2eab881e75ac97fcbe677eeeaf04",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

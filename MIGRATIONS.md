@@ -8,7 +8,24 @@ Every schema version bump is documented here. Rules (from the build spec):
   Snapshots are downloadable from the Grown-Ups panel.
 - Migration logic lives in `src/migration.ts` and is covered by
   `src/migration.test.ts`. Tests run before the migration ever executes in the
-app: `npm test`.
+  app: `npm test`.
+
+## Supabase: Study actor authorization (2026-08-16)
+
+Tracked migration:
+`supabase/migrations/20260816160000_academy_study_actor_authorization.sql`.
+
+The additive migration separates verified guardian authorization from
+service-role Study-session verification. An authenticated-only RPC derives
+`auth.uid()` from the bearer, rechecks the active household, student,
+membership, guardian relationship, grant owner, and exact Study capability,
+and returns only an authorized/denied result. Service role cannot execute this
+actor check. A second authenticated-only RPC authorizes the exact
+`study:production-readiness:read` pre-session capability for a current guardian
+with active learner access; caller household, learner, role, and capability
+claims are inert. The migration is repository-only and has not been applied to
+a hosted Supabase project. Canonical LF SHA-256:
+`697f3bcb7bf5609822a7fea85d83249828cedb20121b2a9ed5d0d83c0c14e4d2`.
 
 ## Supabase: Curriculum activation and rollback (2026-08-10)
 

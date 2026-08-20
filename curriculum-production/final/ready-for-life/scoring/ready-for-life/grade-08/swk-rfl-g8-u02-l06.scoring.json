@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l06",
+  "lessonId": "ma-g8-ready-for-life-u02-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Reasoning quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Assigns responsibility without stating a reason, or the reason doesn't connect to details in the scenario."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Assigns responsibility with a reason tied to specific scenario details for all three scenarios."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Assigns responsibility with reasoning that weighs multiple relevant factors (for example, legal responsibility versus practical availability) rather than a single factor."
+          }
+        ]
+      },
+      {
+        "dimension": "Responsiveness to new information",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The revised answer doesn't change or doesn't engage with the new fact provided, even when the fact is directly relevant."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Explicitly states whether the new fact changes the original guess and explains why, for all three scenarios."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Explains why the new fact changes (or doesn't change) the guess, and identifies what additional information would still be useful to know."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner's initial guesses in task t2 are genuinely recorded before the new facts are introduced, not rewritten in hindsight.",
+      "Reasoning references the specific fictional details given (the lease clause, the work-from-home schedule, the garage usage pattern) rather than generic statements about fairness."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

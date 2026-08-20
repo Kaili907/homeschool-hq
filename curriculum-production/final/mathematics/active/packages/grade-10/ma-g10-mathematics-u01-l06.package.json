@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l06",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 6,
+    "courseDay": 6,
+    "phase": "Guided practice B",
+    "focus": "inscribing equilateral triangles, squares, and hexagons in circles",
+    "title": "Guided practice B: inscribing equilateral triangles, squares, and hexagons in circles"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 1,
+          "prompt": "A regular hexagon is inscribed in a circle. Central angle per side?",
+          "workedSolution": {
+            "steps": [
+              "Six equal arcs make 360°.",
+              "360 ÷ 6 = 60°."
+            ],
+            "answer": "60°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the equilateral triangle construction on a given segment?",
+          "choices": [
+            "The circles intersect, which guarantees 60° angles by definition.",
+            "The intersection point is the midpoint of the segment.",
+            "Both circles have radius equal to the segment, so all three sides are that same length.",
+            "The construction works only when the segment is horizontal."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 2,
+          "prompt": "Which statement is a precise definition of a parallel lines?",
+          "choices": [
+            "two lines the same distance apart at one point",
+            "two lines that meet only at infinity",
+            "two coplanar lines that never intersect, however far they are extended",
+            "two lines with the same length"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. From vertex V draw an arc crossing both rays at P and Q. From P and Q draw equal arcs meeting at R. Draw ray VR. What has been constructed?",
+          "choices": [
+            "an equilateral triangle on PQ",
+            "the bisector of the angle at V",
+            "a line perpendicular to one ray",
+            "the perpendicular bisector of PQ only"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 5. What central angle does each side subtend?",
+          "choices": [
+            "120°",
+            "60°",
+            "30°",
+            "61°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the perpendicular bisector construction?",
+          "choices": [
+            "The arcs look symmetric, so the line must be perpendicular.",
+            "Any line through the midpoint is a perpendicular bisector.",
+            "Both constructed points are equidistant from the endpoints, and the locus of such points is exactly the perpendicular bisector.",
+            "The compass width was more than half the segment, which forces perpendicularity."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a circle?",
+          "choices": [
+            "a closed curve with no corners",
+            "a shape whose area is πr²",
+            "the set of all points in a plane at a fixed distance from a given centre point",
+            "a polygon with infinitely many sides"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. Through point P not on line ℓ, copy the angle that a transversal makes with ℓ, placing the copy at P on the same transversal. What has been constructed?",
+          "choices": [
+            "the perpendicular bisector of the transversal",
+            "a line through P parallel to ℓ",
+            "a line through P perpendicular to ℓ",
+            "the reflection of ℓ across P"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular quadrilateral is inscribed in a circle of radius 8. What central angle does each side subtend?",
+          "choices": [
+            "90°",
+            "91°",
+            "45°",
+            "180°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "Which statement correctly justifies the angle bisector construction?",
+          "choices": [
+            "The ray drawn appears to split the angle evenly.",
+            "The construction builds two congruent triangles by SSS, so the angles at the vertex are congruent.",
+            "The construction relies on the angle being acute.",
+            "Equal arcs always produce equal angles regardless of the triangle."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a perpendicular lines?",
+          "choices": [
+            "two lines that form an isosceles triangle",
+            "two lines that intersect to form right angles",
+            "two lines that never meet",
+            "two lines with opposite slopes"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l06"
+  }
+}

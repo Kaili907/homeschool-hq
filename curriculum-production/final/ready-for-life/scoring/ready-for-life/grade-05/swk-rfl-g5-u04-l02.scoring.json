@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l02",
+  "lessonId": "ma-g5-ready-for-life-u04-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Neutral language",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Entries mix in judgment words (good, bad, lazy, greedy) or any weight/size/calorie language."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All four entries use only the five neutral signal words with no judgment or body-size language."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Neutral throughout, and the reflection explicitly notices when a judgment thought showed up and sets it aside."
+          }
+        ]
+      },
+      {
+        "dimension": "Signal-to-clue accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Clue described does not clearly match the signal named."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each clue plausibly matches its named signal."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Clues are specific and personal rather than generic restatements of the signal word."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No weight, size, calorie, or body-shape word appears anywhere in the four entries.",
+      "Four separate moments are recorded, not one moment repeated.",
+      "The reflection names a specific signal, not a vague 'today was hard.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

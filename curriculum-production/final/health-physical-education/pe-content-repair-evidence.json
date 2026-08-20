@@ -1,0 +1,110 @@
+{
+  "evidenceType": "physical-education-production-depth-r1",
+  "evidenceVersion": "2.0.0",
+  "population": {
+    "lessonsBefore": 972,
+    "lessonsAfter": 972,
+    "lessonsRebuilt": 972
+  },
+  "confirmedBaseline": {
+    "lessons": 972,
+    "missingMovementCues": 756,
+    "equipmentBlockers": 600,
+    "missingRequiredSafety": 324,
+    "zeroActionable": 0,
+    "emptyActivities": 0,
+    "bodyWeightDietFindings": 0,
+    "mandatoryMediaFindings": 0
+  },
+  "repairs": {
+    "movementCueRepairs": 756,
+    "equipmentRepairs": 600,
+    "safetyRepairs": 324,
+    "productionDepthRebuilds": 972,
+    "repairLevel": "canonical generator lesson-family projection"
+  },
+  "after": {
+    "missingMovementCues": 0,
+    "equipmentBlockers": 0,
+    "missingRequiredSafety": 0,
+    "missingAdaptation": 0,
+    "homeUseBlockers": 0,
+    "missingCompletionCriteria": 0,
+    "missingGoalOrReadiness": 0,
+    "missingLessonFamilyPlan": 0,
+    "missingModel": 0,
+    "missingGuidedPractice": 0,
+    "missingProgression": 0,
+    "missingIndependentActivity": 0,
+    "missingRestStopDistinction": 0,
+    "missingEvidenceBoundary": 0,
+    "missingRetry": 0,
+    "missingGuardianBoundary": 0,
+    "missingTutorBoundary": 0,
+    "invalidLessonType": 0
+  },
+  "proofs": {
+    "lessonsAudited": 972,
+    "lessonFamilyCounts": {
+      "COOPERATIVE_CREATIVE_ACTIVITY": 72,
+      "FITNESS_SELF_MANAGEMENT": 95,
+      "MASTERY_PERFORMANCE": 162,
+      "MOVEMENT_CONCEPT_CUES": 183,
+      "PROJECT_LIFETIME_ACTIVITY": 101,
+      "REMEDIATION_RETRY": 162,
+      "REVIEW_RETRIEVAL": 81,
+      "SAFETY_STOP_DECISION": 12,
+      "SKILL_DEVELOPMENT": 79,
+      "TACTICS_DECISION_MAKING": 25
+    },
+    "focusSpecificExecutionCategories": {
+      "balance-strength-mobility": 64,
+      "leadership-inclusion": 104,
+      "locomotor-space": 70,
+      "movement-literacy": 234,
+      "object-control": 64,
+      "outdoor": 48,
+      "rhythm-sequence": 70,
+      "safety-stop-decision": 26,
+      "striking-target": 54,
+      "tactics-games": 66,
+      "training-planning": 172
+    },
+    "runnabilityRule": "Every lesson supplies a goal, readiness check, safe setup, model, guided attempts, one-variable progression, fresh independent work, evidence, reflection, and a changed-teaching retry.",
+    "movementCueRule": "Every lesson supplies at least three target cues and a model with starting position, action, key cue, common error, correction, adaptation, observation focus, and safety boundary.",
+    "adaptationRule": "Every lesson states runnable seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, and described/decision routes that earn equal credit without reason disclosure.",
+    "homeUseRule": "Every lesson states a cleared low-space setup, no-specialized-equipment requirement, household substitute policy, and equal-credit no-equipment path.",
+    "safetyRule": "Every lesson distinguishes learner-controlled REST / ADJUST from STOP AND TELL and DO NOT RESUME, while preserving guardian/professional return authority.",
+    "evidenceRule": "Evidence is type-matched and no Tutor, browser, learner self-report, camera, or wearable can certify physical completion or safe return.",
+    "scoringRule": "Scoring covers safe participation, decision quality, skill evidence, planning, knowledge, reflection, revision, and completion as appropriate; body and peer-comparison scoring is prohibited.",
+    "remediationRule": "Every retry names an observable gap, simplifies setup, changes cue/model, bounds practice, uses a fresh retry, and states an exit criterion.",
+    "approvedAnchor": {
+      "lessonId": "ma-g12-physical-education-u08-l07",
+      "packageSha256": "4b3987ceabdcb4b6c91769078b6f588ed973584a8efb30fc7231007395589dda",
+      "scoringSha256": "24f379f5083fc16a9651483283f8e55fb59ab92ce525a2fcbbbd4a8e230b4bc5",
+      "packageMatchesApprovedSource": true,
+      "scoringMatchesApprovedSource": true
+    }
+  },
+  "issueIdsAfter": {
+    "missingMovementCues": [],
+    "equipmentBlockers": [],
+    "missingRequiredSafety": [],
+    "missingAdaptation": [],
+    "homeUseBlockers": [],
+    "missingCompletionCriteria": [],
+    "missingGoalOrReadiness": [],
+    "missingLessonFamilyPlan": [],
+    "missingModel": [],
+    "missingGuidedPractice": [],
+    "missingProgression": [],
+    "missingIndependentActivity": [],
+    "missingRestStopDistinction": [],
+    "missingEvidenceBoundary": [],
+    "missingRetry": [],
+    "missingGuardianBoundary": [],
+    "missingTutorBoundary": [],
+    "invalidLessonType": []
+  },
+  "classification": "PHYSICAL_EDUCATION_PRODUCTION_DEPTH_R1_READY_FOR_CONVERGENCE"
+}

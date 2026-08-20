@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-ready-for-life-u04-assessment",
+  "courseRef": "ma-g4-ready-for-life",
+  "grade": 4,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g4-ready-for-life-u04",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals, Rest, and Fueling Meals",
+    "courseTitle": "Grade 4 Ready For Life",
+    "assessmentLessonRef": "ma-g4-ready-for-life-u04-l05"
+  },
+  "standards": [
+    "Ready for Life v1, Grade 4 Unit 4: Body Signals, Rest, and Fueling Meals"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u04-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before building your routine, think about a typical recent night.",
+      "prompt": "Describe what usually happens in the thirty minutes before you try to fall asleep on a typical night."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Build a three-step wind-down routine for tonight: first, clear and prepare your sleep space the way you'd clear any space for a task; second, notice and name one body signal that tells you rest time is getting close, like heavy eyelids or a slower mind; third, pick a consistent time to start the first two steps.",
+      "prompt": "I wrote a specific space-clearing step for my sleep space, not just 'clean up.'"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Build a three-step wind-down routine for tonight: first, clear and prepare your sleep space the way you'd clear any space for a task; second, notice and name one body signal that tells you rest time is getting close, like heavy eyelids or a slower mind; third, pick a consistent time to start the first two steps.",
+      "prompt": "I named a specific body signal I'll watch for that means rest time is close."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Build a three-step wind-down routine for tonight: first, clear and prepare your sleep space the way you'd clear any space for a task; second, notice and name one body signal that tells you rest time is getting close, like heavy eyelids or a slower mind; third, pick a consistent time to start the first two steps.",
+      "prompt": "I picked one consistent start time for tonight's routine."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-choice",
+      "directions": "Follow your three-step routine tonight, then the next morning, with your trusted adult, compare how rested you feel to a typical morning and think back over which of the three steps mattered most.",
+      "prompt": "Compared to a typical morning, how rested do you feel this morning?"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Follow your three-step routine tonight, then the next morning, with your trusted adult, compare how rested you feel to a typical morning and think back over which of the three steps mattered most.",
+      "prompt": "Which of your three routine steps, space-clearing, noticing the rest signal, or the consistent start time, do you think made the biggest difference, and why?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Think about how this routine compares to the simple space-clearing habit alone, without the rest-signal or timing steps.",
+      "prompt": "Explain what the rest-signal and consistent-timing steps added beyond just clearing your space, and whether you will keep using the full three-step routine."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/ready-for-life/ma-g4-ready-for-life-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Routine design specificity criterion.",
+    "Provide evidence that meets the stated Morning follow-through and reasoning criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-ready-for-life-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u04-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Body Signals, Rest, and Fueling Meals?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

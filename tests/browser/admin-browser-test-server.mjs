@@ -20,7 +20,7 @@ const capabilities = {
   viewer: readCapabilities,
   owner: [...readCapabilities, ...operationalCapabilities, ...ownerCapabilities],
 }
-const state = { authMode: 'owner', swVersion: 'old' }
+const state = { authMode: 'owner', swVersion: 'old', accessMode: 'unavailable', accessReads: 0 }
 
 function send(response, statusCode, body, headers = {}) {
   response.writeHead(statusCode, {
@@ -93,6 +93,10 @@ const server = createServer(async (request, response) => {
       const next = JSON.parse(await bodyOf(request))
       if (['owner', 'viewer', 'revoked'].includes(next.authMode)) state.authMode = next.authMode
       if (/^[a-z0-9-]{1,40}$/.test(next.swVersion)) state.swVersion = next.swVersion
+      if (['unavailable', 'ready', 'retry'].includes(next.accessMode)) {
+        state.accessMode = next.accessMode
+        state.accessReads = 0
+      }
       json(response, 200, state)
     } catch {
       json(response, 400, { error: { code: 'invalid_request' } })
@@ -109,6 +113,22 @@ const server = createServer(async (request, response) => {
       status: 'authorized',
       role: state.authMode,
       capabilities: capabilities[state.authMode],
+    })
+    return
+  }
+  if (url.pathname === '/api/admin/v1/access') {
+    state.accessReads += 1
+    if (state.accessMode === 'unavailable' || (state.accessMode === 'retry' && state.accessReads === 1)) {
+      json(response, 503, { error: { code: 'access_source_unavailable' } })
+      return
+    }
+    json(response, 200, {
+      schemaVersion: 2,
+      principals: [{
+        principalRef: '00000000-0000-4000-8000-000000000001',
+        assignmentRef: '10000000-0000-4000-8000-000000000001',
+        role: 'owner', status: 'active', revision: '1', isCurrent: true,
+      }],
     })
     return
   }

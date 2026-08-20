@@ -1,0 +1,268 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l02",
+  "lessonId": "ma-g9-financial-literacy-u02-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$75.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6% of the $1,250 sticker price is $75.00."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$336.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$28 a month for twelve months."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,961.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,250 sticker + $75 tax + $85 registration + $120 required gear + $336 insurance + $95 maintenance."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$711.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,961.00 first-year total less the $1,250 advertised."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "56.9%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$711.00 on a $1,250 base is 0.5688, or 56.9% to one decimal place."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$431.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Only insurance ($336) and maintenance ($95) recur; sticker, tax, registration, and gear are one-time."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "sticker * taxRate",
+        "substituted": "1250 * 0.06",
+        "result": "$75.00",
+        "why": "6% of the $1,250 sticker price is $75.00."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "insuranceMonthly * 12",
+        "substituted": "28 * 12",
+        "result": "$336.00",
+        "why": "$28 a month for twelve months."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "sticker2 + #t1-p1 + registration + gear + #t1-p2 + maintenance",
+        "substituted": "1250 + #t1-p1 + 85 + 120 + #t1-p2 + 95",
+        "result": "$1,961.00",
+        "why": "$1,250 sticker + $75 tax + $85 registration + $120 required gear + $336 insurance + $95 maintenance."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - sticker3",
+        "substituted": "#t2-p1 - 1250",
+        "result": "$711.00",
+        "why": "$1,961.00 first-year total less the $1,250 advertised."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / sticker4 * 100, 1)",
+        "substituted": "round(#t2-p2 / 1250 * 100, 1)",
+        "result": "56.9%",
+        "why": "$711.00 on a $1,250 base is 0.5688, or 56.9% to one decimal place."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t1-p2 + maintenance2",
+        "substituted": "#t1-p2 + 95",
+        "result": "$431.00",
+        "why": "Only insurance ($336) and maintenance ($95) recur; sticker, tax, registration, and gear are one-time."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Sort the six costs into one-time and recurring, and explain which sort matters more to someone deciding whether they can afford to keep the scooter, as opposed to whether they can afford to buy it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Sorts correctly: sticker, tax, registration, and gear are one-time; insurance and maintenance recur.",
+          "States that affording the purchase turns on the $1,530 of one-time costs while affording to keep it turns on the $431 a year that recurs.",
+          "Explains that a buyer can clear the first hurdle and fail the second, so the two questions need separate answers."
+        ],
+        "evidenceRequirements": [
+          "Uses the first-year total of $1,961.00 and the second-year figure of $431.00 as the two comparison points."
+        ],
+        "lookFors": [
+          "The response treats the recurring total as the ongoing commitment rather than as a smaller version of the purchase.",
+          "The response does not classify the required helmet and lock as optional."
+        ],
+        "commonMisconception": "Treating the advertised price as the cost of ownership.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is the sales tax?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does a year of insurance cost?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total cost of the first year of ownership?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much more than the sticker price is that?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "By what percentage does the first-year total exceed the sticker price? Round to one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "Assuming insurance and maintenance stay the same and nothing else recurs, what does the second year cost?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Sort the six costs into one-time and recurring, and explain which sort matters more to someone deciding whether they can afford to keep the scooter, as opposed to whether they can afford to buy it."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much is the sales tax? Answer: $75.00. Verification: 6% of the $1,250 sticker price is $75.00. t1-p2: What does a year of insurance cost? Answer: $336.00. Verification: $28 a month for twelve months. t2-p1: What is the total cost of the first year of ownership? Answer: $1,961.00. Verification: $1,250 sticker + $75 tax + $85 registration + $120 required gear + $336 insurance + $95 maintenance. t2-p2: How much more than the sticker price is that? Answer: $711.00. Verification: $1,961.00 first-year total less the $1,250 advertised. t2-p3: By what percentage does the first-year total exceed the sticker price? Round to one decimal place. Answer: 56.9%. Verification: $711.00 on a $1,250 base is 0.5688, or 56.9% to one decimal place. t3-p1: Assuming insurance and maintenance stay the same and nothing else recurs, what does the second year cost? Answer: $431.00. Verification: Only insurance ($336) and maintenance ($95) recur; sticker, tax, registration, and gear are one-time."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t4-p1: Sort the six costs into one-time and recurring, and explain which sort matters more to someone deciding whether they can afford to keep the scooter, as opposed to whether they can afford to buy it. Sorts correctly: sticker, tax, registration, and gear are one-time; insurance and maintenance recur. States that affording the purchase turns on the $1,530 of one-time costs while affording to keep it turns on the $431 a year that recurs. Explains that a buyer can clear the first hurdle and fail the second, so the two questions need separate answers. Uses the first-year total of $1,961.00 and the second-year figure of $431.00 as the two comparison points. The response treats the recurring total as the ongoing commitment rather than as a smaller version of the purchase. The response does not classify the required helmet and lock as optional."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Sorts correctly: sticker, tax, registration, and gear are one-time; insurance and maintenance recur. States that affording the purchase turns on the $1,530 of one-time costs while affording to keep it turns on the $431 a year that recurs. Explains that a buyer can clear the first hurdle and fail the second, so the two questions need separate answers."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 3,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u02-l02.scoring.json",
+    "sourceScoringSha256": "d88cfdb90056060cd63c894c303dfc3e3091cd5a7002338e1474409fceff6165",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

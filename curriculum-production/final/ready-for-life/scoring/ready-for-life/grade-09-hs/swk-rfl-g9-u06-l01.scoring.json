@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l01",
+  "lessonId": "ma-g9-ready-for-life-u06-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "System coverage and specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Names fewer than all five systems, or one or more task examples are vague or generic (such as 'chores' or 'school stuff') rather than a specific real action." },
+          { "label": "Proficient", "descriptor": "Names all five systems with one specific real task example for each, drawn from actual recent activity." },
+          { "label": "Advanced", "descriptor": "Names all five systems with a specific real task example for each and identifies at least one place where two systems overlap in practice." }
+        ]
+      },
+      {
+        "dimension": "Confidence self-assessment accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Confidence ratings are given with no reasoning, or the explanation for the weakest system does not match the rating given." },
+          { "label": "Proficient", "descriptor": "Confidence ratings are given for all five systems, with a reasoning-based explanation for the identified weakest system." },
+          { "label": "Advanced", "descriptor": "Confidence ratings are given with reasoning, and the learner connects the weakest-rated system to a specific concrete gap, a step or skill they have not yet done for real." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A specific real task named for each system, not a generic category label like 'housework' or 'school stuff.'",
+      "A confidence explanation that names an actual concrete gap (a specific step never yet done) rather than a vague feeling like 'I'm just not good at it.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

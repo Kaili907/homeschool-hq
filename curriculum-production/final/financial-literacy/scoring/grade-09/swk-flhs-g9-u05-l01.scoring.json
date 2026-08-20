@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l01",
+  "lessonId": "ma-g9-financial-literacy-u05-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3% of $5,000, and for Option A this is also the only possible outcome."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$230.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4.6% of $5,000, which is the average of a range, not a promise."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$410.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "8.2% of $5,000, again an expected value drawn from a wide range."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$4,850.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A 3% loss on $5,000 leaves $4,850.00."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$3,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A 28% loss on $5,000 leaves $3,600.00 — the investor would be $1,400 down."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$3,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,700.00 at the top of the range against $3,600.00 at the bottom."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "stake * rateA",
+        "substituted": "5000 * 0.03",
+        "result": "$150.00",
+        "why": "3% of $5,000, and for Option A this is also the only possible outcome."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "stake2 * rateB",
+        "substituted": "5000 * 0.046",
+        "result": "$230.00",
+        "why": "4.6% of $5,000, which is the average of a range, not a promise."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "stake3 * rateC",
+        "substituted": "5000 * 0.082",
+        "result": "$410.00",
+        "why": "8.2% of $5,000, again an expected value drawn from a wide range."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "stake4 * (1 - lossB)",
+        "substituted": "5000 * (1 - 0.03)",
+        "result": "$4,850.00",
+        "why": "A 3% loss on $5,000 leaves $4,850.00."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "stake5 * (1 - lossC)",
+        "substituted": "5000 * (1 - 0.28)",
+        "result": "$3,600.00",
+        "why": "A 28% loss on $5,000 leaves $3,600.00 — the investor would be $1,400 down."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "stake6 * (1 + gainC) - #t2-p2",
+        "substituted": "5000 * (1 + 0.34) - #t2-p2",
+        "result": "$3,100.00",
+        "why": "$6,700.00 at the top of the range against $3,600.00 at the bottom."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Describe the pattern linking each option’s expected gain to its spread of outcomes, and explain what an investor is actually paying for when they accept Option A’s $150 instead of Option C’s $410.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States the pattern: the higher the expected gain, the wider the range of outcomes — A has no spread, B has $700 of spread, C has $3,100.",
+          "Explains that Option A’s lower return buys certainty in dollar terms, so the investor is paying $260 of expected gain to remove the possibility of a nominal loss — noting, if they connect it to the next lesson, that a 3% return can still lose purchasing power.",
+          "Notes that an expected return is an average over outcomes, so Option C does not promise $410 in any particular year."
+        ],
+        "evidenceRequirements": [
+          "Uses at least one expected gain and one worst-case figure from each of at least two options."
+        ],
+        "lookFors": [
+          "The response treats the spread as the price of the higher expected return rather than as a flaw.",
+          "The response does not describe Option C as simply \"riskier\" without using the range figures."
+        ],
+        "commonMisconception": "Reading an expected rate of return as the return that will be received.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "communication-of-uncertainty",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the expected one-year gain on Option A?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the expected one-year gain on Option B?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the expected one-year gain on Option C?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Option B worth at the bottom of its stated range, -3%?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is Option C worth at the bottom of its stated range, -28%?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the full spread of Option C — the distance between its best outcome at +34% and its worst?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Describe the pattern linking each option’s expected gain to its spread of outcomes, and explain what an investor is actually paying for when they accept Option A’s $150 instead of Option C’s $410."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the expected one-year gain on Option A? Answer: $150.00. Verification: 3% of $5,000, and for Option A this is also the only possible outcome. t1-p2: What is the expected one-year gain on Option B? Answer: $230.00. Verification: 4.6% of $5,000, which is the average of a range, not a promise. t1-p3: What is the expected one-year gain on Option C? Answer: $410.00. Verification: 8.2% of $5,000, again an expected value drawn from a wide range. t2-p1: What is Option B worth at the bottom of its stated range, -3%? Answer: $4,850.00. Verification: A 3% loss on $5,000 leaves $4,850.00. t2-p2: What is Option C worth at the bottom of its stated range, -28%? Answer: $3,600.00. Verification: A 28% loss on $5,000 leaves $3,600.00 — the investor would be $1,400 down. t2-p3: What is the full spread of Option C — the distance between its best outcome at +34% and its worst? Answer: $3,100.00. Verification: $6,700.00 at the top of the range against $3,600.00 at the bottom."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Describe the pattern linking each option’s expected gain to its spread of outcomes, and explain what an investor is actually paying for when they accept Option A’s $150 instead of Option C’s $410. States the pattern: the higher the expected gain, the wider the range of outcomes — A has no spread, B has $700 of spread, C has $3,100. Explains that Option A’s lower return buys certainty in dollar terms, so the investor is paying $260 of expected gain to remove the possibility of a nominal loss — noting, if they connect it to the next lesson, that a 3% return can still lose purchasing power. Notes that an expected return is an average over outcomes, so Option C does not promise $410 in any particular year. Uses at least one expected gain and one worst-case figure from each of at least two options. The response treats the spread as the price of the higher expected return rather than as a flaw. The response does not describe Option C as simply \"riskier\" without using the range figures."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States the pattern: the higher the expected gain, the wider the range of outcomes — A has no spread, B has $700 of spread, C has $3,100. Explains that Option A’s lower return buys certainty in dollar terms, so the investor is paying $260 of expected gain to remove the possibility of a nominal loss — noting, if they connect it to the next lesson, that a 3% return can still lose purchasing power. Notes that an expected return is an average over outcomes, so Option C does not promise $410 in any particular year."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u05-l01.scoring.json",
+    "sourceScoringSha256": "192f2530dbc85ead000808c05a498c296bf52c614563bf34ad70e17543e2b668",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

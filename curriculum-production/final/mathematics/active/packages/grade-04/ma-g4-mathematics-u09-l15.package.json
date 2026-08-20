@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l15",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l15",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 15,
+    "courseDay": 159,
+    "phase": "Synthesis and review",
+    "focus": "conversion, formulas, and measurement data",
+    "title": "Synthesis and review: conversion, formulas, and measurement data"
+  },
+  "standards": [
+    "4.MD.1",
+    "4.MD.2",
+    "4.MD.3",
+    "4.MD.4"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 1 liter to milliliters.",
+          "choices": [
+            "100 milliliters",
+            "1 milliliters",
+            "1001 milliliters",
+            "1000 milliliters"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A hiker walks 41 meters, then walks 3 more trips of 70 meters each. How many meters total?",
+          "choices": [
+            "251",
+            "41",
+            "210",
+            "252"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 2,
+          "prompt": "A rectangle has area 36 square units and one side is 4 units. What is the length of the other side?",
+          "choices": [
+            "36",
+            "4",
+            "32",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 1/8, 1/8, 2/8, 8/8, 4/8, 6/8, 7/8, 5/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 5/8 yard?",
+          "choices": [
+            "6/8",
+            "5/8",
+            "5/16",
+            "4/8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 20 kilograms to grams.",
+          "choices": [
+            "20 grams",
+            "20000 grams",
+            "1020 grams",
+            "2000 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A tank has 774 liters of water. 3 containers of 131 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "381",
+            "1167",
+            "393",
+            "774"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 2,
+          "prompt": "A rectangle has area 21 square units and one side is 7 units. What is the length of the other side?",
+          "choices": [
+            "21",
+            "3",
+            "14",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 3/4, 4/4, 4/4, 4/4, 4/4, 3/4, 4/4, 2/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 2/4 yard?",
+          "choices": [
+            "3/4",
+            "2/8",
+            "2/4",
+            "1/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 13 feet to inches.",
+          "choices": [
+            "15.6 inches",
+            "156 inches",
+            "25 inches",
+            "13 inches"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l15"
+  }
+}

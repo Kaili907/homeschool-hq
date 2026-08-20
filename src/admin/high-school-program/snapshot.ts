@@ -1,0 +1,458 @@
+/**
+ * Frozen snapshot of the high-school programme derived faithfully from the
+ * read-only contract on `origin/mac/hs912-release-r1`.
+ *
+ * The snapshot is embedded in TypeScript because DASH-4 must be independently
+ * mountable without a runtime fetch. Every fact carries a `sourceDoc` pointing
+ * back to the file in the release tree so provenance is auditable.
+ *
+ * Course data (grade, subject, name, sessions, credit, prerequisites,
+ * requirement tags, cadence, framework, scope) is copied verbatim from
+ * `release/course-matrix.json`. Nothing is inferred; where the matrix records
+ * `null` (e.g., no credit for grade-8 anchors), the snapshot preserves `null`
+ * rather than guessing.
+ *
+ * Seam, standards, coverage and graduation rulings are lifted verbatim from
+ * the paired narrative documents. The display-status projection (COVERED /
+ * PARTIAL / NOT COVERED / UNVERIFIED) is applied in this file only for gaps,
+ * as a one-to-one mapping of the raw verdicts recorded by the contract.
+ */
+import {
+  HIGH_SCHOOL_PROGRAM_CONTRACT_ID,
+  HIGH_SCHOOL_PROGRAM_SOURCE_REF,
+  type CourseReconciliation,
+  type CoverageGap,
+  type CoverageStatus,
+  type DeliveryFact,
+  type HighSchoolCourse,
+  type HighSchoolGrade,
+  type HighSchoolProgramSnapshot,
+  type RawCoverageVerdict,
+  type ReconciliationVerdict,
+  type SeamFact,
+  type StandardsFact,
+  type SubjectEvidenceSource,
+} from './contracts'
+
+const MATRIX_DOC = 'curriculum-authoring/full-family-highschool-9-12/release/course-matrix.json'
+const CONTRACT_DOC = 'curriculum-authoring/full-family-highschool-9-12/release/high-school-release-contract.md'
+const COVERAGE_DOC = 'curriculum-authoring/full-family-highschool-9-12/release/credit-coverage-map.md'
+const STANDARDS_DOC = 'curriculum-authoring/full-family-highschool-9-12/release/standards-reference.md'
+const SEAM_DOC = 'curriculum-authoring/full-family-highschool-9-12/release/grade8-to-grade9-handoff.md'
+
+const RAW_TO_DISPLAY: Readonly<Record<RawCoverageVerdict, CoverageStatus>> = {
+  COVERED: 'COVERED',
+  PARTIALLY_COVERED: 'PARTIAL',
+  NOT_COVERED: 'NOT_COVERED',
+  REQUIRES_DIRECTOR_DECISION: 'UNVERIFIED',
+}
+
+const COURSES: readonly HighSchoolCourse[] = [
+  // Grade 8 anchors (frozen; sessions from published release; no credit recorded)
+  { courseId: 'ma-g8-mathematics', grade: 8, subject: 'mathematics', courseName: 'Grade 8 Mathematics', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 180, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'michigan-mathematics-standards-high-school', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g8-english-language-arts', grade: 8, subject: 'english-language-arts', courseName: 'Grade 8 English Language Arts', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 180, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'michigan-ela-standards-grades-9-12', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g8-science', grade: 8, subject: 'science', courseName: 'Grade 8 Science', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 108, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'michigan-science-standards-high-school', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g8-social-studies', grade: 8, subject: 'social-studies', courseName: 'Grade 8 Social Studies', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 108, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'michigan-social-studies-standards-high-school', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g8-health', grade: 8, subject: 'health', courseName: 'Grade 8 Health', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 36, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'michigan-health-education-standards', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g8-physical-education', grade: 8, subject: 'physical-education', courseName: 'Grade 8 Physical Education', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 108, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'michigan-physical-education-standards', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g8-ready-for-life', grade: 8, subject: 'ready-for-life', courseName: 'Grade 8 Ready for Life', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 36, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'manuel-academy-ready-for-life-progression', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g8-technology', grade: 8, subject: 'technology', courseName: 'Grade 8 Technology and Computer Science', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 36, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'michigan-k12-computer-science-standards', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g8-arts-and-music', grade: 8, subject: 'arts-and-music', courseName: 'Grade 8 Arts and Music', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 72, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'michigan-visual-performing-applied-arts-standards', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g8-financial-literacy', grade: 8, subject: 'financial-literacy', courseName: 'Grade 8 Financial Literacy', origin: 'EXISTING_GRADE_8_ANCHOR', authoringStatus: 'FROZEN_DO_NOT_MODIFY', creditRecommendation: null, sessions: 72, cadence: null, prerequisiteCourseIds: [], satisfiesStateRequirements: [], standardsFramework: 'michigan-personal-finance-expectations', scopeSummary: 'Anchor course already published in curriculum-content/manuel-academy/1.0.0. Referenced for continuity only; not re-authored by this wave.', sourceDoc: MATRIX_DOC },
+
+  // Grade 9 (all TO_BE_AUTHORED per release matrix)
+  { courseId: 'ma-g9-mathematics', grade: 9, subject: 'mathematics', courseName: 'Algebra I', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g8-mathematics'], satisfiesStateRequirements: ['MMC_MATHEMATICS'], standardsFramework: 'michigan-mathematics-standards-high-school', scopeSummary: 'High-school Algebra I: linear equations, functions, quadratics, exponential models, statistics.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g9-english-language-arts', grade: 9, subject: 'english-language-arts', courseName: 'English 9: Foundations of Literary Analysis and Argument', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g8-english-language-arts'], satisfiesStateRequirements: ['MMC_ELA'], standardsFramework: 'michigan-ela-standards-grades-9-12', scopeSummary: 'Foundational literary and informational reading, argument, research and citation, and formal rhetorical analysis at the 9-10 band.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g9-science', grade: 9, subject: 'science', courseName: 'Biology', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g8-science'], satisfiesStateRequirements: ['MMC_SCIENCE', 'MMC_SCIENCE_BIOLOGY'], standardsFramework: 'michigan-science-standards-high-school', scopeSummary: 'High-school Biology with laboratory work: cells, heredity, evolution, ecosystems, matter and energy in living systems.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g9-social-studies', grade: 9, subject: 'social-studies', courseName: 'United States History and Geography (1870 to the Present)', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g8-social-studies'], satisfiesStateRequirements: ['MMC_SOCIAL_STUDIES', 'MMC_SOCIAL_STUDIES_US_HISTORY'], standardsFramework: 'michigan-social-studies-standards-high-school', scopeSummary: 'U.S. history and geography from industrialisation to the present, picking up from the Grade 8 bridge unit.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g9-health', grade: 9, subject: 'health', courseName: 'Health and Wellness I', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 90, cadence: 'daily for one semester', prerequisiteCourseIds: ['ma-g8-health'], satisfiesStateRequirements: ['MMC_PHYSICAL_EDUCATION_AND_HEALTH'], standardsFramework: 'michigan-health-education-standards', scopeSummary: 'High-school health strand covering wellness, mental health, healthy relationships, substance-use prevention, sexual health, and disease prevention.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g9-physical-education', grade: 9, subject: 'physical-education', courseName: 'Personal Fitness and Lifetime Activity', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 90, cadence: 'daily for one semester', prerequisiteCourseIds: ['ma-g8-physical-education'], satisfiesStateRequirements: ['MMC_PHYSICAL_EDUCATION_AND_HEALTH'], standardsFramework: 'michigan-physical-education-standards', scopeSummary: 'Independent programme design for cardiovascular endurance, strength, flexibility, and lifetime activity.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g9-ready-for-life', grade: 9, subject: 'ready-for-life', courseName: 'Ready for Life 9: Personal Management and Learning Systems', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.25, sessions: 36, cadence: 'weekly', prerequisiteCourseIds: ['ma-g8-ready-for-life'], satisfiesStateRequirements: [], standardsFramework: 'manuel-academy-ready-for-life-progression', scopeSummary: 'Executive-function systems for high-school study, time management, and the opening thread of educational development planning.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g9-technology', grade: 9, subject: 'technology', courseName: 'Computer Science Principles and Digital Citizenship', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 90, cadence: 'daily for one semester', prerequisiteCourseIds: ['ma-g8-technology'], satisfiesStateRequirements: ['MMC_ONLINE_LEARNING_EXPERIENCE'], standardsFramework: 'michigan-k12-computer-science-standards', scopeSummary: 'First formal treatment of computing systems, algorithmic thinking, digital citizenship, and an identifiable online-learning experience.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g9-arts-and-music', grade: 9, subject: 'arts-and-music', courseName: 'Foundations of Visual and Media Arts', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 72, cadence: 'twice weekly', prerequisiteCourseIds: ['ma-g8-arts-and-music'], satisfiesStateRequirements: ['MMC_VISUAL_PERFORMING_APPLIED_ARTS'], standardsFramework: 'michigan-visual-performing-applied-arts-standards', scopeSummary: 'Foundations of visual and media arts: elements and principles at high-school depth, media production, and critique vocabulary.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g9-financial-literacy', grade: 9, subject: 'financial-literacy', courseName: 'Personal Finance', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 90, cadence: 'daily for one semester', prerequisiteCourseIds: ['ma-g8-financial-literacy'], satisfiesStateRequirements: ['MMC_PERSONAL_FINANCE'], standardsFramework: 'michigan-personal-finance-expectations', scopeSummary: 'High-school personal finance across earning income, buying goods and services, budgeting and saving, credit, investing, insurance, and taxes.', sourceDoc: MATRIX_DOC },
+
+  // Grade 10
+  { courseId: 'ma-g10-mathematics', grade: 10, subject: 'mathematics', courseName: 'Geometry', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g9-mathematics'], satisfiesStateRequirements: ['MMC_MATHEMATICS'], standardsFramework: 'michigan-mathematics-standards-high-school', scopeSummary: 'High-school Geometry: congruence, similarity, right triangles and trigonometry, circles, and geometric measurement.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g10-english-language-arts', grade: 10, subject: 'english-language-arts', courseName: 'English 10: World Literature and Rhetoric', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g9-english-language-arts'], satisfiesStateRequirements: ['MMC_ELA'], standardsFramework: 'michigan-ela-standards-grades-9-12', scopeSummary: 'World literature across cultures and periods, sustained rhetorical analysis, argument writing, and research at the 9-10 band.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g10-science', grade: 10, subject: 'science', courseName: 'Chemistry', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g9-science'], satisfiesStateRequirements: ['MMC_SCIENCE', 'MMC_SCIENCE_CHEMISTRY_OR_PHYSICS'], standardsFramework: 'michigan-science-standards-high-school', scopeSummary: 'High-school Chemistry with laboratory work: structure and properties of matter, chemical reactions, energy, and interactions of matter.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g10-social-studies', grade: 10, subject: 'social-studies', courseName: 'World History and Geography', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g9-social-studies'], satisfiesStateRequirements: ['MMC_SOCIAL_STUDIES', 'MMC_SOCIAL_STUDIES_WORLD_HISTORY'], standardsFramework: 'michigan-social-studies-standards-high-school', scopeSummary: 'World history and geography sequenced after Grade 9 U.S. history; deliberate reverse of the more common Michigan order (see contract).', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g10-health', grade: 10, subject: 'health', courseName: 'Health II: Mental Health and Community Wellness', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.25, sessions: 36, cadence: 'weekly', prerequisiteCourseIds: ['ma-g9-health'], satisfiesStateRequirements: [], standardsFramework: 'michigan-health-education-standards', scopeSummary: 'Weekly seminar in mental health literacy, self-advocacy, and community wellness (not credit-bearing against MMC).', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g10-physical-education', grade: 10, subject: 'physical-education', courseName: 'Team, Individual, and Dual Activities', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 108, cadence: 'three times weekly', prerequisiteCourseIds: ['ma-g9-physical-education'], satisfiesStateRequirements: [], standardsFramework: 'michigan-physical-education-standards', scopeSummary: 'Team, individual and dual activities, strategy and skills; beyond the credit-bearing MMC requirement carried by Grade 9.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g10-ready-for-life', grade: 10, subject: 'ready-for-life', courseName: 'Ready for Life 10: Career Exploration and Workplace Communication', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.25, sessions: 36, cadence: 'weekly', prerequisiteCourseIds: ['ma-g9-ready-for-life'], satisfiesStateRequirements: [], standardsFramework: 'manuel-academy-ready-for-life-progression', scopeSummary: 'Career exploration, workplace communication, interviewing, and Michigan Career Development Model bindings.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g10-technology', grade: 10, subject: 'technology', courseName: 'Programming I', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 90, cadence: 'daily for one semester', prerequisiteCourseIds: ['ma-g9-technology'], satisfiesStateRequirements: [], standardsFramework: 'michigan-k12-computer-science-standards', scopeSummary: 'First formal programming course: variables, control flow, functions, data structures, and simple programs.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g10-arts-and-music', grade: 10, subject: 'arts-and-music', courseName: 'Music, Theatre, and Performance Foundations', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 72, cadence: 'twice weekly', prerequisiteCourseIds: ['ma-g9-arts-and-music'], satisfiesStateRequirements: ['MMC_VISUAL_PERFORMING_APPLIED_ARTS'], standardsFramework: 'michigan-visual-performing-applied-arts-standards', scopeSummary: 'Music literacy and creation, theatre and performance craft, ensemble collaboration, and public or private presentation.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g10-financial-literacy', grade: 10, subject: 'financial-literacy', courseName: 'Consumer Economics and Credit', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 72, cadence: 'twice weekly', prerequisiteCourseIds: ['ma-g9-financial-literacy'], satisfiesStateRequirements: [], standardsFramework: 'michigan-personal-finance-expectations', scopeSummary: 'Consumer decision analysis, contracts and terms, credit reporting and scoring, debt management, and fraud and scam recognition.', sourceDoc: MATRIX_DOC },
+
+  // Grade 11
+  { courseId: 'ma-g11-mathematics', grade: 11, subject: 'mathematics', courseName: 'Algebra II', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g10-mathematics'], satisfiesStateRequirements: ['MMC_MATHEMATICS'], standardsFramework: 'michigan-mathematics-standards-high-school', scopeSummary: 'High-school Algebra II: polynomial, rational, radical, exponential and logarithmic functions; sequences, series, and probability.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g11-english-language-arts', grade: 11, subject: 'english-language-arts', courseName: 'English 11: American Literature, Research, and Synthesis', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g10-english-language-arts'], satisfiesStateRequirements: ['MMC_ELA'], standardsFramework: 'michigan-ela-standards-grades-9-12', scopeSummary: 'American literature and rhetoric, sustained research, synthesis writing, and formal seminar discussion at the 11-12 band.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g11-science', grade: 11, subject: 'science', courseName: 'Physics', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g10-science'], satisfiesStateRequirements: ['MMC_SCIENCE'], standardsFramework: 'michigan-science-standards-high-school', scopeSummary: 'High-school Physics with laboratory work: motion and stability, energy, waves and information, electromagnetism.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g11-social-studies', grade: 11, subject: 'social-studies', courseName: 'Civics and Economics', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g10-social-studies'], satisfiesStateRequirements: ['MMC_SOCIAL_STUDIES', 'MMC_SOCIAL_STUDIES_CIVICS', 'MMC_SOCIAL_STUDIES_ECONOMICS'], standardsFramework: 'michigan-social-studies-standards-high-school', scopeSummary: 'Civics as a distinct half-year component (governmental structures, rights and responsibilities, participation) and economics as a distinct half-year component (micro, macro, personal-decision framing).', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g11-health', grade: 11, subject: 'health', courseName: 'Health III: Consumer Health, Safety, and Emergency Response', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.25, sessions: 36, cadence: 'weekly', prerequisiteCourseIds: ['ma-g10-health'], satisfiesStateRequirements: [], standardsFramework: 'michigan-health-education-standards', scopeSummary: 'Weekly seminar in consumer health, safety, and emergency response (not credit-bearing against MMC).', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g11-physical-education', grade: 11, subject: 'physical-education', courseName: 'Strength, Conditioning, and Training Design', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 108, cadence: 'three times weekly', prerequisiteCourseIds: ['ma-g10-physical-education'], satisfiesStateRequirements: [], standardsFramework: 'michigan-physical-education-standards', scopeSummary: 'Strength, conditioning, and applied training design; safety-first individual programme development.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g11-ready-for-life', grade: 11, subject: 'ready-for-life', courseName: 'Ready for Life 11: Postsecondary Planning and Portfolio', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.25, sessions: 36, cadence: 'weekly', prerequisiteCourseIds: ['ma-g10-ready-for-life'], satisfiesStateRequirements: [], standardsFramework: 'manuel-academy-ready-for-life-progression', scopeSummary: 'Postsecondary planning, financial-aid literacy, application craft, and personal portfolio development.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g11-technology', grade: 11, subject: 'technology', courseName: 'Data, Systems, and Applied Computing', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 90, cadence: 'daily for one semester', prerequisiteCourseIds: ['ma-g10-technology'], satisfiesStateRequirements: [], standardsFramework: 'michigan-k12-computer-science-standards', scopeSummary: 'Data acquisition and analysis, systems thinking, and applied computing with hardware and networks concepts.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g11-arts-and-music', grade: 11, subject: 'arts-and-music', courseName: 'Studio Art, Composition, and Applied Design', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 72, cadence: 'twice weekly', prerequisiteCourseIds: ['ma-g10-arts-and-music'], satisfiesStateRequirements: [], standardsFramework: 'michigan-visual-performing-applied-arts-standards', scopeSummary: 'Sustained studio and compositional practice, applied and industrial design, iteration from critique, and technical craft development. Held deliberately as the substitutable World-Language credit under MCL 380.1278a(2).', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g11-financial-literacy', grade: 11, subject: 'financial-literacy', courseName: 'Investing, Insurance, and Risk Management', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 72, cadence: 'twice weekly', prerequisiteCourseIds: ['ma-g10-financial-literacy'], satisfiesStateRequirements: [], standardsFramework: 'michigan-personal-finance-expectations', scopeSummary: 'Investment vehicles and risk, diversification, retirement structures, insurance types, and de-identified portfolio and risk simulations.', sourceDoc: MATRIX_DOC },
+
+  // Grade 12
+  { courseId: 'ma-g12-mathematics', grade: 12, subject: 'mathematics', courseName: 'Precalculus with Statistics', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g11-mathematics'], satisfiesStateRequirements: ['MMC_MATHEMATICS', 'MMC_MATHEMATICS_FINAL_YEAR'], standardsFramework: 'michigan-mathematics-standards-high-school', scopeSummary: 'Precalculus with statistics; carries the MMC final-year-of-enrolment mathematics requirement (see contract §A).', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g12-english-language-arts', grade: 12, subject: 'english-language-arts', courseName: 'English 12: Global Literature, Composition, and Portfolio Capstone', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g11-english-language-arts'], satisfiesStateRequirements: ['MMC_ELA'], standardsFramework: 'michigan-ela-standards-grades-9-12', scopeSummary: 'Global literature and sustained composition, culminating in a defended portfolio capstone.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g12-science', grade: 12, subject: 'science', courseName: 'Earth, Space, and Environmental Systems', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g11-science'], satisfiesStateRequirements: ['MMC_SCIENCE'], standardsFramework: 'michigan-science-standards-high-school', scopeSummary: 'High-school Earth, space and environmental systems; the fourth science credit beyond the MMC three.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g12-social-studies', grade: 12, subject: 'social-studies', courseName: 'Contemporary Global Issues and Civic Capstone', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 1, sessions: 180, cadence: 'daily', prerequisiteCourseIds: ['ma-g11-social-studies'], satisfiesStateRequirements: [], standardsFramework: 'michigan-social-studies-standards-high-school', scopeSummary: 'Contemporary global issues, comparative analysis, and a civic-action capstone; the fourth social-studies credit beyond the MMC three.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g12-health', grade: 12, subject: 'health', courseName: 'Health IV: Adult Health Transition', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.25, sessions: 36, cadence: 'weekly', prerequisiteCourseIds: ['ma-g11-health'], satisfiesStateRequirements: [], standardsFramework: 'michigan-health-education-standards', scopeSummary: 'Weekly seminar in adult health transition, navigating the healthcare system, and long-term wellness planning.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g12-physical-education', grade: 12, subject: 'physical-education', courseName: 'Lifelong Wellness and Independent Training Capstone', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 108, cadence: 'three times weekly', prerequisiteCourseIds: ['ma-g11-physical-education'], satisfiesStateRequirements: [], standardsFramework: 'michigan-physical-education-standards', scopeSummary: 'Independent training design capstone for lifelong wellness; safety-first and body-composition-agnostic.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g12-ready-for-life', grade: 12, subject: 'ready-for-life', courseName: 'Ready for Life 12: Independent Adult Living Capstone', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.25, sessions: 36, cadence: 'weekly', prerequisiteCourseIds: ['ma-g11-ready-for-life'], satisfiesStateRequirements: [], standardsFramework: 'manuel-academy-ready-for-life-progression', scopeSummary: 'Independent adult-living capstone bringing together executive-function, career, postsecondary, and civic threads.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g12-technology', grade: 12, subject: 'technology', courseName: 'Cybersecurity, AI Literacy, and Computing Capstone', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 90, cadence: 'daily for one semester', prerequisiteCourseIds: ['ma-g11-technology'], satisfiesStateRequirements: [], standardsFramework: 'michigan-k12-computer-science-standards', scopeSummary: 'Defensive cybersecurity, AI literacy, and a computing capstone. Filter-bypass and probing real systems remain prohibited per Grade 8 policy.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g12-arts-and-music', grade: 12, subject: 'arts-and-music', courseName: 'Arts Capstone: Portfolio and Exhibition', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 72, cadence: 'twice weekly', prerequisiteCourseIds: ['ma-g11-arts-and-music'], satisfiesStateRequirements: [], standardsFramework: 'michigan-visual-performing-applied-arts-standards', scopeSummary: 'A curated cross-arts portfolio, artist statement, exhibition or performance, and a defended body of work. Held as additional VPAA instruction beyond the 1.0 requirement.', sourceDoc: MATRIX_DOC },
+  { courseId: 'ma-g12-financial-literacy', grade: 12, subject: 'financial-literacy', courseName: 'Financial Transition to Adulthood', origin: 'NEW_HIGH_SCHOOL_COURSE', authoringStatus: 'TO_BE_AUTHORED', creditRecommendation: 0.5, sessions: 72, cadence: 'twice weekly', prerequisiteCourseIds: ['ma-g11-financial-literacy'], satisfiesStateRequirements: [], standardsFramework: 'michigan-personal-finance-expectations', scopeSummary: 'Tax filing, payroll and benefits, housing and lease analysis, major purchases, and a defended first-year adult financial plan.', sourceDoc: MATRIX_DOC },
+]
+
+const SEAM: readonly SeamFact[] = [
+  { family: 'mathematics', familyLabel: 'Mathematics', grade8CourseId: 'ma-g8-mathematics', grade9CourseId: 'ma-g9-mathematics', ruling: 'CONTINUOUS', namedDiscontinuities: [], note: 'Grade 8 completes the Grade 8 mathematics standards and stops immediately below Algebra I; Algebra I is the conventional next course. Michigan permits high-school credit to be earned before Grade 9 under conditions in standards-reference.md, but the published Grade 8 course is Grade 8 mathematics, not Algebra I.', sourceDoc: SEAM_DOC },
+  { family: 'english-language-arts', familyLabel: 'English Language Arts', grade8CourseId: 'ma-g8-english-language-arts', grade9CourseId: 'ma-g9-english-language-arts', ruling: 'CONTINUOUS', namedDiscontinuities: [], note: 'The Grade 8 capstone is explicitly a transition portfolio; English 9 begins from that portfolio.', sourceDoc: SEAM_DOC },
+  { family: 'science', familyLabel: 'Science', grade8CourseId: 'ma-g8-science', grade9CourseId: 'ma-g9-science', ruling: 'CONTINUOUS_WITH_DESIGN_DECISION', namedDiscontinuities: ['Cadence: 108 sessions (three times weekly) at Grade 8 stepping to 180 sessions (daily) with laboratory work at Grade 9.', 'Band split: Grades 7 and 8 distribute the Michigan 6-8 performance-expectation band into a local sequence not prescribed by the state.'], note: 'Biology deepens middle-school life-science expectations to the HS performance expectations. The intensity change is deliberate; the science session must open with explicit laboratory-practice and safety onboarding.', sourceDoc: SEAM_DOC },
+  { family: 'social-studies', familyLabel: 'Social Studies', grade8CourseId: 'ma-g8-social-studies', grade9CourseId: 'ma-g9-social-studies', ruling: 'CONTINUOUS_WITH_DESIGN_DECISION', namedDiscontinuities: ['Grade 9 is U.S. History and Grade 10 is World History — the reverse of the more common Michigan pattern.'], note: 'Grade 8 ends mid-narrative at 1870 with an explicit bridge unit; placing U.S. History in Grade 9 closes the seam. Michigan does not mandate the order in which the two credits are taken.', sourceDoc: SEAM_DOC },
+  { family: 'health', familyLabel: 'Health', grade8CourseId: 'ma-g8-health', grade9CourseId: 'ma-g9-health', ruling: 'CONTINUOUS_WITH_CADENCE_CHANGE', namedDiscontinuities: ['Cadence: 36 weekly sessions in Grade 8 to 90 daily sessions in one Grade 9 semester, carrying a half credit.'], note: 'Health and Wellness I revisits every Grade 8 strand at high-school depth. Grade 8 body-assessment prohibitions apply unchanged to all four high-school health courses.', sourceDoc: SEAM_DOC },
+  { family: 'physical-education', familyLabel: 'Physical Education', grade8CourseId: 'ma-g8-physical-education', grade9CourseId: 'ma-g9-physical-education', ruling: 'CONTINUOUS', namedDiscontinuities: [], note: 'Personal Fitness and Lifetime Activity assumes fitness literacy and goal-setting are already established. Body size, weight, weight change, peer comparison and speed alone remain non-assessable.', sourceDoc: SEAM_DOC },
+  { family: 'ready-for-life', familyLabel: 'Ready for Life', grade8CourseId: 'ma-g8-ready-for-life', grade9CourseId: 'ma-g9-ready-for-life', ruling: 'CONTINUOUS', namedDiscontinuities: ['Standards traceability: Grade 8 tags a Manuel Academy local progression rather than a published state framework; Grades 9-12 inherit that. Requires a Director decision.'], note: 'Ready for Life 9 extends executive systems toward self-directed high-school study management and opens the educational-development-plan thread.', sourceDoc: SEAM_DOC },
+  { family: 'technology', familyLabel: 'Technology and Computer Science', grade8CourseId: 'ma-g8-technology', grade9CourseId: 'ma-g9-technology', ruling: 'CONTINUOUS_WITH_CADENCE_CHANGE', namedDiscontinuities: ['Cadence: 36 weekly sessions to 90 daily sessions in a semester.'], note: 'Computer Science Principles and Digital Citizenship assumes exposure to each Grade 8 strand. Filter-bypass and probing real systems remain prohibited; AI assistance disclosure carries forward.', sourceDoc: SEAM_DOC },
+  { family: 'arts-and-music', familyLabel: 'Arts and Music', grade8CourseId: 'ma-g8-arts-and-music', grade9CourseId: 'ma-g9-arts-and-music', ruling: 'CONTINUOUS', namedDiscontinuities: [], note: 'Foundations of Visual and Media Arts assumes a working portfolio habit. The only family with no cadence break at the Grade 8-9 boundary (72 sessions, twice weekly).', sourceDoc: SEAM_DOC },
+  { family: 'financial-literacy', familyLabel: 'Financial Literacy', grade8CourseId: 'ma-g8-financial-literacy', grade9CourseId: 'ma-g9-financial-literacy', ruling: 'DELIBERATE_OVERLAP', namedDiscontinuities: ['Deliberate overlap: Grade 8 already covers PF1-PF7; Grade 9 re-presents them at high-school expectation level rather than depend on a Grade 8 proficiency determination that may not have been recorded.'], note: 'If the Director holds evidence the Grade 8 course met high-school expectations with demonstrated proficiency, Grade 9 may be re-scoped as an extension. This is a Director decision, not a builder decision.', sourceDoc: SEAM_DOC },
+  { family: 'world-language', familyLabel: 'World Language', grade8CourseId: null, grade9CourseId: null, ruling: 'NO_ANCHOR', namedDiscontinuities: ['No Grade 8 anchor, no Grade 9 course. The programme has no World Language subject family.'], note: 'Recorded so the Grade 8 -> 9 transition is not read as complete. The MMC gap is ruled on separately in the coverage map.', sourceDoc: SEAM_DOC },
+]
+
+const STANDARDS: readonly StandardsFact[] = [
+  { family: 'mathematics', familyLabel: 'Mathematics', framework: 'Michigan K-12 Standards — Mathematics (CCSS-derived)', verification: 'VERIFIED', note: 'Code format <Category>-<Domain>.<n>; verbatim examples in the source document.', sourceDoc: STANDARDS_DOC },
+  { family: 'english-language-arts', familyLabel: 'English Language Arts', framework: 'Michigan K-12 Standards — English Language Arts', verification: 'PARTIALLY_VERIFIED', note: 'UNVERIFIED for dotted HS codes (RL.9-10.x). Michigan renders HS ELA as grade-band columns, not printed dotted codes; the ELA session must cite the strand-and-band form or mark constructed codes UNVERIFIED.', sourceDoc: STANDARDS_DOC },
+  { family: 'science', familyLabel: 'Science', framework: 'Michigan K-12 Standards — Science (NGSS PE codes)', verification: 'VERIFIED', note: 'No state-defined Grade 8 checkpoint; Grade 8 sits inside the MS- band. Manuel Academy defines its own seam and says so plainly in the handoff.', sourceDoc: STANDARDS_DOC },
+  { family: 'social-studies', familyLabel: 'Social Studies', framework: 'Michigan K-12 Standards for Social Studies (v 6/19)', verification: 'VERIFIED', note: 'Civics credit value is PARTIALLY VERIFIED (statute cross-references without stating the number; the 0.5 figure is MDE guidance).', sourceDoc: STANDARDS_DOC },
+  { family: 'health', familyLabel: 'Health', framework: 'Michigan Health Education Standards Guidelines (2025)', verification: 'VERIFIED', note: 'Codes verbatim from the guidelines.', sourceDoc: STANDARDS_DOC },
+  { family: 'physical-education', familyLabel: 'Physical Education', framework: 'Michigan K-12 Physical Education Standards (May 2017)', verification: 'PARTIALLY_VERIFIED', note: 'The May 2017 document contains no explicit coding legend. Individual codes are verbatim; the rule generating them was inferred from consistent usage.', sourceDoc: STANDARDS_DOC },
+  { family: 'technology', familyLabel: 'Technology and Computer Science', framework: 'Michigan K-12 Standards: Computer Science (May 2019; CSTA 2017-derived)', verification: 'VERIFIED', note: 'Level 3A = grades 9-10, 3B = grades 11-12. MITECS available alongside.', sourceDoc: STANDARDS_DOC },
+  { family: 'arts-and-music', familyLabel: 'Arts and Music', framework: 'MMC Standards, Benchmarks and GLCE: Visual Arts, Music, Dance, Theatre (v. 06.2011)', verification: 'PARTIALLY_VERIFIED', note: 'Standards dated 2011. No newer revision was located, but the search was not exhaustive; the Arts session should re-check.', sourceDoc: STANDARDS_DOC },
+  { family: 'financial-literacy', familyLabel: 'Financial Literacy', framework: 'Michigan Personal Finance Course/Credit Requirements, Appendix A (post-June-2022)', verification: 'VERIFIED', note: 'PF1-PF7 code family; also E4 personal finance in Social Studies.', sourceDoc: STANDARDS_DOC },
+  { family: 'ready-for-life', familyLabel: 'Ready for Life', framework: null, verification: 'NO_ANCHOR', note: 'No coded MDE standards set exists. The Michigan Career Development Model and CTE cluster documents are frameworks, not coded standards. Requires Director decision.', sourceDoc: STANDARDS_DOC },
+  { family: 'world-language', familyLabel: 'World Language', framework: 'MMC World Languages: Standards and Benchmarks', verification: 'UNVERIFIED', note: 'No World Language subject family exists in the programme. Standards row recorded for reference only.', sourceDoc: STANDARDS_DOC },
+]
+
+const GAPS: readonly CoverageGap[] = [
+  { requirement: 'MMC_WORLD_LANGUAGE', requirementLabel: 'World Language (MMC)', authority: 'MCL 380.1278a(2)', rawVerdict: 'NOT_COVERED', displayStatus: RAW_TO_DISPLAY['NOT_COVERED'], creditsRequired: 2.0, irreducibleRemainderCredits: 0.5, detail: 'No World Language subject family exists in the ten-family model. At most 1.0 credit is substitutable (additional VPAA or a department-approved formal CTE program) and at most a further 0.5 if the personal finance half-credit is directed here. At least 0.5 credit of genuine language study at Novice High proficiency remains uncovered.', owner: 'DIRECTOR', sourceDoc: COVERAGE_DOC },
+  { requirement: 'MMC_ONLINE_LEARNING_EXPERIENCE', requirementLabel: 'Online Learning Experience (MMC)', authority: 'MCL 380.1278a(1)(b)(i)', rawVerdict: 'PARTIALLY_COVERED', displayStatus: RAW_TO_DISPLAY['PARTIALLY_COVERED'], creditsRequired: 0.0, irreducibleRemainderCredits: null, detail: 'Assigned to ma-g9-technology by this contract. Not credit-bearing, so it will not surface in any credit tally. Becomes COVERED when the Technology session delivers an identifiable online learning experience and names where the evidence lives.', owner: 'mac/hs912-tech-arts-r1', sourceDoc: COVERAGE_DOC },
+  { requirement: 'MMC_PERSONAL_FINANCE_DISPLACEMENT', requirementLabel: 'Personal Finance credit displacement (MMC)', authority: 'MCL 380.1278a(3)', rawVerdict: 'REQUIRES_DIRECTOR_DECISION', displayStatus: RAW_TO_DISPLAY['REQUIRES_DIRECTOR_DECISION'], creditsRequired: 0.5, irreducibleRemainderCredits: null, detail: 'The personal finance half-credit displaces 0.5 of mathematics, VPAA, or world language as determined by the board; it is not additive and the 18-credit total is unchanged. Directing it at world language is the only option that reduces a real gap.', owner: 'DIRECTOR', sourceDoc: COVERAGE_DOC },
+  { requirement: 'READY_FOR_LIFE_STANDARDS_ANCHOR', requirementLabel: 'Ready for Life — standards anchor', authority: null, rawVerdict: 'REQUIRES_DIRECTOR_DECISION', displayStatus: RAW_TO_DISPLAY['REQUIRES_DIRECTOR_DECISION'], creditsRequired: 0.0, irreducibleRemainderCredits: null, detail: 'No coded MDE standards set could be verified for this family. It must either bind to an official framework or state plainly that it is locally defined and makes no state standards claim.', owner: 'DIRECTOR', sourceDoc: STANDARDS_DOC },
+]
+
+const GRADUATION = {
+  verdict: 'NOT_GRADUATION_COMPLETE',
+  basis: 'MMC world language is NOT_COVERED with a 0.5 credit irreducible remainder.',
+  note: 'This is a curriculum and coverage design audit against the Michigan Merit Curriculum. It is not a legal opinion and does not decide whether the MMC binds this family. See credit-coverage-map.md.',
+  sourceDoc: CONTRACT_DOC,
+} as const
+
+/**
+ * Source-evidence catalog. SHAs are the short git SHAs observed on
+ * `origin/mac/hs912-*` at the moment this snapshot was authored
+ * (2026-08-15). They exist so the admin surface can name specific commits;
+ * verify by re-inspecting the ref before acting on any specific field value.
+ */
+const SOURCE_RELEASE_SHA = '5150dfe484ca'
+
+const SOURCES: readonly SubjectEvidenceSource[] = [
+  {
+    key: 'release',
+    ref: 'origin/mac/hs912-release-r1',
+    sha: SOURCE_RELEASE_SHA,
+    headSubject: 'release: assemble final high-school release contract',
+    role: 'RELEASE_PLANNING_CONTRACT',
+    familiesCovered: [
+      'mathematics', 'english-language-arts', 'science', 'social-studies',
+      'health', 'physical-education', 'ready-for-life', 'technology',
+      'arts-and-music', 'financial-literacy',
+    ],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/release/'],
+    validationSummary: 'Contract-mode validator passes with 0 blocking findings. Assembly-mode blocks with ASSEMBLY_INCOMPLETE — no subject session has returned into this branch.',
+    coverage: 'COVERED',
+    note: 'Authoritative programme/planning contract: course sequence, recommended sessions and credits, prerequisite chain, seam rulings, coverage audit, and honest gap declarations. No subject content is authored in release/.',
+    supersededBy: null,
+  },
+  {
+    key: 'math-r1',
+    ref: 'origin/mac/hs912-math-r1',
+    sha: '2b716171035c',
+    headSubject: 'feat(curriculum): add Michigan-aligned HS mathematics grades 9-12',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['mathematics'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/mathematics/'],
+    validationSummary: '19/19 checks PASS (validation-report.md dated 2026-08-12). 4 courses / 40 units / 720 lessons / 40 assessments authored.',
+    coverage: 'COVERED',
+    note: 'Course titles diverge from the release matrix (Algebra and Functions I vs Algebra I, etc.); sessions match at 180/course.',
+    supersededBy: null,
+  },
+  {
+    key: 'ela-r1',
+    ref: 'origin/mac/hs912-ela-r1',
+    sha: '42f2505bb04d',
+    headSubject: 'fix(hs-ela): implement the unit arc, raise the assessed bar, assign the texts',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['english-language-arts'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/english-language-arts/'],
+    validationSummary: '303/303 checks PASS (validation/validation.json dated 2026-08-12). 4 courses / 40 units / 720 lessons / 40 assessments authored, 84 standards in corpus.',
+    coverage: 'COVERED',
+    note: 'Course titles diverge from the release matrix by phrasing; sessions match at 180/course.',
+    supersededBy: null,
+  },
+  {
+    key: 'science-r1',
+    ref: 'origin/mac/hs912-science-r1',
+    sha: 'f58f7f1eec0a',
+    headSubject: 'feat(curriculum): author high school science 9-12 sequence',
+    role: 'SUPERSEDED_SUBJECT_EVIDENCE',
+    familiesCovered: ['science'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/science/'],
+    validationSummary: 'Initial revision; superseded by the h2/h3/h4 fix chain. Use h4 for current authored evidence.',
+    coverage: 'UNVERIFIED',
+    note: 'Retained for lineage. Do not treat as current.',
+    supersededBy: 'science-h4',
+  },
+  {
+    key: 'science-h2',
+    ref: 'origin/mac/hs912-science-h2',
+    sha: '265ea3a75740',
+    headSubject: 'fix(curriculum): correct HS science 9-12 safety and standards defects',
+    role: 'SUPERSEDED_SUBJECT_EVIDENCE',
+    familiesCovered: ['science'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/science/'],
+    validationSummary: 'Superseded by h3 and h4.',
+    coverage: 'UNVERIFIED',
+    note: 'Retained for lineage.',
+    supersededBy: 'science-h4',
+  },
+  {
+    key: 'science-h3',
+    ref: 'origin/mac/hs912-science-h3',
+    sha: 'e7551b959112',
+    headSubject: 'fix(curriculum): close HS science H3 learner-use safety findings',
+    role: 'SUPERSEDED_SUBJECT_EVIDENCE',
+    familiesCovered: ['science'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/science/'],
+    validationSummary: 'Superseded by h4.',
+    coverage: 'UNVERIFIED',
+    note: 'Retained for lineage.',
+    supersededBy: 'science-h4',
+  },
+  {
+    key: 'science-h4',
+    ref: 'origin/mac/hs912-science-h4',
+    sha: 'a86780a315b5',
+    headSubject: 'fix(curriculum): close HS science H4 source-consistency findings',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['science'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/science/'],
+    validationSummary: '63/63 checks PASS (authoring-set/manifest.json + validation/validation-report.json). 4 courses / 36 units / 432 lessons / 36 assessments authored.',
+    coverage: 'PARTIAL',
+    note: 'Latest science evidence. Uses a DIFFERENT id scheme (ma-hs9-biology) from the release matrix (ma-g9-science) and delivers 108 days/course (release matrix records 180 for science 9-12). Reconciliation with the release contract is a downstream integration decision.',
+    supersededBy: null,
+  },
+  {
+    key: 'social-studies-r1',
+    ref: 'origin/mac/hs912-social-studies-r1',
+    sha: 'fa4410d70e8e',
+    headSubject: 'feat(social-studies): add Michigan-aligned high school 9-12 social studies',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['social-studies'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/social-studies/'],
+    validationSummary: '27/27 checks PASS (validation/validation.json). 4 courses / 36 units / 432 lessons / 36 assessments; MANIFEST.json + SHA256SUMS.txt present.',
+    coverage: 'PARTIAL',
+    note: 'Course titles diverge from the release matrix; sessions delivered at 108/course (release matrix records 180). Reconciliation with contract is a downstream integration decision.',
+    supersededBy: null,
+  },
+  {
+    key: 'health-pe-r1',
+    ref: 'origin/mac/hs912-health-pe-r1',
+    sha: 'e39e2b343c41',
+    headSubject: 'feat(curriculum): add Grades 9-12 Health and Physical Education',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['health', 'physical-education'],
+    authoringRootPaths: [
+      'curriculum-authoring/full-family-highschool-9-12/subjects/health/',
+      'curriculum-authoring/full-family-highschool-9-12/subjects/physical-education/',
+    ],
+    validationSummary: 'Executable validators (tools/validate-course.mjs) and node --test suites present for both families; no committed pass-count report json.',
+    coverage: 'PARTIAL',
+    note: 'Health delivered at 36 sessions/course (release matrix records 90 for Grade 9 and 36 for 10-12). PE delivered at 108 sessions/course (release matrix records 90 for Grade 9 and 108 for 10-12). Grade 9 diverges in both families; 10-12 match.',
+    supersededBy: null,
+  },
+  {
+    key: 'rfl-finlit-r1',
+    ref: 'origin/mac/hs912-rfl-finlit-r1',
+    sha: '481296a9e794',
+    headSubject: 'feat(curriculum): add High School Ready for Life and Financial Literacy 9-12',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['ready-for-life', 'financial-literacy'],
+    authoringRootPaths: [
+      'curriculum-authoring/full-family-highschool-9-12/subjects/ready-for-life/',
+      'curriculum-authoring/full-family-highschool-9-12/subjects/financial-literacy/',
+    ],
+    validationSummary: 'Financial Literacy 159/159 checks PASS; Ready for Life 142/142 checks PASS (each subject validation/validation.json).',
+    coverage: 'PARTIAL',
+    note: 'Ready for Life delivered at 36 sessions/course (release matrix matches). Financial Literacy Grade 9 delivered at 72 sessions (release matrix records 90); Grade 10-12 match at 72.',
+    supersededBy: null,
+  },
+  {
+    key: 'tech-arts-r1',
+    ref: 'origin/mac/hs912-tech-arts-r1',
+    sha: '627b41c0e794',
+    headSubject: 'feat(hs912): add Grades 9-12 Technology/CS and Arts/Music course packages',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['technology', 'arts-and-music'],
+    authoringRootPaths: [
+      'curriculum-authoring/full-family-highschool-9-12/subjects/technology-computer-science/',
+      'curriculum-authoring/full-family-highschool-9-12/subjects/arts-music/',
+    ],
+    validationSummary: 'Executable validators (subjects/*/validate.mjs) present for both families; no committed pass-count report json.',
+    coverage: 'PARTIAL',
+    note: 'Technology titles and session counts diverge from the release matrix (subject: Grade 9 "Computer Science Foundations and Human-Centered Design" 36 sess; release: "Computer Science Principles and Digital Citizenship" 90 sess). Arts titles diverge; sessions match at 72/course. Subject README explicitly states the packages are authored content only and NOT wired into the served curriculum.',
+    supersededBy: null,
+  },
+]
+
+/**
+ * Per-course reconciliation between the release contract and the subject
+ * branch. Non-null `subjectSessions`/`subjectTitle` are the value observed on
+ * the named `subjectRef`+`subjectSha`. Grade-8 anchors are NOT reconciled
+ * here (they are the frozen published release, not part of this wave).
+ */
+const RECONCILIATIONS: readonly CourseReconciliation[] = ([
+  // mathematics — titles diverge, sessions match
+  { courseId: 'ma-g9-mathematics', subjectSourceKey: 'math-r1', subjectCourseId: 'ma-g9-mathematics', subjectTitle: 'Algebra and Functions I', subjectSessions: 180 },
+  { courseId: 'ma-g10-mathematics', subjectSourceKey: 'math-r1', subjectCourseId: 'ma-g10-mathematics', subjectTitle: 'Geometry: Congruence, Similarity, and Measurement', subjectSessions: 180 },
+  { courseId: 'ma-g11-mathematics', subjectSourceKey: 'math-r1', subjectCourseId: 'ma-g11-mathematics', subjectTitle: 'Advanced Algebra, Functions, and Statistics', subjectSessions: 180 },
+  { courseId: 'ma-g12-mathematics', subjectSourceKey: 'math-r1', subjectCourseId: 'ma-g12-mathematics', subjectTitle: 'Precalculus and Decision Mathematics', subjectSessions: 180 },
+  // english-language-arts — subject subtly re-titles; sessions match
+  { courseId: 'ma-g9-english-language-arts', subjectSourceKey: 'ela-r1', subjectCourseId: 'ma-g9-english-language-arts', subjectTitle: 'English 9: Foundations of Analysis, Argument, and Academic Writing', subjectSessions: 180 },
+  { courseId: 'ma-g10-english-language-arts', subjectSourceKey: 'ela-r1', subjectCourseId: 'ma-g10-english-language-arts', subjectTitle: 'English 10: Independent Analysis, Rhetoric, and Sustained Research', subjectSessions: 180 },
+  { courseId: 'ma-g11-english-language-arts', subjectSourceKey: 'ela-r1', subjectCourseId: 'ma-g11-english-language-arts', subjectTitle: 'English 11: American Literature, Public Argument, and Complex Synthesis', subjectSessions: 180 },
+  { courseId: 'ma-g12-english-language-arts', subjectSourceKey: 'ela-r1', subjectCourseId: 'ma-g12-english-language-arts', subjectTitle: 'English 12: Postsecondary Reading, Research, and Rhetoric', subjectSessions: 180 },
+  // science — id scheme mismatch AND session mismatch
+  { courseId: 'ma-g9-science', subjectSourceKey: 'science-h4', subjectCourseId: 'ma-hs9-biology', subjectTitle: 'Biology', subjectSessions: 108 },
+  { courseId: 'ma-g10-science', subjectSourceKey: 'science-h4', subjectCourseId: 'ma-hs10-chemistry', subjectTitle: 'Chemistry', subjectSessions: 108 },
+  { courseId: 'ma-g11-science', subjectSourceKey: 'science-h4', subjectCourseId: 'ma-hs11-physics', subjectTitle: 'Physics', subjectSessions: 108 },
+  { courseId: 'ma-g12-science', subjectSourceKey: 'science-h4', subjectCourseId: 'ma-hs12-earth-space-environmental', subjectTitle: 'Earth, Space, and Environmental Systems', subjectSessions: 108 },
+  // social-studies — 180 → 108 sessions per course; titles re-phrased
+  { courseId: 'ma-g9-social-studies', subjectSourceKey: 'social-studies-r1', subjectCourseId: 'ma-g9-social-studies', subjectTitle: 'Grade 9 Social Studies: United States History and Geography', subjectSessions: 108 },
+  { courseId: 'ma-g10-social-studies', subjectSourceKey: 'social-studies-r1', subjectCourseId: 'ma-g10-social-studies', subjectTitle: 'Grade 10 Social Studies: World History and Geography', subjectSessions: 108 },
+  { courseId: 'ma-g11-social-studies', subjectSourceKey: 'social-studies-r1', subjectCourseId: 'ma-g11-social-studies', subjectTitle: 'Grade 11 Social Studies: Civics and Economics', subjectSessions: 108 },
+  { courseId: 'ma-g12-social-studies', subjectSourceKey: 'social-studies-r1', subjectCourseId: 'ma-g12-social-studies', subjectTitle: 'Grade 12 Social Studies: Advanced Civic Inquiry, Research, and Policy Analysis', subjectSessions: 108 },
+  // health — Grade 9 diverges (90 → 36 sess); titles diverge everywhere
+  { courseId: 'ma-g9-health', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g9-health', subjectTitle: 'Grade 9 Health', subjectSessions: 36 },
+  { courseId: 'ma-g10-health', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g10-health', subjectTitle: 'Grade 10 Health', subjectSessions: 36 },
+  { courseId: 'ma-g11-health', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g11-health', subjectTitle: 'Grade 11 Health', subjectSessions: 36 },
+  { courseId: 'ma-g12-health', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g12-health', subjectTitle: 'Grade 12 Health', subjectSessions: 36 },
+  // physical-education — Grade 9 diverges (90 → 108 sess); titles diverge everywhere
+  { courseId: 'ma-g9-physical-education', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g9-physical-education', subjectTitle: 'Grade 9 Physical Education', subjectSessions: 108 },
+  { courseId: 'ma-g10-physical-education', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g10-physical-education', subjectTitle: 'Grade 10 Physical Education', subjectSessions: 108 },
+  { courseId: 'ma-g11-physical-education', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g11-physical-education', subjectTitle: 'Grade 11 Physical Education', subjectSessions: 108 },
+  { courseId: 'ma-g12-physical-education', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g12-physical-education', subjectTitle: 'Grade 12 Physical Education', subjectSessions: 108 },
+  // ready-for-life — sessions match; titles subtly differ
+  { courseId: 'ma-g9-ready-for-life', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g9-ready-for-life', subjectTitle: 'Manuel Academy — Ready for Life, Grade 9', subjectSessions: 36 },
+  { courseId: 'ma-g10-ready-for-life', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g10-ready-for-life', subjectTitle: 'Manuel Academy — Ready for Life, Grade 10', subjectSessions: 36 },
+  { courseId: 'ma-g11-ready-for-life', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g11-ready-for-life', subjectTitle: 'Manuel Academy — Ready for Life, Grade 11', subjectSessions: 36 },
+  { courseId: 'ma-g12-ready-for-life', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g12-ready-for-life', subjectTitle: 'Manuel Academy — Ready for Life, Grade 12', subjectSessions: 36 },
+  // technology — titles and sessions diverge everywhere
+  { courseId: 'ma-g9-technology', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g9-technology', subjectTitle: 'Computer Science Foundations and Human-Centered Design', subjectSessions: 36 },
+  { courseId: 'ma-g10-technology', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g10-technology', subjectTitle: 'Data, Algorithms, and Secure Systems', subjectSessions: 36 },
+  { courseId: 'ma-g11-technology', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g11-technology', subjectTitle: 'Software Engineering, Web Systems, and Applied Data Science', subjectSessions: 36 },
+  { courseId: 'ma-g12-technology', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g12-technology', subjectTitle: 'Advanced Computing, Ethics, and Capstone', subjectSessions: 48 },
+  // arts-and-music — titles diverge; sessions match
+  { courseId: 'ma-g9-arts-and-music', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g9-arts-and-music', subjectTitle: 'Studio Direction, Music Literacy, and Critical Practice', subjectSessions: 72 },
+  { courseId: 'ma-g10-arts-and-music', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g10-arts-and-music', subjectTitle: 'Technique, Composition, and Media Production', subjectSessions: 72 },
+  { courseId: 'ma-g11-arts-and-music', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g11-arts-and-music', subjectTitle: 'Concentration, Craft, and Critical Response', subjectSessions: 72 },
+  { courseId: 'ma-g12-arts-and-music', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g12-arts-and-music', subjectTitle: 'Capstone Portfolio and Professional Practice', subjectSessions: 72 },
+  // financial-literacy — Grade 9 diverges (90 → 72 sess); titles differ
+  { courseId: 'ma-g9-financial-literacy', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g9-financial-literacy', subjectTitle: 'Manuel Academy — Financial Literacy, Grade 9', subjectSessions: 72 },
+  { courseId: 'ma-g10-financial-literacy', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g10-financial-literacy', subjectTitle: 'Manuel Academy — Financial Literacy, Grade 10', subjectSessions: 72 },
+  { courseId: 'ma-g11-financial-literacy', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g11-financial-literacy', subjectTitle: 'Manuel Academy — Financial Literacy, Grade 11', subjectSessions: 72 },
+  { courseId: 'ma-g12-financial-literacy', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g12-financial-literacy', subjectTitle: 'Manuel Academy — Financial Literacy, Grade 12', subjectSessions: 72 },
+] as const).map((row): CourseReconciliation => {
+  const contract = COURSES.find((c) => c.courseId === row.courseId)
+  if (!contract) throw new Error(`reconciliation refers to unknown course ${row.courseId}`)
+  const source = SOURCES.find((s) => s.key === row.subjectSourceKey)
+  if (!source) throw new Error(`reconciliation refers to unknown source ${row.subjectSourceKey}`)
+  const titleMatch = row.subjectTitle === contract.courseName
+  const sessionsMatch = row.subjectSessions === contract.sessions
+  const idMatch = row.subjectCourseId === row.courseId
+  let verdict: ReconciliationVerdict
+  if (titleMatch && sessionsMatch && idMatch) verdict = 'MATCHES_CONTRACT'
+  else if (!idMatch && !titleMatch && !sessionsMatch) verdict = 'DIVERGES_MULTIPLE'
+  else if (!idMatch) verdict = 'DIVERGES_ID_SCHEME'
+  else if (!titleMatch && !sessionsMatch) verdict = 'DIVERGES_TITLE_AND_SESSIONS'
+  else if (!titleMatch) verdict = 'DIVERGES_TITLE'
+  else verdict = 'DIVERGES_SESSIONS'
+  const note = idMatch
+    ? (titleMatch && sessionsMatch)
+      ? 'Subject branch aligns with the contract on id, title, and sessions.'
+      : `${titleMatch ? '' : 'Title'}${!titleMatch && !sessionsMatch ? ' and ' : ''}${sessionsMatch ? '' : 'sessions'} differ.`
+    : `Subject branch uses id scheme "${row.subjectCourseId}" instead of the contracted "${row.courseId}".`
+  return {
+    courseId: row.courseId,
+    grade: contract.grade,
+    subject: contract.subject,
+    contractTitle: contract.courseName,
+    contractSessions: contract.sessions,
+    contractCreditRecommendation: contract.creditRecommendation,
+    subjectRef: source.ref,
+    subjectSha: source.sha,
+    subjectCourseId: row.subjectCourseId,
+    subjectTitle: row.subjectTitle,
+    subjectSessions: row.subjectSessions,
+    subjectSourceDoc: source.authoringRootPaths[0] ?? null,
+    titleMatch,
+    sessionsMatch,
+    idMatch,
+    verdict,
+    note,
+  }
+})
+
+const DELIVERY: readonly DeliveryFact[] = [
+  {
+    fact: 'The runtime does not yet serve Grades 9-12.',
+    servedInRelease: false,
+    evidenceRef: HIGH_SCHOOL_PROGRAM_SOURCE_REF,
+    evidencePath: 'curriculum-authoring/full-family-highschool-9-12/release/authoring-boundaries.md',
+    note: 'The release contract lists roughly a dozen shared files that hard-code the grade set 5|7|8 (AcademyGrade in src/types.ts, identifier regexes in src/academy/ and src/admin/curriculum-validation/, the published lesson schema grade enum, and EXPECTED counts in scripts/build-curriculum.mjs). Extending them is required follow-on work for the integration owner and no session in this wave performs it.',
+  },
+  {
+    fact: 'Subject-authored packages are NOT wired into the served curriculum.',
+    servedInRelease: false,
+    evidenceRef: 'origin/mac/hs912-tech-arts-r1',
+    evidencePath: 'curriculum-authoring/full-family-highschool-9-12/subjects/technology-computer-science/README.md',
+    note: 'The tech/arts README states the packages are authored content only and that node scripts/build-curriculum.mjs still reports the unchanged 30 courses / 232 units / 2736 lessons because it scans curriculum-content/ only. The same disclaimer is repeated by the RFL/finlit and other subject READMEs.',
+  },
+  {
+    fact: 'Grades 9-12 have no active production release entry.',
+    servedInRelease: false,
+    evidenceRef: 'curriculum-content/manuel-academy/production-release-registry.json',
+    evidencePath: 'curriculum-content/manuel-academy/production-release-registry.json',
+    note: 'The registry activates 1.0.0, which is pinned to grades 5/7/8. A high-school release must be a new version rather than a mutation of 1.0.0; this contract does not perform that action.',
+  },
+]
+
+export const HIGH_SCHOOL_PROGRAM_SNAPSHOT: HighSchoolProgramSnapshot = Object.freeze({
+  contractId: HIGH_SCHOOL_PROGRAM_CONTRACT_ID,
+  sourceRef: HIGH_SCHOOL_PROGRAM_SOURCE_REF,
+  sourceSha: SOURCE_RELEASE_SHA,
+  contractStatus: 'HIGH_SCHOOL_RELEASE_CONTRACT_READY',
+  authoredOn: '2026-08-12',
+  gradeSpan: [8, 9, 10, 11, 12] satisfies readonly HighSchoolGrade[],
+  courses: COURSES,
+  seam: SEAM,
+  standards: STANDARDS,
+  gaps: GAPS,
+  graduationRuling: GRADUATION,
+  sources: SOURCES,
+  reconciliations: RECONCILIATIONS,
+  delivery: DELIVERY,
+})

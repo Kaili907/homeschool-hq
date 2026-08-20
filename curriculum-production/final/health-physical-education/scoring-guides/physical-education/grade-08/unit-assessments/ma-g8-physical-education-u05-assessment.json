@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g8-physical-education-u05-assessment",
+  "courseId": "ma-g8-physical-education",
+  "grade": 8,
+  "subject": "physical-education",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+    "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+    "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+  },
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "guardianSafetyReview": null,
+  "sourceProvenance": {
+    "sourceBranch": "shared base@656efba (canonical 5/7/8)",
+    "sourceAssessmentId": "ma-g8-physical-education-u05-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

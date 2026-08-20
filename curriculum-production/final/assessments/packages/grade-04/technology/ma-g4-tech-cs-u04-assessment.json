@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-tech-cs-u04-assessment",
+  "courseRef": "ma-g4-tech-cs",
+  "grade": 4,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g4-tech-cs-u04",
+    "unitNumber": 4,
+    "unitTitle": "Algorithms, Loops, and Debugging",
+    "courseTitle": "Grade 4 Technology",
+    "assessmentLessonRef": "ma-g4-tech-cs-u04-l05"
+  },
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-04/ma-g4-tech-cs-u04-l05.task-package.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Show that you can do this on your own: simple variables. Put away the help sheet and the examples. Solve a new problem all the way. First write what answer you expect. Then test it two ways. Include one tricky case. Show what you expected and what you got. Then explain your thinking. Write it so someone new to simple variables could follow it. Keep today's work tied to your unit. Today is about simple variables. It is part of \"Algorithms, Loops, and Debugging\". Later days in this unit cover other things, like sequence review. Before you stop, do this check: Rate confidence in simple variables, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation. In grade 4, try the steps yourself before you ask for help. Give a reason in your own words for at least one choice. A labelled drawing or a spoken answer counts fully."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Your solution done alone, a two-way check with expected and actual, and an explanation someone new could follow."
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/technology/ma-g4-tech-cs-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task about simple variables.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-tech-cs-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-04/ma-g4-tech-cs-u04-l05.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Algorithms, Loops, and Debugging?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

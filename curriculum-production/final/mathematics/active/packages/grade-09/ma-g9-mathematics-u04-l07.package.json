@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u04-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u04-l07",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Systems of Linear Equations and Inequalities",
+    "dayInUnit": 7,
+    "courseDay": 61,
+    "phase": "Investigation or close reading",
+    "focus": "proving that replacement by a sum preserves the solution set",
+    "title": "Investigation or close reading: proving that replacement by a sum preserves the solution set"
+  },
+  "standards": [
+    "A-REI.5",
+    "A-REI.6",
+    "A-REI.12",
+    "MP.1"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "half-plane-membership",
+          "standard": "A-REI.12",
+          "difficulty": 1,
+          "prompt": "Is (1, 2) in the region 3x + y ≤ 6?",
+          "workedSolution": {
+            "steps": [
+              "3(1) + 2 = 5.",
+              "5 ≤ 6, so yes."
+            ],
+            "answer": "Yes; substituting gives 5 ≤ 6."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "linear-combination-equivalence",
+          "standard": "A-REI.5",
+          "difficulty": 2,
+          "prompt": "A student replaces the second equation of a system with (second equation) + 4 × (first equation). Which statement is correct?",
+          "choices": [
+            "The new system has exactly the same solution set, because the replacement step is reversible.",
+            "The new system may lose solutions that the original had.",
+            "The new system is equivalent only when 4 is 1.",
+            "The new system may gain solutions that the original did not have."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-substitution",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "Solve by substitution:\n  y = 3x + 17\n  8x + 5y = 154",
+          "choices": [
+            "(26, 3)",
+            "(3, -8)",
+            "(4, 26)",
+            "(3, 26)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 2,
+          "prompt": "Solve the system exactly:\n  -6x + 1y = 2\n  -3x + 6y = -21",
+          "choices": [
+            "(1, 4)",
+            "(0, -4)",
+            "(-4, -1)",
+            "(-1, -4)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-system-solution-count",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "How many solutions does this system have?\n  7x + 5y = -5\n  28x + 20y = -15",
+          "choices": [
+            "exactly one solution",
+            "no solution",
+            "exactly two solutions",
+            "infinitely many solutions"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "half-plane-membership",
+          "standard": "A-REI.12",
+          "difficulty": 3,
+          "prompt": "Is the point (-7, -3) in the solution region of 5x − 3y ≤ -10?",
+          "choices": [
+            "No; substituting gives -26, which is greater than -10.",
+            "Only points on the boundary line are in the solution region.",
+            "The region cannot be tested without graphing it first.",
+            "Yes; substituting gives -26 ≤ -10."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "linear-combination-equivalence",
+          "standard": "A-REI.5",
+          "difficulty": 3,
+          "prompt": "A student replaces the second equation of a system with (second equation) + 2 × (first equation). Which statement is correct?",
+          "choices": [
+            "The new system is equivalent only when 2 is 1.",
+            "The new system may lose solutions that the original had.",
+            "The new system has exactly the same solution set, because the replacement step is reversible.",
+            "The new system may gain solutions that the original did not have."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "solve-system-by-substitution",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "Solve by substitution:\n  y = -1x + 15\n  -5x − 7y = -107",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "Solve the system exactly:\n  -5x − 3y = 57\n  -8x − 1y = 76",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u04-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u04-l07"
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u02-l05",
+  "lessonId": "ma-g3-financial-literacy-u02-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much pretend money does Ben have in total this week?",
+        "answer": "$10.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5.00 + 3.00 + 2.00) = 10.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 500
+              },
+              {
+                "op": "money",
+                "cents": 300
+              },
+              {
+                "op": "money",
+                "cents": 200
+              }
+            ]
+          },
+          "trace": "(5.00 + 3.00 + 2.00) = 10.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "Which is larger in Ben's record this week, the money he earned or the birthday gift?",
+        "answer": "The gift is larger",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare 2.00 with 5.00 = The gift is larger. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "money",
+              "cents": 200
+            },
+            "right": {
+              "op": "money",
+              "cents": 500
+            },
+            "whenLess": "The gift is larger",
+            "whenEqual": "They are equal",
+            "whenGreater": "The money he earned is larger"
+          },
+          "trace": "compare 2.00 with 5.00 = The gift is larger"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much larger is it?",
+        "answer": "$3.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5.00 - 2.00) = 3.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 500
+            },
+            "less": {
+              "op": "money",
+              "cents": 200
+            }
+          },
+          "trace": "(5.00 - 2.00) = 3.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How much has Ben now earned in total from washing bicycles?",
+        "answer": "$6.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.00 + 4.00) = 6.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 200
+              },
+              {
+                "op": "money",
+                "cents": 400
+              }
+            ]
+          },
+          "trace": "(2.00 + 4.00) = 6.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How does Ben's total earned money now compare with the $5.00 gift?",
+        "answer": "Earned money is larger",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare (2.00 + 4.00) with 5.00 = Earned money is larger. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 200
+                },
+                {
+                  "op": "money",
+                  "cents": 400
+                }
+              ]
+            },
+            "right": {
+              "op": "money",
+              "cents": 500
+            },
+            "whenLess": "Earned money is smaller",
+            "whenEqual": "They are equal",
+            "whenGreater": "Earned money is larger"
+          },
+          "trace": "compare (2.00 + 4.00) with 5.00 = Earned money is larger"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Distinguishing gifts from earnings",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Ben's gift and earnings as the same thing with no difference named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A difference is stated for Ben but only in terms of the amounts rather than how each arrived."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Ben's gift came from someone else's choice while the earned money came from work he did, and notes that he can repeat earning but cannot count on gifts."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much pretend money does Ben have in total this week?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "Which is larger in Ben's record this week, the money he earned or the birthday gift?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much larger is it?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much has Ben now earned in total from washing bicycles?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How does Ben's total earned money now compare with the $5.00 gift?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "What is the difference between the $5.00 Ben was given and the $6.00 he earned?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much pretend money does Ben have in total this week? Answer: $10.00. Verification: (5.00 + 3.00 + 2.00) = 10.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: Which is larger in Ben's record this week, the money he earned or the birthday gift? Answer: The gift is larger. Verification: compare 2.00 with 5.00 = The gift is larger. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How much larger is it? Answer: $3.00. Verification: (5.00 - 2.00) = 3.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: How much has Ben now earned in total from washing bicycles? Answer: $6.00. Verification: (2.00 + 4.00) = 6.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How does Ben's total earned money now compare with the $5.00 gift? Answer: Earned money is larger. Verification: compare (2.00 + 4.00) with 5.00 = Earned money is larger. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Distinguishing gifts from earnings — Not yet: The response treats Ben's gift and earnings as the same thing with no difference named. Approaching: A difference is stated for Ben but only in terms of the amounts rather than how each arrived. Meets: The response explains that Ben's gift came from someone else's choice while the earned money came from work he did, and notes that he can repeat earning but cannot count on gifts. The response explains that Ben's gift came from someone else's choice while the earned money came from work he did, and notes that he can repeat earning but cannot count on gifts."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Ben's gift came from someone else's choice while the earned money came from work he did, and notes that he can repeat earning but cannot count on gifts."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": [
+      {
+        "itemRef": "t4-p1",
+        "promptText": "What is the difference between the $5.00 Ben was given and the $6.00 he earned?",
+        "resolution": "CONFIRMED_OPEN_JUDGMENT",
+        "rationale": "The prompt contrasts how a gift and earnings arrive, not their $1 numerical difference. The source rubric requires origin, repeatability, and agency; the fixed comparison was already answered in t2 and t3."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u02-l05.scoring.json",
+    "sourceScoringSha256": "0a0b1e17c6ad4be3cedfdd6e719cb65a6724cb878e9039cebd6db4b557f63157",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

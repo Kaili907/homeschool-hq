@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l04",
+  "lessonId": "ma-g7-ready-for-life-u05-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Warning-sign identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than five reviews are checked, or warning signs are applied inconsistently."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least five reviews are checked against all three warning signs, and the most suspicious review is correctly identified."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains a combination of warning signs rather than just one."
+          }
+        ]
+      },
+      {
+        "dimension": "Safe research practice",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner does not confirm avoiding unfamiliar links or personal information entry."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner confirms no unfamiliar links were clicked and no personal information was entered."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains what a genuine review pattern looks like compared to the suspicious one."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The task was completed only on a household-approved device.",
+      "No personal information was entered anywhere online during this task.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

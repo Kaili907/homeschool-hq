@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u02-l04",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Operations with Rational Numbers",
+    "dayInUnit": 4,
+    "courseDay": 22,
+    "phase": "Independent application A",
+    "focus": "dividing signed numbers",
+    "title": "Independent application A: dividing signed numbers"
+  },
+  "standards": [
+    "7.NS.1",
+    "7.NS.2",
+    "7.NS.3"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u02-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "add-signed",
+          "standard": "7.NS.1",
+          "difficulty": 1,
+          "prompt": "-5/6 + 1/4 = ?",
+          "workedSolution": {
+            "steps": [
+              "Use 12 as the common denominator.",
+              "-10/12 + 3/12 = -7/12."
+            ],
+            "answer": "-7/12"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u02-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "subtract-signed",
+          "standard": "7.NS.1",
+          "difficulty": 2,
+          "prompt": "-5 - 3 = ?",
+          "choices": [
+            "-8",
+            "-6",
+            "8",
+            "-9"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u02-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-signed",
+          "standard": "7.NS.2",
+          "difficulty": 2,
+          "prompt": "-2 * 4 = ?",
+          "choices": [
+            "8",
+            "-8",
+            "-9",
+            "-6"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u02-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "divide-signed",
+          "standard": "7.NS.2",
+          "difficulty": 2,
+          "prompt": "-15 / 3 = ?",
+          "choices": [
+            "5",
+            "-6",
+            "-5",
+            "-4"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u02-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "signed-fractions",
+          "standard": "7.NS.3",
+          "difficulty": 3,
+          "prompt": "-2/6 + 2/7 = ?",
+          "choices": [
+            "41/21",
+            "1/21",
+            "-1/21",
+            "20/21"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u02-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-rational",
+          "standard": "7.NS.3",
+          "difficulty": 3,
+          "prompt": "-5 + (7 * 3) = ?",
+          "choices": [
+            "15",
+            "17",
+            "18",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u02-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "add-signed",
+          "standard": "7.NS.1",
+          "difficulty": 3,
+          "prompt": "-10 + 9 = ?",
+          "choices": [
+            "-1",
+            "-2",
+            "1",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u02-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "subtract-signed",
+          "standard": "7.NS.1",
+          "difficulty": 3,
+          "prompt": "-8 - 4 = ?",
+          "choices": [
+            "-10",
+            "-12",
+            "-11",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u02-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "multiply-signed",
+          "standard": "7.NS.2",
+          "difficulty": 3,
+          "prompt": "-2 * 1 = ?",
+          "choices": [
+            "0",
+            "-2",
+            "-3",
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u02-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "divide-signed",
+          "standard": "7.NS.2",
+          "difficulty": 2,
+          "prompt": "-9 / 3 = ?",
+          "choices": [
+            "-4",
+            "-3",
+            "-2",
+            "-1"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u02-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "signed-fractions",
+          "standard": "7.NS.3",
+          "difficulty": 3,
+          "prompt": "-1/9 + 1/10 = ?",
+          "choices": [
+            "-91/90",
+            "179/90",
+            "1/90",
+            "-1/90"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u02-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-rational",
+          "standard": "7.NS.3",
+          "difficulty": 3,
+          "prompt": "-4 + (2 * 2) = ?",
+          "choices": [
+            "2",
+            "0",
+            "-1",
+            "1"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u02-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u02-l04"
+  }
+}

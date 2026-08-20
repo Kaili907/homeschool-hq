@@ -1,0 +1,400 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l09",
+  "lessonId": "ma-g11-financial-literacy-u03-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$19,440.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Six months at $3,240 — the target as it stands today."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$3,792.66",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five years of compounding at 3.2% on $3,240. The reserve target is defined by spending, so it moves when spending does."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$22,755.96",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Six months at the year-5 spending level of $3,792.66 — the target the reserve has to reach, not the one it was set against."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$20,230.14",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five years at 0.8% — the reserve grows, just far more slowly than the spending it exists to cover."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,525.82",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$22,755.96 needed against $20,230.14 held — a reserve that was fully funded is now short without a dollar ever leaving it."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "11.1%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,525.82 against the $22,755.96 target — the reserve has lost about a ninth of its coverage in five years."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "5.3",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20,230.14 against $3,792.66 of monthly spending — the six-month reserve has quietly become a 5.3-month one."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$505.16",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,525.82 spread across 5 years — the maintenance cost of keeping a reserve at its stated coverage."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "monthly * 6",
+        "substituted": "3240 * 6",
+        "result": "$19,440.00",
+        "why": "Six months at $3,240 — the target as it stands today."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(monthly2 * pow(1 + inflation, 5), 2)",
+        "substituted": "round(3240 * pow(1 + 0.032, 5), 2)",
+        "result": "$3,792.66",
+        "why": "Five years of compounding at 3.2% on $3,240. The reserve target is defined by spending, so it moves when spending does."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p2 * 6, 2)",
+        "substituted": "round(#t1-p2 * 6, 2)",
+        "result": "$22,755.96",
+        "why": "Six months at the year-5 spending level of $3,792.66 — the target the reserve has to reach, not the one it was set against."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p1 * pow(1 + depositRate, 5), 2)",
+        "substituted": "round(#t1-p1 * pow(1 + 0.008, 5), 2)",
+        "result": "$20,230.14",
+        "why": "Five years at 0.8% — the reserve grows, just far more slowly than the spending it exists to cover."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - #t2-p1",
+        "substituted": "#t1-p3 - #t2-p1",
+        "result": "$2,525.82",
+        "why": "$22,755.96 needed against $20,230.14 held — a reserve that was fully funded is now short without a dollar ever leaving it."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / #t1-p3 * 100, 1)",
+        "substituted": "round(#t2-p2 / #t1-p3 * 100, 1)",
+        "result": "11.1%",
+        "why": "$2,525.82 against the $22,755.96 target — the reserve has lost about a ninth of its coverage in five years."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p1 / #t1-p2, 1)",
+        "substituted": "round(#t2-p1 / #t1-p2, 1)",
+        "result": "5.3",
+        "why": "$20,230.14 against $3,792.66 of monthly spending — the six-month reserve has quietly become a 5.3-month one."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t2-p2 / 5, 2)",
+        "substituted": "round(#t2-p2 / 5, 2)",
+        "result": "$505.16",
+        "why": "$2,525.82 spread across 5 years — the maintenance cost of keeping a reserve at its stated coverage."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Aisha’s reserve was fully funded, nothing was withdrawn, and it is short. Explain the mechanism, and say what it means to describe a reserve as \"six months\" rather than as a dollar amount.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the target is defined by spending, which rises at 3.2%, while the reserve grows at only 0.8%, so the two drift apart with no withdrawal required.",
+          "Argues that stating a reserve in months of coverage keeps the target attached to what it protects, whereas a dollar amount silently shrinks in coverage as prices rise.",
+          "Uses the 5.3-month figure to show what the drift amounts to in the terms the household actually cares about."
+        ],
+        "evidenceRequirements": [
+          "Cites the 3.2% and 0.8% rates as the two figures that pull the target and the reserve apart."
+        ],
+        "lookFors": [
+          "The response identifies the drift as arising from two different rates, not from spending the reserve.",
+          "The response prefers coverage to a dollar figure and says why.",
+          "A response noting the reserve did grow, just too slowly, is reading the figures accurately."
+        ],
+        "commonMisconception": "Treating a savings target set once as a target that stays correct.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "A reserve has to be available at short notice, which is why it earns only 0.8%. Say what that constraint costs Aisha over the five years, and whether a higher-earning account would be a good place for this money.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Prices the constraint using the figures: the $2,525.82 shortfall, or the $505.16 a year needed to maintain coverage, is what the liquidity requirement costs.",
+          "Argues that a reserve should stay accessible even at a lower return, because a reserve that cannot be reached on the day it is needed has failed at its only job."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $2,525.82 shortfall or the $505.16 annual top-up when pricing the constraint."
+        ],
+        "lookFors": [
+          "The response prices the tradeoff rather than treating the low return as simply bad.",
+          "The response ties accessibility to the purpose of the reserve, not to a general rule."
+        ],
+        "commonMisconception": "Judging where to hold a reserve on its return alone.",
+        "dimensions": [
+          "tradeoff-defense",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What reserve covers 6 months of today’s spending?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What will monthly spending be in 5 years at 3.2% a year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What reserve will cover 6 months of spending in 5 years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the $19,440.00 reserve worth in 5 years at 0.8% a year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "By how much does the reserve fall short of the year-5 target?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "The shortfall is what percentage of the year-5 target? Give one decimal place."
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How many months of year-5 spending does the reserve actually cover? Give one decimal place."
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "How much would need to be added each year over the 5 years to close the shortfall, ignoring interest on the additions?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Aisha’s reserve was fully funded, nothing was withdrawn, and it is short. Explain the mechanism, and say what it means to describe a reserve as \"six months\" rather than as a dollar amount."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "A reserve has to be available at short notice, which is why it earns only 0.8%. Say what that constraint costs Aisha over the five years, and whether a higher-earning account would be a good place for this money."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What reserve covers 6 months of today’s spending? Answer: $19,440.00. Verification: Six months at $3,240 — the target as it stands today. t1-p2: What will monthly spending be in 5 years at 3.2% a year? Answer: $3,792.66. Verification: Five years of compounding at 3.2% on $3,240. The reserve target is defined by spending, so it moves when spending does. t1-p3: What reserve will cover 6 months of spending in 5 years? Answer: $22,755.96. Verification: Six months at the year-5 spending level of $3,792.66 — the target the reserve has to reach, not the one it was set against. t2-p1: What is the $19,440.00 reserve worth in 5 years at 0.8% a year? Answer: $20,230.14. Verification: Five years at 0.8% — the reserve grows, just far more slowly than the spending it exists to cover. t2-p2: By how much does the reserve fall short of the year-5 target? Answer: $2,525.82. Verification: $22,755.96 needed against $20,230.14 held — a reserve that was fully funded is now short without a dollar ever leaving it. t2-p3: The shortfall is what percentage of the year-5 target? Give one decimal place. Answer: 11.1%. Verification: $2,525.82 against the $22,755.96 target — the reserve has lost about a ninth of its coverage in five years. t2-p4: How many months of year-5 spending does the reserve actually cover? Give one decimal place. Answer: 5.3. Verification: $20,230.14 against $3,792.66 of monthly spending — the six-month reserve has quietly become a 5.3-month one. t2-p5: How much is required as an annual addition over the 5 years to close the shortfall, ignoring interest on the additions? Answer: $505.16. Verification: $2,525.82 spread across 5 years — the maintenance cost of keeping a reserve at its stated coverage."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Aisha’s reserve was fully funded, nothing was withdrawn, and it is short. Explain the mechanism, and say what it means to describe a reserve as \"six months\" rather than as a dollar amount. Explains that the target is defined by spending, which rises at 3.2%, while the reserve grows at only 0.8%, so the two drift apart with no withdrawal required. Argues that stating a reserve in months of coverage keeps the target attached to what it protects, whereas a dollar amount silently shrinks in coverage as prices rise. Uses the 5.3-month figure to show what the drift amounts to in the terms the household actually cares about. Cites the 3.2% and 0.8% rates as the two figures that pull the target and the reserve apart. The response identifies the drift as arising from two different rates, not from spending the reserve. The response prefers coverage to a dollar figure and says why. A response noting the reserve did grow, just too slowly, is reading the figures accurately. t3-p2: A reserve has to be available at short notice, which is why it earns only 0.8%. Say what that constraint costs Aisha over the five years, and whether a higher-earning account would be a good place for this money. Prices the constraint using the figures: the $2,525.82 shortfall, or the $505.16 a year needed to maintain coverage, is what the liquidity requirement costs. Argues that a reserve should stay accessible even at a lower return, because a reserve that cannot be reached on the day it is needed has failed at its only job. Refers to the $2,525.82 shortfall or the $505.16 annual top-up when pricing the constraint. The response prices the tradeoff rather than treating the low return as simply bad. The response ties accessibility to the purpose of the reserve, not to a general rule."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the target is defined by spending, which rises at 3.2%, while the reserve grows at only 0.8%, so the two drift apart with no withdrawal required. Argues that stating a reserve in months of coverage keeps the target attached to what it protects, whereas a dollar amount silently shrinks in coverage as prices rise. Uses the 5.3-month figure to show what the drift amounts to in the terms the household actually cares about. Prices the constraint using the figures: the $2,525.82 shortfall, or the $505.16 a year needed to maintain coverage, is what the liquidity requirement costs. Argues that a reserve should stay accessible even at a lower return, because a reserve that cannot be reached on the day it is needed has failed at its only job."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u03-l09.scoring.json",
+    "sourceScoringSha256": "232de7d2f237199bf2211d600069c99d09e91c648bb6b1007b2e37c7b7d544bb",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

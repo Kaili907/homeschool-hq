@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u07-l01",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u07-l01",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Measurement: Time, Liquid Volume, and Mass",
+    "dayInUnit": 1,
+    "courseDay": 109,
+    "phase": "Launch and diagnostic",
+    "focus": "what we measure and why the unit matters",
+    "title": "Launch and diagnostic: what we measure and why the unit matters"
+  },
+  "standards": [
+    "3.MD.1",
+    "3.MD.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 1,
+          "prompt": "A movie starts at 2:15 p.m. and lasts 40 minutes. What time does it end?",
+          "workedSolution": {
+            "steps": [
+              "Start at 2:15 p.m. and count forward 40 minutes.",
+              "2:15 + 40 minutes = 2:55 p.m."
+            ],
+            "answer": "2:55 p.m."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 1,
+          "prompt": "A container has 51 liters. 10 liters are removed. How many liters are left?",
+          "choices": [
+            "51",
+            "10",
+            "61",
+            "41"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 1,
+          "prompt": "Practice starts at 11:10 a.m. and lasts 40 minutes. What time does practice end?",
+          "choices": [
+            "10:30 a.m.",
+            "11:50 a.m.",
+            "11:20 a.m.",
+            "12:20 p.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 107 kilograms. Another 112 kilograms are poured in. How many kilograms are in the container now?",
+          "choices": [
+            "112",
+            "107",
+            "219",
+            "220"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 3,
+          "prompt": "Practice starts at 12:45 p.m. and lasts 104 minutes. What time does practice end?",
+          "choices": [
+            "11:01 a.m.",
+            "1:59 p.m.",
+            "2:29 p.m.",
+            "2:59 p.m."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 1,
+          "prompt": "A container has 44 milliliters. Another 28 milliliters are poured in. How many milliliters are in the container now?",
+          "choices": [
+            "72",
+            "28",
+            "73",
+            "44"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 11:30 a.m. and lasts 38 minutes. What time does practice end?",
+          "choices": [
+            "11:38 a.m.",
+            "10:52 a.m.",
+            "12:08 p.m.",
+            "12:38 p.m."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u07-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u07-l01"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l02",
+  "lessonId": "ma-g3-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Item selection accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Packs items unrelated to tomorrow's plan, or leaves out more than one required item."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Packs all items tomorrow's plan requires, with at most one item added at the morning check."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Packs all required items the night before with nothing missing at the morning check, and can explain why each item was chosen."
+          }
+        ]
+      },
+      {
+        "dimension": "Timing of the routine",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Most of the packing happens the morning of, not the night before."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The bag is fully packed and placed by the door the night before."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The bag is fully packed the night before, and the learner checks the weather or asks an adult about it without being reminded."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner checks tomorrow's specific plan before selecting items, rather than packing from habit alone.",
+      "The reflection names one specific previously forgotten item, not a general statement about being more prepared."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

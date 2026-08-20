@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l02",
+  "lessonId": "ma-g12-ready-for-life-u06-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Step specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the three steps is too vague to know when it's actually done."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three steps are concrete and checkable."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The steps would genuinely apply even if the stated direction changed, showing they're not narrowly tied to one assumed path."
+          }
+        ]
+      },
+      {
+        "dimension": "Honesty over performance",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The direction is stated with more certainty than the reflection response suggests is genuine."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The stated direction (including 'still deciding') matches the learner's actual honest position."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection explicitly names and pushes back on any pressure to perform certainty rather than state it honestly."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The direction, if 'still deciding,' is treated as fully complete and valid, not as an unfinished answer.",
+      "All three first steps are concrete enough to verify completion.",
+      "No specific path (college, a job, military service, etc.) is assumed as the default or preferred answer."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

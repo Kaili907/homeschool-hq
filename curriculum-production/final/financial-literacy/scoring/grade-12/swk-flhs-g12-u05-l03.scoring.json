@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l03",
+  "lessonId": "ma-g12-financial-literacy-u05-l03",
+  "integratedDomains": [
+    "saving-investing",
+    "multi-variable-decision",
+    "budgeting",
+    "insurance-risk"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$9,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "80% of the $12,000 balance. Allocation is applied to the starting balance, and the split decides how much of it compounds at each assumed rate."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "20% of the $12,000 balance. The two parts add back to the whole, which is the check that an allocation has been read correctly."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$78,903.08",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Each part compounds at its own assumed rate for 30 years and the two are added. The parts must be compounded separately, because a blended average rate applied to the whole balance would give a different and wrong figure."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$4,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "40% of the $12,000 balance — half of what allocation A places in growth, from the same starting amount."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$7,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60% of the $12,000 balance. As with allocation A, the two parts add back to the whole, which checks the split has been read correctly."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$54,015.11",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same method with the split reversed. Both allocations start from $12,000 and the difference comes entirely from which category holds more of it."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$24,887.97",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$78,903.08 against $54,015.11. A 40 percentage point difference in allocation produces a gap larger than twice the original balance, because the difference compounds for 30 years."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "portfolio * growthA",
+        "substituted": "12000 * 0.8",
+        "result": "$9,600.00",
+        "why": "80% of the $12,000 balance. Allocation is applied to the starting balance, and the split decides how much of it compounds at each assumed rate."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "portfolio2 * stableA",
+        "substituted": "12000 * 0.2",
+        "result": "$2,400.00",
+        "why": "20% of the $12,000 balance. The two parts add back to the whole, which is the check that an allocation has been read correctly."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p1 * pow(1 + growthRate, years) + #t1-p2 * pow(1 + stableRate, years2), 2)",
+        "substituted": "round(#t1-p1 * pow(1 + 0.07, 30) + #t1-p2 * pow(1 + 0.03, 30), 2)",
+        "result": "$78,903.08",
+        "why": "Each part compounds at its own assumed rate for 30 years and the two are added. The parts must be compounded separately, because a blended average rate applied to the whole balance would give a different and wrong figure."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "portfolio3 * growthB",
+        "substituted": "12000 * 0.4",
+        "result": "$4,800.00",
+        "why": "40% of the $12,000 balance — half of what allocation A places in growth, from the same starting amount."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "portfolio4 * stableB",
+        "substituted": "12000 * 0.6",
+        "result": "$7,200.00",
+        "why": "60% of the $12,000 balance. As with allocation A, the two parts add back to the whole, which checks the split has been read correctly."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 * pow(1 + growthRate2, years3) + #t2-p2 * pow(1 + stableRate2, years4), 2)",
+        "substituted": "round(#t2-p1 * pow(1 + 0.07, 30) + #t2-p2 * pow(1 + 0.03, 30), 2)",
+        "result": "$54,015.11",
+        "why": "The same method with the split reversed. Both allocations start from $12,000 and the difference comes entirely from which category holds more of it."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p3 - #t2-p3",
+        "substituted": "#t1-p3 - #t2-p3",
+        "result": "$24,887.97",
+        "why": "$78,903.08 against $54,015.11. A 40 percentage point difference in allocation produces a gap larger than twice the original balance, because the difference compounds for 30 years."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "State what this calculation does establish and what it does not. Then explain why a fictional investor who needs the money in 3 years rather than 30 might reasonably prefer allocation B, even though allocation A is far ahead in this illustration.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States what is established: given the stated rates, a larger share in the higher-growth category compounds to a much larger figure over 30 years, and the gap of $24,887.97 comes from compounding rather than from any extra money being added.",
+          "States what is not established: the 7% and 3% figures are assumptions, actual results vary year to year, and nothing here shows that either allocation will produce these amounts or that growth arrives smoothly.",
+          "Explains the short-horizon case: over 3 years there is little time for compounding to build the gap, and an investor who must sell at a fixed date is exposed to whatever the growth category happens to be worth then, which the illustration’s steady rate conceals entirely."
+        ],
+        "evidenceRequirements": [
+          "Uses the $78,903.08 and $54,015.11 illustrated results and names the 7% and 3% figures as assumptions."
+        ],
+        "lookFors": [
+          "The response does not describe either result as what the investor will have.",
+          "The response connects the horizon to the ability to wait out a fall, rather than to a preference for risk in the abstract."
+        ],
+        "commonMisconception": "Treating a steady assumed rate as a description of how growth actually arrives, which hides the variability that decides whether a short-horizon investor can wait.",
+        "dimensions": [
+          "communication-of-uncertainty",
+          "assumption-identification",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does allocation A place in the growth category?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much does allocation A place in the stable category?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "Under the stated illustration, what would allocation A be worth after the 30 years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does allocation B place in the growth category?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much does allocation B place in the stable category?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Under the same illustration, what would allocation B be worth after the 30 years?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How far apart are the two results under the illustration?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "State what this calculation does establish and what it does not. Then explain why a fictional investor who needs the money in 3 years rather than 30 might reasonably prefer allocation B, even though allocation A is far ahead in this illustration."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much does allocation A place in the growth category? Answer: $9,600.00. Verification: 80% of the $12,000 balance. Allocation is applied to the starting balance, and the split decides how much of it compounds at each assumed rate. t1-p2: How much does allocation A place in the stable category? Answer: $2,400.00. Verification: 20% of the $12,000 balance. The two parts add back to the whole, which is the check that an allocation has been read correctly. t1-p3: Under the stated illustration, what would allocation A be worth after the 30 years? Answer: $78,903.08. Verification: Each part compounds at its own assumed rate for 30 years and the two are added. The parts must be compounded separately, because a blended average rate applied to the whole balance would give a different and wrong figure. t2-p1: How much does allocation B place in the growth category? Answer: $4,800.00. Verification: 40% of the $12,000 balance — half of what allocation A places in growth, from the same starting amount. t2-p2: How much does allocation B place in the stable category? Answer: $7,200.00. Verification: 60% of the $12,000 balance. As with allocation A, the two parts add back to the whole, which checks the split has been read correctly. t2-p3: Under the same illustration, what would allocation B be worth after the 30 years? Answer: $54,015.11. Verification: The same method with the split reversed. Both allocations start from $12,000 and the difference comes entirely from which category holds more of it. t2-p4: How far apart are the two results under the illustration? Answer: $24,887.97. Verification: $78,903.08 against $54,015.11. A 40 percentage point difference in allocation produces a gap larger than twice the original balance, because the difference compounds for 30 years."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: State what this calculation does establish and what it does not. Then explain why a fictional investor who needs the money in 3 years rather than 30 might reasonably prefer allocation B, even though allocation A is far ahead in this illustration. States what is established: given the stated rates, a larger share in the higher-growth category compounds to a much larger figure over 30 years, and the gap of $24,887.97 comes from compounding rather than from any extra money being added. States what is not established: the 7% and 3% figures are assumptions, actual results vary year to year, and nothing here shows that either allocation will produce these amounts or that growth arrives smoothly. Explains the short-horizon case: over 3 years there is little time for compounding to build the gap, and an investor who must sell at a fixed date is exposed to whatever the growth category happens to be worth then, which the illustration’s steady rate conceals entirely. Uses the $78,903.08 and $54,015.11 illustrated results and names the 7% and 3% figures as assumptions. The response does not describe either result as what the investor will have. The response connects the horizon to the ability to wait out a fall, rather than to a preference for risk in the abstract."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States what is established: given the stated rates, a larger share in the higher-growth category compounds to a much larger figure over 30 years, and the gap of $24,887.97 comes from compounding rather than from any extra money being added. States what is not established: the 7% and 3% figures are assumptions, actual results vary year to year, and nothing here shows that either allocation will produce these amounts or that growth arrives smoothly. Explains the short-horizon case: over 3 years there is little time for compounding to build the gap, and an investor who must sell at a fixed date is exposed to whatever the growth category happens to be worth then, which the illustration’s steady rate conceals entirely."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u05-l03.scoring.json",
+    "sourceScoringSha256": "4e0ee8707507368d5340ab0cf5278e76267548978ab52332e4bca57ab68d6d58",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

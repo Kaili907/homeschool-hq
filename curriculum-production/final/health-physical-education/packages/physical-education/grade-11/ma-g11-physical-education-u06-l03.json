@@ -1,0 +1,298 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-task-card",
+  "lessonId": "ma-g11-physical-education-u06-l03",
+  "courseId": "ma-g11-physical-education",
+  "grade": 11,
+  "subject": "physical-education",
+  "unitNumber": 6,
+  "unitTitle": "Outdoor, Adventure, and Community Recreation Planning",
+  "title": "Guided practice A: navigation, communication, and contingency planning",
+  "focus": "navigation, communication, and contingency planning",
+  "essentialQuestion": "How do I plan an activity that is genuinely worth the effort of getting there?",
+  "estimatedMinutes": "35–60",
+  "standards": [
+    "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]",
+    "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]",
+    "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]"
+  ],
+  "primaryLessonType": "PROJECT_LIFETIME_ACTIVITY",
+  "secondaryLessonTypes": [
+    "SKILL_DEVELOPMENT"
+  ],
+  "lessonFamilyPlan": {
+    "instructionalPurpose": "build a bounded plan that transfers the target to an accessible setting",
+    "guidedEmphasis": "Stage the access check, setup, safe simulation or description, evidence choice, and finish before combining the plan.",
+    "independentEvidence": "Complete a fresh safe simulation or described plan with honest scope and guardian authority where required.",
+    "evidencePurpose": "planning, decision quality, application, reflection, and completion"
+  },
+  "goal": "I can build a bounded plan that transfers the target to an accessible setting for navigation, communication, and contingency planning, using a safe standard or equal-credit adapted route, and explain the cue or decision that shows success.",
+  "successOverview": "Success is safe setup, use of the taught Scan, plan, pace, turn back. cue or decision, a fresh bounded application, and a short explanation. Credit never depends on body position, speed, athletic talent, comparison, or use of the standard route.",
+  "readinessCheck": [
+    "Identify the safest start, boundary, and turnaround on a simple supplied route.",
+    "Choose movement, seated, supported, mobility-aid, low-space, no-equipment, or described evidence without explaining why.",
+    "Use the complete described route if guardian permission, safe space, equipment, movement, a partner, or a real setting is unavailable."
+  ],
+  "materials": [
+    "No specialized equipment is required.",
+    "Optional: paper map, weather-appropriate clothing, or activity-specific safety equipment when available and guardian-approved.",
+    "Use a hand-drawn route, imaginary landmarks, or soft household markers indoors."
+  ],
+  "movementCues": [
+    "SCAN the next section for surface, traffic, weather, boundaries, and people.",
+    "PLAN a route, turnaround point, and trusted-adult contact before activity.",
+    "PACE so stopping and speaking comfortably remain possible.",
+    "TURN BACK before conditions, daylight, access, or control become unsafe."
+  ],
+  "ageAppropriateTechnique": "Self-manage setup, demand, and feedback while keeping intensity and range learner-selected and the evidence tied to the taught cue or decision.",
+  "movementModel": {
+    "title": "Model for navigation, communication, and contingency planning",
+    "startingPosition": "Mark a start, safe boundary, and turnaround point on paper or in a clear indoor space.",
+    "action": "Scan the next section, choose a controlled route, state the help plan, and stop at the planned boundary.",
+    "keyCue": "Scan, plan, pace, turn back.",
+    "commonError": "Choosing distance or destination before checking conditions and return options.",
+    "correction": "Set the boundary and turnaround first; shorten or describe the route when conditions are uncertain.",
+    "notice": "Notice route decisions, controlled stopping, and changing conditions rather than speed or distance.",
+    "adaptedModel": "Use the seated, supported, mobility-aid, reduced-range, object-modeled, or described route and preserve this evidence: Notice route decisions, controlled stopping, and changing conditions rather than speed or distance.",
+    "safetyBoundary": "Use a described indoor route unless a guardian has approved the real location, conditions, supervision, and activity-specific safety equipment. No real road, water, isolated area, unfamiliar route, or worsening weather is entered for lesson evidence."
+  },
+  "guidedPractice": [
+    {
+      "id": "guided-1",
+      "prompt": "Stage the access check, setup, safe simulation or description, evidence choice, and finish before combining the plan. Identify the safest start, boundary, and turnaround on a simple supplied route. Apply it to navigation, communication, and contingency planning.",
+      "support": "Use the model cue: Scan, plan, pace, turn back.",
+      "feedback": "If the target is unclear, return to the starting position and use this correction: Set the boundary and turnaround first; shorten or describe the route when conditions are uncertain."
+    },
+    {
+      "id": "guided-2",
+      "prompt": "Travel, gesture, or point through one short clear segment and stop at the boundary.",
+      "support": "Watch for this contrast: Choosing distance or destination before checking conditions and return options.",
+      "feedback": "Keep the safe version when the learner can show or explain notice route decisions, controlled stopping, and changing conditions rather than speed or distance."
+    }
+  ],
+  "practiceProgression": [
+    {
+      "round": 1,
+      "name": "Entry version",
+      "task": "Stage the access check, setup, safe simulation or description, evidence choice, and finish before combining the plan. Travel, gesture, or point through one short clear segment and stop at the boundary.",
+      "targetCue": "Scan, plan, pace, turn back.",
+      "successCheck": "Show or explain the target for navigation, communication, and contingency planning once with the safe boundary intact.",
+      "changedVariable": "None; begin with the simplest safe version.",
+      "learnerChoice": "Remain here, reduce range or pace, add support, rest, or switch to the described route.",
+      "maximumBoundary": "No real road, water, isolated area, unfamiliar route, or worsening weather is entered for lesson evidence."
+    },
+    {
+      "round": 2,
+      "name": "One change",
+      "task": "Travel, gesture, or point through one short clear segment and stop at the boundary. Then add one surface, weather, access, or route-choice change. Keep the planning, decision quality, application, reflection, and completion purpose visible.",
+      "targetCue": "Scan, plan, pace, turn back.",
+      "successCheck": "Name what changed and keep the same cue, control, decision, and safety boundary.",
+      "changedVariable": "Add one surface, weather, access, or route-choice change.",
+      "learnerChoice": "Progress only by choice; repeat or regress whenever the cue or control is not clear.",
+      "maximumBoundary": "No real road, water, isolated area, unfamiliar route, or worsening weather is entered for lesson evidence."
+    },
+    {
+      "round": 3,
+      "name": "Fresh application",
+      "task": "Complete a fresh safe simulation or described plan with honest scope and guardian authority where required. Create or demonstrate a fresh route with a start, boundary, turnaround, condition check, and help plan.",
+      "targetCue": "Scan, plan, pace, turn back.",
+      "successCheck": "Complete the fresh bounded application and identify the cue or decision that controlled it.",
+      "changedVariable": "The learner selects a new safe example, arrangement, or condition.",
+      "learnerChoice": "Use any standard or equal-credit route, take breaks, or finish through description without penalty.",
+      "maximumBoundary": "No real road, water, isolated area, unfamiliar route, or worsening weather is entered for lesson evidence."
+    }
+  ],
+  "independentActivity": {
+    "title": "Fresh application: navigation, communication, and contingency planning",
+    "directions": [
+      "Choose one approved route.",
+      "Create or demonstrate a fresh route with a start, boundary, turnaround, condition check, and help plan.",
+      "Use this cue or decision: Scan, plan, pace, turn back.",
+      "Stop at the maximum boundary.",
+      "Provide the selected evidence without a recording or body metric."
+    ],
+    "freshTask": "Complete a fresh safe simulation or described plan with honest scope and guardian authority where required. Create or demonstrate a fresh route with a start, boundary, turnaround, condition check, and help plan.",
+    "independenceBoundary": "A trusted human or future Tutor may read directions, define a cue, and offer an approved route. They may not perform the decision for the learner, claim unapproved observation, certify physical completion, or provide medical or return clearance."
+  },
+  "warmUpAndFinishPolicy": {
+    "applicability": "REQUIRED_FOR_MOVEMENT",
+    "warmUp": [
+      "Trace the route slowly with a finger, hand, steps, or wheel pushes.",
+      "Rehearse one controlled stop and turnaround at comfortable range."
+    ],
+    "coolDown": [
+      "Return to the easiest comfortable version or rest.",
+      "Restore optional equipment and space safely.",
+      "Name one cue, safety choice, or next adjustment without reporting body data."
+    ],
+    "rationale": null
+  },
+  "spaceSetup": "Clear one arm-span for an indoor route model. Real outdoor, road, water, isolated-area, or unfamiliar-route activity requires guardian permission and appropriate supervision/equipment. Low-space access remains available before and during the lesson. Cleanup: return optional items only after movement has stopped and the path is clear.",
+  "equipmentRequirements": {
+    "required": [
+      "No specialized equipment is required."
+    ],
+    "optional": [
+      "Optional: paper map, weather-appropriate clothing, or activity-specific safety equipment when available and guardian-approved."
+    ],
+    "householdSubstitutes": [
+      "Use a hand-drawn route, imaginary landmarks, or soft household markers indoors."
+    ],
+    "prohibited": [
+      "No real road, water, isolated area, unfamiliar route, or worsening weather is entered for lesson evidence."
+    ],
+    "equalCreditNoEquipment": "Equal-credit low-space no-equipment route: point through an imaginary indoor route and explain the surface, weather, traffic, hydration, help, and turnaround decisions."
+  },
+  "safetyRules": [
+    "Check the surface, ceiling, boundary, people, pets, cords, breakables, footwear or mobility supports, and any optional item before movement.",
+    "Use a described indoor route unless a guardian has approved the real location, conditions, supervision, and activity-specific safety equipment.",
+    "Use learner-selected range, pace, and demand. Control, decisions, and understanding matter more than force, distance, duration, or repetitions.",
+    "If the environment cannot be made safe, do not perform movement; use the equal-credit described route or stop and tell a trusted adult."
+  ],
+  "stoppingRules": [
+    "REST / ADJUST: You may pause, rest, reduce pace or range, use support, switch to an approved route, or finish for the day at any time. You may resume only when comfortable and the environment is safe. Rest and adaptation never reduce credit.",
+    "STOP AND TELL: Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, an injury concern, damaged equipment, or an unsafe environment. Tell a trusted adult and do not continue to test the concern.",
+    "DO NOT RESUME: After a head impact, an injury concern, or a symptom that persists or worsens, remain out until the authorized guardian or qualified professional says it is safe. A learner, browser, or Tutor cannot provide clearance."
+  ],
+  "adaptationRoutes": {
+    "seated": "Use a stable seated position and preserve the Scan, plan, pace, turn back. evidence through upper-body movement, pointing, gesture, object modeling, or description.",
+    "supported": "Place an approved stable support before beginning and use it through the whole attempt; score the cue or decision for navigation, communication, and contingency planning, not unsupported balance.",
+    "reducedRange": "Use the smallest comfortable movement, eye-gaze choice, point, or gesture that still shows the target cue or decision for navigation, communication, and contingency planning.",
+    "reducedPaceOrDemand": "Complete one stage at a time with learner-chosen breaks, remain at the entry version, or split the lesson across short sittings.",
+    "mobilityAidCompatible": "Keep the mobility aid positioned and used as approved; adapt the path around the aid and score the same Scan, plan, pace, turn back. evidence.",
+    "solo": "Use the supplied solo, shadow, diagram, imagined-role, or fictional-situation route; no partner, opponent, group, or audience is required.",
+    "lowSpace": "Use the one-arm-span or one-seat setup: Equal-credit low-space no-equipment route: point through an imaginary indoor route and explain the surface, weather, traffic, hydration, help, and turnaround decisions.",
+    "noEquipment": "Equal-credit low-space no-equipment route: point through an imaginary indoor route and explain the surface, weather, traffic, hydration, help, and turnaround decisions.",
+    "describedOrDecisionRoute": "Describe, draw, gesture, point, sign, or model Create or demonstrate a fresh route with a start, boundary, turnaround, condition check, and help plan. This is a complete equal-credit route when movement is not appropriate."
+  },
+  "accessibleAdaptation": "Choose or change any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route without explaining why. Every route earns equal credit for the same notice route decisions, controlled stopping, and changing conditions rather than speed or distance. The standard route is never required and adaptation never lowers credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit low-space no-equipment route: point through an imaginary indoor route and explain the surface, weather, traffic, hydration, help, and turnaround decisions.",
+  "activitySteps": [
+    "Choose a standard or equal-credit response route.",
+    "Check the required permission.",
+    "Check the space.",
+    "Check any optional equipment.",
+    "Read the REST / ADJUST rule.",
+    "Read the STOP AND TELL rule.",
+    "Complete the warm-up when it applies.",
+    "Study the model.",
+    "Name the key cue.",
+    "Complete guided attempt 1.",
+    "Complete guided attempt 2.",
+    "Choose a progression round.",
+    "Complete the fresh application.",
+    "Use the safe finish when it applies.",
+    "Provide the selected evidence.",
+    "Answer the short reflection or leave it blank."
+  ],
+  "executionCategory": "outdoor",
+  "commonErrorToWatchFor": "Choosing distance or destination before checking conditions and return options.",
+  "evidenceExpectations": {
+    "evidenceTypes": [
+      "PLANNING",
+      "DECISION_QUALITY",
+      "SAFE_PARTICIPATION",
+      "REFLECTION"
+    ],
+    "learnerEvidence": [
+      "One guided response using Scan, plan, pace, turn back..",
+      "One fresh bounded application or complete described equivalent for navigation, communication, and contingency planning.",
+      "One cue, decision, safety, or next-step explanation."
+    ],
+    "physicalCompletion": "NOT_TUTOR_CERTIFIABLE",
+    "observer": "A learner may self-check a cue and a trusted human may review the selected evidence. A Tutor, browser, camera, wearable, or self-report cannot certify physical completion, guardian permission, or safe return.",
+    "doNotCollect": [
+      "weight, appearance, body composition, calories, body shape, fitness norms, speed versus peers, or athletic talent",
+      "diagnosis, disability reason, symptom history, or private medical information",
+      "photo, video, audio, wearable data, location proof, or exercise log"
+    ]
+  },
+  "retryPlan": {
+    "trigger": "Retry when the evidence does not yet show the target cue or decision for navigation, communication, and contingency planning; name the missing observable part without judging the learner.",
+    "simplerSetup": "Identify the safest start, boundary, and turnaround on a simple supplied route.",
+    "differentCue": "Replace the full cue set with: “Scan, plan, pace, turn back.”",
+    "alternateModel": "Contrast this common error — Choosing distance or destination before checking conditions and return options. — with this correction — Set the boundary and turnaround first; shorten or describe the route when conditions are uncertain.",
+    "boundedPractice": "Travel, gesture, or point through one short clear segment and stop at the boundary.",
+    "freshRetry": "Create or demonstrate a fresh route with a start, boundary, turnaround, condition check, and help plan. Use a new safe example rather than repeating the scored attempt.",
+    "exitCriterion": "Return to independent work when the fresh retry shows or explains notice route decisions, controlled stopping, and changing conditions rather than speed or distance. A safety stop, rest, or adaptation is never recorded as failure."
+  },
+  "guardianAuthority": {
+    "level": "GUARDIAN_PERMISSION",
+    "when": "Guardian permission is required before real movement, optional equipment, a real location, partner, outdoor route, or progression is used.",
+    "requiredAction": "The guardian confirms that the bounded space, optional equipment, and activity route are permitted before movement.",
+    "minimumRecord": "Record only permission status or that the equal-credit described route was used; collect no body, health, media, location, or performance data.",
+    "confirmationBoundary": "Guardian confirmation may establish permission or occurrence only. It does not certify academic mastery, physical quality, diagnosis, effort, body status, or safe return.",
+    "equalCreditAlternative": "When guardian review, real movement, equipment, space, partner, or location is unavailable, the supplied solo described/decision route is the complete equal-credit lesson.",
+    "tutorOrLearnerMaySubstitute": false
+  },
+  "tutorMetadata": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "may": [
+      "explain approved content and vocabulary",
+      "cue the approved model",
+      "offer an approved presentation or activity route",
+      "coach how the learner presents their own evidence",
+      "route to rest, stop, retry, or adult handoff"
+    ],
+    "mustNot": [
+      "cannot diagnose, prescribe, rehabilitate, or give medical clearance",
+      "cannot claim unapproved observation or certify physical completion",
+      "cannot override rest, stop, adaptation, guardian authority, professional authority, or safe return",
+      "cannot choose the answer or action for fresh independent evidence",
+      "cannot score body data, norms, appearance, talent, or peer comparison"
+    ]
+  },
+  "keyPoints": [
+    "Mark a start, safe boundary, and turnaround point on paper or in a clear indoor space.",
+    "Scan the next section, choose a controlled route, state the help plan, and stop at the planned boundary.",
+    "Scan, plan, pace, turn back.",
+    "Set the boundary and turnaround first; shorten or describe the route when conditions are uncertain."
+  ],
+  "privacySafeScenario": "Use a supplied or invented non-personal example of navigation, communication, and contingency planning; do not disclose private health information or recreate a hazard.",
+  "studentTask": "Complete a fresh safe simulation or described plan with honest scope and guardian authority where required. Create or demonstrate a fresh route with a start, boundary, turnaround, condition check, and help plan. Use any approved standard or equal-credit route. Name the cue or decision that controlled the result; no body metric, comparison, recording, or physical-completion claim is required.",
+  "knowledgeCheck": "State the starting position, action, key cue, common error, and correction for navigation, communication, and contingency planning. Then distinguish optional REST / ADJUST from STOP AND TELL and DO NOT RESUME.",
+  "completionCriteria": [
+    "The learner uses a safe setup or accurately describes it for navigation, communication, and contingency planning.",
+    "The learner applies Scan, plan, pace, turn back. in one guided attempt and one fresh application or complete described equivalent.",
+    "The learner distinguishes learner-controlled rest from STOP AND TELL and DO NOT RESUME conditions.",
+    "Any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route earns equal credit for the same cue or decision evidence."
+  ],
+  "adaptationChoices": "Choose or change any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route without explaining why. Every route earns equal credit for the same notice route decisions, controlled stopping, and changing conditions rather than speed or distance. The standard route is never required and adaptation never lowers credit.",
+  "extensionChallenge": "Apply navigation, communication, and contingency planning under a new constraint, in a different activity, or teach the cue to someone else — without completing another learner's graded work.",
+  "accessibilitySupports": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Allow typed, handwritten, spoken, drawn, demonstrated, or described responses when the standard permits.",
+    "Offer reduced-copying, extended-time, hidden-timer, rest-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "Preserve the learning target while adjusting quantity, pacing, intensity, range, equipment, or response mode.",
+    "Every movement task has a seated, supported, reduced-range, reduced-pace, and solo version that reaches the same standard.",
+    "Scale, distance, terrain, and duration are learner-set. A full indoor or home-area equivalent is available for any learner for whom the outdoor activity is unsafe, inaccessible, or not approved."
+  ],
+  "optionalReflection": {
+    "prompt": "Which cue, decision, safety check, or adaptation preserved the target for navigation, communication, and contingency planning, and what would you keep or change in a next safe attempt?",
+    "private": true,
+    "graded": false,
+    "optional": true
+  },
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience.",
+    "This task never requires maximal effort, exercise as punishment, or movement through pain.",
+    "This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceLessonId": "ma-g11-physical-education-u06-l03",
+    "productionDepthRevision": "physical-education-production-depth-r1"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

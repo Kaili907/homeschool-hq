@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u05-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u05-l10",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Quadratic Expressions and Equations",
+    "dayInUnit": 10,
+    "courseDay": 82,
+    "phase": "Discussion or problem seminar",
+    "focus": "solving quadratics by inspection, taking roots, and factoring",
+    "title": "Discussion or problem seminar: solving quadratics by inspection, taking roots, and factoring"
+  },
+  "standards": [
+    "A-SSE.3",
+    "A-REI.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 1,
+          "prompt": "Solve x² + 3x + 1 = 0 exactly.",
+          "workedSolution": {
+            "steps": [
+              "Discriminant 9 − 4 = 5.",
+              "x = (−3 ± √5)/2."
+            ],
+            "answer": "x = (−3 ± √5) / 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 2,
+          "prompt": "You need to read off the x-intercepts of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "choices": [
+            "vertex form",
+            "standard form",
+            "recursive form",
+            "factored form"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Solve by factoring: x^2 + 10x + 16 = 0.",
+          "choices": [
+            "x = -8 or x = 2",
+            "x = 8 or x = 2",
+            "x = -8 or x = -2",
+            "x = -7 or x = -2"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Without solving, describe the roots of -x^2 + 8x + 1 = 0.",
+          "choices": [
+            "exactly one real root (a repeated root)",
+            "two distinct irrational roots",
+            "two distinct rational roots",
+            "no real roots (two complex conjugate roots)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "Rewrite x^2 - 6x + 6 in vertex form and state the vertex.",
+          "choices": [
+            "(x + 3)² − 3; vertex (-3, -3)",
+            "(x − 3)² + 3; vertex (3, 3)",
+            "(x − 3)² − 3; vertex (3, -3)",
+            "(x − 3)² + 6; vertex (3, 6)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Use the quadratic formula to solve x^2 - 7x + 1 = 0. Give exact values.",
+          "choices": [
+            "x = (7 ± 3√5) / 1",
+            "x = (7 ± 3√5) / 2",
+            "x = (7 ± √45) / 2",
+            "x = (-7 ± 3√5) / 2"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "You need to read off the y-intercept of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "choices": [
+            "standard form",
+            "factored form",
+            "recursive form",
+            "vertex form"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Solve by factoring: x^2 + 7x - 8 = 0.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Without solving, describe the roots of 2x^2 - 4x + 9 = 0.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u05-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u05-l10"
+  }
+}

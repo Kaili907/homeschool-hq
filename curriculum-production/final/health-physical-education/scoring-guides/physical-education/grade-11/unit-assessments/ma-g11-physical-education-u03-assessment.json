@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g11-physical-education-u03-assessment",
+  "courseId": "ma-g11-physical-education",
+  "grade": 11,
+  "subject": "physical-education",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "safe participation and self-management",
+    "skill cues or movement quality",
+    "tactical or training reasoning",
+    "self-assessment and revision"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with safe, independent application and adequate explanation of cues, tactics, or training reasoning.",
+    "developing": "70–84% or inconsistent explanation; assign varied practice and a fresh transfer check on a later occasion.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the simplest version and reassess with new evidence.",
+    "rule": "A unit score is one evidence source on one occasion, not the sole basis for long-term mastery. Never adjust a score for body size, weight, or appearance."
+  },
+  "accommodationNote": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "guardianSafetyReview": {
+    "equipment": "Depends on the chosen activity; substitutes and free options are acceptable.",
+    "environment": "Guardian approves the practice location.",
+    "movement_hazards": "Depends on the activity; guardian approves the second specialization and its risk profile.",
+    "supervision_note": "Guardian confirms combined training load across both pathways is reasonable.",
+    "guardian_confirmation_required": true
+  },
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceAssessmentId": "ma-g11-physical-education-u03-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

@@ -1,0 +1,9 @@
+.family-pilot-lesson-player { margin: 0 auto; max-width: 56rem; padding: 1.5rem; color: #0f172a; }
+.family-pilot-lesson-player header, .family-pilot-lesson-player article { border: 1px solid #cbd5e1; border-radius: 1rem; background: white; padding: 1.25rem; }
+.family-pilot-lesson-player article { margin-top: 1rem; }
+.family-pilot-lesson-player nav { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.family-pilot-lesson-player button { border: 1px solid #0e7490; border-radius: .6rem; background: #fff; padding: .65rem 1rem; font-weight: 700; }
+.family-pilot-lesson-player button:disabled { opacity: .45; }
+.family-pilot-lesson-player .lesson-subject { color: #0e7490; font-weight: 800; }
+.family-pilot-lesson-player .lesson-directions { border-left: .25rem solid #0891b2; padding-left: .75rem; }
+.family-pilot-lesson-player .lesson-progress { font-weight: 700; }

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u02-l13",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u02-l13",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Integer Exponents and Scientific Notation",
+    "dayInUnit": 13,
+    "courseDay": 35,
+    "phase": "Skill consolidation",
+    "focus": "laws of integer exponents",
+    "title": "Skill consolidation: laws of integer exponents"
+  },
+  "standards": [
+    "8.EE.1",
+    "8.EE.3",
+    "8.EE.4"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u02-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-integer-exponent",
+          "standard": "8.EE.1",
+          "difficulty": 1,
+          "prompt": "Evaluate 4^2.",
+          "choices": [
+            "16",
+            "17",
+            "64",
+            "1/16"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "combine-powers",
+          "standard": "8.EE.1",
+          "difficulty": 2,
+          "prompt": "Simplify 8^5 ÷ 8^-3.",
+          "choices": [
+            "8^9",
+            "8^2",
+            "8^8",
+            "8^10"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "power-of-a-power",
+          "standard": "8.EE.1",
+          "difficulty": 2,
+          "prompt": "Simplify (5^0)^4.",
+          "choices": [
+            "5^0",
+            "5^-1",
+            "5^2",
+            "5^4"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-power-of-ten",
+          "standard": "8.EE.1",
+          "difficulty": 2,
+          "prompt": "Evaluate 10^6.",
+          "choices": [
+            "100000",
+            "1000000",
+            "10000000",
+            "60"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-powers-of-ten",
+          "standard": "8.EE.1",
+          "difficulty": 3,
+          "prompt": "10^-1 is how many times as large as 10^-4?",
+          "choices": [
+            "1000",
+            "0.00001",
+            "0.001",
+            "100"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "convert-scientific-notation",
+          "standard": "8.EE.3",
+          "difficulty": 3,
+          "prompt": "Write 8.3 × 10^-1 in standard form.",
+          "choices": [
+            "0.83",
+            "83",
+            "8.3",
+            "0.083"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "compare-scientific-notation",
+          "standard": "8.EE.3",
+          "difficulty": 3,
+          "prompt": "Compare 5.2 × 10^3 and 9.9 × 10^-9.",
+          "choices": [
+            "5.2 × 10^3 = 9.9 × 10^-9",
+            "cannot be compared without a calculator",
+            "5.2 × 10^3 > 9.9 × 10^-9",
+            "5.2 × 10^3 < 9.9 × 10^-9"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "operate-scientific-notation",
+          "standard": "8.EE.4",
+          "difficulty": 3,
+          "prompt": "Multiply (5 × 10^3) × (7 × 10^5) and write the result in scientific notation.",
+          "choices": [
+            "3.5 × 10^-2",
+            "3.5 × 10^11",
+            "35 × 10^8",
+            "3.5 × 10^9"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "scientific-notation-word-problem",
+          "standard": "8.EE.4",
+          "difficulty": 3,
+          "prompt": "A processor performs 5 × 10^1 operations per second. How many operations does it perform in 4 × 10^3 seconds? Write the answer in scientific notation.",
+          "choices": [
+            "2 × 10^-2",
+            "2 × 10^5",
+            "20 × 10^4",
+            "2 × 10^4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u02-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "extreme-quantities-word-problem",
+          "standard": "8.EE.4",
+          "difficulty": 2,
+          "prompt": "A cell has a diameter of about 8 × 10^3 meters. A virus has a diameter of about 2 × 10^-2 meters. How many times as large is the cell as the virus?",
+          "choices": [
+            "4 × 10^7",
+            "4 × 10^4",
+            "4 × 10^1",
+            "4 × 10^5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "exponent-error-analysis",
+          "standard": "8.EE.1",
+          "difficulty": 3,
+          "prompt": "A student claims 4^-3 = -4^3. Which statement best analyzes the claim?",
+          "choices": [
+            "The claim is correct; a negative exponent negates the value.",
+            "The claim is incorrect; a negative exponent means reciprocal, not a negative sign, so 4^-3 = 1/64.",
+            "The claim is incorrect; 4^-3 = 0.",
+            "The claim is incorrect; 4^-3 = 64."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "scientific-notation-error-analysis",
+          "standard": "8.EE.4",
+          "difficulty": 3,
+          "prompt": "A student multiplies (6 × 10^0) × (5 × 10^-4) and writes 30 × 10^-4. Which statement best analyzes the claim?",
+          "choices": [
+            "The coefficients should have been added, not multiplied: 11 × 10^-4.",
+            "The claim is correct and already in scientific notation.",
+            "The value is correct but not in scientific notation; 30 × 10^-4 should be rewritten as 3 × 10^-3.",
+            "The exponents should have been multiplied: 30 × 10^0."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u02-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u02-l13"
+  }
+}

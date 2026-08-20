@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u05-l03",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Adding and Subtracting Fractions",
+    "dayInUnit": 3,
+    "courseDay": 75,
+    "phase": "Guided practice A",
+    "focus": "common denominators",
+    "title": "Guided practice A: common denominators"
+  },
+  "standards": [
+    "5.NF.1",
+    "5.NF.2"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "least-common-denominator",
+          "standard": "5.NF.1",
+          "difficulty": 1,
+          "prompt": "What is the least common denominator of fractions with denominators 6 and 8?",
+          "workedSolution": {
+            "steps": [
+              "Multiples of 6 are 6, 12, 18, 24, and so on.",
+              "Multiples of 8 are 8, 16, 24, and so on.",
+              "The first shared multiple is 24, so the least common denominator is 24."
+            ],
+            "answer": "24"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "rewrite-with-common-denominator",
+          "standard": "5.NF.1",
+          "difficulty": 1,
+          "prompt": "Rewrite 5/6 and 2/3 as equivalent fractions with the least common denominator.",
+          "choices": [
+            "5/6 and 5/6",
+            "6/6 and 4/6",
+            "4/6 and 5/6",
+            "5/6 and 4/6"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "add-unlike-fractions",
+          "standard": "5.NF.1",
+          "difficulty": 1,
+          "prompt": "1/2 + 1/6 = ? Write the answer in simplest form.",
+          "choices": [
+            "1",
+            "2/3",
+            "1/3",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "subtract-unlike-fractions",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "7/9 - 1/5 = ? Write the answer in simplest form.",
+          "choices": [
+            "26/47",
+            "26/45",
+            "3/5",
+            "27/46"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "add-mixed-numbers",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "5 1/2 + 1 1/11 = ? Write the answer in simplest form.",
+          "choices": [
+            "6 8/23",
+            "7 13/22",
+            "6 13/22",
+            "6 6/11"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "subtract-mixed-numbers",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "4 1/2 - 3 8/9 = ? Write the answer in simplest form.",
+          "choices": [
+            "12/19",
+            "11/19",
+            "11/18",
+            "11/20"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "addition-word-problem",
+          "standard": "5.NF.2",
+          "difficulty": 2,
+          "prompt": "One ribbon piece is 1/3 meters long and another is 2 1/2 meters long. What is their total length in meters?",
+          "choices": [
+            "2 3/7",
+            "2 4/7",
+            "2 2/3",
+            "2 5/6"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "subtraction-word-problem",
+          "standard": "5.NF.2",
+          "difficulty": 2,
+          "prompt": "A ribbon is 2 19/36 meters long. If 3/4 meters are used, how many meters remain?",
+          "choices": [
+            "1 7/9",
+            "1 8/9",
+            "1 2/3",
+            "2 7/9"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fraction",
+          "standard": "5.NF.1",
+          "difficulty": 3,
+          "prompt": "Complete the equivalent fraction: 1/2 = 6/?.",
+          "choices": [
+            "11",
+            "18",
+            "13",
+            "12"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "simplify-fraction",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "Write 6/12 in simplest form.",
+          "choices": [
+            "2/3",
+            "1/3",
+            "1/2",
+            "1/4"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-to-benchmark",
+          "standard": "5.NF.2",
+          "difficulty": 2,
+          "prompt": "Compare 3/3 with the benchmark 1 using <, >, or =.",
+          "choices": [
+            "=",
+            ">",
+            "<"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u05-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u05-l03"
+  }
+}

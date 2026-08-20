@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { CURRICULUM_GRADES } from '../../../src/admin/curriculum/contracts.ts'
 
 const READ_TIMEOUT_MS = 5_000
 const HASH = /^[0-9a-f]{64}$/
@@ -18,6 +19,7 @@ const CONTENT_TYPES = new Set([
   'text/markdown;charset=utf-8',
   'text/plain;charset=utf-8',
 ])
+const COUNT_KEYS = ['courses', 'units', 'lessons', 'assessments', 'texts', 'schedules']
 export const ADMIN_CURRICULUM_RELEASE_LIST_LIMIT = 1_000
 
 function serviceConfig(env) {
@@ -119,8 +121,18 @@ function adaptDetails(value) {
     fileInventorySha256: value.digests.fileInventorySha256,
   }
   if (Object.values(digests).some((digest) => typeof digest !== 'string' || !HASH.test(digest))) return null
-  const gradeCounts = { '5': counts(value.gradeCounts['5']), '7': counts(value.gradeCounts['7']), '8': counts(value.gradeCounts['8']) }
-  if (Object.values(gradeCounts).some((grade) => grade === null)) return null
+  const gradeKeys = Object.keys(value.gradeCounts)
+  const gradeCounts = Object.fromEntries(CURRICULUM_GRADES
+    .map(String)
+    .filter((grade) => Object.hasOwn(value.gradeCounts, grade))
+    .map((grade) => [grade, counts(value.gradeCounts[grade])]))
+  if (
+    gradeKeys.length === 0
+    || gradeKeys.length !== Object.keys(gradeCounts).length
+    || Object.values(gradeCounts).some((grade) => grade === null)
+    || COUNT_KEYS.some((key) => Object.values(gradeCounts)
+      .reduce((total, grade) => total + grade[key], 0) !== release.counts[key])
+  ) return null
   if (value.files.length !== release.fileCount || value.files.length > 10_000) return null
   const staged = release.provenanceClass === 'staged_publish'
   if (staged) {

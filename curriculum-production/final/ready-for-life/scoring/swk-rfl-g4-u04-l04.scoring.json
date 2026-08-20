@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l04",
+  "lessonId": "ma-g4-ready-for-life-u04-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Variety planning and execution",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The plan or the actual plate covers fewer than three food groups, or colors and textures are not addressed."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The plan and the actual plate each include at least three food groups, two colors, and two textures."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner accurately explains every difference between the planned and actual plate."
+          }
+        ]
+      },
+      {
+        "dimension": "Comparison and next step",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The comparison between planned and actual plate is missing or only states whether they matched, with no detail."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The comparison names specific differences and rates the overall variety accurately."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner proposes a specific, realistic way to add more variety next time."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No response references calories, amounts, weight, or food-morality language such as 'healthy' or 'junk' used as a judgment.",
+      "The adult was present for the household portion of the task and the evidence reflects a real plate, not an imagined one."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

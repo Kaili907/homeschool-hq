@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel-academy.local/schema/answer-key.schema.json",
+  "title": "Mathematics answer key (parent/teacher projection)",
+  "description": "Answers and checking reasoning for one lesson's graded items. Stored separately from the student package so a learner-facing renderer never loads it.",
+  "type": "object",
+  "required": ["schemaVersion", "packageId", "lessonRef", "answers", "scoringGuidance", "masteryRule", "remediationGuidance", "extensionGuidance", "integrity"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "packageId": { "type": "string", "pattern": "^swk-" },
+    "lessonRef": {
+      "type": "object",
+      "required": ["lessonId", "courseId", "grade", "unitNumber", "phase"],
+      "additionalProperties": false,
+      "properties": {
+        "lessonId": { "type": "string" },
+        "courseId": { "type": "string" },
+        "grade": { "type": "integer" },
+        "unitNumber": { "type": "integer" },
+        "phase": { "type": "string" }
+      }
+    },
+    "answers": { "type": "array", "items": { "$ref": "#/$defs/answer" } },
+    "scoringGuidance": { "type": "string" },
+    "masteryRule": { "type": "string" },
+    "remediationGuidance": { "type": "array", "items": { "type": "string" } },
+    "extensionGuidance": { "type": "array", "items": { "type": "string" } },
+    "integrity": {
+      "type": "object",
+      "required": ["corpusVersion", "seed"],
+      "additionalProperties": false,
+      "properties": {
+        "corpusVersion": { "type": "string" },
+        "seed": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "answer": {
+      "type": "object",
+      "required": ["ref", "itemType", "standard", "difficulty", "answerType", "answer", "given", "solutionReasoning", "referenceExample", "verification", "commonErrors"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": { "type": "string", "description": "Must equal the ref of a graded item in the paired package." },
+        "itemType": { "type": "string" },
+        "standard": { "type": "string" },
+        "difficulty": { "type": "integer", "enum": [1, 2, 3] },
+        "answerType": { "const": "fixed" },
+        "answer": { "type": "string", "minLength": 1 },
+        "answerIndex": { "type": "integer", "minimum": 0, "description": "Present for multiple-choice items; indexes the package item's choices." },
+        "given": { "type": "object", "description": "The item's generation parameters, so the answer can be re-derived." },
+        "solutionReasoning": {
+          "type": "object",
+          "description": "Reasoning about THIS item, using this item's own quantities.",
+          "required": ["steps", "answer"],
+          "additionalProperties": false,
+          "properties": {
+            "steps": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "answer": { "type": "string" }
+          }
+        },
+        "referenceExample": {
+          "type": "object",
+          "description": "The item type's authored teaching example. A DIFFERENT problem, shown to model the method.",
+          "required": ["prompt", "steps", "answer"],
+          "additionalProperties": false,
+          "properties": {
+            "prompt": { "type": "string" },
+            "steps": { "type": "array", "items": { "type": "string" } },
+            "answer": { "type": "string" }
+          }
+        },
+        "verification": {
+          "type": "object",
+          "required": ["method", "oracle", "parameters"],
+          "additionalProperties": false,
+          "properties": {
+            "method": {
+              "enum": ["recomputed", "generator-authority"],
+              "description": "recomputed: an oracle in this directory re-derived the answer from the parameters on an independent code path. generator-authority: the answer comes from a canonical curriculum generator whose arithmetic is verified by its own oracle test suite."
+            },
+            "oracle": { "type": "string" },
+            "parameters": { "type": "object" }
+          }
+        },
+        "commonErrors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["observed", "likelyCause", "remediation"],
+            "additionalProperties": false,
+            "properties": {
+              "observed": { "type": "string" },
+              "likelyCause": { "type": "string" },
+              "remediation": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

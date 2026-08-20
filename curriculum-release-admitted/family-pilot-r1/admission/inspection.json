@@ -1,0 +1,246 @@
+{
+  "candidate_id": "manuel-academy-family-pilot-r1",
+  "release_version": "2.0.0",
+  "declared_schema_set_version": "2.0.0",
+  "supported_schema_set_version": "2.0.0",
+  "declared_grades": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "observed_grades": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "unsupported_grades": [],
+  "observed_subjects": [
+    "arts-and-music",
+    "english-language-arts",
+    "financial-literacy",
+    "health",
+    "mathematics",
+    "physical-education",
+    "ready-for-life",
+    "science",
+    "social-studies",
+    "technology"
+  ],
+  "unsupported_subjects": [],
+  "graduation_complete_claimed": true,
+  "counts": {
+    "courses": 90,
+    "units": 698,
+    "lessons": 8292,
+    "assessments": 699,
+    "schedules": 9,
+    "resources": 1,
+    "standard_frameworks": 1
+  },
+  "coverage": [
+    {
+      "grade": 3,
+      "declared": true,
+      "courses": 10,
+      "units": 77,
+      "lessons": 900,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ],
+      "scheduled": true
+    },
+    {
+      "grade": 4,
+      "declared": true,
+      "courses": 10,
+      "units": 77,
+      "lessons": 900,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ],
+      "scheduled": true
+    },
+    {
+      "grade": 5,
+      "declared": true,
+      "courses": 10,
+      "units": 77,
+      "lessons": 900,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ],
+      "scheduled": true
+    },
+    {
+      "grade": 7,
+      "declared": true,
+      "courses": 10,
+      "units": 77,
+      "lessons": 900,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ],
+      "scheduled": true
+    },
+    {
+      "grade": 8,
+      "declared": true,
+      "courses": 10,
+      "units": 78,
+      "lessons": 936,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ],
+      "scheduled": true
+    },
+    {
+      "grade": 9,
+      "declared": true,
+      "courses": 10,
+      "units": 78,
+      "lessons": 936,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ],
+      "scheduled": true
+    },
+    {
+      "grade": 10,
+      "declared": true,
+      "courses": 10,
+      "units": 78,
+      "lessons": 936,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ],
+      "scheduled": true
+    },
+    {
+      "grade": 11,
+      "declared": true,
+      "courses": 10,
+      "units": 78,
+      "lessons": 936,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ],
+      "scheduled": true
+    },
+    {
+      "grade": 12,
+      "declared": true,
+      "courses": 10,
+      "units": 78,
+      "lessons": 948,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ],
+      "scheduled": true
+    }
+  ],
+  "referenced_frameworks": [
+    "family-pilot-advisory-standards"
+  ],
+  "custody_frameworks": [
+    "family-pilot-advisory-standards"
+  ],
+  "safety_privacy_gate": {
+    "gate_id": "family-pilot-production-binding-gate-h3",
+    "status": "passed",
+    "reviewed_release_version": "2.0.0",
+    "evidence_locator": "curriculum-release-admitted/family-pilot-r1/validation/binding-validation.json"
+  }
+}

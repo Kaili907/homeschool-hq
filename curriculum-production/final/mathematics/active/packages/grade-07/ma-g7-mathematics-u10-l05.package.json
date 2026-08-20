@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u10-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u10-l05",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 5,
+    "courseDay": 167,
+    "phase": "Concept model B",
+    "focus": "data and uncertainty",
+    "title": "Concept model B: data and uncertainty"
+  },
+  "standards": [
+    "7.RP.3",
+    "7.NS.3",
+    "7.EE.4",
+    "7.G.6",
+    "7.SP.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "proportional-and-algebraic-models",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "A model predicts a $80 rate will increase by 25%. What is the new rate?",
+          "workedSolution": {
+            "steps": [
+              "Identify what the problem is asking and which quantities, assumptions, or constraints matter.",
+              "Build and solve a model, then check the result against the context."
+            ],
+            "answer": "$100"
+          }
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "geometry-and-measurement",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A storage container is 4 by 3 by 2 feet. What is its volume in cubic feet?",
+          "workedSolution": {
+            "steps": [
+              "Identify what the problem is asking and which quantities, assumptions, or constraints matter.",
+              "Build and solve a model, then check the result against the context."
+            ],
+            "answer": "24"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "data-and-uncertainty",
+          "standard": "7.SP.4",
+          "difficulty": 2,
+          "prompt": "A data set has the values 16, 26, 36, 46, 56. The mean is 36. What is the mean absolute deviation (MAD), a measure of the data's uncertainty or spread?",
+          "choices": [
+            "20",
+            "14",
+            "10",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "argument-and-presentation",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A student claims a box that is 6 by 3 by 2 units has a volume of 18 cubic units. Evaluate the claim.",
+          "choices": [
+            "No; the volume is 20 cubic units, not 18.",
+            "No; the volume is 19 cubic units, not 18.",
+            "Cannot be determined from the given information.",
+            "No; the volume is 36 cubic units, not 18."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "problem-formulation",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "A rental company charges a $6 base fee plus $6 per hour. A customer's total bill was $30. Which equation models this situation, and how many hours were rented?",
+          "choices": [
+            "6x + 6 = 30; x = 3",
+            "6x + 6 = 30; x = 6",
+            "6x + 6 = 30; x = 4",
+            "6x + 6 = 30; x = 5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "assumptions-and-constraints",
+          "standard": "7.NS.3",
+          "difficulty": 2,
+          "prompt": "A diver starts at the surface (0 m) and descends 19 m, then descends another 5 m, then ascends 5 m. The dive plan assumes a depth limit of 33 m below the surface. What is the diver's final position, as a signed number of meters?",
+          "choices": [
+            "19",
+            "-19",
+            "-29",
+            "-14"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "proportional-and-algebraic-models",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "A model predicts a $400 rate will increase by 10%. What does the model predict as the new rate?",
+          "choices": [
+            "$440",
+            "$400",
+            "$410",
+            "$360"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "geometry-and-measurement",
+          "standard": "7.G.6",
+          "difficulty": 3,
+          "prompt": "A storage container is designed as a rectangular prism 14 ft long, 2 ft wide, and 11 ft high. What is its volume in cubic feet?",
+          "choices": [
+            "408",
+            "297",
+            "308",
+            "322"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "data-and-uncertainty",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "A data set has the values 11, 21, 31, 41, 51. The mean is 31. What is the mean absolute deviation (MAD), a measure of the data's uncertainty or spread?",
+          "choices": [
+            "20",
+            "14",
+            "12",
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "argument-and-presentation",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A student claims a box that is 6 by 6 by 4 units has a volume of 16 cubic units. Evaluate the claim.",
+          "choices": [
+            "No; the volume is 144 cubic units, not 16.",
+            "Cannot be determined from the given information.",
+            "No; the volume is 18 cubic units, not 16.",
+            "No; the volume is 17 cubic units, not 16."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "problem-formulation",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "A rental company charges a $2 base fee plus $8 per hour. A customer's total bill was $26. Which equation models this situation, and how many hours were rented?",
+          "choices": [
+            "8x + 2 = 26; x = 3",
+            "2x + 8 = 26; x = 5",
+            "8x + 2 = 26; x = 4",
+            "8x + 2 = 26; x = 2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u10-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u10-l05"
+  }
+}

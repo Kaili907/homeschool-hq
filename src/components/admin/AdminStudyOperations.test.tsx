@@ -163,4 +163,51 @@ describe('Admin Study Operations dashboard', () => {
     expect(css).toContain('min-height: 2.75rem')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
   })
+
+  it('renders contract and worker versions that include curriculum grade tokens (3-12)', () => {
+    const gates = STUDY_OPERATION_GATE_IDS.map((id, index) => ({
+      id,
+      status: STATUSES[index],
+      reasonCode: id === 'provider_cost_accounting'
+        ? 'provider_cost_accounting_not_integrated' as const
+        : id === 'provider_attempt_coverage'
+          ? 'provider_attempt_coverage_not_integrated' as const
+          : id === 'adult_review_worker_composition'
+            ? 'adult_review_worker_composed' as const
+            : id === 'adult_review_worker_schedule'
+              ? 'adult_review_worker_schedule_configured' as const
+              : id === 'adult_review_worker_run_evidence'
+                ? 'adult_review_worker_no_work' as const
+                : id === 'production_mount'
+                  ? 'production_mount_unverified' as const
+                  : 'unknown_evidence' as const,
+      contractVersion: id === 'curriculum_release_binding'
+        ? 'study-curriculum.grade-11.v3'
+        : id === 'bound_content_runtime'
+          ? 'family-pilot-grade-10-v2.1'
+          : 'study-production.v1',
+      lastVerifiedAt: null,
+      operatorAction: id === 'provider_cost_accounting'
+        ? 'integrate_cost_accounting' as const
+        : id === 'provider_attempt_coverage'
+          ? 'complete_attempt_coverage' as const
+          : id === 'adult_review_worker_composition' || id === 'adult_review_worker_schedule' || id === 'adult_review_worker_run_evidence'
+            ? 'none' as const
+            : 'retry_evidence' as const,
+    }))
+    const projectionWithGradeTokens: StudyOperationsProjection = {
+      contractVersion: 2,
+      schemaVersion: 2,
+      generatedAt: '2026-08-10T16:00:00.000Z',
+      overallStatus: deriveStudyOperationsStatus(gates),
+      workerEvidence: { ...WORKER_EVIDENCE, workerVersion: 'adult-review-worker.g12.v3' },
+      gates,
+    }
+    const markup = renderToStaticMarkup(
+      <AdminStudyOperations authorized state={{ status: 'ready', projection: projectionWithGradeTokens }} />,
+    )
+    expect(markup).toContain('study-curriculum.grade-11.v3')
+    expect(markup).toContain('family-pilot-grade-10-v2.1')
+    expect(markup).toContain('adult-review-worker.g12.v3')
+  })
 })

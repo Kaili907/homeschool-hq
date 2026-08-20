@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l02",
+  "lessonId": "ma-g9-ready-for-life-u06-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Weekly grid completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Grid is missing entries for one or more systems, or entries are too vague to place on a specific day." },
+          { "label": "Proficient", "descriptor": "Grid includes at least one specific, dated entry for each of the five systems across the week." },
+          { "label": "Advanced", "descriptor": "Grid includes specific entries for all five systems and reflects genuine upcoming commitments for the actual capstone week rather than placeholders." }
+        ]
+      },
+      {
+        "dimension": "Overload detection and correction",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Learner does not determine whether any day is overloaded, or miscounts the commitments on a day." },
+          { "label": "Proficient", "descriptor": "Learner correctly identifies whether any day has three or more different-system demands and, if so, names a specific item to move." },
+          { "label": "Advanced", "descriptor": "Learner correctly identifies overload, moves a specific item to a specific lighter day, and explains why the new day works better." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A grid entry specific enough to check for a real time conflict, a named action on a named day, not a vague label like 'stuff to do.'",
+      "An overload determination that is actually verified by counting entries per day, not just asserted without evidence."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

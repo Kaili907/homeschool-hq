@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l04",
+  "lessonId": "ma-g4-ready-for-life-u05-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Borrowing agreement",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Permission is not clearly asked for, or the return time is vague rather than specific."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Permission is asked directly, a specific return time is agreed on, and the item's condition is noted before borrowing."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains why noting condition beforehand matters, not just as a step to complete."
+          }
+        ]
+      },
+      {
+        "dimension": "Return follow-through",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The item is returned late without the owner being told in advance, or its condition is not checked against the before-notes."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The item is returned on time, or a late return is communicated to the owner before the deadline passes, and condition is honestly compared to the before-notes."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection accurately explains how agreeing on time and condition upfront made responsible return easier."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The item, owner, and return time are all real and specific, not generic placeholders.",
+      "A guardian confirms the item's actual returned condition and timing independently of the learner's self-report."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

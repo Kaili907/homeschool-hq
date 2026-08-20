@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l05",
+  "lessonId": "ma-g8-ready-for-life-u01-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Interruption identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The interruption is described only vaguely ('something came up') with no specific event or time noted."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific interruption is named with a rough time, whether real or a realistically designed one."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The interruption is specific and plausible, and the learner explains why it was likely to happen given their system or schedule."
+          }
+        ]
+      },
+      {
+        "dimension": "Recovery action specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The recovery step is vague or motivational ('I'll try harder,' 'I dealt with it') rather than a concrete action."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The recovery step names a specific, concrete action, such as what was moved, dropped, or reset."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The recovery step is concrete, and the learner explains the reasoning behind choosing that action over an alternative."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The reflection's suggested system change is tied directly to the specific interruption described, not a generic improvement.",
+      "If a designed (not real) interruption is used, it is realistic for that learner's actual schedule rather than an extreme or implausible scenario."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

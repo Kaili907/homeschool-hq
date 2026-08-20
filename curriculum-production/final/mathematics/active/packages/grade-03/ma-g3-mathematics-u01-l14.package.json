@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u01-l14",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u01-l14",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits, Place Value, and Rounding",
+    "dayInUnit": 14,
+    "courseDay": 14,
+    "phase": "Performance task: build",
+    "focus": "worked examples with reasonableness checks",
+    "title": "Performance task: build: worked examples with reasonableness checks"
+  },
+  "standards": [
+    "3.NBT.1",
+    "3.NBT.2",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A school had 852 pencils. 651 pencils were given away. How many pencils are left?",
+          "choices": [
+            "201",
+            "211",
+            "301",
+            "1503"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 654 to the nearest 10.",
+          "choices": [
+            "654",
+            "650",
+            "651",
+            "660"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A school had 595 pencils. They received 296 more pencils. How many pencils are there now?",
+          "choices": [
+            "299",
+            "901",
+            "891",
+            "881"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A school had 756 pencils. 696 pencils were given away. How many pencils are left?",
+          "choices": [
+            "60",
+            "160",
+            "70",
+            "1452"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 3,
+          "prompt": "Round 469 to the nearest 100.",
+          "choices": [
+            "501",
+            "469",
+            "500",
+            "400"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A farm had 434 apples. They received 209 more apples. How many apples are there now?",
+          "choices": [
+            "643",
+            "633",
+            "225",
+            "653"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A school had 775 pencils. 204 pencils were given away. How many pencils are left?",
+          "choices": [
+            "581",
+            "671",
+            "979",
+            "571"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 3,
+          "prompt": "Round 839 to the nearest 100.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A library had 519 books. They received 316 more books. How many books are there now?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u01-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u01-l14"
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l09",
+  "lessonId": "ma-g10-financial-literacy-u07-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$47,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$41,000 of wages plus $6,500 of self-employment income."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$36,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $47,500.00 of total income less the $11,200 standard deduction, applied once to the combined figure."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,690.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$980 on the first $9,800 plus 14% of the remaining $26,500 of taxable income. The $42,000 threshold is not reached, so the top bracket is unused."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$975.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15% of the $6,500 of self-employment income, covering both shares. Note this is charged on the $6,500 itself, with no standard deduction — the deduction applies to income tax only."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$5,665.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,690.00 of income tax plus $975.00 of self-employment payroll tax."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,415.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,665.00 owed against $3,250 paid in through withholding on the wages. The $6,500 of side income generated both income tax and payroll tax and had nothing withheld against either."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The amount of payroll tax the filer personally owes",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The deduction and the thresholds are the same whatever form the income takes. What changes is that the filer personally owes both payroll shares on self-employment income, $975.00 here, where an employer would have paid half on wages."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "w2 + se",
+        "substituted": "41000 + 6500",
+        "result": "$47,500.00",
+        "why": "$41,000 of wages plus $6,500 of self-employment income."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - stdDed",
+        "substituted": "#t1-p1 - 11200",
+        "result": "$36,300.00",
+        "why": "The $47,500.00 of total income less the $11,200 standard deduction, applied once to the combined figure."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "b1 * r1 + (#t1-p2 - b1) * r2",
+        "substituted": "9800 * 0.1 + (#t1-p2 - 9800) * 0.14",
+        "result": "$4,690.00",
+        "why": "$980 on the first $9,800 plus 14% of the remaining $26,500 of taxable income. The $42,000 threshold is not reached, so the top bracket is unused."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "se2 * bothShares",
+        "substituted": "6500 * 0.15",
+        "result": "$975.00",
+        "why": "15% of the $6,500 of self-employment income, covering both shares. Note this is charged on the $6,500 itself, with no standard deduction — the deduction applies to income tax only."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 + #t2-p1",
+        "substituted": "#t1-p3 + #t2-p1",
+        "result": "$5,665.00",
+        "why": "$4,690.00 of income tax plus $975.00 of self-employment payroll tax."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - withheld",
+        "substituted": "#t2-p2 - 3250",
+        "result": "$2,415.00",
+        "why": "$5,665.00 owed against $3,250 paid in through withholding on the wages. The $6,500 of side income generated both income tax and payroll tax and had nothing withheld against either."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Work out what fraction of every dollar of the $6,500 side income this filer keeps, and use it to write one sentence of guidance about setting money aside from side income. Explain why the fraction is smaller than the 14% bracket rate alone would suggest.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Computes the combined burden on the side income correctly — 14% income tax plus 15% payroll tax, so 29 cents of every dollar — and states the fraction kept as about 71 cents.",
+          "Gives guidance tied to that figure: set aside close to 30% of each side payment as it arrives, rather than the 14% the bracket alone suggests.",
+          "Explains that the payroll tax is charged on the side income itself with no deduction, so it stacks on top of the income tax rather than replacing part of it."
+        ],
+        "evidenceRequirements": [
+          "Uses the $975.00 of payroll tax and the $2,415.00 balance due."
+        ],
+        "lookFors": [
+          "The response adds the two taxes rather than treating the bracket rate as the whole burden.",
+          "The response translates the figure into an action with a percentage attached."
+        ],
+        "commonMisconception": "Setting aside only the income tax bracket rate from side income, and being caught by the payroll tax that also applies to it.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the filer’s total income for the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the filer’s taxable income?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the income tax on that taxable income?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What payroll tax is owed on the self-employment income?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the filer owe in total for the year?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "After crediting the $3,250 already withheld, what is the balance due at filing?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Which figure did the $6,500 of self-employment income affect that the same amount of extra W-2 wages would not have?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Work out what fraction of every dollar of the $6,500 side income this filer keeps, and use it to write one sentence of guidance about setting money aside from side income. Explain why the fraction is smaller than the 14% bracket rate alone would suggest."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the filer’s total income for the year? Answer: $47,500.00. Verification: $41,000 of wages plus $6,500 of self-employment income. t1-p2: What is the filer’s taxable income? Answer: $36,300.00. Verification: The $47,500.00 of total income less the $11,200 standard deduction, applied once to the combined figure. t1-p3: What is the income tax on that taxable income? Answer: $4,690.00. Verification: $980 on the first $9,800 plus 14% of the remaining $26,500 of taxable income. The $42,000 threshold is not reached, so the top bracket is unused. t2-p1: What payroll tax is owed on the self-employment income? Answer: $975.00. Verification: 15% of the $6,500 of self-employment income, covering both shares. Note this is charged on the $6,500 itself, with no standard deduction — the deduction applies to income tax only. t2-p2: What does the filer owe in total for the year? Answer: $5,665.00. Verification: $4,690.00 of income tax plus $975.00 of self-employment payroll tax. t2-p3: After crediting the $3,250 already withheld, what is the balance due at filing? Answer: $2,415.00. Verification: $5,665.00 owed against $3,250 paid in through withholding on the wages. The $6,500 of side income generated both income tax and payroll tax and had nothing withheld against either. t2-p4: Which figure did the $6,500 of self-employment income affect that the same amount of extra W-2 wages would not have? Answer: The amount of payroll tax the filer personally owes. Verification: The deduction and the thresholds are the same whatever form the income takes. What changes is that the filer personally owes both payroll shares on self-employment income, $975.00 here, where an employer would have paid half on wages."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Work out what fraction of every dollar of the $6,500 side income this filer keeps, and use it to write one sentence of guidance about setting money aside from side income. Explain why the fraction is smaller than the 14% bracket rate alone would suggest. Computes the combined burden on the side income correctly — 14% income tax plus 15% payroll tax, so 29 cents of every dollar — and states the fraction kept as about 71 cents. Gives guidance tied to that figure: set aside close to 30% of each side payment as it arrives, rather than the 14% the bracket alone suggests. Explains that the payroll tax is charged on the side income itself with no deduction, so it stacks on top of the income tax rather than replacing part of it. Uses the $975.00 of payroll tax and the $2,415.00 balance due. The response adds the two taxes rather than treating the bracket rate as the whole burden. The response translates the figure into an action with a percentage attached."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Computes the combined burden on the side income correctly — 14% income tax plus 15% payroll tax, so 29 cents of every dollar — and states the fraction kept as about 71 cents. Gives guidance tied to that figure: set aside close to 30% of each side payment as it arrives, rather than the 14% the bracket alone suggests. Explains that the payroll tax is charged on the side income itself with no deduction, so it stacks on top of the income tax rather than replacing part of it."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u07-l09.scoring.json",
+    "sourceScoringSha256": "0ff8c13b078c4bbd9a7f0929c7136450b041c61341f8995b17a05212684865d1",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

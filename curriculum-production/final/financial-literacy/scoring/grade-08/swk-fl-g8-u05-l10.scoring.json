@@ -1,0 +1,293 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u05-l10",
+  "lessonId": "ma-g8-financial-literacy-u05-l10",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the compounded balance after five years?",
+        "answer": "$8,029.36",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6,000.00 grown at 6% per period for 5 periods, rounded to the cent each period) = 8,029.36. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "compound",
+            "principal": {
+              "op": "money",
+              "cents": 600000
+            },
+            "bps": 600,
+            "periods": 5
+          },
+          "trace": "(6,000.00 grown at 6% per period for 5 periods, rounded to the cent each period) = 8,029.36"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What does one year of simple interest pay?",
+        "answer": "$360.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6% of 6,000.00) = 360.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 600000
+            },
+            "bps": 600,
+            "round": "exact"
+          },
+          "trace": "(6% of 6,000.00) = 360.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is the simple-interest balance after five years?",
+        "answer": "$7,800.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6,000.00 + ((6% of 6,000.00) x 5)) = 7,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 600000
+              },
+              {
+                "op": "scale",
+                "of": {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 600000
+                  },
+                  "bps": 600,
+                  "round": "exact"
+                },
+                "times": 5
+              }
+            ]
+          },
+          "trace": "(6,000.00 + ((6% of 6,000.00) x 5)) = 7,800.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How much more does compounding produce over five years?",
+        "answer": "$229.36",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((6,000.00 grown at 6% per period for 5 periods, rounded to the cent each period) - (6,000.00 + ((6% of 6,000.00) x 5))) = 229.36. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "compound",
+              "principal": {
+                "op": "money",
+                "cents": 600000
+              },
+              "bps": 600,
+              "periods": 5
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 600000
+                },
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "percent",
+                    "of": {
+                      "op": "money",
+                      "cents": 600000
+                    },
+                    "bps": 600,
+                    "round": "exact"
+                  },
+                  "times": 5
+                }
+              ]
+            }
+          },
+          "trace": "((6,000.00 grown at 6% per period for 5 periods, rounded to the cent each period) - (6,000.00 + ((6% of 6,000.00) x 5))) = 229.36"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much less is that five-year advantage than a single year of simple interest?",
+        "answer": "$130.64",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((6% of 6,000.00) - ((6,000.00 grown at 6% per period for 5 periods, rounded to the cent each period) - (6,000.00 + ((6% of 6,000.00) x 5)))) = 130.64. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 600000
+              },
+              "bps": 600,
+              "round": "exact"
+            },
+            "less": {
+              "op": "diff",
+              "from": {
+                "op": "compound",
+                "principal": {
+                  "op": "money",
+                  "cents": 600000
+                },
+                "bps": 600,
+                "periods": 5
+              },
+              "less": {
+                "op": "sum",
+                "of": [
+                  {
+                    "op": "money",
+                    "cents": 600000
+                  },
+                  {
+                    "op": "scale",
+                    "of": {
+                      "op": "percent",
+                      "of": {
+                        "op": "money",
+                        "cents": 600000
+                      },
+                      "bps": 600,
+                      "round": "exact"
+                    },
+                    "times": 5
+                  }
+                ]
+              }
+            }
+          },
+          "trace": "((6% of 6,000.00) - ((6,000.00 grown at 6% per period for 5 periods, rounded to the cent each period) - (6,000.00 + ((6% of 6,000.00) x 5)))) = 130.64"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Placing compounding in a time context",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response dismisses compounding based on Yaminah's five-year result."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Longer horizons are mentioned for Yaminah but no mechanism is offered."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that the compounding advantage in Yaminah's model grows with each year's larger base, so five years understates what longer horizons produce."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the compounded balance after five years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does one year of simple interest pay?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the simple-interest balance after five years?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much more does compounding produce over five years?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much less is that five-year advantage than a single year of simple interest?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain why compounding looks unimpressive over Yaminah's five years, and what changes over twenty or thirty years."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the compounded balance after five years? Answer: $8,029.36. Verification: (6,000.00 grown at 6% per period for 5 periods, rounded to the cent each period) = 8,029.36. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What does one year of simple interest pay? Answer: $360.00. Verification: (6% of 6,000.00) = 360.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What is the simple-interest balance after five years? Answer: $7,800.00. Verification: (6,000.00 + ((6% of 6,000.00) x 5)) = 7,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: How much more does compounding produce over five years? Answer: $229.36. Verification: ((6,000.00 grown at 6% per period for 5 periods, rounded to the cent each period) - (6,000.00 + ((6% of 6,000.00) x 5))) = 229.36. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How much less is that five-year advantage than a single year of simple interest? Answer: $130.64. Verification: ((6% of 6,000.00) - ((6,000.00 grown at 6% per period for 5 periods, rounded to the cent each period) - (6,000.00 + ((6% of 6,000.00) x 5)))) = 130.64. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Placing compounding in a time context — Not yet: The response dismisses compounding based on Yaminah's five-year result. Approaching: Longer horizons are mentioned for Yaminah but no mechanism is offered. Meets: The response explains that the compounding advantage in Yaminah's model grows with each year's larger base, so five years understates what longer horizons produce. The response explains that the compounding advantage in Yaminah's model grows with each year's larger base, so five years understates what longer horizons produce."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that the compounding advantage in Yaminah's model grows with each year's larger base, so five years understates what longer horizons produce."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u05-l10.scoring.json",
+    "sourceScoringSha256": "acc0924176e6aa9e17f37fa2bca24d9c7c195c3debcd17edd259cd7058200afe",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

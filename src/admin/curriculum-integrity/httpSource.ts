@@ -16,7 +16,7 @@ type FetchLike = (input: string, init: RequestInit) => Promise<Pick<Response, 'o
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/
-const PACKAGE_ID = 'manuel-academy-grades-5-7-8-curriculum-v1'
+const GOVERNED_GRADES = new Set([3, 4, 5, 7, 8, 9, 10, 11, 12])
 const STATUS = new Set<string>(CURRICULUM_INTEGRITY_STATUSES)
 const LINK_KINDS = ['draft', 'validation', 'approval', 'staging', 'published'] as const
 const FINDING_CODES = new Set([
@@ -48,6 +48,16 @@ function status(value: unknown): value is CurriculumIntegrityStatus {
 
 function count(value: unknown): value is number {
   return Number.isSafeInteger(value) && Number(value) >= 0
+}
+
+function packageId(value: unknown): value is string {
+  if (typeof value !== 'string') return false
+  const match = /^manuel-academy-grades-(\d+(?:-\d+)*)-curriculum-v1$/.exec(value)
+  if (!match) return false
+  const grades = match[1].split('-').map(Number)
+  return grades.length > 0
+    && new Set(grades).size === grades.length
+    && grades.every((grade, index) => GOVERNED_GRADES.has(grade) && (index === 0 || grades[index - 1] < grade))
 }
 
 function fixedFinding(value: unknown): CurriculumIntegrityFinding | null {
@@ -116,7 +126,7 @@ function safeSubject(value: unknown): CurriculumIntegritySubject | null {
     || value.state !== (value.kind === 'staged' ? 'STAGED' : 'PUBLISHED')
     || typeof value.subjectId !== 'string' || typeof value.version !== 'string'
     || !status(value.status) || !status(value.manifestStatus) || !status(value.packageStatus)
-    || !status(value.metadataStatus) || (value.packageId !== null && value.packageId !== PACKAGE_ID)
+    || !status(value.metadataStatus) || (value.packageId !== null && !packageId(value.packageId))
     || (value.baseReleaseVersion !== null && (typeof value.baseReleaseVersion !== 'string'
       || !VERSION.test(value.baseReleaseVersion)))
     || (value.schemaSetVersion !== null && value.schemaSetVersion !== '2.0.0')) return null

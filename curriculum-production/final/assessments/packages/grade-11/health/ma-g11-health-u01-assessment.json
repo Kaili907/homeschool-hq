@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-health-u01-assessment",
+  "courseRef": "ma-g11-health",
+  "grade": 11,
+  "subject": "health",
+  "location": {
+    "unitRef": "ma-g11-health-u01",
+    "unitNumber": 1,
+    "unitTitle": "Evaluating Health Information, Products, and Services",
+    "courseTitle": "Health III: Consumer Health, Safety, and Emergency Response",
+    "assessmentLessonRef": "ma-g11-health-u01-l05"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-11/unit-assessments/ma-g11-health-u01-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the private-safe task without disclosing medical history, diagnosis, body measurements, or sexual history.",
+    "Use a fictional scenario when offered and identify a trusted adult or qualified professional where appropriate."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain evidence hierarchy in plain language: anecdote, observation, trial, review in your own words and give a valid example."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of reading a study summary without over-reading it."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply regulated versus unregulated products and what a label legally means in a new fictional situation. Show the decision process or cite the evidence used."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving evaluating a health service: credential, scope, cost, and accountability; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect conflict of interest and funding disclosure with the cost of being wrong: how to size a risk before acting. Explain how the two support, constrain, or build on one another."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Produce a consumer-grade evaluation of three fictional health products or services, ranking them on evidence, safety, cost, and accountability, and stating the one piece of missing information that would change the ranking."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question."
+    }
+  ],
+  "responseMode": "private-safe-task-and-reflection",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/health/ma-g11-health-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy of health information criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated skill application criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-health-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-11/unit-assessments/ma-g11-health-u01-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Evaluating Health Information, Products, and Services?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

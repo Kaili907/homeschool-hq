@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l06",
+  "lessonId": "ma-g5-ready-for-life-u05-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Naming the real impact",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Impact described vaguely, for example 'it was bad.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Impact names specifically who or what was affected."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Impact is specific and the learner connects it to why the responsibility mattered in the first place."
+          }
+        ]
+      },
+      {
+        "dimension": "Repair and prevention",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Repair step is vague or the prevention change is generic 'try harder.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Repair step is carried out and prevention change is specific."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Repair step is carried out, prevention change is specific, and tied to a concrete trigger or reminder system."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No shame language appears in the guided conversation or written reflection.",
+      "Repair step is proportionate to the actual miss, not overblown or dismissive.",
+      "Prevention change is concrete enough to check later."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l01",
+  "lessonId": "ma-g12-ready-for-life-u02-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Category completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fewer than six recurring bill categories are listed, or a major category (housing, a utility, food) is missing entirely." },
+          { "label": "Proficient", "descriptor": "At least six plausible recurring bill categories are listed with a fictional amount for each." },
+          { "label": "Advanced", "descriptor": "Categories include at least one less-obvious but real expense (such as renter's insurance or a recurring transit cost) beyond the warm-up list." }
+        ]
+      },
+      {
+        "dimension": "Internal arithmetic consistency",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The stated leftover/shortfall does not match income minus the sum of listed bills." },
+          { "label": "Proficient", "descriptor": "The leftover/shortfall figure correctly equals income minus the sum of listed bills." },
+          { "label": "Advanced", "descriptor": "The learner shows the running arithmetic (not just a final number), making the calculation easy to check." }
+        ]
+      },
+      {
+        "dimension": "Plausibility of invented figures",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Figures are wildly unrealistic in relation to each other (e.g., rent listed as less than a phone bill) with no acknowledgment." },
+          { "label": "Proficient", "descriptor": "Figures are internally plausible relative to each other, even though invented." },
+          { "label": "Advanced", "descriptor": "The reflection response shows awareness of which figure was hardest to estimate plausibly and why." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real account numbers, real balances, or identifiable real household financial details appear anywhere.",
+      "Income minus total bills equals the stated leftover/shortfall exactly.",
+      "The reflection names a specific category, not a generic 'I forgot something.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

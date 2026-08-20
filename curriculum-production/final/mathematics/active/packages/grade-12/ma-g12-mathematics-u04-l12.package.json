@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u04-l12",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u04-l12",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "The Complex Plane",
+    "dayInUnit": 12,
+    "courseDay": 66,
+    "phase": "Performance task build",
+    "focus": "computing with the geometric representation",
+    "title": "Performance task build: computing with the geometric representation"
+  },
+  "standards": [
+    "N-CN.3",
+    "N-CN.4",
+    "N-CN.5",
+    "N-CN.6",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 2,
+          "prompt": "Complex numbers z and w have modulus 4 and 3 and arguments 45° and 60°. Give the modulus and argument of zw.",
+          "choices": [
+            "modulus 12, argument 105°",
+            "modulus 7, argument 105°",
+            "modulus 12, argument 2700°",
+            "modulus 12, argument 15°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 3,
+          "prompt": "Let z = -6 − 3i and w = -3 + i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "choices": [
+            "distance 25, midpoint -4.5 − i",
+            "distance 7, midpoint -4.5 − i",
+            "distance 5, midpoint 3 + 4i",
+            "distance 5, midpoint -4.5 − i"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 2,
+          "prompt": "For z = 6 + 8i, give the conjugate z̄ and the modulus |z|.",
+          "choices": [
+            "z̄ = 6 − 8i, |z| = 14",
+            "z̄ = -6 − 8i, |z| = 10",
+            "z̄ = -6 + 8i, |z| = 10",
+            "z̄ = 6 − 8i, |z| = 10"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 3,
+          "prompt": "Write 1 − i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "choices": [
+            "modulus √2, argument 225°",
+            "modulus √2, argument 45°",
+            "modulus √2, argument 135°",
+            "modulus √2, argument 315°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 3,
+          "prompt": "Complex numbers z and w have modulus 5 and 4 and arguments 30° and 60°. Give the modulus and argument of zw.",
+          "choices": [
+            "modulus 20, argument 1800°",
+            "modulus 20, argument 30°",
+            "modulus 9, argument 90°",
+            "modulus 20, argument 90°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 3,
+          "prompt": "Let z = 6 + 8i and w = 12 + 16i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "choices": [
+            "distance 10, midpoint 6 + 8i",
+            "distance 100, midpoint 9 + 12i",
+            "distance 14, midpoint 9 + 12i",
+            "distance 10, midpoint 9 + 12i"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 3,
+          "prompt": "For z = -7 − 24i, give the conjugate z̄ and the modulus |z|.",
+          "choices": [
+            "z̄ = -7 + 24i, |z| = 31",
+            "z̄ = -7 + 24i, |z| = 25",
+            "z̄ = 7 + 24i, |z| = 25",
+            "z̄ = 7 − 24i, |z| = 25"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 3,
+          "prompt": "Write 1 + i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "choices": [
+            "modulus √2, argument 315°",
+            "modulus √2, argument 225°",
+            "modulus √2, argument 135°",
+            "modulus √2, argument 45°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 3,
+          "prompt": "Complex numbers z and w have modulus 4 and 2 and arguments 45° and 45°. Give the modulus and argument of zw.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 3,
+          "prompt": "Let z = 4 + i and w = 10 + 9i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u04-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u04-l12"
+  }
+}

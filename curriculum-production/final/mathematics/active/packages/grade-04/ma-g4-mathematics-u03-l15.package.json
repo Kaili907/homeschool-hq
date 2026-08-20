@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l15",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l15",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 15,
+    "courseDay": 51,
+    "phase": "Synthesis and review",
+    "focus": "comparison, factors, and multiples",
+    "title": "Synthesis and review: comparison, factors, and multiples"
+  },
+  "standards": [
+    "4.OA.1",
+    "4.OA.2",
+    "4.OA.4"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank so the sentence is true: 6 is ___ times as many as 2.",
+          "choices": [
+            "4",
+            "3",
+            "6",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Mia has 6 trading cards. Jacob has 4 times as many cards as Mia. How many cards does Jacob have?",
+          "choices": [
+            "30",
+            "24",
+            "18",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 45 have?",
+          "choices": [
+            "3",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "What is the 9th multiple of 6?",
+          "choices": [
+            "15",
+            "48",
+            "60",
+            "54"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 4 is ___ times as many as 2.",
+          "choices": [
+            "3",
+            "4",
+            "2",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 3,
+          "prompt": "Ava has 5 trading cards. Noah has 9 times as many cards as Ava. How many cards does Noah have?",
+          "choices": [
+            "50",
+            "45",
+            "40",
+            "14"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 28 have?",
+          "choices": [
+            "5",
+            "6",
+            "7",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 5th multiple of 4?",
+          "choices": [
+            "9",
+            "24",
+            "16",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 48 is ___ times as many as 12.",
+          "choices": [
+            "4",
+            "12",
+            "36",
+            "48"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l15"
+  }
+}

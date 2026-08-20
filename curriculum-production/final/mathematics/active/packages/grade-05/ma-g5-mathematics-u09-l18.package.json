@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u09-l18",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u09-l18",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Geometry and the Coordinate Plane",
+    "dayInUnit": 18,
+    "courseDay": 162,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "coordinate problem solving",
+    "title": "Publication, presentation, or reflection: coordinate problem solving"
+  },
+  "standards": [
+    "5.G.1",
+    "5.G.2",
+    "5.G.3",
+    "5.G.4"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "coordinate-route",
+          "standard": "5.G.2",
+          "difficulty": 1,
+          "prompt": "Start at (2, 1), move right 3 and up 2. Where do you end?",
+          "workedSolution": {
+            "steps": [
+              "Right increases x.",
+              "Up increases y."
+            ],
+            "answer": "(5, 3)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-coordinate-axes",
+          "standard": "5.G.1",
+          "difficulty": 2,
+          "prompt": "Which coordinate-plane axis is vertical?",
+          "choices": [
+            "ordered pair",
+            "x-axis",
+            "y-axis",
+            "origin"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "read-ordered-pair",
+          "standard": "5.G.1",
+          "difficulty": 2,
+          "prompt": "What ordered pair has x-coordinate 6 and y-coordinate 2?",
+          "choices": [
+            "(5, 2)",
+            "(7, 3)",
+            "(6, 2)",
+            "(6, 1)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "On a map, the library is at x = 12 and y = 4. Which point names its location?",
+          "choices": [
+            "(12, 4)",
+            "(12, 3)",
+            "(4, 12)",
+            "(13, 4)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 3,
+          "prompt": "A shape has 4 sides, 4 right angles, and 2 pairs of parallel sides. Its opposite sides are equal in length, and its adjacent sides are unequal in length. What is the most specific name?",
+          "choices": [
+            "rhombus",
+            "pentagon",
+            "rectangle",
+            "parallelogram"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 3,
+          "prompt": "In the hierarchy rhombus → parallelogram → quadrilateral, what category comes immediately after rhombus?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "geometric-vocabulary",
+          "standard": "5.G.3",
+          "difficulty": 3,
+          "prompt": "Lines in a plane that never meet are called what?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u09-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u09-l18"
+  }
+}

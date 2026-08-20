@@ -1,0 +1,416 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l06",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: avoiding fraud and high-pressure offers"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "avoiding fraud and high-pressure offers",
+  "objective": "Test a fictional investment claim by compounding it out, compare the implied result against a stated alternative, and name the features that identify the offer as one to refuse.",
+  "scenario": "The offer described below is a fictional construction for this exercise. No real firm, promoter, product, or scheme is described, and nothing here identifies any actual offer.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional offer terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional promoter offers a \"guaranteed 18% a month, compounded\", asks for a $250 joining fee, requires a decision within 48 hours, and says the opportunity closes after that. A fictional stable savings account is available paying 3% a year. Test the claim on a $1,000 stake.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "If the 18% monthly claim held for a year, what would a $1,000 stake become?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What annual return does that imply, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the same stake become in a year in the fictional 3% account?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Before deciding anything, note two things a saver can actually do: promoters and the products they sell are listed on a public register kept by the financial regulator, and the full terms of any offer can be requested in writing before any money moves. Now size what is actually at stake and identify the warning signs.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How far apart are the two outcomes after a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If a fictional saver paid the joining fee and invested $2,500, and the offer turns out to be worthless, what have they lost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which feature of this offer is the clearest sign that it should be refused rather than investigated further?",
+          "choices": [
+            "The joining fee of $250",
+            "A return described as both very high and guaranteed",
+            "The 48-hour deadline"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Set out the checks a fictional saver should run before parting with any money, and explain why a 48-hour deadline makes those checks harder rather than unnecessary. Say what the saver should do about their own information as well as their money."
+        }
+      ]
+    }
+  ],
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "Work out what the fictional 3% account would return over 10 years on $1,000, and say what that comparison shows about the kind of growth a genuine long-horizon plan relies on.",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "If the 18% monthly claim held for a year, what would a $1,000 stake become?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What annual return does that imply, to two decimal places?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would the same stake become in a year in the fictional 3% account?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How far apart are the two outcomes after a year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "If a fictional saver paid the joining fee and invested $2,500, and the offer turns out to be worthless, what have they lost?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which feature of this offer is the clearest sign that it should be refused rather than investigated further?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Set out the checks a fictional saver should run before parting with any money, and explain why a 48-hour deadline makes those checks harder rather than unnecessary. Say what the saver should do about their own information as well as their money."
+      }
+    ]
+  },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "INVESTING",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "DECISION_SCENARIO",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.investing.1",
+      "meaning": "Expected return describes uncertainty; it is not a promised result."
+    },
+    {
+      "conceptId": "finlit.investing.2",
+      "meaning": "Risk, diversification, fees, liquidity, and time horizon must be considered together."
+    },
+    {
+      "conceptId": "finlit.investing.3",
+      "meaning": "A comparison should use the same time period and include stated fees and losses as well as gains."
+    }
+  ],
+  "evidencePurpose": "Develop and apply investing, risk, return, fees, and time horizon through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "title": "Understand investing, risk, return, fees, and time horizon",
+    "paragraphs": [
+      "Expected return describes uncertainty; it is not a promised result.",
+      "Risk, diversification, fees, liquidity, and time horizon must be considered together. In this lesson, the learner uses the provided fictional facts about avoiding fraud and high-pressure offers; no real household information belongs in the work.",
+      "A comparison should use the same time period and include stated fees and losses as well as gains. The usable process is: State the fictional goal and time horizon. Compare possible outcomes and fees on the same basis. Identify concentration, liquidity, and loss risk. Make a conditional choice and name what could change it."
+    ],
+    "relationship": [
+      "State the fictional goal and time horizon.",
+      "Compare possible outcomes and fees on the same basis.",
+      "Identify concentration, liquidity, and loss risk.",
+      "Make a conditional choice and name what could change it."
+    ],
+    "commonConfusion": "A higher possible return does not make an option automatically better for every goal or time horizon.",
+    "conditionsAndLimits": "Use only the stated fictional facts, time period, rate meaning, fees, taxes, timing, rounding, goals, and constraints. The result is education for this scenario, not individualized advice."
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "INVESTING",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "Use only the stated principal or balance, rate meaning, period, compounding method, timing, fees, payment allocation, and rounding rule.",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "separationRule": "The model uses different fictional people, amounts, wording, and decision conditions from protected independent and mastery work."
+  },
+  "workedExamples": [
+    {
+      "exampleRef": "pd-r1-investing-g12",
+      "title": "Worked example — investing, risk, return, fees, and time horizon",
+      "fictionCue": "Every person, amount, product, institution, and rule in this example is invented for instruction.",
+      "facts": [
+        "A fictional $200.00 investment gains 4.00% in one year before a $3.00 fee.",
+        "The rate is an invented scenario outcome, not a forecast.",
+        "Round the gain once to cents, half up."
+      ],
+      "goal": "Find the net one-year change and interpret its limits.",
+      "relevantInformation": "Use only the listed fictional facts and conditions; do not substitute real household information.",
+      "method": "State the fictional goal and time horizon. Compare possible outcomes and fees on the same basis. Identify concentration, liquidity, and loss risk. Make a conditional choice and name what could change it.",
+      "steps": [
+        "Represent $200.00 as 20,000 cents and 4.00% as 400 basis points.",
+        "Gross gain: 20,000 × 400 ÷ 10,000 = 800 cents.",
+        "Net gain after the 300-cent fee: 800 − 300 = 500 cents, or $5.00.",
+        "Ending amount: 20,000 + 500 = 20,500 cents, or $205.00."
+      ],
+      "interpretation": "The fee reduces the fictional 4.00% gross gain to a $5.00 net gain.",
+      "reasonablenessCheck": "Ending amount: 20,000 + 500 = 20,500 cents, or $205.00.",
+      "tradeoff": "The investment could lose value, and a near-term goal may require more liquidity and less volatility.",
+      "limits": "The conclusion applies only to the stated fictional facts. A changed rate, fee, time, rule, goal, constraint, or risk can change it.",
+      "calculationAuthority": "All USD calculations shown here are written as integer cents. Percent rates, when used, are integer basis points divided by 10,000; stated rounding is half up at the declared line only."
+    }
+  ],
+  "guidedPracticeContract": {
+    "applicability": "REQUIRED",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g12-financial-literacy-u05-l06",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: A higher possible return does not make an option automatically better for every goal or time horizon.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t3-p1"
+    ],
+    "gradeBandDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.investing.1",
+      "finlit.investing.2",
+      "finlit.investing.3"
+    ],
+    "evidenceLessonId": "ma-g12-financial-literacy-u05-l09",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.investing.core-confusion",
+      "observableSignal": "A higher possible return does not make an option automatically better for every goal or time horizon.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-investing-g12",
+        "title": "Alternate model — investing, risk, return, fees, and time horizon",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "A fictional fund starts at 30,000 cents, has a stated 3.00% scenario gain, and charges a 200-cent fee."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Gain: 30,000 × 300 ÷ 10,000 = 900 cents.",
+          "Net gain: 900 − 200 = 700 cents.",
+          "Ending amount: 30,700 cents.",
+          "State that this scenario result is not guaranteed and compare the goal’s time horizon."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g12-financial-literacy-u05-l07",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g12-financial-literacy-u05-l09",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.investing.1",
+      "finlit.investing.2",
+      "finlit.investing.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g12-financial-literacy-u05-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.investing.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "INVESTING",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "Use only the stated principal or balance, rate meaning, period, compounding method, timing, fees, payment allocation, and rounding rule.",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g12-financial-literacy-u05-l06:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "HIGH_SCHOOL_9_12",
+      "scaffolding": "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+      "reasoningDemand": "Test assumptions, compare interacting constraints, defend a conditional decision, and identify residual risk.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Require assumptions, total and recurring cost, uncertainty, contractual or tax conditions where relevant, and a conditional defense.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u05-l06.package.json",
+    "sourcePackageSha256": "05670ee4d5ff5bb5b1fc7cb5365dfd88347e57edd8a6133596c2a8126e882c03",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u05-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
+    "familyPilotFirst": true
+  }
+}

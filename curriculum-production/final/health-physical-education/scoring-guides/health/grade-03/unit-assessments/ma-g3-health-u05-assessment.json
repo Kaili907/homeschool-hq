@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g3-health-u05-assessment",
+  "courseId": "ma-g3-health",
+  "grade": 3,
+  "subject": "health",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "accuracy",
+    "reasoning and evidence",
+    "application or performance",
+    "checking and revision"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with accurate independent application and adequate reasoning.",
+    "developing": "70-84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+    "rule": "A unit score is one evidence source, not the sole basis for long-term mastery. The transfer item asks about the skill; optional private reflection is separate and is never scored."
+  },
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. Choosing an adapted or opt-out path is never scored as a deficit.",
+  "guardianSafetyReview": {
+    "equipment": "Helmet and protective gear only if the learner uses wheels; smoke alarm and emergency contact list for review by the adult.",
+    "environment": "Home interior and, if chosen, a guardian-supervised outdoor area. Water and fire content is taught as discussion and planning only.",
+    "movement_hazards": "A home safety walk involves moving through the home; an adult accompanies the learner. No learner tests, touches, or operates a hazard, alarm, appliance, water source, or flame.",
+    "food_or_allergy_note": "Kitchen safety discussion may reference household foods; no tasting or cooking is required.",
+    "guardian_confirmation_required": true
+  },
+  "sourceProvenance": {
+    "sourceBranch": "mac/g3-health-h2@50399a6fb6ae095907c0fde25db2a15ca85c6f1f",
+    "sourceAssessmentId": "ma-g3-health-u05-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

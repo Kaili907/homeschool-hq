@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u03-l02",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "dayInUnit": 2,
+    "courseDay": 38,
+    "phase": "Concept model A",
+    "focus": "solving linear equations with letter coefficients",
+    "title": "Concept model A: solving linear equations with letter coefficients"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 1,
+          "prompt": "Why may 2(x + 3) = 10 be rewritten as 2x + 6 = 10?",
+          "workedSolution": {
+            "steps": [
+              "The left side was expanded over the sum.",
+              "That is licensed by the distributive property."
+            ],
+            "answer": "the distributive property"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 2,
+          "prompt": "Is (2, 7) on the graph of y = 3x + 1?",
+          "workedSolution": {
+            "steps": [
+              "Substitute x = 2: y = 3(2) + 1 = 7.",
+              "That matches, so yes."
+            ],
+            "answer": "Yes; the coordinates satisfy the equation."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 1,
+          "prompt": "The graphs of f(x) = -2x + 2 and g(x) = 4x − 22 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = -4",
+            "x = 4",
+            "x = -12",
+            "x = 10/3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 1,
+          "prompt": "Solve 3x + 4y = 5 for y.",
+          "choices": [
+            "y = 5 − 3x",
+            "y = (3x − 5)/4",
+            "y = (5 + 3x)/4",
+            "y = (5 − 3x)/4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x: 3x + 5 = 8x + 35.",
+          "choices": [
+            "x = -6",
+            "x = 6",
+            "x = 30/11",
+            "x = -8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 1,
+          "prompt": "Solve for x and state the solution set: 3x + 6 < -11.",
+          "choices": [
+            "x < 17/3",
+            "x < -17/3",
+            "x < -5/3",
+            "x > -17/3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 2,
+          "prompt": "In a solution, one line reads: From 3x = 9 to x = 3. Which property justifies that step?",
+          "choices": [
+            "subtracting 3 from both sides",
+            "dividing both sides by 3 (division property of equality)",
+            "the associative property",
+            "the distributive property"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 2,
+          "prompt": "Does the point (2, 2) lie on the graph of y = 2x − 2?",
+          "choices": [
+            "No; substituting x = 2 gives y = 3, not 2.",
+            "It cannot be determined without graphing the line.",
+            "Yes; the coordinates satisfy the equation.",
+            "Only if the graph is extended beyond the plotted window."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 3,
+          "prompt": "The graphs of f(x) = -4x + 9 and g(x) = 5x + 36 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = -5",
+            "x = -3",
+            "x = 3",
+            "x = 27"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve 4x + 3y = 1 for y.",
+          "choices": [
+            "y = (4x − 1)/3",
+            "y = (1 + 4x)/3",
+            "y = (1 − 4x)/3",
+            "y = 1 − 4x"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x: -8x + 7 = -1x + 63.",
+          "choices": [
+            "x = -8",
+            "x = -56/9",
+            "x = -10",
+            "x = 8"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u03-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u03-l02"
+  }
+}

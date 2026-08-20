@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l12",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l12",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 12,
+    "courseDay": 156,
+    "phase": "Applied problem solving",
+    "focus": "finding an unknown side length from area or perimeter, and interpreting a line plot",
+    "title": "Applied problem solving: finding an unknown side length from area or perimeter, and interpreting a line plot"
+  },
+  "standards": [
+    "4.MD.3",
+    "4.MD.4"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 1,
+          "prompt": "A rectangle has area 48 square units and one side is 6 units. Find the other side.",
+          "workedSolution": {
+            "steps": [
+              "48 ÷ 6 = 8."
+            ],
+            "answer": "8"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 4/4, 4/4, 2/4, 2/4, 2/4, 1/4, 1/4, 1/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 1/4 yard?",
+          "choices": [
+            "3/8",
+            "4/4",
+            "3/4",
+            "2/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 2,
+          "prompt": "A rectangle has area 15 square units and one side is 3 units. What is the length of the other side?",
+          "choices": [
+            "12",
+            "5",
+            "3",
+            "15"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 2/4, 2/4, 2/4, 1/4, 2/4, 3/4, 3/4, 4/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 4/4 yard?",
+          "choices": [
+            "4/8",
+            "4/4",
+            "3/4",
+            "5/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 3,
+          "prompt": "A rectangle has area 80 square units and one side is 10 units. What is the length of the other side?",
+          "choices": [
+            "10",
+            "8",
+            "80",
+            "70"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 6/8, 2/8, 2/8, 7/8, 1/8, 1/8, 8/8, 8/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 6/8 yard?",
+          "choices": [
+            "7/8",
+            "6/16",
+            "6/8",
+            "5/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 3,
+          "prompt": "A rectangle has area 110 square units and one side is 11 units. What is the length of the other side?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 2/8, 8/8, 4/8, 7/8, 6/8, 2/8, 6/8, 8/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 7/8 yard?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l12"
+  }
+}

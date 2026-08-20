@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l16",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l16",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 16,
+    "courseDay": 52,
+    "phase": "Unit assessment",
+    "focus": "fluency, strategy, and explanation",
+    "title": "Unit assessment: fluency, strategy, and explanation"
+  },
+  "standards": [
+    "3.OA.4",
+    "3.OA.5",
+    "3.OA.6",
+    "3.OA.7",
+    "3.NBT.3"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-multiples-of-ten",
+          "standard": "3.NBT.3",
+          "difficulty": 1,
+          "prompt": "Find 2 × 10.",
+          "choices": [
+            "20",
+            "30",
+            "10",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 5 × 4.",
+          "choices": [
+            "25",
+            "9",
+            "15",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 10 ÷ 2.",
+          "choices": [
+            "2",
+            "6",
+            "8",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 7 × (3 + 7) rewritten using the distributive property?",
+          "choices": [
+            "(7 × 3) + (7 × 7)",
+            "7 + 3 + 7",
+            "7 × 3 × 7",
+            "(7 + 3) × (7 + 7)"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-factor",
+          "standard": "3.OA.4",
+          "difficulty": 2,
+          "prompt": "Find the missing number: 4 × ? = 24",
+          "choices": [
+            "6",
+            "20",
+            "4",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "A teacher has 21 crayons to put into cups of 3 crayons each. How many cups are needed?",
+          "choices": [
+            "18",
+            "7",
+            "3",
+            "21"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-multiples-of-ten",
+          "standard": "3.NBT.3",
+          "difficulty": 3,
+          "prompt": "Find 3 × 50.",
+          "choices": [
+            "160",
+            "15",
+            "150",
+            "140"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 4 × 6.",
+          "choices": [
+            "24",
+            "10",
+            "20",
+            "28"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 36 ÷ 4.",
+          "choices": [
+            "32",
+            "4",
+            "9",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 3,
+          "prompt": "Which expression shows 7 × (9 × 4) rewritten using the associative property?",
+          "choices": [
+            "(7 × 9) × 4",
+            "(7 + 9) × 4",
+            "7 × 4 × 9 × 9",
+            "7 × 9 + 4"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l16"
+  }
+}

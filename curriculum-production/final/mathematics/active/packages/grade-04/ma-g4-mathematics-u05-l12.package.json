@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u05-l12",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u05-l12",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Division with Remainders",
+    "dayInUnit": 12,
+    "courseDay": 84,
+    "phase": "Applied problem solving",
+    "focus": "estimating to predict the size of a quotient",
+    "title": "Applied problem solving: estimating to predict the size of a quotient"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.6"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 53 ÷ 6.",
+          "workedSolution": {
+            "steps": [
+              "6 × 8 = 48.",
+              "53 − 48 = 5, and 5 is less than 6.",
+              "53 ÷ 6 = 8 remainder 5."
+            ],
+            "answer": "8 r5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A baker has 52 eggs and needs 5 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "10",
+            "11",
+            "13",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 83 ÷ 3. Write the answer as a quotient and remainder.",
+          "choices": [
+            "27 r2",
+            "27 r1",
+            "26 r2",
+            "28 r2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "88 students are going on a field trip. Each van holds 5 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "19",
+            "18",
+            "17",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 1160 ÷ 6. Write the answer as a quotient and remainder.",
+          "choices": [
+            "193 r2",
+            "192 r2",
+            "194 r2",
+            "193 r3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 214 eggs and needs 6 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "38",
+            "35",
+            "34",
+            "36"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 302 ÷ 3. Write the answer as a quotient and remainder.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 97 eggs and needs 3 eggs for each cake. How many whole cakes can be made?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u05-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u05-l12"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-financial-literacy-u04-assessment",
+  "courseRef": "ma-g4-financial-literacy",
+  "grade": 4,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g4-financial-literacy-u04",
+    "unitNumber": 4,
+    "unitTitle": "Saving, Goals, and Keeping Money Safe",
+    "courseTitle": "Grade 4 Financial Literacy",
+    "assessmentLessonRef": "ma-g4-financial-literacy-u04-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 4 — saving, goals, and money privacy"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u04-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Go through the four invented fields on Imani's sheet one at a time. Two are ordinary and two would give away something that protects the household. Sort them before deciding what she should do.",
+      "prompt": "Which of the four fields on Imani's sheet should be left blank, and what do those fields have in common?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "Imani wants to join the club without handing over anything private. Write what she should do about the sheet and what she could say to the person collecting it.",
+      "prompt": "What should Imani do with the sheet, and what should she say to whoever asks for the missing information?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "A form asking for something does not make it required.",
+      "prompt": "Why is it worth pausing when any form asks for a number that unlocks money?"
+    }
+  ],
+  "responseMode": "calculation-and-decision-explanation",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/financial-literacy/ma-g4-financial-literacy-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Sorting private from shareable information criterion.",
+    "Provide evidence that meets the stated Acting on the decision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-financial-literacy-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u04-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Saving, Goals, and Keeping Money Safe?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

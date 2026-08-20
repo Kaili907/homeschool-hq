@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u05-l05",
+  "lessonId": "ma-g7-financial-literacy-u05-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What do 12 months of premiums cost?",
+        "answer": "$540.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(45.00 x 12) = 540.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 4500
+            },
+            "times": 12
+          },
+          "trace": "(45.00 x 12) = 540.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the total cost in the claim year with the policy?",
+        "answer": "$1,040.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((45.00 x 12) + 500.00) = 1,040.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 4500
+                },
+                "times": 12
+              },
+              {
+                "op": "money",
+                "cents": 50000
+              }
+            ]
+          },
+          "trace": "((45.00 x 12) + 500.00) = 1,040.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much better off is Nils with the policy in that year?",
+        "answer": "$2,160.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(3,200.00 - ((45.00 x 12) + 500.00)) = 2,160.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 320000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 4500
+                  },
+                  "times": 12
+                },
+                {
+                  "op": "money",
+                  "cents": 50000
+                }
+              ]
+            }
+          },
+          "trace": "(3,200.00 - ((45.00 x 12) + 500.00)) = 2,160.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What do three quiet years of premiums cost?",
+        "answer": "$1,620.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((45.00 x 12) x 3) = 1,620.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 4500
+              },
+              "times": 12
+            },
+            "times": 3
+          },
+          "trace": "((45.00 x 12) x 3) = 1,620.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "Across those three quiet years plus the claim year, how much better off is Nils than paying the repair unprotected?",
+        "answer": "$540.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(3,200.00 - (((45.00 x 12) x 3) + (45.00 x 12) + 500.00)) = 540.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 320000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "scale",
+                    "of": {
+                      "op": "money",
+                      "cents": 4500
+                    },
+                    "times": 12
+                  },
+                  "times": 3
+                },
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 4500
+                  },
+                  "times": 12
+                },
+                {
+                  "op": "money",
+                  "cents": 50000
+                }
+              ]
+            }
+          },
+          "trace": "(3,200.00 - (((45.00 x 12) x 3) + (45.00 x 12) + 500.00)) = 540.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning about insurance and capacity to absorb loss",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response judges Nils's policy solely on whether the totals favour it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The protection is described for Nils but not connected to his capacity to pay a large loss."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Nils is buying protection against a loss he may not be able to absorb at once, and argues that this can justify the policy even at roughly break-even."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do 12 months of premiums cost?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total cost in the claim year with the policy?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much better off is Nils with the policy in that year?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do three quiet years of premiums cost?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "Across those three quiet years plus the claim year, how much better off is Nils than paying the repair unprotected?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain what Nils is actually buying with the premiums, and describe the situation in which the policy is worth having even if the arithmetic comes out roughly even."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do 12 months of premiums cost? Answer: $540.00. Verification: (45.00 x 12) = 540.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What is the total cost in the claim year with the policy? Answer: $1,040.00. Verification: ((45.00 x 12) + 500.00) = 1,040.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How much better off is Nils with the policy in that year? Answer: $2,160.00. Verification: (3,200.00 - ((45.00 x 12) + 500.00)) = 2,160.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What do three quiet years of premiums cost? Answer: $1,620.00. Verification: ((45.00 x 12) x 3) = 1,620.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: Across those three quiet years plus the claim year, how much better off is Nils than paying the repair unprotected? Answer: $540.00. Verification: (3,200.00 - (((45.00 x 12) x 3) + (45.00 x 12) + 500.00)) = 540.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Reasoning about insurance and capacity to absorb loss — Not yet: The response judges Nils's policy solely on whether the totals favour it. Approaching: The protection is described for Nils but not connected to his capacity to pay a large loss. Meets: The response explains that Nils is buying protection against a loss he may not be able to absorb at once, and argues that this can justify the policy even at roughly break-even. The response explains that Nils is buying protection against a loss he may not be able to absorb at once, and argues that this can justify the policy even at roughly break-even."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Nils is buying protection against a loss he may not be able to absorb at once, and argues that this can justify the policy even at roughly break-even."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-07/swk-fl-g7-u05-l05.scoring.json",
+    "sourceScoringSha256": "37e6fee42b2adcf8eb85299bad858c6a224d219fdb8aeb7b11ff38f1bcaa4793",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

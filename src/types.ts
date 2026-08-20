@@ -1,5 +1,11 @@
 import type { SkillId } from './skills'
 import type { AssessmentState } from './assessment/types'
+import {
+  NOMINAL_STUDENT_GRADES,
+  SUPPORTED_ACADEMY_GRADE_TOKENS,
+  type AcademyGradeToken,
+  type NominalStudentGradeToken,
+} from './curriculum/grade-authority'
 
 // ---------- questions (unchanged from v1) ----------
 
@@ -36,12 +42,25 @@ export type SkillStatus = 'mastered' | 'developing' | 'not-started'
 
 export type ISODate = string // YYYY-MM-DD
 
-export type Grade = '3' | '4' | '5' | '6' | '7' | '8' | '10' | '12'
+/** NOMINAL profile grade. It remains separate from curriculum support, so Grade
+ * 6 is valid and Grades 9/11 are representable even when delivery differs. */
+export type Grade = NominalStudentGradeToken
+
+/** Runtime projection for nominal-grade validation. Derived from the nominal
+ * authority rather than independently maintained. */
+export const NOMINAL_GRADES: readonly Grade[] = NOMINAL_STUDENT_GRADES.map(
+  (grade) => String(grade) as Grade,
+)
 
 // ---------- CURR-1 Manuel Academy curriculum (additive, all OPTIONAL; no schemaVersion bump) ----------
 
-/** Grades served by the imported Manuel Academy curriculum release. */
-export type AcademyGrade = '5' | '7' | '8'
+/** Curriculum-supported grade token. This describes runtime capability, not a
+ * claim that a particular content release currently delivers every grade. */
+export type AcademyGrade = AcademyGradeToken
+
+/** Legacy string-valued enumeration used by existing runtime consumers. It is
+ * a derived alias of the numeric canonical authority, not another grade list. */
+export const ACADEMY_GRADES: readonly AcademyGrade[] = SUPPORTED_ACADEMY_GRADE_TOKENS
 
 /** The ten subjects the curriculum release publishes (see academy/contentTypes). */
 export const ACADEMY_SUBJECTS = [
@@ -67,9 +86,9 @@ export type AcademySubject = (typeof ACADEMY_SUBJECTS)[number]
  * before. Levels are per subject because a sixth grader can genuinely need
  * Grade 5 mathematics and Grade 7 ELA in the same term.
  *
- * An explicit level is an AcademyGrade, not any Grade: only 5/7/8 have
- * published content, so assigning '10' would be an inert value nothing can
- * serve. Sync validation enforces the same restriction on untrusted payloads.
+ * An explicit level is an AcademyGrade, not any Grade: only curriculum-
+ * supported grades may be assigned, so assigning '6' would be inert and is
+ * rejected. Sync validation enforces the same restriction on untrusted data.
  */
 export type WorkingLevels = Partial<Record<AcademySubject, AcademyGrade>>
 
@@ -369,7 +388,7 @@ export interface Profile {
   id: string
   name: string
   grade: Grade
-  /** 4-digit, kid-chosen. '' = not set yet (first sign-in creates it). */
+  /** Local verifier for a 4-digit kid-chosen PIN. '' = not set yet. */
   pin: string
   theme: ThemeId
   skills: Partial<Record<SkillId, SkillState>>
@@ -776,7 +795,7 @@ export interface AppState {
   schemaVersion: 2
   profiles: Record<string, Profile>
   activeProfileId: string | null
-  /** gates the Grown-Ups panel. '' = not set yet. */
+  /** Local verifier for the PIN that gates the Grown-Ups panel. '' = not set yet. */
   parentPin: string
   /** MT-1: family-wide tutor voice mute (additive, optional; undefined = not muted). */
   tutorMuted?: boolean

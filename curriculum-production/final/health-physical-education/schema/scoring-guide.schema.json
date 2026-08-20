@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://manuel-academy/curriculum-production/final/health-physical-education/scoring-guide.schema.json",
+  "title": "Health/PE parent/teacher scoring guide",
+  "description": "Parent/teacher-facing rubric and scoring-judgment authority for one lesson or unit assessment. Health and PE use a rubric or scoring-judgment authority rather than a fixed answer key, per the production readiness gate's ARTS_RFL_PE_PROJECT subject family.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "grade", "subject", "scoringAuthority", "sourceProvenance", "productionReadiness"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "kind": { "enum": ["lesson-scoring-guide", "unit-assessment-scoring-guide"] },
+    "lessonId": { "type": "string" },
+    "assessmentId": { "type": "string" },
+    "courseId": { "type": "string" },
+    "grade": { "type": "integer", "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12] },
+    "subject": { "enum": ["health", "physical-education"] },
+    "standards": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "primaryLessonType": {
+      "enum": ["CONCEPT_VOCABULARY", "INFORMATION_EVALUATION", "DECISION_REASONING", "COMMUNICATION_HELP_SEEKING", "HEALTH_SKILL_PROCEDURE", "REVIEW_RETRIEVAL", "REMEDIATION_RETRY", "MASTERY_EVIDENCE", "PROJECT_CAPSTONE", "MOVEMENT_CONCEPT_CUES", "SKILL_DEVELOPMENT", "TACTICS_DECISION_MAKING", "FITNESS_SELF_MANAGEMENT", "SAFETY_STOP_DECISION", "COOPERATIVE_CREATIVE_ACTIVITY", "MASTERY_PERFORMANCE", "PROJECT_LIFETIME_ACTIVITY"]
+    },
+    "secondaryLessonTypes": { "type": "array", "maxItems": 2, "uniqueItems": true, "items": { "type": "string" } },
+    "scoringAuthority": { "const": "RUBRIC" },
+    "successCriteria": { "type": "array", "items": { "type": "string" } },
+    "scoringGuidance": { "type": ["string", "null"] },
+    "masteryRule": { "type": ["string", "null"] },
+    "remediation": { "type": ["string", "null"] },
+    "adaptiveRoutes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "signal": { "type": "string" },
+          "action": { "type": "string" }
+        }
+      }
+    },
+    "guardianOrParentVisibility": { "type": ["string", "null"] },
+    "guardianSafetyReview": { "type": ["object", "null"] },
+    "safetyAndPrivacyNotes": { "type": "array", "items": { "type": "string" } },
+    "protectedAuthority": {
+      "type": "object",
+      "required": ["authorityVersion", "independentEvidence", "acceptableVariation", "misconceptionBoundaries", "safetyCriticalErrors", "scoringNotes"]
+    },
+    "masteryPlan": {
+      "type": "object",
+      "required": ["minimumEvidenceOccasions", "laterRetrievalOrTransferRef", "independenceRule", "privateReflectionContributes", "decisionAuthority"],
+      "properties": {
+        "minimumEvidenceOccasions": { "type": "integer", "minimum": 2 },
+        "laterRetrievalOrTransferRef": { "type": "string" },
+        "independenceRule": { "type": "string" },
+        "privateReflectionContributes": { "const": false },
+        "decisionAuthority": { "type": "string" }
+      }
+    },
+    "reflectionPolicy": {
+      "type": "object",
+      "required": ["mode", "visibleTo", "scored", "contributesToCompletion", "contributesToMastery", "subjectiveJudgmentPolicy"],
+      "properties": {
+        "mode": { "const": "PRIVATE_OPTIONAL" },
+        "visibleTo": { "type": "array", "items": { "type": "string" } },
+        "scored": { "const": false },
+        "contributesToCompletion": { "const": false },
+        "contributesToMastery": { "const": false },
+        "subjectiveJudgmentPolicy": { "const": "SUBJECTIVE_REFLECTION_NOT_AUTOMATICALLY_RIGHT_OR_WRONG" }
+      }
+    },
+    "rubricDimensions": { "type": "array", "items": { "type": "string" } },
+    "protectedDecisionAuthority": { "type": "array", "minItems": 4, "items": { "type": "string" } },
+    "sufficientEvidence": { "type": "string", "minLength": 20 },
+    "guardianAuthority": { "type": "object" },
+    "evidenceTypes": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "tutorBoundary": { "type": "object" },
+    "masteryInterpretation": {
+      "type": ["object", "null"],
+      "properties": {
+        "secure": { "type": "string" },
+        "developing": { "type": "string" },
+        "not_yet": { "type": "string" },
+        "rule": { "type": "string" }
+      }
+    },
+    "accommodationNote": { "type": ["string", "null"] },
+    "sourceProvenance": {
+      "type": "object",
+      "required": ["sourceBranch"],
+      "properties": {
+        "sourceBranch": { "type": "string" },
+        "sourceLessonId": { "type": "string" },
+        "sourceAssessmentId": { "type": "string" }
+      }
+    },
+    "productionReadiness": {
+      "type": "object",
+      "required": ["status", "codes"],
+      "properties": {
+        "status": { "enum": ["READY", "NEEDS_HUMAN_REVIEW", "NOT_READY"] },
+        "codes": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": { "const": "lesson-scoring-guide" },
+          "subject": { "const": "health" }
+        },
+        "required": ["kind", "subject"]
+      },
+      "then": {
+        "required": ["standards", "primaryLessonType", "secondaryLessonTypes", "protectedAuthority", "masteryPlan", "reflectionPolicy"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": { "const": "lesson-scoring-guide" },
+          "subject": { "const": "physical-education" }
+        },
+        "required": ["kind", "subject"]
+      },
+      "then": {
+        "required": ["primaryLessonType", "successCriteria", "rubricDimensions", "scoringGuidance", "masteryRule", "remediation", "adaptiveRoutes", "protectedDecisionAuthority", "sufficientEvidence"]
+      }
+    }
+  ]
+}

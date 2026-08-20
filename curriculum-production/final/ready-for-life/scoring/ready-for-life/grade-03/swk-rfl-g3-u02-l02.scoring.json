@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l02",
+  "lessonId": "ma-g3-ready-for-life-u02-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Color-group accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Several items are placed in the wrong light or dark pile, or sorting appears based on fabric type or size instead of color."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All ten items are placed in the correct light or dark pile based on color."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All ten items are correctly sorted, and the learner correctly explains the reasoning for at least one multi-colored item."
+          }
+        ]
+      },
+      {
+        "dimension": "Handling of new deep-colored items",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "A brand-new deeply colored item is placed directly into the dark pile instead of the 'might still bleed dye' spot."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Any brand-new deeply colored item is correctly set aside in the 'might still bleed dye' spot."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The 'might still bleed dye' item is set aside correctly, and the learner explains the specific reason it cannot go straight into the dark pile."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner names color, not fabric or size, when describing a sorting decision.",
+      "The reflection response names one specific item that moved piles, not a general statement about the whole sort."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

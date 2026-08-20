@@ -4,6 +4,7 @@ import {
   LEARNER_ANALYTICS_LIMITS,
   LEARNERS_READ_CAPABILITY,
   hasOnlyLearnerOperationsFields,
+  isAdminLearnerReference,
   type LearnerAnalyticsReadSource,
   type LearnerAnalyticsSnapshot,
 } from './learnerAnalyticsModel'
@@ -42,7 +43,7 @@ function exactSnapshot(value: unknown): value is LearnerAnalyticsSnapshot {
   if (!Array.isArray(value.learners) || value.learners.length > LEARNER_ANALYTICS_LIMITS.learners || !isRecord(value.details)) return false
   const refs = new Set<string>()
   for (const learner of value.learners) {
-    if (!isRecord(learner) || typeof learner.learnerRef !== 'string' || !/^p[1-5]$/.test(learner.learnerRef)) return false
+    if (!isRecord(learner) || !isAdminLearnerReference(learner.learnerRef)) return false
     if (refs.has(learner.learnerRef) || typeof learner.displayName !== 'string' || learner.displayName.length > 120) return false
     refs.add(learner.learnerRef)
   }

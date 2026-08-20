@@ -1,0 +1,403 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u04-l02",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Travel, and Community Logistics",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: true cost of transportation options"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic true cost of transportation options task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "The learner picks one specific trip they might realistically need to make in their community and compares the listed fare or estimated cost of three different transportation options for that same trip, recording both the direct cost and at least one hidden cost (time, reliability, or effort) for each option.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task only compares listed prices and fare estimates; no payment method, account, or transaction of any kind is needed to complete it.",
+    "If exact fares are not available, the learner uses a reasonable estimate and clearly notes that it is an estimate."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "Embedded resource: swk-rfl-g9-u04-l02-model-card",
+    "Embedded resource: swk-rfl-g9-u04-l02-step-card",
+    "Embedded resource: swk-rfl-g9-u04-l02-guided-card",
+    "Embedded resource: swk-rfl-g9-u04-l02-independent-card",
+    "Embedded resource: swk-rfl-g9-u04-l02-evidence-record",
+    "Embedded resource: swk-rfl-g9-u04-l02-retry-pair",
+    "Embedded resource: swk-rfl-g9-u04-l02-delivered-example",
+    "Embedded resource: swk-rfl-g9-u04-l02-delivered-sample",
+    "Embedded resource: swk-rfl-g9-u04-l02-delivered-table",
+    "learner-local: general knowledge of typical biking or walking speed"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Analyze the complete worked example on swk-rfl-g9-u04-l02-model-card before beginning.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g9-u04-l02-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g9-u04-l02-independent-card; follow every step and retain only the named minimal evidence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Complete the minimal evidence record on swk-rfl-g9-u04-l02-evidence-record; omit or fictionalize private details.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one situation (such as bad weather, being in a hurry, or carrying something heavy) that would change which of the three options you'd choose for this same trip, and explain why."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g9-u04-l02-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g9-u04-l02-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g9-u04-l02-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each. | Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs. Resume at the next unfinished step on swk-rfl-g9-u04-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner repeat the comparison for the same trip but during a time when transit runs less frequently (such as late evening or a weekend), and explain how the reduced frequency changes the true cost of the transit option.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u04-l02",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "transportation-community",
+    "practicalGoal": "I can complete a realistic true cost of transportation options task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g9-u04-l02-model-card",
+        "swk-rfl-g9-u04-l02-step-card",
+        "swk-rfl-g9-u04-l02-guided-card",
+        "swk-rfl-g9-u04-l02-independent-card",
+        "swk-rfl-g9-u04-l02-evidence-record",
+        "swk-rfl-g9-u04-l02-retry-pair",
+        "swk-rfl-g9-u04-l02-delivered-example",
+        "swk-rfl-g9-u04-l02-delivered-sample",
+        "swk-rfl-g9-u04-l02-delivered-table"
+      ],
+      "referencedArtifactWords": [
+        "example",
+        "sample",
+        "table"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g9-u04-l02-delivered-example",
+        "swk-rfl-g9-u04-l02-delivered-sample",
+        "swk-rfl-g9-u04-l02-delivered-table"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g9-u04-l02-local-1",
+          "label": "general knowledge of typical biking or walking speed",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g9-u04-l02-model-card",
+        "kind": "model",
+        "title": "true cost of transportation options worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner picks one specific trip they might realistically need to make in their community and compares the listed fare or estimated cost of three different transportation options for that same trip, recording both the direct cost and at least one hidden cost (time, reliability, or effort) for each option.",
+          "Model move 1: Read the condition and name the exact true cost of transportation options decision or action.",
+          "Model move 2: Before comparing exact numbers, think about what 'cost' means for a trip beyond just the ticket price.",
+          "Model move 3: Pick one specific trip and compare the listed fare or estimated cost of three transportation options for that trip: public transit, a rideshare fare estimate, and biking or walking.",
+          "Model check: Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each. | Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l02-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "true cost of transportation options action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for true cost of transportation options.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l02-guided-card",
+        "kind": "guided-practice",
+        "title": "true cost of transportation options coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner picks one specific trip they might realistically need to make in their community and compares the listed fare or estimated cost of three different transportation options for that same trip, recording both the direct cost and at least one hidden cost (time, reliability, or effort) for each option.",
+          "Coach direction: Before comparing exact numbers, think about what 'cost' means for a trip beyond just the ticket price.",
+          "Learner prompt: List at least three things besides the ticket price or fare that could make one transportation option more costly than another for the same trip (consider time, reliability, comfort, or effort).",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l02-independent-card",
+        "kind": "independent-task",
+        "title": "true cost of transportation options complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Pick one specific trip and compare the listed fare or estimated cost of three transportation options for that trip: public transit, a rideshare fare estimate, and biking or walking.",
+          "Response 1 (t2-p1): I named a specific trip with a real start point and end point.",
+          "Response 2 (t2-p2): I recorded the listed fare, or a reasonable fare estimate, for a public transit option.",
+          "Response 3 (t2-p3): I recorded a rideshare fare estimate for the same trip, without requesting an actual ride.",
+          "Response 4 (t2-p4): I estimated the time and effort needed to bike or walk the same trip.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l02-evidence-record",
+        "kind": "evidence-record",
+        "title": "true cost of transportation options minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Describe one situation (such as bad weather, being in a hurry, or carrying something heavy) that would change which of the three options you'd choose for this same trip, and explain why.",
+          "Success checks: Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each. | Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l02-retry-pair",
+        "kind": "retry",
+        "title": "true cost of transportation options supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g9-u04-l02-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g9-u04-l02-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional true cost of transportation options condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each. | Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs..",
+          "Return: resume at the next unfinished step on swk-rfl-g9-u04-l02-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l02-delivered-example",
+        "kind": "model",
+        "title": "true cost of transportation options delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner picks one specific trip they might realistically need to make in their community and compares the listed fare or estimated cost of three different transportation options for that same trip, recording both the direct cost and at least one hidden cost (time, reliability, or effort) for each option.",
+          "Use steps: Pick one specific trip and compare the listed fare or estimated cost of three transportation options for that trip: public transit, a rideshare fare estimate, and biking or walking.",
+          "Field 1 (t2-p1): I named a specific trip with a real start point and end point.",
+          "Field 2 (t2-p2): I recorded the listed fare, or a reasonable fare estimate, for a public transit option.",
+          "Field 3 (t2-p3): I recorded a rideshare fare estimate for the same trip, without requesting an actual ride.",
+          "Field 4 (t2-p4): I estimated the time and effort needed to bike or walk the same trip.",
+          "Check against: Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each. | Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l02-delivered-sample",
+        "kind": "model",
+        "title": "true cost of transportation options delivered sample",
+        "purpose": "Resolves the lesson's named sample so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner picks one specific trip they might realistically need to make in their community and compares the listed fare or estimated cost of three different transportation options for that same trip, recording both the direct cost and at least one hidden cost (time, reliability, or effort) for each option.",
+          "Use steps: Pick one specific trip and compare the listed fare or estimated cost of three transportation options for that trip: public transit, a rideshare fare estimate, and biking or walking.",
+          "Field 1 (t2-p1): I named a specific trip with a real start point and end point.",
+          "Field 2 (t2-p2): I recorded the listed fare, or a reasonable fare estimate, for a public transit option.",
+          "Field 3 (t2-p3): I recorded a rideshare fare estimate for the same trip, without requesting an actual ride.",
+          "Field 4 (t2-p4): I estimated the time and effort needed to bike or walk the same trip.",
+          "Check against: Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each. | Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u04-l02-delivered-table",
+        "kind": "independent-task",
+        "title": "true cost of transportation options delivered table",
+        "purpose": "Resolves the lesson's named table so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner picks one specific trip they might realistically need to make in their community and compares the listed fare or estimated cost of three different transportation options for that same trip, recording both the direct cost and at least one hidden cost (time, reliability, or effort) for each option.",
+          "Use steps: Pick one specific trip and compare the listed fare or estimated cost of three transportation options for that trip: public transit, a rideshare fare estimate, and biking or walking.",
+          "Field 1 (t2-p1): I named a specific trip with a real start point and end point.",
+          "Field 2 (t2-p2): I recorded the listed fare, or a reasonable fare estimate, for a public transit option.",
+          "Field 3 (t2-p3): I recorded a rideshare fare estimate for the same trip, without requesting an actual ride.",
+          "Field 4 (t2-p4): I estimated the time and effort needed to bike or walk the same trip.",
+          "Check against: Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each. | Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs."
+        ]
+      }
+    ],
+    "model": {
+      "title": "true cost of transportation options worked model",
+      "startingCondition": "The learner picks one specific trip they might realistically need to make in their community and compares the listed fare or estimated cost of three different transportation options for that same trip, recording both the direct cost and at least one hidden cost (time, reliability, or effort) for each option.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact true cost of transportation options decision or action.",
+        "Model move 2: Before comparing exact numbers, think about what 'cost' means for a trip beyond just the ticket price.",
+        "Model move 3: Pick one specific trip and compare the listed fare or estimated cost of three transportation options for that trip: public transit, a rideshare fare estimate, and biking or walking."
+      ],
+      "reasoning": "The model names the condition, follows the ordered true cost of transportation options process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each.",
+        "Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs."
+      ],
+      "resourceRef": "swk-rfl-g9-u04-l02-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for true cost of transportation options.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g9-u04-l02-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner picks one specific trip they might realistically need to make in their community and compares the listed fare or estimated cost of three different transportation options for that same trip, recording both the direct cost and at least one hidden cost (time, reliability, or effort) for each option.",
+      "prompt": "List at least three things besides the ticket price or fare that could make one transportation option more costly than another for the same trip (consider time, reliability, comfort, or effort).",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g9-u04-l02-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g9-u04-l02-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "true cost of transportation options — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g9-u04-l02-independent-card",
+        "directions": "Complete the true cost of transportation options task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g9-u04-l02-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Describe one situation (such as bad weather, being in a hurry, or carrying something heavy) that would change which of the three options you'd choose for this same trip, and explain why.",
+      "observableCriteria": [
+        "Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each.",
+        "Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g9-u04-l02-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g9-u04-l02-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g9-u04-l02-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g9-u04-l02-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Cost comparison accuracy and completeness: Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each. | Hidden-cost reasoning: Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g9-u04-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g9-u04-l02-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

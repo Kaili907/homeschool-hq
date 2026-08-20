@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l10",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l10",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 10,
+    "courseDay": 64,
+    "phase": "Independent evidence B",
+    "focus": "multiplication inside multistep problems",
+    "title": "Independent evidence B: multiplication inside multistep problems"
+  },
+  "standards": [
+    "4.OA.3"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence B",
+    "profile": "independent-evidence-varied",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 1,
+          "prompt": "A parking garage has 5 levels with 32 spots each, plus 8 street spots. How many total spots?",
+          "workedSolution": {
+            "steps": [
+              "5 × 32 = 160.",
+              "160 + 8 = 168."
+            ],
+            "answer": "168"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A theater has 9 sections with 28 seats each, plus 46 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "83",
+            "298",
+            "206",
+            "252"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A theater has 6 sections with 12 seats each, plus 15 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "57",
+            "33",
+            "87",
+            "72"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 7 sections with 51 seats each, but 94 seats are roped off for repairs. How many usable seats remain?",
+          "choices": [
+            "152",
+            "263",
+            "451",
+            "357"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l10#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 8 sections with 24 seats each, plus 64 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "192",
+            "128",
+            "96",
+            "256"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l10#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 4 sections with 49 seats each, but 9 seats are roped off for repairs. How many usable seats remain?",
+          "choices": [
+            "62",
+            "187",
+            "196",
+            "205"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l10#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 9 sections with 20 seats each, plus 91 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "89",
+            "271",
+            "180",
+            "120"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l10#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 8 sections with 15 seats each, plus 95 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "215",
+            "25",
+            "120",
+            "118"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l10#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 7 sections with 46 seats each, plus 37 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "285",
+            "90",
+            "322",
+            "359"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l10#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 4 sections with 41 seats each, but 15 seats are roped off for repairs. How many usable seats remain?",
+          "choices": [
+            "179",
+            "164",
+            "149",
+            "60"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l10"
+  }
+}

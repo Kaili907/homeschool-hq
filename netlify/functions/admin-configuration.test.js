@@ -175,22 +175,29 @@ function setup({ auth = AUTHORIZED, sourceError, resolverError } = {}) {
     if (resolverError) throw resolverError
     return { runtime: RUNTIME, projection }
   })
+  const stepUpAssurance = {
+    consume: vi.fn(async ({ binding }) => ({ ok: true, binding })),
+  }
   return {
     handler: createAdminConfigurationHandler({
       authorization,
       source,
       tokenFactory: () => TOKEN,
       effectiveResolver,
+      stepUpAssurance,
+      requestSourceGuard: () => ({ ok: true }),
+      criticalActionAudit: { record: vi.fn(async () => {}) },
     }),
     authorization,
     source,
     effectiveResolver,
+    stepUpAssurance,
   }
 }
 
 describe('Admin configuration API', () => {
   it('requires configuration:read and returns only the trusted runtime-effective projection', async () => {
-    const { handler, authorization, source, effectiveResolver } = setup()
+    const { handler, authorization, source, effectiveResolver, stepUpAssurance } = setup()
     const response = await handler(event())
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toEqual(EFFECTIVE_READ_RESULT)
@@ -200,6 +207,7 @@ describe('Admin configuration API', () => {
     expect(effectiveResolver).toHaveBeenCalledWith(READ_RESULT)
     expect(response.headers['cache-control']).toBe('no-store')
     expect(response.body).not.toMatch(/secret|token|actor|assignment/i)
+    expect(stepUpAssurance.consume).not.toHaveBeenCalled()
   })
 
   it('fails closed when trusted effective resolution fails', async () => {
@@ -213,7 +221,7 @@ describe('Admin configuration API', () => {
   })
 
   it('requires configuration:manage for preview and returns the raw token only once from the API', async () => {
-    const { handler, authorization, source } = setup()
+    const { handler, authorization, source, stepUpAssurance } = setup()
     const response = await handler(post('/api/admin/v1/configuration/preview', previewBody()))
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toEqual({ ...PREVIEW_RESULT, confirmationToken: TOKEN })
@@ -224,10 +232,11 @@ describe('Admin configuration API', () => {
       createHash('sha256').update(TOKEN).digest('hex'),
     )
     expect(JSON.stringify(source.preview.mock.calls)).not.toContain(`"${TOKEN}"`)
+    expect(stepUpAssurance.consume).not.toHaveBeenCalled()
   })
 
   it('commits with actor/request idempotency data and only a confirmation digest downstream', async () => {
-    const { handler, source } = setup()
+    const { handler, source, stepUpAssurance } = setup()
     const response = await handler(post('/api/admin/v1/configuration/commit', commitBody()))
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toEqual(COMMIT_RESULT)
@@ -237,6 +246,14 @@ describe('Admin configuration API', () => {
       createHash('sha256').update(TOKEN).digest('hex'),
     )
     expect(response.body).not.toContain(TOKEN)
+    expect(stepUpAssurance.consume).toHaveBeenCalledWith({
+      event: expect.anything(),
+      binding: {
+        actorId: 'owner',
+        action: 'admin.production.enable',
+        resource: { type: 'admin-configuration', id: 'runtime.ai.enabled' },
+      },
+    })
   })
 
   it.each([

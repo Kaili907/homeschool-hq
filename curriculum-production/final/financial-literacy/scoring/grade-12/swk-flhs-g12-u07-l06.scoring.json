@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l06",
+  "lessonId": "ma-g12-financial-literacy-u07-l06",
+  "integratedDomains": [
+    "budgeting",
+    "debt",
+    "saving-investing",
+    "credit",
+    "insurance-risk",
+    "multi-variable-decision"
+  ],
+  "isCapstone": true,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$400 in each of the 12 months. This is the larger of the two reserve paths and is what the earlier stress test found the plan needed."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$200 in each of 12 months — half of what Plan 1 builds."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "5.9",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,950 at $331.04 a month. Interest is ignored as stated, so the real figure is slightly higher; the comparison between the two plans is unaffected because the same simplification applies to both."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "2.7",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,950 at $731.04 a month — roughly 3.2 months sooner than Plan 1, which is about $63 of interest avoided at 21.6% on a falling balance."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$200 a month across 12 months. This earns no further employer contribution, because Case R’s election already sits inside the tier that the employer contributes on."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$931.04",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three components of Plan 1. Checking that a plan spends exactly the surplus, and no more, is what makes it a plan rather than a list of intentions."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$931.04",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The two components of Plan 2, which come to the same $931.04. Both plans are complete; they differ in where the money goes, not in how much there is."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "plan1Reserve * 12",
+        "substituted": "400 * 12",
+        "result": "$4,800.00",
+        "why": "$400 in each of the 12 months. This is the larger of the two reserve paths and is what the earlier stress test found the plan needed."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "plan2Reserve * 12",
+        "substituted": "200 * 12",
+        "result": "$2,400.00",
+        "why": "$200 in each of 12 months — half of what Plan 1 builds."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(cardBalance / plan1Card, 1)",
+        "substituted": "round(1950 / 331.04, 1)",
+        "result": "5.9",
+        "why": "$1,950 at $331.04 a month. Interest is ignored as stated, so the real figure is slightly higher; the comparison between the two plans is unaffected because the same simplification applies to both."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(cardBalance2 / plan2Card, 1)",
+        "substituted": "round(1950 / 731.04, 1)",
+        "result": "2.7",
+        "why": "$1,950 at $731.04 a month — roughly 3.2 months sooner than Plan 1, which is about $63 of interest avoided at 21.6% on a falling balance."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "plan1Extra * 12",
+        "substituted": "200 * 12",
+        "result": "$2,400.00",
+        "why": "$200 a month across 12 months. This earns no further employer contribution, because Case R’s election already sits inside the tier that the employer contributes on."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "plan1Reserve2 + plan1Card2 + plan1Extra2",
+        "substituted": "400 + 331.04 + 200",
+        "result": "$931.04",
+        "why": "The three components of Plan 1. Checking that a plan spends exactly the surplus, and no more, is what makes it a plan rather than a list of intentions."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "plan2Reserve2 + plan2Card2",
+        "substituted": "200 + 731.04",
+        "result": "$931.04",
+        "why": "The two components of Plan 2, which come to the same $931.04. Both plans are complete; they differ in where the money goes, not in how much there is."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Both plans allocate exactly $931.04 and both are internally consistent. Defend one of them as the plan you would put forward for this fictional case. Say what your choice gives up, state the circumstance in which the other plan would be the better one, and identify the figure that would most change your answer.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Defends one plan with figures rather than preference — Plan 2 on the grounds that clearing a 21.6% balance in 2.7 months rather than 5.9 removes the most expensive charge fastest, or Plan 1 on the grounds that $4,800.00 of reserve leaves the fictional adult far better placed against the shock that was shown to break the plan.",
+          "Names what the choice gives up: Plan 2 leaves the reserve at $2,400.00 a year and abandons the extra retirement saving, while Plan 1 carries the card balance about 3.2 months longer.",
+          "States the circumstance favouring the other plan — for example that Plan 2 is stronger if income is secure and the reserve is already adequate, while Plan 1 is stronger if a shock is plausible in the near term.",
+          "Identifies the decisive figure, most defensibly the reserve balance or the card rate: a much larger existing reserve would favour Plan 2, and a much lower card rate would weaken its main argument."
+        ],
+        "evidenceRequirements": [
+          "Uses the two reserve totals, $4,800.00 and $2,400.00, and the two card clearance figures, 5.9 and 2.7 months."
+        ],
+        "lookFors": [
+          "The response argues for one plan without describing the other as a mistake.",
+          "The response uses the earlier stress-test finding if it draws on the reserve argument.",
+          "A defence that rests only on which plan \"feels safer\" is not credited; the figures have to do the work."
+        ],
+        "commonMisconception": "Assuming the plan that pays the highest interest rate first must be correct, when the plan’s own stress test showed the reserve was the part that failed.",
+        "defensibleAlternatives": [
+          "Plan 2, prioritising the 21.6% card balance so the most expensive charge is removed within about 3 months.",
+          "Plan 1, prioritising the reserve because the stress test showed the plan failing a 3-month loss of income by $330.62.",
+          "A third allocation that sequences the two — the whole surplus to the card until it is cleared, then the whole surplus to the reserve — provided the parts still sum to $931.04."
+        ],
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does Plan 1 add to the reserve across a year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much does Plan 2 add to the reserve across a year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "Ignoring interest, how many months would Plan 1 take to clear the card? Give one decimal place."
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "Ignoring interest, how many months would Plan 2 take to clear the card? Give one decimal place."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much extra retirement saving does Plan 1 add across a year?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does Plan 1 allocate in total each month?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What does Plan 2 allocate in total each month?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Both plans allocate exactly $931.04 and both are internally consistent. Defend one of them as the plan you would put forward for this fictional case. Say what your choice gives up, state the circumstance in which the other plan would be the better one, and identify the figure that would most change your answer."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much does Plan 1 add to the reserve across a year? Answer: $4,800.00. Verification: $400 in each of the 12 months. This is the larger of the two reserve paths and is what the earlier stress test found the plan needed. t1-p2: How much does Plan 2 add to the reserve across a year? Answer: $2,400.00. Verification: $200 in each of 12 months — half of what Plan 1 builds. t1-p3: Ignoring interest, how many months would Plan 1 take to clear the card? Give one decimal place. Answer: 5.9. Verification: $1,950 at $331.04 a month. Interest is ignored as stated, so the real figure is slightly higher; the comparison between the two plans is unaffected because the same simplification applies to both. t2-p1: Ignoring interest, how many months would Plan 2 take to clear the card? Give one decimal place. Answer: 2.7. Verification: $1,950 at $731.04 a month — roughly 3.2 months sooner than Plan 1, which is about $63 of interest avoided at 21.6% on a falling balance. t2-p2: How much extra retirement saving does Plan 1 add across a year? Answer: $2,400.00. Verification: $200 a month across 12 months. This earns no further employer contribution, because Case R’s election already sits inside the tier that the employer contributes on. t2-p3: What does Plan 1 allocate in total each month? Answer: $931.04. Verification: The three components of Plan 1. Checking that a plan spends exactly the surplus, and no more, is what makes it a plan rather than a list of intentions. t2-p4: What does Plan 2 allocate in total each month? Answer: $931.04. Verification: The two components of Plan 2, which come to the same $931.04. Both plans are complete; they differ in where the money goes, not in how much there is."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Both plans allocate exactly $931.04 and both are internally consistent. Defend one of them as the plan you would put forward for this fictional case. Say what your choice gives up, state the circumstance in which the other plan would be the better one, and identify the figure that would most change your answer. Defends one plan with figures rather than preference — Plan 2 on the grounds that clearing a 21.6% balance in 2.7 months rather than 5.9 removes the most expensive charge fastest, or Plan 1 on the grounds that $4,800.00 of reserve leaves the fictional adult far better placed against the shock that was shown to break the plan. Names what the choice gives up: Plan 2 leaves the reserve at $2,400.00 a year and abandons the extra retirement saving, while Plan 1 carries the card balance about 3.2 months longer. States the circumstance favouring the other plan — for example that Plan 2 is stronger if income is secure and the reserve is already adequate, while Plan 1 is stronger if a shock is plausible in the near term. Identifies the decisive figure, most defensibly the reserve balance or the card rate: a much larger existing reserve would favour Plan 2, and a much lower card rate would weaken its main argument. Uses the two reserve totals, $4,800.00 and $2,400.00, and the two card clearance figures, 5.9 and 2.7 months. The response argues for one plan without describing the other as a mistake. The response uses the earlier stress-test finding if it draws on the reserve argument. A defence that rests only on which plan \"feels safer\" is not credited; the figures have to do the work."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Defends one plan with figures rather than preference — Plan 2 on the grounds that clearing a 21.6% balance in 2.7 months rather than 5.9 removes the most expensive charge fastest, or Plan 1 on the grounds that $4,800.00 of reserve leaves the fictional adult far better placed against the shock that was shown to break the plan. Names what the choice gives up: Plan 2 leaves the reserve at $2,400.00 a year and abandons the extra retirement saving, while Plan 1 carries the card balance about 3.2 months longer. States the circumstance favouring the other plan — for example that Plan 2 is stronger if income is secure and the reserve is already adequate, while Plan 1 is stronger if a shock is plausible in the near term. Identifies the decisive figure, most defensibly the reserve balance or the card rate: a much larger existing reserve would favour Plan 2, and a much lower card rate would weaken its main argument."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u07-l06.scoring.json",
+    "sourceScoringSha256": "37a39d535189de589a94ade1f33723f30f7f6f7d75947a1f95ac21223351eeaf",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u02-l14",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u02-l14",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Multi-Digit Addition and Subtraction",
+    "dayInUnit": 14,
+    "courseDay": 32,
+    "phase": "Performance task: build",
+    "focus": "corrections with place-value explanations",
+    "title": "Performance task: build: corrections with place-value explanations"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A charity collected $16555 in the spring and $5322 in the fall, then received an extra $2622 donation. How much money is there in total?",
+          "choices": [
+            "19255",
+            "19177",
+            "21877",
+            "24499"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a concert raised 97728 dollars on Saturday and 33185 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "64543",
+            "129913",
+            "130913",
+            "131913"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a concert had 80514 visitors expected, but only 36019 attended. How many fewer people attended than expected?",
+          "choices": [
+            "45495",
+            "43495",
+            "44495",
+            "116533"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A charity collected $7474 in the spring and $6816 in the fall, then received an extra $3827 donation. How much money is there in total?",
+          "choices": [
+            "10463",
+            "14290",
+            "18117",
+            "11301"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a food drive raised 285735 dollars on Saturday and 482761 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "768496",
+            "767496",
+            "769496",
+            "197026"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a school had 412245 visitors expected, but only 257115 attended. How many fewer people attended than expected?",
+          "choices": [
+            "154130",
+            "669360",
+            "155130",
+            "156130"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A charity collected $74648 in the spring and $6398 in the fall, then received an extra $7597 donation. How much money is there in total?",
+          "choices": [
+            "73449",
+            "81046",
+            "82245",
+            "88643"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a fundraiser raised 442870 dollars on Saturday and 142963 dollars on Sunday. What was the total number of dollars raised?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a school had 663903 visitors expected, but only 303481 attended. How many fewer people attended than expected?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u02-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u02-l14"
+  }
+}

@@ -1,0 +1,511 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u01-l04",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Taking Care of My Own Space",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Spot, Stop, Ask: A Safe-Space Check"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Manuel Academy RFL G3 Unit 1 — personal and shared space care",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can check a space for a trip, poison, shock, fire, or choke risk. I will point without touching, name the risk or say “I am not sure,” and ask a guardian to handle anything unsafe.",
+  "scenario": "A lamp cord stretches across the middle of a pictured walking path. The lamp is switched off.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "drawing",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner points out and describes each hazard but does not pick up, move, or open any cleaning product, medicine, or sharp item themselves; the trusted adult handles those.",
+    "If a hazard involves electricity, heat, or a chemical container, the adult resolves it while the learner watches and describes what was fixed.",
+    "If the learner is unsure whether something counts as a hazard, the correct move is to point it out and ask, and asking counts as success."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real walkthrough of two spaces is not possible, the learner instead looks at four printed or hand-drawn pictures of rooms containing planted hazards, circles each unsafe item, and writes the specific reason it is unsafe."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g3-u01-l04-risk-strip",
+    "Embedded resource: swk-rfl-g3-u01-l04-model-card",
+    "Embedded resource: swk-rfl-g3-u01-l04-guided-card",
+    "Embedded resource: swk-rfl-g3-u01-l04-home-check",
+    "Embedded resource: swk-rfl-g3-u01-l04-scene-set",
+    "Embedded resource: swk-rfl-g3-u01-l04-evidence-record",
+    "Embedded resource: swk-rfl-g3-u01-l04-retry-pair",
+    "adult-local: Household-authorized guardian",
+    "adult-local: One guardian-selected indoor area"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Open swk-rfl-g3-u01-l04-model-card. Watch one complete example.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g3-u01-l04-guided-card. Do the coached move.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g3-u01-l04-home-check or swk-rfl-g3-u01-l04-scene-set. Choose one complete route. Follow its steps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g3-u01-l04-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which move—spot, stop, name, or ask—helped you make a careful decision? Explain using an invented scene or only the risk word. Do not describe a private household item or room."
+        }
+      ]
+    }
+  ],
+  "remediation": "Contrast two embedded pictures: a strap across a path can cause a trip; a closed book flat on a shelf does not block a path. “Messy” is not a risk word. Name how harm could happen. Coach card: A toy bin is beside the path, but one long strap reaches into the path. Point to the condition and name the risk or say unsure. Confirm only observable moves: risk mechanism named, no-touch boundary used, and adult handoff stated. If a live-task safety error occurred, stop the live task and continue in simulation. Fresh card: A dry, unbroken cord runs along the wall and does not cross the path. Decide “risk,” “safe in this picture,” or “unsure,” and give one reason. Exit: On both fresh cards, the learner gives a risk-based reason and keeps the point-without-touching/ask boundary. Resume with the next unfinished independent scene. A Home Check resumes only when the guardian says it is safe; otherwise finish the equal-credit Scene Check.",
+  "extension": "Have the learner and adult repeat the hazard walk in a third space that specifically differs from the first two, such as a garage or basement, using the same five-word target list.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "approvedAnchor": {
+      "sampleVersion": "director-sample-r1",
+      "approvedLessonId": "ma-g3-ready-for-life-u01-l04",
+      "preserved": true
+    },
+    "lessonFamily": "home-care",
+    "practicalGoal": "I can check a space for a trip, poison, shock, fire, or choke risk. I will point without touching, name the risk or say “I am not sure,” and ask a guardian to handle anything unsafe.",
+    "duration": {
+      "activeLearnerTime": "30–40 minutes",
+      "elapsedWindow": "One session; no waiting or overnight observation",
+      "sessionPattern": "8–10 minutes learn/model, 5–7 minutes guided attempt, 12–18 minutes independent task, 5 minutes evidence/reflection",
+      "checkInPlan": "Guardian signs immediately after the Home Check; no later check-in for Scene Check",
+      "adultTime": "12–18 minutes for Home Check permission, supervision, handling, and signoff",
+      "simulationDuration": "30–35 active minutes in one session; no adult required for the independent simulation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g3-u01-l04-risk-strip",
+        "swk-rfl-g3-u01-l04-model-card",
+        "swk-rfl-g3-u01-l04-guided-card",
+        "swk-rfl-g3-u01-l04-home-check",
+        "swk-rfl-g3-u01-l04-scene-set",
+        "swk-rfl-g3-u01-l04-evidence-record",
+        "swk-rfl-g3-u01-l04-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [
+        "swk-rfl-g3-u01-l04-risk-strip",
+        "swk-rfl-g3-u01-l04-model-card",
+        "swk-rfl-g3-u01-l04-guided-card",
+        "swk-rfl-g3-u01-l04-home-check",
+        "swk-rfl-g3-u01-l04-scene-set",
+        "swk-rfl-g3-u01-l04-evidence-record",
+        "swk-rfl-g3-u01-l04-retry-pair"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "authorized-guardian",
+          "label": "Household-authorized guardian",
+          "delivery": "adult-local",
+          "availabilityRule": "Use the embedded Scene Check. Lack of permission, adult time, a particular household space, or any planted hazard never lowers credit."
+        },
+        {
+          "materialId": "approved-area",
+          "label": "One guardian-selected indoor area",
+          "delivery": "adult-local",
+          "availabilityRule": "Use the embedded Scene Check. Lack of permission, adult time, a particular household space, or any planted hazard never lowers credit."
+        }
+      ],
+      "noPurchaseRule": "Use the embedded Scene Check. Lack of permission, adult time, a particular household space, or any planted hazard never lowers credit."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g3-u01-l04-risk-strip",
+        "kind": "reference",
+        "title": "Five risk words and safe-or-unsure cues",
+        "purpose": "Used by the model, guided attempt, both independent routes, and retry.",
+        "content": [
+          "Trip: Could this make someone fall?",
+          "Poison: Is this an unknown cleaner, medicine, or chemical?",
+          "Shock: Is a cord, plug, or electrical item damaged or wet?",
+          "Fire: Is heat, flame, or a hot item close to something that can burn?",
+          "Choke: Could a very small object be reached by a young child?",
+          "Safe or unsure: If you cannot tell, do not touch. Point and ask."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l04-model-card",
+        "kind": "model",
+        "title": "Watch the four moves",
+        "purpose": "Shows the complete approved worked example.",
+        "content": [
+          "A lamp cord stretches across the middle of a pictured walking path. The lamp is switched off.",
+          "1. Spot: I look from where I am standing. I see a cord crossing the path.",
+          "2. Stop: I do not step over it or touch the cord.",
+          "3. Name: I choose “trip” because a foot could catch on the cord.",
+          "4. Ask and check: I ask the guardian to handle it. After the adult moves it, I check that the walking path is clear.",
+          "The sample succeeds because the learner notices a specific condition, names how harm could happen, follows the no-touch rule, and leaves the physical fix to the guardian."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "Try the first move with a coach",
+        "purpose": "Carries the coached first attempt and fresh correction turn.",
+        "content": [
+          "Picture card: An open cleaning bottle is sitting on a low table. You do not know what is inside.",
+          "What should you do first?",
+          "Pick it up so I can read it. — Stop. An unknown product is adult-only. Point without touching and ask the adult.",
+          "Point, say “poison or unsure,” and ask the adult. — That follows all three boundaries: point, name the possible risk, and ask.",
+          "Walk away without telling anyone. — Noticing is a good start. Add the ask step so the authorized adult knows what you saw.",
+          "Fresh coached card: A closed book is flat on a shelf and does not block a path. Say “safe in this picture” or “I am not sure,” then give one reason.",
+          "Move to independent work after the learner gives a reason and uses the point-without-touching boundary on the fresh card."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l04-home-check",
+        "kind": "independent-task",
+        "title": "Home Check — real-life path",
+        "purpose": "Delivers all five physical-route checkpoints and boundaries.",
+        "content": [
+          "Stand at the guardian-chosen starting place. Do not open, move, or pick up anything.",
+          "Check the five checkpoints shown in the lesson: walking path, exit, heat area, products, and small objects.",
+          "At each checkpoint, say the risk word, say “safe in this check,” or say “I am not sure.” Give one reason.",
+          "Point out concerns. The guardian decides what counts and handles every physical item or change.",
+          "After the guardian is finished, look again from a safe place and say what condition changed. Do not record the room, item, or household details.",
+          "Checkpoint: Walking path",
+          "Checkpoint: Doorway or exit",
+          "Checkpoint: Heat or lamp area",
+          "Checkpoint: Cleaners, medicines, or unknown products",
+          "Checkpoint: Very small objects",
+          "Complete all five checks. Finding no hazard is a valid result when each check includes a risk-based reason. The guardian, not the learner or Tutor, certifies that the physical walkthrough and no-touch boundary occurred."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l04-scene-set",
+        "kind": "independent-task",
+        "title": "Scene Check — equal-credit simulation",
+        "purpose": "Delivers all six equal-credit invented scenes.",
+        "content": [
+          "For each complete scene, choose a risk word or “safe or unsure,” give one short reason, and state the safe next move. These are invented scenes; do not compare them with your home.",
+          "scene-1 — Hallway: A backpack strap lies across the walking path. The doorway is open.",
+          "scene-2 — Side table: An unlabeled spray bottle sits on a low table. No adult is in the picture.",
+          "scene-3 — Play area: Three tiny building pieces are on the floor beside a baby toy.",
+          "scene-4 — Reading corner: A paper decoration touches the shade of a lamp that is switched on.",
+          "scene-5 — Bookshelf: A closed book lies flat on a shelf. The walking path is clear.",
+          "scene-6 — Desk: A power cord has a split cover with wire showing. The learner stands several steps away.",
+          "Submit a response for all six scenes. A trusted human evaluates the risk reasoning; the browser and Tutor do not certify a physical event."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "Spot, Stop, Ask minimal evidence record",
+        "purpose": "Defines the privacy-bounded learner record and observable criteria.",
+        "content": [
+          "A five-check Home Check record with only risk words and check status, or six completed invented Scene Check responses.",
+          "One short reflection about the Spot–Stop–Name–Ask process.",
+          "Learner self-report may record the selected path, but it never certifies a physical walkthrough.",
+          "Which move—spot, stop, name, or ask—helped you make a careful decision? Explain using an invented scene or only the risk word. Do not describe a private household item or room.",
+          "Names a specific risk mechanism or gives a supported safe/unsure decision.",
+          "Uses point-without-touching and adult-handling boundaries.",
+          "Completes every checkpoint or scene and revises a missed safety step when prompted.",
+          "Gives a relevant reflection without needing a preferred opinion or private detail.",
+          "Do not collect: room names or layout; home address or location; household products or medicines; photos, audio, or video; names, schedules, or family circumstances."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l04-retry-pair",
+        "kind": "retry",
+        "title": "Spot, Stop, Ask supported and parallel retry cards",
+        "purpose": "Delivers the complete approved correction loop.",
+        "content": [
+          "Start retry when a response has no risk mechanism, treats ordinary untidiness as danger, skips the ask step, or says the learner should touch or move an unknown or hazardous item.",
+          "Contrast two embedded pictures: a strap across a path can cause a trip; a closed book flat on a shelf does not block a path. “Messy” is not a risk word. Name how harm could happen.",
+          "Coach card: A toy bin is beside the path, but one long strap reaches into the path. Point to the condition and name the risk or say unsure.",
+          "Confirm only observable moves: risk mechanism named, no-touch boundary used, and adult handoff stated. If a live-task safety error occurred, stop the live task and continue in simulation.",
+          "Fresh card: A dry, unbroken cord runs along the wall and does not cross the path. Decide “risk,” “safe in this picture,” or “unsure,” and give one reason.",
+          "On both fresh cards, the learner gives a risk-based reason and keeps the point-without-touching/ask boundary.",
+          "Resume with the next unfinished independent scene. A Home Check resumes only when the guardian says it is safe; otherwise finish the equal-credit Scene Check."
+        ]
+      }
+    ],
+    "model": {
+      "title": "Watch the four moves",
+      "startingCondition": "A lamp cord stretches across the middle of a pictured walking path. The lamp is switched off.",
+      "actions": [
+        {
+          "label": "1. Spot",
+          "detail": "I look from where I am standing. I see a cord crossing the path."
+        },
+        {
+          "label": "2. Stop",
+          "detail": "I do not step over it or touch the cord."
+        },
+        {
+          "label": "3. Name",
+          "detail": "I choose “trip” because a foot could catch on the cord."
+        },
+        {
+          "label": "4. Ask and check",
+          "detail": "I ask the guardian to handle it. After the adult moves it, I check that the walking path is clear."
+        }
+      ],
+      "criteriaCheck": "The sample succeeds because the learner notices a specific condition, names how harm could happen, follows the no-touch rule, and leaves the physical fix to the guardian.",
+      "resourceRef": "swk-rfl-g3-u01-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Spot: look from where you stand.",
+        "2. Stop: do not touch or step over the item.",
+        "3. Name: choose a risk word, safe, or unsure.",
+        "4. Ask: tell the guardian; the adult handles any physical change.",
+        "5. Check: look again from a safe place."
+      ],
+      "resourceRef": "swk-rfl-g3-u01-l04-risk-strip"
+    },
+    "guidedFirstAttempt": {
+      "title": "Try the first move with a coach",
+      "scenario": "Picture card: An open cleaning bottle is sitting on a low table. You do not know what is inside.",
+      "prompt": "What should you do first?",
+      "choices": [
+        {
+          "id": "touch-and-read",
+          "label": "Pick it up so I can read it.",
+          "feedback": "Stop. An unknown product is adult-only. Point without touching and ask the adult.",
+          "releasesLearner": false
+        },
+        {
+          "id": "point-name-ask",
+          "label": "Point, say “poison or unsure,” and ask the adult.",
+          "feedback": "That follows all three boundaries: point, name the possible risk, and ask.",
+          "releasesLearner": true
+        },
+        {
+          "id": "walk-away",
+          "label": "Walk away without telling anyone.",
+          "feedback": "Noticing is a good start. Add the ask step so the authorized adult knows what you saw.",
+          "releasesLearner": false
+        }
+      ],
+      "correctionTurn": "Fresh coached card: A closed book is flat on a shelf and does not block a path. Say “safe in this picture” or “I am not sure,” then give one reason.",
+      "releaseCondition": "Move to independent work after the learner gives a reason and uses the point-without-touching boundary on the fresh card.",
+      "resourceRef": "swk-rfl-g3-u01-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "Home Check — real-life path",
+        "permissionRule": "Do not begin until a household-authorized guardian chooses one indoor area, gives permission, and is ready to stay with you.",
+        "steps": [
+          "Stand at the guardian-chosen starting place. Do not open, move, or pick up anything.",
+          "Check the five checkpoints shown in the lesson: walking path, exit, heat area, products, and small objects.",
+          "At each checkpoint, say the risk word, say “safe in this check,” or say “I am not sure.” Give one reason.",
+          "Point out concerns. The guardian decides what counts and handles every physical item or change.",
+          "After the guardian is finished, look again from a safe place and say what condition changed. Do not record the room, item, or household details."
+        ],
+        "checkpoints": [
+          "Walking path",
+          "Doorway or exit",
+          "Heat or lamp area",
+          "Cleaners, medicines, or unknown products",
+          "Very small objects"
+        ],
+        "completionCondition": "Complete all five checks. Finding no hazard is a valid result when each check includes a risk-based reason. The guardian, not the learner or Tutor, certifies that the physical walkthrough and no-touch boundary occurred.",
+        "completionAuthority": "guardian",
+        "directionsResourceRef": "swk-rfl-g3-u01-l04-home-check"
+      },
+      "simulationRoute": {
+        "title": "Scene Check — equal-credit simulation",
+        "equalCredit": true,
+        "completionAuthority": "learner",
+        "directions": "For each complete scene, choose a risk word or “safe or unsure,” give one short reason, and state the safe next move. These are invented scenes; do not compare them with your home.",
+        "scenes": [
+          {
+            "id": "scene-1",
+            "title": "Hallway",
+            "description": "A backpack strap lies across the walking path. The doorway is open."
+          },
+          {
+            "id": "scene-2",
+            "title": "Side table",
+            "description": "An unlabeled spray bottle sits on a low table. No adult is in the picture."
+          },
+          {
+            "id": "scene-3",
+            "title": "Play area",
+            "description": "Three tiny building pieces are on the floor beside a baby toy."
+          },
+          {
+            "id": "scene-4",
+            "title": "Reading corner",
+            "description": "A paper decoration touches the shade of a lamp that is switched on."
+          },
+          {
+            "id": "scene-5",
+            "title": "Bookshelf",
+            "description": "A closed book lies flat on a shelf. The walking path is clear."
+          },
+          {
+            "id": "scene-6",
+            "title": "Desk",
+            "description": "A power cord has a split cover with wire showing. The learner stands several steps away."
+          }
+        ],
+        "completionCondition": "Submit a response for all six scenes. A trusted human evaluates the risk reasoning; the browser and Tutor do not certify a physical event.",
+        "directionsResourceRef": "swk-rfl-g3-u01-l04-scene-set"
+      },
+      "privacyAlternative": "Use the embedded Scene Check. Lack of permission, adult time, a particular household space, or any planted hazard never lowers credit.",
+      "resourceRef": "swk-rfl-g3-u01-l04-scene-set"
+    },
+    "evidence": {
+      "masteryKinds": [
+        "KNOWLEDGE",
+        "PROCEDURE",
+        "COMPLETION",
+        "REFLECTION",
+        "ADULT_SIGNOFF",
+        "ARTIFACT_EVIDENCE"
+      ],
+      "learnerEvidence": [
+        "A five-check Home Check record with only risk words and check status, or six completed invented Scene Check responses.",
+        "One short reflection about the Spot–Stop–Name–Ask process.",
+        "Learner self-report may record the selected path, but it never certifies a physical walkthrough."
+      ],
+      "reflectionPrompt": "Which move—spot, stop, name, or ask—helped you make a careful decision? Explain using an invented scene or only the risk word. Do not describe a private household item or room.",
+      "observableCriteria": [
+        "Names a specific risk mechanism or gives a supported safe/unsure decision.",
+        "Uses point-without-touching and adult-handling boundaries.",
+        "Completes every checkpoint or scene and revises a missed safety step when prompted.",
+        "Gives a relevant reflection without needing a preferred opinion or private detail."
+      ],
+      "doNotCollect": [
+        "room names or layout",
+        "home address or location",
+        "household products or medicines",
+        "photos, audio, or video",
+        "names, schedules, or family circumstances"
+      ],
+      "resourceRef": "swk-rfl-g3-u01-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start retry when a response has no risk mechanism, treats ordinary untidiness as danger, skips the ask step, or says the learner should touch or move an unknown or hazardous item.",
+      "targetedReteach": "Contrast two embedded pictures: a strap across a path can cause a trip; a closed book flat on a shelf does not block a path. “Messy” is not a risk word. Name how harm could happen.",
+      "supportedReattempt": "Coach card: A toy bin is beside the path, but one long strap reaches into the path. Point to the condition and name the risk or say unsure.",
+      "feedback": "Confirm only observable moves: risk mechanism named, no-touch boundary used, and adult handoff stated. If a live-task safety error occurred, stop the live task and continue in simulation.",
+      "parallelReattempt": "Fresh card: A dry, unbroken cord runs along the wall and does not cross the path. Decide “risk,” “safe in this picture,” or “unsure,” and give one reason.",
+      "exitCriterion": "On both fresh cards, the learner gives a risk-based reason and keeps the point-without-touching/ask boundary.",
+      "returnPath": "Resume with the next unfinished independent scene. A Home Check resumes only when the guardian says it is safe; otherwise finish the equal-credit Scene Check.",
+      "resourceRef": "swk-rfl-g3-u01-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "guardian gave permission and stayed present; learner used point-without-touching; guardian handled every physical change; all five checkpoints were considered",
+      "learnerSelfReport": "recorded-but-not-certifying",
+      "signOffBoundary": "The guardian certifies only the physical walkthrough. The guardian does not score the reflection or infer effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop, step back, do not touch, and tell the guardian whenever an item is unknown, sharp, hot, electrical, chemical, medicinal, broken, or hard to reach safely.",
+      "adultOnly": [
+        "moving or opening any product or medicine",
+        "handling plugs, cords, electricity, heat, glass, or sharp items",
+        "deciding whether and how a physical condition should be changed"
+      ],
+      "unavailablePath": "Use the embedded Scene Check. Lack of permission, adult time, a particular household space, or any planted hazard never lowers credit.",
+      "noShameRule": "Describe only the observable move and correction. Never label the learner, household, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Which move—spot, stop, name, or ask—helped you make a careful decision? Explain using an invented scene or only the risk word. Do not describe a private household item or room.",
+      "doNotCollect": [
+        "room names or layout",
+        "home address or location",
+        "household products or medicines",
+        "photos, audio, or video",
+        "names, schedules, or family circumstances"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read risk-word cues aloud",
+        "rehearse Spot–Stop–Name–Ask",
+        "ask for a risk mechanism on invented scenes",
+        "coach the documented retry loop"
+      ],
+      "mayNot": [
+        "grant household permission",
+        "request private household details or media",
+        "observe or claim a physical condition",
+        "direct the learner to touch or move an item",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor may acknowledge saved learner evidence. Tutor cannot grant permission, observe the home, certify a physical walkthrough, or create guardian attestation.",
+      "missingResourceAction": "Stop and identify the missing embedded item. Do not invent a replacement; route to the other fully delivered path only when its materials resolve."
+    }
+  }
+}

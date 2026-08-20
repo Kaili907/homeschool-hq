@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u06-l03",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Fraction Equivalence and Comparison",
+    "dayInUnit": 3,
+    "courseDay": 93,
+    "phase": "Concept build B",
+    "focus": "why a/b equals n times a over n times b",
+    "title": "Concept build B: why a/b equals n times a over n times b"
+  },
+  "standards": [
+    "4.NF.1"
+  ],
+  "blueprint": {
+    "phase": "Concept build B",
+    "profile": "concept-build-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 1,
+          "prompt": "Generate a fraction equivalent to 2/5 by multiplying the numerator and denominator by the same number.",
+          "workedSolution": {
+            "steps": [
+              "Multiply numerator and denominator by 3.",
+              "2 × 3 = 6, 5 × 3 = 15.",
+              "2/5 = 6/15."
+            ],
+            "answer": "6/15"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 1,
+          "prompt": "Generate a fraction equivalent to 1/3 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "1/9",
+            "4/9",
+            "3/3",
+            "3/9"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 2,
+          "prompt": "Generate a fraction equivalent to 1/4 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "1/12",
+            "4/12",
+            "3/4",
+            "3/12"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 2,
+          "prompt": "Generate a fraction equivalent to 5/6 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "11/12",
+            "10/6",
+            "5/12",
+            "10/12"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 2,
+          "prompt": "Generate a fraction equivalent to 1/6 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "3/18",
+            "4/18",
+            "3/6",
+            "1/18"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 2,
+          "prompt": "Generate a fraction equivalent to 2/4 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "6/12",
+            "2/12",
+            "7/12",
+            "6/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 3,
+          "prompt": "Generate a fraction equivalent to 6/8 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "25/32",
+            "24/32",
+            "24/8",
+            "6/32"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l03#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 3,
+          "prompt": "Generate a fraction equivalent to 3/6 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "3/18",
+            "10/18",
+            "9/6",
+            "9/18"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 2,
+          "prompt": "Generate a fraction equivalent to 2/6 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "2/24",
+            "8/6",
+            "9/24",
+            "8/24"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 2,
+          "prompt": "Generate a fraction equivalent to 2/3 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "5/6",
+            "4/6",
+            "2/6",
+            "4/3"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u06-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u06-l03"
+  }
+}

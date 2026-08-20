@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u09-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u09-l05",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Geometry and the Coordinate Plane",
+    "dayInUnit": 5,
+    "courseDay": 149,
+    "phase": "Concept model B",
+    "focus": "geometric vocabulary",
+    "title": "Concept model B: geometric vocabulary"
+  },
+  "standards": [
+    "5.G.1",
+    "5.G.2",
+    "5.G.3",
+    "5.G.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "read-ordered-pair",
+          "standard": "5.G.1",
+          "difficulty": 1,
+          "prompt": "What point has x-coordinate 3 and y-coordinate 5?",
+          "workedSolution": {
+            "steps": [
+              "Write x first.",
+              "Write y second."
+            ],
+            "answer": "(3, 5)"
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 2,
+          "prompt": "The library is at x = 4 and y = 2. What point names it?",
+          "workedSolution": {
+            "steps": [
+              "Use horizontal distance for x.",
+              "Use vertical distance for y."
+            ],
+            "answer": "(4, 2)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 2,
+          "prompt": "A shape has 4 sides, 4 right angles, and 2 pairs of parallel sides. Its opposite sides are equal in length, and its adjacent sides are unequal in length. What is the most specific name?",
+          "choices": [
+            "rhombus",
+            "rectangle",
+            "parallelogram",
+            "triangle"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 2,
+          "prompt": "In the hierarchy rectangle → parallelogram → quadrilateral, what category comes immediately after rectangle?",
+          "choices": [
+            "trapezoid",
+            "triangle",
+            "pentagon",
+            "parallelogram"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "geometric-vocabulary",
+          "standard": "5.G.3",
+          "difficulty": 2,
+          "prompt": "Lines in a plane that never meet are called what?",
+          "choices": [
+            "vertex",
+            "parallel",
+            "perpendicular",
+            "edge"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-route",
+          "standard": "5.G.2",
+          "difficulty": 2,
+          "prompt": "Start at (6, 1). Move right 3 and up 1. What is the endpoint?",
+          "choices": [
+            "(9, 2)",
+            "(9, 3)",
+            "(10, 3)",
+            "(2, 9)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-coordinate-axes",
+          "standard": "5.G.1",
+          "difficulty": 2,
+          "prompt": "Which coordinate-plane axis is horizontal?",
+          "choices": [
+            "origin",
+            "x-axis",
+            "ordered pair",
+            "y-axis"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "read-ordered-pair",
+          "standard": "5.G.1",
+          "difficulty": 3,
+          "prompt": "What ordered pair has x-coordinate 3 and y-coordinate 4?",
+          "choices": [
+            "(3, 4)",
+            "(4, 4)",
+            "(4, 5)",
+            "(4, 3)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "On a map, the playground is at x = 9 and y = 14. Which point names its location?",
+          "choices": [
+            "(14, 9)",
+            "(9, 14)",
+            "(9, 13)",
+            "(10, 15)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 2,
+          "prompt": "A quadrilateral has four equal sides, 0 right angles, and 2 pairs of parallel sides. What is the most specific name?",
+          "choices": [
+            "rhombus",
+            "parallelogram",
+            "rectangle",
+            "pentagon"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 3,
+          "prompt": "In the hierarchy rhombus → parallelogram → quadrilateral, what category comes immediately after rhombus?",
+          "choices": [
+            "triangle",
+            "parallelogram",
+            "pentagon",
+            "circle"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u09-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u09-l05"
+  }
+}

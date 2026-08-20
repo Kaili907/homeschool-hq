@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u07-l08",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u07-l08",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Decimal Operations",
+    "dayInUnit": 8,
+    "courseDay": 116,
+    "phase": "Reteach and varied practice",
+    "focus": "decimal subtraction",
+    "title": "Reteach and varied practice: decimal subtraction"
+  },
+  "standards": [
+    "5.NBT.3",
+    "5.NBT.4",
+    "5.NBT.7"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 1,
+          "prompt": "Find 1.2 × 3.",
+          "workedSolution": {
+            "steps": [
+              "Ignore the decimal point at first and multiply whole numbers: 12 × 3 = 36.",
+              "Count the decimal places in the factors: 1.2 has one and 3 has none, so the product needs one.",
+              "Count one digit from the right of 36 and place the point there: 1.2 × 3 = 3.6."
+            ],
+            "answer": "3.6"
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "decimal-division",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 4.8 ÷ 3.",
+          "workedSolution": {
+            "steps": [
+              "Divide the ones first: 4 ÷ 3 = 1 with 1 one left over.",
+              "That leftover one is 10 tenths; with the 8 tenths already there that makes 18 tenths, and 18 ÷ 3 = 6 tenths.",
+              "Keep the decimal point directly above its place in 4.8: the quotient is 1.6."
+            ],
+            "answer": "1.6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 1,
+          "prompt": "5 tickets cost $3.98 each. What is the total cost?",
+          "choices": [
+            "$1990",
+            "$8.98",
+            "$19.90",
+            "$199"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-estimation-check",
+          "standard": "5.NBT.4",
+          "difficulty": 1,
+          "prompt": "Round each number to the nearest whole number to estimate 8.55 + 8.16.",
+          "choices": [
+            "16.71",
+            "17",
+            "1700",
+            "1.700"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-addition",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 94.02 + 88.38.",
+          "choices": [
+            "102.85",
+            "18240",
+            "182.40",
+            "1824"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-subtraction",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 84.03 - 45.42.",
+          "choices": [
+            "129.45",
+            "3861",
+            "38.61",
+            "386.1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 1,
+          "prompt": "Find 7.7 × 2.",
+          "choices": [
+            "9.7",
+            "0.154",
+            "15.4",
+            "154"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-division",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 16.2 ÷ 2.",
+          "choices": [
+            "8.1",
+            "81",
+            "0.81",
+            "14.2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "5 tickets cost $7.57 each. What is the total cost?",
+          "choices": [
+            "$3.785",
+            "$37.85",
+            "$378.5",
+            "$7.57"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-estimation-check",
+          "standard": "5.NBT.4",
+          "difficulty": 3,
+          "prompt": "Round each number to the nearest whole number to estimate 38.73 + 77.27.",
+          "choices": [
+            "11600",
+            "115",
+            "1160",
+            "116"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "decimal-addition",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 73.53 + 39.96.",
+          "choices": [
+            "1.1349",
+            "113.49",
+            "1134.9",
+            "77.52"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u07-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u07-l08"
+  }
+}

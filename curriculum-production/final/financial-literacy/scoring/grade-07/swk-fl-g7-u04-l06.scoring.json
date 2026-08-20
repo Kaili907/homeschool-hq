@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u04-l06",
+  "lessonId": "ma-g7-financial-literacy-u04-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Identifying predatory features",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Bram's no-credit-check offer as simply generous."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "One risky feature is identified for Bram but the mechanism is not explained."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies several features of Bram's offer, including the hidden fees, the deadline, and the direct account access, and explains how each shifts risk or removes the borrower's control."
+          }
+        ]
+      },
+      {
+        "dimension": "Responding to pressure",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has the borrower sign, or offers no concrete action."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Signing is refused but nothing is requested or verified."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has the borrower refuse the deadline, demand full written terms including the total cost, and seek an alternative or a trusted adult before signing anything."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names the direct account access as a transfer of control.",
+      "Treats the 24-hour deadline as a pressure tactic, not a fact.",
+      "Requests the total cost of borrowing in writing.",
+      "Considers who the offer is aimed at and why."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "Which features of Bram's invented offer transfer risk to the borrower, and how does each one do it?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should the borrower do, what should they demand in writing, and what does the deadline signal?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why does an offer like this target people with few options, and what does that imply about the terms?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Identifying predatory features — Not yet: The response treats Bram's no-credit-check offer as simply generous. Approaching: One risky feature is identified for Bram but the mechanism is not explained. Meets: The response identifies several features of Bram's offer, including the hidden fees, the deadline, and the direct account access, and explains how each shifts risk or removes the borrower's control. Responding to pressure — Not yet: The response has the borrower sign, or offers no concrete action. Approaching: Signing is refused but nothing is requested or verified. Meets: The response has the borrower refuse the deadline, demand full written terms including the total cost, and seek an alternative or a trusted adult before signing anything. Names the direct account access as a transfer of control. Treats the 24-hour deadline as a pressure tactic, not a fact. Requests the total cost of borrowing in writing. Considers who the offer is aimed at and why."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names the direct account access as a transfer of control. Treats the 24-hour deadline as a pressure tactic, not a fact. Requests the total cost of borrowing in writing. Considers who the offer is aimed at and why."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-07/swk-fl-g7-u04-l06.scoring.json",
+    "sourceScoringSha256": "5b88b2f03054a5b0b2cb24f77a2a5f915e26b773eb9bf6598596d193a44a1d2b",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

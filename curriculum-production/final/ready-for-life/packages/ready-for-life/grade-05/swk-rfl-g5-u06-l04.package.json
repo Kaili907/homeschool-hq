@@ -1,0 +1,380 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u06-l04",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: doing the task"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can practice doing the task. I will do one step at a time and check one result.",
+  "scenario": "With the adult-confirmed plan and supervision categories from the previous lesson, the learner carries out their chosen family contribution — completing the steps marked fully independent on their own, seeking permission before independent-with-permission steps, and having the adult present for every supervision-required step.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The adult is present for the full duration of every step the confirmed plan marked as needing supervision, not a partial check-in.",
+    "If a step turns out to need more supervision than planned once it is underway, the learner stops and asks the adult before continuing."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the planned contribution can't be carried out in real life right now (materials, timing, or access aren't available), the learner instead walks through the full plan verbally or in writing with the adult, step by step, describing exactly what they would do at each step and getting the adult's confirmation that the plan is sound and correctly categorized, in place of physically completing it."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g5-u06-l04-model-card",
+    "Embedded resource: swk-rfl-g5-u06-l04-step-card",
+    "Embedded resource: swk-rfl-g5-u06-l04-guided-card",
+    "Embedded resource: swk-rfl-g5-u06-l04-independent-card",
+    "Embedded resource: swk-rfl-g5-u06-l04-evidence-record",
+    "Embedded resource: swk-rfl-g5-u06-l04-retry-pair",
+    "Embedded resource: swk-rfl-g5-u06-l04-delivered-plan"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Open swk-rfl-g5-u06-l04-model-card. Watch one complete example.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g5-u06-l04-guided-card. Do the coached move.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u06-l04-independent-card. Choose one complete route. Follow its steps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g5-u06-l04-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Now that the task is done, was there a step that turned out harder (or easier) than your plan expected? What would you change about the plan itself, not just your effort?"
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u06-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u06-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u06-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Following the confirmed plan: Completes all steps in the confirmed order. | Respecting supervision categories: Follows every category correctly. Resume at the next unfinished step on swk-rfl-g5-u06-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Identify one part of the finished contribution that could be extended or repeated as an ongoing routine, and sketch what that ongoing version would look like.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can practice doing the task. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u06-l04-model-card",
+        "swk-rfl-g5-u06-l04-step-card",
+        "swk-rfl-g5-u06-l04-guided-card",
+        "swk-rfl-g5-u06-l04-independent-card",
+        "swk-rfl-g5-u06-l04-evidence-record",
+        "swk-rfl-g5-u06-l04-retry-pair",
+        "swk-rfl-g5-u06-l04-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g5-u06-l04-delivered-plan"
+      ],
+      "localMaterials": [],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u06-l04-model-card",
+        "kind": "model",
+        "title": "doing the task worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: With the adult-confirmed plan and supervision categories from the previous lesson, the learner carries out their chosen family contribution — completing the steps marked fully independent on their own, seeking permission before independent-with-permission steps, and having the adult present for every supervision-required step.",
+          "Model move 1: Read the condition and name the exact doing the task decision or action.",
+          "Model move 2: Before starting, review your confirmed plan: which step are you doing first, and which category (supervised, permission-only, independent) is it in?",
+          "Model move 3: Complete every step marked 'needs supervision' with your adult present for the entire step, and every step marked 'needs permission' only after checking in first.",
+          "Model check: Following the confirmed plan: Completes all steps in the confirmed order. | Respecting supervision categories: Follows every category correctly."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u06-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "doing the task action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for doing the task.",
+          "2. Watch the worked move on swk-rfl-g5-u06-l04-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u06-l04-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u06-l04-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u06-l04-evidence-record; use swk-rfl-g5-u06-l04-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u06-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "doing the task coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: With the adult-confirmed plan and supervision categories from the previous lesson, the learner carries out their chosen family contribution — completing the steps marked fully independent on their own, seeking permission before independent-with-permission steps, and having the adult present for every supervision-required step.",
+          "Coach direction: Before starting, review your confirmed plan: which step are you doing first, and which category (supervised, permission-only, independent) is it in?",
+          "Learner prompt: Name the first step and its category.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u06-l04-independent-card",
+        "kind": "independent-task",
+        "title": "doing the task complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Complete every step marked 'needs supervision' with your adult present for the entire step, and every step marked 'needs permission' only after checking in first.",
+          "Response 1 (t2-p1): My adult was present for the full duration of every supervision-required step, not just part of it.",
+          "Response 2 (t2-p2): I checked in before starting every permission-only step.",
+          "Response 3 (t2-p3): I followed the step order from my confirmed plan rather than skipping around.",
+          "Equal-access rule: If the planned contribution can't be carried out in real life right now (materials, timing, or access aren't available), the learner instead walks through the full plan verbally or in writing with the adult, step by step, describing exactly what they would do at each step and getting the adult's confirmation that the plan is sound and correctly categorized, in place of physically completing it."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u06-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "doing the task minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Now that the task is done, was there a step that turned out harder (or easier) than your plan expected? What would you change about the plan itself, not just your effort?",
+          "Success checks: Following the confirmed plan: Completes all steps in the confirmed order. | Respecting supervision categories: Follows every category correctly.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u06-l04-retry-pair",
+        "kind": "retry",
+        "title": "doing the task supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u06-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u06-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional doing the task condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Following the confirmed plan: Completes all steps in the confirmed order. | Respecting supervision categories: Follows every category correctly..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u06-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u06-l04-delivered-plan",
+        "kind": "independent-task",
+        "title": "doing the task delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: With the adult-confirmed plan and supervision categories from the previous lesson, the learner carries out their chosen family contribution — completing the steps marked fully independent on their own, seeking permission before independent-with-permission steps, and having the adult present for every supervision-required step.",
+          "Use steps: Complete every step marked 'needs supervision' with your adult present for the entire step, and every step marked 'needs permission' only after checking in first.",
+          "Field 1 (t2-p1): My adult was present for the full duration of every supervision-required step, not just part of it.",
+          "Field 2 (t2-p2): I checked in before starting every permission-only step.",
+          "Field 3 (t2-p3): I followed the step order from my confirmed plan rather than skipping around.",
+          "Check against: Following the confirmed plan: Completes all steps in the confirmed order. | Respecting supervision categories: Follows every category correctly."
+        ]
+      }
+    ],
+    "model": {
+      "title": "doing the task worked model",
+      "startingCondition": "With the adult-confirmed plan and supervision categories from the previous lesson, the learner carries out their chosen family contribution — completing the steps marked fully independent on their own, seeking permission before independent-with-permission steps, and having the adult present for every supervision-required step.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact doing the task decision or action.",
+        "Model move 2: Before starting, review your confirmed plan: which step are you doing first, and which category (supervised, permission-only, independent) is it in?",
+        "Model move 3: Complete every step marked 'needs supervision' with your adult present for the entire step, and every step marked 'needs permission' only after checking in first."
+      ],
+      "reasoning": "The model names the condition, follows the ordered doing the task process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Following the confirmed plan: Completes all steps in the confirmed order.",
+        "Respecting supervision categories: Follows every category correctly."
+      ],
+      "resourceRef": "swk-rfl-g5-u06-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for doing the task.",
+        "2. Watch the worked move on swk-rfl-g5-u06-l04-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u06-l04-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u06-l04-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u06-l04-evidence-record; use swk-rfl-g5-u06-l04-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u06-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "With the adult-confirmed plan and supervision categories from the previous lesson, the learner carries out their chosen family contribution — completing the steps marked fully independent on their own, seeking permission before independent-with-permission steps, and having the adult present for every supervision-required step.",
+      "prompt": "Name the first step and its category.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Following the confirmed plan: Completes all steps in the confirmed order.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u06-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u06-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "doing the task — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g5-u06-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Complete every step marked 'needs supervision' with your adult present for the entire step, and every step marked 'needs permission' only after checking in first.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "doing the task — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u06-l04-independent-card",
+        "directions": "If the planned contribution can't be carried out in real life right now (materials, timing, or access aren't available), the learner instead walks through the full plan verbally or in writing with the adult, step by step, describing exactly what they would do at each step and getting the adult's confirmation that the plan is sound and correctly categorized, in place of physically completing it.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u06-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Now that the task is done, was there a step that turned out harder (or easier) than your plan expected? What would you change about the plan itself, not just your effort?",
+      "observableCriteria": [
+        "Following the confirmed plan: Completes all steps in the confirmed order.",
+        "Respecting supervision categories: Follows every category correctly."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u06-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u06-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u06-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u06-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Following the confirmed plan: Completes all steps in the confirmed order. | Respecting supervision categories: Follows every category correctly.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u06-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u06-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

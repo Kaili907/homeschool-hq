@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-ready-for-life-u03-assessment",
+  "courseRef": "ma-g10-ready-for-life",
+  "grade": 10,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g10-ready-for-life-u03",
+    "unitNumber": 3,
+    "unitTitle": "Professional Communication",
+    "courseTitle": "Ready for Life 10: Career Exploration and Workplace Communication",
+    "assessmentLessonRef": "ma-g10-ready-for-life-u03-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u03-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Read both feedback messages and note your honest first reaction to each, especially the harder one.",
+      "prompt": "Describe your honest first reaction to the harder feedback message, before drafting a response."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "Draft a brief professional response to each feedback message.",
+      "prompt": "Draft your response to the straightforward feedback."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "extended-response",
+      "directions": "Draft a brief professional response to each feedback message.",
+      "prompt": "Draft your response to the harder feedback, naming one specific thing you'll do differently, without over-apologizing or getting defensive."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Draft a brief professional response to each feedback message.",
+      "prompt": "My response to the harder feedback names a specific action, not just an acknowledgment."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Justify your communication choices by connecting this response to at least one other message you drafted earlier in the unit.",
+      "prompt": "Name one specific choice from this response (a wording choice, structural choice, or tone choice) and connect it to something you learned drafting a different message earlier this unit."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect on receiving difficult feedback overall.",
+      "prompt": "What is the difference between accepting feedback and agreeing that you're a bad person, and how does your response show that difference?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/ready-for-life/ma-g10-ready-for-life-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Response to difficult feedback criterion.",
+    "Provide evidence that meets the stated Justification quality criterion.",
+    "Provide evidence that meets the stated Distinguishing feedback from character judgment criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-ready-for-life-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u03-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Professional Communication?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l01",
+  "lessonId": "ma-g12-ready-for-life-u06-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Index completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the seven required sections is missing from the index."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All seven sections appear on the index with a status marked."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The gap-prioritization reasoning is specific and realistic, not just 'I'll do them in order.'"
+          }
+        ]
+      },
+      {
+        "dimension": "Honest self-audit",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "A section is marked 'have it' without the learner being able to name actual evidence for it."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every 'have it' marking is backed by nameable evidence."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection shows genuine recalibration between the warm-up guess and the honest audit, not defensiveness."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All seven required sections are present on the index.",
+      "No section is marked complete without nameable evidence behind it.",
+      "The gap-prioritization choice is explained with a real reason, not arbitrary."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u07-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u07-l05",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Functions: Concept, Notation, and Interpretation",
+    "dayInUnit": 5,
+    "courseDay": 113,
+    "phase": "Concept model B",
+    "focus": "key features of graphs and tables",
+    "title": "Concept model B: key features of graphs and tables"
+  },
+  "standards": [
+    "F-IF.1",
+    "F-IF.2",
+    "F-IF.3",
+    "F-IF.4",
+    "F-IF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 1,
+          "prompt": "a(1) = 4, a(n) = a(n−1) + 3. Find a(6).",
+          "workedSolution": {
+            "steps": [
+              "Five steps of +3 from 4.",
+              "4 + 15 = 19."
+            ],
+            "answer": "19"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 2,
+          "prompt": "What does the peak of a height-time graph mean?",
+          "workedSolution": {
+            "steps": [
+              "The peak is a maximum.",
+              "It gives the greatest height and when it happens."
+            ],
+            "answer": "the maximum height and its time"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 2,
+          "prompt": "Given f(x) = 3x² − 3x − 5, find f(3).",
+          "choices": [
+            "-5",
+            "13",
+            "18",
+            "67"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 2,
+          "prompt": "Does the set {(1, 3), (2, 5), (1, 8), (4, 9)} define y as a function of x? Justify the decision.",
+          "choices": [
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 1 is paired with both 3 and 8.",
+            "Yes; each input appears once, so each has exactly one output."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 2,
+          "prompt": "A machine starts with 140 components and consumes 7 per hour. It can run for at most 11 hours. What is the domain of C(h) = 140 − 7h in this context?",
+          "choices": [
+            "h ≥ 0",
+            "all real numbers",
+            "0 ≤ h ≤ 11",
+            "0 ≤ h ≤ 140"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 2,
+          "prompt": "A sequence is defined by a(1) = 8 and a(n) = a(n − 1) + 1 for n > 1. Find a(7).",
+          "choices": [
+            "14",
+            "2",
+            "15",
+            "56"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 2,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time reaches its highest point. Which feature is this, and what does it mean?",
+          "choices": [
+            "the y-intercept, giving the launch height",
+            "the maximum, giving the greatest height and the time it occurs",
+            "an interval of decrease",
+            "the x-intercept, giving the landing time"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = 5x² − 4x − 8, find f(4).",
+          "choices": [
+            "56",
+            "-4",
+            "376",
+            "64"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 3,
+          "prompt": "Does the set {(1, 3), (2, 5), (3, 7), (4, 9)} define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; each input appears once, so each has exactly one output.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 1 is paired with both 3 and 8.",
+            "No; the input 4 gives both y = 2 and y = −2."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 2,
+          "prompt": "A machine starts with 75 components and consumes 8 per hour. It can run for at most 11 hours. What is the domain of C(h) = 75 − 8h in this context?",
+          "choices": [
+            "0 ≤ h ≤ 11",
+            "0 ≤ h ≤ 9",
+            "all real numbers",
+            "0 ≤ h ≤ 75"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = 9 and a(n) = a(n − 1) − 4 for n > 1. Find a(23).",
+          "choices": [
+            "97",
+            "-79",
+            "-828",
+            "-83"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u07-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u07-l05"
+  }
+}

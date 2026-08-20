@@ -501,7 +501,7 @@ function ProviderPricingTerms({
             <p>{TIMING_LABELS[group.timing]}</p>
             <h2 id={`pricing-${group.timing}-title`}>{group.title}</h2>
           </header>
-          <div className="admin-pricing-table-wrap">
+          <div className="admin-pricing-table-wrap" tabIndex={0}>
             <table>
               <caption>{group.title} by exact provider pricing dimension</caption>
               <thead>

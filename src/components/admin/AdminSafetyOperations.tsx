@@ -173,7 +173,7 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
               <thead><tr><th scope="col">Learner</th><th scope="col">Occurred</th><th scope="col">Engine</th><th scope="col">Evidence</th><th scope="col">State</th><th scope="col">Inspect</th></tr></thead>
               <tbody>{visibleEvents.map((event) => (
                 <tr key={event.eventRef}>
-                  <td><strong>{event.learner?.displayName ?? (event.learner ? 'Learner' : 'System')}</strong>{event.learner && <span>{event.learner.reference}</span>}</td>
+                  <td><strong>{event.learner?.displayName ?? (event.learner ? 'Learner' : 'System')}</strong>{event.learner && !event.learner.displayName && <span>{event.learner.reference}</span>}</td>
                   <td><time dateTime={event.occurredAt}>{formatTime(event.occurredAt)}</time></td>
                   <td>{engineLabel(event.engine)}</td>
                   <td>{CATEGORY_LABELS[event.evidenceCategory]}</td>

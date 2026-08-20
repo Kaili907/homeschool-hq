@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u04-l17",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u04-l17",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Division and Numerical Expressions",
+    "dayInUnit": 17,
+    "courseDay": 71,
+    "phase": "Targeted correction",
+    "focus": "parentheses and brackets",
+    "title": "Targeted correction: parentheses and brackets"
+  },
+  "standards": [
+    "5.NBT.6",
+    "5.OA.1",
+    "5.OA.2",
+    "5.OA.3"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u04-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-numerical-expression",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "Which phrase describes (5 × 12) - 3?",
+          "workedSolution": {
+            "steps": [
+              "The parentheses show that 5 × 12 is treated as one quantity.",
+              "The result of a multiplication is a product.",
+              "The outside operation subtracts 3 from that product."
+            ],
+            "answer": "Multiply 5 by 12, then subtract 3 from the product."
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "extend-two-rule-patterns",
+          "standard": "5.OA.3",
+          "difficulty": 2,
+          "prompt": "Pattern A starts at 2 and adds 3. Pattern B starts at 4 and adds 6. What are the fourth terms?",
+          "workedSolution": {
+            "steps": [
+              "Pattern A is 2, 5, 8, 11.",
+              "Pattern B is 4, 10, 16, 22.",
+              "The fourth corresponding terms form the pair (11, 22)."
+            ],
+            "answer": "(11, 22)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u04-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-pattern-relationship",
+          "standard": "5.OA.3",
+          "difficulty": 1,
+          "prompt": "Pattern A: 4, 5, 6\nPattern B: 8, 10, 12\nWhich statement describes the relationship between corresponding terms?",
+          "choices": [
+            "Each term in Pattern B is 2 more than the corresponding term in Pattern A.",
+            "Each term in Pattern A is 1/3 of the corresponding term in Pattern B.",
+            "Each term in Pattern A is 2 times the corresponding term in Pattern B.",
+            "Each term in Pattern B is 2 times the corresponding term in Pattern A."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "pattern-ordered-pair",
+          "standard": "5.OA.3",
+          "difficulty": 2,
+          "prompt": "Pattern A starts at 9 and adds 5. Pattern B starts at 0 and adds 12. Using Pattern A as x and Pattern B as y, which point represents term 5?",
+          "choices": [
+            "(29, 48)",
+            "(24, 36)",
+            "(29, 36)",
+            "(34, 60)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "division-model-equation",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "A missing-factor model shows 18 × ? = 1206. Which pair of equations represents the model?",
+          "choices": [
+            "1206 ÷ 18 = 67; 18 × 67 = 1206",
+            "18 ÷ 1206 = 67; 67 × 18 = 1206",
+            "1206 ÷ 67 = 18; 18 × 1206 = 67",
+            "1206 ÷ 19 = 67; 19 × 67 = 1206"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "division-area-model",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "A rectangle has area 506 square units and one side length is 22 units. What is the missing side length?",
+          "choices": [
+            "484",
+            "23",
+            "24",
+            "22"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u04-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "partial-quotients",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "Use these partial-quotients steps to solve 2152 ÷ 24:\n2152 - 24 × 80 = 232\n232 - 24 × 9 = 16\nWhat is the quotient and remainder?",
+          "choices": [
+            "105",
+            "9 R 16",
+            "80 R 16",
+            "89 R 16"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "whole-number-quotient",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 1260 ÷ 18.",
+          "choices": [
+            "69",
+            "71",
+            "70",
+            "88"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 9837 ÷ 68. Write the quotient and remainder.",
+          "choices": [
+            "144 R 46",
+            "144 R 45",
+            "144 R 44",
+            "142 R 45"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "A teacher has 4800 notebooks and packs 79 in each complete set. How many complete sets can be packed?",
+          "choices": [
+            "19",
+            "60",
+            "61",
+            "59"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u04-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u04-l17"
+  }
+}

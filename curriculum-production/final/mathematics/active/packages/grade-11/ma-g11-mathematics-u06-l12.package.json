@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u06-l12",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u06-l12",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Advanced Function Analysis and Graphing",
+    "dayInUnit": 12,
+    "courseDay": 102,
+    "phase": "Performance task build",
+    "focus": "comparing functions across algebraic, graphical, numerical, and verbal forms",
+    "title": "Performance task build: comparing functions across algebraic, graphical, numerical, and verbal forms"
+  },
+  "standards": [
+    "F-IF.7",
+    "F-IF.8",
+    "F-IF.9",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 2,
+          "prompt": "The function f(x) = 2(x − 2)² − 1 opens upward. State its minimum value and where it occurs.",
+          "choices": [
+            "minimum -1 at x = 2",
+            "minimum 2 at x = -1",
+            "minimum 1 at x = 2",
+            "minimum -1 at x = -2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-end-behaviour",
+          "standard": "F-IF.7",
+          "difficulty": 3,
+          "prompt": "A polynomial has degree 2 and leading coefficient 3. Describe its end behaviour.",
+          "choices": [
+            "both ends rise",
+            "both ends fall",
+            "the left end falls and the right end rises",
+            "the left end rises and the right end falls"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rational-function-asymptotes",
+          "standard": "F-IF.7",
+          "difficulty": 2,
+          "prompt": "For f(x) = (x + 3) / (x + 1), state the vertical asymptote and the horizontal asymptote.",
+          "choices": [
+            "vertical x = -1; horizontal y = 1",
+            "vertical x = -3; horizontal y = 1",
+            "vertical x = -1; horizontal y = 3",
+            "vertical x = -1; horizontal y = 0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-across-representations",
+          "standard": "F-IF.9",
+          "difficulty": 3,
+          "prompt": "Function f is given in vertex form as f(x) = −(x + 2)² − 7, so it opens downward. Function g is given by a table whose greatest output is -2. Which function has the greater maximum, and by how much?",
+          "choices": [
+            "g, by -2",
+            "g, by -7",
+            "g, by -9",
+            "g, by 5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 3,
+          "prompt": "The function f(x) = 4(x + 3)² − 12 opens upward. State its minimum value and where it occurs.",
+          "choices": [
+            "minimum -12 at x = 3",
+            "minimum 12 at x = -3",
+            "minimum -3 at x = -12",
+            "minimum -12 at x = -3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-end-behaviour",
+          "standard": "F-IF.7",
+          "difficulty": 3,
+          "prompt": "A polynomial has degree 4 and leading coefficient 5. Describe its end behaviour.",
+          "choices": [
+            "the left end falls and the right end rises",
+            "the left end rises and the right end falls",
+            "both ends rise",
+            "both ends fall"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "rational-function-asymptotes",
+          "standard": "F-IF.7",
+          "difficulty": 3,
+          "prompt": "For f(x) = (x + 1) / (x + 2), state the vertical asymptote and the horizontal asymptote.",
+          "choices": [
+            "vertical x = -2; horizontal y = 0",
+            "vertical x = -2; horizontal y = 1",
+            "vertical x = -1; horizontal y = 1",
+            "vertical x = -2; horizontal y = 1/2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-across-representations",
+          "standard": "F-IF.9",
+          "difficulty": 3,
+          "prompt": "Function f is given in vertex form as f(x) = −(x − 6)² + 3, so it opens downward. Function g is given by a table whose greatest output is 8. Which function has the greater maximum, and by how much?",
+          "choices": [
+            "g, by 3",
+            "g, by 8",
+            "g, by 5",
+            "g, by 11"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 3,
+          "prompt": "The function f(x) = 3(x − 3)² − 9 opens upward. State its minimum value and where it occurs.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "polynomial-end-behaviour",
+          "standard": "F-IF.7",
+          "difficulty": 3,
+          "prompt": "A polynomial has degree 4 and leading coefficient -3. Describe its end behaviour.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u06-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u06-l12"
+  }
+}

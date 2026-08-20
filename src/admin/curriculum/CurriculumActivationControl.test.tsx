@@ -129,6 +129,7 @@ describe('Curriculum Activation & Rollback Admin surface', () => {
   it('contains keyboard focus, Escape, description, and trigger-return safeguards', () => {
     const sourceText = readFileSync(new URL('./CurriculumActivationControl.tsx', import.meta.url), 'utf8')
     const css = readFileSync(new URL('./curriculum-activation.css', import.meta.url), 'utf8')
+      .replace(/\r\n/gu, '\n')
     expect(sourceText).toContain('cancelButtonRef.current?.focus()')
     expect(sourceText).toContain("event.key === 'Escape'")
     expect(sourceText).toContain("event.key !== 'Tab'")

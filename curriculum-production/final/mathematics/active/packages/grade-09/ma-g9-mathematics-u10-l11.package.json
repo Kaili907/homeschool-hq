@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l11",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l11",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 11,
+    "courseDay": 173,
+    "phase": "Performance task planning",
+    "focus": "fitting a function to bivariate data and assessing fit with residual plots",
+    "title": "Performance task planning: fitting a function to bivariate data and assessing fit with residual plots"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 1,
+          "prompt": "Find the mean and median of 4, 8, 6, 10, 2.",
+          "workedSolution": {
+            "steps": [
+              "Sum 30, count 5, mean 6.",
+              "Sorted: 2, 4, 6, 8, 10; median 6."
+            ],
+            "answer": "mean 6, median 6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 2,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 233 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "Both the mean and the median rise sharply.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "The median rises sharply while the mean changes little."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 2,
+          "prompt": "A two-way table has row 1: 24 yes, 26 no; row 2: 18 yes, 17 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "13/25",
+            "12/25",
+            "4/7",
+            "24/85"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 7x + 52, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "The predicted value is 7 test points when x is 0.",
+            "Each additional hour studied is associated with an increase of about 7 test points.",
+            "Each additional hour studied causes an increase of exactly 7 test points.",
+            "Each additional test points is associated with 7 more hour studieds."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 3,
+          "prompt": "Towns with more fire engines report more fire damage. What conclusion is justified?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 16, 26, 18, 36, 13, 32, 24. Give the mean and the median.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 3,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 328 appended. Which statement best describes the effect on the mean and the median?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l11"
+  }
+}

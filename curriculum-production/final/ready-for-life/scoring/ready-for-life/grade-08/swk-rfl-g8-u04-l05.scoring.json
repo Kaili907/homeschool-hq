@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l05",
+  "lessonId": "ma-g8-ready-for-life-u04-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Check-in message completeness and real usability",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "Message omits a return time, a destination or activity cue, or the change-of-plan clause, and reads as too vague to be useful in real life."
+          },
+          {
+            "label": "Developing",
+            "descriptor": "Message includes most required pieces but the wording is still generic or copied closely from the pattern without personalizing it."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Message includes a return time and a change-of-plan clause, written in wording the learner could realistically send as their own text."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about when and why to use it",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "Names a situation for using the message but does not explain why it matters or what to do if there is no reply."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names two specific real situations for using the message and describes a reasonable next step if no reply comes back in time."
+          }
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

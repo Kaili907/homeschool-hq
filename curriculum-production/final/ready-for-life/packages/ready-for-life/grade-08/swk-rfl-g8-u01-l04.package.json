@@ -1,0 +1,400 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u01-l04",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Independent Planning and Executive Routines",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: digital and paper systems"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic digital and paper systems task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "Over the next three real days, the learner puts a planning system to an actual test on their actual life, not a pretend week.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "If trialing a digital tool, use a notes or calendar app already installed and approved for use on a household device rather than installing anything new for this lesson.",
+    "Keep daily log entries limited to your own task names and times; don't record private details about other people's plans or schedules."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real three-day trial isn't possible right now, for example the days ahead are unusually irregular, walk through three fictional but realistic days on paper: for each day, decide which tool you would use, list two or three plausible real tasks for that day, and predict one specific snag that tool would likely run into on that day."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g8-u01-l04-model-card",
+    "Embedded resource: swk-rfl-g8-u01-l04-step-card",
+    "Embedded resource: swk-rfl-g8-u01-l04-guided-card",
+    "Embedded resource: swk-rfl-g8-u01-l04-independent-card",
+    "Embedded resource: swk-rfl-g8-u01-l04-evidence-record",
+    "Embedded resource: swk-rfl-g8-u01-l04-retry-pair",
+    "Embedded resource: swk-rfl-g8-u01-l04-delivered-card",
+    "Embedded resource: swk-rfl-g8-u01-l04-delivered-example",
+    "learner-local: a device with a notes or calendar app already installed, for a digital system",
+    "learner-local: a pen or pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Analyze the complete worked example on swk-rfl-g8-u01-l04-model-card before beginning.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g8-u01-l04-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g8-u01-l04-independent-card; follow every step and retain only the named minimal evidence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Complete the minimal evidence record on swk-rfl-g8-u01-l04-evidence-record; omit or fictionalize private details.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Would you keep using this system as-is, change one part of it, or switch formats entirely? Name the specific change, if any."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g8-u01-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g8-u01-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g8-u01-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: System construction: A real structure is built before day one, populated with genuine current tasks. | Trial honesty and specificity: Each of the three days has a specific, concrete note on what worked and what broke down. Resume at the next unfinished step on swk-rfl-g8-u01-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner test the opposite format, paper if they used digital, digital if they used paper, for one additional day and compare which one required less daily effort to keep up.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "digital-consumer",
+    "practicalGoal": "I can complete a realistic digital and paper systems task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "Three consecutive days; active work is divided across short daily check-ins",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g8-u01-l04-model-card",
+        "swk-rfl-g8-u01-l04-step-card",
+        "swk-rfl-g8-u01-l04-guided-card",
+        "swk-rfl-g8-u01-l04-independent-card",
+        "swk-rfl-g8-u01-l04-evidence-record",
+        "swk-rfl-g8-u01-l04-retry-pair",
+        "swk-rfl-g8-u01-l04-delivered-card",
+        "swk-rfl-g8-u01-l04-delivered-example"
+      ],
+      "referencedArtifactWords": [
+        "card",
+        "example"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g8-u01-l04-delivered-card",
+        "swk-rfl-g8-u01-l04-delivered-example"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g8-u01-l04-local-1",
+          "label": "a device with a notes or calendar app already installed, for a digital system",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u01-l04-local-2",
+          "label": "a pen or pencil",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g8-u01-l04-model-card",
+        "kind": "model",
+        "title": "digital and paper systems worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Over the next three real days, the learner puts a planning system to an actual test on their actual life, not a pretend week.",
+          "Model move 1: Read the condition and name the exact digital and paper systems decision or action.",
+          "Model move 2: Before building anything, decide whether you'll trial a digital system or a paper system for these three days, based on what you already have and what's easiest to check daily.",
+          "Model move 3: Build your system before day one starts: set up the actual structure you'll use, a page per day, a running list, or category columns, whatever fits your chosen tool, and enter your real tasks for day one.",
+          "Model check: System construction: A real structure is built before day one, populated with genuine current tasks. | Trial honesty and specificity: Each of the three days has a specific, concrete note on what worked and what broke down."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "digital and paper systems action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for digital and paper systems.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "digital and paper systems coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Over the next three real days, the learner puts a planning system to an actual test on their actual life, not a pretend week.",
+          "Coach direction: Before building anything, decide whether you'll trial a digital system or a paper system for these three days, based on what you already have and what's easiest to check daily.",
+          "Learner prompt: Which will you trial for the next three days?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l04-independent-card",
+        "kind": "independent-task",
+        "title": "digital and paper systems complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Build your system before day one starts: set up the actual structure you'll use, a page per day, a running list, or category columns, whatever fits your chosen tool, and enter your real tasks for day one.",
+          "Response 1 (t2-p1): My system has a real structure built (not just a blank page) before day one begins.",
+          "Response 2 (t2-p2): Day one already has my actual real tasks entered.",
+          "Equal-access rule: If a real three-day trial isn't possible right now, for example the days ahead are unusually irregular, walk through three fictional but realistic days on paper: for each day, decide which tool you would use, list two or three plausible real tasks for that day, and predict one specific snag that tool would likely run into on that day."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "digital and paper systems minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Would you keep using this system as-is, change one part of it, or switch formats entirely? Name the specific change, if any.",
+          "Success checks: System construction: A real structure is built before day one, populated with genuine current tasks. | Trial honesty and specificity: Each of the three days has a specific, concrete note on what worked and what broke down.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l04-retry-pair",
+        "kind": "retry",
+        "title": "digital and paper systems supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g8-u01-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g8-u01-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional digital and paper systems condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — System construction: A real structure is built before day one, populated with genuine current tasks. | Trial honesty and specificity: Each of the three days has a specific, concrete note on what worked and what broke down..",
+          "Return: resume at the next unfinished step on swk-rfl-g8-u01-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l04-delivered-card",
+        "kind": "guided-practice",
+        "title": "digital and paper systems delivered card",
+        "purpose": "Resolves the lesson's named card so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Over the next three real days, the learner puts a planning system to an actual test on their actual life, not a pretend week.",
+          "Use steps: Build your system before day one starts: set up the actual structure you'll use, a page per day, a running list, or category columns, whatever fits your chosen tool, and enter your real tasks for day one.",
+          "Field 1 (t2-p1): My system has a real structure built (not just a blank page) before day one begins.",
+          "Field 2 (t2-p2): Day one already has my actual real tasks entered.",
+          "Check against: System construction: A real structure is built before day one, populated with genuine current tasks. | Trial honesty and specificity: Each of the three days has a specific, concrete note on what worked and what broke down."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l04-delivered-example",
+        "kind": "model",
+        "title": "digital and paper systems delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Over the next three real days, the learner puts a planning system to an actual test on their actual life, not a pretend week.",
+          "Use steps: Build your system before day one starts: set up the actual structure you'll use, a page per day, a running list, or category columns, whatever fits your chosen tool, and enter your real tasks for day one.",
+          "Field 1 (t2-p1): My system has a real structure built (not just a blank page) before day one begins.",
+          "Field 2 (t2-p2): Day one already has my actual real tasks entered.",
+          "Check against: System construction: A real structure is built before day one, populated with genuine current tasks. | Trial honesty and specificity: Each of the three days has a specific, concrete note on what worked and what broke down."
+        ]
+      }
+    ],
+    "model": {
+      "title": "digital and paper systems worked model",
+      "startingCondition": "Over the next three real days, the learner puts a planning system to an actual test on their actual life, not a pretend week.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact digital and paper systems decision or action.",
+        "Model move 2: Before building anything, decide whether you'll trial a digital system or a paper system for these three days, based on what you already have and what's easiest to check daily.",
+        "Model move 3: Build your system before day one starts: set up the actual structure you'll use, a page per day, a running list, or category columns, whatever fits your chosen tool, and enter your real tasks for day one."
+      ],
+      "reasoning": "The model names the condition, follows the ordered digital and paper systems process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "System construction: A real structure is built before day one, populated with genuine current tasks.",
+        "Trial honesty and specificity: Each of the three days has a specific, concrete note on what worked and what broke down."
+      ],
+      "resourceRef": "swk-rfl-g8-u01-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for digital and paper systems.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g8-u01-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Over the next three real days, the learner puts a planning system to an actual test on their actual life, not a pretend week.",
+      "prompt": "Which will you trial for the next three days?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "System construction: A real structure is built before day one, populated with genuine current tasks.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g8-u01-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g8-u01-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "digital and paper systems — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g8-u01-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Build your system before day one starts: set up the actual structure you'll use, a page per day, a running list, or category columns, whatever fits your chosen tool, and enter your real tasks for day one.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "digital and paper systems — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g8-u01-l04-independent-card",
+        "directions": "If a real three-day trial isn't possible right now, for example the days ahead are unusually irregular, walk through three fictional but realistic days on paper: for each day, decide which tool you would use, list two or three plausible real tasks for that day, and predict one specific snag that tool would likely run into on that day.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g8-u01-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Would you keep using this system as-is, change one part of it, or switch formats entirely? Name the specific change, if any.",
+      "observableCriteria": [
+        "System construction: A real structure is built before day one, populated with genuine current tasks.",
+        "Trial honesty and specificity: Each of the three days has a specific, concrete note on what worked and what broke down."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g8-u01-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g8-u01-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g8-u01-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g8-u01-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: System construction: A real structure is built before day one, populated with genuine current tasks. | Trial honesty and specificity: Each of the three days has a specific, concrete note on what worked and what broke down.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g8-u01-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g8-u01-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

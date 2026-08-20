@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l02",
+  "lessonId": "ma-g8-ready-for-life-u04-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Cost calculation accuracy",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "One or more of the three totals (three single rides, day pass, three QuickHop rides) is calculated incorrectly or a ride leg is miscounted."
+          },
+          {
+            "label": "Developing",
+            "descriptor": "All three totals are attempted with the correct ride-leg count, but one arithmetic total is off."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three totals are calculated correctly using the given fare numbers and the correct count of three ride legs."
+          }
+        ]
+      },
+      {
+        "dimension": "Comparative reasoning and justification",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "States which option costs least without referencing the calculated totals or the specific number of ride legs."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names the least expensive option and explains the choice by directly comparing the calculated totals for this specific three-leg trip."
+          }
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

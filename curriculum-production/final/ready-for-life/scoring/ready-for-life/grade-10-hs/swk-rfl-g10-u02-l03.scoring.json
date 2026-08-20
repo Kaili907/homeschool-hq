@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l03",
+  "lessonId": "ma-g10-ready-for-life-u02-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Appropriateness of the two people chosen",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or both people are chosen for being liked rather than for having observed specific work." },
+          { "label": "Proficient", "descriptor": "Both people have plausibly observed the learner's work directly." },
+          { "label": "Advanced", "descriptor": "Both people are justified with a specific, concrete example of what they observed." }
+        ]
+      },
+      {
+        "dimension": "Permission-request quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The draft assumes agreement rather than asking, or omits context the person would need to decide." },
+          { "label": "Proficient", "descriptor": "The draft asks permission and gives basic context." },
+          { "label": "Advanced", "descriptor": "The draft asks permission respectfully, gives full context, and makes it genuinely easy to decline." }
+        ]
+      },
+      {
+        "dimension": "Understanding of what a reference is for",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Explanation of why the person is appropriate is generic ('they're nice') rather than tied to observed work." },
+          { "label": "Proficient", "descriptor": "Explanation ties each person to something specific they observed." },
+          { "label": "Advanced", "descriptor": "Explanation distinguishes clearly between a personal relationship and an appropriate professional reference." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Neither of the two named people is a family member.",
+      "The draft message explicitly asks rather than informs, and includes what the learner is applying for.",
+      "The reflection identifies a specific, genuine easy-to-decline element in the draft, not a vague politeness claim."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

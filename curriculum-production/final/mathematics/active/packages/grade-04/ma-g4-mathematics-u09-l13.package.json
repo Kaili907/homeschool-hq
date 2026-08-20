@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l13",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l13",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 13,
+    "courseDay": 157,
+    "phase": "Performance task: plan",
+    "focus": "the measurement study",
+    "title": "Performance task: plan: the measurement study"
+  },
+  "standards": [
+    "4.MD.1",
+    "4.MD.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 3 meters to centimeters.",
+          "workedSolution": {
+            "steps": [
+              "1 meter = 100 centimeters.",
+              "3 × 100 = 300.",
+              "3 meters = 300 centimeters."
+            ],
+            "answer": "300 centimeters"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 2/4, 1/4, 2/4, 4/4, 3/4, 2/4, 4/4, 1/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 1/4 yard?",
+          "choices": [
+            "3/4",
+            "2/8",
+            "1/4",
+            "2/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 2 feet to inches.",
+          "choices": [
+            "24 inches",
+            "2 inches",
+            "14 inches",
+            "2.4 inches"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 6/8, 8/8, 2/8, 8/8, 7/8, 1/8, 2/8, 2/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 7/8 yard?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 7 meters to centimeters.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l13"
+  }
+}

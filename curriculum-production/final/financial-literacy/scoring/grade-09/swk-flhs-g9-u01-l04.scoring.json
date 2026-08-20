@@ -1,0 +1,268 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l04",
+  "lessonId": "ma-g9-financial-literacy-u01-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$7,750.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Cost to qualify is tuition plus required materials: $6,800 + $950."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$16,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The annual gain is $46,000 - $29,500."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "6",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,750 / $16,500 is 0.4697 of a year, which is 5.64 months and rounds to 6."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "24",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The clock starts at enrolment: 18 months of training plus the 6 months of higher pay that repay the $7,750."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$74,750.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five years of the $16,500 gain is $82,500, less the $7,750 cost."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "No, it would take longer than a year",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The cost would be $19,950, which is more than the $16,500 earned in the first year at the higher wage."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "tuition + toolsAndBooks",
+        "substituted": "6800 + 950",
+        "result": "$7,750.00",
+        "why": "Cost to qualify is tuition plus required materials: $6,800 + $950."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "after - before",
+        "substituted": "46000 - 29500",
+        "result": "$16,500.00",
+        "why": "The annual gain is $46,000 - $29,500."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p1 / #t1-p2 * 12, 0)",
+        "substituted": "round(#t1-p1 / #t1-p2 * 12, 0)",
+        "result": "6",
+        "why": "$7,750 / $16,500 is 0.4697 of a year, which is 5.64 months and rounds to 6."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "programMonths + #t2-p1",
+        "substituted": "18 + #t2-p1",
+        "result": "24",
+        "why": "The clock starts at enrolment: 18 months of training plus the 6 months of higher pay that repay the $7,750."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t1-p2 * years - #t1-p1",
+        "substituted": "#t1-p2 * 5 - #t1-p1",
+        "result": "$74,750.00",
+        "why": "Five years of the $16,500 gain is $82,500, less the $7,750 cost."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "newTuition + 950 <= #t1-p2",
+        "substituted": "19000 + 950 <= #t1-p2",
+        "result": "No, it would take longer than a year",
+        "why": "The cost would be $19,950, which is more than the $16,500 earned in the first year at the higher wage."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "The payback calculation above leaves out something that costs Lena real money during the 18 months. Name it, and say how including it would change the answer to the payback question.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies a cost the calculation omits — most directly earnings given up if the program reduces her work hours, and reasonably also interest on borrowed tuition, transport, or childcare.",
+          "States that including it raises the total cost to qualify and therefore lengthens the payback beyond 6 months.",
+          "Keeps the direction of the effect correct: a larger cost cannot shorten payback."
+        ],
+        "evidenceRequirements": [
+          "Ties the argument to at least one figure already computed — the $7,750 cost, the $16,500 annual gain, or the 6-month payback."
+        ],
+        "lookFors": [
+          "The response treats forgone earnings as a real cost even though no one writes a cheque for it.",
+          "The response does not conclude that the certificate is therefore not worth it; the five-year figure still favours certifying."
+        ],
+        "commonMisconception": "Counting only money paid out and treating income not earned during training as costing nothing.",
+        "dimensions": [
+          "assumption-identification",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total out-of-pocket cost of getting qualified?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much more would Lena earn per year after certifying?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many whole months of the higher wage does it take to repay the cost of qualifying? Round to the nearest month."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Counting the 18 months of the program itself, how long from starting the program until the cost is repaid?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "Over 5 years at the higher wage, what is Lena’s net gain after subtracting the cost of qualifying?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the program’s tuition rose to $19,000 with everything else unchanged, would the cost still be repaid within the first year of higher pay?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "The payback calculation above leaves out something that costs Lena real money during the 18 months. Name it, and say how including it would change the answer to the payback question."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the total out-of-pocket cost of getting qualified? Answer: $7,750.00. Verification: Cost to qualify is tuition plus required materials: $6,800 + $950. t1-p2: How much more would Lena earn per year after certifying? Answer: $16,500.00. Verification: The annual gain is $46,000 - $29,500. t2-p1: How many whole months of the higher wage does it take to repay the cost of qualifying? Round to the nearest month. Answer: 6. Verification: $7,750 / $16,500 is 0.4697 of a year, which is 5.64 months and rounds to 6. t2-p2: Counting the 18 months of the program itself, how long from starting the program until the cost is repaid? Answer: 24. Verification: The clock starts at enrolment: 18 months of training plus the 6 months of higher pay that repay the $7,750. t3-p1: Over 5 years at the higher wage, what is Lena’s net gain after subtracting the cost of qualifying? Answer: $74,750.00. Verification: Five years of the $16,500 gain is $82,500, less the $7,750 cost. t3-p2: If the program’s tuition rose to $19,000 with everything else unchanged, would the cost still be repaid within the first year of higher pay? Answer: No, it would take longer than a year. Verification: The cost would be $19,950, which is more than the $16,500 earned in the first year at the higher wage."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t4-p1: The payback calculation above leaves out something that costs Lena real money during the 18 months. Name it, and say how including it would change the answer to the payback question. Identifies a cost the calculation omits — most directly earnings given up if the program reduces her work hours, and reasonably also interest on borrowed tuition, transport, or childcare. States that including it raises the total cost to qualify and therefore lengthens the payback beyond 6 months. Keeps the direction of the effect correct: a larger cost cannot shorten payback. Ties the argument to at least one figure already computed — the $7,750 cost, the $16,500 annual gain, or the 6-month payback. The response treats forgone earnings as a real cost even though no one writes a cheque for it. The response does not conclude that the certificate is therefore not worth it; the five-year figure still favours certifying."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies a cost the calculation omits — most directly earnings given up if the program reduces her work hours, and reasonably also interest on borrowed tuition, transport, or childcare. States that including it raises the total cost to qualify and therefore lengthens the payback beyond 6 months. Keeps the direction of the effect correct: a larger cost cannot shorten payback."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 3,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u01-l04.scoring.json",
+    "sourceScoringSha256": "6a4b7211468b40a6b9e43e447d00ad8a07fac3a5b014a3962d7faf88d92d750b",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

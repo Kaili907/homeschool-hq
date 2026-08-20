@@ -257,6 +257,7 @@ describe('Admin Provider Pricing dashboard', () => {
     expect(css).toContain('overflow-x: auto')
     expect(css).toContain('min-height: 2.75rem')
     expect(css).toContain('overflow-wrap: anywhere')
+    expect(markup).toContain('tabindex="0"')
     const shellCss = readFileSync(fileURLToPath(new URL('./admin-console.css', import.meta.url)), 'utf8')
     expect(shellCss).toContain('max-width: 100vw')
     expect(shellCss).toContain('.admin-sidebar nav { min-width: 0; overflow: hidden; }')

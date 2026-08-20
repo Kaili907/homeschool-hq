@@ -1,8 +1,11 @@
 import {
+  CURRICULUM_GRADES,
   CURRICULUM_SEARCH_LIMIT,
   CurriculumSourceError,
+  isCurriculumGrade,
   type CurriculumAssessmentEvidence,
   type CurriculumCatalog,
+  type CurriculumCatalogTotals,
   type CurriculumCourseSummary,
   type CurriculumGrade,
   type CurriculumLessonDetail,
@@ -14,7 +17,6 @@ import {
   type CurriculumUnitSummary,
 } from './contracts'
 
-const SUPPORTED_GRADES = new Set<number>([5, 7, 8])
 type JsonObject = Record<string, unknown>
 
 export interface CurriculumCatalogInput {
@@ -69,8 +71,8 @@ function number(value: unknown, label: string): number {
 
 function grade(value: unknown, label: string): CurriculumGrade {
   const parsed = typeof value === 'string' ? Number(value) : value
-  if (typeof parsed !== 'number' || !SUPPORTED_GRADES.has(parsed)) malformed(`${label} is unsupported`)
-  return parsed as CurriculumGrade
+  if (!isCurriculumGrade(parsed)) malformed(`${label} is unsupported`)
+  return parsed
 }
 
 function stringArray(value: unknown, label: string, required = false): string[] {
@@ -116,10 +118,15 @@ function parseCsv(raw: string): string[][] {
 function parseSourceIdentity(manifestJson: string, validationPassed: boolean): {
   source: CurriculumSourceIdentity
   grades: CurriculumGrade[]
-  expectedCounts: { courses: number; units: number; lessons: number }
+  expectedCounts: { courses: number; units: number; lessons: number; assessments?: number }
 } {
   const manifest = object(parseJson(manifestJson, 'curriculum-manifest.json'), 'curriculum manifest')
   const counts = object(manifest.counts, 'curriculum manifest counts')
+  const parsedGrades = array(manifest.grades, 'curriculum manifest grades').map((value, index) =>
+    grade(value, `curriculum manifest grades[${index}]`),
+  )
+  if (new Set(parsedGrades).size !== parsedGrades.length) malformed('curriculum manifest grades contain duplicates')
+  const declaredGrades = new Set(parsedGrades)
   return {
     source: {
       packageId: string(manifest.package_id, 'curriculum manifest package_id'),
@@ -129,13 +136,14 @@ function parseSourceIdentity(manifestJson: string, validationPassed: boolean): {
       lifecycle: 'published',
       validationStatus: validationPassed ? 'passed' : 'unavailable',
     },
-    grades: array(manifest.grades, 'curriculum manifest grades').map((value, index) =>
-      grade(value, `curriculum manifest grades[${index}]`),
-    ),
+    grades: CURRICULUM_GRADES.filter((value) => declaredGrades.has(value)),
     expectedCounts: {
       courses: number(counts.courses, 'curriculum manifest course count'),
       units: number(counts.units, 'curriculum manifest unit count'),
       lessons: number(counts.lessons, 'curriculum manifest lesson count'),
+      assessments: counts.assessments === undefined
+        ? undefined
+        : number(counts.assessments, 'curriculum manifest assessment count'),
     },
   }
 }
@@ -183,7 +191,7 @@ const LESSON_INDEX_COLUMNS = [
 
 function parseLessonIndex(raw: string): CurriculumLessonSummary[] {
   const rows = parseCsv(raw)
-  if (rows.length < 2) malformed('lesson-index.csv has no lesson rows')
+  if (rows.length < 1) malformed('lesson-index.csv has no header row')
   const header = rows[0]
   for (const column of LESSON_INDEX_COLUMNS) {
     if (!header.includes(column)) malformed(`lesson-index.csv is missing ${column}`)
@@ -207,6 +215,7 @@ function parseLessonIndex(raw: string): CurriculumLessonSummary[] {
 
 function parseAssessments(
   rawByCourse: Readonly<Record<string, string>>,
+  unitsByCourseAndNumber: ReadonlyMap<string, CurriculumUnitSummary>,
   unitsByAssessmentId: ReadonlyMap<string, CurriculumUnitSummary>,
 ): CurriculumAssessmentEvidence[] {
   const assessments: CurriculumAssessmentEvidence[] = []
@@ -215,12 +224,16 @@ function parseAssessments(
     for (const [index, value] of values.entries()) {
       const assessment = object(value, `${courseId} assessment ${index + 1}`)
       const assessmentId = string(assessment.assessment_id, `${courseId} assessment ${index + 1} id`)
-      const unit = unitsByAssessmentId.get(assessmentId)
-      if (!unit || unit.courseId !== courseId) inconsistent(`${assessmentId} is not linked by unit-index.json`)
+      const unitNumber = number(assessment.unit_number, `${assessmentId} unit_number`)
+      const unit = unitsByCourseAndNumber.get(`${courseId}:${unitNumber}`)
+      const declaredUnit = unitsByAssessmentId.get(assessmentId)
+      if (!unit || (declaredUnit && declaredUnit !== unit)) {
+        inconsistent(`${assessmentId} is not linked by unit-index.json`)
+      }
       assessments.push({
         assessmentId,
         courseId,
-        unitNumber: number(assessment.unit_number, `${assessmentId} unit_number`),
+        unitNumber,
         unitTitle: string(assessment.unit_title, `${assessmentId} unit_title`),
         standards: stringArray(assessment.standards, `${assessmentId} standards`, true),
         totalPoints: assessment.total_points === undefined
@@ -248,24 +261,58 @@ export function buildCurriculumCatalog(input: CurriculumCatalogInput): Curriculu
     inconsistent('curriculum indexes do not match manifest counts')
   }
   const coursesById = new Map(courses.map((course) => [course.courseId, course]))
-  const unitsById = new Map(units.map((unit) => [unit.unitId, unit]))
+  const declaredGrades = new Set(grades)
+  for (const course of courses) {
+    if (!declaredGrades.has(course.grade)) inconsistent(`${course.courseId} uses a grade not declared by the manifest`)
+  }
+  const unitsByCourseAndNumber = new Map<string, CurriculumUnitSummary>()
+  for (const unit of units) {
+    const key = `${unit.courseId}:${unit.unitNumber}`
+    if (unitsByCourseAndNumber.has(key)) inconsistent(`unit index contains duplicate course and unit-number coordinates for ${key}`)
+    unitsByCourseAndNumber.set(key, unit)
+  }
   const unitsByAssessmentId = new Map(
     units.filter((unit) => unit.assessmentId).map((unit) => [unit.assessmentId!, unit]),
   )
+  if (unitsByAssessmentId.size !== units.filter((unit) => unit.assessmentId).length) {
+    inconsistent('unit index contains duplicate assessment identifiers')
+  }
   for (const unit of units) {
     const course = coursesById.get(unit.courseId)
     if (!course || course.grade !== unit.grade || course.subject !== unit.subject) inconsistent(`${unit.unitId} has no matching course`)
   }
   for (const lesson of lessons) {
     const course = coursesById.get(lesson.courseId)
-    const unitId = `${lesson.courseId}-u${String(lesson.unitNumber).padStart(2, '0')}`
-    const unit = unitsById.get(unitId)
-    if (!course || !unit || lesson.grade !== course.grade || !unit.lessonIds.includes(lesson.lessonId)) {
+    const unit = unitsByCourseAndNumber.get(`${lesson.courseId}:${lesson.unitNumber}`)
+    if (!course || !unit || lesson.grade !== course.grade || lesson.subject !== course.subject
+      || !unit.lessonIds.includes(lesson.lessonId)) {
       inconsistent(`${lesson.lessonId} is not linked by the course and unit indexes`)
     }
   }
-  const assessments = parseAssessments(input.assessmentJsonByCourse, unitsByAssessmentId)
+  const assessments = parseAssessments(
+    input.assessmentJsonByCourse,
+    unitsByCourseAndNumber,
+    unitsByAssessmentId,
+  )
+  assertUnique(assessments.map((item) => item.assessmentId), 'assessment index')
+  const assessmentIds = new Set(assessments.map((item) => item.assessmentId))
+  if ([...unitsByAssessmentId.keys()].some((assessmentId) => !assessmentIds.has(assessmentId))) {
+    inconsistent('unit index references an assessment missing from assessments.json')
+  }
+  if (expectedCounts.assessments !== undefined && assessments.length !== expectedCounts.assessments) {
+    inconsistent('curriculum assessments do not match manifest counts')
+  }
   return { source, grades, courses, units, lessons, assessments }
+}
+
+export function deriveCurriculumCatalogTotals(catalog: CurriculumCatalog): CurriculumCatalogTotals {
+  return {
+    grades: catalog.grades.length,
+    courses: catalog.courses.length,
+    units: catalog.units.length,
+    lessons: catalog.lessons.length,
+    assessments: catalog.assessments.length,
+  }
 }
 
 function normalize(value: string): string {

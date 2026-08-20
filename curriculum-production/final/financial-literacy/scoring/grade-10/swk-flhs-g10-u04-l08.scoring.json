@@ -1,0 +1,283 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l08",
+  "lessonId": "ma-g10-financial-literacy-u04-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,800 purchase spread across the 12 promotional months. Paying exactly this each month costs nothing in interest under the stated terms."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$485.82",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "26.99% applied to the entire original $1,800 for the full 12 months, exactly as the promotion’s terms state — not to the $150 still outstanding."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$635.82",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $485.82 of retroactive interest plus the $150 that was still outstanding."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "3.24",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$485.82 against the $150 outstanding. Missing the last payment cost more than three times the payment itself, because the trigger is whether a balance remains rather than how large it is."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "126.99%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,800 price plus $485.82 of interest, against the $1,800 price. The whole promotional rate lands at once, which is exactly what \"deferred\" rather than \"waived\" means."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Whether any balance at all remains at the end of the promotion",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The terms make it a threshold, not a proportion: a balance of $150 and a balance of $5 trigger the same $485.82 charge, and eleven payments made on time do not reduce it."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "price / 12",
+        "substituted": "1800 / 12",
+        "result": "$150.00",
+        "why": "The $1,800 purchase spread across the 12 promotional months. Paying exactly this each month costs nothing in interest under the stated terms."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(price2 * defApr, 2)",
+        "substituted": "round(1800 * 0.2699, 2)",
+        "result": "$485.82",
+        "why": "26.99% applied to the entire original $1,800 for the full 12 months, exactly as the promotion’s terms state — not to the $150 still outstanding."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 + remaining",
+        "substituted": "#t1-p2 + 150",
+        "result": "$635.82",
+        "why": "The $485.82 of retroactive interest plus the $150 that was still outstanding."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p2 / remaining2, 2)",
+        "substituted": "round(#t1-p2 / 150, 2)",
+        "result": "3.24",
+        "why": "$485.82 against the $150 outstanding. Missing the last payment cost more than three times the payment itself, because the trigger is whether a balance remains rather than how large it is."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "(#t1-p2 + price3) / price3 * 100",
+        "substituted": "(#t1-p2 + 1800) / 1800 * 100",
+        "result": "126.99%",
+        "why": "The $1,800 price plus $485.82 of interest, against the $1,800 price. The whole promotional rate lands at once, which is exactly what \"deferred\" rather than \"waived\" means."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain the difference between interest that is waived and interest that is deferred, and say what a shopper should set up at the moment of purchase so that this promotion behaves the way it appears to.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Distinguishes the two: waived interest is never owed, while deferred interest is accruing throughout and is cancelled only if the condition is met exactly.",
+          "Names a concrete safeguard set up at purchase — an automatic payment above the $150 required, or a plan to clear the balance a month early — and explains that it protects against the threshold rather than against the rate.",
+          "Uses the $485.82 figure to show that the safeguard is worth far more than the small amounts involved in setting it up."
+        ],
+        "evidenceRequirements": [
+          "Uses the $150.00 required monthly payment and the $485.82 retroactive charge."
+        ],
+        "lookFors": [
+          "The response identifies the all-or-nothing threshold as the feature that matters.",
+          "The response does not describe the promotion as hidden; the terms are stated, and the point is what they mean when read."
+        ],
+        "commonMisconception": "Reading \"no interest for 12 months\" as interest that cannot be charged for that period, rather than as interest that is being held back on a condition.",
+        "dimensions": [
+          "transfer",
+          "plan-coherence",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What equal monthly payment clears the purchase within the promotional period?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "The shopper misses the final payment, leaving $150 outstanding at the end of month 12. Under the stated terms, what interest is charged?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the shopper now owe in total at the end of month 12?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "The retroactive interest is how many times the $150 that was left unpaid? Round to two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Counting the retroactive interest, the shopper paid what percentage of the sticker price?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Under the stated terms, what determines whether the interest is charged?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain the difference between interest that is waived and interest that is deferred, and say what a shopper should set up at the moment of purchase so that this promotion behaves the way it appears to."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What equal monthly payment clears the purchase within the promotional period? Answer: $150.00. Verification: The $1,800 purchase spread across the 12 promotional months. Paying exactly this each month costs nothing in interest under the stated terms. t1-p2: The shopper misses the final payment, leaving $150 outstanding at the end of month 12. Under the stated terms, what interest is charged? Answer: $485.82. Verification: 26.99% applied to the entire original $1,800 for the full 12 months, exactly as the promotion’s terms state — not to the $150 still outstanding. t1-p3: What does the shopper now owe in total at the end of month 12? Answer: $635.82. Verification: The $485.82 of retroactive interest plus the $150 that was still outstanding. t2-p1: The retroactive interest is how many times the $150 that was left unpaid? Round to two decimal places. Answer: 3.24. Verification: $485.82 against the $150 outstanding. Missing the last payment cost more than three times the payment itself, because the trigger is whether a balance remains rather than how large it is. t2-p2: Counting the retroactive interest, the shopper paid what percentage of the sticker price? Answer: 126.99%. Verification: The $1,800 price plus $485.82 of interest, against the $1,800 price. The whole promotional rate lands at once, which is exactly what \"deferred\" rather than \"waived\" means. t2-p3: Under the stated terms, what determines whether the interest is charged? Answer: Whether any balance at all remains at the end of the promotion. Verification: The terms make it a threshold, not a proportion: a balance of $150 and a balance of $5 trigger the same $485.82 charge, and eleven payments made on time do not reduce it."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Explain the difference between interest that is waived and interest that is deferred, and say what a shopper should set up at the moment of purchase so that this promotion behaves the way it appears to. Distinguishes the two: waived interest is never owed, while deferred interest is accruing throughout and is cancelled only if the condition is met exactly. Names a concrete safeguard set up at purchase — an automatic payment above the $150 required, or a plan to clear the balance a month early — and explains that it protects against the threshold rather than against the rate. Uses the $485.82 figure to show that the safeguard is worth far more than the small amounts involved in setting it up. Uses the $150.00 required monthly payment and the $485.82 retroactive charge. The response identifies the all-or-nothing threshold as the feature that matters. The response does not describe the promotion as hidden; the terms are stated, and the point is what they mean when read."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Distinguishes the two: waived interest is never owed, while deferred interest is accruing throughout and is cancelled only if the condition is met exactly. Names a concrete safeguard set up at purchase — an automatic payment above the $150 required, or a plan to clear the balance a month early — and explains that it protects against the threshold rather than against the rate. Uses the $485.82 figure to show that the safeguard is worth far more than the small amounts involved in setting it up."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u04-l08.scoring.json",
+    "sourceScoringSha256": "ef60ce4833aa57973a6dd7d797257d683cb30f042128ee7eeff0b699a7a01128",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

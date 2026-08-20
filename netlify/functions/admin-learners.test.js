@@ -67,6 +67,22 @@ describe('authorized learner analytics endpoint', () => {
     expect(response.statusCode).toBe(200)
   })
 
+  it('accepts bounded expanded learner references, including encoded Grade 10-12 deep links', async () => {
+    const reader = {
+      readSnapshot: vi.fn(),
+      readDetail: vi.fn(async ({ learnerRef }) => ({
+        observedAt: '2026-09-09T18:00:00.000Z', detail: { learnerRef },
+      })),
+    }
+    const handler = createAdminLearnersHandler({ authorization: permitted(), reader })
+    const response = await handler(event({ path: '/api/admin/v1/learners/learner%3Agrade-10%3Aada' }))
+    expect(response.statusCode).toBe(200)
+    expect(reader.readDetail).toHaveBeenCalledWith({
+      accessToken: 'verified.access.token', learnerRef: 'learner:grade-10:ada',
+    })
+    expect((await handler(event({ path: '/api/admin/v1/learners/bad%2Fref' }))).statusCode).toBe(404)
+  })
+
   it('accepts only a canonical local-date selector for today evidence', async () => {
     const authorization = permitted()
     const reader = { readSnapshot: vi.fn(async () => ({ observedAt: '2026-09-09T18:00:00.000Z', learners: [], details: {} })), readDetail: vi.fn() }

@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u04-l14",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u04-l14",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Equations and Inequalities",
+    "dayInUnit": 14,
+    "courseDay": 68,
+    "phase": "Transfer challenge",
+    "focus": "two-step equations",
+    "title": "Transfer challenge: two-step equations"
+  },
+  "standards": [
+    "7.EE.3",
+    "7.EE.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 1,
+          "prompt": "Solve 2x - 3 ≥ 11.",
+          "workedSolution": {
+            "steps": [
+              "Undo operations in reverse order, keeping both sides equivalent.",
+              "Substitute or test a boundary value to check the result."
+            ],
+            "answer": "x ≥ 7"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solution-set",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Which integer satisfies 2x + 3 ≥ 31 and x < 15?",
+          "choices": [
+            "13",
+            "15",
+            "14",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "graph-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Which graph describes x ≥ 3?",
+          "choices": [
+            "closed circle at 3, shaded right",
+            "open circle at 3, shaded right",
+            "closed circle at 4, shaded right",
+            "closed circle at 3, shaded left"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "check-and-interpret-solution",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A club charges $15 plus $5 per session for a total of $35. How many sessions were purchased?",
+          "choices": [
+            "3",
+            "5",
+            "4",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-numerical-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A group buys 2 passes at $18 each and pays a $4 service fee. What is the total cost?",
+          "choices": [
+            "$43",
+            "$41",
+            "$39",
+            "$40"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "two-step-equation",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve 6x + 9 = 13. Write the answer in simplest form.",
+          "choices": [
+            "2/3",
+            "0/3",
+            "2/2",
+            "4/3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve -6x + 4 ≤ -26.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solution-set",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Which integer satisfies 8x + 10 ≥ 98 and x < 12?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "graph-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Which graph describes x ≥ 9?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u04-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u04-l14"
+  }
+}

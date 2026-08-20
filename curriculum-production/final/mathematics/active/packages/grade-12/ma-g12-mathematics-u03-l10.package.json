@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u03-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u03-l10",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Triangle Laws for Non-Right Triangles",
+    "dayInUnit": 10,
+    "courseDay": 46,
+    "phase": "Discussion or problem seminar",
+    "focus": "choosing the appropriate law for a given triangle",
+    "title": "Discussion or problem seminar: choosing the appropriate law for a given triangle"
+  },
+  "standards": [
+    "G-SRT.9",
+    "G-SRT.10",
+    "G-SRT.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u03-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "triangle-area-from-two-sides-and-angle",
+          "standard": "G-SRT.9",
+          "difficulty": 1,
+          "prompt": "a = 8, b = 5, enclosed angle 30°. Area?",
+          "workedSolution": {
+            "steps": [
+              "Area = ½(8)(5)sin30°.",
+              "= ½(8)(5)(0.5) = 10."
+            ],
+            "answer": "10"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u03-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "choose-triangle-law",
+          "standard": "G-SRT.11",
+          "difficulty": 2,
+          "prompt": "A triangle problem gives two angles and any side (AAS or ASA). Which law should be used first?",
+          "choices": [
+            "the law of cosines",
+            "the law of sines",
+            "the law of sines, with a check for the ambiguous case",
+            "the Pythagorean theorem"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "law-of-cosines-side",
+          "standard": "G-SRT.10",
+          "difficulty": 3,
+          "prompt": "In a triangle, sides a = 12 and b = 12 enclose an angle C = 120°. Find c², the square of the third side.",
+          "choices": [
+            "144",
+            "576",
+            "288",
+            "432"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "law-of-sines-side",
+          "standard": "G-SRT.11",
+          "difficulty": 3,
+          "prompt": "In a triangle, angle A = 31°, angle B = 81°, and side a = 16 (opposite A). Find side b to two decimal places.",
+          "choices": [
+            "8.34",
+            "30.68",
+            "41.81",
+            "16"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u03-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "triangle-area-from-two-sides-and-angle",
+          "standard": "G-SRT.9",
+          "difficulty": 3,
+          "prompt": "A triangle has sides a = 4 and b = 12 enclosing an angle of 90°. Find its area exactly.",
+          "choices": [
+            "24",
+            "48",
+            "25",
+            "49"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "choose-triangle-law",
+          "standard": "G-SRT.11",
+          "difficulty": 3,
+          "prompt": "A triangle problem gives two sides and the angle between them (SAS). Which law should be used first?",
+          "choices": [
+            "the law of sines",
+            "the Pythagorean theorem",
+            "the law of cosines",
+            "the law of sines, with a check for the ambiguous case"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "law-of-cosines-side",
+          "standard": "G-SRT.10",
+          "difficulty": 3,
+          "prompt": "In a triangle, sides a = 9 and b = 5 enclose an angle C = 60°. Find c², the square of the third side.",
+          "choices": [
+            "106",
+            "151",
+            "61",
+            "196"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u03-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "law-of-sines-side",
+          "standard": "G-SRT.11",
+          "difficulty": 3,
+          "prompt": "In a triangle, angle A = 58°, angle B = 79°, and side a = 9 (opposite A). Find side b to two decimal places.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "triangle-area-from-two-sides-and-angle",
+          "standard": "G-SRT.9",
+          "difficulty": 3,
+          "prompt": "A triangle has sides a = 10 and b = 15 enclosing an angle of 150°. Find its area exactly.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u03-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u03-l10"
+  }
+}

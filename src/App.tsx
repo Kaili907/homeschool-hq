@@ -13,6 +13,7 @@ import {
   saveAppState,
   type AppStatePersistenceFailure,
 } from './appState'
+import { createLocalPinVerifier, localPinMatches } from './localPin'
 import {
   PLACEMENT_TOTAL,
   PRACTICE_TOTAL,
@@ -96,6 +97,8 @@ import {
 } from './study/production/verifiedRuntimeAdapter'
 import { StudyLifecycleBoundary } from './study/lifecycle'
 import type { AcademyStudyContext } from './academy/adapters/studyContextAdapter'
+import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
+import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
 
 const loadPreviewPorts = import.meta.env.DEV
   ? () => import('./study/mountedPorts').then(({ createMountedStudyPorts }) => createMountedStudyPorts())
@@ -112,6 +115,12 @@ const StudySettings = import.meta.env.DEV
 const StudyProductionRoute = lazy(() =>
   import('./components/study/StudyProductionRoute').then((module) => ({
     default: module.StudyProductionRoute,
+  })),
+)
+
+const FinalFamilyPilotApp = lazy(() =>
+  import('./study/family-pilot/final-app/FinalFamilyPilotApp').then((module) => ({
+    default: module.FinalFamilyPilotApp,
   })),
 )
 
@@ -172,6 +181,25 @@ type Screen =
   | { kind: 'admin' }
 
 export default function App() {
+  const [familyPilotSelected, setFamilyPilotSelected] = useState(
+    () => isFamilyPilotEnabledFromHost() && isFamilyPilotPath(window.location.pathname),
+  )
+  if (familyPilotSelected) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the Family Pilot.</main>}>
+        <FinalFamilyPilotApp
+          onExit={() => {
+            leaveFamilyPilotPath()
+            setFamilyPilotSelected(false)
+          }}
+        />
+      </Suspense>
+    )
+  }
+  return <LegacyApp />
+}
+
+function LegacyApp() {
   const loaded = useMemo(loadAppState, [])
   const studyEnabled = useMemo(isStudyEngineEnabledFromHost, [])
   const studyPreviewEnabled = useMemo(isStudyEnginePreviewEnabledFromHost, [])
@@ -651,7 +679,7 @@ export default function App() {
               title={`Hi, ${profile.name}!`}
               subtitle="Enter your secret PIN"
               onComplete={(pin) => {
-                if (pin === profile.pin) {
+                if (localPinMatches(pin, profile.pin)) {
                   setState((s) => ({ ...s, activeProfileId: profile.id }))
                   setScreen({ kind: 'home' })
                   return null
@@ -672,7 +700,7 @@ export default function App() {
                   return null
                 }
                 if (pin === screen.firstEntry) {
-                  patchById(profile.id, (prev) => ({ ...prev, pin }))
+                  patchById(profile.id, (prev) => ({ ...prev, pin: createLocalPinVerifier(pin) }))
                   setState((s) => ({ ...s, activeProfileId: profile.id }))
                   setScreen({ kind: 'home' })
                   return null
@@ -698,7 +726,7 @@ export default function App() {
               title="Grown-Ups only"
               subtitle="Enter the parent PIN"
               onComplete={(pin) => {
-                if (pin === state.parentPin) {
+                if (localPinMatches(pin, state.parentPin)) {
                   establishParentStudyAuthorization()
                   setScreen({ kind: 'parentHub' })
                   return null
@@ -721,7 +749,7 @@ export default function App() {
                   return null
                 }
                 if (pin === screen.firstEntry) {
-                  setState((s) => ({ ...s, parentPin: pin }))
+                  setState((s) => ({ ...s, parentPin: createLocalPinVerifier(pin) }))
                   establishParentStudyAuthorization()
                   setScreen({ kind: 'parentHub' })
                   return null

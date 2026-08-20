@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u09-l18",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u09-l18",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability Rules and Interpretation",
+    "dayInUnit": 18,
+    "courseDay": 162,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "common probabilistic reasoning errors",
+    "title": "Publication, presentation, or reflection: common probabilistic reasoning errors"
+  },
+  "standards": [
+    "S-CP.5",
+    "S-CP.6",
+    "S-CP.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 1,
+          "prompt": "P(delay | rain) = P(delay). What does that mean?",
+          "workedSolution": {
+            "steps": [
+              "Conditioning changes nothing.",
+              "The events are independent."
+            ],
+            "answer": "They are independent"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "A box holds 12 items, of which 7 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "49/144",
+            "7/12",
+            "7/22",
+            "7/24"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 2,
+          "prompt": "Given P(A and B) = 12/20 and P(B) = 13/20, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "12/13",
+            "3/5",
+            "39/100",
+            "13/12"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 30/100, P(B) = 35/100, and P(A and B) = 18/100, find P(A or B) in lowest terms.",
+          "choices": [
+            "83/100",
+            "47/100",
+            "13/20",
+            "13/100"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, P(has the condition | tested positive) is much smaller than P(tested positive | has the condition). What is the correct interpretation?",
+          "choices": [
+            "The two conditional probabilities condition on different events, so they need not be close; a rare condition makes the first much smaller.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The relationship proves that one event causes the other.",
+            "The two events are mutually exclusive."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 9 items, of which 2 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 10/100 and P(B) = 77/100, find P(A | B) as a fraction in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u09-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u09-l18"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-english-language-arts-u01-assessment",
+  "courseRef": "ma-g4-english-language-arts",
+  "grade": 4,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g4-english-language-arts-u01",
+    "unitNumber": 1,
+    "unitTitle": "An Evidence Habit: Details, Examples, and Inferences",
+    "courseTitle": "Grade 4 English Language Arts",
+    "assessmentLessonRef": "ma-g4-english-language-arts-u01-l17"
+  },
+  "standards": [
+    "4.RL.1",
+    "4.RI.1",
+    "4.W.4",
+    "4.L.1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-04/ma-g4-english-language-arts-u01-l17.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: unit evidence: cited literary and informational responses. Essential question: What counts as evidence, and how do I show my thinking about a text in writing? By the end of this lesson you should be able to: Produce independent evidence of the unit's targets. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for An Evidence Habit: Details, Examples, and Inferences. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain this idea in your own words and give one valid example: explicit meaning and inference.\\n- (6 pts, text evidence) Answer a question about referring to details and examples using an unfamiliar passage, and quote or precisely paraphrase the words that support your answer.\\n- (6 pts, application) Apply this to new material: morphology-driven decoding of unfamiliar words. Show the process or cite the evidence.\\n- (6 pts, error or claim analysis) A plausible but flawed response about writing for a stated audience is provided. Identify the error, correct it, and explain why the correction is better.\\n- (9 pts, constructed writing) Write an independent response connected to collaborative discussion roles and to the unit performance task: Publish an evidence-habits page holding two text-based responses, one literary and one informational, each with quoted or paraphrased support and a self-check.\\n- (4 pts, reflection and transfer) Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.\\n\\nThis assessment also includes 1 fixed-answer/selected-response item(s) delivered separately by your facilitator.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/english-language-arts/ma-g4-english-language-arts-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-english-language-arts-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-04/ma-g4-english-language-arts-u01-l17.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of An Evidence Habit: Details, Examples, and Inferences?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

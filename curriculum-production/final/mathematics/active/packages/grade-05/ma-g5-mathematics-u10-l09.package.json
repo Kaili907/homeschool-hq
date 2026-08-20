@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u10-l09",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u10-l09",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 9,
+    "courseDay": 171,
+    "phase": "Concept model C",
+    "focus": "constraints and assumptions",
+    "title": "Concept model C: constraints and assumptions"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.NBT.5",
+    "5.NBT.6",
+    "5.NBT.7",
+    "5.NF.1",
+    "5.NF.4",
+    "5.MD.5",
+    "5.G.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "coordinate-data",
+          "standard": "5.G.2",
+          "difficulty": 1,
+          "prompt": "A point is at (2, 3). Move right 4 and up 1. Where is it?",
+          "workedSolution": {
+            "steps": [
+              "Right increases x to 6.",
+              "Up increases y to 4."
+            ],
+            "answer": "(6, 4)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "model-argument",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A student says a 3 by 5 by 2 box has volume 15. Is the claim correct?",
+          "choices": [
+            "No; the volume is 30 cubic units.",
+            "No; the volume is 32 cubic units.",
+            "No; the volume is 31 cubic units.",
+            "Yes; the volume is 15 cubic units."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "choose-operation",
+          "standard": "5.OA.1",
+          "difficulty": 3,
+          "prompt": "4 packs hold 9 markers each, and 11 markers are loose. How many markers are there?",
+          "choices": [
+            "47",
+            "50",
+            "49",
+            "48"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "whole-number-model",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 30 × 16.",
+          "choices": [
+            "480",
+            "481",
+            "450",
+            "46"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-model",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "54 supplies are shared equally among 9 teams. How many supplies does each team receive?",
+          "choices": [
+            "7",
+            "6",
+            "8",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-budget",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "5 tickets cost $7.82 each and there is a $2.37 fee. What is the total cost?",
+          "choices": [
+            "$41.47",
+            "$49.29",
+            "$42.47",
+            "$39.10"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fraction-project",
+          "standard": "5.NF.1",
+          "difficulty": 3,
+          "prompt": "A project uses 5/10 meter of blue ribbon and 3/10 meter of gold ribbon. How much ribbon is used?",
+          "choices": [
+            "8/11",
+            "1/5",
+            "4/5",
+            "9/10"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "scale-project",
+          "standard": "5.NF.4",
+          "difficulty": 3,
+          "prompt": "A 1/5-meter path is scaled by 3. What is the new length in meters?",
+          "choices": [
+            "1/5",
+            "4/5",
+            "1/15",
+            "3/5"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "volume-plan",
+          "standard": "5.MD.5",
+          "difficulty": 3,
+          "prompt": "A storage box is 6 units long, 4 units wide, and 3 units high. What is its volume in cubic units?",
+          "choices": [
+            "69",
+            "72",
+            "75",
+            "24"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-data",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "A data point is at (0, 3). Move right 4 and up 3. What is the new point?",
+          "choices": [
+            "(4, 7)",
+            "(6, 4)",
+            "(4, 6)",
+            "(5, 6)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "model-argument",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A student says a 3 by 5 by 7 box has volume 15. Is the claim correct?",
+          "choices": [
+            "Yes; the volume is 15 cubic units.",
+            "No; the volume is 108 cubic units.",
+            "No; the volume is 107 cubic units.",
+            "No; the volume is 105 cubic units."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u10-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u10-l09"
+  }
+}

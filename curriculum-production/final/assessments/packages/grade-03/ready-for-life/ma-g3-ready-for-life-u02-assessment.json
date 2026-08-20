@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-ready-for-life-u02-assessment",
+  "courseRef": "ma-g3-ready-for-life",
+  "grade": 3,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g3-ready-for-life-u02",
+    "unitNumber": 2,
+    "unitTitle": "Clothes and Getting Ready",
+    "courseTitle": "Grade 3 Ready For Life",
+    "assessmentLessonRef": "ma-g3-ready-for-life-u02-l05"
+  },
+  "standards": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 2 — clothing care and readiness routines"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u02-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before choosing anything, check the weather for the next day.",
+      "prompt": "Describe what you noticed about the weather and name the one clothing layer it makes you add or leave out."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Put together the whole night-before routine in order: choose the outfit, check it is clean, set it out, then pack one bag item.",
+      "prompt": "I chose a full outfit that matches tomorrow's temperature and weather."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Put together the whole night-before routine in order: choose the outfit, check it is clean, set it out, then pack one bag item.",
+      "prompt": "I checked that every piece of the outfit is actually clean before setting it out."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Put together the whole night-before routine in order: choose the outfit, check it is clean, set it out, then pack one bag item.",
+      "prompt": "I set the outfit and shoes together on a chair or hook, not left in a pile."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "checklist-item",
+      "directions": "Put together the whole night-before routine in order: choose the outfit, check it is clean, set it out, then pack one bag item.",
+      "prompt": "I packed one item I will need for the next day into my bag."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Complete the whole routine on your own, without being reminded, the night before the actual day.",
+      "prompt": "Record which part of the routine you did first and which you did last, and describe whether anyone reminded you to start or you started on your own."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Compare this morning to a morning when the routine was not done the night before.",
+      "prompt": "Describe one specific way this morning felt less rushed than a morning when you had to find your outfit and pack your bag after waking up."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/ready-for-life/ma-g3-ready-for-life-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Independence (unprompted start) criterion.",
+    "Provide evidence that meets the stated Weather-matched completeness criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-ready-for-life-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u02-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Clothes and Getting Ready?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

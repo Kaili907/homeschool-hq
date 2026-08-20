@@ -8,11 +8,12 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-
 const VERSION = /^\d+\.\d+\.\d+(?:-[a-z0-9.-]+)?$/
 const PATH = /^(?!\/)(?!.*(?:^|\/)\.\.?(?:\/|$))(?!.*\/\/)(?!.*\\).{1,240}$/
 const PACKAGE_FORMAT = 'manuel-academy-curriculum-staged-v1'
-const PACKAGE_ID = 'manuel-academy-grades-5-7-8-curriculum-v1'
+const GOVERNED_GRADES = new Set([3, 4, 5, 7, 8, 9, 10, 11, 12])
 const STAGED_COLLECTIONS = Object.freeze([
   'courses', 'units', 'lessons', 'assessments', 'assessment_interpretations',
   'schedules', 'standard_frameworks', 'resources', 'policy_sets',
 ])
+const PUBLISHED_COUNT_KEYS = Object.freeze(['courses', 'units', 'lessons', 'assessments', 'texts', 'schedules'])
 const STAGED_ARTIFACT_PATHS = new Set([
   'snapshot/manifest.json',
   ...STAGED_COLLECTIONS.map((collection) => `snapshot/${collection}.json`),
@@ -108,6 +109,36 @@ function validHash(value) {
 
 function validIdentity(value) {
   return typeof value === 'string' && UUID.test(value)
+}
+
+function packageGrades(value) {
+  if (typeof value !== 'string') return null
+  const match = /^manuel-academy-grades-(\d+(?:-\d+)*)-curriculum-v1$/.exec(value)
+  if (!match) return null
+  const grades = match[1].split('-').map(Number)
+  return grades.length > 0
+    && new Set(grades).size === grades.length
+    && grades.every((grade, index) => GOVERNED_GRADES.has(grade) && (index === 0 || grades[index - 1] < grade))
+    ? grades.map(String)
+    : null
+}
+
+export function reconcilePublishedGradeCounts(packageId, gradeCounts, totalCounts) {
+  const grades = packageGrades(packageId)
+  if (!grades || !record(gradeCounts) || !record(totalCounts)) return false
+  const recordedGrades = Object.keys(gradeCounts)
+  if (recordedGrades.length !== grades.length || !grades.every((grade) => Object.hasOwn(gradeCounts, grade))) return false
+  return grades.every((grade) => {
+    const values = gradeCounts[grade]
+    return record(values)
+      && Object.keys(values).length === PUBLISHED_COUNT_KEYS.length
+      && PUBLISHED_COUNT_KEYS.every((key) => Object.hasOwn(values, key)
+        && Number.isSafeInteger(values[key]) && values[key] >= 0)
+  }) && PUBLISHED_COUNT_KEYS.every((key) => (
+    Number.isSafeInteger(totalCounts[key])
+    && totalCounts[key] >= 0
+    && grades.reduce((sum, grade) => sum + gradeCounts[grade][key], 0) === totalCounts[key]
+  ))
 }
 
 function provenanceLink(kind, label, status, identity = null, detail = null) {
@@ -270,11 +301,13 @@ export function verifyStagedCandidate(evidence) {
   }
 
   let metadataInvalid = false
+  const releasePackageId = packageGrades(manifest.releaseIdentity?.packageId)
+    ? manifest.releaseIdentity.packageId
+    : null
   const metadataPairs = [
     [1, evidence.schemaVersion, 'Staging schema version'],
     [evidence.schemaVersion, manifest.schemaVersion, 'Manifest schema version'],
     [PACKAGE_FORMAT, manifest.packageFormat, 'Package format'],
-    [PACKAGE_ID, manifest.releaseIdentity?.packageId, 'Package identity'],
     [evidence.targetVersion, manifest.releaseIdentity?.version, 'Release identity version'],
     [evidence.baseReleaseVersion, manifest.baseReleaseVersion, 'Base release'],
     [evidence.targetVersion, manifest.targetVersion, 'Target version'],
@@ -289,6 +322,10 @@ export function verifyStagedCandidate(evidence) {
   ]
   for (const [expectedValue, observedValue, label] of metadataPairs) {
     metadataInvalid = metadataMismatch(findings, label, expectedValue, observedValue, label) || metadataInvalid
+  }
+  if (releasePackageId === null) {
+    metadataInvalid = true
+    addFinding(findings, 'metadata_mismatch', 'Package identity', 'The staged package identity does not name a supported curriculum grade set.')
   }
   if (!sameJson(evidence.entityCounts, manifest.entityCounts)) {
     metadataInvalid = true
@@ -367,7 +404,7 @@ export function verifyStagedCandidate(evidence) {
   return Object.freeze({
     subjectId: validIdentity(evidence.stagingId) ? `staged:${evidence.stagingId}` : 'staged:unavailable',
     kind: 'staged', version: VERSION.test(evidence.targetVersion ?? '') ? evidence.targetVersion : 'Unavailable',
-    state: 'STAGED', status, packageId: manifest.releaseIdentity?.packageId === PACKAGE_ID ? PACKAGE_ID : null,
+    state: 'STAGED', status, packageId: releasePackageId,
     baseReleaseVersion: VERSION.test(evidence.baseReleaseVersion ?? '') ? evidence.baseReleaseVersion : null,
     schemaSetVersion: evidence.schemaSetVersion === '2.0.0' ? evidence.schemaSetVersion : null,
     manifestStatus, packageStatus, metadataStatus,
@@ -540,18 +577,9 @@ export function verifyPublishedRelease(release, observedSource) {
     addFinding(findings, 'manifest_mismatch', 'MANIFEST.json', 'The published package manifest is malformed or inconsistent.')
   }
 
-  if (record(release.gradeCounts)) {
-    for (const key of ['courses', 'units', 'lessons', 'assessments', 'texts', 'schedules']) {
-      const gradeTotal = ['5', '7', '8'].reduce((sum, grade) => sum + (release.gradeCounts[grade]?.[key] ?? Number.NaN), 0)
-      if (!Number.isSafeInteger(gradeTotal) || gradeTotal !== release.counts[key]) {
-        manifestMismatch = true
-        addFinding(findings, 'metadata_mismatch', 'Published grade counts', 'Grade-level counts do not reconcile to the release total counts.')
-        break
-      }
-    }
-  } else {
+  if (!reconcilePublishedGradeCounts(release.packageId, release.gradeCounts, release.counts)) {
     manifestMismatch = true
-    addFinding(findings, 'metadata_mismatch', 'Published grade counts', 'Grade-level release count evidence is unavailable.')
+    addFinding(findings, 'metadata_mismatch', 'Published grade counts', 'Grade-level release count evidence is unavailable or does not match the package grade identity.')
   }
 
   try {

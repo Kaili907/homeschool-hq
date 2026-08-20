@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u04-l14",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u04-l14",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Exponential, Logarithmic, and Series Models",
+    "dayInUnit": 14,
+    "courseDay": 68,
+    "phase": "Transfer challenge",
+    "focus": "solving exponential equations with logarithms",
+    "title": "Transfer challenge: solving exponential equations with logarithms"
+  },
+  "standards": [
+    "F-LE.4",
+    "A-SSE.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 1,
+          "prompt": "Sum the first 4 terms with a = 3, r = 2.",
+          "workedSolution": {
+            "steps": [
+              "3 + 6 + 12 + 24.",
+              "Total 45."
+            ],
+            "answer": "45"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "An investment of $800 grows by 18% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "7 years",
+            "18 years",
+            "5 years",
+            "6 years"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "Evaluate log_2(64).",
+          "choices": [
+            "2",
+            "6",
+            "32",
+            "64"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "Solve 2^x = 4 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = 4/2 = 2",
+            "x = log_2(4) = 3",
+            "x = log_2(4) = 2",
+            "x = log_4(2) = 1/2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 3,
+          "prompt": "Find the sum of the first 5 terms of the geometric series with first term 3 and common ratio 3.",
+          "choices": [
+            "729",
+            "363",
+            "15",
+            "243"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "An investment of $300 grows by 3% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "26 years",
+            "24 years",
+            "3 years",
+            "33 years"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "Evaluate log_10(10000).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "Solve 2^x = 8 exactly, and state the logarithmic form used.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 3,
+          "prompt": "Find the sum of the first 5 terms of the geometric series with first term 7 and common ratio 4.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u04-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u04-l14"
+  }
+}

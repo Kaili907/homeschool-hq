@@ -1,0 +1,404 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u01-l05",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Systems and Time Management",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: breaks and resume"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic breaks and resume task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "The learner picks one real task or assignment that genuinely will take longer than a single sitting to finish, sets a specific focus length and break length in advance, works the session for real today including one timed break, and records exactly what happened at each step, including whether they resumed on time.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no current task needs more than one sitting to finish, the learner instead picks a personal skill they are building, such as reading toward a goal or practicing an instrument, for a session long enough to include a real timed break and resume, and completes the same steps and records for that instead."
+  },
+  "materials": [
+    "Embedded resource: swk-rfl-g7-u01-l05-model-card",
+    "Embedded resource: swk-rfl-g7-u01-l05-step-card",
+    "Embedded resource: swk-rfl-g7-u01-l05-guided-card",
+    "Embedded resource: swk-rfl-g7-u01-l05-independent-card",
+    "Embedded resource: swk-rfl-g7-u01-l05-evidence-record",
+    "Embedded resource: swk-rfl-g7-u01-l05-retry-pair",
+    "Embedded resource: swk-rfl-g7-u01-l05-delivered-example",
+    "Embedded resource: swk-rfl-g7-u01-l05-delivered-plan",
+    "learner-local: paper or a notes app",
+    "adult-or-local: a timer (a phone timer, kitchen timer, or clock works)",
+    "learner-local: the task or materials you will actually be working on"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Analyze the complete worked example on swk-rfl-g7-u01-l05-model-card before beginning.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g7-u01-l05-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g7-u01-l05-independent-card; follow every step and retain only the named minimal evidence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Complete the minimal evidence record on swk-rfl-g7-u01-l05-evidence-record; omit or fictionalize private details.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain, using what actually happened in this session, whether the break helped you focus better after resuming, made no real difference, or made it harder to get back into the task, and why you think that happened."
+        }
+      ]
+    }
+  ],
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g7-u01-l05-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g7-u01-l05-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g7-u01-l05-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance. | Break execution and resume: The session is carried out for real with a timed break, and the learner reports the actual resume time and the progress made afterward. Resume at the next unfinished step on swk-rfl-g7-u01-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+  "extension": "Have the learner run a second work session on a different task using a different focus length or break length and compare which combination led to more progress after resuming.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "career-work",
+    "practicalGoal": "I can complete a realistic breaks and resume task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g7-u01-l05-model-card",
+        "swk-rfl-g7-u01-l05-step-card",
+        "swk-rfl-g7-u01-l05-guided-card",
+        "swk-rfl-g7-u01-l05-independent-card",
+        "swk-rfl-g7-u01-l05-evidence-record",
+        "swk-rfl-g7-u01-l05-retry-pair",
+        "swk-rfl-g7-u01-l05-delivered-example",
+        "swk-rfl-g7-u01-l05-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "example",
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g7-u01-l05-delivered-example",
+        "swk-rfl-g7-u01-l05-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g7-u01-l05-local-1",
+          "label": "paper or a notes app",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g7-u01-l05-local-2",
+          "label": "a timer (a phone timer, kitchen timer, or clock works)",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g7-u01-l05-local-3",
+          "label": "the task or materials you will actually be working on",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g7-u01-l05-model-card",
+        "kind": "model",
+        "title": "breaks and resume worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner picks one real task or assignment that genuinely will take longer than a single sitting to finish, sets a specific focus length and break length in advance, works the session for real today including one timed break, and records exactly what happened at each step, including whether they resumed on time.",
+          "Model move 1: Read the condition and name the exact breaks and resume decision or action.",
+          "Model move 2: Name a real task or assignment you plan to work on today that will take longer than one sitting to finish.",
+          "Model move 3: Plan your session before you start: choose a specific focus length, for example 20 minutes, a specific break length, for example 5 minutes, one specific thing you will do during the break that is not the task, such as stretching, getting water, or walking around, and how you will know when the break is over.",
+          "Model check: Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance. | Break execution and resume: The session is carried out for real with a timed break, and the learner reports the actual resume time and the progress made afterward."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u01-l05-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "breaks and resume action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for breaks and resume.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u01-l05-guided-card",
+        "kind": "guided-practice",
+        "title": "breaks and resume coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner picks one real task or assignment that genuinely will take longer than a single sitting to finish, sets a specific focus length and break length in advance, works the session for real today including one timed break, and records exactly what happened at each step, including whether they resumed on time.",
+          "Coach direction: Name a real task or assignment you plan to work on today that will take longer than one sitting to finish.",
+          "Learner prompt: Name the task and estimate honestly how many minutes you can usually focus before you start to lose concentration.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u01-l05-independent-card",
+        "kind": "independent-task",
+        "title": "breaks and resume complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Plan your session before you start: choose a specific focus length, for example 20 minutes, a specific break length, for example 5 minutes, one specific thing you will do during the break that is not the task, such as stretching, getting water, or walking around, and how you will know when the break is over.",
+          "Response 1 (t2-p1): I wrote a specific focus length and a specific break length, not a vague plan like 'work for a while.'",
+          "Response 2 (t2-p2): I named exactly what I will do during the break and set a specific way, such as a timer or alarm, to know when to resume.",
+          "Equal-access rule: If no current task needs more than one sitting to finish, the learner instead picks a personal skill they are building, such as reading toward a goal or practicing an instrument, for a session long enough to include a real timed break and resume, and completes the same steps and records for that instead."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u01-l05-evidence-record",
+        "kind": "evidence-record",
+        "title": "breaks and resume minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain, using what actually happened in this session, whether the break helped you focus better after resuming, made no real difference, or made it harder to get back into the task, and why you think that happened.",
+          "Success checks: Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance. | Break execution and resume: The session is carried out for real with a timed break, and the learner reports the actual resume time and the progress made afterward.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u01-l05-retry-pair",
+        "kind": "retry",
+        "title": "breaks and resume supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g7-u01-l05-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g7-u01-l05-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional breaks and resume condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance. | Break execution and resume: The session is carried out for real with a timed break, and the learner reports the actual resume time and the progress made afterward..",
+          "Return: resume at the next unfinished step on swk-rfl-g7-u01-l05-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u01-l05-delivered-example",
+        "kind": "model",
+        "title": "breaks and resume delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner picks one real task or assignment that genuinely will take longer than a single sitting to finish, sets a specific focus length and break length in advance, works the session for real today including one timed break, and records exactly what happened at each step, including whether they resumed on time.",
+          "Use steps: Plan your session before you start: choose a specific focus length, for example 20 minutes, a specific break length, for example 5 minutes, one specific thing you will do during the break that is not the task, such as stretching, getting water, or walking around, and how you will know when the break is over.",
+          "Field 1 (t2-p1): I wrote a specific focus length and a specific break length, not a vague plan like 'work for a while.'",
+          "Field 2 (t2-p2): I named exactly what I will do during the break and set a specific way, such as a timer or alarm, to know when to resume.",
+          "Check against: Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance. | Break execution and resume: The session is carried out for real with a timed break, and the learner reports the actual resume time and the progress made afterward."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u01-l05-delivered-plan",
+        "kind": "independent-task",
+        "title": "breaks and resume delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner picks one real task or assignment that genuinely will take longer than a single sitting to finish, sets a specific focus length and break length in advance, works the session for real today including one timed break, and records exactly what happened at each step, including whether they resumed on time.",
+          "Use steps: Plan your session before you start: choose a specific focus length, for example 20 minutes, a specific break length, for example 5 minutes, one specific thing you will do during the break that is not the task, such as stretching, getting water, or walking around, and how you will know when the break is over.",
+          "Field 1 (t2-p1): I wrote a specific focus length and a specific break length, not a vague plan like 'work for a while.'",
+          "Field 2 (t2-p2): I named exactly what I will do during the break and set a specific way, such as a timer or alarm, to know when to resume.",
+          "Check against: Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance. | Break execution and resume: The session is carried out for real with a timed break, and the learner reports the actual resume time and the progress made afterward."
+        ]
+      }
+    ],
+    "model": {
+      "title": "breaks and resume worked model",
+      "startingCondition": "The learner picks one real task or assignment that genuinely will take longer than a single sitting to finish, sets a specific focus length and break length in advance, works the session for real today including one timed break, and records exactly what happened at each step, including whether they resumed on time.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact breaks and resume decision or action.",
+        "Model move 2: Name a real task or assignment you plan to work on today that will take longer than one sitting to finish.",
+        "Model move 3: Plan your session before you start: choose a specific focus length, for example 20 minutes, a specific break length, for example 5 minutes, one specific thing you will do during the break that is not the task, such as stretching, getting water, or walking around, and how you will know when the break is over."
+      ],
+      "reasoning": "The model names the condition, follows the ordered breaks and resume process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance.",
+        "Break execution and resume: The session is carried out for real with a timed break, and the learner reports the actual resume time and the progress made afterward."
+      ],
+      "resourceRef": "swk-rfl-g7-u01-l05-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for breaks and resume.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g7-u01-l05-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner picks one real task or assignment that genuinely will take longer than a single sitting to finish, sets a specific focus length and break length in advance, works the session for real today including one timed break, and records exactly what happened at each step, including whether they resumed on time.",
+      "prompt": "Name the task and estimate honestly how many minutes you can usually focus before you start to lose concentration.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g7-u01-l05-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g7-u01-l05-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "breaks and resume — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g7-u01-l05-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Plan your session before you start: choose a specific focus length, for example 20 minutes, a specific break length, for example 5 minutes, one specific thing you will do during the break that is not the task, such as stretching, getting water, or walking around, and how you will know when the break is over.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "breaks and resume — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g7-u01-l05-independent-card",
+        "directions": "If no current task needs more than one sitting to finish, the learner instead picks a personal skill they are building, such as reading toward a goal or practicing an instrument, for a session long enough to include a real timed break and resume, and completes the same steps and records for that instead.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g7-u01-l05-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain, using what actually happened in this session, whether the break helped you focus better after resuming, made no real difference, or made it harder to get back into the task, and why you think that happened.",
+      "observableCriteria": [
+        "Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance.",
+        "Break execution and resume: The session is carried out for real with a timed break, and the learner reports the actual resume time and the progress made afterward."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g7-u01-l05-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g7-u01-l05-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g7-u01-l05-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g7-u01-l05-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Session planning: A specific focus length, break length, break activity, and return cue are all planned in advance. | Break execution and resume: The session is carried out for real with a timed break, and the learner reports the actual resume time and the progress made afterward.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g7-u01-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g7-u01-l05-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
+  }
+}

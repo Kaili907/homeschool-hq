@@ -1,0 +1,44 @@
+{
+  "report_version": 1,
+  "release_version": "2.0.0",
+  "candidate_id": "manuel-academy-family-pilot-r1",
+  "generated_at": "2026-08-13T10:23:24-04:00",
+  "ready": true,
+  "checks": [
+    {
+      "check": "schema_set_version",
+      "satisfied": true,
+      "detail": "authored against 2.0.0"
+    },
+    {
+      "check": "grade_coverage",
+      "satisfied": true,
+      "detail": "publishes grade(s) 3, 4, 5, 7, 8, 9, 10, 11, 12"
+    },
+    {
+      "check": "schedule_resolution",
+      "satisfied": true,
+      "detail": "every published grade has a schedule placing all of its lessons"
+    },
+    {
+      "check": "subject_support",
+      "satisfied": true,
+      "detail": "subjects arts-and-music, english-language-arts, financial-literacy, health, mathematics, physical-education, ready-for-life, science, social-studies, technology"
+    },
+    {
+      "check": "standards_custody",
+      "satisfied": true,
+      "detail": "1 cited framework(s), each in custody"
+    },
+    {
+      "check": "safety_privacy_gate",
+      "satisfied": true,
+      "detail": "gate family-pilot-production-binding-gate-h3 passed for 2.0.0"
+    },
+    {
+      "check": "graduation_claim",
+      "satisfied": true,
+      "detail": "graduation-complete claimed across all 9 canonical grades"
+    }
+  ]
+}

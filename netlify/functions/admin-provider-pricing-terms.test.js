@@ -93,20 +93,27 @@ function setup({ authorizationResult = AUTHORIZED, sourceError } = {}) {
       }
     }),
   }
+  const stepUpAssurance = {
+    consume: vi.fn(async ({ binding }) => ({ ok: true, binding })),
+  }
   return {
     authorization,
     source,
+    stepUpAssurance,
     handler: createAdminProviderPricingTermsHandler({
       authorization,
       source,
       tokenFactory: () => TOKEN,
+      stepUpAssurance,
+      requestSourceGuard: () => ({ ok: true }),
+      criticalActionAudit: { record: vi.fn(async () => {}) },
     }),
   }
 }
 
 describe('Admin provider pricing terms API', () => {
   it('returns the zero-term safe state behind costs:read', async () => {
-    const { handler, authorization, source } = setup()
+    const { handler, authorization, source, stepUpAssurance } = setup()
     const response = await handler(event())
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toEqual({
@@ -117,10 +124,11 @@ describe('Admin provider pricing terms API', () => {
     })
     expect(authorization.require).toHaveBeenCalledWith(expect.anything(), 'costs:read')
     expect(source.read).toHaveBeenCalledOnce()
+    expect(stepUpAssurance.consume).not.toHaveBeenCalled()
   })
 
   it('requires configuration:manage for preview and returns the raw token only once', async () => {
-    const { handler, authorization, source } = setup()
+    const { handler, authorization, source, stepUpAssurance } = setup()
     const response = await handler(post('/api/admin/v1/provider-pricing-terms/preview', term()))
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body).confirmationToken).toBe(TOKEN)
@@ -131,10 +139,11 @@ describe('Admin provider pricing terms API', () => {
       expect.stringMatching(/^[0-9a-f]{64}$/),
     )
     expect(JSON.stringify(source.preview.mock.calls)).not.toContain(TOKEN)
+    expect(stepUpAssurance.consume).not.toHaveBeenCalled()
   })
 
   it('commits only canonical decimal strings with request idempotency and a token digest', async () => {
-    const { handler, source } = setup()
+    const { handler, source, stepUpAssurance } = setup()
     const body = {
       ...term(),
       expectedRevision: '0',
@@ -149,10 +158,21 @@ describe('Admin provider pricing terms API', () => {
       expect.stringMatching(/^[0-9a-f]{64}$/),
     )
     expect(JSON.stringify(source.commit.mock.calls)).not.toContain(TOKEN)
+    expect(stepUpAssurance.consume).toHaveBeenCalledWith({
+      event: expect.anything(),
+      binding: {
+        actorId: 'owner-user',
+        action: 'admin.provider-pricing.commit',
+        resource: {
+          type: 'provider-pricing-dimension',
+          id: 'anthropic/claude-sonnet-4-6/claude-sonnet-4-6/sonnet/input_token/2030-01-01T00%3A00%3A00.000Z',
+        },
+      },
+    })
   })
 
   it('supports a revision-bound future disable/end operation', async () => {
-    const { handler, source } = setup()
+    const { handler, source, stepUpAssurance } = setup()
     const request = {
       termId: TERM_ID,
       expectedRevision: '1',
@@ -164,6 +184,14 @@ describe('Admin provider pricing terms API', () => {
     const response = await handler(post('/api/admin/v1/provider-pricing-terms/end', request))
     expect(response.statusCode).toBe(200)
     expect(source.end).toHaveBeenCalledWith('verified-access-token', request)
+    expect(stepUpAssurance.consume).toHaveBeenCalledWith({
+      event: expect.anything(),
+      binding: {
+        actorId: 'owner-user',
+        action: 'admin.provider-pricing.end',
+        resource: { type: 'provider-pricing-term', id: TERM_ID },
+      },
+    })
   })
 
   it.each([

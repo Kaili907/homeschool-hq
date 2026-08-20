@@ -1,9 +1,36 @@
 import { createClient } from '@supabase/supabase-js'
 import { createFilesystemCurriculumSource } from '../../../src/admin/curriculum/filesystemSource.node.ts'
-import { buildLearnerAnalyticsSnapshot, LEARNER_ANALYTICS_LIMITS } from '../../../src/admin/learnerAnalyticsModel.ts'
-import { validateRemoteProfileRows } from '../../../src/sync/provenance.ts'
+import {
+  buildLearnerAnalyticsSnapshot,
+  isAdminLearnerReference,
+  LEARNER_ANALYTICS_LIMITS,
+} from '../../../src/admin/learnerAnalyticsModel.ts'
+import { validateProfileForAdminProjection } from '../../../src/sync/provenance.ts'
 
 const READ_TIMEOUT_MS = 5_000
+const MAX_ADMIN_PROFILE_PAYLOAD_BYTES = 4 * 1024 * 1024
+
+function validateAdminProfileRows(value) {
+  if (!Array.isArray(value) || value.length > LEARNER_ANALYTICS_LIMITS.learners) return null
+  let serialized
+  try {
+    serialized = JSON.stringify(value)
+  } catch {
+    return null
+  }
+  if (new TextEncoder().encode(serialized).byteLength > MAX_ADMIN_PROFILE_PAYLOAD_BYTES) return null
+  const ids = new Set()
+  for (const candidate of value) {
+    if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) return null
+    const id = candidate.profile_id
+    if (!isAdminLearnerReference(id) || ids.has(id)
+      || !validateProfileForAdminProjection(id, candidate.data)
+      || typeof candidate.updated_at !== 'string' || candidate.updated_at.length > 64
+      || Number.isNaN(Date.parse(candidate.updated_at))) return null
+    ids.add(id)
+  }
+  return value
+}
 
 export class AdminLearnerProjectionError extends Error {
   constructor(code) {
@@ -90,9 +117,9 @@ export function createAdminLearnerReader({
       if (signal.aborted || error || !Array.isArray(data) || data.length > LEARNER_ANALYTICS_LIMITS.learners) {
         throw new AdminLearnerProjectionError('learner_source_unavailable')
       }
-      const validation = validateRemoteProfileRows(data)
-      if (!validation.ok) throw new AdminLearnerProjectionError('learner_source_unavailable')
-      return validation.rows
+      const rows = validateAdminProfileRows(data)
+      if (!rows) throw new AdminLearnerProjectionError('learner_source_unavailable')
+      return rows
     } catch (error) {
       if (error instanceof AdminLearnerProjectionError) throw error
       throw new AdminLearnerProjectionError('learner_source_unavailable')
@@ -139,7 +166,7 @@ export function createAdminLearnerReader({
   return Object.freeze({
     readSnapshot,
     async readDetail({ accessToken, learnerRef, today }) {
-      if (typeof learnerRef !== 'string' || !/^p[1-5]$/.test(learnerRef)) {
+      if (!isAdminLearnerReference(learnerRef)) {
         throw new AdminLearnerProjectionError('learner_not_found')
       }
       const snapshot = await readSnapshot({ accessToken, ...(today ? { today } : {}) })

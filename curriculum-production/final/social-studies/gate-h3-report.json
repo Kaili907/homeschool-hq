@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "gate": "Production Gate H3",
+  "implementationSha": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+  "inputPolicy": "Static lessons are evaluated with VERIFIED source integrity; dynamic lessons are evaluated UNKNOWN and remain NEEDS_HUMAN_REVIEW until attachment.",
+  "totals": {
+    "lessons": 972,
+    "ready": 960,
+    "needsHumanReview": 12,
+    "notReady": 0
+  },
+  "admissionOverlay": {
+    "productionPackagesAdmitted": 972,
+    "runtimeReadyLessons": 960,
+    "pendingSourceAttachmentLessons": 12,
+    "notReadyLessons": 0,
+    "unresolvedWithoutPolicy": 0
+  },
+  "dynamicLessonResults": [
+    {
+      "lessonId": "ma-g3-social-studies-u09-l01",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l02",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l03",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l04",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l05",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l06",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l07",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l08",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l09",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l10",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l11",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    },
+    {
+      "lessonId": "ma-g3-social-studies-u09-l12",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "codes": [
+        "NEEDS_HUMAN_REVIEW"
+      ],
+      "notes": [
+        "source integrity requires verification but has not been checked"
+      ]
+    }
+  ]
+}

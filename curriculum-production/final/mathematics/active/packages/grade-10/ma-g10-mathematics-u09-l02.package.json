@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u09-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u09-l02",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Coordinate Geometry",
+    "dayInUnit": 2,
+    "courseDay": 146,
+    "phase": "Concept model A",
+    "focus": "completing the square to find a circle's center and radius",
+    "title": "Concept model A: completing the square to find a circle's center and radius"
+  },
+  "standards": [
+    "G-GPE.1",
+    "G-GPE.2",
+    "G-GPE.4",
+    "G-GPE.5",
+    "G-GPE.6",
+    "G-GPE.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "partition-segment-in-ratio",
+          "standard": "G-GPE.6",
+          "difficulty": 1,
+          "prompt": "Partition A(0,0) to B(6,9) in ratio 2:1 from A.",
+          "workedSolution": {
+            "steps": [
+              "Three parts; move two of them.",
+              "(0 + 4, 0 + 6) = (4, 6)."
+            ],
+            "answer": "(4, 6)"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "coordinate-distance-and-perimeter",
+          "standard": "G-GPE.7",
+          "difficulty": 2,
+          "prompt": "Right triangle with legs 3 and 4 on the axes. Perimeter and area?",
+          "workedSolution": {
+            "steps": [
+              "Hypotenuse 5.",
+              "Perimeter 12; area 6."
+            ],
+            "answer": "perimeter 12; area 6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 1,
+          "prompt": "A parabola has focus (1, -3) and directrix y = -5. Write its equation in vertex form.",
+          "choices": [
+            "y = 1/4(x − 1)² − 4",
+            "y = 1/4(x + 1)² − 4",
+            "y = 4(x − 1)² − 4",
+            "y = 1/2(x − 1)² − 4"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 1,
+          "prompt": "Write the equation of the circle with centre (1, 5) and radius 2.",
+          "choices": [
+            "(x − 1)² + (y − 5)² = 2",
+            "(x − 1)² + (y − 5)² = 4",
+            "(x − 1)² − (y − 5)² = 4",
+            "(x + 1)² + (y + 5)² = 4"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "parallel-perpendicular-slope",
+          "standard": "G-GPE.5",
+          "difficulty": 2,
+          "prompt": "A line has slope 5/2. What is the slope of a line perpendicular to it?",
+          "choices": [
+            "5/2",
+            "2/5",
+            "-5/2",
+            "-2/5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "partition-segment-in-ratio",
+          "standard": "G-GPE.6",
+          "difficulty": 1,
+          "prompt": "Find the point that partitions the segment from A(2, -3) to B(-2, -9) in the ratio 1:1 from A.",
+          "choices": [
+            "(-1, -6)",
+            "(0, -5)",
+            "(1, -6)",
+            "(0, -6)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-distance-and-perimeter",
+          "standard": "G-GPE.7",
+          "difficulty": 2,
+          "prompt": "A right triangle has vertices at (0, 0), (3, 0), and (3, 4). Find its perimeter and area.",
+          "choices": [
+            "perimeter 7; area 6",
+            "perimeter 12; area 6",
+            "perimeter 12; area 12",
+            "perimeter 12; area 3.5"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 2,
+          "prompt": "A parabola has focus (3, 2) and directrix y = 0. Write its equation in vertex form.",
+          "choices": [
+            "y = 1/2(x − 3)² + 1",
+            "y = 4(x − 3)² + 1",
+            "y = 1/4(x + 3)² + 1",
+            "y = 1/4(x − 3)² + 1"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 3,
+          "prompt": "Write the equation of the circle with centre (-5, 8) and radius 10.",
+          "choices": [
+            "(x + 5)² − (y − 8)² = 100",
+            "(x + 5)² + (y − 8)² = 100",
+            "(x − 5)² + (y + 8)² = 100",
+            "(x + 5)² + (y − 8)² = 10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "parallel-perpendicular-slope",
+          "standard": "G-GPE.5",
+          "difficulty": 2,
+          "prompt": "A line has slope 1. What is the slope of a line parallel to it?",
+          "choices": [
+            "3/2",
+            "1",
+            "2",
+            "-1"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "partition-segment-in-ratio",
+          "standard": "G-GPE.6",
+          "difficulty": 2,
+          "prompt": "Find the point that partitions the segment from A(-1, 5) to B(2, -7) in the ratio 2:1 from A.",
+          "choices": [
+            "(0, 1)",
+            "(0.5, -1)",
+            "(2, -3)",
+            "(1, -3)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u09-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u09-l02"
+  }
+}

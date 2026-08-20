@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l06",
+  "lessonId": "ma-g9-financial-literacy-u06-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3 gift cards at $500 each, none of which is recoverable once the codes are shared."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "-$395.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The advertised $8,500 does not exist, so the whole outcome is the fee paid out and nothing received."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "A demand for payment before anything is received",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Only Message 1 sets a 30-minute deadline, only Message 2 offers a prize, and only Message 1 names gift cards — but both require money to move before the recipient gets anything."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Send written notice in advance and offer standard payment channels",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The distinguishing feature of the fictional message is not that it asks for money but that it removes every normal way of verifying the claim before paying."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$1,105.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,500 against $395, though both losses are total."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "perCard * cards",
+        "substituted": "500 * 3",
+        "result": "$1,500.00",
+        "why": "3 gift cards at $500 each, none of which is recoverable once the codes are shared."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "0 - fee",
+        "substituted": "0 - 395",
+        "result": "-$395.00",
+        "why": "The advertised $8,500 does not exist, so the whole outcome is the fee paid out and nothing received."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t1-p1 - fee2",
+        "substituted": "#t1-p1 - 395",
+        "result": "$1,105.00",
+        "why": "$1,500 against $395, though both losses are total."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Write the single check you would run on any message of this kind before responding, and explain why it works on both of these messages even though their stories are opposite — one threatens a loss and one promises a gain.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Proposes one concrete, runnable check: contact the organisation independently using a number or address the recipient already had, not one supplied in the message.",
+          "Explains that the check works on both because both depend on the recipient not verifying before money moves, whatever story is used to prevent verification.",
+          "Notes that urgency and prizes are the mechanisms for suppressing that check, not the fraud itself."
+        ],
+        "evidenceRequirements": [
+          "Refers to specific features of both messages — the 30-minute deadline and the $395 advance fee."
+        ],
+        "lookFors": [
+          "The check named would work on a message the learner has never seen before.",
+          "The response does not rely on spotting bad spelling or an odd address, which a careful fraud will not provide."
+        ],
+        "commonMisconception": "Learning the surface features of particular scams rather than the structural feature they share.",
+        "dimensions": [
+          "criteria-application",
+          "transfer",
+          "error-diagnosis"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 3,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 2,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much would complying with Message 1 cost?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "Message 2 promises $8,500 for a $395 fee. What is the recipient’s actual net outcome if they pay?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "Which marker is present in both messages?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "A real utility with an overdue balance would normally do which of these?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much more would complying with Message 1 cost than with Message 2?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write the single check you would run on any message of this kind before responding, and explain why it works on both of these messages even though their stories are opposite — one threatens a loss and one promises a gain."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much would complying with Message 1 cost? Answer: $1,500.00. Verification: 3 gift cards at $500 each, none of which is recoverable once the codes are shared. t1-p2: Message 2 promises $8,500 for a $395 fee. What is the recipient’s actual net outcome if they pay? Answer: -$395.00. Verification: The advertised $8,500 does not exist, so the whole outcome is the fee paid out and nothing received. t2-p1: Which marker is present in both messages? Answer: A demand for payment before anything is received. Verification: Only Message 1 sets a 30-minute deadline, only Message 2 offers a prize, and only Message 1 names gift cards — but both require money to move before the recipient gets anything. t2-p2: A real utility with an overdue balance would normally do which of these? Answer: Send written notice in advance and offer standard payment channels. Verification: The distinguishing feature of the fictional message is not that it asks for money but that it removes every normal way of verifying the claim before paying. t3-p1: How much more would complying with Message 1 cost than with Message 2? Answer: $1,105.00. Verification: $1,500 against $395, though both losses are total."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t4-p1: Write the single check you would run on any message of this kind before responding, and explain why it works on both of these messages even though their stories are opposite — one threatens a loss and one promises a gain. Proposes one concrete, runnable check: contact the organisation independently using a number or address the recipient already had, not one supplied in the message. Explains that the check works on both because both depend on the recipient not verifying before money moves, whatever story is used to prevent verification. Notes that urgency and prizes are the mechanisms for suppressing that check, not the fraud itself. Refers to specific features of both messages — the 30-minute deadline and the $395 advance fee. The check named would work on a message the learner has never seen before. The response does not rely on spotting bad spelling or an odd address, which a careful fraud will not provide."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Proposes one concrete, runnable check: contact the organisation independently using a number or address the recipient already had, not one supplied in the message. Explains that the check works on both because both depend on the recipient not verifying before money moves, whatever story is used to prevent verification. Notes that urgency and prizes are the mechanisms for suppressing that check, not the fraud itself."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 3 independently recomputed or comparison-derived fixed answers and 2 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u06-l06.scoring.json",
+    "sourceScoringSha256": "c92e540b0108f3655cdbe998fc6e21b00097e4535588acdbe9b9ebb375de79a2",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

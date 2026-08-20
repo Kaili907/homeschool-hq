@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-hs9-biology-u08-assessment",
+  "courseRef": "ma-g9-science",
+  "grade": 9,
+  "subject": "science",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/science/packages/ma-hs9-biology/scoring/ma-hs9-biology-u08-l11.md",
+  "scoringSourceAuthority": {
+    "input": "hs912_science_h4",
+    "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+    "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

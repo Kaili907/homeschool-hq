@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-mathematics-u10-assessment",
+  "courseRef": "ma-g9-mathematics",
+  "grade": 9,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g9-mathematics-u10",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "courseTitle": "Algebra I",
+    "assessmentLessonRef": "ma-g9-mathematics-u10-l16"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u10-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "A data set records 12, 19, 12, 13, 15. Give the mean and the median.",
+      "choices": [
+        "mean 13, median 14.2",
+        "mean 14.2, median 14",
+        "mean 14.2, median 13",
+        "mean 14, median 13"
+      ],
+      "standardRef": "S-ID.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A data set of five values between 10 and 30 has one additional reading of 202 appended. Which statement best describes the effect on the mean and the median?",
+      "choices": [
+        "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+        "The median rises sharply while the mean changes little.",
+        "Neither statistic changes, because one value cannot affect a summary.",
+        "Both the mean and the median rise sharply."
+      ],
+      "standardRef": "S-ID.3"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "A two-way table has row 1: 8 yes, 27 no; row 2: 10 yes, 16 no. Among row-1 respondents, what fraction answered yes?",
+      "choices": [
+        "8/61",
+        "4/9",
+        "27/35",
+        "8/35"
+      ],
+      "standardRef": "S-ID.5"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "A least-squares line for a data set is ŷ = 7x + 8, where x is measured in kilometre travelleds and y in litres of fuel. Interpret the slope.",
+      "choices": [
+        "Each additional litres of fuel is associated with 7 more kilometre travelleds.",
+        "Each additional kilometre travelled causes an increase of exactly 7 litres of fuel.",
+        "Each additional kilometre travelled is associated with an increase of about 7 litres of fuel.",
+        "The predicted value is 7 litres of fuel when x is 0."
+      ],
+      "standardRef": "S-ID.7"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Towns with more fire engines report more fire damage. What conclusion is justified?",
+      "choices": [
+        "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+        "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+        "A strong correlation always establishes causation when the sample is large.",
+        "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link."
+      ],
+      "standardRef": "S-ID.9"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A data set records 10, 18, 12, 6, 10. Give the mean and the median.",
+      "choices": [
+        "mean 11.2, median 10",
+        "mean 10, median 11.2",
+        "mean 11, median 10",
+        "mean 11.2, median 11"
+      ],
+      "standardRef": "S-ID.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "A data set of five values between 10 and 30 has one additional reading of 397 appended. Which statement best describes the effect on the mean and the median?",
+      "choices": [
+        "Both the mean and the median rise sharply.",
+        "The median rises sharply while the mean changes little.",
+        "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+        "Neither statistic changes, because one value cannot affect a summary."
+      ],
+      "standardRef": "S-ID.3"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "A two-way table has row 1: 56 yes, 38 no; row 2: 48 yes, 53 no. Among row-1 respondents, what fraction answered yes?",
+      "choices": [
+        "28/47",
+        "19/47",
+        "56/195",
+        "7/13"
+      ],
+      "standardRef": "S-ID.5"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "A least-squares line for a data set is ŷ = 12x + 22, where x is measured in kilometre travelleds and y in litres of fuel. Interpret the slope.",
+      "choices": [
+        "The predicted value is 12 litres of fuel when x is 0.",
+        "Each additional kilometre travelled causes an increase of exactly 12 litres of fuel.",
+        "Each additional kilometre travelled is associated with an increase of about 12 litres of fuel.",
+        "Each additional litres of fuel is associated with 12 more kilometre travelleds."
+      ],
+      "standardRef": "S-ID.7"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "In a randomised trial, one group received a tutoring programme and scored higher on average than the control group. What conclusion is justified?",
+      "choices": [
+        "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+        "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+        "A strong correlation always establishes causation when the sample is large.",
+        "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation."
+      ],
+      "standardRef": "S-ID.9"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "A data set records 7, 31, 23, 18, 20, 9, 31. Give the mean and the median.",
+      "choices": [
+        "mean 19.86, median 18",
+        "mean 20, median 19.86",
+        "mean 19.86, median 20",
+        "mean 20, median 20"
+      ],
+      "standardRef": "S-ID.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u10-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "A data set of five values between 10 and 30 has one additional reading of 371 appended. Which statement best describes the effect on the mean and the median?",
+      "choices": [
+        "The median rises sharply while the mean changes little.",
+        "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+        "Neither statistic changes, because one value cannot affect a summary.",
+        "Both the mean and the median rise sharply."
+      ],
+      "standardRef": "S-ID.3"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/mathematics/ma-g9-mathematics-u10-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-mathematics-u10-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u10-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Distributions, Bivariate Data, and Correlation?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

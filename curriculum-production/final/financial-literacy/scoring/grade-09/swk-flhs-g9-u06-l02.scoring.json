@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l02",
+  "lessonId": "ma-g9-financial-literacy-u06-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$93.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15% of $620, with nothing spent in advance."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$101.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$70 spent for certain, plus a 5% chance of the $620 loss, which is $31.00 in expectation."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$85 of premium for certain, plus a 15% chance of paying the $100 deductible."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$620.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "If the bicycle is stolen the whole $620 falls on the cyclist at once."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$185.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The premium is paid either way and the deductible is the most the cyclist pays on a claim."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Accept the risk",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Accepting costs $93.00 in expectation against $100.00 to transfer and $101.00 to reduce — the three are within $8 of each other."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "pTheft * loss",
+        "substituted": "0.15 * 620",
+        "result": "$93.00",
+        "why": "15% of $620, with nothing spent in advance."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "pReduced * loss2 + lock",
+        "substituted": "0.05 * 620 + 70",
+        "result": "$101.00",
+        "why": "$70 spent for certain, plus a 5% chance of the $620 loss, which is $31.00 in expectation."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "premium + pTheft2 * deductible",
+        "substituted": "85 + 0.15 * 100",
+        "result": "$100.00",
+        "why": "$85 of premium for certain, plus a 15% chance of paying the $100 deductible."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "loss3",
+        "substituted": "620",
+        "result": "$620.00",
+        "why": "If the bicycle is stolen the whole $620 falls on the cyclist at once."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "premium2 + deductible2",
+        "substituted": "85 + 100",
+        "result": "$185.00",
+        "why": "The premium is paid either way and the deductible is the most the cyclist pays on a claim."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p1 < #t1-p3",
+        "substituted": "#t1-p1 < #t1-p3",
+        "result": "Accept the risk",
+        "why": "Accepting costs $93.00 in expectation against $100.00 to transfer and $101.00 to reduce — the three are within $8 of each other."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The three options cost almost the same in expectation but differ sharply in their worst case. Recommend one for a cyclist who has $150 in savings, and defend it against the option with the lowest expected cost.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Recognises the three expected costs are effectively tied, at $93.00, $100.00, and $101.00, so expected cost cannot decide the question.",
+          "Applies the $150 savings constraint honestly: a $620 loss is more than four times savings, while the transfer’s worst case is $185 and the amount actually due on the day of a claim is only the $100 deductible — so neither option is fully covered by savings, but one is far closer.",
+          "Defends the recommendation against the $93.00 option directly rather than ignoring it."
+        ],
+        "evidenceRequirements": [
+          "Uses at least two expected costs and both worst-case figures, $620.00 and $185.00."
+        ],
+        "lookFors": [
+          "The response treats the $7 expected-cost difference as too small to decide anything.",
+          "A recommendation to reduce with the lock is acceptable if it addresses the worst case, which the lock does not remove."
+        ],
+        "commonMisconception": "Choosing among risk responses on expected cost alone when the worst cases differ by hundreds of dollars.",
+        "dimensions": [
+          "tradeoff-defense",
+          "criteria-application",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does accepting the risk cost per year in expectation?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does reducing the risk cost per year in expectation, counting the lock?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does transferring the risk cost per year in expectation, counting the deductible?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the worst single-year cost of accepting the risk?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the worst single-year cost of transferring the risk?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Which option is cheapest in expected annual cost?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The three options cost almost the same in expectation but differ sharply in their worst case. Recommend one for a cyclist who has $150 in savings, and defend it against the option with the lowest expected cost."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does accepting the risk cost per year in expectation? Answer: $93.00. Verification: 15% of $620, with nothing spent in advance. t1-p2: What does reducing the risk cost per year in expectation, counting the lock? Answer: $101.00. Verification: $70 spent for certain, plus a 5% chance of the $620 loss, which is $31.00 in expectation. t1-p3: What does transferring the risk cost per year in expectation, counting the deductible? Answer: $100.00. Verification: $85 of premium for certain, plus a 15% chance of paying the $100 deductible. t2-p1: What is the worst single-year cost of accepting the risk? Answer: $620.00. Verification: If the bicycle is stolen the whole $620 falls on the cyclist at once. t2-p2: What is the worst single-year cost of transferring the risk? Answer: $185.00. Verification: The premium is paid either way and the deductible is the most the cyclist pays on a claim. t2-p3: Which option is cheapest in expected annual cost? Answer: Accept the risk. Verification: Accepting costs $93.00 in expectation against $100.00 to transfer and $101.00 to reduce — the three are within $8 of each other."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The three options cost almost the same in expectation but differ sharply in their worst case. Recommend one for a cyclist who has $150 in savings, and defend it against the option with the lowest expected cost. Recognises the three expected costs are effectively tied, at $93.00, $100.00, and $101.00, so expected cost cannot decide the question. Applies the $150 savings constraint honestly: a $620 loss is more than four times savings, while the transfer’s worst case is $185 and the amount actually due on the day of a claim is only the $100 deductible — so neither option is fully covered by savings, but one is far closer. Defends the recommendation against the $93.00 option directly rather than ignoring it. Uses at least two expected costs and both worst-case figures, $620.00 and $185.00. The response treats the $7 expected-cost difference as too small to decide anything. A recommendation to reduce with the lock is acceptable if it addresses the worst case, which the lock does not remove."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Recognises the three expected costs are effectively tied, at $93.00, $100.00, and $101.00, so expected cost cannot decide the question. Applies the $150 savings constraint honestly: a $620 loss is more than four times savings, while the transfer’s worst case is $185 and the amount actually due on the day of a claim is only the $100 deductible — so neither option is fully covered by savings, but one is far closer. Defends the recommendation against the $93.00 option directly rather than ignoring it."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u06-l02.scoring.json",
+    "sourceScoringSha256": "66809e469e20f55f6c4c3c70b0172a3e9e7b65d1775b57cf0493e1ca9a9f152c",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u05-l06",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Division with Remainders",
+    "dayInUnit": 6,
+    "courseDay": 78,
+    "phase": "Concept build C",
+    "focus": "interpreting remainders in context",
+    "title": "Concept build C: interpreting remainders in context"
+  },
+  "standards": [
+    "4.OA.3"
+  ],
+  "blueprint": {
+    "phase": "Concept build C",
+    "profile": "concept-build-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 1,
+          "prompt": "29 students need vans that hold 8 students each. How many vans are needed?",
+          "workedSolution": {
+            "steps": [
+              "29 ÷ 8 = 3 remainder 5.",
+              "The 5 leftover students still need a van.",
+              "4 vans are needed."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "59 students are going on a field trip. Each van holds 3 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "19",
+            "20",
+            "21",
+            "18"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A baker has 75 eggs and needs 6 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "13",
+            "11",
+            "15",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 295 eggs and needs 8 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "37",
+            "35",
+            "36",
+            "39"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "41 students are going on a field trip. Each van holds 3 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "12",
+            "14",
+            "13",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "117 students are going on a field trip. Each van holds 4 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "28",
+            "31",
+            "29",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "227 students are going on a field trip. Each van holds 7 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "33",
+            "34",
+            "32",
+            "31"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "250 students are going on a field trip. Each van holds 8 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "31",
+            "32",
+            "33",
+            "30"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "89 students are going on a field trip. Each van holds 6 students. How many vans are needed so every student has a seat?",
+          "choices": [
+            "14",
+            "13",
+            "15",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder-in-word-problem",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A baker has 61 eggs and needs 6 eggs for each cake. How many whole cakes can be made?",
+          "choices": [
+            "10",
+            "11",
+            "9",
+            "13"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u05-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u05-l06"
+  }
+}

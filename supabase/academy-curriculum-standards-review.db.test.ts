@@ -232,7 +232,7 @@ describe('curriculum standards review database boundary', () => {
     await updateReview(database)
     await expect(database.exec(`delete from public.academy_curriculum_standard_reviews where review_key = '${REVIEW_KEY}'`))
       .rejects.toThrow('cannot be deleted')
-    const migrationBytes = await readFile(migrationUrls.at(-1)!)
+    const migrationBytes = (await readFile(migrationUrls.at(-1)!, 'utf8')).replace(/\r\n/gu, '\n')
     const custody = JSON.parse(await readFile(
       new URL('../docs/admin-console/curriculum-standards-review-migration.json', import.meta.url), 'utf8',
     ))

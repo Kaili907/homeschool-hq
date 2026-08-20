@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l17",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l17",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 17,
+    "courseDay": 17,
+    "phase": "Targeted correction",
+    "focus": "bisectors, perpendiculars, and parallels through a point",
+    "title": "Targeted correction: bisectors, perpendiculars, and parallels through a point"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 1,
+          "prompt": "Define a circle precisely.",
+          "workedSolution": {
+            "steps": [
+              "Fix a centre and a distance.",
+              "Take every point in the plane at that distance."
+            ],
+            "answer": "the set of points at a fixed distance from a centre"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Equal arcs from A and B meet above and below AB. What is the joining line?",
+          "workedSolution": {
+            "steps": [
+              "Both meeting points are equidistant from A and B.",
+              "That locus is the perpendicular bisector."
+            ],
+            "answer": "the perpendicular bisector of AB"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 1,
+          "prompt": "A regular triangle is inscribed in a circle of radius 4. What central angle does each side subtend?",
+          "choices": [
+            "60°",
+            "121°",
+            "240°",
+            "120°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the angle bisector construction?",
+          "choices": [
+            "The ray drawn appears to split the angle evenly.",
+            "The construction relies on the angle being acute.",
+            "The construction builds two congruent triangles by SSS, so the angles at the vertex are congruent.",
+            "Equal arcs always produce equal angles regardless of the triangle."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 2,
+          "prompt": "Which statement is a precise definition of a circle?",
+          "choices": [
+            "a shape whose area is πr²",
+            "a polygon with infinitely many sides",
+            "the set of all points in a plane at a fixed distance from a given centre point",
+            "a closed curve with no corners"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. From vertex V draw an arc crossing both rays at P and Q. From P and Q draw equal arcs meeting at R. Draw ray VR. What has been constructed?",
+          "choices": [
+            "a line perpendicular to one ray",
+            "the bisector of the angle at V",
+            "the perpendicular bisector of PQ only",
+            "an equilateral triangle on PQ"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 2,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 12. What central angle does each side subtend?",
+          "choices": [
+            "30°",
+            "61°",
+            "60°",
+            "120°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the equilateral triangle construction on a given segment?",
+          "choices": [
+            "The intersection point is the midpoint of the segment.",
+            "The construction works only when the segment is horizontal.",
+            "The circles intersect, which guarantees 60° angles by definition.",
+            "Both circles have radius equal to the segment, so all three sides are that same length."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a perpendicular lines?",
+          "choices": [
+            "two lines with opposite slopes",
+            "two lines that never meet",
+            "two lines that form an isosceles triangle",
+            "two lines that intersect to form right angles"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. Through point P not on line ℓ, copy the angle that a transversal makes with ℓ, placing the copy at P on the same transversal. What has been constructed?",
+          "choices": [
+            "the reflection of ℓ across P",
+            "the perpendicular bisector of the transversal",
+            "a line through P parallel to ℓ",
+            "a line through P perpendicular to ℓ"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l17"
+  }
+}

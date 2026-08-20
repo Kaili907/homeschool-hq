@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l06",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 6,
+    "courseDay": 6,
+    "phase": "Guided practice B",
+    "focus": "sums and products of rational and irrational numbers",
+    "title": "Guided practice B: sums and products of rational and irrational numbers"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 1,
+          "prompt": "Evaluate 27^(2/3).",
+          "workedSolution": {
+            "steps": [
+              "27 = 3³.",
+              "27^(2/3) = (3³)^(2/3) = 3² = 9."
+            ],
+            "answer": "9"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Write √96 in simplest radical form.",
+          "choices": [
+            "24",
+            "4√6",
+            "6√4",
+            "8√6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 2,
+          "prompt": "Classify the product of the rational number 0 and the irrational number √2 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "undefined",
+            "irrational",
+            "rational",
+            "both rational and irrational"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "Option A delivers 132 units of output over 11 hours. Option B delivers 72 units over 8 hours. Which has the greater output per hour?",
+          "choices": [
+            "There is not enough information without knowing the total hours available.",
+            "The two rates are equal.",
+            "Option A",
+            "Option B"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 3,
+          "prompt": "A rectangular plot measures 16.8 m by 29.2 m, each measured to the nearest tenth of a metre. Report the area to 2 decimal places.",
+          "choices": [
+            "46.00 m²",
+            "490.5600 m²",
+            "92.00 m²",
+            "490.56 m²"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 2,
+          "prompt": "You are building a model of the cost effectiveness of two phone plans. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "gigabytes per month",
+            "dollars per gigabyte",
+            "dollars",
+            "gigabytes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "A bottling line operates at 87 grams per second. Express this rate in kilograms per hour.",
+          "choices": [
+            "87 kilograms per hour",
+            "3132 kilograms per hour",
+            "313.2 kilograms per hour",
+            "24.17 kilograms per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 3,
+          "prompt": "Rewrite the square root expression √(x^6) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(4)",
+            "x^(3)",
+            "x^(12)",
+            "x^(1/3)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 3,
+          "prompt": "Evaluate 27^(5/3) exactly.",
+          "choices": [
+            "135",
+            "729",
+            "45",
+            "243"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 3,
+          "prompt": "Write √468 in simplest radical form.",
+          "choices": [
+            "13√6",
+            "78",
+            "12√13",
+            "6√13"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 3,
+          "prompt": "Classify the sum of the irrational numbers √2 and −√2 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "both rational and irrational",
+            "irrational",
+            "undefined",
+            "rational"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l06"
+  }
+}

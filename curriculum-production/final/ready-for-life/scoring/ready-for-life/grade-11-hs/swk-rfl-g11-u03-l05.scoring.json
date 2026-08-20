@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l05",
+  "lessonId": "ma-g11-ready-for-life-u03-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Classification accuracy and reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Classifications rely on general impression rather than the specific signs given in each situation." },
+          { "label": "Proficient", "descriptor": "Most classifications correctly match the urgency level suggested by the specific signs in each situation." },
+          { "label": "Advanced", "descriptor": "All classifications are well-reasoned and the hardest-case explanation in task 3 names a specific competing sign." }
+        ]
+      },
+      {
+        "dimension": "Use of specific signs vs. general impression",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reasoning cites a vague impression ('sounds bad') rather than a named detail." },
+          { "label": "Proficient", "descriptor": "Reasoning cites a specific, named detail from the situation." },
+          { "label": "Advanced", "descriptor": "Reasoning weighs multiple specific details against each other." }
+        ]
+      },
+      {
+        "dimension": "Generalized rule quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Rule is a restatement of one situation rather than a general principle." },
+          { "label": "Proficient", "descriptor": "Rule is general and could reasonably be applied to a new, unseen situation." },
+          { "label": "Advanced", "descriptor": "Rule specifically addresses a common error, such as judging urgency by pain alone." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Classifications are grounded in specific signs named in each situation, not general impressions.",
+      "The hardest-case explanation names a genuine competing sign, not just a restatement of the choice.",
+      "No real situation from the learner's own life is substituted for the provided fictional ones."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

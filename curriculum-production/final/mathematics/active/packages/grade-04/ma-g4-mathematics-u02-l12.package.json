@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u02-l12",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u02-l12",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Multi-Digit Addition and Subtraction",
+    "dayInUnit": 12,
+    "courseDay": 30,
+    "phase": "Applied problem solving",
+    "focus": "multistep problems checked against a rounded estimate",
+    "title": "Applied problem solving: multistep problems checked against a rounded estimate"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.3"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "round-multi-digit-number-review",
+          "standard": "4.NBT.3",
+          "difficulty": 1,
+          "prompt": "Round 24,681 to the nearest 1,000.",
+          "workedSolution": {
+            "steps": [
+              "The nearest multiples of 1,000 are 24,000 and 25,000.",
+              "24,681 is closer to 25,000."
+            ],
+            "answer": "25000"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A charity collected $19912 in the spring and $7154 in the fall, then spent $829 on supplies. How much money remains?",
+          "choices": [
+            "27066",
+            "27895",
+            "26237",
+            "20741"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number-review",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 32711 to the nearest 1000.",
+          "choices": [
+            "33000",
+            "32711",
+            "33001",
+            "32000"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A charity collected $6773 in the spring and $3421 in the fall, then received an extra $1010 donation. How much money is there in total?",
+          "choices": [
+            "11204",
+            "10194",
+            "9184",
+            "7783"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number-review",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 791453 to the nearest 10000.",
+          "choices": [
+            "790001",
+            "800000",
+            "790000",
+            "791453"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A charity collected $61369 in the spring and $33147 in the fall, then received an extra $6436 donation. How much money is there in total?",
+          "choices": [
+            "88080",
+            "94516",
+            "100952",
+            "67805"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "round-multi-digit-number-review",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 278888 to the nearest 10000.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A charity collected $71735 in the spring and $19476 in the fall, then spent $9018 on supplies. How much money remains?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u02-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u02-l12"
+  }
+}

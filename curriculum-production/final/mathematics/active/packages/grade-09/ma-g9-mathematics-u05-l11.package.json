@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u05-l11",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u05-l11",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Quadratic Expressions and Equations",
+    "dayInUnit": 11,
+    "courseDay": 83,
+    "phase": "Performance task planning",
+    "focus": "completing the square and deriving the quadratic formula",
+    "title": "Performance task planning: completing the square and deriving the quadratic formula"
+  },
+  "standards": [
+    "A-SSE.3",
+    "A-REI.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 1,
+          "prompt": "Solve x² − 5x + 6 = 0.",
+          "workedSolution": {
+            "steps": [
+              "Factors: (x − 2)(x − 3) = 0.",
+              "Each factor zero gives x = 2 or x = 3."
+            ],
+            "answer": "x = 2 or x = 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 2,
+          "prompt": "Without solving, describe the roots of -2x^2 + 6x - 5 = 0.",
+          "choices": [
+            "two distinct irrational roots",
+            "two distinct rational roots",
+            "exactly one real root (a repeated root)",
+            "no real roots (two complex conjugate roots)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 2,
+          "prompt": "Rewrite x^2 + 10x + 28 in vertex form and state the vertex.",
+          "choices": [
+            "(x − 5)² + 3; vertex (5, 3)",
+            "(x + 5)² + 3; vertex (-5, 3)",
+            "(x + 5)² − 3; vertex (-5, -3)",
+            "(x + 5)² + 28; vertex (-5, 28)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Use the quadratic formula to solve 2x^2 - x - 2 = 0. Give exact values.",
+          "choices": [
+            "x = (1 ± √17) / 4",
+            "x = (1 ± √17) / 2",
+            "x = (1 ± √17) / 5",
+            "x = (-1 ± √17) / 4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "You need to read off the vertex of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Solve by factoring: x^2 - 100 = 0.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Without solving, describe the roots of 2x^2 - 10x - 10 = 0.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u05-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u05-l11"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g10-mathematics-u02-assessment",
+  "courseRef": "ma-g10-mathematics",
+  "grade": 10,
+  "subject": "mathematics",
+  "authorityClass": "AUTO_SCOREABLE",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/mathematics/active/answer-keys/grade-10/ma-g10-mathematics-u02-l16.key.json",
+  "scoringSourceAuthority": {
+    "input": "hs912_normalization",
+    "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-candidates/hs912-r1/mathematics/grade-10/assessments.json"
+  },
+  "answerAuthorityRef": "repo:curriculum-production/final/mathematics/active/answer-keys/grade-10/ma-g10-mathematics-u02-l16.key.json",
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

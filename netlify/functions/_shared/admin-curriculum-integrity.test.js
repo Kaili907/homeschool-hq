@@ -4,6 +4,7 @@ import {
   createAdminCurriculumIntegrityEvidenceReader,
   createAdminCurriculumIntegrityService,
   loadPublishedSource,
+  reconcilePublishedGradeCounts,
   sha256,
   verifyPublishedRelease,
   verifyStagedCandidate,
@@ -18,7 +19,7 @@ const COLLECTIONS = [
   'schedules', 'standard_frameworks', 'resources', 'policy_sets',
 ]
 
-function stagedFixture() {
+function stagedFixture(packageId = 'manuel-academy-grades-5-7-8-curriculum-v1') {
   const values = Object.fromEntries(COLLECTIONS.map((name) => [name, name === 'courses' ? [{ course_id: 'course-1' }] : []]))
   const contentByPath = {
     'snapshot/manifest.json': { schema_set_version: '2.0.0' },
@@ -42,7 +43,7 @@ function stagedFixture() {
   const manifest = {
     schemaVersion: 1,
     packageFormat: 'manuel-academy-curriculum-staged-v1',
-    releaseIdentity: { packageId: 'manuel-academy-grades-5-7-8-curriculum-v1', version: '2.0.0-rc.1' },
+    releaseIdentity: { packageId, version: '2.0.0-rc.1' },
     baseReleaseVersion: '1.0.0', targetVersion: '2.0.0-rc.1', schemaSetVersion: '2.0.0',
     draft: { id: DRAFT_ID, revision: 3 },
     validation: { id: VALIDATION_ID, resultDigest: validationResultDigest },
@@ -121,6 +122,13 @@ describe('curriculum staged release integrity algorithm', () => {
     expect(result.mismatches).toEqual([])
   })
 
+  it('accepts the expanded governed-grade package identity without rewriting package evidence', () => {
+    const packageId = 'manuel-academy-grades-3-4-5-7-8-9-10-11-12-curriculum-v1'
+    expect(verifyStagedCandidate(stagedFixture(packageId))).toMatchObject({
+      status: 'VERIFIED', packageId, metadataStatus: 'VERIFIED',
+    })
+  })
+
   it('detects tampered, missing, and prohibited extra artifacts', () => {
     const tampered = stagedFixture()
     tampered.artifacts[0].canonicalContent = '{"tampered":true}'
@@ -162,6 +170,23 @@ describe('curriculum staged release integrity algorithm', () => {
 })
 
 describe('published release integrity and legacy provenance ruling', () => {
+  it('reconciles every grade bucket named by old and expanded package identities', () => {
+    const count = (courses) => ({ courses, units: courses * 2, lessons: courses * 3, assessments: courses, texts: 0, schedules: 1 })
+    const grades = [3, 4, 5, 7, 8, 9, 10, 11, 12]
+    const gradeCounts = Object.fromEntries(grades.map((grade) => [String(grade), count(1)]))
+    const totals = { courses: 9, units: 18, lessons: 27, assessments: 9, texts: 0, schedules: 9 }
+    const expanded = 'manuel-academy-grades-3-4-5-7-8-9-10-11-12-curriculum-v1'
+
+    expect(reconcilePublishedGradeCounts(expanded, gradeCounts, totals)).toBe(true)
+    expect(reconcilePublishedGradeCounts(expanded, { ...gradeCounts, '12': undefined }, totals)).toBe(false)
+    expect(reconcilePublishedGradeCounts(expanded, { ...gradeCounts, '6': count(1) }, totals)).toBe(false)
+    expect(reconcilePublishedGradeCounts(
+      'manuel-academy-grades-5-7-8-curriculum-v1',
+      { '5': count(1), '7': count(1), '8': count(1) },
+      { courses: 3, units: 6, lessons: 9, assessments: 3, texts: 0, schedules: 3 },
+    )).toBe(true)
+  })
+
   it('verifies available 1.0.0 artifacts and manifests but rules the release INCOMPLETE', async () => {
     const { release, observed } = await publishedFixture()
     const result = verifyPublishedRelease(release, observed)
