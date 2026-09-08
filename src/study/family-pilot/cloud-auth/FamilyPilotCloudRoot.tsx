@@ -11,18 +11,23 @@ export function FamilyPilotCloudRoot({ children }: {
     const client = getSupabaseClient(composition.configuration.url, composition.configuration.anonKey)
     if (!client) return
     const timers = new Set<number>()
-    const bootstrapAfterProviderEvent = () => {
+    const refreshAfterProviderEvent = () => {
       const timer = window.setTimeout(() => {
         timers.delete(timer)
-        void composition.auth.bootstrap()
+        void composition.auth.refreshProviderSession()
       }, 0)
       timers.add(timer)
     }
     const { data } = client.auth.onAuthStateChange((event) => {
-      // Password sign-in is established by the coordinator that initiated it.
-      // Starting a second bootstrap from SIGNED_IN races that same operation.
-      if (event === 'SIGNED_IN' && composition.auth.snapshot().status !== 'AUTHENTICATING') bootstrapAfterProviderEvent()
-      else if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') bootstrapAfterProviderEvent()
+      // Supabase emits SIGNED_IN when a hidden tab becomes visible and recovers
+      // its still-valid localStorage session. Revalidate without replacing the
+      // mounted household/learner/Study surface. Only a real provider
+      // SIGNED_OUT event may collapse cloud authority.
+      if (event === 'SIGNED_OUT') composition.auth.providerSignedOut()
+      else if (
+        (event === 'SIGNED_IN' && composition.auth.snapshot().status !== 'AUTHENTICATING') ||
+        event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED'
+      ) refreshAfterProviderEvent()
     })
     return () => {
       data.subscription.unsubscribe()

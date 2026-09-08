@@ -104,6 +104,57 @@ describe('family household cloud auth', () => {
     expect(auth.signIn).not.toHaveBeenCalled()
   })
 
+  it('revalidates a visibility-recovered session without dropping the mounted household', async () => {
+    const refreshed = context('2026-08-14T19:00:00.000Z')
+    const auth = identity(refreshed)
+    const local = data()
+    const membership = authority()
+    const runtime = coordinator({ identity: auth, data: local, authority: membership })
+    await runtime.signIn('parent@example.test', 'password')
+    const published: string[] = []
+    runtime.subscribe((state) => published.push(state.status))
+    local.clearCloudAuthority.mockClear()
+    local.establish.mockClear()
+    vi.mocked(membership.resolve).mockClear()
+
+    await expect(runtime.refreshProviderSession()).resolves.toMatchObject({
+      status: 'READY', householdRef: HOUSEHOLD_A, expiresAt: refreshed.expiresAt,
+    })
+    expect(published).toEqual(['READY'])
+    expect(local.clearCloudAuthority).not.toHaveBeenCalled()
+    expect(local.establish).not.toHaveBeenCalled()
+    expect(membership.resolve).toHaveBeenCalledOnce()
+  })
+
+  it('preserves an unexpired household through a transient visibility revalidation failure', async () => {
+    const auth = identity(null)
+    const local = data()
+    const runtime = coordinator({ identity: auth, data: local })
+    await runtime.signIn('parent@example.test', 'password')
+    const before = runtime.snapshot()
+    const published: string[] = []
+    runtime.subscribe((state) => published.push(state.status))
+    local.clearCloudAuthority.mockClear()
+
+    await expect(runtime.refreshProviderSession()).resolves.toBe(before)
+    expect(runtime.snapshot()).toBe(before)
+    expect(published).toEqual([])
+    expect(local.clearCloudAuthority).not.toHaveBeenCalled()
+  })
+
+  it('collapses cloud authority only after a provider-confirmed sign-out', async () => {
+    const storage = new MemoryStorage()
+    const local = data()
+    const runtime = coordinator({ storage, data: local })
+    await runtime.signIn('parent@example.test', 'password')
+
+    expect(runtime.providerSignedOut()).toMatchObject({
+      status: 'EXPIRED', householdRef: HOUSEHOLD_A, localData: 'AVAILABLE',
+    })
+    expect(storage.getItem(LINKED_FAMILY_DEVICE_KEY)).not.toBeNull()
+    expect(local.clearCloudAuthority).toHaveBeenCalled()
+  })
+
   it('establishes a new computer from Parent cloud login without application credential persistence', async () => {
     const storage = new MemoryStorage()
     const local = data()
