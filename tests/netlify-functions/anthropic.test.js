@@ -409,6 +409,34 @@ describe('authenticated Anthropic gateway', () => {
     expect(init.redirect).toBe('error')
   })
 
+  it('accepts answer-free all-subject Family Pilot lesson context without creating answer authority', async () => {
+    const fetchImpl = fetchRouter({
+      providerBody: { content: [{ type: 'text', text: 'What changes when the habitat loses sunlight?' }] },
+    })
+    const request = tutorRequest()
+    request.context = {
+      grade: '7',
+      problem: 'Explain how energy moves through this food web.',
+      studentAnswer: '',
+      graded: false,
+      subject: 'science',
+      lessonTitle: 'Understanding ecosystems',
+      lessonGoal: 'Trace energy through a food web.',
+      pageTitle: 'Guided practice',
+      instruction: 'Use the diagram to explain one relationship.',
+      responseType: 'CONSTRUCTED_RESPONSE',
+    }
+    const result = await createAnthropicHandler({ fetchImpl, env: ENV })(event(request))
+    expect(result.statusCode).toBe(200)
+    const providerBody = JSON.parse(fetchImpl.mock.calls[1][1].body)
+    const contextEnvelope = providerBody.messages.at(-1).content
+    expect(contextEnvelope).toContain('"subject":"science"')
+    expect(contextEnvelope).toContain('"lessonTitle":"Understanding ecosystems"')
+    expect(contextEnvelope).not.toContain('correctAnswer')
+    expect(providerBody.system).toContain('all school subjects')
+    expect(providerBody.system).toContain('Stay within the admitted lesson context')
+  })
+
   it('replaces a Tutor provider answer leak before returning it', async () => {
     const fetchImpl = fetchRouter({
       providerBody: { content: [{ type: 'text', text: 'The answer is 237.' }] },

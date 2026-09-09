@@ -19,7 +19,9 @@
   NODE_VERSION = "22"
 
 # Controlled Family Pilot learner web release. The route stays default-off for
-# production, deploy previews, and every unrelated branch.
+# production, deploy previews, and every unrelated branch. This exact branch is
+# also the stable family-test URL; later certified releases advance the branch
+# instead of widening the flag to other deploy contexts.
 [context."mac/web-release-r3-convergence-r1".environment]
   VITE_FAMILY_PILOT_ENABLED = "true"
 

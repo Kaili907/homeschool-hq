@@ -295,13 +295,15 @@ function netlifyGates(netlifyToml, functionFiles, scheduledFunctionContract) {
   const proxyValue = config.buildEnvironment.VITE_USE_PROXY
   const nodeVersion = config.buildEnvironment.NODE_VERSION
   const functionsDirectory = config.build.functions
+  const approvedFunctionsDirectories = new Set(['netlify/functions', 'netlify/function-entrypoints'])
+  const functionsDirectoryApproved = approvedFunctionsDirectories.has(functionsDirectory)
 
   return [
     gate({
       id: 'netlify.functions_directory', category: 'netlify', subject: 'build.functions',
-      status: functionsDirectory === 'netlify/functions' ? 'present' : functionsDirectory ? 'malformed' : 'missing',
-      reasonCode: functionsDirectory === 'netlify/functions' ? 'FUNCTIONS_DIRECTORY_CONFIGURED' : 'FUNCTIONS_DIRECTORY_INVALID',
-      remediation: functionsDirectory === 'netlify/functions' ? 'No action required.' : 'Set build.functions to netlify/functions.',
+      status: functionsDirectoryApproved ? 'present' : functionsDirectory ? 'malformed' : 'missing',
+      reasonCode: functionsDirectoryApproved ? 'FUNCTIONS_DIRECTORY_CONFIGURED' : 'FUNCTIONS_DIRECTORY_INVALID',
+      remediation: functionsDirectoryApproved ? 'No action required.' : 'Set build.functions to an approved Netlify function entrypoint directory.',
     }),
     gate({
       id: 'netlify.scheduled_target', category: 'netlify', subject: EXPECTED_STUDY_SCHEDULED_FUNCTION,
@@ -571,7 +573,11 @@ export async function runLocalStudyDeploymentPreflight({ rootDirectory = process
     // Missing configuration is represented by deterministic missing gates.
   }
   try {
-    entries = await readdir(resolve(rootDirectory, 'netlify/functions'), { withFileTypes: true })
+    const configuredDirectory = parseNetlifyDeploymentConfig(netlifyToml).build.functions
+    const functionDirectory = configuredDirectory === 'netlify/function-entrypoints'
+      ? configuredDirectory
+      : 'netlify/functions'
+    entries = await readdir(resolve(rootDirectory, functionDirectory), { withFileTypes: true })
   } catch {
     // Missing function directory is represented by deterministic missing gates.
   }

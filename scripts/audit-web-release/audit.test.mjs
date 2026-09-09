@@ -62,7 +62,7 @@ test('negative control: adult answer/scoring locators in browser JSON fail', () 
 test('negative control: learner PIN material fails while PIN display copy does not', () => {
   const fx = fixture()
   try {
-    fx.write('assets/app.js', `console.info('Enter your PIN'); const profile={pin:'4821'}; authenticate(profile.pin)`)
+    fx.write('assets/app.js', `console.info('Enter your PIN'); const profile={'pin':'4821'}; authenticate(profile['pin'])`)
     const result = scanBrowserOutput(fx.root)
     assert.ok(rules(result).has(RULES.learnerPin))
   } finally { fx.close() }
@@ -98,6 +98,14 @@ test('negative control: a required localhost runtime endpoint fails, incidental 
     const result = scanBrowserOutput(fx.root)
     assert.ok(rules(result).has(RULES.localhost))
     assert.equal(result.findings.filter((finding) => finding.rule === RULES.localhost).length, 1)
+  } finally { fx.close() }
+})
+
+test('positive control: Supabase Auth library localhost default is not an application runtime endpoint', () => {
+  const fx = fixture()
+  try {
+    fx.write('assets/supabase.js', `const version='gotrue-js/2.110.8', fallback='http://localhost:9999', storage='supabase.auth.token'`)
+    assert.equal(scanBrowserOutput(fx.root).findings.filter((finding) => finding.rule === RULES.localhost).length, 0)
   } finally { fx.close() }
 })
 

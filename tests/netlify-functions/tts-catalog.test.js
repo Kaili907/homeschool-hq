@@ -3,6 +3,7 @@ import {
   TTS_VOICE_CATALOG,
   createTtsVoiceCatalog,
   projectPublicTtsCatalog,
+  ttsCatalogForEnvironment,
 } from '../../netlify/functions/_shared/tts-catalog.js'
 import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 
@@ -94,6 +95,20 @@ describe('server-owned TTS catalog contract', () => {
     expect(TTS_VOICE_CATALOG.voices).toEqual([])
     expect(Object.isFrozen(TTS_VOICE_CATALOG)).toBe(true)
     expect(Object.isFrozen(TTS_VOICE_CATALOG.voices)).toBe(true)
+  })
+
+  it('maps the private deployment allowlist to public-safe logical family voices', () => {
+    const configured = ttsCatalogForEnvironment(ENV)
+    expect(configured.defaultVoiceRef).toBe('academy.tts.family.1')
+    expect(configured.voices).toHaveLength(1)
+    expect(configured.voices[0]).toMatchObject({
+      voiceRef: 'academy.tts.family.1',
+      providerVoiceId: PROVIDER_SENTINEL,
+      adminApproved: true,
+    })
+    const projected = projectPublicTtsCatalog(configured, ENV, true)
+    expect(projected.synthesisEnabled).toBe(true)
+    expect(JSON.stringify(projected)).not.toContain(PROVIDER_SENTINEL)
   })
 
   it('rejects duplicate refs and invalid defaults', () => {

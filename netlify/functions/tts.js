@@ -29,6 +29,7 @@ import {
   TTS_VOICE_CATALOG,
   projectPublicTtsCatalog,
   resolveTtsCatalogVoice,
+  ttsCatalogForEnvironment,
 } from './_shared/tts-catalog.js'
 import {
   elapsedMilliseconds,
@@ -72,7 +73,7 @@ export function createTtsHandler(overrides = {}) {
       const auth = await verifySupabaseBearer(event, { fetchImpl, env })
       if (!auth.ok) return auth.response
 
-      const catalog = overrides.catalog ?? TTS_VOICE_CATALOG
+      const catalog = overrides.catalog ?? ttsCatalogForEnvironment(env, TTS_VOICE_CATALOG)
       if (isCatalog) {
         let configuration
         try {

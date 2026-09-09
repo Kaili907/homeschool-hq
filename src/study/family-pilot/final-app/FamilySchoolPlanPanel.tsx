@@ -134,6 +134,7 @@ export function FamilySchoolPlanPanel({
   const [busy, setBusy] = useState(true)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+  const studentConfigurationKey = `${student.studentRef}:${student.updatedAt}`
 
   useEffect(() => {
     let live = true
@@ -157,7 +158,7 @@ export function FamilySchoolPlanPanel({
       if (live) { setError('School Plan storage is unavailable on this device.'); setBusy(false) }
     })
     return () => { live = false }
-  }, [controller, host, student])
+  }, [controller, host, studentConfigurationKey])
 
   const courseOptions = useMemo(() => new Map(student.enabledSubjects.map((subject) => [
     subject,

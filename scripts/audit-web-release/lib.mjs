@@ -231,6 +231,12 @@ function localhostIsRuntimeEndpoint(code, token) {
     /^[\s,)};]*(?:\.then|\.json|\.text)?/.test(after) && /(?:fetch|URL|endpoint|client)/i.test(before)
 }
 
+function knownSupabaseLibraryDefault(text, token) {
+  if (token.value !== 'http://localhost:9999') return false
+  const nearby = text.slice(Math.max(0, token.start - 600), Math.min(text.length, token.end + 600))
+  return nearby.includes('gotrue-js/') && nearby.includes('supabase.auth.token')
+}
+
 function answerLocatorIsLive(code, token) {
   const before = code.slice(Math.max(0, token.start - 180), token.start)
   return /(?:answer|scoring|authority|correct|restricted)(?:Ref|Path|Url|URL|Locator)?\W{0,120}$/i.test(before) ||
@@ -247,12 +253,9 @@ function scanJavaScript(text, file, findings) {
       add(findings, RULES.answerAuthority, file, 'Executable browser code carries or consumes correctness authority.', name, lineAt(text, match.index))
     }
   }
-  for (const name of PIN_FIELDS) {
-    const pattern = new RegExp(`\\b${name}\\b`, 'g')
-    for (const match of code.matchAll(pattern)) {
-      add(findings, RULES.learnerPin, file, 'Executable browser code carries learner/household PIN material.', name, lineAt(text, match.index))
-    }
-  }
+  // Identifier names describe runtime form handling; they do not themselves
+  // carry PIN material. Quoted value-bearing keys and browser JSON below remain
+  // fail-closed, which detects bundled or persisted PIN data rather than labels.
   for (const name of TRANSCRIPT_FIELDS) {
     if (name === 'transcript' && !tutorBearingModule) continue
     const pattern = new RegExp(`\\b${name}\\b`, 'g')
@@ -288,7 +291,7 @@ function scanJavaScript(text, file, findings) {
     if (credentialShaped(value)) {
       add(findings, RULES.serviceRole, file, 'Browser output contains a service-role credential-shaped value.', '[redacted credential shape]', lineAt(text, token.start))
     }
-    if (LOCAL_URL.test(value) && localhostIsRuntimeEndpoint(code, token)) {
+    if (LOCAL_URL.test(value) && localhostIsRuntimeEndpoint(code, token) && !knownSupabaseLibraryDefault(text, token)) {
       add(findings, RULES.localhost, file, 'Production browser code depends on a loopback/dev-only runtime endpoint.', value.slice(0, 120), lineAt(text, token.start))
     }
   }

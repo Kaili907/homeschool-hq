@@ -20,7 +20,7 @@ import {
   type FamilyPilotStudentDashboardModel,
 } from '../dashboard-adapter'
 import { fromStudentSelector, toStudentSelector } from '../integration/identity'
-import { createRichLessonRenderModel, FamilyPilotLessonPlayer } from '../lesson-player'
+import { createRichLessonRenderModel, FamilyPilotLessonPlayer, type RichLessonTutorRequest } from '../lesson-player'
 import { FamilyPilotRecoveryScreen } from '../recovery'
 import { buildFamilyFactualProgress, LearnerFactualProgress, ParentProgressReport } from '../reports'
 import { StudentDashboard } from '../student-dashboard'
@@ -67,9 +67,16 @@ import { ParentAssignmentLibrary } from './ParentAssignmentLibrary'
 import { createBrowserHouseholdScopedStorage } from '../cloud-auth/scopedStorage'
 import { FamilyCloudAuthBoundary } from '../cloud-auth/FamilyCloudAuthBoundary'
 import type { FamilyCloudAuthRuntime, FamilyCloudSessionState } from '../cloud-auth/types'
+import {
+  createFamilyPilotTutorHistoryStore,
+  FamilyPilotTutorPanel,
+  ParentTutorHistory,
+  type FamilyPilotTutorHistoryStore,
+  type FamilyPilotTutorLessonContext,
+} from '../tutor-runtime'
 
 type Mode = 'parent' | 'student'
-type ParentView = 'overview' | 'school-plan' | 'assign' | 'review' | 'reports' | 'preferences' | 'backup' | 'devices'
+type ParentView = 'overview' | 'school-plan' | 'assign' | 'review' | 'reports' | 'tutor' | 'preferences' | 'backup' | 'devices'
 
 function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : 'That action could not be completed.'
@@ -287,6 +294,10 @@ function MountedFinalFamilyPilot({
   useEffect(() => () => autoPlannerHost.close(), [autoPlannerHost])
   const app = controller.appSnapshot
   const core = controller.coreSnapshot
+  const tutorHistoryStore = useMemo(() => createFamilyPilotTutorHistoryStore(
+    createBrowserHouseholdScopedStorage(app.state.householdRef),
+    app.state.householdRef,
+  ), [app.state.householdRef])
 
   const doRestore = async (file: File | undefined) => {
     if (!file) return
@@ -433,6 +444,7 @@ function MountedFinalFamilyPilot({
             onExit={() => { setOpenAssignmentRef(null); refresh() }}
             refresh={refresh}
             trustedScorer={trustedScorer}
+            tutorHistoryStore={tutorHistoryStore}
           />
         )}
       </FinalShell>
@@ -511,6 +523,7 @@ function MountedFinalFamilyPilot({
           deviceSyncSetup={deviceSyncSetup}
           onSignOut={onHouseholdSignOut}
           backupOptions={backupOptions}
+          tutorHistoryStore={tutorHistoryStore}
         />
       )}
     </FinalShell>
@@ -729,7 +742,7 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
     <>
       <StudentDashboard
         model={presentation}
-        jarvis={{ mode: 'visual-only', status: 'Jarvis is visual only. Tutor V2 is not connected in this release.' }}
+        jarvis={{ mode: 'tutor-v2', status: 'AI Tutor is available inside every lesson for text and voice help.' }}
         onOpenWork={openWork}
         onOpenCourse={openCourse}
         onOpenSchedule={openSchedule}
@@ -743,7 +756,7 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   )
 }
 
-function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, revision, syncStatus: initialSyncStatus, deviceSyncSetup, onSignOut, backupOptions }: {
+function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, revision, syncStatus: initialSyncStatus, deviceSyncSetup, onSignOut, backupOptions, tutorHistoryStore }: {
   readonly controller: FinalFamilyPilotController
   readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly view: ParentView
@@ -757,6 +770,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
   readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
   readonly onSignOut?: () => void
   readonly backupOptions: FinalFamilyPilotBackupOptions
+  readonly tutorHistoryStore: FamilyPilotTutorHistoryStore
 }) {
   const students = controller.appSnapshot.state.setup.students
   const [selectedRef, setSelectedRef] = useState(students[0]?.studentRef ?? '')
@@ -782,13 +796,14 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
         </div>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2 print:hidden" aria-label="Parent Hub sections">
-        {(['overview', 'preferences', 'school-plan', 'assign', 'review', 'reports', 'backup', 'devices'] as ParentView[]).map((item) => {
+        {(['overview', 'preferences', 'school-plan', 'assign', 'review', 'reports', 'tutor', 'backup', 'devices'] as ParentView[]).map((item) => {
           const label = item === 'overview' ? 'Overview'
             : item === 'preferences' ? 'Family setup'
               : item === 'school-plan' ? 'School Plan'
                 : item === 'assign' ? 'Assignments'
                   : item === 'review' ? 'Review Center'
                   : item === 'reports' ? 'Progress'
+                    : item === 'tutor' ? 'Tutor chats'
                     : item === 'devices' ? 'Device Sync'
                       : 'Backup/Recovery'
           return <button key={item} type="button" className={`min-h-11 rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} aria-current={view === item ? 'page' : undefined} onClick={() => setView(item)}>{label}</button>
@@ -829,6 +844,8 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
         </div>
       ) : view === 'reports' ? (
         <ParentReports controller={controller} autoPlannerHost={autoPlannerHost} student={selected} refresh={refresh} />
+      ) : view === 'tutor' ? (
+        <div className="mt-6"><ParentTutorHistory store={tutorHistoryStore} student={selected} /></div>
       ) : (
         <section className="mt-6 rounded-2xl border bg-white p-5">
           <h3 className="text-xl font-extrabold">Backup and recovery</h3>
@@ -1067,18 +1084,19 @@ function AssessmentSurface({ controller, studentRef, assignmentRef, onExit, refr
   </main>
 }
 
-function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh, trustedScorer }: {
+function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh, trustedScorer, tutorHistoryStore }: {
   readonly controller: FinalFamilyPilotController
   readonly studentRef: string
   readonly assignmentRef: string
   readonly onExit: () => void
   readonly refresh: () => void
   readonly trustedScorer?: LearnerResponseAssessor
+  readonly tutorHistoryStore: FamilyPilotTutorHistoryStore
 }) {
   const [result, setResult] = useState<FinalFamilyPilotControllerResult | null>(null)
   const [busy, setBusy] = useState(true)
   const [message, setMessage] = useState('')
-  const [tutorText, setTutorText] = useState('')
+  const [tutorContext, setTutorContext] = useState<FamilyPilotTutorLessonContext | null>(null)
   const [focus, setFocus] = useState<FamilyPilotFocusSession | null>(null)
   const [responseView, setResponseView] = useState<{ readonly key: string; readonly presentation: LearnerResponsePresentation } | null>(null)
   const [responseLoadError, setResponseLoadError] = useState<{ readonly key: string; readonly message: string } | null>(null)
@@ -1250,6 +1268,36 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh,
     }
     void run(() => controller.completeSegment(studentRef, assignmentRef))
   }
+  const student = controller.appSnapshot.state.setup.students.find((item) => item.studentRef === studentRef)
+  const openTutor = (request?: RichLessonTutorRequest) => {
+    const requestedPage = richRenderModel?.mode === 'rich'
+      ? richRenderModel.pages.find((page) =>
+        request?.itemRef ? page.item?.itemRef === request.itemRef
+          : request?.sectionRef ? page.sectionRef === request.sectionRef
+            : page.item?.itemRef === responseItem?.itemRef)
+      : undefined
+    const item = requestedPage?.item ?? responseItem
+    const detailText = requestedPage?.details.flatMap((detail) => [detail.label, detail.text, ...(detail.items ?? [])]).filter(Boolean).join('\n') ?? ''
+    const pageText = [
+      requestedPage?.body,
+      requestedPage?.directions,
+      detailText,
+      item?.instruction,
+      item?.prompt,
+      item?.example,
+    ].filter(Boolean).join('\n').slice(0, 1_900)
+    setTutorContext({
+      lessonRef: result.material.lessonRef,
+      lessonTitle: result.material.title,
+      subject: result.material.subject,
+      lessonGoal: result.material.lessonGoal,
+      pageTitle: requestedPage?.title ?? item?.title ?? segmentContent.title ?? result.material.title,
+      pageText: pageText || segmentContent.prompt || result.material.lessonGoal || result.material.title,
+      instruction: item?.instruction,
+      responseType: item?.responseType,
+      activeAssessment: requestedPage?.kind === 'mastery-check' || item?.evidenceMode === 'MASTERY',
+    })
+  }
   return (
     <main className="mx-auto max-w-4xl px-4 py-6">
       <section data-material-ref={result.material.materialRef}>
@@ -1274,7 +1322,7 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh,
             onResume={() => void run(() => controller.resume(studentRef, assignmentRef))}
             onNext={completePresentedSegment}
             onCompleteSegment={completePresentedSegment}
-            onOpenTutor={() => setTutorText('Tutor help is reserved for a future trusted callback. Your lesson and response progress are unchanged.')}
+            onOpenTutor={openTutor}
             onExit={(progressRef) => {
               try { controller.hideInstructionalSession(studentRef, assignmentRef) } catch (error) { setMessage(messageOf(error)); return }
               void controller.checkpoint(studentRef, assignmentRef, progressRef ?? null).then(() => onExit())
@@ -1282,7 +1330,19 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh,
           />
         )}
         {!pending && !certified ? <button type="button" className="mt-4 rounded-lg border border-amber-500 px-4 py-2 font-bold" onClick={() => void controller.requestAdultHelp(studentRef, assignmentRef).then(() => { setMessage('A parent check-in is now required for this exact session.'); refresh() }).catch((error) => setMessage(messageOf(error)))}>I need an adult check-in</button> : null}
-        {tutorText ? <div className="mt-4 rounded-lg border border-cyan-200 bg-cyan-50 p-3"><p className="font-bold">Tutor help</p><p className="mt-1">{tutorText}</p><p className="mt-2 text-sm text-slate-600">No Tutor runtime is mounted here. This callback carries lesson references only, and no conversation is persisted.</p></div> : null}
+        {tutorContext && student ? <FamilyPilotTutorPanel
+          store={tutorHistoryStore}
+          student={student}
+          assignmentRef={assignmentRef}
+          sessionRef={result.study.session.sessionRef}
+          context={tutorContext}
+          onClose={() => setTutorContext(null)}
+          onAdultHelp={async () => {
+            await controller.requestAdultHelp(studentRef, assignmentRef)
+            setMessage('A parent check-in is now required for this exact session.')
+            refresh()
+          }}
+        /> : null}
         {message ? <p className="mt-3 font-semibold text-amber-800" role="alert">{message}</p> : null}
       </section>
     </main>

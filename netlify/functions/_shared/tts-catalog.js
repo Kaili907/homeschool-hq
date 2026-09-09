@@ -94,7 +94,34 @@ export const TTS_VOICE_CATALOG = createTtsVoiceCatalog({
 function allowedProviderVoiceIds(env) {
   const configured = env?.ELEVENLABS_ALLOWED_VOICE_IDS
   if (typeof configured !== 'string') return new Set()
-  return new Set(configured.split(',').map((item) => item.trim()).filter(Boolean))
+  return new Set(configured.split(',').map((item) => item.trim()).filter((item) => PROVIDER_VOICE_ID_PATTERN.test(item)))
+}
+
+/**
+ * Turn the deployment's private ElevenLabs allowlist into stable logical voice
+ * refs when no source-owned catalog has been supplied. Provider IDs remain
+ * server-only: the public projection exposes only academy.tts.family.*.
+ */
+export function ttsCatalogForEnvironment(env, baseCatalog = TTS_VOICE_CATALOG) {
+  if (baseCatalog.voices.length > 0) return baseCatalog
+  const providerVoiceIds = [...allowedProviderVoiceIds(env)].slice(0, 8)
+  if (providerVoiceIds.length === 0) return baseCatalog
+  const voices = providerVoiceIds.map((providerVoiceId, index) => ({
+    voiceRef: `academy.tts.family.${index + 1}`,
+    displayLabel: index === 0 ? 'Family tutor voice' : `Family tutor voice ${index + 1}`,
+    providerClass: 'premium',
+    provider: 'elevenlabs',
+    providerVoiceId,
+    voiceVersion: baseCatalog.catalogVersion,
+    status: 'active',
+    cachedPlayback: 'allow',
+    adminApproved: true,
+  }))
+  return createTtsVoiceCatalog({
+    catalogVersion: baseCatalog.catalogVersion,
+    defaultVoiceRef: voices[0].voiceRef,
+    voices,
+  })
 }
 
 function providerConfigured(entry, env) {

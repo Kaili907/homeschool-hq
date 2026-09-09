@@ -47,10 +47,17 @@ export interface AnthropicMessage {
 export interface TutorGatewayContext {
   grade: Grade
   problem: string
-  correctAnswer: string
+  /** Legacy practice-only leak check. Family Pilot never has browser answer authority. */
+  correctAnswer?: string
   studentAnswer: string
   /** TutorChat is mounted only on practice; the server still treats this as untrusted. */
   graded: boolean
+  subject?: string
+  lessonTitle?: string
+  lessonGoal?: string
+  pageTitle?: string
+  instruction?: string
+  responseType?: string
 }
 
 export interface JarvisGatewayStudentContext {
