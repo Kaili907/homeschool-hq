@@ -22,6 +22,13 @@
 # production, deploy previews, and every unrelated branch. This exact branch is
 # also the stable family-test URL; later certified releases advance the branch
 # instead of widening the flag to other deploy contexts.
+[context."mac/web-release-r3-convergence-r1"]
+  # The production-item scorer is intentionally locked off in this family
+  # branch and its complete authority corpus exceeds the branch-function size
+  # limit. Keep the rest of the reviewed server surface, including Tutor and
+  # voice, without publishing a misleading partial scorer.
+  functions = "netlify/family-pilot-entrypoints"
+
 [context."mac/web-release-r3-convergence-r1".environment]
   VITE_FAMILY_PILOT_ENABLED = "true"
 
