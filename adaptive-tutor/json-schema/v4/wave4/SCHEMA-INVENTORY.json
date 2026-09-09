@@ -1,0 +1,83 @@
+{
+  "additionalBoundaryAdjudications": [
+    {
+      "candidate": "CommercialExecutionScope",
+      "classification": "TRUSTED_INTERNAL_CONTRACT"
+    },
+    {
+      "candidate": "model certification",
+      "classification": "TOOLING_ARTIFACT"
+    },
+    {
+      "candidate": "campaign evidence",
+      "classification": "TOOLING_ARTIFACT"
+    },
+    {
+      "candidate": "accepted presentation",
+      "classification": "TRUSTED_INTERNAL_CONTRACT",
+      "durableProjection": "DurableMultimodalEvidence"
+    }
+  ],
+  "additionalSerializedBoundaryCount": 0,
+  "allSerializedObjectSchemasRecursivelyClosed": true,
+  "currentSchemaDirectory": "json-schema/v4/wave4",
+  "generatedSchemaCount": 10,
+  "historicalWave3SchemaDirectoryRewritten": false,
+  "internalPortSchemasGenerated": 0,
+  "previousAcceptedSchemaDirectory": "json-schema/v3/wave3",
+  "product": "Manuel Academy Study Tutor V2",
+  "schemaInventoryVersion": 1,
+  "schemas": [
+    {
+      "file": "study-commercial-tutor-invocation.schema.json",
+      "sha256": "c9a89d50f03835391eea1f7f3ff20de1789ccb939ca0c986b7127ae90211dea7",
+      "source": "core/v3/contracts/commercial.ts#StudyCommercialTutorInvocationSchema"
+    },
+    {
+      "file": "bounded-commercial-provider-request.schema.json",
+      "sha256": "923640b41ebfdb30e424ca4adfef842abb2bd356a4f0f485dbc2444a53f276c4",
+      "source": "core/v3/provider-request/contracts.ts#BoundedCommercialProviderRequestSchema"
+    },
+    {
+      "file": "bounded-commercial-provider-response.schema.json",
+      "sha256": "51496e2ea3bbcbded6035a812a47602c605d9fd957f566312b91a8510488feb5",
+      "source": "core/v3/contracts/commercial.ts#BoundedCommercialProviderResponseSchema"
+    },
+    {
+      "file": "study-commercial-tutor-advisory.schema.json",
+      "sha256": "a5b90b4903eb9ff5ebd49f0954dc91d1424d2514ec8e8fd285175797dd450c92",
+      "source": "core/v3/contracts/commercial.ts#StudyCommercialTutorAdvisorySchema"
+    },
+    {
+      "file": "study-commercial-effect-receipt.schema.json",
+      "sha256": "1a2a070945902a767a7a078c6b208b5bc0d8bb5d335dac7748bef9e96b95b0a3",
+      "source": "core/v3/contracts/commercial.ts#StudyCommercialEffectReceiptSchema"
+    },
+    {
+      "file": "commercial-operation-telemetry-event.schema.json",
+      "sha256": "ec99842025e1b317d6e837ecbb3529daeda9c5de82c412a360676f2f3c7fbab8",
+      "source": "core/v3/telemetry/contracts.ts#TutorCommercialTelemetryEventSchema"
+    },
+    {
+      "file": "parent-report.schema.json",
+      "sha256": "9ae201ffa0da3297190a8c92881ce32ff2a082b0959ae51848bcb5b8ecaaaab6",
+      "source": "study-engine/tutor-v2/parent-reporting/parent-report.ts#ParentReportSchema"
+    },
+    {
+      "file": "instructional-memory-delta.schema.json",
+      "sha256": "e1841941329feb3017a0c2b5c307249dfe13f72ddc6bde94bf73fb3f29ddff69",
+      "source": "core/v3/memory/instructional-memory-delta.ts#InstructionalMemoryDeltaSchema"
+    },
+    {
+      "file": "durable-multimodal-evidence.schema.json",
+      "sha256": "f3c9b317999e4b9148540006400981019ce683e0b4fb32870c3e4f585af7f52b",
+      "source": "core/v3/multimodal/contracts.ts#DurableMultimodalEvidenceSchema"
+    },
+    {
+      "file": "minimized-accepted-study-effect-event.schema.json",
+      "sha256": "17a12dc13ab554a90f9610c0093d2e59383d966aaf9e03312cd8f9ce8a5a6a9f",
+      "source": "core/v3/recovery/recoverable-memory-replay.ts#MinimizedAcceptedStudyEffectEventSchema"
+    }
+  ],
+  "wave": "Wave 4 Adversarial Certification + Repair Reconvergence"
+}

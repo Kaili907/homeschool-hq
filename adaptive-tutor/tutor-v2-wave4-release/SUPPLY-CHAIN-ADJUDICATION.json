@@ -1,0 +1,42 @@
+{
+  "aggregateStatus": "PASS",
+  "evidenceVersion": 1,
+  "forbiddenDependencyFindings": [],
+  "laneLocalToolingManifests": [
+    "adversarial/v4/multilingual-eval/package.json",
+    "adversarial/v4/scope-isolation/package.json",
+    "certification/v4/live-runner/package.json",
+    "certification/v4/model-drift/package.json"
+  ],
+  "negativeControls": [
+    {
+      "id": "vendor-import",
+      "status": "DETECTED"
+    },
+    {
+      "id": "openai-import",
+      "status": "DETECTED"
+    },
+    {
+      "id": "endpoint",
+      "status": "DETECTED"
+    },
+    {
+      "id": "production-netlify-import",
+      "status": "DETECTED"
+    }
+  ],
+  "originalWholeDiffWrapperRuling": {
+    "detail": "Synthetic canaries, test-runner environment variables, and lane-local TypeScript tooling are not production vendor wiring or credentials.",
+    "findingCount": 9,
+    "status": "KNOWN_SCOPE_FALSE_POSITIVES"
+  },
+  "productionFindings": [],
+  "rootLockfileAddition": false,
+  "scannedRoots": [
+    "core/v3",
+    "study-engine/tutor-v2/wave3",
+    "study-engine/tutor-v2/parent-reporting"
+  ],
+  "scope": "CURRENT_PRODUCTION_FOUNDATION"
+}

@@ -1,0 +1,34 @@
+{
+  "session": "STUDY-TUTOR-V2-W4-06",
+  "startingSha": "a2fdf1858cd50c998f5da53970d36ee6c90ff31a",
+  "status": "W4_RESOURCE_ABUSE_BLOCKER_FOUND",
+  "liveProviderCalls": 0,
+  "adversarialTestGroups": 9,
+  "adversarialTestGroupsPassed": 9,
+  "deterministicBounds": {
+    "providerProfiles": 64,
+    "modelProfiles": 64,
+    "providerAvailabilityEntries": 64,
+    "eligibleCatalogEntries": 64,
+    "providerModelComparisonsDuringCatalogBuild": 4096,
+    "candidateAvailabilityComparisonsDuringRouting": 4096,
+    "physicalAttemptsPerInvocation": 2,
+    "transportExecutionsPerInvocation": 2,
+    "usageReceiptsPerReservation": 2,
+    "telemetryEventsPerInvocation": 2,
+    "canonicalMoneyDigits": 19,
+    "canonicalMoneyMaximumMicros": "9223372036854775807"
+  },
+  "blockers": [
+    {
+      "id": "RA-01",
+      "title": "Provider-policy requirement cardinality is unbounded",
+      "reproduction": "A 4096-entry providerPolicyRequirements list and a 4096-entry nested allowedRetentionClasses list are fully traversed and accepted."
+    },
+    {
+      "id": "RA-02",
+      "title": "Reservation identity does not prevent replayed execution",
+      "reproduction": "Two invocations with identical logical-operation, reservation, and physical-attempt refs each dispatch once."
+    }
+  ]
+}

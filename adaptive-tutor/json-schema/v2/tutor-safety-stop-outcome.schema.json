@@ -1,0 +1,60 @@
+{
+  "$id": "TutorV2SafetyStopOutcome",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "academicContinuationAllowed": {
+      "const": false,
+      "type": "boolean"
+    },
+    "actionCompatibilityId": {
+      "const": "manuel-academy.study-tutor-v2.action.v1",
+      "type": "string"
+    },
+    "actionSchemaVersion": {
+      "const": 1,
+      "type": "number"
+    },
+    "code": {
+      "const": "SAFETY_STOP",
+      "type": "string"
+    },
+    "compatibilityId": {
+      "const": "manuel-academy.study-tutor-v2.contracts.v2",
+      "type": "string"
+    },
+    "contractVersion": {
+      "const": "2.0.0",
+      "type": "string"
+    },
+    "envelope": {
+      "const": "tutor-safety-stop",
+      "type": "string"
+    },
+    "interactionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "safetyRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "actionSchemaVersion",
+    "compatibilityId",
+    "actionCompatibilityId",
+    "envelope",
+    "interactionRef",
+    "code",
+    "safetyRef",
+    "academicContinuationAllowed"
+  ],
+  "title": "Tutor V2 Safety Stop Outcome",
+  "type": "object"
+}

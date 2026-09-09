@@ -1,0 +1,845 @@
+{
+  "aggregateStatus": "PASS",
+  "artifactStatus": "HISTORICAL_R6_FRAMEWORK_RUN",
+  "baselineBlocked": 0,
+  "booleanEvidenceFlipOnly": false,
+  "currentExactCandidateCertification": false,
+  "historicalExecutionSubjectSha": "57cae2722632fbf2a6318a1c7744a6126d6a69c3",
+  "supersededBy": "docs/study-tutor-v2/wave4/repairs/w4-r9-mutation-evidence-binding/CAMPAIGN-EVIDENCE.json",
+  "cleanupComplete": true,
+  "compilerFailureAloneCountsAsDetection": false,
+  "compileValid": 13,
+  "controlCount": 13,
+  "disposableDetachedWorktreesOnly": true,
+  "evidenceVersion": 2,
+  "expectedOutputMutationUsed": false,
+  "frameworkSourceSession": "STUDY-TUTOR-V2-W4-R6",
+  "invalid": 0,
+  "killed": 13,
+  "mutationKind": "implementation",
+  "permanentDetectorAssertionsChanged": false,
+  "qualifying": 13,
+  "releaseArtifactMutationUsed": false,
+  "requiredControlCount": 13,
+  "resultJsonMutationUsed": false,
+  "results": [
+    {
+      "afterSha256": {
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "78609f15e24aea0e7864abf4b18a4944fffd0467131c9e2d5b5c1f41002ecf52"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 40,
+        "detectorId": "W4-D01-PROMPT-INJECTION-FOCUSED",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-01-prompt-injection",
+        "exitCode": 0,
+        "family": "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
+        "invocation": [
+          "node adversarial/v4/prompt-injection/run-focused.mjs test"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "5b4fdadf729ff6fd475871cf190b891dd4ae7f5c23e5931646f8ada1f042c9a7",
+        "sourceInvariant": "Untrusted instructions cannot widen Study authority or advisory authority fields.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "44ee3212d87f36e3eb4407d02c219a92d7ab30f114e907e0a8fbcf91d9ee4b1f"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Widen the executable successful advisory's Study mutation authority field.",
+      "detectorId": "W4-D01-PROMPT-INJECTION-FOCUSED",
+      "detectorOutcome": {
+        "assertionCount": 40,
+        "detectorId": "W4-D01-PROMPT-INJECTION-FOCUSED",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-01-prompt-injection",
+        "exitCode": 1,
+        "family": "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
+        "invocation": [
+          "node adversarial/v4/prompt-injection/run-focused.mjs test"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "e7765ef0d320dc5a40625a2277fc40048ef10ab98b5561ffab1631ef23e8cdc9",
+        "sourceInvariant": "Untrusted instructions cannot widen Study authority or advisory authority fields.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M01-AUTHORITY-FIELD-WIDENING",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2..3f21d292 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -261,7 +261,7 @@ function finalizedAdvisory(\n     assistanceEvidenceRef: proposal ? invocation.curriculum.opportunityRef : null,\n     presentationIntent: proposal ? response.presentationIntent : null,\n     studyDecisionRequired: true,\n-    studyMutationAllowed: false,\n+    studyMutationAllowed: true as false,\n     officialMasteryAuthority: false,\n     officialWorkingLevelAuthority: false,\n     nominalGradeAuthority: false,\n",
+      "family": "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
+      "mutationId": "W4-M01-AUTHORITY-FIELD-WIDENING",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M01 prompt-injection authority-field/hierarchy weakening",
+      "sourcePaths": [
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/core/v2/policy/anti-answer/index.ts": "c1645f2d618c2c37e007594264a0783bd463873d7205414e12e22af534fc441a"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 66,
+        "detectorId": "W4-D02-ANSWER-EXTRACTION-CERTIFICATION",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-02-answer-extraction",
+        "exitCode": 0,
+        "family": "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
+        "invocation": [
+          "node adversarial/v4/answer-extraction/run-certification.mjs"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "6815595eed453da94a5ea2aebe552a58382f30be6e8d9b9fa2676871091becb5",
+        "sourceInvariant": "Active assessments structurally reject unrestricted answer-bearing actions.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/core/v2/policy/anti-answer/index.ts": "7e659c14dca435c94b8153b20776ea28a2ec05a009317debe66e9e2b4fd102fc"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Remove ask-check from the structural active-assessment free-form rejection set.",
+      "detectorId": "W4-D02-ANSWER-EXTRACTION-CERTIFICATION",
+      "detectorOutcome": {
+        "assertionCount": 66,
+        "detectorId": "W4-D02-ANSWER-EXTRACTION-CERTIFICATION",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-02-answer-extraction",
+        "exitCode": 1,
+        "family": "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
+        "invocation": [
+          "node adversarial/v4/answer-extraction/run-certification.mjs"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "62ccbb3cb55b6e9288a03ac9311de6a941bd966f6e7222d96b51951a5ef3fb52",
+        "sourceInvariant": "Active assessments structurally reject unrestricted answer-bearing actions.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M02-REMOVE-ASK-CHECK-PROTECTION",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/core/v2/policy/anti-answer/index.ts b/adaptive-tutor/core/v2/policy/anti-answer/index.ts\nindex e2fc8293..09cd7e34 100644\n--- a/adaptive-tutor/core/v2/policy/anti-answer/index.ts\n+++ b/adaptive-tutor/core/v2/policy/anti-answer/index.ts\n@@ -68,7 +68,6 @@ const ACTIVE_ASSESSMENT_FREE_FORM_ACTION_KINDS: ReadonlySet<TutorActionKind> =\n   new Set([\n     \"explain\",\n     \"hint\",\n-    \"ask-check\",\n     \"show-example\",\n     \"reteach\",\n   ]);\n",
+      "family": "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
+      "mutationId": "W4-M02-REMOVE-ASK-CHECK-PROTECTION",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M02 structural active-assessment anti-answer weakening",
+      "sourcePaths": [
+        "adaptive-tutor/core/v2/policy/anti-answer/index.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "20041338e15c339377466f1962c0ef9c2006b46c23efc54bbf676b5bbc801327"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 56,
+        "detectorId": "W4-D03-R1-R4-R5-SCOPE-LINEAGE",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r1-commercial-integrity;w4-r4-study-lineage;w4-r5-presentation-lineage",
+        "exitCode": 0,
+        "family": "CROSS_SCOPE_COMMERCIAL_ISOLATION",
+        "invocation": [
+          "node --test R1-commercial-integrity R4-study-lineage R5-presentation-lineage"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "da62098cf708fd98c1c2b3154ef164d792f5765876a90589b2f44a5d661df09c",
+        "sourceInvariant": "Every commercial, accepted-effect, memory, and presentation boundary reconciles the canonical Study scope.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "44ee3212d87f36e3eb4407d02c219a92d7ab30f114e907e0a8fbcf91d9ee4b1f"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Remove canonical learner-scope equality before commercial dispatch.",
+      "detectorId": "W4-D03-R1-R4-R5-SCOPE-LINEAGE",
+      "detectorOutcome": {
+        "assertionCount": 56,
+        "detectorId": "W4-D03-R1-R4-R5-SCOPE-LINEAGE",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r1-commercial-integrity;w4-r4-study-lineage;w4-r5-presentation-lineage",
+        "exitCode": 1,
+        "family": "CROSS_SCOPE_COMMERCIAL_ISOLATION",
+        "invocation": [
+          "node --test R1-commercial-integrity R4-study-lineage R5-presentation-lineage"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "33f89f4e8b3f4ca8111d67e4e17be5bc455ad2a63be58199ea4c9003a416d941",
+        "sourceInvariant": "Every commercial, accepted-effect, memory, and presentation boundary reconciles the canonical Study scope.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M03-REMOVE-CANONICAL-LEARNER-SCOPE",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2..f2960e7f 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -481,7 +481,6 @@ export function executeCommercialTutorInvocation(\n   }\n   if (\n     invocation.householdScopeRef !== input.trustedScope.householdScopeRef ||\n-    invocation.learnerScopeRef !== input.trustedScope.learnerScopeRef ||\n     invocation.sessionRef !== input.trustedScope.sessionRef ||\n     invocation.interactionRef !== input.trustedScope.interactionRef ||\n     invocation.groundedContext.scopeRef !== input.trustedScope.interactionRef ||\n",
+      "family": "CROSS_SCOPE_COMMERCIAL_ISOLATION",
+      "mutationId": "W4-M03-REMOVE-CANONICAL-LEARNER-SCOPE",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M03 CommercialExecutionScope equality/reconciliation weakening",
+      "sourcePaths": [
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts": "e45b9c22274967630dff0d3de17f510a43cf9b30c5e1673b85546215744d7d2b"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 31,
+        "detectorId": "W4-D04-REPLAY-CRASH-CURRENT",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-04-replay-crash",
+        "exitCode": 0,
+        "externalBaselineOwner": "W4-R7",
+        "family": "REPLAY_CRASH_IDEMPOTENCY",
+        "invocation": [
+          "node $TSC -p adversarial/v4/replay-crash/tsconfig.json",
+          "node --test adversarial/v4/replay-crash/.test-dist/adversarial/v4/replay-crash/state-machine.test.js"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "a515d34ddd16663187d8f2d174d1dc332b43bceaaecd425c9e88f9aa2aa86ca2",
+        "sourceInvariant": "Crash recovery reuses accepted effects and physical attempts at most once under current contracts.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts": "0273f5c6cbd7c2d5051b3058ec73aaa6cdf8e3b2b2893217448a83c5b33065e8"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Bypass reuse of an already observed provider physical attempt.",
+      "detectorId": "W4-D04-REPLAY-CRASH-CURRENT",
+      "detectorOutcome": {
+        "assertionCount": 0,
+        "detectorId": "W4-D04-REPLAY-CRASH-CURRENT",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-04-replay-crash",
+        "exitCode": 2,
+        "externalBaselineOwner": "W4-R7",
+        "family": "REPLAY_CRASH_IDEMPOTENCY",
+        "invocation": [
+          "node $TSC -p adversarial/v4/replay-crash/tsconfig.json",
+          "node --test adversarial/v4/replay-crash/.test-dist/adversarial/v4/replay-crash/state-machine.test.js"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "d3450b6c199ddda116d8095d3a28292c687ff18c757e7f79d1f5d3419e38cccc",
+        "sourceInvariant": "Crash recovery reuses accepted effects and physical attempts at most once under current contracts.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M04-REDISPATCH-EXISTING-ATTEMPT",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\nindex 7cb41d44..da80bf8f 100644\n--- a/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n+++ b/adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts\n@@ -180,7 +180,7 @@ export class DeterministicProvider {\n   dispatch(attempt: CommercialAttempt, payloadDigest: string): ProviderDispatchResult {\n     this.dispatchLog.push(attempt.physicalAttemptRef);\n     const existing = this.#dispatches.get(attempt.physicalAttemptRef);\n-    if (existing) {\n+    if (existing && false) {\n       if (existing.payloadDigest !== payloadDigest) {\n         throw new Error(\"physical attempt reference was rebound to a different payload\");\n       }\n",
+      "family": "REPLAY_CRASH_IDEMPOTENCY",
+      "mutationId": "W4-M04-REDISPATCH-EXISTING-ATTEMPT",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M04 accepted-effect/provider replay idempotency weakening",
+      "sourcePaths": [
+        "adaptive-tutor/adversarial/v4/replay-crash/state-machine.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "687c09c3a45c3e9912b0d944531b37d67cbd31c37f1a8a0f33e6bf6ea191a9a7"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 27,
+        "detectorId": "W4-D05-R1-CURRENT-PROVIDER-STATE",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r1-commercial-integrity",
+        "exitCode": 0,
+        "family": "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
+        "invocation": [
+          "node --test R1-commercial-integrity"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "0c1f7669967ad2919e2872b4259d979d4790b18f13a31b4f986ea69804c9341b",
+        "sourceInvariant": "Dispatch and response acceptance revalidate exact trusted current provider state.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "44ee3212d87f36e3eb4407d02c219a92d7ab30f114e907e0a8fbcf91d9ee4b1f"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Bypass current trusted provider-state revalidation before response acceptance.",
+      "detectorId": "W4-D05-R1-CURRENT-PROVIDER-STATE",
+      "detectorOutcome": {
+        "assertionCount": 27,
+        "detectorId": "W4-D05-R1-CURRENT-PROVIDER-STATE",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r1-commercial-integrity",
+        "exitCode": 1,
+        "family": "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
+        "invocation": [
+          "node --test R1-commercial-integrity"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "9e12ce1d6c2ed0372caf6d28b4d05c1fc73dcb48a1ac0c9afc0bd1ae23b633af",
+        "sourceInvariant": "Dispatch and response acceptance revalidate exact trusted current provider state.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M05-BYPASS-RESPONSE-STATE-REVALIDATION",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2..1446ecce 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -852,7 +852,7 @@ export function executeCommercialTutorInvocation(\n         validateCurrentCommercialExecutionEligibility(\n           responseEligibility,\n           responseEligibilityRequest,\n-        ) === null\n+        ) === null && false\n       ) {\n         return {\n           status: \"static-fallback\",\n",
+      "family": "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
+      "mutationId": "W4-M05-BYPASS-RESPONSE-STATE-REVALIDATION",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M05 current trusted provider-state revalidation bypass",
+      "sourcePaths": [
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "c6e35d122078cfd9a89ca1e0ef298113f2f4ecb3ec8af605c45351f2d7e8f1be"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 27,
+        "detectorId": "W4-D06-R1-BOUNDS-SINGLE-USE",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r1-commercial-integrity",
+        "exitCode": 0,
+        "family": "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
+        "invocation": [
+          "node --test R1-commercial-integrity"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "0c1f7669967ad2919e2872b4259d979d4790b18f13a31b4f986ea69804c9341b",
+        "sourceInvariant": "Policy collections are bounded and ALREADY_CLAIMED physical attempts never dispatch again.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts": "44ee3212d87f36e3eb4407d02c219a92d7ab30f114e907e0a8fbcf91d9ee4b1f"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Permit ALREADY_CLAIMED to continue into physical provider dispatch.",
+      "detectorId": "W4-D06-R1-BOUNDS-SINGLE-USE",
+      "detectorOutcome": {
+        "assertionCount": 27,
+        "detectorId": "W4-D06-R1-BOUNDS-SINGLE-USE",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r1-commercial-integrity",
+        "exitCode": 1,
+        "family": "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
+        "invocation": [
+          "node --test R1-commercial-integrity"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "ae3eda3296961e87cfae49c0bb49e423be2278e86103e53ea4c0996c620e5b1a",
+        "sourceInvariant": "Policy collections are bounded and ALREADY_CLAIMED physical attempts never dispatch again.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M06-ALLOW-ALREADY-CLAIMED-DISPATCH",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\nindex 092e15d2..866a8b09 100644\n--- a/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n+++ b/adaptive-tutor/core/v3/commercial-operation/orchestrate.ts\n@@ -786,7 +786,7 @@ export function executeCommercialTutorInvocation(\n     } catch {\n       break;\n     }\n-    if (dispatchClaim !== \"CLAIMED\") break;\n+    if (dispatchClaim === \"CONFLICT\") break;\n     providerCalls += 1;\n     let transportResult: CommercialProviderTransportResult;\n     try {\n",
+      "family": "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
+      "mutationId": "W4-M06-ALLOW-ALREADY-CLAIMED-DISPATCH",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M06 claimPhysicalAttemptDispatch / ALREADY_CLAIMED enforcement bypass",
+      "sourcePaths": [
+        "adaptive-tutor/core/v3/commercial-operation/orchestrate.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/core/v3/multimodal/projection.ts": "c1528bbdb5f60671aab126d81d4a8f72acfa08c14c59502def895b81ea018b3b"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 74,
+        "detectorId": "W4-D07-PRIVACY-CURRENT-CANARY",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-07-privacy-retention",
+        "exitCode": 0,
+        "externalBaselineOwner": "W4-R8",
+        "family": "PRIVACY_RETENTION_MINIMIZATION",
+        "invocation": [
+          "node $TSC -p adversarial/v4/privacy-retention/tsconfig.json",
+          "node adversarial/v4/privacy-retention/.dist/adversarial/v4/privacy-retention/certify.js"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "da411e48aa7fe2000625858ba70351e172b2fd8cb00f2966c5369a5e3b50c83c",
+        "sourceInvariant": "Forbidden raw fields and synthetic canaries cannot enter any durable projection.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/core/v3/multimodal/projection.ts": "e5a8c626caf1554c6696023fa722dc70dad5282f28233e5b24f7c05a053c9500"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Project a forbidden raw transcript canary into durable captionRef.",
+      "detectorId": "W4-D07-PRIVACY-CURRENT-CANARY",
+      "detectorOutcome": {
+        "assertionCount": 0,
+        "detectorId": "W4-D07-PRIVACY-CURRENT-CANARY",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-07-privacy-retention",
+        "exitCode": 1,
+        "externalBaselineOwner": "W4-R8",
+        "family": "PRIVACY_RETENTION_MINIMIZATION",
+        "invocation": [
+          "node $TSC -p adversarial/v4/privacy-retention/tsconfig.json",
+          "node adversarial/v4/privacy-retention/.dist/adversarial/v4/privacy-retention/certify.js"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "6d8d7a1aba1e12c951a519087aa699d1f1581b9d85f23034da70a48a788585a0",
+        "sourceInvariant": "Forbidden raw fields and synthetic canaries cannot enter any durable projection.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M07-PERSIST-RAW-TRANSCRIPT",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/multimodal/projection.ts b/adaptive-tutor/core/v3/multimodal/projection.ts\nindex 3f9fd1af..68f3bd45 100644\n--- a/adaptive-tutor/core/v3/multimodal/projection.ts\n+++ b/adaptive-tutor/core/v3/multimodal/projection.ts\n@@ -133,7 +133,9 @@ export function projectDurableMultimodalEvidence(\n     outcome: source.outcome,\n     assistanceLevel: source.assistanceLevel,\n     observedAt: source.observedAt,\n-    captionRef: source.presentation.caption.captionRef,\n+    captionRef: source.transient?.transcriptText === undefined\n+      ? source.presentation.caption.captionRef\n+      : `transcript:${source.transient.transcriptText}`,\n     captionAvailability: \"available\",\n     transcriptPersisted: false,\n     rawMediaPersisted: false,\n",
+      "family": "PRIVACY_RETENTION_MINIMIZATION",
+      "mutationId": "W4-M07-PERSIST-RAW-TRANSCRIPT",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M07 forbidden synthetic canary/raw field durable projection",
+      "sourcePaths": [
+        "adaptive-tutor/core/v3/multimodal/projection.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/core/v3/multimodal/policy.ts": "270fa7361cc6e91a5202447d2bbb68024040d2b916ef65d4ad21c5045c34dec5"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 28,
+        "detectorId": "W4-D08-R2-R5-MULTIMODAL-LINEAGE",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r2-multimodal-boundary;w4-r5-presentation-lineage",
+        "exitCode": 0,
+        "family": "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
+        "invocation": [
+          "node --test R2-multimodal-boundary R5-presentation-lineage"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "afce6efa1dd69c8d7158b2f7d251616b67fd9ea2dbb1136f0dc5495e8a41992f",
+        "sourceInvariant": "Caption, digest, provenance, capability, and commercial scope must match before presentation acceptance.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/core/v3/multimodal/policy.ts": "e5089d3768cf1af1501428b0de7e6b0f1c711d06b9b32d6d7520ccc51073bf6b"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Remove reviewed-visual digest equality from trusted media binding.",
+      "detectorId": "W4-D08-R2-R5-MULTIMODAL-LINEAGE",
+      "detectorOutcome": {
+        "assertionCount": 28,
+        "detectorId": "W4-D08-R2-R5-MULTIMODAL-LINEAGE",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r2-multimodal-boundary;w4-r5-presentation-lineage",
+        "exitCode": 1,
+        "family": "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
+        "invocation": [
+          "node --test R2-multimodal-boundary R5-presentation-lineage"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "75cd693554e78f29423cc49a7f27cc5895fd90643598ac819042a473d836ab3a",
+        "sourceInvariant": "Caption, digest, provenance, capability, and commercial scope must match before presentation acceptance.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M08-REMOVE-VISUAL-DIGEST-BINDING",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/multimodal/policy.ts b/adaptive-tutor/core/v3/multimodal/policy.ts\nindex 99b7b18b..113d9fe3 100644\n--- a/adaptive-tutor/core/v3/multimodal/policy.ts\n+++ b/adaptive-tutor/core/v3/multimodal/policy.ts\n@@ -108,7 +108,6 @@ function sameVisual(\n ): boolean {\n   return left.visualRef === right.visualRef\n     && left.visualKind === right.visualKind\n-    && left.contentDigest === right.contentDigest\n     && left.mimeType === right.mimeType\n     && left.reviewStatus === right.reviewStatus\n     && left.reviewRef === right.reviewRef\n",
+      "family": "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
+      "mutationId": "W4-M08-REMOVE-VISUAL-DIGEST-BINDING",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M08 load-bearing digest validation removal",
+      "sourcePaths": [
+        "adaptive-tutor/core/v3/multimodal/policy.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs": "c3ffc4caeb258d26aaf322cae0271ccc33fc1febc2bf5ca142a578d28ecb0f62"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 10,
+        "detectorId": "W4-D09-MULTILINGUAL-HARD-RUBRIC",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-09-multilingual-eval",
+        "exitCode": 0,
+        "family": "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION",
+        "invocation": [
+          "node --test adversarial/v4/multilingual-eval/tests/certification.test.mjs"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "cedd78fe749f6642ef768cd5570cff530a474ce03d9fcda64c31d8cce063c218",
+        "sourceInvariant": "Answer, authority, and safety failures are hard failures that aggregate quality cannot compensate.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs": "2595e2a1c580f4effe075c43f1185cd5e66aad2459fd7dc67e7b48064185c47b"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json",
+        "node --check adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Allow a hard multilingual semantic failure to avoid the hard-gate decision.",
+      "detectorId": "W4-D09-MULTILINGUAL-HARD-RUBRIC",
+      "detectorOutcome": {
+        "assertionCount": 10,
+        "detectorId": "W4-D09-MULTILINGUAL-HARD-RUBRIC",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-09-multilingual-eval",
+        "exitCode": 1,
+        "family": "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION",
+        "invocation": [
+          "node --test adversarial/v4/multilingual-eval/tests/certification.test.mjs"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "dad62ebb0a6f9002b92c484e2e00023c8fce458d4ba4339cec61e867f7a9b727",
+        "sourceInvariant": "Answer, authority, and safety failures are hard failures that aggregate quality cannot compensate.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M09-COMPENSATE-HARD-MULTILINGUAL-FAILURE",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs b/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs\nindex c987af81..9a925493 100644\n--- a/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs\n+++ b/adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs\n@@ -212,7 +212,7 @@ export function scoreCandidate(testCase, unvalidatedCandidate) {\n       leakedTokens: stableSort(leaked),\n       forbiddenSafetyActions: stableSort(forbiddenSafetyActions),\n     },\n-    decision: hardFailures.length > 0\n+    decision: hardFailures.length > 0 && total < 0\n       ? \"FAIL_HARD_GATE\"\n       : referenceMismatches.length > 0\n         ? \"FAIL_REFERENCE_MISMATCH\"\n",
+      "family": "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION",
+      "mutationId": "W4-M09-COMPENSATE-HARD-MULTILINGUAL-FAILURE",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M09 hard semantic violation compensation",
+      "sourcePaths": [
+        "adaptive-tutor/adversarial/v4/multilingual-eval/src/scorer.mjs"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts": "a25af111c1ec6081f29779f30d2a811210fbd3fe9b650b5ccd22070acef84e4d"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 22,
+        "detectorId": "W4-D10-R3-PARENT-GUARDIAN",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r3-parent-guardian",
+        "exitCode": 0,
+        "family": "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
+        "invocation": [
+          "node --test R3-parent-guardian"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "60495deca49fd3a5793bc8e9b6637dc1a5660c523206d5c7b34fc8303354af1a",
+        "sourceInvariant": "Reports require exact guardian/consent scope and retain truthful Study transition state.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts": "dd6ac01219da844f538143b8093bc90167e52863ebcba17785ccf8883908e24f"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Remove learner binding from guardian authorization scope matching.",
+      "detectorId": "W4-D10-R3-PARENT-GUARDIAN",
+      "detectorOutcome": {
+        "assertionCount": 22,
+        "detectorId": "W4-D10-R3-PARENT-GUARDIAN",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/repairs/w4-r3-parent-guardian",
+        "exitCode": 1,
+        "family": "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
+        "invocation": [
+          "node --test R3-parent-guardian"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "2b96922038aecf9ab8bc4654fe15395f17cfdf5eba34df40f7a37dbfa0fa8ab8",
+        "sourceInvariant": "Reports require exact guardian/consent scope and retain truthful Study transition state.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M10-REMOVE-GUARDIAN-LEARNER-BINDING",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts b/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts\nindex 3f1b37ac..2223e323 100644\n--- a/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts\n+++ b/adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts\n@@ -767,7 +767,6 @@ function authorizationMatchesScope(\n   if (\n     authorization.guardianRef !== reportScope.guardianRef ||\n     authorization.householdScopeRef !== reportScope.householdScopeRef ||\n-    authorization.learnerScopeRef !== reportScope.selectedLearnerRef ||\n     authorization.scopeKind !== reportScope.scopeKind\n   ) {\n     return false;\n@@ -859,7 +858,6 @@ function authorizationMatchesTrustedAuthority(\n     submitted.policyRevisionRef === trusted.policyRevisionRef &&\n     submitted.guardianRef === trusted.guardianRef &&\n     submitted.householdScopeRef === trusted.householdScopeRef &&\n-    submitted.learnerScopeRef === trusted.learnerScopeRef &&\n     submitted.authorizationRevisionRef === trusted.authorizationRevisionRef &&\n     submitted.currentAuthorizationRevisionRef ===\n       trusted.currentAuthorizationRevisionRef &&\n",
+      "family": "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
+      "mutationId": "W4-M10-REMOVE-GUARDIAN-LEARNER-BINDING",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M10 consent/guardian binding requirement removal",
+      "sourcePaths": [
+        "adaptive-tutor/study-engine/tutor-v2/parent-reporting/parent-report.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/certification/v4/model-drift/src/identity.ts": "f081d207fab9c914243a9a6c26701adc10cf48e63e398f3fe4e941336192cb76"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 21,
+        "detectorId": "W4-D11-MODEL-DRIFT-IDENTITY",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-11-model-drift",
+        "exitCode": 0,
+        "family": "MODEL_DRIFT_CERTIFICATION_IDENTITY",
+        "invocation": [
+          "node certification/v4/model-drift/scripts/run-compiled.mjs"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "ea74e0c74110a650a1b0794b839323e905edd51b068d4d282a80ad19a4c54bf7",
+        "sourceInvariant": "Any model revision or configuration identity drift invalidates certification.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/certification/v4/model-drift/src/identity.ts": "a40b1810690af826bf65cb1055a2d1d6e43b76e7c34279d99a4ab05cb4e17db0"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Exclude model revision and configuration digest from changed certification identity.",
+      "detectorId": "W4-D11-MODEL-DRIFT-IDENTITY",
+      "detectorOutcome": {
+        "assertionCount": 21,
+        "detectorId": "W4-D11-MODEL-DRIFT-IDENTITY",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-11-model-drift",
+        "exitCode": 1,
+        "family": "MODEL_DRIFT_CERTIFICATION_IDENTITY",
+        "invocation": [
+          "node certification/v4/model-drift/scripts/run-compiled.mjs"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "16a50b680bc5156b5407fd477e8aac96f239f083b3b244e34355bebfac04fa31",
+        "sourceInvariant": "Any model revision or configuration identity drift invalidates certification.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M11-IGNORE-MODEL-CONFIG-DRIFT",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/certification/v4/model-drift/src/identity.ts b/adaptive-tutor/certification/v4/model-drift/src/identity.ts\nindex 9975e5ab..6bd4609a 100644\n--- a/adaptive-tutor/certification/v4/model-drift/src/identity.ts\n+++ b/adaptive-tutor/certification/v4/model-drift/src/identity.ts\n@@ -22,7 +22,11 @@ export function changedCertificationIdentityFields(\n   certified: CertificationIdentity,\n   observed: CertificationIdentity,\n ): readonly CertificationIdentityField[] {\n-  return CERTIFICATION_IDENTITY_FIELDS.filter((field) => certified[field] !== observed[field]);\n+  return CERTIFICATION_IDENTITY_FIELDS.filter((field) =>\n+    field !== \"modelRevisionRef\"\n+    && field !== \"configurationDigest\"\n+    && certified[field] !== observed[field]\n+  );\n }\n \n export function certificationIdentitiesEqual(\n",
+      "family": "MODEL_DRIFT_CERTIFICATION_IDENTITY",
+      "mutationId": "W4-M11-IGNORE-MODEL-CONFIG-DRIFT",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M11 modelRevision/configuration drift certification retention",
+      "sourcePaths": [
+        "adaptive-tutor/certification/v4/model-drift/src/identity.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/certification/v4/live-runner/src/runner.ts": "f6aa4d61dfa81e836d599d774f3e8e47254417235d0428658294b03d05ee2647"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 11,
+        "detectorId": "W4-D12-OFFLINE-CAMPAIGN-HARD-FAIL",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-12-live-cert-runner",
+        "exitCode": 0,
+        "family": "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL",
+        "invocation": [
+          "node --experimental-strip-types --test certification/v4/live-runner/tests/live-runner.test.ts"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "0a879eda587c7830d39afdd16ab674f7dc97bd5bf97237f245ed7791f16f0dbf",
+        "sourceInvariant": "The first hard violation fails and halts the offline campaign before further dispatch.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/certification/v4/live-runner/src/runner.ts": "417969f12ab366311176f0c1c6bb37252c8c7d171eea8f4e157706425021b489"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Continue campaign execution after recording a hard violation.",
+      "detectorId": "W4-D12-OFFLINE-CAMPAIGN-HARD-FAIL",
+      "detectorOutcome": {
+        "assertionCount": 11,
+        "detectorId": "W4-D12-OFFLINE-CAMPAIGN-HARD-FAIL",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-12-live-cert-runner",
+        "exitCode": 1,
+        "family": "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL",
+        "invocation": [
+          "node --experimental-strip-types --test certification/v4/live-runner/tests/live-runner.test.ts"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "a235d6537c595c1c826c6fef4c5627c858533ef182e7b67ccc7ecf74dc4d3a7f",
+        "sourceInvariant": "The first hard violation fails and halts the offline campaign before further dispatch.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M12-CONTINUE-AFTER-HARD-VIOLATION",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/certification/v4/live-runner/src/runner.ts b/adaptive-tutor/certification/v4/live-runner/src/runner.ts\nindex f35a5291..2b92ae77 100644\n--- a/adaptive-tutor/certification/v4/live-runner/src/runner.ts\n+++ b/adaptive-tutor/certification/v4/live-runner/src/runner.ts\n@@ -332,7 +332,6 @@ export async function runCertificationCampaign(input: {\n           reasonCodes: [...gate.reasonCodes],\n         })));\n         haltReason = \"hard-violation\";\n-        break campaignLoop;\n       }\n     }\n   }\n",
+      "family": "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL",
+      "mutationId": "W4-M12-CONTINUE-AFTER-HARD-VIOLATION",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M12 hard violation non-failing campaign continuation",
+      "sourcePaths": [
+        "adaptive-tutor/certification/v4/live-runner/src/runner.ts"
+      ]
+    },
+    {
+      "afterSha256": {
+        "adaptive-tutor/core/v3/index.ts": "30426a07a5a77e8686dcd047f9d54757ccfab8daa393c47a6d16cc7419beff41"
+      },
+      "baselineDetectorOutcome": {
+        "assertionCount": 9,
+        "detectorId": "W4-D13-PRODUCTION-SCOPED-SCANNER",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-13-supply-chain",
+        "exitCode": 0,
+        "family": "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
+        "invocation": [
+          "node scripts/tutor-v4/.dist/scripts/tutor-v4/certify-supply-chain.js"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "e1814e2eb5fa4071b664a1fe5a304e3fccd96e9991670ff5cc7e2f6ad4bfb73c",
+        "sourceInvariant": "Production Tutor foundation source contains no vendor, credential, endpoint, or deployment seam.",
+        "status": "PASS"
+      },
+      "beforeSha256": {
+        "adaptive-tutor/core/v3/index.ts": "607869c7c113fd7b51a2a59ebc4b88a9ede90dc4c4782c1fe5afa6494f1022fa"
+      },
+      "classification": "KILLED",
+      "cleanup": {
+        "worktreePruned": true,
+        "worktreeRemoved": true
+      },
+      "compileCommand": [
+        "node node_modules/typescript/bin/tsc -p scripts/tutor-v4/tsconfig.json"
+      ],
+      "compileExitCode": 0,
+      "compilerFailureUsedAsDetection": false,
+      "description": "Introduce a prohibited live vendor endpoint into scanned foundation source.",
+      "detectorId": "W4-D13-PRODUCTION-SCOPED-SCANNER",
+      "detectorOutcome": {
+        "assertionCount": 9,
+        "detectorId": "W4-D13-PRODUCTION-SCOPED-SCANNER",
+        "detectorOutcome": "EXECUTED",
+        "evidenceRef": "docs/study-tutor-v2/wave4/lanes/w4-13-supply-chain",
+        "exitCode": 1,
+        "family": "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
+        "invocation": [
+          "node scripts/tutor-v4/.dist/scripts/tutor-v4/certify-supply-chain.js"
+        ],
+        "missingPaths": [],
+        "nonCompensable": true,
+        "outputSha256": "c1ed0844d7952003983d0418582bc3f762afff9543ff2ee26f8594af0043685f",
+        "sourceInvariant": "Production Tutor foundation source contains no vendor, credential, endpoint, or deployment seam.",
+        "status": "FAIL"
+      },
+      "diffReference": "docs/study-tutor-v2/wave4/repairs/w4-r6-gate-integrity/CAMPAIGN-EVIDENCE.json#W4-M13-ADD-LIVE-VENDOR-ENDPOINT",
+      "exactSourceDiff": "diff --git a/adaptive-tutor/core/v3/index.ts b/adaptive-tutor/core/v3/index.ts\nindex 38b2cf74..86711dff 100644\n--- a/adaptive-tutor/core/v3/index.ts\n+++ b/adaptive-tutor/core/v3/index.ts\n@@ -1,3 +1,5 @@\n+export const W4_MUTANT_LIVE_ENDPOINT = \"https://api.openai.com/v1/responses\";\n+\n export * from \"./commercial-operation/index.js\";\n export * from \"./commercial-operation/orchestrate.js\";\n export * from \"./contracts/index.js\";\n",
+      "family": "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
+      "mutationId": "W4-M13-ADD-LIVE-VENDOR-ENDPOINT",
+      "mutationKind": "implementation",
+      "rewriteApplied": true,
+      "semanticShape": "M13 prohibited vendor/credential/live-endpoint foundation reference",
+      "sourcePaths": [
+        "adaptive-tutor/core/v3/index.ts"
+      ]
+    }
+  ],
+  "serialExecution": true,
+  "session": "STUDY-TUTOR-V2-W4-16",
+  "survived": 0
+}

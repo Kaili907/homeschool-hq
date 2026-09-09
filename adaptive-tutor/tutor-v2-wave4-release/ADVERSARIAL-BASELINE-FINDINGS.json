@@ -1,0 +1,36 @@
+{
+  "evidenceVersion": 1,
+  "findings": [
+    {
+      "blockerAssertions": 19,
+      "classification": "BASELINE_ADVERSARIAL_FINDING",
+      "lane": "W4-03",
+      "originalEvidence": "docs/study-tutor-v2/wave4/lanes/w4-03-scope-isolation"
+    },
+    {
+      "blockerAssertions": 5,
+      "classification": "BASELINE_ADVERSARIAL_FINDING",
+      "lane": "W4-05",
+      "originalEvidence": "docs/study-tutor-v2/wave4/lanes/w4-05-provider-chaos"
+    },
+    {
+      "blockerAssertions": 2,
+      "classification": "BASELINE_ADVERSARIAL_FINDING",
+      "lane": "W4-06",
+      "originalEvidence": "docs/study-tutor-v2/wave4/lanes/w4-06-resource-abuse"
+    },
+    {
+      "blockerAssertions": 7,
+      "classification": "BASELINE_ADVERSARIAL_FINDING",
+      "lane": "W4-08",
+      "originalEvidence": "docs/study-tutor-v2/wave4/lanes/w4-08-multimodal-fuzz"
+    },
+    {
+      "blockerAssertions": 5,
+      "classification": "BASELINE_ADVERSARIAL_FINDING",
+      "lane": "W4-10",
+      "originalEvidence": "docs/study-tutor-v2/wave4/lanes/w4-10-parent-guardian"
+    }
+  ],
+  "preservationRuling": "PASS_HISTORICAL_RED_EVIDENCE_PRESERVED_UNCHANGED"
+}

@@ -1,0 +1,36 @@
+{
+  "deferred": [
+    "production persistence for budgets, telemetry, replay, and dispatch claims",
+    "live provider credentials and transports",
+    "live pricing and availability feed",
+    "Parent Hub production UI",
+    "browser multimodal capture",
+    "vendor TTS/STT",
+    "production curriculum-registry adapter",
+    "deployment and commercial web security convergence",
+    "live stochastic model certification"
+  ],
+  "inherited": [
+    {
+      "code": "OBSOLETE_BROAD_PLATFORM_VALIDATOR",
+      "detail": "The inherited broad platform-boundary validator remains 18/19 because its obsolete rule flags accepted paths/generated output."
+    },
+    {
+      "code": "INHERITED_DEPENDENCY_ADVISORIES",
+      "detail": "Three inherited high advisories remain separately classified."
+    },
+    {
+      "code": "SESSION6_ARCHIVES_NOT_MOUNTED",
+      "detail": "Four frozen Session 6 archives remain unavailable; current executable bridge tests do not replace archive checksums."
+    },
+    {
+      "code": "WAVE2_OWNERSHIP_ALLOWLIST",
+      "detail": "The inherited Wave 2 wrapper reaches HOLD only because its pre-Wave-3 ownership allowlist rejects later accepted Wave 3 and Wave 4 paths; its current regressions and bridges pass."
+    },
+    {
+      "code": "WAVE1_TEMP_COPY_DEPENDENCIES",
+      "detail": "The inherited Wave 1 wrapper's isolated temporary copies cannot resolve the locally shared dependency tree; its 253/253 security convergence and 209/209 Study bridge suites pass before that environment-only failure."
+    }
+  ],
+  "limitationsVersion": 1
+}

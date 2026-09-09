@@ -1,0 +1,354 @@
+{
+  "$id": "BoundedCommercialProviderRequest",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "academicScope": {
+      "additionalProperties": false,
+      "properties": {
+        "conceptRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "courseRef": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            }
+          ]
+        },
+        "subjectRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "actionFamily": {
+      "anyOf": [
+        {
+          "const": "EXPLANATION",
+          "type": "string"
+        },
+        {
+          "const": "HINT",
+          "type": "string"
+        },
+        {
+          "const": "GUIDING_QUESTION",
+          "type": "string"
+        },
+        {
+          "const": "GROUNDED_EXAMPLE",
+          "type": "string"
+        },
+        {
+          "const": "PREREQUISITE_RECOMMENDATION",
+          "type": "string"
+        },
+        {
+          "const": "PARENT_SAFE_DRAFT",
+          "type": "string"
+        }
+      ]
+    },
+    "assessmentPhase": {
+      "anyOf": [
+        {
+          "const": "instruction-or-practice",
+          "type": "string"
+        },
+        {
+          "const": "active-graded-or-mastery-check",
+          "type": "string"
+        },
+        {
+          "const": "completed-assessment-review",
+          "type": "string"
+        },
+        {
+          "const": "non-graded-review",
+          "type": "string"
+        }
+      ]
+    },
+    "attemptEvidence": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "academicSignalCodes": {
+              "items": {
+                "anyOf": [
+                  {
+                    "const": "NO_ATTEMPT_EVIDENCE",
+                    "type": "string"
+                  },
+                  {
+                    "const": "ATTEMPT_INCORRECT",
+                    "type": "string"
+                  },
+                  {
+                    "const": "ATTEMPT_PARTIAL",
+                    "type": "string"
+                  },
+                  {
+                    "const": "ATTEMPT_CORRECT",
+                    "type": "string"
+                  },
+                  {
+                    "const": "MISCONCEPTION_IDENTIFIED",
+                    "type": "string"
+                  },
+                  {
+                    "const": "RECHECK_NEEDED",
+                    "type": "string"
+                  },
+                  {
+                    "const": "RECHECK_COMPLETED",
+                    "type": "string"
+                  },
+                  {
+                    "const": "ASSISTANCE_USED",
+                    "type": "string"
+                  }
+                ]
+              },
+              "maxItems": 8,
+              "minItems": 1,
+              "type": "array"
+            },
+            "assistanceLevel": {
+              "anyOf": [
+                {
+                  "const": "independent",
+                  "type": "string"
+                },
+                {
+                  "const": "light-hint",
+                  "type": "string"
+                },
+                {
+                  "const": "guided",
+                  "type": "string"
+                },
+                {
+                  "const": "reteach-required",
+                  "type": "string"
+                }
+              ]
+            },
+            "attemptCount": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "attemptOrdinal": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "attemptRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "completionSignal": {
+              "anyOf": [
+                {
+                  "const": "NOT_STARTED",
+                  "type": "string"
+                },
+                {
+                  "const": "IN_PROGRESS",
+                  "type": "string"
+                },
+                {
+                  "const": "COMPLETED",
+                  "type": "string"
+                }
+              ]
+            },
+            "misconceptionRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 4,
+              "type": "array"
+            },
+            "recheckSignal": {
+              "anyOf": [
+                {
+                  "const": "NOT_REQUESTED",
+                  "type": "string"
+                },
+                {
+                  "const": "REQUESTED",
+                  "type": "string"
+                },
+                {
+                  "const": "COMPLETED",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "required": [
+            "attemptOrdinal",
+            "attemptCount",
+            "assistanceLevel",
+            "academicSignalCodes",
+            "misconceptionRefs",
+            "completionSignal",
+            "recheckSignal"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "configurationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "disclosureBoundary": {
+      "const": "STUDY_DERIVED_STRUCTURED_EVIDENCE_ONLY",
+      "type": "string"
+    },
+    "groundingEvidence": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "contentDigest": {
+            "pattern": "^sha256:[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "groundingRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contentDigest"
+        ],
+        "type": "object"
+      },
+      "maxItems": 12,
+      "minItems": 1,
+      "type": "array"
+    },
+    "invocationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "learnerStagePolicyRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "logicalOperationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "presentationPolicyRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "presentationRequirement": {
+      "anyOf": [
+        {
+          "const": "TEXT_ONLY",
+          "type": "string"
+        },
+        {
+          "const": "REVIEWED_VISUAL_REFERENCE",
+          "type": "string"
+        }
+      ]
+    },
+    "providerPolicyRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "rawAttemptDisclosureAllowed": {
+      "const": false,
+      "type": "boolean"
+    },
+    "requestKind": {
+      "const": "bounded-commercial-provider-request",
+      "type": "string"
+    },
+    "requestVersion": {
+      "const": "study-tutor-v2.commercial-provider-request.v1",
+      "type": "string"
+    },
+    "reviewedContentEvidence": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "contentDigest": {
+            "pattern": "^sha256:[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "contentRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contentDigest"
+        ],
+        "type": "object"
+      },
+      "maxItems": 12,
+      "minItems": 1,
+      "type": "array"
+    },
+    "safetyPolicyRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "requestVersion",
+    "requestKind",
+    "academicScope",
+    "actionFamily",
+    "assessmentPhase",
+    "reviewedContentEvidence",
+    "groundingEvidence",
+    "presentationRequirement",
+    "disclosureBoundary",
+    "rawAttemptDisclosureAllowed"
+  ],
+  "title": "Bounded Commercial Provider Request",
+  "type": "object"
+}

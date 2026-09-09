@@ -1,0 +1,75 @@
+{
+  "$id": "TutorV2FailureOutcome",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actionCompatibilityId": {
+      "const": "manuel-academy.study-tutor-v2.action.v1",
+      "type": "string"
+    },
+    "actionSchemaVersion": {
+      "const": 1,
+      "type": "number"
+    },
+    "code": {
+      "anyOf": [
+        {
+          "const": "PROVIDER_UNAVAILABLE",
+          "type": "string"
+        },
+        {
+          "const": "PROVIDER_TIMEOUT",
+          "type": "string"
+        },
+        {
+          "const": "MALFORMED_RESPONSE",
+          "type": "string"
+        },
+        {
+          "const": "UNSUPPORTED_ACTION",
+          "type": "string"
+        }
+      ]
+    },
+    "compatibilityId": {
+      "const": "manuel-academy.study-tutor-v2.contracts.v2",
+      "type": "string"
+    },
+    "contractVersion": {
+      "const": "2.0.0",
+      "type": "string"
+    },
+    "envelope": {
+      "const": "tutor-failure",
+      "type": "string"
+    },
+    "interactionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "reasonRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "retryable": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "actionSchemaVersion",
+    "compatibilityId",
+    "actionCompatibilityId",
+    "envelope",
+    "interactionRef",
+    "code",
+    "retryable",
+    "reasonRef"
+  ],
+  "title": "Tutor V2 Failure Outcome",
+  "type": "object"
+}

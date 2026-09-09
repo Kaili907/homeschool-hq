@@ -1,0 +1,37 @@
+TAP version 13
+# Subtest: selects a bounded provider-independent immutable attempt
+not ok 1 - selects a bounded provider-independent immutable attempt
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  location: '/private$MUTANT_ROOT/adaptive-tutor/scripts/tutor-v3/.dist/core/v3/routing/provider-routing/provider-routing.test.js:141:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + 'model-profile:alpha'
+    - 'model-revision:alpha-2026-08-r1'
+             ^
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'model-revision:alpha-2026-08-r1'
+  actual: 'model-profile:alpha'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private$MUTANT_ROOT/adaptive-tutor/scripts/tutor-v3/.dist/core/v3/routing/provider-routing/provider-routing.test.js:150:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms <duration>

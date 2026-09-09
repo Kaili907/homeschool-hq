@@ -1,0 +1,128 @@
+{
+  "accepted": {
+    "OWNERSHIP_ADJUDICATION": "f79271ac2cc57e9128ee61774a4f082c35c6fa77",
+    "W1_01": "9e30d59f64184e89db493a004e738e859b06a686",
+    "W1_02": "660de6a445ca66b8de5136a6ee388804346dce4b",
+    "W1_03": "ee6cc83fdaa43fe733d05abefdaedffe3d0febf9",
+    "W1_04": "befb91bb2321aec0449d2d8e613619a592feb76c",
+    "W1_05": "4a8bded7bc0caf5ff647dae814e011d20c8ae5bf",
+    "W1_06": "b93765552d60a88ac7691ca7840dfc2ae3a23e77",
+    "W1_07": "9b959ab7e8176ebccb4fd3ca7b54bf5584602b35",
+    "W1_08": "31d5609527f75a11d9d3017ce0f07b3ec1c99b88"
+  },
+  "acceptedRepairs": {
+    "APPROVAL_DECISION_STRUCTURAL_VALIDATION_REPAIR": {
+      "branch": "origin/mac/tutor-v2-w1-approval-decision-repair-r4",
+      "directParent": "6f90d351d759c697788b6489bd465d954ce52184",
+      "sha": "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841"
+    },
+    "PROVIDER_BOUNDARY_REPAIR": {
+      "branch": "origin/mac/tutor-v2-w1-provider-boundary-repair-r1",
+      "directParent": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
+      "sha": "d7aa9720b8096205acc0b63d21a895d8fc16de6f"
+    },
+    "REVIEWED_CONTENT_PRIVACY_PROVENANCE_REPAIR": {
+      "branch": "origin/mac/tutor-v2-w1-privacy-provenance-repair-r3",
+      "directParent": "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+      "sha": "cf7ee7265c812a86b708b0e8cf2a33e6370e753d"
+    },
+    "STRUCTURAL_ANTI_ANSWER_REPAIR": {
+      "branch": "origin/mac/tutor-v2-w1-anti-answer-repair-r2",
+      "directParent": "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+      "sha": "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a"
+    }
+  },
+  "immutableLearnerBaseline": "7baf8dfbc27168708ed4cf504285a1838d7345f6",
+  "product": "Manuel Academy Study Tutor V2",
+  "provenanceVersion": 5,
+  "reconvergenceHistory": {
+    "W1_09R2": {
+      "acceptedAsWave1Release": false,
+      "branch": "origin/mac/tutor-v2-w1-reconvergence-r2",
+      "independentRuling": "W1_10R2_HOLD_LEXICAL_ANTI_ANSWER_BOUNDARY",
+      "sha": "2c8716ed5db5bb824fc92533615295f0b163f7b2"
+    },
+    "W1_09R3": {
+      "acceptedAsWave1Release": false,
+      "branch": "mac/tutor-v2-w1-reconvergence-r3",
+      "independentRuling": "W1_10R3_HOLD_LEXICAL_PRIVACY_BOUNDARY",
+      "session": "STUDY-TUTOR-V2-W1-09R3",
+      "sha": "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+      "startingRepairSha": "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a"
+    },
+    "W1_09R4": {
+      "acceptedAsWave1Release": false,
+      "branch": "mac/tutor-v2-w1-reconvergence-r4",
+      "session": "STUDY-TUTOR-V2-W1-09R4 — Final Wave 1 Privacy Provenance Reconvergence",
+      "sha": "6f90d351d759c697788b6489bd465d954ce52184",
+      "startingRepairSha": "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
+      "status": "SUPERSEDED_BY_APPROVAL_DECISION_REPAIR"
+    },
+    "W1_09R5": {
+      "acceptedAsWave1Release": false,
+      "branch": "mac/tutor-v2-w1-reconvergence-r5",
+      "session": "STUDY-TUTOR-V2-W1-09R5 — Final Wave 1 Approval-Decision Reconvergence",
+      "startingRepairSha": "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+      "status": "CANDIDATE_REQUIRES_W1_10R5_FINAL_INDEPENDENT_REREVIEW"
+    },
+    "W1_10R4_ATTEMPTED_REVIEW": {
+      "acceptedAsAcceptanceEvidence": false,
+      "canonicalR4BranchModified": false,
+      "custodyStatus": "INVALID",
+      "reason": "The detached reviewer modified the canonical detached review worktree, so custody was broken and that review cannot serve as Wave 1 acceptance evidence.",
+      "repairedBy": "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+      "reproducedBlocker": "MALFORMED_APPROVAL_DECISION_NORMALIZED_INTO_VALID_LOOKING_APPROVAL_BEFORE_VALIDATION",
+      "reproducedBlockerBeforeTermination": true,
+      "reproducedBlockerWasReal": true
+    }
+  },
+  "recordedW1_08IntegrationCommits": {
+    "W1_03": "4cf4bda1c99d0490136f3e53d9c412050166b9ff",
+    "W1_04": "7a1a12cfe36d6c19657977a07d05f8ecfbff9c5e",
+    "W1_05": "c7156bc34baccb06dd911519fc29c45bd5782223",
+    "W1_06": "42c91482102842d3c22cde489dbbf8f73124c17e",
+    "W1_07": "5a6a191c922c42c5320faf49e2c97f89ada8093e"
+  },
+  "rejectedCandidates": {
+    "W1_09": {
+      "acceptedAsWave1Release": false,
+      "independentRuling": "W1_10_HOLD_PROVIDER_BOUNDARY",
+      "sha": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d"
+    },
+    "W1_09R2": {
+      "acceptedAsWave1Release": false,
+      "independentRuling": "W1_10R2_HOLD_SEMANTIC_ANTI_ANSWER_BYPASS",
+      "sha": "2c8716ed5db5bb824fc92533615295f0b163f7b2"
+    },
+    "W1_09R3": {
+      "acceptedAsWave1Release": false,
+      "independentRuling": "W1_10R3_HOLD_LEXICAL_PRIVACY_BOUNDARY",
+      "sha": "7435f820dc9e141d8a113b4d7f853044e36ba51d"
+    }
+  },
+  "stablePatchIds": {
+    "W1_03": "ea279d423d6e36928ed4bb03946c6839aa283bd2",
+    "W1_04": "df59c210e417c3d14fa0c63d841f7750e1d6be14",
+    "W1_05": "8e389743994665e5608b8c5b3c2cb5665f7005b5",
+    "W1_06": "2a7d297c95cb4521fc0b75ade8648bc3f37dec09",
+    "W1_07": "c3c29d0d4a4482d666112c8952ffa26499fa9923"
+  },
+  "verification": {
+    "acceptedLaneTreesEquivalent": true,
+    "approvalDecisionStructuralGatesPermanent": true,
+    "approvalDecisionStructuralRepairPresent": true,
+    "canonicalRemoteTipsExact": true,
+    "ownershipAdjudicationPresent": true,
+    "providerBoundaryRepairPresent": true,
+    "providerMutationGatesPermanent": true,
+    "regexNeutralizedPrivacyValidationRequired": true,
+    "releaseSecurityOwnershipCrossed": false,
+    "reviewedContentPrivacyGatesPermanent": true,
+    "reviewedContentPrivacyRepairPresent": true,
+    "structuralAntiAnswerGatesPermanent": true,
+    "structuralAntiAnswerRepairPresent": true,
+    "w1_10R4ReproducedBlockerWasRealAndRepaired": true,
+    "w1_10R4ReviewCustodyInvalidated": true
+  },
+  "wave": "Wave 1 Foundation"
+}

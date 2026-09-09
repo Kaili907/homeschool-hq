@@ -1,0 +1,111 @@
+TAP version 13
+# Subtest: projects exact commercial attempt and reservation lineage
+not ok 1 - projects exact commercial attempt and reservation lineage
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  location: '/private$MUTANT_ROOT/adaptive-tutor/scripts/tutor-v3/.dist/core/v3/telemetry/telemetry.test.js:68:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    ... Skipped lines
+
+      {
+        actionFamily: 'hint',
+        attemptIndex: 0,
+        authorityScope: 'commercial-operations-only',
+        cacheClass: 'miss',
+    ...
+        outputTokenCount: 45,
+    +   physicalAttemptRef: 'logical-operation:telemetry-001',
+    -   physicalAttemptRef: 'physical-attempt:telemetry-001-primary',
+        providerPolicyEvidenceRef: 'provider-policy-evidence:commercial-r7',
+        providerPolicyRevisionRef: 'provider-policy-revision:commercial-r7',
+        providerRef: 'provider:opaque-001',
+        reasonCode: 'COMPLETED',
+        reservationRef: 'reservation:telemetry-001',
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    contractVersion: '3.1.0'
+    eventKind: 'tutor-commercial-operation'
+    eventRef: 'event:tutor-operation-001'
+    logicalOperationRef: 'logical-operation:telemetry-001'
+    physicalAttemptRef: 'physical-attempt:telemetry-001-primary'
+    reservationRef: 'reservation:telemetry-001'
+    routeRef: 'route:telemetry-primary-r1'
+    providerRef: 'provider:opaque-001'
+    modelRef: 'model:opaque-001'
+    modelRevisionRef: 'model-revision:opaque-001-r7'
+    configurationDigest: 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    capabilityProfileRevisionRef: 'capability-profile:opaque-001-r4'
+    capabilityProfileDigest: 'sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+    providerPolicyRevisionRef: 'provider-policy-revision:commercial-r7'
+    providerPolicyEvidenceRef: 'provider-policy-evidence:commercial-r7'
+    attemptIndex: 0
+    role: 'primary'
+    actionFamily: 'hint'
+    routeClass: 'hosted-standard'
+    inputTokenCount: 120
+    outputTokenCount: 45
+    latencyMs: 731
+    costMicros: '1250'
+    cacheClass: 'miss'
+    fallbackClass: 'none'
+    outcome: 'success'
+    reasonCode: 'COMPLETED'
+    authorityScope: 'commercial-operations-only'
+    instructionalUseAllowed: false
+    studyAuthority: false
+    studyMutationAllowed: false
+  actual:
+    contractVersion: '3.1.0'
+    eventKind: 'tutor-commercial-operation'
+    eventRef: 'event:tutor-operation-001'
+    logicalOperationRef: 'logical-operation:telemetry-001'
+    physicalAttemptRef: 'logical-operation:telemetry-001'
+    reservationRef: 'reservation:telemetry-001'
+    routeRef: 'route:telemetry-primary-r1'
+    providerRef: 'provider:opaque-001'
+    modelRef: 'model:opaque-001'
+    modelRevisionRef: 'model-revision:opaque-001-r7'
+    configurationDigest: 'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    capabilityProfileRevisionRef: 'capability-profile:opaque-001-r4'
+    capabilityProfileDigest: 'sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+    providerPolicyRevisionRef: 'provider-policy-revision:commercial-r7'
+    providerPolicyEvidenceRef: 'provider-policy-evidence:commercial-r7'
+    attemptIndex: 0
+    role: 'primary'
+    actionFamily: 'hint'
+    routeClass: 'hosted-standard'
+    inputTokenCount: 120
+    outputTokenCount: 45
+    latencyMs: 731
+    costMicros: '1250'
+    cacheClass: 'miss'
+    fallbackClass: 'none'
+    outcome: 'success'
+    reasonCode: 'COMPLETED'
+    authorityScope: 'commercial-operations-only'
+    instructionalUseAllowed: false
+    studyAuthority: false
+    studyMutationAllowed: false
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private$MUTANT_ROOT/adaptive-tutor/scripts/tutor-v3/.dist/core/v3/telemetry/telemetry.test.js:70:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms <duration>

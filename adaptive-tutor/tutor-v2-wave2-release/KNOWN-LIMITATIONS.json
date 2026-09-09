@@ -1,0 +1,47 @@
+{
+  "candidate": [
+    {
+      "code": "FINAL_INDEPENDENT_REREVIEW_REQUIRED",
+      "detail": "Wave 2 remains incomplete until W2-10R5 detached review of the exact final candidate SHA."
+    },
+    {
+      "code": "REFERENCE_REPLAY_LEDGER_ONLY",
+      "detail": "The included replay ledger is in-memory test/reference infrastructure; durable production persistence is intentionally absent."
+    },
+    {
+      "code": "REFERENCE_ONLY_REVIEWED_CONTENT",
+      "detail": "Composition returns reviewed content references and reviewed Parent copy; no learner-facing production delivery path is wired."
+    },
+    {
+      "code": "NO_LIVE_MODEL_CERTIFICATION",
+      "detail": "No live model or commercial web runtime certification was performed."
+    },
+    {
+      "code": "WAVE3_PROVIDER_HARDENING",
+      "detail": "Broad lower-level provider raw-attempt contract width remains a Wave 3 hardening requirement; accepted Wave 1 supported routes reject current learner attempts before provider execution."
+    },
+    {
+      "code": "EXTERNAL_STUDY_AUTHORITY_PORT_SEPARATE",
+      "detail": "The verified learner-line Study progression authority repair is a separate integration artifact and is not contained in this Tutor candidate."
+    }
+  ],
+  "inherited": [
+    {
+      "code": "OBSOLETE_BROAD_PLATFORM_VALIDATOR",
+      "detail": "The broad legacy validator remains 18/19 because its platform-boundary substring rule flags accepted authority paths and generated output."
+    },
+    {
+      "code": "SESSION6_ARCHIVES_NOT_MOUNTED",
+      "detail": "Four external Session 6 archives were not mounted; the reconstructed frozen source built and 35 executable Study Core Bridge tests passed, while one archive checksum test skipped."
+    },
+    {
+      "code": "INHERITED_DEPENDENCY_ADVISORIES",
+      "detail": "Three existing high advisories affect @playwright/test, playwright, and nanoid in unchanged Study runtime manifests."
+    },
+    {
+      "code": "NON_SELF_REFERENTIAL_CANDIDATE_SHA",
+      "detail": "As in Wave 1, the exact final candidate SHA is recorded after commit in the session return rather than self-referenced inside checksummed generated artifacts, preserving deterministic regeneration."
+    }
+  ],
+  "limitationsVersion": 1
+}

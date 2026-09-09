@@ -1,0 +1,31 @@
+{
+  "evidenceVersion": 1,
+  "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
+  "hardGateFamilies": {
+    "additionalPrivacyProvenance": 21,
+    "approvalAuthorityAttacks": 10,
+    "freeFormOutputProvenance": 15,
+    "fullReviewedContentPrivacySuite": 78,
+    "historicalPrivacyBlockers": 16,
+    "structuredControlPrivacy": 16
+  },
+  "invariants": {
+    "CROSS_CHILD_REVIEW_APPROVAL_REUSE_ALLOWED": false,
+    "LEXICAL_PRIVACY_MATCHING_IS_DEFENSE_IN_DEPTH_ONLY": true,
+    "PRIVACY_SECURITY_REQUIRES_REVIEWED_PROVENANCE": true,
+    "RAW_LEARNER_FREE_FORM_ATTEMPT_PROVIDER_DISCLOSURE_ALLOWED": false,
+    "UNREVIEWED_PROVIDER_FREE_FORM_LEARNER_OUTPUT_ALLOWED": false
+  },
+  "permanentHardGateTest": "tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.ts",
+  "providerReceivesApprovalAuthority": false,
+  "regexNeutralizedTemporaryCopyRequired": true,
+  "rejectedRepairApproach": "KEYWORD_EXPANSION_CANNOT_AUTHORIZE_ARBITRARY_FREE_FORM_CONTENT",
+  "reviewedContentAuthorityOwner": "Study Engine",
+  "reviewedContentPrivacyRepairSha": "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
+  "rootRule": "ARBITRARY_FREE_FORM_CONTENT_REQUIRES_TRUSTED_STUDY_REVIEWED_CONTENT_PROVENANCE",
+  "softScoreCompensationAllowed": false,
+  "w1_09R3Sha": "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+  "w1_10R3Blocker": "PRIVACY_SECURITY_DEPENDED_ON_FINITE_LEXICAL_PATTERNS",
+  "w1_10R3Ruling": "HOLD",
+  "WAVE_1_COMPLETE": false
+}

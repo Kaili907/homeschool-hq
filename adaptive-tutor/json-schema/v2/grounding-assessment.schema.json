@@ -1,0 +1,248 @@
+{
+  "$id": "TutorV2GroundingAssessment",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "claims": {
+          "items": {
+            "$id": "TutorV2ProviderGroundingClaim",
+            "additionalProperties": false,
+            "properties": {
+              "claimKind": {
+                "anyOf": [
+                  {
+                    "const": "direct-support",
+                    "type": "string"
+                  },
+                  {
+                    "const": "paraphrase-support",
+                    "type": "string"
+                  },
+                  {
+                    "const": "example-source",
+                    "type": "string"
+                  }
+                ]
+              },
+              "contentDigest": {
+                "pattern": "^sha256:[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "groundingRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "groundingRef",
+              "contentDigest",
+              "claimKind"
+            ],
+            "type": "object"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "status": {
+          "const": "grounded",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "claims"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "missingGroundingRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "status": {
+          "const": "missing-grounding",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "missingGroundingRefs"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "invalidClaims": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "groundingRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "reasonCode": {
+                "maxLength": 96,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "groundingRef",
+              "reasonCode"
+            ],
+            "type": "object"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "status": {
+          "const": "invalid-grounding",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "invalidClaims"
+      ],
+      "type": "object"
+    },
+    {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "const": "INSUFFICIENT_GROUNDED_CONTEXT",
+              "type": "string"
+            },
+            "invalidClaims": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "groundingRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  },
+                  "reasonCode": {
+                    "maxLength": 96,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "groundingRef",
+                  "reasonCode"
+                ],
+                "type": "object"
+              },
+              "maxItems": 12,
+              "type": "array"
+            },
+            "missingGroundingRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 12,
+              "minItems": 1,
+              "type": "array"
+            },
+            "status": {
+              "const": "insufficient-grounding",
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "code",
+            "missingGroundingRefs",
+            "invalidClaims"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "const": "INSUFFICIENT_GROUNDED_CONTEXT",
+              "type": "string"
+            },
+            "invalidClaims": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "groundingRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  },
+                  "reasonCode": {
+                    "maxLength": 96,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "groundingRef",
+                  "reasonCode"
+                ],
+                "type": "object"
+              },
+              "maxItems": 12,
+              "minItems": 1,
+              "type": "array"
+            },
+            "missingGroundingRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 0,
+              "type": "array"
+            },
+            "status": {
+              "const": "insufficient-grounding",
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "code",
+            "missingGroundingRefs",
+            "invalidClaims"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  ],
+  "title": "Tutor V2 Grounding Assessment"
+}

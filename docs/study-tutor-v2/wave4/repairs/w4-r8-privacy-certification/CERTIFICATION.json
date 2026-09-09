@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "study-tutor-v2.w4-current-privacy-certification.v1",
+  "session": "STUDY-TUTOR-V2-W4-R8",
+  "startingSha": "27bf8d544f60a7024d0b4c3f47e3d0ee71ee9b76",
+  "ruling": "STALE_CERTIFICATION_FIXTURE",
+  "legitimateDurableProjection": {
+    "status": "accepted",
+    "commercialExecutionScopeRef": "commercial-scope:w4-privacy",
+    "householdScopeRef": "household-scope:w4-privacy",
+    "learnerScopeRef": "learner-scope:w4-privacy",
+    "sessionRef": "session:w4-privacy",
+    "interactionRef": "interaction:w4-privacy",
+    "logicalOperationRef": "logical-operation:w4-privacy",
+    "conceptRef": "concept:w4-privacy",
+    "opportunityRef": "opportunity:w4-privacy",
+    "presentationRef": "presentation:w4-privacy",
+    "reviewedVisualDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "reviewedVisualKind": "image",
+    "reviewedVisualMimeType": "image/png",
+    "reviewedVisualStatus": "approved",
+    "reviewedVisualProvenanceRef": "provenance:w4-privacy-image",
+    "transcriptPersisted": false,
+    "rawMediaPersisted": false
+  },
+  "canaryCampaign": {
+    "categories": 14,
+    "scannedSurfaces": 41,
+    "directLeaks": 0,
+    "normalizedLeaks": 0,
+    "encodedLeaks": 0
+  },
+  "providerPolicy": {
+    "attacks": 6,
+    "failedClosed": 6,
+    "providerCalls": 0
+  },
+  "closedSchemaMutations": {
+    "attempted": 9,
+    "rejected": 9
+  },
+  "negativeControl": {
+    "mutation": "retain-raw-transcript-canary",
+    "detector": "direct-canary-scan",
+    "status": "DETECTED"
+  },
+  "regressions": {
+    "r2Multimodal": "PASS_30_OF_30",
+    "r5PresentationLineage": "PASS_20_OF_20",
+    "wave3HardGates": "PASS_18_OF_18",
+    "wave3Convergence": "PASS_33_OF_33",
+    "wave4Schema": "PASS_10_SCHEMAS_PLUS_INVENTORY"
+  },
+  "productCodeChanged": false,
+  "historicalW407ReportChanged": false,
+  "classification": "W4_PRIVACY_CERTIFICATION_REPAIR_READY_FOR_RECONVERGENCE"
+}

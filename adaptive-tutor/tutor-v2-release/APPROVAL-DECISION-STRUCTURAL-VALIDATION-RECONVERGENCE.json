@@ -1,0 +1,62 @@
+{
+  "approvalDecisionRepairSha": "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+  "evidenceVersion": 1,
+  "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
+  "hardGateFamilies": {
+    "accessorAttacks": 10,
+    "bridgeApprovalDecisionSelected": 41,
+    "compositionAttacks": 6,
+    "failureDataMinimization": 1,
+    "fullApprovalDecisionSuite": 67,
+    "hiddenKeyAttacks": 5,
+    "hostileReflectionAttacks": 3,
+    "hostileThenableAttacks": 2,
+    "legitimateDecisionRegression": 6,
+    "malformedValueShapes": 15,
+    "prototypeAttacks": 6,
+    "providerInputMalformedApproval": 8,
+    "providerOutputMalformedApproval": 4,
+    "rootInvariant": 1,
+    "w1_10R4HistoricalBlockers": 8
+  },
+  "invariants": {
+    "APPROVAL_ACCESSORS_ALLOWED": false,
+    "APPROVAL_CUSTOM_PROTOTYPES_ALLOWED": false,
+    "APPROVAL_DECISIONS_VALIDATED_BEFORE_NORMALIZATION": true,
+    "approvalGetterSideEffectCount": 0,
+    "MALFORMED_APPROVAL_FAILS_CLOSED": true,
+    "malformedApprovalContentPersisted": false,
+    "malformedApprovalPreventsProviderExecution": true,
+    "malformedApprovalWithholdsLearnerFacingProviderProse": true
+  },
+  "permanentHardGateTest": "tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.ts",
+  "providerReceivesApprovalAuthority": false,
+  "rejectedRepairApproach": "NORMALIZE_THEN_VALIDATE_CANNOT_CONTAIN_ACCESSOR_PROTOTYPE_OR_HIDDEN_KEY_FORGERY",
+  "reviewedContentAuthorityOwner": "Study Engine",
+  "rootRule": "UNTRUSTED_AUTHORITY_DECISIONS_MUST_BE_STRUCTURALLY_VALIDATED_BEFORE_NORMALIZATION_OR_PROPERTY_ACCESS",
+  "softScoreCompensationAllowed": false,
+  "validationPipeline": [
+    "reject null, non-object, and array candidates",
+    "require the prototype to be exactly Object.prototype",
+    "enumerate every own key with Reflect.ownKeys",
+    "reject symbol keys and any unexpected own key, enumerable or not",
+    "require own data descriptors for every expected field",
+    "reject accessor-backed and setter-backed fields without invoking them",
+    "read status, approvalRef, and code only from validated data descriptors",
+    "validate approvalRef with the canonical OpaqueReferenceSchema",
+    "construct a fresh frozen internal decision",
+    "treat any inspection exception as an authority failure"
+  ],
+  "w1_09R4Sha": "6f90d351d759c697788b6489bd465d954ce52184",
+  "w1_10R4Blocker": "MALFORMED_APPROVAL_DECISION_NORMALIZED_INTO_VALID_LOOKING_APPROVAL_BEFORE_VALIDATION",
+  "w1_10R4CustodyIncident": {
+    "acceptedAsAcceptanceEvidence": false,
+    "canonicalR4BranchModified": false,
+    "custodyStatus": "INVALID",
+    "finalIndependentRereviewStillRequired": "W1-10R5",
+    "reason": "The detached reviewer modified the canonical detached review worktree, so custody was broken and that review cannot serve as Wave 1 acceptance evidence.",
+    "reproducedBlockerBeforeTermination": true,
+    "reproducedBlockerWasReal": true
+  },
+  "WAVE_1_COMPLETE": false
+}

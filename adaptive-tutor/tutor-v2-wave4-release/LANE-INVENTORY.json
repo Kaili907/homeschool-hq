@@ -1,0 +1,84 @@
+{
+  "inventoryVersion": 1,
+  "laneCount": 13,
+  "lanes": [
+    {
+      "current": "PASS",
+      "family": "PROMPT_INJECTION_AUTHORITY_CONTAINMENT",
+      "historical": "READY_FOR_CONVERGENCE",
+      "lane": "W4-01"
+    },
+    {
+      "current": "PASS",
+      "family": "ACTIVE_ASSESSMENT_ANSWER_EXTRACTION_RESISTANCE",
+      "historical": "READY_FOR_CONVERGENCE",
+      "lane": "W4-02"
+    },
+    {
+      "current": "PASS_19_OF_19_CLOSED",
+      "family": "CROSS_SCOPE_COMMERCIAL_ISOLATION",
+      "historical": "BASELINE_ADVERSARIAL_FINDING_19",
+      "lane": "W4-03"
+    },
+    {
+      "current": "PASS",
+      "family": "REPLAY_CRASH_IDEMPOTENCY",
+      "historical": "READY_FOR_CONVERGENCE",
+      "lane": "W4-04"
+    },
+    {
+      "current": "PASS_5_OF_5_CLOSED",
+      "family": "PROVIDER_CHAOS_CURRENT_STATE_REVALIDATION",
+      "historical": "BASELINE_ADVERSARIAL_FINDING_5",
+      "lane": "W4-05"
+    },
+    {
+      "current": "PASS_2_OF_2_CLOSED",
+      "family": "RESOURCE_BOUNDS_AND_SINGLE_USE_DISPATCH",
+      "historical": "BASELINE_ADVERSARIAL_FINDING_2",
+      "lane": "W4-06"
+    },
+    {
+      "current": "PASS",
+      "family": "PRIVACY_RETENTION_MINIMIZATION",
+      "historical": "READY_FOR_CONVERGENCE",
+      "lane": "W4-07"
+    },
+    {
+      "current": "PASS_7_OF_7_CLOSED",
+      "family": "MULTIMODAL_PRESENTATION_BOUNDARY_HARDENING",
+      "historical": "BASELINE_ADVERSARIAL_FINDING_7",
+      "lane": "W4-08"
+    },
+    {
+      "current": "PASS_EVALUATION_ONLY",
+      "family": "MULTILINGUAL_HARD_BOUNDARY_PRESERVATION",
+      "historical": "EVALUATION_ONLY_READY_FOR_CONVERGENCE",
+      "lane": "W4-09"
+    },
+    {
+      "current": "PASS_5_OF_5_CLOSED",
+      "family": "PARENT_GUARDIAN_AUTHORIZATION_TRUTHFULNESS",
+      "historical": "BASELINE_ADVERSARIAL_FINDING_5",
+      "lane": "W4-10"
+    },
+    {
+      "current": "PASS",
+      "family": "MODEL_DRIFT_CERTIFICATION_IDENTITY",
+      "historical": "READY_FOR_CONVERGENCE",
+      "lane": "W4-11"
+    },
+    {
+      "current": "PASS_OFFLINE_ONLY",
+      "family": "OFFLINE_LIVE_CERT_RUNNER_HARD_FAIL",
+      "historical": "OFFLINE_RUNNER_READY_FOR_CONVERGENCE",
+      "lane": "W4-12"
+    },
+    {
+      "current": "PASS",
+      "family": "SUPPLY_CHAIN_VENDOR_SECRET_ISOLATION",
+      "historical": "READY_FOR_CONVERGENCE",
+      "lane": "W4-13"
+    }
+  ]
+}

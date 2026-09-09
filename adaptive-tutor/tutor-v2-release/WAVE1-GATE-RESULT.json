@@ -1,0 +1,676 @@
+{
+  "resultVersion": 1,
+  "product": "Manuel Academy Study Tutor V2",
+  "wave": "Wave 1 Foundation",
+  "foundationGate": "PASS",
+  "finalClassification": "WAVE1_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "releaseReady": false,
+  "wave1Complete": false,
+  "finalIndependentRereviewRequired": true,
+  "hardGateFamilies": [
+    {
+      "name": "PROVIDER_AUTHORITY_BOUNDARY",
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "compensableByQualityScore": false,
+      "blocker": "W1-10 HOLD #1: provider received and could mutate Study authority",
+      "repair": "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
+      "status": "PASS",
+      "memberChecks": [
+        {
+          "name": "provider-port-structural-boundary",
+          "status": "PASS"
+        },
+        {
+          "name": "provider-port-regression",
+          "status": "PASS"
+        },
+        {
+          "name": "provider-mutation-convergence-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "w1-b1-provider-mutation-adversarial",
+          "status": "PASS"
+        },
+        {
+          "name": "accepted-b1-repair-tree-equivalence",
+          "status": "PASS"
+        }
+      ],
+      "failingChecks": []
+    },
+    {
+      "name": "STRUCTURAL_ACTIVE_ASSESSMENT_ANTI_ANSWER",
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "compensableByQualityScore": false,
+      "blocker": "W1-10R2 HOLD #2: active-assessment answer security relied on lexical phrases",
+      "repair": "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
+      "status": "PASS",
+      "memberChecks": [
+        {
+          "name": "structural-anti-answer-convergence-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "active-assessment-explain-structural-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "active-assessment-hint-structural-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "active-assessment-ask-check-structural-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "active-assessment-show-example-structural-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "active-assessment-reteach-structural-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "active-assessment-phrase-matrix-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "active-assessment-structured-controls-regression",
+          "status": "PASS"
+        },
+        {
+          "name": "answer-bearing-field-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "completed-review-permission-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "w1-b2-structural-anti-answer-bridge",
+          "status": "PASS"
+        },
+        {
+          "name": "accepted-b2-repair-tree-equivalence",
+          "status": "PASS"
+        }
+      ],
+      "failingChecks": []
+    },
+    {
+      "name": "REVIEWED_CONTENT_PRIVACY_PROVENANCE",
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "compensableByQualityScore": false,
+      "blocker": "W1-10R3 HOLD #3: privacy relied on lexical phrases",
+      "repair": "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
+      "status": "PASS",
+      "memberChecks": [
+        {
+          "name": "reviewed-content-privacy-provenance-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "w1-10r3-historical-privacy-blockers",
+          "status": "PASS"
+        },
+        {
+          "name": "additional-privacy-provenance-hard-gates",
+          "status": "PASS"
+        },
+        {
+          "name": "approval-authority-attacks",
+          "status": "PASS"
+        },
+        {
+          "name": "free-form-output-provenance",
+          "status": "PASS"
+        },
+        {
+          "name": "structured-control-privacy",
+          "status": "PASS"
+        },
+        {
+          "name": "regex-neutralized-privacy-provenance-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "w1-b3-reviewed-content-privacy-bridge",
+          "status": "PASS"
+        },
+        {
+          "name": "accepted-b3-repair-tree-equivalence",
+          "status": "PASS"
+        }
+      ],
+      "failingChecks": []
+    },
+    {
+      "name": "APPROVAL_DECISION_STRUCTURAL_VALIDATION",
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "compensableByQualityScore": false,
+      "blocker": "W1-10R4 reproduced blocker: malformed approval decisions normalized into valid-looking approvals before validation",
+      "repair": "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+      "status": "PASS",
+      "memberChecks": [
+        {
+          "name": "approval-decision-structural-parser-boundary",
+          "status": "PASS"
+        },
+        {
+          "name": "approval-decision-structural-validation-hard-gate",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-raw-decision-root-invariant",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-accessor-attacks",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-hostile-thenable-attacks",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-prototype-attacks",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-hidden-key-attacks",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-hostile-reflection-attacks",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-malformed-value-shapes",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-legitimate-decision-regression",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-w1-10r4-historical-blockers",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-provider-input-malformed-approval",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-provider-output-malformed-approval",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-composition-attacks",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-failure-data-minimization",
+          "status": "PASS"
+        },
+        {
+          "name": "w1-b4-approval-decision-bridge",
+          "status": "PASS"
+        },
+        {
+          "name": "accepted-b4-repair-tree-equivalence",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-repair-direct-parent",
+          "status": "PASS"
+        },
+        {
+          "name": "b4-repair-audited-scope",
+          "status": "PASS"
+        }
+      ],
+      "failingChecks": []
+    }
+  ],
+  "checks": [
+    {
+      "name": "node-22",
+      "status": "PASS",
+      "detail": "Node 22.23.2",
+      "command": "node --version"
+    },
+    {
+      "name": "canonical-provenance",
+      "status": "PASS",
+      "detail": "16/16 pinned remote tips exact, including B1/B2/B3/B4 and R2/R3/R4",
+      "command": "git rev-parse origin/mac/tutor-v2-w1-*"
+    },
+    {
+      "name": "b1-repair-direct-parent",
+      "status": "PASS",
+      "detail": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
+      "command": "git rev-parse d7aa9720b8096205acc0b63d21a895d8fc16de6f^"
+    },
+    {
+      "name": "b2-repair-direct-parent",
+      "status": "PASS",
+      "detail": "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+      "command": "git rev-parse 9f0b66be0b7f86b2004f05137ef9892d2a3ef09a^"
+    },
+    {
+      "name": "b3-repair-direct-parent",
+      "status": "PASS",
+      "detail": "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+      "command": "git rev-parse cf7ee7265c812a86b708b0e8cf2a33e6370e753d^"
+    },
+    {
+      "name": "b4-repair-direct-parent",
+      "status": "PASS",
+      "detail": "6f90d351d759c697788b6489bd465d954ce52184",
+      "command": "git rev-parse cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841^"
+    },
+    {
+      "name": "b4-repair-audited-scope",
+      "status": "PASS",
+      "detail": "B4 touched only reviewed-content.ts and the bridge suite",
+      "command": "git diff --name-only 6f90d351d759c697788b6489bd465d954ce52184 cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841"
+    },
+    {
+      "name": "accepted-lane-tree-equivalence",
+      "status": "PASS",
+      "detail": "unrepaired W1-04 through W1-07 trees exact",
+      "command": "git diff --quiet <accepted-sha> HEAD -- <unrepaired-lane-paths>"
+    },
+    {
+      "name": "accepted-b1-repair-tree-equivalence",
+      "status": "PASS",
+      "detail": "provider and bridge repair source exact",
+      "command": "git diff --quiet d7aa9720b8096205acc0b63d21a895d8fc16de6f HEAD -- <b1-repair-paths>"
+    },
+    {
+      "name": "accepted-b2-repair-tree-equivalence",
+      "status": "PASS",
+      "detail": "structural anti-answer repair source and bridge tests exact",
+      "command": "git diff --quiet 9f0b66be0b7f86b2004f05137ef9892d2a3ef09a HEAD -- <b2-repair-paths>"
+    },
+    {
+      "name": "accepted-b3-repair-tree-equivalence",
+      "status": "PASS",
+      "detail": "privacy bridge source outside the audited B4 repair scope exact",
+      "command": "git diff --quiet cf7ee7265c812a86b708b0e8cf2a33e6370e753d HEAD -- <b3-repair-paths minus b4 scope>"
+    },
+    {
+      "name": "accepted-b4-repair-tree-equivalence",
+      "status": "PASS",
+      "detail": "approval-decision parser source and bridge tests exact",
+      "command": "git diff --quiet cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841 HEAD -- <b4-repair-paths>"
+    },
+    {
+      "name": "provider-port-structural-boundary",
+      "status": "PASS",
+      "detail": "provider-safe request exported; TutorRequest/StudyAuthorityContext excluded",
+      "command": "source structural assertion"
+    },
+    {
+      "name": "approval-decision-structural-parser-boundary",
+      "status": "PASS",
+      "detail": "raw authority decision validated before normalization or property access",
+      "command": "source structural assertion"
+    },
+    {
+      "name": "v2-typecheck",
+      "status": "PASS",
+      "detail": "strict TypeScript",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
+    },
+    {
+      "name": "v2-compile",
+      "status": "PASS",
+      "detail": "convergence compilation",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
+    },
+    {
+      "name": "schema-runtime-parity-artifacts",
+      "status": "PASS",
+      "detail": "23 schemas + inventory exact",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/.dist/scripts/tutor-v2/generate-schemas.js --check"
+    },
+    {
+      "name": "release-evidence-artifacts",
+      "status": "PASS",
+      "detail": "10 release artifacts exact",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js --check"
+    },
+    {
+      "name": "accepted-v2-slice-tests",
+      "status": "PASS",
+      "detail": "168/168 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/contracts/contracts.test.js scripts/tutor-v2/.dist/core/v2/providers/testing/provider-port.test.js scripts/tutor-v2/.dist/core/v2/policy/authority/authority.test.js scripts/tutor-v2/.dist/core/v2/policy/grounding/grounding.test.js scripts/tutor-v2/.dist/core/v2/policy/anti-answer/anti-answer.test.js scripts/tutor-v2/.dist/core/v2/policy/refusal/refusal.test.js scripts/tutor-v2/.dist/core/v2/policy/age/profile.test.js scripts/tutor-v2/.dist/core/v2/memory/session-memory.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/evidence/tutor-evidence.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/privacy/provider-context.test.js"
+    },
+    {
+      "name": "provider-port-regression",
+      "status": "PASS",
+      "detail": "12/12 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/providers/testing/provider-port.test.js"
+    },
+    {
+      "name": "provider-mutation-convergence-hard-gate",
+      "status": "PASS",
+      "detail": "13/13 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js"
+    },
+    {
+      "name": "structural-anti-answer-convergence-hard-gate",
+      "status": "PASS",
+      "detail": "53/53 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-explain-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active explain rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-hint-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active hint rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-ask-check-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active ask-check rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-show-example-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active show-example rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-reteach-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active reteach rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-phrase-matrix-hard-gate",
+      "status": "PASS",
+      "detail": "20/20 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-09R3 phrase matrix scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-structured-controls-regression",
+      "status": "PASS",
+      "detail": "4/4 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-09R3 structured control scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "answer-bearing-field-hard-gate",
+      "status": "PASS",
+      "detail": "1/1 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=answer-bearing structured field scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "completed-review-permission-hard-gate",
+      "status": "PASS",
+      "detail": "2/2 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-09R3 completed review scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "reviewed-content-privacy-provenance-hard-gate",
+      "status": "PASS",
+      "detail": "78/78 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "w1-10r3-historical-privacy-blockers",
+      "status": "PASS",
+      "detail": "16/16 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-10R3 historical privacy blocker scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "additional-privacy-provenance-hard-gates",
+      "status": "PASS",
+      "detail": "21/21 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B3 additional privacy provenance scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "approval-authority-attacks",
+      "status": "PASS",
+      "detail": "10/10 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B3 approval attack scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "free-form-output-provenance",
+      "status": "PASS",
+      "detail": "15/15 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B3 free-form output provenance scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "structured-control-privacy",
+      "status": "PASS",
+      "detail": "16/16 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B3 structured control privacy scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "approval-decision-structural-validation-hard-gate",
+      "status": "PASS",
+      "detail": "67/67 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-raw-decision-root-invariant",
+      "status": "PASS",
+      "detail": "1/1 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 root invariant scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-accessor-attacks",
+      "status": "PASS",
+      "detail": "10/10 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 accessor attack scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-hostile-thenable-attacks",
+      "status": "PASS",
+      "detail": "2/2 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 hostile thenable scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-prototype-attacks",
+      "status": "PASS",
+      "detail": "6/6 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 prototype attack scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-hidden-key-attacks",
+      "status": "PASS",
+      "detail": "5/5 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 hidden-key attack scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-hostile-reflection-attacks",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 hostile reflection scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-malformed-value-shapes",
+      "status": "PASS",
+      "detail": "15/15 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 malformed primitive or container|B4 malformed decision shape scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-legitimate-decision-regression",
+      "status": "PASS",
+      "detail": "6/6 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 legitimate decision regression scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-w1-10r4-historical-blockers",
+      "status": "PASS",
+      "detail": "8/8 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 W1-10R4 historical scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-provider-input-malformed-approval",
+      "status": "PASS",
+      "detail": "8/8 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 W1-10R4 historical provider-input|B4 provider-input grounding scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-provider-output-malformed-approval",
+      "status": "PASS",
+      "detail": "4/4 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 W1-10R4 historical provider-output scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-composition-attacks",
+      "status": "PASS",
+      "detail": "6/6 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 composition scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "b4-failure-data-minimization",
+      "status": "PASS",
+      "detail": "1/1 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B4 failure-data minimization scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "cross-slice-convergence-tests",
+      "status": "PASS",
+      "detail": "253/253 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/schema-parity.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js"
+    },
+    {
+      "name": "bridge-typecheck",
+      "status": "PASS",
+      "detail": "W1-08 bridge compilation",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
+    },
+    {
+      "name": "w1-b1-provider-mutation-adversarial",
+      "status": "PASS",
+      "detail": "12/12 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-10 adversarial study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
+      "name": "w1-b2-structural-anti-answer-bridge",
+      "status": "PASS",
+      "detail": "13/13 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=malicious provider active-assessment|active-assessment structured control|answer-bearing provider field|completed review|provider context excludes protected answer authority study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
+      "name": "w1-b3-reviewed-content-privacy-bridge",
+      "status": "PASS",
+      "detail": "50/50 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-10R3|reviewed-content authority|reviewed learner-safe|grounding digest|raw learner free-form|exact Study-reviewed prose|unapproved reason code|approval cannot|provider-fabricated approval|self-computed digest|authority and approval objects study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
+      "name": "w1-b4-approval-decision-bridge",
+      "status": "PASS",
+      "detail": "41/41 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=raw approval|raw status|throwing approval getter|custom-prototype approval|class-instance approval|null-prototype approval|inherited approval fields|custom prototype supplying|non-enumerable extra key|symbol key on approval|non-enumerable approval metadata|hidden extra key on rejection|exact synchronous|exact asynchronous|frozen exact plain approval|malformed approval failure data|primitive or container authority decision|hostile authority decision|approval fails closed before provider execution|learner-output approval uses reviewed fallback study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
+      "name": "repaired-bridge-regression",
+      "status": "PASS",
+      "detail": "209/209 pass; 0 fail; 0 skipped",
+      "command": "node --test study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
+      "name": "regex-neutralized-privacy-compile",
+      "status": "PASS",
+      "detail": "temporary copy compiled with lexical RULES empty",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
+    },
+    {
+      "name": "regex-neutralized-privacy-provenance-hard-gate",
+      "status": "PASS",
+      "detail": "78/78 pass; 0 fail; 0 skipped",
+      "command": "temporary copy: RULES=[]; tsc; node --test reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "evaluation-harness-build-test",
+      "status": "PASS",
+      "detail": "8/8 harness self-tests",
+      "command": "npm --prefix evals/v2/framework test"
+    },
+    {
+      "name": "foundation-evaluation",
+      "status": "PASS",
+      "detail": "128/128; FOUNDATION_GATE_PASS; releaseReady=false",
+      "command": "node evals/v2/framework/.dist/framework/src/cli.js --format=json"
+    },
+    {
+      "name": "tutor-core-v0.2-typecheck",
+      "status": "PASS",
+      "detail": "frozen Core typecheck",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5/adaptive-tutor/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
+    },
+    {
+      "name": "tutor-core-v0.2-tests",
+      "status": "PASS",
+      "detail": "21/21 tests",
+      "command": "npm test"
+    },
+    {
+      "name": "tutor-core-v0.2-build",
+      "status": "PASS",
+      "detail": "isolated build PASS",
+      "command": "npm run build"
+    },
+    {
+      "name": "tutor-core-v0.2-smoke",
+      "status": "PASS",
+      "detail": "isolated smoke PASS",
+      "command": "npm run smoke"
+    },
+    {
+      "name": "w1-05-broad-validator",
+      "status": "INHERITED_FINDING",
+      "detail": "18/19; obsolete substring/platform scope flags accepted authority paths and generated test output",
+      "command": "npm run validate (isolated copy)"
+    },
+    {
+      "name": "frozen-core-live-tree-build",
+      "status": "PASS",
+      "detail": "reconstructed frozen v0.2 source build",
+      "command": "npm run build"
+    },
+    {
+      "name": "study-core-bridge-regression",
+      "status": "PASS",
+      "detail": "35/36 pass; 1 skipped",
+      "command": "SESSION6_SOURCE_ROOT=<reconstructed> node --test adaptive-tutor/study-engine/tests/tutor-core-bridge/*.test.mjs"
+    },
+    {
+      "name": "frozen-archive-checksums",
+      "status": "NOT_AVAILABLE",
+      "detail": "four external SESSION6 archives not mounted; one exact-checksum test skipped",
+      "command": "SESSION6_*_ZIP exact checksum test"
+    },
+    {
+      "name": "dependency-advisories",
+      "status": "INHERITED_FINDING",
+      "detail": "3 existing high advisories: @playwright/test, nanoid, playwright; manifests unchanged from immutable baseline",
+      "command": "npm audit --json (study-engine/runtime)"
+    },
+    {
+      "name": "w1-09r5-path-ownership",
+      "status": "PASS",
+      "detail": "10 authored files all convergence-owned",
+      "command": "git diff --name-only cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841 HEAD plus git status"
+    },
+    {
+      "name": "git-diff-check",
+      "status": "PASS",
+      "detail": "no whitespace errors",
+      "command": "git diff --check"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "$id": "StudyTutorV2BridgeMemoryAccess",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "memoryRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "scope": {
+      "additionalProperties": false,
+      "properties": {
+        "householdScopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "interactionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "learnerScopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "lessonRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "scopeKind": {
+          "const": "trusted-study-tutor-scope",
+          "type": "string"
+        },
+        "sessionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scopeKind",
+        "householdScopeRef",
+        "learnerScopeRef",
+        "sessionRef",
+        "interactionRef",
+        "lessonRef"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "memoryRef",
+    "scope"
+  ],
+  "title": "Study Tutor V2 Bridge Memory Access",
+  "type": "object"
+}

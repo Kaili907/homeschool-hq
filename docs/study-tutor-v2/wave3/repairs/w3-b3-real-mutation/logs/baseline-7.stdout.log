@@ -1,0 +1,16 @@
+TAP version 13
+# Subtest: measured execution over attempt timeout rejects low reported latency
+ok 1 - measured execution over attempt timeout rejects low reported latency
+  ---
+  duration_ms: <duration>
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms <duration>

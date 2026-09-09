@@ -1,0 +1,803 @@
+{
+  "$id": "StudyCommercialTutorInvocation",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowedTutorActions": {
+      "items": {
+        "anyOf": [
+          {
+            "const": "explain",
+            "type": "string"
+          },
+          {
+            "const": "hint",
+            "type": "string"
+          },
+          {
+            "const": "ask-check",
+            "type": "string"
+          },
+          {
+            "const": "show-example",
+            "type": "string"
+          },
+          {
+            "const": "reteach",
+            "type": "string"
+          },
+          {
+            "const": "check-prerequisite",
+            "type": "string"
+          },
+          {
+            "const": "suggest-break",
+            "type": "string"
+          },
+          {
+            "const": "escalate",
+            "type": "string"
+          },
+          {
+            "const": "return-to-lesson",
+            "type": "string"
+          }
+        ]
+      },
+      "maxItems": 9,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "assessmentPhase": {
+      "anyOf": [
+        {
+          "const": "instruction-or-practice",
+          "type": "string"
+        },
+        {
+          "const": "active-graded-or-mastery-check",
+          "type": "string"
+        },
+        {
+          "const": "completed-assessment-review",
+          "type": "string"
+        },
+        {
+          "const": "non-graded-review",
+          "type": "string"
+        }
+      ]
+    },
+    "authorityBoundary": {
+      "additionalProperties": false,
+      "properties": {
+        "studyProgressionDecisionRequired": {
+          "const": true,
+          "type": "boolean"
+        },
+        "tutorCanAssignCurriculum": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanChangeNominalGrade": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanChangeOfficialWorkingLevel": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanClearSafety": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanCompleteStudySegment": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanDeclareOfficialMastery": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanGrantGuardianAuthority": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorRecommendationIsAdvisory": {
+          "const": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "tutorRecommendationIsAdvisory",
+        "studyProgressionDecisionRequired",
+        "tutorCanCompleteStudySegment",
+        "tutorCanDeclareOfficialMastery",
+        "tutorCanChangeOfficialWorkingLevel",
+        "tutorCanChangeNominalGrade",
+        "tutorCanAssignCurriculum",
+        "tutorCanClearSafety",
+        "tutorCanGrantGuardianAuthority"
+      ],
+      "type": "object"
+    },
+    "authorization": {
+      "additionalProperties": false,
+      "properties": {
+        "configurationRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "curriculumAuthorityRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "curriculumPolicyRevisionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "learnerStageCatalogVersion": {
+          "maxLength": 80,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+          "type": "string"
+        },
+        "learnerStagePolicyRevisionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "presentationPolicyRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "providerPolicyRevisionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "safetyPolicyRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "studyPermissionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "learnerStageCatalogVersion"
+      ],
+      "type": "object"
+    },
+    "contractVersion": {
+      "const": "study-tutor-v3.commercial-invocation.v1",
+      "type": "string"
+    },
+    "curriculum": {
+      "additionalProperties": false,
+      "properties": {
+        "conceptRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "courseRef": {
+          "maxLength": 160,
+          "minLength": 2,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        },
+        "digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "lessonRef": {
+          "maxLength": 160,
+          "minLength": 2,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        },
+        "opportunityRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "packageRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "releaseRef": {
+          "maxLength": 160,
+          "minLength": 2,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        },
+        "subjectId": {
+          "maxLength": 160,
+          "minLength": 2,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        },
+        "unitRef": {
+          "maxLength": 160,
+          "minLength": 2,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 80,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "releaseRef",
+        "version",
+        "digest",
+        "courseRef",
+        "subjectId",
+        "unitRef",
+        "lessonRef"
+      ],
+      "type": "object"
+    },
+    "groundedContext": {
+      "$id": "TutorV3GroundedContextBundle",
+      "additionalProperties": false,
+      "properties": {
+        "assessmentPhase": {
+          "anyOf": [
+            {
+              "const": "instruction-or-practice",
+              "type": "string"
+            },
+            {
+              "const": "active-graded-or-mastery-check",
+              "type": "string"
+            },
+            {
+              "const": "completed-assessment-review",
+              "type": "string"
+            },
+            {
+              "const": "non-graded-review",
+              "type": "string"
+            }
+          ]
+        },
+        "bundleRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "contractVersion": {
+          "const": "study-tutor-v2.grounding.v3",
+          "type": "string"
+        },
+        "fallbackContextRef": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "items": {
+          "items": {
+            "$id": "TutorV3GroundedContextItem",
+            "additionalProperties": false,
+            "properties": {
+              "contentDigest": {
+                "pattern": "^sha256:[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "contextRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "materialKind": {
+                "anyOf": [
+                  {
+                    "const": "instructional",
+                    "type": "string"
+                  },
+                  {
+                    "const": "static-fallback",
+                    "type": "string"
+                  }
+                ]
+              },
+              "reviewAuthority": {
+                "const": "study",
+                "type": "string"
+              },
+              "reviewStatus": {
+                "anyOf": [
+                  {
+                    "const": "study-reviewed",
+                    "type": "string"
+                  },
+                  {
+                    "const": "not-reviewed",
+                    "type": "string"
+                  }
+                ]
+              },
+              "scopeRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "validity": {
+                "anyOf": [
+                  {
+                    "const": "valid",
+                    "type": "string"
+                  },
+                  {
+                    "const": "stale",
+                    "type": "string"
+                  },
+                  {
+                    "const": "invalid",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "contextRef",
+              "scopeRef",
+              "contentDigest",
+              "materialKind",
+              "reviewAuthority",
+              "reviewStatus",
+              "validity"
+            ],
+            "type": "object"
+          },
+          "maxItems": 64,
+          "type": "array"
+        },
+        "scopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "source": {
+          "const": "study-authority",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contractVersion",
+        "bundleRef",
+        "source",
+        "scopeRef",
+        "assessmentPhase",
+        "items",
+        "fallbackContextRef"
+      ],
+      "type": "object"
+    },
+    "groundingRequirements": {
+      "items": {
+        "$id": "TutorV3GroundingRequirement",
+        "additionalProperties": false,
+        "properties": {
+          "claimKind": {
+            "anyOf": [
+              {
+                "const": "factual",
+                "type": "string"
+              },
+              {
+                "const": "instructional",
+                "type": "string"
+              }
+            ]
+          },
+          "claimRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "requiredContext": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "contentDigest": {
+                  "pattern": "^sha256:[a-f0-9]{64}$",
+                  "type": "string"
+                },
+                "contextRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "contextRef",
+                "contentDigest"
+              ],
+              "type": "object"
+            },
+            "maxItems": 16,
+            "minItems": 1,
+            "type": "array"
+          },
+          "scopeRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "claimRef",
+          "scopeRef",
+          "claimKind",
+          "requiredContext"
+        ],
+        "type": "object"
+      },
+      "maxItems": 32,
+      "type": "array"
+    },
+    "householdScopeRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "interactionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "invocationKind": {
+      "const": "trusted-study-commercial-tutor-invocation",
+      "type": "string"
+    },
+    "issuedBy": {
+      "const": "study-engine",
+      "type": "string"
+    },
+    "learnerScopeRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "learnerStageRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "logicalOperationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "nominalGrade": {
+      "maximum": 20,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "nominalGradeRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "officialWorkingLevel": {
+      "maximum": 20,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "officialWorkingLevelRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "requestedActionFamily": {
+      "anyOf": [
+        {
+          "const": "EXPLANATION",
+          "type": "string"
+        },
+        {
+          "const": "HINT",
+          "type": "string"
+        },
+        {
+          "const": "GUIDING_QUESTION",
+          "type": "string"
+        },
+        {
+          "const": "GROUNDED_EXAMPLE",
+          "type": "string"
+        },
+        {
+          "const": "PREREQUISITE_RECOMMENDATION",
+          "type": "string"
+        },
+        {
+          "const": "PARENT_SAFE_DRAFT",
+          "type": "string"
+        }
+      ]
+    },
+    "requestedPresentation": {
+      "additionalProperties": false,
+      "properties": {
+        "allowedDisplayModes": {
+          "items": {
+            "anyOf": [
+              {
+                "const": "reviewed-text",
+                "type": "string"
+              },
+              {
+                "const": "reviewed-visual",
+                "type": "string"
+              },
+              {
+                "const": "reviewed-text-and-visual",
+                "type": "string"
+              },
+              {
+                "const": "structured-check",
+                "type": "string"
+              }
+            ]
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "mappingContext": {
+          "$id": "TutorV3PresentationMappingContext",
+          "additionalProperties": false,
+          "properties": {
+            "accessibilityCaptionRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "fallbackPresentation": {
+              "$id": "TutorV3FallbackPresentationIntent",
+              "additionalProperties": false,
+              "properties": {
+                "presentationRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "requestedDeliveryChannels": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "const": "text",
+                        "type": "string"
+                      },
+                      {
+                        "const": "visual",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "maxItems": 2,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "presentationRef",
+                "requestedDeliveryChannels"
+              ],
+              "type": "object"
+            },
+            "requestSpeechAfterAcceptance": {
+              "type": "boolean"
+            },
+            "reviewedVisuals": {
+              "items": {
+                "$id": "TutorV3ReviewedVisualIntent",
+                "additionalProperties": false,
+                "properties": {
+                  "contentDigest": {
+                    "pattern": "^sha256:[a-f0-9]{64}$",
+                    "type": "string"
+                  },
+                  "contentRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  },
+                  "kind": {
+                    "anyOf": [
+                      {
+                        "const": "image",
+                        "type": "string"
+                      },
+                      {
+                        "const": "diagram",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "provenanceRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "contentRef",
+                  "contentDigest",
+                  "provenanceRef"
+                ],
+                "type": "object"
+              },
+              "maxItems": 12,
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "reviewedVisuals",
+            "requestSpeechAfterAcceptance"
+          ],
+          "type": "object"
+        },
+        "modalityRequirement": {
+          "anyOf": [
+            {
+              "const": "TEXT_ONLY",
+              "type": "string"
+            },
+            {
+              "const": "REVIEWED_IMAGE",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "modalityRequirement",
+        "allowedDisplayModes",
+        "mappingContext"
+      ],
+      "type": "object"
+    },
+    "reviewedContentEvidence": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "contentDigest": {
+            "pattern": "^sha256:[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "contentRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contentDigest"
+        ],
+        "type": "object"
+      },
+      "maxItems": 12,
+      "minItems": 1,
+      "type": "array"
+    },
+    "sessionRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "subjectCapability": {
+      "anyOf": [
+        {
+          "const": "NUMERICAL_REASONING",
+          "type": "string"
+        },
+        {
+          "const": "SYMBOLIC_REASONING",
+          "type": "string"
+        },
+        {
+          "const": "PROSE_EXPLANATION",
+          "type": "string"
+        },
+        {
+          "const": "SOURCE_GROUNDED_ANALYSIS",
+          "type": "string"
+        },
+        {
+          "const": "SPATIAL_VISUAL_INTERPRETATION",
+          "type": "string"
+        },
+        {
+          "const": "MULTILINGUAL_EXPLANATION",
+          "type": "string"
+        }
+      ]
+    },
+    "subjectRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "invocationKind",
+    "issuedBy",
+    "nominalGrade",
+    "officialWorkingLevel",
+    "curriculum",
+    "assessmentPhase",
+    "requestedActionFamily",
+    "subjectCapability",
+    "allowedTutorActions",
+    "requestedPresentation",
+    "reviewedContentEvidence",
+    "groundedContext",
+    "groundingRequirements",
+    "authorization",
+    "authorityBoundary"
+  ],
+  "title": "Study Commercial Tutor Invocation",
+  "type": "object"
+}

@@ -1,0 +1,20 @@
+{
+  "compositionVersion": "study-tutor-v2.wave2-composition.v1",
+  "generatedSchemaCount": 2,
+  "internalPortSchemasGenerated": 0,
+  "product": "Manuel Academy Study Tutor V2",
+  "schemaInventoryVersion": 1,
+  "schemas": [
+    {
+      "file": "wave2-adaptive-composition-request.schema.json",
+      "sha256": "329a8cf474e89357ca91570abec03b357c831220d95ce0048274313dd4113f26",
+      "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2AdaptiveCompositionRequestSchema"
+    },
+    {
+      "file": "wave2-study-decision-packet.schema.json",
+      "sha256": "fb0e6403a2c0571523ffcfa97c3c7d859b7cb85930f0e8571168038ff1a94d13",
+      "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2StudyDecisionPacketSchema"
+    }
+  ],
+  "wave": "Wave 2 R5 Final Two-Blocker Repair Candidate"
+}

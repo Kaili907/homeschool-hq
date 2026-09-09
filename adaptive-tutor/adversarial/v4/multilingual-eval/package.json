@@ -1,0 +1,11 @@
+{
+  "name": "@manuel-academy/w4-multilingual-eval",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "validate": "node src/cli.mjs --validate",
+    "evaluate": "node src/cli.mjs --evaluate"
+  }
+}

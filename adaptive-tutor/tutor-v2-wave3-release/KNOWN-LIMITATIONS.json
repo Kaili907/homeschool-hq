@@ -1,0 +1,27 @@
+{
+  "deferred": [
+    "durable production persistence for budgets, telemetry, and replay",
+    "live provider credentials, transports, pricing, and availability feeds",
+    "Parent Hub UI and notification delivery",
+    "browser multimodal capture and TTS/STT vendor wiring",
+    "production curriculum-registry adapter",
+    "commercial deployment and security convergence",
+    "live stochastic model certification",
+    "Wave 4 adversarial campaigns"
+  ],
+  "inherited": [
+    {
+      "code": "OBSOLETE_BROAD_PLATFORM_VALIDATOR",
+      "detail": "The accepted inherited broad platform-boundary validator remains 18/19 because its obsolete substring rule flags accepted authority paths/generated output."
+    },
+    {
+      "code": "INHERITED_DEPENDENCY_ADVISORIES",
+      "detail": "Three inherited high advisories remain for @playwright/test, playwright, and nanoid; manifests are unchanged."
+    },
+    {
+      "code": "SESSION6_ARCHIVES_NOT_MOUNTED",
+      "detail": "Four frozen Session 6 archives remain unavailable; current executable bridge tests are used without replacing archive checksum evidence."
+    }
+  ],
+  "limitationsVersion": 2
+}

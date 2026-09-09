@@ -1,0 +1,38 @@
+{
+  "additionalCandidates": [
+    {
+      "candidate": "CommercialExecutionScope",
+      "classification": "TRUSTED_INTERNAL_CONTRACT",
+      "reason": "Study-issued in-process authority input; serialized boundaries carry only its opaque ref and exact lineage"
+    },
+    {
+      "candidate": "model certification",
+      "classification": "TOOLING_ARTIFACT"
+    },
+    {
+      "candidate": "campaign evidence",
+      "classification": "TOOLING_ARTIFACT"
+    },
+    {
+      "candidate": "accepted presentation",
+      "classification": "TRUSTED_INTERNAL_CONTRACT",
+      "durableProjection": "DurableMultimodalEvidence"
+    }
+  ],
+  "additionalSerializedBoundaryCount": 0,
+  "currentSerializedBoundaryCount": 10,
+  "internalPortSchemaCount": 0,
+  "inventoryVersion": 1,
+  "serializedBoundaries": [
+    "StudyCommercialTutorInvocation",
+    "BoundedCommercialProviderRequest",
+    "BoundedCommercialProviderResponse",
+    "StudyCommercialTutorAdvisory",
+    "StudyCommercialEffectReceipt",
+    "CommercialOperationTelemetryEvent",
+    "ParentReport",
+    "InstructionalMemoryDelta",
+    "DurableMultimodalEvidence",
+    "MinimizedAcceptedStudyEffectEvent"
+  ]
+}

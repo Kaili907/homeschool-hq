@@ -1,0 +1,45 @@
+{
+  "ACTIVE_ASSESSMENT_ANSWER_SECURITY_IS_STRUCTURAL": true,
+  "ACTIVE_ASSESSMENT_PROVIDER_FREE_FORM_PROSE_ALLOWED": false,
+  "counts": {
+    "fullStructuralAntiAnswerSuite": 53,
+    "phraseMatrix": 20,
+    "structuralActionProseAttacks": 15
+  },
+  "evidenceVersion": 1,
+  "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
+  "permanentHardGateTest": "tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.ts",
+  "regressions": {
+    "completedReviewRemainsStudyAuthorized": true,
+    "instructionOrPracticeFreeFormActionsFunctional": true,
+    "nonGradedReviewFreeFormActionsFunctional": true,
+    "structuredControlsNotRejectedSolelyByActivePhase": true
+  },
+  "structuralAntiAnswerRepairSha": "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
+  "structuralRule": {
+    "answerKeyProvidedToProviderOrTutor": false,
+    "eligibleStructuredControlActions": [
+      "check-prerequisite",
+      "suggest-break",
+      "escalate",
+      "return-to-lesson"
+    ],
+    "lexicalChecksAreSecurityBoundary": false,
+    "phase": "active-graded-or-mastery-check",
+    "rejectedProviderFreeFormActions": [
+      "explain",
+      "hint",
+      "ask-check",
+      "show-example",
+      "reteach"
+    ]
+  },
+  "w1_09R2Sha": "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+  "w1_10R2BypassPhrases": [
+    "Use 4 as the response.",
+    "Put 4 in the box.",
+    "Your response should be 4."
+  ],
+  "w1_10R2Ruling": "HOLD",
+  "WAVE_1_COMPLETE": false
+}
